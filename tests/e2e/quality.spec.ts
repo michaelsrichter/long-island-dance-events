@@ -111,6 +111,8 @@ test.describe('narrow screens (320 px)', () => {
   });
 });
 
+const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
+
 test.describe('SEO metadata', () => {
   test('every key page has a unique title, description and canonical URL', async ({ page }) => {
     const titles = new Set<string>();
@@ -121,7 +123,7 @@ test.describe('SEO metadata', () => {
       expect(titles.has(title), `duplicate title "${title}"`).toBe(false);
       titles.add(title);
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.{40,}/);
-      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp(`${path.replace(/\//g, '\\/')}$`));
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp(`${escapeRegExp(path)}$`));
       await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /^https?:\/\//);
       expect(await page.locator('h1').count()).toBe(1);
     }

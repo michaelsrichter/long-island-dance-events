@@ -87,7 +87,7 @@ test.describe('an event page', () => {
     const source = page.locator('#source');
     await expect(source).toContainText('written by us');
     await expect(source.getByRole('link').first()).toHaveAttribute('href', /^https:\/\//);
-    await expect(source.getByRole('link', { name: 'Report a problem with this listing' })).toHaveAttribute('href', /github\.com\/michaelsrichter\/long-island-dance-events\/issues\/new\?template=listing-correction\.yml/);
+    await expect(source.getByRole('link', { name: 'Report a problem with this listing' })).toHaveAttribute('href', /^https:\/\/github\.com\/michaelsrichter\/long-island-dance-events\/issues\/new\?template=listing-correction\.yml/);
   });
 
   test('can be added to a calendar (.ics, Google and Outlook)', async ({ pinned: page, request }) => {
@@ -100,7 +100,7 @@ test.describe('an event page', () => {
     expect(body).toMatch(/DTSTART(;TZID=[^:]+|;VALUE=DATE)?:\d{8}/);
     const google = await page.locator('#add-to-calendar a[data-track-method="google"]').getAttribute('href');
     expect(new URL(google!).searchParams.get('dates')).toMatch(/^\d{8}(T\d{6}Z)?\/\d{8}(T\d{6}Z)?$/);
-    await expect(page.locator('#add-to-calendar a[data-track-method="outlook"]')).toHaveAttribute('href', /outlook\.live\.com/);
+    await expect(page.locator('#add-to-calendar a[data-track-method="outlook"]')).toHaveAttribute('href', /^https:\/\/outlook\.live\.com\/calendar\//);
   });
 
   test('can be shared, and the link is copied', async ({ pinned: page }) => {
@@ -114,7 +114,7 @@ test.describe('an event page', () => {
     await share.getByRole('button', { name: 'Copy link' }).click();
     await expect(page.locator('[data-toast]')).toHaveText('Link copied.');
     expect(await page.evaluate(() => (window as any).__copied.at(-1))).toBe(canonical);
-    await expect(share.getByRole('link', { name: /Facebook/ })).toHaveAttribute('href', /facebook\.com\/sharer/);
+    await expect(share.getByRole('link', { name: /Facebook/ })).toHaveAttribute('href', /^https:\/\/www\.facebook\.com\/sharer\//);
   });
 
   test('links to its venue, which lists what is on there', async ({ pinned: page }) => {
