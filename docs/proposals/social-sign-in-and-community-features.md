@@ -12,7 +12,7 @@ Visitors could sign in with **Google, Facebook, Apple or a one-time code sent to
 ### The 3 decisions the owner needs to make
 
 1. **Option 1 ($0 a month, a bit more of our own sign-in code) or Option 2 ($9 a month, Azure handles sign-in sessions).**
-2. **Who owns visitor accounts and where they live.** External ID needs an Azure subscription and its own Entra "external tenant". The current subscription looks like a Microsoft-internal one; a community site that volunteers may take over may need its own subscription. Also buy the **custom domain** before launch (Google's branded sign-in screen and good email delivery both need a domain we own).
+2. **Who owns visitor accounts and where they live.** External ID needs an Azure subscription and its own Entra "external tenant". The current subscription looks like a Microsoft-internal one; a community site that volunteers may take over may need its own subscription. (The custom domain is already done: the site is live at **https://longisland.dance**, which every redirect and callback address below uses.)
 3. **Community rules:** we suggest **13+ to like or comment, 18+ to post photos, no photos where a child can be recognized, every photo reviewed by a person, and removal requests handled within 48 hours.** Who are the moderators?
 
 Smaller choices (can wait): turn on Facebook at launch or later; add Apple later (costs $99 a year); use Cloudflare Turnstile bot checks or not.
@@ -82,6 +82,7 @@ Costs are per month at three sizes: **tiny** (200 signed-in users, 50 photos a m
 
 - **Astro static site**; all data is JSON/YAML in `src/content/**`, validated by Zod (`src/lib/schemas.ts`). Every data change is a git commit (GitOps).
 - **Azure Static Web Apps Free** (`swa-li-dance-events-web`, East US 2) plus Log Analytics (0.1 GB/day cap) and Application Insights, from `infra/main.bicep` and `infra/deploy.ps1`. The Bicep already allows `skuName: 'Standard'`.
+- **Live at https://longisland.dance** (the Static Web App's default domain). `www.longisland.dance` and the `*.azurestaticapps.net` address redirect to it with 301s, so every sign-in redirect and callback address in this proposal uses `https://longisland.dance` only.
 - **Managed Functions** in `api/` (Node, Functions v4, `apiRuntime: node:22`): a GitHub OAuth bridge for Decap CMS (`/api/auth`, `/api/callback`) and `/api/telemetry`. They already use patterns we will reuse: host allow-list (`api/src/hosts.js`), same-origin checks, size limits, strict input validation, a per-instance rate limiter and a salted IP hash that is never stored (`api/src/telemetry-validate.js`, `api/src/functions/telemetry.js`).
 - **Strict CSP** written at build time by `scripts/postbuild.mjs` into `staticwebapp.config.json`: script hashes, no inline styles (the build fails on `style="..."`), `default-src 'self'`, no `frame-src`, `form-action 'self'`, `frame-ancestors 'none'`. Decap CMS has its own looser CSP under `/admin/*`. The config file must stay under 20 KB.
 - **Privacy promise today:** the privacy page says "No accounts" and no tracking cookies unless you agree (`src/content/pages/privacy.md`). This proposal would change that page.
@@ -114,12 +115,12 @@ Costs are per month at three sizes: **tiny** (200 signed-in users, 50 photos a m
 
 | Provider | Possible? | Cost | What it takes |
 | --- | --- | --- | --- |
-| **Google** (OIDC) | ✅ | Free (no price or billing step anywhere in Google's setup; "free" is not stated in one sentence, so treat as *very likely*). | A Google Cloud project and OAuth client. Asking only for `openid email profile` needs **no Google verification** and has **no 100-user cap**. Showing **our name and logo** needs "brand verification", which needs a **domain we own** (a `*.azurestaticapps.net` address almost certainly cannot be verified; unverified, test it). With External ID, Google's redirect goes to Microsoft's `ciamlogin.com`, so no domain of our own is needed just to work. |
+| **Google** (OIDC) | ✅ | Free (no price or billing step anywhere in Google's setup; "free" is not stated in one sentence, so treat as *very likely*). | A Google Cloud project and OAuth client. Asking only for `openid email profile` needs **no Google verification** and has **no 100-user cap**. Showing **our name and logo** needs "brand verification", which needs a **domain we own**: **longisland.dance** qualifies once it is verified in Google Search Console. With External ID, Google's redirect goes to Microsoft's `ciamlogin.com` (authorized domains `ciamlogin.com` and `microsoftonline.com`); with our own sign-in (Option 3), the redirect is `https://longisland.dance/api/login/callback`. |
 | **Facebook** (OAuth 2.0) | ✅ | Free (no fee anywhere in Meta's docs; *unverified* as an explicit statement). | A Meta developer account and a **Consumer** app (type cannot be changed later). `public_profile` and `email` are **granted automatically, no app review**, and **no business verification** (that is only for "Advanced Access" requests). Needs a public **privacy policy URL** and either a **data-deletion instructions page** or a **data-deletion callback** (Meta POSTs a signed request; we must reply `{"url": ..., "confirmation_code": ...}`). The yearly Data Use Checkup applies only to Advanced Access (double-check in the dashboard). |
 | **Instagram** | ❌ for personal accounts | - | The **Instagram Basic Display API ended on December 4, 2024**. Its replacements ("Instagram API with Instagram Login" / "with Facebook Login") only work for **professional (business or creator) accounts**; Meta says the Facebook-login version "cannot access Instagram consumer accounts". Threads' API is for publishing, not sign-in. Tools that list an "Instagram" button (PocketBase, Auth.js, Keycloak) all hit this same business-only API. **Plan:** offer Google and Facebook (many Instagram users have one); keep linking to organizers' public Instagram pages as today. |
-| **Apple** | ✅ (optional) | **$99 a year** (Apple Developer Program). | A Services ID and our domain registered with Apple. Users may hide their email; Apple then gives a relay address (100 emails a day limit per address). Useful for iPhone users without Google. Whether a published app is also required is *unverified*; test in the Apple portal. |
+| **Apple** | ✅ (optional) | **$99 a year** (Apple Developer Program). | A Services ID and our domain (`longisland.dance`) registered with Apple. Users may hide their email; Apple then gives a relay address (100 emails a day limit per address). Useful for iPhone users without Google. Whether a published app is also required is *unverified*; test in the Apple portal. |
 | **Microsoft account** | ✅ | Free | Ready-made on SWA Free, or as a custom OIDC provider in External ID. Low demand for a dance site. |
-| **Email code** (one-time passcode) or **magic link** | ✅ | **Free with External ID** (Microsoft sends the code). If we send our own: see below. | External ID supports "email with one-time passcode" out of the box. Sending our own email needs a sending service and, for good delivery, **our own domain** with SPF/DKIM records. |
+| **Email code** (one-time passcode) or **magic link** | ✅ | **Free with External ID** (Microsoft sends the code). If we send our own: see below. | External ID supports "email with one-time passcode" out of the box. Sending our own email needs a sending service and, for good delivery, SPF/DKIM records on **longisland.dance** (we already own it). |
 
 **If we send our own sign-in emails** (Options 3, 4 and 6):
 
@@ -141,10 +142,10 @@ All Azure-based options (1, 2, 3, 4, 6 and the likes part of 7) share the same *
 
 ### Option 1: External ID + our Functions on SWA Free (recommended)
 
-**How it works.** A "Sign in" link goes to `/api/login?with=google` (or `facebook`, `apple`, `email`). Our Function redirects the whole page to External ID (`<tenant>.ciamlogin.com`) with a hint so Google/Facebook opens directly (External ID "issuer acceleration": `domain_hint=google`). After sign-in, External ID sends the browser back to `/api/login/callback` with a one-time code. The Function swaps the code for an **ID token** (server-to-server, with a client secret in app settings), checks its signature, finds or creates the user record, and sets **our own session cookie** (`__Host-` prefix, `HttpOnly`, `Secure`, `SameSite=Lax`, 30 days). The session id is stored only as a hash in Table Storage, so we can sign someone out instantly (for example, when banning). This is the same shape as the existing GitHub bridge in `api/src/functions/oauth.js`, using a well-tested library (`openid-client`) instead of hand-written token code.
+**How it works.** A "Sign in" link goes to `/api/login?with=google` (or `facebook`, `apple`, `email`). Our Function redirects the whole page to External ID (`<tenant>.ciamlogin.com`) with a hint so Google/Facebook opens directly (External ID "issuer acceleration": `domain_hint=google`). After sign-in, External ID sends the browser back to **`https://longisland.dance/api/login/callback`** with a one-time code. This is the only redirect URI to register in the External ID app registration, because `www` and the `azurestaticapps.net` address already 301 to `longisland.dance`; the Function builds it from the host allow-list, as `oauth.js` does today. (Pull-request preview sites have other addresses, so sign-in will not work there unless their URIs are added.) The Function swaps the code for an **ID token** (server-to-server, with a client secret in app settings), checks its signature, finds or creates the user record, and sets **our own session cookie** (`__Host-` prefix, `HttpOnly`, `Secure`, `SameSite=Lax`, 30 days). The session id is stored only as a hash in Table Storage, so we can sign someone out instantly (for example, when banning). This is the same shape as the existing GitHub bridge in `api/src/functions/oauth.js`, using a well-tested library (`openid-client`) instead of hand-written token code.
 
 - **Sign-in methods:** Google, Facebook, Apple, Microsoft Entra / other OIDC, email + password, **email one-time code** (External ID docs). Instagram: no.
-- **Cost:** **$0 up to 50,000 MAU**, then $0.03 per MAU. Email codes are sent by Microsoft at no extra charge. SMS sign-in would cost extra (not needed). A custom sign-in domain (for example `login.ourdomain.org`) needs **Azure Front Door**, which costs extra; we suggest keeping the default `ciamlogin.com` address.
+- **Cost:** **$0 up to 50,000 MAU**, then $0.03 per MAU. Email codes are sent by Microsoft at no extra charge. SMS sign-in would cost extra (not needed). A custom sign-in domain (for example `login.longisland.dance`) needs **Azure Front Door**, which costs extra; we suggest keeping the default `ciamlogin.com` address.
 - **Pros:** free at every size we priced; Microsoft runs the risky parts (passwords, codes, account recovery, provider secrets); keeps data in Azure; no third-party script on our pages and **no CSP change for sign-in**; stays on SWA Free.
 - **Cons:** we own the session code (small, but security-relevant: CSRF, cookie flags, logout); setting up an external tenant and user flow in the Entra admin center takes learning; the sign-in page is Microsoft-hosted (we can add our logo and colors); the tenant must be linked to an Azure subscription for billing.
 - **Effort:** sign-in 3-5 days; whole project 16-22 days (phase 1 + 2).
@@ -152,7 +153,7 @@ All Azure-based options (1, 2, 3, 4, 6 and the likes part of 7) share the same *
 
 ### Option 2: SWA Standard + External ID as the SWA sign-in provider
 
-**How it works.** Upgrade SWA to Standard and register External ID as a **custom OpenID Connect provider** in `staticwebapp.config.json` (`auth.identityProviders.customOpenIdConnectProviders`). SWA handles the redirect, callback and session cookie. Functions read the **`x-ms-client-principal`** header. A `rolesSource` function (`/api/roles`) runs at each sign-in and returns roles such as `member` (or nothing for banned users). GitHub must be re-added as a custom provider for moderators. You could also register Google and Facebook directly in SWA and use External ID only for email codes, but using External ID for everything keeps one user list.
+**How it works.** Upgrade SWA to Standard and register External ID as a **custom OpenID Connect provider** in `staticwebapp.config.json` (`auth.identityProviders.customOpenIdConnectProviders`). SWA handles the redirect, callback and session cookie; the callback to register in External ID is **`https://longisland.dance/.auth/login/extid/callback`** (SWA's pattern is `/.auth/login/<provider name>/callback`; `extid` is the name we would give the provider in the config). Functions read the **`x-ms-client-principal`** header. A `rolesSource` function (`/api/roles`) runs at each sign-in and returns roles such as `member` (or nothing for banned users). GitHub must be re-added as a custom provider for moderators. You could also register Google and Facebook directly in SWA and use External ID only for email codes, but using External ID for everything keeps one user list.
 
 - **Cost:** $9 a month + the shared backend.
 - **Pros:** least sign-in code for us; SWA's session handling is managed by Microsoft; route rules can require roles (`"allowedRoles": ["member"]` on `/api/comments`).
@@ -162,9 +163,9 @@ All Azure-based options (1, 2, 3, 4, 6 and the likes part of 7) share the same *
 
 ### Option 3: Build our own sign-in
 
-**How it works.** Our Functions talk to Google (OIDC) and Facebook (OAuth 2.0 + Graph API `/me`) directly, and send their own email codes or magic links through Azure Communication Services Email. We store users, linked identities and sessions in Table Storage.
+**How it works.** Our Functions talk to Google (OIDC) and Facebook (OAuth 2.0 + Graph API `/me`) directly, with redirect URIs `https://longisland.dance/api/login/callback/google` and `.../facebook`, and send their own email codes or magic links through Azure Communication Services Email from `longisland.dance`. We store users, linked identities and sessions in Table Storage.
 
-- **Cost:** $0 for sign-in + email about $0.05 / $0.50 / $5 a month (200 / 2,000 / 20,000 emails) + our own domain for sending.
+- **Cost:** $0 for sign-in + email about $0.05 / $0.50 / $5 a month (200 / 2,000 / 20,000 emails). Sending from `longisland.dance` needs SPF/DKIM DNS records, but no new domain.
 - **Pros:** no identity vendor; full control; stays on SWA Free.
 - **Cons:** the most security-sensitive code (code-guessing limits, token expiry, account linking when the same email uses Google and Facebook, account recovery); we must implement Facebook's data-deletion rules ourselves; email deliverability and spam folders are our problem; ACS's test domain allows only 10 emails an hour.
 - **Effort:** sign-in 7-10 days; whole project 20-27 days.
@@ -176,7 +177,7 @@ All of these use a **top-level redirect** to the vendor's sign-in page (works wi
 | Vendor | Free amount | Google / Facebook / email code | Notes |
 | --- | --- | --- | --- |
 | **Auth0** | **25,000 MAU** | ✅ / ✅ / ✅ | Best free fit. Built-in email is rate-limited and "not production-grade", so add our own email service. Custom domain is free but needs a card on file. Crossing 25,000 MAU jumps to paid "B2C Essentials" bands (20,000 MAU is listed at about $1,400 a month), a big cliff. Inactive free tenants may be deleted after 150 days (*unverified*). |
-| Clerk | 50,000 monthly *retained* users | ✅ / ✅ / ✅ | Production **requires a domain we own** with a DNS record; branding removal is paid. Repriced 2026-02-05. |
+| Clerk | 50,000 monthly *retained* users | ✅ / ✅ / ✅ | Production **requires a domain we own** with a DNS record (`longisland.dance` works); branding removal is paid. Repriced 2026-02-05. |
 | Firebase Authentication | Unlimited for Google/Facebook/email link | ✅ / ✅ / link only | Email links: **5 a day on the free Spark plan**. Its redirect sign-in uses an **iframe** from Firebase's domain, so we would have to add `frame-src`. |
 | WorkOS AuthKit | 1,000,000 MAU | ✅ / **❌ no Facebook** / ✅ | Fails the Facebook requirement. |
 | Supabase Auth | 50,000 MAU | ✅ / ✅ / ✅ | Built-in email: **2 an hour**, so custom SMTP is needed. See Option 5. |
@@ -370,7 +371,7 @@ Each page gets two different buttons:
 | Photo requests a month (about 50 KB each) | 50,000 | 500,000 | 5,000,000 |
 | Sign-in emails we send ourselves (Options 3, 4, 6, 7 only) | 200 | 2,000 | 20,000 |
 
-Other assumptions: East US 2 prices from the Azure Retail Prices API; Storage is Standard LRS (Hot tier for blobs); photos are kept 12 months; text posts are under 1,000 characters (one Content Safety text record each, plus one for each photo caption); the read-model JSON is about 3 KB; the Azure subscription has no other big egress (the first 100 GB a month of egress is free per subscription). Domain registration, taxes and people's time are **not** included.
+Other assumptions: East US 2 prices from the Azure Retail Prices API; Storage is Standard LRS (Hot tier for blobs); photos are kept 12 months; text posts are under 1,000 characters (one Content Safety text record each, plus one for each photo caption); the read-model JSON is about 3 KB; the Azure subscription has no other big egress (the first 100 GB a month of egress is free per subscription). The domain `longisland.dance` is already owned and live, so no domain cost is added. Taxes and people's time are **not** included.
 
 ### Shared community backend (Options 1-4 and 6; Option 7 uses part of it)
 
@@ -445,8 +446,8 @@ How to read this: at the tiny and medium sizes, the recommended option costs **l
 - **No general New York privacy law yet:** the "NY Privacy Act" (S3044) is still a bill. California, Virginia and Connecticut privacy laws have size thresholds (for example $25 million revenue or 100,000 people) that a volunteer site does not meet, and Virginia and Connecticut exempt nonprofits.
 - **Section 230** (47 U.S.C. § 230): a site is generally not treated as the publisher of what users post, and removing posts it finds objectionable in good faith is protected. It does not cover federal crimes or copyright.
 - **Copyright (DMCA, 17 U.S.C. § 512):** before accepting photos, **register a DMCA agent** with the U.S. Copyright Office (**$6**, renew every **3 years**), publish how to send a takedown notice, remove reported photos quickly, and follow the counter-notice rules (restore after 10-14 business days unless the claimant sues).
-- **Facebook:** give Meta a **data-deletion instructions URL** (simplest: a "Delete your account" section on the privacy page). A callback is optional. With External ID, the Facebook user id is stored in External ID, and deleting the account removes it.
-- **Google:** the consent screen needs a homepage and privacy policy link; showing our name and logo needs brand verification on a domain we own.
+- **Facebook:** give Meta a **data-deletion instructions URL** (simplest: `https://longisland.dance/privacy/#delete-your-account`). A callback is optional. With External ID, the Facebook user id is stored in External ID, and deleting the account removes it.
+- **Google:** the consent screen needs a homepage and privacy policy link (`https://longisland.dance/` and `https://longisland.dance/privacy/`); showing our name and logo needs brand verification of `longisland.dance`.
 
 ### Community rules and terms for posts (draft, plain language)
 
@@ -464,12 +465,12 @@ How to read this: at the tiny and medium sizes, the recommended option costs **l
 
 ```mermaid
 flowchart LR
-  V["Visitor's browser"] -->|"pages and scripts"| SWA["Static Web App, Free plan<br/>static pages"]
+  V["Visitor's browser"] -->|"pages and scripts"| SWA["Static Web App, Free plan<br/>https://longisland.dance"]
   V -->|"read likes, comments, photos<br/>JSON + images, cached 60 s"| PUB[("Blob Storage, public:<br/>read-model JSON + approved photos")]
-  V -->|"1. Sign in link"| FN["Managed Functions /api"]
+  V -->|"1. Sign in link"| FN["Managed Functions<br/>longisland.dance/api"]
   FN -->|"2. redirect"| EXT["Entra External ID<br/>ciamlogin.com"]
   EXT -->|"Google, Facebook,<br/>Apple, email code"| IDP["Sign-in providers"]
-  EXT -->|"3. one-time code"| FN
+  EXT -->|"3. one-time code to<br/>longisland.dance/api/login/callback"| FN
   FN -->|"4. session cookie"| V
   V -->|"like, comment, photo,<br/>report, with cookie"| FN
   FN --> TS[("Table Storage:<br/>users, sessions, comments, photos,<br/>likes, flags, queue, audit log")]
@@ -486,10 +487,11 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-  V["Visitor's browser"] -->|"pages"| SWA["Static Web App, Standard plan<br/>$9 a month"]
-  V -->|"/.auth/login/extid"| AUTH["SWA built-in sign-in"]
+  V["Visitor's browser"] -->|"pages"| SWA["Static Web App, Standard plan<br/>https://longisland.dance, $9 a month"]
+  V -->|"longisland.dance/.auth/login/extid"| AUTH["SWA built-in sign-in"]
   AUTH -->|"OpenID Connect"| EXT["Entra External ID"]
   EXT -->|"Google, Facebook,<br/>Apple, email code"| IDP["Sign-in providers"]
+  EXT -->|"back to longisland.dance/<br/>.auth/login/extid/callback"| AUTH
   AUTH -->|"SWA session cookie"| V
   AUTH -->|"each sign-in: claims"| ROLES["Roles function at /api/roles:<br/>member, or none if banned"]
   V -->|"/api calls with cookie"| FN["Managed Functions /api"]
@@ -561,15 +563,15 @@ Table Storage has no automatic expiry, so a **weekly GitHub Actions workflow** d
 - New helpers: `src/lib/session.js` (create, read, revoke sessions; cookie flags), `src/lib/oidc.js` (External ID code flow with `openid-client`), `src/lib/store.js` (`@azure/data-tables`, `@azure/storage-blob`), `src/lib/moderate.js` (Content Safety REST calls + the decision rules as a pure, unit-tested function), `src/lib/images.js` (`sharp`), `src/lib/turnstile.js`, `src/lib/readmodel.js` (rebuild one page's JSON).
 - New Functions: `login.js` (`/api/login`, `/api/login/callback`, `/api/logout`), `me.js` (`/api/me`, data export, account deletion, "did I like these?"), `likes.js`, `comments.js` (comments and corrections → GitHub issue), `photos.js`, `flags.js`, `admin.js` (queue list, decide, ban, unban), and optionally `facebook-deletion.js`.
 - Reuse `hosts.js` and the same-origin check from `telemetry.js` on every write (CSRF protection together with `SameSite=Lax`), keep `Cache-Control: no-store` on personal answers, and add telemetry counters (posts, AI decisions, queue size).
-- New app settings (never in git): `EXTERNAL_ID_ISSUER`, `EXTERNAL_ID_CLIENT_ID`, `EXTERNAL_ID_CLIENT_SECRET`, `COMMUNITY_STORAGE_CONNECTION` (or a SAS per service), `CONTENT_SAFETY_ENDPOINT`, `CONTENT_SAFETY_KEY`, `TURNSTILE_SECRET`, `GITHUB_ISSUES_TOKEN`. Because SWA Free Functions cannot use managed identity (decision P20), use a **separate storage account only for community data**, and rotate its keys twice a year.
+- New app settings (never in git): `EXTERNAL_ID_ISSUER`, `EXTERNAL_ID_CLIENT_ID`, `EXTERNAL_ID_CLIENT_SECRET`, `COMMUNITY_STORAGE_CONNECTION` (or a SAS per service), `CONTENT_SAFETY_ENDPOINT`, `CONTENT_SAFETY_KEY`, `TURNSTILE_SECRET`, `GITHUB_ISSUES_TOKEN`. `ALLOWED_HOSTS` must include `longisland.dance` so the callback is built as `https://longisland.dance/api/login/callback`. Because SWA Free Functions cannot use managed identity (decision P20), use a **separate storage account only for community data**, and rotate its keys twice a year.
 - Tests (`node --test`): validators, moderation decision rules, session cookie flags, like idempotency, read-model builder, image cleaning (EXIF really removed). `package-lock.json` changes must be normalized with `npm run lockfile:normalize`.
 
 **`infra/main.bicep` and `infra/deploy.ps1`**
 
-- Storage account (StorageV2, Standard_LRS, HTTPS only, TLS 1.2, blob public access allowed **only** for `photos` and `community`), the containers and tables above, a CORS rule allowing `GET` from the site's hosts, a lifecycle rule for `pending`, and blob soft delete (7 days).
+- Storage account (StorageV2, Standard_LRS, HTTPS only, TLS 1.2, blob public access allowed **only** for `photos` and `community`), the containers and tables above, a CORS rule allowing `GET` from `https://longisland.dance`, a lifecycle rule for `pending`, and blob soft delete (7 days).
 - Content Safety account (`Microsoft.CognitiveServices/accounts`, kind `ContentSafety`, sku `F0`, East US 2).
 - `deploy.ps1` writes the new app settings (values not printed), like it does today.
-- **Not in Bicep:** the External ID tenant, its user flow, and the Google/Facebook app registrations are set up once in the Entra admin center, Google Cloud console and Meta dashboard. Document the steps in `docs/deployment.md`.
+- **Not in Bicep:** the External ID tenant, its user flow, and the Google/Facebook app registrations are set up once in the Entra admin center, Google Cloud console and Meta dashboard, with `https://longisland.dance` as the home page and `https://longisland.dance/api/login/callback` as the app's redirect URI. Document the steps in `docs/deployment.md`.
 
 **Static pages (`src/`)**
 
@@ -697,8 +699,7 @@ All checked **2026-10-03**. Azure prices come from the public [Azure Retail Pric
 
 ### Still unverified (check before building)
 
-- Whether a `*.azurestaticapps.net` address can pass Google brand verification (very likely not; use our own domain).
-- Facebook Login cost stated explicitly as free; exact "no selling data" wording in Meta Platform Terms section 3.
+- Whether Facebook Login is explicitly free; exact "no selling data" wording in Meta Platform Terms section 3.
 - Whether Sign in with Apple for a website also needs a published app.
 - What happens on SWA Free past "1 million free executions" of managed Functions.
 - Whether `sharp` runs in SWA managed Functions; whether Turnstile adds inline styles under our CSP.
