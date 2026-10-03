@@ -20,7 +20,7 @@ $ErrorActionPreference = 'Stop'
 $base = $Name.ToLowerInvariant() -replace '[^a-z0-9-]', '-'
 if (-not $ResourceGroup) { $ResourceGroup = "rg-$base-web" }
 if (-not $StaticWebAppName) { $StaticWebAppName = "swa-$base-web" }
-$tags = "project=$base-web", 'template=community-site-starter', 'managedBy=bicep'
+$tags = "project=$base", 'owner=michaelsrichter', 'template=community-site-starter', 'managedBy=bicep'
 
 az group create --name $ResourceGroup --location $Location --tags $tags --output none
 $out = az deployment group create --resource-group $ResourceGroup --name "web-$base-$(Get-Date -Format yyyyMMddHHmmss)" `

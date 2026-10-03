@@ -10,7 +10,7 @@ let firstEvent = '';
 
 await check('Homepage loads with search and quick links', async () => {
   const r = await get('/'); assert(r.status === 200, `status ${r.status}`);
-  const html = await r.text(); assert(html.includes('Find a place to dance on Long Island'), 'missing hero heading');
+  const html = await r.text(); assert(/<h1 id="hero-title"[^>]*>[^<]*Dance and/.test(html), 'missing hero heading');
   assert(html.includes('data-quick-links') || html.includes('quick-links'), 'missing quick links');
   return html.match(/<title>([^<]+)/)?.[1];
 });

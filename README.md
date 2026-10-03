@@ -9,7 +9,7 @@
 - Every event links to its venue, organizer, teachers, bands and DJs, and each of those pages lists what is coming up.
 - Add any event to Google, Outlook or Apple calendars, or subscribe to the whole list (`/events/all.ics`, `/events/rss.xml`).
 
-Status: **MVP (build phases 1-2)**. The site works locally with real data from The Dance Calendar. It is not deployed yet. See [Roadmap](#roadmap).
+Status: **MVP (build phases 1-2), live at <https://black-dune-0e0f3e40f.1.azurestaticapps.net>** on Azure Static Web Apps (Free). Search engines are kept away until launch (`ALLOW_INDEXING=false`). See [Roadmap](#roadmap).
 
 ## How it works
 
@@ -160,7 +160,7 @@ docs/             decisions, content audit, content model, architecture, editor 
 3. Ira's List LI adapter; duplicate detection (exact match key, then local embeddings with bge-small: ≥ 0.9 merge, 0.8-0.9 human review).
 4. Submit-an-event form (to a moderation queue).
 5. Admin area (GitHub sign-in, `admin` role): moderation queue, source panel, feedback and bug inbox (Table Storage + GitHub issues).
-6. Azure: Static Web Apps Free + Functions + Storage, all in Bicep.
+6. Azure: ✅ Static Web Apps Free + managed Functions + monitoring (Bicep, `infra/`). Storage account comes with phase 5, when its first Functions need it.
 7. Weekly GitHub Actions run that opens a pull request with the run report and @mentions the owner (GitHub sends the email); an issue is filed if a source breaks.
 8. Discovery of more sources (owner approves each), docs, launch.
 
