@@ -1,0 +1,22 @@
+{
+  "name": "First Dance Wedding and Social Dance Studio",
+  "aliases": [
+    "First Dance",
+    "First Dance - Wedding and Social Dance Studio"
+  ],
+  "address": "18 Hempstead Tpke",
+  "town": "Farmingdale",
+  "county": "Nassau",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: 1st-dance.com, farmingdalenychamber.org, google.com.",
+  "postalCode": "11735",
+  "phone": "(631) 513-8706",
+  "website": "https://1st-dance.com/",
+  "googleMapsUrl": "https://www.google.com/maps?cid=6127969443822797100",
+  "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot.",
+  "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance, parking lot and restroom.",
+  "reviewNotes": "Brands itself \"First Dance Wedding\"; formerly Dance Obsession (Barney & Debbie).",
+  "latitude": 40.729407,
+  "longitude": -73.46313,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -6,8 +6,8 @@
       "url": [
         "http://127.0.0.1:4322/",
         "http://127.0.0.1:4322/events/",
-        "http://127.0.0.1:4322/events/series/thursday-night-swing/",
-        "http://127.0.0.1:4322/new-to-swing/"
+        "http://127.0.0.1:4322/events/calendar/",
+        "http://127.0.0.1:4322/venues/huntington-moose-lodge/"
       ],
       "numberOfRuns": 3,
       "settings": {

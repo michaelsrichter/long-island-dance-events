@@ -1,0 +1,36 @@
+{
+  "title": "Ballroom, Latin and more classes at Adelphi University",
+  "summary": "Group class in Ballroom, Latin and more with Richard Fiore.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom",
+    "east-coast-swing",
+    "salsa",
+    "bachata",
+    "merengue"
+  ],
+  "start": "2026-10-02",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=FR;UNTIL=20261030"
+  },
+  "venueId": "adelphi-university",
+  "town": "Garden City",
+  "organizerId": "adelphi-university",
+  "instructorIds": [
+    "richard-fiore"
+  ],
+  "skillLevel": "all-levels",
+  "contactEmail": "ndenicola@adelphi.edu",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "pages 15, 17, 19, 21, 23",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.6,
+  "matchKey": "thedancecalendar|adelphi-university|adelphi-university|friday|tba|class-lesson||bachata+ballroom+east-coast-swing+latin-ballroom+merengue+salsa||repeat",
+  "reviewNotes": "No start time found."
+}

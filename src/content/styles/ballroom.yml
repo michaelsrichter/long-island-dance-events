@@ -1,5 +1,19 @@
-name: "Ballroom"
-order: 50
-family: swing
-summary: "Partner dances such as foxtrot, rumba, and cha-cha that may fit some songs."
-tempo: "Foxtrot, rumba, cha-cha and more"
+name: Ballroom (Standard and Smooth)
+family: ballroom
+order: 20
+aliases:
+  - Ballroom
+  - Standard
+  - Standards
+  - Smooth
+  - American Smooth
+  - Foxtrot
+  - Fox Trot
+  - American Foxtrot
+  - Waltz
+  - Viennese Waltz
+  - Quickstep
+  - Peabody
+  - Strict Tempo
+summary: Classic partner dances that travel around the floor, like the waltz and foxtrot.
+music: Waltzes, big-band standards, ballads

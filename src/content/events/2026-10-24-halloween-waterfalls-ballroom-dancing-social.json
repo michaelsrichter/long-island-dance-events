@@ -1,0 +1,29 @@
+{
+  "title": "Halloween Ballroom and Latin social dance with DJ Valerie at The Waterfalls Clubhouse Ballroom",
+  "summary": "An evening of Ballroom and Latin social dancing with music by DJ Valerie. You do not need a partner.",
+  "category": "social-dance",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "start": "2026-10-24T19:00",
+  "end": "2026-10-24T23:00",
+  "timezone": "America/New_York",
+  "venueId": "waterfalls-ballroom",
+  "town": "Lake Ronkonkoma",
+  "organizerId": "waterfalls-ballroom-dancing",
+  "performerIds": [
+    "dj-valerie"
+  ],
+  "price": 20,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "page 21",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 1,
+  "matchKey": "thedancecalendar|waterfalls-ballroom|waterfalls-ballroom-dancing|saturday|19:00|social-dance|dj-valerie|ballroom+latin-ballroom||2026-10-24|halloween"
+}

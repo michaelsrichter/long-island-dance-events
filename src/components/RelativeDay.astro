@@ -1,0 +1,8 @@
+---
+/** "Today" / "Tomorrow" label next to a date heading. Filled in the browser so it stays right between builds. */
+interface Props {
+  date: string;
+}
+const { date } = Astro.props;
+---
+<span class="day-rel" data-day-rel={date} hidden></span>

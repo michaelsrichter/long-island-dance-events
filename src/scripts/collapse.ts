@@ -1,5 +1,5 @@
 /**
- * "Show more" for long Riverbend event lists. A container with data-collapse="3" shows only its first
+ * "Show more" for long event lists. A container with data-collapse="3" shows only its first
  * three visible events; a button (data-collapse-toggle="<container id>") reveals the rest.
  *
  * The page is rendered already collapsed (items carry data-collapsed, hidden by CSS only when

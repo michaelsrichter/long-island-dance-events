@@ -1,4 +1,4 @@
-/* Riverbend Swing Dance Club design system. Original design; tokens first, then base, layout, components. */
+/* Long Island Dance Events design system (from community-site-starter). Original design; tokens first, then base, layout, components. */
 
 @layer reset, tokens, base, layout, components, utilities;
 
@@ -654,7 +654,7 @@
 }
 
 
-/* Phase 2: Riverbend vs community events, relative dates, dance-style tags, external links */
+/* Relative dates, dance-style tags, external links */
 @layer components {
   .host { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0.65rem; border-radius: 999px; font-weight: 800; font-size: 0.85rem; line-height: 1.3; letter-spacing: 0.01em; white-space: nowrap; border: 1.5px solid transparent; }
   .host svg { width: 1em; height: 1em; flex: none; }
@@ -854,7 +854,7 @@
 }
 
 @layer components {
-  /* A wider, shorter map suits Riverbend Valley's shape. */
+  /* A wider, shorter map suits Long Island's shape. */
   .events-map { height: min(52vh, 28rem); }
   @media (min-width: 60rem) { .events-map { height: min(calc(100vh - 11rem), 36rem); } }
 }
@@ -870,7 +870,7 @@
   @media (max-width: 29.99rem) { .view-switch a { padding: 0 0.75rem; font-size: 0.95rem; } }
 }
 
-/* "Show more" for long Riverbend lists (scripts/collapse.ts). Only applies when JavaScript runs. */
+/* "Show more" for long lists (scripts/collapse.ts). Only applies when JavaScript runs. */
 @layer components {
   .js [data-collapsed] { display: none !important; }
   .js [data-collapse] [data-month-group]:not(:has([data-event]:not([hidden]):not([data-collapsed]))) { display: none; }
@@ -918,3 +918,63 @@
     .js .nav__toggle { padding: 0 0.7rem; gap: 0.35rem; }
   }
 }
+
+/* ---------- Long Island Dance Events: aggregator elements ---------- */
+.home-hero--aggregator { grid-template-areas: 'intro' 'quick'; padding-bottom: clamp(3rem, 6vw, 5rem); }
+.home-hero--aggregator .home-hero__intro { grid-area: intro; min-width: 0; }
+@media (min-width: 60rem) {
+  .home-hero--aggregator { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-areas: 'intro quick'; align-items: center; }
+}
+.quick-links { grid-area: quick; min-width: 0; }
+.quick-links ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-3); }
+.quick-links li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.quick-link { display: flex; align-items: center; gap: 0.6rem; min-height: 3.5rem; padding: 0.75rem 1rem; border-radius: var(--radius-m); background: rgb(255 255 255 / 0.08); border: 1px solid rgb(255 255 255 / 0.24); color: var(--c-on-night); font-weight: 700; text-decoration: none; }
+.quick-link:hover { background: rgb(255 255 255 / 0.16); }
+.quick-link:focus-visible { outline: 3px solid var(--c-gold); outline-offset: 2px; }
+.quick-link svg { width: 1.3em; height: 1.3em; color: var(--c-gold); flex: none; }
+.quick-link__label { min-width: 0; }
+@media (max-width: 39.99rem) { .quick-link { padding: 0.6rem 0.75rem; gap: 0.5rem; min-height: 3.25rem; } .quick-link__count { min-width: 1.75rem; padding-inline: 0.35rem; } }
+.quick-link__count { margin-left: auto; min-width: 2rem; text-align: center; padding: 0.1rem 0.5rem; border-radius: 999px; background: var(--c-gold); color: #24162f; font-size: 0.9rem; }
+.hero-search { display: flex; gap: 0.5rem; margin-top: var(--space-5); max-width: 34rem; }
+.hero-search input { flex: 1; min-width: 0; min-height: var(--tap); padding: 0 1rem; border-radius: 999px; border: 2px solid transparent; font: inherit; background: var(--c-surface); color: var(--c-ink); }
+.hero-search input:focus-visible { outline: 3px solid var(--c-gold); outline-offset: 2px; }
+.hero-search .btn { flex: none; }
+@media (max-width: 22.5rem) { .hero-search .btn { padding-inline: 0.75rem; } }
+.hero__stat { margin-top: var(--space-3); color: var(--c-on-night-soft); font-weight: 600; }
+
+.cat-badge { display: inline-flex; align-items: center; padding: 0.1rem 0.6rem; border-radius: 999px; font-weight: 800; font-size: 0.78rem; letter-spacing: 0.03em; text-transform: uppercase; border: 1px solid currentColor; background: var(--c-surface); line-height: 1.5; }
+.cat-badge--small { font-size: 0.7rem; padding: 0 0.45rem; }
+.cat-badge--social-dance { color: var(--c-brand); }
+.cat-badge--class-lesson { color: var(--c-link); }
+.cat-badge--lesson-party { color: var(--c-accent); }
+.cat-badge--live-music { color: var(--c-warn); }
+.cat-badge--festival { color: var(--c-ok); }
+.event-hero .cat-badge { background: transparent; }
+.status--past { color: var(--c-ink-soft); background: var(--c-muted-bg); }
+.status--pending-review { color: var(--c-warn); background: var(--c-warn-bg); }
+
+.day-heading { font-size: var(--step-1); margin: 0 0 var(--space-3); padding-bottom: 0.4rem; border-bottom: 3px solid var(--c-gold); display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+h3.day-heading { font-size: 1.1rem; }
+.day-rel { font-family: var(--font-body); font-size: 0.78rem; font-weight: 800; padding: 0.1rem 0.55rem; border-radius: 999px; background: var(--c-accent); color: var(--c-on-accent); text-transform: uppercase; letter-spacing: 0.04em; }
+.day-group[hidden] { display: none; }
+
+.style-grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr)); gap: var(--space-3); }
+.style-chip { display: flex; flex-direction: column; gap: 0.15rem; min-height: var(--tap); padding: 0.75rem 1rem; border-radius: var(--radius-m); border: 2px solid var(--c-line); background: var(--c-surface); color: var(--c-ink); font-weight: 700; text-decoration: none; }
+.style-chip:hover { border-color: var(--c-link); color: var(--c-link); }
+.style-chip__count { font-weight: 600; font-size: 0.85rem; color: var(--c-ink-soft); }
+.style-cards { list-style: none; padding: 0; }
+.style-tag a { color: inherit; }
+
+.steps { display: grid; gap: var(--space-3); padding-left: 1.4rem; margin: 0; }
+.steps li::marker { font-weight: 800; color: var(--c-accent); }
+.how-photo { margin: 0; }
+.cal__time { font-weight: 800; }
+.cal__event--class-lesson { background: transparent; color: var(--c-link); border: 1px solid currentColor; font-weight: 600; }
+.cal__event--past { background: var(--c-muted-bg); color: var(--c-ink); border-color: transparent; }
+.site-footer__note { margin-top: var(--space-6); color: var(--c-on-night-soft); max-width: 48rem; }
+.data-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.data-table th, .data-table td { padding: 0.6rem 0.75rem 0.6rem 0; border-bottom: 1px solid var(--c-line); text-align: left; vertical-align: top; }
+.data-table thead th { border-bottom: 2px solid var(--c-ink); white-space: nowrap; }
+.data-table tbody th { font-weight: 700; overflow-wrap: anywhere; min-width: 9rem; }
+.prose-wide { max-width: 52rem; }
+.person-link { font-weight: 600; }

@@ -1,0 +1,21 @@
+{
+  "name": "Merrick Golf Course Clubhouse",
+  "aliases": [
+    "Merrick Golf Course"
+  ],
+  "address": "2550 Clubhouse Road",
+  "town": "Merrick",
+  "county": "Nassau",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: divaballroomdancing.com, hempsteadny.gov, merrickgc.com, thedancecalendar.com, google.com.",
+  "postalCode": "11566",
+  "phone": "(516) 868-4650",
+  "website": "https://hempsteadny.gov/facilities/facility/details/merrickgolfcourse-31",
+  "googleMapsUrl": "https://www.google.com/maps?cid=7493017510355899013",
+  "parkingNotes": "Free parking (dansant organizer's ad).",
+  "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
+  "reviewNotes": "Town of Hempstead facility; operator site https://merrickgc.com/. Just east of the Meadowbrook Pkwy, south of Merrick Rd.",
+  "latitude": 40.649624,
+  "longitude": -73.557994,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

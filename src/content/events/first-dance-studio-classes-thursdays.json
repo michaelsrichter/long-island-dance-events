@@ -1,0 +1,27 @@
+{
+  "title": "Beginner dance class at First Dance Wedding and Social Dance Studio",
+  "summary": "Group class for beginners. For adults. You do not need a partner.",
+  "category": "class-lesson",
+  "start": "2026-10-01T19:30",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=TH;UNTIL=20261029"
+  },
+  "venueId": "first-dance-studio",
+  "town": "Farmingdale",
+  "organizerId": "first-dance-studio",
+  "price": 35,
+  "priceNotes": "First class free for new students",
+  "skillLevel": "beginner",
+  "ageGroup": "adults",
+  "infoUrl": "https://www.1st-dance.com",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "pages 15, 17, 19, 20, 22",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.95,
+  "matchKey": "thedancecalendar|first-dance-studio|first-dance-studio|thursday|19:30|class-lesson|||adults|repeat"
+}

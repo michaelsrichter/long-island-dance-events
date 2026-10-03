@@ -15,22 +15,10 @@ document.querySelectorAll<HTMLElement>('[data-upcoming-list] [data-event]').forE
 });
 
 // Month headings with no remaining visible events.
-document.querySelectorAll<HTMLElement>('[data-upcoming-list] [data-month-group], [data-upcoming-list] [data-host-section]').forEach((group) => {
+document.querySelectorAll<HTMLElement>('[data-upcoming-list] [data-month-group]').forEach((group) => {
   const visible = group.querySelectorAll('[data-event]:not([hidden])').length;
   if (visible === 0) group.hidden = true;
 });
-
-// Homepage featured "next dance": swap in the next candidate if the first has ended.
-const candidates = [...document.querySelectorAll<HTMLElement>('[data-featured-candidate]')];
-if (candidates.length) {
-  const firstLive = candidates.find((c) => Number(c.dataset.end) > now);
-  candidates.forEach((c) => {
-    c.hidden = c !== firstLive;
-  });
-  const empty = document.querySelector<HTMLElement>('[data-featured-empty]');
-  if (empty) empty.hidden = Boolean(firstLive);
-  if (!firstLive) track('empty_state', { location: 'home_next' });
-}
 
 document.querySelectorAll<HTMLElement>('[data-upcoming-list]').forEach((list) => {
   const remaining = list.querySelectorAll('[data-event]:not([hidden])').length;

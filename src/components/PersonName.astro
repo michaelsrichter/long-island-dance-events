@@ -1,28 +1,12 @@
 ---
-/** A teacher's or band's name, linked to their own website (or first social page) when they have one. */
-import Icon from './Icon.astro';
+/** A teacher's, band's or DJ's name, linked to their page on this site (upcoming events + their own links). */
 import type { PersonRef } from '../lib/content';
-import { displayHost } from '../lib/links';
 
 interface Props {
-  person: PersonRef;
-  /** Analytics location, e.g. "card" or "home_next". */
+  person: Pick<PersonRef, 'name' | 'href'>;
+  /** Analytics location, e.g. "card". */
   location?: string;
 }
 const { person: p, location } = Astro.props;
-const link = p.links[0];
 ---
-{link ? (
-  <a
-    class="person-ext"
-    href={link.url}
-    target="_blank"
-    rel="noopener"
-    data-track="outbound_click"
-    data-track-method={link.kind}
-    data-track-location={location}
-    data-track-target={displayHost(link.url)}
-  >{p.name}<Icon name="external" /><span class="visually-hidden"> ({link.label}, opens in a new tab)</span></a>
-) : (
-  p.name
-)}
+<a class="person-link" href={p.href} data-track="select_person" data-track-location={location}>{p.name}</a>

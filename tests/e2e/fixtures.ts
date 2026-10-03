@@ -1,7 +1,10 @@
 import { test as base, expect, type Page } from '@playwright/test';
 
-/** The build used for end-to-end tests is generated with BUILD_NOW; the browser clock is pinned to the same moment. */
-export const BUILD_NOW = process.env.BUILD_NOW || '2026-10-01T22:00:00-04:00';
+/**
+ * Test builds use BUILD_NOW (see scripts/build-now.mjs: 8 AM on the day of the latest scrape).
+ * The browser clock is pinned to the same moment so "upcoming", "Today" and relative dates match the build.
+ */
+export const BUILD_NOW = process.env.BUILD_NOW || '2026-10-03T08:00:00-04:00';
 
 export const test = base.extend<{ pinned: Page }>({
   pinned: async ({ page }, use) => {
@@ -14,4 +17,12 @@ export { expect };
 export async function noHorizontalScroll(page: Page) {
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   expect(overflow, 'page should not scroll sideways').toBeLessThanOrEqual(0);
+}
+
+/** URL of the first upcoming event on /events/ (the data changes every week, so tests look it up). */
+export async function firstEventUrl(page: Page, selector = '[data-upcoming-list] [data-event]:not([hidden]) .event-card__title a'): Promise<string> {
+  await page.goto('/events/');
+  const href = await page.locator(selector).first().getAttribute('href');
+  expect(href).toMatch(/^\/events\/\d{4}-\d{2}-\d{2}-/);
+  return href!;
 }

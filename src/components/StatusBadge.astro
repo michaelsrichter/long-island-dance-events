@@ -4,15 +4,13 @@ import { STATUS_LABELS } from '../lib/event-core';
 import type { EventStatus } from '../lib/schemas';
 interface Props {
   status: EventStatus;
-  showScheduled?: boolean;
 }
-const { status, showScheduled = false } = Astro.props;
-const icon = status === 'cancelled' ? 'x' : status === 'postponed' ? 'pause' : status === 'soldOut' ? 'ticket' : status === 'completed' ? 'clock' : 'check';
-const label = status === 'scheduled' ? 'On as planned' : STATUS_LABELS[status];
+const { status } = Astro.props;
+const icon = status === 'cancelled' ? 'x' : status === 'past' ? 'clock' : status === 'pending-review' ? 'info' : 'check';
 ---
-{(status !== 'scheduled' || showScheduled) && (
+{status !== 'active' && (
   <span class:list={['status', `status--${status}`]}>
     <Icon name={icon} />
-    {label}
+    {STATUS_LABELS[status]}
   </span>
 )}

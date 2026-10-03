@@ -1,0 +1,20 @@
+{
+  "name": "Swing Dance Long Island",
+  "type": "nonprofit",
+  "aliases": [
+    "Swing Dance Long Island",
+    "SDLI"
+  ],
+  "website": "https://www.sdli.org/",
+  "phone": "(631) 476-3707",
+  "town": "Greenlawn",
+  "homeVenueId": "huntington-moose-lodge",
+  "danceStyles": [
+    "east-coast-swing",
+    "lindy-hop"
+  ],
+  "facebookUrl": "https://www.facebook.com/swingdancelongisland",
+  "email": "info@sdli.org",
+  "description": "All-volunteer nonprofit running Tuesday swing dances with a beginner lesson at the Huntington Moose Lodge in Greenlawn.",
+  "reviewNotes": "Town = where its weekly dances are held; mailing address is a P.O. box in Centereach. Email is from SDLI's Facebook page (not shown on sdli.org)."
+}

@@ -1,184 +1,114 @@
 # Architecture
 
-This site is a static-first community website with editable content, a small managed API surface and a strong test/build pipeline.
+Long Island Dance Events is a static website built from data files in git. All heavy work (collecting, PDF reading, matching) runs in GitHub Actions or on a developer's computer. The live site is static files on Azure Static Web Apps (Free tier) plus a few thin Azure Functions.
 
 ## System diagram
 
 ```mermaid
-flowchart TD
-  visitor[Visitor browser] --> cdn[Azure Static Web Apps CDN]
-  cdn --> html[Static Astro HTML/CSS/JS]
-  html --> content[src/content collections]
-  html --> feeds[RSS and iCalendar feeds]
-  html --> map[Leaflet + OpenStreetMap tiles]
-  html --> api[/api managed Functions]
-  api --> oauth[GitHub OAuth]
-  api --> otel[Azure Monitor / Application Insights]
-  editor[Editor] --> cms[Decap CMS /admin]
-  cms --> oauth
-  cms --> github[GitHub content branch / pull request]
-  github --> actions[GitHub Actions CI]
-  actions --> build[astro build + postbuild]
-  build --> cdn
+flowchart TB
+  subgraph Sources["Public sources"]
+    S1[The Dance Calendar<br/>monthly PDF]
+    S2[More sources<br/>after owner approval]
+  end
+  subgraph Collect["Collect (GitHub Actions, weekly - phase 7; or npm run ingest)"]
+    F[PoliteFetcher<br/>robots.txt, delay, cache, User-Agent]
+    AD[Adapter per source<br/>fetch + normalize]
+    PY[PDF extractor<br/>PyMuPDF, font-aware]
+    N[Shared helpers<br/>times, prices, places, styles, people, own-words text]
+    C[Collapse dates into<br/>repeating events]
+    M[Merge with existing files<br/>past / pending-review / locked fields]
+    V[Zod validation]
+    R[Run report]
+  end
+  subgraph Repo["GitHub repository (GitOps)"]
+    D[(src/content/**<br/>events, venues, organizers,<br/>instructors, performers, styles, sources)]
+    CI[CI: types, unit, Python, e2e, axe,<br/>links, Lighthouse, gitleaks]
+  end
+  subgraph Azure["Azure (Free tier)"]
+    SWA[Static Web App<br/>static pages + feeds]
+    FN[Managed Functions<br/>CMS sign-in, telemetry;<br/>later: submit, feedback, admin]
+    ST[(Storage: Tables + Blobs<br/>phase 5-6)]
+  end
+  S1 --> F
+  S2 --> F
+  F --> AD
+  AD --> PY --> N
+  AD --> N --> C --> M --> V --> D
+  V --> R
+  D --> CI --> SWA
+  CMS[Decap CMS at /admin/] -->|commits / PRs| D
+  SWA --- FN --- ST
 ```
 
-## Request flow
+## Ingest pipeline
 
-1. Visitor requests a page from Azure Static Web Apps.
-2. Static HTML is served from `dist/`.
-3. Client scripts progressively enhance filters, slideshow, share, relative dates, map and theme controls.
-4. Internal API calls are limited to `/api/auth`, `/api/callback` and `/api/telemetry`.
-5. If telemetry is configured, the API sends OpenTelemetry metrics/logs to Azure Monitor.
+| Step | Code | Notes |
+| --- | --- | --- |
+| Load registries | `ingest/lib/registry.ts` | Venues, organizers, teachers, bands/DJs, styles and their `aliases`; Long Island place list. |
+| Fetch | `ingest/lib/fetch.ts` | Honors `robots.txt`, waits `rateLimitSeconds` between requests to a host, conditional GET, cache in `.cache/ingest/` (never committed). User-Agent `LongIslandDanceEventsBot/1.0 (+repo URL)`. |
+| Adapter | `ingest/adapters/<id>.ts` | `fetch(ctx)` returns documents; `normalize(docs, ctx)` returns dated `Candidate`s. Loaded by name from the source file's `adapter` field. |
+| PDF | `ingest/pdf/extract_calendar.py` | Day headings are uppercase and larger than body text; sections and towns are bold. Outputs rows: date, section, town, text, page. |
+| Normalize | `ingest/lib/times.ts`, `prices.ts`, `text.ts`, `describe.ts` | Times ("7:30-11pm", "lesson at 7"), prices ("$15/$20 members"), styles, venues and people; titles and summaries in our own words. |
+| Scope | `src/data/long-island-places.json` | Keeps only Nassau and Suffolk; counts the rest as "out of area". |
+| Collapse | `ingest/lib/collapse.ts` | Same listing on many dates → one event with an RRULE (weekly, or monthly "Nth weekday" only when stated or clearly repeated). Themed nights stay one-off. |
+| Merge | `ingest/lib/merge.ts` | Match by `matchKey`; keep `firstSeen`; respect `lockedFields`; ended → `past`; vanished or low confidence → `pending-review`; never delete. |
+| Validate + write | `src/lib/schemas.ts`, `ingest/lib/store.ts` | Zod validation; stable key order for small diffs. Invalid records are reported, not written. |
+| Report | `ingest/run.ts` | Markdown + JSON: per-source status, found/kept/out-of-area, created/updated/past/needs-review. |
 
-## Content build flow
+## Build
 
 ```mermaid
 flowchart LR
-  md[Markdown/YAML content] --> schema[Zod schemas]
-  schema --> astro[Astro content collections]
-  astro --> pages[Pages and feeds]
-  pages --> postbuild[postbuild: redirects + CSP + style guard]
-  postbuild --> dist[dist/]
+  content[src/content/**] --> zod[Astro content collections<br/>+ Zod schemas]
+  zod --> resolve[resolveOccurrences:<br/>expand RRULE 120 days,<br/>link venue/organizer/people/styles]
+  resolve --> pages[Static pages, feeds,<br/>JSON-LD, sitemap]
+  pages --> post[postbuild: CSP hashes,<br/>inline-style guard]
+  post --> dist[dist/]
 ```
 
-Key points:
+- `BUILD_NOW` (optional) fixes "today" for repeatable tests. Production builds use the real time.
+- Events that end after the page was built are hidden by a small script (`src/scripts/expire.ts`), so lists stay correct between rebuilds.
 
-- Astro content collections validate every entry.
-- Unit tests also parse content directly to catch CMS mistakes early.
-- A fixed `BUILD_NOW` keeps tests deterministic.
-- Recurring series generate occurrences; one-off event entries can override one occurrence.
+## Routes
 
-## Runtime routes
+| Route | Purpose |
+| --- | --- |
+| `/` | Search, quick links (Today, This weekend, Classes, Live music, Map) with counts, today's and this week's events, dance styles. |
+| `/events/` | All upcoming events with filters (when, type, style, town, county, day, price, level, venue, teacher/band/DJ, text). Filters live in the URL. Works without JavaScript. |
+| `/events/calendar/`, `/events/calendar/<yyyy-mm>/` | Month grid on desktop, agenda list on phones. |
+| `/events/map/` | Leaflet + OpenStreetMap; star pins for dances and live music, round pins for classes; list fallback. |
+| `/events/<date>-<id>/` | One date of an event: when, where, price, organizer, teachers, bands/DJs, repeat rule, other dates, add to calendar, share, source credit, "Report a problem". |
+| `/events/<slug>/calendar.ics` | One date as an iCalendar file. |
+| `/events/all.ics`, `/events/rss.xml` | Subscribe to everything. |
+| `/events/past/`, `/events/past/<year>/` | Archive. |
+| `/venues/`, `/organizers/`, `/instructors/`, `/performers/`, `/styles/` and `/<type>/<id>/` | Directory pages; each lists its upcoming events. |
+| `/sources/` | Credits every source, explains how collection works, corrections, opt-out and takedown. |
+| `/faq/`, `/about/`, `/privacy/` | Plain-language help. |
+| `/admin/` | Decap CMS. |
+| `/api/auth`, `/api/callback`, `/api/telemetry` | CMS sign-in bridge and first-party telemetry (Azure Functions). |
+| `/llms.txt`, `/robots.txt`, `/sitemap-index.xml` | Machine-readable summaries. |
 
-| Route | Purpose | Source |
-| --- | --- | --- |
-| `/` | Homepage, next home event, slideshow, community teaser | `src/pages/index.astro` |
-| `/events/` | Upcoming list with filters and home-first ordering | `src/pages/events/index.astro` |
-| `/events/calendar/` | Month calendar | `src/pages/events/calendar/` |
-| `/events/map/` | Map of venues with upcoming events | `src/pages/events/map.astro` |
-| `/events/<slug>/` | Event detail | `src/pages/events/[slug]/index.astro` |
-| `/events/<slug>/calendar.ics` | One-event iCalendar file | `src/pages/events/[slug]/calendar.ics.ts` |
-| `/events/club-events.ics` | Home organization calendar feed | `src/pages/events/club-events.ics.ts` |
-| `/events/community-events.ics` | Community event feed | `src/pages/events/community-events.ics.ts` |
-| `/admin/` | Decap CMS shell | `public/admin/` |
-| `/api/auth`, `/api/callback` | GitHub OAuth bridge | `api/src/functions/oauth.js` |
-| `/api/telemetry` | First-party telemetry endpoint | `api/src/functions/telemetry.js` |
-
-## Data model
-
-```mermaid
-erDiagram
-  SETTINGS ||--o{ SERIES : defaults
-  VENUE ||--o{ SERIES : hosts
-  VENUE ||--o{ EVENT : hosts
-  SERIES ||--o{ EVENT : override
-  ORGANIZER ||--o{ EVENT : runs
-  ORGANIZER ||--o{ SERIES : runs
-  INSTRUCTOR ||--o{ EVENT : teaches
-  PERFORMER ||--o{ EVENT : plays
-  STYLE ||--o{ EVENT : tags
-  GALLERY ||--o{ IMAGE : contains
-```
-
-`host: home` means the organization running the site. `host: community` means a listing from another organizer.
-
-## Home-first event logic
-
-1. Resolve one-time events.
-2. Resolve recurring series dates through each series horizon.
-3. Apply overrides for cancellation, postponement, band nights, price changes or one-time details.
-4. Partition upcoming/past using the event end time.
-5. Sort home events chronologically before community events.
-6. Choose the next confirmed home event as the hero.
-7. Client-side expiry promotes the next candidate if the built page is viewed after the first event ends.
-
-## Client-side enhancement boundaries
-
-The site works without JavaScript for the core flow:
-
-- Event lists render server-side.
-- No-JS users see all home events instead of a collapsed list.
-- Calendar links are real links.
-- Theme follows the device preference.
-
-JavaScript adds:
-
-- Filters.
-- Show-more toggles.
-- Relative dates after the page ages.
-- Share/copy behavior.
-- Slideshow controls and autoplay.
-- Leaflet map.
-- Consent and analytics.
-
-## Security design
+## Security and privacy
 
 | Area | Decision |
 | --- | --- |
-| Static pages | No server rendering for public pages. |
-| CMS auth | OAuth token returned only to the CMS window; not logged or stored server-side. |
-| Secrets | GitHub Actions secrets and Azure app settings only. |
-| CSP | Generated in `scripts/postbuild.mjs`; no `unsafe-inline` for site scripts/styles. |
-| Admin CSP | Separate because Decap CMS needs broader script/style permissions. |
-| Telemetry | Payload validation, size limits, rate limiting, origin checks. |
-| Content | Public content only; no private rosters or member databases. |
+| Public pages | Static; no server rendering. |
+| Secrets | GitHub Actions secrets and Azure app settings only; gitleaks scans history in CI. |
+| CSP | Generated at build time with script hashes; inline styles rejected; separate admin CSP. |
+| CMS sign-in | GitHub OAuth bridge; token goes only to the CMS window. |
+| Collecting | `robots.txt` honored, rate limits, identifying User-Agent, cache. Original text and PDFs are never committed. |
+| Personal data | Only public business contact details from public listings. Private contacts and members' names are not recorded. |
+| Analytics | Consent-gated; telemetry strips unknown fields and rate-limits. |
 
-## Performance design
+## Planned (later phases)
 
-- Static HTML from CDN.
-- Astro image pipeline with responsive sizes.
-- Custom image service avoids upscaling.
-- Fonts are local packages and preloaded.
-- Leaflet loads only on the map page.
-- Third-party analytics load only after consent and only if IDs exist.
-
-## Deployment environments
-
-| Environment | Purpose | Indexing |
-| --- | --- | --- |
-| Local dev | Editing and testing | noindex by default |
-| Pull request preview | Review content and design | noindex |
-| Azure default host | Pre-launch testing | usually noindex |
-| Custom domain | Production | `ALLOW_INDEXING=true` after launch |
-
-## Important files
-
-| File | Responsibility |
-| --- | --- |
-| `src/lib/event-core.ts` | Pure event expansion, sorting and partitioning. |
-| `src/lib/content.ts` | Astro collection lookup and event enrichment. |
-| `src/lib/schemas.ts` | Zod schemas shared by Astro and tests. |
-| `src/lib/calendar.ts` | iCalendar and add-to-calendar links. |
-| `src/lib/seo.ts` | JSON-LD and metadata helpers. |
-| `src/lib/focus-image-service.mjs` | Focus crops and no-upscale image guard. |
-| `scripts/postbuild.mjs` | Redirect pages, CSP hashes and inline-style enforcement. |
-| `scripts/geocode-venues.mjs` | Census-first geocoding with Nominatim fallback. |
-| `api/src/functions/oauth.js` | CMS OAuth flow. |
-| `api/src/functions/telemetry.js` | Telemetry validation and ingestion. |
-
-## Mermaid sequence: CMS edit
-
-```mermaid
-sequenceDiagram
-  participant Editor
-  participant CMS
-  participant API
-  participant GitHub
-  participant CI
-  Editor->>CMS: Open /admin/
-  CMS->>API: /api/auth
-  API->>GitHub: OAuth authorize
-  GitHub-->>API: callback code
-  API-->>CMS: token postMessage
-  Editor->>CMS: Edit content
-  CMS->>GitHub: commit/change request
-  GitHub->>CI: run checks and preview
-  CI-->>Editor: pass/fail + preview URL
-```
+- **Duplicates (phase 3):** exact `matchKey` pass, then local embeddings (bge-small, run in CI, no API key). Cosine ≥ 0.9 merges; 0.8-0.9 goes to a human review queue.
+- **Admin (phase 5):** Static Web Apps built-in auth with GitHub and an `admin` role; moderation queue, source panel, feedback and bug inbox. Functions write to Table Storage and open GitHub issues.
+- **Azure (phase 6):** Bicep for Static Web App, Storage account (Tables for mutable state, Blobs for raw snapshots) and settings.
+- **Weekly run (phase 7):** scheduled workflow runs the ingest and opens a pull request with the report; @mentions the owner so GitHub emails them; files an issue with the failing snapshot when an adapter returns nothing or invalid data.
 
 ## Known tradeoffs
 
-- Static builds are fast and cheap, but schedule changes require a rebuild.
-- The CMS is simpler than a custom database app, but complex content migrations are better done in files/scripts.
-- Community listings are useful, but they must clearly show source and organizer because the home organization does not control them.
-- Geocoding is automated but guarded by map center/radius because public geocoders can return distant false matches.
+- Weekly freshness: a change made by an organizer mid-week shows up at the next run (or sooner if an editor fixes it in the CMS).
+- PDF layouts can change. The golden-file test fails loudly when that happens.
+- Repeating rules are a tested subset of iCalendar RRULE; unusual patterns are stored as explicit date lists.

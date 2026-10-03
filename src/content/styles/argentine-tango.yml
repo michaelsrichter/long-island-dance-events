@@ -1,5 +1,12 @@
-name: "Argentine Tango"
-order: 76
-family: other
-summary: "An improvised, close-embrace partner dance from Buenos Aires, danced at events called milongas."
-tempo: "Tango, vals and milonga"
+name: Argentine Tango
+family: tango
+order: 40
+aliases:
+  - Argentine Tango
+  - Tango Argentino
+  - Milonga
+  - Practica
+  - Práctica
+  - Vals Criollo
+summary: A slow, close partner dance from Buenos Aires. The couple walks and improvises together.
+music: Tango, vals and milonga

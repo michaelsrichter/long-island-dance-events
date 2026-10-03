@@ -1,27 +1,25 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import ResponsiveImage from './ResponsiveImage.astro';
 import Icon from './Icon.astro';
 import PersonLinks from './PersonLinks.astro';
-import { linksOf } from '../lib/links';
+import type { ExternalLink } from '../lib/links';
 interface Props {
-  person: CollectionEntry<'instructors'> | CollectionEntry<'performers'>;
+  name: string;
+  href: string;
+  /** Short label above the name, e.g. "DJ" or "Teacher". */
+  kicker: string;
+  icon?: 'people' | 'music' | 'pin' | 'star';
+  links?: ExternalLink[];
   upcomingCount?: number;
+  note?: string | undefined;
 }
-const { person, upcomingCount = 0 } = Astro.props;
-const p = person.data;
-const kindLabel = p.kind === 'band' ? 'Band' : p.kind === 'dj' ? 'DJ' : 'Teacher';
+const { name, href, kicker, icon = 'people', links = [], upcomingCount = 0, note } = Astro.props;
 ---
 <li class="card person-card">
-  {p.image && p.imageAlt ? (
-    <ResponsiveImage src={p.image} alt="" widths={[176]} sizes="88px" aspect={1} focus={p.imageFocus ?? '50% 30%'} class="avatar" />
-  ) : (
-    <span class="avatar avatar--placeholder" aria-hidden="true"><Icon name={p.kind === 'instructor' ? 'people' : 'music'} /></span>
-  )}
+  <span class="avatar avatar--placeholder" aria-hidden="true"><Icon name={icon} /></span>
   <div>
-    <p class="card__kicker">{kindLabel}{upcomingCount > 0 ? ` · ${upcomingCount} upcoming` : ''}</p>
-    <h3><a href={`/performers/${person.id}/`}>{p.name}</a></h3>
-    {p.role && <p class="muted">{p.role}</p>}
-    <PersonLinks links={linksOf(p)} name={p.name} max={3} location="performers" />
+    <p class="card__kicker">{kicker}{upcomingCount > 0 ? ` · ${upcomingCount} coming up` : ''}</p>
+    <h3><a href={href}>{name}</a></h3>
+    {note && <p class="muted">{note}</p>}
+    <PersonLinks links={links} name={name} max={3} location="directory" />
   </div>
 </li>

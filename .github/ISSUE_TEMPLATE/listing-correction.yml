@@ -1,0 +1,41 @@
+name: Fix a listing
+description: Something about an event, venue, teacher, band or DJ is wrong or out of date (date, time, price, place, name).
+title: "Fix listing: "
+labels: [listing-correction]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping! Tell us what is wrong and what it should say. If the original calendar or flyer is wrong too, please also tell the organizer.
+  - type: input
+    id: page
+    attributes:
+      label: Page address
+      description: Copy the web address of the page with the problem.
+      placeholder: https://.../events/2026-10-10-.../
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: right
+    attributes:
+      label: What should it say?
+      description: Include where you saw the right information (organizer's website, flyer, email).
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Who are you?
+      options:
+        - A dancer or music fan
+        - The organizer, teacher, band or DJ
+        - The venue
+        - Someone else
+    validations:
+      required: false

@@ -1,39 +1,17 @@
-siteName: Riverbend Swing Dance Club
-shortName: Riverbend
-legalName: Riverbend Swing Dance Club, Inc.
-region: Riverbend Valley
-tagline: Friendly swing dancing every Thursday night. Beginners welcome, no partner needed.
-description: Riverbend Swing Dance Club hosts friendly weekly swing dances, lessons, live music nights, and community dance listings in Riverbend Valley.
-mission: Riverbend Swing Dance Club is a fictional all-volunteer nonprofit sample that shows how a community dance website can be organized.
-hotlinePhone: (555) 010-0123
-hotlineLabel: Dance hotline
-email: info@example.org
-mailingAddress:
-  line1: P.O. Box 101
-  city: Riverbend
-  state: NY
-  postalCode: "12508"
-newsletterUrl: https://example.com/newsletter
-facebookUrl: https://www.facebook.com/groups/example
-facebookLabel: Riverbend Facebook group
-instagramUrl: https://example.com/instagram
-youtubeUrl: https://example.com/youtube
-membershipFee: 20
-membershipYear: January 1 to December 31
-standardPrices:
-  - label: Weekly dance
-    member: 10
-    student: 5
-    nonMember: 15
-  - label: Live band night
-    member: 15
-    student: 5
-    nonMember: 20
-defaultVenue: riverbend-community-hall
+siteName: Long Island Dance Events
+shortName: LI Dance Events
+region: Long Island
+tagline: Find dances, classes and live music on Long Island, all in one place.
+description: Find social dances, dance classes and live music for dancing in Nassau and Suffolk counties, Long Island. Updated every week from local calendars.
+mission: Long Island Dance Events gathers dance listings from local calendars and organizers into one easy list. We are not the organizers. Always check with the organizer before you go.
+repoUrl: https://github.com/michaelsrichter/long-island-dance-events
+timezone: America/New_York
+counties:
+  - Nassau
+  - Suffolk
 mapCenter:
-  lat: 41.5034
-  lng: -73.9696
-maxDistanceKm: 80
+  lat: 40.80
+  lng: -73.15
+maxDistanceKm: 130
 socialImage: ../../assets/uploads/lindy-couple-dance-fun.jpg
-socialImageAlt: A couple laughing as they swing out together in front of a crowd.
-
+socialImageAlt: A couple laughing as they swing dance together in front of a crowd.

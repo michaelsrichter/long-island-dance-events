@@ -1,0 +1,5 @@
+question: How often is the site updated?
+answer: Once a week, a program checks every calendar we use. A person also reviews anything the program was not sure about. The "last checked" date is on every event page.
+category: about-site
+order: 10
+published: true

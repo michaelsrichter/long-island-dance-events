@@ -1,0 +1,21 @@
+{
+  "name": "Huntington Moose Lodge",
+  "aliases": [
+    "Greenlawn Moose Lodge",
+    "Moose Lodge"
+  ],
+  "address": "631 Pulaski Road",
+  "town": "Greenlawn",
+  "county": "Suffolk",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: sdli.org, google.com.",
+  "postalCode": "11740",
+  "phone": "(631) 757-2777",
+  "googleMapsUrl": "https://www.google.com/maps?cid=6872930918112154437",
+  "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot.",
+  "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
+  "reviewNotes": "No working official website: Google Maps lists moose318.com but it did not resolve on 2026-10-03. Address/phone verified on SDLI's venue page and Google Maps. Hosts SDLI Tuesdays and DancXchange Club Night (4th Fridays).",
+  "latitude": 40.868155,
+  "longitude": -73.353569,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

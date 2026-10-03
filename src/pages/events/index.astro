@@ -4,71 +4,52 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import EventViews from '../../components/EventViews.astro';
 import EventCard from '../../components/EventCard.astro';
-import FeaturedEvent from '../../components/FeaturedEvent.astro';
 import EmptyState from '../../components/EmptyState.astro';
-import HostBadge from '../../components/HostBadge.astro';
 import Icon from '../../components/Icon.astro';
-import ShowMore from '../../components/ShowMore.astro';
-import { getEventGroups, getSettings, type ResolvedEvent } from '../../lib/content';
-import { EVENT_TYPE_LABELS, EXPERIENCE_LABELS } from '../../lib/schemas';
-import { formatMonthKey } from '../../lib/time';
+import RelativeDay from '../../components/RelativeDay.astro';
+import { byDay, getEventGroups, getSettings } from '../../lib/content';
+import { CATEGORY_LABELS, EVENT_CATEGORIES, SKILL_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
 
-const { upcoming, upcomingHome, upcomingCommunity, next } = await getEventGroups();
+const { upcoming } = await getEventGroups();
 const settings = await getSettings();
 const styles = (await getCollection('styles')).sort((a, b) => a.data.order - b.data.order);
-const venues = await getCollection('venues');
-const byMonth = (list: ResolvedEvent[]) => {
-  const groups = new Map<string, ResolvedEvent[]>();
-  for (const e of list) groups.set(e.date.slice(0, 7), [...(groups.get(e.date.slice(0, 7)) ?? []), e]);
-  return [...groups];
-};
-const homeList = upcomingHome.filter((e) => e.slug !== next?.slug);
-const homeMonths = byMonth(homeList);
-const SHOW = 3;
-const homeIndex = new Map(homeList.map((e, i) => [e.slug, i]));
-const communityMonths = byMonth(upcomingCommunity);
-const usedTypes = [...new Set(upcoming.flatMap((e) => e.details.eventTypes ?? []))];
 const usedStyles = styles.filter((s) => upcoming.some((e) => e.styles.some((x) => x.id === s.id)));
-const usedVenues = venues.filter((v) => upcoming.some((e) => e.venueEntry?.id === v.id)).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const venues = [...new Map(upcoming.filter((e) => e.venue).map((e) => [e.venue!.id, e.venue!])).values()].sort((a, b) => a.data.name.localeCompare(b.data.name));
+const towns = [...new Set(upcoming.map((e) => e.location.town).filter(Boolean) as string[])].sort();
+const people = [...new Map(upcoming.flatMap((e) => [...e.performers, ...e.instructors]).map((p) => [p.id, p])).values()].sort((a, b) => a.name.localeCompare(b.name));
+const usedCategories = EVENT_CATEGORIES.filter((c) => upcoming.some((e) => e.category === c));
+const days = byDay(upcoming);
 const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Events', href: '/events/' },
 ];
-const quick = [
+const when = [
   { value: 'all', label: 'All upcoming' },
+  { value: 'today', label: 'Today' },
+  { value: 'weekend', label: 'This weekend' },
   { value: 'week', label: 'Next 7 days' },
   { value: 'month', label: 'This month' },
-  { value: 'band', label: 'Live bands' },
 ];
-const hosts = [
-  { value: '', label: 'Everyone' },
-  { value: 'home', label: `${settings.shortName} events` },
-  { value: 'community', label: 'Community events' },
-];
+const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 ---
 <BaseLayout
-  title={`Upcoming swing dances in ${settings.region}`}
-  description={`Upcoming ${settings.shortName} swing dances, lessons and live band nights, plus ${upcomingCommunity.length} community dance events around ${settings.region}. Beginners welcome at ${settings.shortName}, no partner needed.`}
+  title={`Dance events on ${settings.region}`}
+  description={`${upcoming.length} upcoming social dances, classes and live music nights in Nassau and Suffolk. Filter by dance style, town, day, price and level.`}
   pageType="events"
   jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}
 >
-  <PageHeader title="Upcoming events" lede={`${settings.shortName} dances plus more places to dance around ${settings.region}. At ${settings.shortName}, beginners are welcome and no partner is needed.`} crumbs={crumbs}>
+  <PageHeader title="Upcoming dance events" lede="Dances, classes and live music in Nassau and Suffolk. Check with the organizer before you go." crumbs={crumbs}>
     <EventViews current="list" />
   </PageHeader>
 
   <div class="container section stack-l">
-    {next && (
-      <div data-featured-candidate data-end={String(next.end.getTime())}>
-        <FeaturedEvent event={next} label={`Next ${settings.shortName} dance`} hasSocialImage />
-      </div>
-    )}
-
     <form class="filters js-only" data-event-filters aria-label="Filter events">
       <fieldset>
-        <legend>Show</legend>
+        <legend>When</legend>
         <div class="quick-views">
-          {quick.map((q, i) => (
+          {when.map((q, i) => (
             <label class="chip">
               <input type="radio" name="when" value={q.value} checked={i === 0} />
               <span>{q.label}</span>
@@ -77,26 +58,15 @@ const hosts = [
         </div>
       </fieldset>
       <fieldset>
-        <legend>Hosted by</legend>
+        <legend>Type of event</legend>
         <div class="quick-views">
-          {hosts.map((h, i) => (
-            <label class="chip">
-              <input type="radio" name="host" value={h.value} checked={i === 0} />
-              <span>{h.label}</span>
-            </label>
+          <label class="chip"><input type="radio" name="category" value="" checked /><span>Everything</span></label>
+          {usedCategories.map((c) => (
+            <label class="chip"><input type="radio" name="category" value={c} /><span>{CATEGORY_LABELS[c]}</span></label>
           ))}
         </div>
       </fieldset>
-      <details class="filters__more">
-        <summary><Icon name="menu" />More filters</summary>
       <div class="filters__row">
-        <div class="field">
-          <label for="f-type">Type of event</label>
-          <select id="f-type" name="type">
-            <option value="">Any type</option>
-            {usedTypes.map((t) => <option value={t}>{EVENT_TYPE_LABELS[t]}</option>)}
-          </select>
-        </div>
         <div class="field">
           <label for="f-style">Dance style</label>
           <select id="f-style" name="style">
@@ -104,34 +74,66 @@ const hosts = [
             {usedStyles.map((s) => <option value={s.id}>{s.data.name}</option>)}
           </select>
         </div>
-        {usedVenues.length > 1 && (
-          <div class="field">
-            <label for="f-venue">Venue</label>
-            <select id="f-venue" name="venue">
-              <option value="">Any venue</option>
-              {usedVenues.map((v) => <option value={v.id}>{v.data.name}</option>)}
-            </select>
-          </div>
-        )}
-        <div class="field">
-          <label for="f-lesson">Lesson</label>
-          <select id="f-lesson" name="lesson">
-            <option value="">With or without</option>
-            <option value="yes">Has a lesson</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="f-level">Level</label>
-          <select id="f-level" name="level">
-            <option value="">Any level</option>
-            {Object.entries(EXPERIENCE_LABELS).filter(([k]) => k !== 'all-levels').map(([k, v]) => <option value={k}>{v}</option>)}
-          </select>
-        </div>
         <div class="field">
           <label for="f-q">Search</label>
           <input id="f-q" name="q" type="search" placeholder="Band, teacher, town…" autocomplete="off" />
         </div>
       </div>
+      <details class="filters__more">
+        <summary><Icon name="menu" />More filters</summary>
+        <div class="filters__row">
+          <div class="field">
+            <label for="f-county">County</label>
+            <select id="f-county" name="county">
+              <option value="">Nassau and Suffolk</option>
+              <option value="Nassau">Nassau</option>
+              <option value="Suffolk">Suffolk</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-town">Town</label>
+            <select id="f-town" name="town">
+              <option value="">Any town</option>
+              {towns.map((t) => <option value={t}>{t}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-day">Day of the week</label>
+            <select id="f-day" name="day">
+              <option value="">Any day</option>
+              {weekdays.map((d) => <option value={d}>{cap(d)}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-price">Price</label>
+            <select id="f-price" name="price">
+              <option value="">Free or paid</option>
+              <option value="free">Free only</option>
+              <option value="paid">Paid</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-level">Level</label>
+            <select id="f-level" name="level">
+              <option value="">Any level</option>
+              {(['beginner', 'intermediate', 'advanced'] as const).map((k) => <option value={k}>{SKILL_LABELS[k]}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-venue">Venue</label>
+            <select id="f-venue" name="venue">
+              <option value="">Any venue</option>
+              {venues.map((v) => <option value={v.id}>{v.data.name}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-person">Teacher, band or DJ</label>
+            <select id="f-person" name="person">
+              <option value="">Anyone</option>
+              {people.map((p) => <option value={p.id}>{p.name}</option>)}
+            </select>
+          </div>
+        </div>
       </details>
       <div class="btn-row filters__foot">
         <p class="result-count" data-result-count aria-live="polite">{upcoming.length} events shown</p>
@@ -139,51 +141,20 @@ const hosts = [
       </div>
     </form>
 
-    <ul class="host-legend" aria-label="What the badges mean">
-      <li><HostBadge host="home" size="small" />Run by {settings.siteName}</li>
-      <li><HostBadge host="community" size="small" />Run by another group. Check with the organizer before you go.</li>
-    </ul>
-
     {upcoming.length === 0 ? (
       <EmptyState title="No upcoming events are listed right now">
-        <p>New dates are added regularly. Call the {settings.hotlineLabel} at {settings.hotlinePhone} or <a href={settings.newsletterUrl}>join the email list</a>.</p>
-        <p><a href="/events/past/">Browse past events</a></p>
+        <p>New listings are added every week. <a href="/events/past/">Browse past events</a>.</p>
       </EmptyState>
     ) : (
       <div class="stack-l" data-upcoming-list="events">
-        {homeMonths.length > 0 && (
-          <section data-host-section="home" id="home" aria-labelledby="home-h" data-collapse={String(SHOW)}>
-            <h2 id="home-h">{next ? `More ${settings.shortName} dances` : `${settings.shortName} dances`}</h2>
-            {homeMonths.map(([key, list]) => (
-              <section data-month-group aria-labelledby={`m-home-${key}`}>
-                <h3 class="month-heading" id={`m-home-${key}`}>{formatMonthKey(key)}</h3>
-                <ul class="event-list">
-                  {list.map((e) => <EventCard event={e} headingLevel="h4" collapsed={(homeIndex.get(e.slug) ?? 0) >= SHOW} />)}
-                </ul>
-              </section>
-            ))}
-            <ShowMore target="home" total={homeList.length} limit={SHOW} label={`${settings.shortName} dances`} />
+        {days.map((g) => (
+          <section class="day-group" data-month-group aria-labelledby={`d-${g.date}`}>
+            <h2 class="day-heading" id={`d-${g.date}`}>{g.label} <RelativeDay date={g.date} /></h2>
+            <ul class="event-list">
+              {g.events.map((e) => <EventCard event={e} headingLevel="h3" hideDate />)}
+            </ul>
           </section>
-        )}
-        {communityMonths.length > 0 && (
-          <section data-host-section="community" id="community" aria-labelledby="community-h">
-            <div class="section__head">
-              <div>
-                <h2 id="community-h">More dancing around {settings.region}</h2>
-                <p>Other groups' dances, socials and classes, including swing, ballroom, Latin and more. Details come from the organizers' own listings and <a href="/community/#sources">community calendars</a>.</p>
-              </div>
-              <a class="btn btn--secondary" href="/community/"><Icon name="people" />Dance groups and teachers</a>
-            </div>
-            {communityMonths.map(([key, list]) => (
-              <section data-month-group aria-labelledby={`m-community-${key}`}>
-                <h3 class="month-heading" id={`m-community-${key}`}>{formatMonthKey(key)}</h3>
-                <ul class="event-list">
-                  {list.map((e) => <EventCard event={e} headingLevel="h4" compact />)}
-                </ul>
-              </section>
-            ))}
-          </section>
-        )}
+        ))}
       </div>
     )}
     <div data-filter-empty hidden>
@@ -196,13 +167,11 @@ const hosts = [
     </div>
 
     <section class="card" aria-labelledby="sub">
-      <h2 id="sub" class="h3">Never miss a dance</h2>
-      <p>Add every {settings.shortName} dance to your phone's calendar. It updates automatically when we add or change events. Want the community events too? Subscribe to the community calendar as well.</p>
+      <h2 id="sub" class="h3">Get every listing in your calendar app</h2>
+      <p>Subscribe once, and new events show up on their own. You can also follow the RSS feed.</p>
       <div class="btn-row">
-        <a class="btn btn--primary btn--small" href="/events/club-events.ics" data-track="add_to_calendar" data-track-method="subscribe_feed" data-track-location="events"><Icon name="calendar" />{settings.shortName} dances (.ics)</a>
-        <a class="btn btn--secondary btn--small" href="/events/community-events.ics" data-track="add_to_calendar" data-track-method="subscribe_feed" data-track-location="events_community"><Icon name="calendar" />Community events (.ics)</a>
+        <a class="btn btn--primary btn--small" href="/events/all.ics" data-track="add_to_calendar" data-track-method="subscribe_feed" data-track-location="events"><Icon name="calendar" />Subscribe (.ics)</a>
         <a class="btn btn--secondary btn--small" href="/events/rss.xml">RSS feed</a>
-        {settings.newsletterUrl && <a class="btn btn--secondary btn--small" href={settings.newsletterUrl} rel="noopener" data-track="newsletter_click" data-track-location="events"><Icon name="mail" />Email list</a>}
       </div>
     </section>
   </div>

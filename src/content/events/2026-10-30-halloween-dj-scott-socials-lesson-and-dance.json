@@ -1,0 +1,34 @@
+{
+  "title": "Halloween Ballroom social dance with a lesson at Knights of Columbus Hall, Patchogue",
+  "summary": "A group lesson at 6:00 PM with Shah, then open social dancing to music by DJ Scott. Dance styles: Ballroom. Costumes are welcome. Snacks are included, and there is a cash bar. In bad weather, call before you go.",
+  "category": "lesson-party",
+  "danceStyles": [
+    "ballroom"
+  ],
+  "start": "2026-10-30T18:00",
+  "end": "2026-10-30T23:00",
+  "timezone": "America/New_York",
+  "cadence": "1st and 3rd Fridays of the month",
+  "lessonTime": "18:00",
+  "venueId": "knights-of-columbus-patchogue",
+  "town": "Patchogue",
+  "organizerId": "dj-scott-socials",
+  "performerIds": [
+    "dj-scott"
+  ],
+  "instructorIds": [
+    "shah"
+  ],
+  "price": 20,
+  "priceNotes": "Free lesson included",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "page 23",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 1,
+  "matchKey": "thedancecalendar|knights-of-columbus-patchogue|dj-scott-socials|friday|18:00|lesson-party|dj-scott|ballroom||2026-10-30|halloween"
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Ballroom and Latin social dance with DJ Gene & Joanne at Brumidi Lodge (Sons of Italy)",
+  "summary": "An evening of Ballroom and Latin social dancing with music by DJ Gene & Joanne.",
+  "category": "social-dance",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "start": "2026-10-07T18:00",
+  "end": "2026-10-07T22:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=WE;UNTIL=20261028"
+  },
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "club-brumidi",
+  "performerIds": [
+    "dj-gene-and-joanne"
+  ],
+  "price": 25,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.sonsofitalyli.com",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "pages 16, 19, 20, 22",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 1,
+  "matchKey": "thedancecalendar|brumidi-lodge|club-brumidi|wednesday|18:00|social-dance|dj-gene-and-joanne|ballroom+latin-ballroom||repeat"
+}

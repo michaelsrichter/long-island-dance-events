@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import { getEventGroups } from '../../lib/content';
+import { linksOf } from '../../lib/links';
+import { ORGANIZER_TYPE_LABELS } from '../../lib/schemas';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+const orgs = (await getCollection('organizers', (o) => !o.data.optOut)).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const { upcoming } = await getEventGroups();
+const count = (id: string) => new Set(upcoming.filter((e) => e.organizer?.id === id).map((e) => e.eventId)).size;
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Organizers', href: '/organizers/' },
+];
+---
+<BaseLayout title="Dance studios, clubs and organizers on Long Island" description={`${orgs.length} studios, clubs, DJs and teachers who run dances and classes in Nassau and Suffolk.`} pageType="organizers" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Studios, clubs and organizers" lede="The people and groups who run the events. Contact them with questions about their events." crumbs={crumbs} />
+  <div class="container section">
+    <ul class="grid grid--3 person-grid">
+      {orgs.map((o) => <PersonCard name={o.data.name} href={`/organizers/${o.id}/`} kicker={`${ORGANIZER_TYPE_LABELS[o.data.type]}${o.data.town ? ` · ${o.data.town}` : ''}`} icon="people" links={linksOf(o.data)} upcomingCount={count(o.id)} />)}
+    </ul>
+  </div>
+</BaseLayout>

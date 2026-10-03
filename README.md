@@ -1,349 +1,178 @@
-# Community site starter
+# Long Island Dance Events
 
-A reusable, rebrandable starter for volunteer dance and community organization websites. The included sample organization is fictional: **Riverbend Swing Dance Club** in **Riverbend Valley**. The sample exists so a new team can see the whole site working before replacing names, venues, dates, photos, colors, OAuth settings and analytics IDs.
+**One mobile-friendly list of social dances, dance classes and live music in Nassau and Suffolk counties, Long Island, New York.** Listings are collected every week from public calendars, written up in our own words, and linked back to where they came from.
 
-Derived from the Swing Dance Long Island website: https://github.com/michaelsrichter/sdli-website
+- Swing, West Coast Swing, hustle, salsa, bachata, Argentine tango, ballroom, country and more.
+- Browse by list, month calendar or map, with "Today" and "This weekend" shortcuts.
+- Every event links to its venue, organizer, teachers, bands and DJs, and each of those pages lists what is coming up.
+- Add any event to Google, Outlook or Apple calendars, or subscribe to the whole list (`/events/all.ics`, `/events/rss.xml`).
 
-## What this is for
+Status: **MVP (build phases 1-2)**. The site works locally with real data from The Dance Calendar. It is not deployed yet. See [Roadmap](#roadmap).
 
-This starter helps a small volunteer organization answer the questions visitors ask first:
-
-- Is there an event coming up?
-- When and where is it?
-- Is there a beginner lesson?
-- How much does it cost?
-- Do I need a partner?
-- Can I add it to my calendar, get directions, or share it?
-- What else is happening in the local community?
-
-It is intentionally static-first and content-first. Editors change Markdown/YAML files through Decap CMS, pull requests get previews and tests, and Azure Static Web Apps hosts the site cheaply with automatic HTTPS.
-
-## Create your site from this template
-
-```powershell
-gh repo create <owner>/<name> --template michaelsrichter/community-site-starter --public --clone
-cd <name>
-npm ci
-npm ci --prefix api
-npm run dev
-```
-
-Then run the rebrand helper:
-
-```powershell
-node scripts/rebrand.mjs --name "Your Dance Club" --short "Your Club" --slug your-club --domain https://www.example.org --email info@example.org --region "Your Region"
-```
-
-Finish the manual steps in [REBRAND.md](REBRAND.md).
-
-## Use with the Copilot plugin
-
-This template is designed to be used with the Copilot plugin **community-site-kit**, which provides skills and agents for content audits, legacy-site mapping, rebranding and launch checks.
-
-```powershell
-copilot plugin marketplace add michaelsrichter/community-site-kit
-copilot plugin install community-site-kit@community-site-kit
-```
-
-Recommended workflow:
-
-1. Ask the plugin to audit the old site or source folder.
-2. Create redirects and a content replacement plan.
-3. Use this starter as the implementation target.
-4. Run the full verification before publishing.
-
-## Features
-
-### Visitor experience
-
-- Homepage hero with the next home-organization event.
-- Next three home events shown first, with a **Show more** toggle for longer lists.
-- Community events listed after home events and clearly labeled.
-- Event detail pages with lesson time, dancing time, venue, prices, lineup, organizer, source, share buttons and print action.
-- Add-to-calendar support: per-event `.ics`, Google Calendar, Outlook personal, Outlook work/school and subscribable feeds.
-- Event list, month calendar and Leaflet/OpenStreetMap venue map.
-- Humanized relative dates with a pinned test clock.
-- Light/dark/auto theme switch with no-JS fallback.
-- Accessible share dialog fallback when native sharing is unavailable.
-- No-JS event list that still shows all home events.
-
-### Editor experience
-
-- Decap CMS 3 at `/admin/`.
-- GitHub OAuth bridge in Azure Static Web Apps managed Functions.
-- Editorial workflow pull requests, preview links and tests.
-- Content collections validated by Zod schemas.
-- Required explicit `published` booleans for events, series, FAQs, announcements and gallery albums.
-- Focus-point image crops and alt text validation.
-- Home series plus one-off event overrides for cancellations, band nights and special dates.
-
-### Engineering and operations
-
-- Astro static site with strict TypeScript.
-- Custom image service that supports focus crops and avoids upscaling.
-- CSP generated at build time with hashes for allowed inline scripts.
-- Postbuild legacy redirect stub generation.
-- Link checker for internal links and fragments.
-- Unit tests, API tests and Playwright e2e/axe/mobile tests.
-- GA4 and Microsoft Clarity are consent-gated and optional.
-- First-party OpenTelemetry endpoint can send metrics/events to Azure Monitor.
-- Bicep + `infra/deploy.ps1` provisioning.
-- GitHub Actions for CI, deployment, CodeQL, geocoding and link checks.
-
-## Architecture summary
+## How it works
 
 ```mermaid
 flowchart LR
-  visitor[Visitor browser] --> static[Astro static pages]
-  static --> content[src/content collections]
-  editor[Editor] --> cms[Decap CMS /admin]
-  cms --> pr[GitHub pull request]
-  pr --> ci[CI: check, tests, build, links, e2e]
-  ci --> swa[Azure Static Web Apps]
-  swa --> api[Managed Functions /api]
-  api --> oauth[GitHub OAuth]
-  api --> monitor[Azure Monitor / Application Insights]
+  subgraph Weekly["Weekly, in GitHub Actions"]
+    A[Source registry<br/>src/content/sources/*.json] --> B[Adapter<br/>ingest/adapters/*.ts]
+    B -->|fetch politely| C[(Cache, not committed)]
+    C --> D[Normalize: dates, times, prices,<br/>styles, venues, people]
+    D --> E[Combine dates into<br/>repeating events]
+    E --> F[Merge with existing files<br/>mark past / needs review]
+    F --> G[Validate with Zod]
+    G --> H[Data files in git<br/>src/content/**]
+  end
+  H --> I[Astro static build] --> J[Azure Static Web Apps]
+  K[Editors: Decap CMS at /admin/] --> H
 ```
 
-Key design choices are documented in [docs/architecture.md](docs/architecture.md) and [docs/decision-log.md](docs/decision-log.md).
+- **GitOps:** every event, venue, organizer, teacher, band/DJ, dance style and source is a small JSON or YAML file in `src/content/`. Every change is a git commit, and every commit rebuilds the site.
+- **Heavy work happens at build time** (scraping, PDF reading, matching). The live site is static files plus thin Azure Functions.
+- **Polite collecting:** the bot follows each site's `robots.txt`, waits between requests, caches downloads, and identifies itself (`LongIslandDanceEventsBot/1.0`).
+- **Our own words:** titles and summaries are generated from facts (date, time, place, price, style, people). Original text is never republished. Every event records `sourceId` and `sourceUrl`, and the [Sources page](src/pages/sources.astro) credits each source and explains corrections, opt-outs and takedowns.
+- **Scope:** only Nassau and Suffolk counties. Towns are checked against `src/data/long-island-places.json` (283 places). Listings in Queens, Brooklyn and elsewhere are skipped and counted in the run report.
 
-## Prerequisites
+## Where the listings come from
 
-- Node.js version from `.nvmrc`.
-- npm.
-- Git.
-- GitHub CLI (`gh`) for deployment automation.
-- Azure CLI (`az`) for Azure provisioning.
-- A GitHub repository for the new site.
-- Optional: a custom domain and DNS access.
+| Source | Type | Status |
+| --- | --- | --- |
+| [The Dance Calendar](https://www.thedancecalendar.com/dance-calendar) | Monthly PDF newsletter | Live (adapter `thedancecalendar`) |
+| [Ira's List LI](https://www.iraslistli.com/) | Website | Planned for phase 3 |
 
-Check versions:
+New sources are proposed in [docs/content-audit.md](docs/content-audit.md) and added only after the owner approves them. Organizers can [ask for a correction](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=listing-correction.yml), [suggest a listing](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=add-listing.yml) or [opt out](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=remove-listing.yml).
 
-```powershell
-node --version
-npm --version
-git --version
-gh --version
-az version
-```
+## Run it on your computer
 
-## Local development
-
-Install dependencies:
+You need **Node 24** (see `.nvmrc`), **Python 3.12+** and Git.
 
 ```powershell
 npm ci
 npm ci --prefix api
+pip install -r ingest/requirements.txt
+
+npm run dev                         # http://localhost:4321, live reload
 ```
 
-Run the site:
+To see exactly what visitors see (production build):
 
 ```powershell
-npm run dev
-```
-
-Run the local Decap CMS proxy in another terminal if you want file-based CMS editing:
-
-```powershell
-npm run cms:local
-```
-
-Then open:
-
-- Site: <http://localhost:4321/>
-- CMS: <http://localhost:4321/admin/>
-
-Build locally with deterministic dates:
-
-```powershell
-$env:BUILD_NOW='2026-10-01T22:00:00-04:00'
+$env:BUILD_NOW = npm run -s build-now   # pin "today" to the morning of the latest scrape (optional)
 npm run build
-npm run test:links
+npx astro preview --port 4321
 ```
 
-## Repository structure
+`BUILD_NOW` is optional. Without it the build uses the real time. Tests set it so results are repeatable as the data changes.
+
+## Collect events (ingest)
+
+```powershell
+npm run ingest -- --dry-run                 # show what would change, write nothing
+npm run ingest                              # all enabled sources; writes src/content/**
+npm run ingest -- --source thedancecalendar
+npm run ingest -- --offline                 # reuse cached downloads only (.cache/ingest)
+npm run ingest -- --report report.md --json report.json --strict
+```
+
+What a run does:
+
+1. Downloads each enabled source (respecting `robots.txt` and `rateLimitSeconds`).
+2. Reads the listings. For PDFs, `ingest/pdf/extract_calendar.py` uses font sizes and bold text to find day headings, sections and towns.
+3. Skips anything outside Nassau and Suffolk.
+4. Matches venues, organizers, teachers, bands/DJs and dance styles against the existing files (by name and aliases). Unknown venues and DJs are created with a review note.
+5. Combines dates of the same listing into one repeating event with a rule such as "every Tuesday" or "1st and 3rd Friday of the month".
+6. Merges with existing files. It keeps `firstSeen`, respects `lockedFields` (fields an editor fixed by hand), marks ended events as `past`, and never deletes anything. Listings that vanish from a month the source still covers, or that the program is unsure about (confidence below 0.6), become `pending-review` and are hidden until someone checks them.
+7. Validates every file with the Zod schemas, writes sorted JSON, and prints a run report.
+
+### Add a new source
+
+1. Get the owner's approval (see the proposals in [docs/content-audit.md](docs/content-audit.md)).
+2. Check `robots.txt` and the site's terms. Prefer structured data: schema.org Event JSON-LD, then iCal (`.ics`), then HTML, then PDF.
+3. Add `src/content/sources/<id>.json` (copy `thedancecalendar.json`; set `enabled`, `type`, `url`, `attribution`, `rateLimitSeconds`).
+4. Add `ingest/adapters/<id>.ts` exporting `adapter: Adapter` with `fetch(ctx)` and `normalize(docs, ctx)` that return `Candidate`s (see `ingest/lib/types.ts`). Reuse the helpers in `ingest/lib/` for times, prices, places and descriptions.
+5. Save a small sample of the source in `ingest/fixtures/` and add a golden-file test in `tests/unit/ingest.test.ts` (regenerate with `UPDATE_GOLDEN=1`).
+6. Run `npm run ingest -- --source <id> --dry-run`, review the report, then run without `--dry-run` and open a pull request.
+
+No core code changes are needed: `ingest/run.ts` loads `ingest/adapters/<adapter>.ts` by name.
+
+## Data model
+
+| Entity | Folder | Links to |
+| --- | --- | --- |
+| Event | `src/content/events/*.json` | venue, organizer, performers, instructors, styles, source |
+| Venue | `src/content/venues/*.json` | (address, town, map coordinates, parking/access) |
+| Organizer (studio, club, DJ series) | `src/content/organizers/*.json` | home venue |
+| Instructor (teacher) | `src/content/instructors/*.json` | organizers, styles |
+| Performer (band or DJ) | `src/content/performers/*.json` | genres |
+| Dance style | `src/content/styles/*.yml` | aliases used for matching |
+| Source | `src/content/sources/*.json` | adapter, last run status and counts |
+
+Schemas: [`src/lib/schemas.ts`](src/lib/schemas.ts). Repeating events use a small, tested subset of iCalendar RRULE ([`src/lib/rrule.ts`](src/lib/rrule.ts)). Field-by-field details: [docs/content-model.md](docs/content-model.md).
+
+## Editing (CMS)
+
+Editors use **Decap CMS** at `/admin/`, signing in with GitHub. Each save becomes a commit or pull request.
+
+> **Deviation from the brief:** the brief asked for Keystatic. This project keeps **Decap CMS** because the base template (`michaelsrichter/community-site-starter` and the community-site-kit) is built and tested around it: OAuth bridge Function, generated config, CSP, editor guide and e2e tests. Both are git-backed, so the GitOps model is the same. Recorded in [docs/decision-log.md](docs/decision-log.md).
+
+- CMS source: `cms/config.yml` (generated into `public/admin/config.yml` on install/build).
+- Editor how-to: [docs/editor-guide.md](docs/editor-guide.md).
+- Sign-in needs a GitHub OAuth app; see [docs/deployment.md](docs/deployment.md).
+
+## Tests and quality checks
+
+```powershell
+npm run lockfile:check          # package-lock.json must point at registry.npmjs.org
+npx astro check                 # types + content validation
+npm test                        # unit tests, incl. ingest golden files (needs PyMuPDF for the PDF test)
+npm run test:py                 # PDF extractor tests
+npm test --prefix api           # Azure Functions tests
+$env:BUILD_NOW = npm run -s build-now; $env:ALLOW_INDEXING = 'true'; npm run build
+npm run test:links              # internal links and #anchors
+npx playwright test             # journeys, filters, map, calendar, CMS, axe (WCAG 2.2 AA), phone + desktop
+npx lhci autorun                # Lighthouse budgets (CI; on Windows run Lighthouse per URL instead)
+```
+
+CI (`.github/workflows/ci.yml`) runs all of these on every pull request, plus a gitleaks secret scan.
+
+> If your computer installs npm packages from a private mirror, run `npm run lockfile:normalize` before committing.
+
+## Repository layout
 
 ```text
-.github/                    GitHub Actions, issue forms and PR template
-api/                        Azure Static Web Apps managed Functions
-  src/functions/oauth.js    GitHub OAuth bridge for Decap CMS
-  src/functions/telemetry.js First-party telemetry endpoint
-cms/config.yml              Source Decap CMS config
-public/admin/               Admin shell and generated CMS config
-infra/                      Bicep and deployment script
-scripts/                    Build, CMS, geocoding, redirects, rebrand, smoke checks
-src/assets/uploads/         Reusable sample images with open licenses
-src/components/             Astro UI components
-src/content/                Editable content collections
-src/data/                   Legacy redirects and optional history data
-src/lib/                    Pure logic and shared helpers
-src/pages/                  Astro routes
-tests/unit/                 Vitest unit tests
-tests/e2e/                  Playwright e2e, axe and mobile tests
-docs/                       Architecture, editor and launch documentation
+src/content/      data files (events, venues, organizers, instructors, performers, styles, sources, faqs, pages, settings)
+src/data/         Long Island place list used for the Nassau/Suffolk check
+src/lib/          schemas, repeating-event rules, event resolution, SEO, calendar export
+src/pages/        Astro pages (events, calendar, map, venues, organizers, teachers, bands & DJs, styles, sources)
+ingest/           weekly collector: run.ts, adapters/, lib/, pdf/ (Python extractor), fixtures/
+api/              Azure Functions (CMS sign-in bridge, telemetry)
+cms/              Decap CMS configuration
+infra/            Bicep + deploy script for Azure Static Web Apps (phase 6)
+tests/            unit (vitest) and end-to-end (Playwright) tests
+docs/             decisions, content audit, content model, architecture, editor guide, deployment
 ```
 
-## Content model summary
+## Roadmap
 
-The editable content lives under `src/content/`:
-
-- `settings/site.yml`: organization names, region, contact details, membership, prices, map center and default venue.
-- `series/`: recurring weekly or monthly schedules.
-- `events/`: one-time events and one-date changes to a series.
-- `venues/`: addresses, coordinates, parking, accessibility and map links.
-- `organizers/`: community groups listed on the site.
-- `instructors/` and `performers/`: teachers, DJs and bands.
-- `styles/`: dance style taxonomy used for tags and filters.
-- `pages/`: editable long-form pages.
-- `faqs/`: questions shown on the FAQ and New to Swing pages.
-- `announcements/`: optional site-wide banners.
-- `gallery/`: albums and homepage slideshow images.
-
-See [docs/content-model.md](docs/content-model.md) for every field.
-
-## CMS operation
-
-The CMS source is `cms/config.yml`. During install/build, `scripts/build-cms-config.mjs` writes `public/admin/config.yml`.
-
-Important Decap rules in this project:
-
-- `sortable_fields` must be a list.
-- Every publishable entry needs an explicit `published` boolean.
-- Do not add a `media_library` block.
-- Images live under `src/assets/uploads/`.
-- Use relation fields where possible so event references remain valid.
-
-CMS sign-in uses a GitHub OAuth app. See [docs/editor-guide.md](docs/editor-guide.md) for setup, troubleshooting and editor tasks.
-
-## Auth setup for Decap CMS
-
-Create a GitHub OAuth app for the live domain:
-
-- Homepage URL: `https://<domain>`
-- Authorization callback URL: `https://<domain>/api/callback`
-- Uncheck **Expire user access tokens**.
-
-Store the values as Azure Static Web Apps app settings:
-
-- `GITHUB_OAUTH_CLIENT_ID`
-- `GITHUB_OAUTH_CLIENT_SECRET`
-- `ALLOWED_HOSTS=<domain>,<azure-host>`
-
-When you add a custom domain, update the OAuth callback URL to match the new domain. Enterprise Managed User accounts cannot be collaborators on personal repositories, so use an organization-owned repository if your editors use EMU accounts.
-
-## Azure provisioning
-
-Provision a new Static Web App and monitoring resources:
-
-```powershell
-./infra/deploy.ps1 -Name <slug> -Repo <owner/repo>
-```
-
-With a custom domain:
-
-```powershell
-./infra/deploy.ps1 -Name <slug> -Repo <owner/repo> -CustomDomain www.example.org
-```
-
-The script derives names:
-
-- Resource group: `rg-<slug>-web`
-- Static Web App: `swa-<slug>-web`
-- Monitoring: `log-swa-<slug>-web`, `appi-swa-<slug>-web`
-
-It sets the deployment token secret and GitHub variables for `SITE_URL` and `ALLOW_INDEXING`.
-
-## Deployment
-
-GitHub Actions builds `dist/` and uploads it to Azure Static Web Apps. The API folder is uploaded as managed Functions.
-
-Before launch, use:
-
-- `SITE_URL=https://example.org` or the Azure preview host.
-- `ALLOW_INDEXING=false`.
-
-At launch, use:
-
-- `SITE_URL=https://www.example.org` or the chosen production origin.
-- `ALLOW_INDEXING=true`.
-
-## Custom domain and DNS
-
-See [docs/dns-cutover.md](docs/dns-cutover.md). Typical records:
-
-- `CNAME www -> <static-web-app>.azurestaticapps.net`
-- `TXT _dnsauth.www -> <Azure validation token>`
-
-Update the GitHub OAuth callback after the domain is active.
-
-## Rollback
-
-See [docs/rollback.md](docs/rollback.md). In short:
-
-1. Re-run the previous successful deployment or revert the commit.
-2. Put `ALLOW_INDEXING=false` on any temporary host.
-3. Move DNS back only if necessary.
-4. Keep redirects stable unless the rollback returns to the old site.
-
-## Testing
-
-Run the full local verification:
-
-```powershell
-npm ci
-npm ci --prefix api
-npx astro check
-npx vitest run
-$env:BUILD_NOW='2026-10-01T22:00:00-04:00'; npm run build
-npm run test:links
-npm test --prefix api
-npx playwright test
-```
-
-Playwright uses the built site through Astro preview. It covers visitor journeys, home-first ordering, sharing, calendars, map pins, CMS loading, legacy redirects, no-JS behavior, axe scans, keyboard behavior and 320 px screens.
-
-## Troubleshooting
-
-| Symptom | Likely cause | Fix |
-| --- | --- | --- |
-| CMS says it cannot load config | `public/admin/config.yml` missing or invalid | Run `npm run cms:config`; check `cms/config.yml` indentation. |
-| CMS sign-in returns 503 | OAuth app settings missing or host not allowed | Set `GITHUB_OAUTH_CLIENT_ID`, `GITHUB_OAUTH_CLIENT_SECRET`, `ALLOWED_HOSTS`. |
-| GitHub says callback mismatch | OAuth app callback still points at an old domain | Update callback to `https://<domain>/api/callback`. |
-| An event does not appear | `published: false`, `status: draft`, past date, or invalid series override | Check frontmatter and run `npm test`. |
-| Map pin missing | Venue has no latitude/longitude | Run `npm run geocode` or enter coordinates manually. |
-| Link checker fails for `example.org` | A sample URL uses the site origin and is treated as internal | Use `example.com` for placeholder external links. |
-| Build fails on inline styles | CSP guard found `style=""` in generated HTML | Move styling to CSS classes. |
-| Playwright port busy | A preview server is already running on 4321 | Stop it or set `E2E_PORT`. |
-| Rare Windows build crash with a libuv assertion | Known intermittent platform issue | Re-run the same build command. |
-| CI step "Lockfiles use the public npm registry" fails, or Dependabot reports `private_source_authentication_failure` | `npm install` ran on a machine that uses a private npm mirror (company proxy, Azure Artifacts, Artifactory), which wrote the mirror's URLs into `package-lock.json` | Run `npm run lockfile:normalize` and commit. Installs on that machine still go through the mirror. |
+1. ✅ Scaffold: Astro + Decap, entity schemas, dance-style list, CI.
+2. ✅ The Dance Calendar end-to-end (PDF) → data files → browsable, filterable site. **MVP checkpoint.**
+3. Ira's List LI adapter; duplicate detection (exact match key, then local embeddings with bge-small: ≥ 0.9 merge, 0.8-0.9 human review).
+4. Submit-an-event form (to a moderation queue).
+5. Admin area (GitHub sign-in, `admin` role): moderation queue, source panel, feedback and bug inbox (Table Storage + GitHub issues).
+6. Azure: Static Web Apps Free + Functions + Storage, all in Bicep.
+7. Weekly GitHub Actions run that opens a pull request with the run report and @mentions the owner (GitHub sends the email); an issue is filed if a source breaks.
+8. Discovery of more sources (owner approves each), docs, launch.
 
 ## Cost
 
-For a small volunteer site, expected Azure cost is near zero:
-
-- Azure Static Web Apps Free SKU: no hosting charge for typical usage.
-- Managed Functions: included with SWA usage limits.
-- Log Analytics daily cap defaults to 0.1 GB/day and 30-day retention.
-- Third-party analytics are optional.
-
-Review Azure pricing before raising retention, daily caps or SKU.
+Designed for about **$0/month**: Azure Static Web Apps Free tier, managed Functions, one Storage account (pennies), free GitHub Actions minutes for the weekly run, OpenStreetMap tiles and geocoding (Nominatim, 1 request per second).
 
 ## Security and privacy
 
-- Do not commit secrets.
-- OAuth client secrets belong in Azure app settings.
-- Deployment tokens belong in GitHub Actions secrets.
-- Analytics are consent-gated.
-- Telemetry strips unknown fields and rejects script-like values.
-- CSP is generated in `scripts/postbuild.mjs`.
-- Admin routes use a separate CSP.
-- The site should not store member databases or private rosters in public content files.
+- No secrets in the repo. Deployment tokens live in GitHub Actions secrets; OAuth secrets in Azure app settings.
+- Strict Content Security Policy generated at build time (`scripts/postbuild.mjs`).
+- Analytics are consent-gated; first-party telemetry strips unknown fields.
+- We do not store people's private details. Public contact details come from public listings only.
 
-## Known limitations
+## Credits
 
-- This is a static public website, not a membership system.
-- Decap CMS edits files; complex workflows still require pull request review.
-- Venue geocoding is best-effort. Editors can override coordinates.
-- Nominatim is rate-limited to one request per second.
-- The starter includes fictional sample content and open-licensed photos; replace them before launch.
-- The sample legal/privacy text is not legal advice.
+Built from [community-site-starter](https://github.com/michaelsrichter/community-site-starter) with the community-site-kit. Map data © OpenStreetMap contributors. Sample dance photos: Thomas Quine, CC BY 2.0 (Wikimedia Commons), credited on each page they appear. Event facts come from the sources credited on the [Sources page](src/pages/sources.astro).

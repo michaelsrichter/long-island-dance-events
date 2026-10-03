@@ -1,0 +1,70 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getSettings } from '../lib/content';
+import { breadcrumbJsonLd } from '../lib/seo';
+import { displayHost } from '../lib/links';
+import { formatDateShort } from '../lib/time';
+
+const settings = await getSettings();
+const sources = (await getCollection('sources')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const events = await getCollection('events');
+const count = (id: string) => events.filter((e) => e.data.sourceId === id && e.data.status !== 'pending-review').length;
+const issues = `${settings.repoUrl}/issues/new`;
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Where listings come from', href: '/sources/' },
+];
+const statusText: Record<string, string> = { ok: 'Worked', empty: 'Found nothing', invalid: 'Had errors', error: 'Failed', never: 'Not run yet', skipped: 'Turned off' };
+---
+<BaseLayout title="Where our listings come from" description="How Long Island Dance Events finds listings, credits its sources, and how organizers can fix, add or remove their events." pageType="sources" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Where listings come from" lede="We do not run any of these events. We collect public listings, write short summaries in our own words, and always link back to the source." crumbs={crumbs} />
+  <div class="container section stack-l prose-wide">
+    <section aria-labelledby="how-h">
+      <h2 id="how-h">How it works</h2>
+      <ol class="steps">
+        <li><strong>Once a week</strong>, a computer program visits the sources below. It follows each website's rules for robots, waits between requests, and says who it is.</li>
+        <li><strong>It reads the facts:</strong> date, time, place, price, dance style and who is teaching or playing. It skips anything outside Nassau and Suffolk counties.</li>
+        <li><strong>It writes a short summary in our own words.</strong> We never copy the original text. Each event page says where the listing came from, with a link.</li>
+        <li><strong>Anything unclear waits for a person.</strong> If the program is not sure, the listing stays hidden until someone checks it.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="src-h">
+      <h2 id="src-h">Our sources</h2>
+      <div class="table-scroll mt-3">
+        <table class="data-table">
+          <caption class="visually-hidden">Sources and when we last checked them</caption>
+          <thead><tr><th scope="col">Source</th><th scope="col">What we take</th><th scope="col">Listings</th><th scope="col">Last checked</th></tr></thead>
+          <tbody>
+            {sources.map((s) => (
+              <tr>
+                <th scope="row"><a href={s.data.url} rel="noopener">{s.data.name}</a><br /><span class="muted">{displayHost(s.data.url)}</span></th>
+                <td>{s.data.attribution}</td>
+                <td>{count(s.id)}</td>
+                <td>{s.data.lastScraped ? `${formatDateShort(s.data.lastScraped.slice(0, 10), true)} (${statusText[s.data.lastStatus] ?? s.data.lastStatus})` : 'Not yet'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted mt-3">"Listings" counts the events we show from each source, including repeating events counted once.</p>
+    </section>
+
+    <section aria-labelledby="corrections" id="corrections">
+      <h2>Fix, add or remove a listing</h2>
+      <p>Organizers and dancers can help keep the list right. Each request opens a public form on GitHub (a free account is needed).</p>
+      <ul>
+        <li><a href={`${issues}?template=listing-correction.yml`} rel="noopener">Report a wrong date, time, price or place</a> (or use the "Report a problem" button on any event page).</li>
+        <li><a href={`${issues}?template=add-listing.yml`} rel="noopener">Tell us about an event or a calendar we are missing</a>.</li>
+        <li><a href={`${issues}?template=remove-listing.yml`} rel="noopener">Remove my events from this site (opt out)</a>. We stop listing an organizer's events within a week of the request.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="takedown" id="takedown">
+      <h2>Copyright and takedown requests</h2>
+      <p>We only show facts (when, where, how much) and short summaries we wrote ourselves, and we link to the original. If you believe something here uses your work without permission, <a href={`${issues}?template=remove-listing.yml`} rel="noopener">send a takedown request</a>{settings.email ? <> or email <a href={`mailto:${settings.email}`}>{settings.email}</a></> : ''}. Tell us the page address and what should be removed. We act on requests within a week.</p>
+    </section>
+  </div>
+</BaseLayout>

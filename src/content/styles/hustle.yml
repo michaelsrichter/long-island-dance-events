@@ -1,5 +1,11 @@
-name: "Hustle"
-order: 74
-family: other
-summary: "A smooth, spinning partner dance from the 1970s disco era."
-tempo: "Disco, pop and R&B"
+name: Hustle
+family: swing
+order: 13
+aliases:
+  - Hustle
+  - Latin Hustle
+  - NY Hustle
+  - New York Hustle
+  - Disco Hustle
+summary: A fast, spinning partner dance from the 1970s disco days. It was born in New York.
+music: Disco, funk, freestyle, pop

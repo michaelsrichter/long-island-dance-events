@@ -1,5 +1,5 @@
 {
-  "name": "community-site-starter",
+  "name": "li-dance-events-website",
   "version": "1.0.0",
   "private": true,
   "description": "Reusable Astro starter for volunteer dance and community organization websites.",
@@ -28,6 +28,9 @@
     "ci": "npm run check && npm run test && npm run build && npm run test:links",
     "test:smoke": "node scripts/smoke.mjs",
     "geocode": "node scripts/geocode-venues.mjs",
+    "ingest": "tsx ingest/run.ts",
+    "test:py": "python -m unittest discover -s ingest/pdf -p \"test_*.py\"",
+    "build-now": "node scripts/build-now.mjs",
     "lockfile:normalize": "node scripts/normalize-lockfile.mjs",
     "lockfile:check": "node scripts/normalize-lockfile.mjs --check"
   },
@@ -51,6 +54,7 @@
     "@types/node": "^24.0.0",
     "decap-cms": "^3.16.3",
     "decap-server": "^3.11.3",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "vitest": "^5.0.1",
     "yaml": "^2.9.1"

@@ -1,0 +1,28 @@
+{
+  "title": "Ballroom classes at The DancXchange Dance Studio",
+  "summary": "Group classes in Ballroom. Times: 7:15 PM Beginner American Foxtrot; 8:15 PM Principles of Movement.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "ballroom"
+  ],
+  "start": "2026-10-06T19:15",
+  "end": "2026-10-06T21:15",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=TU;UNTIL=20261027"
+  },
+  "venueId": "dancxchange-studio",
+  "town": "Melville",
+  "organizerId": "dancxchange",
+  "skillLevel": "mixed",
+  "infoUrl": "https://www.donnadesimone.us",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "pages 16, 18, 20, 22",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.95,
+  "matchKey": "thedancecalendar|dancxchange-studio|dancxchange|tuesday|19:15|class-lesson||ballroom||repeat"
+}

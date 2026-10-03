@@ -4,7 +4,6 @@ import '../styles/global.css';
 import frauncesUrl from '@fontsource/fraunces/files/fraunces-latin-700-normal.woff2?url';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import Announcement from '../components/Announcement.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import { getSettings } from '../lib/content';
 import { jsonLdString, organizationJsonLd, websiteJsonLd } from '../lib/seo';
@@ -68,7 +67,7 @@ const analytics = {
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#24162f" />
     <link rel="alternate" type="application/rss+xml" title={`${settings.shortName} upcoming events`} href="/events/rss.xml" />
-    <link rel="alternate" type="text/calendar" title={`${settings.shortName} events calendar`} href="/events/club-events.ics" />
+    <link rel="alternate" type="text/calendar" title={`${settings.siteName} calendar`} href="/events/all.ics" />
     <meta property="og:site_name" content={settings.siteName} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content={ogType === 'event' ? 'website' : ogType} />
@@ -88,7 +87,6 @@ const analytics = {
   </head>
   <body class={bodyClass}>
     <a class="skip-link" href="#main">Skip to main content</a>
-    <Announcement />
     <Header />
     <main id="main" tabindex="-1">
       <slot />

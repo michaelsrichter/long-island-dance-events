@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
-  - name: Rebrand guide
-    url: https://example.org
-    about: Replace with your project documentation URL.
+  - name: Where do the listings come from?
+    url: https://github.com/michaelsrichter/long-island-dance-events#where-the-listings-come-from
+    about: How we collect events, credit sources and handle corrections.

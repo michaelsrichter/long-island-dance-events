@@ -1,5 +1,9 @@
-name: "Blues"
-order: 70
-family: other
-summary: "A slow, grounded partner dance to blues music. Many swing dancers enjoy it too."
-tempo: "Slow to medium blues"
+name: Blues Dancing
+family: swing
+order: 14
+aliases:
+  - Blues Dance
+  - Blues Dancing
+  - Fusion
+summary: A slow, relaxed partner dance to blues music, with lots of room to improvise.
+music: Blues

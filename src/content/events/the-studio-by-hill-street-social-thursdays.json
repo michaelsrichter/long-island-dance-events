@@ -1,0 +1,29 @@
+{
+  "title": "Ballroom and Latin social dance at The Studio by Hill Street",
+  "summary": "An evening of Ballroom and Latin social dancing.",
+  "category": "social-dance",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "start": "2026-10-01T18:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=TH;UNTIL=20261022"
+  },
+  "venueId": "the-studio-by-hill-street",
+  "town": "Southampton",
+  "organizerId": "the-studio-by-hill-street",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.thestudiobyhillstreet.com",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "pages 15, 17, 19, 20",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.95,
+  "matchKey": "thedancecalendar|the-studio-by-hill-street|the-studio-by-hill-street|thursday|18:00|social-dance||ballroom+latin-ballroom||repeat",
+  "reviewNotes": "Dance styles come from the organizer, not this listing."
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Great Neck Ballroom",
+  "address": "34 Middle Neck Rd",
+  "town": "Great Neck",
+  "county": "Nassau",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: divaballroomdancing.com, gnballroom.com, google.com.",
+  "postalCode": "11021",
+  "phone": "(929) 712-5960",
+  "website": "https://www.gnballroom.com/",
+  "googleMapsUrl": "https://www.google.com/maps?cid=6981634857878174245",
+  "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot.",
+  "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
+  "latitude": 40.787659,
+  "longitude": -73.72863,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

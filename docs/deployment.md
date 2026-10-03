@@ -43,10 +43,10 @@ The script derives:
 
 | Resource | Pattern | Example |
 | --- | --- | --- |
-| Resource group | `rg-<slug>-web` | `rg-riverbend-web` |
-| Static Web App | `swa-<slug>-web` | `swa-riverbend-web` |
-| Log Analytics | `log-swa-<slug>-web` | `log-swa-riverbend-web` |
-| Application Insights | `appi-swa-<slug>-web` | `appi-swa-riverbend-web` |
+| Resource group | `rg-<slug>-web` | `rg-li-dance-events-web` |
+| Static Web App | `swa-<slug>-web` | `swa-li-dance-events-web` |
+| Log Analytics | `log-swa-<slug>-web` | `log-swa-li-dance-events-web` |
+| Application Insights | `appi-swa-<slug>-web` | `appi-swa-li-dance-events-web` |
 
 It also sets:
 

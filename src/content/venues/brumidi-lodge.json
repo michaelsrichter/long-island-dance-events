@@ -1,0 +1,23 @@
+{
+  "name": "Brumidi Lodge (Sons of Italy)",
+  "aliases": [
+    "Club Brumidi",
+    "Brumidi Lodge",
+    "Constantino Brumidi Lodge"
+  ],
+  "address": "2075 Deer Park Avenue",
+  "town": "Deer Park",
+  "county": "Suffolk",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: sonsofitalyli.com, thedancecalendar.com, facebook.com, google.com.",
+  "postalCode": "11729",
+  "phone": "(631) 940-2006",
+  "website": "https://sonsofitalyli.com/",
+  "googleMapsUrl": "https://www.google.com/maps?cid=660608878130361980",
+  "parkingNotes": "Large parking lot (\"Huge Parking Lot\" in the lodge's own ad).",
+  "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
+  "reviewNotes": "On Route 231. Facebook: https://www.facebook.com/Brumidilodge. \"Largest dance floor on Long Island\" is the lodge's own claim and is not recorded as fact.",
+  "latitude": 40.771306,
+  "longitude": -73.333128,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

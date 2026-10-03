@@ -1,0 +1,28 @@
+{
+  "title": "Intermediate Hustle classes at The DancXchange Dance Studio",
+  "summary": "Group classes in Hustle for intermediate dancers. Times: 7:15 PM Intermediate Hustle II; 8:15 PM Slow Intermediate Hustle I.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "hustle"
+  ],
+  "start": "2026-10-01T19:15",
+  "end": "2026-10-01T21:15",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=TH;UNTIL=20261029"
+  },
+  "venueId": "dancxchange-studio",
+  "town": "Melville",
+  "organizerId": "dancxchange",
+  "skillLevel": "intermediate",
+  "infoUrl": "https://www.donnadesimone.us",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "pages 15, 17, 19, 20, 22",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.95,
+  "matchKey": "thedancecalendar|dancxchange-studio|dancxchange|thursday|19:15|class-lesson||hustle||repeat"
+}

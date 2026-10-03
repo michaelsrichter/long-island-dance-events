@@ -1,0 +1,20 @@
+{
+  "name": "Massapequa Elks Lodge",
+  "aliases": [
+    "Massapequa Elks"
+  ],
+  "address": "2162 Veterans Blvd",
+  "town": "Massapequa",
+  "county": "Nassau",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: massapequaelks.org, elks.org, google.com.",
+  "postalCode": "11758",
+  "phone": "(516) 798-2162",
+  "website": "https://massapequaelks.org/",
+  "googleMapsUrl": "https://www.google.com/maps?cid=15295434709990956773",
+  "parkingNotes": "Spacious on-site parking lot; next to the Massapequa LIRR station.",
+  "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
+  "latitude": 40.67764,
+  "longitude": -73.468515,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

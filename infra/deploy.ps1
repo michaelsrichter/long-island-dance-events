@@ -3,10 +3,10 @@
   Provision an Azure Static Web App for this starter.
 
 .EXAMPLE
-  ./infra/deploy.ps1 -Name riverbend -Repo owner/repo -CustomDomain www.example.org
+  ./infra/deploy.ps1 -Name li-dance-events -Repo michaelsrichter/long-island-dance-events -CustomDomain www.example.org
 #>
 param(
-  [string]$Name = 'riverbend',
+  [string]$Name = 'li-dance-events',
   [string]$ResourceGroup = '',
   [string]$StaticWebAppName = '',
   [string]$Location = 'eastus2',

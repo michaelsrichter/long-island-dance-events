@@ -27,6 +27,10 @@ export interface SocialCard {
   lines: string[];
   footer?: string;
   status?: string;
+  /** Site name shown at the top. */
+  brand?: string;
+  /** Web address shown at the bottom right. */
+  host?: string;
 }
 
 const C = { night: '#24162f', night2: '#3a2147', gold: '#f2b134', cream: '#fff4e4', soft: '#e9d8ea', red: '#ffaaa5' };
@@ -74,7 +78,7 @@ function tree(card: SocialCard, w: number, hgt: number): Node {
     [
       h('div', { display: 'flex', alignItems: 'center', gap: 18, fontSize: 30, color: C.gold, fontWeight: 700, letterSpacing: 2 }, [
         h('div', { width: 46, height: 46, borderRadius: 46, background: C.gold, display: 'flex' }),
-        'Riverbend Swing Dance Club',
+        card.brand ?? 'Long Island Dance Events',
       ]),
       h('div', { display: 'flex', flexDirection: square ? 'column' : 'row', gap: 44, alignItems: square ? 'flex-start' : 'center' }, [
         ...(card.day ? [ticket(card, s)] : []),
@@ -85,8 +89,8 @@ function tree(card: SocialCard, w: number, hgt: number): Node {
         ]),
       ]),
       h('div', { display: 'flex', justifyContent: 'space-between', fontSize: 28, color: C.soft, borderTop: `2px solid ${C.night2}`, paddingTop: 22 }, [
-        h('div', { display: 'flex' }, card.footer ?? 'Beginners welcome · No partner needed'),
-        h('div', { display: 'flex', color: C.gold, fontWeight: 700 }, 'example.org'),
+        h('div', { display: 'flex' }, card.footer ?? 'Check with the organizer before you go'),
+        h('div', { display: 'flex', color: C.gold, fontWeight: 700 }, card.host ?? 'Long Island Dance Events'),
       ]),
     ],
   );
@@ -99,23 +103,24 @@ export async function renderSocialPng(card: SocialCard, size: 'og' | 'square'): 
 }
 
 import type { ResolvedEvent } from './content';
-import { dateParts, formatTime } from './time';
+import { dateParts } from './time';
 
 export function cardFor(e: ResolvedEvent): SocialCard {
   const p = dateParts(e.date);
-  const d = e.details;
   const lines = [
-    [d.lessonStartTime && `Lesson ${formatTime(d.lessonStartTime, true)}`, d.danceStartTime && `Dancing ${formatTime(d.danceStartTime, true)}`].filter(Boolean).join(' · ') ||
-      (e.timeLabel ?? 'Time to be announced'),
-    [e.location.name, e.location.city].filter(Boolean).join(', '),
-    e.band ? `Live band: ${e.band.name}` : '',
+    [e.timeLabel ?? 'Time not listed', e.lessonLabel && e.category !== 'class-lesson' ? `lesson ${e.lessonLabel}` : ''].filter(Boolean).join(' · '),
+    [e.location.name, e.location.town].filter(Boolean).join(', '),
+    e.liveActs.length ? `Live music: ${e.liveActs.map((a) => a.name).join(', ')}` : e.styles.slice(0, 3).map((s) => s.name).join(' · '),
   ].filter(Boolean);
+  const host = (process.env.SITE_URL ?? '').replace(/^https?:\/\//, '').replace(/\/$/, '');
   return {
     title: e.title,
     month: p.monthShort,
     day: p.day,
     weekday: p.weekdayShort,
     lines,
-    status: e.status === 'cancelled' ? 'Cancelled' : e.status === 'postponed' ? 'Postponed' : undefined,
+    status: e.status === 'cancelled' ? 'Cancelled' : undefined,
+    footer: e.categoryLabel,
+    host: host && host !== 'example.org' ? host : undefined,
   };
 }

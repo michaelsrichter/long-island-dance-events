@@ -1,0 +1,50 @@
+{
+ "issue": "2030-11",
+ "rows": [
+  {
+   "date": "2030-11-01",
+   "section": "DANCES",
+   "town": "Huntington",
+   "text": "Example Lodge. 12 Fictional Ave. Ballroom & Latin social with DJ Sample. 7-11pm. $20pp includes desserts. Info: 555-0101.",
+   "page": 2
+  },
+  {
+   "date": "2030-11-01",
+   "section": "DANCES",
+   "town": "Little Neck, Queens",
+   "text": "Out-of-area Ballroom at 1 Elsewhere Rd. 2-5pm social. 555-0102.",
+   "page": 2
+  },
+  {
+   "date": "2030-11-01",
+   "section": "CLASSES",
+   "town": "Bay Shore",
+   "text": "Practice Studio. 99 Test St. 7pm Beginner West Coast Swing, 8pm Intermediate Hustle. No partner needed. $15. Info: www.practicestudio.example",
+   "page": 2
+  },
+  {
+   "date": "2030-11-02",
+   "section": "DANCES",
+   "town": "Huntington",
+   "text": "Swing night at Example Lodge, 12 Fictional Ave. East Coast Swing lesson at 7:30pm, live band at 8pm. $15/person. This listing keeps going into the next page and must stay joined.",
+   "page": 2
+  },
+  {
+   "date": "2030-11-03",
+   "section": "SPECIAL",
+   "town": "Riverhead",
+   "text": "Argentine Tango milonga at Sample Hall, 5 Demo Rd. 6-10pm. Free.",
+   "page": 3
+  }
+ ],
+ "stats": {
+  "pages": 4,
+  "calendarPages": [
+   2,
+   3
+  ],
+  "days": 3,
+  "bodyFontSize": 9.5,
+  "rows": 5
+ }
+}

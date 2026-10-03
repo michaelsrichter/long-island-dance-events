@@ -1,0 +1,28 @@
+{
+  "title": "Halloween Country Two-Step and Line Dancing social dance with DJ Neil Wrangler",
+  "summary": "An evening of Country Two-Step and Line Dancing social dancing with music by DJ Neil Wrangler. Costumes are welcome.",
+  "category": "social-dance",
+  "danceStyles": [
+    "country-two-step",
+    "line-dancing"
+  ],
+  "start": "2026-10-24T19:00",
+  "timezone": "America/New_York",
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "long-island-country-music-association",
+  "performerIds": [
+    "dj-neil-wrangler"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "page 21",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.95,
+  "matchKey": "thedancecalendar|brumidi-lodge|long-island-country-music-association|saturday|19:00|social-dance|dj-neil-wrangler|country-two-step+line-dancing||2026-10-24|halloween",
+  "reviewNotes": "Dance styles come from the organizer, not this listing."
+}

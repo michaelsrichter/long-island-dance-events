@@ -1,5 +1,9 @@
-name: "Lindy Hop"
-order: 20
+name: Lindy Hop
 family: swing
-summary: "The original swing dance from Harlem: playful, energetic, and full of partner connection."
-tempo: "Big-band swing and hot jazz"
+order: 10
+aliases:
+  - Lindy
+  - Lindy Hop
+  - Lindyhop
+summary: The original swing dance from 1920s Harlem in New York City. It is bouncy and playful.
+music: Big-band swing and jazz

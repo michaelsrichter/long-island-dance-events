@@ -1,62 +1,60 @@
 ---
 import type { Settings } from '../lib/content';
-import Icon from './Icon.astro';
 import ThemeSwitch from './ThemeSwitch.astro';
 interface Props {
   settings: Settings;
 }
 const { settings: s } = Astro.props;
-const tel = s.hotlinePhone.replace(/[^0-9+]/g, '');
 const year = new Date().getFullYear();
 const hasConsent = Boolean(import.meta.env.PUBLIC_GA4_ID || import.meta.env.PUBLIC_CLARITY_ID);
+const issues = `${s.repoUrl}/issues/new/choose`;
 ---
 <footer class="site-footer">
   <div class="container">
     <div class="site-footer__grid">
-      <section aria-labelledby="footer-hotline">
-        <h2 id="footer-hotline">{s.hotlineLabel}</h2>
-        <a class="hotline" href={`tel:+1${tel}`} data-track="click_hotline" data-track-location="footer">{s.hotlinePhone}</a>
-        <p class="mt-3">Call any time for dance details and weather cancellations.</p>
-      </section>
-      <section aria-labelledby="footer-visit">
-        <h2 id="footer-visit">Explore</h2>
+      <section aria-labelledby="footer-find">
+        <h2 id="footer-find">Find events</h2>
         <ul>
-          <li><a href="/events/">Upcoming events</a></li>
+          <li><a href="/events/">All upcoming events</a></li>
+          <li><a href="/events/?when=today">Tonight and today</a></li>
+          <li><a href="/events/?when=weekend">This weekend</a></li>
+          <li><a href="/events/?category=class-lesson">Classes and lessons</a></li>
+          <li><a href="/events/?category=live-music">Live music</a></li>
           <li><a href="/events/calendar/">Month calendar</a></li>
-          <li><a href="/events/map/">Dance map</a></li>
-          <li><a href="/events/past/">Past events</a></li>
-          <li><a href="/new-to-swing/">New to swing?</a></li>
-          <li><a href="/faq/">Frequently Asked Questions</a></li>
-          <li><a href="/performers/">Bands, DJs and teachers</a></li>
-          <li><a href="/community/">{s.region} dance community</a></li>
+          <li><a href="/events/map/">Map</a></li>
         </ul>
       </section>
-      <section aria-labelledby="footer-org">
-        <h2 id="footer-org">{s.shortName}</h2>
+      <section aria-labelledby="footer-browse">
+        <h2 id="footer-browse">Browse</h2>
         <ul>
-          <li><a href="/about/">About {s.shortName}</a></li>
-          <li><a href="/membership/">Membership</a></li>
-          <li><a href="/contact/">Contact and volunteering</a></li>
-          {s.newsletterUrl && <li><a href={s.newsletterUrl} rel="noopener" data-track="newsletter_click" data-track-location="footer">Join the email list</a></li>}
-          {s.facebookUrl && <li><a href={s.facebookUrl} rel="noopener" data-track="outbound_click" data-track-method="facebook" data-track-location="footer" data-track-target="facebook.com">{s.facebookLabel ?? 'Facebook group'}</a></li>}
-          <li><a href="/events/club-events.ics" data-track="add_to_calendar" data-track-method="subscribe_feed">Subscribe to our calendar</a></li>
+          <li><a href="/venues/">Venues</a></li>
+          <li><a href="/organizers/">Studios, clubs and organizers</a></li>
+          <li><a href="/instructors/">Teachers</a></li>
+          <li><a href="/performers/">Bands and DJs</a></li>
+          <li><a href="/styles/">Dance styles explained</a></li>
+          <li><a href="/events/past/">Past events</a></li>
         </ul>
       </section>
-      <section aria-labelledby="footer-contact">
-        <h2 id="footer-contact">Contact</h2>
-        <address>
-          <a href={`mailto:${s.email}`} data-track="click_email" data-track-location="footer"><Icon name="mail" class="visually-hidden" />{s.email}</a><br />
-          {s.legalName}<br />
-          {s.mailingAddress.line1}<br />
-          {s.mailingAddress.city}, {s.mailingAddress.state} {s.mailingAddress.postalCode}
-        </address>
+      <section aria-labelledby="footer-about">
+        <h2 id="footer-about">About this site</h2>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/sources/">Where listings come from</a></li>
+          <li><a href="/faq/">Frequently Asked Questions</a></li>
+          <li><a href={issues} rel="noopener">Add, fix or remove a listing</a></li>
+          <li><a href="/events/all.ics" data-track="add_to_calendar" data-track-method="subscribe_feed">Subscribe in your calendar app</a></li>
+          <li><a href="/events/rss.xml">RSS feed</a></li>
+        </ul>
       </section>
     </div>
+    <p class="site-footer__note">We collect listings from public calendars and organizers. Details can change, so <strong>always check with the organizer before you go</strong>.</p>
     <ThemeSwitch variant="choice" location="footer" class="theme-choice--footer" />
     <div class="site-footer__base">
-      <p>© {year} {s.legalName.replace(/\.$/, '')}. An all-volunteer, not-for-profit organization.</p>
+      <p>© {year} {s.siteName}. A free community guide. Not connected with the events listed.</p>
       <p>
         <a href="/privacy/">Privacy</a>
+        <span aria-hidden="true"> · </span>
+        <a href="/sources/#takedown">Takedown requests</a>
         {hasConsent && <span aria-hidden="true"> · </span>}
         {hasConsent && <button type="button" class="link-button js-only" data-consent-open>Privacy choices</button>}
       </p>

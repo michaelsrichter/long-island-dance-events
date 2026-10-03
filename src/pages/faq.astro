@@ -7,12 +7,10 @@ import { inlineMarkdown } from '../lib/markdown';
 
 const faqs = (await getCollection('faqs', (f) => f.data.published)).sort((a, b) => a.data.order - b.data.order);
 const labels: Record<string, string> = {
-  'first-visit': 'Your first visit',
-  dancing: 'Dancing and lessons',
-  admission: 'Admission',
-  venue: 'The venue',
-  membership: 'Membership',
-  volunteering: 'Volunteering',
+  'finding-events': 'Finding events',
+  'going-dancing': 'Going dancing',
+  listings: 'About the listings',
+  'about-site': 'About this site',
 };
 const groups = Object.keys(labels)
   .map((k) => ({ key: k, label: labels[k]!, items: faqs.filter((f) => f.data.category === k) }))
@@ -22,8 +20,8 @@ const crumbs = [
   { name: 'Frequently Asked Questions', href: '/faq/' },
 ];
 ---
-<BaseLayout title="Swing Dance FAQ: Partners, Lessons, Prices" description="Answers to common questions about Riverbend swing dances: do I need a partner, are beginners welcome, what does it cost, what should I wear and more." pageType="faq" jsonLd={[faqJsonLd(faqs.map((f) => f.data)), breadcrumbJsonLd(crumbs, Astro.site!)]}>
-  <PageHeader title="Frequently Asked Questions" lede="Quick answers about Riverbend dances. Still wondering? Call the 24-hour Dance Hotline at (631) 476-3707." crumbs={crumbs} />
+<BaseLayout title="Frequently Asked Questions" description="Answers to common questions: how to find a dance tonight, do I need a partner, what to wear, what it costs, and who runs the events." pageType="faq" jsonLd={[faqJsonLd(faqs.map((f) => f.data)), breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Frequently Asked Questions" lede="Quick answers about finding and going to dances on Long Island." crumbs={crumbs} />
   <div class="container--narrow section stack-l">
     {groups.map((g) => (
       <section aria-labelledby={`faq-${g.key}`}>

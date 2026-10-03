@@ -1,0 +1,22 @@
+{
+  "name": "Knights of Columbus Hall, Patchogue",
+  "aliases": [
+    "Knights of Columbus",
+    "Monseigneur Hall"
+  ],
+  "address": "38 West 1st Street",
+  "town": "Patchogue",
+  "county": "Suffolk",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: purplepenguinentertainment.com, kofc725.com, google.com.",
+  "postalCode": "11772",
+  "phone": "(631) 207-0725",
+  "website": "https://kofc725.com/",
+  "googleMapsUrl": "https://www.google.com/maps?cid=13070516743131956636",
+  "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot.",
+  "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance, parking lot, restroom and seating.",
+  "reviewNotes": "Off Waverly Ave. Google Maps names it \"Monseigneur Hall / Patchogue Knights of Columbus\".",
+  "latitude": 40.767623,
+  "longitude": -73.027595,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

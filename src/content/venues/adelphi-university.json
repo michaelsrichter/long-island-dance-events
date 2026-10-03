@@ -1,0 +1,23 @@
+{
+  "name": "Adelphi University",
+  "aliases": [
+    "Adelphi",
+    "Woodruff Hall"
+  ],
+  "address": "1 South Avenue",
+  "town": "Garden City",
+  "county": "Nassau",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: adelphi.edu, google.com.",
+  "postalCode": "11530",
+  "phone": "(800) 233-5744",
+  "website": "https://www.adelphi.edu/",
+  "googleMapsUrl": "https://www.google.com/maps?cid=5764565024136057826",
+  "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot at Woodruff Hall. LIRR Nassau Boulevard station is a short walk.",
+  "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot for Woodruff Hall.",
+  "description": "Ballroom classes meet in Woodruff Hall, Room 304.",
+  "reviewNotes": "Ballroom classes are a Continuing Education course (Ruth S. Ammon College of Education & Health Sciences) held in Woodruff Hall, Room 304. Dance-shoe rules apply on the special floor.",
+  "latitude": 40.719764,
+  "longitude": -73.651972,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

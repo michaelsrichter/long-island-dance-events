@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import EventSeriesList from '../../components/EventSeriesList.astro';
+import { upcomingFor } from '../../lib/content';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  return (await getCollection('styles')).map((s) => ({ params: { slug: s.id }, props: { style: s } }));
+}
+const { style } = Astro.props;
+const s = style.data;
+const events = await upcomingFor((e) => e.styles.some((x) => x.id === style.id));
+const classes = events.filter((e) => e.category === 'class-lesson');
+const dances = events.filter((e) => e.category !== 'class-lesson');
+const teachers = (await getCollection('instructors')).filter((i) => i.data.styles.includes(style.id));
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Dance styles', href: '/styles/' },
+  { name: s.name, href: `/styles/${style.id}/` },
+];
+---
+<BaseLayout title={`${s.name} on Long Island: where to dance and take classes`} description={`${s.summary} Find ${s.name} dances and classes in Nassau and Suffolk.`.slice(0, 165)} pageType="style" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title={s.name} lede={s.summary} crumbs={crumbs}>
+    <p class="btn-row mt-5"><a class="btn btn--secondary" href={`/events/?style=${style.id}`}>Filter all events by {s.name}</a></p>
+  </PageHeader>
+  <div class="container section stack-l">
+    {s.music && <p><span class="fact-label">Music you will hear:</span> {s.music}</p>}
+    <section aria-labelledby="d-h">
+      <h2 id="d-h">Dances and live music</h2>
+      <div class="mt-5"><EventSeriesList events={dances} empty={`No ${s.name} dances are listed right now`} /></div>
+    </section>
+    <section aria-labelledby="c-h">
+      <h2 id="c-h">Classes</h2>
+      <div class="mt-5"><EventSeriesList events={classes} empty={`No ${s.name} classes are listed right now`} /></div>
+    </section>
+    {teachers.length > 0 && (
+      <section class="panel" aria-labelledby="t-h">
+        <h2 id="t-h">Teachers</h2>
+        <p>{teachers.map((t, i) => <>{i > 0 && ', '}<a href={`/instructors/${t.id}/`}>{t.data.name}</a></>)}</p>
+      </section>
+    )}
+  </div>
+</BaseLayout>

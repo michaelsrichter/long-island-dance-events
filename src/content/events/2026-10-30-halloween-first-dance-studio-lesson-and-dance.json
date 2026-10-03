@@ -1,0 +1,29 @@
+{
+  "title": "Halloween Ballroom and Latin social dance with a lesson at First Dance Wedding and Social Dance Studio",
+  "summary": "A group lesson at 7:30 PM, then open social dancing. Dance styles: Ballroom and Latin. Costumes are welcome.",
+  "category": "lesson-party",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "start": "2026-10-30T19:30",
+  "end": "2026-10-30T22:00",
+  "timezone": "America/New_York",
+  "lessonTime": "19:30",
+  "venueId": "first-dance-studio",
+  "town": "Farmingdale",
+  "organizerId": "first-dance-studio",
+  "price": 25,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.1st-dance.com",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "page 23",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 1,
+  "matchKey": "thedancecalendar|first-dance-studio|first-dance-studio|friday|19:30|lesson-party||ballroom+latin-ballroom||2026-10-30|halloween",
+  "reviewNotes": "Dance styles come from the organizer, not this listing."
+}

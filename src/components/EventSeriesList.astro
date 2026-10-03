@@ -1,0 +1,22 @@
+---
+/** Upcoming events with repeating listings shown once (their next date and how often they repeat). */
+import type { ResolvedEvent } from '../lib/content';
+import EventCard from './EventCard.astro';
+import EmptyState from './EmptyState.astro';
+
+interface Props {
+  events: ResolvedEvent[];
+  empty: string;
+  headingLevel?: 'h2' | 'h3' | 'h4';
+}
+const { events, empty, headingLevel = 'h3' } = Astro.props;
+const seen = new Set<string>();
+const firsts = events.filter((e) => (seen.has(e.eventId) ? false : (seen.add(e.eventId), true)));
+---
+{firsts.length ? (
+  <ul class="event-list" data-upcoming-list="entity">
+    {firsts.map((e) => <EventCard event={e} headingLevel={headingLevel} />)}
+  </ul>
+) : (
+  <EmptyState title={empty}><p><a href="/events/">See all upcoming events</a></p></EmptyState>
+)}

@@ -1,8 +1,24 @@
-/** Lightweight event filtering for /events/. The full list works without JavaScript. */
+/** Event filters for /events/. The full list works without JavaScript; filters sync to the URL so views can be shared. */
 import { track } from './analytics';
 
 const form = document.querySelector<HTMLFormElement>('[data-event-filters]');
 const list = document.querySelector<HTMLElement>('[data-upcoming-list]');
+
+const nyDate = (d: Date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
+const addDays = (date: string, n: number) => {
+  const [y, m, d] = date.split('-').map(Number) as [number, number, number];
+  return new Date(Date.UTC(y, m - 1, d + n, 12)).toISOString().slice(0, 10);
+};
+
+/** Today's date and the coming weekend (Friday to Sunday; from today when already in it), in New York time. */
+export function ranges(now = new Date()) {
+  const today = nyDate(now);
+  const [y, m, d] = today.split('-').map(Number) as [number, number, number];
+  const dow = new Date(Date.UTC(y, m - 1, d, 12)).getUTCDay();
+  const friday = addDays(today, dow === 0 ? -2 : dow === 6 ? -1 : 5 - dow);
+  const weekendFrom = dow === 0 || dow === 6 ? today : friday;
+  return { today, weekEnd: addDays(today, 6), month: today.slice(0, 7), weekendFrom, weekendTo: addDays(friday, 2) };
+}
 
 if (form && list) {
   form.hidden = false;
@@ -10,33 +26,34 @@ if (form && list) {
   const empty = document.querySelector<HTMLElement>('[data-filter-empty]');
   const cards = [...list.querySelectorAll<HTMLElement>('[data-event]')].filter((c) => !c.hasAttribute('data-expired'));
   const groups = [...list.querySelectorAll<HTMLElement>('[data-month-group]')];
-  const hostSections = [...list.querySelectorAll<HTMLElement>('[data-host-section]')];
+  const r = ranges();
 
-  const nyDate = (d: Date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
-  const today = nyDate(new Date());
-  const weekEnd = nyDate(new Date(Date.now() + 6 * 86400000));
-  const month = today.slice(0, 7);
-
-  const fields = ['when', 'host', 'type', 'style', 'venue', 'lesson', 'level', 'q'] as const;
+  const fields = ['when', 'category', 'style', 'q', 'county', 'town', 'day', 'price', 'level', 'venue', 'person'] as const;
   type Field = (typeof fields)[number];
+  const MORE: Field[] = ['county', 'town', 'day', 'price', 'level', 'venue', 'person'];
 
   function values(): Record<Field, string> {
     const fd = new FormData(form!);
     return Object.fromEntries(fields.map((f) => [f, String(fd.get(f) ?? '').trim()])) as Record<Field, string>;
   }
 
+  const has = (list: string | undefined, v: string) => (list ?? '').split(' ').includes(v);
+
   function matches(c: HTMLElement, v: Record<Field, string>): boolean {
     const date = c.dataset.date ?? '';
-    if (v.when === 'today' && date !== today) return false;
-    if (v.when === 'week' && (date < today || date > weekEnd)) return false;
-    if (v.when === 'month' && !date.startsWith(month)) return false;
-    if (v.when === 'band' && c.dataset.band !== 'yes') return false;
-    if (v.host && c.dataset.host !== v.host) return false;
-    if (v.type && !(c.dataset.types ?? '').split(' ').includes(v.type)) return false;
-    if (v.style && !(c.dataset.styles ?? '').split(' ').includes(v.style)) return false;
+    if (v.when === 'today' && date !== r.today) return false;
+    if (v.when === 'weekend' && (date < r.weekendFrom || date > r.weekendTo)) return false;
+    if (v.when === 'week' && (date < r.today || date > r.weekEnd)) return false;
+    if (v.when === 'month' && !date.startsWith(r.month)) return false;
+    if (v.category && c.dataset.category !== v.category) return false;
+    if (v.style && !has(c.dataset.styles, v.style)) return false;
+    if (v.county && c.dataset.county !== v.county) return false;
+    if (v.town && c.dataset.town !== v.town) return false;
+    if (v.day && c.dataset.weekday !== v.day) return false;
+    if (v.price && c.dataset.price !== v.price) return false;
+    if (v.level && c.dataset.level !== v.level && c.dataset.level !== 'all-levels' && c.dataset.level !== 'mixed') return false;
     if (v.venue && c.dataset.venue !== v.venue) return false;
-    if (v.lesson === 'yes' && c.dataset.lesson !== 'yes') return false;
-    if (v.level && c.dataset.level !== v.level && c.dataset.level !== 'all-levels') return false;
+    if (v.person && !has(c.dataset.people, v.person)) return false;
     if (v.q && !(c.textContent ?? '').toLowerCase().includes(v.q.toLowerCase())) return false;
     return true;
   }
@@ -50,10 +67,6 @@ if (form && list) {
       if (ok) shown++;
     }
     for (const g of groups) g.hidden = !g.querySelector('[data-event]:not([hidden])');
-    for (const s of hostSections) s.hidden = !s.querySelector('[data-event]:not([hidden])');
-    // While filters are on, show every match; the "Show more" collapse returns when filters are cleared.
-    const filtering = fields.some((f) => v[f] && !(f === 'when' && v[f] === 'all'));
-    list!.querySelectorAll<HTMLElement>('[data-collapse]').forEach((c) => c.toggleAttribute('data-collapse-filtered', filtering));
     document.dispatchEvent(new CustomEvent('site:lists-changed'));
     if (count) count.textContent = `${shown} ${shown === 1 ? 'event' : 'events'} shown`;
     if (empty) empty.hidden = shown !== 0;
@@ -69,7 +82,7 @@ if (form && list) {
 
   // Restore state from the URL so filtered views can be shared.
   const params = new URLSearchParams(location.search);
-  if (['type', 'style', 'venue', 'lesson', 'level', 'q'].some((k) => params.get(k))) {
+  if (MORE.some((k) => params.get(k))) {
     const more = form.querySelector<HTMLDetailsElement>('.filters__more');
     if (more) more.open = true;
   }

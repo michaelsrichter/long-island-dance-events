@@ -1,0 +1,40 @@
+name: Remove my listings (opt out or takedown)
+description: Ask us to stop listing your events, or to remove something you believe uses your work without permission.
+title: "Remove: "
+labels: [remove-listing]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We act on requests within a week. We may ask a simple question to confirm you speak for the organizer, venue, band or DJ. This form is public, so please leave out private details like phone numbers.
+  - type: input
+    id: page
+    attributes:
+      label: Page address
+      description: The page (or pages) to remove.
+      placeholder: https://...
+    validations:
+      required: true
+  - type: dropdown
+    id: request
+    attributes:
+      label: What would you like us to do?
+      options:
+        - Stop listing all my events (opt out)
+        - Remove one listing
+        - Remove text or an image (takedown)
+    validations:
+      required: true
+  - type: input
+    id: who
+    attributes:
+      label: Who are you?
+      description: e.g. "I run the Friday hustle social at ..."
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Anything else?
+    validations:
+      required: false
