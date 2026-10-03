@@ -1,0 +1,43 @@
+---
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  widths: number[];
+  sizes: string;
+  class?: string;
+  loading?: 'eager' | 'lazy';
+  /** Crop to an aspect ratio (width / height). Leave out to show the whole photo. */
+  aspect?: number;
+  /**
+   * Point to keep in frame when cropping, as "x% y%" from the top-left ("50% 30%" keeps the upper middle).
+   * Chosen by hand per photo; automatic "interesting area" guesses produced odd crops.
+   */
+  focus?: string;
+}
+const { src, alt, widths, sizes, class: className, loading = 'lazy', aspect, focus = '50% 50%' } = Astro.props;
+// Never ask for a crop bigger than the source can provide (that would upscale and blur the photo).
+const maxW = aspect ? Math.min(src.width, Math.floor(src.height * aspect)) : src.width;
+const usable = widths.filter((w) => w <= maxW);
+const finalWidths = usable.length ? usable : [maxW];
+const width = Math.max(...finalWidths);
+const height = aspect ? Math.round(width / aspect) : Math.round((width * src.height) / src.width);
+---
+<Picture
+  src={src}
+  alt={alt}
+  formats={['webp']}
+  fallbackFormat="jpg"
+  widths={finalWidths}
+  sizes={sizes}
+  width={width}
+  height={height}
+  fit={aspect ? 'cover' : undefined}
+  position={aspect ? focus : undefined}
+  loading={loading}
+  decoding={loading === 'eager' ? 'sync' : 'async'}
+  fetchpriority={loading === 'eager' ? 'high' : undefined}
+  class={className}
+  quality={72}
+/>

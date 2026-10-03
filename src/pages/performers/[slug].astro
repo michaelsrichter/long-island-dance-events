@@ -1,0 +1,90 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import EventCard from '../../components/EventCard.astro';
+import ShowMore from '../../components/ShowMore.astro';
+import ResponsiveImage from '../../components/ResponsiveImage.astro';
+import PersonLinks from '../../components/PersonLinks.astro';
+import { getEventGroups } from '../../lib/content';
+import { breadcrumbJsonLd } from '../../lib/seo';
+import { linksOf } from '../../lib/links';
+
+export async function getStaticPaths() {
+  const all = [...(await getCollection('instructors')), ...(await getCollection('performers'))];
+  return all.map((p) => ({ params: { slug: p.id }, props: { person: p } }));
+}
+const { person } = Astro.props;
+const { Content } = await render(person);
+const p = person.data;
+const links = linksOf(p);
+const org = p.organizer ? await getEntry('organizers', p.organizer) : undefined;
+if (p.organizer && !org) throw new Error(`Performer "${person.id}" refers to unknown organizer "${p.organizer}".`);
+const { upcoming, past } = await getEventGroups();
+const involved = (e: (typeof upcoming)[number]) => e.details.bandName === person.id || (e.details.instructorNames ?? []).includes(person.id) || (e.details.djNames ?? []).includes(person.id);
+const next = upcoming.filter((e) => e.host === 'home' && involved(e));
+const elsewhere = upcoming.filter((e) => e.host === 'community' && involved(e)).slice(0, 6);
+const before = past.filter((e) => e.host === 'home' && involved(e)).slice(0, 6);
+const site = Astro.site!;
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Bands, DJs and teachers', href: '/performers/' },
+  { name: p.name, href: `/performers/${person.id}/` },
+];
+const ld = {
+  '@context': 'https://schema.org',
+  '@type': p.kind === 'band' ? 'MusicGroup' : 'Person',
+  name: p.name,
+  url: new URL(`/performers/${person.id}/`, site).toString(),
+  ...(p.kind === 'instructor' ? { jobTitle: p.role ?? 'Swing dance instructor' } : {}),
+  sameAs: links.map((l) => l.url),
+  ...(p.members?.length && p.kind === 'band' ? { member: p.members.map((m) => ({ '@type': 'Person', name: m.replace(/\s*\(.*\)$/, '') })) } : {}),
+};
+const kind = p.kind === 'band' ? 'Live band' : p.kind === 'dj' ? 'DJ' : 'Swing dance teacher';
+---
+<BaseLayout title={p.seoTitle ?? `${p.name}: ${kind} at Riverbend`} description={p.seoDescription ?? `${p.name}, ${kind.toLowerCase()} at Riverbend Swing Dance Club dances.${next.length ? ` Next appearance: ${next[0]!.dateLabel}.` : ''}`} pageType="performer" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
+  <PageHeader title={p.name} lede={p.role ?? kind} crumbs={crumbs} />
+  <div class="container section">
+    <div class="split">
+      <div class="stack-l">
+        <div class="prose"><Content /></div>
+        {p.members && p.members.length > 0 && (
+          <section aria-labelledby="members-h"><h2 id="members-h" class="h3">Members</h2><ul class="mt-3">{p.members.map((m) => <li>{m}</li>)}</ul></section>
+        )}
+        {links.length > 0 && <PersonLinks links={links} name={p.name} variant="buttons" location="performer" class="btn-row" />}
+        {org && (
+          <p class="muted">
+            {p.name} also runs <a href={`/community/#${org.id}`}>{org.data.name}</a>, listed on our <a href="/community/">Riverbend Valley dance community</a> page.
+          </p>
+        )}
+        <section aria-labelledby="next-h">
+          <h2 id="next-h">Upcoming at Riverbend</h2>
+          {next.length ? (
+            <>
+              <ul class="event-list mt-5" id="performer-home" data-upcoming-list="performer" data-collapse="3">{next.map((e, i) => <EventCard event={e} collapsed={i >= 3} />)}</ul>
+              <ShowMore target="performer-home" total={next.length} label="Riverbend dates" />
+            </>
+          ) : <p class="mt-3">No upcoming dates are listed yet. <a href="/events/">See all events</a>.</p>}
+        </section>
+        {elsewhere.length > 0 && (
+          <section aria-labelledby="elsewhere-h">
+            <h2 id="elsewhere-h" class="h3">Also around Riverbend Valley</h2>
+            <ul class="event-list mt-3" data-upcoming-list="performer_community">{elsewhere.map((e) => <EventCard event={e} compact />)}</ul>
+          </section>
+        )}
+        {before.length > 0 && (
+          <section aria-labelledby="past-h">
+            <h2 id="past-h" class="h3">Recent appearances</h2>
+            <ul class="event-list mt-3">{before.map((e) => <EventCard event={e} past />)}</ul>
+          </section>
+        )}
+      </div>
+      {p.image && p.imageAlt && (
+        <figure class="photo">
+          <ResponsiveImage src={p.image} alt={p.imageAlt} widths={[400, 640, 900]} sizes="(min-width: 56rem) 30vw, 92vw" loading="eager" />
+          {p.imageCredit && <figcaption class="photo__caption">{p.imageCredit}</figcaption>}
+        </figure>
+      )}
+    </div>
+  </div>
+</BaseLayout>

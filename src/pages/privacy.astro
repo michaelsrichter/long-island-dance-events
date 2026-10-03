@@ -1,0 +1,8 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+const hasConsent = Boolean(import.meta.env.PUBLIC_GA4_ID || import.meta.env.PUBLIC_CLARITY_ID);
+---
+<ContentPage id="privacy" pageType="privacy">
+  {hasConsent && <p class="js-only"><button type="button" class="btn btn--secondary" data-consent-open>Change my privacy choice</button></p>}
+  {!hasConsent && <p class="muted">Google Analytics and Microsoft Clarity are not turned on for this site right now, so no analytics cookies are set.</p>}
+</ContentPage>

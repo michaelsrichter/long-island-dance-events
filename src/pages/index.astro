@@ -1,0 +1,261 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FeaturedEvent from '../components/FeaturedEvent.astro';
+import EventCard from '../components/EventCard.astro';
+import EmptyState from '../components/EmptyState.astro';
+import Icon from '../components/Icon.astro';
+import Photo from '../components/Photo.astro';
+import Slideshow, { type Slide } from '../components/Slideshow.astro';
+import ShowMore from '../components/ShowMore.astro';
+import PersonName from '../components/PersonName.astro';
+import HostBadge from '../components/HostBadge.astro';
+import { getEventGroups, getSettings, type PersonRef } from '../lib/content';
+import { linksOf } from '../lib/links';
+import { photos } from '../lib/photos';
+
+const settings = await getSettings();
+const page = (await getEntry('pages', 'home'))!;
+const { Content } = await render(page);
+const { upcomingHome, upcomingCommunity, next, past } = await getEventGroups();
+// Render a few next-dance candidates so the browser can promote the next one if the first ends before the nightly rebuild.
+const candidates = upcomingHome.filter((e) => e.status === 'scheduled' || e.status === 'soldOut').slice(0, 3);
+const comingUp = upcomingHome.filter((e) => e.slug !== next?.slug).slice(0, 10);
+const SHOW = 3;
+const community = upcomingCommunity.slice(0, 4);
+const styles = (await getCollection('styles')).filter((s) => s.data.family === 'swing').sort((a, b) => a.data.order - b.data.order);
+const venue = (await getEntry('venues', settings.defaultVenue ?? 'riverbend-community-hall'))!;
+// Homepage slideshow: photos from every gallery album marked "Show in the homepage slideshow".
+// Albums can mix organization photos and open-licensed inspiration photos.
+const slides: Slide[] = (await getCollection('gallery', (g) => g.data.published && g.data.homepageSlideshow))
+  .sort((a, b) => a.data.order - b.data.order)
+  .flatMap((a) => a.data.images.map((img) => ({ src: img.image, alt: img.alt, caption: img.caption, credit: img.credit, creditUrl: img.creditUrl, focus: img.focus, video: img.video })))
+  .slice(0, 16);
+const tel = settings.hotlinePhone.replace(/[^0-9]/g, '');
+// Teachers who taught most recently, linked to their own websites.
+const instructors = await getCollection('instructors');
+const lastTaught = (id: string) => past.find((e) => (e.details.instructorNames ?? []).includes(id))?.date ?? '';
+const recentTeachers: PersonRef[] = instructors
+  .filter((t) => lastTaught(t.id))
+  .sort((a, b) => lastTaught(b.id).localeCompare(lastTaught(a.id)))
+  .slice(0, 2)
+  .map((t) => ({ name: t.data.name, href: `/performers/${t.id}/`, kind: t.data.kind, links: linksOf(t.data) }));
+---
+<BaseLayout title={page.data.seoTitle ?? settings.siteName} description={page.data.seoDescription ?? settings.description} pageType="home" exactTitle>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container home-hero">
+      <div class="home-hero__intro">
+        <p class="hero__eyebrow"><Icon name="music" />Every Thursday · {settings.region}</p>
+        <h1 id="hero-title">{page.data.heading}</h1>
+      </div>
+      <div class="home-hero__more">
+        <p class="hero__lede">{page.data.lede}</p>
+        <ul class="pill-row" aria-label="Good to know">
+          <li class="pill"><Icon name="check" />Beginners welcome</li>
+          <li class="pill"><Icon name="people" />No partner needed</li>
+          <li class="pill"><Icon name="clock" />Lesson at 7:30 PM</li>
+        </ul>
+      </div>
+      <div class="home-hero__card">
+        {candidates.map((e, i) => (
+          <div data-featured-candidate data-end={String(e.end.getTime())} hidden={i > 0}>
+            <FeaturedEvent event={e} label={`Next ${settings.shortName} dance`} hasSocialImage />
+          </div>
+        ))}
+        <div data-featured-empty hidden={candidates.length > 0}>
+          <EmptyState title="No dances are scheduled right now">
+            <p>New dates are coming soon. Call the {settings.hotlineLabel} at <a href={`tel:+1${tel}`}>{settings.hotlinePhone}</a> or <a href={settings.newsletterUrl}>join the email list</a> to hear first.</p>
+          </EmptyState>
+        </div>
+      </div>
+      <div class="home-hero__photos">
+        <Slideshow slides={slides} label="Photos of swing dancing" sizes="(min-width: 60rem) 46vw, 94vw" location="home_slideshow" />
+      </div>
+    </div>
+    <svg class="swoosh" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 60V30C240 0 480 0 720 22s480 30 720 0v38z" fill="currentColor" /></svg>
+  </section>
+
+  <section class="section" aria-labelledby="coming-up">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <h2 id="coming-up">Coming up at {settings.shortName}</h2>
+          <p>Every week is a little different: guest teachers, DJ nights and live bands.</p>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/events/">All upcoming events <Icon name="arrow" /></a>
+          <a class="btn btn--secondary" href="/events/calendar/"><Icon name="calendar" />Month view</a>
+        </div>
+      </div>
+      {comingUp.length > 0 ? (
+        <>
+          <ul class="event-list" id="home-home-list" data-upcoming-list="home" data-collapse={String(SHOW)}>
+            {comingUp.map((e, i) => <EventCard event={e} collapsed={i >= SHOW} />)}
+          </ul>
+          <ShowMore target="home-home-list" total={comingUp.length} limit={SHOW} label={`${settings.shortName} dances`} />
+        </>
+      ) : (
+        <EmptyState title="No other dances are listed yet">
+          <p>Check back soon, or <a href={settings.newsletterUrl}>join the email list</a>.</p>
+        </EmptyState>
+      )}
+      <div data-upcoming-empty hidden>
+        <EmptyState title="No more dances are listed yet"><p>Check back soon.</p></EmptyState>
+      </div>
+      <p class="mt-5"><a href="/events/club-events.ics" data-track="add_to_calendar" data-track-method="subscribe_feed" data-track-location="home">Subscribe to the {settings.shortName} calendar</a> to get every dance on your phone.</p>
+    </div>
+  </section>
+
+  {community.length > 0 && (
+    <section class="section section--tint" aria-labelledby="community-h">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 id="community-h">More dancing around {settings.region}</h2>
+            <p>Want to dance on other nights? These <HostBadge host="community" size="small" /> events are run by other groups. Check with the organizer before you go.</p>
+          </div>
+          <div class="btn-row">
+            <a class="btn btn--secondary" href="/events/#community">All community events <Icon name="arrow" /></a>
+            <a class="btn btn--secondary" href="/community/"><Icon name="people" />Dance groups and teachers</a>
+          </div>
+        </div>
+        <ul class="event-list" data-upcoming-list="home_community">
+          {community.map((e) => <EventCard event={e} compact />)}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <section class="section section--sand" aria-labelledby="expect">
+    <div class="container">
+      <div class="section__head">
+        <div>
+          <h2 id="expect">What to expect</h2>
+          <p>Your first night is easy. Here is how a regular dance works.</p>
+        </div>
+        <a class="btn btn--secondary" href="/new-to-swing/">New to swing? Start here</a>
+      </div>
+      <ol class="grid grid--3 expect" role="list">
+        {(page.data.highlights ?? []).map((h) => (
+          <li class="card card--accent">
+            <p class="highlight__step">{h.title}</p>
+            <p>{h.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="styles">
+    <div class="container info-band">
+      <Photo photo={photos.dressedUp} sizes="(min-width: 56rem) 45vw, 92vw" widths={[480, 720, 960]} aspect={4 / 3} />
+      <div class="stack">
+        <h2 id="styles">The dances you will see</h2>
+        <p>The DJ and bands play swing music for several dance styles. Dance whichever style fits the song, or just enjoy the music.</p>
+        <ul class="style-list">
+          {styles.slice(0, 4).map((s) => (
+            <li>
+              <h3>{s.data.name}</h3>
+              <p>{s.data.summary}</p>
+            </li>
+          ))}
+        </ul>
+        <p><a href="/new-to-swing/#styles">More about each dance style</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--night" aria-labelledby="beginners">
+    <div class="container info-band info-band--flip info-band--portrait">
+      <Photo photo={photos.polkaDots} sizes="(min-width: 56rem) 45vw, 92vw" widths={[480, 720, 960]} aspect={4 / 5} />
+      <div class="stack">
+        <h2 id="beginners">Never danced before? Perfect.</h2>
+        <p>Every regular dance starts with a <strong>swing lesson at 7:30 PM</strong>. A teacher walks the whole group through the basics, and partners rotate so you dance with lots of friendly people.</p>
+        <ul class="facts">
+          <li><Icon name="check" /><span>No partner or experience needed</span></li>
+          <li><Icon name="shoe" /><span>Wear comfortable shoes that let you turn</span></li>
+          {recentTeachers.length > 0 && (
+            <li><Icon name="people" /><span>Recent teachers include {recentTeachers.map((t, n) => <>{n > 0 && ' and '}<PersonName person={t} location="home" /></>)}</span></li>
+          )}
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/new-to-swing/">Your first night</a>
+          <a class="btn btn--secondary" href="/lessons/">About the lessons</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="members">
+    <div class="container">
+      <div class="cta-band">
+        <h2 id="members">Members save every week</h2>
+        <p>{settings.shortName} membership is just <strong>${settings.membershipFee} a year</strong> ({settings.membershipYear}). Members pay less at the door and help keep an all-volunteer group dancing.</p>
+        <ul class="stat-row">
+          {settings.standardPrices.map((p) => (
+            <li><strong>${p.member}</strong> members on {p.label}s <span class="visually-hidden">(non-members ${p.nonMember}, students ${p.student})</span></li>
+          ))}
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/membership/">How to join</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand" aria-labelledby="venue">
+    <div class="container grid grid--2">
+      <div class="stack">
+        <h2 id="venue">Where we dance</h2>
+        <p>Our regular dances happen at the <strong>{venue.data.name}</strong> in {venue.data.city}.</p>
+        <address class="card">
+          <strong>{venue.data.name}</strong>
+          <span>{venue.data.address}<br />{venue.data.city}, {venue.data.state} {venue.data.postalCode}</span>
+          <span class="btn-row">
+            {venue.data.directionsUrl && <a class="btn btn--primary btn--small" href={venue.data.directionsUrl} target="_blank" rel="noopener" data-track="get_directions" data-track-method="google" data-track-location="home_venue"><Icon name="directions" />Get directions<span class="visually-hidden"> (opens in a new tab)</span></a>}
+            <a class="btn btn--secondary btn--small" href={`/venues/${venue.id}/`}>Venue details</a>
+            <a class="btn btn--secondary btn--small" href="/events/map/"><Icon name="pin" />Dance map</a>
+          </span>
+        </address>
+      </div>
+      <div class="stack">
+        <h2>About {settings.shortName}</h2>
+        <div class="prose"><Content /></div>
+        <p><a href="/about/">Meet the volunteers</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="photos">
+    <div class="container">
+      <div class="section__head">
+        <h2 id="photos">Live music, full dance floor</h2>
+        <a class="btn btn--secondary" href="/gallery/">See the gallery</a>
+      </div>
+      <div class="photo-strip">
+        <Photo photo={photos.danceFloor} sizes="(min-width: 60rem) 30vw, 92vw" widths={[400, 640, 960]} aspect={2} />
+        <Photo photo={photos.bandNight} sizes="(min-width: 60rem) 30vw, 92vw" widths={[400, 640, 960]} aspect={2} />
+        <Photo photo={photos.blackYellow} sizes="(min-width: 60rem) 30vw, 92vw" widths={[400, 640, 960]} aspect={2} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--night" aria-labelledby="help">
+    <div class="container grid grid--2">
+      <div class="stack">
+        <h2 id="help">Get involved</h2>
+        <p>{settings.shortName} is run entirely by volunteers. Help at the door, welcome new dancers, take photos or share ideas. We would love to hear from you.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="/contact/">Volunteer or contact us</a>
+          {settings.newsletterUrl && <a class="btn btn--secondary" href={settings.newsletterUrl} rel="noopener" data-track="newsletter_click" data-track-location="home">Join the email list</a>}
+          {settings.facebookUrl && <a class="btn btn--secondary" href={settings.facebookUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="facebook" data-track-location="home" data-track-target="facebook.com"><Icon name="facebook" />{settings.facebookLabel ?? 'Facebook group'}<span class="visually-hidden"> (opens in a new tab)</span></a>}
+        </div>
+      </div>
+      <div class="stack">
+        <h2>{settings.hotlineLabel}</h2>
+        <p><a class="hotline" href={`tel:+1${tel}`} data-track="click_hotline" data-track-location="home">{settings.hotlinePhone}</a></p>
+        <p>Call for dance details or weather cancellations. The email list also sends weekly updates and emergency cancellation notices.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

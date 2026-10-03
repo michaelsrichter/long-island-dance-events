@@ -1,0 +1,38 @@
+---
+/** A person's or organizer's own website and social pages, website first. */
+import Icon from './Icon.astro';
+import { displayHost, type ExternalLink } from '../lib/links';
+
+interface Props {
+  links: ExternalLink[];
+  /** Whose links these are, for screen readers: "Maya Rivera". */
+  name: string;
+  variant?: 'chips' | 'buttons';
+  max?: number;
+  /** Analytics location, e.g. "event" or "performer". */
+  location?: string;
+  class?: string;
+}
+const { links, name, variant = 'chips', max, location, class: className } = Astro.props;
+const shown = typeof max === 'number' ? links.slice(0, max) : links;
+const iconOf = (k: ExternalLink['kind']) => (k === 'website' ? 'link' : k === 'link' ? 'external' : k);
+---
+{shown.length > 0 && (
+  <ul class:list={['ext-links', `ext-links--${variant}`, className]} aria-label={`${name} online`}>
+    {shown.map((l) => (
+      <li>
+        <a
+          class={variant === 'buttons' ? 'btn btn--secondary btn--small' : 'ext-link'}
+          href={l.url}
+          target="_blank"
+          rel="noopener"
+          title={l.kind === 'website' ? displayHost(l.url) : undefined}
+          data-track="outbound_click"
+          data-track-method={l.kind}
+          data-track-location={location}
+          data-track-target={displayHost(l.url)}
+        ><Icon name={iconOf(l.kind)} />{l.label}<span class="visually-hidden"> of {name} (opens in a new tab)</span></a>
+      </li>
+    ))}
+  </ul>
+)}

@@ -1,0 +1,18 @@
+---
+import Icon from './Icon.astro';
+import { STATUS_LABELS } from '../lib/event-core';
+import type { EventStatus } from '../lib/schemas';
+interface Props {
+  status: EventStatus;
+  showScheduled?: boolean;
+}
+const { status, showScheduled = false } = Astro.props;
+const icon = status === 'cancelled' ? 'x' : status === 'postponed' ? 'pause' : status === 'soldOut' ? 'ticket' : status === 'completed' ? 'clock' : 'check';
+const label = status === 'scheduled' ? 'On as planned' : STATUS_LABELS[status];
+---
+{(status !== 'scheduled' || showScheduled) && (
+  <span class:list={['status', `status--${status}`]}>
+    <Icon name={icon} />
+    {label}
+  </span>
+)}

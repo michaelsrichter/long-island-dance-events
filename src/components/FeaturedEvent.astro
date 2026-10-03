@@ -1,0 +1,72 @@
+---
+import type { ResolvedEvent } from '../lib/content';
+import { calendarEventOf, shareInputOf } from '../lib/content';
+import Icon from './Icon.astro';
+import TicketDate from './TicketDate.astro';
+import StatusBadge from './StatusBadge.astro';
+import AddToCalendar from './AddToCalendar.astro';
+import ShareControls from './ShareControls.astro';
+import RelativeWhen from './RelativeWhen.astro';
+import PersonName from './PersonName.astro';
+import { formatTime, formatTimeRange } from '../lib/time';
+
+interface Props {
+  event: ResolvedEvent;
+  label?: string;
+  hasSocialImage?: boolean;
+  headingLevel?: 'h2' | 'h3';
+}
+const { event: e, label = 'Next dance', hasSocialImage = false, headingLevel = 'h2' } = Astro.props;
+const Heading = headingLevel;
+const site = Astro.site!;
+const cal = calendarEventOf(e, site);
+const d = e.details;
+---
+<article class="featured" aria-labelledby={`featured-${e.slug}`} data-featured-event data-end={String(e.end.getTime())}>
+  <p class="featured__label">
+    <span>{label}</span>
+    <RelativeWhen start={e.start} end={e.end} excited allDay={e.timeTba} class="when--featured" />
+  </p>
+  <div class="featured__top">
+    <TicketDate date={e.date} />
+    <div>
+      <StatusBadge status={e.status} />
+      <Heading class="featured__title" id={`featured-${e.slug}`}><a href={e.url}>{e.title}</a></Heading>
+      <p class="featured__when">{e.dateLabel}</p>
+    </div>
+  </div>
+  <ul class="facts">
+    {d.lessonStartTime && (
+      <li><Icon name="clock" /><span><span class="fact-label">Lesson:</span> {formatTime(d.lessonStartTime)}{e.instructors.length > 0 && <> with {e.instructors.map((p, n) => <>{n > 0 && ' and '}<PersonName person={p} location="home_next" /></>)}</>}</span></li>
+    )}
+    {d.danceStartTime && (
+      <li><Icon name="music" /><span><span class="fact-label">Open dancing:</span> {formatTimeRange(d.danceStartTime, d.danceEndTime)}{e.band && <> with <PersonName person={e.band} location="home_next" /></>}</span></li>
+    )}
+    {!d.lessonStartTime && !d.danceStartTime && (
+      <li><Icon name="clock" /><span><span class="fact-label">Time:</span> {e.timeTba ? 'To be announced' : formatTime(e.startLocal.slice(11))}</span></li>
+    )}
+    {e.location.name && (
+      <li><Icon name="pin" /><span><span class="fact-label">Where:</span> {e.location.name}, {e.location.city}</span></li>
+    )}
+    <li><Icon name="ticket" /><span><span class="fact-label">Admission:</span> {e.admissionLine}</span></li>
+  </ul>
+  {e.admission.notes && <p class="muted featured__notes">{e.admission.notes}</p>}
+  <div class="btn-row">
+    <a class="btn btn--primary" href={e.url} data-track="select_event" data-track-location="home_next">
+      View event details
+      <Icon name="arrow" />
+    </a>
+    {e.location.directionsUrl && (
+      <a class="btn btn--secondary" href={e.location.directionsUrl} target="_blank" rel="noopener" data-track="get_directions" data-track-method="google" data-track-location="home_next">
+        <Icon name="directions" />
+        Directions<span class="visually-hidden"> to {e.location.name} (opens in a new tab)</span>
+      </a>
+    )}
+    <AddToCalendar cal={cal} icsHref={`${e.url}calendar.ics`} location="home_next" />
+    <ShareControls share={shareInputOf(e, site)} details={{ lesson: d.lessonStartTime ? `Lesson at ${formatTime(d.lessonStartTime)}` : undefined, admission: e.admissionLine, beginners: e.beginnerFriendly }} slug={e.slug} socialImage={hasSocialImage ? `${e.url}social-square.png` : undefined} variant="button" location="home_next" />
+  </div>
+  <p class="reassure">
+    {e.beginnerFriendly && <span class="tag"><Icon name="check" />Beginners welcome</span>}
+    {e.noPartnerNeeded && <span class="tag"><Icon name="people" />No partner needed</span>}
+  </p>
+</article>

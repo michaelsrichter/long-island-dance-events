@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import HostBadge from '../../components/HostBadge.astro';
+import { getEventGroups, getSettings } from '../../lib/content';
+import { breadcrumbJsonLd } from '../../lib/seo';
+import history from '../../data/legacy-history.json';
+
+const venues = (await getCollection('venues')).filter((v) => v.data.active).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const { upcoming, past } = await getEventGroups();
+const settings = await getSettings();
+const isHome = (id: string) => id === settings.defaultVenue || [...upcoming, ...past].some((e) => e.host === 'home' && e.venueEntry?.id === id);
+const homeVenues = venues.filter((v) => isHome(v.id));
+const otherVenues = venues.filter((v) => !isHome(v.id)).sort((a, b) => a.data.city.localeCompare(b.data.city) || a.data.name.localeCompare(b.data.name));
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Venues', href: '/venues/' },
+];
+---
+<BaseLayout title="Swing Dance Venues on Riverbend Valley" description="Where Riverbend Swing Dance Club dances happen, with addresses, parking and directions, plus other Riverbend Valley dance venues. Weekly Tuesday dances at the Riverbend Community Hall in Riverbend, NY." pageType="venues" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Venues" lede="Where Riverbend dances happen, plus other places to dance around Riverbend Valley." crumbs={crumbs} />
+  <div class="container section stack-l">
+    <section aria-labelledby="home-venues">
+      <h2 id="home-venues">Where Riverbend dances</h2>
+      <ul class="grid grid--2 mt-5" role="list">
+        {homeVenues.map((v) => {
+          const count = upcoming.filter((e) => e.venueEntry?.id === v.id && e.host === 'home').length;
+          return (
+            <li class="card card--accent">
+              <p class="card__kicker"><HostBadge host="home" size="small" /> {count} upcoming Riverbend {count === 1 ? 'dance' : 'dances'}</p>
+              <h3><a href={`/venues/${v.id}/`}>{v.data.name}</a></h3>
+              <address>{v.data.address}<br />{v.data.city}, {v.data.state} {v.data.postalCode}</address>
+              <p class="muted">Venue details, parking and directions</p>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+    {otherVenues.length > 0 && (
+      <section aria-labelledby="other-venues">
+        <h2 id="other-venues">Other dance venues around Riverbend Valley</h2>
+        <p class="mt-3">Places where other groups hold the <a href="/events/#community">community events</a> we list.</p>
+        <ul class="grid grid--3 mt-5" role="list">
+          {otherVenues.map((v) => {
+            const count = upcoming.filter((e) => e.venueEntry?.id === v.id).length;
+            return (
+              <li class="card">
+                <p class="card__kicker">{v.data.city}{count ? ` · ${count} upcoming` : ''}</p>
+                <h3 class="h4"><a href={`/venues/${v.id}/`}>{v.data.name}</a></h3>
+                <address class="muted">{v.data.address}</address>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    )}
+    <section class="card" id="past-venues" aria-labelledby="past-venues-h">
+      <h2 id="past-venues-h" class="h3">Places Riverbend has danced</h2>
+      <p>Over the years, Riverbend has held dances and events at many places across Riverbend Valley. These are historical venues from the old website, not current dance locations.</p>
+      <ul class="style-list mt-3" role="list">
+        {history.pastVenues.map((name) => <li>{name}</li>)}
+      </ul>
+    </section>
+  </div>
+</BaseLayout>

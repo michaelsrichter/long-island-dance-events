@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "trailingSlash": "auto",
+  "platform": { "apiRuntime": "node:22" },
+  "routes": [
+    { "route": "/index.php", "redirect": "/", "statusCode": 301 },
+    { "route": "/events.php", "redirect": "/events/", "statusCode": 301 },
+    { "route": "/contact.php", "redirect": "/contact/", "statusCode": 301 },
+    { "route": "/_astro/*", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
+    { "route": "/admin/*", "headers": { "Content-Security-Policy": "__ADMIN_CSP__", "Cache-Control": "no-cache" } },
+    { "route": "/*.ics", "headers": { "Cache-Control": "public, max-age=900" } },
+    { "route": "/media/*", "headers": { "Cache-Control": "public, max-age=604800" } }
+  ],
+  "responseOverrides": { "404": { "rewrite": "/404.html", "statusCode": 404 } },
+  "mimeTypes": {
+    ".ics": "text/calendar; charset=utf-8",
+    ".webmanifest": "application/manifest+json",
+    ".txt": "text/plain; charset=utf-8",
+    ".yml": "text/yaml; charset=utf-8",
+    ".xml": "application/xml; charset=utf-8",
+    ".mp4": "video/mp4"
+  },
+  "globalHeaders": {
+    "Content-Security-Policy": "__SITE_CSP__",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=(self), payment=(), usb=(), interest-cohort=(), browsing-topics=()",
+    "Cross-Origin-Opener-Policy": "same-origin-allow-popups",
+    "Strict-Transport-Security": "max-age=31536000; includeSubDomains"
+  }
+}

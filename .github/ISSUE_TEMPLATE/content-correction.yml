@@ -1,0 +1,25 @@
+name: Content correction
+description: Something on the website is wrong or out of date (date, time, price, venue, name).
+labels: [content]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page address
+      description: Copy the web address of the page with the problem.
+      placeholder: https://example.org/events/...
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong?
+    validations:
+      required: true
+  - type: textarea
+    id: right
+    attributes:
+      label: What should it say?
+      description: Include your source if you have one (flyer, email from the band, board decision).
+    validations:
+      required: true

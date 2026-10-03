@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import ContentPage from '../layouts/ContentPage.astro';
+import Photo from '../components/Photo.astro';
+import PersonCard from '../components/PersonCard.astro';
+import EventCard from '../components/EventCard.astro';
+import ShowMore from '../components/ShowMore.astro';
+import { getEventGroups } from '../lib/content';
+import { photos } from '../lib/photos';
+
+const teachers = await getCollection('instructors');
+const organizers = (await getCollection('organizers')).filter((o) => o.data.active && o.data.classes);
+const SWING = new Set(['lindy-hop', 'east-coast-swing', 'west-coast-swing', 'balboa', 'blues']);
+const swingClasses = organizers.filter((o) => (o.data.danceStyles ?? []).some((s) => SWING.has(s))).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const { upcomingHome, past } = await getEventGroups();
+const lastSeen = (id: string) => past.find((e) => (e.details.instructorNames ?? []).includes(id))?.date ?? '';
+teachers.sort((a, b) => lastSeen(b.id).localeCompare(lastSeen(a.id)));
+const withLesson = upcomingHome.filter((e) => e.hasLesson).slice(0, 8);
+---
+<ContentPage id="lessons" pageType="lessons">
+  <section aria-labelledby="next-lessons">
+    <h2 id="next-lessons">Next lessons</h2>
+    <ul class="event-list mt-5" id="lessons-home" data-upcoming-list="lessons" data-collapse="3">{withLesson.map((e, i) => <EventCard event={e} collapsed={i >= 3} />)}</ul>
+    <ShowMore target="lessons-home" total={withLesson.length} label="lessons" />
+    <p class="mt-3"><a href="/events/?lesson=yes&host=home">All upcoming Riverbend lessons</a></p>
+  </section>
+  <section aria-labelledby="teachers-h">
+    <h2 id="teachers-h">Teachers</h2>
+    <ul class="grid grid--2 mt-5" role="list">{teachers.map((t) => <PersonCard person={t} />)}</ul>
+  </section>
+  {swingClasses.length > 0 && (
+    <section aria-labelledby="more-classes-h">
+      <h2 id="more-classes-h">More swing classes on Riverbend Valley</h2>
+      <p class="mt-3">Want to learn faster? These teachers and studios run class series outside Riverbend nights.</p>
+      <ul class="org-list mt-5">
+        {swingClasses.map((o) => (
+          <li class="org-card">
+            <h3 class="h4"><a href={`/community/#${o.id}`}>{o.data.name}</a></h3>
+            <p>{o.data.classes}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="mt-3"><a href="/community/#classes">All classes, including ballroom and Latin</a></p>
+    </section>
+  )}
+  <Fragment slot="aside">
+    <Photo photo={photos.polkaDots} sizes="(min-width: 56rem) 35vw, 92vw" widths={[480, 720, 960]} />
+  </Fragment>
+</ContentPage>

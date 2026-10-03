@@ -1,0 +1,13 @@
+{
+  "extends": "astro/tsconfigs/strictest",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist", "node_modules", "api", "public/admin/decap-cms.js"],
+  "compilerOptions": {
+    "verbatimModuleSyntax": true,
+    "exactOptionalPropertyTypes": false,
+    "noPropertyAccessFromIndexSignature": false,
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+name: Idea or improvement
+description: Suggest a new feature or a better way to do something.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+    validations:
+      required: true
+  - type: textarea
+    id: who
+    attributes:
+      label: Who would it help?

@@ -1,0 +1,61 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import EventCard from '../../../components/EventCard.astro';
+import ShowMore from '../../../components/ShowMore.astro';
+import EmptyState from '../../../components/EmptyState.astro';
+import Photo from '../../../components/Photo.astro';
+import Icon from '../../../components/Icon.astro';
+import { getEventGroups } from '../../../lib/content';
+import { admissionOf, admissionText } from '../../../lib/event-core';
+import { formatTime, formatTimeRange } from '../../../lib/time';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+import { photos } from '../../../lib/photos';
+
+export async function getStaticPaths() {
+  const series = await getCollection('series', (s) => s.data.published);
+  return series.map((s) => ({ params: { series: s.data.slug }, props: { entry: s } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { upcoming } = await getEventGroups();
+const list = upcoming.filter((e) => e.source.seriesId === entry.id);
+const s = entry.data;
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Events', href: '/events/' },
+  { name: s.title, href: `/events/series/${s.slug}/` },
+];
+const weekday = s.recurrence.weekday[0]!.toUpperCase() + s.recurrence.weekday.slice(1);
+---
+<BaseLayout title={s.seoTitle ?? s.title} description={s.seoDescription ?? s.summary ?? s.title} pageType="series" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title={s.title} lede={s.summary} crumbs={crumbs} />
+  <div class="container section stack-l">
+    <div class="info-band">
+      <div class="panel">
+        <h2>Every {weekday}</h2>
+        <ul class="facts mt-3">
+          {s.lessonStartTime && <li><Icon name="clock" /><span><span class="fact-label">Lesson:</span> {formatTime(s.lessonStartTime)}</span></li>}
+          {s.danceStartTime && <li><Icon name="music" /><span><span class="fact-label">Open dancing:</span> {formatTimeRange(s.danceStartTime, s.danceEndTime)}</span></li>}
+          <li><Icon name="ticket" /><span><span class="fact-label">Admission:</span> {admissionText(admissionOf(s))}</span></li>
+        </ul>
+        {s.admissionNotes && <p class="muted mt-3">{s.admissionNotes}</p>}
+        <div class="prose mt-5"><Content /></div>
+      </div>
+      <Photo photo={photos.danceFloor} sizes="(min-width: 56rem) 45vw, 92vw" widths={[480, 720, 960]} aspect={2} />
+    </div>
+    <section aria-labelledby="dates">
+      <h2 id="dates">Upcoming dates</h2>
+      {list.length ? (
+        <>
+          <ul class="event-list mt-5" id="series-dates" data-upcoming-list="series" data-collapse="3">{list.map((e, i) => <EventCard event={e} collapsed={i >= 3} />)}</ul>
+          <ShowMore target="series-dates" total={list.length} label="dates" />
+        </>
+      ) : (
+        <EmptyState title="No upcoming dates are listed"><p><a href="/events/">See all events</a></p></EmptyState>
+      )}
+    </section>
+  </div>
+</BaseLayout>
+

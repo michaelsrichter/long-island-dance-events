@@ -1,0 +1,58 @@
+---
+import Icon from './Icon.astro';
+import Logo from './Logo.astro';
+import ThemeSwitch from './ThemeSwitch.astro';
+import { getSettings } from '../lib/content';
+
+const settings = await getSettings();
+const nav = [
+  { href: '/', label: 'Home' },
+  { href: '/events/', label: 'Events' },
+  { href: '/new-to-swing/', label: 'New to Swing?' },
+  { href: '/lessons/', label: 'Lessons' },
+  { href: '/venues/', label: 'Venues' },
+  { href: '/about/', label: 'About' },
+  { href: '/membership/', label: 'Membership' },
+  { href: '/gallery/', label: 'Gallery' },
+  { href: '/contact/', label: 'Contact' },
+];
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/" aria-label={`${settings.siteName} home`}>
+      <Logo class="brand__mark" />
+      <span class="brand__text">
+        <span class="brand__name">{settings.siteName}</span>
+        <span class="brand__abbr">{settings.shortName} · Volunteer-run nonprofit</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
+        <Icon name="menu" />
+        <span>Menu</span>
+      </button>
+      <div class="nav__panel" id="nav-panel" data-nav-panel>
+        <ul class="nav__list">
+          {nav.map((item) => (
+            <li>
+              <a class="nav__link" href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+        <ThemeSwitch variant="choice" location="menu" class="theme-choice--menu" />
+      </div>
+    </nav>
+    <ThemeSwitch variant="button" location="header" />
+    {settings.facebookUrl && (
+      <a class="header-social" href={settings.facebookUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="facebook" data-track-location="header" data-track-target="facebook.com" title={settings.facebookLabel ?? `${settings.shortName} Facebook group`}>
+        <Icon name="facebook" />
+        <span class="visually-hidden">{settings.facebookLabel ?? `${settings.shortName} Facebook group`} (opens in a new tab)</span>
+      </a>
+    )}
+  </div>
+</header>
+<script>
+  import '../scripts/nav';
+</script>

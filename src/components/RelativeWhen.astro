@@ -1,0 +1,20 @@
+---
+/** Placeholder for a friendly relative date label. Filled in the browser (see scripts/relative.ts). */
+interface Props {
+  start: Date;
+  end: Date;
+  excited?: boolean;
+  allDay?: boolean;
+  class?: string;
+}
+const { start, end, excited = false, allDay = false, class: className } = Astro.props;
+---
+<span
+  class:list={['when', className]}
+  data-when
+  data-when-start={String(start.getTime())}
+  data-when-end={String(end.getTime())}
+  data-when-excited={excited ? 'true' : undefined}
+  data-when-all-day={allDay ? 'true' : undefined}
+  hidden
+></span>

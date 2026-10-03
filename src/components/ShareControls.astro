@@ -1,0 +1,95 @@
+---
+import Icon from './Icon.astro';
+import { detailText, shareLinks, type ShareInput } from '../lib/share';
+interface Props {
+  share: ShareInput;
+  details: { lesson?: string | undefined; admission?: string | undefined; beginners?: boolean };
+  slug: string;
+  socialImage?: string | undefined;
+  /** "inline" renders every option as a visible button; "button" renders one Share button. */
+  variant?: 'inline' | 'button';
+  buttonClass?: string;
+  location?: string;
+}
+const { share, details, slug, socialImage, variant = 'inline', buttonClass = 'btn btn--secondary', location = 'event' } = Astro.props;
+const links = shareLinks(share);
+const details_ = detailText({ ...share, ...details });
+const dialogId = `share-${slug}-${location}`;
+type ShareIcon = 'link' | 'copy' | 'facebook' | 'mail' | 'sms' | 'download';
+type ShareOption =
+  | { kind: 'copy-link' | 'copy-details'; label: string; icon: ShareIcon; method: string }
+  | { kind: 'link' | 'download'; label: string; icon: ShareIcon; href: string; method: string; external?: boolean };
+const options: ShareOption[] = [
+  { kind: 'copy-link', label: 'Copy link', icon: 'link', method: 'copy_link' },
+  { kind: 'copy-details', label: 'Copy event details', icon: 'copy', method: 'copy_details' },
+  { kind: 'link', label: 'Facebook', icon: 'facebook', href: links.facebook, method: 'facebook', external: true },
+  { kind: 'link', label: 'Email', icon: 'mail', href: links.email, method: 'email' },
+  { kind: 'link', label: 'Text message', icon: 'sms', href: links.sms, method: 'sms' },
+  ...(socialImage ? [{ kind: 'download' as const, label: 'Download image for Instagram', icon: 'download' as const, href: socialImage, method: 'download_image' }] : []),
+];
+---
+<div class="share" data-share data-share-title={share.title} data-share-text={links.text} data-share-url={share.url} data-share-details={details_} data-share-slug={slug} data-track-location={location}>
+  {variant === 'button' && (
+    <>
+      <button type="button" class:list={[buttonClass, 'js-only']} data-share-open={dialogId}>
+        <Icon name="share" />
+        Share
+      </button>
+      <a class:list={[buttonClass, 'no-js-only']} href={`${new URL(share.url).pathname}#share`}>
+        <Icon name="share" />
+        Share
+      </a>
+      <dialog class="share-dialog" id={dialogId} aria-labelledby={`${dialogId}-title`}>
+        <div class="share-dialog__inner">
+          <div class="share-dialog__head">
+            <h2 id={`${dialogId}-title`} class="h3">Share this event</h2>
+            <button type="button" class="icon-btn" data-dialog-close aria-label="Close">
+              <Icon name="x" />
+            </button>
+          </div>
+          <p class="muted">{share.title}</p>
+          <div class="share-dialog__list">
+            {options.map((o) =>
+              o.kind === 'link' || o.kind === 'download' ? (
+                <a class="btn btn--secondary" href={o.href} data-track="share" data-track-method={o.method} {...('external' in o && o.external ? { target: '_blank', rel: 'noopener' } : {})} {...(o.kind === 'download' ? { download: `${slug}.png` } : {})}>
+                  <Icon name={o.icon} />
+                  {o.label}
+                </a>
+              ) : (
+                <button type="button" class="btn btn--secondary" data-share-action={o.kind}>
+                  <Icon name={o.icon} />
+                  {o.label}
+                </button>
+              ),
+            )}
+          </div>
+        </div>
+      </dialog>
+    </>
+  )}
+  {variant === 'inline' && (
+    <div class="action-group">
+      <button type="button" class="btn btn--primary btn--small" data-share-native hidden>
+        <Icon name="share" />
+        Share…
+      </button>
+      {options.map((o) =>
+        o.kind === 'link' || o.kind === 'download' ? (
+          <a class="btn btn--secondary btn--small" href={o.href} data-track="share" data-track-method={o.method} {...('external' in o && o.external ? { target: '_blank', rel: 'noopener' } : {})} {...(o.kind === 'download' ? { download: `${slug}.png` } : {})}>
+            <Icon name={o.icon} />
+            {o.label}
+            {'external' in o && o.external && <span class="visually-hidden"> (opens in a new tab)</span>}
+          </a>
+        ) : (
+          <button type="button" class="btn btn--secondary btn--small js-only" data-share-action={o.kind}>
+            <Icon name={o.icon} />
+            {o.label}
+          </button>
+        ),
+      )}
+    </div>
+  )}
+</div>
+<script>
+  import '../scripts/share';
+</script>

@@ -1,0 +1,31 @@
+---
+import ResponsiveImage from './ResponsiveImage.astro';
+import type { Photo } from '../lib/photos';
+interface Props {
+  photo: Photo;
+  widths?: number[];
+  sizes: string;
+  aspect?: number;
+  /** Overrides the photo's own focus point for this crop. */
+  focus?: string;
+  loading?: 'eager' | 'lazy';
+  class?: string;
+  caption?: string;
+}
+const { photo, widths = [400, 640, 960, 1280], sizes, aspect, focus, loading = 'lazy', class: className, caption } = Astro.props;
+---
+<figure class:list={['photo', className]}>
+  <ResponsiveImage src={photo.src} alt={photo.alt} widths={widths} sizes={sizes} aspect={aspect} focus={focus ?? photo.focus} loading={loading} />
+  {(caption || photo.credit) && (
+    <figcaption class="photo__caption">
+      {caption && <span>{caption} </span>}
+      {photo.credit && (
+        <span class="photo__credit">
+          Photo: <a href={photo.credit.sourceUrl} rel="noopener">{photo.credit.author}</a>,{' '}
+          {photo.credit.licenseUrl ? <a href={photo.credit.licenseUrl} rel="noopener license">{photo.credit.license}</a> : photo.credit.license}
+          {photo.sample && ' (sample image)'}
+        </span>
+      )}
+    </figcaption>
+  )}
+</figure>

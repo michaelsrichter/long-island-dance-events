@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import { buildNow } from '../lib/content';
+import { dateInZone } from '../lib/time';
+
+const today = dateInZone(buildNow());
+const items = (await getCollection('announcements'))
+  .filter((a) => a.data.published && (!a.data.startDate || a.data.startDate <= today) && (!a.data.endDate || a.data.endDate >= today))
+  .sort((a, b) => (a.data.level === 'important' ? -1 : 0) - (b.data.level === 'important' ? -1 : 0));
+const a = items[0];
+---
+{a && (
+  <aside class:list={['announcement', a.data.level === 'important' && 'announcement--important']} aria-label="Announcement" data-announcement-end={a.data.endDate}>
+    <div class="container announcement__inner">
+      <p>{a.data.message}</p>
+      {a.data.linkUrl && <a href={a.data.linkUrl}>{a.data.linkText ?? 'Learn more'}</a>}
+    </div>
+  </aside>
+)}

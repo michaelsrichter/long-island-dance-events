@@ -1,0 +1,16 @@
+---
+interface Props {
+  styles: { id: string; name: string }[];
+  max?: number;
+  label?: string;
+}
+const { styles, max = 4, label = 'Dance styles' } = Astro.props;
+const shown = styles.slice(0, max);
+const more = styles.length - shown.length;
+---
+{shown.length > 0 && (
+  <ul class="style-tags" aria-label={label}>
+    {shown.map((s) => <li class="style-tag">{s.name}</li>)}
+    {more > 0 && <li class="style-tag style-tag--more">+{more} more</li>}
+  </ul>
+)}

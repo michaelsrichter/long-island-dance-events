@@ -1,0 +1,37 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+import Photo from '../components/Photo.astro';
+import { getSettings } from '../lib/content';
+import { formatPrice } from '../lib/event-core';
+import { photos } from '../lib/photos';
+
+const s = await getSettings();
+---
+<ContentPage id="membership" pageType="membership">
+  <section aria-labelledby="prices-h" class="panel">
+    <h2 id="prices-h">Admission prices</h2>
+    <div class="table-scroll">
+      <table class="price-table">
+        <caption class="visually-hidden">Door prices for members, students and non-members</caption>
+        <thead>
+          <tr><th scope="col">Night</th><th scope="col">Members</th><th scope="col">Students</th><th scope="col">Non-members</th></tr>
+        </thead>
+        <tbody>
+          {s.standardPrices.map((p) => (
+            <tr><th scope="row">{p.label}</th><td>{formatPrice(p.member)}</td><td>{formatPrice(p.student)}</td><td>{formatPrice(p.nonMember)}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="muted mt-3">Each event page shows that night's price.</p>
+  </section>
+  <Fragment slot="aside">
+    <div class="card card--accent">
+      <p class="card__kicker">Membership</p>
+      <p class="hotline">${s.membershipFee}<span class="muted"> / year</span></p>
+      <p>{s.membershipYear}. Join at the door of any Riverbend dance.</p>
+      <a class="btn btn--primary" href="/events/">Find your next dance</a>
+    </div>
+    <Photo photo={photos.dressedUp} sizes="(min-width: 56rem) 35vw, 92vw" widths={[480, 720, 960]} aspect={4 / 5} />
+  </Fragment>
+</ContentPage>

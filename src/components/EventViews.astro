@@ -1,0 +1,18 @@
+---
+/** List / Month calendar / Map / Past events switcher shown at the top of every events page. */
+interface Props {
+  current: 'list' | 'calendar' | 'map' | 'past';
+}
+const { current } = Astro.props;
+const views = [
+  { id: 'list', href: '/events/', label: 'List' },
+  { id: 'calendar', href: '/events/calendar/', label: 'Month calendar' },
+  { id: 'map', href: '/events/map/', label: 'Map' },
+  { id: 'past', href: '/events/past/', label: 'Past events' },
+] as const;
+---
+<nav class="mt-5" aria-label="Event views">
+  <div class="view-switch">
+    {views.map((v) => <a href={v.href} aria-current={v.id === current ? 'page' : undefined}>{v.label}</a>)}
+  </div>
+</nav>

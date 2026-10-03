@@ -1,0 +1,16 @@
+---
+const hasThirdParty = Boolean(import.meta.env.PUBLIC_GA4_ID || import.meta.env.PUBLIC_CLARITY_ID);
+---
+{hasThirdParty && (
+  <section class="consent" aria-labelledby="consent-title" data-consent hidden>
+    <h2 id="consent-title">Help us improve this site?</h2>
+    <p>
+      With your OK, we use Google Analytics and Microsoft Clarity to see which pages help dancers most. They set cookies.
+      No ads, and you can change your mind any time. <a href="/privacy/">Privacy details</a>
+    </p>
+    <div class="btn-row">
+      <button type="button" class="btn btn--primary btn--small" data-consent-choice="granted">Allow</button>
+      <button type="button" class="btn btn--secondary btn--small" data-consent-choice="denied">No, thanks</button>
+    </div>
+  </section>
+)}

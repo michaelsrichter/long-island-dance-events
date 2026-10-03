@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import PersonCard from '../../components/PersonCard.astro';
+import { getEventGroups } from '../../lib/content';
+import { breadcrumbJsonLd } from '../../lib/seo';
+import history from '../../data/legacy-history.json';
+
+const [instructors, performers] = await Promise.all([getCollection('instructors'), getCollection('performers')]);
+const { upcoming, past } = await getEventGroups();
+const lastSeen = (id: string) => past.find((e) => e.details.bandName === id || (e.details.instructorNames ?? []).includes(id))?.date ?? '';
+const count = (id: string) => upcoming.filter((e) => e.details.bandName === id || (e.details.instructorNames ?? []).includes(id)).length;
+const bands = performers.filter((p) => p.data.kind === 'band').sort((a, b) => count(b.id) - count(a.id) || lastSeen(b.id).localeCompare(lastSeen(a.id)));
+const djs = performers.filter((p) => p.data.kind === 'dj');
+const teachers = instructors.sort((a, b) => lastSeen(b.id).localeCompare(lastSeen(a.id)));
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Bands, DJs and teachers', href: '/performers/' },
+];
+---
+<BaseLayout title="Bands, DJs and Swing Teachers" description="Meet the swing bands, DJs and dance teachers who play and teach at Riverbend Swing Dance Club dances." pageType="performers" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Bands, DJs and teachers" lede="The musicians and teachers who make Riverbend nights happen." crumbs={crumbs} />
+  <div class="container section stack-l">
+    <section aria-labelledby="teachers">
+      <h2 id="teachers">Teachers</h2>
+      <ul class="grid grid--3 mt-5" role="list">{teachers.map((p) => <PersonCard person={p} upcomingCount={count(p.id)} />)}</ul>
+    </section>
+    <section aria-labelledby="bands">
+      <h2 id="bands">Live bands</h2>
+      <ul class="grid grid--3 mt-5" role="list">{bands.map((p) => <PersonCard person={p} upcomingCount={count(p.id)} />)}</ul>
+    </section>
+    {djs.length > 0 && (
+      <section aria-labelledby="djs">
+        <h2 id="djs">DJs</h2>
+        <ul class="grid grid--3 mt-5" role="list">{djs.map((p) => <PersonCard person={p} />)}</ul>
+      </section>
+    )}
+    <section class="card" id="past-performers" aria-labelledby="past-performers-h">
+      <h2 id="past-performers-h" class="h3">More bands from Riverbend's history</h2>
+      <p>These bands played Riverbend dances in earlier years, according to the old website.</p>
+      <ul class="style-list mt-3" role="list">{history.pastPerformers.map((n) => <li>{n}</li>)}</ul>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,586 @@
+# Decap CMS configuration for the Riverbend website.
+# Editors sign in with GitHub at /admin/. Every change becomes a pull request (editorial workflow),
+# is checked by automated tests, gets a preview website, and goes live when it is published (merged).
+backend:
+  name: github
+  repo: example/community-site-starter
+  branch: main
+  # base_url and auth_endpoint are set at runtime in /admin/init.js to this site's /api/auth function.
+  commit_messages:
+    create: 'Create {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: 'Upload "{{path}}"'
+    deleteMedia: 'Delete "{{path}}"'
+
+publish_mode: editorial_workflow
+show_preview_links: true
+locale: en
+
+media_folder: src/assets/uploads
+public_folder: ../../assets/uploads
+# The built-in media library is used (no media_library block: Decap treats any entry there as an external library).
+
+editor:
+  preview: true
+
+# ---------- Reusable field groups ----------
+x-time: &time
+  widget: datetime
+  date_format: false
+  time_format: 'h:mm A'
+  format: 'HH:mm'
+  picker_utc: false
+  required: false
+
+x-focus: &focus
+  widget: string
+  required: false
+  pattern: ['^\d{1,3}% \d{1,3}%$', 'Two percentages, for example 50% 30%']
+  hint: 'Optional. Which part stays in view if the photo has to be trimmed: across %, then down %. "50% 30%" keeps faces near the top; "50% 50%" is the middle.'
+
+x-event-details: &event-details
+  - { label: 'Short summary (1–2 sentences)', name: summary, widget: text, required: false, hint: 'Shown on event cards and in search results. Keep it under 300 characters.' }
+  - label: 'Who runs this event?'
+    name: host
+    widget: select
+    required: false
+    default: home
+    options:
+      - { label: 'Home event (ours)', value: home }
+      - { label: 'Community event (another group)', value: community }
+    hint: 'Community events get a "Community event" badge, are listed after Home events, and never appear as the "Next home dance".'
+  - label: 'Organizer (community events)'
+    name: organizer
+    widget: relation
+    collection: organizers
+    value_field: '{{slug}}'
+    search_fields: [name, town]
+    display_fields: ['{{name}} ({{town}})']
+    required: false
+    hint: 'Who runs a community event. Their phone, email, website and social links are shown on the event. Add new groups under "Dance groups and organizers".'
+  - { label: 'Repeats (in plain words)', name: cadence, widget: string, required: false, hint: 'For community events, for example "Every Wednesday" or "First and third Fridays of the month".' }
+  - { label: 'More information link', name: infoUrl, widget: string, required: false, hint: "The organizer's own page for this event, if there is one." }
+  - { label: 'Listing source', name: sourceName, widget: string, required: false, hint: 'Where this listing came from, for example "Sample Community Calendar, November 2026". Shown on the event page.' }
+  - { label: 'Listing source link', name: sourceUrl, widget: string, required: false }
+  - { label: 'Doors open', name: doorsTime, <<: *time }
+  - { label: 'Lesson starts', name: lessonStartTime, <<: *time, hint: 'Leave empty if there is no lesson.' }
+  - { label: 'Open dancing starts', name: danceStartTime, <<: *time }
+  - { label: 'Open dancing ends', name: danceEndTime, <<: *time }
+  - label: 'Venue'
+    name: venue
+    widget: relation
+    collection: venues
+    value_field: '{{slug}}'
+    search_fields: [name, city]
+    display_fields: ['{{name}}, {{city}}']
+    required: false
+    hint: 'Choose a saved venue. Only use the address fields below for a one-off location.'
+  - { label: 'Street address (one-off locations only)', name: address, widget: string, required: false }
+  - { label: 'Town', name: city, widget: string, required: false }
+  - { label: 'State', name: state, widget: string, required: false }
+  - { label: 'ZIP code', name: postalCode, widget: string, required: false }
+  - { label: 'Directions link', name: directionsUrl, widget: string, required: false, hint: 'Optional. Leave empty to use Google Maps directions to the venue.' }
+  - label: 'Teachers'
+    name: instructorNames
+    widget: relation
+    collection: instructors
+    value_field: '{{slug}}'
+    search_fields: [name]
+    display_fields: [name]
+    multiple: true
+    required: false
+  - label: 'DJs'
+    name: djNames
+    widget: relation
+    collection: performers
+    value_field: '{{slug}}'
+    search_fields: [name]
+    display_fields: [name]
+    filters: [{ field: kind, values: [dj] }]
+    multiple: true
+    required: false
+  - label: 'Live band'
+    name: bandName
+    widget: relation
+    collection: performers
+    value_field: '{{slug}}'
+    search_fields: [name]
+    display_fields: [name]
+    filters: [{ field: kind, values: [band] }]
+    required: false
+    hint: 'Band not in the list? Add it under "Bands and DJs" first.'
+  - label: 'Dance styles'
+    name: danceStyles
+    widget: relation
+    collection: styles
+    value_field: '{{slug}}'
+    search_fields: [name]
+    display_fields: [name]
+    multiple: true
+    required: false
+  - label: 'Type of event'
+    name: eventTypes
+    widget: select
+    multiple: true
+    required: false
+    options:
+      - { label: 'Weekly dance', value: weekly-dance }
+      - { label: 'Monthly dance', value: monthly-dance }
+      - { label: 'Live band night', value: live-band }
+      - { label: 'DJ night', value: dj-night }
+      - { label: 'Beginner lesson', value: beginner-lesson }
+      - { label: 'Workshop', value: workshop }
+      - { label: 'Special event', value: special-event }
+      - { label: 'Community event', value: community-event }
+      - { label: 'Social dance', value: social-dance }
+      - { label: 'Practice party', value: practice }
+      - { label: 'Class', value: class }
+      - { label: 'Dance weekend', value: festival }
+  - label: 'Experience level'
+    name: experienceLevel
+    widget: select
+    required: false
+    options:
+      - { label: 'All levels welcome', value: all-levels }
+      - { label: 'Beginner', value: beginner }
+      - { label: 'Intermediate', value: intermediate }
+      - { label: 'Advanced', value: advanced }
+  - { label: 'Partner required?', name: partnerRequired, widget: boolean, default: false, required: false }
+  - { label: 'Beginner friendly?', name: beginnerFriendly, widget: boolean, default: true, required: false }
+  - { label: 'Price: Members ($)', name: admissionMember, widget: number, value_type: float, min: 0, required: false }
+  - { label: 'Price: students ($)', name: admissionStudent, widget: number, value_type: float, min: 0, required: false }
+  - { label: 'Price: non-members ($)', name: admissionNonMember, widget: number, value_type: float, min: 0, required: false }
+  - { label: 'Price notes', name: admissionNotes, widget: string, required: false, hint: 'For example "Band night" or "Cash only".' }
+  - { label: 'Registration link', name: registrationUrl, widget: string, required: false }
+  - { label: 'Registration required?', name: registrationRequired, widget: boolean, default: false, required: false }
+  - { label: 'Capacity notes', name: capacityNotes, widget: string, required: false }
+  - { label: 'Featured photo', name: featuredImage, widget: image, required: false, choose_url: false, hint: 'Use real photos you have permission to use. Do not use images with important text in them.' }
+  - { label: 'Photo description (alt text)', name: featuredImageAlt, widget: string, required: false, hint: 'Required when you add a photo. Describe what is in the photo for people who cannot see it.' }
+  - { label: 'Photo focus point', name: featuredImageFocus, <<: *focus }
+  - label: 'Photo gallery'
+    name: gallery
+    widget: list
+    required: false
+    fields:
+      - { label: Photo, name: image, widget: image, choose_url: false }
+      - { label: 'Photo description (alt text)', name: alt, widget: string }
+      - { label: Caption, name: caption, widget: string, required: false }
+      - { label: 'Photo credit', name: credit, widget: string, required: false }
+      - { label: 'Photo credit link', name: creditUrl, widget: string, required: false }
+      - { label: 'Photo focus point', name: focus, <<: *focus }
+  - { label: 'Organizer / sponsor', name: sponsor, widget: string, required: false }
+  - { label: 'Contact name', name: contactName, widget: string, required: false }
+  - { label: 'Contact email', name: contactEmail, widget: string, required: false }
+  - { label: 'Contact phone', name: contactPhone, widget: string, required: false }
+  - { label: 'Facebook event link', name: facebookEventUrl, widget: string, required: false }
+  - { label: 'SEO title', name: seoTitle, widget: string, required: false, hint: 'Optional. Under 70 characters.' }
+  - { label: 'SEO description', name: seoDescription, widget: text, required: false, hint: 'Optional. Under 170 characters.' }
+  - { label: 'Last updated', name: lastUpdated, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, required: false }
+  - { label: 'Notes for editors (not shown on the website)', name: editorialReview, widget: text, required: false }
+
+collections:
+  # ---------- Events ----------
+  - name: events
+    label: Events
+    label_singular: Event
+    description: 'One-time events, plus changes to a single date of a weekly series (for example a band night, pizza night, holiday closure or weather cancellation).'
+    folder: src/content/events
+    create: true
+    extension: md
+    format: frontmatter
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    summary: '{{startDateTime}}{{occurrenceDate}} · {{title}} · {{host}} · {{status}}'
+    sortable_fields: [startDateTime, occurrenceDate, title, status, host]
+    view_filters:
+      - { label: 'Home events', field: host, pattern: '^(home)?$' }
+      - { label: 'Community events', field: host, pattern: community }
+      - { label: Cancelled, field: status, pattern: cancelled }
+      - { label: Postponed, field: status, pattern: postponed }
+      - { label: Drafts, field: status, pattern: draft }
+      - { label: '2026', field: startDateTime, pattern: '^2026' }
+      - { label: '2027', field: startDateTime, pattern: '^2027' }
+    view_groups:
+      - { label: Year, field: startDateTime, pattern: '\d{4}' }
+      - { label: Status, field: status }
+    preview_path: 'events/'
+    fields:
+      - { label: Title, name: title, widget: string, hint: 'For example "Band Night: Playing Favorites".' }
+      - label: Status
+        name: status
+        widget: select
+        default: scheduled
+        options:
+          - { label: 'Draft (not on the website)', value: draft }
+          - { label: 'Scheduled', value: scheduled }
+          - { label: 'Cancelled (stays visible, clearly marked)', value: cancelled }
+          - { label: 'Postponed', value: postponed }
+          - { label: 'Sold out', value: soldOut }
+          - { label: 'Completed (archive)', value: completed }
+      - { label: 'Show on website', name: published, widget: boolean, default: true }
+      - { label: 'Feature on the homepage', name: featured, widget: boolean, default: false, required: false }
+      - label: 'Weekly series (leave empty for a one-time event)'
+        name: series
+        widget: relation
+        collection: series
+        value_field: '{{slug}}'
+        search_fields: [title]
+        display_fields: [title]
+        required: false
+        hint: 'Pick a series to change one date of it. Empty fields below will use the series settings.'
+      - { label: 'Series date being changed', name: occurrenceDate, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, required: false, hint: 'Only for series changes. The event web address uses this date and never changes.' }
+      - { label: 'Starts (date and time)', name: startDateTime, widget: datetime, format: 'YYYY-MM-DDTHH:mm', date_format: 'YYYY-MM-DD', time_format: 'h:mm A', picker_utc: false, required: false, hint: 'Riverbend Valley time. Required for one-time events. Leave the time empty if it is not known yet.' }
+      - { label: 'Ends (date and time)', name: endDateTime, widget: datetime, format: 'YYYY-MM-DDTHH:mm', date_format: 'YYYY-MM-DD', time_format: 'h:mm A', picker_utc: false, required: false }
+      - { label: 'Cancellation or postponement message', name: cancelledMessage, widget: text, required: false, hint: 'Shown prominently when the status is Cancelled or Postponed.' }
+      - { label: 'Rescheduled event web address', name: postponedTo, widget: string, required: false, hint: 'For postponed events, for example /events/2026-11-03-band-night/' }
+      - { label: 'Description', name: body, widget: markdown, required: false }
+      - *event-details
+
+  # ---------- Weekly / monthly series ----------
+  - name: series
+    label: Event series
+    label_singular: Series
+    description: 'Templates for repeating dances. The website creates each date automatically; change single dates under Events.'
+    folder: src/content/series
+    create: true
+    extension: md
+    format: frontmatter
+    identifier_field: title
+    slug: '{{fields.slug}}'
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: 'Web address name', name: slug, widget: string, pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', 'Lowercase letters, numbers and hyphens only'], hint: 'Used in every event web address. Do not change after publishing.' }
+      - { label: 'Show on website', name: published, widget: boolean, default: true }
+      - label: Repeats
+        name: recurrence
+        widget: object
+        fields:
+          - { label: Frequency, name: frequency, widget: select, options: [{ label: Weekly, value: weekly }, { label: Monthly, value: monthly }] }
+          - { label: 'Every (1 = every week or month)', name: interval, widget: number, value_type: int, default: 1, min: 1, max: 4 }
+          - { label: 'Day of the week', name: weekday, widget: select, options: [sunday, monday, tuesday, wednesday, thursday, friday, saturday] }
+          - { label: 'Week of the month (monthly only)', name: weekOfMonth, widget: select, required: false, options: [{ label: First, value: 1 }, { label: Second, value: 2 }, { label: Third, value: 3 }, { label: Fourth, value: 4 }, { label: Last, value: -1 }] }
+          - { label: 'First date', name: startDate, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false }
+          - { label: 'Last date (optional)', name: endDate, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, required: false }
+          - { label: 'Show this many weeks ahead', name: horizonWeeks, widget: number, value_type: int, default: 12, min: 1, max: 52 }
+          - label: 'Skip these dates'
+            name: exceptDates
+            widget: list
+            required: false
+            field: { label: Date, name: date, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false }
+      - { label: 'Starts at', name: startTime, <<: *time, required: true }
+      - { label: 'Ends at', name: endTime, <<: *time, required: true }
+      - { label: Timezone, name: timezone, widget: hidden, default: America/New_York }
+      - { label: Description, name: body, widget: markdown, required: false }
+      - *event-details
+
+  # ---------- Venues ----------
+  - name: venues
+    label: Venues
+    label_singular: Venue
+    folder: src/content/venues
+    create: true
+    extension: md
+    format: frontmatter
+    identifier_field: name
+    slug: '{{fields.name}}'
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: 'Short name', name: shortName, widget: string, required: false }
+      - { label: 'Current venue', name: active, widget: boolean, default: true }
+      - { label: 'Street address', name: address, widget: string, hint: 'If you change the address, also empty Latitude and Longitude below so the map pin moves to the new address.' }
+      - { label: Town, name: city, widget: string }
+      - { label: State, name: state, widget: string, default: NY }
+      - { label: 'ZIP code', name: postalCode, widget: string, required: false }
+      - { label: 'Venue phone', name: phone, widget: string, required: false }
+      - { label: Website, name: website, widget: string, required: false }
+      - { label: Latitude, name: latitude, widget: number, value_type: float, required: false, hint: 'Leave empty: it is filled in automatically from the street address a minute or two after you save (U.S. Census geocoder). Only change it if the map pin is in the wrong place.' }
+      - { label: Longitude, name: longitude, widget: number, value_type: float, required: false, hint: 'Filled in automatically with the latitude. Riverbend Valley longitudes are negative, for example -73.35.' }
+      - { label: 'Where the map location came from', name: coordinatesSource, widget: string, required: false, hint: 'Filled in automatically. If you fix the pin by hand, write "Checked by hand".' }
+      - { label: 'Directions link', name: directionsUrl, widget: string, required: false }
+      - { label: 'Google Maps listing (photos and reviews)', name: googleMapsUrl, widget: string, required: false, hint: 'The venue''s Google Maps page, for example https://www.google.com/maps?cid=…' }
+      - { label: 'Facebook page', name: facebookUrl, widget: string, required: false }
+      - { label: Parking, name: parkingNotes, widget: text, required: false }
+      - { label: Accessibility, name: accessibilityNotes, widget: text, required: false, hint: 'Step-free entry, restrooms, seating, lighting, etc.' }
+      - { label: 'Where the parking and access details came from', name: factsSource, widget: string, required: false, hint: 'For example "Google Maps listing and reviews (October 2026)". Shown under the details.' }
+      - { label: Photo, name: image, widget: image, required: false, choose_url: false }
+      - { label: 'Photo description (alt text)', name: imageAlt, widget: string, required: false }
+      - { label: 'SEO title', name: seoTitle, widget: string, required: false }
+      - { label: 'SEO description', name: seoDescription, widget: text, required: false }
+      - { label: 'Notes for editors', name: editorialReview, widget: text, required: false }
+      - { label: About this venue, name: body, widget: markdown, required: false }
+
+  # ---------- Community organizers ----------
+  - name: organizers
+    label: Dance groups and organizers
+    label_singular: Dance group
+    description: 'Other groups, studios and teachers that run community events. Pick one as the organizer of a community event; their contact details and links appear on the event and on the Dance community page.'
+    folder: src/content/organizers
+    create: true
+    extension: md
+    format: frontmatter
+    identifier_field: name
+    slug: '{{fields.name}}'
+    summary: '{{name}} · {{town}}'
+    sortable_fields: [name, town]
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: 'Short name', name: shortName, widget: string, required: false }
+      - { label: 'Still active', name: active, widget: boolean, default: true, hint: 'Turn off to hide the group from the Dance community page.' }
+      - { label: 'One-line description', name: tagline, widget: string, required: false, hint: 'For example "Wednesday Ballroom & Latin socials". Under 160 characters.' }
+      - { label: Town, name: town, widget: string, required: false }
+      - { label: 'Usual venue', name: venue, widget: relation, collection: venues, value_field: '{{slug}}', search_fields: [name, city], display_fields: ['{{name}}, {{city}}'], required: false }
+      - { label: 'Dance styles', name: danceStyles, widget: relation, collection: styles, value_field: '{{slug}}', search_fields: [name], display_fields: [name], multiple: true, required: false, hint: 'The first style decides which group they appear in on the Dance community page.' }
+      - { label: Phone, name: phone, widget: string, required: false, hint: 'As published by the organizer.' }
+      - { label: 'Second phone', name: phoneAlt, widget: string, required: false }
+      - { label: Email, name: email, widget: string, required: false }
+      - { label: Website, name: website, widget: string, required: false }
+      - { label: Facebook, name: facebookUrl, widget: string, required: false }
+      - { label: Instagram, name: instagramUrl, widget: string, required: false }
+      - label: 'More links'
+        name: moreLinks
+        widget: list
+        required: false
+        summary: '{{fields.label}}'
+        fields:
+          - { label: 'Link text', name: label, widget: string }
+          - { label: 'Web address', name: url, widget: string }
+      - { label: 'Classes they offer', name: classes, widget: text, required: false, hint: 'Shown under "Take a class". Leave empty if they only run dances.' }
+      - { label: 'Listing source', name: sourceName, widget: string, required: false, hint: 'Where these details came from, for example "Sample Community Calendar, October 2026".' }
+      - { label: 'Listing source link', name: sourceUrl, widget: string, required: false }
+      - { label: 'Notes for editors', name: editorialReview, widget: text, required: false }
+      - { label: About, name: body, widget: markdown, required: false }
+
+  # ---------- People ----------
+  - name: instructors
+    label: Teachers
+    label_singular: Teacher
+    folder: src/content/instructors
+    create: true
+    extension: md
+    format: frontmatter
+    identifier_field: name
+    slug: '{{fields.name}}'
+    fields: &person-fields
+      - { label: Name, name: name, widget: string }
+      - { label: Type, name: kind, widget: select, options: [{ label: Teacher, value: instructor }, { label: DJ, value: dj }, { label: Band, value: band }] }
+      - { label: 'Role or tagline', name: role, widget: string, required: false }
+      - { label: Website, name: website, widget: string, required: false, hint: 'Their own website. Shown wherever their name appears on the site.' }
+      - { label: Facebook, name: facebookUrl, widget: string, required: false }
+      - { label: Instagram, name: instagramUrl, widget: string, required: false }
+      - { label: YouTube, name: youtubeUrl, widget: string, required: false }
+      - label: 'More links'
+        name: moreLinks
+        widget: list
+        required: false
+        summary: '{{fields.label}}'
+        hint: 'For example a Meetup group, a calendar or a music page.'
+        fields:
+          - { label: 'Link text', name: label, widget: string, hint: 'Short, for example "Meetup group".' }
+          - { label: 'Web address', name: url, widget: string }
+      - { label: 'Runs this dance group', name: organizer, widget: relation, collection: organizers, value_field: '{{slug}}', search_fields: [name], display_fields: [name], required: false, hint: 'Optional. Links their profile to their group on the Dance community page.' }
+      - { label: 'Band members', name: members, widget: list, required: false }
+      - { label: 'Dance styles', name: danceStyles, widget: relation, collection: styles, value_field: '{{slug}}', search_fields: [name], display_fields: [name], multiple: true, required: false }
+      - { label: Photo, name: image, widget: image, required: false, choose_url: false }
+      - { label: 'Photo description (alt text)', name: imageAlt, widget: string, required: false }
+      - { label: 'Photo focus point', name: imageFocus, <<: *focus }
+      - { label: 'Photo credit', name: imageCredit, widget: string, required: false }
+      - { label: 'SEO title', name: seoTitle, widget: string, required: false }
+      - { label: 'SEO description', name: seoDescription, widget: text, required: false }
+      - { label: 'Notes for editors', name: editorialReview, widget: text, required: false }
+      - { label: Bio, name: body, widget: markdown, required: false }
+  - name: performers
+    label: Bands and DJs
+    label_singular: Band or DJ
+    folder: src/content/performers
+    create: true
+    extension: md
+    format: frontmatter
+    identifier_field: name
+    slug: '{{fields.name}}'
+    fields: *person-fields
+
+  # ---------- Dance styles ----------
+  - name: styles
+    label: Dance styles
+    label_singular: Dance style
+    folder: src/content/styles
+    create: true
+    extension: yml
+    format: yml
+    identifier_field: name
+    slug: '{{fields.name}}'
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: 'Sort order', name: order, widget: number, value_type: int, default: 50 }
+      - label: 'Kind of dance'
+        name: family
+        widget: select
+        default: swing
+        options:
+          - { label: 'Swing (danced at Riverbend)', value: swing }
+          - { label: 'Other (ballroom, Latin, tango, country…)', value: other }
+        hint: 'Swing styles appear in "The dances you will see" and on New to Swing. Other styles are used to tag community events.'
+      - { label: 'Short description', name: summary, widget: text }
+      - { label: 'Longer description', name: description, widget: text, required: false }
+      - { label: 'Typical music', name: tempo, widget: string, required: false }
+
+  # ---------- Pages ----------
+  - name: pages
+    label: Pages
+    files:
+      - &page
+        name: home
+        label: Homepage introduction
+        file: src/content/pages/home.md
+        fields: &page-fields
+          - { label: 'Page title', name: title, widget: string }
+          - { label: 'Main heading', name: heading, widget: string, required: false }
+          - { label: 'Intro sentence', name: lede, widget: text, required: false }
+          - { label: 'SEO title', name: seoTitle, widget: string, required: false }
+          - { label: 'SEO description', name: seoDescription, widget: text, required: false }
+          - { label: 'Highlight cards', name: highlights, widget: list, required: false, fields: [{ label: Title, name: title, widget: string }, { label: Text, name: text, widget: text }] }
+          - { label: Photo, name: image, widget: image, required: false, choose_url: false }
+          - { label: 'Photo description (alt text)', name: imageAlt, widget: string, required: false }
+          - { label: 'Notes for editors', name: editorialReview, widget: text, required: false }
+          - { label: 'Page text', name: body, widget: markdown, required: false }
+      - { name: new-to-swing, label: 'New to Swing (beginner information)', file: src/content/pages/new-to-swing.md, fields: *page-fields }
+      - { name: lessons, label: Lessons, file: src/content/pages/lessons.md, fields: *page-fields }
+      - { name: membership, label: Membership, file: src/content/pages/membership.md, fields: *page-fields }
+      - { name: about, label: 'About Riverbend', file: src/content/pages/about.md, fields: *page-fields }
+      - { name: contact, label: Contact, file: src/content/pages/contact.md, fields: *page-fields }
+      - { name: gallery, label: 'Gallery introduction', file: src/content/pages/gallery.md, fields: *page-fields }
+      - { name: privacy, label: Privacy, file: src/content/pages/privacy.md, fields: *page-fields }
+
+  # ---------- Announcements ----------
+  - name: announcements
+    label: Announcements
+    label_singular: Announcement
+    description: 'A short banner at the top of every page. Only the most important current one is shown.'
+    folder: src/content/announcements
+    create: true
+    extension: yml
+    format: yml
+    identifier_field: message
+    slug: '{{year}}-{{month}}-{{day}}-{{fields.message}}'
+    fields:
+      - { label: Message, name: message, widget: text }
+      - { label: 'Link address', name: linkUrl, widget: string, required: false }
+      - { label: 'Link text', name: linkText, widget: string, required: false }
+      - { label: Importance, name: level, widget: select, default: info, options: [{ label: Normal, value: info }, { label: 'Important (red)', value: important }] }
+      - { label: 'Show from', name: startDate, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, required: false }
+      - { label: 'Show until', name: endDate, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, required: false }
+      - { label: 'Show on website', name: published, widget: boolean, default: true }
+
+  # ---------- Gallery ----------
+  - name: gallery
+    label: Photo albums
+    label_singular: Album
+    folder: src/content/gallery
+    create: true
+    extension: yml
+    format: yml
+    identifier_field: title
+    slug: '{{fields.title}}'
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, format: 'YYYY-MM-DD', date_format: 'YYYY-MM-DD', time_format: false, required: false }
+      - { label: Description, name: description, widget: text, required: false }
+      - { label: 'Sort order', name: order, widget: number, value_type: int, default: 50 }
+      - { label: 'Show on website', name: published, widget: boolean, default: true }
+      - { label: 'Show in the homepage slideshow', name: homepageSlideshow, widget: boolean, default: false, required: false, hint: 'Adds this album''s photos to the rotating slideshow at the top of the homepage. Only use photos Riverbend has permission to use, and add the photographer in "Photo credit".' }
+      - label: Photos
+        name: images
+        widget: list
+        min: 1
+        summary: '{{fields.alt}}'
+        fields:
+          - { label: Photo, name: image, widget: image, choose_url: false }
+          - { label: 'Photo description (alt text)', name: alt, widget: string, hint: 'Required. Describe the photo for people who cannot see it.' }
+          - { label: Caption, name: caption, widget: string, required: false }
+          - { label: 'Photo credit', name: credit, widget: string, required: false, hint: 'The photographer, and the license if it is not Riverbend''s own photo, for example "Jane Smith, used with permission".' }
+          - { label: 'Photo credit link', name: creditUrl, widget: string, required: false }
+          - { label: 'Photo focus point', name: focus, <<: *focus }
+          - { label: 'Video clip (optional)', name: video, widget: string, required: false, pattern: ['^/media/videos/[\w.-]+\.mp4$', 'A path such as /media/videos/clip.mp4'], hint: 'Optional short silent clip that plays in the homepage slideshow, with the photo above as its still image. Ask the website administrator to add the video file (keep clips under 20 seconds and 1 MB).' }
+      - { label: 'Where the photos came from', name: source, widget: string, required: false }
+      - { label: 'Permission notes', name: rightsNote, widget: text, required: false }
+
+  # ---------- FAQs ----------
+  - name: faqs
+    label: Frequently Asked Questions
+    label_singular: Question
+    folder: src/content/faqs
+    create: true
+    extension: yml
+    format: yml
+    identifier_field: question
+    slug: '{{fields.question}}'
+    summary: '{{category}} · {{question}}'
+    fields:
+      - { label: Question, name: question, widget: string }
+      - { label: Answer, name: answer, widget: text, hint: 'Plain sentences. You can add links like [Membership](/membership/).' }
+      - label: Topic
+        name: category
+        widget: select
+        options:
+          - { label: 'Your first visit', value: first-visit }
+          - { label: 'Dancing and lessons', value: dancing }
+          - { label: Admission, value: admission }
+          - { label: 'The venue', value: venue }
+          - { label: Membership, value: membership }
+          - { label: Volunteering, value: volunteering }
+      - { label: 'Sort order', name: order, widget: number, value_type: int, default: 50 }
+      - { label: 'Show on website', name: published, widget: boolean, default: true }
+      - { label: 'Notes for editors', name: editorialReview, widget: text, required: false }
+
+  # ---------- Site settings ----------
+  - name: settings
+    label: Site settings
+    files:
+      - name: site
+        label: 'Contact details, prices and membership'
+        file: src/content/settings/site.yml
+        fields:
+          - { label: 'Site name', name: siteName, widget: string }
+          - { label: 'Short name', name: shortName, widget: string }
+          - { label: 'Legal name', name: legalName, widget: string }
+          - { label: 'Region served', name: region, widget: string, hint: 'For example "Riverbend Valley".' }
+          - { label: Tagline, name: tagline, widget: string }
+          - { label: 'Site description (for search engines)', name: description, widget: text }
+          - { label: Mission, name: mission, widget: text }
+          - { label: 'Hotline phone', name: hotlinePhone, widget: string }
+          - { label: 'Hotline label', name: hotlineLabel, widget: string }
+          - { label: Email, name: email, widget: string }
+          - label: 'Mailing address'
+            name: mailingAddress
+            widget: object
+            fields:
+              - { label: 'Line 1', name: line1, widget: string }
+              - { label: Town, name: city, widget: string }
+              - { label: State, name: state, widget: string }
+              - { label: 'ZIP code', name: postalCode, widget: string }
+          - { label: 'Email list sign-up link', name: newsletterUrl, widget: string, required: false }
+          - { label: 'Facebook page or group', name: facebookUrl, widget: string, required: false }
+          - { label: 'Facebook link text', name: facebookLabel, widget: string, required: false, hint: 'For example "Riverbend Facebook group".' }
+          - { label: 'Instagram page', name: instagramUrl, widget: string, required: false }
+          - { label: 'YouTube channel', name: youtubeUrl, widget: string, required: false }
+          - { label: 'Membership fee ($ per year)', name: membershipFee, widget: number, value_type: float }
+          - { label: 'Membership year', name: membershipYear, widget: string }
+          - label: 'Standard door prices'
+            name: standardPrices
+            widget: list
+            fields:
+              - { label: 'Night type', name: label, widget: string }
+              - { label: 'Members ($)', name: member, widget: number, value_type: float }
+              - { label: 'Students ($)', name: student, widget: number, value_type: float }
+              - { label: 'Non-members ($)', name: nonMember, widget: number, value_type: float }
+          - { label: 'Default venue', name: defaultVenue, widget: relation, collection: venues, value_field: '{{slug}}', search_fields: [name], display_fields: [name], required: false }
+          - label: 'Map center'
+            name: mapCenter
+            widget: object
+            required: false
+            fields:
+              - { label: Latitude, name: lat, widget: number, value_type: float }
+              - { label: Longitude, name: lng, widget: number, value_type: float }
+          - { label: 'Maximum geocoding distance (km)', name: maxDistanceKm, widget: number, value_type: float, required: false }
+          - { label: 'Default social image', name: socialImage, widget: image, required: false, choose_url: false }
+          - { label: 'Default social image alt text', name: socialImageAlt, widget: string, required: false }

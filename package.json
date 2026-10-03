@@ -1,0 +1,58 @@
+{
+  "name": "community-site-starter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Reusable Astro starter for volunteer dance and community organization websites.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "node scripts/build-cms-config.mjs && astro dev",
+    "build": "astro build && node scripts/postbuild.mjs",
+    "prebuild": "node scripts/build-cms-config.mjs",
+    "preview": "astro preview --port 4321",
+    "check": "astro check",
+    "typecheck": "astro check",
+    "validate:content": "astro sync",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:e2e": "playwright test",
+    "test:links": "node scripts/check-links.mjs",
+    "lighthouse": "lhci autorun",
+    "cms:config": "node scripts/build-cms-config.mjs",
+    "cms:local": "decap-server",
+    "copy:cms": "node scripts/copy-cms.mjs",
+    "postinstall": "node scripts/copy-cms.mjs && node scripts/build-cms-config.mjs",
+    "ci": "npm run check && npm run test && npm run build && npm run test:links",
+    "test:smoke": "node scripts/smoke.mjs",
+    "geocode": "node scripts/geocode-venues.mjs",
+    "lockfile:normalize": "node scripts/normalize-lockfile.mjs",
+    "lockfile:check": "node scripts/normalize-lockfile.mjs --check"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/atkinson-hyperlegible": "^5.3.0",
+    "@fontsource/fraunces": "^5.3.0",
+    "astro": "^7.3.5",
+    "leaflet": "^1.9.4",
+    "satori": "^0.33.5",
+    "sharp": "^0.35.4",
+    "web-vitals": "^6.2.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.63.0",
+    "@types/leaflet": "^1.9.22",
+    "@types/node": "^24.0.0",
+    "decap-cms": "^3.16.3",
+    "decap-server": "^3.11.3",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.1",
+    "yaml": "^2.9.1"
+  }
+}

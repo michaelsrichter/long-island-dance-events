@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # A fixed "now" makes end-to-end results repeatable. Deployment builds use the real time.
+  BUILD_NOW: '2026-10-01T22:00:00-04:00'
+  SITE_URL: https://example.org
+  # Lighthouse's SEO score needs indexable pages; deploy builds keep indexing off until launch.
+  ALLOW_INDEXING: 'true'
+
+jobs:
+  quality:
+    name: Type check, tests, build, links
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            api/package-lock.json
+
+      - name: Lockfiles use the public npm registry
+        run: node scripts/normalize-lockfile.mjs --check
+      - name: Install site dependencies
+        run: npm ci
+      - name: Install API dependencies
+        run: npm ci --prefix api
+
+      - name: Validate content and types (astro check)
+        run: npm run check
+      - name: Unit tests (schemas, events, time zones, calendars, SEO, redirects, CMS config, theme, rebrand)
+        run: npm test
+      - name: API tests (OAuth bridge, telemetry validation, rate limiting)
+        run: npm test --prefix api
+
+      - name: Build
+        run: npm run build
+      - name: Unit tests against the built site (legacy redirects)
+        run: npm test -- tests/unit/seo-config.test.ts
+      - name: Check internal links and #anchors
+        run: npm run test:links
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: End-to-end, accessibility (axe) and mobile tests
+        run: npm run test:e2e
+      - name: Lighthouse quality gates
+        run: npx lhci autorun
+
+      - name: Upload test reports
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: test-reports
+          path: |
+            playwright-report/
+            test-results/
+            .lighthouseci/
+          retention-days: 7
+
+  secrets:
+    name: Secret scanning (gitleaks)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GITLEAKS_VERSION: 8.30.1
+      GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Install gitleaks (checksum verified)
+        run: |
+          curl -sSL -o gitleaks.tar.gz "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          echo "${GITLEAKS_SHA256}  gitleaks.tar.gz" | sha256sum -c -
+          tar -xzf gitleaks.tar.gz gitleaks
+      - name: Scan full git history
+        run: ./gitleaks git --redact --verbose --exit-code 1 .

@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { breadcrumbJsonLd, faqJsonLd } from '../lib/seo';
+import { inlineMarkdown } from '../lib/markdown';
+
+const faqs = (await getCollection('faqs', (f) => f.data.published)).sort((a, b) => a.data.order - b.data.order);
+const labels: Record<string, string> = {
+  'first-visit': 'Your first visit',
+  dancing: 'Dancing and lessons',
+  admission: 'Admission',
+  venue: 'The venue',
+  membership: 'Membership',
+  volunteering: 'Volunteering',
+};
+const groups = Object.keys(labels)
+  .map((k) => ({ key: k, label: labels[k]!, items: faqs.filter((f) => f.data.category === k) }))
+  .filter((g) => g.items.length);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Frequently Asked Questions', href: '/faq/' },
+];
+---
+<BaseLayout title="Swing Dance FAQ: Partners, Lessons, Prices" description="Answers to common questions about Riverbend swing dances: do I need a partner, are beginners welcome, what does it cost, what should I wear and more." pageType="faq" jsonLd={[faqJsonLd(faqs.map((f) => f.data)), breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Frequently Asked Questions" lede="Quick answers about Riverbend dances. Still wondering? Call the 24-hour Dance Hotline at (631) 476-3707." crumbs={crumbs} />
+  <div class="container--narrow section stack-l">
+    {groups.map((g) => (
+      <section aria-labelledby={`faq-${g.key}`}>
+        <h2 id={`faq-${g.key}`}>{g.label}</h2>
+        <div class="faq mt-5">
+          {g.items.map((f) => (
+            <details data-faq={f.id} id={f.id}>
+              <summary>{f.data.question}</summary>
+              <div class="faq__answer prose"><p set:html={inlineMarkdown(f.data.answer)} /></div>
+            </details>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

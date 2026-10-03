@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import EventViews from '../../../components/EventViews.astro';
+import MonthCalendar from '../../../components/MonthCalendar.astro';
+import { getEventGroups } from '../../../lib/content';
+import { monthRange } from '../../../lib/months';
+import { dateInZone, formatMonthKey } from '../../../lib/time';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+
+export async function getStaticPaths() {
+  const { all, now } = await getEventGroups();
+  return monthRange(all, now).map((month) => ({ params: { month } }));
+}
+const { month } = Astro.params as { month: string };
+const { all, now } = await getEventGroups();
+const months = monthRange(all, now);
+const i = months.indexOf(month);
+const label = formatMonthKey(month);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Events', href: '/events/' },
+  { name: label, href: `/events/calendar/${month}/` },
+];
+---
+<BaseLayout title={`${label} Swing Dance Calendar`} description={`Riverbend swing dances and lessons on Riverbend Valley in ${label}.`} pageType="calendar" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Event calendar" crumbs={crumbs}>
+    <EventViews current="calendar" />
+  </PageHeader>
+  <div class="container section">
+    <MonthCalendar month={month} events={all} prev={months[i - 1]} next={months[i + 1]} today={dateInZone(now)} now={now} />
+  </div>
+</BaseLayout>

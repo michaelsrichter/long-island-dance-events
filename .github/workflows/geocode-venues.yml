@@ -1,0 +1,51 @@
+name: Venue map locations
+
+# When an editor adds a venue (or clears its latitude/longitude after changing the address),
+# look up the coordinates from the street address and save them to the same branch, so the
+# venue appears on the events map. The allowed area comes from mapCenter / maxDistanceKm in
+# src/content/settings/site.yml. See scripts/geocode-venues.mjs.
+on:
+  pull_request:
+    paths: ['src/content/venues/**']
+  push:
+    branches: [main]
+    paths: ['src/content/venues/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: geocode-${{ github.head_ref || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  geocode:
+    name: Fill in map coordinates for venues
+    # CMS branches live in this repository; pull requests from forks cannot be written to.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+      - name: Look up missing coordinates
+        run: node scripts/geocode-venues.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Save coordinates to the branch
+        run: |
+          if git diff --quiet -- src/content/venues; then
+            echo "Every venue already has map coordinates."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/content/venues
+          git commit -m "Add map coordinates for new or moved venues"
+          git push

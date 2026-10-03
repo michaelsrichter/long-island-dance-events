@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import StyleTags from '../components/StyleTags.astro';
+import PersonLinks from '../components/PersonLinks.astro';
+import Icon from '../components/Icon.astro';
+import { getEventGroups, getSettings } from '../lib/content';
+import { linksOf } from '../lib/links';
+import { breadcrumbJsonLd } from '../lib/seo';
+
+const settings = await getSettings();
+const [organizers, styles, venues] = await Promise.all([getCollection('organizers'), getCollection('styles'), getCollection('venues')]);
+const { upcomingCommunity } = await getEventGroups();
+const styleName = new Map(styles.map((s) => [s.id, s.data.name]));
+const venueById = new Map(venues.map((v) => [v.id, v]));
+const SWING = new Set(['lindy-hop', 'east-coast-swing', 'west-coast-swing', 'balboa', 'blues', 'other']);
+const active = organizers.filter((o) => o.data.active);
+const nextFor = (id: string) => upcomingCommunity.filter((e) => e.organizerEntry?.id === id);
+// Riverbend Valley groups before New York City ones, then groups with upcoming events, then alphabetical.
+const order = (a: (typeof active)[number], b: (typeof active)[number]) =>
+  Number(a.data.town === 'New York City') - Number(b.data.town === 'New York City') ||
+  Number(nextFor(b.id).length > 0) - Number(nextFor(a.id).length > 0) ||
+  a.data.name.localeCompare(b.data.name);
+const swing = active.filter((o) => SWING.has(o.data.danceStyles?.[0] ?? '')).sort(order);
+const other = active.filter((o) => !SWING.has(o.data.danceStyles?.[0] ?? '')).sort(order);
+const classes = active.filter((o) => o.data.classes).sort((a, b) => Number(SWING.has(b.data.danceStyles?.[0] ?? '')) - Number(SWING.has(a.data.danceStyles?.[0] ?? '')) || a.data.name.localeCompare(b.data.name));
+const telOf = (p: string) => `tel:+1${p.replace(/[^0-9]/g, '').replace(/^1(?=\d{10}$)/, '')}`;
+const groups = [
+  { id: 'swing', title: 'Swing and blues', lede: 'Lindy Hop, East Coast Swing, West Coast Swing and blues outside of Riverbend nights.', list: swing },
+  { id: 'ballroom-latin', title: 'Ballroom, Latin and more', lede: 'Ballroom, Latin, Hustle, tango and country socials. Many play some swing music too.', list: other },
+];
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Dance community', href: '/community/' },
+];
+const site = Astro.site!;
+const listLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Riverbend Valley social dance groups and teachers',
+  itemListElement: active.map((o, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Organization',
+      name: o.data.name,
+      url: o.data.website ?? new URL(`/community/#${o.id}`, site).toString(),
+      ...(o.data.phone ? { telephone: o.data.phone } : {}),
+      ...(o.data.town ? { address: { '@type': 'PostalAddress', addressLocality: o.data.town, addressRegion: 'NY', addressCountry: 'US' } } : {}),
+    },
+  })),
+};
+---
+<BaseLayout
+  title="Riverbend Valley Dance Community: Swing, Ballroom and Latin Groups"
+  description={`More places to dance on Riverbend Valley: ${active.length} swing, blues, ballroom and Latin groups and teachers, with contacts, venues and upcoming events. Listed by Riverbend Swing Dance Club.`}
+  pageType="community"
+  jsonLd={[listLd, breadcrumbJsonLd(crumbs, site)]}
+>
+  <PageHeader title="Riverbend Valley dance community" lede="Want to dance more than once a week? These groups and teachers run socials, practices and classes around Riverbend Valley. They are not part of Riverbend, but many of our dancers go." crumbs={crumbs}>
+    <div class="btn-row mt-5">
+      <a class="btn btn--primary" href="/events/#community"><Icon name="calendar" />Upcoming community events</a>
+      {settings.facebookUrl && <a class="btn btn--secondary" href={settings.facebookUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="facebook" data-track-location="community" data-track-target="facebook.com"><Icon name="facebook" />{settings.facebookLabel ?? 'Facebook group'}<span class="visually-hidden"> (opens in a new tab)</span></a>}
+    </div>
+  </PageHeader>
+
+  <div class="container section stack-l">
+    <nav aria-label="On this page">
+      <ul class="jump-links">
+        {groups.map((g) => <li><a class="chip-link" href={`#${g.id}`}>{g.title}</a></li>)}
+        <li><a class="chip-link" href="#classes">Take a class</a></li>
+        <li><a class="chip-link" href="#sources">Where listings come from</a></li>
+      </ul>
+    </nav>
+
+    {groups.map((g) => (
+      <section aria-labelledby={`${g.id}-h`} id={g.id}>
+        <h2 id={`${g.id}-h`}>{g.title}</h2>
+        <p class="mt-3">{g.lede}</p>
+        <ul class="org-list mt-5">
+          {g.list.map((o) => {
+            const d = o.data;
+            const upcoming = nextFor(o.id);
+            const venue = d.venue ? venueById.get(d.venue) : undefined;
+            const tags = (d.danceStyles ?? []).filter((s) => styleName.has(s)).map((id) => ({ id, name: styleName.get(id)! }));
+            return (
+              <li class="org-card" id={o.id}>
+                {d.town && <p class="card__kicker"><Icon name="pin" class="kicker-icon" />{d.town}</p>}
+                <h3>{d.name}</h3>
+                {d.tagline && <p class="org-card__tagline">{d.tagline}</p>}
+                <StyleTags styles={tags} max={5} label={`Dances at ${d.name}`} />
+                <ul class="facts mt-3">
+                  {venue && <li><Icon name="pin" /><span><a href={`/venues/${venue.id}/`}>{venue.data.name}</a>, {venue.data.city}</span></li>}
+                  {d.phone && <li><Icon name="phone" /><span><a href={telOf(d.phone)} data-track="outbound_click" data-track-method="phone" data-track-location="community">{d.phone}</a>{d.phoneAlt && <> or <a href={telOf(d.phoneAlt)} data-track="outbound_click" data-track-method="phone" data-track-location="community">{d.phoneAlt}</a></>}</span></li>}
+                  {d.email && <li><Icon name="mail" /><a href={`mailto:${d.email}`} data-track="outbound_click" data-track-method="email" data-track-location="community">{d.email}</a></li>}
+                  {upcoming.length > 0 && (
+                    <li><Icon name="calendar" /><span>Next: <a href={upcoming[0]!.url}>{upcoming[0]!.title}</a>, {upcoming[0]!.dateLabel}{upcoming.length > 1 ? ` (+${upcoming.length - 1} more)` : ''}</span></li>
+                  )}
+                </ul>
+                <PersonLinks links={linksOf(d)} name={d.name} location="community" />
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))}
+
+    <section aria-labelledby="classes-h" id="classes">
+      <h2 id="classes-h">Take a class</h2>
+      <p class="mt-3">Riverbend's Tuesday lesson is a great start. To learn faster, try a class series. See also <a href="/lessons/">Riverbend lessons</a> and <a href="/performers/#teachers">our teachers</a>.</p>
+      <ul class="org-list mt-5">
+        {classes.map((o) => (
+          <li class="org-card">
+            <h3 class="h4"><a href={`#${o.id}`}>{o.data.name}</a></h3>
+            <p>{o.data.classes}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="card" aria-labelledby="sources-h" id="sources">
+      <h2 id="sources-h" class="h3">Where these listings come from</h2>
+      <ul class="facts mt-3">
+        <li><Icon name="info" /><span><a href="https://example.com/community-calendar" target="_blank" rel="noopener">Sample Community Calendar<span class="visually-hidden"> (opens in a new tab)</span></a>, the monthly guide to social dancing on Riverbend Valley and nearby. Pick up a copy or read the current issue online.</span></li>
+        <li><Icon name="info" /><span><a href="https://triplestepswing.com/calendar" target="_blank" rel="noopener">Triple Step Swing's swing calendar<span class="visually-hidden"> (opens in a new tab)</span></a>, kept by Riverbend teacher Maya Rivera.</span></li>
+        {settings.facebookUrl && <li><Icon name="facebook" /><span>Events shared in the <a href={settings.facebookUrl} target="_blank" rel="noopener">{settings.facebookLabel ?? 'Riverbend Facebook group'}<span class="visually-hidden"> (opens in a new tab)</span></a>.</span></li>}
+      </ul>
+      <p class="mt-3">Riverbend does not run these events and cannot promise the details are current. Please check with the organizer before you go. Run a dance on Riverbend Valley? Email <a href={`mailto:${settings.email}`} data-track="click_email" data-track-location="community">{settings.email}</a> to be listed.</p>
+    </section>
+  </div>
+</BaseLayout>
+

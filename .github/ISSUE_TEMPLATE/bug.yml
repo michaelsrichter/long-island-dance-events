@@ -1,0 +1,27 @@
+name: Website problem
+description: Something does not work (a button, a link, the layout on your phone, accessibility).
+labels: [bug]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page address
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you try, and what did you expect to happen?
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser
+      placeholder: iPhone 15, Safari / Windows laptop, Edge
+  - type: dropdown
+    id: a11y
+    attributes:
+      label: Is this an accessibility problem?
+      options: ['No', 'Yes (screen reader, keyboard, zoom, color or similar)']

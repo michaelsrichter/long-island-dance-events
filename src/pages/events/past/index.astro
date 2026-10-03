@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import EventViews from '../../../components/EventViews.astro';
+import EventCard from '../../../components/EventCard.astro';
+import { getEventGroups } from '../../../lib/content';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+import history from '../../../data/legacy-history.json';
+
+const past = (await getEventGroups()).past.filter((e) => e.host === 'home');
+const years = [...new Set(past.map((e) => e.date.slice(0, 4)))].sort().reverse();
+const recent = past.slice(0, 12);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Events', href: '/events/' },
+  { name: 'Past events', href: '/events/past/' },
+];
+const oldYears = Object.entries(history.years as Record<string, number>).sort(([a], [b]) => b.localeCompare(a));
+---
+<BaseLayout title="Past Swing Dances" description="Archive of past Riverbend Swing Dance Club dances, band nights and lessons, plus Riverbend's event history back to 2006." pageType="past" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Past events" lede="Look back at recent Riverbend dances, bands and teachers." crumbs={crumbs}>
+    <EventViews current="past" />
+  </PageHeader>
+  <div class="container section stack-l">
+    <nav aria-label="Archive years">
+      <h2 class="h3">Browse by year</h2>
+      <ul class="btn-row mt-3" role="list">
+        {years.map((y) => <li><a class="btn btn--secondary btn--small" href={`/events/past/${y}/`}>{y}</a></li>)}
+        <li><a class="btn btn--secondary btn--small" href="#earlier-history">2006 to 2023</a></li>
+      </ul>
+    </nav>
+    <section aria-labelledby="recent">
+      <h2 id="recent">Most recent</h2>
+      <ul class="event-list mt-5">
+        {recent.map((e) => <EventCard event={e} past />)}
+      </ul>
+    </section>
+    <section aria-labelledby="earlier-history-h" class="card" id="earlier-history">
+      <h2 id="earlier-history-h" class="h3">Earlier history: 2006 to 2023</h2>
+      <p>Riverbend's previous website listed {oldYears.reduce((n, [, c]) => n + c, 0).toLocaleString('en-US')} events from October 2006 through 2023. Those older listings were not moved to this site one by one, but here is a summary by year.</p>
+      <div class="table-scroll">
+        <table class="price-table">
+          <caption class="visually-hidden">Number of events listed per year on the old Riverbend website</caption>
+          <thead><tr><th scope="col">Year</th><th scope="col">Events listed</th></tr></thead>
+          <tbody>
+            {oldYears.map(([y, n]) => <tr id={`history-${y}`}><th scope="row">{y}</th><td>{n}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">The 2020 and 2021 dips reflect the COVID-19 pause in dancing.</p>
+      <p><a href="/performers/#past-performers">Bands that played Riverbend dances</a> · <a href="/venues/#past-venues">Places Riverbend has danced</a></p>
+    </section>
+  </div>
+</BaseLayout>

@@ -1,0 +1,87 @@
+---
+import type { ResolvedEvent } from '../lib/content';
+import { homeFirst } from '../lib/event-core';
+import { addDays, daysInMonth, formatDateLong, formatMonthKey, weekdayOf, WEEKDAYS } from '../lib/time';
+import EventCard from './EventCard.astro';
+import EmptyState from './EmptyState.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+  month: string; // YYYY-MM
+  events: ResolvedEvent[];
+  prev?: string | undefined;
+  next?: string | undefined;
+  today: string;
+  now: Date;
+}
+const { month, events, prev, next, today, now } = Astro.props;
+const [y, m] = month.split('-').map(Number) as [number, number];
+const first = `${month}-01`;
+const lead = WEEKDAYS.indexOf(weekdayOf(first));
+const total = daysInMonth(y, m);
+const start = addDays(first, -lead);
+const cells = Math.ceil((lead + total) / 7) * 7;
+const days = Array.from({ length: cells }, (_, i) => addDays(start, i));
+const weeks = Array.from({ length: cells / 7 }, (_, w) => days.slice(w * 7, w * 7 + 7));
+const byDate = new Map<string, ResolvedEvent[]>();
+for (const e of events) byDate.set(e.date, [...(byDate.get(e.date) ?? []), e]);
+// Within each day, Riverbend's own events come first.
+for (const [k, list] of byDate) byDate.set(k, homeFirst(list));
+const inMonth = events.filter((e) => e.date.startsWith(month));
+const hasCommunity = inMonth.some((e) => e.host === 'community');
+const label = formatMonthKey(month);
+---
+<div class="cal-nav">
+  {prev ? <a class="btn btn--secondary btn--small" href={`/events/calendar/${prev}/`} data-track="view_calendar_month" data-track-method="prev"><span aria-hidden="true">←</span> {formatMonthKey(prev)}</a> : <span></span>}
+  <h2 id="cal-title">{label}</h2>
+  {next ? <a class="btn btn--secondary btn--small" href={`/events/calendar/${next}/`} data-track="view_calendar_month" data-track-method="next">{formatMonthKey(next)} <span aria-hidden="true">→</span></a> : <span></span>}
+</div>
+{hasCommunity && (
+  <ul class="host-legend mt-3" aria-label="What the colors mean">
+    <li><span class="cal__event legend-swatch" aria-hidden="true">Gold</span>Riverbend dances</li>
+    <li><span class="cal__event cal__event--community legend-swatch" aria-hidden="true">Outlined</span>Other groups' community events</li>
+  </ul>
+)}
+
+<table class="cal" aria-labelledby="cal-title">
+  <thead>
+    <tr>{WEEKDAYS.map((d) => <th scope="col"><abbr title={d[0]!.toUpperCase() + d.slice(1)}>{d.slice(0, 3)}</abbr></th>)}</tr>
+  </thead>
+  <tbody>
+    {weeks.map((week) => (
+      <tr>
+        {week.map((day) => {
+          const list = byDate.get(day) ?? [];
+          const outside = !day.startsWith(month);
+          return (
+            <td class:list={[outside && 'cal__outside', day === today && 'cal__today']}>
+              <span class="cal__day"><span class="visually-hidden">{formatDateLong(day)}{day === today ? ' (today)' : ''}</span><span aria-hidden="true">{Number(day.slice(8))}</span></span>
+              {!outside && list.map((e) => {
+                const st = e.end.getTime() <= now.getTime() && e.status !== 'cancelled' ? 'completed' : e.status;
+                return (
+                  <a class:list={['cal__event', `cal__event--${st}`, `cal__event--${e.host}`]} href={e.url}>
+                    {e.status === 'cancelled' && <span class="visually-hidden">Cancelled: </span>}
+                    {e.host === 'community' && <span class="visually-hidden">Community event: </span>}
+                    {e.title}
+                    {e.timeLabel && <span class="visually-hidden">, {e.timeLabel}</span>}
+                  </a>
+                );
+              })}
+            </td>
+          );
+        })}
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<div class="cal-agenda">
+  {inMonth.length ? (
+    <ul class="event-list">
+      {inMonth.map((e) => <EventCard event={e} past={e.end.getTime() <= now.getTime()} compact={e.host === 'community'} />)}
+    </ul>
+  ) : (
+    <EmptyState title={`No events listed for ${label}`}><p><a href="/events/">See all upcoming events</a></p></EmptyState>
+  )}
+</div>
+<p class="mt-5"><a href="/events/club-events.ics" data-track="add_to_calendar" data-track-method="subscribe_feed" data-track-location="calendar"><Icon name="calendar" class="visually-hidden" />Subscribe to the Riverbend calendar</a></p>

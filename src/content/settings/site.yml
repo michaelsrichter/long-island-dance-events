@@ -1,0 +1,39 @@
+siteName: Riverbend Swing Dance Club
+shortName: Riverbend
+legalName: Riverbend Swing Dance Club, Inc.
+region: Riverbend Valley
+tagline: Friendly swing dancing every Thursday night. Beginners welcome, no partner needed.
+description: Riverbend Swing Dance Club hosts friendly weekly swing dances, lessons, live music nights, and community dance listings in Riverbend Valley.
+mission: Riverbend Swing Dance Club is a fictional all-volunteer nonprofit sample that shows how a community dance website can be organized.
+hotlinePhone: (555) 010-0123
+hotlineLabel: Dance hotline
+email: info@example.org
+mailingAddress:
+  line1: P.O. Box 101
+  city: Riverbend
+  state: NY
+  postalCode: "12508"
+newsletterUrl: https://example.com/newsletter
+facebookUrl: https://www.facebook.com/groups/example
+facebookLabel: Riverbend Facebook group
+instagramUrl: https://example.com/instagram
+youtubeUrl: https://example.com/youtube
+membershipFee: 20
+membershipYear: January 1 to December 31
+standardPrices:
+  - label: Weekly dance
+    member: 10
+    student: 5
+    nonMember: 15
+  - label: Live band night
+    member: 15
+    student: 5
+    nonMember: 20
+defaultVenue: riverbend-community-hall
+mapCenter:
+  lat: 41.5034
+  lng: -73.9696
+maxDistanceKm: 80
+socialImage: ../../assets/uploads/lindy-couple-dance-fun.jpg
+socialImageAlt: A couple laughing as they swing out together in front of a crowd.
+

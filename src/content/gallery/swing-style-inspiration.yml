@@ -1,0 +1,68 @@
+title: Swing style inspiration
+description: Sample open-licensed photos from the 2018 Lindy Bout swing dance competition in Vancouver, Canada. They demonstrate the gallery and slideshow layout.
+order: 10
+published: true
+homepageSlideshow: true
+source: Wikimedia Commons, photos by Thomas Quine, CC BY 2.0.
+rightsNote: Free to use with credit (CC BY 2.0). Keep the photographer credit and license link with each photo.
+images:
+  - image: ../../assets/uploads/lindy-couple-dance-fun.jpg
+    alt: A couple laughing as they swing out together in front of a crowd.
+    caption: Sample swing dance photo.
+    credit: Thomas Quine, CC BY 2.0
+    creditUrl: https://commons.wikimedia.org/wiki/File:Dance_fun.jpg
+    focus: 50% 32%
+  - image: ../../assets/uploads/lindy-couple-black-and-yellow.jpg
+    alt: A couple in black and yellow outfits smiling as they Lindy Hop together.
+    caption: Vintage-inspired dance clothes are fun but optional.
+    credit: Thomas Quine, CC BY 2.0
+    creditUrl: https://commons.wikimedia.org/wiki/File:Lindy_Hop_dancers_in_black_and_yellow.jpg
+    focus: 55% 30%
+  - image: ../../assets/uploads/lindy-dancer-teal-top-at-the-dance-hop.jpg
+    alt: A smiling dancer in a teal top and navy skirt swing dancing at a busy dance.
+    caption: Social dancing at an outside event.
+    credit: Thomas Quine, CC BY 2.0
+    creditUrl: https://commons.wikimedia.org/wiki/File:At_the_dance_hop_(46265907185).jpg
+    focus: 45% 30%
+  - image: ../../assets/uploads/lindy-couple-hand-in-hand.jpg
+    alt: A smiling couple in vintage-style clothes swing dancing hand in hand.
+    caption: A clear, friendly photo for cards and page sections.
+    credit: Thomas Quine, CC BY 2.0
+    creditUrl: https://commons.wikimedia.org/wiki/File:Hand-in-hand_Lindy_Hop_dancers.jpg
+    focus: 55% 30%
+  - image: ../../assets/uploads/lindy-same-sex-couple.jpg
+    alt: Two men in a cap and a jacket swing dancing together. Anyone can lead or follow.
+    caption: Anyone can lead or follow.
+    credit: Thomas Quine, CC BY 2.0
+    creditUrl: https://commons.wikimedia.org/wiki/File:Same-sex_dancers.jpg
+    focus: 50% 30%
+  - image: ../../assets/uploads/lindy-dancer-green-jumpsuit-skip-hop.jpg
+    alt: A dancer in a green jumpsuit doing a joyful kick step on the dance floor.
+    caption: Motion and joy make strong website photos.
+    credit: Thomas Quine, CC BY 2.0
+    creditUrl: https://commons.wikimedia.org/wiki/File:Skip_hop_(52961550362).jpg
+    focus: 62% 40%
+  - image: ../../assets/uploads/lindy-dancer-red-hat-polka-dots.jpg
+    alt: A dancer in a cherry-print skirt swing dancing with a partner in an orange hat.
+    caption: Comfortable clothes matter more than dressing up.
+    credit: Thomas Quine, CC BY 2.0
+    creditUrl: https://commons.wikimedia.org/wiki/File:Lindy_Hop_dancer_with_red_hat_and_red_belt.jpg
+    focus: 50% 38%
+  - image: ../../assets/uploads/lindy-dancers-purple-and-green.jpg
+    alt: Two Lindy Hop dancers in a green dress and a purple shirt dancing together.
+    caption: A sample image used in the starter design.
+    credit: Thomas Quine, CC BY 2.0
+    creditUrl: https://commons.wikimedia.org/wiki/File:Lindy_Hop_dancers_in_purple_and_green.jpg
+    focus: 50% 33%
+  - image: ../../assets/uploads/lindy-dancer-black-dress.jpg
+    alt: A dancer in a black dress spinning with her partner during a swing dance.
+    caption: Action photos work well in galleries.
+    credit: Thomas Quine, CC BY 2.0
+    creditUrl: https://commons.wikimedia.org/wiki/File:Lindy_Hop_dancer_in_black_dress.jpg
+    focus: 45% 30%
+  - image: ../../assets/uploads/solo-jazz-dancer-hop-and-a-skip.jpg
+    alt: A dancer in a floral blouse and high-waisted trousers doing solo jazz steps on a stage.
+    caption: Solo jazz can be part of swing dance culture.
+    credit: Thomas Quine, CC BY 2.0
+    creditUrl: https://commons.wikimedia.org/wiki/File:Hop_and_a_skip_(52876191506).jpg
+    focus: 50% 40%

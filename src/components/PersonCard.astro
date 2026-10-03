@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ResponsiveImage from './ResponsiveImage.astro';
+import Icon from './Icon.astro';
+import PersonLinks from './PersonLinks.astro';
+import { linksOf } from '../lib/links';
+interface Props {
+  person: CollectionEntry<'instructors'> | CollectionEntry<'performers'>;
+  upcomingCount?: number;
+}
+const { person, upcomingCount = 0 } = Astro.props;
+const p = person.data;
+const kindLabel = p.kind === 'band' ? 'Band' : p.kind === 'dj' ? 'DJ' : 'Teacher';
+---
+<li class="card person-card">
+  {p.image && p.imageAlt ? (
+    <ResponsiveImage src={p.image} alt="" widths={[176]} sizes="88px" aspect={1} focus={p.imageFocus ?? '50% 30%'} class="avatar" />
+  ) : (
+    <span class="avatar avatar--placeholder" aria-hidden="true"><Icon name={p.kind === 'instructor' ? 'people' : 'music'} /></span>
+  )}
+  <div>
+    <p class="card__kicker">{kindLabel}{upcomingCount > 0 ? ` · ${upcomingCount} upcoming` : ''}</p>
+    <h3><a href={`/performers/${person.id}/`}>{p.name}</a></h3>
+    {p.role && <p class="muted">{p.role}</p>}
+    <PersonLinks links={linksOf(p)} name={p.name} max={3} location="performers" />
+  </div>
+</li>

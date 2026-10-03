@@ -1,0 +1,17 @@
+---
+import { dateParts, formatDateLong } from '../lib/time';
+interface Props {
+  date: string;
+  muted?: boolean;
+  small?: boolean;
+  /** Community events use an outlined ticket so Riverbend's own events stand out. */
+  community?: boolean;
+}
+const { date, muted = false, small = false, community = false } = Astro.props;
+const p = dateParts(date);
+---
+<div class:list={['ticket', muted && 'ticket--muted', small && 'ticket--small', community && !muted && 'ticket--community']} aria-hidden="true" data-date={date} title={formatDateLong(date)}>
+  <span class="ticket__month">{p.monthShort}</span>
+  <span class="ticket__day">{p.day}</span>
+  <span class="ticket__weekday">{p.weekdayShort}</span>
+</div>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import EventViews from '../../../components/EventViews.astro';
+import MonthCalendar from '../../../components/MonthCalendar.astro';
+import { getEventGroups } from '../../../lib/content';
+import { monthRange } from '../../../lib/months';
+import { dateInZone } from '../../../lib/time';
+import { breadcrumbJsonLd } from '../../../lib/seo';
+
+const { all, now } = await getEventGroups();
+const months = monthRange(all, now);
+const month = dateInZone(now).slice(0, 7);
+const i = months.indexOf(month);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Events', href: '/events/' },
+  { name: 'Calendar', href: '/events/calendar/' },
+];
+---
+<BaseLayout title="Swing Dance Calendar" description="Month-by-month calendar of Riverbend Swing Dance Club dances, lessons and live band nights." pageType="calendar" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Event calendar" lede="See the whole month at a glance. On a phone, events are listed below each month." crumbs={crumbs}>
+    <EventViews current="calendar" />
+  </PageHeader>
+  <div class="container section">
+    <MonthCalendar month={month} events={all} prev={months[i - 1]} next={months[i + 1]} today={dateInZone(now)} now={now} />
+  </div>
+</BaseLayout>

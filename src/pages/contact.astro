@@ -1,0 +1,49 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+import Icon from '../components/Icon.astro';
+import Photo from '../components/Photo.astro';
+import { getSettings } from '../lib/content';
+import { photos } from '../lib/photos';
+
+const s = await getSettings();
+const tel = s.hotlinePhone.replace(/[^0-9]/g, '');
+---
+<ContentPage id="contact" pageType="contact">
+  <Fragment slot="before">
+    <div class="container section">
+      <ul class="grid grid--3" role="list">
+        <li class="card card--accent">
+          <h2 class="h3"><Icon name="phone" class="visually-hidden" />{s.hotlineLabel}</h2>
+          <p><a class="hotline" href={`tel:+1${tel}`} data-track="click_hotline" data-track-location="contact">{s.hotlinePhone}</a></p>
+          <p>Dance details and weather cancellations, any time.</p>
+        </li>
+        <li class="card card--accent">
+          <h2 class="h3">Email</h2>
+          <p><a href={`mailto:${s.email}`} data-track="click_email" data-track-location="contact">{s.email}</a></p>
+          <p>Questions, volunteering, photos and website feedback.</p>
+        </li>
+        <li class="card card--accent">
+          <h2 class="h3">Mail</h2>
+          <address>{s.legalName}<br />{s.mailingAddress.line1}<br />{s.mailingAddress.city}, {s.mailingAddress.state} {s.mailingAddress.postalCode}</address>
+        </li>
+        {s.facebookUrl && (
+          <li class="card card--accent">
+            <h2 class="h3"><Icon name="facebook" class="visually-hidden" />Facebook group</h2>
+            <p><a href={s.facebookUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="facebook" data-track-location="contact" data-track-target="facebook.com">{s.facebookLabel ?? 'Riverbend Facebook group'}<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+            <p>Photos, news and swing events shared by members. Over 900 dancers.</p>
+          </li>
+        )}
+      </ul>
+    </div>
+  </Fragment>
+  <section id="email-list" aria-labelledby="email-list-h" class="panel">
+    <h2 id="email-list-h">Join the Riverbend email list</h2>
+    <p>Get weekly emails about upcoming dances and lessons, extra details that are not on the website, and emergency cancellations for weather or venue problems. You do not have to be a member to join.</p>
+    <p>After you sign up, check your inbox and click the link in the confirmation email. You will not receive announcements until you confirm. You can unsubscribe at any time.</p>
+    {s.newsletterUrl && <a class="btn btn--primary" href={s.newsletterUrl} rel="noopener" data-track="newsletter_click" data-track-location="contact"><Icon name="mail" />Sign up for emails</a>}
+  </section>
+  <Fragment slot="aside">
+    <Photo photo={photos.danceFloor} sizes="(min-width: 56rem) 35vw, 92vw" widths={[480, 720, 960]} aspect={2} caption="Riverbend dancers dressed up for a holiday dance." />
+  </Fragment>
+</ContentPage>
+

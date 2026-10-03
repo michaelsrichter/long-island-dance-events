@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import ContentPage from '../layouts/ContentPage.astro';
+import ResponsiveImage from '../components/ResponsiveImage.astro';
+
+const albums = (await getCollection('gallery', (g) => g.data.published)).sort((a, b) => a.data.order - b.data.order);
+const site = Astro.site!;
+const imageLd = albums.flatMap((a) =>
+  a.data.images.map((img) => ({
+    '@context': 'https://schema.org',
+    '@type': 'ImageObject',
+    contentUrl: new URL(img.image.src, site).toString(),
+    description: img.alt,
+    ...(img.credit ? { creditText: img.credit } : {}),
+    ...(img.creditUrl ? { acquireLicensePage: img.creditUrl } : {}),
+  })),
+);
+---
+<ContentPage id="gallery" pageType="gallery" jsonLd={imageLd}>
+  {albums.map((a) => (
+    <section aria-labelledby={`album-${a.id}`}>
+      <h2 id={`album-${a.id}`}>{a.data.title}</h2>
+      {a.data.description && <p class="muted">{a.data.description}</p>}
+      <ul class="gallery-grid mt-5" role="list">
+        {a.data.images.map((img) => (
+          <li class:list={[img.image.width / img.image.height > 2 && 'is-wide']}>
+            <figure>
+              <ResponsiveImage src={img.image} alt={img.alt} widths={[480, 720, 1080, 1440]} sizes={img.image.width / img.image.height > 2 ? '(min-width: 75rem) 70rem, 94vw' : '(min-width: 60rem) 30vw, 94vw'} />
+              {(img.caption || img.credit) && (
+                <figcaption>
+                  {img.caption}{img.caption && img.credit ? ' ' : ''}
+                  {img.credit && <span>Photo: {img.creditUrl ? <a href={img.creditUrl} rel="noopener">{img.credit}</a> : img.credit}</span>}
+                </figcaption>
+              )}
+            </figure>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</ContentPage>

@@ -1,0 +1,20 @@
+---
+/** "Show N more …" button for a list with data-collapse (see scripts/collapse.ts). Hidden without JavaScript, when everything shows. */
+interface Props {
+  /** id of the container with data-collapse. */
+  target: string;
+  /** Total events in the list. */
+  total: number;
+  /** How many show before the button. */
+  limit?: number;
+  /** Plural noun, e.g. "Riverbend dances". */
+  label: string;
+}
+const { target, total, limit = 3, label } = Astro.props;
+const extra = total - limit;
+---
+{extra > 0 && (
+  <p class="collapse-more js-only" data-collapse-more>
+    <button type="button" class="btn btn--secondary" data-collapse-toggle={target} data-collapse-label={label} aria-controls={target} aria-expanded="false">Show {extra} more {label}</button>
+  </p>
+)}

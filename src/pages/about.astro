@@ -1,0 +1,39 @@
+---
+import ContentPage from '../layouts/ContentPage.astro';
+import Photo from '../components/Photo.astro';
+import { photos } from '../lib/photos';
+import history from '../data/legacy-history.json';
+import { getEventGroups, getSettings } from '../lib/content';
+
+const settings = await getSettings();
+const past = (await getEventGroups()).past.filter((e) => e.host === 'home');
+const historic = Object.values(history.years as Record<string, number>).reduce((a, b) => a + b, 0) + past.length;
+const bands = history.pastPerformers.length;
+---
+<ContentPage id="about" pageType="about">
+  <section aria-labelledby="numbers" class="cta-band" id="friends-intro">
+    <h2 id="numbers">Riverbend by the numbers</h2>
+    <ul class="stat-row">
+      <li><strong>2006</strong> online archive begins</li>
+      <li><strong>{historic.toLocaleString('en-US')}+</strong> events listed</li>
+      <li><strong>{bands}+</strong> bands in our history</li>
+      <li><strong>100%</strong> volunteer-run</li>
+    </ul>
+  </section>
+  <section id="friends" aria-labelledby="friends-h">
+    <h2 id="friends-h">Friends of Riverbend</h2>
+    <ul class="mt-3">
+      <li><a href="https://triplestepswing.com/" rel="noopener">Triple Step Swing</a>: Maya Rivera's Lindy Hop classes, private lessons and monthly swing dances on Riverbend Valley, plus a <a href="https://triplestepswing.com/calendar" rel="noopener">swing calendar</a>.</li>
+      <li><a href="https://example.com/community-calendar" rel="noopener">Sample Community Calendar</a>: the monthly guide to social dancing on Riverbend Valley.</li>
+      {settings.facebookUrl && <li><a href={settings.facebookUrl} rel="noopener">{settings.facebookLabel ?? 'Riverbend Facebook group'}</a>: news, photos and swing events shared by members.</li>}
+    </ul>
+    <p class="mt-3">Looking for more places to dance? See the <a href="/community/">Riverbend Valley dance community</a> page.</p>
+    <p class="mt-3 muted">The old website had a long "Links" page. Most of those links were out of date, so only active ones were kept. Know a group we should list? <a href="/contact/">Tell us</a>.</p>
+  </section>
+  <Fragment slot="aside">
+    <Photo photo={photos.soloJazz} sizes="(min-width: 56rem) 35vw, 92vw" widths={[480, 720, 960]} caption="Jitterbugging in 1938. Swing dancing started in the Jazz Age and is still going strong." />
+    <Photo photo={photos.bandNight} sizes="(min-width: 56rem) 35vw, 92vw" widths={[480, 720, 960]} aspect={2} caption="A live big band at an Riverbend dance." />
+  </Fragment>
+</ContentPage>
+
+

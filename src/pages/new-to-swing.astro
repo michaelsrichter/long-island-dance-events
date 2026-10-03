@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import ContentPage from '../layouts/ContentPage.astro';
+import Photo from '../components/Photo.astro';
+import FeaturedEvent from '../components/FeaturedEvent.astro';
+import { getEventGroups } from '../lib/content';
+import { photos } from '../lib/photos';
+import { faqJsonLd } from '../lib/seo';
+import { inlineMarkdown } from '../lib/markdown';
+
+const styles = (await getCollection('styles')).filter((s) => s.data.family === 'swing').sort((a, b) => a.data.order - b.data.order);
+const faqs = (await getCollection('faqs', (f) => f.data.published && f.data.category === 'first-visit')).sort((a, b) => a.data.order - b.data.order);
+const { next } = await getEventGroups();
+---
+<ContentPage id="new-to-swing" pageType="beginners" jsonLd={[faqJsonLd(faqs.map((f) => f.data))]}>
+  <section id="styles" aria-labelledby="styles-h">
+    <h2 id="styles-h">Swing dance styles</h2>
+    <ul class="style-list mt-5" role="list">
+      {styles.map((s) => (
+        <li>
+          <h3>{s.data.name}</h3>
+          <p>{s.data.summary}</p>
+          {s.data.description && <p class="muted mt-3">{s.data.description}</p>}
+        </li>
+      ))}
+    </ul>
+  </section>
+  <section aria-labelledby="faq-h">
+    <h2 id="faq-h">Common questions</h2>
+    <div class="faq mt-5">
+      {faqs.map((f) => (
+        <details data-faq={f.id}>
+          <summary>{f.data.question}</summary>
+          <div class="faq__answer prose"><p set:html={inlineMarkdown(f.data.answer)} /></div>
+        </details>
+      ))}
+    </div>
+    <p class="mt-5"><a href="/faq/">All Frequently Asked Questions</a></p>
+  </section>
+  <Fragment slot="aside">
+    {next && <FeaturedEvent event={next} label="Your first night could be" hasSocialImage />}
+    <Photo photo={photos.danceFloor} sizes="(min-width: 56rem) 35vw, 92vw" widths={[480, 720, 960]} aspect={4 / 3} />
+    <Photo photo={photos.heroCouple} sizes="(min-width: 56rem) 35vw, 92vw" widths={[480, 720, 960]} caption="Swing dancing has been bringing people together since the 1930s." />
+  </Fragment>
+</ContentPage>
+

@@ -1,0 +1,101 @@
+---
+import type { ResolvedEvent } from '../lib/content';
+import Icon from './Icon.astro';
+import StatusBadge from './StatusBadge.astro';
+import TicketDate from './TicketDate.astro';
+import ResponsiveImage from './ResponsiveImage.astro';
+import HostBadge from './HostBadge.astro';
+import RelativeWhen from './RelativeWhen.astro';
+import StyleTags from './StyleTags.astro';
+import { formatTime, formatDateLong } from '../lib/time';
+import { formatPrice } from '../lib/event-core';
+import PersonName from './PersonName.astro';
+
+interface Props {
+  event: ResolvedEvent;
+  headingLevel?: 'h2' | 'h3' | 'h4';
+  past?: boolean;
+  /** Smaller layout for long community lists. */
+  compact?: boolean;
+  /** Starts hidden behind a "Show more" button (see scripts/collapse.ts). */
+  collapsed?: boolean;
+}
+const { event: e, headingLevel = 'h3', past = false, compact = false, collapsed = false } = Astro.props;
+const Heading = headingLevel;
+const status = past ? e.effectiveStatus : e.status;
+const lesson = e.details.lessonStartTime ? `Lesson ${formatTime(e.details.lessonStartTime)}` : undefined;
+const endTime = e.endLocal.slice(0, 10) === e.date ? e.endLocal.slice(11) : '';
+const dance = e.details.danceStartTime
+  ? `Dancing ${formatTime(e.details.danceStartTime)}`
+  : e.timeTba
+    ? 'Time to be announced'
+    : `${formatTime(e.startLocal.slice(11))}${endTime ? `–${formatTime(endTime)}` : ''}`;
+const prices = [e.admission.member, e.admission.student, e.admission.nonMember].filter((n): n is number => typeof n === 'number');
+const priceLabel = e.admission.free
+  ? 'Free'
+  : prices.length > 1
+    ? `${formatPrice(Math.min(...prices))}–${formatPrice(Math.max(...prices))}`
+    : prices.length === 1
+      ? formatPrice(prices[0]!)
+      : undefined;
+const org = e.organizerEntry?.data;
+// Skip "Hosted by" when the title already names the organizer ("Social Dancing with DJ Scott").
+const showHost = e.host === 'community' && org && ![org.name, org.shortName].some((n) => n && e.title.toLowerCase().includes(n.toLowerCase()));
+const filterData = {
+  'data-event': '',
+  'data-collapsed': collapsed ? '' : undefined,
+  'data-host': e.host,
+  'data-date': e.date,
+  'data-end': String(e.end.getTime()),
+  'data-status': e.status,
+  'data-types': (e.details.eventTypes ?? []).join(' '),
+  'data-styles': e.styles.map((s) => s.id).join(' '),
+  'data-venue': e.venueEntry?.id ?? '',
+  'data-lesson': e.hasLesson ? 'yes' : 'no',
+  'data-level': e.details.experienceLevel ?? 'all-levels',
+  'data-band': e.band ? 'yes' : 'no',
+};
+---
+<li class:list={['event-card', `event-card--${status}`, `event-card--${e.host}`, compact && 'event-card--compact']} {...filterData}>
+  <TicketDate date={e.date} muted={past || status === 'cancelled'} small community={e.host === 'community'} />
+  <div class="event-card__body">
+    <div class="event-card__badges">
+      <HostBadge host={e.host} size="small" />
+      <StatusBadge status={status} />
+      {!past && <RelativeWhen start={e.start} end={e.end} excited={e.host === 'home'} allDay={e.timeTba} />}
+    </div>
+    <Heading class="event-card__title">
+      <a href={e.url}>
+        <span class="visually-hidden">{formatDateLong(e.date)}: </span>{e.title}{status === 'cancelled' && <span class="visually-hidden"> (cancelled)</span>}
+      </a>
+    </Heading>
+    {status === 'cancelled' && e.cancelledMessage && <p class="event-card__note">{e.cancelledMessage}</p>}
+    <p class="event-card__meta">
+      {lesson && <span><Icon name="clock" />{lesson}</span>}
+      <span><Icon name="music" />{dance}</span>
+      {e.location.city && <span><Icon name="pin" />{e.location.name ? `${e.location.name}, ${e.location.city}` : e.location.city}</span>}
+      {!past && priceLabel && <span><Icon name="ticket" />{priceLabel}</span>}
+    </p>
+    {(e.band || e.instructors.length > 0 || showHost || (e.host === 'community' && e.details.cadence)) && (
+      <p class="event-card__meta">
+        {e.band && <span><Icon name="star" />Live band:&nbsp;<PersonName person={e.band} location="card" /></span>}
+        {e.instructors.length > 0 && (
+          <span><Icon name="people" />Teacher:&nbsp;{e.instructors.map((i, n) => <>{n > 0 && ', '}<PersonName person={i} location="card" /></>)}</span>
+        )}
+        {showHost && <span><Icon name="info" />Hosted by {org!.name}</span>}
+        {e.host === 'community' && e.details.cadence && <span><Icon name="calendar" />{e.details.cadence}</span>}
+      </p>
+    )}
+    <StyleTags styles={e.styles} max={3} />
+    {e.host === 'home' && !past && status !== 'cancelled' && (e.beginnerFriendly || e.noPartnerNeeded) && (
+      <p class="event-card__reassure">
+        {[e.beginnerFriendly && 'Beginners welcome', e.noPartnerNeeded && 'No partner needed'].filter(Boolean).join(' · ')}
+      </p>
+    )}
+  </div>
+  {!compact && e.image && e.imageAlt && e.imageFrom !== 'series' && (
+    <div class="event-card__thumb">
+      <ResponsiveImage src={e.image} alt="" widths={[208]} sizes="104px" aspect={1} focus={e.imageFocus ?? '50% 30%'} />
+    </div>
+  )}
+</li>

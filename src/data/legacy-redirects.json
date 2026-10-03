@@ -1,0 +1,18 @@
+[
+  {
+    "from": "/index.php",
+    "to": "/"
+  },
+  {
+    "from": "/events.php",
+    "to": "/events/"
+  },
+  {
+    "from": "/contact.php",
+    "to": "/contact/"
+  },
+  {
+    "from": "/old-gallery.php",
+    "to": "/gallery/"
+  }
+]

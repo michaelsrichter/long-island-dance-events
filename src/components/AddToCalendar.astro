@@ -1,0 +1,62 @@
+---
+import Icon from './Icon.astro';
+import type { CalendarEvent } from '../lib/calendar';
+import { googleCalendarUrl, outlookCalendarUrl } from '../lib/calendar';
+interface Props {
+  cal: CalendarEvent;
+  icsHref: string;
+  variant?: 'menu' | 'list';
+  buttonClass?: string;
+  location?: string;
+}
+const { cal, icsHref, variant = 'menu', buttonClass = 'btn btn--secondary', location = 'event' } = Astro.props;
+const items = [
+  { label: 'Google Calendar', href: googleCalendarUrl(cal), method: 'google', icon: 'google' as const, external: true },
+  { label: 'Apple, iPhone or other (.ics)', href: icsHref, method: 'ics', icon: 'download' as const, external: false },
+  { label: 'Outlook.com', href: outlookCalendarUrl(cal, 'personal'), method: 'outlook', icon: 'outlook' as const, external: true },
+  { label: 'Outlook for work or school', href: outlookCalendarUrl(cal, 'work'), method: 'office365', icon: 'outlook' as const, external: true },
+];
+---
+{variant === 'menu' ? (
+  <details class="menu" data-menu>
+    <summary class={buttonClass}>
+      <Icon name="calendar" />
+      Add to calendar
+    </summary>
+    <ul class="menu__list" role="list">
+      {items.map((i) => (
+        <li>
+          <a
+            href={i.href}
+            class="menu__item"
+            {...(i.external ? { target: '_blank', rel: 'noopener' } : { download: '' })}
+            data-track="add_to_calendar"
+            data-track-method={i.method}
+            data-track-location={location}
+          >
+            <Icon name={i.icon} />
+            {i.label}
+            {i.external && <span class="visually-hidden"> (opens in a new tab)</span>}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </details>
+) : (
+  <div class="action-group">
+    {items.map((i) => (
+      <a
+        href={i.href}
+        class="btn btn--secondary btn--small"
+        {...(i.external ? { target: '_blank', rel: 'noopener' } : { download: '' })}
+        data-track="add_to_calendar"
+        data-track-method={i.method}
+        data-track-location={location}
+      >
+        <Icon name={i.icon} />
+        {i.label}
+        {i.external && <span class="visually-hidden"> (opens in a new tab)</span>}
+      </a>
+    ))}
+  </div>
+)}

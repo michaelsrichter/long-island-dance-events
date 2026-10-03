@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Page not found" description="Sorry, we could not find that page on the Riverbend Swing Dance Club website." pageType="404" noindex>
+  <div class="container--narrow section stack">
+    <p class="card__kicker">Error 404</p>
+    <h1>Oops, we missed a step</h1>
+    <p data-legacy-message hidden>This address is from Riverbend's old website. We are taking you to the new page…</p>
+    <p>We could not find that page. It may have moved when Riverbend launched its new website.</p>
+    <div class="btn-row">
+      <a class="btn btn--primary" href="/events/">See upcoming dances</a>
+      <a class="btn btn--secondary" href="/">Go to the home page</a>
+    </div>
+    <ul class="mt-5">
+      <li><a href="/new-to-swing/">New to swing?</a></li>
+      <li><a href="/membership/">Membership</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="/events/past/">Past events</a></li>
+    </ul>
+  </div>
+</BaseLayout>
+<script>
+  // Safety net for old example.org addresses that are not mapped individually.
+  const p = location.pathname.toLowerCase();
+  const rules: [RegExp, string][] = [
+    [/^\/index\.php\/home\/(events_archive|archives|categories)/, '/events/past/'],
+    [/^\/index\.php\/home\/calendar/, '/events/calendar/'],
+    [/^\/index\.php\/home\/events/, '/events/'],
+    [/^\/index\.php\/home\/bands/, '/performers/'],
+    [/^\/index\.php\/home\/venues/, '/venues/'],
+    [/^\/index\.php\/home\/sponsor/, '/about/#friends'],
+    [/^\/index\.php\/home\/news/, '/about/'],
+    [/^\/index\.php\/(home\/)?(rss|atom)/, '/events/rss.xml'],
+    [/^\/index\.php/, '/'],
+  ];
+  const hit = rules.find(([re]) => re.test(p));
+  if (hit) {
+    document.querySelector<HTMLElement>('[data-legacy-message]')?.removeAttribute('hidden');
+    location.replace(hit[1]);
+  }
+</script>

@@ -1,0 +1,40 @@
+---
+/**
+ * Light / dark mode controls (see scripts/theme.ts). Needs JavaScript, so it is hidden without it;
+ * the site then simply follows the device setting.
+ * - variant "button": one round sun/moon button that flips between light and dark (header).
+ * - variant "choice": Light / Dark / Auto chips with a label (phone menu and footer).
+ */
+import Icon from './Icon.astro';
+interface Props {
+  variant: 'button' | 'choice';
+  /** Analytics location, also used to keep radio group names unique. */
+  location: string;
+  class?: string;
+}
+const { variant, location, class: cls } = Astro.props;
+const options = [
+  { value: 'light', label: 'Light', icon: 'sun' },
+  { value: 'dark', label: 'Dark', icon: 'moon' },
+  { value: 'auto', label: 'Auto', icon: 'device' },
+] as const;
+---
+{variant === 'button' ? (
+  <button type="button" class:list={['theme-button js-only', cls]} data-theme-toggle data-theme-location={location} aria-label="Switch to dark mode" title="Switch to dark mode">
+    <Icon name="moon" class="theme-button__moon" />
+    <Icon name="sun" class="theme-button__sun" />
+  </button>
+) : (
+  <fieldset class:list={['theme-choice js-only', cls]} data-theme-choice data-theme-location={location}>
+    <legend>Light or dark mode</legend>
+    <div class="theme-choice__options">
+      {options.map((o) => (
+        <label class="chip">
+          <input type="radio" name={`theme-${location}`} value={o.value} />
+          <span><Icon name={o.icon} />{o.label}</span>
+        </label>
+      ))}
+    </div>
+    <p class="theme-choice__hint">Auto matches your phone or computer.</p>
+  </fieldset>
+)}

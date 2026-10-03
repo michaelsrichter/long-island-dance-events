@@ -1,0 +1,116 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import EventCard from '../../components/EventCard.astro';
+import ShowMore from '../../components/ShowMore.astro';
+import EmptyState from '../../components/EmptyState.astro';
+import Icon from '../../components/Icon.astro';
+import { getEventGroups, getSettings } from '../../lib/content';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  const venues = await getCollection('venues');
+  return venues.map((v) => ({ params: { slug: v.id }, props: { venue: v } }));
+}
+const { venue } = Astro.props;
+const { Content } = await render(venue);
+const v = venue.data;
+const settings = await getSettings();
+const { upcoming, past } = await getEventGroups();
+const atVenue = upcoming.filter((e) => e.venueEntry?.id === venue.id);
+const here = atVenue.filter((e) => e.host === 'home').slice(0, 10);
+const others = atVenue.filter((e) => e.host === 'community').slice(0, 8);
+const recent = past.filter((e) => e.venueEntry?.id === venue.id && e.host === 'home').slice(0, 4);
+/** Riverbend dances here (now or in the archive), as opposed to a venue only used by other groups. */
+const homeVenue = venue.id === settings.defaultVenue || here.length > 0 || recent.length > 0;
+const full = `${v.name}, ${v.address}, ${v.city}, ${v.state} ${v.postalCode ?? ''}`.trim();
+const google = v.directionsUrl ?? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(full)}`;
+const apple = `https://maps.apple.com/?daddr=${encodeURIComponent(full)}`;
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Venues', href: '/venues/' },
+  { name: v.name, href: `/venues/${venue.id}/` },
+];
+const site = Astro.site!;
+const placeLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Place',
+  '@id': new URL(`/venues/${venue.id}/#place`, site).toString(),
+  name: v.name,
+  telephone: v.phone,
+  address: { '@type': 'PostalAddress', streetAddress: v.address, addressLocality: v.city, addressRegion: v.state, postalCode: v.postalCode, addressCountry: 'US' },
+  ...(v.latitude !== undefined && v.longitude !== undefined ? { geo: { '@type': 'GeoCoordinates', latitude: v.latitude, longitude: v.longitude } } : {}),
+  ...(v.googleMapsUrl ? { hasMap: v.googleMapsUrl } : {}),
+  ...([v.website, v.facebookUrl].some(Boolean) ? { sameAs: [v.website, v.facebookUrl].filter(Boolean) } : {}),
+  url: new URL(`/venues/${venue.id}/`, site).toString(),
+};
+const tel = settings.hotlinePhone.replace(/[^0-9]/g, '');
+const host = (u: string) => new URL(u).hostname.replace(/^www\./, '');
+---
+<BaseLayout title={v.seoTitle ?? `${v.name}, ${v.city}`} description={v.seoDescription ?? `${v.name}, ${v.address}, ${v.city}, ${v.state}. Directions${homeVenue ? ', parking and upcoming Riverbend swing dances' : ' and upcoming dance events'}.`} pageType="venue" jsonLd={[placeLd, breadcrumbJsonLd(crumbs, site)]}>
+  <PageHeader title={v.name} lede={`${v.address}, ${v.city}, ${v.state} ${v.postalCode ?? ''}`} crumbs={crumbs}>
+    <div class="btn-row mt-5">
+      <a class="btn btn--primary" href={google} target="_blank" rel="noopener" data-track="get_directions" data-track-method="google" data-track-location="venue"><Icon name="directions" />Google Maps<span class="visually-hidden"> (opens in a new tab)</span></a>
+      <a class="btn btn--secondary" href={apple} target="_blank" rel="noopener" data-track="get_directions" data-track-method="apple" data-track-location="venue"><Icon name="pin" />Apple Maps<span class="visually-hidden"> (opens in a new tab)</span></a>
+      {v.googleMapsUrl && <a class="btn btn--secondary" href={v.googleMapsUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="reviews" data-track-location="venue" data-track-target="google.com"><Icon name="star" />Photos &amp; reviews<span class="visually-hidden"> on Google Maps (opens in a new tab)</span></a>}
+      {v.latitude !== undefined && atVenue.length > 0 && <a class="btn btn--secondary" href={`/events/map/#place-${venue.id}`}><Icon name="pin" />See it on the dance map</a>}
+    </div>
+  </PageHeader>
+  <div class="container section">
+    <div class="split">
+      <div class="stack-l">
+        {(homeVenue || others.length === 0) && (
+          <section aria-labelledby="upcoming-here">
+            <h2 id="upcoming-here">{homeVenue ? 'Riverbend dances here' : 'Upcoming here'}</h2>
+            {here.length ? (
+              <>
+                <ul class="event-list mt-5" id="venue-home" data-upcoming-list="venue" data-collapse="3">{here.map((e, i) => <EventCard event={e} collapsed={i >= 3} />)}</ul>
+                <ShowMore target="venue-home" total={here.length} label="Riverbend dances" />
+              </>
+            ) : (
+              <EmptyState title="No upcoming events are listed here"><p><a href="/events/">See all events</a></p></EmptyState>
+            )}
+          </section>
+        )}
+        {others.length > 0 && (
+          <section aria-labelledby="others-here">
+            <h2 id="others-here" class={homeVenue ? 'h3' : undefined}>{homeVenue ? 'Other groups dancing here' : 'Upcoming here'}</h2>
+            <ul class="event-list mt-5" data-upcoming-list="venue_community">{others.map((e) => <EventCard event={e} compact />)}</ul>
+          </section>
+        )}
+        {recent.length > 0 && (
+          <section aria-labelledby="recent-here">
+            <h2 id="recent-here" class="h3">Recently</h2>
+            <ul class="event-list mt-3">{recent.map((e) => <EventCard event={e} past />)}</ul>
+          </section>
+        )}
+      </div>
+      <aside class="stack">
+        <section class="panel" aria-labelledby="venue-info">
+          <h2 id="venue-info">Venue information</h2>
+          <dl class="dl">
+            <div><dt>Address</dt><dd><address>{v.address}<br />{v.city}, {v.state} {v.postalCode}</address></dd></div>
+            {v.phone && <div><dt>Venue phone</dt><dd><a href={`tel:+1${v.phone.replace(/[^0-9]/g, '')}`}>{v.phone}</a></dd></div>}
+            {(v.website || v.facebookUrl) && (
+              <div>
+                <dt>Online</dt>
+                <dd>
+                  <ul class="ext-links">
+                    {v.website && <li><a class="ext-link" href={v.website} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="website" data-track-location="venue" data-track-target={host(v.website)}><Icon name="link" />{host(v.website)}<span class="visually-hidden"> (opens in a new tab)</span></a></li>}
+                    {v.facebookUrl && <li><a class="ext-link" href={v.facebookUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="facebook" data-track-location="venue" data-track-target="facebook.com"><Icon name="facebook" />Facebook<span class="visually-hidden"> (opens in a new tab)</span></a></li>}
+                  </ul>
+                </dd>
+              </div>
+            )}
+            <div><dt>Parking</dt><dd>{v.parkingNotes ?? (homeVenue ? <>Call the {settings.hotlineLabel} at <a href={`tel:+1${tel}`}>{settings.hotlinePhone}</a> for parking details.</> : 'Ask the event organizer about parking.')}</dd></div>
+            <div><dt>Accessibility</dt><dd>{v.accessibilityNotes ?? (homeVenue ? <>Have an access need? Call <a href={`tel:+1${tel}`}>{settings.hotlinePhone}</a> or email <a href={`mailto:${settings.email}`}>{settings.email}</a> before you visit and we will do our best to help.</> : 'Contact the event organizer before you visit about any access needs.')}</dd></div>
+          </dl>
+          {v.factsSource && <p class="muted mt-3">Parking and access details from: {v.factsSource}.</p>}
+          {v.googleMapsUrl && <p class="mt-3"><a href={v.googleMapsUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="reviews" data-track-location="venue_panel" data-track-target="google.com">See photos and read reviews on Google Maps<span class="visually-hidden"> (opens in a new tab)</span></a></p>}
+        </section>
+        <div class="prose"><Content /></div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
