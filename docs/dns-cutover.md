@@ -1,113 +1,69 @@
-# DNS cutover
+# DNS cutover: longisland.dance
 
-This guide moves a site from the Azure default hostname to a production custom domain.
+The site's address is **https://longisland.dance** (the "apex" or root domain). `www.longisland.dance` and the Azure address https://black-dune-0e0f3e40f.1.azurestaticapps.net redirect there (301).
 
-## Before DNS changes
+Status (October 3, 2026, 6:31 PM): **done.** Both domains are `Ready` with free HTTPS certificates; `longisland.dance` is the default domain; `SITE_URL` is `https://longisland.dance`; smoke test 23/23. Search engines are still blocked until launch.
 
-- Full verification passes locally.
-- Deployment workflow succeeds on the Azure host.
-- `node scripts/smoke.mjs https://<azure-host>` passes.
-- OAuth works on the Azure host or is intentionally pending.
-- Content is approved.
-- Rollback plan is known.
+## Records to add at Namecheap
 
-## Recommended domain shape
+Namecheap: **Domain List → Manage** next to `longisland.dance` → **Advanced DNS** tab → **Host Records**.
 
-Use `www.example.org` as the canonical site unless your DNS provider supports apex CNAME flattening reliably.
+1. Make sure the **Nameservers** setting (Domain tab) is **Namecheap BasicDNS**. Advanced DNS records only work with Namecheap's own nameservers.
+2. **Delete** Namecheap's parking records if they are there: the `CNAME Record` for `www` pointing to `parkingpage.namecheap.com`, and any `URL Redirect Record` for `@` or `www`.
+3. Click **Add New Record** for each row:
 
-Common setup:
+| Type | Host | Value | TTL | Why |
+| --- | --- | --- | --- | --- |
+| ALIAS Record | `@` | `black-dune-0e0f3e40f.1.azurestaticapps.net` | 5 min | Points longisland.dance at the site |
+| CNAME Record | `www` | `black-dune-0e0f3e40f.1.azurestaticapps.net` | Automatic | Points www.longisland.dance at the site |
+| TXT Record | `@` | `_fzdvr5dwgoujlnny7jhkqudnjs8ou9y` | Automatic | Proves to Azure that you own longisland.dance |
+| TXT Record | `_dnsauth.www` | `_fvpz3g30np07c0vpuf6bdacab4e713s` | Automatic | Proves to Azure that you own www.longisland.dance |
 
-- Production: `https://www.example.org`
-- Apex `example.org`: forwarded/redirected to `https://www.example.org`
+4. Click the green check mark on each row to save.
 
-## Azure custom domain steps
+Notes:
 
-1. Open the Static Web App in Azure.
-2. Go to **Custom domains**.
-3. Add `www.example.org`.
-4. Azure shows a CNAME target and TXT validation token.
-5. Add DNS records.
-6. Return to Azure and validate.
-7. Wait for managed certificate provisioning.
+- Type the host exactly as shown (`@`, `www`, `_dnsauth.www`). Namecheap adds `.longisland.dance` by itself.
+- Leave out `https://` and any trailing `/` in the values.
+- Other TXT records at `@` (for example email/SPF) can stay. More than one TXT record per host is fine.
+- The tokens above are not secrets. They are meant to be public in DNS, and they only work for this Static Web App.
 
-## DNS records
+## How long it takes
 
-| Type | Host/name | Value |
-| --- | --- | --- |
-| CNAME | `www` | `<static-web-app>.azurestaticapps.net` |
-| TXT | `_dnsauth.www` | Azure validation token |
+Usually 5 to 60 minutes; Azure says apex domains can take up to 72 hours. Azure checks the TXT records on its own, then creates a free HTTPS certificate.
 
-TTL can be 300 seconds during cutover, then raised later.
-
-## Namecheap example
-
-In **Advanced DNS**:
-
-| Type | Host | Value | TTL |
-| --- | --- | --- | --- |
-| CNAME Record | `www` | `<static-web-app>.azurestaticapps.net` | Automatic or 5 min |
-| TXT Record | `_dnsauth.www` | `<token>` | Automatic or 5 min |
-| URL Redirect Record | `@` | `https://www.example.org/` | Unmasked, if you want apex forwarding |
-
-Namecheap sometimes appends the domain automatically. If Azure asks for `_dnsauth.www.example.org`, the Namecheap host is usually `_dnsauth.www`.
-
-## After domain validates
-
-Update GitHub variables:
+Check progress:
 
 ```powershell
-gh variable set SITE_URL --repo <owner/repo> --body https://www.example.org
-gh variable set ALLOW_INDEXING --repo <owner/repo> --body true
+az staticwebapp hostname list -n swa-li-dance-events-web -g rg-li-dance-events-web --query "[].{domain:name, status:status}" -o table
+Resolve-DnsName longisland.dance -Type TXT
+Resolve-DnsName _dnsauth.www.longisland.dance -Type TXT
 ```
 
-Update OAuth app:
+Both domains should show `Ready`.
 
-- Homepage URL: `https://www.example.org`
-- Callback URL: `https://www.example.org/api/callback`
-- Keep **Expire user access tokens** unchecked.
+## After both domains show "Ready" (done by the developer, not the owner)
 
-Update Azure app setting:
-
-```powershell
-az staticwebapp appsettings set --name <swa-name> --resource-group <rg> --setting-names ALLOWED_HOSTS=www.example.org,<azure-host>
-```
-
-Redeploy.
-
-## Verification
-
-```powershell
-curl -I https://www.example.org
-node scripts/smoke.mjs https://www.example.org
-```
-
-Check:
-
-- HTTPS certificate is valid.
-- Canonical links use the production domain.
-- `/admin/` sign-in redirects back to the production domain.
-- `/sitemap-index.xml` uses production URLs.
-- `robots.txt` allows indexing only when ready.
-- Key old URLs redirect.
+1. In Azure (portal → Static Web App → **Custom domains**), select `longisland.dance` → **Set default**. Visitors to `www.longisland.dance` and the `azurestaticapps.net` address are then sent to `https://longisland.dance`.
+2. Set the GitHub variable `SITE_URL` to `https://longisland.dance` and redeploy, so links, the sitemap and share images use the new address:
+   ```powershell
+   gh variable set SITE_URL --repo michaelsrichter/long-island-dance-events --body https://longisland.dance
+   gh workflow run "Azure Static Web Apps" --repo michaelsrichter/long-island-dance-events --ref main
+   ```
+3. `ALLOWED_HOSTS` (Azure app setting) already lists `longisland.dance`, `www.longisland.dance` and the Azure address.
+4. Run `node scripts/smoke.mjs https://longisland.dance` and check the site on a phone and a computer, in light and dark mode.
+5. Search engines stay blocked (`ALLOW_INDEXING=false`) until the owner says to launch. Then: `gh variable set ALLOW_INDEXING --repo michaelsrichter/long-island-dance-events --body true` and redeploy.
+6. When editor sign-in is set up, the GitHub OAuth app uses Homepage URL `https://longisland.dance` and callback `https://longisland.dance/api/callback` (keep **Expire user access tokens** unchecked).
 
 ## Rollback
 
-If cutover fails:
-
-1. Set `ALLOW_INDEXING=false` if a broken host is public.
-2. Revert DNS records to the previous site or Azure host.
-3. Reset `SITE_URL` to the working host.
-4. Update OAuth callback back to the working host.
-5. Redeploy or rerun the last successful workflow.
-6. Document what failed before trying again.
+The Azure address keeps working the whole time. If something goes wrong: set `SITE_URL` back to `https://black-dune-0e0f3e40f.1.azurestaticapps.net`, unset the default domain in Azure, redeploy, and fix the DNS records.
 
 ## Troubleshooting
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
-| Azure cannot validate domain | TXT host/value wrong or DNS not propagated | Check with `nslookup -type=TXT _dnsauth.www.example.org`. |
-| Browser certificate warning | Certificate still provisioning | Wait; verify Azure custom domain status. |
-| Site loads but assets fail | Wrong `SITE_URL` or mixed old deployment | Redeploy after variable update. |
-| CMS sign-in fails | OAuth callback still old | Update OAuth app and app settings. |
-| Apex does not redirect | DNS provider forwarding not configured | Add URL redirect or use provider-specific forwarding. |
-| Search indexes Azure host | Indexing enabled before custom domain | Set `ALLOW_INDEXING=false` on non-production and request removal if needed. |
+| Azure stays at "Validating" | TXT record host or value is wrong, or DNS has not spread yet | `Resolve-DnsName longisland.dance -Type TXT` must show the token. Check for typos and extra spaces. |
+| longisland.dance shows a Namecheap parking page | Parking or URL-redirect record still there | Delete it; keep only the ALIAS for `@`. |
+| Certificate warning in the browser | Certificate still being created | Wait up to an hour after "Ready". |
+| www works but the root does not | ALIAS record missing or nameservers are not BasicDNS | Add the ALIAS for `@`; set nameservers to Namecheap BasicDNS. |

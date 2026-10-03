@@ -9,7 +9,7 @@
 - Every event links to its venue, organizer, teachers, bands and DJs, and each of those pages lists what is coming up.
 - Add any event to Google, Outlook or Apple calendars, or subscribe to the whole list (`/events/all.ics`, `/events/rss.xml`).
 
-Status: **MVP (build phases 1-2), live at <https://black-dune-0e0f3e40f.1.azurestaticapps.net>** on Azure Static Web Apps (Free). Search engines are kept away until launch (`ALLOW_INDEXING=false`). See [Roadmap](#roadmap).
+Status: **MVP (build phases 1-2), live at <https://longisland.dance>** on Azure Static Web Apps (Free). Search engines are kept away until launch (`ALLOW_INDEXING=false`). See [Roadmap](#roadmap).
 
 ## How it works
 
