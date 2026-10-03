@@ -1,0 +1,159 @@
+name: Collect events (scheduled)
+
+# Reads every switched-on source in src/content/sources/ on its own schedule, then opens (or
+# updates) ONE rolling pull request with the changes and the run report. The Sunday run asks
+# @michaelsrichter to review, which is the weekly email (decision P14). Sources that return no
+# events or broken data get a GitHub issue with a snapshot of what was downloaded (sizes, hashes,
+# page type; never the page text).
+#
+#   daily         every morning        sources with "cadence": "daily" (weekly bar-band lists)
+#   twice-weekly  Monday and Thursday  busy bar, venue and aggregator calendars
+#   weekly        Sunday               clubs, studios, bands, libraries, monthly calendars
+#
+# The collector honors robots.txt, waits between requests, and names itself
+# LongIslandDanceEventsBot/1.0. Nothing here gets around a block.
+#
+# One-time setting for the owner: Settings > Actions > General > Workflow permissions >
+# "Allow GitHub Actions to create and approve pull requests" must be on.
+on:
+  schedule:
+    - cron: '15 10 * * *' # daily, 6:15 AM New York (summer time)
+    - cron: '45 10 * * 1,4' # Monday and Thursday
+    - cron: '30 9 * * 0' # Sunday
+  workflow_dispatch:
+    inputs:
+      cadence:
+        description: 'Which sources (comma list of daily, twice-weekly, weekly, monthly)'
+        required: true
+        default: 'weekly,monthly'
+      source:
+        description: 'Only this source id (optional; overrides the list above)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: ingest
+  cancel-in-progress: false
+
+env:
+  BRANCH: ingest/updates
+  REVIEWER: michaelsrichter
+
+jobs:
+  collect:
+    name: Collect, validate and propose changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: ingest/requirements.txt
+      - name: Install PDF extractor dependencies
+        run: pip install -r ingest/requirements.txt
+
+      - name: Pick the sources for this run
+        id: pick
+        env:
+          SCHEDULE: ${{ github.event.schedule }}
+          INPUT_CADENCE: ${{ inputs.cadence }}
+          INPUT_SOURCE: ${{ inputs.source }}
+        run: |
+          case "$SCHEDULE" in
+            '15 10 * * *') cadence=daily ;;
+            '45 10 * * 1,4') cadence=twice-weekly ;;
+            '30 9 * * 0') cadence=weekly,monthly ;;
+            *) cadence="${INPUT_CADENCE:-weekly,monthly}" ;;
+          esac
+          echo "cadence=$cadence" >> "$GITHUB_OUTPUT"
+          echo "source=$INPUT_SOURCE" >> "$GITHUB_OUTPUT"
+          # Only the Sunday run (or a manual weekly run) asks for review, so the owner gets one email a week.
+          if [ "$SCHEDULE" = '30 9 * * 0' ] || { [ -z "$SCHEDULE" ] && [[ "$cadence" == *weekly* ]] && [[ "$cadence" != twice-weekly ]]; }; then
+            echo "notify=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "notify=false" >> "$GITHUB_OUTPUT"
+          fi
+          echo "Collecting: ${INPUT_SOURCE:-$cadence}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Continue the open collection branch (or start a new one from main)
+        id: branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
+            git fetch origin "$BRANCH"
+            git checkout -B "$BRANCH" "origin/$BRANCH"
+            if ! git merge --no-edit origin/main; then
+              git merge --abort
+              git checkout -B "$BRANCH" origin/main
+              echo "reset=true" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            git checkout -B "$BRANCH" origin/main
+          fi
+
+      - name: Restore the download cache (ETags and page hashes, never committed)
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .cache/ingest
+          key: ingest-cache-${{ github.run_id }}
+          restore-keys: ingest-cache-
+
+      - name: Collect events
+        env:
+          CADENCE: ${{ steps.pick.outputs.cadence }}
+          SOURCE: ${{ steps.pick.outputs.source }}
+        run: |
+          rm -f .cache/ingest/report.md .cache/ingest/report.json
+          if [ -n "$SOURCE" ]; then
+            npx tsx ingest/run.ts --source "$SOURCE" --report .cache/ingest/report.md --json .cache/ingest/report.json
+          else
+            npx tsx ingest/run.ts --cadence "$CADENCE" --report .cache/ingest/report.md --json .cache/ingest/report.json
+          fi
+          cat .cache/ingest/report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: File or update issues for sources that failed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node .github/scripts/ingest-issues.mjs .cache/ingest/report.json
+
+      - name: Validate every content file (astro check)
+        run: npm run check
+
+      - name: Build the report database
+        run: npx tsx catalog/scripts/build-sqlite.ts
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: li-dance-sqlite-${{ github.run_id }}
+          path: |
+            data/li-dance.sqlite
+            data/li-dance-report.md
+            .cache/ingest/report.md
+            .cache/ingest/report.json
+          retention-days: 90
+
+      - name: Open or update the collection pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NOTIFY: ${{ steps.pick.outputs.notify }}
+          RESET: ${{ steps.branch.outputs.reset }}
+          CADENCE: ${{ steps.pick.outputs.source || steps.pick.outputs.cadence }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node .github/scripts/ingest-pr.mjs .cache/ingest/report.md

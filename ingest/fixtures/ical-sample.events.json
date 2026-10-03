@@ -1,0 +1,178 @@
+{
+  "outOfArea": [
+    {
+      "town": "Astoria",
+      "count": 1
+    }
+  ],
+  "skipped": [
+    {
+      "reason": "cancelled by the source",
+      "ref": "calendar feed 2026-10-09"
+    }
+  ],
+  "created": {
+    "venues": [
+      "sample-barn-smithtown",
+      "sample-hall-riverhead"
+    ],
+    "performers": []
+  },
+  "drafts": [
+    {
+      "id": "2026-10-05-sample-hall-riverhead-classes",
+      "matchKey": "test-source|sample-hall-riverhead||monday|09:00|class-lesson||line-dancing|2026-10-05",
+      "dates": [
+        "2026-10-05"
+      ],
+      "data": {
+        "title": "Line Dancing class at Sample Hall",
+        "summary": "Group class in Line Dancing.",
+        "category": "class-lesson",
+        "danceStyles": [
+          "line-dancing"
+        ],
+        "start": "2026-10-05T09:00",
+        "timezone": "America/New_York",
+        "venueId": "sample-hall-riverhead",
+        "town": "Riverhead",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://example-lodge.example/feed.ics",
+        "sourceName": "Test source",
+        "sourceRef": "calendar feed 2026-10-05",
+        "status": "active",
+        "confidence": 0.9,
+        "reviewNotes": "Repeat rule \"FREQ=DAILY;COUNT=3\" is not supported; only the first date was kept."
+      }
+    },
+    {
+      "id": "2026-10-18-sample-barn-smithtown-live-music",
+      "matchKey": "test-source|sample-barn-smithtown||sunday|14:00|live-music|||2026-10-18",
+      "dates": [
+        "2026-10-18"
+      ],
+      "data": {
+        "title": "Dance with live music at Sample Barn",
+        "summary": "Dance to live music.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-18T14:00",
+        "end": "2026-10-18T17:00",
+        "timezone": "America/New_York",
+        "venueId": "sample-barn-smithtown",
+        "town": "Smithtown",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://example-lodge.example/feed.ics",
+        "sourceName": "Test source",
+        "sourceRef": "calendar feed 2026-10-18",
+        "status": "active",
+        "confidence": 0.85,
+        "reviewNotes": "New venue was added automatically. Check it."
+      }
+    },
+    {
+      "id": "2026-10-27-halloween-example-lodge-live-music",
+      "matchKey": "test-source|example-lodge||tuesday|20:00|live-music||east-coast-swing|2026-10-27|halloween",
+      "dates": [
+        "2026-10-27"
+      ],
+      "data": {
+        "title": "Halloween East Coast Swing dance with live music at Example Lodge",
+        "summary": "Dance to live music. Dance styles: East Coast Swing. Costumes are welcome.",
+        "category": "live-music",
+        "danceStyles": [
+          "east-coast-swing"
+        ],
+        "start": "2026-10-27T20:00",
+        "end": "2026-10-27T23:00",
+        "timezone": "America/New_York",
+        "venueId": "example-lodge",
+        "town": "Huntington",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://example-lodge.example/feed.ics",
+        "sourceName": "Test source",
+        "sourceRef": "calendar feed 2026-10-27",
+        "status": "active",
+        "confidence": 0.9
+      }
+    },
+    {
+      "id": "2026-11-07-sample-hall-riverhead-festival",
+      "matchKey": "test-source|sample-hall-riverhead||saturday|tba|festival||line-dancing|2026-11-07",
+      "dates": [
+        "2026-11-07"
+      ],
+      "data": {
+        "title": "Line Dancing festival at Sample Hall",
+        "summary": "A larger dance event for Line Dancing.",
+        "category": "festival",
+        "danceStyles": [
+          "line-dancing"
+        ],
+        "start": "2026-11-07",
+        "timezone": "America/New_York",
+        "venueId": "sample-hall-riverhead",
+        "town": "Riverhead",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://example-lodge.example/feed.ics",
+        "sourceName": "Test source",
+        "sourceRef": "calendar feed 2026-11-07",
+        "status": "active",
+        "confidence": 0.7,
+        "reviewNotes": "New venue was added automatically. Check it. No start time found."
+      }
+    },
+    {
+      "id": "example-lodge-lesson-and-dance-tuesdays",
+      "matchKey": "test-source|example-lodge||tuesday|19:30|lesson-party||east-coast-swing|repeat",
+      "dates": [
+        "2026-10-06",
+        "2026-10-20",
+        "2026-11-03"
+      ],
+      "data": {
+        "title": "East Coast Swing social dance with a lesson at Example Lodge",
+        "summary": "A group lesson at 7:30 PM, then open social dancing. Dance styles: East Coast Swing. You do not need a partner.",
+        "category": "lesson-party",
+        "danceStyles": [
+          "east-coast-swing"
+        ],
+        "start": "2026-10-06T19:30",
+        "end": "2026-10-06T22:30",
+        "timezone": "America/New_York",
+        "lessonTime": "19:30",
+        "venueId": "example-lodge",
+        "town": "Huntington",
+        "performerIds": [],
+        "instructorIds": [],
+        "price": 15,
+        "priceNotes": "Pay at the door",
+        "skillLevel": "all-levels",
+        "infoUrl": "https://example-lodge.example/swing/",
+        "sourceId": "test-source",
+        "sourceUrl": "https://example-lodge.example/swing/",
+        "sourceName": "Test source",
+        "sourceRef": "calendar feed 2026-10-06",
+        "status": "active",
+        "confidence": 0.9,
+        "recurrence": {
+          "rrule": "FREQ=MONTHLY;BYDAY=1TU,3TU;UNTIL=20261103",
+          "rdates": [],
+          "exdates": []
+        }
+      }
+    }
+  ]
+}
