@@ -68,9 +68,13 @@ jobs:
           skip_app_build: true
       - name: Smoke test the deployed site
         if: env.HAS_SWA_TOKEN == 'true'
+        # Production is tested at its public address (SITE_URL): once a custom domain is the default,
+        # the azurestaticapps.net address only redirects there. Pull requests test their preview URL.
+        env:
+          SMOKE_URL: ${{ github.event_name == 'pull_request' && steps.deploy.outputs.static_web_app_url || vars.SITE_URL || steps.deploy.outputs.static_web_app_url }}
         run: |
           sleep 20
-          node scripts/smoke.mjs "${{ steps.deploy.outputs.static_web_app_url }}"
+          node scripts/smoke.mjs "$SMOKE_URL"
 
   close_preview:
     name: Close preview environment
