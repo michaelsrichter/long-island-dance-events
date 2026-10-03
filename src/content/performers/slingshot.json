@@ -1,0 +1,45 @@
+{
+  "name": "Slingshot",
+  "type": "band",
+  "aliases": [
+    "Slingshot Jams",
+    "Slingshot Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.facebook.com/Slingshotjams/posts/friday-night-slingshot-is-back-for-a-night-of-dancing-dinner-and-drinks-invite-y/5530793000271155/",
+        "note": "Band post invites fans to a night of dancing, dinner and drinks at Ristegio's."
+      },
+      {
+        "url": "https://www.facebook.com/Slingshotjams/posts/tonights-the-night-dinner-drinks-and-bring-your-dancing-shoes-the-dance-floor-is/5164673790216413/",
+        "note": "Band post: bring your dancing shoes, the dance floor is open."
+      },
+      {
+        "url": "https://allevents.in/org/slingshot-jams/12887967",
+        "note": "Organizer page calls Slingshot a Long Island dance band playing top 40 hits from all eras."
+      },
+      {
+        "url": "https://www.cooperageinn.com/fallfestival",
+        "note": "Cooperage Inn Fall Festival band list shows Slingshot on Sunday, Oct 4."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Its posts promote nights of dinner, drinks and dancing with an open dance floor, so freestyle dancing to party hits is normal.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "Long Island cover band that calls itself a dance band, playing top 40 hits from many eras at restaurants, bars and the Cooperage Inn Fall Festival, where it has played for eight seasons.",
+  "facebookUrl": "https://www.facebook.com/Slingshotjams",
+  "genres": [
+    "top 40 hits from all eras",
+    "party covers"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). The old band domain slingshotjams.com now shows unrelated adult content, so it is not linked. Facebook dancing posts date from 2022."
+}

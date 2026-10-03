@@ -1,5 +1,6 @@
 name: Kizomba
 family: latin
+danceType: partner
 order: 33
 aliases:
   - Kizomba

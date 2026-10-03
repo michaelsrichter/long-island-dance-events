@@ -1,0 +1,32 @@
+{
+  "name": "Show No Mercy",
+  "type": "band",
+  "aliases": [
+    "Show No Mercy Slayer Tribute",
+    "Show No Mercy: NYC Slayer Tribute"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://allevents.in/patchogue/the-big-4-at-89-north-ft-show-no-mercy-damage-inc-and-chaotica/200030700749651",
+        "note": "Oct 3 'Big 4' tribute show at 89 North with Damage Inc and Chaotica, posted by the band."
+      },
+      {
+        "url": "https://silkfcty.com/events/show-no-mercy-slayer-tribute-performing-reign-in-blood-for-its-40th-anniversary/",
+        "note": "Venue page bills a night of thrash metal with the band playing Reign in Blood in full."
+      }
+    ],
+    "notes": "A thrash-metal tribute concert: fans headbang and may start a mosh pit, but there is no social or partner dancing.",
+    "rating": "listening"
+  },
+  "description": "Long-running New York City and Long Island Slayer tribute band; on Oct 3 it plays the yearly 'Big 4' thrash-metal tribute night at 89 North in Patchogue with Damage Inc. and Chaotica.",
+  "facebookUrl": "https://www.facebook.com/ShowNoMercyNY",
+  "genres": [
+    "tribute to Slayer",
+    "thrash metal"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Confirmed Slayer tribute. Damage Inc. on the same bill is a Metallica tribute.",
+  "youtubeUrl": "https://www.youtube.com/@shownomercyny206"
+}

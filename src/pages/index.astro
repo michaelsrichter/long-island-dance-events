@@ -15,7 +15,7 @@ const { upcoming, tonight, weekend, nextSevenDays, today } = await getEventGroup
 const dancesToday = tonight.filter(isDance);
 const weekDancesAll = nextSevenDays.filter(isDance);
 const weekDances = weekDancesAll.filter((e) => e.date > today);
-const weekClasses = nextSevenDays.filter((e) => !isDance(e));
+const weekClasses = nextSevenDays.filter((e) => e.category === 'class-lesson');
 const SHOW = 6;
 const SHOW_CLASSES = 3;
 const danceIndex = new Map(weekDances.map((e, i) => [e.slug, i]));
@@ -28,7 +28,7 @@ const quick = [
   { href: '/events/?when=today', label: 'Today', count: dancesToday.length, icon: 'clock' as const },
   { href: '/events/?when=weekend', label: 'This weekend', count: weekend.filter(isDance).length, icon: 'music' as const },
   { href: '/events/?category=live-music', label: 'Live music', count: upcoming.filter((e) => e.category === 'live-music').length, icon: 'star' as const },
-  { href: '/events/?category=class-lesson', label: 'Classes', count: upcoming.filter((e) => !isDance(e)).length, icon: 'people' as const },
+  { href: '/events/?category=class-lesson', label: 'Classes', count: upcoming.filter((e) => e.category === 'class-lesson').length, icon: 'people' as const },
   { href: '/events/map/', label: 'Map', count: undefined, icon: 'pin' as const },
 ];
 ---

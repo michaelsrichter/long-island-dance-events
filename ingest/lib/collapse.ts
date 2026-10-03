@@ -107,6 +107,7 @@ function baseData(c: Candidate, dates: string[], repeating: boolean): DraftData 
     sourceName: c.sourceName,
     sourceRef: c.sourceRef,
     status: 'active',
+    dancingCues: c.dancingCues ?? [],
     confidence: Number(c.confidence.toFixed(2)),
     reviewNotes: c.reviewNotes.length ? [...new Set(c.reviewNotes)].join(' ') : undefined,
   };

@@ -7,6 +7,7 @@ import RelativeWhen from '../../components/RelativeWhen.astro';
 import EmptyState from '../../components/EmptyState.astro';
 import Icon from '../../components/Icon.astro';
 import { getEventGroups, type ResolvedEvent } from '../../lib/content';
+import { isDanceLevel } from '../../lib/dancing';
 import { groupByPlace } from '../../lib/map-places';
 import { formatDateShort } from '../../lib/time';
 import { breadcrumbJsonLd } from '../../lib/seo';
@@ -30,8 +31,9 @@ const whens = [
   { value: 'week', label: 'Next 7 days' },
   { value: 'month', label: 'This month' },
 ];
-const kind = (e: ResolvedEvent) => (e.category === 'class-lesson' ? 'class' : 'dance');
-const placeKind = (list: ResolvedEvent[]) => (list.some((e) => kind(e) === 'dance') ? 'dance' : 'class');
+/** dance = dances and live music with dancing; class = classes; listen = concerts where people mostly listen. */
+const kind = (e: ResolvedEvent) => (e.category === 'class-lesson' ? 'class' : isDanceLevel(e.dancing.level) ? 'dance' : 'listen');
+const placeKind = (list: ResolvedEvent[]) => (list.some((e) => kind(e) === 'dance') ? 'dance' : list.some((e) => kind(e) === 'class') ? 'class' : 'listen');
 const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` · ${e.timeLabel.split(' to ')[0]}` : ''}`;
 ---
 <BaseLayout
@@ -40,7 +42,7 @@ const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` 
   pageType="map"
   jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}
 >
-  <PageHeader title="Dance map" lede="Find dancing near you. Star pins have dances or live music. Round pins only have classes." crumbs={crumbs}>
+  <PageHeader title="Dance map" lede="Find dancing near you. Star pins have dances or live music you can dance to. Round pins only have classes or concerts." crumbs={crumbs}>
     <EventViews current="map" />
   </PageHeader>
 
@@ -73,7 +75,7 @@ const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` 
         <div class="events-map" data-events-map role="region" aria-label="Map of upcoming events. The list of places has the same information."></div>
         <ul class="host-legend mt-3" aria-label="What the pins mean">
           <li><span class="map-pin-key map-pin-key--home" aria-hidden="true"><Icon name="star" /></span>Dances or live music</li>
-          <li><span class="map-pin-key map-pin-key--community" aria-hidden="true"></span>Classes only</li>
+          <li><span class="map-pin-key map-pin-key--community" aria-hidden="true"></span>Classes or concerts only</li>
         </ul>
       </div>
 

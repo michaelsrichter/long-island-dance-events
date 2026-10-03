@@ -1,0 +1,45 @@
+{
+  "name": "Mach5 Band NY",
+  "type": "band",
+  "aliases": [
+    "Mach 5",
+    "Mach5",
+    "Mach5 Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.mach5nyband.com/what-we-offer",
+        "note": "Band page lists its genres; video captions say songs like Love Shack keep people dancing and moving."
+      },
+      {
+        "url": "https://www.mach5nyband.com/",
+        "note": "Band offers live music for parties, bars and restaurants on Long Island."
+      },
+      {
+        "url": "https://allevents.in/kings-park/mach5-band-trio-returns-to-shanahans/200030470735506",
+        "note": "Example gig: trio show at Shanahan's in Kings Park."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A party cover band. Captions on its own video page talk about songs that keep the crowd dancing and moving.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A Long Island cover band formed in 2017 that plays as a trio up to a six-piece, mixing classic rock, country, Motown, R&B, Top 40 and some disco.",
+  "genres": [
+    "classic rock",
+    "country",
+    "Motown and R&B",
+    "Top 40",
+    "disco"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). A different 'Mach 5' rock band is in Austin, TX (mach5atx.com). Tiki Joe's Captree gig not confirmed on the band site. Social links not found on the site.",
+  "website": "https://www.mach5nyband.com/"
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Crash My Party",
+  "type": "band",
+  "aliases": [
+    "Crash My Party Luke Bryan Tribute",
+    "Crash My Party - The Ultimate Luke Bryan Tribute Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://loss4wordsproduction.wixsite.com/lukebryantributeband/about-5",
+        "note": "Band's own show diary mentions a Memorial Day brewery show with line dancing on Long Island."
+      },
+      {
+        "url": "https://allevents.in/miller-place/dine-and-dance-line-dancing-dinner/200030544702048",
+        "note": "Daisy's Nashville Lounge in Miller Place held a 'Dine and Dance' line-dancing dinner in Aug 2026."
+      },
+      {
+        "url": "https://gnreventsny.com/artist/crash-my-party/",
+        "note": "Booking agent page describes a fun, energetic Luke Bryan tribute."
+      }
+    ],
+    "kinds": [
+      "line",
+      "freestyle"
+    ],
+    "notes": "A country party band. The band notes a show with line dancing, and its Oct 3 venue, Daisy's in Miller Place, is a country bar that hosts line-dance nights.",
+    "rating": "party",
+    "styles": [
+      "line-dancing",
+      "freestyle"
+    ]
+  },
+  "description": "A Long Island tribute band led by singer Casey Wayne that plays Luke Bryan's country hits at bars, breweries and theaters.",
+  "genres": [
+    "tribute to Luke Bryan",
+    "country"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). No two-step evidence found. The band also plays seated theaters (Smithtown PAC, Paramount) where dancing is less likely. No official Facebook/Instagram confirmed.",
+  "website": "https://loss4wordsproduction.wixsite.com/lukebryantributeband"
+}

@@ -28,7 +28,7 @@ if (form && list) {
   const groups = [...list.querySelectorAll<HTMLElement>('[data-month-group]')];
   const r = ranges();
 
-  const fields = ['when', 'category', 'style', 'q', 'county', 'town', 'day', 'price', 'level', 'venue', 'person'] as const;
+  const fields = ['when', 'category', 'dance', 'style', 'q', 'county', 'town', 'day', 'price', 'level', 'venue', 'person'] as const;
   type Field = (typeof fields)[number];
   const MORE: Field[] = ['county', 'town', 'day', 'price', 'level', 'venue', 'person'];
   /** Values that are left out of the address: all dates, and dances + live music (the default view). */
@@ -47,7 +47,9 @@ if (form && list) {
     if (v.when === 'weekend' && (date < r.weekendFrom || date > r.weekendTo)) return false;
     if (v.when === 'week' && (date < r.today || date > r.weekEnd)) return false;
     if (v.when === 'month' && !date.startsWith(r.month)) return false;
-    if (v.category === 'dances' && c.dataset.category === 'class-lesson') return false;
+    // The default view: dances and live music people dance to (no classes, no listening-only concerts).
+    if (v.category === 'dances' && (c.dataset.category === 'class-lesson' || c.dataset.dancing === 'unlikely')) return false;
+    if (v.dance && !has(c.dataset.danceKinds, v.dance)) return false;
     if (v.category && v.category !== 'dances' && v.category !== 'all' && c.dataset.category !== v.category) return false;
     if (v.style && !has(c.dataset.styles, v.style)) return false;
     if (v.county && c.dataset.county !== v.county) return false;

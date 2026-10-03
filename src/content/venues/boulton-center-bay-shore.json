@@ -1,0 +1,46 @@
+{
+  "name": "Boulton Center for the Performing Arts",
+  "aliases": [
+    "Boulton Center",
+    "The Boulton Center",
+    "YMCA Boulton Center",
+    "Boulton Center Bay Shore"
+  ],
+  "address": "37 W Main St",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://www.allbiz.com/business/ymca-boulton-center-for-the-performing-631-969-1101",
+        "note": "Business listing describes a 261-seat stadium-style theater in the former Regent movie theater."
+      },
+      {
+        "url": "https://www.tripadvisor.com/ShowUserReviews-g47286-d2310912-r177887057-Boulton_Center_for_the_Performing_Arts-Bay_Shore_Long_Island_New_York.html",
+        "note": "Reviews praise sloped seating where every seat sees the stage; none mention dancing."
+      },
+      {
+        "url": "https://www.boultoncenter.org/",
+        "note": "Venue home page lists upcoming concerts and stresses that every seat is close to the stage."
+      }
+    ],
+    "floor": "seated",
+    "notes": "All seats are fixed theater seats on a sloped floor, and we found no dance area. Plan on a seated concert.",
+    "policy": "unknown"
+  },
+  "description": "A small theater of about 260 seats in an old movie house on Bay Shore's Main Street, run with the YMCA. It hosts concerts, tribute bands and comedy.",
+  "facebookUrl": "https://www.facebook.com/BoultonCenter/",
+  "factsSource": "Checked October 3, 2026. Source: boultoncenter.org.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Boulton+Center+for+the+Performing+Arts%2C+37+W+Main+St%2C+Bay+Shore%2C+NY+11706",
+  "kind": "theater",
+  "phone": "(631) 969-1101",
+  "postalCode": "11706",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). CHECK THE GIG: the Boulton Center's own site lists 'From Dublin to Duluth' on Oct 3, and Leonid & Friends' tour page puts them in Skokie, IL that night. Ira's Leonid & Friends listing here looks wrong. Facebook URL comes from a venue directory, not the venue's site.",
+  "state": "NY",
+  "town": "Bay Shore",
+  "website": "https://www.boultoncenter.org/",
+  "latitude": 40.721122,
+  "longitude": -73.248321,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

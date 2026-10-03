@@ -1,0 +1,25 @@
+{
+  "title": "Skillet at The Paramount",
+  "summary": "Live music by Skillet at The Paramount in Huntington. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-04",
+  "timezone": "America/New_York",
+  "venueId": "paramount-huntington",
+  "town": "Huntington",
+  "performerIds": [
+    "skillet"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 3, 2026",
+  "sourceRef": "sunday list",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-04|paramount-huntington|skillet|2026-10-04|special"
+}

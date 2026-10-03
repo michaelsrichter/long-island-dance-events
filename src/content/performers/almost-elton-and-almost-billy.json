@@ -1,0 +1,38 @@
+{
+  "name": "Almost Elton & Almost Billy",
+  "type": "band",
+  "aliases": [
+    "Almost Elton/Almost Billy",
+    "Almost Elton NY"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.hhhlibrary.org/services/adults",
+        "note": "Library lists the Oct 4, 2-3:30 PM show in a lecture room as a sing-along with a band and costume changes; registration was full."
+      },
+      {
+        "url": "https://almosteltonnyband.com/",
+        "note": "Band's own schedule lists the Oct 4 Dix Hills library show, which confirms this is the right Almost Elton."
+      },
+      {
+        "url": "https://allevents.in/smithtown/almost-elton-and-almost-billy-at-smithtown-center-for-the-performing-arts/2400029522696256",
+        "note": "Same show played the Smithtown Center for the Performing Arts, a seated theater, in Feb 2026."
+      }
+    ],
+    "notes": "A sit-down tribute concert. The Dix Hills library show is in a lecture room, and the library invites people to sing along, not to dance.",
+    "rating": "listening"
+  },
+  "description": "A New York tribute act that plays the piano hits of Elton John and Billy Joel in one show, backed by a band and with costume changes.",
+  "facebookUrl": "https://www.facebook.com/AlmostEltonNyTributeBand",
+  "genres": [
+    "tribute to Elton John",
+    "tribute to Billy Joel",
+    "piano rock"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Other Elton tributes use the 'Almost Elton' name (e.g., a Memphis band at almostelton.com). Chose the NY band because its site lists this exact library date. Rating is based on venue and format; no crowd video watched.",
+  "website": "https://almosteltonnyband.com/",
+  "youtubeUrl": "https://www.youtube.com/@AlmostEltonNyTributeBand"
+}

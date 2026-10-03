@@ -111,3 +111,30 @@ describe('links between entities', () => {
     for (const { data } of load('gallery', '.yml')) for (const i of data.images) expect(i.credit, i.alt).toBeTruthy();
   });
 });
+
+describe('source settings', () => {
+  it('keeps adapter settings when a source file is written back after a run', () => {
+    const input = {
+      name: 'Example Hall',
+      url: 'https://example.org/',
+      type: 'ical',
+      adapter: 'ical',
+      cadence: 'daily',
+      focus: 'music',
+      attribution: 'Dates and times from Example Hall.',
+      feedUrl: 'https://example.org/events.ics',
+      pageUrls: ['https://example.org/calendar/'],
+      defaults: { venueId: 'example-hall', town: 'Huntington', performerIds: [], danceStyles: ['salsa'], category: 'live-music' },
+      include: 'salsa|bachata',
+      exclude: 'comedy',
+      catalogStatus: 'needs-permission',
+      permission: { status: 'requested', note: 'Emailed the manager.', requestedAt: '2026-10-01', feedUrl: 'https://example.org/feed.ics' },
+    };
+    const parsed = sourceSchema.parse(input);
+    expect(parsed).toMatchObject(input);
+    expect(sourceSchema.parse(JSON.parse(JSON.stringify(parsed)))).toEqual(parsed);
+  });
+  it('rejects an unknown cadence', () => {
+    expect(() => sourceSchema.parse({ name: 'X Y', url: 'https://x.org/', type: 'html', adapter: 'x', cadence: 'hourly', attribution: 'x' })).toThrow();
+  });
+});

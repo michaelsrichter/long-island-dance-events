@@ -3,6 +3,8 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import TicketDate from '../../../components/TicketDate.astro';
 import StatusBadge from '../../../components/StatusBadge.astro';
+import DancingBadge from '../../../components/DancingBadge.astro';
+import DancingPanel from '../../../components/DancingPanel.astro';
 import Icon from '../../../components/Icon.astro';
 import AddToCalendar from '../../../components/AddToCalendar.astro';
 import ShareControls from '../../../components/ShareControls.astro';
@@ -78,6 +80,7 @@ const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at $
           <div>
             <div class="event-hero__badges">
               <span class:list={['cat-badge', `cat-badge--${e.category}`]}>{e.categoryLabel}</span>
+              {e.category !== 'class-lesson' && <DancingBadge dancing={e.dancing} />}
               <StatusBadge status={e.status} />
               {upcomingNow && <RelativeWhen start={e.start} end={e.end} allDay={e.timeTba} />}
             </div>
@@ -216,6 +219,8 @@ const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at $
               )}
             </dl>
           </section>
+
+          {e.category !== 'class-lesson' && <DancingPanel dancing={e.dancing} />}
 
           <section class="panel" aria-labelledby="source-h" id="source">
             <h2 id="source-h">Where this listing comes from</h2>

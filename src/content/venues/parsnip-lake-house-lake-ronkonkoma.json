@@ -1,0 +1,49 @@
+{
+  "name": "Parsnip Lake House",
+  "aliases": [
+    "Parsnips Lake House",
+    "Parsnip",
+    "Parsnips",
+    "Parsnip Pub"
+  ],
+  "address": "432 Smithtown Blvd",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "http://www.tripadvisor.com/ShowUserReviews-g48025-d23885110-r1044008193-Parsnip_Pub-Long_Island_Lake_Ronkonkoma.html",
+        "note": "Visitor review describes very limited seating, a standing bar in the middle of the room, and some people dancing to the band."
+      },
+      {
+        "url": "https://www.postcard.inc/places/parsnip-lake-house-lake-ronkonkoma-JKyeeJmrpZE",
+        "note": "Review summary: live music, DJs, dancing and lake views; a reviewer says the DJ plays good dance music."
+      },
+      {
+        "url": "https://www.atly.com/location/ParsnipLakeHouse",
+        "note": "Summary says the small indoor space fills quickly while the outdoor deck is used for bands at sunset."
+      }
+    ],
+    "floor": "small",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The indoor room is small and fills up fast, but people do dance near the band. There is also an outdoor deck by the lake.",
+    "policy": "allowed"
+  },
+  "description": "A small, casual neighborhood bar on Lake Ronkonkoma with a back deck over the water. It hosts bands, DJs and karaoke most nights.",
+  "facebookUrl": "https://www.facebook.com/Parsnip-Lake-House-108847530981437",
+  "factsSource": "Checked October 3, 2026. Source: theparsniplakehouse.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Parsnip+Lake+House+432+Smithtown+Blvd+Lake+Ronkonkoma+NY+11779",
+  "kind": "bar",
+  "phone": "(631) 285-2632",
+  "postalCode": "11779",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira wrote 'Parsnips'; the business calls itself 'Parsnip Lake House' (older listings: 'Parsnip Pub'). The Voices Carry gig on Oct 3 was not found on the venue's site (its show list was empty). Facebook link comes from a Bing business listing.",
+  "state": "NY",
+  "town": "Lake Ronkonkoma",
+  "website": "https://www.theparsniplakehouse.com/",
+  "latitude": 40.833263,
+  "longitude": -73.123656,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

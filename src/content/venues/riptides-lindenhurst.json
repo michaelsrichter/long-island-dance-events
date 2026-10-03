@@ -1,0 +1,44 @@
+{
+  "name": "RipTides Cocktails and Grill",
+  "aliases": [
+    "RipTides",
+    "Riptides Lindenhurst"
+  ],
+  "address": "168 E Montauk Hwy",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://riptidescocktailsandgrills.com/",
+        "note": "Official site: address, hours, side-door accessible entrance, street parking."
+      },
+      {
+        "url": "https://allevents.in/west-babylon/wicked-games-at-riptides-in-lindenhurst/200030766728915",
+        "note": "Band's event: Wicked Games annual Octoberfest Jam at Riptides in Lindenhurst, Sat Oct 3, 7:30 pm."
+      },
+      {
+        "url": "https://maps.roadtrippers.com/us/lindenhurst-ny/food-drink/riptides-cocktails-and-grill",
+        "note": "Yelp review excerpt mentions spending a night listening to the live band Wicked Games; no mention of dancing."
+      }
+    ],
+    "floor": "unknown",
+    "notes": "Rock and party bands like Wicked Games play here, but we could not confirm how much room there is to dance. Check with the bar.",
+    "policy": "unknown"
+  },
+  "description": "A laid-back cocktail bar and grill on Montauk Highway in Lindenhurst serving seafood and bar food, with local party bands on some nights.",
+  "facebookUrl": "https://www.facebook.com/riptidescocktailsandgrill",
+  "factsSource": "Checked October 3, 2026. Source: riptidescocktailsandgrills.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=RipTides+Cocktails+and+Grill+168+E+Montauk+Hwy+Lindenhurst+NY+11757",
+  "kind": "bar",
+  "phone": "(631) 505-3200",
+  "postalCode": "11757",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Confirmed as the Lindenhurst Riptides because the band's own Oct 3 event names Riptides in Lindenhurst. One event listing shows 172 9th Ave, West Babylon, which looks like a map error. Website domain now ends in 'grills.com'; older listings use riptidescocktailsandgrill.com. Ira listed this gig twice (duplicate line).",
+  "state": "NY",
+  "town": "Lindenhurst",
+  "website": "https://riptidescocktailsandgrills.com/",
+  "latitude": 40.680567,
+  "longitude": -73.359485,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

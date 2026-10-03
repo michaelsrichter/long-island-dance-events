@@ -1,0 +1,52 @@
+{
+  "name": "Eleanor's Lounge",
+  "aliases": [
+    "Eleanor's",
+    "Eleanor's Bohemia"
+  ],
+  "address": "4103 Sunrise Hwy",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://www.tripadvisor.co.nz/Attraction_Review-g47336-d12229337-Reviews-Eleanor_s_Lounge-Bohemia_Long_Island_New_York.html",
+        "note": "Reviewers describe a bar with live music and a dance floor; one notes the dance area is small."
+      },
+      {
+        "url": "https://orionsmap.com/venues/ny/oakdale/eleanors-lounge",
+        "note": "Event list shows weekly 'Karaoke and Dance Party' nights and Friday dance bands."
+      },
+      {
+        "url": "https://www.findglocal.com/US/Bohemia/10150148105855065/Eleanors-Lounge",
+        "note": "Copies of the bar's posts promote a country day where the band plays line dance hits, and bands that keep people dancing."
+      },
+      {
+        "url": "https://eleanorslounge.com/",
+        "note": "Venue site lists Miss Mayhem on Oct 3, 8-11 PM, $5 cover."
+      }
+    ],
+    "floor": "dance-floor",
+    "kinds": [
+      "freestyle",
+      "line"
+    ],
+    "notes": "Eleanor's has a dance floor, though reviewers say it is on the small side. Weekend bands and DJ dance parties get people dancing, and country band days feature line dance songs.",
+    "policy": "encouraged"
+  },
+  "description": "A long-running lounge on Sunrise Highway in Bohemia, popular with an over-40 crowd. It has live bands on weekends, karaoke, bingo and DJ dance nights.",
+  "facebookUrl": "https://www.facebook.com/EleanorsLounge/",
+  "factsSource": "Checked October 3, 2026. Source: eleanorslounge.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Eleanor%27s+Lounge%2C+4103+Sunrise+Hwy%2C+Bohemia%2C+NY+11716",
+  "kind": "bar",
+  "phone": "(631) 256-7443",
+  "postalCode": "11716",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Map listings show (631) 244-7090; the venue's own website shows 631-256-7443, which we used.",
+  "state": "NY",
+  "town": "Bohemia",
+  "website": "https://eleanorslounge.com/",
+  "latitude": 40.749793,
+  "longitude": -73.134197,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "The Bryant Library",
+  "aliases": [
+    "Bryant Library",
+    "Bryant Library Roslyn"
+  ],
+  "address": "2 Paper Mill Rd",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://bryantlibrary.libcal.com/",
+        "note": "Library calendar: 'Mor Presents: Olivia & Dolly', Sun Oct 4, 2-3 pm, in the HGR room, in-person registration with limited seats."
+      },
+      {
+        "url": "https://allevents.in/roslyn/olivia-and-grease-vs-dolly-and-divas-the-bryant-library/80007746395601",
+        "note": "Event listing for the free concert at The Bryant Library, 2 Paper Mill Rd."
+      }
+    ],
+    "floor": "seated",
+    "notes": "This is a one-hour afternoon concert in a library program room with registered seats. It is a sit-and-listen show, not a dance event.",
+    "policy": "unknown"
+  },
+  "description": "The historic public library of Roslyn village, the oldest in Nassau County, which runs free programs and afternoon concerts for the community.",
+  "facebookUrl": "https://www.facebook.com/bryantlibrary/",
+  "factsSource": "Checked October 3, 2026. Source: bryantlibrary.libcal.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Bryant+Library+2+Paper+Mill+Rd+Roslyn+NY+11576",
+  "kind": "library",
+  "phone": "(516) 621-2240",
+  "postalCode": "11576",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Free event; registration through the library calendar. ZIP 11576 is the standard Roslyn ZIP (the Bing listing gave no ZIP).",
+  "state": "NY",
+  "town": "Roslyn",
+  "website": "https://www.bryantlibrary.org/",
+  "latitude": 40.797044,
+  "longitude": -73.648624,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

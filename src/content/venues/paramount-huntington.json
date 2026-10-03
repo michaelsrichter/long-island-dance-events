@@ -1,0 +1,48 @@
+{
+  "name": "The Paramount",
+  "aliases": [
+    "Paramount",
+    "Paramount Huntington",
+    "The Paramount Huntington"
+  ],
+  "address": "370 New York Ave",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.lawngisland.com/home/the-paramount-huntington-long-island-ny",
+        "note": "Venue description says shows can be standing, hybrid or fully seated, with a large main-level dance floor plus balcony and mezzanine seating."
+      },
+      {
+        "url": "https://cmd.hexagon.com/en/paramount-huntington-seating-chart.html",
+        "note": "Capacity guide describes a general-admission standing floor of roughly 950 that can be turned into table seating."
+      },
+      {
+        "url": "https://www.paramountny.com/shows",
+        "note": "Official calendar lists Almost Queen on Sat Oct 3 and Skillet on Sun Oct 4."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "At standing shows the main floor in front of the stage is open, and fans move and dance there. Some shows add tables or chairs, so check the ticket type before you go.",
+    "policy": "allowed"
+  },
+  "description": "A restored 1920s theater in Huntington village that is now a 1,500-capacity concert hall for touring bands, tribute acts and comedy, with balcony seats and a large main floor.",
+  "facebookUrl": "https://www.facebook.com/theparamountny/",
+  "factsSource": "Checked October 3, 2026. Source: paramountny.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Paramount+370+New+York+Ave+Huntington+NY+11743",
+  "kind": "concert-hall",
+  "phone": "(631) 673-7300",
+  "postalCode": "11743",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Both Ira gigs confirmed on the official calendar. The same building has a separate downstairs bar, Spotlight at The Paramount (spotlightny.com), which has its own DJ dance nights; do not confuse the two rooms. Whether each show is standing or seated varies.",
+  "state": "NY",
+  "town": "Huntington",
+  "website": "https://www.paramountny.com/",
+  "latitude": 40.86962,
+  "longitude": -73.425975,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

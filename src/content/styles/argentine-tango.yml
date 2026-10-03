@@ -1,5 +1,6 @@
 name: Argentine Tango
 family: tango
+danceType: partner
 order: 40
 aliases:
   - Argentine Tango

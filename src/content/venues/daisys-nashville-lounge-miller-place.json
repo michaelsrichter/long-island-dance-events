@@ -1,0 +1,48 @@
+{
+  "name": "Daisy's Nashville Lounge (Miller Place)",
+  "aliases": [
+    "Daisy's Miller Pl",
+    "Daisy's Miller Place"
+  ],
+  "address": "275 Route 25A, Suite 33",
+  "coordinatesSource": "U.S. Census Bureau Geocoder (Route 25A, Miller Place; street-level, approximate)",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://daisysli.com/event/dine-dance/",
+        "note": "Venue's Dine & Dance page: Sunday line dancing in Miller Place with instruction all evening and no cover."
+      },
+      {
+        "url": "https://daisysli.com/event/dine-dance-daisys-line-dance-night/",
+        "note": "Venue page invites beginners onto the dance floor for line dancing; says no partner and no experience needed."
+      },
+      {
+        "url": "https://daisysli.com/calendar/",
+        "note": "Venue calendar lists Crash My Party (Luke Bryan tribute) at Miller Place on Saturday Oct 3, 8 PM."
+      }
+    ],
+    "floor": "dance-floor",
+    "kinds": [
+      "line",
+      "freestyle"
+    ],
+    "notes": "Daisy's holds Sunday line dance nights with an instructor, no partner or experience needed. Saturday band nights are party nights where people dance in front of the band.",
+    "policy": "encouraged"
+  },
+  "description": "A Nashville-themed country bar and restaurant on Route 25A in Miller Place. It has live country and cover bands, karaoke and a weekly line dance night.",
+  "facebookUrl": "https://www.facebook.com/daisys.li/",
+  "factsSource": "Checked October 3, 2026. Source: daisysli.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Daisy%27s+Nashville+Lounge+%28Miller+Place%29%2C+275+Route+25A%2C+Suite+33%2C+Miller+Place%2C+NY+11764",
+  "kind": "bar",
+  "latitude": 40.948507,
+  "longitude": -72.991392,
+  "phone": "(631) 403-2900",
+  "postalCode": "11764",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Some map listings show 307 Route 25A; the venue's own site says 275 Route 25A, Suite 33. Facebook page is shared with the Patchogue location.",
+  "state": "NY",
+  "town": "Miller Place",
+  "website": "https://daisysli.com/"
+}

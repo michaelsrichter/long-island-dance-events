@@ -1,0 +1,47 @@
+{
+  "name": "The Spot at Oakdale Yacht",
+  "aliases": [
+    "The Spot at Oaksale Yacht",
+    "The Spot at Oakdale Yacht Club",
+    "The Spot Oakdale"
+  ],
+  "address": "520 Shore Dr",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.thespotoakdale.com/",
+        "note": "Official site describes a lively dockside tiki bar with weekly live music where people come for dancing the night away."
+      },
+      {
+        "url": "https://www.thespotoakdale.com/events",
+        "note": "Sat Oct 3: First Annual Oktoberfest with Rich Mahogany, 3-7 pm, no cover, heated tents."
+      },
+      {
+        "url": "https://dockwa.com/explore/destination/mncxl3-oakdale-yacht",
+        "note": "Marina guest review mentions a tiki bar restaurant with live music almost every night."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The venue invites guests to dance the night away at its dockside band shows. On Oct 3 it holds an Oktoberfest afternoon with heated tents and a band.",
+    "policy": "encouraged"
+  },
+  "description": "An outdoor tiki bar and restaurant on the docks of the Oakdale Yacht marina, with a band stage, waterfront seating and live music most weekends in season.",
+  "factsSource": "Checked October 3, 2026. Source: thespotoakdale.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Spot+at+Oakdale+Yacht+520+Shore+Dr+Oakdale+NY+11769",
+  "kind": "bar",
+  "phone": "(631) 319-9993",
+  "postalCode": "11769",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'Oaksale' is a typo for Oakdale. The Spot sits at the Oakdale Yacht marina (Oakdale Yacht Club); Ira's List has pages /oakdale-yacht-club and /yacht-club-mondays-oakdale-yacht for it. Bing lists 500 Shore Dr; the official site says 520 Shore Dr. Ira gave no time; the venue lists 3-7 pm. No official Facebook URL confirmed. Kind could also be 'marina-club'.",
+  "state": "NY",
+  "town": "Oakdale",
+  "website": "https://www.thespotoakdale.com/",
+  "latitude": 40.728728,
+  "longitude": -73.147509,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

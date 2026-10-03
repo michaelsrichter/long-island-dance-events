@@ -1,0 +1,45 @@
+{
+  "name": "Downtown Malverne (Church Street & Hempstead Avenue)",
+  "aliases": [
+    "Malverne Fall Festival",
+    "Malverne Fall Festival & Classic Car Show",
+    "Malverne Car Show"
+  ],
+  "address": "Church Street & Hempstead Avenue (by the Malverne LIRR station)",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.liherald.com/westhempstead/stories/malverne-fall-festival-car-show-october-3,225410",
+        "note": "News story: Oct 3, 11 AM-4:30 PM, free; Vinyl Revival plays Church Street 2-4 PM; car show on Hempstead Avenue."
+      },
+      {
+        "url": "https://longisland.kidsoutandabout.com/content/annual-malverne-chamber-commerce-fall-festival-and-classic-car-show-0",
+        "note": "Event listing calls Vinyl Revival a high-energy dance, disco, Motown and rock band; DJs in two spots."
+      },
+      {
+        "url": "https://www.newsbreak.com/malverne-ny-daily-brief-372333547/4903261556439-malverne-fall-festival-and-car-show-on-oct-3",
+        "note": "Summary says the festival uses Church Street and the commuter lot on Hempstead Avenue."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "This is a free outdoor street festival. Vinyl Revival, a 10-piece dance, disco and Motown band, plays on Church Street, so there should be room to dance in the street near the band.",
+    "policy": "allowed"
+  },
+  "description": "The village center of Malverne around Church Street, the gazebo and the train station lot on Hempstead Avenue, where the Chamber of Commerce holds its yearly fall festival and car show.",
+  "factsSource": "Checked October 3, 2026. Source: liherald.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Church+Street+and+Hempstead+Avenue%2C+Malverne%2C+NY+11565",
+  "kind": "festival",
+  "postalCode": "11565",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Event, not a fixed venue: mapped to the Church Street / Malverne LIRR station area (station is at Hempstead Ave & Utterby Rd, beside Church St). Organizer: Malverne Chamber of Commerce. Yearly event, so this venue may only be used once a year.",
+  "state": "NY",
+  "town": "Malverne",
+  "latitude": 40.674942,
+  "longitude": -73.669503,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "The Warehouse",
+  "aliases": [
+    "Warehouse",
+    "The Warehouse Amityville",
+    "Warehouse Amityville",
+    "The Warehouse LI"
+  ],
+  "address": "203 Broadway",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://mindtrip.ai/restaurant/amityville-new-york/warehouse-live-music-pub-grub/re-6n1uMKIe",
+        "note": "Review summary: large bar, elevated stage with good sound, and a dance floor."
+      },
+      {
+        "url": "https://www.thewarehouseli.com/",
+        "note": "Official site: up to 300 guests with 150+ seats on three raised tiers; a quoted review mentions plenty of standing room."
+      },
+      {
+        "url": "https://usarestaurants.info/explore/united-states/new-york/suffolk-county/babylon/amityville/792451-the-warehouse.htm",
+        "note": "Visitor review says a band played songs you could dance to."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "There is standing room in front of the raised stage that reviewers describe as a dance floor, and fans dance to the cover bands. Tables must be reserved and cost extra.",
+    "policy": "allowed"
+  },
+  "description": "A live-music club, bar and event space in Amityville village with a raised stage, a 40-foot bar, tiered seating and a kitchen, hosting local cover bands, tribute acts and themed brunches.",
+  "facebookUrl": "https://www.facebook.com/thewarehouseli",
+  "factsSource": "Checked October 3, 2026. Source: thewarehouseli.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Warehouse+203+Broadway+Amityville+NY+11701",
+  "kind": "bar",
+  "phone": "(631) 238-1820",
+  "postalCode": "11701",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List venue page (/the-warehouse) links to thewarehouseli.com/calendar, so 'Warehouse' is The Warehouse in Amityville, not another business with that name. Gigs this weekend: Taylor Swift Eras Drag Brunch (Sat and Sun) and Serve The Servants / Love Hate Love (Sat night); not checked on the venue calendar. Reviews say reserved tables carry a fee and food/drink minimums.",
+  "state": "NY",
+  "town": "Amityville",
+  "website": "https://www.thewarehouseli.com/",
+  "latitude": 40.678384,
+  "longitude": -73.417374,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

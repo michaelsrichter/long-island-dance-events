@@ -1,0 +1,43 @@
+{
+  "name": "Revel Restaurant & Bar",
+  "aliases": [
+    "Revel",
+    "Revel Garden City"
+  ],
+  "address": "835 Franklin Ave",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.opentable.com/r/revel-restaurant-and-bar-garden-city",
+        "note": "OpenTable lists 'DJ on Thursdays & Fridays' and 'Dancing' as features; a Disco Brunch with a DJ says 'Come dance'; review summary mentions DJ and dancing."
+      },
+      {
+        "url": "https://www.revelrestaurant.com/",
+        "note": "Official site describes a bar and cocktail area in front of a large dining room in a 4,500 sq ft space."
+      }
+    ],
+    "floor": "unknown",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "DJs play on Thursday and Friday nights and some brunches, and reviewers mention dancing. There is no separate dance hall, so people dance in the bar area.",
+    "policy": "encouraged"
+  },
+  "description": "A stylish restaurant and cocktail bar in downtown Garden City with global-style American food, brunch, private rooms and DJ nights at the bar.",
+  "facebookUrl": "https://www.facebook.com/1374227202797949/",
+  "factsSource": "Checked October 3, 2026. Source: revelrestaurant.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Revel+Restaurant+%26+Bar+835+Franklin+Ave+Garden+City+NY+11530",
+  "kind": "restaurant",
+  "phone": "(516) 246-9111",
+  "postalCode": "11530",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira wrote only 'Revel'. Revel Restaurant & Bar in Garden City is the only Long Island venue named Revel we found that runs DJ nights, so it is the likely match, but we could not confirm a DJ Jolie booking there on Sat Oct 3 (OpenTable lists DJs Thursday and Friday). A DJ Jolie found online is an NYC-based event DJ. Owner should confirm.",
+  "state": "NY",
+  "town": "Garden City",
+  "website": "https://www.revelrestaurant.com/",
+  "latitude": 40.727161,
+  "longitude": -73.634637,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

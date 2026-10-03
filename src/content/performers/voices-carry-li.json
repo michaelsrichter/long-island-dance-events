@@ -1,0 +1,40 @@
+{
+  "name": "Voices Carry LI",
+  "type": "band",
+  "aliases": [
+    "Voices Carry",
+    "Voices Carry Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.youtube.com/@VoicesCarryLI/videos",
+        "note": "Channel description: 5-piece energetic cover band playing hits from the 80s to early 2000s."
+      },
+      {
+        "url": "https://www.liblogger.com/events/saturday-night-voices-carry",
+        "note": "Oct 3 Parsnip Lake House listing: live hits from the 1970s to 2000s plus a DJ."
+      },
+      {
+        "url": "https://mindtrip.ai/attraction/lake-ronkonkoma-new-york/parsnip-lake-house/at-748DX2xW",
+        "note": "Venue summary mentions live music, DJs and dancing."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "An energetic cover band playing 80s to 2000s hits at Parsnip Lake House, a lakeside bar known for live bands, DJs and dancing; freestyle dancing is likely.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "Five-piece, female-fronted Long Island cover band playing half-forgotten hits from the 1980s through the early 2000s.",
+  "genres": [
+    "80s, 90s and early 2000s pop and rock covers"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Assumed the Parsnip gig is Voices Carry LI. A different 'Voices Carry' 80s 'Bandaoke' act exists on Facebook; not confirmed which plays Parsnip.",
+  "youtubeUrl": "https://www.youtube.com/@VoicesCarryLI"
+}

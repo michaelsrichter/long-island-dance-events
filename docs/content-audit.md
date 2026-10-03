@@ -41,6 +41,19 @@ These are the open questions. None blocks the launch; each listing already tells
 
 Source details: `reviewNotes` on each file in `src/content/**`, plus the research notes kept outside the repo.
 
+## Ira's List import (October 3, 2026)
+
+The first run read 51 gigs from the home-page weekly list. 48 are on Long Island at venues we researched, 1 is held for review, and 3 were skipped (theater, comedy and drag shows are not dance or band nights). 44 venues and 45 bands/DJs were added, each with public evidence links (venue and band sites, news, reviews, public photo pages). No partner dancing was found at any Ira's List venue. Line dancing is a regular thing at The Nutty Irishman, 89 North, Daisy's (Miller Place), Eleanor's and Lucky Strike.
+
+| Topic | What we found | Suggested action |
+| --- | --- | --- |
+| Leonid & Friends (Boulton Center, Oct 3) | The band's tour page and Live Nation show Skokie, Illinois that night, and the Boulton Center lists a different show. Held for review (status locked). | Ask the venue, then publish or cancel. |
+| Revel (Garden City) | Not sure which "Revel" the list means; scored as a DJ night from the listing only. | Confirm the venue. |
+| Serve The Servants (Oct 3) | Ira's List says The Warehouse (shown); the band's own site says Katie's that night. | Check with the band. |
+| The Byrne Unit at Salt Shack (Babylon, Oct 4) | Ira's List says "3pm?"; the venue says 5pm. Any time Ira's List marks with "?" is not shown ("time not listed"). | Ask the venue, then set the time and lock it. |
+| In The Groove at Black Pearl (Port Jefferson, Oct 4) | Ira's List says 3-8 PM (shown); the venue says 3-6. | Ask the venue. |
+| New York Ska-Jazz Ensemble, Tres Palms Oyster Fest | Could not confirm on the venues' own pages. | Spot-check. |
+| CarTunes, SqueezePlay, Lefty, For The Love Of Freestyle, We Are Live Fall Fest | Acts we could not identify. Their gigs are scored on the venue and the listing only. | Add the band if someone knows them. |
 ## Photos
 
 No photos were supplied. The site reuses two openly licensed swing-dance photos from the starter (Thomas Quine, CC BY 2.0, Wikimedia Commons), credited on the page and captioned "not a Long Island event". Organizer photos can be added later with written permission.

@@ -1,0 +1,46 @@
+{
+  "name": "Greenport Harbor Brewing Co. (Peconic)",
+  "aliases": [
+    "Greenport Harbor Brewing",
+    "Greenport Harbor Brewing Co",
+    "Greenport Harbor Brewery Peconic",
+    "Greenport Harbor Brewing Peconic"
+  ],
+  "address": "42155 Main Rd",
+  "coordinatesSource": "OpenStreetMap Nominatim (Greenport Harbor Brewing Company, 42155 Main Road)",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://posh.vip/e/fall-fest-3",
+        "note": "Ticket page for We Are Live Fall Fest at the Peconic brewery, Sun Oct 4, 12-6 PM, held on the grass with vendors, music and games."
+      },
+      {
+        "url": "https://www.wearelivellc.com/fallfest",
+        "note": "Organizer page promises house music and DJs at the Fall Fest."
+      },
+      {
+        "url": "https://northforker.com/2025/11/new-things-brewing-at-peconics-greenport-harbor-brewing-co/",
+        "note": "Article says the Peconic site added a large stage and is becoming a music and private-event venue."
+      }
+    ],
+    "floor": "open-space",
+    "notes": "There is a big lawn and an indoor stage, so there is room to move, but we found no reports of people dancing here. The Oct 4 Fall Fest is a ticketed outdoor market with DJs and games.",
+    "policy": "unknown"
+  },
+  "description": "The larger of Greenport Harbor's two North Fork locations: a big brewery taproom and restaurant on Main Road with a stage, a large lawn and weekend live music.",
+  "facebookUrl": "https://www.facebook.com/greenportbrew",
+  "factsSource": "Checked October 3, 2026. Source: greenportharborbrewing.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Greenport+Harbor+Brewing+Co.+%28Peconic%29%2C+42155+Main+Rd%2C+Peconic%2C+NY+11958",
+  "kind": "brewery",
+  "latitude": 41.0414585,
+  "longitude": -72.4546489,
+  "phone": "(631) 477-1100",
+  "postalCode": "11958",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Greenport Harbor Brewing has two sites: Peconic (42155 Main Rd) and Greenport village (234 Carpenter St). The Oct 4 Fall Fest is at Peconic. The Fall Fest is run by an outside company (We Are Live) and needs a ticket.",
+  "state": "NY",
+  "town": "Peconic",
+  "website": "https://greenportharborbrewing.com/"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Downtown Massapequa Park (Park Boulevard & Front Street)",
+  "aliases": [
+    "Mass Park LIRR",
+    "Massapequa Park Street Fair",
+    "Mass Park Street Fair",
+    "Downtown Massapequa Park"
+  ],
+  "address": "Park Boulevard & Front Street (north of Sunrise Highway, by the LIRR station)",
+  "coordinatesSource": "OpenStreetMap Nominatim (Front Street at Massapequa Park station)",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://oysterbaytoday.com/obt-event/massapequa-park-street-fair-2026/",
+        "note": "Village listing: Sun Oct 4, 10:30 AM-4:30 PM, Park Blvd and Front Street north of Sunrise Highway; live music."
+      },
+      {
+        "url": "https://events.longisland.com/the-massapequa-park-street-fair-2026.html",
+        "note": "Fair listing promises all-day live music at three locations plus 150+ vendors and a kids' fun zone."
+      },
+      {
+        "url": "https://longislandplaybook.com/events/annual-massapequa-park-village-street-fair",
+        "note": "Guide says three live bands play all day at the fair."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "This is a free outdoor street fair with live bands at three spots. You can dance in the street near a band, but it is mainly a shopping and family event.",
+    "policy": "allowed"
+  },
+  "description": "The downtown stretch of Park Boulevard by the Massapequa Park train station, closed to traffic for the village's yearly street fair with vendors, food trucks, kids' rides and live music.",
+  "factsSource": "Checked October 3, 2026. Source: oysterbaytoday.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Park+Boulevard+and+Front+Street%2C+Massapequa+Park%2C+NY+11762",
+  "kind": "festival",
+  "latitude": 40.6778728,
+  "longitude": -73.4544971,
+  "phone": "(516) 798-0244",
+  "postalCode": "11762",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Best match: Ira's 'Octoberfest Fair' on Oct 4 at 'Mass Park LIRR' looks like the Massapequa Park Street Fair by the station. We could not confirm Redneck Romance or Fivestone on the fair's lineup. Phone is the Village of Massapequa Park office. Rain date Oct 11.",
+  "state": "NY",
+  "town": "Massapequa Park"
+}

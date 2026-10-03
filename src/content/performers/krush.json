@@ -1,0 +1,44 @@
+{
+  "name": "Krush",
+  "type": "band",
+  "aliases": [
+    "Krush the Band",
+    "Krush The Band NY"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.krushtheband.com/",
+        "note": "Band site promises three sets of rock, dance and more, and says to come party with the band."
+      },
+      {
+        "url": "https://www.krushtheband.com/shows",
+        "note": "Show list includes many nights at The Inn in Long Beach, plus weddings and beach bars."
+      },
+      {
+        "url": "https://www.bandsintown.com/e/106091657-krush-the-band-ny-at-the-inn",
+        "note": "Yearly Black Friday show at The Inn, Long Beach; tagged 70s, 80s, 90s rock."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A party cover band. Its own site invites fans to party to three sets of rock and dance music, and it plays weddings.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A Long Island cover band playing rock and dance hits from the 70s to the 90s at bars, beach clubs and weddings, with regular shows at The Inn in Long Beach.",
+  "facebookUrl": "https://www.facebook.com/krush.the.band1",
+  "genres": [
+    "70s, 80s and 90s rock covers",
+    "dance and party hits"
+  ],
+  "instagramUrl": "https://www.instagram.com/krush.the.band/",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). The Oct 3 date at The Inn was not on the band calendar we read, but the band plays there often.",
+  "website": "https://www.krushtheband.com/",
+  "youtubeUrl": "https://www.youtube.com/@krushthebandny4208"
+}

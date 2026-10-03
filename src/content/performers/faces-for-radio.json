@@ -1,0 +1,41 @@
+{
+  "name": "Faces for Radio",
+  "type": "band",
+  "aliases": [
+    "Faces For Radio NYC"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.stephentalkhouse.com/events/184711",
+        "note": "Talkhouse describes a high-energy party band known for turning any room into a full party."
+      },
+      {
+        "url": "https://www.thebash.com/cover-band/facesforradio",
+        "note": "Booking profile: party band focused on 80s, 90s, 2000s and current pop-rock; plays NYC, Hamptons, Jersey Shore."
+      },
+      {
+        "url": "https://www.gigsalad.com/faces_for_radio_washington",
+        "note": "Booking profile calls it a pop/rock/dance cover band; a client review says it was hired as a party band."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Venue and booking pages call it a high-energy pop, rock and dance party band. Dancing is likely, but we did not watch crowd video.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A party cover band formed in 2019 that plays current hits and throwback anthems at bars, clubs and weddings around NYC, Long Island and the Hamptons.",
+  "genres": [
+    "pop and rock party covers",
+    "80s, 90s and 2000s hits"
+  ],
+  "instagramUrl": "https://www.instagram.com/facesforradionyc/",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Instagram handle taken from the band's Linktree title (@FacesForRadioNYC); no official website found. Nutty Irishman listing not checked directly.",
+  "youtubeUrl": "https://www.youtube.com/@FacesForRadioBand"
+}

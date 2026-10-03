@@ -1,0 +1,30 @@
+{
+  "name": "Oceanwalk",
+  "type": "band",
+  "aliases": [
+    "Oceanwalk Music",
+    "Ocean Walk"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://bellmorelibrary.org/summer-ice-cream-social-feat-oceanwalk-music/",
+        "note": "Library event describes Oceanwalk Music as a lively acoustic trio playing covers from the '60s to today."
+      },
+      {
+        "url": "https://www.bandsintown.com/v/10413646-off-the-brook-or-merrick",
+        "note": "Off The Brook (Merrick) venue page lists an Oceanwalk show in September 2026."
+      }
+    ],
+    "notes": "An acoustic trio playing covers in a restaurant; people mostly eat, listen and sing along rather than dance.",
+    "rating": "listening"
+  },
+  "description": "Acoustic trio from the Bellmore-Merrick area that plays cover songs from the 1960s to today at restaurants and library events.",
+  "genres": [
+    "acoustic covers",
+    "songs from the '60s to today"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). No official website or social pages found. Not the Russian rapper 'OceanWalk' or the Pennsylvania metal band 'The Ocean Walker'. Identity based on same name at nearby Merrick/Bellmore venues."
+}

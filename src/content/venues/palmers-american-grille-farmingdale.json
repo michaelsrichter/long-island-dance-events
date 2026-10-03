@@ -1,0 +1,45 @@
+{
+  "name": "Palmer's American Grille",
+  "aliases": [
+    "Palmer's",
+    "Palmers Farmingdale",
+    "Palmer's American Grill"
+  ],
+  "address": "123 Fulton St",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://palmersamericangrille.com/farmingdale-farmingdale-palmer-s-american-grille-events",
+        "note": "Events page lists 'Live Music Mike Lefty' on Saturday October 3, 7-10 pm."
+      },
+      {
+        "url": "https://www.tripadvisor.ca/Restaurant_Review-g47704-d2569534-Reviews-Palmer_s_American_Grille-Farmingdale_Long_Island_New_York.html",
+        "note": "Listing says live entertainment is in the bar/lounge area on Friday and Saturday evenings."
+      },
+      {
+        "url": "https://www.opentable.com/palmers-american-grill",
+        "note": "Review summary describes a lively bar scene on music nights but a calm dining room; no mention of dancing."
+      }
+    ],
+    "floor": "unknown",
+    "notes": "Live music happens in the bar and lounge on Friday and Saturday nights, but this is mainly a dinner restaurant. We found no clear reports of people dancing.",
+    "policy": "unknown"
+  },
+  "description": "An upscale American grill in Farmingdale serving steaks, pasta and seafood, with a bar and lounge that has live music on weekend evenings and a private party room.",
+  "facebookUrl": "https://www.facebook.com/palmersamericangrille/",
+  "factsSource": "Checked October 3, 2026. Source: tripadvisor.ca.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Palmer%27s+American+Grille+123+Fulton+St+Farmingdale+NY+11735",
+  "kind": "restaurant",
+  "phone": "(516) 420-0609",
+  "postalCode": "11735",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Two businesses named Palmers came up: 'Palmers Restaurant & Tavern' (palmers-restaurant.com) is in Andover and has closed, so it is not this one. Palmer's American Grille's own events page lists 'Live Music Mike Lefty' on Sat Oct 3, which matches Ira's 'Lefty'. Most listings give 123 Fulton St; the restaurant's homepage says 123 Hempstead Tpke (Fulton Street is the local name of Hempstead Turnpike/Route 24 in Farmingdale).",
+  "state": "NY",
+  "town": "Farmingdale",
+  "website": "https://palmersamericangrille.com/",
+  "latitude": 40.731037,
+  "longitude": -73.455339,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

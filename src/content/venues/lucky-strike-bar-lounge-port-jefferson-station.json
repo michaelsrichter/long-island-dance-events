@@ -1,0 +1,49 @@
+{
+  "name": "Lucky Strike Bar & Lounge at Port Jeff Bowl",
+  "aliases": [
+    "Lucky Strike Pt Jeff",
+    "Lucky Strike Bar & Lounge",
+    "Lucky Strike Port Jeff",
+    "Port Jeff Bowl"
+  ],
+  "address": "31 Chereb Ln",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://www.portjeffbowl.com/lucky-strike-lounge",
+        "note": "Venue page lists Terror Garden on Oct 3 (music starts 7:30 PM) and says line dancing every Monday."
+      },
+      {
+        "url": "https://licma.org/dance-instruction",
+        "note": "Long Island country music group lists Monday line dancing at the Lucky Strike Lounge: lesson 6-6:30 PM, open dancing 6:30-9 PM."
+      },
+      {
+        "url": "https://allevents.in/port-jefferson-station/open-dance-night-with-helen/200030698438632",
+        "note": "Teacher's listing for a Monday open dance night at the lounge; all levels welcome, $15."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "line"
+    ],
+    "notes": "The lounge holds a line dance night every Monday with a short lesson, then open dancing with requests. On Saturday band nights the music is live rock, but we found no reports on how much people dance then.",
+    "policy": "encouraged"
+  },
+  "description": "The bar and lounge inside the Port Jeff Bowl bowling center. It has live cover bands most Saturdays and a weekly line dancing night.",
+  "facebookUrl": "https://www.facebook.com/luckystrikebarlounge/",
+  "factsSource": "Checked October 3, 2026. Source: portjeffbowl.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Lucky+Strike+Bar+%26+Lounge+at+Port+Jeff+Bowl%2C+31+Chereb+Ln%2C+Port+Jefferson+Station%2C+NY+11776",
+  "kind": "bar",
+  "phone": "(631) 473-3300",
+  "postalCode": "11776",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Lucky Strike bowling chain location in Sayville. Size of the dance area not confirmed. Monday line dancing is run by an outside teacher ('Dancing in Line with Helen').",
+  "state": "NY",
+  "town": "Port Jefferson Station",
+  "website": "https://www.portjeffbowl.com/lucky-strike-lounge",
+  "latitude": 40.930781,
+  "longitude": -73.054246,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

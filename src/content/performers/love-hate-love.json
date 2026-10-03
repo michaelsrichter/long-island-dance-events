@@ -1,0 +1,34 @@
+{
+  "name": "Love Hate Love",
+  "type": "band",
+  "aliases": [
+    "Love Hate Love Alice in Chains Tribute"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://allevents.in/amityville/unplugged-serve-the-servants-love-hate-love-and-unglued-at-the-warehouse/200030766292852",
+        "note": "Oct 3 at The Warehouse, Amityville: an unplugged night with Serve The Servants, Love Hate Love and Unglued."
+      },
+      {
+        "url": "https://ilovebabylon.com/event/unplugged-90s-acoustic-grunge-night-at-the-warehouse/",
+        "note": "Organizers describe the acoustic grunge night as intimate and not a typical loud tribute show."
+      },
+      {
+        "url": "https://www.spotlightny.com/events/love-hate-love",
+        "note": "Full-band 21+ tribute show at Spotlight at The Paramount, Huntington."
+      }
+    ],
+    "notes": "A grunge tribute. The Oct 3 Warehouse show is an acoustic 'unplugged' night meant for close listening, not dancing.",
+    "rating": "listening"
+  },
+  "description": "A Long Island tribute band that plays the songs of 90s grunge band Alice in Chains, sometimes in an acoustic 'unplugged' format.",
+  "facebookUrl": "https://www.facebook.com/LovehateloveNY",
+  "genres": [
+    "tribute to Alice in Chains",
+    "90s grunge"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Facebook page lists Farmingdale, NY as home base."
+}

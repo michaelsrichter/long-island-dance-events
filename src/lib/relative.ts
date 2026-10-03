@@ -36,7 +36,8 @@ export interface RelativeLabel {
 export function relativeLabel(startMs: number, endMs: number, nowMs: number, opts: { excited?: boolean; allDay?: boolean } = {}): RelativeLabel {
   const days = nyDayNumber(startMs) - nyDayNumber(nowMs);
   if (endMs <= nowMs) return { text: '', tone: 'past', days };
-  if (startMs <= nowMs) return { text: 'Happening now!', tone: 'now', days: 0 };
+  // With no start time we can't know it has begun, so a date-only listing just says Today.
+  if (startMs <= nowMs && !opts.allDay) return { text: 'Happening now!', tone: 'now', days: 0 };
   const evening = !opts.allDay && Number(hourFmt.format(new Date(startMs))) >= 17;
   const bang = opts.excited ? '!' : '';
   if (days <= 0) return { text: evening ? 'Tonight!' : 'Today!', tone: 'today', days: 0 };

@@ -1,0 +1,45 @@
+{
+  "name": "Off The Brook Bistro & Cocktails",
+  "aliases": [
+    "Off The Brook",
+    "Off The Brook Merrick",
+    "Off The Brook Bistro"
+  ],
+  "address": "1810 Merrick Rd",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.offthebrook.com/",
+        "note": "Official site lists live music Friday and Saturday 7-9 pm, brunch and happy hour; parking in rear."
+      },
+      {
+        "url": "https://www.opentable.com/r/off-the-brook-merrick",
+        "note": "Reservation page lists upcoming solo and duo performers; no mention of dancing."
+      },
+      {
+        "url": "https://www.postcard.inc/places/off-the-brook-or-bistro-and-cocktails-merrick-JkR2sYS7SVE",
+        "note": "Review summaries describe a cute, cozy bistro with live music and events."
+      }
+    ],
+    "floor": "unknown",
+    "notes": "This is a cozy dinner spot with live music from about 7 to 9 pm on Fridays and Saturdays. We found no reports of people dancing, so expect a sit-down crowd.",
+    "policy": "unknown"
+  },
+  "description": "A small Italian-American bistro and cocktail bar on Merrick Road with brunch on weekends and live local music on Friday and Saturday evenings. Parking is behind the building.",
+  "facebookUrl": "https://www.facebook.com/offthebrook/",
+  "factsSource": "Checked October 3, 2026. Source: offthebrook.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Off+The+Brook+1810+Merrick+Rd+Merrick+NY+11566",
+  "kind": "restaurant",
+  "phone": "(516) 608-6543",
+  "postalCode": "11566",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Address confirmed by Ira's List venue page (/off-the-brook): 1810 Merrick Rd, Merrick, parking in rear, phone 516-608-6543. Oceanwalk gig on Oct 3 not checked on the venue's own calendar.",
+  "state": "NY",
+  "town": "Merrick",
+  "website": "https://www.offthebrook.com/",
+  "latitude": 40.65351,
+  "longitude": -73.556061,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

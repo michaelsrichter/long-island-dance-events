@@ -1,5 +1,6 @@
 name: Latin and Rhythm (ballroom)
 family: ballroom
+danceType: partner
 order: 21
 aliases:
   - Latin

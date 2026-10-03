@@ -1,0 +1,43 @@
+{
+  "name": "In The Groove",
+  "type": "band",
+  "aliases": [
+    "In The Groove Band",
+    "In The Groove Dance Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.inthegroove.band/",
+        "note": "Band site calls its show 70s dance music and lists dance hits from the 70s to today."
+      },
+      {
+        "url": "https://allevents.in/port-jefferson/in-the-groove-brings-the-boogie-memorial-day-weekend-saturday-may-23/200029680914211",
+        "note": "Black Pearl show listing tells guests to bring their boogie shoes and get ready to groove."
+      },
+      {
+        "url": "https://allevents.in/org/in-the-groove/7702394",
+        "note": "Band's event page shows regular gigs at Black Pearl (Danford's, Port Jefferson) and Tiki Joe's."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A disco and funk band built around dance music. Its shows are promoted as nights to bring your 'boogie shoes'.",
+    "rating": "dance-band",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A Long Island dance band that recreates 1970s disco and funk (Earth, Wind & Fire, Donna Summer) plus later dance hits.",
+  "facebookUrl": "https://www.facebook.com/InTheGrooveDanceBand/",
+  "genres": [
+    "70s disco and funk",
+    "dance hits from the 70s to today"
+  ],
+  "instagramUrl": "https://www.instagram.com/inthegroove.band/",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Rated dance-band because the band markets itself around dance music; no evidence of partner or hustle dancing. Crowd video not watched.",
+  "website": "https://www.inthegroove.band/"
+}

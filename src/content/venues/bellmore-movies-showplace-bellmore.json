@@ -1,0 +1,45 @@
+{
+  "name": "Bellmore Movies & Showplace",
+  "aliases": [
+    "Bellmore Showplace Theater",
+    "Bellmore Movies",
+    "Bellmore Showplace"
+  ],
+  "address": "222 Pettit Ave",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.bellmoremovie.com/events/78037-moonflower-spirit-of-santana/",
+        "note": "Theater's own page for Moonflower (Santana tribute) at the Showplace on Oct 3, 8 PM."
+      },
+      {
+        "url": "https://www.yelp.com/biz/bellmore-movies-and-showplace-bellmore",
+        "note": "Reviews call it a cozy, old-fashioned single-screen movie theater."
+      },
+      {
+        "url": "https://events.longisland.com/christmas-with-olivia-dolly.html",
+        "note": "Listing for a different tribute show here promises sing-alongs and dancing, so some crowds get up during concerts."
+      }
+    ],
+    "floor": "seated",
+    "notes": "It is a movie theater with rows of seats and no dance floor. Some concert ads here mention dancing, but any dancing would be at or near your seat.",
+    "policy": "unknown"
+  },
+  "description": "An old-style single-screen movie theater across from the Bellmore train station. Its Showplace stage also hosts live tribute concerts.",
+  "facebookUrl": "https://www.facebook.com/BellmoreMovies/",
+  "factsSource": "Checked October 3, 2026. Source: bellmoremovie.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Bellmore+Movies+%26+Showplace%2C+222+Pettit+Ave%2C+Bellmore%2C+NY+11710",
+  "kind": "theater",
+  "phone": "(516) 783-7200",
+  "postalCode": "11710",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'Bellmore Showplace Theater' is the Showplace stage inside Bellmore Movies. A promoter called Bellmore Concerts also runs shows at this address.",
+  "state": "NY",
+  "town": "Bellmore",
+  "website": "https://www.bellmoremovie.com/",
+  "latitude": 40.668836,
+  "longitude": -73.530364,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

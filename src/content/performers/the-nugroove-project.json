@@ -1,0 +1,44 @@
+{
+  "name": "The NuGroove Project",
+  "type": "band",
+  "aliases": [
+    "NuGroove Project",
+    "NuGroove",
+    "Nu Groove Project"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://thenugrooveproject.com/home",
+        "note": "Band site describes three lineups and a high-energy mashup show across eras."
+      },
+      {
+        "url": "https://allevents.in/new-hyde-park/the-nugroove-project-at-the-village-of-new-hyde-parks-29th-annual-street-fair/200030302540632",
+        "note": "Street-fair post invites people to spend the afternoon singing and dancing with the band."
+      },
+      {
+        "url": "https://allevents.in/mount-sinai/the-nugroove-project-at-tiki-joes-cedar-beach-mount-sinai/200030131641751",
+        "note": "Beach-bar post promises feel-good grooves and a little dancing if the mood hits."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Upbeat mashups of old and new hits at bars, beach spots and street fairs. The band's own posts invite people to sing and dance along, so some freestyle dancing is likely.",
+    "rating": "mixed",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "East Moriches-based cover project that remixes hits from many decades into mashups; it books as a 6-piece show band, a trio (Small Town Gig) or a duo (Stix & Soul).",
+  "genres": [
+    "pop and rock covers from many decades",
+    "mashups",
+    "soul"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List does not say which of the three lineups plays Daisy's Patchogue. A linktr.ee/nugroove page lists Instagram/Facebook but the direct URLs were not verified.",
+  "website": "https://thenugrooveproject.com/home",
+  "youtubeUrl": "https://www.youtube.com/@gggonzalez1908"
+}

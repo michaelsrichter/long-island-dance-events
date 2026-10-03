@@ -116,7 +116,7 @@ if (mapEl && list) {
 
   function labelMarker(p: Place) {
     const el = p.marker.getElement();
-    el?.setAttribute('aria-label', `${p.name}: ${p.visibleCount} upcoming ${p.visibleCount === 1 ? 'event' : 'events'}${p.host === 'dance' ? ', has dances' : ', classes only'}`);
+    el?.setAttribute('aria-label', `${p.name}: ${p.visibleCount} upcoming ${p.visibleCount === 1 ? 'event' : 'events'}${p.host === 'dance' ? ', has dances' : ', classes or concerts only'}`);
   }
 
   function focusPlace(p: Place, fromList = false) {
@@ -192,7 +192,7 @@ if (mapEl && list) {
     // A link to a place that only has classes (e.g. from a venue page) shows everything, so its pin is there.
     const linked = places.find((p) => `#place-${p.id}` === location.hash);
     const typeEl = form.elements.namedItem('type');
-    if (linked && !params.get('type') && typeEl instanceof RadioNodeList && linked.events.every((e) => e.dataset.host === 'class')) typeEl.value = 'all';
+    if (linked && !params.get('type') && typeEl instanceof RadioNodeList && linked.events.every((e) => e.dataset.host !== 'dance')) typeEl.value = 'all';
     form.addEventListener('change', () => apply('change'));
   }
   apply('load');

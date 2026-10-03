@@ -1,0 +1,44 @@
+{
+  "name": "Twisted Cow Distillery",
+  "aliases": [
+    "Twisted Cow",
+    "Twisted Cow East Northport"
+  ],
+  "address": "13 Hewitt Square",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://twistedcowdistillery.net/Events/Detail/EventId/1205/squeeze-play-debuts",
+        "note": "Official event: SqueezePlay at the tasting room, Sat Oct 3, 8-11 pm."
+      },
+      {
+        "url": "https://twistedcowdistillery.net/The-Tasting-Room",
+        "note": "Tasting room page mentions comfortable seating, live music, tours and events."
+      },
+      {
+        "url": "https://www.mapquest.com/us/new-york/twisted-cow-distillery-516550027",
+        "note": "Yelp review excerpt: staff pulled a long table over so a group could see the band on a Saturday night."
+      }
+    ],
+    "floor": "unknown",
+    "notes": "The tasting room has table seating and bands on weekend nights. Reviews talk about finding a table to watch the band; we found no reports of dancing.",
+    "policy": "unknown"
+  },
+  "description": "A craft distillery in East Northport with a farm-industrial tasting room serving cocktails made from its own spirits, plus tours, trivia and live music.",
+  "facebookUrl": "https://www.facebook.com/tc.distillery/",
+  "factsSource": "Checked October 3, 2026. Source: twistedcowdistillery.net.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Twisted+Cow+Distillery+13+Hewitt+Square+East+Northport+NY+11731",
+  "kind": "distillery",
+  "phone": "(631) 980-8269",
+  "postalCode": "11731",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Phone is published as 631-980-TCOW (= 631-980-8269). SqueezePlay confirmed for Oct 3; the second act Ira listed, 'CarTunes', was not found on the venue site (an acoustic act also appears that day).",
+  "state": "NY",
+  "town": "East Northport",
+  "website": "https://twistedcowdistillery.net/",
+  "latitude": 40.876394,
+  "longitude": -73.323369,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

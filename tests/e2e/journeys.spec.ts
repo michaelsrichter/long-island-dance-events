@@ -164,6 +164,9 @@ test.describe('directory pages link everything together', () => {
   test('the sources page credits every source and explains corrections and takedowns', async ({ pinned: page }) => {
     await page.goto('/sources/');
     await expect(page.getByRole('link', { name: 'The Dance Calendar' })).toHaveAttribute('href', /^https:\/\/www\.thedancecalendar\.com\//);
+    await expect(page.getByRole('heading', { name: 'Dance calendars' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Live-music lists' })).toBeVisible();
+    await expect(page.locator('#src-music').locator('xpath=..')).toContainText("Ira's List");
     await expect(page.locator('#corrections')).toContainText('Remove my events');
     await expect(page.locator('#takedown')).toContainText('takedown request');
   });
@@ -249,5 +252,42 @@ test.describe('CMS and errors', () => {
     expect(res?.status()).toBe(404);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Oops, we missed a step');
     await expect(page.getByRole('link', { name: 'See upcoming events' })).toBeVisible();
+  });
+});
+
+test.describe('can you dance there?', () => {
+  test('shows where people mostly sit and listen, and keeps those shows out of the dance list', async ({ pinned: page }) => {
+    await page.goto('/events/?category=all');
+    const quiet = page.locator('[data-upcoming-list] [data-event][data-dancing="unlikely"]:not([hidden])');
+    expect(await quiet.count()).toBeGreaterThan(0);
+    const href = (await quiet.first().locator('.event-card__title a').getAttribute('href'))!;
+    await page.goto('/events/');
+    await expect(page.locator(`[data-upcoming-list] [data-event]:not([hidden]) .event-card__title a[href="${href}"]`)).toHaveCount(0);
+    await page.goto(href);
+    const panel = page.locator('[data-dancing-panel]');
+    await expect(panel.getByRole('heading', { name: 'Can you dance here?' })).toBeVisible();
+    await expect(panel.getByRole('img', { name: /Dancing score: [0-3] out of 10/ })).toBeVisible();
+    await expect(panel.getByRole('link', { name: 'How the score works' })).toHaveAttribute('href', '/faq/#dancing-score');
+  });
+
+  test('the kind-of-dancing filter keeps only that kind, and venue pages explain their dancing', async ({ pinned: page }) => {
+    await page.goto('/events/?category=all');
+    await page.locator('.chip', { hasText: 'Line dancing' }).click();
+    await expect(page).toHaveURL(/dance=line/);
+    const visible = page.locator('[data-upcoming-list] [data-event]:not([hidden])');
+    expect(await visible.count()).toBeGreaterThan(0);
+    for (const c of await visible.all()) await expect(c).toHaveAttribute('data-dance-kinds', /\bline\b/);
+    await visible.first().locator('.event-card__title a').click();
+    await expect(page.locator('[data-dancing-panel] .dance-kinds')).toContainText('Line dancing');
+    await page.locator('main a[href^="/venues/"]').first().click();
+    await expect(page.getByRole('heading', { name: /^Dancing at / })).toBeVisible();
+    await expect(page.locator('#dancing')).toContainText('Line dancing');
+  });
+
+  test('a dance-calendar listing is always a dance event', async ({ pinned: page }) => {
+    await page.goto('/events/?category=all');
+    const href = await page.locator('[data-upcoming-list] [data-event][data-category="social-dance"][data-dancing="dance-event"]:not([hidden]) .event-card__title a').first().getAttribute('href');
+    await page.goto(href!);
+    await expect(page.locator('[data-dancing-panel]')).toHaveAttribute('data-level', 'dance-event');
   });
 });

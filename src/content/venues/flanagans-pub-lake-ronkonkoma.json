@@ -1,0 +1,48 @@
+{
+  "name": "Flanagan's Pub",
+  "aliases": [
+    "Flanagans Octoberfest",
+    "Flanagan's Lake Ronkonkoma",
+    "Flanagan's Ronkonkoma"
+  ],
+  "address": "451 Hawkins Ave",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.tripadvisor.com/ShowUserReviews-g1501343-d840683-r959337293-Flanagan_s_Pub-Long_Island_Lake_Ronkonkoma.html",
+        "note": "TripAdvisor review says the room is large enough for big bands and by 10:30 most people in the bar were dancing."
+      },
+      {
+        "url": "https://www.flanaganspubny.com/events-2/3rd-annual-oktoberfest",
+        "note": "Pub's own page: 3rd Annual Oktoberfest, Sun Oct 4, 2-5 PM in the back parking lot, live music by Limewired."
+      },
+      {
+        "url": "https://www.flanaganspubny.com/events-2",
+        "note": "Pub's events page shows live bands most Friday and Saturday nights."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The main bar room is big enough that people dance when a party band plays. The Oct 4 Oktoberfest is outdoors in the back parking lot, with a band starting at 2 PM.",
+    "policy": "allowed"
+  },
+  "description": "A family-run Irish pub and restaurant on Hawkins Avenue with a big bar room, dining rooms and a back patio. It has live bands on weekend nights.",
+  "facebookUrl": "https://www.facebook.com/flanaganspubny/",
+  "factsSource": "Checked October 3, 2026. Source: flanaganspubny.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Flanagan%27s+Pub%2C+451+Hawkins+Ave%2C+Lake+Ronkonkoma%2C+NY+11779",
+  "kind": "bar",
+  "phone": "(631) 588-9843",
+  "postalCode": "11779",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'Flanagans Octoberfest' = the Oktoberfest at Flanagan's Pub in Lake Ronkonkoma (Limewired confirms on its own site). Not Lily Flanagan's in Babylon (now Lily's Babylon) or Father Flanagan's in Levittown.",
+  "state": "NY",
+  "town": "Lake Ronkonkoma",
+  "website": "https://www.flanaganspubny.com/",
+  "latitude": 40.825054,
+  "longitude": -73.107448,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

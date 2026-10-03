@@ -1,0 +1,43 @@
+{
+  "name": "Yachtley Crew",
+  "type": "band",
+  "aliases": [
+    "Yachtley Crew Yacht Rock"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://openingnight.online/yachtley-crew-full-steam-ahead/",
+        "note": "Concert review has a section on fans dancing in the aisles and a standing ovation."
+      },
+      {
+        "url": "https://100percentrock.com/2025/05/live-yachtley-crew-perth-12-may-2025/",
+        "note": "Live review: the crowd danced, sang and clapped non-stop."
+      },
+      {
+        "url": "https://www.patchoguetheatre.org/events/2026-10-03-y-chtley-cr-w",
+        "note": "Patchogue Theatre page for the Oct 3, 8 pm show."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A theater concert, but reviews say fans sing, clap and dance in the aisles to the soft-rock hits, so expect some freestyle dancing.",
+    "rating": "mixed",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "Seven-piece Southern California yacht-rock band, formed in 2017, that tours nationally playing smooth '70s and '80s soft-rock hits in sailor outfits.",
+  "facebookUrl": "https://www.facebook.com/YachtleyCrew/",
+  "genres": [
+    "yacht rock",
+    "70s and 80s soft rock"
+  ],
+  "instagramUrl": "https://www.instagram.com/yachtleycrew/",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Nationally touring act, not a local cover band.",
+  "website": "https://www.yachtleycrew.com/",
+  "youtubeUrl": "https://www.youtube.com/yachtleycrew"
+}

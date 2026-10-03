@@ -29,6 +29,7 @@
       "sourceName": "The Dance Calendar, November 2030",
       "sourceRef": "page 2",
       "status": "active",
+      "dancingCues": [],
       "confidence": 0.9
     }
   },
@@ -60,6 +61,7 @@
       "sourceName": "The Dance Calendar, November 2030",
       "sourceRef": "page 2",
       "status": "active",
+      "dancingCues": [],
       "confidence": 0.8,
       "reviewNotes": "New venue was added automatically. Check it."
     }
@@ -91,6 +93,7 @@
       "sourceName": "The Dance Calendar, November 2030",
       "sourceRef": "page 2",
       "status": "active",
+      "dancingCues": [],
       "confidence": 0.9
     }
   },
@@ -121,6 +124,7 @@
       "sourceName": "The Dance Calendar, November 2030",
       "sourceRef": "page 3",
       "status": "active",
+      "dancingCues": [],
       "confidence": 0.7,
       "reviewNotes": "New venue was added automatically. Check it."
     }

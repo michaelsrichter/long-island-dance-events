@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import EventSeriesList from '../../components/EventSeriesList.astro';
 import PersonLinks from '../../components/PersonLinks.astro';
+import DancingFacts from '../../components/DancingFacts.astro';
 import { upcomingFor } from '../../lib/content';
 import { linksOf } from '../../lib/links';
 import { PERFORMER_TYPE_LABELS } from '../../lib/schemas';
@@ -28,8 +29,9 @@ const lede = p.description ?? `${PERFORMER_TYPE_LABELS[p.type]}${p.genres.length
   </PageHeader>
   <div class="container section stack-l">
     <section aria-labelledby="on-h">
-      <h2 id="on-h">Where to dance to {p.name} next</h2>
+      <h2 id="on-h">Where to see {p.name} next</h2>
       <div class="mt-5"><EventSeriesList events={events} empty={`No upcoming events with ${p.name} are listed right now`} /></div>
     </section>
+    {p.dancing && <DancingFacts name={p.name} kind="performer" rating={p.dancing.rating} kinds={p.dancing.kinds} notes={p.dancing.notes} evidence={p.dancing.evidence} confidence={p.dancing.confidence} checked={p.dancing.checked} />}
   </div>
 </BaseLayout>

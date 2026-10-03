@@ -1,0 +1,52 @@
+{
+  "name": "89 North Music Venue",
+  "aliases": [
+    "89 North",
+    "89 North Patchogue"
+  ],
+  "address": "89 N Ocean Ave",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://89northmusic.com/days/d-09-30-2026/",
+        "note": "Venue's own Country Night listing: DJ, live bands and line dance instruction, dancing 7:30-10:30 PM, no experience needed."
+      },
+      {
+        "url": "https://www.tripadvisor.com/ShowUserReviews-g60803-d3444047-r693510510-89_North-Patchogue_Long_Island_New_York.html",
+        "note": "Reviewer compares it to a classic rock club with tables around the stage and room for dancing."
+      },
+      {
+        "url": "https://www.yelp.com/biz/89-north-music-venue-patchogue",
+        "note": "A Yelp reviewer says there is plenty of room to hang out or dance."
+      },
+      {
+        "url": "https://www.loc8nearme.com/new-york/patchogue/89-north-music-venue/5015902/",
+        "note": "A January 2026 review says they have done both standing-room and seated shows and there is room for dancing."
+      }
+    ],
+    "floor": "dance-floor",
+    "kinds": [
+      "line",
+      "freestyle"
+    ],
+    "notes": "There is open floor in front of the stage where people dance at band shows. On Wednesday country nights an instructor teaches line dances and beginners are welcome.",
+    "policy": "encouraged"
+  },
+  "description": "A live music club in downtown Patchogue with a stage, a big bar, table seating and standing room. It books tribute and rock bands on weekends and runs a weekly country night.",
+  "facebookUrl": "https://www.facebook.com/89northmusic/",
+  "factsSource": "Checked October 3, 2026. Source: 89northmusic.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=89+North+Music+Venue%2C+89+N+Ocean+Ave%2C+Patchogue%2C+NY+11772",
+  "kind": "concert-hall",
+  "phone": "(631) 730-8992",
+  "postalCode": "11772",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Oct 3 is a metal tribute night (Slayer and Metallica tributes), so expect a standing rock crowd, not social dancing. A review summary says the venue discourages moshing.",
+  "state": "NY",
+  "town": "Patchogue",
+  "website": "https://89northmusic.com/",
+  "latitude": 40.76657,
+  "longitude": -73.015012,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

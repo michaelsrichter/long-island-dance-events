@@ -1,0 +1,40 @@
+{
+  "name": "Moonflower~Spirit of Santana",
+  "type": "band",
+  "aliases": [
+    "Moonflower Santana Tribute"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.bellmoremovie.com/events/78037-moonflower-spirit-of-santana/",
+        "note": "Oct 3, 8 PM at The Showplace, Bellmore: billed as a concert experience with Latin percussion and guitarist Nick Sassano."
+      },
+      {
+        "url": "https://nicksassano.com/electronic-press-kit/",
+        "note": "Press kit: playing the NY metro area since 2021; says the show keeps audiences on their feet."
+      },
+      {
+        "url": "https://www.longislandpress.com/2023/07/18/music-under-the-stars-moonflower-spirit-of-santana-plays-syosset-woodbury-community-park/",
+        "note": "News story on an outdoor park concert in Syosset."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A concert-style tribute in a small theater. The band says it keeps audiences on their feet, and Santana's Latin rhythms invite some dancing, but it is mainly a show.",
+    "rating": "mixed",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A New York-area Santana tribute band led by guitarist Nick Sassano, with Latin percussion and Santana's guitar-driven Latin rock hits.",
+  "genres": [
+    "tribute to Santana",
+    "Latin rock"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Other Santana tributes named Moonflower exist (Tampa, FL and Las Vegas). This is the NY metro band led by Nick Sassano, as named on the Bellmore listing. No salsa evidence.",
+  "website": "https://nicksassano.com/moonflower/"
+}

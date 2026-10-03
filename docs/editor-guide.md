@@ -72,6 +72,17 @@ Only add events in **Nassau or Suffolk** counties.
 - **Other names used in listings** helps matching (for example "DJ Neil" and "DJ Neil Wrangler").
 - **Opt out**: if an organizer asks us to stop listing their events, open the organizer and turn on **Opted out (do not list their events)**. The weekly run then skips their events. Set any of their current events to **Cancelled** with the note "Removed at the organizer's request".
 
+## Can you dance there? (the dancing score)
+
+Listings from dance calendars are always dance events. Live-music listings (bands and DJs at bars, restaurants, parks and theaters) get a **dancing score** from 0 to 10, worked out from:
+
+1. **The venue:** open the venue and fill in **Dancing here** (room to dance, whether dancing is welcome, the kinds of dancing, what you found and the web pages that show it).
+2. **The band or DJ:** open them and fill in **Dancing at their shows** (dance band, party band, mixed or mostly listening).
+3. **Clues in the listing** the weekly run spots, such as "DJ", "dance party", "theater", "library", "acoustic" or "brunch".
+
+To fix one event, open it and fill in **Can you dance here? (your answer)**: a chance from 0 (no dancing) to 1 (sure), the kinds of dancing, and a short reason visitors will see. Leave it empty to let the site work it out.
+
+Kinds of dancing: **Partner** (swing, salsa, ballroom, hustle, tango…), **Line** and **Party dancing** (freestyle, like at a club or wedding). Only write what a public page shows; add that page under **How we know (sources)**. Never use private group posts or people's personal photos.
 ## Sources
 
 You can turn a source off by unticking **Turned on**. The **Last result** fields are filled in by the weekly run:
@@ -84,7 +95,9 @@ You can turn a source off by unticking **Turned on**. The **Last result** fields
 | error | Could not download or read the source. |
 | skipped | The source is turned off, or its robots.txt does not allow it. |
 
-New sources need a small program (an "adapter") written by a developer, and the owner's approval. See the README.
+**How often** says when the program reads the source (every day, twice a week, weekly, monthly, only in season, or only by hand). **What it lists** tells the site whether everything in the source is a dance (a dance calendar) or whether each listing needs a dancing score (a live-music list).
+
+New sources need a small program (an "adapter") written by a developer, and the owner's approval. Many calendars can share the general calendar-feed (`ical`) and event-page (`jsonld`) adapters: then you only fill in **Feed address**, **Facts to use when a listing leaves them out** and, if needed, the **Only keep** / **Skip** patterns. See the README.
 
 ## Writing tips
 
