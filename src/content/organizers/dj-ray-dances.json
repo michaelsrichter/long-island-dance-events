@@ -1,0 +1,18 @@
+{
+  "name": "DJ Ray Dance Nights",
+  "type": "dj",
+  "aliases": [
+    "Sounds of DJ Ray"
+  ],
+  "phone": "(516) 385-1720",
+  "town": "Massapequa",
+  "homeVenueId": "massapequa-elks-lodge",
+  "danceStyles": [
+    "hustle",
+    "east-coast-swing",
+    "west-coast-swing",
+    "latin-ballroom"
+  ],
+  "description": "Oldies dance nights with DJ Ray at the Massapequa Elks Lodge.",
+  "reviewNotes": "Only source is The Dance Calendar (directory + listing); no website or social page found."
+}

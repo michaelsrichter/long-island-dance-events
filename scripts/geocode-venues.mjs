@@ -15,11 +15,10 @@ export const NOMINATIM_SOURCE = 'OpenStreetMap Nominatim (© OpenStreetMap contr
 
 export function readGeocodeSettings(env = process.env) {
   const s = YAML.parse(readFileSync(settingsPath, 'utf8')) ?? {};
-  const siteUrl = (env.SITE_URL || 'https://example.org').replace(/\/$/, '');
   return {
     center: s.mapCenter ?? { lat: 39.5, lng: -98.35 },
     maxDistanceKm: Number(s.maxDistanceKm ?? 250),
-    userAgent: `${s.shortName ?? 'community-site'}-geocoder/1.0 (+${siteUrl}; ${s.email ?? 'info@example.org'})`,
+    userAgent: `${(s.shortName ?? 'community-site').replace(/\s+/g, '')}-geocoder/1.0 (+${s.repoUrl ?? env.SITE_URL ?? 'https://example.org'})`,
   };
 }
 
@@ -42,8 +41,8 @@ export function parseFlags(argv) {
 }
 
 export function oneLineAddress(v) {
-  const street = String(v.address ?? '').replace(/,?\s*(suite|ste\.?|unit|apt\.?|floor|fl\.?|room|rm\.?|#)\s*[\w-]+/gi, '').trim();
-  return [street, v.city, [v.state ?? 'NY', v.postalCode].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+  const street = String(v.address ?? '').replace(/,?\s*(?:\b(?:suite|ste\.?|unit|apt\.?|floor|fl\.?|room|rm\.?)\b|#)\s*[\w-]+/gi, '').trim();
+  return [street, v.town ?? v.city, [v.state ?? 'NY', v.postalCode].filter(Boolean).join(' ')].filter(Boolean).join(', ');
 }
 
 export function distanceKm(a, b) {
@@ -120,26 +119,20 @@ async function main() {
   const maxDistanceKm = flags.maxDistanceKm ?? settings.maxDistanceKm;
   let updated = 0;
   const missing = [];
-  for (const file of readdirSync(venuesDir).filter((f) => f.endsWith('.md')).sort()) {
+  for (const file of readdirSync(venuesDir).filter((f) => f.endsWith('.json')).sort()) {
     const path = join(venuesDir, file);
-    const text = readFileSync(path, 'utf8');
-    const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---(\r?\n[\s\S]*)?$/);
-    if (!m) continue;
-    const doc = YAML.parseDocument(m[1]);
-    const v = doc.toJS();
+    const v = JSON.parse(readFileSync(path, 'utf8'));
     if (!flags.force && Number.isFinite(v.latitude) && Number.isFinite(v.longitude)) continue;
-    if (!v.address || !v.city) { missing.push(`${file} (no street address)`); continue; }
+    if (!v.address || !(v.town ?? v.city)) { missing.push(`${file} (no street address)`); continue; }
     const address = oneLineAddress(v);
     const hit = await geocode(address, { name: v.name, center, maxDistanceKm, userAgent: settings.userAgent });
     if (!hit) { missing.push(`${file} (${address})`); console.warn(`✗ ${file}: no match for "${address}"`); continue; }
     console.log(`✓ ${file}: ${round(hit.lat)}, ${round(hit.lng)} ← ${hit.source}${hit.matched ? `: ${hit.matched}` : ''}`);
     if (flags.dry) continue;
-    doc.set('latitude', round(hit.lat));
-    doc.set('longitude', round(hit.lng));
-    doc.set('coordinatesSource', hit.source);
-    const eol = text.includes('\r\n') ? '\r\n' : '\n';
-    const front = doc.toString({ lineWidth: 0 }).trimEnd().replace(/\n/g, eol);
-    writeFileSync(path, `---${eol}${front}${eol}---${m[2] ?? eol}`);
+    v.latitude = round(hit.lat);
+    v.longitude = round(hit.lng);
+    v.coordinatesSource = hit.source;
+    writeFileSync(path, `${JSON.stringify(v, null, 2)}\n`);
     updated++;
   }
   console.log(`\n[geocode] ${updated} venue(s) updated${flags.dry ? ' (dry run)' : ''}. Center ${center.lat},${center.lng}; max ${maxDistanceKm} km.`);

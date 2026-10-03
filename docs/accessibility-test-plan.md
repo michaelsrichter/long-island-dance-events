@@ -25,18 +25,17 @@ Coverage:
 
 | Page | Why |
 | --- | --- |
-| `/` | Hero, slideshow, next-dance card, theme controls. |
-| `/events/` | Filters, collapsed lists, event cards. |
+| `/` | Search, quick links with counts, today and this week lists, theme controls. |
+| `/events/` | Filters (fieldsets, chips, selects), result count, event cards. |
 | `/events/map/` | Map plus accessible list fallback. |
 | `/events/calendar/` | Calendar grid/agenda. |
 | `/events/past/` and year pages | Archive navigation. |
 | Event detail pages | Alerts, price tables, share/calendar controls. |
-| Community event page | Organizer/source warnings and links. |
-| `/community/` | Organizer cards and classes. |
-| `/new-to-swing/`, `/lessons/`, `/faq/` | Beginner content and accordions. |
+| `/faq/` | Accordions. |
 | `/venues/` and venue detail | Addresses, parking, map links. |
-| `/performers/` and profile | Person cards and external links. |
-| Static pages | About, membership, gallery, contact, privacy. |
+| `/organizers/`, `/instructors/`, `/performers/`, `/styles/` and detail pages | Cards, external links, upcoming lists. |
+| `/sources/` | Sources table, correction and takedown links. |
+| Static pages | About, privacy. |
 | 404 | Helpful recovery actions. |
 
 ## Manual keyboard script
@@ -69,7 +68,7 @@ Playwright covers this, but manually confirm when changing scripts:
 
 - Disable JavaScript.
 - `/events/` hides filters.
-- All home event cards are visible.
+- All event cards are visible.
 - No Show more button is shown.
 - Event detail calendar `.ics` link remains visible.
 - Theme controls are hidden and device color scheme is used.

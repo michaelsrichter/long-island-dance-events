@@ -1,0 +1,17 @@
+{
+  "name": "Adelphi University Continuing Education",
+  "type": "school",
+  "aliases": [
+    "Adelphi University"
+  ],
+  "phone": "(516) 877-4260",
+  "town": "Garden City",
+  "homeVenueId": "adelphi-university",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "website": "https://www.adelphi.edu/ce-course/workshop/ballroom-dancing/",
+  "description": "Adelphi University non-credit course in social and ballroom dancing, held Friday evenings on the Garden City campus.",
+  "reviewNotes": "Added so Richard Fiore's class has an organizer; registration is online via the course page."
+}

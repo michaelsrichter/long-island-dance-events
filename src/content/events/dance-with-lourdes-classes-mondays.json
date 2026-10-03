@@ -1,0 +1,34 @@
+{
+  "title": "West Coast Swing, Ballroom and Latin classes at Brumidi Lodge (Sons of Italy)",
+  "summary": "Group classes in West Coast Swing, Ballroom and Latin with Lourdes Cruz. Times: 4:45 PM intermediate/advanced West Coast Swing; 5:45 PM advanced West Coast Swing; 6:45 PM Ballroom Mix; 7:45 PM Latin Mix.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "west-coast-swing",
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "start": "2026-10-05T16:45",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=MO;UNTIL=20261026",
+    "exdates": [
+      "2026-10-19"
+    ]
+  },
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "dance-with-lourdes",
+  "instructorIds": [
+    "lourdes-cruz"
+  ],
+  "skillLevel": "mixed",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "pages 16, 18, 21",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.95,
+  "matchKey": "thedancecalendar|brumidi-lodge|dance-with-lourdes|monday|16:45|class-lesson||ballroom+latin-ballroom+west-coast-swing||repeat"
+}

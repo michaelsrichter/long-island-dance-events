@@ -1,5 +1,9 @@
-name: "West Coast Swing"
-order: 30
+name: West Coast Swing
 family: swing
-summary: "A smooth, stretchy partner dance done in a slot. It fits blues, pop, and many swing songs."
-tempo: "Slow to medium blues, R&B, pop and swing"
+order: 12
+aliases:
+  - West Coast Swing
+  - WCS
+  - West Coast
+summary: A smooth swing dance done in a straight line. It fits pop, R&B and blues songs.
+music: Pop, R&B, blues, country

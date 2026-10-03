@@ -5,24 +5,25 @@ import EventViews from '../../../components/EventViews.astro';
 import MonthCalendar from '../../../components/MonthCalendar.astro';
 import { getEventGroups } from '../../../lib/content';
 import { monthRange } from '../../../lib/months';
-import { dateInZone } from '../../../lib/time';
+import { dateInZone, formatMonthKey } from '../../../lib/time';
 import { breadcrumbJsonLd } from '../../../lib/seo';
 
 const { all, now } = await getEventGroups();
 const months = monthRange(all, now);
 const month = dateInZone(now).slice(0, 7);
 const i = months.indexOf(month);
+const label = formatMonthKey(month);
 const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Events', href: '/events/' },
   { name: 'Calendar', href: '/events/calendar/' },
 ];
 ---
-<BaseLayout title="Swing Dance Calendar" description="Month-by-month calendar of Riverbend Swing Dance Club dances, lessons and live band nights." pageType="calendar" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
-  <PageHeader title="Event calendar" lede="See the whole month at a glance. On a phone, events are listed below each month." crumbs={crumbs}>
+<BaseLayout title={`${label} dance calendar for Long Island`} description={`Social dances, classes and live music in Nassau and Suffolk in ${label}, shown as a month calendar.`} pageType="calendar" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Month calendar" lede="See the whole month at a glance. On a phone, the events are listed under the calendar." crumbs={crumbs}>
     <EventViews current="calendar" />
   </PageHeader>
   <div class="container section">
-    <MonthCalendar month={month} events={all} prev={months[i - 1]} next={months[i + 1]} today={dateInZone(now)} now={now} />
+    <MonthCalendar month={month} events={all.filter((e) => e.status !== 'pending-review')} prev={months[i - 1]} next={months[i + 1]} today={dateInZone(now)} now={now} />
   </div>
 </BaseLayout>

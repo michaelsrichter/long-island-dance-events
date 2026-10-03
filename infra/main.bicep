@@ -5,7 +5,7 @@ targetScope = 'resourceGroup'
 @allowed(['eastus2', 'centralus', 'westus2', 'westeurope', 'eastasia'])
 param location string = 'eastus2'
 
-@description('Globally unique name for the Static Web App, such as swa-riverbend-web.')
+@description('Globally unique name for the Static Web App, such as swa-li-dance-events-web.')
 param staticWebAppName string
 
 @description('Static Web Apps plan. Free covers most small volunteer sites; Standard adds SLA and advanced networking.')

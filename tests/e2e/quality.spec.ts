@@ -1,5 +1,5 @@
 import AxeBuilder from '@axe-core/playwright';
-import { test, expect, noHorizontalScroll } from './fixtures';
+import { test, expect, noHorizontalScroll, firstEventUrl } from './fixtures';
 
 const PAGES = [
   '/',
@@ -7,35 +7,34 @@ const PAGES = [
   '/events/map/',
   '/events/calendar/',
   '/events/past/',
-  '/events/past/2026/',
-  '/events/series/thursday-night-swing/',
-  '/events/2026-10-08-thursday-night-swing/',
-  '/events/2026-10-03-beacon-blues-night/',
-  '/community/',
-  '/new-to-swing/',
-  '/lessons/',
   '/venues/',
-  '/venues/riverbend-community-hall/',
-  '/venues/juniper-grange/',
+  '/venues/huntington-moose-lodge/',
+  '/organizers/',
+  '/organizers/swing-dance-long-island/',
+  '/instructors/',
+  '/instructors/lourdes-cruz/',
   '/performers/',
-  '/performers/maya-rivera/',
+  '/performers/dj-ray/',
+  '/styles/',
+  '/styles/west-coast-swing/',
+  '/sources/',
   '/about/',
-  '/membership/',
-  '/gallery/',
-  '/contact/',
   '/faq/',
   '/privacy/',
   '/this-page-does-not-exist/',
 ];
 
 test.describe('accessibility (axe, WCAG 2.2 AA)', () => {
-  for (const path of PAGES) {
-    test(`no serious or critical violations: ${path}`, async ({ pinned: page }) => {
-      await page.goto(path);
-      const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
-      const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
-      expect(serious.map((v) => `${v.id}: ${v.help} (${v.nodes.map((n) => n.target.join(' ')).slice(0, 3).join(' | ')})`)).toEqual([]);
-    });
+  for (const path of [...PAGES, 'first event page']) {
+    for (const scheme of ['light', 'dark'] as const) {
+      test(`no serious or critical violations (${scheme}): ${path}`, async ({ pinned: page }) => {
+        await page.emulateMedia({ colorScheme: scheme });
+        await page.goto(path === 'first event page' ? await firstEventUrl(page) : path);
+        const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).exclude('.leaflet-container').analyze();
+        const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
+        expect(serious.map((v) => `${v.id}: ${v.help} (${v.nodes.map((n) => n.target.join(' ')).slice(0, 3).join(' | ')})`)).toEqual([]);
+      });
+    }
   }
 });
 
@@ -63,20 +62,23 @@ test.describe('keyboard navigation', () => {
     await expect(button).toBeFocused();
   });
 
-  test('add-to-calendar menu works with the keyboard', async ({ pinned: page }) => {
-    await page.goto('/');
-    const summary = page.locator('[data-featured-candidate]:not([hidden]) details[data-menu] > summary');
-    await summary.focus();
+  test('the share dialog opens and closes with the keyboard', async ({ pinned: page }) => {
+    await page.addInitScript(() => Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }));
+    await page.goto(await firstEventUrl(page));
+    const btn = page.locator('.action-bar [data-share-open]');
+    test.skip(!(await btn.isVisible()), 'The quick-action bar only shows on small screens');
+    await btn.focus();
     await page.keyboard.press('Enter');
-    const google = page.locator('[data-featured-candidate]:not([hidden]) details[data-menu] a[data-track-method="google"]');
-    await expect(google).toBeVisible();
+    const dialog = page.getByRole('dialog', { name: 'Share this event' });
+    await expect(dialog).toBeVisible();
     await page.keyboard.press('Escape');
-    await expect(google).toBeHidden();
+    await expect(dialog).toBeHidden();
+    await expect(btn).toBeFocused();
   });
 
-  test('every interactive element has a visible focus indicator', async ({ pinned: page }) => {
+  test('every interactive element on the events page has a visible focus indicator', async ({ pinned: page }) => {
     await page.goto('/events/');
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 14; i++) {
       await page.keyboard.press('Tab');
       const outline = await page.evaluate(() => {
         const el = document.activeElement as HTMLElement;
@@ -94,24 +96,22 @@ test.describe('keyboard navigation', () => {
 
 test.describe('narrow screens (320 px)', () => {
   test.use({ viewport: { width: 320, height: 640 } });
-  for (const path of PAGES) {
+  for (const path of [...PAGES, 'first event page']) {
     test(`no sideways scrolling: ${path}`, async ({ pinned: page }) => {
-      await page.goto(path);
+      await page.goto(path === 'first event page' ? await firstEventUrl(page) : path);
       await noHorizontalScroll(page);
     });
   }
 
-  test('touch targets in the next-dance card are at least 44 px tall', async ({ pinned: page }) => {
+  test('quick links and filter chips are at least 44 px tall', async ({ pinned: page }) => {
     await page.goto('/');
-    const targets = page.locator('[data-featured-candidate]:not([hidden]) .btn-row :is(a.btn, summary.btn, button.btn)');
-    const n = await targets.count();
-    expect(n).toBeGreaterThan(2);
-    for (let i = 0; i < n; i++) {
-      const box = await targets.nth(i).boundingBox();
-      if (box) expect(box.height).toBeGreaterThanOrEqual(44);
-    }
+    for (const link of await page.locator('.quick-link').all()) expect((await link.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+    await page.goto('/events/');
+    for (const chip of (await page.locator('.filters .chip span').all()).slice(0, 6)) expect((await chip.boundingBox())!.height).toBeGreaterThanOrEqual(44);
   });
 });
+
+const escapeRegExp = (s: string) => s.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
 
 test.describe('SEO metadata', () => {
   test('every key page has a unique title, description and canonical URL', async ({ page }) => {
@@ -123,18 +123,18 @@ test.describe('SEO metadata', () => {
       expect(titles.has(title), `duplicate title "${title}"`).toBe(false);
       titles.add(title);
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.{40,}/);
-      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp(`${path.replace(/\//g, '\\/')}$`));
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', new RegExp(`${escapeRegExp(path)}$`));
       await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /^https?:\/\//);
       expect(await page.locator('h1').count()).toBe(1);
     }
   });
 
-  test('event pages include valid Event structured data', async ({ page }) => {
-    await page.goto('/events/2026-10-17-saturday-stomp-live-band/');
+  test('event pages include Event structured data with the place and organizer', async ({ page }) => {
+    await page.goto(await firstEventUrl(page));
     const blocks = await page.locator('script[type="application/ld+json"]').allTextContents();
-    const event = blocks.map((b) => JSON.parse(b)).find((d) => d['@type'] === 'DanceEvent');
-    expect(event.startDate).toBe('2026-10-17T19:30:00-04:00');
-    expect(event.location.address.addressLocality).toBe('Riverbend');
-    expect(event.performer[0]['@type']).toBe('MusicGroup');
+    const event = blocks.map((b) => JSON.parse(b)).find((d) => d['@type'] === 'DanceEvent' || d['@type'] === 'EducationEvent');
+    expect(event.startDate).toMatch(/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}[-+]\d{2}:\d{2})?$/);
+    expect(event.location.address.addressRegion).toBe('NY');
+    expect(event.eventAttendanceMode).toContain('Offline');
   });
 });

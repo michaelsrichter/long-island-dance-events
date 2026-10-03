@@ -8,16 +8,15 @@ const settings = await getSettings();
 const nav = [
   { href: '/', label: 'Home' },
   { href: '/events/', label: 'Events' },
-  { href: '/new-to-swing/', label: 'New to Swing?' },
-  { href: '/lessons/', label: 'Lessons' },
+  { href: '/events/map/', label: 'Map' },
   { href: '/venues/', label: 'Venues' },
+  { href: '/styles/', label: 'Dance styles' },
+  { href: '/instructors/', label: 'Teachers' },
+  { href: '/performers/', label: 'Bands & DJs' },
   { href: '/about/', label: 'About' },
-  { href: '/membership/', label: 'Membership' },
-  { href: '/gallery/', label: 'Gallery' },
-  { href: '/contact/', label: 'Contact' },
 ];
 const path = Astro.url.pathname;
-const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const isCurrent = (href: string) => (href === '/' ? path === '/' : href === '/events/' ? path.startsWith('/events/') && !path.startsWith('/events/map/') : path.startsWith(href));
 ---
 <header class="site-header">
   <div class="container site-header__inner">
@@ -25,7 +24,7 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
       <Logo class="brand__mark" />
       <span class="brand__text">
         <span class="brand__name">{settings.siteName}</span>
-        <span class="brand__abbr">{settings.shortName} · Volunteer-run nonprofit</span>
+        <span class="brand__abbr">Nassau &amp; Suffolk · updated weekly</span>
       </span>
     </a>
     <nav class="nav" aria-label="Main">
@@ -46,9 +45,9 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWi
     </nav>
     <ThemeSwitch variant="button" location="header" />
     {settings.facebookUrl && (
-      <a class="header-social" href={settings.facebookUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="facebook" data-track-location="header" data-track-target="facebook.com" title={settings.facebookLabel ?? `${settings.shortName} Facebook group`}>
+      <a class="header-social" href={settings.facebookUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="facebook" data-track-location="header" data-track-target="facebook.com" title={settings.facebookLabel ?? 'Facebook'}>
         <Icon name="facebook" />
-        <span class="visually-hidden">{settings.facebookLabel ?? `${settings.shortName} Facebook group`} (opens in a new tab)</span>
+        <span class="visually-hidden">{settings.facebookLabel ?? 'Facebook'} (opens in a new tab)</span>
       </a>
     )}
   </div>

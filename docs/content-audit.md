@@ -1,139 +1,50 @@
-# Content audit and migration report template
+# Content audit
 
-Use this template before replacing the sample content. The goal is to decide what to keep, rewrite, merge, redirect or delete.
+What the site holds after the first collection run, where it came from, and what a person should check. Written for the site owner and future editors.
 
-## Summary
+## First run (October 3, 2026)
 
-| Item | Finding |
-| --- | --- |
-| Platform | TODO: old CMS/static host/social page/spreadsheet. |
-| Pages fetched | TODO count and crawl date. |
-| Event archive | TODO date range and number of entries. |
-| Next dated event on the old site | TODO. |
-| Images | TODO count, known permission status and alt text quality. |
-| Titles and descriptions | TODO duplicate titles/descriptions. |
-| Dead calls to action | TODO. |
-| External links | TODO count and issues. |
+| Step | Count |
+| --- | ---: |
+| Listings in The Dance Calendar, October 2026 issue | 185 |
+| Outside Nassau and Suffolk (skipped): Queens, Brooklyn, Little Neck, Elmhurst and others | 73 |
+| Kept (Long Island) | 112 |
+| Event files after combining repeating dates | 41 |
+| Repeating events (weekly or monthly rule) | 24 |
+| Upcoming dates shown on the site (next 120 days) | 103 |
+| Hidden for review | 0 |
 
-## Additional sources
+Events by type: 15 classes, 13 social dances, 10 lesson + dance parties, 3 live-music nights.
+Most common styles: ballroom (25 events), Latin ballroom (21), hustle (9), West Coast Swing (8), East Coast Swing (6), country two-step (5).
 
-| Source | What was taken | Counts | Notes |
-| --- | --- | --- | --- |
-| Current organizer spreadsheet | Upcoming home events, prices, venue notes | TODO | Confirm with event chair. |
-| Sample community listing | Beacon Blues Night details | 1 example | Replace with real source. |
+Directory pages created: 13 venues (all on the map), 14 organizers, 10 teachers, 9 bands and DJs, 15 dance styles.
 
-## Facts migrated (and where they came from)
+Venue, organizer, teacher, band and DJ details were checked against each group's own website, venue pages and Google Maps (public view). Every recorded fact has a source link in the research notes. Personal names of club officers and private contacts were not recorded.
 
-| Fact | Value on the new site | Source on the old site | Status |
-| --- | --- | --- | --- |
-| Organization | Riverbend Swing Dance Club, Inc. | Sample settings | Replace/confirm. |
-| Weekly dance | Thursday Night Swing at Riverbend Community Hall | Sample series | Replace/confirm. |
-| Lesson | 7:30 PM | Sample series | Replace/confirm. |
-| Social dancing | 8:00 to 10:30 PM | Sample series | Replace/confirm. |
-| Admission | $15 general, $10 members, $5 students | Sample settings | Replace/confirm. |
-| Hotline | (555) 010-0123 | Sample settings | Replace/confirm. |
-| Email | info@example.org | Sample settings | Replace/confirm. |
+## Please check (owner or organizers)
 
-## Duplicated, stale, contradictory or incomplete content
+These are the open questions. None blocks the launch; each listing already tells visitors to confirm with the organizer.
 
-| Issue | Where found | Decision | Owner |
-| --- | --- | --- | --- |
-| Old flyer says a different end time | TODO | Confirm and store once in event fields | TODO |
-| Former venue still appears on old pages | TODO | Redirect to venues archive or remove | TODO |
-
-## Crawled page inventory
-
-| Page type | Pages fetched | Legacy addresses mapped |
-| --- | ---: | ---: |
-| Home/info pages | TODO | TODO |
-| Event details | TODO | TODO |
-| Event archive/month pages | TODO | TODO |
-| Venue pages | TODO | TODO |
-| Performer/teacher pages | TODO | TODO |
-| Gallery/images | TODO | TODO |
-| Feeds/search/member pages | TODO | TODO |
-
-## Event archive by year
-
-| Year | Entries | Notes |
-| --- | ---: | --- |
-| 2025 | 2 | Sample past events in starter. |
-| 2026 | 13 | Sample current/past/future events in starter. |
-| TODO | TODO | Fill from audit. |
-
-## Venues
-
-| Venue | Old address | Status |
+| Topic | What we found | Suggested action |
 | --- | --- | --- |
-| Riverbend Community Hall | `/old-venue-main` | Migrated to `/venues/riverbend-community-hall/` (sample). |
-| TODO | TODO | TODO |
+| Argentine Tango Lovers (Mirelle's, Tuesdays) | The newsletter says "every other Tuesday"; the club's own calendar shows every Tuesday in October. | Ask the club; set the rule and lock it (`lockedFields`). |
+| LICMA November dance | licma.org says Sat Nov 28; the lodge site says Nov 14. | Ask LICMA before November. |
+| The Studio by Hill Street phone | Three numbers appear (website header, website FAQ, Google). We show the website header number. | Ask the studio. |
+| DJ Ray (Massapequa Elks) | No website. May or may not be Ray Swartz ("Line Dance With Ray"), who teaches at the same lodge. Not linked. | Ask the organizer. |
+| DJ Scott (Patchogue) | His own site and the newsletter list different phone numbers. We show his site's number. | None needed. |
+| Val & Neda (Southampton) | Probably the pro couple Valentyn Isaiev & Neda Andriekute, but nothing ties them to Southampton. Not linked. | Ask the studio. |
+| DJ Omar H (tango) | Could not be identified online. Name only. | Ask Argentine Tango Lovers. |
+| KL Dance | Website (kldance.net) no longer works; no official social page found. | Ask the teachers for a current link. |
+| Waterfalls Halloween dance | The newsletter ad says "Saturday, Oct. 26", but Oct 26, 2026 is a Monday. The venue calendar shows Oct 10 and Oct 24. | We follow the calendar dates. |
+| Dance styles inherited from the organizer | 6 listings did not name styles, so the organizer's usual styles were used (noted on each file). | Spot-check after the first week. |
+| No start time | Adelphi classes and one tango social have no time in the source. Pages say "time not listed". | Ask the organizers. |
 
-## Bands, DJs and teachers
+Source details: `reviewNotes` on each file in `src/content/**`, plus the research notes kept outside the repo.
 
-| Name | Old address | Status |
-| --- | --- | --- |
-| Maya Rivera | TODO | Sample instructor at `/performers/maya-rivera/`. |
-| The Riverbend Syncopators | TODO | Sample band at `/performers/riverbend-syncopators/`. |
-| TODO | TODO | TODO |
+## Photos
 
-## Images
+No photos were supplied. The site reuses two openly licensed swing-dance photos from the starter (Thomas Quine, CC BY 2.0, Wikimedia Commons), credited on the page and captioned "not a Long Island event". Organizer photos can be added later with written permission.
 
-| Image group | Count | Rights status | Decision |
-| --- | ---: | --- | --- |
-| Starter sample CC BY photos | 10 | Known CC BY 2.0 | Keep with credit or replace. |
-| Old site photos | TODO | TODO | Confirm before uploading. |
-| Flyers/posters | TODO | Often text-only | Enter facts as events; avoid image-only schedules. |
+## Source proposals (discovery pass)
 
-## External links
-
-| URL | Status | Decision |
-| --- | --- | --- |
-| `https://example.com/community-calendar` | Sample placeholder | Replace with real source. |
-| TODO | TODO | TODO |
-
-## Recommended migration decisions
-
-| Old content | New destination | Reason |
-| --- | --- | --- |
-| Home page | `/` | Preserve main entry point. |
-| Upcoming events | `/events/` | Primary visitor task. |
-| Old gallery | `/gallery/` | Example redirect. |
-| Old venue pages | `/venues/<slug>/` or `/venues/` | Preserve directions/parking value. |
-| Old teacher/band pages | `/performers/<slug>/` or `/performers/` | Preserve search traffic. |
-
-## Open questions for volunteers
-
-- [ ] Confirm legal name.
-- [ ] Confirm public phone/email.
-- [ ] Confirm membership price and year.
-- [ ] Confirm venue accessibility notes.
-- [ ] Confirm photo permissions.
-- [ ] Confirm which community organizers should be listed.
-- [ ] Confirm old URLs that matter most.
-
-## SEO and AI-answer improvements
-
-- Unique page titles and descriptions.
-- Clear event schema for dates, venue, prices and performers.
-- FAQ structured data.
-- Sitemap generated from current pages.
-- `llms.txt` with public factual summary.
-- Redirects from old URLs.
-
-## Usability improvements
-
-- Next event visible on homepage.
-- Beginner promise visible early.
-- Prices shown on cards/pages.
-- Directions and calendar actions one click away.
-- Community listings labeled.
-- Map plus accessible list.
-- No-JS event list.
-
-## Sources to credit
-
-| Source | What it supports | How credited |
-| --- | --- | --- |
-| Sample community listing | Sample community events | `sourceName` on event. |
-| Wikimedia Commons photos | Sample gallery | Credits in gallery captions. |
-| Google Maps listing | Venue photos/reviews link | Link only; do not copy reviews. |
+New sources are **proposed here and added only after the owner approves them**. See [source-proposals.md](source-proposals.md): 24 candidates (4 high, 6 medium, 14 low priority) and 33 set aside, with robots.txt and format checks for each. Machine-readable copy: [source-proposals.json](source-proposals.json).

@@ -1,5 +1,4 @@
 ---
-import { getEntry, render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import TicketDate from '../../../components/TicketDate.astro';
@@ -8,96 +7,56 @@ import Icon from '../../../components/Icon.astro';
 import AddToCalendar from '../../../components/AddToCalendar.astro';
 import ShareControls from '../../../components/ShareControls.astro';
 import EventCard from '../../../components/EventCard.astro';
-import ShowMore from '../../../components/ShowMore.astro';
-import ResponsiveImage from '../../../components/ResponsiveImage.astro';
-import HostBadge from '../../../components/HostBadge.astro';
 import RelativeWhen from '../../../components/RelativeWhen.astro';
-import StyleTags from '../../../components/StyleTags.astro';
 import PersonLinks from '../../../components/PersonLinks.astro';
-import { calendarEventOf, getEventGroups, getSettings, scheduleLines, shareInputOf, type PersonRef, type ResolvedEvent } from '../../../lib/content';
+import { buildNow, calendarEventOf, getAllEvents, getSettings, shareInputOf, type PersonRef, type ResolvedEvent } from '../../../lib/content';
 import { breadcrumbJsonLd, eventJsonLd } from '../../../lib/seo';
-import { formatPrice, isUpcoming } from '../../../lib/event-core';
-import { formatTime } from '../../../lib/time';
+import { isUpcoming } from '../../../lib/event-core';
+import { CATEGORY_HELP } from '../../../lib/schemas';
+import { formatDateShort } from '../../../lib/time';
 import { displayHost } from '../../../lib/links';
 
 export async function getStaticPaths() {
-  const { all } = await getEventGroups();
+  const all = await getAllEvents();
   return all.map((event) => ({ params: { slug: event.slug }, props: { slug: event.slug } }));
 }
 
 const { slug } = Astro.props as { slug: string };
-const { all, upcomingOrdered, next: nextHome, now } = await getEventGroups();
+const all = await getAllEvents();
+const now = buildNow();
 const e = all.find((x) => x.slug === slug) as ResolvedEvent;
 const settings = await getSettings();
 const site = Astro.site!;
-const d = e.details;
-const home = e.host === 'home';
+const d = e.data;
 const upcomingNow = isUpcoming(e, now);
-const status = upcomingNow ? e.status : e.effectiveStatus;
 const cal = calendarEventOf(e, site);
 const share = shareInputOf(e, site);
 const socialImage = upcomingNow ? `${e.url}social.png` : undefined;
 const socialSquare = upcomingNow ? `${e.url}social-square.png` : undefined;
-
-// Body text: the event's own description, else the series description.
-let Content: any = null;
-if (e.source.eventId) {
-  const entry = await getEntry('events', e.source.eventId);
-  if (entry?.body?.trim()) Content = (await render(entry)).Content;
-}
-if (!Content && e.source.seriesId) {
-  const s = await getEntry('series', e.source.seriesId);
-  if (s?.body?.trim()) Content = (await render(s)).Content;
-}
-
-const moreHome = upcomingOrdered.filter((x) => x.slug !== e.slug && x.host === 'home').slice(0, 8);
-const moreCommunity = upcomingOrdered.filter((x) => x.slug !== e.slug && x.host === 'community').slice(0, 3);
-const more = [...moreHome, ...moreCommunity];
-/** Point visitors on any other event page to the next Riverbend dance. */
-const showNextHome = upcomingNow && nextHome && nextHome.slug !== e.slug;
+const upcoming = all.filter((x) => isUpcoming(x, now));
+const otherDates = upcoming.filter((x) => x.eventId === e.eventId && x.slug !== e.slug).slice(0, 6);
+const atVenue = e.venue ? upcoming.filter((x) => x.venue?.id === e.venue!.id && x.eventId !== e.eventId).slice(0, 3) : [];
+const sameStyle = upcoming.filter((x) => x.eventId !== e.eventId && x.venue?.id !== e.venue?.id && x.styles.some((s) => e.styles.some((t) => t.id === s.id))).slice(0, 3);
 const crumbs = [
   { name: 'Home', href: '/' },
   { name: upcomingNow ? 'Events' : 'Past events', href: upcomingNow ? '/events/' : '/events/past/' },
   { name: e.title, href: e.url },
 ];
-const title = d.seoTitle && e.source.kind === 'event' ? d.seoTitle : `${e.title}, ${e.dateLabel}${e.location.city ? ` in ${e.location.city}` : ''}`;
+const title = d.seoTitle ?? `${e.title}, ${formatDateShort(e.date)}${e.location.town ? ` in ${e.location.town}` : ''}`;
 const description =
-  (e.source.kind === 'event' ? d.seoDescription : undefined) ??
-  [
-    status === 'cancelled' ? 'CANCELLED.' : '',
-    `${e.dateLabel}${e.timeLabel ? ` at ${e.timeLabel}` : ''}${e.location.name ? `, ${e.location.name}, ${e.location.city}.` : '.'}`,
-    d.lessonStartTime ? `Swing lesson at ${formatTime(d.lessonStartTime)}.` : '',
-    e.band ? `Live music by ${e.band.name}.` : '',
-    [e.beginnerFriendly && 'Beginners welcome.', e.noPartnerNeeded && 'No partner needed.'].filter(Boolean).join(' '),
-    home ? '' : 'Community event listed by Riverbend.',
-  ]
-    .filter(Boolean)
-    .join(' ')
-    .slice(0, 165);
-const lessonLine = d.lessonStartTime ? `Lesson at ${formatTime(d.lessonStartTime)}` : undefined;
+  d.seoDescription ??
+  [e.status === 'cancelled' ? 'CANCELLED.' : '', `${e.dateLabel}${e.timeLabel ? `, ${e.timeLabel}` : ''}${e.location.town ? `, ${e.location.town}` : ''}.`, d.summary].filter(Boolean).join(' ').slice(0, 165);
 const daysUntil = Math.ceil((e.start.getTime() - now.getTime()) / 86400000);
-const priceRows = (
-  home
-    ? [
-        { label: 'Non-members', value: e.admission.nonMember },
-        { label: 'Riverbend members', value: e.admission.member },
-        { label: 'Students', value: e.admission.student },
-      ]
-    : [
-        { label: 'Per person', value: e.admission.nonMember },
-        { label: 'Members', value: e.admission.member },
-        { label: 'Students', value: e.admission.student },
-      ]
-).filter((r) => typeof r.value === 'number') as { label: string; value: number }[];
-const tel = settings.hotlinePhone.replace(/[^0-9]/g, '');
 const telOf = (p: string) => `tel:+1${p.replace(/[^0-9]/g, '').replace(/^1(?=\d{10}$)/, '')}`;
-const people: { role: string; icon: 'music' | 'people'; p: PersonRef }[] = [
-  ...(e.band ? [{ role: 'Live band', icon: 'music' as const, p: e.band }] : []),
+const people: { role: string; icon: 'music' | 'people' | 'star'; p: PersonRef }[] = [
+  ...e.liveActs.map((p) => ({ role: p.kind === 'band' ? 'Band' : 'Live music', icon: 'star' as const, p })),
   ...e.djs.map((p) => ({ role: 'DJ', icon: 'music' as const, p })),
   ...e.instructors.map((p) => ({ role: 'Teacher', icon: 'people' as const, p })),
 ];
 const c = e.contact;
-const organizerName = e.organizerEntry?.data.name ?? c.name;
+const org = e.organizer;
+const reportUrl = `${settings.repoUrl}/issues/new?template=listing-correction.yml&title=${encodeURIComponent(`Fix listing: ${e.title} (${e.date})`)}&page=${encodeURIComponent(new URL(e.url, site).toString())}`;
+const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at ${e.lessonLabel}` : undefined;
 ---
 <BaseLayout
   title={title}
@@ -107,7 +66,7 @@ const organizerName = e.organizerEntry?.data.name ?? c.name;
   ogType="event"
   pageType="event"
   bodyClass="has-action-bar"
-  htmlData={{ 'data-event-slug': e.slug, 'data-event-status': status, 'data-days-until': String(daysUntil) }}
+  htmlData={{ 'data-event-slug': e.slug, 'data-event-status': e.status, 'data-days-until': String(daysUntil) }}
   jsonLd={[eventJsonLd(e, settings, site, socialImage ? new URL(socialImage, site).toString() : undefined), breadcrumbJsonLd(crumbs, site)]}
 >
   <article data-event-detail data-end={String(e.end.getTime())} aria-labelledby="event-title">
@@ -115,94 +74,53 @@ const organizerName = e.organizerEntry?.data.name ?? c.name;
       <div class="container">
         <Breadcrumbs items={crumbs} />
         <div class="event-hero__top">
-          <TicketDate date={e.date} muted={!upcomingNow || status === 'cancelled'} />
+          <TicketDate date={e.date} muted={!upcomingNow || e.status === 'cancelled'} />
           <div>
             <div class="event-hero__badges">
-              <HostBadge host={e.host} />
-              <StatusBadge status={status} showScheduled={upcomingNow} />
-              {upcomingNow && <RelativeWhen start={e.start} end={e.end} excited={home} allDay={e.timeTba} />}
-              {e.typeLabels.slice(0, 3).map((t) => <span class="pill">{t}</span>)}
+              <span class:list={['cat-badge', `cat-badge--${e.category}`]}>{e.categoryLabel}</span>
+              <StatusBadge status={e.status} />
+              {upcomingNow && <RelativeWhen start={e.start} end={e.end} allDay={e.timeTba} />}
             </div>
             <h1 id="event-title" class="mt-3">{e.title}</h1>
             <p class="event-hero__date"><time datetime={e.timeTba ? e.date : e.startLocal}>{e.dateLabel}{e.timeLabel ? ` · ${e.timeLabel}` : ''}</time></p>
             <ul class="hero-facts" aria-label="Key details">
-              {d.lessonStartTime && <li><Icon name="clock" />Lesson {formatTime(d.lessonStartTime)}</li>}
-              {d.danceStartTime && <li><Icon name="music" />Dancing {formatTime(d.danceStartTime)}{d.danceEndTime ? `–${formatTime(d.danceEndTime)}` : ''}</li>}
-              {e.location.city && <li><Icon name="pin" />{e.location.name ? `${e.location.name}, ` : ''}{e.location.city}</li>}
-              {e.admission.known && <li><Icon name="ticket" />{e.admission.free ? 'Free' : `From ${formatPrice(Math.min(...[e.admission.member, e.admission.student, e.admission.nonMember].filter((n): n is number => typeof n === 'number')))}`}</li>}
+              {lessonLine && <li><Icon name="people" />{lessonLine}</li>}
+              {e.location.town && <li><Icon name="pin" />{e.location.name ? `${e.location.name}, ` : ''}{e.location.town}</li>}
+              <li><Icon name="ticket" />{e.price.known ? e.price.label : 'Price not listed'}</li>
+              {e.cadence && <li><Icon name="calendar" />{e.cadence}</li>}
             </ul>
-            {d.summary && <p class="hero__lede">{d.summary}</p>}
+            <p class="hero__lede">{d.summary}</p>
           </div>
         </div>
-        {e.image && e.imageAlt && (
-          e.imageFrom === 'performer' ? (
-            <figure class="event-hero__media event-hero__media--portrait">
-              <ResponsiveImage src={e.image} alt={e.imageAlt} widths={[320, 480, 640]} sizes="(min-width: 44rem) 20rem, 70vw" loading="eager" />
-              {e.imagePerson && <figcaption class="photo__caption">{e.band?.name === e.imagePerson ? 'Live band' : 'Teacher'}: {e.imagePerson}</figcaption>}
-            </figure>
-          ) : (
-            <div class="event-hero__media">
-              <ResponsiveImage src={e.image} alt={e.imageAlt} widths={[480, 720, 960, 1280]} sizes="(min-width: 44rem) 40rem, 94vw" aspect={e.image.width / e.image.height > 2 ? 2.2 : 16 / 9} focus={e.imageFocus ?? '50% 40%'} loading="eager" />
-            </div>
-          )
-        )}
       </div>
     </header>
 
     <div class="container">
       <div class="event-layout">
         <div class="event-main">
-          {status === 'cancelled' && (
+          {e.status === 'cancelled' && (
             <div class="alert alert--bad" role="note">
               <p class="alert__title">This event is cancelled.</p>
-              <p>{e.cancelledMessage ?? 'We are sorry for any inconvenience.'}</p>
-              {upcomingNow && <p><a href="/events/">See other upcoming dances</a></p>}
+              {d.cancelledNote && <p>{d.cancelledNote}</p>}
+              <p><a href="/events/">See other upcoming events</a></p>
             </div>
           )}
-          {status === 'postponed' && (
-            <div class="alert alert--warn" role="note">
-              <p class="alert__title">This event is postponed.</p>
-              {e.cancelledMessage && <p>{e.cancelledMessage}</p>}
-              {e.postponedTo && <p><a href={e.postponedTo.startsWith('/') ? e.postponedTo : `/events/${e.postponedTo}/`}>See the new date</a></p>}
-            </div>
-          )}
-          {!upcomingNow && status !== 'cancelled' && (
+          {!upcomingNow && e.status !== 'cancelled' && (
             <div class="alert alert--info" role="note">
               <p class="alert__title">This event has already happened.</p>
-              <p><a href="/events/">See upcoming dances</a></p>
+              <p><a href="/events/">See upcoming events</a></p>
             </div>
           )}
           {upcomingNow && (
             <div class="alert alert--info" role="note" data-ended-notice hidden>
               <p class="alert__title">This event has ended.</p>
-              <p><a href="/events/">See upcoming dances</a></p>
+              <p><a href="/events/">See upcoming events</a></p>
             </div>
           )}
-{upcomingNow && home && e.source.kind === 'series-occurrence' && (
-            <div class="alert alert--info" role="note">
-              <p class="alert__title">Part of Riverbend's regular weekly schedule</p>
-              <p>The theme, teacher or band for this night will be posted closer to the date. Weather or holidays can change plans, so check this page or call the {settings.hotlineLabel} at <a href={`tel:+1${tel}`}>{settings.hotlinePhone}</a> before you go.</p>
-            </div>
-          )}
-{!home && (
-  <div class="alert alert--community" role="note">
-    <p class="alert__title">Community event, not run by Riverbend</p>
-    <p>
-      {organizerName ? `${organizerName} runs this event. ` : ''}We list it so you can find more places to dance.
-      {upcomingNow && ' Times and prices can change, so please check with the organizer before you go.'}
-    </p>
-  </div>
-)}
-{showNextHome && nextHome && (
-  <aside class="next-home no-print" aria-label="Next Riverbend dance">
-    <HostBadge host="home" size="small" />
-    <p>
-      <span class="next-home__label">Next Riverbend dance:</span>
-      <a href={nextHome.url}>{nextHome.title}</a>, {nextHome.dateLabel}
-      <RelativeWhen start={nextHome.start} end={nextHome.end} excited allDay={nextHome.timeTba} />
-    </p>
-  </aside>
-)}
+          <div class="alert alert--community" role="note">
+            <p class="alert__title">Check with the organizer before you go</p>
+            <p>{org ? `${org.data.name} runs this event, not this website. ` : 'This website does not run this event. '}We copy the facts from a public calendar, and plans can change.</p>
+          </div>
 
           <section class="panel" aria-labelledby="glance">
             <h2 id="glance">At a glance</h2>
@@ -212,71 +130,64 @@ const organizerName = e.organizerEntry?.data.name ?? c.name;
                 <dd>
                   {e.dateLabel}
                   <ul class="facts mt-3">
-                    {scheduleLines(e).map((l) => (
-                      <li><Icon name="clock" /><span><span class="fact-label">{l.label}:</span> {l.value}</span></li>
-                    ))}
+                    <li><Icon name="clock" /><span><span class="fact-label">Time:</span> {e.timeLabel ?? 'Not listed. Ask the organizer.'}</span></li>
+                    {lessonLine && <li><Icon name="people" /><span><span class="fact-label">Lesson:</span> {e.lessonLabel}</span></li>}
+                    {e.cadence && <li><Icon name="calendar" /><span><span class="fact-label">Repeats:</span> {e.cadence}</span></li>}
                   </ul>
-                </dd>
-              </div>
-              {e.location.full && (
-                <div>
-                  <dt>Where</dt>
-                  <dd>
-                    {e.location.name && <strong>{e.venueEntry ? <a href={`/venues/${e.venueEntry.id}/`}>{e.location.name}</a> : e.location.name}</strong>}
-                    {e.location.name && <br />}
-                    {e.location.address}<br />
-                    {e.location.city}, {e.location.state} {e.location.postalCode}
-                  </dd>
-                </div>
-              )}
-              <div>
-                <dt>Admission</dt>
-                <dd>
-                  {priceRows.length > 0 ? (
-                    <table class="price-table">
-                      <caption class="visually-hidden">Admission prices</caption>
-                      <tbody>
-                        {priceRows.map((r) => (
-                          <tr><th scope="row">{r.label}</th><td>{formatPrice(r.value)}</td></tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  ) : (
-                    <span>{upcomingNow ? 'To be announced' : 'Not listed for this past event'}</span>
+                  {otherDates.length > 0 && (
+                    <p class="mt-3">Also on: {otherDates.map((x, i) => <>{i > 0 && ', '}<a href={x.url}>{formatDateShort(x.date)}</a></>)}</p>
                   )}
-                  {e.admission.notes && <p class="muted mt-3">{e.admission.notes}</p>}
-                  {upcomingNow && home && <p class="mt-3"><a href="/membership/">Members pay less. Join for ${settings.membershipFee} a year.</a></p>}
                 </dd>
               </div>
               <div>
-                <dt>Good to know</dt>
+                <dt>Where</dt>
                 <dd>
-                  <p class="reassure">
-                    {e.beginnerFriendly && <span class="tag"><Icon name="check" />Beginners welcome</span>}
-                    {e.noPartnerNeeded && <span class="tag"><Icon name="people" />No partner needed</span>}
-                    {e.hasLesson && <span class="tag"><Icon name="shoe" />{home ? 'Swing lesson first' : 'Lesson first'}</span>}
-                    <span class="tag tag--neutral">{e.experienceLabel}</span>
+                  {e.venue ? (
+                    <>
+                      <strong><a href={`/venues/${e.venue.id}/`}>{e.location.name}</a></strong><br />
+                      {e.location.address}<br />
+                      {e.location.town}, {e.location.state} {e.location.postalCode}
+                      {e.venue.data.parkingNotes && <p class="muted mt-3"><span class="fact-label">Parking:</span> {e.venue.data.parkingNotes}</p>}
+                      {e.venue.data.accessibilityNotes && <p class="muted"><span class="fact-label">Access:</span> {e.venue.data.accessibilityNotes}</p>}
+                    </>
+                  ) : (
+                    <span>{e.location.town}. The exact place is not listed. Ask the organizer.</span>
+                  )}
+                </dd>
+              </div>
+              <div>
+                <dt>Price</dt>
+                <dd>{e.priceLine}</dd>
+              </div>
+              <div>
+                <dt>Type and level</dt>
+                <dd>
+                  <p><strong>{e.categoryLabel}.</strong> {CATEGORY_HELP[e.category]}</p>
+                  <p class="reassure mt-3">
+                    <span class="tag tag--neutral">{e.skillLabel}</span>
+                    {d.ageGroup === 'kids' && <span class="tag tag--neutral">For children</span>}
+                    {d.ageGroup === 'adults' && <span class="tag tag--neutral">For adults</span>}
                   </p>
                   {e.styles.length > 0 && (
                     <div class="mt-3">
-                      <p class="fact-label">Dances you can expect:</p>
-                      <StyleTags styles={e.styles} />
+                      <p class="fact-label">Dance styles:</p>
+                      <ul class="style-tags" aria-label="Dance styles">
+                        {e.styles.map((s) => <li class="style-tag"><a href={`/styles/${s.id}/`}>{s.name}</a></li>)}
+                      </ul>
                     </div>
                   )}
-                  {d.registrationRequired && d.registrationUrl && <p class="mt-3"><a href={d.registrationUrl}>Registration required: sign up here</a></p>}
-                  {d.capacityNotes && <p class="mt-3">{d.capacityNotes}</p>}
                 </dd>
               </div>
               {people.length > 0 && (
                 <div>
-                  <dt>Lineup</dt>
+                  <dt>Who</dt>
                   <dd>
                     <ul class="lineup">
                       {people.map(({ role, icon, p }) => (
                         <li>
                           <Icon name={icon} />
                           <div>
-                            <span><span class="fact-label">{role}:</span> {p.href ? <a href={p.href}>{p.name}</a> : p.name}</span>
+                            <span><span class="fact-label">{role}:</span> <a href={p.href}>{p.name}</a></span>
                             <PersonLinks links={p.links} name={p.name} location="event" />
                           </div>
                         </li>
@@ -285,39 +196,39 @@ const organizerName = e.organizerEntry?.data.name ?? c.name;
                   </dd>
                 </div>
               )}
-              {!home && (organizerName || c.phone || c.email || c.links.length > 0 || e.infoUrl) && (
+              <div>
+                <dt>Organizer</dt>
+                <dd>
+                  {org ? <p><strong><a href={`/organizers/${org.id}/`}>{org.data.name}</a></strong></p> : <p>Not listed.</p>}
+                  <ul class="facts mt-3">
+                    {c.phone && <li><Icon name="phone" /><a href={telOf(c.phone)} data-track="outbound_click" data-track-method="phone" data-track-location="event">{c.phone}</a></li>}
+                    {c.email && <li><Icon name="mail" /><a href={`mailto:${c.email}`} data-track="outbound_click" data-track-method="email" data-track-location="event">{c.email}</a></li>}
+                    {e.moreInfoUrl && <li><Icon name="external" /><a href={e.moreInfoUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="link" data-track-location="event" data-track-target={displayHost(e.moreInfoUrl)}>More details on {displayHost(e.moreInfoUrl)}<span class="visually-hidden"> (opens in a new tab)</span></a></li>}
+                  </ul>
+                  {org && <PersonLinks links={c.links.filter((l) => l.url !== e.moreInfoUrl)} name={org.data.name} location="event" />}
+                </dd>
+              </div>
+              {d.priceNotes && !e.priceLine.includes(d.priceNotes) && (
                 <div>
-                  <dt>Hosted by</dt>
-                  <dd>
-                    {organizerName && <p><strong>{e.organizerEntry ? <a href={`/community/#${e.organizerEntry.id}`}>{organizerName}</a> : organizerName}</strong></p>}
-                    {d.cadence && <p class="muted">{d.cadence}</p>}
-                    <ul class="facts mt-3">
-                      {c.phone && <li><Icon name="phone" /><a href={telOf(c.phone)} data-track="outbound_click" data-track-method="phone" data-track-location="event">{c.phone}</a></li>}
-                      {c.phoneAlt && <li><Icon name="phone" /><a href={telOf(c.phoneAlt)} data-track="outbound_click" data-track-method="phone" data-track-location="event">{c.phoneAlt}</a></li>}
-                      {c.email && <li><Icon name="mail" /><a href={`mailto:${c.email}`} data-track="outbound_click" data-track-method="email" data-track-location="event">{c.email}</a></li>}
-                      {e.infoUrl && <li><Icon name="external" /><a href={e.infoUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="link" data-track-location="event" data-track-target={displayHost(e.infoUrl)}>Event details on {displayHost(e.infoUrl)}<span class="visually-hidden"> (opens in a new tab)</span></a></li>}
-                    </ul>
-                    {organizerName && <PersonLinks links={c.links} name={organizerName} location="event" />}
-                  </dd>
-                </div>
-              )}
-              {e.listing && (
-                <div>
-                  <dt>Source</dt>
-                  <dd class="muted">
-                    Listed in {e.listing.url ? <a href={e.listing.url} target="_blank" rel="noopener">{e.listing.name}<span class="visually-hidden"> (opens in a new tab)</span></a> : e.listing.name}.
-                  </dd>
+                  <dt>Notes</dt>
+                  <dd>{d.priceNotes}</dd>
                 </div>
               )}
             </dl>
           </section>
 
-          {Content && (
-            <section class="panel" aria-labelledby="about-event">
-              <h2 id="about-event">About this event</h2>
-              <div class="prose"><Content /></div>
-            </section>
-          )}
+          <section class="panel" aria-labelledby="source-h" id="source">
+            <h2 id="source-h">Where this listing comes from</h2>
+            <p>
+              We found this event in{' '}
+              <a href={d.sourceUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="source" data-track-location="event" data-track-target={displayHost(d.sourceUrl)}>{d.sourceName ?? e.source?.data.name ?? displayHost(d.sourceUrl)}<span class="visually-hidden"> (opens in a new tab)</span></a>{d.sourceRef ? ` (${d.sourceRef})` : ''}.
+              The title and summary above are written by us. <a href="/sources/">How listings work</a>.
+            </p>
+            <p class="muted">First listed {formatDateShort(d.firstSeen, true)}. Last checked {formatDateShort(d.lastSeen, true)}.</p>
+            <p class="btn-row mt-3">
+              <a class="btn btn--secondary btn--small" href={reportUrl} rel="noopener" data-track="report_problem" data-track-location="event"><Icon name="info" />Report a problem with this listing</a>
+            </p>
+          </section>
         </div>
 
         <aside class="event-aside no-print" aria-label="Event actions">
@@ -338,48 +249,41 @@ const organizerName = e.organizerEntry?.data.name ?? c.name;
           )}
           <section class="panel actions" id="share" aria-labelledby="share-h">
             <h2 id="share-h">Share this event</h2>
-            <ShareControls share={share} details={{ lesson: lessonLine, admission: e.admissionLine, beginners: e.beginnerFriendly }} slug={e.slug} socialImage={socialSquare} variant="inline" />
-            {socialSquare && <p class="muted">Posting to Instagram? Copy the event details and download the square image, then add them to your post or story.</p>}
+            <ShareControls share={share} details={{ lesson: lessonLine, admission: e.priceLine }} slug={e.slug} socialImage={socialSquare} variant="inline" />
           </section>
           <section class="panel actions" aria-labelledby="q-h">
             <h2 id="q-h">Questions?</h2>
-            {home ? (
-              <p>Call the {settings.hotlineLabel}: <a href={`tel:+1${tel}`} data-track="click_hotline" data-track-location="event">{settings.hotlinePhone}</a></p>
-            ) : c.phone || c.email ? (
+            {c.phone || c.email ? (
               <p>
-                Contact {organizerName ?? 'the organizer'}:{' '}
+                Contact {org?.data.name ?? 'the organizer'}:{' '}
                 {c.phone && <a href={telOf(c.phone)} data-track="outbound_click" data-track-method="phone" data-track-location="event_aside">{c.phone}</a>}
                 {c.phone && c.email && ' or '}
                 {c.email && <a href={`mailto:${c.email}`} data-track="outbound_click" data-track-method="email" data-track-location="event_aside">{c.email}</a>}
               </p>
             ) : (
-              <p>Contact {organizerName ?? 'the organizer'}{c.links[0] ? <> through <a href={c.links[0].url} target="_blank" rel="noopener">their {c.links[0].label.toLowerCase()}<span class="visually-hidden"> (opens in a new tab)</span></a></> : ''}.</p>
+              <p>Contact {org?.data.name ?? 'the organizer'}{c.links[0] ? <> through <a href={c.links[0].url} target="_blank" rel="noopener">their {c.links[0].label.toLowerCase()}<span class="visually-hidden"> (opens in a new tab)</span></a></> : ''}.</p>
             )}
             <p><button type="button" class="btn btn--secondary btn--small js-only" data-print><Icon name="print" />Print this page</button></p>
           </section>
         </aside>
       </div>
 
-      {more.length > 0 && (
+      {(atVenue.length > 0 || sameStyle.length > 0) && (
         <section class="section no-print" aria-labelledby="more">
           <div class="section__head">
-            <h2 id="more">More upcoming dances</h2>
+            <h2 id="more">More events you might like</h2>
             <a class="btn btn--secondary" href="/events/">All events</a>
           </div>
-          {moreHome.length > 0 && (
+          {atVenue.length > 0 && (
             <>
-              <ul class="event-list" id="more-home" data-upcoming-list="event_more" data-collapse="3">
-                {moreHome.map((x, i) => <EventCard event={x} collapsed={i >= 3} />)}
-              </ul>
-              <ShowMore target="more-home" total={moreHome.length} label="Riverbend dances" />
+              <h3>Also at {e.location.name}</h3>
+              <ul class="event-list mt-3">{atVenue.map((x) => <EventCard event={x} headingLevel="h4" />)}</ul>
             </>
           )}
-          {moreCommunity.length > 0 && (
+          {sameStyle.length > 0 && (
             <>
-              <h3 class="mt-5">Other dances around Riverbend Valley</h3>
-              <ul class="event-list mt-3" data-upcoming-list="event_more_community">
-                {moreCommunity.map((x) => <EventCard event={x} compact headingLevel="h4" />)}
-              </ul>
+              <h3 class="mt-5">More {e.styles.slice(0, 2).map((s) => s.name).join(' and ')} nearby</h3>
+              <ul class="event-list mt-3">{sameStyle.map((x) => <EventCard event={x} headingLevel="h4" />)}</ul>
             </>
           )}
         </section>
@@ -396,9 +300,9 @@ const organizerName = e.organizerEntry?.data.name ?? c.name;
     {e.location.directionsUrl ? (
       <a href={e.location.directionsUrl} target="_blank" rel="noopener" data-track="get_directions" data-track-method="google" data-track-location="action_bar"><Icon name="directions" />Directions<span class="visually-hidden"> (opens in a new tab)</span></a>
     ) : (
-      <a href="/contact/"><Icon name="phone" />Contact</a>
+      <a href="#source"><Icon name="info" />Source</a>
     )}
-    <ShareControls share={share} details={{ lesson: lessonLine, admission: e.admissionLine, beginners: e.beginnerFriendly }} slug={e.slug} socialImage={socialSquare} variant="button" buttonClass="action-bar__btn" location="action_bar" />
+    <ShareControls share={share} details={{ lesson: lessonLine, admission: e.priceLine }} slug={e.slug} socialImage={socialSquare} variant="button" buttonClass="action-bar__btn" location="action_bar" />
   </nav>
 </BaseLayout>
 <script>

@@ -1,0 +1,31 @@
+{
+  "title": "Ballroom social dance with a lesson at Merrick Golf Course Clubhouse",
+  "summary": "A group lesson, then open social dancing. Dance styles: Ballroom. Snacks are included.",
+  "category": "lesson-party",
+  "danceStyles": [
+    "ballroom"
+  ],
+  "start": "2026-10-09T12:30",
+  "end": "2026-10-09T15:30",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-10-23"
+    ]
+  },
+  "venueId": "merrick-golf-course",
+  "town": "Merrick",
+  "organizerId": "society-tempo-dances",
+  "price": 12,
+  "priceNotes": "Suggested donation. Free lesson included",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "pages 17, 21",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 1,
+  "matchKey": "thedancecalendar|merrick-golf-course|society-tempo-dances|friday|12:30|lesson-party||ballroom||repeat"
+}

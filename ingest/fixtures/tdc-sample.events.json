@@ -1,0 +1,128 @@
+[
+  {
+    "id": "2030-11-01-example-lodge-social",
+    "matchKey": "thedancecalendar|example-lodge||friday|19:00|social-dance|dj-sample|ballroom+latin-ballroom||2030-11-01",
+    "dates": [
+      "2030-11-01"
+    ],
+    "data": {
+      "title": "Ballroom and Latin social dance with DJ Sample at Example Lodge",
+      "summary": "An evening of Ballroom and Latin social dancing with music by DJ Sample.",
+      "category": "social-dance",
+      "danceStyles": [
+        "ballroom",
+        "latin-ballroom"
+      ],
+      "start": "2030-11-01T19:00",
+      "end": "2030-11-01T23:00",
+      "timezone": "America/New_York",
+      "venueId": "example-lodge",
+      "town": "Huntington",
+      "performerIds": [
+        "dj-sample"
+      ],
+      "instructorIds": [],
+      "price": 20,
+      "skillLevel": "all-levels",
+      "sourceId": "thedancecalendar",
+      "sourceUrl": "https://www.thedancecalendar.com/sample.pdf",
+      "sourceName": "The Dance Calendar, November 2030",
+      "sourceRef": "page 2",
+      "status": "active",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "2030-11-01-practice-studio-classes",
+    "matchKey": "thedancecalendar|practice-studio-bay-shore|practice-studio|friday|19:00|class-lesson||hustle+west-coast-swing||2030-11-01",
+    "dates": [
+      "2030-11-01"
+    ],
+    "data": {
+      "title": "West Coast Swing and Hustle classes at Practice Studio",
+      "summary": "Group classes in West Coast Swing and Hustle. Times: 7 PM Beginner West Coast Swing; 8 PM Intermediate Hustle. You do not need a partner.",
+      "category": "class-lesson",
+      "danceStyles": [
+        "west-coast-swing",
+        "hustle"
+      ],
+      "start": "2030-11-01T19:00",
+      "timezone": "America/New_York",
+      "venueId": "practice-studio-bay-shore",
+      "town": "Bay Shore",
+      "performerIds": [],
+      "instructorIds": [],
+      "organizerId": "practice-studio",
+      "price": 15,
+      "skillLevel": "mixed",
+      "sourceId": "thedancecalendar",
+      "sourceUrl": "https://www.thedancecalendar.com/sample.pdf",
+      "sourceName": "The Dance Calendar, November 2030",
+      "sourceRef": "page 2",
+      "status": "active",
+      "confidence": 0.8,
+      "reviewNotes": "New venue was added automatically. Check it."
+    }
+  },
+  {
+    "id": "2030-11-02-example-lodge-live-music",
+    "matchKey": "thedancecalendar|example-lodge||saturday|19:30|live-music||east-coast-swing||2030-11-02",
+    "dates": [
+      "2030-11-02"
+    ],
+    "data": {
+      "title": "East Coast Swing dance with live music at Example Lodge",
+      "summary": "Dance to live music. Dance styles: East Coast Swing. A group lesson starts at 7:30 PM.",
+      "category": "live-music",
+      "danceStyles": [
+        "east-coast-swing"
+      ],
+      "start": "2030-11-02T19:30",
+      "timezone": "America/New_York",
+      "lessonTime": "19:30",
+      "venueId": "example-lodge",
+      "town": "Huntington",
+      "performerIds": [],
+      "instructorIds": [],
+      "price": 15,
+      "skillLevel": "all-levels",
+      "sourceId": "thedancecalendar",
+      "sourceUrl": "https://www.thedancecalendar.com/sample.pdf",
+      "sourceName": "The Dance Calendar, November 2030",
+      "sourceRef": "page 2",
+      "status": "active",
+      "confidence": 0.9
+    }
+  },
+  {
+    "id": "2030-11-03-sample-hall-riverhead-social",
+    "matchKey": "thedancecalendar|sample-hall-riverhead||sunday|18:00|social-dance||argentine-tango||2030-11-03",
+    "dates": [
+      "2030-11-03"
+    ],
+    "data": {
+      "title": "Argentine Tango social dance at Sample Hall",
+      "summary": "An evening of Argentine Tango social dancing.",
+      "category": "social-dance",
+      "danceStyles": [
+        "argentine-tango"
+      ],
+      "start": "2030-11-03T18:00",
+      "end": "2030-11-03T22:00",
+      "timezone": "America/New_York",
+      "venueId": "sample-hall-riverhead",
+      "town": "Riverhead",
+      "performerIds": [],
+      "instructorIds": [],
+      "isFree": true,
+      "skillLevel": "all-levels",
+      "sourceId": "thedancecalendar",
+      "sourceUrl": "https://www.thedancecalendar.com/sample.pdf",
+      "sourceName": "The Dance Calendar, November 2030",
+      "sourceRef": "page 3",
+      "status": "active",
+      "confidence": 0.7,
+      "reviewNotes": "New venue was added automatically. Check it."
+    }
+  }
+]

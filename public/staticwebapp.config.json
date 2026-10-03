@@ -3,9 +3,6 @@
   "trailingSlash": "auto",
   "platform": { "apiRuntime": "node:22" },
   "routes": [
-    { "route": "/index.php", "redirect": "/", "statusCode": 301 },
-    { "route": "/events.php", "redirect": "/events/", "statusCode": 301 },
-    { "route": "/contact.php", "redirect": "/contact/", "statusCode": 301 },
     { "route": "/_astro/*", "headers": { "Cache-Control": "public, max-age=31536000, immutable" } },
     { "route": "/admin/*", "headers": { "Content-Security-Policy": "__ADMIN_CSP__", "Cache-Control": "no-cache" } },
     { "route": "/*.ics", "headers": { "Cache-Control": "public, max-age=900" } },

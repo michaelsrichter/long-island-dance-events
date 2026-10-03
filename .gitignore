@@ -31,3 +31,7 @@ Thumbs.db
 
 # Generated from cms/config.yml by scripts/build-cms-config.mjs
 public/admin/config.yml
+
+# Ingest cache (downloaded source files; never commit)
+.cache/
+__pycache__/

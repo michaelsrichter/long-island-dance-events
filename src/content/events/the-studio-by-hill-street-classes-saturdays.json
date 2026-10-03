@@ -1,0 +1,31 @@
+{
+  "title": "Ballroom class at The Studio by Hill Street",
+  "summary": "Group class in Ballroom with Monito. For adults.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "ballroom"
+  ],
+  "start": "2026-10-03T10:30",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=SA;UNTIL=20261031"
+  },
+  "venueId": "the-studio-by-hill-street",
+  "town": "Southampton",
+  "organizerId": "the-studio-by-hill-street",
+  "instructorIds": [
+    "monito"
+  ],
+  "skillLevel": "all-levels",
+  "ageGroup": "adults",
+  "infoUrl": "https://www.thestudiobyhillstreet.com",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "pages 16, 18, 19, 21, 23",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.95,
+  "matchKey": "thedancecalendar|the-studio-by-hill-street|the-studio-by-hill-street|saturday|10:30|class-lesson||ballroom|adults|repeat"
+}

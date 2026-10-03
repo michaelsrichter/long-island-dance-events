@@ -1,5 +1,12 @@
-name: "East Coast Swing"
-order: 10
+name: East Coast Swing
 family: swing
-summary: "A bouncy, beginner-friendly swing dance built on simple six-count patterns."
-tempo: "Medium to fast swing, rock and roll, and jump blues"
+order: 11
+aliases:
+  - East Coast Swing
+  - ECS
+  - Jitterbug
+  - Swing
+  - Swing Dance
+  - Swing Dancing
+summary: A simple, bouncy swing dance. It is often the first partner dance people learn.
+music: Swing, rock and roll, oldies

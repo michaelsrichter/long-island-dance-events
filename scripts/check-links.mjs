@@ -74,7 +74,7 @@ if (checkExternal) {
   for (const [href, from] of external) {
     if (skip.test(href)) continue;
     try {
-      const res = await fetch(href, { method: 'GET', redirect: 'follow', headers: { 'User-Agent': 'Riverbend link checker' }, signal: AbortSignal.timeout(15000) });
+      const res = await fetch(href, { method: 'GET', redirect: 'follow', headers: { 'User-Agent': 'LongIslandDanceEvents link checker (+https://github.com/michaelsrichter/long-island-dance-events)' }, signal: AbortSignal.timeout(15000) });
       if (res.status >= 400 && res.status !== 403 && res.status !== 429) broken.push(`${from} -> ${href} (HTTP ${res.status})`);
     } catch (e) {
       broken.push(`${from} -> ${href} (${e.name})`);

@@ -1,0 +1,1156 @@
+{
+ "description": "Towns, villages and hamlets in Nassau and Suffolk counties (Long Island, New York). Used to keep listings inside the site area. Places in Queens, Brooklyn and elsewhere are out of area.",
+ "aliases": {
+  "Huntington Sta": "Huntington Station",
+  "Pt Jefferson": "Port Jefferson",
+  "Port Jeff": "Port Jefferson",
+  "Saint James": "St. James",
+  "St James": "St. James",
+  "Westhampton Bch": "Westhampton Beach",
+  "Lk Ronkonkoma": "Lake Ronkonkoma",
+  "Massapequa Pk": "Massapequa Park",
+  "Rockville Ctr": "Rockville Centre",
+  "E. Meadow": "East Meadow",
+  "E Meadow": "East Meadow",
+  "No. Babylon": "North Babylon",
+  "W. Babylon": "West Babylon",
+  "W. Islip": "West Islip",
+  "E. Islip": "East Islip",
+  "E. Northport": "East Northport",
+  "Bayshore": "Bay Shore"
+ },
+ "places": [
+  {
+   "name": "Albertson",
+   "county": "Nassau"
+  },
+  {
+   "name": "Amagansett",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Amityville",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Aquebogue",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Asharoken",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Atlantic Beach",
+   "county": "Nassau"
+  },
+  {
+   "name": "Babylon",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Baiting Hollow",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Baldwin",
+   "county": "Nassau"
+  },
+  {
+   "name": "Baldwin Harbor",
+   "county": "Nassau"
+  },
+  {
+   "name": "Barnum Island",
+   "county": "Nassau"
+  },
+  {
+   "name": "Baxter Estates",
+   "county": "Nassau"
+  },
+  {
+   "name": "Bay Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "Bay Shore",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Bayport",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Bayville",
+   "county": "Nassau"
+  },
+  {
+   "name": "Belle Terre",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Bellerose",
+   "county": "Nassau"
+  },
+  {
+   "name": "Bellerose Terrace",
+   "county": "Nassau"
+  },
+  {
+   "name": "Bellmore",
+   "county": "Nassau"
+  },
+  {
+   "name": "Bellport",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Bethpage",
+   "county": "Nassau"
+  },
+  {
+   "name": "Blue Point",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Bohemia",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Brentwood",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Bridgehampton",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Brightwaters",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Brookhaven",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Brookville",
+   "county": "Nassau"
+  },
+  {
+   "name": "Calverton",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Carle Place",
+   "county": "Nassau"
+  },
+  {
+   "name": "Cedarhurst",
+   "county": "Nassau"
+  },
+  {
+   "name": "Center Moriches",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Centereach",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Centerport",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Central Islip",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Centre Island",
+   "county": "Nassau"
+  },
+  {
+   "name": "Cold Spring Harbor",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Commack",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Copiague",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Coram",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Cove Neck",
+   "county": "Nassau"
+  },
+  {
+   "name": "Cutchogue",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Deer Park",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Dering Harbor",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Dix Hills",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Atlantic Beach",
+   "county": "Nassau"
+  },
+  {
+   "name": "East Farmingdale",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Garden City",
+   "county": "Nassau"
+  },
+  {
+   "name": "East Hampton",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Hills",
+   "county": "Nassau"
+  },
+  {
+   "name": "East Islip",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Marion",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Massapequa",
+   "county": "Nassau"
+  },
+  {
+   "name": "East Meadow",
+   "county": "Nassau"
+  },
+  {
+   "name": "East Moriches",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Northport",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Norwich",
+   "county": "Nassau"
+  },
+  {
+   "name": "East Patchogue",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Quogue",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Rockaway",
+   "county": "Nassau"
+  },
+  {
+   "name": "East Setauket",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Williston",
+   "county": "Nassau"
+  },
+  {
+   "name": "Eastport",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Eatons Neck",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Elmont",
+   "county": "Nassau"
+  },
+  {
+   "name": "Elwood",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Farmingdale",
+   "county": "Nassau"
+  },
+  {
+   "name": "Farmingville",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Fire Island",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Fishers Island",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Flanders",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Floral Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "Flower Hill",
+   "county": "Nassau"
+  },
+  {
+   "name": "Fort Salonga",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Franklin Square",
+   "county": "Nassau"
+  },
+  {
+   "name": "Freeport",
+   "county": "Nassau"
+  },
+  {
+   "name": "Garden City",
+   "county": "Nassau"
+  },
+  {
+   "name": "Garden City Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "Garden City South",
+   "county": "Nassau"
+  },
+  {
+   "name": "Glen Cove",
+   "county": "Nassau"
+  },
+  {
+   "name": "Glen Head",
+   "county": "Nassau"
+  },
+  {
+   "name": "Glenwood Landing",
+   "county": "Nassau"
+  },
+  {
+   "name": "Gordon Heights",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Great Neck",
+   "county": "Nassau"
+  },
+  {
+   "name": "Great Neck Estates",
+   "county": "Nassau"
+  },
+  {
+   "name": "Great Neck Gardens",
+   "county": "Nassau"
+  },
+  {
+   "name": "Great Neck Plaza",
+   "county": "Nassau"
+  },
+  {
+   "name": "Great River",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Greenlawn",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Greenport",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Greenvale",
+   "county": "Nassau"
+  },
+  {
+   "name": "Halesite",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Hampton Bays",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Harbor Hills",
+   "county": "Nassau"
+  },
+  {
+   "name": "Harbor Isle",
+   "county": "Nassau"
+  },
+  {
+   "name": "Hauppauge",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Head of the Harbor",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Hempstead",
+   "county": "Nassau"
+  },
+  {
+   "name": "Herricks",
+   "county": "Nassau"
+  },
+  {
+   "name": "Hewlett",
+   "county": "Nassau"
+  },
+  {
+   "name": "Hewlett Bay Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "Hewlett Harbor",
+   "county": "Nassau"
+  },
+  {
+   "name": "Hewlett Neck",
+   "county": "Nassau"
+  },
+  {
+   "name": "Hicksville",
+   "county": "Nassau"
+  },
+  {
+   "name": "Holbrook",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Holtsville",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Huntington",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Huntington Bay",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Huntington Station",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Inwood",
+   "county": "Nassau"
+  },
+  {
+   "name": "Island Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "Islandia",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Islip",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Islip Terrace",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Jamesport",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Jericho",
+   "county": "Nassau"
+  },
+  {
+   "name": "Kensington",
+   "county": "Nassau"
+  },
+  {
+   "name": "Kings Park",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Kings Point",
+   "county": "Nassau"
+  },
+  {
+   "name": "Lake Grove",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Lake Ronkonkoma",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Lake Success",
+   "county": "Nassau"
+  },
+  {
+   "name": "Lakeview",
+   "county": "Nassau"
+  },
+  {
+   "name": "Lattingtown",
+   "county": "Nassau"
+  },
+  {
+   "name": "Laurel",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Laurel Hollow",
+   "county": "Nassau"
+  },
+  {
+   "name": "Lawrence",
+   "county": "Nassau"
+  },
+  {
+   "name": "Levittown",
+   "county": "Nassau"
+  },
+  {
+   "name": "Lido Beach",
+   "county": "Nassau"
+  },
+  {
+   "name": "Lindenhurst",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Lloyd Harbor",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Locust Valley",
+   "county": "Nassau"
+  },
+  {
+   "name": "Long Beach",
+   "county": "Nassau"
+  },
+  {
+   "name": "Lynbrook",
+   "county": "Nassau"
+  },
+  {
+   "name": "Malverne",
+   "county": "Nassau"
+  },
+  {
+   "name": "Manhasset",
+   "county": "Nassau"
+  },
+  {
+   "name": "Manhasset Hills",
+   "county": "Nassau"
+  },
+  {
+   "name": "Manorhaven",
+   "county": "Nassau"
+  },
+  {
+   "name": "Manorville",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Massapequa",
+   "county": "Nassau"
+  },
+  {
+   "name": "Massapequa Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "Mastic",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Mastic Beach",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Matinecock",
+   "county": "Nassau"
+  },
+  {
+   "name": "Mattituck",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Medford",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Melville",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Merrick",
+   "county": "Nassau"
+  },
+  {
+   "name": "Middle Island",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Mill Neck",
+   "county": "Nassau"
+  },
+  {
+   "name": "Miller Place",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Mineola",
+   "county": "Nassau"
+  },
+  {
+   "name": "Montauk",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Moriches",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Mount Sinai",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Munsey Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "Muttontown",
+   "county": "Nassau"
+  },
+  {
+   "name": "Napeague",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Nesconset",
+   "county": "Suffolk"
+  },
+  {
+   "name": "New Cassel",
+   "county": "Nassau"
+  },
+  {
+   "name": "New Hyde Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "New Suffolk",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Nissequogue",
+   "county": "Suffolk"
+  },
+  {
+   "name": "North Amityville",
+   "county": "Suffolk"
+  },
+  {
+   "name": "North Babylon",
+   "county": "Suffolk"
+  },
+  {
+   "name": "North Bay Shore",
+   "county": "Suffolk"
+  },
+  {
+   "name": "North Bellmore",
+   "county": "Nassau"
+  },
+  {
+   "name": "North Great River",
+   "county": "Suffolk"
+  },
+  {
+   "name": "North Haven",
+   "county": "Suffolk"
+  },
+  {
+   "name": "North Hempstead",
+   "county": "Nassau"
+  },
+  {
+   "name": "North Hills",
+   "county": "Nassau"
+  },
+  {
+   "name": "North Lindenhurst",
+   "county": "Suffolk"
+  },
+  {
+   "name": "North Lynbrook",
+   "county": "Nassau"
+  },
+  {
+   "name": "North Massapequa",
+   "county": "Nassau"
+  },
+  {
+   "name": "North Merrick",
+   "county": "Nassau"
+  },
+  {
+   "name": "North New Hyde Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "North Patchogue",
+   "county": "Suffolk"
+  },
+  {
+   "name": "North Sea",
+   "county": "Suffolk"
+  },
+  {
+   "name": "North Valley Stream",
+   "county": "Nassau"
+  },
+  {
+   "name": "North Wantagh",
+   "county": "Nassau"
+  },
+  {
+   "name": "Northampton",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Northport",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Northville",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Noyack",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Oakdale",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Ocean Beach",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Oceanside",
+   "county": "Nassau"
+  },
+  {
+   "name": "Old Bethpage",
+   "county": "Nassau"
+  },
+  {
+   "name": "Old Brookville",
+   "county": "Nassau"
+  },
+  {
+   "name": "Old Field",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Old Westbury",
+   "county": "Nassau"
+  },
+  {
+   "name": "Orient",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Oyster Bay",
+   "county": "Nassau"
+  },
+  {
+   "name": "Oyster Bay Cove",
+   "county": "Nassau"
+  },
+  {
+   "name": "Patchogue",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Peconic",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Plainedge",
+   "county": "Nassau"
+  },
+  {
+   "name": "Plainview",
+   "county": "Nassau"
+  },
+  {
+   "name": "Plandome",
+   "county": "Nassau"
+  },
+  {
+   "name": "Plandome Heights",
+   "county": "Nassau"
+  },
+  {
+   "name": "Plandome Manor",
+   "county": "Nassau"
+  },
+  {
+   "name": "Point Lookout",
+   "county": "Nassau"
+  },
+  {
+   "name": "Poquott",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Port Jefferson",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Port Jefferson Station",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Port Washington",
+   "county": "Nassau"
+  },
+  {
+   "name": "Port Washington North",
+   "county": "Nassau"
+  },
+  {
+   "name": "Quiogue",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Quogue",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Remsenburg",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Ridge",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Riverhead",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Riverside",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Rockville Centre",
+   "county": "Nassau"
+  },
+  {
+   "name": "Rocky Point",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Ronkonkoma",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Roosevelt",
+   "county": "Nassau"
+  },
+  {
+   "name": "Roslyn",
+   "county": "Nassau"
+  },
+  {
+   "name": "Roslyn Estates",
+   "county": "Nassau"
+  },
+  {
+   "name": "Roslyn Harbor",
+   "county": "Nassau"
+  },
+  {
+   "name": "Roslyn Heights",
+   "county": "Nassau"
+  },
+  {
+   "name": "Russell Gardens",
+   "county": "Nassau"
+  },
+  {
+   "name": "Saddle Rock",
+   "county": "Nassau"
+  },
+  {
+   "name": "Saddle Rock Estates",
+   "county": "Nassau"
+  },
+  {
+   "name": "Sag Harbor",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Sagaponack",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Salisbury",
+   "county": "Nassau"
+  },
+  {
+   "name": "Saltaire",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Sands Point",
+   "county": "Nassau"
+  },
+  {
+   "name": "Sayville",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Sea Cliff",
+   "county": "Nassau"
+  },
+  {
+   "name": "Seaford",
+   "county": "Nassau"
+  },
+  {
+   "name": "Searingtown",
+   "county": "Nassau"
+  },
+  {
+   "name": "Selden",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Setauket",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Shelter Island",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Shinnecock Hills",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Shirley",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Shoreham",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Smithtown",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Sound Beach",
+   "county": "Suffolk"
+  },
+  {
+   "name": "South Farmingdale",
+   "county": "Nassau"
+  },
+  {
+   "name": "South Floral Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "South Hempstead",
+   "county": "Nassau"
+  },
+  {
+   "name": "South Huntington",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Southampton",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Southold",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Speonk",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Springs",
+   "county": "Suffolk"
+  },
+  {
+   "name": "St. James",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Stewart Manor",
+   "county": "Nassau"
+  },
+  {
+   "name": "Stony Brook",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Syosset",
+   "county": "Nassau"
+  },
+  {
+   "name": "Terryville",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Thomaston",
+   "county": "Nassau"
+  },
+  {
+   "name": "Tuckahoe",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Uniondale",
+   "county": "Nassau"
+  },
+  {
+   "name": "University Gardens",
+   "county": "Nassau"
+  },
+  {
+   "name": "Upper Brookville",
+   "county": "Nassau"
+  },
+  {
+   "name": "Upton",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Valley Stream",
+   "county": "Nassau"
+  },
+  {
+   "name": "Village of the Branch",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Wading River",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Wainscott",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Wantagh",
+   "county": "Nassau"
+  },
+  {
+   "name": "Water Mill",
+   "county": "Suffolk"
+  },
+  {
+   "name": "West Babylon",
+   "county": "Suffolk"
+  },
+  {
+   "name": "West Bay Shore",
+   "county": "Suffolk"
+  },
+  {
+   "name": "West Hampton Dunes",
+   "county": "Suffolk"
+  },
+  {
+   "name": "West Hempstead",
+   "county": "Nassau"
+  },
+  {
+   "name": "West Islip",
+   "county": "Suffolk"
+  },
+  {
+   "name": "West Sayville",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Westbury",
+   "county": "Nassau"
+  },
+  {
+   "name": "Westhampton",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Westhampton Beach",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Wheatley Heights",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Williston Park",
+   "county": "Nassau"
+  },
+  {
+   "name": "Woodbury",
+   "county": "Nassau"
+  },
+  {
+   "name": "Woodmere",
+   "county": "Nassau"
+  },
+  {
+   "name": "Woodsburgh",
+   "county": "Nassau"
+  },
+  {
+   "name": "Wyandanch",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Yaphank",
+   "county": "Suffolk"
+  }
+ ]
+}

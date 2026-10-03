@@ -3,7 +3,6 @@ import 'leaflet/dist/leaflet.css';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import EventViews from '../../components/EventViews.astro';
-import HostBadge from '../../components/HostBadge.astro';
 import RelativeWhen from '../../components/RelativeWhen.astro';
 import EmptyState from '../../components/EmptyState.astro';
 import Icon from '../../components/Icon.astro';
@@ -13,42 +12,45 @@ import { formatDateShort } from '../../lib/time';
 import { breadcrumbJsonLd } from '../../lib/seo';
 
 const { upcoming } = await getEventGroups();
-const { places, unplaced } = groupByPlace(upcoming.map((e) => ({ ...e, venueId: e.venueEntry?.id })));
+const { places, unplaced } = groupByPlace(upcoming.map((e) => ({ ...e, venueId: e.venue?.id })));
 const MAX_EVENTS = 3;
 const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Events', href: '/events/' },
   { name: 'Map', href: '/events/map/' },
 ];
-const hosts = [
-  { value: '', label: 'Everyone' },
-  { value: 'home', label: 'Riverbend events' },
-  { value: 'community', label: 'Community events' },
+/** Dances and live music first, like the event list; classes and everything are one tap away. */
+const types = [
+  { value: 'dance', label: 'Dances & live music' },
+  { value: 'class', label: 'Classes' },
+  { value: 'all', label: 'Everything' },
 ];
 const whens = [
   { value: 'all', label: 'All upcoming' },
   { value: 'week', label: 'Next 7 days' },
   { value: 'month', label: 'This month' },
 ];
-const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` · ${e.timeLabel}` : ''}`;
+const kind = (e: ResolvedEvent) => (e.category === 'class-lesson' ? 'class' : 'dance');
+const placeKind = (list: ResolvedEvent[]) => (list.some((e) => kind(e) === 'dance') ? 'dance' : 'class');
+const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` · ${e.timeLabel.split(' to ')[0]}` : ''}`;
 ---
 <BaseLayout
-  title="Map of Swing Dances on Riverbend Valley"
-  description={`See where to dance on Riverbend Valley: Riverbend's Tuesday swing dance in Riverbend plus ${places.length - 1} other dance venues, with upcoming dates and directions.`}
+  title="Map of dance events on Long Island"
+  description={`See where to dance in Nassau and Suffolk: ${places.length} places with upcoming dances, classes and live music, with dates and directions.`}
   pageType="map"
   jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}
 >
-  <PageHeader title="Dance map" lede="Find a dance near you. Riverbend's own dances have a star pin; other groups' community events have a round pin." crumbs={crumbs}>
+  <PageHeader title="Dance map" lede="Find dancing near you. Star pins have dances or live music. Round pins only have classes." crumbs={crumbs}>
     <EventViews current="map" />
   </PageHeader>
 
   <div class="container section stack-l">
     <form class="filters js-only" data-map-filters aria-label="Filter the map">
       <fieldset>
-        <legend>Hosted by</legend>
+        <legend>Type of event</legend>
         <div class="quick-views">
-          {hosts.map((h, i) => (
-            <label class="chip"><input type="radio" name="host" value={h.value} checked={i === 0} /><span>{h.label}</span></label>
+          {types.map((h, i) => (
+            <label class="chip"><input type="radio" name="type" value={h.value} checked={i === 0} /><span>{h.label}</span></label>
           ))}
         </div>
       </fieldset>
@@ -62,16 +64,16 @@ const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` 
       </fieldset>
       <div class="btn-row filters__foot">
         <p class="result-count" data-map-count aria-live="polite">{places.length} places shown</p>
-        <button type="button" class="btn btn--secondary btn--small" data-map-locate><Icon name="pin" />Show dances near me</button>
+        <button type="button" class="btn btn--secondary btn--small" data-map-locate><Icon name="pin" />Show places near me</button>
       </div>
     </form>
 
     <div class="map-layout">
       <div class="map-panel js-only">
-        <div class="events-map" data-events-map role="region" aria-label="Map of upcoming dances. Use the list of places for the same information."></div>
+        <div class="events-map" data-events-map role="region" aria-label="Map of upcoming events. The list of places has the same information."></div>
         <ul class="host-legend mt-3" aria-label="What the pins mean">
-          <li><span class="map-pin-key map-pin-key--home" aria-hidden="true"><Icon name="star" /></span>Riverbend dance</li>
-          <li><span class="map-pin-key map-pin-key--community" aria-hidden="true"></span>Community event</li>
+          <li><span class="map-pin-key map-pin-key--home" aria-hidden="true"><Icon name="star" /></span>Dances or live music</li>
+          <li><span class="map-pin-key map-pin-key--community" aria-hidden="true"></span>Classes only</li>
         </ul>
       </div>
 
@@ -79,49 +81,51 @@ const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` 
         {places.length === 0 ? (
           <EmptyState title="No upcoming events are on the map right now"><p><a href="/events/">See all events</a></p></EmptyState>
         ) : (
-          <ol class="map-places" data-upcoming-list="map" aria-label="Places with upcoming dances">
-            {places.map((p) => (
-              <li class="map-place" id={`place-${p.id}`} data-map-place data-lat={String(p.lat)} data-lng={String(p.lng)} data-host={p.host} data-name={p.name}>
-                <div class="map-place__head">
-                  <span class:list={['map-pin-key', `map-pin-key--${p.host}`]} aria-hidden="true">{p.host === 'home' && <Icon name="star" />}</span>
-                  <div>
-                    <h2 class="map-place__name">{p.venueId ? <a href={`/venues/${p.venueId}/`}>{p.name}</a> : p.name}</h2>
-                    <p class="muted">{[p.address, p.city].filter(Boolean).join(', ')}<span class="map-place__distance" data-map-distance></span></p>
+          <ol class="map-places" data-upcoming-list="map" aria-label="Places with upcoming events">
+            {places.map((p) => {
+              const k = placeKind(p.events);
+              return (
+                <li class="map-place" id={`place-${p.id}`} data-map-place data-lat={String(p.lat)} data-lng={String(p.lng)} data-host={k} data-name={p.name}>
+                  <div class="map-place__head">
+                    <span class:list={['map-pin-key', `map-pin-key--${k === 'dance' ? 'home' : 'community'}`]} aria-hidden="true">{k === 'dance' && <Icon name="star" />}</span>
+                    <div>
+                      <h2 class="map-place__name">{p.venueId ? <a href={`/venues/${p.venueId}/`}>{p.name}</a> : p.name}</h2>
+                      <p class="muted">{[p.address, p.town].filter(Boolean).join(', ')}<span class="map-place__distance" data-map-distance></span></p>
+                    </div>
                   </div>
-                </div>
-                <ul class="map-place__events">
-                  {p.events.map((e, i) => (
-                    <li data-event data-map-event data-host={e.host} data-date={e.date} data-end={String(e.end.getTime())} hidden={i >= MAX_EVENTS}>
-                      <a href={e.url} data-track="select_event" data-track-location="map">{e.title}</a>
-                      <span class="map-place__when">{when(e)}</span>
-                      <span class="map-place__badges">
-                        <HostBadge host={e.host} size="small" />
-                        <RelativeWhen start={e.start} end={e.end} excited={e.host === 'home'} allDay={e.timeTba} />
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                {p.events.length > MAX_EVENTS && <p class="muted map-place__more" data-map-more>More dates on the <a href={p.venueId ? `/venues/${p.venueId}/` : '/events/'}>{p.venueId ? 'venue page' : 'events list'}</a>.</p>}
-                <p class="btn-row map-place__actions">
-                  <button type="button" class="btn btn--secondary btn--small js-only" data-map-focus><Icon name="pin" />Show on map</button>
-                  <a class="btn btn--secondary btn--small" href={`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`} target="_blank" rel="noopener" data-track="get_directions" data-track-method="google" data-track-location="map"><Icon name="directions" />Directions<span class="visually-hidden"> to {p.name} (opens in a new tab)</span></a>
-                </p>
-              </li>
-            ))}
+                  <ul class="map-place__events">
+                    {p.events.map((e, i) => (
+                      <li data-event data-map-event data-host={kind(e)} data-date={e.date} data-end={String(e.end.getTime())} hidden={i >= MAX_EVENTS}>
+                        <a href={e.url} data-track="select_event" data-track-location="map">{e.title}</a>
+                        <span class="map-place__when">{when(e)}</span>
+                        <span class="map-place__badges">
+                          <span class:list={['cat-badge', 'cat-badge--small', `cat-badge--${e.category}`]}>{e.categoryLabel}</span>
+                          <RelativeWhen start={e.start} end={e.end} allDay={e.timeTba} />
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  {p.events.length > MAX_EVENTS && <p class="muted map-place__more" data-map-more>More dates on the <a href={p.venueId ? `/venues/${p.venueId}/` : '/events/'}>{p.venueId ? 'venue page' : 'events list'}</a>.</p>}
+                  <p class="btn-row map-place__actions">
+                    <button type="button" class="btn btn--secondary btn--small js-only" data-map-focus><Icon name="pin" />Show on map</button>
+                    <a class="btn btn--secondary btn--small" href={`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}`} target="_blank" rel="noopener" data-track="get_directions" data-track-method="google" data-track-location="map"><Icon name="directions" />Directions<span class="visually-hidden"> to {p.name} (opens in a new tab)</span></a>
+                  </p>
+                </li>
+              );
+            })}
           </ol>
         )}
         <div data-map-empty hidden>
-          <EmptyState title="Nothing matches those filters" icon="info"><p>Try "Everyone" or "All upcoming".</p></EmptyState>
+          <EmptyState title="Nothing matches those filters" icon="info"><p>Try "Everything" or "All upcoming".</p></EmptyState>
         </div>
         {unplaced.length > 0 && (
           <section class="card mt-5" aria-labelledby="unplaced-h">
-            <h2 id="unplaced-h" class="h4">Also coming up (several or unlisted venues)</h2>
+            <h2 id="unplaced-h" class="h4">Also coming up (place not on the map yet)</h2>
             <ul class="map-place__events mt-3" data-upcoming-list="map_unplaced">
               {unplaced.map((e) => (
-                <li data-event data-host={e.host} data-date={e.date} data-end={String(e.end.getTime())}>
+                <li data-event data-host={kind(e)} data-date={e.date} data-end={String(e.end.getTime())}>
                   <a href={e.url} data-track="select_event" data-track-location="map">{e.title}</a>
-                  <span class="map-place__when">{when(e)}{e.location.city ? ` · ${e.location.city}` : ''}</span>
-                  <span class="map-place__badges"><HostBadge host={e.host} size="small" /></span>
+                  <span class="map-place__when">{when(e)}{e.location.town ? ` · ${e.location.town}` : ''}</span>
                 </li>
               ))}
             </ul>

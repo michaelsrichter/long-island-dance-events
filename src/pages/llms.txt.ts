@@ -3,41 +3,34 @@ import { getEventGroups, getSettings } from '../lib/content';
 
 /** Lightweight navigation aid for AI assistants. Facts only; no private or speculative content. */
 export const GET: APIRoute = async ({ site }) => {
-  const [s, { next }] = await Promise.all([getSettings(), getEventGroups()]);
+  const [s, { upcoming }] = await Promise.all([getSettings(), getEventGroups()]);
   const u = (p: string) => new URL(p, site).toString();
-  const prices = s.standardPrices.map((p) => `${p.label}: $${p.nonMember} non-members, $${p.member} members, $${p.student} students`).join('; ');
-  const body = `# ${s.siteName} (${s.shortName})
+  const body = `# ${s.siteName}
 
-> ${s.mission} Weekly swing dances every Tuesday at the Riverbend Community Hall, 631 Pulaski Road, Riverbend, NY: swing lesson at 7:30 PM, social dancing 8 to 10 PM. Beginners welcome; no partner needed.
+> ${s.mission}
 
-Key facts:
-- Standard admission: ${prices}.
-- Membership: $${s.membershipFee} per person per year (${s.membershipYear}); join at the door of any Riverbend dance.
-- ${s.hotlineLabel}: ${s.hotlinePhone}. Email: ${s.email}.
-- Mailing address: ${s.legalName}, ${s.mailingAddress.line1}, ${s.mailingAddress.city}, ${s.mailingAddress.state} ${s.mailingAddress.postalCode}.
-${next ? `- Next scheduled Riverbend dance: ${next.title}, ${next.dateLabel}${next.timeLabel ? ` at ${next.timeLabel}` : ''} (${u(next.url)}).\n` : ''}
-## Events
-- [Upcoming events](${u('/events/')}): every upcoming Riverbend dance with date, lesson time, price and venue, followed by community events run by other Riverbend Valley groups (clearly labeled "Community event").
-- [Dance map](${u('/events/map/')}): every venue with upcoming dances, with addresses and directions.
-- [Riverbend calendar feed (.ics)](${u('/events/club-events.ics')})
-- [Community events calendar feed (.ics)](${u('/events/community-events.ics')})
-- [RSS feed](${u('/events/rss.xml')}) (Riverbend dances only)
-- [Past events](${u('/events/past/')})
+- Area: Nassau and Suffolk counties, Long Island, New York.
+- ${upcoming.length} upcoming listings (social dances, classes, lesson + dance parties, live music), updated weekly from public calendars.
+- Every event page names the organizer, links to the original listing, and asks visitors to confirm with the organizer.
 
-## For new dancers
-- [New to swing?](${u('/new-to-swing/')})
-- [Lessons](${u('/lessons/')})
-- [Frequently Asked Questions](${u('/faq/')})
+## Find events
+- [Upcoming events](${u('/events/')}): filter by day, dance style, town, county, price, level, venue, teacher, band or DJ. Filters are in the URL, e.g. ${u('/events/?when=weekend&style=west-coast-swing')}.
+- [Month calendar](${u('/events/calendar/')})
+- [Map](${u('/events/map/')})
+- [Calendar feed (.ics)](${u('/events/all.ics')})
+- [RSS feed](${u('/events/rss.xml')})
 
-## Riverbend Valley dance community
-- [Dance groups and teachers](${u('/community/')}): other swing, blues, ballroom and Latin groups on Riverbend Valley, with contacts and classes. These are not run by Riverbend.
-${s.facebookUrl ? `- [${s.facebookLabel ?? 'Riverbend Facebook group'}](${s.facebookUrl})\n` : ''}
-## Organization
-- [About Riverbend](${u('/about/')})
-- [Membership](${u('/membership/')})
+## Browse
 - [Venues](${u('/venues/')})
-- [Bands, DJs and teachers](${u('/performers/')})
-- [Contact](${u('/contact/')})
+- [Studios, clubs and organizers](${u('/organizers/')})
+- [Teachers](${u('/instructors/')})
+- [Bands and DJs](${u('/performers/')})
+- [Dance styles explained](${u('/styles/')})
+
+## About
+- [About](${u('/about/')})
+- [Where listings come from](${u('/sources/')})
+- [Frequently Asked Questions](${u('/faq/')})
 `;
   return new Response(body, { headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
 };

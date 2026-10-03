@@ -3,10 +3,10 @@
   Provision an Azure Static Web App for this starter.
 
 .EXAMPLE
-  ./infra/deploy.ps1 -Name riverbend -Repo owner/repo -CustomDomain www.example.org
+  ./infra/deploy.ps1 -Name li-dance-events -Repo michaelsrichter/long-island-dance-events -CustomDomain www.example.org
 #>
 param(
-  [string]$Name = 'riverbend',
+  [string]$Name = 'li-dance-events',
   [string]$ResourceGroup = '',
   [string]$StaticWebAppName = '',
   [string]$Location = 'eastus2',
@@ -20,7 +20,7 @@ $ErrorActionPreference = 'Stop'
 $base = $Name.ToLowerInvariant() -replace '[^a-z0-9-]', '-'
 if (-not $ResourceGroup) { $ResourceGroup = "rg-$base-web" }
 if (-not $StaticWebAppName) { $StaticWebAppName = "swa-$base-web" }
-$tags = "project=$base-web", 'template=community-site-starter', 'managedBy=bicep'
+$tags = "project=$base", 'owner=michaelsrichter', 'template=community-site-starter', 'managedBy=bicep'
 
 az group create --name $ResourceGroup --location $Location --tags $tags --output none
 $out = az deployment group create --resource-group $ResourceGroup --name "web-$base-$(Get-Date -Format yyyyMMddHHmmss)" `

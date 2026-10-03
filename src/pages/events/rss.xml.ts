@@ -3,19 +3,18 @@ import type { APIRoute } from 'astro';
 import { getEventGroups, getSettings } from '../../lib/content';
 
 export const GET: APIRoute = async (context) => {
-  const [{ upcomingHome: upcoming }, settings] = await Promise.all([getEventGroups(), getSettings()]);
+  const [{ upcoming }, settings] = await Promise.all([getEventGroups(), getSettings()]);
   return rss({
-    title: `${settings.siteName}: upcoming dances`,
+    title: `${settings.siteName}: upcoming events`,
     description: settings.description,
     site: context.site!,
     trailingSlash: true,
-    items: upcoming.map((e) => ({
+    items: upcoming.slice(0, 200).map((e) => ({
       title: `${e.status === 'cancelled' ? 'CANCELLED: ' : ''}${e.title} (${e.dateLabel})`,
       link: e.url,
-      description: [e.details.summary, `${e.dateLabel}${e.timeLabel ? ` at ${e.timeLabel}` : ''}`, e.location.full, `Admission: ${e.admissionLine}`]
+      description: [e.data.summary, `${e.dateLabel}${e.timeLabel ? `, ${e.timeLabel}` : ''}`, e.location.full, `Price: ${e.priceLine}`, `Source: ${e.data.sourceName ?? e.source?.data.name}`]
         .filter(Boolean)
         .join(' — '),
-      // Publication date is not tracked; use the event start so readers sort by date.
       pubDate: e.start,
     })),
     customData: '<language>en-us</language>',

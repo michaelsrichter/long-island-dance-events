@@ -6,12 +6,12 @@ import sharp from 'sharp';
 
 const require = createRequire(import.meta.url);
 const font = (pkg: string, file: string) => readFileSync(require.resolve(`${pkg}/files/${file}`));
-let fonts: { name: string; data: Buffer; weight: 400 | 700; style: 'normal' }[] | undefined;
+let fonts: { name: string; data: Buffer; weight: 400 | 700 | 800; style: 'normal' }[] | undefined;
 function getFonts() {
   fonts ??= [
-    { name: 'Fraunces', data: font('@fontsource/fraunces', 'fraunces-latin-700-normal.woff'), weight: 700, style: 'normal' },
-    { name: 'Atkinson', data: font('@fontsource/atkinson-hyperlegible', 'atkinson-hyperlegible-latin-400-normal.woff'), weight: 400, style: 'normal' },
-    { name: 'Atkinson', data: font('@fontsource/atkinson-hyperlegible', 'atkinson-hyperlegible-latin-700-normal.woff'), weight: 700, style: 'normal' },
+    { name: 'Inter', data: font('@fontsource/inter', 'inter-latin-400-normal.woff'), weight: 400, style: 'normal' },
+    { name: 'Inter', data: font('@fontsource/inter', 'inter-latin-700-normal.woff'), weight: 700, style: 'normal' },
+    { name: 'Inter', data: font('@fontsource/inter', 'inter-latin-800-normal.woff'), weight: 800, style: 'normal' },
   ];
   return fonts;
 }
@@ -27,9 +27,13 @@ export interface SocialCard {
   lines: string[];
   footer?: string;
   status?: string;
+  /** Site name shown at the top. */
+  brand?: string;
+  /** Web address shown at the bottom right. */
+  host?: string;
 }
 
-const C = { night: '#24162f', night2: '#3a2147', gold: '#f2b134', cream: '#fff4e4', soft: '#e9d8ea', red: '#ffaaa5' };
+const C = { night: '#0b0b0d', night2: '#2a0a10', line: '#2c2d35', red: '#c1121f', redSoft: '#ff8a94', silver: '#c9ccd3', white: '#ffffff', soft: '#c8cad1' };
 
 function ticket(card: SocialCard, scale: number) {
   return h(
@@ -41,15 +45,15 @@ function ticket(card: SocialCard, scale: number) {
       justifyContent: 'center',
       width: 170 * scale,
       height: 200 * scale,
-      background: C.gold,
+      background: 'linear-gradient(180deg, #ffffff 0%, #e4e6ea 100%)',
       color: C.night,
       borderRadius: 18 * scale,
       flexShrink: 0,
     },
     [
-      h('div', { fontFamily: 'Atkinson', fontWeight: 700, fontSize: 30 * scale, letterSpacing: 4 }, (card.month ?? '').toUpperCase()),
-      h('div', { fontFamily: 'Fraunces', fontSize: 92 * scale, lineHeight: 1 }, card.day ?? ''),
-      h('div', { fontFamily: 'Atkinson', fontWeight: 700, fontSize: 28 * scale, borderTop: `3px dashed ${C.night}`, paddingTop: 6 * scale, marginTop: 4 * scale }, (card.weekday ?? '').toUpperCase()),
+      h('div', { fontWeight: 800, fontSize: 30 * scale, letterSpacing: 4, color: C.red }, (card.month ?? '').toUpperCase()),
+      h('div', { fontWeight: 800, fontSize: 92 * scale, lineHeight: 1, letterSpacing: -3 }, card.day ?? ''),
+      h('div', { fontWeight: 700, fontSize: 28 * scale, borderTop: `2px solid #b4b7bf`, paddingTop: 6 * scale, marginTop: 4 * scale }, (card.weekday ?? '').toUpperCase()),
     ],
   );
 }
@@ -67,26 +71,26 @@ function tree(card: SocialCard, w: number, hgt: number): Node {
       flexDirection: 'column',
       justifyContent: 'space-between',
       padding: square ? 80 : 64,
-      background: `radial-gradient(circle at 85% 15%, ${C.night2} 0%, ${C.night} 60%)`,
-      color: C.cream,
-      fontFamily: 'Atkinson',
+      background: `radial-gradient(circle at 90% 10%, #7a0b16 0%, ${C.night2} 35%, ${C.night} 70%)`,
+      color: C.white,
+      fontFamily: 'Inter',
     },
     [
-      h('div', { display: 'flex', alignItems: 'center', gap: 18, fontSize: 30, color: C.gold, fontWeight: 700, letterSpacing: 2 }, [
-        h('div', { width: 46, height: 46, borderRadius: 46, background: C.gold, display: 'flex' }),
-        'Riverbend Swing Dance Club',
+      h('div', { display: 'flex', alignItems: 'center', gap: 18, fontSize: 30, color: C.silver, fontWeight: 700, letterSpacing: 1 }, [
+        h('div', { width: 46, height: 46, borderRadius: 46, background: `linear-gradient(135deg, ${C.red}, #5c0812)`, display: 'flex' }),
+        card.brand ?? 'Long Island Dance Events',
       ]),
       h('div', { display: 'flex', flexDirection: square ? 'column' : 'row', gap: 44, alignItems: square ? 'flex-start' : 'center' }, [
         ...(card.day ? [ticket(card, s)] : []),
         h('div', { display: 'flex', flexDirection: 'column', gap: 14, ...(square ? {} : { flex: 1 }) }, [
-          ...(card.status ? [h('div', { fontSize: 34, fontWeight: 700, color: C.red, letterSpacing: 2 }, card.status.toUpperCase())] : []),
-          h('div', { fontFamily: 'Fraunces', fontSize: square ? titleSize * 1.05 : titleSize, lineHeight: 1.05 }, card.title),
+          ...(card.status ? [h('div', { fontSize: 34, fontWeight: 800, color: C.redSoft, letterSpacing: 2 }, card.status.toUpperCase())] : []),
+          h('div', { fontWeight: 800, fontSize: square ? titleSize * 1.05 : titleSize, lineHeight: 1.05, letterSpacing: -1.5 }, card.title),
           ...card.lines.map((l) => h('div', { fontSize: square ? 38 : 34, color: C.soft }, l)),
         ]),
       ]),
-      h('div', { display: 'flex', justifyContent: 'space-between', fontSize: 28, color: C.soft, borderTop: `2px solid ${C.night2}`, paddingTop: 22 }, [
-        h('div', { display: 'flex' }, card.footer ?? 'Beginners welcome · No partner needed'),
-        h('div', { display: 'flex', color: C.gold, fontWeight: 700 }, 'example.org'),
+      h('div', { display: 'flex', justifyContent: 'space-between', fontSize: 28, color: C.soft, borderTop: `2px solid ${C.line}`, paddingTop: 22 }, [
+        h('div', { display: 'flex' }, card.footer ?? 'Check with the organizer before you go'),
+        h('div', { display: 'flex', color: C.silver, fontWeight: 700 }, card.host ?? 'Long Island Dance Events'),
       ]),
     ],
   );
@@ -99,23 +103,24 @@ export async function renderSocialPng(card: SocialCard, size: 'og' | 'square'): 
 }
 
 import type { ResolvedEvent } from './content';
-import { dateParts, formatTime } from './time';
+import { dateParts } from './time';
 
 export function cardFor(e: ResolvedEvent): SocialCard {
   const p = dateParts(e.date);
-  const d = e.details;
   const lines = [
-    [d.lessonStartTime && `Lesson ${formatTime(d.lessonStartTime, true)}`, d.danceStartTime && `Dancing ${formatTime(d.danceStartTime, true)}`].filter(Boolean).join(' · ') ||
-      (e.timeLabel ?? 'Time to be announced'),
-    [e.location.name, e.location.city].filter(Boolean).join(', '),
-    e.band ? `Live band: ${e.band.name}` : '',
+    [e.timeLabel ?? 'Time not listed', e.lessonLabel && e.category !== 'class-lesson' ? `lesson ${e.lessonLabel}` : ''].filter(Boolean).join(' · '),
+    [e.location.name, e.location.town].filter(Boolean).join(', '),
+    e.liveActs.length ? `Live music: ${e.liveActs.map((a) => a.name).join(', ')}` : e.styles.slice(0, 3).map((s) => s.name).join(' · '),
   ].filter(Boolean);
+  const host = (process.env.SITE_URL ?? '').replace(/^https?:\/\//, '').replace(/\/$/, '');
   return {
     title: e.title,
     month: p.monthShort,
     day: p.day,
     weekday: p.weekdayShort,
     lines,
-    status: e.status === 'cancelled' ? 'Cancelled' : e.status === 'postponed' ? 'Postponed' : undefined,
+    status: e.status === 'cancelled' ? 'Cancelled' : undefined,
+    footer: e.categoryLabel,
+    host: host && host !== 'example.org' ? host : undefined,
   };
 }

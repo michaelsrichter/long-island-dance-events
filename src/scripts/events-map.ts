@@ -13,7 +13,8 @@ interface Place {
   el: HTMLElement;
   id: string;
   name: string;
-  host: 'home' | 'community';
+  /** 'dance' when the place has any dance or live music; 'class' when it only has classes. */
+  host: 'dance' | 'class';
   latlng: L.LatLng;
   marker: L.Marker;
   events: HTMLElement[];
@@ -27,7 +28,7 @@ const nyDate = (d: Date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Americ
 function pinIcon(host: Place['host']): L.DivIcon {
   const el = document.createElement('span');
   el.className = 'map-pin__shape';
-  if (host === 'home') {
+  if (host === 'dance') {
     const svg = document.createElementNS(SVG, 'svg');
     svg.setAttribute('viewBox', '0 0 24 24');
     svg.setAttribute('aria-hidden', 'true');
@@ -36,7 +37,7 @@ function pinIcon(host: Place['host']): L.DivIcon {
     svg.append(path);
     el.append(svg);
   }
-  return L.divIcon({ html: el, className: `map-pin map-pin--${host}`, iconSize: [34, 42], iconAnchor: [17, 40], popupAnchor: [0, -36] });
+  return L.divIcon({ html: el, className: `map-pin map-pin--${host === 'dance' ? 'home' : 'community'}`, iconSize: [34, 42], iconAnchor: [17, 40], popupAnchor: [0, -36] });
 }
 
 function popupFor(p: Place): HTMLElement {
@@ -100,9 +101,9 @@ if (mapEl && list) {
   const now = Date.now();
   const places: Place[] = [...list.querySelectorAll<HTMLElement>('[data-map-place]')].map((el) => {
     const latlng = L.latLng(Number(el.dataset.lat), Number(el.dataset.lng));
-    const host = el.dataset.host === 'home' ? 'home' : 'community';
+    const host = el.dataset.host === 'dance' ? 'dance' : 'class';
     const name = el.dataset.name ?? '';
-    const marker = L.marker(latlng, { icon: pinIcon(host), title: name, keyboard: true, riseOnHover: true, zIndexOffset: host === 'home' ? 1000 : 0 });
+    const marker = L.marker(latlng, { icon: pinIcon(host), title: name, keyboard: true, riseOnHover: true, zIndexOffset: host === 'dance' ? 1000 : 0 });
     const events = [...el.querySelectorAll<HTMLElement>('[data-map-event]')];
     for (const e of events) if (Number(e.dataset.end) <= now) e.setAttribute('data-expired', '');
     el.tabIndex = -1;
@@ -115,7 +116,7 @@ if (mapEl && list) {
 
   function labelMarker(p: Place) {
     const el = p.marker.getElement();
-    el?.setAttribute('aria-label', `${p.name}: ${p.visibleCount} upcoming ${p.visibleCount === 1 ? 'event' : 'events'}${p.host === 'home' ? ', Riverbend dances' : ''}`);
+    el?.setAttribute('aria-label', `${p.name}: ${p.visibleCount} upcoming ${p.visibleCount === 1 ? 'event' : 'events'}${p.host === 'dance' ? ', has dances' : ', classes only'}`);
   }
 
   function focusPlace(p: Place, fromList = false) {
@@ -128,12 +129,12 @@ if (mapEl && list) {
 
   const count = document.querySelector<HTMLElement>('[data-map-count]');
   const empty = document.querySelector<HTMLElement>('[data-map-empty]');
-  const fields = ['host', 'when'] as const;
+  const fields = ['type', 'when'] as const;
   type Values = Record<(typeof fields)[number], string>;
 
   function values(): Values {
     const fd = form ? new FormData(form) : new FormData();
-    return { host: String(fd.get('host') ?? ''), when: String(fd.get('when') ?? 'all') };
+    return { type: String(fd.get('type') ?? 'dance'), when: String(fd.get('when') ?? 'all') };
   }
 
   function apply(source: 'load' | 'change') {
@@ -143,7 +144,7 @@ if (mapEl && list) {
     const month = today.slice(0, 7);
     const matches = (e: HTMLElement) => {
       if (e.hasAttribute('data-expired')) return false;
-      if (v.host && e.dataset.host !== v.host) return false;
+      if (v.type && v.type !== 'all' && e.dataset.host !== v.type) return false;
       const d = e.dataset.date ?? '';
       if (v.when === 'week' && (d < today || d > weekEnd)) return false;
       if (v.when === 'month' && !d.startsWith(month)) return false;
@@ -169,16 +170,16 @@ if (mapEl && list) {
     if (empty) empty.hidden = shown !== 0;
     if (visible.length) map.fitBounds(L.latLngBounds(visible), { padding: [28, 28], maxZoom: 13 });
     else if (source === 'load') map.setView([40.8, -73.2], 9);
-    // Riverbend Valley is wide and short: never zoom out further than needed to show the island.
+    // Long Island is wide and short: never zoom out further than needed to show the island.
     if (map.getZoom() < 8.5) map.setZoom(8.5);
     if (form) {
       const params = new URLSearchParams();
-      if (v.host) params.set('host', v.host);
+      if (v.type && v.type !== 'dance') params.set('type', v.type);
       if (v.when && v.when !== 'all') params.set('when', v.when);
       const qs = params.toString();
       history.replaceState(null, '', `${qs ? `?${qs}` : location.pathname}${location.hash}`);
     }
-    if (source === 'change') track('filter_events', { location: 'map', filter: [v.host && 'host', v.when !== 'all' && 'when'].filter(Boolean).join(',') || 'none', value: [v.host, v.when].join(',').slice(0, 100), results: shown });
+    if (source === 'change') track('filter_events', { location: 'map', filter: [v.type !== 'dance' && 'type', v.when !== 'all' && 'when'].filter(Boolean).join(',') || 'none', value: [v.type, v.when].join(',').slice(0, 100), results: shown });
   }
 
   if (form) {
@@ -188,11 +189,15 @@ if (mapEl && list) {
       const el = form.elements.namedItem(f);
       if (val && el instanceof RadioNodeList) el.value = val;
     }
+    // A link to a place that only has classes (e.g. from a venue page) shows everything, so its pin is there.
+    const linked = places.find((p) => `#place-${p.id}` === location.hash);
+    const typeEl = form.elements.namedItem('type');
+    if (linked && !params.get('type') && typeEl instanceof RadioNodeList && linked.events.every((e) => e.dataset.host === 'class')) typeEl.value = 'all';
     form.addEventListener('change', () => apply('change'));
   }
   apply('load');
 
-  // Deep links such as /events/map/#place-riverbend-community-hall open that pin.
+  // Deep links such as /events/map/#place-brumidi-lodge open that pin.
   const target = places.find((p) => `#place-${p.id}` === location.hash);
   if (target) focusPlace(target);
 

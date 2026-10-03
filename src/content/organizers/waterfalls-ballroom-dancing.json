@@ -1,0 +1,18 @@
+{
+  "name": "Ballroom Dancing at The Waterfalls",
+  "type": "venue",
+  "aliases": [
+    "Hosted by Valerie"
+  ],
+  "email": "valmdance@yahoo.com",
+  "phone": "(631) 581-8509",
+  "town": "Lake Ronkonkoma",
+  "homeVenueId": "waterfalls-ballroom",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "reviewNotes": "Venue calendar names the organizer as \"The Waterfalls Management\" with music by DJ Valerie; no separate organization name is published. Email only appears in The Dance Calendar.",
+  "website": "https://waterfallsapartments.com/event-calendar",
+  "description": "Ballroom and Latin dances with DJ Valerie on the 2nd and 4th Saturday in the clubhouse ballroom at The Waterfalls."
+}

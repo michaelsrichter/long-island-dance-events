@@ -1,0 +1,17 @@
+{
+  "name": "First Dance Wedding and Social Dance Studio",
+  "type": "studio",
+  "aliases": [
+    "First Dance"
+  ],
+  "website": "https://1st-dance.com/",
+  "phone": "(631) 513-8706",
+  "town": "Farmingdale",
+  "homeVenueId": "first-dance-studio",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "email": "dancefarmingdale@gmail.com",
+  "description": "Farmingdale studio, formerly Dance Obsession, teaching wedding first dances, adult ballroom and Latin, and kids classes since 1986."
+}

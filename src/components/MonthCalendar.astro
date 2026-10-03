@@ -1,6 +1,6 @@
 ---
 import type { ResolvedEvent } from '../lib/content';
-import { homeFirst } from '../lib/event-core';
+import { sortOccurrences } from '../lib/event-core';
 import { addDays, daysInMonth, formatDateLong, formatMonthKey, weekdayOf, WEEKDAYS } from '../lib/time';
 import EventCard from './EventCard.astro';
 import EmptyState from './EmptyState.astro';
@@ -25,10 +25,8 @@ const days = Array.from({ length: cells }, (_, i) => addDays(start, i));
 const weeks = Array.from({ length: cells / 7 }, (_, w) => days.slice(w * 7, w * 7 + 7));
 const byDate = new Map<string, ResolvedEvent[]>();
 for (const e of events) byDate.set(e.date, [...(byDate.get(e.date) ?? []), e]);
-// Within each day, Riverbend's own events come first.
-for (const [k, list] of byDate) byDate.set(k, homeFirst(list));
-const inMonth = events.filter((e) => e.date.startsWith(month));
-const hasCommunity = inMonth.some((e) => e.host === 'community');
+for (const [k, list] of byDate) byDate.set(k, sortOccurrences(list));
+const inMonth = sortOccurrences(events.filter((e) => e.date.startsWith(month)));
 const label = formatMonthKey(month);
 ---
 <div class="cal-nav">
@@ -36,12 +34,10 @@ const label = formatMonthKey(month);
   <h2 id="cal-title">{label}</h2>
   {next ? <a class="btn btn--secondary btn--small" href={`/events/calendar/${next}/`} data-track="view_calendar_month" data-track-method="next">{formatMonthKey(next)} <span aria-hidden="true">→</span></a> : <span></span>}
 </div>
-{hasCommunity && (
-  <ul class="host-legend mt-3" aria-label="What the colors mean">
-    <li><span class="cal__event legend-swatch" aria-hidden="true">Gold</span>Riverbend dances</li>
-    <li><span class="cal__event cal__event--community legend-swatch" aria-hidden="true">Outlined</span>Other groups' community events</li>
-  </ul>
-)}
+<ul class="host-legend mt-3" aria-label="What the colors mean">
+  <li><span class="cal__event cal__event--social-dance legend-swatch" aria-hidden="true">Dance</span>Dances and live music</li>
+  <li><span class="cal__event cal__event--class-lesson legend-swatch" aria-hidden="true">Class</span>Classes and lessons</li>
+</ul>
 
 <table class="cal" aria-labelledby="cal-title">
   <thead>
@@ -57,13 +53,13 @@ const label = formatMonthKey(month);
             <td class:list={[outside && 'cal__outside', day === today && 'cal__today']}>
               <span class="cal__day"><span class="visually-hidden">{formatDateLong(day)}{day === today ? ' (today)' : ''}</span><span aria-hidden="true">{Number(day.slice(8))}</span></span>
               {!outside && list.map((e) => {
-                const st = e.end.getTime() <= now.getTime() && e.status !== 'cancelled' ? 'completed' : e.status;
+                const st = e.end.getTime() <= now.getTime() && e.status !== 'cancelled' ? 'past' : e.status;
+                const kind = e.category === 'class-lesson' ? 'class-lesson' : 'social-dance';
                 return (
-                  <a class:list={['cal__event', `cal__event--${st}`, `cal__event--${e.host}`]} href={e.url}>
+                  <a class:list={['cal__event', `cal__event--${st}`, `cal__event--${kind}`]} href={e.url}>
                     {e.status === 'cancelled' && <span class="visually-hidden">Cancelled: </span>}
-                    {e.host === 'community' && <span class="visually-hidden">Community event: </span>}
-                    {e.title}
-                    {e.timeLabel && <span class="visually-hidden">, {e.timeLabel}</span>}
+                    {e.timeLabel && <span class="cal__time">{e.timeLabel.split(' to ')[0]}</span>} {e.title.replace(/ at [^,]+$/, '')}{e.location.name && <span class="visually-hidden"> at {e.location.name}</span>}
+                    <span class="visually-hidden"> ({e.categoryLabel})</span>
                   </a>
                 );
               })}
@@ -78,10 +74,10 @@ const label = formatMonthKey(month);
 <div class="cal-agenda">
   {inMonth.length ? (
     <ul class="event-list">
-      {inMonth.map((e) => <EventCard event={e} past={e.end.getTime() <= now.getTime()} compact={e.host === 'community'} />)}
+      {inMonth.map((e) => <EventCard event={e} past={e.end.getTime() <= now.getTime()} />)}
     </ul>
   ) : (
     <EmptyState title={`No events listed for ${label}`}><p><a href="/events/">See all upcoming events</a></p></EmptyState>
   )}
 </div>
-<p class="mt-5"><a href="/events/club-events.ics" data-track="add_to_calendar" data-track-method="subscribe_feed" data-track-location="calendar"><Icon name="calendar" class="visually-hidden" />Subscribe to the Riverbend calendar</a></p>
+<p class="mt-5"><a href="/events/all.ics" data-track="add_to_calendar" data-track-method="subscribe_feed" data-track-location="calendar"><Icon name="calendar" class="visually-hidden" />Subscribe in your calendar app</a></p>

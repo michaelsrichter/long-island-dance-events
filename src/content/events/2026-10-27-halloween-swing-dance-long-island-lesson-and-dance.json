@@ -1,0 +1,30 @@
+{
+  "title": "Halloween East Coast Swing lesson and social dance at Huntington Moose Lodge",
+  "summary": "An East Coast Swing group lesson at 7:30 PM with Carol Fraser, then open social dancing. Costumes are welcome.",
+  "category": "lesson-party",
+  "danceStyles": [
+    "east-coast-swing"
+  ],
+  "start": "2026-10-27T19:30",
+  "timezone": "America/New_York",
+  "lessonTime": "19:30",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "instructorIds": [
+    "carol-fraser"
+  ],
+  "price": 15,
+  "priceNotes": "Members pay less",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.sdli.org",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "page 22",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 1,
+  "matchKey": "thedancecalendar|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|lesson-party||east-coast-swing||2026-10-27|halloween"
+}

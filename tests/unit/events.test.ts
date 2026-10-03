@@ -1,161 +1,109 @@
 import { describe, expect, it } from 'vitest';
-import { admissionOf, admissionText, hostOf, isUpcoming, nextConfirmed, partition, resolveOccurrences, homeFirst, sortOccurrences } from '../../src/lib/event-core';
-import { ev, tuesdaySeries } from './helpers';
+import { eventSchema, type EventData } from '../../src/lib/schemas';
+import { isUpcoming, occurrenceSlug, partition, priceOf, priceText, resolveOccurrences, type RawEvent } from '../../src/lib/event-core';
+import { describeRule, expandRule, lastDate, occurrenceDates, parseRRule, validateRRule } from '../../src/lib/rrule';
 
-const NOW = new Date('2026-10-01T22:00:00-04:00');
+const base = {
+  summary: 'An evening of Hustle social dancing.',
+  category: 'social-dance',
+  sourceId: 'thedancecalendar',
+  sourceUrl: 'https://www.thedancecalendar.com/issue.pdf',
+  firstSeen: '2026-10-01',
+  lastSeen: '2026-10-01',
+  town: 'Huntington',
+};
+const ev = (id: string, data: Record<string, unknown>): RawEvent => ({ id, data: eventSchema.parse({ ...base, ...data }) as EventData });
+const NOW = new Date('2026-10-03T04:00:00Z'); // Saturday, October 3, 2026 at midnight in New York
 
-describe('series occurrences and overrides', () => {
-  const series = tuesdaySeries();
-  const overrides = [
-    ev('2026-10-13-band-night.md', {
-      title: 'Band Night: Playing Favorites',
-      series: 'thursday-night-swing',
-      occurrenceDate: '2026-10-13',
-      bandName: 'moonlight-jump-band',
-      admissionMember: 15,
-      admissionStudent: 10,
-      admissionNonMember: 20,
-      eventTypes: ['weekly-dance', 'live-band'],
-    }),
-    ev('2026-10-20-cancelled.md', {
-      title: 'Thursday Night Swing',
-      series: 'thursday-night-swing',
-      occurrenceDate: '2026-10-20',
-      status: 'cancelled',
-      cancelledMessage: 'Cancelled because of a storm.',
-    }),
-  ];
-  const all = resolveOccurrences(overrides, [series], { now: NOW });
-
-  it('creates one stable URL per occurrence', () => {
-    expect(all.map((o) => o.slug)).toEqual([
-      '2026-10-06-thursday-night-swing',
-      '2026-10-13-thursday-night-swing',
-      '2026-10-20-thursday-night-swing',
-      '2026-10-27-thursday-night-swing',
+describe('repeat rules (RRULE subset)', () => {
+  it('parses and validates the supported parts', () => {
+    expect(parseRRule('FREQ=WEEKLY;BYDAY=TU;UNTIL=20261027')).toEqual({ freq: 'WEEKLY', interval: 1, byday: [{ weekday: 2, ordinal: undefined }], until: '2026-10-27', count: undefined });
+    expect(validateRRule('FREQ=MONTHLY;BYDAY=1FR,3FR')).toBeNull();
+    expect(validateRRule('FREQ=DAILY')).not.toBeNull();
+    expect(validateRRule('FREQ=WEEKLY;BYDAY=1TU')).not.toBeNull(); // ordinals only make sense monthly
+    expect(validateRRule('FREQ=WEEKLY;UNTIL=20261027;COUNT=3')).not.toBeNull();
+  });
+  it('expands weekly, every-other-week and monthly ordinal rules', () => {
+    expect(expandRule('2026-10-06', parseRRule('FREQ=WEEKLY;BYDAY=TU;UNTIL=20261027'), '2027-01-01')).toEqual(['2026-10-06', '2026-10-13', '2026-10-20', '2026-10-27']);
+    expect(expandRule('2026-10-06', parseRRule('FREQ=WEEKLY;INTERVAL=2;BYDAY=TU'), '2026-11-10')).toEqual(['2026-10-06', '2026-10-20', '2026-11-03']);
+    expect(expandRule('2026-10-02', parseRRule('FREQ=MONTHLY;BYDAY=1FR,3FR'), '2026-11-30')).toEqual(['2026-10-02', '2026-10-16', '2026-11-06', '2026-11-20']);
+    expect(expandRule('2026-10-31', parseRRule('FREQ=MONTHLY;BYDAY=-1SA;COUNT=2'), '2027-12-31')).toEqual(['2026-10-31', '2026-11-28']);
+  });
+  it('adds extra dates and removes skipped ones', () => {
+    expect(occurrenceDates('2026-10-05', { rrule: 'FREQ=WEEKLY;BYDAY=MO;UNTIL=20261026', exdates: ['2026-10-19'], rdates: ['2026-10-30'] }, '2026-12-31')).toEqual([
+      '2026-10-05',
+      '2026-10-12',
+      '2026-10-26',
+      '2026-10-30',
     ]);
+    expect(occurrenceDates('2026-10-09', { rdates: ['2026-10-23'] }, '2026-12-31')).toEqual(['2026-10-09', '2026-10-23']);
+    expect(lastDate('2026-10-05', { rrule: 'FREQ=WEEKLY;BYDAY=MO;UNTIL=20261026' })).toBe('2026-10-26');
+    expect(lastDate('2026-10-05', { rrule: 'FREQ=WEEKLY;BYDAY=MO' })).toBeUndefined();
   });
-  it('lets an override change the title, band and prices while inheriting the rest', () => {
-    const o = all[1]!;
-    expect(o.title).toBe('Band Night: Playing Favorites');
-    expect(o.details.bandName).toBe('moonlight-jump-band');
-    expect(o.details.admissionNonMember).toBe(20);
-    expect(o.details.venue).toBe('riverbend-community-hall');
-    expect(o.details.lessonStartTime).toBe('19:30');
-    expect(o.source.kind).toBe('series-override');
-  });
-  it('keeps a cancelled occurrence visible and marked as cancelled', () => {
-    const o = all[2]!;
-    expect(o.status).toBe('cancelled');
-    expect(o.cancelledMessage).toMatch(/storm/);
-    expect(partition(all, NOW).upcoming.map((x) => x.slug)).toContain(o.slug);
-  });
-  it('skips cancelled dances when choosing the next confirmed dance', () => {
-    const later = new Date('2026-10-14T12:00:00-04:00');
-    expect(nextConfirmed(all, later)?.slug).toBe('2026-10-27-thursday-night-swing');
-  });
-  it('computes timezone-correct start and end instants', () => {
-    expect(all[0]!.start.toISOString()).toBe('2026-10-06T23:30:00.000Z');
-    expect(all[0]!.end.toISOString()).toBe('2026-10-07T02:00:00.000Z');
+  it('describes rules in plain words', () => {
+    expect(describeRule('2026-10-06', parseRRule('FREQ=WEEKLY;BYDAY=TU'))).toBe('Every Tuesday');
+    expect(describeRule('2026-10-06', parseRRule('FREQ=WEEKLY;INTERVAL=2;BYDAY=TU'))).toBe('Every other Tuesday');
+    expect(describeRule('2026-10-02', parseRRule('FREQ=MONTHLY;BYDAY=1FR,3FR'))).toBe('1st and 3rd Fridays of the month');
+    expect(describeRule('2026-10-31', parseRRule('FREQ=MONTHLY;BYDAY=-1SA'))).toBe('Last Saturday of the month');
   });
 });
 
-describe('upcoming versus past', () => {
-  const events = [
-    ev('a.md', { title: 'Past dance', startDateTime: '2026-09-29T19:30', endDateTime: '2026-09-29T22:00' }),
-    ev('b.md', { title: 'Tonight', startDateTime: '2026-10-01T19:30', endDateTime: '2026-10-01T23:00' }),
-    ev('c.md', { title: 'Future dance', startDateTime: '2026-10-06T19:30' }),
-    ev('d.md', { title: 'Draft dance', startDateTime: '2026-10-08T19:30', status: 'draft' }),
-    ev('e.md', { title: 'Hidden dance', startDateTime: '2026-10-09T19:30', published: false }),
-    ev('f.md', { title: 'Time TBA', startDateTime: '2026-10-10' }),
-  ];
-  const all = resolveOccurrences(events, [], { now: NOW });
+describe('occurrences', () => {
+  const weekly = ev('swing-dance-long-island-lesson-and-dance-tuesdays', { title: 'East Coast Swing lesson and social dance', start: '2026-10-06T19:30', end: '2026-10-06T22:00', recurrence: { rrule: 'FREQ=WEEKLY;BYDAY=TU;UNTIL=20261020' } });
+  const once = ev('2026-10-02-dominick-paradise-live-music', { title: 'Live music night', category: 'live-music', start: '2026-10-02T19:00', end: '2026-10-02T23:00' });
+  const lateNight = ev('2026-10-09-dj-ray', { title: 'DJ night', start: '2026-10-09T20:00', end: '2026-10-09T00:00' });
+  const hidden = ev('2026-10-10-unchecked', { title: 'Unchecked listing', start: '2026-10-10T19:00', status: 'pending-review' });
+  const list = resolveOccurrences([weekly, once, lateNight, hidden], { now: NOW });
 
-  it('never lists an event that has ended as upcoming', () => {
-    const { upcoming, past } = partition(all, NOW);
-    expect(upcoming.map((o) => o.title)).toEqual(['Tonight', 'Future dance', 'Time TBA']);
-    expect(past.map((o) => o.title)).toEqual(['Past dance']);
-    expect(past[0]!.effectiveStatus).toBe('completed');
-  });
-  it('an event in progress is still upcoming until it ends', () => {
-    expect(isUpcoming(all.find((o) => o.title === 'Tonight')!, NOW)).toBe(true);
-    expect(isUpcoming(all.find((o) => o.title === 'Tonight')!, new Date('2026-10-01T23:00:01-04:00'))).toBe(false);
-  });
-  it('excludes drafts and unpublished events', () => {
-    expect(all.some((o) => o.title === 'Draft dance' || o.title === 'Hidden dance')).toBe(false);
-  });
-  it('defaults to a 3-hour event when no end is given, and all-day when the time is TBA', () => {
-    const f = all.find((o) => o.title === 'Future dance')!;
-    expect((f.end.getTime() - f.start.getTime()) / 3600000).toBe(3);
-    const tba = all.find((o) => o.title === 'Time TBA')!;
-    expect(tba.timeTba).toBe(true);
-    expect(tba.start.toISOString()).toBe('2026-10-10T04:00:00.000Z');
-  });
-  it('returns an empty upcoming list when everything is in the past (empty state)', () => {
-    expect(partition(all, new Date('2027-01-01T00:00:00Z')).upcoming).toEqual([]);
-    expect(nextConfirmed(all, new Date('2027-01-01T00:00:00Z'))).toBeUndefined();
-  });
-  it('sorts by start time, then title', () => {
-    const sorted = sortOccurrences([
-      { title: 'B', start: new Date(2) },
-      { title: 'A', start: new Date(2) },
-      { title: 'C', start: new Date(1) },
+  it('expands repeating events into dated pages with stable URLs', () => {
+    expect(list.filter((o) => o.eventId === weekly.id).map((o) => o.slug)).toEqual([
+      '2026-10-06-swing-dance-long-island-lesson-and-dance-tuesdays',
+      '2026-10-13-swing-dance-long-island-lesson-and-dance-tuesdays',
+      '2026-10-20-swing-dance-long-island-lesson-and-dance-tuesdays',
     ]);
-    expect(sorted.map((s) => s.title)).toEqual(['C', 'A', 'B']);
+    expect(occurrenceSlug('2026-10-02-dominick-paradise-live-music', '2026-10-02')).toBe('2026-10-02-dominick-paradise-live-music');
+    expect(list.find((o) => o.eventId === weekly.id)!.cadence).toBe('Every Tuesday');
+  });
+  it('uses New York time, including events that end after midnight', () => {
+    const o = list.find((x) => x.eventId === lateNight.id)!;
+    expect(o.start.toISOString()).toBe('2026-10-10T00:00:00.000Z');
+    expect(o.end.toISOString()).toBe('2026-10-10T04:00:00.000Z');
+  });
+  it('marks ended events as past and hides listings waiting for review', () => {
+    expect(list.find((o) => o.eventId === once.id)!.status).toBe('past');
+    expect(list.some((o) => o.eventId === hidden.id)).toBe(false);
+    const { upcoming, past } = partition(list, NOW);
+    expect(past.map((o) => o.eventId)).toEqual([once.id]);
+    expect(upcoming.every((o) => isUpcoming(o, NOW))).toBe(true);
+  });
+  it('keeps cancelled events visible and clearly marked', () => {
+    const c = resolveOccurrences([ev('2026-10-17-x', { title: 'Cancelled night', start: '2026-10-17T19:00', status: 'cancelled' })], { now: NOW });
+    expect(c[0]!.status).toBe('cancelled');
+    expect(isUpcoming(c[0]!, NOW)).toBe(true);
+  });
+  it('refuses two events with the same URL', () => {
+    expect(() => resolveOccurrences([once, { ...once }], { now: NOW })).toThrow(/Duplicate event URL/);
   });
 });
 
-describe('Riverbend events first, community events after', () => {
-  const community = (id: string, data: Record<string, unknown>) => ev(id, { host: 'community', organizer: 'dj-scott', ...data });
-  const events = [
-    community('2026-10-02-dj-scott.md', { title: 'Friday Social', startDateTime: '2026-10-02T18:00', endDateTime: '2026-10-02T23:00' }),
-    ev('2026-10-06-pizza.md', { title: 'Pizza Night', startDateTime: '2026-10-06T19:30', endDateTime: '2026-10-06T22:00' }),
-    community('2026-10-03-waterfalls.md', { title: 'Saturday Ballroom', startDateTime: '2026-10-03T19:00', endDateTime: '2026-10-03T23:00' }),
-    ev('2026-10-13-dj.md', { title: 'DJ Night', startDateTime: '2026-10-13T19:30', endDateTime: '2026-10-13T22:00', status: 'cancelled' }),
-    ev('2026-10-20-band.md', { title: 'Band Night', startDateTime: '2026-10-20T19:30', endDateTime: '2026-10-20T22:00' }),
-  ];
-  const all = resolveOccurrences(events, [], { now: NOW });
-
-  it('treats events without a host as Riverbend events', () => {
-    expect(all.map((o) => hostOf(o))).toEqual(['community', 'community', 'home', 'home', 'home']);
-  });
-  it('the "next dance" is always the next confirmed Riverbend dance, even when a community event is sooner', () => {
-    expect(nextConfirmed(all, NOW)?.title).toBe('Pizza Night');
-    expect(nextConfirmed(all, NOW, 'any')?.title).toBe('Friday Social');
-    expect(nextConfirmed(all, new Date('2026-10-07T00:00:00-04:00'))?.title).toBe('Band Night');
-  });
-  it('lists Riverbend events first, each group in date order', () => {
-    expect(homeFirst(all).map((o) => o.title)).toEqual(['Pizza Night', 'DJ Night', 'Band Night', 'Friday Social', 'Saturday Ballroom']);
+describe('prices in plain words', () => {
+  it('handles free, single, range and unknown prices', () => {
+    expect(priceText(priceOf({ isFree: true }))).toBe('Free');
+    expect(priceText(priceOf({ price: 25 }))).toBe('$25 per person');
+    expect(priceText(priceOf({ price: 15, priceMax: 20, priceNotes: 'Members pay less' }))).toBe('$15 to $20 per person. Members pay less');
+    expect(priceText(priceOf({}))).toBe('Price not listed. Ask the organizer.');
   });
 });
 
-describe('events that run past midnight', () => {
-  it('a series ending at 12 AM ends the next day', () => {
-    const fri = tuesdaySeries({ title: 'Friday Dance', slug: 'friday-dance', recurrence: { frequency: 'weekly', weekday: 'friday', startDate: '2026-10-02', endDate: '2026-10-09' }, startTime: '20:00', endTime: '00:00', danceStartTime: '20:00', danceEndTime: '00:00', lessonStartTime: undefined });
-    const [first] = resolveOccurrences([], [fri], { now: NOW });
-    expect(first!.endLocal).toBe('2026-10-03T00:00');
-    expect((first!.end.getTime() - first!.start.getTime()) / 3600000).toBe(4);
-    expect(isUpcoming(first!, new Date('2026-10-02T23:30:00-04:00'))).toBe(true);
+describe('event schema rules', () => {
+  it('needs a venue or at least a town', () => {
+    expect(() => eventSchema.parse({ ...base, town: undefined, title: 'No place', start: '2026-10-06T19:30' })).toThrow(/venue/i);
+  });
+  it('rejects a bad repeat rule and a free event with a price', () => {
+    expect(() => eventSchema.parse({ ...base, title: 'Bad rule', start: '2026-10-06T19:30', recurrence: { rrule: 'FREQ=YEARLY' } })).toThrow(/repeat rule/i);
+    expect(() => eventSchema.parse({ ...base, title: 'Free?', start: '2026-10-06T19:30', isFree: true, price: 10 })).toThrow(/free/i);
+  });
+  it('keeps times as text even if YAML turned them into numbers', () => {
+    expect(eventSchema.parse({ ...base, title: 'Lesson', start: '2026-10-06T19:30', lessonTime: 1170 }).lessonTime).toBe('19:30');
   });
 });
-
-describe('content integrity errors', () => {
-  it('rejects two entries with the same URL', () => {
-    const a = ev('2026-10-06-dance.md', { title: 'Dance', startDateTime: '2026-10-06T19:30' });
-    const b = ev('dance.md', { title: 'Dance', startDateTime: '2026-10-06T20:00' });
-    expect(() => resolveOccurrences([a, b], [], { now: NOW })).toThrow(/Duplicate event URL/);
-  });
-  it('rejects an override that points to an unknown series', () => {
-    const o = ev('x.md', { title: 'Override', series: 'nope', occurrenceDate: '2026-10-06' });
-    expect(() => resolveOccurrences([o], [], { now: NOW })).toThrow(/unknown series/);
-  });
-});
-
-describe('admission summary', () => {
-  it('describes prices in plain language', () => {
-    expect(admissionText(admissionOf({ admissionMember: 10, admissionStudent: 5, admissionNonMember: 15 }))).toBe('$15 non-members, $10 members, $5 students');
-    expect(admissionText(admissionOf({ admissionNonMember: 0 }))).toBe('Free');
-    expect(admissionText(admissionOf({}))).toBe('Admission details to be announced');
-  });
-});
-

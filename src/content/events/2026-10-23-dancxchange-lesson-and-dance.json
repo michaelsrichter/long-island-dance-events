@@ -1,0 +1,32 @@
+{
+  "title": "Hustle lesson and social dance at Huntington Moose Lodge",
+  "summary": "A Hustle group lesson at 7:15 PM, then open social dancing. Dance styles: Hustle, West Coast Swing and more. Snacks are included.",
+  "category": "lesson-party",
+  "danceStyles": [
+    "hustle",
+    "west-coast-swing",
+    "country-two-step",
+    "latin-ballroom",
+    "ballroom"
+  ],
+  "start": "2026-10-23T19:15",
+  "end": "2026-10-23T23:00",
+  "timezone": "America/New_York",
+  "lessonTime": "19:15",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "dancxchange",
+  "price": 20,
+  "priceNotes": "Free lesson included. Pay at the door",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.donnadesimone.us",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "page 21",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 1,
+  "matchKey": "thedancecalendar|huntington-moose-lodge|dancxchange|friday|19:15|lesson-party||ballroom+country-two-step+hustle+latin-ballroom+west-coast-swing||2026-10-23"
+}

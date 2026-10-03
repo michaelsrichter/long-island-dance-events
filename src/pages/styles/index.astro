@@ -1,0 +1,43 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getEventGroups } from '../../lib/content';
+import { STYLE_FAMILIES } from '../../lib/schemas';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+const styles = (await getCollection('styles')).sort((a, b) => a.data.order - b.data.order);
+const { upcoming } = await getEventGroups();
+const count = (id: string) => new Set(upcoming.filter((e) => e.styles.some((s) => s.id === id)).map((e) => e.eventId)).size;
+const familyLabel: Record<(typeof STYLE_FAMILIES)[number], string> = { swing: 'Swing and hustle', ballroom: 'Ballroom', latin: 'Latin', tango: 'Tango', country: 'Country', other: 'Other' };
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Dance styles', href: '/styles/' },
+];
+---
+<BaseLayout title="Dance styles explained" description="What is West Coast Swing? Hustle? Bachata? Short, plain-language explanations of the partner dances you can find on Long Island." pageType="styles" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Dance styles explained" lede="Each style has its own steps and music. Pick one to learn a little about it and see where to dance it." crumbs={crumbs} />
+  <div class="container section stack-l">
+    {STYLE_FAMILIES.map((f) => {
+      const list = styles.filter((s) => s.data.family === f);
+      return list.length > 0 && (
+        <section aria-labelledby={`f-${f}`}>
+          <h2 id={`f-${f}`}>{familyLabel[f]}</h2>
+          <ul class="grid grid--3 mt-5 style-cards">
+            {list.map((s) => {
+              const n = count(s.id);
+              return (
+                <li class="card">
+                  <h3><a href={`/styles/${s.id}/`}>{s.data.name}</a></h3>
+                  <p>{s.data.summary}</p>
+                  {s.data.music && <p class="muted"><span class="fact-label">Music:</span> {s.data.music}</p>}
+                  <p class="card__kicker mt-3">{n ? `${n} upcoming ${n === 1 ? 'event' : 'events'}` : 'Nothing listed right now'}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      );
+    })}
+  </div>
+</BaseLayout>

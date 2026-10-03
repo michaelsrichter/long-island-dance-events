@@ -1,0 +1,26 @@
+{
+  "title": "Halloween Ballroom and Latin social dance at Brumidi Lodge (Sons of Italy)",
+  "summary": "An evening of Ballroom and Latin social dancing. Costumes are welcome. Food is included, and there is a cash bar.",
+  "category": "social-dance",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "start": "2026-10-31T18:30",
+  "end": "2026-10-31T22:30",
+  "timezone": "America/New_York",
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "club-brumidi",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "page 23",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.95,
+  "matchKey": "thedancecalendar|brumidi-lodge|club-brumidi|saturday|18:30|social-dance||ballroom+latin-ballroom||2026-10-31|halloween",
+  "reviewNotes": "Dance styles come from the organizer, not this listing."
+}

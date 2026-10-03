@@ -1,0 +1,22 @@
+{
+  "name": "The DancXchange Dance Studio",
+  "aliases": [
+    "DancXchange Dance Studio",
+    "290 Broad Hollow Rd"
+  ],
+  "address": "290 Broadhollow Road",
+  "town": "Melville",
+  "county": "Suffolk",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: donnadesimone.us, google.com.",
+  "postalCode": "11747",
+  "phone": "(516) 375-8498",
+  "website": "https://www.donnadesimone.us/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=290+Broad+Hollow+Rd%2C+Melville%2C+NY+11747",
+  "accessibilityNotes": "Inside the Bank of America professional building; studio is downstairs at the atrium level. Front doors lock automatically at 8:00 pm, so arrive before 8.",
+  "description": "Lower level, Suite LL150E. The studio says its front doors lock at 8 PM.",
+  "reviewNotes": "No Google Maps place listing for the studio itself; link is an address search. Phone is Donna DeSimone's published cell.",
+  "latitude": 40.783743,
+  "longitude": -73.418758,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

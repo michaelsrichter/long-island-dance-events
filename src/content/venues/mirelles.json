@@ -1,0 +1,21 @@
+{
+  "name": "Mirelle's",
+  "aliases": [
+    "Mirelles",
+    "Mirelle's Restaurant"
+  ],
+  "address": "170 Post Ave",
+  "town": "Westbury",
+  "county": "Nassau",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: argentinetangolovers.com, mirellesrestaurant.com, google.com.",
+  "postalCode": "11590",
+  "phone": "(516) 338-4933",
+  "website": "https://mirellesrestaurant.com/",
+  "googleMapsUrl": "https://www.google.com/maps?cid=11590847970585050672",
+  "parkingNotes": "Parking and entrance are in the back (Argentine Tango Lovers).",
+  "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance, parking lot, restroom and seating.",
+  "latitude": 40.755063,
+  "longitude": -73.587773,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

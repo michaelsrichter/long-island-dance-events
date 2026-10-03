@@ -1,0 +1,52 @@
+name: Add an event or calendar
+description: Tell us about a dance, class, live-music night or a whole calendar on Long Island that we are missing.
+title: "Add: "
+labels: [add-listing]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        We list events in **Nassau and Suffolk counties** only. A link to a public calendar (website, Facebook page, PDF or .ics feed) helps us keep listings up to date every week.
+  - type: input
+    id: link
+    attributes:
+      label: Link to the event or calendar
+      placeholder: https://...
+    validations:
+      required: true
+  - type: input
+    id: what
+    attributes:
+      label: Event or organizer name
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Place and town
+      placeholder: e.g. Moose Lodge, Huntington
+    validations:
+      required: true
+  - type: input
+    id: when
+    attributes:
+      label: Day and time
+      placeholder: e.g. Every 2nd Friday, 8 PM to 11 PM
+    validations:
+      required: false
+  - type: textarea
+    id: details
+    attributes:
+      label: Anything else?
+      description: Dance styles, price, lesson time, band or DJ.
+    validations:
+      required: false
+  - type: dropdown
+    id: role
+    attributes:
+      label: Are you the organizer?
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true

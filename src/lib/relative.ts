@@ -30,7 +30,7 @@ export interface RelativeLabel {
  * @param startMs event start (UTC ms)
  * @param endMs event end (UTC ms)
  * @param nowMs current time (UTC ms)
- * @param opts.excited add "!" to "In N days" (used for Riverbend's own events)
+ * @param opts.excited add "!" to "In N days" (optional, for highlighted events)
  * @param opts.allDay date known but time to be announced
  */
 export function relativeLabel(startMs: number, endMs: number, nowMs: number, opts: { excited?: boolean; allDay?: boolean } = {}): RelativeLabel {

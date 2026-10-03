@@ -1,0 +1,23 @@
+{
+  "name": "The Waterfalls Clubhouse Ballroom",
+  "aliases": [
+    "Waterfalls Ballroom",
+    "The Waterfalls"
+  ],
+  "address": "400 Cassata Road",
+  "town": "Lake Ronkonkoma",
+  "county": "Suffolk",
+  "state": "NY",
+  "factsSource": "Checked October 3, 2026. Sources: waterfallsapartments.com, google.com.",
+  "postalCode": "11779",
+  "phone": "(631) 738-6700",
+  "website": "https://waterfallsapartments.com/",
+  "googleMapsUrl": "https://www.google.com/maps?cid=9650492865616719017",
+  "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot.",
+  "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
+  "description": "Clubhouse ballroom in a 55+ community. The public dances are open to walk-ins.",
+  "reviewNotes": "Ballroom is in the clubhouse of a 55+ rental community; public dances are on its event calendar. Official street name is Cassata Road (newsletter calendar says \"Ave\").",
+  "latitude": 40.835532,
+  "longitude": -73.096974,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

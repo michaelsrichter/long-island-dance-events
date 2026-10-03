@@ -12,9 +12,9 @@ export async function getStaticPaths() {
   const { all, now } = await getEventGroups();
   return monthRange(all, now).map((month) => ({ params: { month } }));
 }
-const { month } = Astro.params as { month: string };
 const { all, now } = await getEventGroups();
 const months = monthRange(all, now);
+const month = (Astro.params as { month: string }).month;
 const i = months.indexOf(month);
 const label = formatMonthKey(month);
 const crumbs = [
@@ -23,11 +23,11 @@ const crumbs = [
   { name: label, href: `/events/calendar/${month}/` },
 ];
 ---
-<BaseLayout title={`${label} Swing Dance Calendar`} description={`Riverbend swing dances and lessons on Riverbend Valley in ${label}.`} pageType="calendar" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
-  <PageHeader title="Event calendar" crumbs={crumbs}>
+<BaseLayout title={`${label} dance calendar for Long Island`} description={`Social dances, classes and live music in Nassau and Suffolk in ${label}, shown as a month calendar.`} pageType="calendar" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+  <PageHeader title="Month calendar" lede="See the whole month at a glance. On a phone, the events are listed under the calendar." crumbs={crumbs}>
     <EventViews current="calendar" />
   </PageHeader>
   <div class="container section">
-    <MonthCalendar month={month} events={all} prev={months[i - 1]} next={months[i + 1]} today={dateInZone(now)} now={now} />
+    <MonthCalendar month={month} events={all.filter((e) => e.status !== 'pending-review')} prev={months[i - 1]} next={months[i + 1]} today={dateInZone(now)} now={now} />
   </div>
 </BaseLayout>

@@ -1,0 +1,20 @@
+{
+  "name": "DJ Scott's Social Dance Nights",
+  "type": "dj",
+  "aliases": [
+    "Music by DJ Scott",
+    "Purple Penguin Entertainment"
+  ],
+  "phone": "(631) 357-2881",
+  "town": "Patchogue",
+  "homeVenueId": "knights-of-columbus-patchogue",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom",
+    "east-coast-swing"
+  ],
+  "website": "https://www.purplepenguinentertainment.com/",
+  "email": "scott@djscottmusic.com",
+  "description": "Social dance nights with a ballroom-to-rock music mix by DJ Scott at the Knights of Columbus hall in Patchogue.",
+  "reviewNotes": "The Dance Calendar lists different phone numbers (631.277.7774 / 631.513.1055); only DJ Scott's own-site number is recorded."
+}

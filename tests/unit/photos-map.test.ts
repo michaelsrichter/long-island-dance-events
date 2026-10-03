@@ -21,36 +21,34 @@ describe('focus-point crops', () => {
 });
 
 describe('events map grouping', () => {
-  const ev = (slug: string, host: 'home' | 'community', date: string, venueId?: string, lat?: number) => ({
+  const ev = (slug: string, date: string, venueId?: string, lat?: number) => ({
     slug,
-    host,
     start: new Date(`${date}T19:30:00-04:00`),
     venueId,
     location: { name: venueId ?? 'Somewhere', latitude: lat, longitude: lat === undefined ? undefined : -73.3 },
   });
   const { places, unplaced } = groupByPlace([
-    ev('c1', 'community', '2026-10-03', 'grange', 40.77),
-    ev('s2', 'home', '2026-10-13', 'hall', 40.87),
-    ev('s1', 'home', '2026-10-06', 'hall', 40.87),
-    ev('c2', 'community', '2026-10-02', 'mirelles', 40.75),
-    ev('x', 'community', '2026-10-09'),
+    ev('c1', '2026-10-03', 'grange', 40.77),
+    ev('s2', '2026-10-13', 'hall', 40.87),
+    ev('s1', '2026-10-06', 'hall', 40.87),
+    ev('c2', '2026-10-02', 'mirelles', 40.75),
+    ev('x', '2026-10-09'),
   ]);
   it('makes one place per venue, with its events in date order', () => {
-    expect(places.map((p) => p.id)).toEqual(['hall', 'mirelles', 'grange']);
-    expect(places[0]!.events.map((e) => e.slug)).toEqual(['s1', 's2']);
+    expect(places[2]!.events.map((e) => e.slug)).toEqual(['s1', 's2']);
   });
-  it("puts Riverbend's own venue first and marks it as Riverbend", () => {
-    expect(places[0]!.host).toBe('home');
-    expect(places[1]!.host).toBe('community');
+  it('orders places by their next event', () => {
+    expect(places.map((p) => p.id)).toEqual(['mirelles', 'grange', 'hall']);
   });
   it('lists events without coordinates separately', () => {
     expect(unplaced.map((e) => e.slug)).toEqual(['x']);
   });
 });
-
 describe('venue geocoding', () => {
   it('drops suite numbers from addresses', () => {
-    expect(oneLineAddress({ address: '290 Broadhollow Road, Suite LL150E', city: 'Melville', postalCode: '11747' })).toBe('290 Broadhollow Road, Melville, NY 11747');
+    expect(oneLineAddress({ address: '290 Broadhollow Road, Suite LL150E', town: 'Melville', postalCode: '11747' })).toBe('290 Broadhollow Road, Melville, NY 11747');
+    // A word that merely contains "ste" is not a suite number.
+    expect(oneLineAddress({ address: '18 Hempstead Tpke', town: 'Farmingdale' })).toBe('18 Hempstead Tpke, Farmingdale, NY');
   });
   it('reads Census and OpenStreetMap answers', () => {
     expect(parseCensus({ result: { addressMatches: [{ coordinates: { x: -73.33, y: 40.77 }, matchedAddress: '2075 DEER PARK AVE' }] } })).toEqual({
@@ -70,10 +68,12 @@ describe('venue geocoding', () => {
     const { readdirSync, readFileSync } = await import('node:fs');
     const { join } = await import('node:path');
     const dir = join(__dirname, '..', '..', 'src', 'content', 'venues');
-    for (const f of readdirSync(dir).filter((x) => x.endsWith('.md'))) {
-      const fm = readFileSync(join(dir, f), 'utf8');
-      expect(fm, f).toMatch(/^latitude: 4[01]\.\d+/m);
-      expect(fm, f).toMatch(/^longitude: -7[2-4]\.\d+/m);
+    for (const f of readdirSync(dir).filter((x) => x.endsWith('.json'))) {
+      const v = JSON.parse(readFileSync(join(dir, f), 'utf8'));
+      expect(v.latitude, f).toBeGreaterThan(40.5);
+      expect(v.latitude, f).toBeLessThan(41.2);
+      expect(v.longitude, f).toBeGreaterThan(-74.1);
+      expect(v.longitude, f).toBeLessThan(-71.8);
     }
   });
 });
