@@ -39,3 +39,7 @@ __pycache__/
 # Local scratch and tool output
 .tmp/
 .playwright-mcp/
+
+# SQLite report database built by catalog/scripts/build-sqlite.ts (rebuilt every run; never commit)
+data/*.sqlite
+data/*-report.md
