@@ -1,9 +1,11 @@
 # Long Island Dance Events
 
-**One mobile-friendly list of social dances, dance classes and live music in Nassau and Suffolk counties, Long Island, New York.** Listings are collected every week from public calendars, written up in our own words, and linked back to where they came from.
+**One mobile-friendly list of social dances and live music in Nassau and Suffolk counties, Long Island, New York, plus dance classes.** Listings are collected every week from public calendars, written up in our own words, and linked back to where they came from.
 
 - Swing, West Coast Swing, hustle, salsa, bachata, Argentine tango, ballroom, country and more.
-- Browse by list, month calendar or map, with "Today" and "This weekend" shortcuts.
+- Dances and live music come first; classes are one tap away.
+- Browse by list, month calendar or map, with "This week", "Today" and "This weekend" shortcuts.
+- Black, dark red, silver and white design with light and dark modes, built for phones first.
 - Every event links to its venue, organizer, teachers, bands and DJs, and each of those pages lists what is coming up.
 - Add any event to Google, Outlook or Apple calendars, or subscribe to the whole list (`/events/all.ics`, `/events/rss.xml`).
 
@@ -39,7 +41,7 @@ flowchart LR
 | [The Dance Calendar](https://www.thedancecalendar.com/dance-calendar) | Monthly PDF newsletter | Live (adapter `thedancecalendar`) |
 | [Ira's List LI](https://www.iraslistli.com/) | Website | Planned for phase 3 |
 
-New sources are proposed in [docs/content-audit.md](docs/content-audit.md) and added only after the owner approves them. Organizers can [ask for a correction](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=listing-correction.yml), [suggest a listing](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=add-listing.yml) or [opt out](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=remove-listing.yml).
+New sources are proposed in [docs/source-proposals.md](docs/source-proposals.md) (24 candidates from the discovery pass) and added only after the owner approves them. Organizers can [ask for a correction](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=listing-correction.yml), [suggest a listing](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=add-listing.yml) or [opt out](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=remove-listing.yml).
 
 ## Run it on your computer
 
@@ -85,7 +87,7 @@ What a run does:
 
 ### Add a new source
 
-1. Get the owner's approval (see the proposals in [docs/content-audit.md](docs/content-audit.md)).
+1. Get the owner's approval (see [docs/source-proposals.md](docs/source-proposals.md)).
 2. Check `robots.txt` and the site's terms. Prefer structured data: schema.org Event JSON-LD, then iCal (`.ics`), then HTML, then PDF.
 3. Add `src/content/sources/<id>.json` (copy `thedancecalendar.json`; set `enabled`, `type`, `url`, `attribution`, `rateLimitSeconds`).
 4. Add `ingest/adapters/<id>.ts` exporting `adapter: Adapter` with `fetch(ctx)` and `normalize(docs, ctx)` that return `Candidate`s (see `ingest/lib/types.ts`). Reuse the helpers in `ingest/lib/` for times, prices, places and descriptions.
@@ -175,4 +177,4 @@ Designed for about **$0/month**: Azure Static Web Apps Free tier, managed Functi
 
 ## Credits
 
-Built from [community-site-starter](https://github.com/michaelsrichter/community-site-starter) with the community-site-kit. Map data © OpenStreetMap contributors. Sample dance photos: Thomas Quine, CC BY 2.0 (Wikimedia Commons), credited on each page they appear. Event facts come from the sources credited on the [Sources page](src/pages/sources.astro).
+Built from [community-site-starter](https://github.com/michaelsrichter/community-site-starter) with the community-site-kit. Map data © OpenStreetMap contributors. Font: Inter by Rasmus Andersson (SIL Open Font License), via Fontsource. Sample dance photos: Thomas Quine, CC BY 2.0 (Wikimedia Commons), credited on each page they appear. Event facts come from the sources credited on the [Sources page](src/pages/sources.astro).

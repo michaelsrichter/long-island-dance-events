@@ -3,12 +3,19 @@ interface Props {
   class?: string;
 }
 const { class: className } = Astro.props;
+const id = `logo-g-${Math.random().toString(36).slice(2, 8)}`;
 ---
 <svg class={className} viewBox="0 0 512 512" width="48" height="48" aria-hidden="true" focusable="false">
-  <circle cx="256" cy="256" r="256" fill="#24162f" />
-  <path d="M206 168 L346 132 L346 176 L206 212 Z" fill="#f2b134"/>
-  <path d="M206 170 V332 M346 134 V298" stroke="#f2b134" stroke-width="26" stroke-linecap="round"/>
-  <ellipse cx="170" cy="336" rx="48" ry="34" transform="rotate(-20 170 336)" fill="#f2b134"/>
-  <ellipse cx="310" cy="302" rx="48" ry="34" transform="rotate(-20 310 302)" fill="#f2b134"/>
-  <path d="M118 398 C 200 434, 312 434, 394 398" fill="none" stroke="#e8673c" stroke-width="22" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d01a2a" />
+      <stop offset="1" stop-color="#4f0710" />
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="256" fill={`url(#${id})`} />
+  <path d="M206 168 L346 132 L346 176 L206 212 Z" fill="#ffffff"/>
+  <path d="M206 170 V332 M346 134 V298" stroke="#ffffff" stroke-width="26" stroke-linecap="round"/>
+  <ellipse cx="170" cy="336" rx="48" ry="34" transform="rotate(-20 170 336)" fill="#ffffff"/>
+  <ellipse cx="310" cy="302" rx="48" ry="34" transform="rotate(-20 310 302)" fill="#ffffff"/>
+  <path d="M118 398 C 200 434, 312 434, 394 398" fill="none" stroke="#c9ccd3" stroke-width="22" stroke-linecap="round"/>
 </svg>

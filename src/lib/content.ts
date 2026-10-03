@@ -205,6 +205,9 @@ export function byDay(list: ResolvedEvent[]): DayGroup[] {
   return [...groups].map(([date, events]) => ({ date, label: formatDateLong(date), events }));
 }
 
+/** Social dances, lesson + dance parties, live music and festivals: everything except classes. The site leads with these. */
+export const isDance = (e: { category: string }): boolean => e.category !== 'class-lesson';
+
 /** Saturday and Sunday of the coming weekend (Friday evening counts too), as YYYY-MM-DD. */
 export function weekendRange(now: Date, tz = DEFAULT_TZ): { from: string; to: string } {
   const today = dateInZone(now, tz);

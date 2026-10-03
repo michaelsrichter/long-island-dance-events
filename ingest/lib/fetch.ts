@@ -4,8 +4,19 @@
  * unchanged file is not downloaded again. Cached copies live in .cache/ingest and are never committed.
  */
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+
+const isFile = (p: string): boolean => statSync(p, { throwIfNoEntry: false })?.isFile() ?? false;
+/** Read a file, or undefined when it does not exist (no separate exists check, so no race). */
+function readIfExists(p: string): string | undefined {
+  try {
+    return readFileSync(p, 'utf8');
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === 'ENOENT') return undefined;
+    throw e;
+  }
+}
 
 export const USER_AGENT = 'LongIslandDanceEventsBot/1.0 (+https://github.com/michaelsrichter/long-island-dance-events; weekly, polite)';
 const BOT_TOKEN = 'longislanddanceeventsbot';
@@ -114,9 +125,11 @@ export class PoliteFetcher {
     const k = this.key(url);
     const file = join(this.cacheDir, k);
     const metaFile = `${file}.json`;
-    const meta = existsSync(metaFile) ? (JSON.parse(readFileSync(metaFile, 'utf8')) as { etag?: string; lastModified?: string; contentType?: string }) : undefined;
+    const metaText = readIfExists(metaFile);
+    const meta = metaText ? (JSON.parse(metaText) as { etag?: string; lastModified?: string; contentType?: string }) : undefined;
+    const cached = isFile(file);
     if (this.opts.offline) {
-      if (!existsSync(file)) throw new Error(`Offline and not cached: ${url}`);
+      if (!cached) throw new Error(`Offline and not cached: ${url}`);
       return { url, status: 200, file, contentType: meta?.contentType ?? '', fromCache: true };
     }
     const u = new URL(url);
@@ -124,8 +137,8 @@ export class PoliteFetcher {
     if (!isAllowed(rules, u.pathname + u.search)) throw new Error(`robots.txt does not allow ${url}`);
     await this.wait(u.host, Math.max(delaySeconds, rules.crawlDelay ?? 0));
     const headers: Record<string, string> = { 'user-agent': USER_AGENT, accept: '*/*' };
-    if (meta?.etag && existsSync(file)) headers['if-none-match'] = meta.etag;
-    if (meta?.lastModified && existsSync(file)) headers['if-modified-since'] = meta.lastModified;
+    if (meta?.etag && cached) headers['if-none-match'] = meta.etag;
+    if (meta?.lastModified && cached) headers['if-modified-since'] = meta.lastModified;
     let res: Response | undefined;
     for (let attempt = 0; attempt < 2; attempt++) {
       try {

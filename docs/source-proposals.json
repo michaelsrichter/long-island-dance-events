@@ -1,0 +1,1319 @@
+[
+  {
+    "id": "cdss-litma-contradance",
+    "name": "LITMA Contradances (on the CDSS community calendar)",
+    "url": "https://cdss.org/organizer/long-island-traditional-music-association/",
+    "feedUrl": "https://cdss.org/organizer/long-island-traditional-music-association/?ical=1",
+    "format": "iCal feed (WordPress The Events Calendar) + schema.org Event JSON-LD on the page",
+    "styles": [
+      "contra dance"
+    ],
+    "towns": [
+      "Smithtown"
+    ],
+    "county": "Suffolk",
+    "robots": "allowed (User-agent * Allow /; Content-Signal: search=yes, ai-train=no, use=reference). AI-training bots are blocked; our use is listing with a link back.",
+    "overlap": "no (not in the Oct 2026 Dance Calendar data)",
+    "freshness": "12 events: Oct 18, Nov 15, Dec 20 2026 and monthly into mid-2027.",
+    "effort": "S",
+    "priority": "High",
+    "reason": "Clean iCal with per-event UIDs and links; adds a style (contra) not in the October Dance Calendar. LITMA's own site (litma.org) has no fall dates, so CDSS is the better source.",
+    "evidence": [
+      "https://cdss.org/organizer/long-island-traditional-music-association/",
+      "https://cdss.org/organizer/long-island-traditional-music-association/?ical=1",
+      "https://cdss.org/robots.txt",
+      "https://litma.org/",
+      "https://litma.org/calendar-2/"
+    ]
+  },
+  {
+    "id": "sdli-events",
+    "name": "Swing Dance Long Island (SDLI) - Upcoming Events",
+    "url": "http://www.sdli.org/index.php/sdli/events/",
+    "feedUrl": "",
+    "format": "clean HTML list (ExpressionEngine); month grid at /index.php/sdli/calendar/YYYY/MM/. No JSON-LD or iCal found.",
+    "styles": [
+      "East Coast Swing",
+      "Lindy Hop",
+      "West Coast Swing",
+      "Balboa",
+      "Collegiate Shag",
+      "some ballroom"
+    ],
+    "towns": [
+      "Greenlawn"
+    ],
+    "county": "Suffolk",
+    "robots": "none (robots.txt returns 404)",
+    "overlap": "yes (SDLI is in the Dance Calendar)",
+    "freshness": "Dated listings through Dec 29, 2026, plus Jan 26, 2027.",
+    "effort": "S",
+    "priority": "High",
+    "reason": "The organizer's own weekly schedule with the band for each date; fresher and more detailed than a monthly PDF.",
+    "evidence": [
+      "https://www.sdli.org/",
+      "http://www.sdli.org/index.php/sdli/events/",
+      "http://www.sdli.org/index.php/sdli/calendar/",
+      "https://www.sdli.org/robots.txt"
+    ]
+  },
+  {
+    "id": "ballroom-legacy-sea-cliff",
+    "name": "Ballroom Legacy Dance Studio (Sea Cliff) - Wix Events",
+    "url": "https://www.ballroomlegacy.us/",
+    "feedUrl": "https://www.ballroomlegacy.us/event-pages-sitemap.xml",
+    "format": "schema.org Event JSON-LD on each Wix event page; the event sitemap lists every event page",
+    "styles": [
+      "Latin social",
+      "ballroom"
+    ],
+    "towns": [
+      "Sea Cliff"
+    ],
+    "county": "Nassau",
+    "robots": "allowed",
+    "overlap": "no (not in the Oct 2026 Dance Calendar data)",
+    "freshness": "Event pages for Oct 2 and Dec 4, 2026, Jan 1 and Apr 2, 2027.",
+    "effort": "S",
+    "priority": "High",
+    "reason": "New Nassau organizer with structured data and correct addresses; sitemap makes discovery trivial.",
+    "evidence": [
+      "https://www.ballroomlegacy.us/sitemap.xml",
+      "https://www.ballroomlegacy.us/event-pages-sitemap.xml",
+      "https://www.ballroomlegacy.us/event-details-registration/friday-night-latin-dance-fever-2026-10-02-19-30",
+      "https://visitglencove.com/event/legacy-night-latin-social-dance-presented-by-ballroom-legacy/"
+    ]
+  },
+  {
+    "id": "brumidi-lodge-deer-park",
+    "name": "Club Brumidi / Constantino Brumidi Lodge, Sons of Italy (Deer Park)",
+    "url": "https://sonsofitalyli.com/events/",
+    "feedUrl": "https://sonsofitalyli.com/wp-json/wp/v2/event",
+    "format": "clean HTML list (Very Simple Event List plugin) with 'Date:/Time:/Location:' lines; WordPress REST gives titles and text but not dates",
+    "styles": [
+      "social dance mix (tango, West Coast Swing, hustle, ballroom/Latin)",
+      "dinner dances",
+      "classes"
+    ],
+    "towns": [
+      "Deer Park"
+    ],
+    "county": "Suffolk",
+    "robots": "allowed",
+    "overlap": "yes (Club Brumidi is in the Dance Calendar)",
+    "freshness": "Listings for Oct 7, Oct 9-10 and Oct 31, 2026.",
+    "effort": "S",
+    "priority": "High",
+    "reason": "Large weekly social; the lodge's own list adds one-off dances and closures (e.g., 'no class Oct 18').",
+    "evidence": [
+      "https://sonsofitalyli.com/events/",
+      "https://sonsofitalyli.com/event/wednesday-night-dance-social/",
+      "https://sonsofitalyli.com/wp-json/wp/v2/event?per_page=5",
+      "https://sonsofitalyli.com/robots.txt"
+    ]
+  },
+  {
+    "id": "jlr-dance-unlimited",
+    "name": "JLR Dance Unlimited (Bay Shore) - Wix Events",
+    "url": "https://www.jlrdanceunlimited.com/events-2",
+    "feedUrl": "https://www.jlrdanceunlimited.com/event-pages-sitemap.xml",
+    "format": "schema.org Event JSON-LD on each event page (Wix Events); list page links are in the server HTML",
+    "styles": [
+      "ballroom",
+      "Latin",
+      "hustle"
+    ],
+    "towns": [
+      "Bay Shore"
+    ],
+    "county": "Suffolk",
+    "robots": "allowed",
+    "overlap": "yes (JLR is in the Dance Calendar)",
+    "freshness": "Upcoming: Oct 11 and Oct 31, 2026.",
+    "effort": "S",
+    "priority": "Medium",
+    "reason": "Structured, but few events, and the Wix venue address is wrong (geocoded to Lagos, Nigeria) so the adapter must pin the known venue (5 5th Ave, Bay Shore).",
+    "evidence": [
+      "https://www.jlrdanceunlimited.com/events-2",
+      "https://www.jlrdanceunlimited.com/events/halloween-dance-social",
+      "https://www.jlrdanceunlimited.com/event-pages-sitemap.xml",
+      "https://www.jlrdanceunlimited.com/robots.txt"
+    ]
+  },
+  {
+    "id": "gene-casey-lone-sharks",
+    "name": "Gene Casey & the Lone Sharks (band) - show calendar",
+    "url": "https://genecasey.com/events/",
+    "feedUrl": "https://genecasey.com/events/list/?ical=1",
+    "format": "iCal + schema.org Event JSON-LD (WordPress The Events Calendar)",
+    "styles": [
+      "swing / rockabilly / roots band for dancing"
+    ],
+    "towns": [
+      "Amityville",
+      "Greenlawn",
+      "Bayport",
+      "Greenport",
+      "Cutchogue"
+    ],
+    "county": "Suffolk",
+    "robots": "allowed",
+    "overlap": "partly (SDLI band night; Liam's Landing nights are not in the Oct 2026 Dance Calendar data)",
+    "freshness": "Gigs through Feb 14, 2027.",
+    "effort": "S",
+    "priority": "Medium",
+    "reason": "Clean feed; Dance Manhattan lists Sharks' Night as a recommended LI swing dance. Needs a venue allowlist (Liam's Landing, SDLI).",
+    "evidence": [
+      "https://genecasey.com/events/",
+      "https://genecasey.com/events/list/?ical=1",
+      "https://genecasey.com/event/sharks-night-at-liams-in-amityville-ny/",
+      "https://genecasey.com/robots.txt"
+    ]
+  },
+  {
+    "id": "twisted-cow-barrelhouse-boogie",
+    "name": "Twisted Cow Distillery - Barrelhouse Boogie Lindy Hop night",
+    "url": "https://twistedcowdistillery.net/Events?Page=1",
+    "feedUrl": "",
+    "format": "clean HTML list + event detail pages (a 'Download Info' link exists; type unverified)",
+    "styles": [
+      "Lindy Hop (lesson + DJ social)"
+    ],
+    "towns": [
+      "East Northport"
+    ],
+    "county": "Suffolk",
+    "robots": "unverified - the site closed connections from the research network (Python, curl and browser all failed); content was read through the WebIQ crawler instead",
+    "overlap": "no (not in the Oct 2026 Dance Calendar data)",
+    "freshness": "Listing for Wed Oct 14, 2026.",
+    "effort": "M",
+    "priority": "Medium",
+    "reason": "Only first-party listing for this monthly Lindy night; confirm robots.txt and access from GitHub Actions before building.",
+    "evidence": [
+      "https://twistedcowdistillery.net/Events?Page=1",
+      "https://twistedcowdistillery.net/Events/Detail/EventId/1317/barrelhouse-boogie-swing-dancing-lessons-returns",
+      "https://twistedcowdistillery.net/robots.txt (could not be fetched)"
+    ]
+  },
+  {
+    "id": "dancemanhattan-li-swing",
+    "name": "Dance Manhattan - 'LI Recommended Swing Dances on Long Island'",
+    "url": "http://dancemanhattan.com/calendar/event/113",
+    "feedUrl": "",
+    "format": "HTML (one free-text block, updated in place); https has a self-signed certificate, http works",
+    "styles": [
+      "swing",
+      "Lindy Hop",
+      "blues"
+    ],
+    "towns": [
+      "Farmingdale",
+      "Greenlawn",
+      "Amityville",
+      "East Northport",
+      "Huntington",
+      "Syosset"
+    ],
+    "county": "Nassau + Suffolk",
+    "robots": "none (robots.txt URL returns an HTML page with no rules)",
+    "overlap": "partly (SDLI)",
+    "freshness": "Page dated Sat Oct 3, 2026; lists dates through Dec 5, 2026.",
+    "effort": "M",
+    "priority": "Medium",
+    "reason": "Best single list of LI swing nights, including some that are otherwise Instagram-only; free text, so parse defensively or use as a cross-check.",
+    "evidence": [
+      "http://dancemanhattan.com/calendar/event/113",
+      "http://dancemanhattan.com/calendar/event/241",
+      "http://www.dancemanhattan.com/calendar/event/39",
+      "http://dancemanhattan.com/robots.txt"
+    ]
+  },
+  {
+    "id": "triple-step-swing",
+    "name": "Triple Step Swing (Long Island Lindy Hop) - calendar",
+    "url": "https://triplestepswing.com/calendar",
+    "feedUrl": "https://inffuse.eventscalendar.co/api/v0.1/projects/proj_LH4Z9iBCTJ3nnZsI92ePw/data/public/events?user=user_jkYMxufQ75hxoRD01us4U&app=calendar",
+    "format": "JSON from an eventscalendar.co widget (no ICS offered); Meetup group iCal exists but is empty",
+    "styles": [
+      "Lindy Hop",
+      "swing",
+      "blues",
+      "big band concerts"
+    ],
+    "towns": [
+      "Syosset",
+      "Huntington",
+      "Greenlawn",
+      "East Meadow",
+      "Glen Cove",
+      "Brookville",
+      "West Sayville"
+    ],
+    "county": "Nassau + Suffolk",
+    "robots": "triplestepswing.com: none (404). Feed host inffuse.eventscalendar.co: Disallow / (only .js files and /js/*/*/data allowed) - the events API is disallowed.",
+    "overlap": "partly (SDLI items)",
+    "freshness": "Events through Nov 13, 2026.",
+    "effort": "M",
+    "priority": "Medium",
+    "reason": "Richest LI swing community calendar, but only usable with permission: ask Triple Step Swing to share a Google Calendar/ICS or give a written OK.",
+    "evidence": [
+      "https://triplestepswing.com/calendar",
+      "https://inffuse.eventscalendar.co/robots.txt",
+      "https://embed.eventscalendar.co/iframely/calendar/proj_LH4Z9iBCTJ3nnZsI92ePw",
+      "https://www.meetup.com/triplestepswing-longisland/events/ical/"
+    ]
+  },
+  {
+    "id": "diva-lourdes-gcal",
+    "name": "DiVa Ballroom / Dance with Lourdes Cruz - Long Island Google Calendar",
+    "url": "https://divaballroomdancing.com/long-island/",
+    "feedUrl": "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
+    "format": "public Google Calendar (iCal) embedded on the page",
+    "styles": [
+      "ballroom",
+      "Latin",
+      "salsa",
+      "West Coast Swing",
+      "Argentine tango",
+      "line dance",
+      "country two-step"
+    ],
+    "towns": [
+      "Deer Park",
+      "Great Neck",
+      "Merrick",
+      "Hicksville",
+      "Lynbrook",
+      "Glen Cove"
+    ],
+    "county": "Nassau + Suffolk",
+    "robots": "calendar.google.com robots.txt: 'Allow: /$, Disallow: /' - automated fetching of the ICS path is disallowed. divaballroomdancing.com itself: allowed.",
+    "overlap": "partly (Lourdes and Brumidi classes are in the Dance Calendar)",
+    "freshness": "70 VEVENTs; dates through Dec 19, 2026.",
+    "effort": "S",
+    "priority": "Medium",
+    "reason": "Broad Nassau class and practice-social coverage in a clean ICS, but needs the organizer's OK because Google's robots.txt disallows bots.",
+    "evidence": [
+      "https://divaballroomdancing.com/long-island/",
+      "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
+      "https://calendar.google.com/robots.txt"
+    ]
+  },
+  {
+    "id": "huntington-arts-council-dance",
+    "name": "Huntington Arts Council - events calendar, Dance category",
+    "url": "https://www.huntingtonarts.org/events/category/dance/",
+    "feedUrl": "https://www.huntingtonarts.org/events/category/dance/?ical=1",
+    "format": "iCal + JSON-LD + REST (/wp-json/tribe/events/v1/events?categories=dance)",
+    "styles": [
+      "swing (SDLI)",
+      "dance performances"
+    ],
+    "towns": [
+      "Greenlawn",
+      "Roslyn Harbor"
+    ],
+    "county": "Suffolk; some Nassau",
+    "robots": "allowed",
+    "overlap": "yes (SDLI)",
+    "freshness": "Through Mar 2027.",
+    "effort": "S",
+    "priority": "Low",
+    "reason": "Very clean feed but mostly duplicates SDLI; keep as a fallback if SDLI's site breaks.",
+    "evidence": [
+      "https://www.huntingtonarts.org/events/",
+      "https://www.huntingtonarts.org/events/category/dance/?ical=1",
+      "https://www.huntingtonarts.org/wp-json/tribe/events/v1/events?start_date=2026-10-01&end_date=2026-12-31&per_page=50&search=dance",
+      "https://www.huntingtonarts.org/wp-json/tribe/events/v1/categories?per_page=100&hide_empty=1"
+    ]
+  },
+  {
+    "id": "out-on-the-town-li",
+    "name": "Out on the Town - Long Island event calendar",
+    "url": "https://outonthetownli.com/",
+    "feedUrl": "https://outonthetownli.com/?post_type=tribe_events&ical=1&eventDisplay=list",
+    "format": "iCal + JSON-LD + REST (The Events Calendar); no dance category",
+    "styles": [
+      "country nights",
+      "Latin nights",
+      "bar dance parties"
+    ],
+    "towns": [
+      "Farmingdale",
+      "Patchogue",
+      "Rockville Centre",
+      "Manorville"
+    ],
+    "county": "Nassau + Suffolk",
+    "robots": "allowed",
+    "overlap": "partly (DJ Neil's Nutty Irishman night appears in Dance Calendar notes)",
+    "freshness": "Oct-Dec 2026.",
+    "effort": "M",
+    "priority": "Low",
+    "reason": "Good feed, but dance content is mixed with nightlife; needs a keyword allowlist and manual review.",
+    "evidence": [
+      "https://outonthetownli.com/",
+      "https://outonthetownli.com/event/country-night/2026-09-01/",
+      "https://outonthetownli.com/wp-json/tribe/events/v1/events?start_date=2026-10-01&end_date=2026-12-31&per_page=50&search=country",
+      "https://outonthetownli.com/wp-json/tribe/events/v1/categories?per_page=100&hide_empty=1"
+    ]
+  },
+  {
+    "id": "haymakers-band",
+    "name": "The Haymakers (band) - shows",
+    "url": "https://www.haymakersmusic.com/shows",
+    "feedUrl": "",
+    "format": "clean HTML list (Wix, server-rendered)",
+    "styles": [
+      "rock & roll / swing-friendly band night"
+    ],
+    "towns": [
+      "Farmingdale",
+      "Lindenhurst"
+    ],
+    "county": "Nassau + Suffolk",
+    "robots": "allowed",
+    "overlap": "no",
+    "freshness": "Oct 3, Oct 11, Nov 7, Dec 5, 2026.",
+    "effort": "S",
+    "priority": "Low",
+    "reason": "Listed by Dance Manhattan as a LI swing night, but the band bills itself as rock & roll; dance focus unverified.",
+    "evidence": [
+      "https://www.haymakersmusic.com/shows",
+      "https://www.haymakersmusic.com/robots.txt"
+    ]
+  },
+  {
+    "id": "line-dance-with-ray",
+    "name": "Line Dance With Ray (Ray Swartz)",
+    "url": "https://www.linedancewithray.com/",
+    "feedUrl": "",
+    "format": "clean HTML (Wix): weekly schedule + 'Upcoming events'",
+    "styles": [
+      "line dancing"
+    ],
+    "towns": [
+      "Massapequa",
+      "Island Park",
+      "Bay Shore",
+      "Deer Park"
+    ],
+    "county": "Nassau + Suffolk",
+    "robots": "allowed",
+    "overlap": "partly (Massapequa Elks and LICMA appear in the Dance Calendar)",
+    "freshness": "Weekly schedule current; 'Upcoming events' still shows September dates.",
+    "effort": "S",
+    "priority": "Low",
+    "reason": "Useful for a Classes page; the event list is not updated often.",
+    "evidence": [
+      "https://www.linedancewithray.com/",
+      "https://www.linedancewithray.com/sitemap.xml"
+    ]
+  },
+  {
+    "id": "dj-neil-wrangler",
+    "name": "DJ Neil Wrangler - Long Island's Country DJ",
+    "url": "https://dj-neil.com/",
+    "feedUrl": "",
+    "format": "HTML text (Nuxt); weekly items have no dates",
+    "styles": [
+      "country line dancing"
+    ],
+    "towns": [
+      "Farmingdale",
+      "Port Washington",
+      "Lindenhurst",
+      "Ronkonkoma",
+      "Wantagh"
+    ],
+    "county": "Nassau + Suffolk",
+    "robots": "none (robots.txt 404)",
+    "overlap": "partly (in Dance Calendar notes)",
+    "freshness": "Special events ended Sept 2026; weekly items undated.",
+    "effort": "M",
+    "priority": "Low",
+    "reason": "Real weekly dances, but text-only with no dates; best used to confirm recurring series.",
+    "evidence": [
+      "https://dj-neil.com/"
+    ]
+  },
+  {
+    "id": "licma",
+    "name": "Long Island Country Music Association (LICMA)",
+    "url": "https://licma.org/",
+    "feedUrl": "",
+    "format": "HTML ('Next LICMA Dance is Saturday, October 24, 2026')",
+    "styles": [
+      "country",
+      "line dancing"
+    ],
+    "towns": [
+      "Deer Park"
+    ],
+    "county": "Suffolk",
+    "robots": "allowed",
+    "overlap": "yes",
+    "freshness": "Next dance Oct 24, 2026.",
+    "effort": "S",
+    "priority": "Low",
+    "reason": "One dance a month and already in the Dance Calendar; handy to settle date conflicts (Nov date differs between sources).",
+    "evidence": [
+      "https://licma.org/",
+      "https://licma.org/dance-schedule"
+    ]
+  },
+  {
+    "id": "waterfalls-ballroom",
+    "name": "The Waterfalls (Lake Ronkonkoma) - community event calendar",
+    "url": "https://waterfallsapartments.com/event-calendar/",
+    "feedUrl": "",
+    "format": "HTML calendar (WordPress 'Event Calendar WD' plugin; iCal export unverified)",
+    "styles": [
+      "ballroom"
+    ],
+    "towns": [
+      "Lake Ronkonkoma"
+    ],
+    "county": "Suffolk",
+    "robots": "allowed",
+    "overlap": "yes",
+    "freshness": "Oct 10 and Oct 24, 2026.",
+    "effort": "S",
+    "priority": "Low",
+    "reason": "Reliable but only two dances a month, already in the Dance Calendar.",
+    "evidence": [
+      "https://waterfallsapartments.com/event-calendar/"
+    ]
+  },
+  {
+    "id": "dj-scott-purple-penguin",
+    "name": "DJ Scott (Purple Penguin Entertainment) - social dance calendar",
+    "url": "https://www.purplepenguinentertainment.com/events",
+    "feedUrl": "",
+    "format": "JavaScript-rendered text (needs a headless browser); dates have no year",
+    "styles": [
+      "social dance / ballroom mix"
+    ],
+    "towns": [
+      "Patchogue"
+    ],
+    "county": "Suffolk",
+    "robots": "allowed",
+    "overlap": "yes",
+    "freshness": "Listed through Oct 16, 2026.",
+    "effort": "M",
+    "priority": "Low",
+    "reason": "Already in the Dance Calendar; needs a browser and year inference.",
+    "evidence": [
+      "https://www.purplepenguinentertainment.com/",
+      "https://www.purplepenguinentertainment.com/events"
+    ]
+  },
+  {
+    "id": "town-of-hempstead-dance-classes",
+    "name": "Town of Hempstead adult classes (Line Dancing, Ballroom, Salsa & Latin)",
+    "url": "https://hempsteadny.gov/297/Line-Dancing",
+    "feedUrl": "",
+    "format": "HTML (CivicPlus program pages)",
+    "styles": [
+      "line dancing",
+      "ballroom",
+      "salsa/Latin"
+    ],
+    "towns": [
+      "Hicksville"
+    ],
+    "county": "Nassau",
+    "robots": "allowed",
+    "overlap": "no (but the same classes appear on the DiVa/Lourdes calendar)",
+    "freshness": "Fall 2026 session dates.",
+    "effort": "S",
+    "priority": "Low",
+    "reason": "Seasonal, registration-based classes for town residents; fits a Classes page, not the events list.",
+    "evidence": [
+      "https://hempsteadny.gov/297/Line-Dancing"
+    ]
+  },
+  {
+    "id": "salsa-sensation-levittown",
+    "name": "Salsa Sensation Latin Dance Studio (Levittown) - class schedule",
+    "url": "https://www.salsasensation.com/schedule",
+    "feedUrl": "",
+    "format": "HTML page (Squarespace) with a monthly class grid; no events collection",
+    "styles": [
+      "salsa",
+      "bachata"
+    ],
+    "towns": [
+      "Levittown"
+    ],
+    "county": "Nassau",
+    "robots": "allowed",
+    "overlap": "unverified",
+    "freshness": "October 2026 schedule posted.",
+    "effort": "M",
+    "priority": "Low",
+    "reason": "Classes only; the grid is free text.",
+    "evidence": [
+      "https://www.salsasensation.com/schedule",
+      "https://www.salsasensation.com/?format=json"
+    ]
+  },
+  {
+    "id": "ballroom-factory-patchogue",
+    "name": "Ballroom Factory Dance Studio (Patchogue) - group classes",
+    "url": "https://ballroomfactory.com/group-classes-workshop/",
+    "feedUrl": "",
+    "format": "clean HTML list of monthly class series",
+    "styles": [
+      "cha cha",
+      "foxtrot",
+      "Lindy",
+      "salsa/bachata",
+      "West Coast Swing",
+      "hustle",
+      "rumba",
+      "tango"
+    ],
+    "towns": [
+      "Patchogue"
+    ],
+    "county": "Suffolk",
+    "robots": "allowed",
+    "overlap": "unverified",
+    "freshness": "October and November 2026 classes listed.",
+    "effort": "S",
+    "priority": "Low",
+    "reason": "Good data for a Classes page; no socials listed.",
+    "evidence": [
+      "https://ballroomfactory.com/group-classes-workshop/",
+      "https://ballroomfactory.com/contact/"
+    ]
+  },
+  {
+    "id": "li-library-calendars",
+    "name": "Long Island public library calendars (e.g., Amityville, Hicksville)",
+    "url": "https://www.amityvillepubliclibrary.org/event/intermediate-line-dancing-person-vfw-hall-10186",
+    "feedUrl": "https://hicksvillelibrary.libcal.com/event/16949892/ical",
+    "format": "JSON-LD per event page (Amityville); LibCal per-event iCal and calendar subscribe feeds (Hicksville)",
+    "styles": [
+      "line dancing",
+      "ballroom"
+    ],
+    "towns": [
+      "Amityville",
+      "Hicksville"
+    ],
+    "county": "Nassau + Suffolk",
+    "robots": "allowed (Hicksville LibCal sets Crawl-delay: 10)",
+    "overlap": "no",
+    "freshness": "Amityville: Oct-Nov 2026; Hicksville ballroom class was summer 2026.",
+    "effort": "L",
+    "priority": "Low",
+    "reason": "Often residents-only classes; many platforms to support for few events.",
+    "evidence": [
+      "https://www.amityvillepubliclibrary.org/event/intermediate-line-dancing-person-vfw-hall-10186",
+      "https://hicksvillelibrary.libcal.com/event/16949892",
+      "https://hicksvillelibrary.libcal.com/robots.txt"
+    ]
+  },
+  {
+    "id": "sabaki-dance",
+    "name": "sabaki.dance (Latin dance aggregator) - city pages",
+    "url": "https://sabaki.dance/events/Sea-Cliff",
+    "feedUrl": "",
+    "format": "schema.org Event JSON-LD",
+    "styles": [
+      "salsa",
+      "bachata",
+      "kizomba"
+    ],
+    "towns": [
+      "Sea Cliff",
+      "Levittown"
+    ],
+    "county": "Nassau",
+    "robots": "allowed (Crawl-delay: 1)",
+    "overlap": "no",
+    "freshness": "October 2026.",
+    "effort": "M",
+    "priority": "Low",
+    "reason": "Few Nassau/Suffolk events and second-hand provenance ('we read the group chats'); filter hard by address.",
+    "evidence": [
+      "https://sabaki.dance/events/Sea-Cliff",
+      "https://sabaki.dance/robots.txt"
+    ]
+  },
+  {
+    "id": "polish-club-port-washington",
+    "name": "Polish American Cultural Association (Port Washington) - upcoming events",
+    "url": "https://portwashingtonpolishclub.com/upcoming-events",
+    "feedUrl": "",
+    "format": "clean HTML list (GoDaddy)",
+    "styles": [
+      "country night",
+      "dinner dances"
+    ],
+    "towns": [
+      "Port Washington"
+    ],
+    "county": "Nassau",
+    "robots": "allowed",
+    "overlap": "partly (DJ Neil)",
+    "freshness": "Events dated 10/04, 10/11, 10/31 and 11/21/2026.",
+    "effort": "S",
+    "priority": "Low",
+    "reason": "Few dance events among parades and parties.",
+    "evidence": [
+      "https://portwashingtonpolishclub.com/upcoming-events"
+    ]
+  },
+  {
+    "id": "dancecalendar-info",
+    "name": "dancecalendar.info - Long Island area",
+    "url": "https://www.dancecalendar.info/event.aspx?idarea=49",
+    "feedUrl": "",
+    "format": "HTML",
+    "styles": [],
+    "towns": [],
+    "county": "Nassau + Suffolk",
+    "robots": "disallowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "robots.txt disallows this path.",
+    "evidence": [
+      "https://www.dancecalendar.info/event.aspx?idarea=49",
+      "https://www.dancecalendar.info/robots.txt"
+    ]
+  },
+  {
+    "id": "patch-calendars",
+    "name": "Patch town calendars (e.g., Israeli Dancing, Plainview)",
+    "url": "https://patch.com/new-york/plainview/calendar/event/20260908/5d3cfa39-097a-4ec8-ac79-1b74ffbbc7ee/israeli-dancing",
+    "feedUrl": "",
+    "format": "JSON-LD",
+    "styles": [],
+    "towns": [],
+    "county": "Nassau + Suffolk",
+    "robots": "allowed for *",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Patch terms forbid spiders/robots/data mining to catalog content. Has JSON-LD, but user-submitted and mostly duplicates.",
+    "evidence": [
+      "https://patch.com/terms",
+      "https://patch.com/robots.txt"
+    ]
+  },
+  {
+    "id": "eventbrite",
+    "name": "Eventbrite event pages",
+    "url": "https://www.eventbrite.com/d/ny--central-islip/salsa/",
+    "feedUrl": "",
+    "format": "JSON-LD",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "partly disallowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Terms of Service prohibit web scraping (section 'Prohibition of web scraping'); use the official API with a token per organizer if ever needed. Sampled items were outside the region (SalSwing Thursdays is in Latham, NY) or gone (Gouye Wednesday Long Island: 404).",
+    "evidence": [
+      "https://www.eventbrite.com/help/en-us/articles/251210/eventbrite-terms-of-service/",
+      "https://www.eventbrite.com/robots.txt",
+      "https://www.eventbrite.com/e/salswing-thursdays-swing-salsa-bachata-lesson-social-tickets-1996819378514"
+    ]
+  },
+  {
+    "id": "meetup-li-swing-groups",
+    "name": "Meetup groups (Triple Step Swing; Long Island Swing Syndicate)",
+    "url": "https://www.meetup.com/triplestepswing-longisland/",
+    "feedUrl": "",
+    "format": "iCal (empty)",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "allowed (ical)",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Group iCal feeds are allowed by robots.txt but have 0 upcoming events; Meetup terms forbid commercial scraping.",
+    "evidence": [
+      "https://www.meetup.com/triplestepswing-longisland/events/ical/",
+      "https://www.meetup.com/long-island-swing-syndicate/events/ical/",
+      "https://www.meetup.com/robots.txt",
+      "https://help.meetup.com/hc/en-us/articles/49237910563341-Terms-of-Service-1-1-2026"
+    ]
+  },
+  {
+    "id": "salsavida-long-island",
+    "name": "Salsa Vida - 'Long Island' guide",
+    "url": "https://www.salsavida.com/guides/new-york/long-island/",
+    "feedUrl": "",
+    "format": "JSON-LD",
+    "styles": [],
+    "towns": [],
+    "county": "mostly Queens",
+    "robots": "allowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Its 'Long Island' is mostly Long Island City, Queens (10 of 14 JSON-LD events at Cucala Dance Company, 47-10 32nd Pl). Only Salsa Sensation (Levittown) is in Nassau.",
+    "evidence": [
+      "https://www.salsavida.com/guides/new-york/long-island/"
+    ]
+  },
+  {
+    "id": "golatindance",
+    "name": "GO Latin Dance",
+    "url": "https://golatindance.com/latin-dance-events-in-new-york/",
+    "feedUrl": "",
+    "format": "iCal + JSON-LD",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "allowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Global feed; a 'Long Island' search returned 0 events; only LI-sounding venue is Lorenz 'Nassau', which is in Queens.",
+    "evidence": [
+      "https://golatindance.com/events/?ical=1",
+      "https://golatindance.com/wp-json/tribe/events/v1/events?start_date=2026-10-01&end_date=2026-12-31&per_page=50&search=Long%20Island"
+    ]
+  },
+  {
+    "id": "lorenz-nassau",
+    "name": "Lorenz Latin Dance Studio - 'Nassau' location",
+    "url": "https://www.lorenzdancestudio.com/nassau",
+    "feedUrl": "",
+    "format": "HTML",
+    "styles": [],
+    "towns": [],
+    "county": "Queens (likely)",
+    "robots": "allowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Address 246-14 Jericho Tpke, Floral Park 11001 uses Queens-style numbering; the studio calls all three sites 'in NYC' and Bailar lists it as 'Queens, Floral Park'. Outside Nassau unless the owner confirms otherwise.",
+    "evidence": [
+      "https://www.lorenzdancestudio.com/nassau",
+      "https://getbailar.com/events/socials-at-lorenz-dance-studio-nassau-floral-park-ny-2026-10-02-2"
+    ]
+  },
+  {
+    "id": "bailar",
+    "name": "Bailar (getbailar.com)",
+    "url": "https://getbailar.com/events/socials-at-lorenz-dance-studio-nassau-floral-park-ny-2026-10-02-2",
+    "feedUrl": "",
+    "format": "JSON-LD",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "allowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "JSON-LD is good, but the only 'Nassau' item found is Lorenz (Queens).",
+    "evidence": [
+      "https://getbailar.com/events/socials-at-lorenz-dance-studio-nassau-floral-park-ny-2026-10-02-2"
+    ]
+  },
+  {
+    "id": "nyc-latin-calendars",
+    "name": "where-to-dance-salsa.com and latindancecalendar.com (New York pages)",
+    "url": "https://where-to-dance-salsa.com/cities/new-york/",
+    "feedUrl": "",
+    "format": "HTML",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "NYC-focused; no Nassau/Suffolk events found besides Lorenz (Queens).",
+    "evidence": [
+      "https://where-to-dance-salsa.com/cities/new-york/",
+      "https://latindancecalendar.com/events/location/new-york-state-usa/"
+    ]
+  },
+  {
+    "id": "ballroom-avenue",
+    "name": "Ballroom Avenue LLC",
+    "url": "https://www.ballroomavenue.com/upcoming-events",
+    "feedUrl": "",
+    "format": "HTML + Google Calendar embed",
+    "styles": [],
+    "towns": [],
+    "county": "Ohio",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Outside region: '614 WCS' events at Seventh Son Brewing are in Columbus, Ohio.",
+    "evidence": [
+      "https://www.ballroomavenue.com/upcoming-events"
+    ]
+  },
+  {
+    "id": "mj-ballroom",
+    "name": "MJ Ballroom",
+    "url": "https://www.mjballroom.com/calendar",
+    "feedUrl": "",
+    "format": "Squarespace iCal",
+    "styles": [],
+    "towns": [],
+    "county": "Indiana",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Outside region: Greenwood, Indiana.",
+    "evidence": [
+      "https://www.mjballroom.com/calendar",
+      "https://www.mjballroom.com/contact"
+    ]
+  },
+  {
+    "id": "ballroom-dream",
+    "name": "Ballroom Dream Dance Studio",
+    "url": "https://ballroomdreamusa.com/calendar/socials/",
+    "feedUrl": "",
+    "format": "HTML",
+    "styles": [],
+    "towns": [],
+    "county": "New Jersey",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Outside region: New Jersey.",
+    "evidence": [
+      "https://ballroomdreamusa.com/calendar/socials/"
+    ]
+  },
+  {
+    "id": "stars-n-stripes-squares",
+    "name": "Stars N Stripes Square Dance Club",
+    "url": "https://starsnstripessquares.com/calendar",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "Florida",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Outside region: The Villages, Florida.",
+    "evidence": [
+      "https://starsnstripessquares.com/calendar",
+      "https://starsnstripessquares.com/location"
+    ]
+  },
+  {
+    "id": "tanglefoots",
+    "name": "Tanglefoots Square Dance Club",
+    "url": "https://www.tanglefoots.org/caller-schedule.html",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "South Carolina",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Outside region: West Columbia, South Carolina.",
+    "evidence": [
+      "https://www.tanglefoots.org/"
+    ]
+  },
+  {
+    "id": "wcs-long-island",
+    "name": "West Coast Swing Long Island (WCSLI)",
+    "url": "https://www.westcoastswinglongisland.com/calendar",
+    "feedUrl": "",
+    "format": "Wix",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "allowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Calendar page is empty and the site footer says 2024; contact is via Instagram/Facebook.",
+    "evidence": [
+      "https://www.westcoastswinglongisland.com/",
+      "https://www.westcoastswinglongisland.com/calendar"
+    ]
+  },
+  {
+    "id": "375-dance-studio",
+    "name": "375 Dance Studio (Carle Place) - Social Dance",
+    "url": "https://375dancestudio.com/social-dance/",
+    "feedUrl": "",
+    "format": "HTML",
+    "styles": [],
+    "towns": [],
+    "county": "Nassau",
+    "robots": "allowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Only one event shown (Sept 7, 2026, past); stale.",
+    "evidence": [
+      "https://375dancestudio.com/social-dance/",
+      "https://375dancestudio.com/schedule/"
+    ]
+  },
+  {
+    "id": "li-latin-movement",
+    "name": "Long Island Latin Movement (Bay Shore)",
+    "url": "https://lilatinmovement.com/events",
+    "feedUrl": "",
+    "format": "HTML",
+    "styles": [],
+    "towns": [],
+    "county": "Suffolk",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Events page shows template placeholder text ('Here is the description of your event').",
+    "evidence": [
+      "https://lilatinmovement.com/events"
+    ]
+  },
+  {
+    "id": "argentine-tango-lovers",
+    "name": "Argentine Tango Lovers of Long Island - ATL Calendar",
+    "url": "https://www.argentinetangolovers.com/atl-calendar",
+    "feedUrl": "",
+    "format": "iframe (browser-only)",
+    "styles": [],
+    "towns": [],
+    "county": "Nassau",
+    "robots": "allowed",
+    "overlap": "yes",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Data sits in a third-party Wix app iframe (wix.shareiiit.com) with a signed, expiring token; browser-only and fragile. Weekly Tuesday practica at Mirelle's is already in the Dance Calendar.",
+    "evidence": [
+      "https://www.argentinetangolovers.com/atl-calendar"
+    ]
+  },
+  {
+    "id": "richie-c-events",
+    "name": "Richie C's Country Music & Dance calendar",
+    "url": "https://richiecevents.wordpress.com/2026/06/29/richie-cs-country-music-dance-events/",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Author posted the last edition in June 2026.",
+    "evidence": [
+      "https://richiecevents.wordpress.com/2026/06/29/richie-cs-country-music-dance-events/"
+    ]
+  },
+  {
+    "id": "litma-own-site",
+    "name": "LITMA website (litma.org)",
+    "url": "https://litma.org/",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "No fall 2026 dates on the site (calendar pages are empty); use the CDSS feed instead.",
+    "evidence": [
+      "https://litma.org/",
+      "https://litma.org/calendar-2/"
+    ]
+  },
+  {
+    "id": "fred-astaire-li",
+    "name": "Fred Astaire studios (Garden City, Manhasset, Huntington, Smithtown, Port Jefferson)",
+    "url": "https://www.fredastaire.com/garden-city/calendar/",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "allowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Calendar pages describe class types but show no machine-readable dates (likely images).",
+    "evidence": [
+      "https://www.fredastaire.com/garden-city/calendar/",
+      "https://www.fredastaire.com/huntington-ny/calendar/"
+    ]
+  },
+  {
+    "id": "dancxchange-donna",
+    "name": "DancXchange / Donna DeSimone",
+    "url": "https://donnadesimone.us/",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "yes",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Bulletin text plus image flyers; points to a Facebook group. No list of dated events.",
+    "evidence": [
+      "https://donnadesimone.us/"
+    ]
+  },
+  {
+    "id": "thislongisland",
+    "name": "This Long Island events feed",
+    "url": "https://thislongisland.com/events/feed.ics",
+    "feedUrl": "",
+    "format": "iCal",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "allowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "ICS with 198 events but almost no dance content.",
+    "evidence": [
+      "https://thislongisland.com/events/feed.ics"
+    ]
+  },
+  {
+    "id": "li-press-events",
+    "name": "Long Island Press events (Dance shows)",
+    "url": "https://events.longislandpress.com/things-to-do/long-island/dance-shows/",
+    "feedUrl": "",
+    "format": "iCal",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "allowed",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "'Dance' here means stage performances, not social dancing.",
+    "evidence": [
+      "https://events.longislandpress.com/?ical=1"
+    ]
+  },
+  {
+    "id": "discover-long-island",
+    "name": "Discover Long Island events",
+    "url": "https://discoverlongisland.com/events/",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Tourism calendar; the sampled Country Nights page was 404 and no dance listings were found.",
+    "evidence": [
+      "https://discoverlongisland.com/events/"
+    ]
+  },
+  {
+    "id": "liblogger",
+    "name": "LI Blogger event listings",
+    "url": "https://www.liblogger.com/events/swing-dance-night-twisted-cow",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Copies of other listings; the swing night page is from January 2026.",
+    "evidence": [
+      "https://www.liblogger.com/events/swing-dance-night-twisted-cow"
+    ]
+  },
+  {
+    "id": "seasonal-arts-festivals",
+    "name": "Huntington Summer Arts Festival; Islip Arts Council",
+    "url": "https://www.huntingtonsummerartsfestival.com/",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Summer-only concerts (some Latin/big-band nights); low dance focus.",
+    "evidence": [
+      "https://www.huntingtonsummerartsfestival.com/",
+      "https://isliparts.org/"
+    ]
+  },
+  {
+    "id": "great-neck-ballroom",
+    "name": "Great Neck Ballroom Dance Studio",
+    "url": "https://www.gnballroom.com/",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "Nassau",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "No calendar on the site; its practice socials appear on the DiVa/Lourdes calendar.",
+    "evidence": [
+      "https://www.gnballroom.com/"
+    ]
+  },
+  {
+    "id": "the-burrows-great-hall",
+    "name": "The Burrows swing/blues nights (The Great Hall, Huntington)",
+    "url": "http://dancemanhattan.com/calendar/event/113",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "Suffolk",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Own presence is Instagram-only (per Dance Manhattan); covered via Dance Manhattan and Triple Step Swing.",
+    "evidence": [
+      "http://dancemanhattan.com/calendar/event/113"
+    ]
+  },
+  {
+    "id": "rudance-long-island",
+    "name": "RU Dance Long Island",
+    "url": "https://rudancelongisland.com/current-schedule",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Schedule says 2025; location not clear (718 phone).",
+    "evidence": [
+      "https://rudancelongisland.com/current-schedule"
+    ]
+  },
+  {
+    "id": "studios-without-event-pages",
+    "name": "First Dance Studio (Farmingdale); The Studio by Hill Street (Southampton); Dance Magic (St. James); Arthur Murray (Port Jefferson)",
+    "url": "https://1st-dance.com/",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "No public event list or feed found (event URLs 404; booking systems like Mindbody are not public feeds).",
+    "evidence": [
+      "https://1st-dance.com/events/",
+      "https://thestudiobyhillstreet.com/events",
+      "https://www.dancemagicballroom.com/?format=json",
+      "https://www.arthurmurraydanceclub.com/long-island-ny"
+    ]
+  },
+  {
+    "id": "contradances-net",
+    "name": "Contra Dance Catalog (contradances.net) - New York",
+    "url": "https://contradances.net/events/locate/us/ny",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "No Long Island listings found; CDSS covers LITMA.",
+    "evidence": [
+      "https://contradances.net/events/locate/us/ny"
+    ]
+  },
+  {
+    "id": "israeli-dance-listings",
+    "name": "Israeli dance listings (israelidances.com, jewishworldlife.com)",
+    "url": "https://www.israelidances.com/worldclasses.asp?Country=All",
+    "feedUrl": "",
+    "format": "",
+    "styles": [],
+    "towns": [],
+    "county": "",
+    "robots": "",
+    "overlap": "",
+    "freshness": "",
+    "effort": "",
+    "priority": "Not recommended",
+    "reason": "Sites returned 503 / timed out; LI sessions unverified.",
+    "evidence": [
+      "https://www.israelidances.com/worldclasses.asp?Country=All",
+      "https://www.jewishworldlife.com/danceevents.asp?EventID=15932"
+    ]
+  }
+]

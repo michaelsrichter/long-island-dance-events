@@ -7,8 +7,8 @@ import EventCard from '../../components/EventCard.astro';
 import EmptyState from '../../components/EmptyState.astro';
 import Icon from '../../components/Icon.astro';
 import RelativeDay from '../../components/RelativeDay.astro';
-import { byDay, getEventGroups, getSettings } from '../../lib/content';
-import { CATEGORY_LABELS, EVENT_CATEGORIES, SKILL_LABELS } from '../../lib/schemas';
+import { byDay, getEventGroups, getSettings, isDance } from '../../lib/content';
+import { SKILL_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
 
 const { upcoming } = await getEventGroups();
@@ -18,8 +18,15 @@ const usedStyles = styles.filter((s) => upcoming.some((e) => e.styles.some((x) =
 const venues = [...new Map(upcoming.filter((e) => e.venue).map((e) => [e.venue!.id, e.venue!])).values()].sort((a, b) => a.data.name.localeCompare(b.data.name));
 const towns = [...new Set(upcoming.map((e) => e.location.town).filter(Boolean) as string[])].sort();
 const people = [...new Map(upcoming.flatMap((e) => [...e.performers, ...e.instructors]).map((p) => [p.id, p])).values()].sort((a, b) => a.name.localeCompare(b.name));
-const usedCategories = EVENT_CATEGORIES.filter((c) => upcoming.some((e) => e.category === c));
 const days = byDay(upcoming);
+const dances = upcoming.filter(isDance);
+/** "Dances & live music" is the default view; classes are one tap away. */
+const types = [
+  { value: 'dances', label: 'Dances & live music' },
+  ...(upcoming.some((e) => e.category === 'live-music') ? [{ value: 'live-music', label: 'Live music' }] : []),
+  ...(upcoming.some((e) => !isDance(e)) ? [{ value: 'class-lesson', label: 'Classes' }] : []),
+  { value: 'all', label: 'Everything' },
+];
 const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Events', href: '/events/' },
@@ -36,11 +43,11 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 ---
 <BaseLayout
   title={`Dance events on ${settings.region}`}
-  description={`${upcoming.length} upcoming social dances, classes and live music nights in Nassau and Suffolk. Filter by dance style, town, day, price and level.`}
+  description={`${dances.length} upcoming social dances and live music nights in Nassau and Suffolk, plus dance classes. Filter by dance style, town, day, price and level.`}
   pageType="events"
   jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}
 >
-  <PageHeader title="Upcoming dance events" lede="Dances, classes and live music in Nassau and Suffolk. Check with the organizer before you go." crumbs={crumbs}>
+  <PageHeader title="Upcoming dances" lede="Social dances, dance parties and live music in Nassau and Suffolk. Classes are one tap away." crumbs={crumbs}>
     <EventViews current="list" />
   </PageHeader>
 
@@ -60,9 +67,8 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
       <fieldset>
         <legend>Type of event</legend>
         <div class="quick-views">
-          <label class="chip"><input type="radio" name="category" value="" checked /><span>Everything</span></label>
-          {usedCategories.map((c) => (
-            <label class="chip"><input type="radio" name="category" value={c} /><span>{CATEGORY_LABELS[c]}</span></label>
+          {types.map((t) => (
+            <label class="chip"><input type="radio" name="category" value={t.value} checked={t.value === 'dances'} /><span>{t.label}</span></label>
           ))}
         </div>
       </fieldset>
@@ -76,7 +82,7 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
         </div>
         <div class="field">
           <label for="f-q">Search</label>
-          <input id="f-q" name="q" type="search" placeholder="Band, teacher, town…" autocomplete="off" />
+          <input id="f-q" name="q" type="search" placeholder="Name or town" autocomplete="off" />
         </div>
       </div>
       <details class="filters__more">
@@ -136,7 +142,7 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
         </div>
       </details>
       <div class="btn-row filters__foot">
-        <p class="result-count" data-result-count aria-live="polite">{upcoming.length} events shown</p>
+        <p class="result-count" data-result-count aria-live="polite">{dances.length} events shown</p>
         <button type="reset" class="btn btn--secondary btn--small">Clear filters</button>
       </div>
     </form>

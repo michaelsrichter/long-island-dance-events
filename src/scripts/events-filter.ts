@@ -31,6 +31,8 @@ if (form && list) {
   const fields = ['when', 'category', 'style', 'q', 'county', 'town', 'day', 'price', 'level', 'venue', 'person'] as const;
   type Field = (typeof fields)[number];
   const MORE: Field[] = ['county', 'town', 'day', 'price', 'level', 'venue', 'person'];
+  /** Values that are left out of the address: all dates, and dances + live music (the default view). */
+  const DEFAULTS: Partial<Record<Field, string>> = { when: 'all', category: 'dances' };
 
   function values(): Record<Field, string> {
     const fd = new FormData(form!);
@@ -45,7 +47,8 @@ if (form && list) {
     if (v.when === 'weekend' && (date < r.weekendFrom || date > r.weekendTo)) return false;
     if (v.when === 'week' && (date < r.today || date > r.weekEnd)) return false;
     if (v.when === 'month' && !date.startsWith(r.month)) return false;
-    if (v.category && c.dataset.category !== v.category) return false;
+    if (v.category === 'dances' && c.dataset.category === 'class-lesson') return false;
+    if (v.category && v.category !== 'dances' && v.category !== 'all' && c.dataset.category !== v.category) return false;
     if (v.style && !has(c.dataset.styles, v.style)) return false;
     if (v.county && c.dataset.county !== v.county) return false;
     if (v.town && c.dataset.town !== v.town) return false;
@@ -71,11 +74,11 @@ if (form && list) {
     if (count) count.textContent = `${shown} ${shown === 1 ? 'event' : 'events'} shown`;
     if (empty) empty.hidden = shown !== 0;
     const params = new URLSearchParams();
-    for (const f of fields) if (v[f] && !(f === 'when' && v[f] === 'all')) params.set(f, v[f]);
+    for (const f of fields) if (v[f] && v[f] !== DEFAULTS[f]) params.set(f, v[f]);
     const qs = params.toString();
     history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
     if (source === 'change') {
-      const active = fields.filter((f) => v[f] && v[f] !== 'all');
+      const active = fields.filter((f) => v[f] && v[f] !== DEFAULTS[f]);
       track('filter_events', { filter: active.join(',') || 'none', value: active.map((f) => v[f]).join(',').slice(0, 100), results: shown });
     }
   }

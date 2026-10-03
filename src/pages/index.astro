@@ -2,63 +2,65 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EventCard from '../components/EventCard.astro';
-import EmptyState from '../components/EmptyState.astro';
 import Icon from '../components/Icon.astro';
 import Photo from '../components/Photo.astro';
 import ShowMore from '../components/ShowMore.astro';
 import RelativeDay from '../components/RelativeDay.astro';
-import { byDay, getEventGroups, getSettings } from '../lib/content';
+import { byDay, getEventGroups, getSettings, isDance } from '../lib/content';
 import { photos } from '../lib/photos';
 import { formatDateLong } from '../lib/time';
 
 const settings = await getSettings();
-const { upcoming, tonight, weekend, nextSevenDays, today, weekendRange } = await getEventGroups();
-const weekendLater = weekend.filter((e) => e.date > today);
-const shown = new Set([...tonight, ...weekendLater].map((e) => e.slug));
-const later = nextSevenDays.filter((e) => !shown.has(e.slug));
-const laterDays = byDay(later);
+const { upcoming, tonight, weekend, nextSevenDays, today } = await getEventGroups();
+const dancesToday = tonight.filter(isDance);
+const weekDancesAll = nextSevenDays.filter(isDance);
+const weekDances = weekDancesAll.filter((e) => e.date > today);
+const weekClasses = nextSevenDays.filter((e) => !isDance(e));
 const SHOW = 6;
-const laterIndex = new Map(later.map((e, i) => [e.slug, i]));
+const SHOW_CLASSES = 3;
+const danceIndex = new Map(weekDances.map((e, i) => [e.slug, i]));
+const classIndex = new Map(weekClasses.map((e, i) => [e.slug, i]));
 const styles = (await getCollection('styles')).sort((a, b) => a.data.order - b.data.order);
 const styleCounts = styles.map((s) => ({ s, n: upcoming.filter((e) => e.styles.some((x) => x.id === s.id)).length })).filter((x) => x.n > 0);
-const places = new Set(nextSevenDays.map((e) => e.venue?.id ?? e.location.town)).size;
+const places = new Set(weekDancesAll.map((e) => e.venue?.id ?? e.location.town)).size;
 const quick = [
-  { href: '/events/?when=today', label: 'Today', count: tonight.length, icon: 'clock' as const },
-  { href: '/events/?when=weekend', label: 'This weekend', count: weekend.length, icon: 'calendar' as const },
-  { href: '/events/?category=class-lesson', label: 'Classes', count: upcoming.filter((e) => e.category === 'class-lesson').length, icon: 'people' as const },
+  { href: '/events/?when=week', label: 'This week', count: weekDancesAll.length, icon: 'calendar' as const, primary: true },
+  { href: '/events/?when=today', label: 'Today', count: dancesToday.length, icon: 'clock' as const },
+  { href: '/events/?when=weekend', label: 'This weekend', count: weekend.filter(isDance).length, icon: 'music' as const },
   { href: '/events/?category=live-music', label: 'Live music', count: upcoming.filter((e) => e.category === 'live-music').length, icon: 'star' as const },
+  { href: '/events/?category=class-lesson', label: 'Classes', count: upcoming.filter((e) => !isDance(e)).length, icon: 'people' as const },
   { href: '/events/map/', label: 'Map', count: undefined, icon: 'pin' as const },
 ];
 ---
-<BaseLayout title={`${settings.siteName}: dances, classes and live music in Nassau and Suffolk`} description={settings.description} pageType="home" exactTitle>
+<BaseLayout title={`${settings.siteName}: social dances and live music in Nassau and Suffolk`} description={settings.description} pageType="home" exactTitle>
   <section class="hero" aria-labelledby="hero-title">
     <div class="container home-hero home-hero--aggregator">
       <div class="home-hero__intro">
         <p class="hero__eyebrow"><Icon name="music" />Nassau and Suffolk · Updated every week</p>
-        <h1 id="hero-title">Find a place to dance on Long Island</h1>
-        <p class="hero__lede">Social dances, classes and live music from local calendars, all in one list. Swing, ballroom, Latin, hustle, tango, country and more.</p>
+        <h1 id="hero-title">Dance and <span class="hero-accent">live music</span> on Long Island</h1>
+        <p class="hero__lede">Social dances, dance parties and live bands from local calendars, all in one place. Swing, ballroom, Latin, hustle, tango, country and more.</p>
         <form class="hero-search" action="/events/" method="get" role="search">
           <label for="home-q" class="visually-hidden">Search events</label>
           <input id="home-q" name="q" type="search" placeholder="Style, town or band" autocomplete="off" />
+          <input type="hidden" name="category" value="all" />
           <button class="btn btn--primary" type="submit"><Icon name="search" />Search</button>
         </form>
-        <p class="hero__stat">{nextSevenDays.length} events in the next 7 days at {places} places.</p>
+        <p class="hero__stat"><strong>{weekDancesAll.length}</strong> dances and live-music nights in the next 7 days, at {places} {places === 1 ? 'place' : 'places'}.</p>
       </div>
       <nav class="quick-links" aria-label="Quick links">
         <ul>
           {quick.map((q) => (
             <li>
-              <a class="quick-link" href={q.href}>
+              <a class:list={['quick-link', { 'quick-link--primary': q.primary }]} href={q.href}>
                 <Icon name={q.icon} />
                 <span class="quick-link__label">{q.label}</span>
-                {q.count !== undefined && <span class="quick-link__count">{q.count}</span>}
+                {q.count !== undefined && <span class:list={['quick-link__count', { 'quick-link__count--zero': q.count === 0 }]}>{q.count}</span>}
               </a>
             </li>
           ))}
         </ul>
       </nav>
     </div>
-    <svg class="swoosh" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 60V30C240 0 480 0 720 22s480 30 720 0v38z" fill="currentColor" /></svg>
   </section>
 
   <section class="section" aria-labelledby="today-h">
@@ -70,65 +72,59 @@ const quick = [
         </div>
         <a class="btn btn--secondary" href="/events/?when=today">Today's list <Icon name="arrow" /></a>
       </div>
-      {tonight.length > 0 ? (
+      {dancesToday.length > 0 ? (
         <ul class="event-list" data-upcoming-list="home_today">
-          {tonight.map((e) => <EventCard event={e} hideDate />)}
+          {dancesToday.map((e) => <EventCard event={e} hideDate />)}
         </ul>
       ) : (
-        <EmptyState title="Nothing is listed for today">
-          <p>Look at <a href="/events/?when=weekend">this weekend</a> or <a href="/events/">everything coming up</a>.</p>
-        </EmptyState>
+        <p class="notice-line"><Icon name="info" /><span>No dances or live music are listed for today.{weekDances.length > 0 && <> See <a href="#week-h">what is on this week</a>.</>}</span></p>
       )}
       <div data-upcoming-empty hidden>
-        <EmptyState title="Today's events have ended"><p>See <a href="/events/">what is coming up next</a>.</p></EmptyState>
+        <p class="notice-line"><Icon name="info" /><span>Today's dances have ended. See <a href="/events/">what is coming up next</a>.</span></p>
       </div>
     </div>
   </section>
 
-  {weekendLater.length > 0 && (
-    <section class="section section--tint" aria-labelledby="weekend-h">
+  {weekDances.length > 0 && (
+    <section class="section section--tint" aria-labelledby="week-h">
       <div class="container">
         <div class="section__head">
           <div>
-            <h2 id="weekend-h">This weekend</h2>
-            <p>{formatDateLong(weekendRange.from > today ? weekendRange.from : today)} to {formatDateLong(weekendRange.to)}</p>
-          </div>
-          <a class="btn btn--secondary" href="/events/?when=weekend">All weekend events <Icon name="arrow" /></a>
-        </div>
-        <div data-upcoming-list="home_weekend" class="stack-l">
-          {byDay(weekendLater).map((g) => (
-            <section class="day-group" data-month-group aria-labelledby={`w-${g.date}`}>
-              <h3 class="day-heading" id={`w-${g.date}`}>{g.label} <RelativeDay date={g.date} /></h3>
-              <ul class="event-list">{g.events.map((e) => <EventCard event={e} hideDate headingLevel="h4" />)}</ul>
-            </section>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  {later.length > 0 && (
-    <section class="section" aria-labelledby="week-h">
-      <div class="container">
-        <div class="section__head">
-          <div>
-            <h2 id="week-h">Later this week</h2>
-            <p>More dancing in the next 7 days.</p>
+            <h2 id="week-h">Dances and live music this week</h2>
+            <p>The next 7 days, day by day.</p>
           </div>
           <div class="btn-row">
-            <a class="btn btn--primary" href="/events/">All upcoming events <Icon name="arrow" /></a>
+            <a class="btn btn--primary" href="/events/">All dances <Icon name="arrow" /></a>
             <a class="btn btn--secondary" href="/events/calendar/"><Icon name="calendar" />Month calendar</a>
           </div>
         </div>
         <div id="home-week" data-upcoming-list="home_week" data-collapse={String(SHOW)} class="stack-l">
-          {laterDays.map((g) => (
+          {byDay(weekDances).map((g) => (
             <section class="day-group" data-month-group aria-labelledby={`l-${g.date}`}>
               <h3 class="day-heading" id={`l-${g.date}`}>{g.label} <RelativeDay date={g.date} /></h3>
-              <ul class="event-list">{g.events.map((e) => <EventCard event={e} hideDate headingLevel="h4" collapsed={(laterIndex.get(e.slug) ?? 0) >= SHOW} />)}</ul>
+              <ul class="event-list">{g.events.map((e) => <EventCard event={e} hideDate headingLevel="h4" collapsed={(danceIndex.get(e.slug) ?? 0) >= SHOW} />)}</ul>
             </section>
           ))}
         </div>
-        <ShowMore target="home-week" total={later.length} limit={SHOW} label="events this week" />
+        <ShowMore target="home-week" total={weekDances.length} limit={SHOW} label="dances this week" />
+      </div>
+    </section>
+  )}
+
+  {weekClasses.length > 0 && (
+    <section class="section" aria-labelledby="classes-h">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 id="classes-h">Classes this week</h2>
+            <p>Group lessons for every level. Many dances also start with a short lesson.</p>
+          </div>
+          <a class="btn btn--secondary" href="/events/?category=class-lesson">All classes <Icon name="arrow" /></a>
+        </div>
+        <ul id="home-classes" class="event-list" data-upcoming-list="home_classes" data-collapse={String(SHOW_CLASSES)}>
+          {weekClasses.map((e) => <EventCard event={e} collapsed={(classIndex.get(e.slug) ?? 0) >= SHOW_CLASSES} />)}
+        </ul>
+        <ShowMore target="home-classes" total={weekClasses.length} limit={SHOW_CLASSES} label="classes this week" />
       </div>
     </section>
   )}

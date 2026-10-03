@@ -134,7 +134,7 @@ if (mapEl && list) {
 
   function values(): Values {
     const fd = form ? new FormData(form) : new FormData();
-    return { type: String(fd.get('type') ?? ''), when: String(fd.get('when') ?? 'all') };
+    return { type: String(fd.get('type') ?? 'dance'), when: String(fd.get('when') ?? 'all') };
   }
 
   function apply(source: 'load' | 'change') {
@@ -144,7 +144,7 @@ if (mapEl && list) {
     const month = today.slice(0, 7);
     const matches = (e: HTMLElement) => {
       if (e.hasAttribute('data-expired')) return false;
-      if (v.type && e.dataset.host !== v.type) return false;
+      if (v.type && v.type !== 'all' && e.dataset.host !== v.type) return false;
       const d = e.dataset.date ?? '';
       if (v.when === 'week' && (d < today || d > weekEnd)) return false;
       if (v.when === 'month' && !d.startsWith(month)) return false;
@@ -174,12 +174,12 @@ if (mapEl && list) {
     if (map.getZoom() < 8.5) map.setZoom(8.5);
     if (form) {
       const params = new URLSearchParams();
-      if (v.type) params.set('type', v.type);
+      if (v.type && v.type !== 'dance') params.set('type', v.type);
       if (v.when && v.when !== 'all') params.set('when', v.when);
       const qs = params.toString();
       history.replaceState(null, '', `${qs ? `?${qs}` : location.pathname}${location.hash}`);
     }
-    if (source === 'change') track('filter_events', { location: 'map', filter: [v.type && 'type', v.when !== 'all' && 'when'].filter(Boolean).join(',') || 'none', value: [v.type, v.when].join(',').slice(0, 100), results: shown });
+    if (source === 'change') track('filter_events', { location: 'map', filter: [v.type !== 'dance' && 'type', v.when !== 'all' && 'when'].filter(Boolean).join(',') || 'none', value: [v.type, v.when].join(',').slice(0, 100), results: shown });
   }
 
   if (form) {
@@ -189,6 +189,10 @@ if (mapEl && list) {
       const el = form.elements.namedItem(f);
       if (val && el instanceof RadioNodeList) el.value = val;
     }
+    // A link to a place that only has classes (e.g. from a venue page) shows everything, so its pin is there.
+    const linked = places.find((p) => `#place-${p.id}` === location.hash);
+    const typeEl = form.elements.namedItem('type');
+    if (linked && !params.get('type') && typeEl instanceof RadioNodeList && linked.events.every((e) => e.dataset.host === 'class')) typeEl.value = 'all';
     form.addEventListener('change', () => apply('change'));
   }
   apply('load');

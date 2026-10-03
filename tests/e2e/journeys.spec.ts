@@ -1,15 +1,19 @@
 import { test, expect, firstEventUrl } from './fixtures';
 
 test.describe('finding something to dance to', () => {
-  test('the homepage shows today, quick links with counts, and a search box', async ({ pinned: page }) => {
+  test('the homepage leads with dances, shows today, quick links with counts, and a search box', async ({ pinned: page }) => {
     await page.goto('/');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Find a place to dance on Long Island');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Dance and live music on Long Island');
     await expect(page.getByRole('heading', { level: 2, name: 'Today' })).toBeVisible();
     const quick = page.getByRole('navigation', { name: 'Quick links' });
-    for (const name of [/Today/, /This weekend/, /Classes/, /Live music/, /Map/]) await expect(quick.getByRole('link', { name })).toBeVisible();
+    for (const name of [/^This week(?!end)/, /^Today/, /^This weekend/, /^Live music/, /^Classes/, /^Map/]) await expect(quick.getByRole('link', { name })).toBeAttached();
+    // Dances and live music come first; classes have their own, shorter section.
+    for (const c of await page.locator('[data-upcoming-list="home_week"] [data-event]').all()) expect(await c.getAttribute('data-category')).not.toBe('class-lesson');
+    for (const c of await page.locator('[data-upcoming-list="home_classes"] [data-event]').all()) await expect(c).toHaveAttribute('data-category', 'class-lesson');
     await page.getByRole('searchbox', { name: 'Search events' }).fill('hustle');
     await page.getByRole('button', { name: 'Search' }).click();
-    await expect(page).toHaveURL(/\/events\/\?q=hustle/);
+    await expect(page).toHaveURL(/\/events\/\?(.*&)?q=hustle/);
+    await expect(page.locator('input[name="category"][value="all"]')).toBeChecked();
     await expect(page.locator('#f-q')).toHaveValue('hustle');
     const cards = page.locator('[data-upcoming-list] [data-event]:not([hidden])');
     expect(await cards.count()).toBeGreaterThan(0);
@@ -50,6 +54,20 @@ test.describe('finding something to dance to', () => {
     await page.locator('#f-person').selectOption({ index: 1 });
     const person = await page.locator('#f-person').inputValue();
     for (const c of await visible.all()) await expect(c).toHaveAttribute('data-people', new RegExp(person));
+  });
+
+  test('the events list starts with dances and live music; classes are one tap away', async ({ pinned: page }) => {
+    await page.goto('/events/');
+    await expect(page.locator('input[name="category"][value="dances"]')).toBeChecked();
+    const visible = page.locator('[data-upcoming-list] [data-event]:not([hidden])');
+    const dances = await visible.count();
+    expect(dances).toBeGreaterThan(0);
+    for (const c of await visible.all()) expect(await c.getAttribute('data-category')).not.toBe('class-lesson');
+    await page.locator('.chip', { hasText: 'Everything' }).click();
+    await expect(page).toHaveURL(/category=all/);
+    expect(await visible.count()).toBeGreaterThan(dances);
+    await page.locator('.chip', { hasText: 'Classes' }).click();
+    for (const c of (await visible.all()).slice(0, 10)) await expect(c).toHaveAttribute('data-category', 'class-lesson');
   });
 
   test('only Nassau and Suffolk events are listed', async ({ pinned: page }) => {
@@ -101,25 +119,25 @@ test.describe('an event page', () => {
 
   test('links to its venue, which lists what is on there', async ({ pinned: page }) => {
     await page.goto('/events/?when=all');
-    const card = page.locator('[data-upcoming-list] [data-event]:not([data-venue=""])').first();
+    const card = page.locator('[data-upcoming-list] [data-event]:not([data-venue=""]):not([hidden])').first();
     const venue = await card.getAttribute('data-venue');
     await card.locator('.event-card__title a').click();
     await page.locator('section[aria-labelledby="glance"] a[href^="/venues/"]').click();
     await expect(page).toHaveURL(new RegExp(`/venues/${venue}/$`));
     expect(await page.locator('[data-upcoming-list="entity"] [data-event]').count()).toBeGreaterThan(0);
-    await expect(page.getByRole('link', { name: /^Google Maps/ }).first()).toHaveAttribute('href', /google\.com\/maps/);
+    await expect(page.getByRole('link', { name: /^Google Maps/ }).first()).toHaveAttribute('href', /^https:\/\/www\.google\.com\/maps[/?]/);
   });
 
   test('a repeating event says how often it repeats and lists other dates', async ({ pinned: page }) => {
     await page.goto('/events/');
-    const repeating = page.locator('[data-upcoming-list] .event-card', { hasText: /Every (Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)/ }).first();
+    const repeating = page.locator('[data-upcoming-list] .event-card:not([hidden])', { hasText: /Every (Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)/ }).first();
     await repeating.locator('.event-card__title a').click();
     await expect(page.locator('.hero-facts')).toContainText(/Every \w+day/);
   });
 
   test('an event that has ended is hidden from upcoming lists without a rebuild', async ({ page }) => {
     await page.goto('/events/');
-    const first = page.locator('[data-upcoming-list] [data-event]').first();
+    const first = page.locator('[data-upcoming-list] [data-event]:not([hidden])').first();
     const end = Number(await first.getAttribute('data-end'));
     const href = await first.locator('.event-card__title a').getAttribute('href');
     await page.clock.setFixedTime(new Date(end + 60_000));
@@ -145,7 +163,7 @@ test.describe('directory pages link everything together', () => {
 
   test('the sources page credits every source and explains corrections and takedowns', async ({ pinned: page }) => {
     await page.goto('/sources/');
-    await expect(page.getByRole('link', { name: 'The Dance Calendar' })).toHaveAttribute('href', /thedancecalendar\.com/);
+    await expect(page.getByRole('link', { name: 'The Dance Calendar' })).toHaveAttribute('href', /^https:\/\/www\.thedancecalendar\.com\//);
     await expect(page.locator('#corrections')).toContainText('Remove my events');
     await expect(page.locator('#takedown')).toContainText('takedown request');
   });
@@ -156,7 +174,8 @@ test.describe('views', () => {
     await page.goto('/events/calendar/');
     if (isMobile) {
       await expect(page.locator('table.cal')).toBeHidden();
-      await expect(page.locator('.cal-agenda .event-card').first()).toBeVisible();
+      for (const past of await page.locator('.cal-agenda .event-card--past').all()) await expect(past).toBeHidden();
+      await expect(page.locator('.cal-agenda .event-card:not(.event-card--past)').first()).toBeVisible();
     } else {
       await expect(page.locator('table.cal')).toBeVisible();
       await expect(page.locator('table.cal .cal__event').first()).toBeVisible();
@@ -169,6 +188,12 @@ test.describe('views', () => {
     const places = page.locator('[data-map-place]');
     const n = await places.count();
     expect(n).toBeGreaterThan(3);
+    // Dances and live music first: places with only classes are hidden until "Everything" is chosen.
+    const dancePlaces = await page.locator('[data-map-place]:not([hidden])').count();
+    expect(dancePlaces).toBeGreaterThan(0);
+    await expect(page.locator('.leaflet-marker-icon')).toHaveCount(dancePlaces);
+    await page.locator('label.chip', { hasText: 'Everything' }).click();
+    await expect(page).toHaveURL(/type=all/);
     await expect(page.locator('.leaflet-marker-icon')).toHaveCount(n);
     await page.locator('label.chip', { hasText: 'Classes' }).click();
     await expect(page).toHaveURL(/type=class/);
@@ -192,8 +217,8 @@ test.describe('light and dark mode', () => {
     await page.emulateMedia({ colorScheme: 'dark' });
     await page.goto('/');
     const html = page.locator('html');
-    const DARK = 'rgb(21, 14, 27)';
-    const LIGHT = 'rgb(255, 250, 242)';
+    const DARK = 'rgb(10, 10, 12)';
+    const LIGHT = 'rgb(246, 246, 248)';
     await expect(page.locator('body')).toHaveCSS('background-color', DARK);
     if (isMobile) {
       await page.getByRole('button', { name: 'Menu' }).click();

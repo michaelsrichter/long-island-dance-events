@@ -229,7 +229,7 @@ export function normalizeRows(rows: CalendarRow[], opts: NormalizeOptions): Norm
     // Contact details only when the organizer record does not already have them.
     const phones = extractPhones(text).filter((p) => !org?.phone || digits(p) !== digits(org.phone));
     const emails = extractEmails(text).filter((e) => e !== org?.email);
-    const urls = extractUrls(text).filter((u) => !/thedancecalendar\.com/i.test(u));
+    const urls = extractUrls(text).filter((u) => domainOf(u) !== 'thedancecalendar.com');
     const infoUrl = urls.find((u) => org?.website && domainOf(u) === domainOf(org.website)) ?? urls[0];
 
     const name = (id: string, m: Map<string, { name: string }>) => m.get(id)?.name ?? id;

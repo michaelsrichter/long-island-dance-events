@@ -47,4 +47,4 @@ No photos were supplied. The site reuses two openly licensed swing-dance photos 
 
 ## Source proposals (discovery pass)
 
-New sources are **proposed here and added only after the owner approves them**. See [source-proposals.md](source-proposals.md) (added after the discovery pass).
+New sources are **proposed here and added only after the owner approves them**. See [source-proposals.md](source-proposals.md): 24 candidates (4 high, 6 medium, 14 low priority) and 33 set aside, with robots.txt and format checks for each. Machine-readable copy: [source-proposals.json](source-proposals.json).

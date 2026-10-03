@@ -1,5 +1,5 @@
 /** Read and write entity files with a stable key order so weekly diffs stay small and readable. */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { CONTENT_DIR } from './registry';
 
@@ -37,10 +37,19 @@ export function writeEntity(collection: string, id: string, data: Record<string,
   mkdirSync(dir, { recursive: true });
   const file = join(dir, `${id}.json`);
   const text = serialize(data, collection === 'events' ? EVENT_ORDER : ['name', 'type', 'aliases']);
-  const before = existsSync(file) ? readFileSync(file, 'utf8') : undefined;
-  if (before === text) return false;
+  if (readIfExists(file) === text) return false;
   writeFileSync(file, text, 'utf8');
   return true;
+}
+
+/** Read a file, or undefined when it does not exist (no separate exists check, so no race). */
+export function readIfExists(file: string): string | undefined {
+  try {
+    return readFileSync(file, 'utf8');
+  } catch (e) {
+    if ((e as NodeJS.ErrnoException).code === 'ENOENT') return undefined;
+    throw e;
+  }
 }
 
 export { EVENT_ORDER };
