@@ -43,11 +43,23 @@ export function decodeHtml(s: string): string {
     .replace(/&([a-z]+);/gi, (m, n) => ENTITIES[n.toLowerCase()] ?? m);
 }
 
+export function stripTags(s: string): string {
+  let prev: string;
+  do {
+    prev = s;
+    s = s.replace(/<[^<>]*>/g, '');
+  } while (s !== prev);
+  return s;
+}
+
 /** Text of every paragraph in the page, one entry per line, in order. */
 export function htmlLines(html: string): string[] {
   const out: string[] = [];
   for (const m of html.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/gi)) {
-    const text = decodeHtml(m[1]!.replace(/<br\s*\/?>/gi, '\n').replace(/<[^>]+>/g, '')).replace(/[\u200B-\u200D\u2060\uFEFF]/g, '');
+    // Facts are plain text: strip tags until none are left, then drop any angle brackets that decoding produced.
+    const text = decodeHtml(stripTags(m[1]!.replace(/<br\s*\/?>/gi, '\n')))
+      .replace(/[<>]/g, ' ')
+      .replace(/[\u200B-\u200D\u2060\uFEFF]/g, '');
     for (const line of text.split('\n')) {
       const t = line.replace(/\s+/g, ' ').trim();
       if (t) out.push(t);

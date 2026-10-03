@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { cuesFor, dateFor, normalizeIraRows, normalizeTime, parseEntry, parseWeeklyList, splitEntry } from '../../ingest/adapters/iraslist';
+import { cuesFor, dateFor, htmlLines, normalizeIraRows, normalizeTime, parseEntry, parseWeeklyList, splitEntry } from '../../ingest/adapters/iraslist';
 import { Registry, ROOT } from '../../ingest/lib/registry';
 import { assessDancing, type DancingInput } from '../../src/lib/dancing';
 import { eventSchema, performerSchema, styleSchema, venueSchema } from '../../src/lib/schemas';
@@ -40,6 +40,9 @@ describe("Ira's List weekly list", () => {
     expect(rows.find((r) => r.act === 'Unknown Act')).toMatchObject({ venue: 'Mystery Bar', time: '1-5pm', sponsor: false });
     expect(rows.find((r) => r.act.startsWith('Byrne'))).toMatchObject({ time: '3pm', timeUnsure: true });
     expect(rows.some((r) => r.act === 'Not A Gig')).toBe(false);
+  });
+  it('keeps only plain text, even from tricky markup', () => {
+    expect(htmlLines('<p>A <<b>script>alert(1)<</b>/script> &lt;img src=x&gt; Band</p>')).toEqual(['A alert(1) img src=x Band']);
   });
   it('drops a gig listed twice on the same day', () => {
     expect(rows.filter((r) => r.date === '2031-01-01' && r.act === 'Sample Party Band')).toHaveLength(1);

@@ -39,7 +39,8 @@ await check('Event structured data', async () => {
   const html = await (await get(firstEvent)).text();
   const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].flatMap((m) => { const j = JSON.parse(m[1]); return j['@graph'] || [j]; });
   const ev = blocks.find((b) => EVENT_TYPES.has(b['@type']));
-  assert(ev && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2}$/.test(ev.startDate), 'event JSON-LD missing or bad startDate');
+  // A date alone is valid schema.org when the start time is not known.
+  assert(ev && /^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2}[+-]\d{2}:\d{2})?$/.test(ev.startDate), 'event JSON-LD missing or bad startDate');
   return `${ev['@type']}: ${ev.name}`;
 });
 await check('CMS admin page', async () => { const r = await get('/admin/'); assert(r.status === 200, `status ${r.status}`); assert((await r.text()).includes('decap-cms.js'), 'bundle not referenced'); const cfg = await (await get('/admin/config.yml')).text(); assert(cfg.includes('long-island-dance-events'), 'config not found'); });
