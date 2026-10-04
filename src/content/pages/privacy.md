@@ -16,7 +16,7 @@ highlights:
 
 - **Nothing personal.** You do not sign up, and we do not ask for your name or email.
 - **Basic, anonymous counts** may be collected to see which pages are useful, such as how many people opened the events list. This does not include your name, and it does not follow you to other websites.
-- **Analytics cookies** (Google Analytics or Microsoft Clarity) are only used if they are turned on **and** you agree. Right now they are turned off.
+- **Analytics cookies** (Google Analytics and Microsoft Clarity) are only used if they are turned on **and** you agree. Until you choose **Allow**, they are not loaded and set no cookies. The note at the end of this page says whether they are turned on right now.
 
 ## The map
 
