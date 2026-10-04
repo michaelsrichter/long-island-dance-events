@@ -6,6 +6,9 @@ backend:
   name: github
   repo: michaelsrichter/long-island-dance-events
   branch: main
+  # The repository is public, so editors only need "public_repo" access. The default ("repo") would
+  # also give the editor's sign-in access to every private repository on their GitHub account.
+  auth_scope: public_repo
   # base_url and auth_endpoint are set at runtime in /admin/init.js to this site's /api/auth function.
   commit_messages:
     create: 'Create {{collection}} "{{slug}}"'
