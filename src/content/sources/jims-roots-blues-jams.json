@@ -1,0 +1,18 @@
+{
+  "name": "Jim's Roots & Blues jams calendar",
+  "url": "https://jimsrootsandblues.com/calendar/jams/",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Jim's Roots & Blues jams calendar. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Riverhead: old-time jam, bluegrass jam, traditional music session.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "permission": {
+    "status": "needed",
+    "note": "The calendar is a Google Calendar, and Google's calendar feed host blocks bots. Ask for permission or another feed."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep low priority; real dated LI jam entries but mostly outside region."
+}

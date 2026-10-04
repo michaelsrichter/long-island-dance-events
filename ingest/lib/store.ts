@@ -7,7 +7,7 @@ const EVENT_ORDER = [
   'title', 'summary', 'category', 'danceStyles', 'start', 'end', 'timezone', 'recurrence', 'cadence', 'lessonTime',
   'venueId', 'town', 'organizerId', 'performerIds', 'instructorIds', 'price', 'priceMax', 'isFree', 'priceNotes',
   'skillLevel', 'ageGroup', 'ticketUrl', 'infoUrl', 'contactPhone', 'contactEmail', 'status', 'cancelledNote',
-  'sourceId', 'sourceUrl', 'sourceName', 'sourceRef', 'firstSeen', 'lastSeen', 'confidence', 'matchKey', 'mergedFrom',
+  'sourceId', 'sourceUrl', 'sourceName', 'sourceRef', 'firstSeen', 'lastSeen', 'dancingCues', 'dancing', 'confidence', 'matchKey', 'mergedFrom',
   'lockedFields', 'reviewNotes', 'seoTitle', 'seoDescription',
 ];
 

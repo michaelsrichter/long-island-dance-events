@@ -1,0 +1,30 @@
+{
+  "title": "Vinyl Revival at Downtown Malverne (Church Street & Hempstead Avenue)",
+  "summary": "Live music by Vinyl Revival at Downtown Malverne (Church Street & Hempstead Avenue) in Malverne. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-03T14:00",
+  "end": "2026-10-03T16:00",
+  "timezone": "America/New_York",
+  "venueId": "downtown-malverne-church-street-malverne",
+  "town": "Malverne",
+  "performerIds": [
+    "vinyl-revival"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 3, 2026",
+  "sourceRef": "saturday list",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon",
+    "festival"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-03|downtown-malverne-church-street-malverne|vinyl-revival|2026-10-03|special"
+}

@@ -1,0 +1,18 @@
+{
+  "name": "BaseLocal - live music in Islip",
+  "url": "https://baselocal.com/ny/islip/events/live-music/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from BaseLocal. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Islip, Bay Shore, Babylon and Brookhaven: cover bands, tribute acts, Facebook event listings.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "allowed. Terms forbid scraping, crawling, or automated access without written consent."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep only for permission; useful but terms require consent and LI filtering."
+}

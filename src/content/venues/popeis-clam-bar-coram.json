@@ -1,0 +1,44 @@
+{
+  "name": "Popei's Clam Bar",
+  "aliases": [
+    "Popeis Coram",
+    "Popei's Clam Bar Coram"
+  ],
+  "address": "451 Middle Country Rd",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.popeisclambaronline.com/",
+        "note": "Official site mentions live music, a lively bar and an outdoor patio."
+      },
+      {
+        "url": "https://www.bandsintown.com/e/105422472-the-max-the-ultimate-90's-party-at-popei's-clam-bar",
+        "note": "Shows the Coram location books 90s party cover bands at 9 pm."
+      },
+      {
+        "url": "https://allevents.in/coram/playback-debut-at-popeis-coram/200030654652151",
+        "note": "80s new-wave band listing at the Coram location in September 2026."
+      }
+    ],
+    "floor": "unknown",
+    "notes": "Party cover bands play here on weekend nights, but we found no clear reports of a dance area or of people dancing. Call ahead if dancing matters to you.",
+    "policy": "unknown"
+  },
+  "description": "A casual seafood, steak and burger restaurant on Middle Country Road in Coram with a busy bar, an outdoor tiki patio and live bands on weekends.",
+  "facebookUrl": "https://www.facebook.com/Popeis-Clam-Bar-740007936025253",
+  "factsSource": "Checked October 3, 2026. Source: popeisclambaronline.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Popei%27s+Clam+Bar+451+Middle+Country+Rd+Coram+NY+11727",
+  "kind": "restaurant",
+  "phone": "(631) 696-4029",
+  "postalCode": "11727",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Popei's has other locations (for example Deer Park, popeis.com); Ira specified Coram. The Daplorabulls gig was not confirmed on the venue's calendar. The Facebook link comes from a Bing listing tied to the Coram address.",
+  "state": "NY",
+  "town": "Coram",
+  "website": "https://www.popeisclambaronline.com/",
+  "latitude": 40.869715,
+  "longitude": -73.006667,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

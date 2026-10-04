@@ -1,0 +1,35 @@
+{
+  "name": "Damage Inc. NY",
+  "type": "band",
+  "aliases": [
+    "Damage Inc.",
+    "Damage Inc. Metallica Tribute"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://outonthetownli.com/venue/89-north-music-venue/",
+        "note": "89 North lists 'The Big Four Tribute Night' on Oct 3 with Chaotica, a Slayer tribute and Damage Inc."
+      },
+      {
+        "url": "https://gnreventsny.com/artist/damage-inc/",
+        "note": "Agent page: Damage Inc. NY, formed in 2013 and based on Long Island."
+      },
+      {
+        "url": "https://www.facebook.com/damageincnewyork/posts/were-bringing-the-metallica-power-and-fury-upstate-to-daryls-house-club-on-wedne/735512945240775/",
+        "note": "Band post uses mosh-pit and headbanger tags."
+      }
+    ],
+    "notes": "A heavy metal tribute night. Fans headbang and mosh up front; it is not partner, line or party dancing.",
+    "rating": "listening"
+  },
+  "description": "A Long Island-based Metallica tribute band, formed in 2013, that recreates Metallica's thrash metal concerts.",
+  "facebookUrl": "https://www.facebook.com/damageincnewyork",
+  "genres": [
+    "tribute to Metallica",
+    "heavy metal"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). A different national Metallica tribute also uses 'Damage Inc' (damageinc.us, formed 2004). The Long Island band fits the 89 North gig."
+}

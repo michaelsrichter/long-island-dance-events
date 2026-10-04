@@ -1,0 +1,38 @@
+{
+  "name": "TOBAY Beach",
+  "aliases": [
+    "TOBAY Car Show",
+    "TOBAY"
+  ],
+  "address": "Ocean Pkwy (TOBAY Beach)",
+  "coordinatesSource": "OpenStreetMap Nominatim (Tobay Beach)",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://oysterbaytown.com/l-i-s-largest-car-show-at-tobay-beach-rescheduled-to-october-3rd-due-to-inclement-weather/",
+        "note": "Town announcement: car show moved to Sat Oct 3, 11 am-4 pm, free for spectators, live concert by That 70's Band."
+      },
+      {
+        "url": "https://www.litimes.org/2026/10/03/car-show-long-island-at-tobay-beach-draws-big-crowd/",
+        "note": "News report: big crowd on Oct 3; That 70s Band played during the show."
+      }
+    ],
+    "floor": "unknown",
+    "notes": "This is an outdoor car show with a free daytime concert. People mostly walk around and watch; we found no reports of dancing.",
+    "policy": "unknown"
+  },
+  "description": "A Town of Oyster Bay beach on Ocean Parkway with ocean and bay sides, a marina and a spray park. On Oct 3 it hosts the free Car Show Long Island Fall Classic with a live band.",
+  "factsSource": "Checked October 3, 2026. Source: oysterbaytown.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=TOBAY+Beach+Ocean+Pkwy+Massapequa+NY+11758",
+  "kind": "beach",
+  "latitude": 40.6090352,
+  "longitude": -73.4285892,
+  "postalCode": "11758",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira listed an event, not a venue; we used TOBAY Beach (Town of Oyster Bay) as the venue. Event info line from the town: 516-797-4121; extra parking and a shuttle from Jones Beach Field 5. TOBAY Beach is normally limited to Town of Oyster Bay residents, with limited non-resident access. Kind could also be 'festival' for this event.",
+  "state": "NY",
+  "town": "Massapequa",
+  "website": "https://oysterbaytown.com/tobay/"
+}

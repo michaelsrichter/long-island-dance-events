@@ -1,0 +1,18 @@
+{
+  "name": "Greenport Harbor Brewing Company - upcoming events",
+  "url": "https://greenportharborbrewing.com/upcoming-events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Greenport Harbor Brewing Company. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Greenport: brewery live music, acoustic and cover acts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "recheck-from-ci",
+  "defaults": {
+    "venueId": "greenport-harbor-brewing-company-greenport",
+    "town": "Greenport"
+  },
+  "reviewNotes": "Our office network could not open this site. Check robots.txt from GitHub Actions, then switch it on. Catalog check 2026-10-03: Keep as a low-priority live-music source and recheck from CI. It is more listening/social brewery music than dance."
+}

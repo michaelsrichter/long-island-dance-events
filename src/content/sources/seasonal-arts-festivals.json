@@ -1,0 +1,18 @@
+{
+  "name": "Huntington Summer Arts Festival; Islip Arts Council",
+  "url": "https://www.huntingtonsummerartsfestival.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Huntington Summer Arts Festival; Islip Arts Council. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Long Island: live music.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "allowed, but page returned HTTP 429 to our bot."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Needs permission. Because the page returned 429, ask or recheck later from CI before using it."
+}

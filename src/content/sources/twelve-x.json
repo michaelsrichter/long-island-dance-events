@@ -1,0 +1,19 @@
+{
+  "name": "12X Live - 2026 shows",
+  "url": "https://www.12xlive.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from 12X Live. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Farmingdale, Brookhaven, Jamesport and Patchogue: party rock, dance cover band, beach bar gigs.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "defaults": {
+    "performerIds": [
+      "12x-live"
+    ]
+  },
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck before summer because it has many seasonal LI dance-band dates, but none are still upcoming."
+}

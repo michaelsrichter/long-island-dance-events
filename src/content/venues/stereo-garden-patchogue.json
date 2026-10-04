@@ -1,0 +1,47 @@
+{
+  "name": "Stereo Garden",
+  "aliases": [
+    "Stereo Garden LI",
+    "Stereo Garden Patchogue"
+  ],
+  "address": "9 Railroad Ave",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://www.stereogardenli.com/",
+        "note": "Official site: former roller rink with over 20,000 sq ft of open, column-free floor; 21+ unless stated."
+      },
+      {
+        "url": "https://www.stereogardenli.com/stereo-garden-li-events/",
+        "note": "Club 30+ on Sat Oct 3, 5-9 pm: club-style party with DJs, disco balls and confetti."
+      },
+      {
+        "url": "https://www.tripadvisor.com/Restaurant_Review-g60803-d13446330-Reviews-Stereo_Garden-Long_Island_Patchogue.html",
+        "note": "Listing describes three bars, a full stage, a dance floor and a VIP area."
+      }
+    ],
+    "floor": "dance-floor",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The old roller-rink floor gives lots of open space in front of the stage. Club 30+ is a daytime club party with DJs playing 80s, 90s and 2000s hits, made for dancing.",
+    "policy": "encouraged"
+  },
+  "description": "A large multi-use music venue and event hall in Patchogue village, built as a 1940s roller rink, with a stage, two bars, multiple levels and a beer garden.",
+  "facebookUrl": "https://www.facebook.com/StereoGardenLI/",
+  "factsSource": "Checked October 3, 2026. Source: stereogardenli.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Stereo+Garden+9+Railroad+Ave+Patchogue+NY+11772",
+  "kind": "concert-hall",
+  "phone": "(631) 416-7755",
+  "postalCode": "11772",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Phone numbers differ: the website shows (631) 416-7755, while Bing lists (631) 699-8151 (the events/brunch contact). Club 30+ is a touring party brand run by an outside promoter, ticketed, 21+.",
+  "state": "NY",
+  "town": "Patchogue",
+  "website": "https://www.stereogardenli.com/",
+  "latitude": 40.764796,
+  "longitude": -73.01714,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

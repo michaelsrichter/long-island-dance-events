@@ -1,0 +1,22 @@
+{
+  "name": "Harley's American Grille (Farmingdale/Huntington) - DJ and live music nights",
+  "url": "https://www.harleysamericangrille.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Harley's American Grille (Farmingdale/Huntington). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Farmingdale and Huntington: disco freestyle, DJ entertainment, restaurant live music.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "harleys-american-grille-farmingdale",
+    "town": "Farmingdale"
+  },
+  "permission": {
+    "status": "needed",
+    "note": "The calendar only shows up in a web browser (it is drawn by JavaScript), so our collector cannot read it. Ask for an .ics link or another public feed."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep it, but expect manual review. The dance signal is good, but the schedule is recurring text rather than dated events."
+}

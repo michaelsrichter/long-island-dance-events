@@ -1,0 +1,23 @@
+{
+  "name": "Danny Langdon - upcoming shows",
+  "url": "https://www.dannylangdon.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Danny Langdon. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Merrick, Seaford and Massapequa Park: classic rock, solo acoustic, cover band.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "danny-langdon"
+    ]
+  },
+  "permission": {
+    "status": "needed",
+    "note": "The calendar only shows up in a web browser (it is drawn by JavaScript), so our collector cannot read it. Ask for an .ics link or another public feed."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep because it has several Nassau public gigs, but the Wix widget needs extra handling."
+}

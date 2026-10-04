@@ -1,0 +1,18 @@
+{
+  "name": "Long Island Arts Council at Freeport",
+  "url": "https://www.liacf.org/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Long Island Arts Council at Freeport. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Freeport: arts events, concerts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "robots check returned 429/unknown. Terms not checked because site returned 429"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep for permission or CI recheck; likely arts events but bot was rate-limited."
+}

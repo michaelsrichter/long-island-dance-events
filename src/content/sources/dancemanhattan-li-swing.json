@@ -1,0 +1,14 @@
+{
+  "name": "Dance Manhattan - Long Island swing dances list",
+  "url": "http://dancemanhattan.com/calendar/event/113",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Dance Manhattan. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Farmingdale, Greenlawn, Amityville and East Northport: swing, Lindy Hop, blues.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "reviewNotes": "Catalog check 2026-10-03: Keep as a cross-check. It catches LI swing nights that are otherwise social-only, but it is free text."
+}

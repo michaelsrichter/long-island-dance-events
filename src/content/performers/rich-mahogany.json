@@ -1,0 +1,45 @@
+{
+  "name": "Rich Mahogany",
+  "type": "band",
+  "aliases": [
+    "Rich Mahogany Band",
+    "The Rich Mahogany Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.fireislandnews.com/arts-culture/arts-theatre/i18d5nzisy9sef11f8ur9x8d311hxu/",
+        "note": "Boulton Center report: sold-out crowd on its feet; band plays rock, Billy Joel, reggae, disco, country."
+      },
+      {
+        "url": "https://islipbulletin.net/stories/summer-fun-concert-series-begins,121234",
+        "note": "June 2026 Brookwood Hall concert filled the whole lawn with fans."
+      },
+      {
+        "url": "https://therichmahoganyband.com/",
+        "note": "Band site pitches itself as good songs, good vibes and a great party."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A local party band with a big following. At a theater show the crowd stood the whole night, and outdoor shows pack the lawn, so freestyle dancing is common.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "Six-piece Long Island party band formed in 2006 that mixes classic rock, Billy Joel, modern rock, reggae, disco and country covers; well known around Bay Shore, Brightwaters and Fire Island.",
+  "facebookUrl": "https://www.facebook.com/pg/Rich-Mahogany-46187720660",
+  "genres": [
+    "classic and modern rock covers",
+    "Billy Joel",
+    "reggae",
+    "disco",
+    "country"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'The Spot at Oaksale Yacht' is likely The Spot at the Oakdale Yacht Club (typo). Band site events page is outdated.",
+  "website": "https://therichmahoganyband.com/"
+}

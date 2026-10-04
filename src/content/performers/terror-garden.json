@@ -1,0 +1,33 @@
+{
+  "name": "Terror Garden",
+  "type": "band",
+  "aliases": [
+    "Terror Garden Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.metal-archives.com/bands/Terror_Garden/3540494911",
+        "note": "Metal database: heavy metal/hard rock band from Amityville, Long Island, formed 2010."
+      },
+      {
+        "url": "https://linktr.ee/terrorgardenband",
+        "note": "Band link page: Long Island original hard rock/metal since 2010."
+      }
+    ],
+    "notes": "Plays its own hard rock and metal songs; people come to watch and headbang, not to dance.",
+    "rating": "listening"
+  },
+  "description": "Long Island band that writes and plays its own hard rock and heavy metal, formed in 2010 in the Amityville area, with several albums and a 2026 EP.",
+  "facebookUrl": "https://www.facebook.com/terrorgardenband",
+  "genres": [
+    "original hard rock",
+    "heavy metal"
+  ],
+  "instagramUrl": "https://www.instagram.com/terrorgardenband",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Could not confirm the Lucky Strike Port Jefferson date outside Ira's List.",
+  "website": "https://linktr.ee/terrorgardenband",
+  "youtubeUrl": "https://www.youtube.com/terrorgarden"
+}

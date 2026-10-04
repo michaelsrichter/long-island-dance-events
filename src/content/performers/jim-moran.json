@@ -1,0 +1,24 @@
+{
+  "name": "Jim Moran",
+  "type": "solo",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.groovehub.io/events/jim-morans-sunday-funday-open-mic-jam/20260920",
+        "note": "Listing: Sundays at 3 PM at Frogzz in Yaphank, hosted by guitarist Jim Moran; most genres welcome."
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=tt4E8YEFH0w",
+        "note": "Video listing of a rock and blues jam at Frogzz with Jim Moran on guitar and vocals."
+      }
+    ],
+    "notes": "An open jam where musicians take turns on rock and blues songs. It is mainly for players and listeners; we found no sign of dancing.",
+    "rating": "listening"
+  },
+  "genres": [
+    "rock and blues guitar"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03)."
+}

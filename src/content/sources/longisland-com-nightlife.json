@@ -1,0 +1,18 @@
+{
+  "name": "LongIsland.com Nightlife Events",
+  "url": "https://nightlife.longisland.com/events/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from LongIsland.com Nightlife Events. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Bellmore, Bohemia, Jericho and Melville: nightlife, DJ events, happy hour music, bar concerts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "robots parsed as unknown; main page returned 200. Terms forbid robots, spiders, automated devices, retrieval, and indexing."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep only for permission; useful volume but terms block automated collection."
+}

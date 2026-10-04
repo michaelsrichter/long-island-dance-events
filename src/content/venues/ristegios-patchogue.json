@@ -1,0 +1,47 @@
+{
+  "name": "Ristegio's Restaurant & Lounge",
+  "aliases": [
+    "Ristegios",
+    "Ristegios Patchogue"
+  ],
+  "address": "641 Medford Ave",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "http://www.tripadvisor.com/ShowUserReviews-g60803-d6623414-r1050724943-Ristegio_s_Restaurant_and_Lounge-Long_Island_Patchogue.html",
+        "note": "Review mentions asking for a table near the dance floor to see a band."
+      },
+      {
+        "url": "https://www.thesouljamrevue.com/event-details/the-soul-jam-revue-live-at-ristegios-8",
+        "note": "Band's event page invites guests to have dinner and then hit the dance floor at Ristegio's."
+      },
+      {
+        "url": "https://happeningnext.com/event/radio-flashback-returns-to-ristegios-rnr-70s-80s-dance-party-eid3a0dshro0r",
+        "note": "Band billed its Ristegio's show as a 70s/80s dance party."
+      }
+    ],
+    "floor": "dance-floor",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The lounge has a dance floor in front of the band. Soul, Motown and rock party bands play most weekends, and diners get up to dance after dinner.",
+    "policy": "allowed"
+  },
+  "description": "A New American restaurant, lounge and catering hall on Medford Avenue (Route 112) in North Patchogue, with sushi, steaks and live bands on weekend nights.",
+  "facebookUrl": "https://www.facebook.com/ristegios",
+  "factsSource": "Checked October 3, 2026. Source: ristegios.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Ristegio%27s+Restaurant+%26+Lounge+641+Medford+Ave+Patchogue+NY+11772",
+  "kind": "restaurant",
+  "phone": "(631) 731-3663",
+  "postalCode": "11772",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List venue page (/ristegios) gives 641 Medford Ave (Rt 112), Patchogue, 631-731-3663. The area is often called North Patchogue; some listings show 639 Medford Ave or 641 Medford Ave #112. The Music Express gig not checked on the venue calendar.",
+  "state": "NY",
+  "town": "Patchogue",
+  "website": "https://ristegios.com/",
+  "latitude": 40.790125,
+  "longitude": -73.008422,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "The Byrne Unit",
+  "type": "band",
+  "aliases": [
+    "Byrne Unit",
+    "Byrne Unit NY"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://thebyrneunit.com/",
+        "note": "Band site says sets are adjusted in real time to keep the dance floor active."
+      },
+      {
+        "url": "https://thebyrneunit.com/long-island-cover-band",
+        "note": "Band promises a packed dance floor and lists rock, pop, country, Motown, funk and Top 40."
+      },
+      {
+        "url": "https://thebyrneunit.com/about",
+        "note": "Lists regular venues including Salt Shack at Cedar Beach, Toomey's and Lily Flanagan's."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A party cover band for bars, beach clubs and weddings. The band says it shapes each set live to keep the dance floor busy.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "An Amityville-based cover band that plays classic rock, pop, country, Motown and Top 40 hits at Long Island bars, beach clubs and weddings.",
+  "facebookUrl": "https://www.facebook.com/thebyrneunitny",
+  "genres": [
+    "classic rock and pop covers",
+    "country",
+    "Motown and funk",
+    "Top 40"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Dance claims come from the band's own marketing; no crowd video watched.",
+  "website": "https://thebyrneunit.com/"
+}

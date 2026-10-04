@@ -4,6 +4,7 @@
  *
  *   npx tsx ingest/run.ts                      # all enabled sources
  *   npx tsx ingest/run.ts --source thedancecalendar --dry-run
+ *   npx tsx ingest/run.ts --cadence daily,twice-weekly   # only sources with these cadences
  *   npx tsx ingest/run.ts --offline            # reuse cached downloads only
  *   npx tsx ingest/run.ts --today 2026-10-03 --report .cache/ingest/report.md --json .cache/ingest/report.json
  */
@@ -93,9 +94,11 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
   const report: RunReport = { startedAt: new Date().toISOString(), today, dryRun, sources: [], created: { venues: [], performers: [], instructors: [], organizers: [] }, totals: { activeEvents: 0, needsReview: 0, changedFiles: 0 } };
   const changed = new Set<string>();
   const only = typeof a.source === 'string' ? a.source : undefined;
+  const cadences = typeof a.cadence === 'string' ? new Set(a.cadence.split(',').map((c) => c.trim()).filter(Boolean)) : undefined;
 
   for (const [id, source] of registry.sources) {
     if (only && id !== only) continue;
+    if (cadences && !only && !cadences.has(source.cadence)) continue;
     const sr: SourceReport = { id, name: source.name, status: 'skipped', documents: [], found: 0, kept: 0, outOfArea: [], review: [], invalid: [] };
     report.sources.push(sr);
     if (!source.enabled && !only) {

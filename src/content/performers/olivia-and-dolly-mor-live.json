@@ -1,0 +1,47 @@
+{
+  "name": "Olivia & Grease vs. Dolly & Divas (Mor & the MOR LIVE Band)",
+  "type": "band",
+  "aliases": [
+    "Mor Live Band Presents: Olivia & Dolly",
+    "Olivia & Dolly",
+    "Olivia & Grease vs. Dolly & Divas",
+    "MOR LIVE Band",
+    "Hopelessly Olivia and Dolly and Divas"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://events.longislandpress.com/event/olivia-dolly-tribute-christmas-show/",
+        "note": "Listing for a Bellmore show promises a live-band tribute with costumes, sing-alongs and dancing."
+      },
+      {
+        "url": "https://www.morhits.com/olivia-grease-vs-dolly-divas",
+        "note": "Tribute starring Mor: Olivia Newton-John, Dolly Parton, Shania Twain, Carrie Underwood and Grease songs; family show."
+      },
+      {
+        "url": "https://longislandwave.com/events/337/olivia-and-dolly-tribute-christmas-show/",
+        "note": "Describes Mor Schwartz's tribute backed by a live band at the Bellmore Showplace."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A family tribute concert. Promoters mention sing-alongs and dancing, but the Oct 4 show is at a public library, usually a seated setting.",
+    "rating": "mixed",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A New York tribute show starring singer Mor with a live band, covering Olivia Newton-John, Grease and Dolly Parton plus other country-pop divas.",
+  "genres": [
+    "tribute to Olivia Newton-John",
+    "tribute to Dolly Parton",
+    "Grease songs",
+    "country-pop"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Bryant Library (Roslyn) listing not checked directly. 'Mor' is the performer's stage name.",
+  "website": "https://www.morhits.com/olivia-grease-vs-dolly-divas",
+  "youtubeUrl": "https://www.youtube.com/@OliviaVsDolly"
+}

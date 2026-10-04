@@ -1,0 +1,20 @@
+{
+  "name": "Club Brumidi at Brumidi Lodge (Deer Park) - events",
+  "url": "https://sonsofitalyli.com/events/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Club Brumidi at Brumidi Lodge (Deer Park). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Deer Park: social dance mix (tango, West Coast Swing, hustle, ballroom/Latin), dinner dances, classes.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "feedUrl": "https://sonsofitalyli.com/wp-json/wp/v2/event",
+  "defaults": {
+    "venueId": "brumidi-lodge",
+    "town": "Deer Park",
+    "organizerId": "club-brumidi"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. Club Brumidi lists weekly socials, classes, live-music dances, and closures in plain text."
+}

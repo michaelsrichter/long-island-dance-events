@@ -1,0 +1,19 @@
+{
+  "name": "That's What She Said - performances",
+  "url": "https://thatswhatshesaidny.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from That's What She Said. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Commack, Port Jefferson Station and Baldwin: women icons tribute, rock, pop cover band.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "thats-what-she-said"
+    ]
+  },
+  "reviewNotes": "Switched off: On 2026-10-03 it listed 21 dates, but none were at a venue we have researched yet (for example Bobbique (Patchogue); Lucky Strike Bar and Grill (Port Jefferson); Napper Tandy (Laurel); Nostalgia (Wantagh)). Add those venue files in src/content/venues (address and dance-floor research), then switch it back on. Catalog check 2026-10-03: Keep because it has three public LI bar/venue dates and one repeating venue."
+}

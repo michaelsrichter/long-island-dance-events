@@ -1,0 +1,28 @@
+{
+  "name": "DJ Jolie",
+  "type": "dj",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.opentable.com/r/revel-restaurant-and-bar-garden-city",
+        "note": "Review summary says the DJ and dancing add fun, and Saturday is the lively DJ night."
+      },
+      {
+        "url": "https://www.findglocal.com/US/Garden-City/1374227202797949/Revel-Restaurant-%26-Bar",
+        "note": "Copy of Revel's page says it has DJs every Friday and Saturday night."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Revel has DJs on Friday and Saturday nights, and diner reviews mention dancing. We could not confirm details about this DJ.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A DJ booked for a Saturday night at Revel, a Garden City restaurant and bar that brings in DJs on weekend nights.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Identity not confirmed. A NYC house-music DJ called DJ JOLIE exists (Degy Entertainment roster), but nothing links her to Revel. Assumed 'Revel' is Revel Restaurant & Bar, Garden City."
+}

@@ -1,0 +1,45 @@
+---
+/** Researched dancing facts for a venue or a band/DJ, with sources. */
+import { BAND_RATING_LABELS, DANCE_TYPE_LABELS, VENUE_FLOOR_LABELS, type DanceType } from '../lib/schemas';
+interface Props {
+  name: string;
+  kind: 'venue' | 'performer';
+  floor?: keyof typeof VENUE_FLOOR_LABELS | undefined;
+  rating?: keyof typeof BAND_RATING_LABELS | undefined;
+  kinds: DanceType[];
+  notes?: string | undefined;
+  evidence: { url: string; note: string }[];
+  confidence: 'high' | 'medium' | 'low';
+  checked?: string | undefined;
+}
+const p = Astro.props;
+const summary = p.kind === 'venue' ? (p.floor ? VENUE_FLOOR_LABELS[p.floor] : undefined) : p.rating ? BAND_RATING_LABELS[p.rating] : undefined;
+const sure = { high: 'We are fairly sure.', medium: 'This is our best guess.', low: 'This is a rough guess; we found little information.' }[p.confidence];
+const host = (u: string) => {
+  try {
+    return new URL(u).hostname.replace(/^www\./, '');
+  } catch {
+    return u;
+  }
+};
+---
+<section class="panel" aria-labelledby="dancing-h" id="dancing">
+  <h2 id="dancing-h">{p.kind === 'venue' ? `Dancing at ${p.name}` : `Dancing at ${p.name} shows`}</h2>
+  <dl class="dl">
+    {summary && <div><dt>{p.kind === 'venue' ? 'Room to dance' : 'Crowd'}</dt><dd>{summary}</dd></div>}
+    <div>
+      <dt>Kind of dancing</dt>
+      <dd>{p.kinds.length ? <ul class="dance-kinds mt-0">{p.kinds.map((k) => <li><span class:list={['dance-badge', `dance-badge--${k}`]}>{DANCE_TYPE_LABELS[k]}</span></li>)}</ul> : 'Little or no dancing.'}</dd>
+    </div>
+    {p.notes && <div><dt>What we found</dt><dd>{p.notes}</dd></div>}
+  </dl>
+  <p class="muted mt-3">{sure}{p.checked && ` Checked ${new Date(`${p.checked}T12:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}.`} <a href="/faq/#dancing-score">How we decide</a>.</p>
+  {p.evidence.length > 0 && (
+    <details class="dance-evidence mt-3">
+      <summary>How we checked ({p.evidence.length} {p.evidence.length === 1 ? 'source' : 'sources'})</summary>
+      <ul>
+        {p.evidence.map((x) => <li><a href={x.url} target="_blank" rel="noopener nofollow">{host(x.url)}<span class="visually-hidden"> (opens in a new tab)</span></a>: {x.note}</li>)}
+      </ul>
+    </details>
+  )}
+</section>

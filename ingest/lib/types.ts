@@ -1,5 +1,5 @@
 /** Types shared by adapters and the pipeline. */
-import type { EventCategory, SkillLevel, SourceData } from '../../src/lib/schemas';
+import type { DancingCue, EventCategory, SkillLevel, SourceData } from '../../src/lib/schemas';
 import type { Registry } from './registry';
 import type { PoliteFetcher } from './fetch';
 
@@ -41,6 +41,8 @@ export interface Candidate {
   cadence?: string | undefined;
   /** Ordinal weekdays from the source's stated pattern, e.g. [1, 3] for "first and third". */
   cadenceOrdinals?: number[] | undefined;
+  /** Hints about dancing from the listing (theater, DJ, dance party...). */
+  dancingCues?: DancingCue[] | undefined;
   confidence: number;
   reviewNotes: string[];
   /** Same on every date of a repeating listing. */

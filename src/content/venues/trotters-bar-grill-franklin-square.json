@@ -1,0 +1,47 @@
+{
+  "name": "Trotters Bar & Grill",
+  "aliases": [
+    "Trotters",
+    "Trotters Franklin Square"
+  ],
+  "address": "1050 Hempstead Tpke",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://usarestaurants.info/explore/united-states/new-york/nassau-county/hempstead/franklin-square/431334-trotters-bar-grill.htm",
+        "note": "Review: good food with rockin' bands, dancing encouraged; bar, main dining room and quieter side room."
+      },
+      {
+        "url": "https://www.tripadvisor.ca/Restaurant_Review-g47750-d1344954-Reviews-Trotters_Bar_Grill-Franklin_Square_Long_Island_New_York.html",
+        "note": "Review describes a crowded bar on a band night and dancing to the band."
+      },
+      {
+        "url": "https://whataretheysaying.com/trotters-bar-grill-franklin-square-ny/",
+        "note": "Review summary quotes a guest saying it was loud and there was no space to dance at the bar."
+      }
+    ],
+    "floor": "small",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Rock cover bands play here on weekend nights and some guests dance near the band. Space is tight; one reviewer said there was no room to dance at the bar.",
+    "policy": "allowed"
+  },
+  "description": "A neighborhood sports bar and grill on Hempstead Turnpike in Franklin Square with a main bar, dining room, quieter side room, big parking lot and rock bands on weekend nights.",
+  "facebookUrl": "https://www.facebook.com/TrottersBarandGrill/",
+  "factsSource": "Checked October 3, 2026. Source: trottersbarandgrill.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Trotters+Bar+%26+Grill+1050+Hempstead+Tpke+Franklin+Square+NY+11010",
+  "kind": "bar",
+  "phone": "(516) 355-5681",
+  "postalCode": "11010",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List has a /trotters venue page (sponsored venue). Black Ice's own site confirms the show Sat Oct 3, 9 pm-12 am at Trotters, 1050 Hempstead Tpke, Franklin Square. The band's site lists phone (516) 335-5681, but the official site shows (516) 355-5681, which we used. Formerly Shackleton's.",
+  "state": "NY",
+  "town": "Franklin Square",
+  "website": "https://www.trottersbarandgrill.com/",
+  "latitude": 40.707815,
+  "longitude": -73.679037,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Almost Elton & Almost Billy at Half Hollow Hills Community Library (Dix Hills)",
+  "summary": "Live music by Almost Elton & Almost Billy at Half Hollow Hills Community Library (Dix Hills) in Dix Hills. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-04T14:00",
+  "timezone": "America/New_York",
+  "venueId": "half-hollow-hills-library-dix-hills",
+  "town": "Dix Hills",
+  "performerIds": [
+    "almost-elton-and-almost-billy"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 3, 2026",
+  "sourceRef": "sunday list",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon",
+    "library",
+    "tribute"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-04|half-hollow-hills-library-dix-hills|almost-elton-and-almost-billy|2026-10-04|special"
+}

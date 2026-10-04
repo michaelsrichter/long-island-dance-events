@@ -1,0 +1,14 @@
+{
+  "name": "The Common Ground (Sayville) - community concert calendar",
+  "url": "https://thecommonground.com/calendar-of-events",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from The Common Ground (Sayville). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Sayville: summer outdoor concerts, family community events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck for the next summer concert season. It is a real local source but not current for dance events now."
+}

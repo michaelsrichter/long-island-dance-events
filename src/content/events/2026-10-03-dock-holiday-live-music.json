@@ -1,0 +1,29 @@
+{
+  "title": "Dock Holiday at North Hempstead Beach Park",
+  "summary": "Live music by Dock Holiday at North Hempstead Beach Park in Port Washington. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-03T16:00",
+  "timezone": "America/New_York",
+  "venueId": "north-hempstead-beach-park-port-washington",
+  "town": "Port Washington",
+  "performerIds": [
+    "dock-holiday"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 3, 2026",
+  "sourceRef": "saturday list",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon",
+    "outdoor"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-03|north-hempstead-beach-park-port-washington|dock-holiday|2026-10-03|special"
+}

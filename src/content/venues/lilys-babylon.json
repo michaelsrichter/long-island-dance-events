@@ -1,0 +1,48 @@
+{
+  "name": "Lily's Babylon",
+  "aliases": [
+    "Lily Flanagan's",
+    "Lily Flanagan's Pub",
+    "Lily's"
+  ],
+  "address": "345 Deer Park Ave",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.lilyflanaganspub.com/musicevents",
+        "note": "Pub's events page lists Legendary Murphys on Sat Oct 3, 6-10 PM, and weekly happy-hour bands."
+      },
+      {
+        "url": "https://ilovebabylon.com/event/the-daplorabulls-live-lilys-babylon/",
+        "note": "Local listing for a party band at Lily's invites people to come dance the night away."
+      },
+      {
+        "url": "https://www.eventbrite.com/e/lilys-after-dark-saturday-club-pass-103-tickets-2002576568424",
+        "note": "Ticket page for Lily's After Dark club night, Sat Oct 3 from 10 PM, 18+ to enter."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Party bands play early evening, and promoters invite people to dance. Later on weekend nights it runs 'Lily's After Dark' club nights for ages 18 and up with a cover charge.",
+    "policy": "allowed"
+  },
+  "description": "A large Irish-American pub and restaurant on Deer Park Avenue in Babylon Village, formerly called Lily Flanagan's. It has happy-hour bands on Fridays and Saturdays and turns into a late-night club.",
+  "facebookUrl": "https://www.facebook.com/232718040167311/",
+  "factsSource": "Checked October 3, 2026. Source: lilyflanaganspub.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Lily%27s+Babylon%2C+345+Deer+Park+Ave%2C+Babylon%2C+NY+11702",
+  "kind": "bar",
+  "phone": "(631) 539-0816",
+  "postalCode": "11702",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). The 6 PM band and the 10 PM 18+ club night are different crowds. We did not find photos showing a dedicated dance floor.",
+  "state": "NY",
+  "town": "Babylon",
+  "website": "https://www.lilyflanaganspub.com/",
+  "latitude": 40.701645,
+  "longitude": -73.322078,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

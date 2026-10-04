@@ -1,0 +1,45 @@
+{
+  "name": "Flagstar at Westbury Music Fair",
+  "aliases": [
+    "Flagstar At Westbury",
+    "Westbury Music Fair",
+    "Flagstar Westbury"
+  ],
+  "address": "960 Brush Hollow Rd",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.westburymusicfair.org/westbury-music-fair-seating-chart/",
+        "note": "Seating guide (ticket site) shows 360-degree seating in eight rows around a rotating stage."
+      },
+      {
+        "url": "https://www.flagstaratwestburymusicfair.com/",
+        "note": "Official site lists For The Love Of Freestyle on Sat Oct 3."
+      },
+      {
+        "url": "https://www.longislandpress.com/2026/09/30/lisa-lisa-takes-fans-home-on-stage-and-in-biopic/",
+        "note": "Preview of the Oct 3 freestyle show with Lisa Lisa, The Cover Girls and others; a dance-music bill."
+      }
+    ],
+    "floor": "seated",
+    "notes": "Every ticket is a reserved seat in rows around the stage, and there is no dance floor. Freestyle fans may stand and move at their seats, but plan on a seated concert.",
+    "policy": "unknown"
+  },
+  "description": "A large theater-in-the-round with a rotating stage and up to about 2,800 seats, run by Live Nation. It hosts big-name concerts and comedy.",
+  "facebookUrl": "https://www.facebook.com/WestburyMusicFair/",
+  "factsSource": "Checked October 3, 2026. Source: flagstaratwestburymusicfair.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Flagstar+at+Westbury+Music+Fair%2C+960+Brush+Hollow+Rd%2C+Westbury%2C+NY+11590",
+  "kind": "theater",
+  "phone": "(516) 247-5200",
+  "postalCode": "11590",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). westburymusicfair.org is a third-party ticket site, not the official venue site. That site calls the Oct 3 show 'Louder Than Love'; the official site calls it 'For The Love Of Freestyle'.",
+  "state": "NY",
+  "town": "Westbury",
+  "website": "https://www.flagstaratwestburymusicfair.com/",
+  "latitude": 40.768879,
+  "longitude": -73.56599,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

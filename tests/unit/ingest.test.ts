@@ -39,6 +39,7 @@ describe('time parsing', () => {
     ['Doors open 6:30PM. Music starts 7PM. Coffee available at 10pm.', '19:00', undefined, undefined],
     ['Brunch dance 11-2pm', '11:00', '14:00', undefined],
     ['Call 631-476-3707 for details.', undefined, undefined, undefined],
+    ['Advanced ticket sales close at 5PM the day of this event.', undefined, undefined, undefined],
   ];
   it.each(cases)('%s', (text, start, end, lesson) => {
     const t = parseTimes(text);
@@ -215,6 +216,14 @@ describe('merging runs', () => {
     const stored = new Map([[id, eventSchema.parse({ ...e, title: 'Edited by hand', lockedFields: ['title'] })]]);
     const next = mergeDrafts(stored, draft({ title: 'Scraped title' }), { sourceId: 's', today: '2026-10-02' });
     expect(next.events.get(id)!.title).toBe('Edited by hand');
+  });
+  it('keeps an editor note when the editor locked the status', () => {
+    const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
+    const [id, e] = [...first.events][0]!;
+    const held = eventSchema.parse({ ...e, status: 'pending-review', lockedFields: ['status'], reviewNotes: 'Band is on tour that night.' });
+    const next = mergeDrafts(new Map([[id, held]]), draft(), { sourceId: 's', today: '2026-10-02' });
+    expect(next.events.get(id)).toMatchObject({ status: 'pending-review', reviewNotes: 'Band is on tour that night.' });
+    expect(next.stats).toMatchObject({ updated: 0, unchanged: 1 });
   });
   it('marks ended events past and vanished ones for review, without deleting', () => {
     const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });

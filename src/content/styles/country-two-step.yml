@@ -1,5 +1,6 @@
 name: Country Two-Step
 family: country
+danceType: partner
 order: 50
 aliases:
   - Country 2 Step

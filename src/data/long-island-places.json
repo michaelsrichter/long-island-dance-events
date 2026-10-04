@@ -1,6 +1,9 @@
 {
  "description": "Towns, villages and hamlets in Nassau and Suffolk counties (Long Island, New York). Used to keep listings inside the site area. Places in Queens, Brooklyn and elsewhere are out of area.",
  "aliases": {
+  "Captree Island": "Captree",
+  "Captree State Park": "Captree",
+  "Oak Beach-Captree": "Captree",
   "Huntington Sta": "Huntington Station",
   "Pt Jefferson": "Port Jefferson",
   "Port Jeff": "Port Jefferson",
@@ -20,6 +23,10 @@
   "Bayshore": "Bay Shore"
  },
  "places": [
+  {
+   "name": "Captree",
+   "county": "Suffolk"
+  },
   {
    "name": "Albertson",
    "county": "Nassau"

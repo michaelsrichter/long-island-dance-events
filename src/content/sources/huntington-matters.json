@@ -1,0 +1,15 @@
+{
+  "name": "Huntington Matters events",
+  "url": "https://huntingtonmatters.com/events/",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "dance",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Huntington Matters events. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Centerport, Huntington, Huntington Station and Northport: line dancing, festival live music, community events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
+  "reviewNotes": "Catalog check 2026-10-03: Keep with keyword filters; occasional dance/music items in a broad calendar."
+}

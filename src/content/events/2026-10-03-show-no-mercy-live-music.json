@@ -1,0 +1,23 @@
+{
+  "title": "Show No Mercy and Damage Inc. NY at 89 North Music Venue",
+  "summary": "Live music by Show No Mercy and Damage Inc. NY at 89 North Music Venue in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-03",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "show-no-mercy",
+    "damage-inc-ny"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 3, 2026",
+  "sourceRef": "saturday list",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-03|89-north-music-venue-patchogue|show-no-mercy-damage-inc|2026-10-03|special"
+}

@@ -1,0 +1,12 @@
+---
+/** Small "kind of dancing" badge for event cards: Partner dancing / Party dancing likely / Mostly listening. */
+import type { DancingAssessment } from '../lib/dancing';
+interface Props {
+  dancing: DancingAssessment;
+}
+const { dancing: d } = Astro.props;
+const tone = d.level === 'unlikely' ? 'listen' : d.kinds[0] ?? 'freestyle';
+---
+<span class:list={['dance-badge', `dance-badge--${tone}`, `dance-badge--${d.level}`]} title={d.level === 'dance-event' ? d.label : `Dancing score: ${d.outOf10} out of 10`}>
+  {d.label}{d.level !== 'dance-event' && <span class="visually-hidden"> (dancing score {d.outOf10} out of 10)</span>}
+</span>

@@ -1,0 +1,38 @@
+{
+  "name": "Serve The Servants",
+  "type": "band",
+  "aliases": [
+    "Serve The Servants Nirvana Tribute",
+    "STS Nirvana Tribute"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.servetheservantstribute.com/",
+        "note": "Band site: Long Island Nirvana tribute aiming to copy the Nirvana live show."
+      },
+      {
+        "url": "https://allevents.in/amityville/unplugged-serve-the-servants-love-hate-love-and-unglued-at-the-warehouse/200030766292852",
+        "note": "Oct 3 'Unplugged' show at The Warehouse, Amityville, with Love Hate Love and Unglued."
+      },
+      {
+        "url": "https://happeningnext.com/event/long-island-seattle-4-grunge-fest-eid3a0ds49jow",
+        "note": "Plays grunge tribute festivals alongside Alice in Chains and Pearl Jam tributes."
+      }
+    ],
+    "notes": "A Nirvana tribute is a rock concert where fans watch, sing and sometimes mosh. This weekend's show is billed as Unplugged (acoustic), so expect a listening crowd.",
+    "rating": "listening"
+  },
+  "description": "Long Island Nirvana tribute trio, active since 2023, that recreates Nirvana's live show; on Oct 3 it plays an 'Unplugged' acoustic night at The Warehouse in Amityville.",
+  "facebookUrl": "https://www.facebook.com/p/Serve-The-Servants-Nirvana-Tribute-61556565905790/",
+  "genres": [
+    "tribute to Nirvana",
+    "grunge",
+    "90s alternative rock"
+  ],
+  "instagramUrl": "https://www.instagram.com/servetheservantsliny",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Band site lists Oct 3 as 'Unplugged at Katie's / Katies of Smithtown', but AllEvents and Ira's List put the Unplugged show at The Warehouse, Amityville. Owner may want to confirm the venue.",
+  "website": "https://www.servetheservantstribute.com/"
+}

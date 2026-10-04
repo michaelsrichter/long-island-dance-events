@@ -95,12 +95,19 @@ async function nominatim(address, userAgent) {
   return parseNominatim(await getJson(u, userAgent));
 }
 
-export async function geocode(address, { name, center, maxDistanceKm, userAgent } = {}) {
+export async function geocode(address, { name, town, center, maxDistanceKm, userAgent } = {}) {
   const cfg = readGeocodeSettings();
   const c = center ?? cfg.center;
   const maxKm = maxDistanceKm ?? cfg.maxDistanceKm;
   const ua = userAgent ?? cfg.userAgent;
-  const attempts = [() => census(address, ua), () => nominatim(address, ua), ...(name ? [() => nominatim(`${name}, ${address}`, ua)] : [])];
+  // Last try: the business name and town only (OpenStreetMap knows "Osprey's Dominion, Peconic"
+  // even when it does not know the house number).
+  const attempts = [
+    () => census(address, ua),
+    () => nominatim(address, ua),
+    ...(name ? [() => nominatim(`${name}, ${address}`, ua)] : []),
+    ...(name && town ? [() => nominatim(`${name}, ${town}`, ua)] : []),
+  ];
   for (const attempt of attempts) {
     try {
       const hit = await attempt();
@@ -125,7 +132,7 @@ async function main() {
     if (!flags.force && Number.isFinite(v.latitude) && Number.isFinite(v.longitude)) continue;
     if (!v.address || !(v.town ?? v.city)) { missing.push(`${file} (no street address)`); continue; }
     const address = oneLineAddress(v);
-    const hit = await geocode(address, { name: v.name, center, maxDistanceKm, userAgent: settings.userAgent });
+    const hit = await geocode(address, { name: v.name, town: v.town ?? v.city, center, maxDistanceKm, userAgent: settings.userAgent });
     if (!hit) { missing.push(`${file} (${address})`); console.warn(`✗ ${file}: no match for "${address}"`); continue; }
     console.log(`✓ ${file}: ${round(hit.lat)}, ${round(hit.lng)} ← ${hit.source}${hit.matched ? `: ${hit.matched}` : ''}`);
     if (flags.dry) continue;

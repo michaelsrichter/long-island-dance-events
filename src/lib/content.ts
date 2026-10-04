@@ -6,6 +6,7 @@ import { CATEGORY_LABELS, SKILL_LABELS, type County, type EventCategory } from '
 import { addDays, dateInZone, formatDateLong, formatTime, weekdayOf, DEFAULT_TZ } from './time';
 import type { ShareInput } from './share';
 import { linksOf, type ExternalLink } from './links';
+import { assessDancing, isDanceLevel, type DancingAssessment } from './dancing';
 
 export type Venue = CollectionEntry<'venues'>;
 export type Performer = CollectionEntry<'performers'>;
@@ -68,6 +69,8 @@ export interface ResolvedEvent extends Occurrence {
   contact: { name?: string | undefined; phone?: string | undefined; email?: string | undefined; website?: string | undefined; links: ExternalLink[] };
   /** Organizer page, ticket page or more-info link, in that order. */
   moreInfoUrl?: string | undefined;
+  /** Can you dance here? Score, kinds of dancing and reasons (src/lib/dancing.ts). */
+  dancing: DancingAssessment;
 }
 
 let cache: Promise<ResolvedEvent[]> | undefined;
@@ -140,7 +143,7 @@ export async function getAllEvents(): Promise<ResolvedEvent[]> {
       const styles = d.danceStyles.map((id) => {
         const s = refs.styles.get(id);
         if (!s) throw new Error(`${where} uses unknown dance style "${id}".`);
-        return { id, name: s.data.name, order: s.data.order };
+        return { id, name: s.data.name, order: s.data.order, danceType: s.data.danceType };
       });
       const v = venue?.data;
       const loc = {
@@ -157,6 +160,19 @@ export async function getAllEvents(): Promise<ResolvedEvent[]> {
       const dir = loc.address ? directions(full) : undefined;
       const price = priceOf(d);
       const od = organizer?.data;
+      const dancing = assessDancing({
+        category: d.category,
+        sourceFocus: source.data.focus,
+        sourceName: source.data.name,
+        styles: styles.map(({ id, name, danceType }) => ({ id, name, danceType })),
+        cues: d.dancingCues,
+        venue: v ? { name: v.name, kind: v.kind, dancing: v.dancing } : undefined,
+        performers: d.performerIds.map((id) => {
+          const p = refs.performers.get(id)!.data;
+          return { name: p.name, type: p.type, dancing: p.dancing };
+        }),
+        override: d.dancing,
+      });
       return {
         ...o,
         url: `/events/${o.slug}/`,
@@ -187,6 +203,7 @@ export async function getAllEvents(): Promise<ResolvedEvent[]> {
         },
         moreInfoUrl: d.ticketUrl ?? d.infoUrl ?? od?.website,
         cadence: o.cadence ?? cadenceOf(d),
+        dancing,
       };
     });
   })();
@@ -205,8 +222,8 @@ export function byDay(list: ResolvedEvent[]): DayGroup[] {
   return [...groups].map(([date, events]) => ({ date, label: formatDateLong(date), events }));
 }
 
-/** Social dances, lesson + dance parties, live music and festivals: everything except classes. The site leads with these. */
-export const isDance = (e: { category: string }): boolean => e.category !== 'class-lesson';
+/** Dances, dance parties and live music where people dance: everything except classes and listening-only shows. The site leads with these. */
+export const isDance = (e: { category: string; dancing: { level: DancingAssessment['level'] } }): boolean => e.category !== 'class-lesson' && isDanceLevel(e.dancing.level);
 
 /** Saturday and Sunday of the coming weekend (Friday evening counts too), as YYYY-MM-DD. */
 export function weekendRange(now: Date, tz = DEFAULT_TZ): { from: string; to: string } {

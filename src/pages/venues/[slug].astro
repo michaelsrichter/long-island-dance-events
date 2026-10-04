@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import EventSeriesList from '../../components/EventSeriesList.astro';
 import Icon from '../../components/Icon.astro';
+import DancingFacts from '../../components/DancingFacts.astro';
 import { upcomingFor } from '../../lib/content';
 import { breadcrumbJsonLd } from '../../lib/seo';
 import { displayHost } from '../../lib/links';
@@ -52,6 +53,7 @@ const telOf = (p: string) => `tel:+1${p.replace(/[^0-9]/g, '').replace(/^1(?=\d{
       <p class="muted">Repeating events show their next date.</p>
       <div class="mt-5"><EventSeriesList events={events} empty="No upcoming events are listed here right now" /></div>
     </section>
+    {v.dancing && <DancingFacts name={v.name} kind="venue" floor={v.dancing.floor} kinds={v.dancing.kinds} notes={v.dancing.notes} evidence={v.dancing.evidence} confidence={v.dancing.confidence} checked={v.dancing.checked} />}
     <section class="panel" aria-labelledby="facts-h">
       <h2 id="facts-h">Venue details</h2>
       <dl class="dl">

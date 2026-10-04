@@ -1,0 +1,41 @@
+{
+  "name": "Miss Mayhem",
+  "type": "band",
+  "aliases": [
+    "Miss Mayhem Rocks",
+    "Miss Mayhem Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.missmayhemrocks.com/",
+        "note": "Band site: Long Island's hi-energy party band, music to keep you up and moving all night."
+      },
+      {
+        "url": "https://eleanorslounge.com/events/miss-mayhem-live-at-eleanors-2/",
+        "note": "Eleanor's Lounge listing: fun, high-energy rock and roll, 8-11 PM, small cover."
+      },
+      {
+        "url": "https://eleanorslounge.com/locations/the-new-eleanors-lounge/",
+        "note": "Venue calendar shows Miss Mayhem on Oct 3, 2026."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Bills itself as Long Island's hi-energy party band, with music meant to keep people moving all night.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A Long Island party band playing high-energy rock and roll covers, often at Eleanor's Lounge in Bohemia.",
+  "facebookUrl": "https://www.facebook.com/MissMayhemBand",
+  "genres": [
+    "high-energy rock and party covers"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Dance claims come from the band's own marketing; no crowd video watched.",
+  "website": "https://www.missmayhemrocks.com/"
+}

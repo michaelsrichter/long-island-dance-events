@@ -1,5 +1,6 @@
 name: Blues Dancing
 family: swing
+danceType: partner
 order: 14
 aliases:
   - Blues Dance

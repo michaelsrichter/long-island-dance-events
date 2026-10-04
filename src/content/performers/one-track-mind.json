@@ -1,0 +1,38 @@
+{
+  "name": "One Track Mind",
+  "type": "band",
+  "aliases": [
+    "One Track Mind Band",
+    "OneTrackMindBand"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://onetrackmindband.net/",
+        "note": "Band site says its goal is to keep beloved anthems alive on the dance floor; lists Babylon-area venues."
+      },
+      {
+        "url": "https://onetrackmindband.net/about",
+        "note": "About page: members have decades of experience in Long Island club cover bands."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A bar and brewery cover band whose stated goal is to keep favorite anthems going on the dance floor; freestyle dancing is likely.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "South Shore Long Island cover band of veteran local musicians that gives familiar classic songs a modern twist at breweries, bars and street fairs.",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=100079145253582",
+  "genres": [
+    "covers of classic hits with a modern twist"
+  ],
+  "instagramUrl": "https://www.instagram.com/onetrackmindbandli",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the 2026 hip-hop act 'One Track Mind' on Apple Music or the Illinois classic-rock band of the same name.",
+  "website": "https://onetrackmindband.net/"
+}

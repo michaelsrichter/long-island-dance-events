@@ -1,5 +1,6 @@
 name: Line Dancing
 family: country
+danceType: line
 order: 51
 aliases:
   - Line Dance

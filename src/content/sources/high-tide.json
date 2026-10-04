@@ -1,0 +1,19 @@
+{
+  "name": "High Tide Band - schedule",
+  "url": "https://hightideli.com/schedule",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from High Tide Band. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Bay Shore and West Islip: party band, cover band.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "high-tide-band"
+    ]
+  },
+  "reviewNotes": "Switched off on 2026-10-03: the only public date this fall is on Fire Island (Kismet); the rest are private parties. Check again in spring. Catalog check 2026-10-03: Keep because it gives three public Suffolk dates and repeats Farrell's of Brooklyn."
+}

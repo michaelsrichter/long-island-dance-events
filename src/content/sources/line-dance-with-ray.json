@@ -1,0 +1,13 @@
+{
+  "name": "Line Dance With Ray (Ray Swartz)",
+  "url": "https://www.linedancewithray.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Line Dance With Ray (Ray Swartz). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Massapequa, Island Park, Bay Shore and Deer Park: line dancing.",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Accepted on 2026-10-03, but the October 3 check found: Set aside for automation. The weekly schedule is useful, but no current future-dated event cards were visible. Catalog check 2026-10-03: Set aside for automation. The weekly schedule is useful, but no current future-dated event cards were visible."
+}

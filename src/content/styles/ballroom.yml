@@ -1,5 +1,6 @@
 name: Ballroom (Standard and Smooth)
 family: ballroom
+danceType: partner
 order: 20
 aliases:
   - Ballroom

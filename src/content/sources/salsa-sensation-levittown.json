@@ -1,0 +1,18 @@
+{
+  "name": "Salsa Sensation Latin Dance Studio (Levittown) - schedule",
+  "url": "https://www.salsasensation.com/schedule",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Salsa Sensation Latin Dance Studio (Levittown). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Levittown: salsa, bachata.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "salsa-sensation-levittown",
+    "town": "Levittown"
+  },
+  "reviewNotes": "Weekly schedule written in words with no dates. An editor adds it once as a repeating event in the CMS and checks the page each month. Catalog check 2026-10-03: Keep for a lessons page only. It has clear October classes but not a normal event feed."
+}

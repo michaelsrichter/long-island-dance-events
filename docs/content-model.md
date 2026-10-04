@@ -57,6 +57,8 @@ One file per listing. A repeating listing ("every Tuesday") is one file with a `
 | `confidence` | | 0-1. Below 0.6 the ingest sets `pending-review`. |
 | `lockedFields` | | Field names an editor fixed by hand. The weekly run never changes them. |
 | `matchKey` | | Internal key that recognizes the same listing next week. Do not edit. |
+| `dancingCues` | | Clues the ingest found in the listing: `dj`, `dance-party`, `theater`, `library`, `acoustic`, `brunch`, `jam`, `afternoon`, `outdoor`, `festival`, `tribute`. They nudge the dancing score. |
+| `dancing` | | Editor override of the dancing score: `likelihood` (0-1), `kinds` (`partner`, `line`, `freestyle`), `notes`. |
 | `mergedFrom`, `embedding` | | Reserved for duplicate detection (phase 3). |
 | `seoTitle`, `seoDescription` | | Optional search-result overrides. |
 
@@ -64,7 +66,7 @@ How the site uses it: each date of a repeating event becomes its own page (`/eve
 
 ## `venues/*.json`
 
-`name`, `address`, `town`, `county` (`Nassau` or `Suffolk`), `state`, `postalCode`, `website`, `phone`, `latitude`/`longitude` (filled by `npm run geocode` or the "Venue map locations" workflow), `coordinatesSource`, `googleMapsUrl`, `facebookUrl`, `parkingNotes`, `accessibilityNotes`, `factsSource`, `description`, `aliases` (other names used in listings, for matching), `reviewNotes`.
+`name`, `address`, `town`, `county` (`Nassau` or `Suffolk`), `state`, `postalCode`, `website`, `phone`, `latitude`/`longitude` (filled by `npm run geocode` or the "Venue map locations" workflow), `coordinatesSource`, `googleMapsUrl`, `facebookUrl`, `parkingNotes`, `accessibilityNotes`, `factsSource`, `description`, `aliases` (other names used in listings, for matching), `kind` (`bar`, `restaurant`, `nightclub`, `brewery`, `winery`, `distillery`, `theater`, `concert-hall`, `park`, `beach`, `library`, `lodge-hall`, `dance-studio`, `school`, `festival`, `marina-club`, `other`), `dancing` (research: `floor` = `dance-floor`, `open-space`, `small`, `seated` or `unknown`; `policy` = `encouraged`, `allowed`, `discouraged` or `unknown`; `kinds`; `notes`; `confidence` high/medium/low; `checked` date; `evidence` = list of `url` + `note`), `reviewNotes`.
 
 ## `organizers/*.json`
 
@@ -76,15 +78,15 @@ How the site uses it: each date of a repeating event becomes its own page (`/eve
 
 ## `performers/*.json` (bands and DJs)
 
-`name`, `type` (`band`, `dj`, `solo`), `genres`, `website`, social links and `moreLinks`, `description`, `aliases`, `reviewNotes`.
+`name`, `type` (`band`, `dj`, `solo`), `genres`, `website`, social links and `moreLinks`, `description`, `aliases`, `dancing` (research: `rating` = `dance-band`, `party`, `mixed`, `listening` or `unknown`; `kinds`; `styles` people do at their shows; `notes`; `confidence`; `checked`; `evidence`), `reviewNotes`.
 
 ## `styles/*.yml` (dance styles)
 
-`name`, `family` (`swing`, `ballroom`, `latin`, `tango`, `country`, `other`), `order`, `aliases` (words that mean this style in listings, e.g. "WCS"), `summary` (one plain sentence), `description`, `music`.
+`name`, `family` (`swing`, `ballroom`, `latin`, `tango`, `country`, `other`), `order`, `aliases` (words that mean this style in listings, e.g. "WCS"), `summary` (one plain sentence), `description`, `music`, `danceType` (`partner`, `line` or `freestyle`; default `partner`).
 
 ## `sources/*.json`
 
-`name`, `url`, `type` (`jsonld`, `ical`, `html`, `pdf`, `api`), `adapter` (file name in `ingest/adapters/`), `cadence`, `enabled`, `attribution` (shown on the Sources page), `description`, `rateLimitSeconds`, and run results written by the ingest: `lastScraped`, `lastStatus`, `lastMessage`, `lastCounts` (found, kept, outOfArea, needsReview).
+`name`, `url`, `type` (`jsonld`, `ical`, `html`, `pdf`, `api`), `adapter` (file name in `ingest/adapters/`), `cadence` (`daily`, `twice-weekly`, `weekly`, `monthly`, `seasonal`, `manual`), `focus` (`dance` = a dance calendar, everything is a dance or class; `music` = a live-music list, each listing gets a dancing score), `enabled`, `feedUrl` and `pageUrls` (what generic adapters read), `defaults` (venue, town, organizer, performers, styles, category to use when a listing leaves them out), `include` / `exclude` (patterns), `catalogStatus` and `permission` (status, note, dates, feed the owner gave us), `attribution` (shown on the Sources page), `description`, `rateLimitSeconds`, and run results written by the ingest: `lastScraped`, `lastStatus`, `lastMessage`, `lastCounts` (found, kept, outOfArea, needsReview).
 
 ## Other content
 

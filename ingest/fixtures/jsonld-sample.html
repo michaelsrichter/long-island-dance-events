@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Example Bar &amp; Grill - Events (fictional test page)</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MusicEvent",
+      "name": "The Example Rockers &#8211; Classic Rock Dance Party",
+      "startDate": "2026-10-16T21:00:00-04:00",
+      "endDate": "2026-10-17T01:00:00-04:00",
+      "url": "https://example-bar.example/events/example-rockers/",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": {
+        "@type": "Place",
+        "name": "Example Bar & Grill",
+        "address": { "@type": "PostalAddress", "streetAddress": "123 Fictional Rd", "addressLocality": "Babylon", "addressRegion": "NY", "postalCode": "11702" }
+      },
+      "performer": { "@type": "MusicGroup", "name": "The Example Rockers" },
+      "offers": { "@type": "Offer", "price": "10.00", "priceCurrency": "USD" },
+      "description": "<p>Cover band night. Dance floor open all night.</p>"
+    },
+    {
+      "@type": "DanceEvent",
+      "name": "Halloween West Coast Swing Party",
+      "startDate": "2026-10-31T19:30:00",
+      "endDate": "2026-10-31T23:00:00",
+      "url": "https://example-bar.example/events/halloween-wcs/",
+      "location": { "@type": "Place", "name": "Example Lodge", "address": { "@type": "PostalAddress", "streetAddress": "12 Fictional Ave", "addressLocality": "Huntington", "addressRegion": "NY" } },
+      "isAccessibleForFree": true,
+      "description": "Lesson at 7:30pm, then social dancing. Costumes welcome!"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Jersey Shore Swing Night",
+    "startDate": "2026-10-20T20:00:00-04:00",
+    "location": { "@type": "Place", "name": "Somewhere Tavern", "address": { "@type": "PostalAddress", "streetAddress": "1 River St", "addressLocality": "Hoboken", "addressRegion": "NJ" } }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Cancelled Salsa Social",
+    "startDate": "2026-10-22T20:00:00-04:00",
+    "eventStatus": "https://schema.org/EventCancelled",
+    "location": { "@type": "Place", "name": "Example Lodge", "address": { "@type": "PostalAddress", "addressLocality": "Huntington" } }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": "Summer Concert That Already Happened",
+    "startDate": "2026-08-01T19:00:00-04:00",
+    "location": { "@type": "Place", "name": "Example Park", "address": { "@type": "PostalAddress", "addressLocality": "Babylon" } }
+  }
+]
+</script>
+<script type="application/ld+json">{ this block is broken on purpose and must be skipped }</script>
+</head>
+<body><h1>Events</h1><p>Fictional test page for the JSON-LD adapter.</p></body>
+</html>

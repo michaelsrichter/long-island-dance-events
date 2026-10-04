@@ -1,0 +1,47 @@
+{
+  "name": "Lushes Restaurant & Bar",
+  "aliases": [
+    "Lushes",
+    "Lushes Oceanside",
+    "Lushes Bar"
+  ],
+  "address": "3116 Long Beach Rd",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.lushesrestaurantanbar.com/events",
+        "note": "Venue events page: Freestyle Fridays every week with freestyle, 80s, 90s, disco and dance classics."
+      },
+      {
+        "url": "https://www.liblogger.com/events/lir-dance-party-at-lushes-10-17-2026",
+        "note": "Listing for an LIR Dance Party at Lushes with DJ Andre playing dance hits, no cover."
+      },
+      {
+        "url": "https://www.eventbrite.com/e/the-hottest-freestyle-friday-party-lushes-dj-mdw-tickets-1988270246831",
+        "note": "Radio station promoter calls Freestyle Fridays at Lushes a weekly freestyle dance party that packs the room."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Lushes runs DJ dance nights: Freestyle Fridays with 80s and 90s freestyle and disco, and Saturday dance parties. It is 21+ after 9 PM.",
+    "policy": "encouraged"
+  },
+  "description": "A cocktail lounge and restaurant on Long Beach Road in Oceanside that opened in 2026. It turns into a 21-and-over nightspot with DJs after 9 PM.",
+  "factsSource": "Checked October 3, 2026. Source: lushesrestaurantanbar.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Lushes+Restaurant+%26+Bar%2C+3116+Long+Beach+Rd%2C+Oceanside%2C+NY+11572",
+  "kind": "bar",
+  "phone": "(516) 699-3433",
+  "postalCode": "11572",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'LIR Dance Party with Andre' on Oct 3 matches the venue's Saturday DJ parties (we found an Oct 17 listing). No Facebook page found. Size of the dance area not confirmed.",
+  "state": "NY",
+  "town": "Oceanside",
+  "website": "https://www.lushesrestaurantanbar.com/",
+  "latitude": 40.63602,
+  "longitude": -73.640448,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

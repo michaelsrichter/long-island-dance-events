@@ -1,0 +1,18 @@
+{
+  "name": "RS Beanery (Merrick) - events",
+  "url": "https://rsbeanerymerrick.com/events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from RS Beanery (Merrick). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Merrick: coffeehouse live music, small bands.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "town": "Merrick"
+  },
+  "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
+  "reviewNotes": "Switched off on 2026-10-03: the address on the site (153 Merrick Ave, Merrick) could not be found by the Census or OpenStreetMap geocoders. Confirm the address and add a venue file before switching on. Catalog check 2026-10-03: Keep only as low priority. It is current and structured, but it is more listening-room than dance venue."
+}

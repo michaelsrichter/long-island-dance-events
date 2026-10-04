@@ -1,0 +1,26 @@
+{
+  "title": "Dance party with Club 30+ New York at Stereo Garden",
+  "summary": "A dance party with Club 30+ New York at Stereo Garden in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "social-dance",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-03T17:00",
+  "timezone": "America/New_York",
+  "venueId": "stereo-garden-patchogue",
+  "town": "Patchogue",
+  "organizerId": "club-30-plus-new-york",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 3, 2026",
+  "sourceRef": "saturday list",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "dance-party"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-03|stereo-garden-patchogue|club-30-new-york|2026-10-03|special"
+}

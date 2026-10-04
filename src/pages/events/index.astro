@@ -8,7 +8,7 @@ import EmptyState from '../../components/EmptyState.astro';
 import Icon from '../../components/Icon.astro';
 import RelativeDay from '../../components/RelativeDay.astro';
 import { byDay, getEventGroups, getSettings, isDance } from '../../lib/content';
-import { SKILL_LABELS } from '../../lib/schemas';
+import { DANCE_TYPES, DANCE_TYPE_LABELS, SKILL_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
 
 const { upcoming } = await getEventGroups();
@@ -24,8 +24,13 @@ const dances = upcoming.filter(isDance);
 const types = [
   { value: 'dances', label: 'Dances & live music' },
   ...(upcoming.some((e) => e.category === 'live-music') ? [{ value: 'live-music', label: 'Live music' }] : []),
-  ...(upcoming.some((e) => !isDance(e)) ? [{ value: 'class-lesson', label: 'Classes' }] : []),
+  ...(upcoming.some((e) => e.category === 'class-lesson') ? [{ value: 'class-lesson', label: 'Classes' }] : []),
   { value: 'all', label: 'Everything' },
+];
+/** Kind of dancing. Partner, line and party (freestyle) dancing; only kinds that have upcoming events. */
+const danceKinds = [
+  { value: '', label: 'Any' },
+  ...DANCE_TYPES.filter((k) => upcoming.some((e) => e.dancing.kinds.includes(k))).map((k) => ({ value: k, label: DANCE_TYPE_LABELS[k] })),
 ];
 const crumbs = [
   { name: 'Home', href: '/' },
@@ -69,6 +74,14 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
         <div class="quick-views">
           {types.map((t) => (
             <label class="chip"><input type="radio" name="category" value={t.value} checked={t.value === 'dances'} /><span>{t.label}</span></label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Kind of dancing</legend>
+        <div class="quick-views">
+          {danceKinds.map((k, i) => (
+            <label class="chip"><input type="radio" name="dance" value={k.value} checked={i === 0} /><span>{k.label}</span></label>
           ))}
         </div>
       </fieldset>

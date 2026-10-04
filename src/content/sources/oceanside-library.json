@@ -1,0 +1,15 @@
+{
+  "name": "Oceanside Library LibCal",
+  "url": "https://oceansidelibrary.libcal.com/calendar",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Oceanside Library LibCal. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Oceanside: dance and movement, Zumba, music trivia, library concert.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "feedUrl": "https://oceansidelibrary.libcal.com/rss.php?iid=6710&m=month&cid=20886",
+  "reviewNotes": "The saved link is an RSS list, not a calendar file. Ask the library for its LibCal .ics link. Catalog check 2026-10-03: Keep with filters; easy feed and useful library dance/music programs."
+}

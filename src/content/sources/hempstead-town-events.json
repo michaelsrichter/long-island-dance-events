@@ -1,0 +1,15 @@
+{
+  "name": "Town of Hempstead events",
+  "url": "https://townofhempsteadevents.com/",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from Town of Hempstead events. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Hempstead and Point Lookout: neighborhood concerts, summer luaus, car shows, fall festival.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "feedUrl": "https://townofhempsteadevents.com/wp-json/tribe/events/v1/events",
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck for summer concerts; easy feed but no current dance/live music confirmed."
+}

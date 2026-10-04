@@ -1,0 +1,18 @@
+{
+  "name": "The Saint (Farmingdale) - DJ nights",
+  "url": "https://thesaintny.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from The Saint (Farmingdale). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Farmingdale: resident DJ lounge, Friday and Saturday nightlife.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "the-saint-farmingdale",
+    "town": "Farmingdale"
+  },
+  "reviewNotes": "Weekly schedule written in words with no dates. An editor adds it once as a repeating event in the CMS and checks the page each month. Catalog check 2026-10-03: Keep as a nightlife lead. It is dance-adjacent, but it needs manual checking because there are no dated events."
+}

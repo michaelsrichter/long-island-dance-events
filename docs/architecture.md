@@ -8,11 +8,11 @@ Long Island Dance Events is a static website built from data files in git. All h
 flowchart TB
   subgraph Sources["Public sources"]
     S1[The Dance Calendar<br/>monthly PDF]
-    S2[More sources<br/>after owner approval]
+    S2[66 more calendars<br/>feeds, event data, web lists]
   end
-  subgraph Collect["Collect (GitHub Actions, weekly - phase 7; or npm run ingest)"]
+  subgraph Collect["Collect (GitHub Actions: daily, Mon+Thu, Sunday; or npm run ingest)"]
     F[PoliteFetcher<br/>robots.txt, delay, cache, User-Agent]
-    AD[Adapter per source<br/>fetch + normalize]
+    AD[Adapter: thedancecalendar, iraslist,<br/>or generic ical / jsonld / htmllist]
     PY[PDF extractor<br/>PyMuPDF, font-aware]
     N[Shared helpers<br/>times, prices, places, styles, people, own-words text]
     C[Collapse dates into<br/>repeating events]
@@ -46,7 +46,7 @@ flowchart TB
 | --- | --- | --- |
 | Load registries | `ingest/lib/registry.ts` | Venues, organizers, teachers, bands/DJs, styles and their `aliases`; Long Island place list. |
 | Fetch | `ingest/lib/fetch.ts` | Honors `robots.txt`, waits `rateLimitSeconds` between requests to a host, conditional GET, cache in `.cache/ingest/` (never committed). User-Agent `LongIslandDanceEventsBot/1.0 (+repo URL)`. |
-| Adapter | `ingest/adapters/<id>.ts` | `fetch(ctx)` returns documents; `normalize(docs, ctx)` returns dated `Candidate`s. Loaded by name from the source file's `adapter` field. |
+| Adapter | `ingest/adapters/<id>.ts` | `fetch(ctx)` returns documents; `normalize(docs, ctx)` returns dated `Candidate`s. Loaded by name from the source file's `adapter` field. Most sources use a generic adapter configured in their source file: `ical` (calendar feeds), `jsonld` (schema.org Event data, event sitemaps) or `htmllist` (dated web page lists, Squarespace event lists), all sharing `ingest/lib/structured.ts`. |
 | PDF | `ingest/pdf/extract_calendar.py` | Day headings are uppercase and larger than body text; sections and towns are bold. Outputs rows: date, section, town, text, page. |
 | Normalize | `ingest/lib/times.ts`, `prices.ts`, `text.ts`, `describe.ts` | Times ("7:30-11pm", "lesson at 7"), prices ("$15/$20 members"), styles, venues and people; titles and summaries in our own words. |
 | Scope | `src/data/long-island-places.json` | Keeps only Nassau and Suffolk; counts the rest as "out of area". |
@@ -105,7 +105,7 @@ flowchart LR
 - **Duplicates (phase 3):** exact `matchKey` pass, then local embeddings (bge-small, run in CI, no API key). Cosine ≥ 0.9 merges; 0.8-0.9 goes to a human review queue.
 - **Admin (phase 5):** Static Web Apps built-in auth with GitHub and an `admin` role; moderation queue, source panel, feedback and bug inbox. Functions write to Table Storage and open GitHub issues.
 - **Azure (phase 6):** Bicep for Static Web App, Storage account (Tables for mutable state, Blobs for raw snapshots) and settings.
-- **Weekly run (phase 7):** scheduled workflow runs the ingest and opens a pull request with the report; @mentions the owner so GitHub emails them; files an issue with the failing snapshot when an adapter returns nothing or invalid data.
+- **Scheduled runs (built):** `.github/workflows/ingest-scheduled.yml` runs each source on its `cadence` (daily, Monday + Thursday, Sunday), updates one rolling pull request with the report, requests review from and @mentions the owner on Sundays (the weekly email), and files an issue with a metadata-only snapshot when a source finds nothing or returns invalid data. `report-database.yml` builds the SQLite report database; `source-discovery.yml` searches for new sources monthly. See [database-plan.md](database-plan.md).
 
 ## Known tradeoffs
 

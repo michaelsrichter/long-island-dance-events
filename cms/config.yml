@@ -6,6 +6,9 @@ backend:
   name: github
   repo: michaelsrichter/long-island-dance-events
   branch: main
+  # The repository is public, so editors only need "public_repo" access. The default ("repo") would
+  # also give the editor's sign-in access to every private repository on their GitHub account.
+  auth_scope: public_repo
   # base_url and auth_endpoint are set at runtime in /admin/init.js to this site's /api/auth function.
   commit_messages:
     create: 'Create {{collection}} "{{slug}}"'
@@ -70,6 +73,35 @@ x-socials: &socials
 x-seo: &seo
   - { label: 'Search title (optional)', name: seoTitle, widget: string, required: false, hint: 'Under 70 characters.' }
   - { label: 'Search description (optional)', name: seoDescription, widget: text, required: false, hint: 'Under 170 characters.' }
+
+x-evidence: &evidence
+  label: 'How we know (sources)'
+  name: evidence
+  widget: list
+  required: false
+  collapsed: true
+  summary: '{{fields.url}}'
+  fields:
+    - { label: 'Web page', name: url, widget: string, hint: 'Venue site, review, news story or public photo page.' }
+    - { label: 'What it shows (our own words)', name: note, widget: string, hint: 'Under 240 characters.' }
+
+x-dance-kinds: &dance-kinds
+  label: 'Kinds of dancing'
+  name: kinds
+  widget: select
+  multiple: true
+  required: false
+  options:
+    - { label: 'Partner dancing (swing, salsa, ballroom, hustle, tango...)', value: partner }
+    - { label: 'Line dancing', value: line }
+    - { label: 'Party dancing (freestyle, like at a club or wedding)', value: freestyle }
+
+x-research-confidence: &research-confidence
+  label: 'How sure are we?'
+  name: confidence
+  widget: select
+  default: low
+  options: [high, medium, low]
 
 x-review: &review
   label: 'Notes for editors (never shown publicly)'
@@ -182,6 +214,17 @@ collections:
       - { label: 'Where in the source', name: sourceRef, widget: string, required: false, hint: 'For example "page 17".' }
       - { label: 'First seen', name: firstSeen, <<: *date }
       - { label: 'Last seen', name: lastSeen, <<: *date }
+      - label: 'Can you dance here? (your answer)'
+        name: dancing
+        widget: object
+        required: false
+        collapsed: true
+        hint: 'Fill this in only to correct the automatic dancing score. Leave it empty to let the site work it out.'
+        fields:
+          - { label: 'Dancing chance (0 = none, 1 = sure)', name: likelihood, widget: number, value_type: float, min: 0, max: 1, step: 0.1 }
+          - *dance-kinds
+          - { label: 'Why (shown to visitors)', name: notes, widget: string, required: false }
+      - { label: 'Dancing hints from the listing', name: dancingCues, widget: select, multiple: true, required: false, options: [dj, dance-party, theater, library, brunch, festival, outdoor, tribute, acoustic, jam, afternoon], hint: 'Set by the weekly scrape.' }
       - { label: 'Confidence (0 to 1)', name: confidence, widget: number, value_type: float, min: 0, max: 1, default: 1, hint: 'How sure the scrape was. Below 0.6 the event waits for review.' }
       - label: 'Locked fields'
         name: lockedFields
@@ -189,7 +232,7 @@ collections:
         multiple: true
         required: false
         hint: 'Fields you fixed by hand. The weekly scrape will not change them. Add "status" after you approve an event.'
-        options: [title, summary, category, danceStyles, start, end, recurrence, cadence, lessonTime, venueId, town, organizerId, performerIds, instructorIds, price, priceMax, isFree, priceNotes, skillLevel, ageGroup, ticketUrl, infoUrl, contactPhone, contactEmail, status, sourceUrl, sourceName, sourceRef, confidence, reviewNotes]
+        options: [title, summary, category, danceStyles, start, end, recurrence, cadence, lessonTime, venueId, town, organizerId, performerIds, instructorIds, price, priceMax, isFree, priceNotes, skillLevel, ageGroup, ticketUrl, infoUrl, contactPhone, contactEmail, status, sourceUrl, sourceName, sourceRef, dancingCues, dancing, confidence, reviewNotes]
       - { label: 'Merged duplicates', name: mergedFrom, widget: list, required: false, hint: 'Ids of duplicate listings that were combined into this one.' }
       - { label: 'Scrape match key', name: matchKey, widget: string, required: false, hint: 'Used by the weekly scrape to find this listing again. Do not change it.' }
       - *review
@@ -225,6 +268,34 @@ collections:
       - { label: 'Accessibility', name: accessibilityNotes, widget: text, required: false }
       - { label: 'Where these facts came from', name: factsSource, widget: string, required: false }
       - { label: 'Good to know', name: description, widget: text, required: false }
+      - label: 'Kind of place'
+        name: kind
+        widget: select
+        required: false
+        options: [bar, restaurant, nightclub, brewery, winery, distillery, theater, concert-hall, park, beach, library, lodge-hall, dance-studio, school, festival, marina-club, other]
+      - label: 'Dancing here'
+        name: dancing
+        widget: object
+        required: false
+        collapsed: true
+        hint: 'Is there room to dance, and what kind of dancing happens? Used for the dancing score on events here.'
+        fields:
+          - label: 'Room to dance'
+            name: floor
+            widget: select
+            default: unknown
+            options:
+              - { label: 'Has a dance floor', value: dance-floor }
+              - { label: 'Room to dance near the band', value: open-space }
+              - { label: 'Small space; a few people dance', value: small }
+              - { label: 'Mostly seats; little or no dancing', value: seated }
+              - { label: 'Not sure yet', value: unknown }
+          - { label: 'Does the venue want people to dance?', name: policy, widget: select, default: unknown, options: [encouraged, allowed, discouraged, unknown] }
+          - *dance-kinds
+          - { label: 'What we found (our own words)', name: notes, widget: text, required: false, hint: 'One or two plain sentences. Shown on the venue page.' }
+          - *evidence
+          - *research-confidence
+          - { label: 'Checked on', name: checked, <<: *date, required: false }
       - *seo
       - *review
 
@@ -307,6 +378,29 @@ collections:
       - { label: 'Music genres', name: genres, widget: list, required: false }
       - *socials
       - { label: 'Description (our own words)', name: description, widget: text, required: false }
+      - label: 'Dancing at their shows'
+        name: dancing
+        widget: object
+        required: false
+        collapsed: true
+        hint: 'Do people dance when they play? Used for the dancing score on their gigs.'
+        fields:
+          - label: 'Crowd'
+            name: rating
+            widget: select
+            default: unknown
+            options:
+              - { label: 'Plays for dancers', value: dance-band }
+              - { label: 'Party band: crowds often dance', value: party }
+              - { label: 'Some people dance', value: mixed }
+              - { label: 'Mostly for listening', value: listening }
+              - { label: 'Not sure yet', value: unknown }
+          - *dance-kinds
+          - { label: 'Dance styles at their shows', name: styles, <<: *style-relation }
+          - { label: 'What we found (our own words)', name: notes, widget: text, required: false }
+          - *evidence
+          - *research-confidence
+          - { label: 'Checked on', name: checked, <<: *date, required: false }
       - *seo
       - *review
 
@@ -324,8 +418,72 @@ collections:
       - { label: 'Web address', name: url, widget: string }
       - { label: 'Kind of source', name: type, widget: select, options: [jsonld, ical, html, pdf, api] }
       - { label: 'Adapter', name: adapter, widget: string, hint: 'File name in ingest/adapters/ without .ts' }
-      - { label: 'How often', name: cadence, widget: select, options: [weekly, monthly, manual], default: weekly }
+      - label: 'How often'
+        name: cadence
+        widget: select
+        default: weekly
+        options:
+          - { label: 'Every day', value: daily }
+          - { label: 'Twice a week', value: twice-weekly }
+          - { label: 'Once a week', value: weekly }
+          - { label: 'Once a month', value: monthly }
+          - { label: 'Only in season (summer concerts, festivals)', value: seasonal }
+          - { label: 'Only when someone runs it by hand', value: manual }
+      - label: 'What it lists'
+        name: focus
+        widget: select
+        default: dance
+        options:
+          - { label: 'Dances and classes (a dance calendar)', value: dance }
+          - { label: 'Live music (dancing varies)', value: music }
       - { label: 'Turned on', name: enabled, widget: boolean, default: true }
+      - { label: 'Feed address (optional)', name: feedUrl, widget: string, required: false, hint: 'Calendar feed (.ics), event list page or data address the program reads, if different from the web address.' }
+      - { label: 'Extra pages to read', name: pageUrls, widget: list, required: false, hint: 'Full web addresses, one per line (event pages, month pages).' }
+      - label: 'Facts to use when a listing leaves them out'
+        name: defaults
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: 'Venue', name: venueId, widget: relation, collection: venues, value_field: '{{slug}}', search_fields: [name, town, aliases], display_fields: ['{{name}}, {{town}}'], required: false }
+          - { label: 'Town', name: town, widget: string, required: false }
+          - { label: 'Organizer', name: organizerId, widget: relation, collection: organizers, value_field: '{{slug}}', search_fields: [name, aliases], display_fields: [name], required: false }
+          - { label: 'Bands and DJs', name: performerIds, widget: relation, collection: performers, value_field: '{{slug}}', search_fields: [name, aliases], display_fields: [name], multiple: true, required: false }
+          - { label: 'Dance styles', name: danceStyles, <<: *style-relation, required: false }
+          - { label: 'Type of event', name: category, widget: select, required: false, options: [social-dance, class-lesson, lesson-party, live-music, festival] }
+      - { label: 'Only keep listings matching', name: include, widget: string, required: false, hint: 'Advanced. A pattern (regular expression), for example "swing|lindy". Leave blank to keep everything.' }
+      - { label: 'Skip listings matching', name: exclude, widget: string, required: false, hint: 'Advanced. A pattern (regular expression), for example "comedy|trivia".' }
+      - label: 'Catalog status'
+        name: catalogStatus
+        widget: select
+        required: false
+        options:
+          - { label: 'Live on the site', value: live }
+          - { label: 'Being built', value: in-progress }
+          - { label: 'Checked, ready to build', value: verified }
+          - { label: 'Check again from the automatic run', value: recheck-from-ci }
+          - { label: 'Needs the owner''s permission', value: needs-permission }
+          - { label: 'Added by hand (flyers, emails)', value: manual-intake }
+          - { label: 'Check again when the season starts', value: seasonal-recheck }
+      - label: 'Permission to read this site'
+        name: permission
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - label: 'Status'
+            name: status
+            widget: select
+            options:
+              - { label: 'Not needed (the site allows it)', value: not-needed }
+              - { label: 'Needed, not asked yet', value: needed }
+              - { label: 'Asked, waiting for an answer', value: requested }
+              - { label: 'Allowed', value: granted }
+              - { label: 'Said no', value: denied }
+          - { label: 'Note', name: note, widget: text, required: false }
+          - { label: 'Asked on', name: requestedAt, <<: *date, required: false }
+          - { label: 'Answered on', name: decidedAt, <<: *date, required: false }
+          - { label: 'Feed they gave us', name: feedUrl, widget: string, required: false }
       - { label: 'Credit shown on the Sources page', name: attribution, widget: text }
       - { label: 'Description', name: description, widget: text, required: false }
       - { label: 'Seconds between requests', name: rateLimitSeconds, widget: number, value_type: int, min: 1, max: 60, default: 3 }
@@ -356,6 +514,14 @@ collections:
     fields:
       - { label: 'Name', name: name, widget: string }
       - { label: 'Family', name: family, widget: select, options: [swing, ballroom, latin, tango, country, other] }
+      - label: 'Kind of dancing'
+        name: danceType
+        widget: select
+        default: partner
+        options:
+          - { label: 'Partner dancing', value: partner }
+          - { label: 'Line dancing', value: line }
+          - { label: 'Party dancing (freestyle)', value: freestyle }
       - { label: 'Order', name: order, widget: number, value_type: int, default: 50 }
       - *aliases
       - { label: 'Short explanation', name: summary, widget: text, hint: 'One or two plain sentences, under 240 characters.' }

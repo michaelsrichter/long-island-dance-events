@@ -42,7 +42,7 @@ describe('friendly relative dates', () => {
   });
   it('says "Today!" (not "Tonight!") when the time is not announced', () => {
     const s = ny('2026-10-02T00:00:00-04:00');
-    expect(relativeLabel(s + 1, s + 86_400_000, now, { allDay: true }).text).toBe('Happening now!');
+    expect(relativeLabel(s + 1, s + 86_400_000, now, { allDay: true })).toMatchObject({ text: 'Today!', tone: 'today' });
     const t = ny('2026-10-03T00:00:00-04:00');
     expect(relativeLabel(t, t + 86_400_000, now, { allDay: true }).text).toBe('Tomorrow');
   });

@@ -2,6 +2,7 @@
 import type { ResolvedEvent } from '../lib/content';
 import Icon from './Icon.astro';
 import StatusBadge from './StatusBadge.astro';
+import DancingBadge from './DancingBadge.astro';
 import TicketDate from './TicketDate.astro';
 import RelativeWhen from './RelativeWhen.astro';
 import StyleTags from './StyleTags.astro';
@@ -37,6 +38,8 @@ const filterData = {
   'data-price': e.price.free ? 'free' : e.price.known ? 'paid' : 'unknown',
   'data-people': people.map((p) => p.id).join(' '),
   'data-organizer': e.organizer?.id ?? '',
+  'data-dancing': e.dancing.level,
+  'data-dance-kinds': e.dancing.kinds.join(' '),
 };
 ---
 <li class:list={['event-card', `event-card--${e.status}`, `event-card--${e.category}`]} {...filterData}>
@@ -44,6 +47,7 @@ const filterData = {
   <div class="event-card__body">
     <div class="event-card__badges">
       <span class:list={['cat-badge', `cat-badge--${e.category}`]}>{e.categoryLabel}</span>
+      {e.category !== 'class-lesson' && <DancingBadge dancing={e.dancing} />}
       <StatusBadge status={e.status} />
       {!past && <RelativeWhen start={e.start} end={e.end} allDay={e.timeTba} />}
     </div>

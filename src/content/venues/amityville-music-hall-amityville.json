@@ -1,0 +1,19 @@
+{
+  "name": "Amityville Music Hall",
+  "aliases": [
+    "Amityville Music Hall (AMH)",
+    "AMH"
+  ],
+  "address": "198 Broadway",
+  "town": "Amityville",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11701",
+  "website": "https://amh.live/",
+  "kind": "concert-hall",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://amh.live/ (event data on the venue's own site).",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 40.679065,
+  "longitude": -73.417396,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

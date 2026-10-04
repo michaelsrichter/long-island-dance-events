@@ -1,0 +1,14 @@
+{
+  "name": "The Burrows swing/blues nights (The Great Hall, Huntington)",
+  "url": "http://dancemanhattan.com/calendar/event/113",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from The Burrows swing/blues nights (The Great Hall, Huntington). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Long Island: dance events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "manual-intake",
+  "reviewNotes": "Events are only in social posts or picture flyers. Add them by hand (flyer intake). Catalog check 2026-10-03: Manual intake. The primary source is social-only, so use manual review unless a better organizer feed appears."
+}

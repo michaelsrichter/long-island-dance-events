@@ -1,0 +1,14 @@
+{
+  "name": "Subculture - Long Island new wave dance club",
+  "url": "https://www.alternativesounds.com/subculture.htm",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Subculture. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Wantagh, Hicksville and Island Park: 80s new wave, industrial, synthpop, alternative dance.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "reviewNotes": "Dates are listed, but the place for each night is only shown in pictures. Add these by hand (flyer intake). Catalog check 2026-10-03: Keep it because it is a Long Island dance-club source with three future event dates."
+}

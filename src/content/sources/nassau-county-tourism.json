@@ -1,0 +1,15 @@
+{
+  "name": "Nassau County Tourism events",
+  "url": "https://nassaucountytourism.com/events/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Nassau County Tourism events. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Bethpage, Farmingdale and Roslyn: concerts, tribute shows, arts events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
+  "reviewNotes": "The event list does not name the town for each event, so we cannot check it is on Long Island. Needs a reader for its event pages. Catalog check 2026-10-03: Keep with filters; good Nassau live-music source but not dance-focused."
+}

@@ -1,0 +1,32 @@
+{
+  "name": "The Chain - A Fleetwood Mac Experience",
+  "type": "band",
+  "aliases": [
+    "The Chain",
+    "The Chain Fleetwood Mac Tribute"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.baystreet.org/performance/the-chain-a-fleetwood-mac-experience-2/",
+        "note": "Bay Street Theater page: Oct 3, 8 pm tribute concert, band lineup, return after a sold-out show."
+      },
+      {
+        "url": "https://thechainlongisland.com/videos/",
+        "note": "Band video page includes a clip from a sold-out Bay Street Theater show."
+      }
+    ],
+    "notes": "A seated theater tribute concert; people listen and sing along to the hits.",
+    "rating": "listening"
+  },
+  "description": "Long Island tribute band that recreates the songs of Fleetwood Mac and Stevie Nicks, playing theaters, libraries and outdoor concerts in New York, New Jersey and Pennsylvania.",
+  "genres": [
+    "tribute to Fleetwood Mac",
+    "Stevie Nicks",
+    "classic rock"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Several bands use the name 'The Chain' (e.g., thechainband.com, thechainrocks.com). This is the Long Island group whose site shows Bay Street Theater videos. Its site sits behind a browser check, so socials were not collected.",
+  "website": "https://thechainlongisland.com/"
+}

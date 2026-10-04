@@ -1,0 +1,19 @@
+{
+  "name": "The Boat Yard (Massapequa/Tobay Beach) - seasonal events calendar",
+  "url": "https://theboatyardny.com/events/",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from The Boat Yard (Massapequa/Tobay Beach). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Massapequa and Tobay Beach: seasonal beach entertainment.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "feedUrl": "https://theboatyardny.com/events.ics",
+  "defaults": {
+    "venueId": "the-boat-yard-massapequa",
+    "town": "Massapequa"
+  },
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck next season. It is a real seasonal source, but it has no upcoming dance or live-music events now."
+}

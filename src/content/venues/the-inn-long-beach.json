@@ -1,0 +1,48 @@
+{
+  "name": "The Inn",
+  "aliases": [
+    "The Inn LB",
+    "The Inn Long Beach",
+    "Long Beach Inn"
+  ],
+  "address": "943 W Beech St",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.atly.com/location/TheInn",
+        "note": "Summary: two-level venue with three bars, live music and DJs until 4 am; crowds sing and dance along with local bands."
+      },
+      {
+        "url": "https://www.restaurantji.com/ny/long-beach/the-inn-/",
+        "note": "Review summary says band shows draw a crowd that sings and dances along."
+      },
+      {
+        "url": "https://www.krushtheband.com/shows",
+        "note": "Krush lists many past shows at The Inn, Long Beach, confirming it as a regular band venue."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "This is a busy party bar where crowds sing and dance along with local cover bands and DJs. Expect a crowded, standing room on band nights.",
+    "policy": "allowed"
+  },
+  "description": "A two-level bar and restaurant in Long Beach's West End with three bars, bar food, and live bands and DJs that run late into the night.",
+  "facebookUrl": "https://www.facebook.com/TheLongBeachInn/",
+  "factsSource": "Checked October 3, 2026. Source: theinnlbny.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Inn+943+W+Beech+St+Long+Beach+NY+11561",
+  "kind": "bar",
+  "phone": "(516) 432-9220",
+  "postalCode": "11561",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). 'LB' = Long Beach. Krush's Oct 3 5 pm show was not found on the band's or venue's calendar, but Krush plays The Inn often. Long Beach is a city in Nassau County.",
+  "state": "NY",
+  "town": "Long Beach",
+  "website": "https://www.theinnlbny.com/",
+  "latitude": 40.586076,
+  "longitude": -73.693608,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

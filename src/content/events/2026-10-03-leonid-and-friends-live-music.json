@@ -1,0 +1,30 @@
+{
+  "title": "Leonid & Friends at Boulton Center for the Performing Arts",
+  "summary": "Live music by Leonid & Friends at Boulton Center for the Performing Arts in Bay Shore. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-03",
+  "timezone": "America/New_York",
+  "venueId": "boulton-center-bay-shore",
+  "town": "Bay Shore",
+  "performerIds": [
+    "leonid-and-friends"
+  ],
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 3, 2026",
+  "sourceRef": "saturday list",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "theater",
+    "tribute"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-03|boulton-center-bay-shore|leonid-and-friends-tribute-to-chicago|2026-10-03|special",
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "Held for review: the band's tour page and Live Nation list Skokie, Illinois for October 3, 2026, and the Boulton Center's own calendar shows a different show that night (research 2026-10-03). Confirm with the venue before publishing."
+}

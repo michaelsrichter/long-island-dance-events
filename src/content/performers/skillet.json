@@ -1,0 +1,33 @@
+{
+  "name": "Skillet",
+  "type": "band",
+  "aliases": [
+    "Skillet Comatose 20 Years",
+    "Skillet Still Screaming Tour"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://www.paramountny.com/events/skillet-comatose-20-years-still-screaming-tour",
+        "note": "Paramount page: Oct 4 tour stop celebrating 20 years of Comatose, with hard-rock anthems and two openers."
+      },
+      {
+        "url": "https://www.livenation.com/event/k7vGF_GRs6iid/skillet-comatose-20-years-still-screaming-tour",
+        "note": "Live Nation listing for the Oct 4, 7 pm show in Huntington."
+      }
+    ],
+    "notes": "A big rock concert: fans stand, sing, jump and headbang. It is not a dance event.",
+    "rating": "listening"
+  },
+  "description": "Nationally touring hard-rock band known for Christian rock hits; at The Paramount it plays its 'Comatose 20 Years, Still Screaming' tour with Escape The Fate and Autumn Kings.",
+  "genres": [
+    "hard rock",
+    "Christian rock"
+  ],
+  "instagramUrl": "https://www.instagram.com/skilletmusic",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Confirmed the national band on tour, not a local cover band. Facebook URL not verified, so omitted.",
+  "website": "https://www.skillet.com/",
+  "youtubeUrl": "https://www.youtube.com/@skilletband"
+}

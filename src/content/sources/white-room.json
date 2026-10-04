@@ -1,0 +1,19 @@
+{
+  "name": "White Room Band - events",
+  "url": "https://whiteroomband.com/events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from White Room Band. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Calverton, Patchogue and Riverhead: live music, cover band, brewery and pub gigs.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "white-room-band"
+    ]
+  },
+  "reviewNotes": "Switched off: On 2026-10-03 it listed 10 dates, but none were at a venue we have researched yet (for example Peconic River Herb Farm (Peconic)). Add those venue files in src/content/venues (address and dance-floor research), then switch it back on. Catalog check 2026-10-03: Keep because it has three upcoming Suffolk public gigs at breweries and pubs."
+}

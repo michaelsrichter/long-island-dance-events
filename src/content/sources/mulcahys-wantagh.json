@@ -1,0 +1,19 @@
+{
+  "name": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "url": "https://mulcahyslongisland.com/concert-events/",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "music",
+  "cadence": "twice-weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Mulcahy's (Wantagh). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Wantagh: hip-hop and R&B dance parties, freestyle and old-school nights, tribute and cover-band shows.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "feedUrl": "https://mulcahyslongisland.com/events/?ical=1",
+  "defaults": {
+    "venueId": "mulcahys-wantagh",
+    "town": "Wantagh"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a high-volume Long Island venue with structured future events and clear dance-party listings."
+}

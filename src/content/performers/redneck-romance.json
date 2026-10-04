@@ -1,0 +1,25 @@
+{
+  "name": "Redneck Romance",
+  "type": "band",
+  "aliases": [
+    "Redneck Romance Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://allevents.in/massapequa-park/redneck-romance-johnny-mcgorey%E2%80%99s-6-30-start/200028670377931",
+        "note": "Band-posted event at Johnny McGorey's Pub in Massapequa Park; no music style given."
+      },
+      {
+        "url": "https://www.liblogger.com/events/redneck-romance-8-22-2026",
+        "note": "Listing for an Aug 2026 show at Bacaro Italian Tavern, Massapequa Park."
+      }
+    ],
+    "notes": "We found no song list or description of their crowds, so we can't say whether people dance at their shows.",
+    "rating": "unknown"
+  },
+  "description": "Massapequa Park-area cover band that plays local pubs, taverns, park picnics and street fairs on the South Shore of Nassau and western Suffolk.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Genre not verified; the name hints at country, but no evidence was found. A Facebook page (Redneck36) shows up in search but was not confirmed as theirs."
+}

@@ -72,6 +72,17 @@ Only add events in **Nassau or Suffolk** counties.
 - **Other names used in listings** helps matching (for example "DJ Neil" and "DJ Neil Wrangler").
 - **Opt out**: if an organizer asks us to stop listing their events, open the organizer and turn on **Opted out (do not list their events)**. The weekly run then skips their events. Set any of their current events to **Cancelled** with the note "Removed at the organizer's request".
 
+## Can you dance there? (the dancing score)
+
+Listings from dance calendars are always dance events. Live-music listings (bands and DJs at bars, restaurants, parks and theaters) get a **dancing score** from 0 to 10, worked out from:
+
+1. **The venue:** open the venue and fill in **Dancing here** (room to dance, whether dancing is welcome, the kinds of dancing, what you found and the web pages that show it).
+2. **The band or DJ:** open them and fill in **Dancing at their shows** (dance band, party band, mixed or mostly listening).
+3. **Clues in the listing** the weekly run spots, such as "DJ", "dance party", "theater", "library", "acoustic" or "brunch".
+
+To fix one event, open it and fill in **Can you dance here? (your answer)**: a chance from 0 (no dancing) to 1 (sure), the kinds of dancing, and a short reason visitors will see. Leave it empty to let the site work it out.
+
+Kinds of dancing: **Partner** (swing, salsa, ballroom, hustle, tango…), **Line** and **Party dancing** (freestyle, like at a club or wedding). Only write what a public page shows; add that page under **How we know (sources)**. Never use private group posts or people's personal photos.
 ## Sources
 
 You can turn a source off by unticking **Turned on**. The **Last result** fields are filled in by the weekly run:
@@ -84,7 +95,9 @@ You can turn a source off by unticking **Turned on**. The **Last result** fields
 | error | Could not download or read the source. |
 | skipped | The source is turned off, or its robots.txt does not allow it. |
 
-New sources need a small program (an "adapter") written by a developer, and the owner's approval. See the README.
+**How often** says when the program reads the source (every day, twice a week, weekly, monthly, only in season, or only by hand). **What it lists** tells the site whether everything in the source is a dance (a dance calendar) or whether each listing needs a dancing score (a live-music list).
+
+New sources need a small program (an "adapter") written by a developer, and the owner's approval. Many calendars can share the general calendar-feed (`ical`) and event-page (`jsonld`) adapters: then you only fill in **Feed address**, **Facts to use when a listing leaves them out** and, if needed, the **Only keep** / **Skip** patterns. See the README.
 
 ## Writing tips
 
@@ -115,4 +128,13 @@ Visitors use the "Report a problem" button on each event, or the forms on the **
 
 ## Sign-in setup (for the site owner)
 
-Create a GitHub OAuth app: Homepage `https://<domain>`, callback `https://<domain>/api/callback`, and **untick "Expire user access tokens"**. Then add these Azure Static Web Apps settings: `GITHUB_OAUTH_CLIENT_ID`, `GITHUB_OAUTH_CLIENT_SECRET`, `ALLOWED_HOSTS=<domain>,<azure-host>`. Update the callback when the domain changes. Editors need write access to the repository. Work accounts managed by a company (Enterprise Managed Users) cannot be added to a personal repository.
+**Done on 2026-10-03.** The GitHub OAuth app is **"Long Island Dance Events CMS"** under the owner's GitHub account (Settings → Developer settings → OAuth Apps). Its sign-in return addresses are `https://longisland.dance/api/callback` and `https://www.longisland.dance/api/callback`, and "Expire user access tokens" is off. The Azure Static Web App `swa-li-dance-events-web` has the settings `GITHUB_OAUTH_CLIENT_ID`, `GITHUB_OAUTH_CLIENT_SECRET` and `ALLOWED_HOSTS` (longisland.dance, www.longisland.dance and the azurestaticapps.net address). The editor asks GitHub only for **public repositories** access (`auth_scope: public_repo` in `cms/config.yml`), so signing in never opens your private repositories.
+
+To set it up again (new domain, or a lost secret):
+
+1. GitHub → Settings → Developer settings → OAuth Apps → the app. Set Homepage `https://<domain>` and the return address `https://<domain>/api/callback`. Keep **"Expire user access tokens" unticked**.
+2. Click **Generate a new client secret**. Copy it straight into the Azure setting `GITHUB_OAUTH_CLIENT_SECRET`. Never paste it in a file, chat or email.
+3. Add the new domain to `ALLOWED_HOSTS`.
+4. Check: `https://<domain>/api/auth` should send you to github.com. If it shows "CMS sign-in is not configured", a setting is missing.
+
+Editors need write access to the repository (Settings → Collaborators). Work accounts managed by a company (Enterprise Managed Users) cannot be added to a personal repository; editors must use a personal GitHub account.

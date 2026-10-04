@@ -39,7 +39,7 @@ type Stored = EventRecord;
 const LOCKABLE = [
   'title', 'summary', 'category', 'danceStyles', 'start', 'end', 'timezone', 'recurrence', 'cadence', 'lessonTime', 'venueId', 'town',
   'organizerId', 'performerIds', 'instructorIds', 'price', 'priceMax', 'isFree', 'priceNotes', 'skillLevel', 'ageGroup', 'ticketUrl',
-  'infoUrl', 'contactPhone', 'contactEmail', 'sourceUrl', 'sourceName', 'sourceRef', 'confidence', 'reviewNotes',
+  'infoUrl', 'contactPhone', 'contactEmail', 'sourceUrl', 'sourceName', 'sourceRef', 'dancingCues', 'confidence', 'reviewNotes',
 ] as const;
 
 function datesOf(e: Pick<EventRecord, 'start' | 'recurrence'>): string[] {
@@ -84,6 +84,8 @@ export function mergeDrafts(
     seen.add(id);
     const prev = events.get(id) as Stored;
     const locked = new Set(prev.lockedFields ?? []);
+    // An editor who holds or publishes a listing by hand owns its notes too.
+    if (locked.has('status')) locked.add('reviewNotes');
     const next: Record<string, unknown> = { ...prev };
     for (const k of LOCKABLE) if (!locked.has(k)) next[k] = (d.data as Record<string, unknown>)[k];
     let dates = d.dates;

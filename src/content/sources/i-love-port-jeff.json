@@ -1,0 +1,14 @@
+{
+  "name": "I Love Port Jeff events",
+  "url": "https://www.iloveportjeff.com/events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from I Love Port Jeff events. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Port Jefferson: summer concerts, blues festival, DJ beach events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck before summer; useful in season but no upcoming dance/live-music item confirmed now."
+}

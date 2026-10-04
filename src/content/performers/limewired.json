@@ -1,0 +1,41 @@
+{
+  "name": "Limewired",
+  "type": "band",
+  "aliases": [
+    "LimeWired Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://limewiredband.com/",
+        "note": "Band site: high-energy 80s, 90s and 2000s covers; calls a show a traveling party for all ages."
+      },
+      {
+        "url": "https://www.flanaganspubny.com/events-2/3rd-annual-oktoberfest",
+        "note": "Flanagan's Pub, Ronkonkoma: Oktoberfest Oct 4 in the back lot with Limewired from 2 PM."
+      },
+      {
+        "url": "https://limewiredband.com/shows",
+        "note": "Band calendar also lists 89 North and Daisy's Nashville Lounge shows."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A party cover band that calls its shows a 'traveling party'. Its Oct 4 gig is a family-friendly outdoor Oktoberfest.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A Long Island cover band playing rock and pop hits from the 80s, 90s and 2000s at bars, breweries and outdoor festivals.",
+  "facebookUrl": "https://www.facebook.com/LimeWiredBand",
+  "genres": [
+    "80s, 90s and 2000s rock and pop covers"
+  ],
+  "instagramUrl": "https://www.instagram.com/LimeWired",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Instagram link comes from the band site; not opened. No crowd video watched.",
+  "website": "https://limewiredband.com/"
+}

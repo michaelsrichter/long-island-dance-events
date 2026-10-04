@@ -1,0 +1,52 @@
+---
+/** "Can you dance here?" panel on event pages: the answer, a 10-step meter, reasons and sources. */
+import type { DancingAssessment } from '../lib/dancing';
+import { DANCE_TYPE_HELP, DANCE_TYPE_LABELS } from '../lib/schemas';
+interface Props {
+  dancing: DancingAssessment;
+}
+const { dancing: d } = Astro.props;
+const host = (u: string) => {
+  try {
+    return new URL(u).hostname.replace(/^www\./, '');
+  } catch {
+    return u;
+  }
+};
+---
+<section class="panel dance-panel" aria-labelledby="dance-h" id="dancing" data-dancing-panel data-level={d.level}>
+  <h2 id="dance-h">Can you dance here?</h2>
+  <p class="dance-panel__headline"><strong>{d.headline}</strong></p>
+  {d.level !== 'dance-event' && (
+    <div class="dance-meter" role="img" aria-label={`Dancing score: ${d.outOf10} out of 10`}>
+      <span class="dance-meter__bar" aria-hidden="true">
+        {Array.from({ length: 10 }, (_, i) => <span class:list={['dance-meter__step', { 'is-on': i < d.outOf10 }]} />)}
+      </span>
+      <span class="dance-meter__text" aria-hidden="true">Dancing score: {d.outOf10} out of 10</span>
+    </div>
+  )}
+  {d.kinds.length > 0 && (
+    <ul class="dance-kinds">
+      {d.kinds.map((k) => (
+        <li><span class:list={['dance-badge', `dance-badge--${k}`]}>{DANCE_TYPE_LABELS[k]}</span> <span class="muted">{DANCE_TYPE_HELP[k]}</span></li>
+      ))}
+    </ul>
+  )}
+  {d.reasons.length > 0 && (
+    <>
+      <p class="fact-label mt-3">Why we think so</p>
+      <ul class="dance-reasons">{d.reasons.map((r) => <li>{r}</li>)}</ul>
+    </>
+  )}
+  {d.evidence.length > 0 && (
+    <details class="dance-evidence mt-3">
+      <summary>How we checked ({d.evidence.length} {d.evidence.length === 1 ? 'source' : 'sources'})</summary>
+      <ul>
+        {d.evidence.map((x) => (
+          <li><a href={x.url} target="_blank" rel="noopener nofollow" data-track="outbound_click" data-track-method="evidence" data-track-location="event">{host(x.url)}<span class="visually-hidden"> (opens in a new tab)</span></a>: {x.note}</li>
+        ))}
+      </ul>
+    </details>
+  )}
+  {d.level !== 'dance-event' && <p class="muted mt-3">The score is our best guess from the venue, the band and the listing. Crowds, space and rules can change, so ask the venue if dancing matters to you. <a href="/faq/#dancing-score">How the score works</a>.</p>}
+</section>

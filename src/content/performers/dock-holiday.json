@@ -1,0 +1,42 @@
+{
+  "name": "Dock Holiday",
+  "type": "band",
+  "aliases": [
+    "Dock Holiday Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://www.liherald.com/bellmore/stories/dock-holiday-gets-loud-at-bellmore-library,217318",
+        "note": "News story on a 2025 outdoor show: fans danced on the grass and one song set off a full dance party."
+      },
+      {
+        "url": "https://dockholiday.org/dock-holiday-electronic-press-kit-epk",
+        "note": "Band press kit says its mix of styles keeps crowds dancing."
+      },
+      {
+        "url": "https://dockholiday.org/live-shows",
+        "note": "Band calendar lists Oct 3, 4 PM at the Town of North Hempstead Fall Festival."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A party cover band. A local paper reported fans dancing on the lawn and a full dance party during 'Uptown Funk' at a library concert.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A six-piece Long Island cover band with a female lead singer and sax that mixes funk, country, pop, rock and soul hits.",
+  "facebookUrl": "https://www.facebook.com/DOCKHOLIDAYBAND",
+  "genres": [
+    "funk, country, pop, rock and soul covers"
+  ],
+  "instagramUrl": "https://www.instagram.com/dock_holiday_the_band",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List says North Hempstead Beach Park; the band calls it the Town of North Hempstead Fall Festival.",
+  "website": "https://dockholiday.org/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCk9rfcwDnZg-C9GBCP3LAhg"
+}

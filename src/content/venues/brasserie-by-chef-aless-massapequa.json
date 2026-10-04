@@ -1,0 +1,43 @@
+{
+  "name": "Brasserie by Chef Aless",
+  "aliases": [
+    "Brasserie by Chef Aless Massapequa",
+    "Brasserie Massapequa"
+  ],
+  "address": "5590 Merrick Rd",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.atly.com/location/BrasserieByChefAless",
+        "note": "Guide site says live jazz and DJ music add energy and encourage dancing and mingling (not the venue's own words)."
+      },
+      {
+        "url": "https://allevents.in/massapequa/the-paumanok-stompers-first-performance-at-brasserie-by-chef-aless/200029679836621",
+        "note": "Listing for a New Orleans jazz band's first show here; that band also plays swing dance events."
+      },
+      {
+        "url": "https://www.brasseriebychefaless.com/events/",
+        "note": "Restaurant's events page lists dinners and private parties; no dance nights are posted."
+      }
+    ],
+    "floor": "small",
+    "notes": "This is mainly a sit-down restaurant. It books jazz bands, including a swing band, but we found no clear sign of a dance floor. Ask before you go if you want to dance.",
+    "policy": "unknown"
+  },
+  "description": "A French brasserie on Merrick Road in Massapequa with a Paris-style dining room and bar. It hosts live jazz and DJ nights.",
+  "factsSource": "Checked October 3, 2026. Source: brasseriebychefaless.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Brasserie+by+Chef+Aless%2C+5590+Merrick+Rd%2C+Massapequa%2C+NY+11758",
+  "kind": "restaurant",
+  "phone": "(585) 486-2305",
+  "postalCode": "11758",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Could not confirm the Oct 3 NY Ska Jazz Ensemble show on the restaurant's site. The phone number has a 585 area code but is the one the restaurant publishes. No Facebook page found (Instagram: @brasseriebychefaless).",
+  "state": "NY",
+  "town": "Massapequa",
+  "website": "https://www.brasseriebychefaless.com/",
+  "latitude": 40.669298,
+  "longitude": -73.431749,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

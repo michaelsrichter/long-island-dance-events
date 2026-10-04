@@ -1,0 +1,52 @@
+{
+  "name": "Salt Shack",
+  "aliases": [
+    "Salt Shack NY",
+    "Salt Shack Cedar Beach",
+    "Salt Shack Babylon"
+  ],
+  "address": "100 Ocean Pkwy (Cedar Beach)",
+  "coordinatesSource": "OpenStreetMap Nominatim (Cedar Beach, Babylon)",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.tripadvisor.in/ShowUserReviews-g47266-d14201906-r700393040-Salt_Shack-Babylon_Long_Island_New_York.html",
+        "note": "Review describes local bands and dancing under the stars at the beach venue."
+      },
+      {
+        "url": "https://birdeye.com/salt-shack-167779600418195?page=3",
+        "note": "Guest comment: great bands to sing and dance with."
+      },
+      {
+        "url": "https://restaurantjump.com/salt-shack-11702/",
+        "note": "Review mentions staying for the live music and having fun dancing."
+      },
+      {
+        "url": "https://saltshackny.com/events/",
+        "note": "Official calendar: Southern Earth Experience Sat Oct 3 7 pm; Pumpkin Festival 12-4 pm and The Byrne Unit 5 pm on Sun Oct 4."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "People dance on the sand and main floor in front of the stage when bands and DJs play. It can get very crowded on big nights.",
+    "policy": "allowed"
+  },
+  "description": "A seasonal beach bar and grill right on the sand at Cedar Beach on Ocean Parkway, with a stage for bands, DJs, picnic tables and an upstairs deck.",
+  "facebookUrl": "https://www.facebook.com/saltshackny/",
+  "factsSource": "Checked October 3, 2026. Source: saltshackny.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Salt+Shack+100+Ocean+Pkwy+Babylon+NY+11702",
+  "kind": "bar",
+  "latitude": 40.6301007,
+  "longitude": -73.3409542,
+  "phone": "(631) 422-7222",
+  "postalCode": "11702",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Official site says the season is May-September, but it still lists October events. Ira listed Byrne Unit at '3p?' while the venue calendar says 5 pm on Oct 4. Some listings give 1 or 200 Ocean Pkwy; the official site says 100 Ocean Pkwy. Cedar Beach parking may cost non-residents a fee. Ira's List has a venue page (/salt-shack-2021).",
+  "state": "NY",
+  "town": "Babylon",
+  "website": "https://saltshackny.com/"
+}

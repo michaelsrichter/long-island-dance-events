@@ -1,0 +1,32 @@
+{
+  "name": "Ann Wilson",
+  "type": "solo",
+  "aliases": [
+    "Ann Wilson of Heart",
+    "Ann Wilson: The Voice of Heart",
+    "Ann Wilson & Tripsitter"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.patchoguetheatre.org/events/2026-10-04-ann-wilson-the-voice-of-heart-tripsitter",
+        "note": "Patchogue Theatre lists 'Ann Wilson: The Voice of Heart & Tripsitter' on Oct 4, 2026 with a reserved seating chart."
+      },
+      {
+        "url": "https://annwilson.com/",
+        "note": "Official site promotes her new album and tour with Tripsitter."
+      }
+    ],
+    "notes": "A seated theater concert by a rock legend. People come to hear her voice; it is not a dance event.",
+    "rating": "listening"
+  },
+  "description": "The lead singer and co-founder of the rock band Heart (Barracuda, Crazy On You), now touring with her band Tripsitter.",
+  "genres": [
+    "classic rock",
+    "hard rock"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Show time: iloveny lists 7 PM; an older BroadwayWorld article said 8 PM. Check the theater site.",
+  "website": "https://annwilson.com/"
+}

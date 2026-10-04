@@ -1,0 +1,19 @@
+{
+  "name": "All Revved Up NY - Meat Loaf tribute shows",
+  "url": "https://allrevvedupnyband.com/shows-meat-loaf-tribute",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from All Revved Up NY. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Oakdale and Port Jefferson Station: Meat Loaf tribute, classic rock tribute.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "all-revved-up-ny"
+    ]
+  },
+  "reviewNotes": "Switched off: On 2026-10-03 it listed 6 dates, but none were at a venue we have researched yet (for example Oakdale (Oakdale); Port Jefferson Station (Port Jefferson Station)). Add those venue files in src/content/venues (address and dance-floor research), then switch it back on. Catalog check 2026-10-03: Keep at low priority for live-music cross-checking; it is mostly a listening tribute act."
+}
