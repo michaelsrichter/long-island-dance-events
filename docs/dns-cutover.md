@@ -10,12 +10,14 @@ The site is moving from the old Azure app (`black-dune…`, Microsoft work subsc
 
 Done by the developer: the new app has the latest site (smoke test 23/23), and Azure is waiting to verify both names on it (`Validating`).
 
-**Step 1: add two TXT records (no downtime).** At Namecheap, Advanced DNS, **add** these. Keep the old TXT records for now:
+**Step 1: TXT records for the new app (no downtime).** At Namecheap, Advanced DNS, the TXT values must be **exactly** these. On October 4 at 12:06 PM the first codes (`_1z5hq…` and `_vb8ey…`) were replaced: Azure checked once before those records existed and never checked again, so both names were removed and added back with new codes.
 
 | Type | Host | Value | TTL |
 | --- | --- | --- | --- |
-| TXT Record | `@` | `_1z5hqa0gvfv8fyg2mel4qnias6evxws` | Automatic |
-| TXT Record | `_dnsauth.www` | `_vb8ey7fli7nkdqxar5shd280lg5y07i` | Automatic |
+| TXT Record | `@` | `_0sb092kfpr2wabeium2mql1p6gj1ilw` | Automatic |
+| TXT Record | `_dnsauth.www` | `_z5bc1gizrs5yslniimu1s2jdrp79nct` | Automatic |
+
+Edit the two records you added before (`_1z5hq…` at `@`, `_vb8ey…` at `_dnsauth.www`) and paste the new values. Also delete the old app's TXT records (`_fzdvr…` at `@`, `_fvpz3…` at `_dnsauth.www`); the old app is already verified and doesn't need them. That leaves one Azure code per host, plus the SPF record at `@`, which stays.
 
 **Step 2: after the developer confirms both names show `Ready` on the new app, point the site at it.** Edit the two existing records:
 
@@ -36,6 +38,8 @@ Resolve-DnsName longisland.dance -Type TXT
 ```
 
 Rollback: point the ALIAS and CNAME back at `black-dune-0e0f3e40f.1.azurestaticapps.net` (the old app keeps its names until step 3).
+
+If a name sits at `Validating` for more than an hour while `Resolve-DnsName` already shows the right code, Azure has stopped checking. Remove the name and add it again on the new app (`az staticwebapp hostname delete`, then `hostname set --validation-method dns-txt-token`), and put the new code in DNS.
 
 ## Records to add at Namecheap (original setup, October 3)
 
