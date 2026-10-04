@@ -15,10 +15,11 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { EventCategory, SkillLevel } from '../../src/lib/schemas';
 import { addDays, weekdayOf } from '../../src/lib/time';
-import { cuesFor, stripTags } from '../adapters/iraslist';
+import { cuesFor } from './cues';
+import { stripTags } from './html';
 import { makeSummary, makeTitle, themeOf, type DescribeInput } from './describe';
 import { parsePrices } from './prices';
-import { lookupPlace, ROOT, type Place, type Registry } from './registry';
+import { lookupPlace, normalizeAddress, ROOT, type Place, type Registry } from './registry';
 import { cleanListingText, normalizeText, slugify } from './text';
 import { findTimes, parseTimes } from './times';
 import type { AdapterContext, Candidate, NormalizeResult } from './types';
@@ -162,15 +163,11 @@ export function actName(text: string): string | undefined {
   const withAct = /\b(?:with|featuring|feat\.?|ft\.?)\s+([A-Z0-9].*)$/.exec(s);
   if (withAct) s = withAct[1]!;
   s = s.replace(/^[\s,.;:!"“”]+/, '').replace(ACT_PREFIX, '').replace(/[,.;:!?"“”\s]+$/, '').replace(/^[,.;:!"“”\s]+/, '').replace(/\s+/g, ' ').trim();
+  // Calendars often print the next day's name right after the act ("4 Shades of Grey Saturday").
+  s = s.replace(/\s+(?:mon|tues|wednes|thurs|fri|satur|sun)day\b.*$/i, '').trim();
   if (s.length < 3 || s.length > 50 || !/[A-Za-z]{2}/.test(s) || NOT_AN_ACT.test(s) || CALENDAR_WORD.test(s)) return undefined;
-  if (s.split(' ').length > 7 || /[!?]/.test(s)) return undefined;
+  if (s.split(' ').length > 10 || /[!?]/.test(s)) return undefined;
   return s;
-}
-
-function findPerformer(reg: Registry, name: string): string | undefined {
-  const n = normalizeText(name);
-  for (const [id, p] of reg.performers) if ([p.name, ...p.aliases].some((a) => normalizeText(a) === n)) return id;
-  return undefined;
 }
 
 /** "LEGENDARY MURPHYS" -> "Legendary Murphys" (short tokens such as DJ, EDM, AC/DC stay as they are). */
@@ -183,12 +180,55 @@ export function tidyName(name: string): string {
     .join(' ');
 }
 
-/** Match a band/DJ name, or add it to the registry for an editor to check. */
-export function ensurePerformer(reg: Registry, name: string, sourceName: string, id = slugify(name, 60)): string | undefined {
+/** Same name once case, punctuation, spaces and a leading "The" are ignored ("Beer Nutz" = "BEERNUTZ"). */
+export const compactName = (s: string) => normalizeText(s).replace(/^the /, '').replace(/[^a-z0-9]+/g, '');
+
+const TIME_GLUE = /\d\s*(?:am|pm)\b|\d(?:am|pm)[A-Za-z]|\b\d{1,2}:\d{2}\b/i;
+/** Case-sensitive on purpose: "10:30pmLive", "GreySaturday", "RevivalFriday". */
+const WORD_GLUE = /(?:am|pm|AM|PM)(?=[A-Z][a-z])|[a-z](?:Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day\b|[a-z](?:Live|Music|Read|More)\b/;
+
+/**
+ * Is this text safe to show as an act name in a title? Rejects text glued together from page
+ * elements ("-10:30pmLive Music: 4 Shades of GreySaturday"), times, and leftover punctuation.
+ */
+export function displayActOk(name: string): boolean {
+  const s = name.trim();
+  return s.length >= 2 && s.length <= 80 && /^[A-Za-z0-9"“'‘(]/.test(s) && !TIME_GLUE.test(s) && !WORD_GLUE.test(s) && /[A-Za-z]{2}/.test(s);
+}
+
+const JOINED_ACTS = /[:;|/+@#!?()[\]]|,|\s[-–—]\s|\b(?:vs\.?|versus|w\/|with|featuring|feat\.?|ft\.?|presents|plus|tribute to|the music of|matinee|tour|edition|anniversary|night|party|festival|fest|show|live at)\b/i;
+const EVENT_WORDS =
+  /\b(closed|private|trivia|bingo|karaoke|comedy|brunch|specials?|menu|tickets?|sold out|doors|free|admission|reservations?|open mic|open jam|jam session|dinner|buffet|cover|read more|more info|details|rsvp|register|coming soon|tba|tbd|to be announced|fair|carnival|club|social|bash|celebration|parade|market|halloween|thanksgiving|christmas|holiday|new year|(?:mon|tues|wednes|thurs|fri|satur|sun)day|january|february|march|april|june|july|august|september|october|november|december)\b/i;
+
+/**
+ * Strict check before adding a band or DJ to the registry. A name that fails (two acts joined,
+ * an abbreviation such as "AMH", an event description) stays in the title only.
+ */
+export function performerNameOk(name: string): boolean {
+  const s = name.replace(/\s+/g, ' ').trim();
+  if (!displayActOk(s) || s.length < 3 || s.length > 50) return false;
+  if (JOINED_ACTS.test(s) || EVENT_WORDS.test(s)) return false;
+  if (!s.includes(' ') && s === s.toUpperCase() && s.replace(/[^A-Z]/g, '').length <= 4) return false; // "AMH", "LHT"
+  if (s.split(' ').length > 6) return false;
+  return true;
+}
+
+function findPerformer(reg: Registry, name: string): string | undefined {
+  const n = compactName(name);
+  if (!n) return undefined;
+  for (const [id, p] of reg.performers) if ([p.name, ...p.aliases].some((a) => compactName(a) === n)) return id;
+  return undefined;
+}
+
+/**
+ * Match a band/DJ name to the registry. Only when `create` is true and the name passes the strict
+ * check is a new band/DJ added (with a review note); otherwise undefined.
+ */
+export function ensurePerformer(reg: Registry, name: string, sourceName: string, id = slugify(name, 60), create = true): string | undefined {
   const clean = tidyName(name);
-  if (clean.length < 2 || clean.length > 60) return undefined;
   const known = reg.performers.has(id) ? id : findPerformer(reg, clean);
   if (known) return known;
+  if (!create || !performerNameOk(clean)) return undefined;
   reg.performers.set(id, {
     name: clean,
     type: /^dj\b/i.test(clean) ? 'dj' : 'band',
@@ -200,21 +240,35 @@ export function ensurePerformer(reg: Registry, name: string, sourceName: string,
   return id;
 }
 
-/** The source's own venue (defaults.venueId): use it, or add it named after the source. */
-function ensureDefaultVenue(reg: Registry, id: string, sourceName: string, town: Place | undefined): string | undefined {
+/** A street address: a house number followed by a street name ("345 Deer Park Ave"). */
+export const hasStreetAddress = (s: string | undefined): s is string => Boolean(s && /\b\d{1,6}[A-Za-z]?\s+[A-Za-z0-9.'-]+(?:\s+[A-Za-z0-9.'-]+)*/.test(s) && /[A-Za-z]{3}/.test(s));
+
+/**
+ * An existing venue with this name or alias (or this street address) in the same town.
+ * Checked before anything new is created, so the same place never gets two files.
+ */
+export function findVenue(reg: Registry, name: string | undefined, address: string | undefined, town: string | undefined): string | undefined {
+  const sameTown = (v: { town: string }) => !town || normalizeText(v.town) === normalizeText(town);
+  const n = name ? compactName(name) : '';
+  if (n.length >= 3) {
+    for (const [id, v] of reg.venues) if (sameTown(v) && [v.name, ...v.aliases].some((a) => compactName(a) === n)) return id;
+  }
+  if (hasStreetAddress(address)) {
+    const a = normalizeAddress(address.split(',')[0]!);
+    for (const [id, v] of reg.venues) if (sameTown(v) && v.address && normalizeAddress(v.address.split(',')[0]!) === a) return id;
+  }
+  const text = [name, address].filter(Boolean).join(' ');
+  const id = text ? reg.matchVenue(text, town) : undefined;
+  return id && sameTown(reg.venues.get(id)!) ? id : undefined;
+}
+
+/** The source's own venue (defaults.venueId), or an existing venue with the source's name in that town. Never invented. */
+function defaultVenueId(reg: Registry, id: string, sourceName: string, town: Place | undefined, log: (m: string) => void): string | undefined {
   if (reg.venues.has(id)) return id;
-  if (!town) return undefined;
-  reg.venues.set(id, {
-    name: entityNameFromSource(sourceName),
-    aliases: [],
-    address: '',
-    town: town.name,
-    county: town.county,
-    state: 'NY',
-    reviewNotes: `Added automatically for the source "${sourceName}". Add the street address, then geocode.`,
-  });
-  reg.created.venues.add(id);
-  return id;
+  const found = findVenue(reg, entityNameFromSource(sourceName), undefined, town?.name);
+  if (found) return found;
+  log(`Default venue "${id}" is not in src/content/venues yet, so listings without their own venue are skipped.`);
+  return undefined;
 }
 
 function townOfVenue(reg: Registry, venueId: string | undefined): Place | undefined {
@@ -247,10 +301,13 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
   let last = ctx.today;
 
   const defaultTown = lookupPlace(defaults.town) ?? townOfVenue(reg, defaults.venueId);
-  const defaultVenue = defaults.venueId ? ensureDefaultVenue(reg, defaults.venueId, src.name, defaultTown) : undefined;
+  const defaultVenue = defaults.venueId ? defaultVenueId(reg, defaults.venueId, src.name, defaultTown, ctx.log) : undefined;
+  // A band's own gig list: the band itself (an existing file, or one named after the source).
   const defaultPerformers = (defaults.performerIds ?? [])
     .map((pid) => (reg.performers.has(pid) ? pid : ensurePerformer(reg, entityNameFromSource(src.name), src.name, pid)))
     .filter((x): x is string => Boolean(x));
+  const unresearched = new Set<string>();
+  const unresearchedActs = new Set<string>();
 
   for (const f of found) {
     const date = f.start.slice(0, 10);
@@ -284,54 +341,63 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       outOfArea.set(f.locality, (outOfArea.get(f.locality) ?? 0) + 1);
       continue;
     }
-    const venueText = [f.locationName, f.address].filter(Boolean).join(' ');
-    if (venueText) venueId = reg.matchVenue(venueText, place?.name);
-    if (!venueId && defaultVenue && (!ownPlace || ownPlace.name === defaultTown?.name)) {
-      venueId = defaultVenue;
-      place = defaultTown;
-    }
-    // A venue we just added for this source has no street address yet: take it from its own page.
-    const dv = venueId && venueId === defaultVenue ? reg.venues.get(venueId) : undefined;
-    if (dv && !dv.address && f.address && reg.created.venues.has(defaultVenue!)) {
-      const town = dv.town.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      dv.address = f.address.replace(new RegExp(`\\s*,?\\s*${town}\\b.*$`, 'i'), '').trim() || f.address;
-    }
-    // Feeds and built-in event data name their venues reliably, so add them even without a street address.
-    if (!venueId && f.locationName && (f.address || opts.structured) && place && f.locationName.length <= 80 && !/^(tba|tbd|online|virtual)$/i.test(f.locationName)) {
+    if (f.locationName || f.address) venueId = findVenue(reg, f.locationName, f.address, place?.name);
+    if (!venueId && defaultVenue && (!ownPlace || ownPlace.name === townOfVenue(reg, defaultVenue)?.name)) venueId = defaultVenue;
+    // A new venue only with a street address (never invented); it gets a review note.
+    if (!venueId && f.locationName && hasStreetAddress(f.address) && place && f.locationName.length <= 80) {
       const id = slugify(`${f.locationName} ${place.name}`, 60);
       if (!reg.venues.has(id)) {
         reg.venues.set(id, {
           name: f.locationName,
           aliases: [],
-          address: f.address ?? '',
+          address: f.address.split(',')[0]!.trim(),
           town: place.name,
           county: place.county,
           state: 'NY',
-          reviewNotes: `Added automatically from ${src.name}. Check the name${f.address ? ' and address' : ', add the street address'}, then geocode.`,
+          reviewNotes: `Added automatically from ${src.name}. Check the name and address; research the dance floor.`,
         });
         reg.created.venues.add(id);
       }
       venueId = id;
       notes.push('New venue was added automatically. Check it.');
     }
-    if (!place) place = (venueId ? townOfVenue(reg, venueId) : undefined) ?? findPlaceInText(text) ?? defaultTown;
+    if (venueId) place = townOfVenue(reg, venueId) ?? place;
+    // Unknown venue: not published until someone researches it (as for Ira's List). Dance calendars
+    // that only give a town are kept with the town; live-music listings need a venue for the dancing score.
+    if (!place) place = findPlaceInText(text) ?? defaultTown;
     if (!place) {
+      // No Long Island town anywhere in the listing (often another state).
       outOfArea.set('town not stated', (outOfArea.get('town not stated') ?? 0) + 1);
       continue;
     }
-    if (venueId) confidence += 0.15;
-    else notes.push(f.locationName ? `Venue "${f.locationName.slice(0, 60)}" is not in the registry yet.` : 'Venue not found in the listing.');
-
-    // Who
-    const performerIds = [...defaultPerformers];
-    const named = f.performers?.length ? f.performers : defaults.venueId && focus === 'music' ? [actName(f.title)].filter((x): x is string => Boolean(x)) : [];
-    for (const name of named) {
-      if (f.locationName && normalizeText(name) === normalizeText(f.locationName)) continue;
-      if (defaultVenue && normalizeText(name) === normalizeText(reg.venues.get(defaultVenue)?.name ?? '')) continue;
-      const id = ensurePerformer(reg, name, src.name);
-      if (id && !performerIds.includes(id)) performerIds.push(id);
+    if (!venueId && (f.locationName || focus === 'music')) {
+      const label = `${f.locationName ?? 'venue not named'} (${place.name})`;
+      unresearched.add(label);
+      skipped.push({ reason: 'venue not researched yet', ref: `${ref} ${label}`.slice(0, 160) });
+      continue;
     }
-    for (const id of reg.matchPerformers(text)) if (!performerIds.includes(id)) performerIds.push(id);
+    if (venueId) confidence += 0.15;
+    else notes.push('Venue not found in the listing.');
+
+    // Who: researched bands/DJs, plus new ones only when the name passes a strict check.
+    // Other act names stay in the title only.
+    const performerIds = [...defaultPerformers];
+    const titleOnlyActs: string[] = [];
+    const venueName = venueId ? reg.venues.get(venueId)?.name ?? '' : f.locationName ?? '';
+    const named = f.performers?.length ? f.performers : defaults.venueId && focus === 'music' ? [actName(f.title)].filter((x): x is string => Boolean(x)) : [];
+    for (const raw of named) {
+      const name = tidyName(raw);
+      if (!displayActOk(name) || compactName(name) === compactName(venueName) || compactName(name) === compactName(f.locationName ?? '')) continue;
+      const id = ensurePerformer(reg, name, src.name);
+      if (id) {
+        if (!performerIds.includes(id)) performerIds.push(id);
+      } else {
+        titleOnlyActs.push(name);
+        unresearchedActs.add(name);
+      }
+    }
+    for (const id of reg.matchPerformers(`${f.title} ${(f.performers ?? []).join(' ')}`)) if (!performerIds.includes(id)) performerIds.push(id);
+    if (titleOnlyActs.length) notes.push(`Band or DJ not researched yet: ${titleOnlyActs.join(', ')}.`);
     const organizerId =
       (defaults.organizerId && reg.organizers.has(defaults.organizerId) ? defaults.organizerId : undefined) ??
       reg.matchOrganizer(text) ??
@@ -347,7 +413,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     if (danceStyles.length || performerIds.length) confidence += 0.05;
 
     // What and when
-    const category = categoryOf(text, focus, liveActs.length, djs.length, defaults.category);
+    const category = categoryOf(text, focus, liveActs.length + titleOnlyActs.length, djs.length, defaults.category);
     const parsed = parseTimes(`${f.title}. ${f.description ?? ''}`);
     const start = timeOf(f.start) ?? parsed.start;
     let end = timeOf(f.end) ?? (timeOf(f.start) ? undefined : parsed.end);
@@ -367,7 +433,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       theme,
       venueName: venueId ? reg.venues.get(venueId)?.name : undefined,
       djs: djs.map((id) => name(id, reg.performers)),
-      liveActs: liveActs.map((id) => name(id, reg.performers)),
+      liveActs: [...liveActs.map((id) => name(id, reg.performers)), ...titleOnlyActs],
       instructors: [],
       lessonTime: parsed.lessonTime,
       schedule: [],
@@ -409,7 +475,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       theme,
       infoUrl: f.url && /^https?:\/\//.test(f.url) ? f.url : undefined,
       dancingCues: cuesFor({
-        act: [...liveActs, ...djs].map((id) => name(id, reg.performers)).join(' ') || f.title,
+        act: [...[...liveActs, ...djs].map((id) => name(id, reg.performers)), ...titleOnlyActs].join(' ') || f.title,
         venue: (venueId ? reg.venues.get(venueId)?.name : f.locationName) ?? '',
         text,
         time: start ? `${Number(start.slice(0, 2)) % 12 || 12}:${start.slice(3, 5)}${Number(start.slice(0, 2)) < 12 ? 'am' : 'pm'}` : undefined,
@@ -420,6 +486,8 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       oneOff: Boolean(theme),
     });
   }
+  if (unresearched.size) ctx.log(`${src.id}: venues to research: ${[...unresearched].sort().join('; ')}`);
+  if (unresearchedActs.size) ctx.log(`${src.id}: bands/DJs to research: ${[...unresearchedActs].sort().join('; ')}`);
   return {
     candidates,
     found: found.length,
@@ -453,7 +521,8 @@ export function htmlToLines(html: string): string[] {
     .replace(/<br\s*\/?>/gi, '\n')
     .replace(/<\/?(p|div|li|tr|td|th|h[1-6]|section|article|ul|ol|table|dt|dd|time)\b[^>]*>/gi, '\n');
   // Strip tags until none are left, then drop any angle brackets that decoding produced (as in iraslist.ts).
-  return decodeEntities(stripTags(body))
+  // Inline tags become a space so text from neighbouring elements does not run together.
+  return decodeEntities(stripTags(body, ' '))
     .replace(/[<>]/g, ' ')
     .split('\n')
     .map((l) => l.replace(/[ \t\u00a0]+/g, ' ').trim())
@@ -462,7 +531,7 @@ export function htmlToLines(html: string): string[] {
 
 /** Plain text from an HTML fragment (tags removed completely, entities decoded). */
 export function plainText(fragment: string): string {
-  return decodeEntities(stripTags(fragment)).replace(/[<>]/g, ' ').replace(/\s+/g, ' ').trim();
+  return decodeEntities(stripTags(fragment, ' ')).replace(/[<>]/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
 /** Local New York date-time 'YYYY-MM-DDTHH:mm' for an instant. */

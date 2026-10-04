@@ -7,50 +7,25 @@
   ],
   "skipped": [
     {
+      "reason": "venue not researched yet",
+      "ref": "calendar feed 2026-11-07 Sample Hall (Riverhead)"
+    },
+    {
       "reason": "cancelled by the source",
       "ref": "calendar feed 2026-10-09"
+    },
+    {
+      "reason": "venue not researched yet",
+      "ref": "calendar feed 2026-10-05 Sample Hall (Riverhead)"
     }
   ],
   "created": {
     "venues": [
-      "sample-barn-smithtown",
-      "sample-hall-riverhead"
+      "sample-barn-smithtown"
     ],
     "performers": []
   },
   "drafts": [
-    {
-      "id": "2026-10-05-sample-hall-riverhead-classes",
-      "matchKey": "test-source|sample-hall-riverhead||monday|09:00|class-lesson||line-dancing|2026-10-05",
-      "dates": [
-        "2026-10-05"
-      ],
-      "data": {
-        "title": "Line Dancing class at Sample Hall",
-        "summary": "Group class in Line Dancing.",
-        "category": "class-lesson",
-        "danceStyles": [
-          "line-dancing"
-        ],
-        "start": "2026-10-05T09:00",
-        "timezone": "America/New_York",
-        "venueId": "sample-hall-riverhead",
-        "town": "Riverhead",
-        "performerIds": [],
-        "instructorIds": [],
-        "skillLevel": "all-levels",
-        "sourceId": "test-source",
-        "sourceUrl": "https://example-lodge.example/feed.ics",
-        "sourceName": "Test source",
-        "sourceRef": "calendar feed 2026-10-05",
-        "status": "active",
-        "dancingCues": [
-          "afternoon"
-        ],
-        "confidence": 0.9,
-        "reviewNotes": "Repeat rule \"FREQ=DAILY;COUNT=3\" is not supported; only the first date was kept."
-      }
-    },
     {
       "id": "2026-10-18-sample-barn-smithtown-live-music",
       "matchKey": "test-source|sample-barn-smithtown||sunday|14:00|live-music|||2026-10-18",
@@ -110,38 +85,6 @@
         "status": "active",
         "dancingCues": [],
         "confidence": 0.9
-      }
-    },
-    {
-      "id": "2026-11-07-sample-hall-riverhead-festival",
-      "matchKey": "test-source|sample-hall-riverhead||saturday|tba|festival||line-dancing|2026-11-07",
-      "dates": [
-        "2026-11-07"
-      ],
-      "data": {
-        "title": "Line Dancing festival at Sample Hall",
-        "summary": "A larger dance event for Line Dancing.",
-        "category": "festival",
-        "danceStyles": [
-          "line-dancing"
-        ],
-        "start": "2026-11-07",
-        "timezone": "America/New_York",
-        "venueId": "sample-hall-riverhead",
-        "town": "Riverhead",
-        "performerIds": [],
-        "instructorIds": [],
-        "skillLevel": "all-levels",
-        "sourceId": "test-source",
-        "sourceUrl": "https://example-lodge.example/feed.ics",
-        "sourceName": "Test source",
-        "sourceRef": "calendar feed 2026-11-07",
-        "status": "active",
-        "dancingCues": [
-          "festival"
-        ],
-        "confidence": 0.7,
-        "reviewNotes": "New venue was added automatically. Check it. No start time found."
       }
     },
     {

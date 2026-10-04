@@ -11,7 +11,7 @@
   "rateLimitSeconds": 5,
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "jazz-at-the-barn-huntington",
+    "venueId": "conklin-barn-huntington",
     "town": "Huntington"
   },
   "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority. It is current but is a listening-room jazz source."

@@ -4,16 +4,16 @@
   "type": "html",
   "adapter": "htmllist",
   "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
+  "cadence": "manual",
+  "enabled": false,
   "attribution": "Some listings come from Twisted Cow Distillery (East Northport). We write our own short summaries and link back to the original page.",
   "description": "Dance listings in East Northport: Lindy Hop (lesson + DJ social).",
   "rateLimitSeconds": 5,
   "catalogStatus": "recheck-from-ci",
   "defaults": {
-    "venueId": "twisted-cow-distillery",
+    "venueId": "twisted-cow-distillery-east-northport",
     "town": "East Northport"
   },
   "include": "swing|lindy|boogie|danc",
-  "reviewNotes": "Catalog check 2026-10-03: Recheck from CI. The office network blocks the site, but Web IQ shows a future Barrelhouse Boogie swing night."
+  "reviewNotes": "Switched off on 2026-10-03: our office network could not open this site, so its robots.txt is not checked yet. The monthly source check (GitHub Actions) will check it; switch on if it allows our collector. Catalog check 2026-10-03: Recheck from CI. The office network blocks the site, but Web IQ shows a future Barrelhouse Boogie swing night."
 }

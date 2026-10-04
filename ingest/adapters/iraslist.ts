@@ -14,10 +14,12 @@
  *              are skipped: they are not live music for dancing.
  * The "live calendar" on that page is a third-party widget whose data host blocks robots, so we do not use it.
  */
-import type { DancingCue, EventCategory } from '../../src/lib/schemas';
+import type { EventCategory } from '../../src/lib/schemas';
 import { formatDateLong, weekdayOf } from '../../src/lib/time';
 import { lookupPlace, type Registry } from '../lib/registry';
 import { normalizeText, slugify } from '../lib/text';
+import { cuesFor } from '../lib/cues';
+import { stripTags } from '../lib/html';
 import { parseTimes } from '../lib/times';
 import type { Adapter, AdapterContext, Candidate, FetchedDocument, NormalizeResult } from '../lib/types';
 
@@ -43,14 +45,7 @@ export function decodeHtml(s: string): string {
     .replace(/&([a-z]+);/gi, (m, n) => ENTITIES[n.toLowerCase()] ?? m);
 }
 
-export function stripTags(s: string): string {
-  let prev: string;
-  do {
-    prev = s;
-    s = s.replace(/<[^<>]*>/g, '');
-  } while (s !== prev);
-  return s;
-}
+export { stripTags };
 
 /** Text of every paragraph in the page, one entry per line, in order. */
 export function htmlLines(html: string): string[] {
@@ -180,23 +175,7 @@ export function parseWeeklyList(html: string, today: string): IraRow[] {
 /** Shows that are not live music for dancing (theater, comedy, drag brunch, trivia). */
 const NOT_MUSIC_RE = /\b(the musical|musical\b|comedy|comedian|stand[- ]up|magician|magic show|drag (brunch|show)|trivia|bingo|paint (and|&) sip|book (talk|signing))\b/i;
 
-export function cuesFor(row: Pick<IraRow, 'act' | 'venue' | 'text' | 'time'>): DancingCue[] {
-  const t = `${row.act} ${row.venue}`;
-  const cues = new Set<DancingCue>();
-  if (/(^|\W)dj\b/i.test(row.act)) cues.add('dj');
-  if (/\b(dance party|dance night|disco|club night|silent disco)\b|club \d\d\+/i.test(t)) cues.add('dance-party');
-  if (/\b(theat(er|re)|playhouse|performing arts|showplace|center for the arts|cmpac|boulton|paramount|flagstar|bandshell|amphitheat(er|re))\b/i.test(t)) cues.add('theater');
-  if (/\blibrary\b/i.test(t)) cues.add('library');
-  if (/\bbrunch\b/i.test(t)) cues.add('brunch');
-  if (/\b(fest(ival)?|oktoberfest|octoberfest|fair|car show|block party|street fair)\b/i.test(t)) cues.add('festival');
-  if (/\b(beach|park|pk\b|marina|boardwalk|bandshell|lawn)\b/i.test(t)) cues.add('outdoor');
-  if (/\btribute\b|\bthe music of\b|\bexperience\b|\b(almost|alter|spirit of)\b/i.test(t)) cues.add('tribute');
-  if (/\b(acoustic|unplugged|duo|solo)\b/i.test(row.act)) cues.add('acoustic');
-  if (/\bjam\b/i.test(row.act)) cues.add('jam');
-  const start = row.time ? parseTimes(row.time).start : undefined;
-  if (start && Number(start.slice(0, 2)) < 17) cues.add('afternoon');
-  return [...cues].sort();
-}
+export { cuesFor };
 
 export interface IraNormalizeOptions {
   sourceId: string;

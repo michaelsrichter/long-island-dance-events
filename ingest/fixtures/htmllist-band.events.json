@@ -9,6 +9,10 @@
     {
       "reason": "not a dance or live-music listing",
       "ref": "events page 2026-11-14"
+    },
+    {
+      "reason": "venue not researched yet",
+      "ref": "events page 2026-12-05 Sample Hall (Riverhead)"
     }
   ],
   "created": {
@@ -20,17 +24,18 @@
   "drafts": [
     {
       "id": "2026-10-17-the-pretend-band-live-music",
-      "matchKey": "test-source|babylon||saturday|21:00|live-music|the-pretend-band||2026-10-17",
+      "matchKey": "test-source|sample-pub||saturday|21:00|live-music|the-pretend-band||2026-10-17",
       "dates": [
         "2026-10-17"
       ],
       "data": {
-        "title": "Dance with live music by The Pretend Band",
+        "title": "Dance with live music by The Pretend Band at Sample Pub",
         "summary": "Dance to live music by The Pretend Band.",
         "category": "live-music",
         "danceStyles": [],
         "start": "2026-10-17T21:00",
         "timezone": "America/New_York",
+        "venueId": "sample-pub",
         "town": "Babylon",
         "performerIds": [
           "the-pretend-band"
@@ -43,8 +48,7 @@
         "sourceRef": "events page 2026-10-17",
         "status": "active",
         "dancingCues": [],
-        "confidence": 0.65,
-        "reviewNotes": "Venue \"Sample Pub\" is not in the registry yet."
+        "confidence": 0.8
       }
     },
     {
@@ -75,35 +79,6 @@
         "status": "active",
         "dancingCues": [],
         "confidence": 0.8
-      }
-    },
-    {
-      "id": "2026-12-05-holiday-the-pretend-band-live-music",
-      "matchKey": "test-source|riverhead||saturday|19:00|live-music|the-pretend-band||2026-12-05|holiday",
-      "dates": [
-        "2026-12-05"
-      ],
-      "data": {
-        "title": "Holiday Dance with live music by The Pretend Band",
-        "summary": "Dance to live music by The Pretend Band.",
-        "category": "live-music",
-        "danceStyles": [],
-        "start": "2026-12-05T19:00",
-        "timezone": "America/New_York",
-        "town": "Riverhead",
-        "performerIds": [
-          "the-pretend-band"
-        ],
-        "instructorIds": [],
-        "skillLevel": "all-levels",
-        "sourceId": "test-source",
-        "sourceUrl": "https://pretend-band.example/shows",
-        "sourceName": "The Pretend Band - shows",
-        "sourceRef": "events page 2026-12-05",
-        "status": "active",
-        "dancingCues": [],
-        "confidence": 0.65,
-        "reviewNotes": "Venue \"Sample Hall\" is not in the registry yet."
       }
     }
   ]

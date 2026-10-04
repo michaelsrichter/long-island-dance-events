@@ -11,7 +11,7 @@
   "rateLimitSeconds": 5,
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "amityville-music-hall",
+    "venueId": "amityville-music-hall-amityville",
     "town": "Amityville"
   },
   "reviewNotes": "Catalog check 2026-10-03: Keep only if the site wants broader live music. It is a concert source, not a social-dance source."

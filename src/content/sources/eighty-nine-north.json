@@ -11,7 +11,7 @@
   "rateLimitSeconds": 5,
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "89-north-patchogue",
+    "venueId": "89-north-music-venue-patchogue",
     "town": "Patchogue"
   },
   "reviewNotes": "Catalog check 2026-10-03: Keep it because it has many future Long Island music and dance events in an easy calendar format."

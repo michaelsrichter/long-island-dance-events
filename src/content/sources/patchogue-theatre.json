@@ -11,7 +11,7 @@
   "rateLimitSeconds": 5,
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "patchogue-theatre",
+    "venueId": "patchogue-theatre-patchogue",
     "town": "Patchogue"
   },
   "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",

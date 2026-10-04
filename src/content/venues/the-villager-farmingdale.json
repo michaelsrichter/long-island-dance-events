@@ -1,0 +1,20 @@
+{
+  "name": "The Villager",
+  "aliases": [
+    "The Villager Farmingdale",
+    "Villager Farmingdale",
+    "Villager"
+  ],
+  "address": "306 Main St",
+  "town": "Farmingdale",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11735",
+  "website": "https://www.thevillagerfarmingdale.com/",
+  "kind": "bar",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://www.thevillagerfarmingdale.com/livemusic.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 40.732293,
+  "longitude": -73.44587,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

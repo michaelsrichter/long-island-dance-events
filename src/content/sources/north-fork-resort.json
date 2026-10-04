@@ -4,15 +4,14 @@
   "type": "html",
   "adapter": "htmllist",
   "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
+  "cadence": "seasonal",
+  "enabled": false,
   "attribution": "Some listings come from North Fork Resort (Greenport). We write our own short summaries and link back to the original page.",
   "description": "Live music listings in Greenport: Friday resort live music, classic rock and blues bands.",
   "rateLimitSeconds": 5,
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "north-fork-resort-greenport",
     "town": "Greenport"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it for the season. It has a clear weekly live-music run, though it is not strongly dance-specific."
+  "reviewNotes": "Switched off on 2026-10-03: the Friday music series ran through early October, so there are no upcoming dates. Check again in spring. Catalog check 2026-10-03: Keep it for the season. It has a clear weekly live-music run, though it is not strongly dance-specific."
 }

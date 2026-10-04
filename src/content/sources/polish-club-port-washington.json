@@ -11,7 +11,7 @@
   "rateLimitSeconds": 5,
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "polish-american-cultural-association",
+    "venueId": "polish-american-cultural-association-port-washington",
     "town": "Port Washington"
   },
   "reviewNotes": "Catalog check 2026-10-03: Keep as low priority. It has a few Nassau dance nights among many civic events."

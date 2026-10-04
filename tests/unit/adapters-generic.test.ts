@@ -12,7 +12,7 @@ import { adapter as ical, foundFromIcs, icsTimeToLocal, parseIcs, splitLocation 
 import { adapter as jsonld, eventNodes, jsonLdBlocks, sitemapLinks } from '../../ingest/adapters/jsonld';
 import { collapse } from '../../ingest/lib/collapse';
 import { Registry, ROOT } from '../../ingest/lib/registry';
-import { entityNameFromSource, findPlaceInText, htmlToLines, isoToLocal } from '../../ingest/lib/structured';
+import { displayActOk, entityNameFromSource, findPlaceInText, findVenue, htmlToLines, isoToLocal, performerNameOk } from '../../ingest/lib/structured';
 import type { Adapter, AdapterContext, FetchedDocument } from '../../ingest/lib/types';
 
 const TODAY = '2026-10-03';
@@ -21,7 +21,12 @@ const real = Registry.load();
 
 function fixtureRegistry() {
   return new Registry(
-    new Map([['example-lodge', { name: 'Example Lodge', aliases: [], address: '12 Fictional Ave', town: 'Huntington', county: 'Suffolk' as const, state: 'NY' }]]),
+    // Fictional researched venues, as if they were files in src/content/venues/.
+    new Map([
+      ['example-lodge', { name: 'Example Lodge', aliases: [], address: '12 Fictional Ave', town: 'Huntington', county: 'Suffolk' as const, state: 'NY' }],
+      ['sample-pub', { name: 'Sample Pub', aliases: ['Sample Pub Babylon'], address: '5 Pretend Lane', town: 'Babylon', county: 'Suffolk' as const, state: 'NY' }],
+      ['sample-tavern', { name: 'Sample Tavern', aliases: [], address: '77 Pretend Rd', town: 'Bay Shore', county: 'Suffolk' as const, state: 'NY' }],
+    ]),
     new Map([['dj-sample', { name: 'DJ Sample', type: 'dj' as const, aliases: [], genres: [] }]]),
     new Map(),
     new Map(),
@@ -83,6 +88,33 @@ describe('shared helpers', () => {
   });
 });
 
+describe('names and venues are checked before anything new is created', () => {
+  it('only adds bands and DJs with clean names', () => {
+    for (const bad of ['-10:30pmLive Music: 4 Shades of GreySaturday', 'Ann Wilson: The Voice of Heart & Tripsitter', 'AMH', 'John vs Paul — Matinee', 'Show No Mercy, Damage Inc., & Chaotica', 'Halloween Party w/ Hello Brooklyn', 'COLUMBUS DAY STREET FAIR & CARNIVAL'])
+      expect(performerNameOk(bad), bad).toBe(false);
+    for (const good of ['The Fictionals', 'Gene Casey & the Lone Sharks', 'DJ Sample', '4 Shades of Grey', '10 Cent Redemption', 'Smells Like Nirvana'])
+      expect(performerNameOk(good), good).toBe(true);
+    expect(displayActOk('Ann Wilson: The Voice of Heart & Tripsitter')).toBe(true);
+    expect(displayActOk('-10:30pmLive Music: RevivalFriday')).toBe(false);
+  });
+  it('matches existing venues by name, alias or street address in the same town', () => {
+    const reg = fixtureRegistry();
+    expect(findVenue(reg, 'SAMPLE PUB', undefined, 'Babylon')).toBe('sample-pub');
+    expect(findVenue(reg, 'Sample Pub Babylon', undefined, 'Babylon')).toBe('sample-pub');
+    expect(findVenue(reg, 'The Pub on Pretend Lane', '5 Pretend Ln', 'Babylon')).toBe('sample-pub');
+    expect(findVenue(reg, 'Sample Pub', undefined, 'Riverhead')).toBeUndefined();
+    expect(findVenue(reg, 'Somewhere New', undefined, 'Babylon')).toBeUndefined();
+  });
+  it('never invents a venue without a street address', async () => {
+    const ctx = context({ adapter: 'jsonld', type: 'jsonld', focus: 'music' });
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const r = toCandidates([{ title: 'The Fictionals', start: '2026-10-20T20:00', locationName: 'New Place', locality: 'Babylon', pageUrl: 'https://example.test/e' }], ctx, { structured: true });
+    expect(r.candidates).toHaveLength(0);
+    expect(r.skipped).toEqual([{ reason: 'venue not researched yet', ref: 'listing 2026-10-20 New Place (Babylon)' }]);
+    expect([...ctx.registry.created.venues]).toEqual([]);
+  });
+});
+
 describe('JSON-LD adapter', () => {
   it('reads every Event node and skips broken blocks', () => {
     const nodes = eventNodes(jsonLdBlocks(readFileSync(join(FIX, 'jsonld-sample.html'), 'utf8')));
@@ -138,7 +170,12 @@ describe('iCal adapter', () => {
     expect(tuesday?.data).toMatchObject({ danceStyles: ['east-coast-swing'], lessonTime: '19:30', price: 15, start: '2026-10-06T19:30' });
     expect(tuesday?.data.recurrence?.rrule).toBeDefined();
     expect(drafts.find((d) => d.data.town === 'Smithtown')?.data.start).toBe('2026-10-18T14:00');
-    expect(drafts.find((d) => /boot camp|class/i.test(d.data.title) || d.data.category === 'class-lesson')?.data.category).toBe('class-lesson');
+    // "Sample Hall, Riverhead, NY" has no street address and is not a known venue: skipped, never invented.
+    expect(result.skipped.filter((s) => s.reason === 'venue not researched yet').map((s) => s.ref).sort()).toEqual([
+      'calendar feed 2026-10-05 Sample Hall (Riverhead)',
+      'calendar feed 2026-11-07 Sample Hall (Riverhead)',
+    ]);
+    expect(drafts.some((d) => d.data.town === 'Riverhead')).toBe(false);
   });
 });
 
@@ -180,7 +217,7 @@ describe('HTML list adapter', () => {
     });
     expect(drafts).toHaveLength(1);
     expect(drafts[0]!.data).toMatchObject({ start: '2026-10-16T21:00', venueId: 'sample-tavern', performerIds: ['the-fictionals'], infoUrl: 'https://sample-tavern.example/music/2026/10/16/the-fictionals' });
-    expect(ctx.registry.venues.get('sample-tavern')).toMatchObject({ name: 'Sample Tavern', address: '77 Pretend Rd', town: 'Bay Shore' });
+    expect([...ctx.registry.created.venues]).toEqual([]);
   });
   it("matches the golden events for a venue's own page", async () => {
     const { drafts, ctx, result } = await runGolden('htmllist-venue', htmllist, 'htmllist-venue.html', 'https://sample-pub.example/music', {
@@ -188,11 +225,26 @@ describe('HTML list adapter', () => {
       focus: 'music',
       defaults: { venueId: 'sample-pub', town: 'Babylon' },
     });
-    expect([...ctx.registry.created.venues]).toEqual(['sample-pub']);
-    expect(ctx.registry.venues.get('sample-pub')).toMatchObject({ name: 'Sample Pub', town: 'Babylon', county: 'Suffolk' });
+    expect([...ctx.registry.created.venues]).toEqual([]);
+    expect(drafts.every((d) => d.data.venueId === 'sample-pub')).toBe(true);
     expect(result.skipped.map((s) => s.reason)).toContain('not a dance or live-music listing');
     expect(drafts.map((d) => d.data.start).sort()).toEqual(['2026-10-09T18:00', '2026-10-10T21:00', '2026-10-23T21:00']);
     expect(drafts.find((d) => d.data.start === '2026-10-10T21:00')?.data.performerIds).toEqual(['dj-sample']);
+  });
+  it('keeps text from neighbouring elements apart (no glued band names)', async () => {
+    const { drafts, ctx } = await runGolden('htmllist-glued', htmllist, 'htmllist-glued.html', 'https://sample-pub.example/calendar', {
+      name: 'Sample Pub (Babylon) - live music',
+      focus: 'music',
+      defaults: { venueId: 'sample-pub', town: 'Babylon' },
+    });
+    const names = [...ctx.registry.performers.values()].map((p) => p.name);
+    for (const n of names) expect(n).not.toMatch(/\d(am|pm)|[a-z](Saturday|Sunday)|^-|Live Music/);
+    expect([...ctx.registry.created.performers].sort()).toEqual(['4-shades-of-fiction', 'revival-fictional']);
+    const oct16 = drafts.find((d) => d.data.start === '2026-10-16T21:00')!.data;
+    // Two acts joined with a colon: shown in the title, not added as a band.
+    expect(oct16.title).toContain('Ann Example: The Voice of Fiction & Pretendsitter');
+    expect(oct16.performerIds).toEqual([]);
+    expect(drafts.find((d) => d.data.start === '2026-10-17T14:00')?.data.performerIds).toEqual([]);
   });
   it("matches the golden events for a band's own page", async () => {
     const { drafts, result } = await runGolden('htmllist-band', htmllist, 'htmllist-band.html', 'https://pretend-band.example/shows', {
@@ -201,7 +253,9 @@ describe('HTML list adapter', () => {
       defaults: { performerIds: ['the-pretend-band'] },
     });
     expect(result.outOfArea).toEqual([{ town: 'town not stated', count: 1 }]);
-    expect(drafts.map((d) => d.data.town).sort()).toEqual(['Babylon', 'Huntington', 'Riverhead']);
+    expect(drafts.map((d) => d.data.town).sort()).toEqual(['Babylon', 'Huntington']);
+    expect(drafts.find((d) => d.data.town === 'Babylon')?.data.venueId).toBe('sample-pub');
+    expect(result.skipped.map((s) => s.reason)).toContain('venue not researched yet');
     expect(drafts.every((d) => d.data.performerIds?.includes('the-pretend-band'))).toBe(true);
     expect(drafts.find((d) => d.data.town === 'Huntington')?.data).toMatchObject({ venueId: 'example-lodge', start: '2026-10-24T20:00', end: '2026-10-24T23:00' });
   });
