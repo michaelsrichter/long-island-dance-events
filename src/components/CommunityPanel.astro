@@ -1,0 +1,135 @@
+---
+/**
+ * Likes, notes (comments), private corrections and photos for one page.
+ * The page stays fully static: approved notes and photos are read in the browser from Blob Storage,
+ * and sign-in uses Static Web Apps + Microsoft Entra External ID. Without JavaScript only the
+ * sign-in link and the community rules link show.
+ */
+import Icon from './Icon.astro';
+import { COMMUNITY, loginHref, pageKey, readModelUrl, type PageType } from '../lib/community';
+
+interface Props {
+  type: PageType;
+  id: string;
+  /** Name of the event, venue, person or style (used in labels). */
+  name: string;
+  /** For events: the date of this page's occurrence (YYYY-MM-DD). */
+  date?: string | undefined;
+}
+const { type, id, name, date } = Astro.props;
+const key = pageKey(type, id);
+const here = new URL(`${Astro.url.pathname}#community`, Astro.site).toString();
+const noun = { event: 'event', venue: 'place', organizer: 'organizer', instructor: 'teacher', performer: 'band or DJ', style: 'dance style' }[type];
+---
+<section
+  class="panel community no-print"
+  id="community"
+  aria-labelledby="community-h"
+  data-community
+  data-key={key}
+  data-name={name}
+  data-date={date}
+  data-src={readModelUrl(key)}
+  data-photos={COMMUNITY.photosEnabled ? 'on' : 'off'}
+>
+  <div class="community__head">
+    <h2 id="community-h">Dancers' notes and photos</h2>
+    <button type="button" class="btn btn--secondary btn--small community__like js-only" data-like aria-pressed="false" disabled>
+      <Icon name="star" />
+      <span data-like-label>Like</span>
+      <span class="community__count" data-like-count></span>
+      <span class="visually-hidden"> {name}</span>
+    </button>
+  </div>
+  <p class="muted">Been to this {noun}? Share a tip or a photo. A volunteer or our AI checker looks at every post first, and photos always wait for a person.</p>
+
+  <div class="community__photos" data-photo-list hidden></div>
+  <ol class="community__comments" data-comment-list hidden></ol>
+  <p class="muted" data-empty hidden>No notes yet. Be the first!</p>
+
+  <div class="community__signin" data-signed-out>
+    <a class="btn btn--primary btn--small" href={loginHref(here)} data-signin><Icon name="people" />Sign in to like, comment or add a photo</a>
+    <p class="muted">Free. We email you a one-time code; no password. <a href="/community-rules/">Community rules</a> · <a href="/privacy/#accounts">Privacy</a></p>
+  </div>
+
+  <div class="community__member" data-signed-in hidden>
+    <p class="alert alert--info" data-profile-needed hidden>
+      Almost there: <a href={`/account/?next=${encodeURIComponent(Astro.url.pathname + '#community')}`}>finish your profile</a> (pick a display name and agree to the rules) to post.
+    </p>
+    <p class="alert alert--warn" data-blocked hidden></p>
+
+    <form class="community__form" data-comment-form novalidate>
+      <fieldset class="community__choice">
+        <legend>What would you like to send?</legend>
+        <label><input type="radio" name="kind" value="comment" checked /> A public note for other dancers</label>
+        <label><input type="radio" name="kind" value="correction" /> A private correction for our editors</label>
+      </fieldset>
+      <div class="field">
+        <label for="community-text">Your note</label>
+        <textarea id="community-text" name="text" rows="4" maxlength="1000" required aria-describedby="community-text-help"></textarea>
+        <p class="muted" id="community-text-help">Be kind and stay on topic. Please don't post phone numbers, emails or links.</p>
+      </div>
+      <p class="btn-row"><button type="submit" class="btn btn--primary btn--small">Send</button></p>
+    </form>
+
+    {COMMUNITY.photosEnabled && (
+      <details class="community__photo-form" data-photo-details>
+        <summary>Add a photo</summary>
+        <form data-photo-form novalidate>
+          <p class="muted" data-photo-needs hidden>To post photos you must be 18 or older and agree to the photo rules on <a href="/account/">your account page</a>.</p>
+          <div class="field">
+            <label for="community-file">Photo (JPEG, PNG or WebP)</label>
+            <input id="community-file" name="file" type="file" accept="image/jpeg,image/png,image/webp" required />
+          </div>
+          <img class="community__preview" data-photo-preview alt="" hidden />
+          <div class="field">
+            <label for="community-alt">Describe the photo for people who can't see it</label>
+            <input id="community-alt" name="alt" type="text" maxlength="200" required placeholder="Couples dancing under string lights" />
+          </div>
+          <div class="field">
+            <label for="community-caption">Caption (optional)</label>
+            <input id="community-caption" name="caption" type="text" maxlength="200" />
+          </div>
+          <fieldset class="community__choice">
+            <legend>Please confirm</legend>
+            <label><input type="checkbox" name="own" value="yes" required /> I took this photo or have the right to share it.</label>
+            <label><input type="checkbox" name="people" value="yes" required /> People who can be recognized agreed to be posted.</label>
+            <label><input type="checkbox" name="noKids" value="yes" required /> No one under 18 can be recognized.</label>
+          </fieldset>
+          <p class="muted">We remove location data (GPS) and resize the photo. Anyone pictured can ask us to take it down.</p>
+          <p class="btn-row"><button type="submit" class="btn btn--primary btn--small">Send photo for review</button></p>
+        </form>
+      </details>
+    )}
+    <p class="muted community__links"><a href="/account/">Your account</a> · <a href="/community-rules/">Community rules</a> · <a data-signout href="/.auth/logout">Sign out</a></p>
+  </div>
+
+  <p class="community__status" role="status" aria-live="polite" data-status></p>
+
+  <dialog class="share-dialog" data-report-dialog aria-labelledby="report-h">
+    <form method="dialog" class="share-dialog__inner" data-report-form>
+      <div class="share-dialog__head">
+        <h2 id="report-h" class="h3">Report this post</h2>
+        <button type="button" class="icon-btn" data-report-cancel aria-label="Close"><Icon name="x" /></button>
+      </div>
+      <fieldset class="community__choice">
+        <legend>What is wrong?</legend>
+        <label><input type="radio" name="reason" value="rude" checked /> Rude, hateful or harassing</label>
+        <label><input type="radio" name="reason" value="spam" /> Spam or an ad</label>
+        <label><input type="radio" name="reason" value="private" /> Shares someone's private details</label>
+        <label><input type="radio" name="reason" value="shows-me" /> It shows me and I want it removed</label>
+        <label><input type="radio" name="reason" value="child" /> It shows a child</label>
+        <label><input type="radio" name="reason" value="not-mine" /> Someone else's photo</label>
+        <label><input type="radio" name="reason" value="other" /> Something else</label>
+      </fieldset>
+      <div class="field">
+        <label for="report-note">Anything else? (optional)</label>
+        <input id="report-note" name="note" type="text" maxlength="300" />
+      </div>
+      <p class="btn-row"><button type="submit" class="btn btn--primary btn--small" value="send">Send report</button></p>
+    </form>
+  </dialog>
+</section>
+<script>
+  import '../scripts/community';
+</script>

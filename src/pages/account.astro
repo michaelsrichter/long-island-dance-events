@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+import { loginHref } from '../lib/community';
+
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Your account', href: '/account/' },
+];
+const here = new URL('/account/', Astro.site).toString();
+const thisYear = new Date().getFullYear();
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+---
+<BaseLayout title="Your account" description="Your Long Island Dance Events account: display name, community rules, download or delete your data." pageType="account" noindex>
+  <PageHeader title="Your account" lede="An account lets you like pages, leave notes and share photos. Browsing never needs one." crumbs={crumbs} />
+  <div class="container section stack-l account" data-account>
+    <section class="panel" data-signed-out aria-labelledby="acct-signin-h">
+      <h2 id="acct-signin-h">Sign in</h2>
+      <p>We email you a one-time code. There is no password to remember.</p>
+      <p class="btn-row"><a class="btn btn--primary" href={loginHref(here)} data-signin><Icon name="people" />Sign in or create an account</a></p>
+      <p class="muted">By signing in you agree to the <a href="/community-rules/">community rules</a>. See <a href="/privacy/#accounts">what we keep</a>.</p>
+    </section>
+
+    <section class="panel" data-signed-in hidden aria-labelledby="acct-profile-h">
+      <h2 id="acct-profile-h">Your profile</h2>
+      <p class="alert alert--warn" data-blocked hidden></p>
+      <form class="community__form" data-profile-form novalidate>
+        <div class="field">
+          <label for="acct-name">Display name (shown next to your posts)</label>
+          <input id="acct-name" name="displayName" type="text" minlength="2" maxlength="40" required autocomplete="nickname" />
+        </div>
+        <fieldset class="community__choice" data-age-fields>
+          <legend>When were you born?</legend>
+          <p class="muted">We only keep whether you are 13 or older, and 18 or older. We never store the date.</p>
+          <div class="account__birth">
+            <div class="field">
+              <label for="acct-month">Month</label>
+              <select id="acct-month" name="birthMonth" required>
+                <option value="">Choose…</option>
+                {months.map((m, i) => <option value={String(i + 1)}>{m}</option>)}
+              </select>
+            </div>
+            <div class="field">
+              <label for="acct-year">Year</label>
+              <input id="acct-year" name="birthYear" type="number" inputmode="numeric" min={thisYear - 110} max={thisYear} required />
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="community__choice">
+          <legend>Rules</legend>
+          <label data-rules-row><input type="checkbox" name="acceptRules" value="yes" /> I agree to the <a href="/community-rules/">community rules</a>.</label>
+          <label data-photo-row><input type="checkbox" name="photoTerms" value="yes" /> I am 18 or older and agree to the photo rules (only needed to post photos).</label>
+        </fieldset>
+        <p class="btn-row"><button type="submit" class="btn btn--primary">Save</button></p>
+      </form>
+    </section>
+
+    <section class="panel" data-signed-in hidden aria-labelledby="acct-data-h">
+      <h2 id="acct-data-h">Your data</h2>
+      <p>Download a copy of everything we keep about you: your display name, likes, notes and photos.</p>
+      <p class="btn-row"><a class="btn btn--secondary" href="/api/me/export" download><Icon name="download" />Download my data</a></p>
+      <h3 class="mt-5">Delete my account</h3>
+      <p>This deletes your profile, likes, notes and photos from this website right away. Your sign-in account is removed within 30 days.</p>
+      <form class="community__form" data-delete-form novalidate>
+        <div class="field">
+          <label for="acct-delete">Type DELETE to confirm</label>
+          <input id="acct-delete" name="confirm" type="text" autocomplete="off" />
+        </div>
+        <p class="btn-row"><button type="submit" class="btn btn--secondary">Delete my account</button></p>
+      </form>
+    </section>
+
+    <p class="btn-row" data-signed-in hidden><a class="btn btn--secondary" href="/.auth/logout" data-signout>Sign out</a></p>
+    <p class="community__status" role="status" aria-live="polite" data-status></p>
+    <noscript><p class="alert alert--info">Your account page needs JavaScript.</p></noscript>
+  </div>
+</BaseLayout>
+<script>
+  import '../scripts/account';
+</script>

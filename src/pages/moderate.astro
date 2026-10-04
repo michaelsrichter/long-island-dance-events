@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { loginHref } from '../lib/community';
+
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Moderation', href: '/moderate/' },
+];
+const here = new URL('/moderate/', Astro.site).toString();
+---
+<BaseLayout title="Moderation queue" description="Moderators review posts and photos waiting for a person." pageType="moderate" noindex>
+  <PageHeader title="Moderation queue" lede="Posts and photos waiting for a person. Approve, reject or hide each one. Every decision is logged." crumbs={crumbs} />
+  <div class="container section stack-l moderate" data-moderate>
+    <p class="alert alert--info" data-mod-signin hidden>Moderators only. <a href={loginHref(here)}>Sign in</a> with the email address listed as a moderator.</p>
+    <div class="btn-row" data-mod-tools hidden>
+      <button type="button" class="btn btn--secondary btn--small" data-mod-refresh>Refresh</button>
+      <button type="button" class="btn btn--secondary btn--small" data-mod-log>Show this month's log</button>
+    </div>
+    <p class="community__status" role="status" aria-live="polite" data-status></p>
+    <ol class="moderate__list" data-mod-list></ol>
+    <section class="panel" data-mod-log-panel hidden aria-labelledby="mod-log-h">
+      <h2 id="mod-log-h">Decision log</h2>
+      <ol class="moderate__log" data-mod-log-list></ol>
+    </section>
+    <section class="panel" aria-labelledby="mod-help-h">
+      <h2 id="mod-help-h">How to decide</h2>
+      <ul>
+        <li><strong>Approve</strong> if it follows the <a href="/community-rules/">community rules</a>.</li>
+        <li><strong>Reject</strong> if it breaks them. Photos: reject if a child can be recognized, if it looks like someone did not agree to be posted, or if it is not from a dance.</li>
+        <li><strong>Hide</strong> takes a public post down while you check something.</li>
+        <li><strong>Corrections</strong> are private notes for editors. Fix the listing (or not), then mark it <strong>Done</strong>.</li>
+        <li><strong>Ban</strong> stops a person from posting (for some days or for good) and can hide everything they posted.</li>
+        <li>If a photo might show child sexual abuse: do not download or share it. Reject it, keep the log entry, and report it to the NCMEC CyberTipline.</li>
+      </ul>
+    </section>
+  </div>
+</BaseLayout>
+<script>
+  import '../scripts/moderate';
+</script>
