@@ -1,0 +1,25 @@
+{
+  "title": "Lisa Polizzi Jam at Daisy's Nashville Lounge (Patchogue)",
+  "summary": "Live music by Lisa Polizzi Jam at Daisy's Nashville Lounge (Patchogue). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-08T19:00",
+  "end": "2026-10-08T22:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/thursday-june-4-lisa-polizzi-jam/2026-10-08/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/thursday-june-4-lisa-polizzi-jam/2026-10-08/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-08",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "jam"
+  ],
+  "confidence": 0.85,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-patchogue||thursday|19:00|live-music|lisapolizzijam||2026-10-08",
+  "reviewNotes": "Band or DJ not researched yet: Lisa Polizzi Jam."
+}

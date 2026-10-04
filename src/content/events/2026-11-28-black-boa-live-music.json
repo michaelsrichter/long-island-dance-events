@@ -1,0 +1,22 @@
+{
+  "title": "Black BOA at Bartini Bar & Lounge",
+  "summary": "Live music by Black BOA at Bartini Bar & Lounge. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-28T21:00",
+  "timezone": "America/New_York",
+  "venueId": "bartini-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "black-boa"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bartini-babylon",
+  "sourceUrl": "https://www.bartinibabylon.com/event-calendar",
+  "sourceName": "Bartini Bar & Lounge (Babylon) - event calendar",
+  "sourceRef": "events page 2026-11-28",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.8,
+  "matchKey": "bartini-babylon|bartini-babylon||saturday|21:00|live-music|black-boa||2026-11-28"
+}

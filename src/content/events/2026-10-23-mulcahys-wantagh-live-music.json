@@ -1,0 +1,25 @@
+{
+  "title": "Stifler's Mom and DJ Savage at Mulcahy's",
+  "summary": "Live music by Stifler's Mom and DJ Savage at Mulcahy's. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-23T20:00",
+  "end": "2026-10-23T23:30",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/90s-vs-2000s-night-with-stiflers-mom-and-dj-savage/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/90s-vs-2000s-night-with-stiflers-mom-and-dj-savage/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2026-10-23",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "dj"
+  ],
+  "confidence": 0.85,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|20:00|live-music|stiflersmomanddjsavage||2026-10-23",
+  "reviewNotes": "Band or DJ not researched yet: Stifler's Mom and DJ Savage."
+}

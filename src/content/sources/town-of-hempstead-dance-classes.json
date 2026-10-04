@@ -1,17 +1,26 @@
 {
   "name": "Town of Hempstead adult classes (Line Dancing, Ballroom, Salsa & Latin)",
-  "url": "https://hempsteadny.gov/297/Line-Dancing",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Town of Hempstead adult classes (Line Dancing, Ballroom, Salsa & Latin). We write our own short summaries and link back to the original page.",
-  "description": "Dance listings in Hicksville: line dancing, ballroom, salsa/Latin.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
     "town": "Hicksville"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep only for lessons/community pages. These are resident-focused classes, not public socials."
+  "description": "Dance listings in Hicksville: line dancing, ballroom, salsa/Latin.",
+  "enabled": true,
+  "focus": "dance",
+  "lastCounts": {
+    "found": 2,
+    "kept": 0,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastMessage": "The adapter found 2 listings but none could be used. The source layout may have changed.",
+  "lastScraped": "2026-10-04T16:12:50.367Z",
+  "lastStatus": "empty",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep only for lessons/community pages. These are resident-focused classes, not public socials.",
+  "url": "https://hempsteadny.gov/297/Line-Dancing"
 }

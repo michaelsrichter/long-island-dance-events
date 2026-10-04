@@ -1,0 +1,24 @@
+{
+  "title": "EagleMania: The World’s Greatest Eagles Tribute at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by EagleMania: The World’s Greatest Eagles Tribute at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-20T20:00",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "patchogue-theatre",
+  "sourceUrl": "https://www.patchoguetheatre.org/events/",
+  "sourceName": "Patchogue Theatre - events",
+  "sourceRef": "events page 2026-11-20",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "theater",
+    "tribute"
+  ],
+  "confidence": 0.75,
+  "matchKey": "patchogue-theatre|patchogue-theatre-patchogue||friday|20:00|live-music|eaglemaniatheworldsgreatesteaglestribute||2026-11-20",
+  "reviewNotes": "Band or DJ not researched yet: EagleMania: The World’s Greatest Eagles Tribute."
+}

@@ -1,18 +1,26 @@
 {
   "name": "Bartini Bar & Lounge (Babylon) - event calendar",
-  "url": "https://www.bartinibabylon.com/event-calendar",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
   "attribution": "Some listings come from Bartini Bar & Lounge (Babylon). We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Babylon: weekend local rock bands, karaoke, open mic.",
-  "rateLimitSeconds": 5,
+  "cadence": "twice-weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "bartini-babylon",
-    "town": "Babylon"
+    "town": "Babylon",
+    "venueId": "bartini-babylon"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it. The event-calendar page has many current local bar-band dates, but the dance signal is indirect."
+  "description": "Live music listings in Babylon: weekend local rock bands, karaoke, open mic.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 19,
+    "kept": 17,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:06:15.986Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. The event-calendar page has many current local bar-band dates, but the dance signal is indirect.",
+  "url": "https://www.bartinibabylon.com/event-calendar"
 }

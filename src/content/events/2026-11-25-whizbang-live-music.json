@@ -1,0 +1,22 @@
+{
+  "title": "Whizbang at Bartini Bar & Lounge",
+  "summary": "Live music by Whizbang at Bartini Bar & Lounge. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-25T20:30",
+  "timezone": "America/New_York",
+  "venueId": "bartini-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "whizbang"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bartini-babylon",
+  "sourceUrl": "https://www.bartinibabylon.com/event-calendar",
+  "sourceName": "Bartini Bar & Lounge (Babylon) - event calendar",
+  "sourceRef": "events page 2026-11-25",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.8,
+  "matchKey": "bartini-babylon|bartini-babylon||wednesday|20:30|live-music|whizbang||2026-11-25"
+}

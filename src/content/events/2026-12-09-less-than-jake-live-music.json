@@ -1,0 +1,24 @@
+{
+  "title": "Less Than Jake at Mulcahy's",
+  "summary": "Live music by Less Than Jake at Mulcahy's. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-09T19:30",
+  "end": "2026-12-09T23:30",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "performerIds": [
+    "less-than-jake"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/less-than-jake/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/less-than-jake/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2026-12-09",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.9,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||wednesday|19:30|live-music|less-than-jake||2026-12-09"
+}

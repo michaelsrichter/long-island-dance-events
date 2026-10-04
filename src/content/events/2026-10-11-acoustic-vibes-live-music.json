@@ -1,0 +1,28 @@
+{
+  "title": "Acoustic Vibes at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Acoustic Vibes at Daisy's Nashville Lounge (Miller Place). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-11T13:00",
+  "end": "2026-10-11T17:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "acoustic-vibes"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/acoustic-vibes-2/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/acoustic-vibes-2/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-11",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "acoustic",
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||sunday|13:00|live-music|acoustic-vibes||2026-10-11"
+}

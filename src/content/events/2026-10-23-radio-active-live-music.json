@@ -1,0 +1,22 @@
+{
+  "title": "Radio Active at The Villager",
+  "summary": "Live music by Radio Active at The Villager. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-23T18:00",
+  "timezone": "America/New_York",
+  "venueId": "the-villager-farmingdale",
+  "town": "Farmingdale",
+  "performerIds": [
+    "radio-active"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "radio-active",
+  "sourceUrl": "https://radioactiveny.com/",
+  "sourceName": "Radio Active - events calendar",
+  "sourceRef": "events page 2026-10-23",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.8,
+  "matchKey": "radio-active|the-villager-farmingdale||friday|18:00|live-music|radio-active||2026-10-23"
+}

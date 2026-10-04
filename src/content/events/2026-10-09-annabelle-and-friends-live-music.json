@@ -1,0 +1,23 @@
+{
+  "title": "Annabelle and Friends at Kitty Mulligan's Irish Pub",
+  "summary": "Live music by Annabelle and Friends at Kitty Mulligan's Irish Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-09T19:00",
+  "end": "2026-10-09T22:00",
+  "timezone": "America/New_York",
+  "venueId": "kitty-mulligans-bay-shore",
+  "town": "Bay Shore",
+  "performerIds": [
+    "annabelle-and-friends"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "kitty-mulligans-bay-shore",
+  "sourceUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+  "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
+  "sourceRef": "events page 2026-10-09",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.8,
+  "matchKey": "kitty-mulligans-bay-shore|kitty-mulligans-bay-shore||friday|19:00|live-music|annabelle-and-friends||2026-10-09"
+}

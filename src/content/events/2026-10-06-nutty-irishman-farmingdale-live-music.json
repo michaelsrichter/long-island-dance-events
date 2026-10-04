@@ -1,0 +1,20 @@
+{
+  "title": "Country Night at The Nutty Irishman",
+  "summary": "Live music by Country Night at The Nutty Irishman in Farmingdale. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-06T19:00",
+  "timezone": "America/New_York",
+  "venueId": "nutty-irishman-farmingdale",
+  "town": "Farmingdale",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 4, 2026",
+  "sourceRef": "tuesday list",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-06|nutty-irishman-farmingdale|country-night|2026-10-06|special",
+  "reviewNotes": "Band or DJ not researched yet: Country Night."
+}

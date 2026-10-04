@@ -1,0 +1,22 @@
+{
+  "title": "Halloween Social dance at Polish American Cultural Association",
+  "summary": "An evening of social dancing. Costumes are welcome.",
+  "category": "social-dance",
+  "start": "2026-10-31T19:00",
+  "timezone": "America/New_York",
+  "venueId": "polish-american-cultural-association-port-washington",
+  "town": "Port Washington",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "polish-club-port-washington",
+  "sourceUrl": "https://portwashingtonpolishclub.com/upcoming-events",
+  "sourceName": "Polish American Cultural Association (Port Washington) - upcoming events",
+  "sourceRef": "events page 2026-10-31",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "dj"
+  ],
+  "confidence": 0.75,
+  "matchKey": "polish-club-port-washington|polish-american-cultural-association-port-washington||saturday|19:00|social-dance|||2026-10-31|halloween"
+}

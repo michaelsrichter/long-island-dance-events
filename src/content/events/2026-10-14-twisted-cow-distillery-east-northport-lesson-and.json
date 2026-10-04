@@ -1,0 +1,21 @@
+{
+  "title": "Social dance with a lesson at Twisted Cow Distillery",
+  "summary": "A group lesson, then open social dancing.",
+  "category": "lesson-party",
+  "start": "2026-10-14T19:30",
+  "end": "2026-10-14T22:30",
+  "timezone": "America/New_York",
+  "venueId": "twisted-cow-distillery-east-northport",
+  "town": "East Northport",
+  "price": 10,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "dancemanhattan-li-swing",
+  "sourceUrl": "http://dancemanhattan.com/calendar/event/113",
+  "sourceName": "Dance Manhattan - Long Island swing dances list",
+  "sourceRef": "events page 2026-10-14",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.75,
+  "matchKey": "dancemanhattan-li-swing|twisted-cow-distillery-east-northport||wednesday|19:30|lesson-party|||2026-10-14"
+}

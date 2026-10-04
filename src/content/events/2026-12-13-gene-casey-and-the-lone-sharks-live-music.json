@@ -1,0 +1,30 @@
+{
+  "title": "Gene Casey & the Lone Sharks at Bedell Cellars",
+  "summary": "Live music by Gene Casey & the Lone Sharks at Bedell Cellars. The dancing score on this page says whether people usually dance. Dance styles: Latin.",
+  "category": "live-music",
+  "danceStyles": [
+    "latin-ballroom"
+  ],
+  "start": "2026-12-13T13:00",
+  "end": "2026-12-13T17:00",
+  "timezone": "America/New_York",
+  "venueId": "bedell-cellars-cutchogue",
+  "town": "Cutchogue",
+  "performerIds": [
+    "gene-casey-and-the-lone-sharks"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://genecasey.com/event/gene-casey-at-bedell-cellars-2/",
+  "status": "active",
+  "sourceId": "gene-casey-lone-sharks",
+  "sourceUrl": "https://genecasey.com/event/gene-casey-at-bedell-cellars-2/",
+  "sourceName": "Gene Casey & the Lone Sharks - show calendar",
+  "sourceRef": "calendar feed 2026-12-13",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "gene-casey-lone-sharks|bedell-cellars-cutchogue||sunday|13:00|live-music|gene-casey-and-the-lone-sharks|latin-ballroom|2026-12-13"
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Country Road at Mulcahy's",
+  "summary": "Live music by Country Road at Mulcahy's. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-16T20:00",
+  "end": "2026-10-16T23:30",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "performerIds": [
+    "country-road"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/country-road/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/country-road/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2026-10-16",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.9,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|20:00|live-music|country-road||2026-10-16"
+}

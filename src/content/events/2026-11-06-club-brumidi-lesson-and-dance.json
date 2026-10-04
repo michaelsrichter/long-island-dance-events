@@ -1,0 +1,35 @@
+{
+  "title": "West Coast Swing, Hustle and Argentine Tango social dance with a lesson at Brumidi Lodge (Sons of Italy)",
+  "summary": "A group lesson, then open social dancing to music by DJ Gene & Joanne. Dance styles: West Coast Swing, Hustle and Argentine Tango. Food is included, and there is a cash bar.",
+  "category": "lesson-party",
+  "danceStyles": [
+    "west-coast-swing",
+    "hustle",
+    "argentine-tango"
+  ],
+  "start": "2026-11-06T19:00",
+  "end": "2026-11-06T22:30",
+  "timezone": "America/New_York",
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "club-brumidi",
+  "performerIds": [
+    "dj-gene-and-joanne"
+  ],
+  "price": 25,
+  "priceNotes": "Free lesson included",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://sonsofitalyli.com/event/friday-night-dance-social/",
+  "status": "active",
+  "sourceId": "brumidi-lodge-deer-park",
+  "sourceUrl": "https://sonsofitalyli.com/event/friday-night-dance-social/",
+  "sourceName": "Club Brumidi at Brumidi Lodge (Deer Park) - events",
+  "sourceRef": "event page 2026-11-06",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "dj"
+  ],
+  "confidence": 0.8,
+  "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|friday|19:00|lesson-party|dj-gene-and-joanne|argentine-tango+hustle+west-coast-swing|2026-11-06"
+}
