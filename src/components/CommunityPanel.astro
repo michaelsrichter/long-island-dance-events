@@ -1,6 +1,6 @@
 ---
 /**
- * Likes, notes (comments), private corrections and photos for one page.
+ * Notes (comments), private corrections and photos for one page. The Like button is at the top of the page (Reactions.astro).
  * The page stays fully static: approved notes and photos are read in the browser from Blob Storage,
  * and sign-in uses Static Web Apps + Microsoft Entra External ID. Without JavaScript only the
  * sign-in link and the community rules link show.
@@ -34,13 +34,8 @@ const noun = { event: 'event', venue: 'place', organizer: 'organizer', instructo
 >
   <div class="community__head">
     <h2 id="community-h">Dancers' notes and photos</h2>
-    <button type="button" class="btn btn--secondary btn--small community__like js-only" data-like aria-pressed="false" disabled>
-      <Icon name="star" />
-      <span data-like-label>Like</span>
-      <span class="community__count" data-like-count></span>
-      <span class="visually-hidden"> {name}</span>
-    </button>
   </div>
+
   <p class="muted">Been to this {noun}? Share a tip or a photo. A volunteer or our AI checker looks at every post first, and photos always wait for a person.</p>
 
   <div class="community__photos" data-photo-list hidden></div>

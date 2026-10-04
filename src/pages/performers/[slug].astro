@@ -10,6 +10,7 @@ import { linksOf } from '../../lib/links';
 import { PERFORMER_TYPE_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
+import Reactions from '../../components/Reactions.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('performers')).map((p) => ({ params: { slug: p.id }, props: { person: p } }));
@@ -26,6 +27,7 @@ const lede = p.description ?? `${PERFORMER_TYPE_LABELS[p.type]}${p.genres.length
 ---
 <BaseLayout title={p.seoTitle ?? `${p.name}: where to dance to them on Long Island`} description={p.seoDescription ?? `${p.name} (${PERFORMER_TYPE_LABELS[p.type]}). Upcoming dances and gigs in Nassau and Suffolk.`} pageType="person" jsonLd={[{ '@context': 'https://schema.org', '@type': p.type === 'band' ? 'MusicGroup' : 'Person', name: p.name, genre: p.genres, sameAs: linksOf(p).map((l) => l.url) }, breadcrumbJsonLd(crumbs, Astro.site!)]}>
   <PageHeader title={p.name} lede={lede} crumbs={crumbs}>
+      <Reactions type="performer" id={person.id} name={p.name} variant="hero" />
     <PersonLinks links={linksOf(p)} name={p.name} variant="buttons" location="performer" class="mt-5" />
   </PageHeader>
   <div class="container section stack-l">

@@ -1,0 +1,39 @@
+---
+/**
+ * Like (with a count) and, for upcoming events, Save. Used on event cards in every list and at the top
+ * of detail pages. One like per person per page (the API enforces it). Saves are private bookmarks.
+ * The buttons are wired up by scripts/reactions.ts; without JavaScript they are not shown.
+ * Icons are CSS masks (not inline SVG) because a list page can have hundreds of these buttons.
+ */
+import { pageKey, type PageType } from '../lib/community';
+
+interface Props {
+  type: PageType;
+  id: string;
+  /** Name of the event, place or person (read out by screen readers after "Like"/"Save"). */
+  name: string;
+  /** Show the Save button (upcoming events only). */
+  save?: boolean;
+  /** For events: the date of this occurrence (YYYY-MM-DD), kept with a save. */
+  date?: string | undefined;
+  /** "card" (small, in lists) or "hero" (top of a detail page). */
+  variant?: 'card' | 'hero';
+}
+const { type, id, name, save = false, date, variant = 'card' } = Astro.props;
+---
+<div class:list={['react', `react--${variant}`, 'js-only', 'no-print']} data-react data-key={pageKey(type, id)} data-date={date} data-detail={variant === 'hero' ? '' : undefined}>
+  <button type="button" class="react__btn react__like" data-like aria-pressed="false" disabled>
+    <span class="react__icon react__icon--like" aria-hidden="true"></span>
+    <span data-like-label>Like</span><span class="visually-hidden"> {name}</span>
+    <span class="react__count" data-like-count hidden></span>
+  </button>
+  {save && (
+    <button type="button" class="react__btn react__save" data-save aria-pressed="false" disabled>
+      <span class="react__icon react__icon--save" aria-hidden="true"></span>
+      <span data-save-label>Save</span><span class="visually-hidden"> {name}</span>
+    </button>
+  )}
+</div>
+<script>
+  import '../scripts/reactions';
+</script>

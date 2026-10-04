@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Icon from '../components/Icon.astro';
+
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Your account', href: '/account/' },
+  { name: 'Saved events', href: '/saved/' },
+];
+---
+<BaseLayout title="Saved events" description="Events you saved on Long Island Dance Events. Only you can see this list." pageType="saved" noindex>
+  <PageHeader title="Saved events" lede="The events you saved, with their next date. Only you can see this list." crumbs={crumbs} />
+  <div class="container section stack-l saved" data-saved>
+    <p class="spinner js-only" data-loading role="status">Loading your saved events…</p>
+    <noscript><p class="alert alert--info">Your saved events need JavaScript turned on.</p></noscript>
+
+    <section class="panel" data-signed-out hidden aria-labelledby="saved-signin-h">
+      <h2 id="saved-signin-h">Sign in to see your saved events</h2>
+      <p>Tap <strong>Save</strong> on any event to keep it here. It's free: enter your email and we send you a one-time code. There is no password to remember.</p>
+      <p class="btn-row"><a class="btn btn--primary" href="/account/" data-signin><Icon name="people" />Sign in or create an account</a></p>
+    </section>
+
+    <div class="empty" data-empty hidden>
+      <Icon name="bookmark" />
+      <h2 class="h3">You haven't saved any events yet.</h2>
+      <p>Tap <strong>Save</strong> on any event, and it will show up here with its next date.</p>
+      <p class="btn-row"><a class="btn btn--primary" href="/events/"><Icon name="calendar" />Find events</a></p>
+    </div>
+
+    <section data-upcoming hidden aria-labelledby="saved-up-h">
+      <h2 id="saved-up-h">Coming up</h2>
+      <ul class="saved-list" data-upcoming-list></ul>
+    </section>
+
+    <section data-ended hidden aria-labelledby="saved-ended-h">
+      <h2 id="saved-ended-h">No upcoming dates</h2>
+      <p class="muted">These events have ended or are not on our calendar right now. If they come back, they move up to "Coming up".</p>
+      <ul class="saved-list saved-list--ended" data-ended-list></ul>
+    </section>
+
+    <p class="muted" data-signed-in hidden>Saved events are private. They are included when you <a href="/account/">download your data</a> and deleted with your account.</p>
+  </div>
+</BaseLayout>
+<script>
+  import '../scripts/saved';
+</script>

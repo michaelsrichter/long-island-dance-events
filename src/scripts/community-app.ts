@@ -1,5 +1,5 @@
 /**
- * Community panel: likes, notes, corrections, photos and reports for one page.
+ * Community panel: notes, corrections, photos and reports for one page (likes are in reactions.ts).
  * All user text is inserted with textContent (never innerHTML).
  */
 import { loginUrl, rememberAccount } from './account-state';
@@ -72,9 +72,6 @@ export function init(panel: HTMLElement) {
   const src = panel.dataset.src!;
   const date = panel.dataset.date || '';
   const status = q<HTMLElement>(panel, '[data-status]')!;
-  const likeBtn = q<HTMLButtonElement>(panel, '[data-like]')!;
-  const likeLabel = q<HTMLElement>(panel, '[data-like-label]')!;
-  const likeCount = q<HTMLElement>(panel, '[data-like-count]')!;
   const commentList = q<HTMLOListElement>(panel, '[data-comment-list]')!;
   const photoList = q<HTMLElement>(panel, '[data-photo-list]')!;
   const empty = q<HTMLElement>(panel, '[data-empty]')!;
@@ -94,21 +91,11 @@ export function init(panel: HTMLElement) {
   signin.href = loginUrl(`${location.pathname}#community`);
 
   let me: Me | null = null;
-  let liked = false;
-  let likes = 0;
   let reportTarget: { itemType: 'comment' | 'photo'; itemId: string } | null = null;
 
   const say = (text: string) => {
     status.textContent = text;
   };
-
-  function renderLikes() {
-    likeBtn.disabled = false;
-    likeBtn.setAttribute('aria-pressed', String(liked));
-    likeLabel.textContent = liked ? 'Liked' : 'Like';
-    likeCount.textContent = likes ? String(likes) : '';
-    likeBtn.classList.toggle('is-on', liked);
-  }
 
   function reportButton(itemType: 'comment' | 'photo', itemId: string) {
     const b = document.createElement('button');
@@ -129,8 +116,6 @@ export function init(panel: HTMLElement) {
   }
 
   function render(doc: Doc) {
-    likes = doc.likes || 0;
-    renderLikes();
     commentList.replaceChildren();
     for (const c of doc.comments) {
       const li = document.createElement('li');
@@ -236,20 +221,6 @@ export function init(panel: HTMLElement) {
     } else say(r.data?.message || 'Something went wrong. Please try again.');
   }
 
-  likeBtn.addEventListener('click', async () => {
-    if (!me) {
-      location.href = signin.href;
-      return;
-    }
-    const r = await busy(likeBtn, liked ? 'Removing…' : 'Liking…', () => api('/api/likes', { method: 'POST', body: JSON.stringify({ key, like: !liked }) }));
-    if (r.status === 200) {
-      liked = r.data.liked;
-      likes = r.data.count;
-      renderLikes();
-      say(liked ? 'Thanks for the like!' : 'Like removed.');
-    } else handleError(r);
-  });
-
   commentForm.addEventListener('submit', async (ev) => {
     ev.preventDefault();
     const data = new FormData(commentForm);
@@ -339,10 +310,8 @@ export function init(panel: HTMLElement) {
       applyMe();
       return;
     }
-    const [meRes, likedRes] = await Promise.all([api('/api/me'), api(`/api/me/likes?keys=${encodeURIComponent(key)}`)]);
+    const meRes = await api('/api/me');
     me = meRes.status === 200 && meRes.data?.signedIn ? (meRes.data.user as Me) : null;
-    liked = Boolean(likedRes.data?.liked?.[key]);
     applyMe();
-    renderLikes();
   })();
 }

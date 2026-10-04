@@ -12,6 +12,7 @@ import EventCard from '../../../components/EventCard.astro';
 import RelativeWhen from '../../../components/RelativeWhen.astro';
 import PersonLinks from '../../../components/PersonLinks.astro';
 import CommunityPanel from '../../../components/CommunityPanel.astro';
+import Reactions from '../../../components/Reactions.astro';
 import { buildNow, calendarEventOf, getAllEvents, getSettings, shareInputOf, type PersonRef, type ResolvedEvent } from '../../../lib/content';
 import { breadcrumbJsonLd, eventJsonLd } from '../../../lib/seo';
 import { isUpcoming } from '../../../lib/event-core';
@@ -87,6 +88,7 @@ const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at $
             </div>
             <h1 id="event-title" class="mt-3">{e.title}</h1>
             <p class="event-hero__date"><time datetime={e.timeTba ? e.date : e.startLocal}>{e.dateLabel}{e.timeLabel ? ` · ${e.timeLabel}` : ''}</time></p>
+            <Reactions type="event" id={e.eventId} name={e.title} date={e.date} save={upcomingNow && e.status !== 'cancelled'} variant="hero" />
             <ul class="hero-facts" aria-label="Key details">
               {lessonLine && <li><Icon name="people" />{lessonLine}</li>}
               {e.location.town && <li><Icon name="pin" />{e.location.name ? `${e.location.name}, ` : ''}{e.location.town}</li>}

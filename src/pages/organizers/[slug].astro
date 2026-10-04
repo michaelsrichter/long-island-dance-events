@@ -10,6 +10,7 @@ import { linksOf } from '../../lib/links';
 import { ORGANIZER_TYPE_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
+import Reactions from '../../components/Reactions.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('organizers')).map((o) => ({ params: { slug: o.id }, props: { org: o } }));
@@ -31,6 +32,7 @@ const ld = { '@context': 'https://schema.org', '@type': 'Organization', name: o.
 ---
 <BaseLayout title={o.seoTitle ?? `${o.name}: dances and classes`} description={o.seoDescription ?? `${o.description ?? `${ORGANIZER_TYPE_LABELS[o.type]}${o.town ? ` in ${o.town}` : ''}.`} Upcoming events, contact details and links.`.slice(0, 165)} pageType="organizer" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={o.name} lede={o.description ?? `${ORGANIZER_TYPE_LABELS[o.type]}${o.town ? ` in ${o.town}` : ''}.`} crumbs={crumbs}>
+      <Reactions type="organizer" id={org.id} name={o.name} variant="hero" />
     <PersonLinks links={linksOf(o)} name={o.name} variant="buttons" location="organizer" class="mt-5" />
   </PageHeader>
   <div class="container section stack-l">

@@ -8,6 +8,7 @@ import { upcomingFor } from '../../lib/content';
 import { linksOf } from '../../lib/links';
 import { breadcrumbJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
+import Reactions from '../../components/Reactions.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('instructors')).map((p) => ({ params: { slug: p.id }, props: { person: p } }));
@@ -26,6 +27,7 @@ const lede = p.description ?? `Dance teacher${styles.length ? ` (${styles.map((s
 ---
 <BaseLayout title={p.seoTitle ?? `${p.name}: dance classes on Long Island`} description={p.seoDescription ?? `${lede} Upcoming classes and lessons with ${p.name} in Nassau and Suffolk.`.slice(0, 165)} pageType="person" jsonLd={[{ '@context': 'https://schema.org', '@type': 'Person', name: p.name, jobTitle: 'Dance teacher', sameAs: linksOf(p).map((l) => l.url) }, breadcrumbJsonLd(crumbs, Astro.site!)]}>
   <PageHeader title={p.name} lede={lede} crumbs={crumbs}>
+      <Reactions type="instructor" id={person.id} name={p.name} variant="hero" />
     <PersonLinks links={linksOf(p)} name={p.name} variant="buttons" location="instructor" class="mt-5" />
   </PageHeader>
   <div class="container section stack-l">

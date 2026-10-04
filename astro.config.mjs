@@ -23,7 +23,7 @@ export default defineConfig({
   image: { service: { entrypoint: './src/lib/focus-image-service.mjs' } },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/admin/') && !page.includes('/404') && !page.includes('/account/') && !page.includes('/moderate/'),
+      filter: (page) => !page.includes('/admin/') && !page.includes('/404') && !page.includes('/account/') && !page.includes('/moderate/') && !page.includes('/saved/'),
     }),
   ],
 });
