@@ -1,0 +1,25 @@
+{
+  "title": "Kung Fu Betty at Salt Shack",
+  "summary": "Live music by Kung Fu Betty at Salt Shack. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-11T13:00",
+  "timezone": "America/New_York",
+  "venueId": "salt-shack-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "kung-fu-betty"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "salt-shack-cedar-beach",
+  "sourceUrl": "https://saltshackny.com/",
+  "sourceName": "Salt Shack at Cedar Beach (Babylon) - beach music calendar",
+  "sourceRef": "events page 2026-10-11",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.8,
+  "matchKey": "salt-shack-cedar-beach|salt-shack-babylon||sunday|13:00|live-music|kung-fu-betty||2026-10-11"
+}

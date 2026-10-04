@@ -1,0 +1,24 @@
+{
+  "title": "TUSK: The Ultimate Fleetwood Mac Tribute at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by TUSK: The Ultimate Fleetwood Mac Tribute at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-02-20T20:00",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "patchogue-theatre",
+  "sourceUrl": "https://www.patchoguetheatre.org/events/",
+  "sourceName": "Patchogue Theatre - events",
+  "sourceRef": "events page 2027-02-20",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "theater",
+    "tribute"
+  ],
+  "confidence": 0.75,
+  "matchKey": "patchogue-theatre|patchogue-theatre-patchogue||saturday|20:00|live-music|tusktheultimatefleetwoodmactribute||2027-02-20",
+  "reviewNotes": "Band or DJ not researched yet: TUSK: The Ultimate Fleetwood Mac Tribute."
+}

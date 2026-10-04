@@ -1,0 +1,24 @@
+{
+  "title": "Trade Winds at Lily's Babylon",
+  "summary": "Live music by Trade Winds at Lily's Babylon. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-09T18:30",
+  "end": "2026-10-09T21:30",
+  "timezone": "America/New_York",
+  "venueId": "lilys-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "trade-winds"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.lilyflanaganspub.com/musicevents/2026/10/9/happy-hour-band-trade-winds",
+  "status": "active",
+  "sourceId": "lily-flanagans-babylon",
+  "sourceUrl": "https://www.lilyflanaganspub.com/musicevents/2026/10/9/happy-hour-band-trade-winds",
+  "sourceName": "Lily Flanagan's Pub (Babylon) - music calendar",
+  "sourceRef": "events page 2026-10-09",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.8,
+  "matchKey": "lily-flanagans-babylon|lilys-babylon||friday|18:30|live-music|trade-winds||2026-10-09"
+}

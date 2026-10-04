@@ -1,16 +1,24 @@
 {
   "name": "I Love Babylon events",
-  "url": "https://ilovebabylon.com/events/",
   "type": "ical",
   "adapter": "ical",
-  "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
   "attribution": "Some listings come from I Love Babylon events. We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Amityville, Babylon, Copiague and Deer Park: drag brunch, theater, community concerts, local festivals.",
-  "rateLimitSeconds": 5,
+  "cadence": "twice-weekly",
   "catalogStatus": "verified",
+  "description": "Live music listings in Amityville, Babylon, Copiague and Deer Park: drag brunch, theater, community concerts, local festivals.",
+  "enabled": true,
   "feedUrl": "https://ilovebabylon.com/events/?ical=1",
+  "focus": "music",
   "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
-  "reviewNotes": "Catalog check 2026-10-03: Keep with filters; feed is easy but only a subset is relevant."
+  "lastCounts": {
+    "found": 30,
+    "kept": 3,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:12:06.393Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep with filters; feed is easy but only a subset is relevant.",
+  "url": "https://ilovebabylon.com/events/"
 }

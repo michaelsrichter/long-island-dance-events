@@ -1,0 +1,29 @@
+{
+  "title": "John vs Paul — Matinee at Live On The Porch",
+  "summary": "Live music by John vs Paul — Matinee at Live On The Porch. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-18T14:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-11-29"
+    ]
+  },
+  "venueId": "live-on-the-porch-smithtown",
+  "town": "Smithtown",
+  "price": 63,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "live-on-the-porch",
+  "sourceUrl": "https://liveontheporch.com/events/",
+  "sourceName": "Live On The Porch (Smithtown) - show calendar",
+  "sourceRef": "event data on the page 2026-10-18",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||sunday|14:00|live-music|johnvspaulmatinee||repeat",
+  "reviewNotes": "Band or DJ not researched yet: John vs Paul — Matinee."
+}

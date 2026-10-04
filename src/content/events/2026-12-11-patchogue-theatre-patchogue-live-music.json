@@ -1,0 +1,23 @@
+{
+  "title": "That Motown Band: Home For The Holidays 2026 at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by That Motown Band: Home For The Holidays 2026 at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-11T20:00",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "patchogue-theatre",
+  "sourceUrl": "https://www.patchoguetheatre.org/events/",
+  "sourceName": "Patchogue Theatre - events",
+  "sourceRef": "events page 2026-12-11",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.75,
+  "matchKey": "patchogue-theatre|patchogue-theatre-patchogue||friday|20:00|live-music|thatmotownbandhomefortheholidays2026||2026-12-11",
+  "reviewNotes": "Band or DJ not researched yet: That Motown Band: Home For The Holidays 2026."
+}

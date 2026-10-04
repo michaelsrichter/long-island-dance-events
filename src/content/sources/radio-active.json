@@ -1,19 +1,27 @@
 {
   "name": "Radio Active - events calendar",
-  "url": "https://radioactiveny.com/",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Radio Active. We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Coram, Lindenhurst, Farmingdale and Medford: rock cover band, acoustic trio, bar band.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
     "performerIds": [
       "radio-active"
     ]
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep as a strong source because it has many future LI public gigs and clear venue details."
+  "description": "Live music listings in Coram, Lindenhurst, Farmingdale and Medford: rock cover band, acoustic trio, bar band.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 18,
+    "kept": 4,
+    "needsReview": 0,
+    "outOfArea": 6
+  },
+  "lastScraped": "2026-10-04T16:10:59.571Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep as a strong source because it has many future LI public gigs and clear venue details.",
+  "url": "https://radioactiveny.com/"
 }

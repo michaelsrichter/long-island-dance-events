@@ -1,18 +1,26 @@
 {
   "name": "Polish American Cultural Association (Port Washington) - upcoming events",
-  "url": "https://portwashingtonpolishclub.com/upcoming-events",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Polish American Cultural Association (Port Washington). We write our own short summaries and link back to the original page.",
-  "description": "Dance listings in Port Washington: country night, dinner dances.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "polish-american-cultural-association-port-washington",
-    "town": "Port Washington"
+    "town": "Port Washington",
+    "venueId": "polish-american-cultural-association-port-washington"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep as low priority. It has a few Nassau dance nights among many civic events."
+  "description": "Dance listings in Port Washington: country night, dinner dances.",
+  "enabled": true,
+  "focus": "dance",
+  "lastCounts": {
+    "found": 5,
+    "kept": 2,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:10:39.142Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep as low priority. It has a few Nassau dance nights among many civic events.",
+  "url": "https://portwashingtonpolishclub.com/upcoming-events"
 }

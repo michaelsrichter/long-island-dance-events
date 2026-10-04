@@ -1,20 +1,28 @@
 {
   "name": "Gene Casey & the Lone Sharks - show calendar",
-  "url": "https://genecasey.com/events/",
   "type": "ical",
   "adapter": "ical",
-  "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Gene Casey & the Lone Sharks. We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Amityville, Greenlawn, Bayport and Greenport: swing / rockabilly / roots band for dancing.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
-  "feedUrl": "https://genecasey.com/events/list/?ical=1",
   "defaults": {
     "performerIds": [
       "gene-casey-and-the-lone-sharks"
     ]
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep as a filtered band source. Use a venue allowlist so only dance-friendly LI gigs are imported."
+  "description": "Live music listings in Amityville, Greenlawn, Bayport and Greenport: swing / rockabilly / roots band for dancing.",
+  "enabled": true,
+  "feedUrl": "https://genecasey.com/events/list/?ical=1",
+  "focus": "music",
+  "lastCounts": {
+    "found": 28,
+    "kept": 17,
+    "needsReview": 0,
+    "outOfArea": 3
+  },
+  "lastScraped": "2026-10-04T16:07:10.710Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep as a filtered band source. Use a venue allowlist so only dance-friendly LI gigs are imported.",
+  "url": "https://genecasey.com/events/"
 }

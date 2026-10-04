@@ -1,0 +1,27 @@
+{
+  "title": "Festival at SOUND Body & Mind",
+  "summary": "A larger event with live music at SOUND Body & Mind.",
+  "category": "festival",
+  "start": "2026-10-04T14:00",
+  "end": "2026-10-04T17:00",
+  "timezone": "America/New_York",
+  "venueId": "sound-body-and-mind-huntington",
+  "town": "Huntington",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/sound-body-mind-fall-festival-on-the-harbor-free/?occurrence=2026-10-04&time=1791122400",
+  "status": "active",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/sound-body-mind-fall-festival-on-the-harbor-free/?occurrence=2026-10-04&time=1791122400",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-10-04",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "afternoon",
+    "festival"
+  ],
+  "confidence": 0.85,
+  "matchKey": "huntington-matters|sound-body-and-mind-huntington||sunday|14:00|festival|||2026-10-04",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

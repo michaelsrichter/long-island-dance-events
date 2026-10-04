@@ -1,20 +1,28 @@
 {
   "name": "The Waterfalls (Lake Ronkonkoma) - community event calendar",
-  "url": "https://waterfallsapartments.com/event-calendar/",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from The Waterfalls (Lake Ronkonkoma). We write our own short summaries and link back to the original page.",
-  "description": "Dance listings in Lake Ronkonkoma: ballroom.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "waterfalls-ballroom",
+    "organizerId": "waterfalls-ballroom-dancing",
     "town": "Lake Ronkonkoma",
-    "organizerId": "waterfalls-ballroom-dancing"
+    "venueId": "waterfalls-ballroom"
   },
+  "description": "Dance listings in Lake Ronkonkoma: ballroom.",
+  "enabled": true,
+  "focus": "dance",
   "include": "danc|ballroom|latin|swing|social",
-  "reviewNotes": "Catalog check 2026-10-03: Keep as a low-volume confirmation source; reliable but mostly duplicate."
+  "lastCounts": {
+    "found": 2,
+    "kept": 2,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:11:37.368Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep as a low-volume confirmation source; reliable but mostly duplicate.",
+  "url": "https://waterfallsapartments.com/event-calendar/"
 }

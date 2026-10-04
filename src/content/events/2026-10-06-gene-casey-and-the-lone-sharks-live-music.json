@@ -1,0 +1,25 @@
+{
+  "title": "Gene Casey & the Lone Sharks at First and South",
+  "summary": "Live music by Gene Casey & the Lone Sharks at First and South. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-06T17:00",
+  "end": "2026-10-06T20:00",
+  "timezone": "America/New_York",
+  "venueId": "first-and-south-greenport",
+  "town": "Greenport",
+  "performerIds": [
+    "gene-casey-and-the-lone-sharks"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://genecasey.com/event/gene-casey-and-helen-hooke-in-greenport/",
+  "status": "active",
+  "sourceId": "gene-casey-lone-sharks",
+  "sourceUrl": "https://genecasey.com/event/gene-casey-and-helen-hooke-in-greenport/",
+  "sourceName": "Gene Casey & the Lone Sharks - show calendar",
+  "sourceRef": "calendar feed 2026-10-06",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.9,
+  "matchKey": "gene-casey-lone-sharks|first-and-south-greenport||tuesday|17:00|live-music|gene-casey-and-the-lone-sharks||2026-10-06",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

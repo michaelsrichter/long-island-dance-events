@@ -1,0 +1,11 @@
+{
+  "name": "People’s Pub",
+  "address": "291 Bayport Avenue",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Bayport",
+  "latitude": 40.746032,
+  "longitude": -73.050735,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

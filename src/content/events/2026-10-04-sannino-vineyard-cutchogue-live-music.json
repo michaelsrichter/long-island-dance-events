@@ -1,0 +1,25 @@
+{
+  "title": "Live music at Sannino Vineyard",
+  "summary": "Live music at Sannino Vineyard. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-04T13:00",
+  "end": "2026-10-04T17:00",
+  "timezone": "America/New_York",
+  "venueId": "sannino-vineyard-cutchogue",
+  "town": "Cutchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/%f0%9f%8e%b6-live-music-sundays/2026-10-04/",
+  "status": "active",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/%f0%9f%8e%b6-live-music-sundays/2026-10-04/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-04",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|sannino-vineyard-cutchogue||sunday|13:00|live-music|||2026-10-04",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

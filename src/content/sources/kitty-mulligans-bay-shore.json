@@ -1,18 +1,26 @@
 {
   "name": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
-  "url": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
   "attribution": "Some listings come from Kitty Mulligan's Irish Pub (Bay Shore). We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Bay Shore: classic rock cover bands, open jams, music bingo.",
-  "rateLimitSeconds": 5,
+  "cadence": "twice-weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "kitty-mulligans-bay-shore",
-    "town": "Bay Shore"
+    "town": "Bay Shore",
+    "venueId": "kitty-mulligans-bay-shore"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a current Bay Shore pub calendar, useful for band nights even if not strongly dance-labeled."
+  "description": "Live music listings in Bay Shore: classic rock cover bands, open jams, music bingo.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 9,
+    "kept": 7,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:10:01.730Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a current Bay Shore pub calendar, useful for band nights even if not strongly dance-labeled.",
+  "url": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events"
 }

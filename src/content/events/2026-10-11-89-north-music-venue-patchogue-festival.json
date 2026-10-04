@@ -1,0 +1,23 @@
+{
+  "title": "Festival at 89 North Music Venue",
+  "summary": "A larger event with live music at 89 North Music Venue.",
+  "category": "festival",
+  "start": "2026-10-11",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "eighty-nine-north",
+  "sourceUrl": "https://89northmusic.com/calendar",
+  "sourceName": "89 North (Patchogue) - music calendar",
+  "sourceRef": "events page 2026-10-11",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "festival"
+  ],
+  "confidence": 0.55,
+  "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||sunday|tba|festival|||2026-10-11",
+  "reviewNotes": "No start time found."
+}

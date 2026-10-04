@@ -1,0 +1,11 @@
+{
+  "name": "Kasey’s Kitchen & Cocktails",
+  "address": "23 N Park Ave",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Out on the Town - Long Island event calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Rockville Centre",
+  "latitude": 40.65692,
+  "longitude": -73.645109,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

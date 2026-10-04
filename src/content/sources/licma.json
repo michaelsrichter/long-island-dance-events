@@ -1,18 +1,26 @@
 {
   "name": "Long Island Country Music Association (LICMA) - dances",
-  "url": "https://licma.org/",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Long Island Country Music Association (LICMA). We write our own short summaries and link back to the original page.",
-  "description": "Dance listings in Deer Park: country, line dancing.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "town": "Deer Park",
-    "organizerId": "long-island-country-music-association"
+    "organizerId": "long-island-country-music-association",
+    "town": "Deer Park"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep as a low-volume direct source for LICMA dances and date conflicts."
+  "description": "Dance listings in Deer Park: country, line dancing.",
+  "enabled": true,
+  "focus": "dance",
+  "lastCounts": {
+    "found": 4,
+    "kept": 1,
+    "needsReview": 1,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:10:06.900Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep as a low-volume direct source for LICMA dances and date conflicts.",
+  "url": "https://licma.org/"
 }

@@ -1,0 +1,11 @@
+{
+  "name": "Suffolk Theater",
+  "address": "118 East Main Street",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Riverhead",
+  "latitude": 40.917468,
+  "longitude": -72.660635,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

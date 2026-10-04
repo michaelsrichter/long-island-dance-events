@@ -1,0 +1,24 @@
+{
+  "title": "East Coast Swing social dance",
+  "summary": "An evening of East Coast Swing social dancing.",
+  "category": "social-dance",
+  "danceStyles": [
+    "east-coast-swing"
+  ],
+  "start": "2026-11-13T20:00",
+  "end": "2026-11-13T22:30",
+  "timezone": "America/New_York",
+  "town": "Syosset",
+  "price": 10,
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "dancemanhattan-li-swing",
+  "sourceUrl": "http://dancemanhattan.com/calendar/event/113",
+  "sourceName": "Dance Manhattan - Long Island swing dances list",
+  "sourceRef": "events page 2026-11-13",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.55,
+  "matchKey": "dancemanhattan-li-swing|syosset||friday|20:00|social-dance||east-coast-swing|2026-11-13",
+  "reviewNotes": "Venue not found in the listing."
+}

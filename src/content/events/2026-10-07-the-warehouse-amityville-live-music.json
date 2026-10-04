@@ -1,0 +1,25 @@
+{
+  "title": "Shakedown Citi - Dead Tribute at The Warehouse",
+  "summary": "Live music by Shakedown Citi - Dead Tribute at The Warehouse. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-07T18:30",
+  "end": "2026-10-07T21:30",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/8a005344-8770-4a7a-b470-5cc67f51ffef",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/8a005344-8770-4a7a-b470-5cc67f51ffef",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-07",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "tribute"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|the-warehouse-amityville||wednesday|18:30|live-music|shakedowncitideadtribute||2026-10-07",
+  "reviewNotes": "Band or DJ not researched yet: Shakedown Citi - Dead Tribute."
+}

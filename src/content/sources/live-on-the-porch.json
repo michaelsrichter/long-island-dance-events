@@ -1,18 +1,26 @@
 {
   "name": "Live On The Porch (Smithtown) - show calendar",
-  "url": "https://liveontheporch.com/events/",
   "type": "jsonld",
   "adapter": "jsonld",
-  "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Live On The Porch (Smithtown). We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Smithtown: tribute concerts, classic rock shows, country-rock shows.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "live-on-the-porch-smithtown",
-    "town": "Smithtown"
+    "town": "Smithtown",
+    "venueId": "live-on-the-porch-smithtown"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority for live music. It is structured and current, but it is a listening/concert room."
+  "description": "Live music listings in Smithtown: tribute concerts, classic rock shows, country-rock shows.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 17,
+    "kept": 17,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:10:17.154Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority for live music. It is structured and current, but it is a listening/concert room.",
+  "url": "https://liveontheporch.com/events/"
 }
