@@ -17,6 +17,7 @@
  *                       7 photo upload          8 /moderate/ as non-moderator
  *                       9 moderate as admin (the email must be in ADMIN_EMAILS first)
  *                      10 account: rename, export, delete          11 sign in again after delete
+ *                      13 sign out (run in a new command, i.e. after a browser restart) and sign in again
  *                      cleanup  delete the test account if it still exists
  *   --out <dir>       screenshots and report.json (default test-results/e2e-signin)
  *   --headed          show the browser
@@ -28,8 +29,8 @@
  * ADMIN_EMAILS is set per environment: for a PR preview use
  *   az staticwebapp appsettings set ... --environment-name <PR number> --setting-names "ADMIN_EMAILS=..."
  * Everything the test posts is removed again by step 10 (delete my account).
- * Signing out also signs out of External ID, which asks "Which account do you want to sign out of?";
- * the script picks the test account there.
+ * "Sign out" ends only the site's session (no External ID sign-out page); the script also copes with
+ * older setups that show "Which account do you want to sign out of?".
  */
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -203,6 +204,17 @@ async function readModel(page) {
 async function dismissConsent(page) {
   const no = page.getByRole('button', { name: 'No, thanks' });
   if (await no.isVisible().catch(() => false)) await no.click().catch(() => {});
+}
+
+/** Scroll an element into view the way the browser does for focus, then report what (if anything) sits on top of it. */
+async function coveredBy(page, locator) {
+  return locator.evaluate((el) => {
+    el.scrollIntoView({ block: 'nearest' });
+    const r = el.getBoundingClientRect();
+    const top = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+    if (!top || top === el || el.contains(top) || top.contains(el) || (el.labels && [...el.labels].some((l) => l.contains(top)))) return '';
+    return `${top.tagName.toLowerCase()}${top.closest('[data-consent]') ? ' in the consent pop-up' : ''}`;
+  });
 }
 
 async function waitPanelReady(page) {
@@ -537,7 +549,7 @@ async function signInFromPanel(page, r, { signup, welcome }) {
   r.notes.push(`Account page timeline: ${timeline.join(' > ')}`);
   r.timings.accountPage = Date.now() - arrive;
   r.timings.signInTotal = Date.now() - t0;
-  return { outcome, spinner, welcome };
+  return { outcome, spinner, welcome, hops: auth.hops };
 }
 
 async function fillWelcome(page, r, check, { photoRules }) {
@@ -545,13 +557,29 @@ async function fillWelcome(page, r, check, { photoRules }) {
   check(heading === 'Welcome! One more step', `Welcome heading was "${heading}"`);
   const name = await page.locator('#acct-name').inputValue();
   r.notes.push(`Name prefilled with "${name}"`);
-  check(name.length >= 2, 'Display name was not prefilled');
+  // External ID asks only for the email, so there may be no name to suggest; never a placeholder or an email.
+  check(!/^unknown$/i.test(name) && !name.includes('@'), `Name prefilled with a placeholder or email: "${name}"`);
   const months = await page.locator('#acct-month option').count();
   const years = await page.locator('#acct-year option').count();
   check(months === 13, `Month dropdown has ${months} options (expected 12 + placeholder)`);
   check(years >= 100, `Year dropdown has ${years} options`);
   r.shots.push(await shot(page, 'welcome-form', { full: true }));
   if (STEPS.includes('12') || args.ux) r.notes.push(...(await uxShots(page, 'welcome')));
+  // The consent pop-up may show on first visit; the form's fields and Save button must be reachable above it.
+  if (await page.locator('[data-consent]').isVisible().catch(() => false)) {
+    for (const [w, h] of [
+      [390, 844],
+      [1280, 900],
+    ]) {
+      await page.setViewportSize({ width: w, height: h });
+      await page.waitForTimeout(300);
+      for (const sel of ['#acct-year', 'input[name=photoTerms]', '[data-save]']) {
+        const covered = await coveredBy(page, page.locator(sel));
+        check(!covered, `At ${w}px the consent pop-up covers ${sel} even after scrolling to it (${covered})`);
+      }
+      r.shots.push(await shot(page, `welcome-with-consent-${w}`));
+    }
+  }
   await dismissConsent(page);
   await page.locator('#acct-name').fill(NAME);
   const year = new Date().getFullYear() - 30;
@@ -616,6 +644,7 @@ async function main() {
   await step('2', 'Sign up with the AgentMail address (External ID, one-time code)', async ({ r, check }) => {
     const res = await signInFromPanel(page, r, { signup: true });
     welcome = res;
+    check(!res.hops.some((h) => /add details/i.test(h.text)), 'External ID still asks for extra details (a display name) at sign-up');
     r.notes.push(`Account page: spinner seen ${res.spinner}; ${secs(r.timings.accountPage)} from arriving to the form`);
     if (r.timings.accountPage > 3000) r.notes.push(`Slow: the account page took ${secs(r.timings.accountPage)} to show the welcome form`);
     check(res.outcome === 'welcome', `After sign-up we did not get the welcome step (outcome: ${res.outcome})`);
@@ -972,9 +1001,11 @@ async function main() {
     r.notes.push(`Delete: ${del.status()} ${JSON.stringify(await del.json().catch(() => ({})))}`);
     check(del.status() === 200, `Delete returned ${del.status()}`);
     r.shots.push(await shot(page, 'account-deleted-message'));
-    await page.waitForURL((u) => u.origin !== ORIGIN || u.pathname.startsWith('/.auth/'), { timeout: 30_000 });
+    // Sign-out leaves the account page (straight back to the site, or through External ID pages on older setups).
+    await page.waitForURL((u) => !(u.origin === ORIGIN && u.pathname.startsWith('/account/')), { timeout: 30_000 });
     try {
       const out = await completeAuth(page, { label: 'delete-signout' });
+      check(out.hops.length === 0, `Sign-out after delete went through External ID pages: ${hopText(out.hops)}`);
       r.notes.push(`Sign-out pages after delete: ${hopText(out.hops)}`);
       r.timings.deleteToSignedOut = Date.now() - t2;
       check(!(await principal(page)), 'Still signed in after deleting the account');
@@ -1019,6 +1050,35 @@ async function main() {
     }
   }, page, log);
 
+  await step('13', 'Sign out (e.g. after a browser restart): straight back to the site; signing in again asks for a code', async ({ r, check }) => {
+    // Run in a new command after the sign-in steps (for example "--steps 1-3", then "--steps 13"), so the browser restarted.
+    if (!(await principal(page))) throw new Error('Not signed in; run the sign-in steps first');
+    await page.goto(VENUE_URL);
+    await page.locator('.site-footer [data-account-signout]').waitFor({ state: 'visible', timeout: 30_000 });
+    const hosts = new Set();
+    const onNav = (f) => {
+      if (f === page.mainFrame()) hosts.add(new URL(f.url()).host);
+    };
+    page.on('framenavigated', onNav);
+    const t = Date.now();
+    await page.locator('.site-footer [data-account-signout]').click();
+    await page.waitForURL((u) => u.origin === ORIGIN && !u.pathname.startsWith('/.auth/'), { timeout: 30_000 });
+    r.timings.signOut = Date.now() - t;
+    page.off('framenavigated', onNav);
+    const elsewhere = [...hosts].filter((h) => h !== new URL(ORIGIN).host);
+    check(elsewhere.length === 0, `Sign-out went through other sites: ${elsewhere.join(', ')}`);
+    check(!(await principal(page)), 'Still signed in after "Sign out"');
+    await page.waitForTimeout(1500);
+    check((await headerLabel(page)) === 'Sign in', `Header after sign-out: "${await headerLabel(page)}"`);
+    r.shots.push(await shot(page, 'after-sign-out'));
+    // Shared computers: the next sign-in must ask for an email code, not silently reuse the last person.
+    await page.goto(loginUrl('/'));
+    const auth = await completeAuth(page, { label: 'signin-after-signout' });
+    r.timings.signInAgain = auth.ms;
+    r.notes.push(`Sign-in pages after sign-out: ${hopText(auth.hops)}`);
+    check(auth.hops.some((h) => h.mailWaitMs), 'Signing in again after "Sign out" did not ask for an email code');
+  }, page, log);
+
   await step('cleanup', 'Delete the test account if it exists', async ({ r, check }) => {
     if (!(await principal(page))) {
       r.notes.push('Not signed in; nothing to delete from this browser');
@@ -1034,7 +1094,8 @@ async function main() {
       const del = await delP;
       r.notes.push(`Delete through the account page: ${del.status()}`);
       check(del.status() === 200, `Delete returned ${del.status()}`);
-      await page.waitForURL((u) => u.origin !== ORIGIN || u.pathname.startsWith('/.auth/'), { timeout: 30_000 });
+      // Sign-out leaves the account page (straight back to the site, or through External ID pages on older setups).
+    await page.waitForURL((u) => !(u.origin === ORIGIN && u.pathname.startsWith('/account/')), { timeout: 30_000 });
       const out = await completeAuth(page, { label: 'cleanup-signout' });
       r.notes.push(`Sign-out pages: ${hopText(out.hops)}`);
     } else {
