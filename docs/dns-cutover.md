@@ -8,7 +8,7 @@ Status (October 4, 2026, 12:30 PM): **done, on the new Azure app** (see below). 
 
 The site is moving from the old Azure app (`black-dune…`, Microsoft work subscription) to a new one in the owner's own subscription (**Richter Cloud 150Credit**, resource group `rg-li-dance-events-web`, address **https://gentle-glacier-01b92ea0f.3.azurestaticapps.net**). The new app also has the storage, content-safety and visitor sign-in settings for the community features. Deploys from `main` already go to the new app. `longisland.dance` keeps showing the old app until the DNS records below change.
 
-**Status: done (October 4, 2026, about 12:30 PM).** Both names are `Ready` on the new app. `longisland.dance` is its default domain, the ALIAS and CNAME point at it, and `www` and the Azure address redirect (301) to https://longisland.dance. Smoke test 23/23 on https://longisland.dance; screenshots checked in light and dark, phone and desktop, and at 320 px. Both names were removed from the old app. The old app (`black-dune…`, paid Standard plan) still exists until the owner decides to delete it. The old TXT records (`_fzdvr…`, `_fvpz3…`) can be deleted at Namecheap.
+**Status: done (October 4, 2026, about 12:30 PM).** Both names are `Ready` on the new app. `longisland.dance` is its default domain, the ALIAS and CNAME point at it, and `www` and the Azure address redirect (301) to https://longisland.dance. Smoke test 23/23 on https://longisland.dance; screenshots checked in light and dark, phone and desktop, and at 320 px. Both names were removed from the old app, and on October 4 the owner had the whole old resource group (`black-dune…` and its monitoring, storage and content-safety resources in the Microsoft work subscription) deleted. **gentle-glacier is now the only production app.** The old TXT records (`_fzdvr…`, `_fvpz3…`) do nothing now and can be deleted at Namecheap.
 
 **Step 1: TXT records for the new app (no downtime).** At Namecheap, Advanced DNS, the TXT values must be **exactly** these. On October 4 at 12:06 PM the first codes (`_1z5hq…` and `_vb8ey…`) were replaced: Azure checked once before those records existed and never checked again, so both names were removed and added back with new codes.
 
@@ -37,11 +37,13 @@ az staticwebapp hostname list -n swa-li-dance-events-web -g rg-li-dance-events-w
 Resolve-DnsName longisland.dance -Type TXT
 ```
 
-Rollback: point the ALIAS and CNAME back at `black-dune-0e0f3e40f.1.azurestaticapps.net` (the old app keeps its names until step 3).
+Rollback: no longer possible. The old app was deleted on October 4, 2026. To recover from a bad deploy, see [rollback.md](rollback.md) (redeploy an earlier commit to the same app).
 
 If a name sits at `Validating` for more than an hour while `Resolve-DnsName` already shows the right code, Azure has stopped checking. Remove the name and add it again on the new app (`az staticwebapp hostname delete`, then `hostname set --validation-method dns-txt-token`), and put the new code in DNS.
 
-## Records to add at Namecheap (original setup, October 3)
+## Records to add at Namecheap (original setup, October 3; history only)
+
+This section describes the first setup on the old app, which has since been deleted. The records in use now are in the section above. To set the site up again on a new Static Web App, follow the same steps with that app's address and codes.
 
 Namecheap: **Domain List → Manage** next to `longisland.dance` → **Advanced DNS** tab → **Host Records**.
 
@@ -94,7 +96,7 @@ Both domains should show `Ready`.
 
 ## Rollback
 
-The Azure address keeps working the whole time. If something goes wrong: set `SITE_URL` back to `https://black-dune-0e0f3e40f.1.azurestaticapps.net`, unset the default domain in Azure, redeploy, and fix the DNS records.
+The Azure address (https://gentle-glacier-01b92ea0f.3.azurestaticapps.net) keeps working even if DNS breaks. If the domain stops working: set `SITE_URL` to that address, unset the default domain in Azure (portal → Static Web App → **Custom domains**), redeploy, and then fix the DNS records. The old app (`black-dune…`) no longer exists, so do not point DNS at it.
 
 ## Troubleshooting
 
