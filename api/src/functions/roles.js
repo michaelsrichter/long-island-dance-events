@@ -21,7 +21,10 @@ async function rolesFor(payload) {
   if (!/^[A-Za-z0-9_-]{8,128}$/.test(userId)) return [];
   const claims = Array.isArray(payload.claims) ? payload.claims : [];
   const email = claim(claims, 'email').toLowerCase();
-  const name = cleanText(claim(claims, 'name'), 40);
+  // External ID no longer asks for a name at sign-up (the welcome step does), so the claim may be
+  // missing or a placeholder like "unknown". Never suggest a placeholder or an email address.
+  const rawName = cleanText(claim(claims, 'name'), 40);
+  const name = /^unknown$/i.test(rawName) || rawName.includes('@') ? '' : rawName;
   const oid = claim(claims, 'oid');
   const now = new Date().toISOString();
 

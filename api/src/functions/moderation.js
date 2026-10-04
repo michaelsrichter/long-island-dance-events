@@ -14,6 +14,7 @@ const { json, error, sameOrigin, readJson, cleanText, isPageKey, NO_STORE } = re
 const { table, container, TABLES, CONTAINERS } = require('../lib/store');
 const { requireAdmin, getUser, PROFILE } = require('../lib/users');
 const { rebuild, photoPaths } = require('../lib/readmodel');
+const { publishPhoto, unpublishPhoto } = require('../lib/photo-files');
 const { audit, month } = require('../lib/audit');
 
 const ITEM_ID = /^\d{16}_[A-Za-z0-9_-]{6,20}$/;
@@ -57,7 +58,7 @@ app.http('adminQueue', {
         status: item.status,
         ...(isPhoto
           ? { caption: item.caption, alt: item.alt, width: item.width, height: item.height, preview: `/api/moderation/photo?key=${encodeURIComponent(q.key)}&id=${encodeURIComponent(q.itemKey)}&size=m` }
-          : { text: item.body, githubIssue: item.githubIssue || '' }),
+          : { text: item.body }),
         date: item.occurrenceDate || '',
         user: { id: item.userId, name: item.displayName || '', status: (u && u.status) || 'unknown', approved: Number(u && u.approvedCount) || 0, rejected: Number(u && u.rejectedCount) || 0 },
         flags: flags.map((f) => ({ reason: f.reason, note: f.note || '' })),
@@ -93,18 +94,7 @@ async function bumpUser(userId, field) {
   if (u) await table(TABLES.users).merge({ partitionKey: userId, rowKey: PROFILE, [field]: (Number(u[field]) || 0) + 1 });
 }
 
-async function movePhoto(key, photoId, toPublic) {
-  const paths = Object.values(photoPaths(key, photoId));
-  for (const path of paths) {
-    if (toPublic) {
-      const data = await container(CONTAINERS.pending).download(path);
-      if (data) await container(CONTAINERS.photos).upload(path, data, 'image/webp', 'public, max-age=31536000, immutable');
-    } else {
-      await container(CONTAINERS.photos).remove(path);
-    }
-    await container(CONTAINERS.pending).remove(path);
-  }
-}
+const movePhoto = (key, photoId, toPublic) => (toPublic ? publishPhoto(key, photoId) : unpublishPhoto(key, photoId));
 
 app.http('adminDecide', {
   methods: ['POST'],

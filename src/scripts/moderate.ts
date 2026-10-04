@@ -16,7 +16,6 @@ type Item = {
   caption?: string;
   alt?: string;
   preview?: string;
-  githubIssue?: string;
   date: string;
   user: { id: string; name: string; status: string; approved: number; rejected: number };
   flags: { reason: string; note: string }[];
@@ -115,12 +114,6 @@ if (root) {
     } else {
       const quote = el('blockquote', it.text || '', 'moderate__text');
       li.appendChild(quote);
-    }
-    if (it.githubIssue) {
-      const a = el('a', 'GitHub issue');
-      a.href = it.githubIssue;
-      a.rel = 'noopener';
-      li.appendChild(el('p')).appendChild(a);
     }
     if (it.ai) li.appendChild(el('p', `AI scores (0 safe, 2 unsure, 4+ harmful): ${Object.entries(it.ai).map(([k, v]) => `${AI_LABELS[k] || k} ${v}`).join(', ')}`, 'muted'));
     if (it.flags.length) li.appendChild(el('p', `Reports: ${it.flags.map((f) => f.reason + (f.note ? ` ("${f.note}")` : '')).join('; ')}`, 'muted'));

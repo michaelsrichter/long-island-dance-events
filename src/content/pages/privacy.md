@@ -27,7 +27,7 @@ An account is optional. You only need one to like pages, leave notes or share ph
 - **Sign-in cookie:** after you sign in, a cookie keeps you signed in. It is needed for the account to work, so it does not need your OK. It is not used for tracking or ads.
 - **Notes and photos you post** are public once approved, with your display name. They are checked first by an AI service (Azure AI Content Safety) and, for photos and anything unclear, by a volunteer.
 - **Photos:** we remove hidden location data (GPS) and camera details and resize them. The original file is not kept.
-- **Private corrections** are seen only by our editors. They may become a GitHub issue with the page link and your suggested fix, but never your name or account.
+- **Private corrections** are seen only by our editors, in our private moderation queue. They are never posted publicly.
 - **How long we keep things:** approved notes and photos stay until you delete them or your account. Rejected posts are deleted after 90 days. Our moderation log (what was decided and why) is kept for 2 years. Backups are kept for 5 weeks.
 - **We never sell or share** your information, and we do not use it for ads.
 
@@ -37,7 +37,7 @@ On [your account page](/account/) you can download everything we keep about you,
 
 ### Delete your account
 
-Go to [your account page](/account/), type DELETE and press **Delete my account**. Your profile, likes, notes and photos are removed from this website right away, and your sign-in account is removed within 30 days. If you signed in with Facebook or Google, this also removes the link to that account. You can also ask us through the "Suggest a correction" form on any page.
+Go to [your account page](/account/), type DELETE and press **Delete my account**. Your profile, likes, notes, photos and the reports you sent are removed from this website right away, and your sign-in account is removed within 30 days. If you signed in with Facebook or Google, this also removes the link to that account. You can also ask us through the "Suggest a correction" form on any page.
 
 ### Children
 

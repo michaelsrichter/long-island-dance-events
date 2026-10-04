@@ -13,9 +13,14 @@ process.env.MODERATION_DENY_WORDS = 'forbiddenword';
 
 const PAGES = ['venue:huntington-moose-lodge', 'event:tuesday-hustle', 'style:west-coast-swing'];
 const csCalls = [];
+const githubCalls = [];
 globalThis.fetch = async (url, init = {}) => {
   const u = String(url);
   if (u.endsWith('/community-pages.json')) return new Response(JSON.stringify({ keys: PAGES }), { status: 200 });
+  if (u.startsWith('https://api.github.com/')) {
+    githubCalls.push(u);
+    return new Response(JSON.stringify({ html_url: 'https://github.com/example/issues/1' }), { status: 201 });
+  }
   if (u.includes('/contentsafety/')) {
     const body = JSON.parse(init.body);
     csCalls.push(u.includes('image:') ? 'image' : 'text');
@@ -166,6 +171,11 @@ test('sign-in roles: members by default, admins by email, banned and under-13 ge
   await fake.table('Users').merge({ partitionKey: 'user0001aa', rowKey: 'profile', status: 'banned', bannedUntil: '' });
   assert.deepEqual(await signIn('user0001aa'), []);
   await fake.table('Users').merge({ partitionKey: 'user0001aa', rowKey: 'profile', status: 'active' });
+  // No name from the sign-in service (or its "unknown" placeholder, or an email): nothing is suggested.
+  for (const [id, n] of [['noname01aa', ''], ['noname02aa', 'unknown'], ['noname03aa', 'x@example.com']]) {
+    await signIn(id, `${id}@example.com`, n);
+    assert.equal(fake.rows('Users', id)[0].suggestedName, '', `name "${n}" is not suggested`);
+  }
 });
 
 test('profile: neutral age question, under-13 is refused and nothing else kept', async () => {
@@ -245,6 +255,22 @@ test('corrections are private: never published, always queued', async () => {
   assert.equal(fake.json('community/venue/huntington-moose-lodge.json').comments.length, 0);
 });
 
+test('corrections never go to GitHub, even if an old GITHUB_ISSUES_TOKEN is still configured', async () => {
+  process.env.GITHUB_ISSUES_TOKEN = 'leftover-token';
+  githubCalls.length = 0;
+  try {
+    const r = await call('comments', '/api/comments', { method: 'POST', user: principal('user0003aa'), body: { key: PAGES[0], kind: 'correction', text: 'Call Dana at 631-555-0199 about the parking' } });
+    assert.equal(r.status, 200);
+    assert.equal(r.body.status, 'pending');
+  } finally {
+    delete process.env.GITHUB_ISSUES_TOKEN;
+  }
+  assert.equal(githubCalls.length, 0, 'no request to GitHub');
+  const row = fake.rows('Comments', PAGES[0]).find((c) => c.body.includes('631-555-0199'));
+  assert.equal(row.githubIssue, undefined);
+  assert.ok(fake.rows('ModQueue', 'pending').some((q) => q.itemKey === row.rowKey), 'it waits in the moderation queue');
+});
+
 test('reports: three different people hide a comment until a moderator decides', async () => {
   const doc = fake.json('community/event/tuesday-hustle.json');
   const itemId = doc.comments[0].id;
@@ -298,11 +324,32 @@ test('photos: 18+ only, consent required, always queued, approved photos become 
   const d = await call('adminDecide', '/api/moderation/decide', { method: 'POST', user: admin, body: { key: item.key, itemType: 'photo', itemId: item.itemId, decision: 'approve' } });
   assert.equal(d.body.status, 'published');
   assert.ok(fake.blobs.has(`photos/venue/huntington-moose-lodge/${row.photoId}-480.webp`));
-  assert.equal(fake.blobs.get(`photos/venue/huntington-moose-lodge/${row.photoId}-480.webp`).cacheControl, 'public, max-age=31536000, immutable');
+  assert.equal(fake.blobs.get(`photos/venue/huntington-moose-lodge/${row.photoId}-480.webp`).cacheControl, 'public, max-age=3600');
   assert.ok(!fake.blobs.has(`pending/venue/huntington-moose-lodge/${row.photoId}-480.webp`));
   const doc = fake.json('community/venue/huntington-moose-lodge.json');
   assert.equal(doc.photos.length, 1);
   assert.match(doc.photos[0].src.s, /\/photos\/venue\/huntington-moose-lodge\/.+-480\.webp$/);
+});
+
+test('photos: a reported photo stops being served at once, and comes back if a moderator approves it', async () => {
+  const row = fake.rows('Photos', PAGES[0])[0];
+  const file = (container, px) => `${container}/venue/huntington-moose-lodge/${row.photoId}-${px}.webp`;
+  assert.ok(fake.blobs.has(file('photos', 480)), 'approved photo is public');
+  await signIn('user0006aa');
+  await finishProfile('user0006aa', { name: 'Reporter' });
+  const r = await call('flags', '/api/flags', { method: 'POST', user: principal('user0006aa'), body: { key: PAGES[0], itemType: 'photo', itemId: row.rowKey, reason: 'shows-me' } });
+  assert.equal(r.status, 200);
+  for (const px of [480, 1024, 2048]) {
+    assert.ok(!fake.blobs.has(file('photos', px)), `${px} px file is no longer public`);
+    assert.ok(fake.blobs.has(file('pending', px)), `${px} px file is kept privately for the moderator`);
+  }
+  assert.equal(fake.json('community/venue/huntington-moose-lodge.json').photos.length, 0);
+  const admin = principal('admin001aa', ['member', 'admin'], 'Boss');
+  const d = await call('adminDecide', '/api/moderation/decide', { method: 'POST', user: admin, body: { key: PAGES[0], itemType: 'photo', itemId: row.rowKey, decision: 'approve' } });
+  assert.equal(d.body.status, 'published');
+  assert.ok(fake.blobs.has(file('photos', 480)), 'public again after approval');
+  assert.ok(!fake.blobs.has(file('pending', 480)));
+  assert.equal(fake.json('community/venue/huntington-moose-lodge.json').photos.length, 1);
 });
 
 test('admin: only moderators; bans stop posting and can hide content; log records it', async () => {
@@ -327,12 +374,37 @@ test('account: export lists my data; delete removes it and updates public pages'
   const data = JSON.parse(exp.body);
   assert.ok(data.likes.some((l) => l.page === PAGES[2]));
   assert.ok(data.comments.some((c) => c.kind === 'correction'));
+  assert.ok(data.reports.some((r) => r.page === PAGES[1] && r.reason === 'rude'), 'my reports are in the download');
+  const myFlags = () => [...(fake.tables.get('Flags')?.values() || [])].flatMap((p) => [...p.values()]).filter((f) => f.rowKey === 'user0003aa');
+  assert.equal(myFlags().length, 1);
   assert.equal((await call('meDelete', '/api/me/delete', { method: 'POST', user: me, body: { confirm: 'nope' } })).status, 400);
   const del = await call('meDelete', '/api/me/delete', { method: 'POST', user: me, body: { confirm: 'DELETE' } });
   assert.equal(del.status, 200);
   assert.equal(fake.rows('Users', 'user0003aa').length, 0);
   assert.equal(fake.rows('UserItems', 'user0003aa').length, 0);
+  assert.equal(myFlags().length, 0, 'my reports are deleted with my account');
   assert.equal(fake.json('community/style/west-coast-swing.json').likes, 0);
+});
+
+test('account: deleting the account does not undo a ban or the under-13 block', async () => {
+  const admin = principal('admin001aa', ['member', 'admin'], 'Boss');
+  await signIn('banned01aa');
+  await finishProfile('banned01aa', { name: 'Banned' });
+  const banned = principal('banned01aa');
+  assert.equal((await call('adminBan', '/api/moderation/ban', { method: 'POST', user: admin, body: { userId: 'banned01aa', days: 30, reason: 'spam' } })).status, 200);
+  assert.equal((await call('meDelete', '/api/me/delete', { method: 'POST', user: banned, body: { confirm: 'DELETE' } })).status, 200);
+  const tomb = fake.rows('Users', 'banned01aa')[0];
+  assert.equal(tomb?.status, 'banned', 'the ban survives deleting the account');
+  for (const field of ['displayName', 'suggestedName', 'idpUserId', 'age13', 'rulesAcceptedAt']) assert.equal(tomb[field], undefined, `no ${field} kept`);
+  assert.deepEqual(await signIn('banned01aa'), [], 'no member role after signing in again');
+  await finishProfile('banned01aa', { name: 'Fresh Start' });
+  assert.equal((await call('likes', '/api/likes', { method: 'POST', user: banned, body: { key: PAGES[2], like: true } })).status, 403);
+
+  await signIn('kid00002aa', 'kid2@example.com', 'Kid');
+  assert.equal((await finishProfile('kid00002aa', { year: new Date().getUTCFullYear() - 10 })).status, 403);
+  assert.equal((await call('meDelete', '/api/me/delete', { method: 'POST', user: principal('kid00002aa'), body: { confirm: 'DELETE' } })).status, 200);
+  assert.equal(fake.rows('Users', 'kid00002aa')[0]?.status, 'under13');
+  assert.equal((await finishProfile('kid00002aa', { year: 1990 })).status, 403, 'cannot answer the age question again');
 });
 
 test('rate limits stop floods', async () => {

@@ -5,14 +5,14 @@
  *   POST /api/me/profile         display name, age check (only "13+"/"18+" is kept), accept rules
  *   GET  /api/me/likes?keys=...  which of these pages I liked
  *   GET  /api/me/export          download everything we keep about me (JSON)
- *   POST /api/me/delete          delete my profile, likes, comments and photos
+ *   POST /api/me/delete          delete my profile, likes, comments, photos and reports
  */
 require('../telemetry-setup');
 const { app } = require('@azure/functions');
 const { json, error, sameOrigin, readJson, cleanText, isPageKey } = require('../lib/http');
 const { readPrincipal } = require('../lib/principal');
 const { table, container, TABLES, CONTAINERS } = require('../lib/store');
-const { getUser, ageFrom, publicProfile, PROFILE } = require('../lib/users');
+const { getUser, isBanned, ageFrom, publicProfile, PROFILE } = require('../lib/users');
 const { allow } = require('../lib/limits');
 const moderate = require('../lib/moderate');
 const { rebuild, rebuildCounts, photoPaths } = require('../lib/readmodel');
@@ -114,11 +114,14 @@ app.http('meExport', {
     if (!principal) return signIn();
     const user = await getUser(principal.userId);
     const items = await myItems(principal.userId);
-    const out = { exportedAt: new Date().toISOString(), profile: null, likes: [], comments: [], photos: [] };
+    const out = { exportedAt: new Date().toISOString(), profile: null, likes: [], comments: [], photos: [], reports: [] };
     if (user) out.profile = { displayName: user.displayName || '', status: user.status, over13: Boolean(user.age13), over18: Boolean(user.age18), rulesAcceptedAt: user.rulesAcceptedAt || '', photoTermsAt: user.photoTermsAt || '', createdAt: user.createdAt || '' };
     for (const it of items) {
       const [kind, key, rk] = it.rowKey.split('~');
-      if (kind === 'like') out.likes.push({ page: key, at: it.at });
+      if (kind === 'flag') {
+        const f = await table(TABLES.flags).get(`${it.itemType}~${it.key}~${it.itemId}`, principal.userId);
+        if (f) out.reports.push({ page: it.key, itemType: it.itemType, reason: f.reason, note: f.note || '', at: f.at });
+      } else if (kind === 'like') out.likes.push({ page: key, at: it.at });
       else if (kind === 'comment') {
         const c = await table(TABLES.comments).get(key, rk);
         if (c) out.comments.push({ page: key, kind: c.kind, text: c.body, status: c.status, at: c.createdAt });
@@ -131,13 +134,19 @@ app.http('meExport', {
   },
 });
 
-/** Delete everything a person posted or liked. Used by "delete my account" and by moderators. */
+/** Delete everything a person posted, liked or reported. Used by "delete my account" and by moderators. */
 async function deleteUserData(userId) {
   const items = await myItems(userId);
   const touched = new Set();
   const likeChanged = new Set();
   for (const it of items) {
     const [kind, key, rk] = it.rowKey.split('~');
+    if (kind === 'flag') {
+      // The report itself goes; the item's report count and any queue entry stay for moderators.
+      await table(TABLES.flags).remove(`${it.itemType}~${it.key}~${it.itemId}`, userId);
+      await table(TABLES.userItems).remove(userId, it.rowKey);
+      continue;
+    }
     if (kind === 'like') {
       await table(TABLES.likes).remove(key, userId);
       likeChanged.add(key);
@@ -179,7 +188,10 @@ app.http('meDelete', {
     if (r.body.confirm !== 'DELETE') return error(400, 'confirm', 'Type DELETE to confirm.');
     const user = await getUser(principal.userId);
     const pages = await deleteUserData(principal.userId);
-    await table(TABLES.users).remove(principal.userId, PROFILE);
+    if (user && (isBanned(user) || user.status === 'under13')) {
+      // Keep only the status (no name or other personal data), so deleting the account cannot undo a ban or the age block.
+      await table(TABLES.users).upsert({ partitionKey: principal.userId, rowKey: PROFILE, status: user.status, bannedUntil: user.bannedUntil || '', deletedAt: new Date().toISOString() });
+    } else await table(TABLES.users).remove(principal.userId, PROFILE);
     await audit({ actor: 'self', action: 'account_deleted', targetType: 'user', targetId: principal.userId, reason: `pages=${pages}; sign-in account ${user && user.idpUserId ? user.idpUserId : 'unknown'} to remove from External ID` });
     return json(200, { ok: true, message: 'Your data was deleted. You will now be signed out.' });
   },

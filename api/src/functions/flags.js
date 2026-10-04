@@ -11,6 +11,7 @@ const { table, TABLES } = require('../lib/store');
 const { requireMember } = require('../lib/users');
 const { allow } = require('../lib/limits');
 const { rebuild } = require('../lib/readmodel');
+const { unpublishPhoto } = require('../lib/photo-files');
 const { audit } = require('../lib/audit');
 
 const HIDE_AFTER = 3;
@@ -38,12 +39,16 @@ app.http('flags', {
     const flagId = `${itemType}~${key}~${itemId}`;
     const created = await table(TABLES.flags).create({ partitionKey: flagId, rowKey: m.principal.userId, reason, note, at: new Date().toISOString() });
     if (!created) return json(200, { ok: true, message: 'You already reported this. Thanks!' });
+    // Listed under the reporter too, so "download my data" includes it and "delete my account" removes it.
+    await table(TABLES.userItems).upsert({ partitionKey: m.principal.userId, rowKey: `flag~${flagId}`, itemType, key, itemId, at: new Date().toISOString() });
 
     const count = (Number(item.flagCount) || 0) + 1;
     const isAdmin = m.principal.roles.includes('admin');
     // Safety reasons hide at once; others after three different people report it.
     const hide = isAdmin || reason === 'child' || reason === 'shows-me' || count >= HIDE_AFTER;
     await items.merge({ partitionKey: key, rowKey: itemId, flagCount: count, ...(hide ? { status: 'hidden' } : {}) });
+    // A hidden photo must stop being served, not just drop off the page.
+    if (hide && itemType === 'photo') await unpublishPhoto(key, item.photoId);
     const prefix = itemType === 'photo' ? 'p' : 'c';
     await table(TABLES.queue).upsert({ partitionKey: 'pending', rowKey: `${prefix}~${key}~${itemId}`, itemType, key, itemKey: itemId, reason: `reports:${reason}`, ai: item.ai || '', at: new Date().toISOString() });
     if (hide) await rebuild(key);

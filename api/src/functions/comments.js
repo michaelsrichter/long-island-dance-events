@@ -2,8 +2,8 @@
 /**
  * POST /api/comments { key, kind: 'comment' | 'correction', text, date? }
  *   comment     -> public after the AI check (or after a human, if the AI is unsure)
- *   correction  -> private note to editors; always goes to the moderation queue and, when
- *                  GITHUB_ISSUES_TOKEN is set, opens a GitHub issue (no name or account id in it)
+ *   correction  -> private note to editors; always goes to the moderation queue and stays there
+ *                  (never posted anywhere public)
  */
 require('../telemetry-setup');
 const { app } = require('@azure/functions');
@@ -15,7 +15,6 @@ const { pageExists } = require('../lib/pages');
 const moderate = require('../lib/moderate');
 const { rebuild } = require('../lib/readmodel');
 const { audit } = require('../lib/audit');
-const { openCorrectionIssue } = require('../lib/github');
 
 const MAX = { comment: 1000, correction: 2000 };
 
@@ -23,7 +22,7 @@ app.http('comments', {
   methods: ['POST'],
   authLevel: 'anonymous',
   route: 'comments',
-  handler: async (request, context) => {
+  handler: async (request) => {
     if (!sameOrigin(request)) return error(403, 'origin', 'Not allowed.');
     const r = await readJson(request, 8192);
     if (!r.ok) return r.response;
@@ -63,14 +62,6 @@ app.http('comments', {
     }
     if (status === 'published') await rebuild(key);
     await audit({ actor: 'ai', action: verdict.decision, targetType: kind, targetId: rk, key, reason: verdict.reason, scores, after: status });
-    if (kind === 'correction' && status === 'pending') {
-      try {
-        const issue = await openCorrectionIssue({ key, text, date });
-        if (issue) await table(TABLES.comments).merge({ partitionKey: key, rowKey: rk, githubIssue: issue });
-      } catch (err) {
-        context.warn(`correction issue: ${err && err.message}`);
-      }
-    }
     const message = kind === 'correction' && status === 'pending' ? 'Thanks! Our editors will check your correction.' : moderate.MESSAGES[verdict.decision];
     return json(status === 'rejected' ? 422 : 200, { status, message, ...(status === 'published' ? { id: rk } : {}) });
   },
