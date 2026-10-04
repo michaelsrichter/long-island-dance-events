@@ -40,7 +40,7 @@ flowchart LR
 | Source | Type | Status |
 | --- | --- | --- |
 | [The Dance Calendar](https://www.thedancecalendar.com/dance-calendar) | Monthly PDF newsletter | Live (adapter `thedancecalendar`), weekly |
-| [Ira's List LI](https://www.iraslistli.com/) | Weekly live-music list (home page text) | Live (adapter `iraslist`), daily. The embedded calendar widget blocks bots, so only the home-page list is read. |
+| [Ira's List LI](https://www.iraslistli.com/) | Live-music calendar (public Google Calendar feed) | Live (adapter `iraslist`), daily. Reads the calendar's public iCal address for the next 60 days, with times and addresses, and falls back to the home-page list (decision P40). |
 | 42 more calendars: dance clubs and studios, bars and music venues with researched venue files, band pages, town and library calendars | Calendar feeds, built-in event data, web page lists | Switched on (generic adapters `ical`, `jsonld`, `htmllist`), twice a week or weekly |
 | 101 more that we know about | Blocked by `robots.txt` or bot checks, social media or flyers only, seasonal, need a feed, or all their listings are at venues nobody has researched yet | Off, with a note in each file saying why and what to do |
 

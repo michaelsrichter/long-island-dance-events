@@ -25,6 +25,8 @@ This is the list of websites that publish upcoming **dance events** and **live m
 3. A person (with AI help) then read each page and wrote the notes in our own words. Nothing was copied from the sites, and no private people's details were recorded.
 4. Our office network blocks some bar, brewery and winery sites. For those we read Microsoft's saved copy through Web IQ Browse and marked them **recheck-from-ci**: GitHub Actions must read their robots.txt before we collect anything.
 
+**Public Google Calendars are the one exception.** `calendar.google.com/robots.txt` blocks all bots, but Google tells people to use a public calendar's iCal address in other apps (support.google.com/calendar/answer/37083). So when an organizer makes a calendar public, we read only that address: `https://calendar.google.com/calendar/ical/<id>/public/basic.ics`. Ira's List is read this way (decision P40). A Google Calendar embedded on a web page shows its id in the page's code (`src=` in the calendar link); put that feed address in the source's `url` or `feedUrl` and use the `ical` adapter.
+
 **Screenshots are not a way around a block.** A program that takes screenshots or reads text from images is still a robot, so robots.txt and the site's rules still apply. Blocked sites are asked for permission. Social-media-only and flyer-only events come in through the hand-entry (flyer upload) path described in [`docs/database-plan.md`](database-plan.md).
 
 ## What the status words mean

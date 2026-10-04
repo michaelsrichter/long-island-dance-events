@@ -5,8 +5,9 @@
   "attribution": "Live bands and DJs come from Ira's List, a weekly guide to live music on Long Island. We list the facts and link back; check with the venue before you go.",
   "cadence": "daily",
   "catalogStatus": "live",
-  "description": "Weekly list of live bands and DJs at Long Island bars, restaurants, parks and theaters. We read the \"This week\" list on the home page.",
+  "description": "Live bands and DJs at Long Island bars, restaurants, parks and theaters. We read Ira's List's public Google Calendar (its iCal subscription feed, with times and addresses for the next 60 days) and fall back to the \"This week\" list on the home page.",
   "enabled": true,
+  "feedUrl": "https://calendar.google.com/calendar/ical/iraslistli%40gmail.com/public/basic.ics",
   "focus": "music",
   "lastCounts": {
     "found": 54,
@@ -16,6 +17,10 @@
   },
   "lastScraped": "2026-10-04T16:23:19.974Z",
   "lastStatus": "ok",
+  "permission": {
+    "note": "Ira's List publishes this calendar publicly. Google documents the public iCal address as the way for other apps to subscribe (support.google.com/calendar/answer/37083). We read only that feed, once per run, with caching.",
+    "status": "not-needed"
+  },
   "rateLimitSeconds": 5,
   "url": "https://www.iraslistli.com/"
 }

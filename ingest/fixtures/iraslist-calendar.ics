@@ -1,0 +1,59 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:fictional-list@example.com
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20310103T200000
+DTEND;TZID=America/New_York:20310103T230000
+UID:a1@example.com
+SUMMARY:📌Sample Party Band-Example Pub (Ira'sList Sponsored Venue)
+LOCATION:Example Pub\, 1 Fictional Ave\, Farmingdale\, NY 11735\, USA
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20310103T200000
+DTEND;TZID=America/New_York:20310103T230000
+UID:a2@example.com
+SUMMARY:Sample Party Bnd-Example Pub
+LOCATION:Example Pub\, 1 Fictional Ave\, Farmingdale\, NY 11735\, USA
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20310104T190000
+DTEND;TZID=America/New_York:20310104T220000
+UID:a3@example.com
+SUMMARY:Pretend Rockers on Saturday\, Jan. 4th-The Fictional Tavern
+LOCATION:The Fictional Tavern\, 77 Imaginary Rd\, Huntington\, NY 11743\, USA
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20310105T180000
+UID:a4@example.com
+SUMMARY:WCS at Example Pub - Sun Jan 5 at 6 pm Full Band
+LOCATION:Example Pub
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20310106T190000
+UID:a5@example.com
+SUMMARY:Somebody Band-Unknown Room
+LOCATION:Unknown Room
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20310107T190000
+UID:a6@example.com
+SUMMARY:Far Band-City Club
+LOCATION:City Club\, 9 Broadway\, Astoria\, NY 11106\, USA
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20310108T193000
+UID:a7@example.com
+SUMMARY:Rocky Horror Picture Show-Example Playhouse
+LOCATION:Example Playhouse\, 2 Fictional Ave\, Patchogue\, NY 11772
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/New_York:20310109T200000
+UID:a8@example.com
+SUMMARY:Half Step Halloween Costume Contest and Dance Party!-3490
+LOCATION:3490\, 3490 Pretend Blvd\, Seaford\, NY 11783
+END:VEVENT
+END:VCALENDAR

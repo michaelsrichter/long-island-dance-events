@@ -1,5 +1,6 @@
 /**
- * Polite HTTP for scraping (brief §5): descriptive User-Agent, robots.txt honored, one request at a
+ * Polite HTTP for scraping (brief §5): descriptive User-Agent, robots.txt honored (one documented exception:
+ * published public calendar feeds, see isPublishedCalendarFeed), one request at a
  * time per host with a delay, and a disk cache with conditional requests (ETag / Last-Modified) so an
  * unchanged file is not downloaded again. Cached copies live in .cache/ingest and are never committed.
  */
@@ -83,6 +84,18 @@ export interface FetchResult {
   fromCache: boolean;
 }
 
+/**
+ * A calendar a publisher has made public and shares as an iCal subscription feed. Google documents this
+ * "public address in iCal format" as the way for other applications to subscribe to a public calendar
+ * (support.google.com/calendar/answer/37083). calendar.google.com's robots.txt is written for crawlers of
+ * its web pages, so for exactly this feed address we act like any calendar app: one cached, conditional
+ * request per run. Nothing else on calendar.google.com is fetched, and private calendars are never readable.
+ */
+const PUBLISHED_CALENDAR_FEED = /^https:\/\/calendar\.google\.com\/calendar\/ical\/[A-Za-z0-9._%+-]+(?:%40|@)[A-Za-z0-9.-]+\/public\/basic\.ics$/;
+export function isPublishedCalendarFeed(url: string): boolean {
+  return PUBLISHED_CALENDAR_FEED.test(url);
+}
+
 export class PoliteFetcher {
   private robots = new Map<string, RobotsRules>();
   private lastRequest = new Map<string, number>();
@@ -133,8 +146,9 @@ export class PoliteFetcher {
       return { url, status: 200, file, contentType: meta?.contentType ?? '', fromCache: true };
     }
     const u = new URL(url);
-    const rules = await this.rules(u.origin, delaySeconds);
-    if (!isAllowed(rules, u.pathname + u.search)) throw new Error(`robots.txt does not allow ${url}`);
+    const feed = isPublishedCalendarFeed(url);
+    const rules = feed ? { allow: [], disallow: [] } : await this.rules(u.origin, delaySeconds);
+    if (!feed && !isAllowed(rules, u.pathname + u.search)) throw new Error(`robots.txt does not allow ${url}`);
     await this.wait(u.host, Math.max(delaySeconds, rules.crawlDelay ?? 0));
     const headers: Record<string, string> = { 'user-agent': USER_AGENT, accept: '*/*' };
     if (meta?.etag && cached) headers['if-none-match'] = meta.etag;
