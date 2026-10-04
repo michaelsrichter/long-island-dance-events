@@ -1,10 +1,11 @@
 name: Community maintenance
 
-# Weekly: back up community tables, delete rejected posts older than 90 days, moderation log older
-# than 2 years and old rate-limit counters (see the privacy page and docs/deployment.md).
+# Daily: create empty public files for new pages, back up community tables, delete rejected posts
+# older than 90 days, moderation log older than 2 years and old rate-limit counters
+# (see the privacy page and docs/deployment.md).
 on:
   schedule:
-    - cron: '30 8 * * 1' # Mondays, early morning U.S. Eastern time
+    - cron: '30 10 * * *' # every morning U.S. Eastern time, after the nightly site rebuild
   workflow_dispatch:
     inputs:
       dry_run:
@@ -39,4 +40,5 @@ jobs:
         if: env.HAS_STORAGE == 'true'
         env:
           COMMUNITY_STORAGE: ${{ secrets.COMMUNITY_STORAGE }}
+          SITE_URL: ${{ vars.SITE_URL }}
         run: node scripts/community-maintenance.mjs ${{ inputs.dry_run && '--dry-run' || '' }}

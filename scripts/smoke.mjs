@@ -51,11 +51,22 @@ await check('Telemetry endpoint rejects cross-origin posts', async () => { const
 const COMMUNITY_KEY = 'venue:huntington-moose-lodge';
 let blobBase = '';
 await check('Visitor sign-in goes to Entra External ID', async () => {
-  const r = await get('/.auth/login/extid');
-  assert(r.status === 302, `status ${r.status}`);
-  const host = new URL(r.headers.get('location')).host;
-  assert(host.endsWith('.ciamlogin.com'), `redirects to ${host}`);
-  return `redirects to ${host}`;
+  // SWA first redirects to itself (adding a nonce and a cookie), then to the identity provider.
+  let url = `${base}/.auth/login/extid`;
+  const jar = new Map();
+  for (let hop = 0; hop < 4; hop++) {
+    const cookie = [...jar].map(([k, v]) => `${k}=${v}`).join('; ');
+    const r = await fetch(url, { redirect: 'manual', headers: cookie ? { cookie } : {} });
+    for (const c of r.headers.getSetCookie?.() ?? []) { const [pair] = c.split(';'); const i = pair.indexOf('='); jar.set(pair.slice(0, i).trim(), pair.slice(i + 1)); }
+    assert(r.status === 302, `hop ${hop}: status ${r.status}`);
+    const next = new URL(r.headers.get('location'), url);
+    if (next.host !== new URL(base).host) {
+      assert(next.host.endsWith('.ciamlogin.com'), `redirects to ${next.host}`);
+      return `redirects to ${next.host}`;
+    }
+    url = next.toString();
+  }
+  throw new Error('too many redirects');
 });
 await check('Signed-out visitors are anonymous', async () => {
   const me = await (await get('/.auth/me')).json();

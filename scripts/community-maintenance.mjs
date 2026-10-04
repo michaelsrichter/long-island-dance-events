@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-// Weekly maintenance for community data (run by .github/workflows/community-maintenance.yml).
+// Daily maintenance for community data (run by .github/workflows/community-maintenance.yml).
 //
+//   0. Create an empty public JSON file for every page that has none yet (so browsers never get a 404).
 //   1. Back up every community table to the private "backups" container (kept 5 weeks by a lifecycle rule).
 //   2. Delete rejected notes and photos older than 90 days (the decision stays in the ModLog).
 //   3. Delete moderation-log months older than 2 years.
@@ -28,10 +29,36 @@ const TABLES = ['Users', 'Comments', 'Photos', 'Likes', 'LikeCounts', 'UserItems
 const blobs = BlobServiceClient.fromConnectionString(conn);
 const table = (name) => TableClient.fromConnectionString(conn, name);
 const stamp = new Date(now).toISOString().slice(0, 10);
-const counts = { backedUp: 0, rejectedRemoved: 0, logRemoved: 0, limitsRemoved: 0 };
+const counts = { seeded: 0, backedUp: 0, rejectedRemoved: 0, logRemoved: 0, limitsRemoved: 0 };
+const site = (process.env.SITE_URL || 'https://longisland.dance').replace(/\/+$/, '');
 
 async function remove(t, e) {
   if (!dryRun) await t.deleteEntity(e.partitionKey, e.rowKey);
+}
+
+// 0. Empty read-model files for pages without any activity yet
+{
+  const res = await fetch(`${site}/community-pages.json`);
+  if (!res.ok) throw new Error(`community-pages.json: HTTP ${res.status}`);
+  const { keys } = await res.json();
+  const community = blobs.getContainerClient('community');
+  const existing = new Set();
+  for await (const b of community.listBlobsFlat()) existing.add(b.name);
+  for (const key of keys) {
+    const [type, id] = key.split(':');
+    const path = `${type}/${id}.json`;
+    if (existing.has(path)) continue;
+    counts.seeded++;
+    if (!dryRun) {
+      const doc = { v: 1, key, likes: 0, comments: [], photos: [], updatedAt: new Date(now).toISOString() };
+      await community.getBlockBlobClient(path).uploadData(Buffer.from(JSON.stringify(doc)), { blobHTTPHeaders: { blobContentType: 'application/json; charset=utf-8', blobCacheControl: 'public, max-age=60' } });
+    }
+  }
+  for (const type of ['event', 'venue', 'organizer', 'instructor', 'performer', 'style']) {
+    const path = `counts/${type}.json`;
+    if (existing.has(path) || dryRun) continue;
+    await community.getBlockBlobClient(path).uploadData(Buffer.from(JSON.stringify({ v: 1, type, likes: {}, updatedAt: new Date(now).toISOString() })), { blobHTTPHeaders: { blobContentType: 'application/json; charset=utf-8', blobCacheControl: 'public, max-age=300' } });
+  }
 }
 
 // 1. Backups
@@ -85,4 +112,4 @@ for await (const e of limits.listEntities()) {
   }
 }
 
-console.log(`${dryRun ? '[dry run] ' : ''}backed up ${counts.backedUp} rows to backups/${stamp}/; removed ${counts.rejectedRemoved} old rejected posts, ${counts.logRemoved} old log rows, ${counts.limitsRemoved} old rate-limit rows.`);
+console.log(`${dryRun ? '[dry run] ' : ''}created ${counts.seeded} empty page files; backed up ${counts.backedUp} rows to backups/${stamp}/; removed ${counts.rejectedRemoved} old rejected posts, ${counts.logRemoved} old log rows, ${counts.limitsRemoved} old rate-limit rows.`);
