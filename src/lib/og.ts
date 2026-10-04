@@ -99,7 +99,9 @@ function tree(card: SocialCard, w: number, hgt: number): Node {
 export async function renderSocialPng(card: SocialCard, size: 'og' | 'square'): Promise<Buffer> {
   const [w, hgt] = size === 'og' ? [1200, 630] : [1080, 1080];
   const svg = await satori(tree(card, w, hgt) as never, { width: w, height: hgt, fonts: getFonts() });
-  return sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toBuffer();
+  // A 256-colour palette looks the same for these flat cards and halves the file size,
+  // which keeps the site well under the Static Web Apps size limit (two images per upcoming event).
+  return sharp(Buffer.from(svg)).png({ palette: true, quality: 90, effort: 10, compressionLevel: 9, dither: 1 }).toBuffer();
 }
 
 import type { ResolvedEvent } from './content';

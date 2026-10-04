@@ -17,4 +17,13 @@ describe('social images', () => {
     expect([og.width, og.height]).toEqual([1200, 630]);
     expect([sq.width, sq.height]).toEqual([1080, 1080]);
   }, 30_000);
+
+  it('stays small enough for thousands of events (under 75 KB each)', async () => {
+    const card = { title: 'Faces for Radio at The Nutty Irishman', month: 'Oct', day: '3', weekday: 'Sat', lines: ['The Nutty Irishman, Farmingdale', 'Live music · Line dancing likely'], footer: "Listed on Ira's List" };
+    const og = await renderSocialPng(card, 'og');
+    const sq = await renderSocialPng(card, 'square');
+    expect(og.length).toBeLessThan(75 * 1024);
+    expect(sq.length).toBeLessThan(75 * 1024);
+    expect((await sharp(og).metadata()).format).toBe('png');
+  }, 30_000);
 });
