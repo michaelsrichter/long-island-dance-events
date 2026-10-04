@@ -14,6 +14,6 @@
     "venueId": "patchogue-theatre-patchogue",
     "town": "Patchogue"
   },
-  "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
+  "include": "\\b(danc\\w*|ballroom|swing|music|concerts?|bands?|tributes?|jazz|blues|rock|rock (?:and|n|&) roll|rockin'?|motown|doo.?wop|country|orchestra|symphony|tenors|acoustic|unplugged|singers?|songs)\\b",
   "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority for live music. It is a listening/theatre source rather than a dance source."
 }

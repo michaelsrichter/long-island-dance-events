@@ -124,13 +124,13 @@ export function entityNameFromSource(name: string): string {
   return name.split(/\s+[-–—|]\s+/)[0]!.replace(/\s*\([^)]*\)\s*$/, '').trim();
 }
 
-const NON_EVENT = /\b(closed|private (?:party|event)|trivia|bingo|karaoke|comedy|paint (?:and|&) sip|yoga|gift cards?|holiday hours|now hiring|drag (?:brunch|show|bingo|queen))\b/i;
+const NON_EVENT = /\b(closed|private (?:party|event)|trivia|bingo|karaoke|comedy|comedian|stand-?up|paint (?:and|&) sip|yoga|gift cards?|holiday hours|now hiring|drag (?:brunch|show|bingo|queen)|picture show|screening|film|movie|circus|game show|psychic|medium)\b/i;
 // Never a dance or live-music listing, even when an aggregator's text mentions "music".
 const NEVER_EVENT = /\b(street fair|carnival|craft fair|farmer['’]?s market|flea market|yard sale|car show|vintage pop[- ]?up|pop[- ]?up (?:shop|market)|football|soccer|baseball|hockey|golf outing)\b/i;
 const FESTIVAL = /\b(festival|fest\b|dance weekend|congress|dance camp|marathon)\b/i;
 // "world-class musicians" and "a class act" are not classes.
 const CLASS = /(?<!-)\b(class(?:es)?(?![-\w]|\s+act\b)|lessons?|workshops?|boot ?camp|instruction)\b/i;
-const SOCIAL = /\b(social|dance party|dance night|milonga|practica|open dancing|dancing to|dancing until|dj'?d music|music (?:&|and) dancing)\b|\d\s*(?:pm)?\s*\/\s*music\b/i;
+const SOCIAL = /\b(social|dance party|dance night|milonga|practica|open dancing|dancing to|dancing until|dancing (?:from|begins|starts)|dj'?d music|dj music|music (?:&|and) dancing)\b|\d\s*(?:pm)?\s*\/\s*music\b/i;
 const LIVE = /\b(live (?:music|band|entertainment)|band\b|concert|tribute|orchestra|in concert|acoustic|performs|on stage)\b/i;
 
 /**
@@ -449,8 +449,13 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       continue;
     }
     if (date < ctx.today || date > horizon) continue;
-    if ((include && !include.test(text)) || (exclude && exclude.test(text)) || (!include && NON_EVENT.test(f.title)) || NEVER_EVENT.test(f.title)) {
-      skipped.push({ reason: 'not a dance or live-music listing', ref });
+    // Trivia, bingo, comedy and film nights are skipped on every calendar, even when a source's
+    // "include" pattern matches ("Rocky Horror" contains "rock"), unless the title names a dance.
+    const nonEvent = NON_EVENT.test(f.title) && !DANCE_TEXT.test(f.title);
+    // A happy hour counts only when it names a band, DJ or live music ("Happy Hour Band: ...").
+    const plainHappyHour = /\bhappy hour\b/i.test(f.title) && !MUSIC_TEXT.test(`${f.title} ${f.description ?? ''}`) && !reg.matchPerformers(`${f.title} ${f.description ?? ''}`).length;
+    if ((include && !include.test(text)) || (exclude && exclude.test(text)) || nonEvent || plainHappyHour || NEVER_EVENT.test(f.title)) {
+      skipped.push({ reason: 'not a dance or live-music listing', ref: `${ref} ${f.title}`.slice(0, 160) });
       continue;
     }
     const optedOut = reg.isOptedOut(text);
@@ -595,9 +600,9 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       confidence -= 0.1;
       notes.push('No start time found.');
     }
-    // A dance or show starting between 1 and 8 in the morning is almost always a typo on the source
+    // A dance or show starting between 1 and 9 in the morning is almost always a typo on the source
     // ("6:30 AM" for 6:30 PM), so a person checks it before it is shown.
-    if (start && minutesOf(start) >= 60 && minutesOf(start) < 480) {
+    if (start && minutesOf(start) >= 60 && minutesOf(start) < 540) {
       notes.push(`Start time looks wrong (${Number(start.slice(0, 2))}:${start.slice(3, 5)} in the morning). Check the source.`);
       confidence = Math.min(confidence, 0.4);
     }
