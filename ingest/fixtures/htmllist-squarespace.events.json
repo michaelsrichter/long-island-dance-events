@@ -42,6 +42,7 @@
         "sourceName": "Sample Tavern (Bay Shore) - music calendar",
         "sourceRef": "events page 2026-10-16",
         "status": "active",
+        "dancingCues": [],
         "confidence": 0.8
       }
     }

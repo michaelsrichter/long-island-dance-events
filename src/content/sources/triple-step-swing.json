@@ -1,0 +1,19 @@
+{
+  "name": "Triple Step Swing (Long Island Lindy Hop) - calendar",
+  "url": "https://triplestepswing.com/calendar",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Triple Step Swing (Long Island Lindy Hop). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Syosset, Huntington, Greenlawn and East Meadow: Lindy Hop, swing, blues, big band concerts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "feedUrl": "https://inffuse.eventscalendar.co/api/v0.1/projects/proj_LH4Z9iBCTJ3nnZsI92ePw/data/public/events?user=user_jkYMxufQ75hxoRD01us4U&app=calendar",
+  "permission": {
+    "status": "needed",
+    "note": "site page has no robots.txt, but eventscalendar.co widget host disallows bots."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Needs permission. Ask Triple Step Swing for a shareable calendar or written OK before collecting widget JSON."
+}

@@ -1,0 +1,19 @@
+{
+  "name": "The Haymakers (band) - shows",
+  "url": "https://www.haymakersmusic.com/shows",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from The Haymakers (band). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Farmingdale and Lindenhurst: rock & roll / swing-friendly band night.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "the-haymakers"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep as low priority. It is dance-friendly live music, but the dance signal is stronger on Dance Manhattan."
+}

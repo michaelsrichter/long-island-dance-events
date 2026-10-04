@@ -12,8 +12,22 @@
 - **The website does not need a live database yet.** The pages are built ahead of time. Add a managed database only when the site must save things instantly (editor review list, flyer uploads, organizer submissions). The cheapest good choice is the **Azure SQL Database free offer ($0)**. Managed PostgreSQL or MySQL costs about **$15-16 a month** even when idle.
 - **Check sources on a schedule that fits them:** daily for weekly bar-band lists, twice a week for busy bar and venue calendars, weekly for clubs, studios and monthly calendars, monthly for new-source discovery with Web IQ, and each spring for summer concert series.
 - **Read structured data first:** event data built into pages (JSON-LD) and calendar feeds (.ics) need no AI. Use rules for tidy web pages. Use a **small, cheap Microsoft Foundry model (gpt-5-nano)** only for messy pages and flyer photos.
-- **Expected running cost: about $1.50 a month (about $18 a year) at list prices**, mostly Web IQ discovery. AI costs pennies. See the [cost table](#cost-table).
-- **Never get around a block.** Screenshots, reading text from images, or pretending to be a browser are still automated access. Blocked sources get a [permission request](#permission-request-flow). Social-media-only and flyer-only events come in by [hand upload](#human-in-the-loop-flyer-intake).
+- **Expected running cost: about $1.27 a month (about $15 a year) at list prices**, mostly Web IQ discovery. AI costs pennies. See the [cost table](#10-cost-table).
+- **Never get around a block.** Screenshots, reading text from images, or pretending to be a browser are still automated access. Blocked sources get a [permission request](#9-permission-request-flow). Social-media-only and flyer-only events come in by [hand upload](#8-human-in-the-loop-flyer-intake).
+
+## What is built (October 3, 2026)
+
+| Piece | Where | State |
+| --- | --- | --- |
+| Source files for every accepted and tracked source (145) | `src/content/sources/*.json` | **68 switched on** (The Dance Calendar, Ira's List, and 66 more); 77 off with a reason (needs permission, browser-only calendar, seasonal, hand entry, or our office network could not check it) |
+| Generic adapters | `ingest/adapters/ical.ts`, `jsonld.ts`, `htmllist.ts` + `ingest/lib/structured.ts` | Built, with golden tests on fictional fixtures. A live dry run on October 3 read 59 of the 66 new sources; the rest had only past or off-island dates that day |
+| Scheduled collection | `.github/workflows/ingest-scheduled.yml` | Daily, Monday + Thursday, Sunday. One rolling pull request; weekly review request (the weekly email); issues for broken sources |
+| Report database | `catalog/schema.sql`, `catalog/scripts/build-sqlite.ts`, `.github/workflows/report-database.yml` | Built on every change to the data; download from the run page |
+| Monthly discovery | `.github/workflows/source-discovery.yml`, `catalog/scripts/discovery_report.py` | Built; the search step waits for the `WEBIQ_API_KEY` secret |
+| AI help (Foundry) and flyer upload | Plan only (sections 5 and 8) | Waiting for owner decisions |
+| Permission requests | Plan (section 9); a `permission` note in each blocked source file | Ready to send once the owner picks a contact address |
+
+**Owner setup (one time):** in GitHub, Settings → Actions → General → Workflow permissions → allow GitHub Actions to create pull requests. Then add the repository secret `WEBIQ_API_KEY`. We did not add it.
 
 ## 1. How the pieces fit
 
@@ -318,14 +332,14 @@ At the expected volume: about 4,000 events a year, about 90 sources switched on,
 
 | Item | Assumption | Per month | Per year |
 | --- | --- | ---: | ---: |
-| Web IQ discovery (Search + Browse) | 85 searches + 20 page reads a month at $12.50 per 1,000 calls (free during evaluation) | $1.31 | $15.75 |
+| Web IQ discovery (monthly job) | 85 searches a month at $12.50 per 1,000 calls (free during evaluation). Add $0.25 a month for 20 page reads if a person checks blocked sites through Web IQ Browse | $1.06 | $12.75 |
 | Foundry text extraction (gpt-5-nano) | 1.45 million tokens in, 0.29 million out | $0.19 | $2.28 |
 | Foundry flyer vision (gpt-5-nano) | 30 flyers; worst case 0.8 million tokens in | $0.02 (worst $0.06) | $0.24 (worst $0.72) |
 | GitHub Actions | Public repository: standard runners and artifact storage are free (~300 minutes a month) | $0 | $0 |
 | Raw page copies | Kept in the Actions cache and artifacts for 90 days ($0). Optional Azure Blob Hot LRS: about 0.5 GB at $0.0184 per GB + writes | $0 (Blob option: about $0.02) | $0 (about $0.24) |
 | Database for reports (SQLite artifact) | Rebuilt every run | $0 | $0 |
 | Azure Static Web Apps Free | Hosting, 100 GB bandwidth | $0 | $0 |
-| **Total (recommended setup)** | | **about $1.52** | **about $18.27** |
+| **Total (recommended setup)** | | **about $1.27** | **about $15.27** |
 | Optional: Azure SQL Database free offer (phase 5 admin data) | Within the free monthly amount | $0 | $0 |
 | Optional instead: PostgreSQL Flexible B1ms | Runs all month | $16.09 | $193.08 |
 | If the AI use is 10× higher than planned | Busy season, many messy pages | +$2.10 | +$25 |
@@ -336,8 +350,8 @@ Not included: the domain name renewal and any paid plan the owner chooses later.
 
 | Phase | What | Result |
 | --- | --- | --- |
-| 1 (this pull request) | Source catalog, database design, SQLite build in CI with sample reports, plan | Owner can see every source and run reports |
-| 2 | Registry files for all accepted sources; generic JSON-LD and iCal adapters with golden tests; HTML adapters for the High-priority sites; scheduled workflows (daily + twice weekly + weekly), PR with report, issue on failure; monthly Web IQ rediscovery | Dozens of sources collected automatically |
+| 1 ✅ (PR #8) | Source catalog, database design, SQLite build in CI with sample reports, plan | Owner can see every source and run reports |
+| 2 ✅ (PR #8) | 145 source files (68 switched on); generic JSON-LD, iCal and HTML-list adapters with golden tests; scheduled workflows (daily + twice weekly + weekly), one rolling PR with the report, issue on failure; monthly Web IQ rediscovery | Dozens of sources collected automatically |
 | 3 | Permission requests for blocked sources; first `.ics` feeds from organizers; duplicate detection with embeddings | More events, fewer duplicates |
 | 4 | Foundry resource + gpt-5-nano for messy pages (after a 10-page test); dancing score from venue and band facts | The long tail of bar and band sites |
 | 5 | Admin area: review queue, flyer upload, permission records in Azure SQL free offer (or Table Storage) | Editors work in the site, not in git |
@@ -348,7 +362,7 @@ Not included: the domain name renewal and any paid plan the owner chooses later.
 1. **Storage:** keep the free SQLite copy now and add the **Azure SQL free offer** for admin data in phase 5 (recommended)? Or pay about **$16 a month** for PostgreSQL now?
 2. **AI:** approve creating a Microsoft Foundry resource with **gpt-5-nano** (pay per use, about $0.20 a month expected) and a small test (under $0.05)?
 3. **Permission outreach:** who contacts organizers that block bots, starting with LongIsland.com, Triple Step Swing and Lourdes Cruz? Which contact address should those emails come from? (Related: decision P13, there is no public email yet.)
-4. **Web IQ in production:** add the repository secret `WEBIQ_API_KEY` for the monthly discovery job. After evaluation it costs about $1.31 a month.
+4. **Web IQ in production:** add the repository secret `WEBIQ_API_KEY` for the monthly discovery job (`.github/workflows/source-discovery.yml`). After evaluation it costs about $1.06 a month.
 5. **Flyer intake:** turn on organizer uploads (signed-in) when the admin area ships, with the "I may share this" checkbox and delete-after-review rule?
 
 ## Prices we checked

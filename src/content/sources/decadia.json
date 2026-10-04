@@ -1,0 +1,19 @@
+{
+  "name": "Decadia - upcoming shows",
+  "url": "https://www.decadialive.com/home",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Decadia. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Babylon, Smithtown, Amityville and Wantagh: 80s and 90s, party band, tribute concerts, cover band.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "decadia"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep because it has many LI public dates soon and useful repeat venue signals."
+}

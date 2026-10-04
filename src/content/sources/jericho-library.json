@@ -1,0 +1,18 @@
+{
+  "name": "Jericho Public Library events",
+  "url": "https://www.jericholibrary.org/events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Jericho Public Library events. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Jericho: Chinese dance, traditional Chinese dancercise, children music movement.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "town": "Jericho"
+  },
+  "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
+  "reviewNotes": "The library calendar fills in its events in the browser, so the page we can read has dates but no events. Ask the library for an .ics link. Catalog check 2026-10-03: Keep with filters; real dance classes but mostly library programs."
+}

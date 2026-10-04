@@ -1,0 +1,19 @@
+{
+  "name": "The Fabulous Acchords - appearance schedule",
+  "url": "https://theacchords.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from The Fabulous Acchords. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in New Hyde Park, Levittown, Hicksville and Port Jefferson: doo-wop, oldies, sock hop, dinner dance.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "the-fabulous-acchords"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep because it has several public LI oldies dates, but many listings are outside LI."
+}

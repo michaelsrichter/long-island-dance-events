@@ -1,0 +1,14 @@
+{
+  "name": "Webtunes - Long Island live music",
+  "url": "https://webtunes.com/events/long-island",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "music",
+  "cadence": "twice-weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Webtunes. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Amityville, Bay Shore, Bellmore and Huntington: rock cover bands, tribute bands, freestyle concert.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "reviewNotes": "Catalog check 2026-10-03: Keep it: LI-only page with machine-readable live-music events, but expect duplicates."
+}

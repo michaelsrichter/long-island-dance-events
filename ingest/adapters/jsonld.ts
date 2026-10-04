@@ -11,7 +11,7 @@
  */
 import { readFileSync } from 'node:fs';
 import type { Adapter, AdapterContext, FetchedDocument, NormalizeResult } from '../lib/types';
-import { decodeEntities, isoToLocal, settingsOf, toCandidates, type FoundEvent } from '../lib/structured';
+import { decodeEntities, isoToLocal, plainText, settingsOf, toCandidates, type FoundEvent } from '../lib/structured';
 
 export const MAX_PAGES = 30;
 const EVENT_TYPES = new Set(['event', 'musicevent', 'danceevent', 'socialevent', 'festival', 'educationevent', 'theaterevent', 'comedyevent', 'childrensevent', 'exhibitionevent', 'sportsevent', 'businessevent', 'foodevent', 'literaryevent', 'publicationevent', 'saleevent', 'screeningevent', 'visualartsevent', 'courseinstance']);
@@ -20,7 +20,7 @@ const EVENT_LINK = /\/(?:event-details|events?|shows?|gigs?|calendar)\/[^"'#?\s]
 type Json = Record<string, unknown>;
 const asArray = <T>(v: T | T[] | undefined | null): T[] => (v === undefined || v === null ? [] : Array.isArray(v) ? v : [v]);
 const text = (v: unknown): string | undefined => {
-  if (typeof v === 'string') return decodeEntities(v).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() || undefined;
+  if (typeof v === 'string') return plainText(decodeEntities(v).replace(/<(br|\/p|\/div|\/li)\b[^>]*>/gi, ' ')) || undefined;
   if (typeof v === 'number') return String(v);
   return undefined;
 };

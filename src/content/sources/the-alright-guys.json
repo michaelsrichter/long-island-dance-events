@@ -1,0 +1,19 @@
+{
+  "name": "The Alright Guys - shows",
+  "url": "https://thealrightguys.com/shows/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from The Alright Guys. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Island Park and Long Beach: blues, rock, Americana.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "the-alright-guys"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep because it has two dated Nassau public shows and a strong danceability signal."
+}

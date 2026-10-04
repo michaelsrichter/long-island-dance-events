@@ -1,0 +1,18 @@
+{
+  "name": "89 North (Patchogue) - music calendar",
+  "url": "https://89northmusic.com/calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "twice-weekly",
+  "enabled": true,
+  "attribution": "Some listings come from 89 North (Patchogue). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Patchogue: country line dancing, cover bands, tribute bands, live music.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "89-north-patchogue",
+    "town": "Patchogue"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep it because it has many future Long Island music and dance events in an easy calendar format."
+}

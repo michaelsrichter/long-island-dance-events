@@ -1,0 +1,14 @@
+{
+  "name": "Good Times Magazine music calendar",
+  "url": "https://goodtimesmag.com/music-calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Good Times Magazine music calendar. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Carle Place and Mineola: local music calendar, print issue listings.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "manual-intake",
+  "reviewNotes": "Events are only in social posts or picture flyers. Add them by hand (flyer intake). Catalog check 2026-10-03: Use by hand only; the event rows are not machine-readable in the cached page."
+}

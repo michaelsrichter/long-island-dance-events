@@ -1,0 +1,14 @@
+{
+  "name": "Long Island Music and Entertainment Hall of Fame concert calendar",
+  "url": "https://www.limusichalloffame.org/long-island-concert-calendar/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Long Island Music and Entertainment Hall of Fame concert calendar. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Huntington, Patchogue, Port Jefferson and Southampton: concerts, jazz, rock, tribute shows.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "reviewNotes": "Catalog check 2026-10-03: Keep as a concert source, but it is not focused on social dancing."
+}

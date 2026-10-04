@@ -1,0 +1,17 @@
+{
+  "name": "Enjoy Long Beach music and events",
+  "url": "https://www.enjoylb.com/music-and-events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "twice-weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Enjoy Long Beach music and events. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Long Beach: DJs, bar bands, rooftop events, free concerts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "town": "Long Beach"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep it; useful Long Beach music/DJ items, but terms URL returned 429."
+}

@@ -1,0 +1,18 @@
+{
+  "name": "The Buoy Bar (Point Lookout) - seasonal live music",
+  "url": "https://www.buoybarli.com/buoy_bar_events.html",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from The Buoy Bar (Point Lookout). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Point Lookout: waterfront seasonal live music, country music fest.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "defaults": {
+    "venueId": "the-buoy-bar-point-lookout",
+    "town": "Point Lookout"
+  },
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck in season. It is a real waterfront music source, but current listings are stale."
+}

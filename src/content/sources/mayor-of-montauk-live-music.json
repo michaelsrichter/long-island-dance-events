@@ -1,0 +1,14 @@
+{
+  "name": "Mayor of Montauk Guide - live music",
+  "url": "https://www.mayorofmontauk.com/events/live-music",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "music",
+  "cadence": "twice-weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Mayor of Montauk Guide. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Montauk and East Hampton: acoustic, rock, bar bands, nightlife.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "reviewNotes": "Catalog check 2026-10-03: Keep it as a strong Montauk source, with venue/time checks."
+}

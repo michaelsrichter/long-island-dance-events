@@ -1,0 +1,15 @@
+{
+  "name": "West Islip Public Library events",
+  "url": "https://westisliplibrary.libnet.info/events?r=thismonth",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from West Islip Public Library events. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in West Islip: Zumba, kids movement, library concert, Toddlers Tango.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "feedUrl": "https://westisliplibrary.libnet.info/eeventcaldata?event_type=0&req=%7B%22private%22%3Afalse%2C%22date%22%3A%222026-10-03%22%2C%22days%22%3A60%7D",
+  "reviewNotes": "The library calendar loads from a LibNet data feed in the browser. Ask the library for an .ics link, or add a LibNet adapter. Catalog check 2026-10-03: Keep with filters; requires JSON endpoint but has movement/concert items."
+}

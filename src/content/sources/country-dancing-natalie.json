@@ -1,0 +1,14 @@
+{
+  "name": "Country Dancing with Natalie - lessons and events",
+  "url": "https://www.countrydancingwithnatalie.com/lessons.html",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Country Dancing with Natalie. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Port Jefferson Station, Mastic, Massapequa and Bayport: country line dancing.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "reviewNotes": "Weekly schedule written in words with no dates. An editor adds it once as a repeating event in the CMS and checks the page each month. Catalog check 2026-10-03: Keep it because the lessons page gives public recurring Long Island line-dance times and venues."
+}

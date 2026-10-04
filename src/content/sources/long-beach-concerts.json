@@ -1,0 +1,18 @@
+{
+  "name": "City of Long Beach concerts",
+  "url": "https://www.longbeachny.gov/concerts",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from City of Long Beach concerts. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Long Beach: summer concerts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "disallowed by robots.txt. Terms not checked because robots disallow fetching"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep for permission request; likely useful but robots blocks us."
+}

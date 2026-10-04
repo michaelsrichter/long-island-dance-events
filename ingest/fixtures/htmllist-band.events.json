@@ -42,6 +42,7 @@
         "sourceName": "The Pretend Band - shows",
         "sourceRef": "events page 2026-10-17",
         "status": "active",
+        "dancingCues": [],
         "confidence": 0.65,
         "reviewNotes": "Venue \"Sample Pub\" is not in the registry yet."
       }
@@ -72,6 +73,7 @@
         "sourceName": "The Pretend Band - shows",
         "sourceRef": "events page 2026-10-24",
         "status": "active",
+        "dancingCues": [],
         "confidence": 0.8
       }
     },
@@ -99,6 +101,7 @@
         "sourceName": "The Pretend Band - shows",
         "sourceRef": "events page 2026-12-05",
         "status": "active",
+        "dancingCues": [],
         "confidence": 0.65,
         "reviewNotes": "Venue \"Sample Hall\" is not in the registry yet."
       }

@@ -44,6 +44,9 @@
         "sourceName": "Test source",
         "sourceRef": "calendar feed 2026-10-05",
         "status": "active",
+        "dancingCues": [
+          "afternoon"
+        ],
         "confidence": 0.9,
         "reviewNotes": "Repeat rule \"FREQ=DAILY;COUNT=3\" is not supported; only the first date was kept."
       }
@@ -72,6 +75,9 @@
         "sourceName": "Test source",
         "sourceRef": "calendar feed 2026-10-18",
         "status": "active",
+        "dancingCues": [
+          "afternoon"
+        ],
         "confidence": 0.85,
         "reviewNotes": "New venue was added automatically. Check it."
       }
@@ -102,6 +108,7 @@
         "sourceName": "Test source",
         "sourceRef": "calendar feed 2026-10-27",
         "status": "active",
+        "dancingCues": [],
         "confidence": 0.9
       }
     },
@@ -130,6 +137,9 @@
         "sourceName": "Test source",
         "sourceRef": "calendar feed 2026-11-07",
         "status": "active",
+        "dancingCues": [
+          "festival"
+        ],
         "confidence": 0.7,
         "reviewNotes": "New venue was added automatically. Check it. No start time found."
       }
@@ -166,6 +176,7 @@
         "sourceName": "Test source",
         "sourceRef": "calendar feed 2026-10-06",
         "status": "active",
+        "dancingCues": [],
         "confidence": 0.9,
         "recurrence": {
           "rrule": "FREQ=MONTHLY;BYDAY=1TU,3TU;UNTIL=20261103",

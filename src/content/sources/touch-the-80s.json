@@ -1,0 +1,19 @@
+{
+  "name": "Touch the 80s - 2026 schedule",
+  "url": "http://touchthe80s.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Touch the 80s. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Farmingdale and Franklin Square: 80s new wave, tribute band, club dance music.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "touch-the-80s"
+    ]
+  },
+  "reviewNotes": "The schedule lists dates and places in separate columns, so a computer cannot pair them reliably. Add these by hand, or ask the band for a calendar link. Catalog check 2026-10-03: Keep because it has a clear fall schedule and repeat Nassau dance venues."
+}

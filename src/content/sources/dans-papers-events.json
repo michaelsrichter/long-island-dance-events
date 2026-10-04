@@ -1,0 +1,14 @@
+{
+  "name": "Dan's Papers East End concerts",
+  "url": "https://events.danspapers.com/things-to-do/east-end/concerts/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Dan's Papers East End concerts. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Amagansett, Bridgehampton, Cutchogue and Hampton Bays: East End concerts, wine and live music, dance category.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "reviewNotes": "Catalog check 2026-10-03: Keep, but watch permissions; useful East End music volume and terms page returned 403."
+}

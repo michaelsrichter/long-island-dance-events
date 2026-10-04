@@ -6,7 +6,7 @@ This is the list of websites that publish upcoming **dance events** and **live m
 
 ## The short version
 
-- We looked at **218 websites**. **90 are usable now** (1 live, 1 being built, 88 verified), 7 need one more check from GitHub Actions, 23 need the organizer's permission, 4 can only be added by hand, 18 are seasonal, and 76 were set aside.
+- We looked at **218 websites**. **90 are usable now** (2 live, 88 verified), 7 need one more check from GitHub Actions, 23 need the organizer's permission, 4 can only be added by hand, 18 are seasonal, and 76 were set aside.
 - Usable sources by priority: **24 High, 38 Medium, 28 Low.**
 - Of the 142 sources we keep, **42 are mainly about dancing** (clubs, studios, teachers, dance calendars) and **100 are mainly about live music** (bars, venues, bands). Music sources matter because many people dance to cover bands and DJs.
 - **Best new finds:** bar and beach-club calendars with event data built in (Daisy's in Miller Place, Mulcahy's in Wantagh), a country line-dance venue (89 North in Patchogue), the Mayor of Montauk and Webtunes music calendars, and dance-band gig lists (Pour Some 80s On Me, Radio Active, Decadia, Beernutz, Audawind).
@@ -31,8 +31,8 @@ This is the list of websites that publish upcoming **dance events** and **live m
 
 | Status | Meaning | Sources |
 | --- | --- | ---: |
-| **live** | Already collected by the website every week. | 1 |
-| **in-progress** | Being wired into the website right now (in another work session). | 1 |
+| **live** | Already collected by the website every week. | 2 |
+| **in-progress** | Being wired into the website right now (in another work session). | 0 |
 | **verified** | We opened it, it lists upcoming Long Island events, and robots.txt lets our bot read it. | 88 |
 | **recheck-from-ci** | Looks good, but our office network blocks the site (bars, breweries, wineries). Check robots.txt from GitHub Actions before collecting. | 7 |
 | **needs-permission** | The site blocks bots (robots.txt says no, or it answered 403/429/bot check), or its rules forbid collecting. We ask the organizer first. | 23 |
@@ -90,8 +90,7 @@ Counts below include every source we keep (everything except set-aside).
 
 ```mermaid
 pie showData title Sources we keep, by status
-  "live" : 1
-  "in-progress" : 1
+  "live" : 2
   "verified" : 88
   "recheck-from-ci" : 7
   "needs-permission" : 23
@@ -101,10 +100,12 @@ pie showData title Sources we keep, by status
 
 ## Top recommendations (High priority)
 
+**Collected by the website:** 68 of 145 source files are switched on (51 with `htmllist`, 9 with `jsonld`, 6 with `ical`, 1 with `iraslist`, 1 with `thedancecalendar`). The rest stay off with a note saying why (permission needed, browser-only calendar, seasonal, hand entry, or not yet checked).
+
 | Source | Status | Kind of dancing | Towns | Format | Events per month | Effort |
 | --- | --- | --- | --- | --- | ---: | --- |
+| [Ira's List LI live music calendar](https://www.iraslistli.com/) | live | freestyle, line | Babylon, Bellmore, Coram + | Web page list (HTML) | 100 | L |
 | [The Dance Calendar - monthly Long Island dance PDF](https://www.thedancecalendar.com/find-venues-events) | live | partner, line | Carle Place, Westbury, Massapequa + | PDF | 40 | L |
-| [Ira's List LI live music calendar](https://www.iraslistli.com/) | in-progress | freestyle, line | Babylon, Bellmore, Coram + | Web page list (HTML) | 100 | L |
 | [LongIsland.com Events calendar](https://events.longisland.com/) | needs-permission | freestyle | Bay Shore, Bethpage, Deer Park + | Web page list (HTML) | 100 | M |
 | [LongIsland.com Nightlife Events](https://nightlife.longisland.com/events/) | needs-permission | freestyle | Bellmore, Bohemia, Jericho + | Web page list (HTML) | 40 | M |
 | [The Nutty Irishman (Farmingdale) - dance floor and country night](https://www.thenuttyirishman.com/venues) | recheck-from-ci | line, freestyle | Farmingdale | Web page list (HTML) | 12 | M |
@@ -395,6 +396,7 @@ Looked at and not kept. The reason is in our own words.
 
 ## Files
 
+- Each source we keep also has a file in [`src/content/sources/`](../src/content/sources/) that the collector reads. It holds the adapter, `focus` (dance or music), `cadence`, feed and default venue or band, and a `permission` note for blocked sources.
 - [`catalog/sources.json`](../catalog/sources.json): one record per source with every field (styles, towns, format, robots.txt, terms, freshness, overlap, evidence links).
 - [`catalog/search-log.json`](../catalog/search-log.json): every Web IQ query, its result count and result links.
 - [`catalog/search-queries.json`](../catalog/search-queries.json) and [`catalog/scripts/webiq-search.mjs`](../catalog/scripts/webiq-search.mjs): rerun the search (the key comes only from the `WEBIQ_API_KEY` environment variable).

@@ -1,0 +1,19 @@
+{
+  "name": "Steve Mitchell as Elvis - upcoming performances",
+  "url": "https://stevemitchellaselvis.com/shows.php",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Steve Mitchell as Elvis. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Copiague: Elvis tribute, restaurant shows, concerts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "steve-mitchell-as-elvis"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep at low priority because only one upcoming LI public date remains and it is a listening tribute show."
+}

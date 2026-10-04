@@ -48,6 +48,7 @@
         "sourceName": "Test source",
         "sourceRef": "event data on the page 2026-10-16",
         "status": "active",
+        "dancingCues": [],
         "confidence": 0.9,
         "reviewNotes": "New venue was added automatically. Check it."
       }
@@ -81,6 +82,7 @@
         "sourceName": "Test source",
         "sourceRef": "event data on the page 2026-10-31",
         "status": "active",
+        "dancingCues": [],
         "confidence": 0.9
       }
     }

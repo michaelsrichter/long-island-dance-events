@@ -1,0 +1,19 @@
+{
+  "name": "Mezza Luna (Hauppauge) - events",
+  "url": "https://www.mezzalunafinedining.com/events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Mezza Luna (Hauppauge). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Hauppauge: restaurant live music, solo and small-group acts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "mezza-luna-hauppauge",
+    "town": "Hauppauge"
+  },
+  "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
+  "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority. It is structured and current, but it is dinner music rather than dance."
+}

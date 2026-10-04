@@ -1,0 +1,19 @@
+{
+  "name": "10 Cent Redemption - show schedule",
+  "url": "https://10centredemption.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from 10 Cent Redemption. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Huntington: rock, blues, metal, cover band.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "10-cent-redemption"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep at low priority because only one future public LI date remains."
+}

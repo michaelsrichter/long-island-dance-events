@@ -1,0 +1,14 @@
+{
+  "name": "Village of Greenport calendar",
+  "url": "https://villageofgreenport.gov/calendar/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from Village of Greenport calendar. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Greenport: village concerts, Mitchell Park events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck before summer; real site with concert category but no current dates."
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Vinyl Cut - upcoming schedule",
+  "url": "https://www.vinylcutny.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Vinyl Cut. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Malverne: 60s and 70s cover band, oldies.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "vinyl-cut"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep at low priority because it has one Nassau public date and one out-of-area date."
+}

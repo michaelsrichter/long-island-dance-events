@@ -16,7 +16,7 @@
 import { readFileSync } from 'node:fs';
 import { addDays } from '../../src/lib/time';
 import { findTimes } from '../lib/times';
-import { actName, decodeEntities, htmlToLines, settingsOf, toCandidates, type FoundEvent } from '../lib/structured';
+import { actName, decodeEntities, htmlToLines, plainText, settingsOf, toCandidates, type FoundEvent } from '../lib/structured';
 import type { Adapter, AdapterContext, FetchedDocument, NormalizeResult } from '../lib/types';
 
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
@@ -182,7 +182,7 @@ export function squarespaceEvents(html: string, pageUrl: string): FoundEvent[] {
   const out: FoundEvent[] = [];
   for (const m of html.matchAll(/<article class="eventlist-event[\s\S]*?<\/article>/g)) {
     const a = m[0];
-    const title = decodeEntities(/class="eventlist-title-link"[^>]*>([\s\S]*?)<\/a>/.exec(a)?.[1] ?? '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    const title = plainText(/class="eventlist-title-link"[^>]*>([\s\S]*?)<\/a>/.exec(a)?.[1] ?? '');
     const date = /<time class="event-date" datetime="(\d{4}-\d{2}-\d{2})"/.exec(a)?.[1];
     if (!title || !date) continue;
     const t24 = /<span class="event-time-24hr">([\s\S]*?)<\/span>\s*<\/li>/.exec(a)?.[1] ?? '';
@@ -193,10 +193,10 @@ export function squarespaceEvents(html: string, pageUrl: string): FoundEvent[] {
     const excerpt = /class="eventlist-excerpt"[^>]*>([\s\S]*?)<\/div>/.exec(a)?.[1];
     out.push({
       title,
-      description: excerpt ? decodeEntities(excerpt.replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim().slice(0, 600) : undefined,
+      description: excerpt ? plainText(excerpt.replace(/<\/?(p|br|div)\b[^>]*>/gi, ' ')).slice(0, 600) : undefined,
       start: times[0] ? `${date}T${times[0]}` : date,
       end: times[1] ? `${date}T${times[1]}` : undefined,
-      locationName: addr ? decodeEntities(addr[1]!.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim() || undefined : undefined,
+      locationName: addr ? plainText(addr[1]!) || undefined : undefined,
       address: addr ? decodeURIComponent(addr[2]!.replace(/\+/g, ' ')).replace(/\s+United States$/i, '') : undefined,
       url: link,
       ref: 'events page',

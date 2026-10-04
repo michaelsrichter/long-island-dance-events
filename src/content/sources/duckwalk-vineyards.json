@@ -1,0 +1,18 @@
+{
+  "name": "Duckwalk Vineyards - events",
+  "url": "https://duckwalk.com/events/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Duckwalk Vineyards. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Southold and Water Mill: winery live music, acoustic and small-band sets.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "recheck-from-ci",
+  "defaults": {
+    "venueId": "duckwalk-vineyards-southold",
+    "town": "Southold"
+  },
+  "reviewNotes": "Our office network could not open this site. Check robots.txt from GitHub Actions, then switch it on. Catalog check 2026-10-03: Recheck from CI. It is a real Long Island winery music source, but the office network blocked direct verification."
+}

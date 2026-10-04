@@ -1,0 +1,22 @@
+{
+  "name": "Hotel Indigo East End (Riverhead) - weekly live music page",
+  "url": "https://indigoeastend.com/weekly-live-music-on-long-islands-east-end/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Hotel Indigo East End (Riverhead). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Riverhead: hotel live music.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "defaults": {
+    "venueId": "hotel-indigo-east-end-riverhead",
+    "town": "Riverhead"
+  },
+  "permission": {
+    "status": "needed",
+    "note": "unverified (site returned 403)."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep only for permission outreach. The site blocked the request, so we should not retry around it."
+}

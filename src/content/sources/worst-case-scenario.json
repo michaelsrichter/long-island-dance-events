@@ -1,0 +1,19 @@
+{
+  "name": "Worst Case Scenario - upcoming shows",
+  "url": "https://wcsrocks.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Worst Case Scenario. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Wantagh, Deer Park, Massapequa Park and Northport: classic rock, modern rock, country, cover band.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "worst-case-scenario"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep because it has a clean upcoming list and clear danceable bar-band language."
+}

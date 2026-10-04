@@ -1,0 +1,19 @@
+{
+  "name": "Tradewinds - events calendar",
+  "url": "https://tradewindstheband.com/events-1",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from Tradewinds. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Bay Shore, Kismet, Ocean Beach and East Islip: wedding band, party band, dance band.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "defaults": {
+    "performerIds": [
+      "tradewinds"
+    ]
+  },
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck seasonally because the band has many open summer LI events, but none remain upcoming today."
+}

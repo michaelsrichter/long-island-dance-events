@@ -1,0 +1,19 @@
+{
+  "name": "Swing Dance Long Island (SDLI) - upcoming events",
+  "url": "http://www.sdli.org/index.php/sdli/events/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Swing Dance Long Island (SDLI). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Greenlawn: East Coast Swing, Lindy Hop, West Coast Swing, Balboa.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "huntington-moose-lodge",
+    "town": "Greenlawn",
+    "organizerId": "swing-dance-long-island"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. SDLI has its own dated Tuesday swing schedule with lessons, bands, and venue details."
+}

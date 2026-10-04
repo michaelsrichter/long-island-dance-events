@@ -1,0 +1,18 @@
+{
+  "name": "Claudio's (Greenport) - nightlife and live music",
+  "url": "https://claudios.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from Claudio's (Greenport). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Greenport: weekend DJs, waterfront live bands, theme parties.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "defaults": {
+    "venueId": "claudios-greenport",
+    "town": "Greenport"
+  },
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck in season. The dance signal is strong, but the opened page did not expose a current dated calendar."
+}

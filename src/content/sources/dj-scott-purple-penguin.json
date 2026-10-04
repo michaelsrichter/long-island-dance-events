@@ -1,0 +1,23 @@
+{
+  "name": "DJ Scott (Purple Penguin Entertainment) - social dance calendar",
+  "url": "https://www.purplepenguinentertainment.com/events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from DJ Scott (Purple Penguin Entertainment). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Patchogue: social dance / ballroom mix.",
+  "rateLimitSeconds": 5,
+  "defaults": {
+    "performerIds": [
+      "dj-scott-purple-penguin-entertainment"
+    ],
+    "organizerId": "dj-scott-socials"
+  },
+  "permission": {
+    "status": "needed",
+    "note": "The calendar only shows up in a web browser (it is drawn by JavaScript), so our collector cannot read it. Ask for an .ics link or another public feed."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Set aside for automation. It is duplicate and no current future-dated listings were readable by the bot."
+}

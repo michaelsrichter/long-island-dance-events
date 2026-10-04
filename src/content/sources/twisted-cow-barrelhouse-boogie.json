@@ -1,0 +1,19 @@
+{
+  "name": "Twisted Cow Distillery (East Northport) - Barrelhouse Boogie swing night",
+  "url": "https://twistedcowdistillery.net/Events?Page=1",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Twisted Cow Distillery (East Northport). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in East Northport: Lindy Hop (lesson + DJ social).",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "recheck-from-ci",
+  "defaults": {
+    "venueId": "twisted-cow-distillery",
+    "town": "East Northport"
+  },
+  "include": "swing|lindy|boogie|danc",
+  "reviewNotes": "Catalog check 2026-10-03: Recheck from CI. The office network blocks the site, but Web IQ shows a future Barrelhouse Boogie swing night."
+}

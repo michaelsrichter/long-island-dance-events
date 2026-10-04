@@ -71,7 +71,7 @@
     "name": "Ira's List LI live music calendar",
     "url": "https://www.iraslistli.com/",
     "feedUrl": "",
-    "status": "in-progress",
+    "status": "live",
     "priority": "High",
     "focus": "dance",
     "category": {
@@ -118,7 +118,7 @@
     "danceSignals": "Long Island live music resource listing bands, DJs, dance parties, and country nights.",
     "effort": "L",
     "checkCadence": "twice-weekly",
-    "reason": "Weekly list of bar bands and DJ nights across Nassau and Suffolk. Its adapter is being built in another session (ingest/adapters/iraslist.ts).",
+    "reason": "Weekly list of bar bands and DJ nights across Nassau and Suffolk. Live: read every day by ingest/adapters/iraslist.ts.",
     "evidence": [
       "https://www.iraslistli.com/",
       "https://www.iraslistli.com/robots.txt"

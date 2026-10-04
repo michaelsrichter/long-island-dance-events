@@ -1,0 +1,18 @@
+{
+  "name": "Barefoot Adventures - Friends Waterfront line dancing",
+  "url": "https://www.barefootadventures.org/event-details/line-dancing-every-thursday-friends-waterfront-bar-grill-2026-09-17-19-00",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Barefoot Adventures. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Long Island: line dancing.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "allowed."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep for permission follow-up because the page was rate-limited and should not be retried around."
+}

@@ -74,7 +74,7 @@ w("")
 w("## The short version")
 w("")
 w(f"- We looked at **{len(cat)} websites**. **{len(usable)} are usable now** "
-  f"({by_status['live']} live, {by_status['in-progress']} being built, {by_status['verified']} verified), "
+  f"({by_status['live']} live, " + (f"{by_status['in-progress']} being built, " if by_status['in-progress'] else "") + f"{by_status['verified']} verified), "
   f"{by_status['recheck-from-ci']} need one more check from GitHub Actions, {by_status['needs-permission']} need the organizer's permission, "
   f"{by_status['manual-intake']} can only be added by hand, {by_status['seasonal-recheck']} are seasonal, and {by_status['set-aside']} were set aside.")
 pri = collections.Counter(s["priority"] for s in usable)
@@ -142,6 +142,15 @@ w("```")
 w("")
 w("## Top recommendations (High priority)")
 w("")
+reg_dir = os.path.join(ROOT, "src", "content", "sources")
+if os.path.isdir(reg_dir):
+    reg = {f[:-5]: json.load(open(os.path.join(reg_dir, f), encoding="utf-8")) for f in os.listdir(reg_dir) if f.endswith(".json")}
+    on = [r for r in reg.values() if r.get("enabled")]
+    by_adapter = collections.Counter(r.get("adapter") for r in on)
+    w(f"**Collected by the website:** {len(on)} of {len(reg)} source files are switched on "
+      f"({', '.join(f'{n} with `{a}`' for a, n in by_adapter.most_common())}). "
+      "The rest stay off with a note saying why (permission needed, browser-only calendar, seasonal, hand entry, or not yet checked).")
+    w("")
 w("| Source | Status | Kind of dancing | Towns | Format | Events per month | Effort |")
 w("| --- | --- | --- | --- | --- | ---: | --- |")
 for s in sorted([s for s in active if s["priority"] == "High"], key=lambda s: (s["status"] != "live", s["status"], s["id"])):
@@ -202,6 +211,8 @@ section("Set aside", "Looked at and not kept. The reason is in our own words.",
         [("Source", md_link), ("Reason", lambda s: s["reason"])])
 w("## Files")
 w("")
+w("- Each source we keep also has a file in [`src/content/sources/`](../src/content/sources/) that the collector reads. "
+  "It holds the adapter, `focus` (dance or music), `cadence`, feed and default venue or band, and a `permission` note for blocked sources.")
 w("- [`catalog/sources.json`](../catalog/sources.json): one record per source with every field (styles, towns, format, robots.txt, terms, freshness, overlap, evidence links).")
 w("- [`catalog/search-log.json`](../catalog/search-log.json): every Web IQ query, its result count and result links.")
 w("- [`catalog/search-queries.json`](../catalog/search-queries.json) and [`catalog/scripts/webiq-search.mjs`](../catalog/scripts/webiq-search.mjs): rerun the search (the key comes only from the `WEBIQ_API_KEY` environment variable).")

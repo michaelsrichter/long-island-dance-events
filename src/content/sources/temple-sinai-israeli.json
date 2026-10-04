@@ -1,0 +1,20 @@
+{
+  "name": "Temple Sinai (Roslyn Heights) - Israeli folk dancing",
+  "url": "https://templesinaiweb.org/meet-us/committees/adult-education-2/israeli-folk-dancing",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Temple Sinai (Roslyn Heights). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Roslyn Heights: Israeli folk dancing.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "feedUrl": "https://templesinaiweb.org/events/?ical=1",
+  "defaults": {
+    "venueId": "temple-sinai-roslyn",
+    "town": "Roslyn Heights"
+  },
+  "include": "israeli|folk danc|danc",
+  "reviewNotes": "Weekly schedule written in words with no dates. An editor adds it once as a repeating event in the CMS and checks the page each month. Catalog check 2026-10-03: Keep it because it lists a clear recurring weekly public Israeli folk dance on Long Island."
+}

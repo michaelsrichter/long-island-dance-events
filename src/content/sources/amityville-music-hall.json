@@ -1,0 +1,18 @@
+{
+  "name": "Amityville Music Hall - show list",
+  "url": "https://amh.live/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "twice-weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Amityville Music Hall. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Amityville: rock concerts, metal and indie shows.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "amityville-music-hall",
+    "town": "Amityville"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep only if the site wants broader live music. It is a concert source, not a social-dance source."
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Ballroom Legacy Dance Studio (Sea Cliff) - events",
+  "url": "https://www.ballroomlegacy.us/",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "dance",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Ballroom Legacy Dance Studio (Sea Cliff). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Sea Cliff: Latin social, ballroom.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "feedUrl": "https://www.ballroomlegacy.us/event-pages-sitemap.xml",
+  "defaults": {
+    "venueId": "ballroom-legacy-sea-cliff",
+    "town": "Sea Cliff"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. The Wix page is JS-heavy, but the event sitemap confirms future Latin Dance Fever pages."
+}

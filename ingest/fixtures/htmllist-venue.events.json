@@ -42,6 +42,7 @@
         "sourceName": "Sample Pub (Babylon) - live music",
         "sourceRef": "events page 2026-10-09",
         "status": "active",
+        "dancingCues": [],
         "confidence": 0.8
       }
     },
@@ -72,6 +73,9 @@
         "sourceName": "Sample Pub (Babylon) - live music",
         "sourceRef": "events page 2026-10-10",
         "status": "active",
+        "dancingCues": [
+          "dj"
+        ],
         "confidence": 0.8
       }
     },
@@ -102,6 +106,7 @@
         "sourceName": "Sample Pub (Babylon) - live music",
         "sourceRef": "events page 2026-10-23",
         "status": "active",
+        "dancingCues": [],
         "confidence": 0.8
       }
     }

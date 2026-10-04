@@ -1,0 +1,19 @@
+{
+  "name": "Patchogue Theatre - events",
+  "url": "https://www.patchoguetheatre.org/events/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "twice-weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Patchogue Theatre. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Patchogue: theatre concerts, tribute acts, comedy and stage shows.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "patchogue-theatre",
+    "town": "Patchogue"
+  },
+  "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
+  "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority for live music. It is a listening/theatre source rather than a dance source."
+}

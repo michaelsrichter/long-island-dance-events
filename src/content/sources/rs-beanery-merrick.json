@@ -1,0 +1,19 @@
+{
+  "name": "RS Beanery (Merrick) - events",
+  "url": "https://rsbeanerymerrick.com/events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from RS Beanery (Merrick). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Merrick: coffeehouse live music, small bands.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "rs-beanery-merrick",
+    "town": "Merrick"
+  },
+  "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
+  "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority. It is current and structured, but it is more listening-room than dance venue."
+}

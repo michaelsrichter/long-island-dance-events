@@ -1,0 +1,15 @@
+{
+  "name": "Greenport Dances in the Park",
+  "url": "https://greenportvillage.com/event/dances-in-the-park/",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from Greenport Dances in the Park. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Greenport: summer concert dancing, live bands.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "feedUrl": "https://greenportvillage.com/events/?ical=1",
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck in spring because it is a real Greenport summer dance/music series but has no upcoming dates now."
+}

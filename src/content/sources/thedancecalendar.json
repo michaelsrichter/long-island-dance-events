@@ -16,5 +16,6 @@
   "lastScraped": "2026-10-03T04:49:17.061Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
-  "url": "https://www.thedancecalendar.com/dance-calendar"
+  "url": "https://www.thedancecalendar.com/dance-calendar",
+  "catalogStatus": "live"
 }

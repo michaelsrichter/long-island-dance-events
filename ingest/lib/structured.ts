@@ -15,6 +15,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import type { EventCategory, SkillLevel } from '../../src/lib/schemas';
 import { addDays, weekdayOf } from '../../src/lib/time';
+import { cuesFor, stripTags } from '../adapters/iraslist';
 import { makeSummary, makeTitle, themeOf, type DescribeInput } from './describe';
 import { parsePrices } from './prices';
 import { lookupPlace, ROOT, type Place, type Registry } from './registry';
@@ -235,7 +236,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
   const reg = ctx.registry;
   const src = settingsOf(ctx);
   const focus = src.focus ?? 'dance';
-  const defaults = src.defaults ?? {};
+  const defaults: SourceDefaults = src.defaults ?? {};
   const include = regexOrUndefined(src.include);
   const exclude = regexOrUndefined(src.exclude);
   const horizon = addDays(ctx.today, opts.horizonDays ?? 180);
@@ -407,6 +408,12 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       seriesSummary: makeSummary(plain),
       theme,
       infoUrl: f.url && /^https?:\/\//.test(f.url) ? f.url : undefined,
+      dancingCues: cuesFor({
+        act: [...liveActs, ...djs].map((id) => name(id, reg.performers)).join(' ') || f.title,
+        venue: (venueId ? reg.venues.get(venueId)?.name : f.locationName) ?? '',
+        text,
+        time: start ? `${Number(start.slice(0, 2)) % 12 || 12}:${start.slice(3, 5)}${Number(start.slice(0, 2)) < 12 ? 'am' : 'pm'}` : undefined,
+      }),
       confidence: Math.max(0, Math.min(1, confidence)),
       reviewNotes: notes,
       seriesKey: [src.id, venueKey, organizerId ?? '', weekdayOf(date), start ?? 'tba', category, [...performerIds].sort().join('+'), [...danceStyles].sort().join('+')].join('|'),
@@ -441,15 +448,21 @@ export function decodeEntities(s: string): string {
 /** Page text with line breaks kept at block elements. Scripts, styles and navigation are dropped. */
 export function htmlToLines(html: string): string[] {
   const body = html
-    .replace(/<!--[\s\S]*?-->/g, ' ')
-    .replace(/<(script|style|noscript|svg|nav|footer|header|form|select)\b[\s\S]*?<\/\1>/gi, ' ')
+    .replace(/<!--[\s\S]*?--!?>/g, ' ')
+    .replace(/<(script|style|noscript|svg|nav|footer|header|form|select)\b[\s\S]*?<\/\1\b[^>]*>/gi, ' ')
     .replace(/<br\s*\/?>/gi, '\n')
-    .replace(/<\/?(p|div|li|tr|td|th|h[1-6]|section|article|ul|ol|table|dt|dd|time|span class="[^"]*date[^"]*")\b[^>]*>/gi, '\n')
-    .replace(/<[^>]+>/g, ' ');
-  return decodeEntities(body)
+    .replace(/<\/?(p|div|li|tr|td|th|h[1-6]|section|article|ul|ol|table|dt|dd|time)\b[^>]*>/gi, '\n');
+  // Strip tags until none are left, then drop any angle brackets that decoding produced (as in iraslist.ts).
+  return decodeEntities(stripTags(body))
+    .replace(/[<>]/g, ' ')
     .split('\n')
     .map((l) => l.replace(/[ \t\u00a0]+/g, ' ').trim())
     .filter(Boolean);
+}
+
+/** Plain text from an HTML fragment (tags removed completely, entities decoded). */
+export function plainText(fragment: string): string {
+  return decodeEntities(stripTags(fragment)).replace(/[<>]/g, ' ').replace(/\s+/g, ' ').trim();
 }
 
 /** Local New York date-time 'YYYY-MM-DDTHH:mm' for an instant. */

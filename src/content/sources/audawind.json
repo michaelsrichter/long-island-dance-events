@@ -1,0 +1,19 @@
+{
+  "name": "Audawind - tour dates",
+  "url": "https://audawind.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Audawind. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Huntington Station, Southold, Cutchogue and Farmingdale: coastal country rock, country rock, Nashville, beach concerts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "audawind"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep as a strong but noisy source because it has many LI dates plus out-of-area tour stops to filter."
+}

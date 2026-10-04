@@ -1,0 +1,18 @@
+{
+  "name": "Dance With Me Long Island (Greenvale) - class schedule",
+  "url": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Dance With Me Long Island (Greenvale). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Greenvale: ballroom, Latin, bachata, salsa.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "dance-with-me-greenvale",
+    "town": "Greenvale"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep it because it has a current month public class schedule for a Long Island dance studio."
+}

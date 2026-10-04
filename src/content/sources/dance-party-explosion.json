@@ -1,0 +1,19 @@
+{
+  "name": "Dance Party Explosion - upcoming shows",
+  "url": "https://dpe-li.com/upcoming-shows/",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Dance Party Explosion. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Patchogue: funk, rock, dance, Top 40.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "dance-party-explosion"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep because the schedule is clean JSON-LD and the band has an explicit dance-floor signal."
+}

@@ -1,0 +1,19 @@
+{
+  "name": "That's What She Said - performances",
+  "url": "https://thatswhatshesaidny.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from That's What She Said. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Commack, Port Jefferson Station and Baldwin: women icons tribute, rock, pop cover band.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "thats-what-she-said"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep because it has three public LI bar/venue dates and one repeating venue."
+}
