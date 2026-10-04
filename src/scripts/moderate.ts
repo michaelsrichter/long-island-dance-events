@@ -74,7 +74,7 @@ const AI_LABELS: Record<string, string> = { SelfHarm: 'Self-harm' };
 const whenFull = (iso: string) => new Date(iso).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
 const whenDay = (day: string) => new Date(`${day}T12:00:00Z`).toLocaleDateString(undefined, { dateStyle: 'medium' });
 function pageLabel(key: string) {
-  const type = key.split(':')[0];
+  const [type = ''] = key.split(':');
   return pageNames[key] ? `${pageNames[key]} (${KINDS[type] || type})` : key;
 }
 
