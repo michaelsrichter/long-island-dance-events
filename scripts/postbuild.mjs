@@ -38,6 +38,12 @@ const thirdPartyConnect = [
   'https://c.bing.com',
 ];
 const thirdPartyImg = ['https://*.google-analytics.com', 'https://*.googletagmanager.com', 'https://*.clarity.ms', 'https://c.bing.com', 'https://tile.openstreetmap.org'];
+// Community features read approved photos and per-page JSON straight from Blob Storage;
+// "blob:" lets the photo form preview a picked file before upload.
+const community = JSON.parse(readFileSync(join(root, 'src', 'data', 'community.json'), 'utf8'));
+const communityOrigin = new URL(community.blobBase).origin;
+thirdPartyImg.push(communityOrigin, 'blob:');
+thirdPartyConnect.push(communityOrigin);
 const siteCsp = [
   "default-src 'self'",
   `script-src 'self' ${[...hashes].join(' ')} ${thirdPartyScripts.join(' ')}`.replace(/\s+/g, ' ').trim(),

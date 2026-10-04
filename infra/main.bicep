@@ -18,8 +18,8 @@ param enableCommunity bool = true
 @description('Globally unique storage account name for community data (3-24 lowercase letters and digits).')
 param communityStorageName string = 'stlongislanddance'
 
-@description('Site origins allowed to read the public community JSON from Blob Storage (CORS).')
-param communityCorsOrigins array = ['https://longisland.dance', 'https://www.longisland.dance', 'http://localhost:4321', 'http://127.0.0.1:4321']
+@description('Origins allowed to read the public community JSON from Blob Storage (CORS, GET/HEAD only). The containers are public and read-only, so any origin is fine; this also covers pull-request preview sites.')
+param communityCorsOrigins array = ['*']
 
 @description('Name (and custom subdomain) of the Azure AI Content Safety resource. Must be globally unique.')
 param contentSafetyName string = 'cs-longislanddance'

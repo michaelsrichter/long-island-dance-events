@@ -9,6 +9,7 @@ import { upcomingFor } from '../../lib/content';
 import { linksOf } from '../../lib/links';
 import { ORGANIZER_TYPE_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
+import CommunityPanel from '../../components/CommunityPanel.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('organizers')).map((o) => ({ params: { slug: o.id }, props: { org: o } }));
@@ -49,5 +50,6 @@ const ld = { '@context': 'https://schema.org', '@type': 'Organization', name: o.
       </dl>
       <p class="muted mt-3"><Icon name="info" /> Is this your group? You can <a href="/sources/#corrections">fix these details or ask us to remove your listings</a>.</p>
     </section>
+    <CommunityPanel type="organizer" id={org.id} name={o.name} />
   </div>
 </BaseLayout>

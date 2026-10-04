@@ -8,6 +8,7 @@ import DancingFacts from '../../components/DancingFacts.astro';
 import { upcomingFor } from '../../lib/content';
 import { breadcrumbJsonLd } from '../../lib/seo';
 import { displayHost } from '../../lib/links';
+import CommunityPanel from '../../components/CommunityPanel.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('venues')).map((v) => ({ params: { slug: v.id }, props: { venue: v } }));
@@ -66,5 +67,6 @@ const telOf = (p: string) => `tel:+1${p.replace(/[^0-9]/g, '').replace(/^1(?=\d{
       </dl>
       {v.factsSource && <p class="muted mt-3">{v.factsSource} Something wrong? <a href="/sources/#corrections">Tell us</a>.</p>}
     </section>
+    <CommunityPanel type="venue" id={venue.id} name={v.name} />
   </div>
 </BaseLayout>

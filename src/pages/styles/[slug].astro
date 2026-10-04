@@ -5,6 +5,7 @@ import PageHeader from '../../components/PageHeader.astro';
 import EventSeriesList from '../../components/EventSeriesList.astro';
 import { upcomingFor } from '../../lib/content';
 import { breadcrumbJsonLd } from '../../lib/seo';
+import CommunityPanel from '../../components/CommunityPanel.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('styles')).map((s) => ({ params: { slug: s.id }, props: { style: s } }));
@@ -41,5 +42,6 @@ const crumbs = [
         <p>{teachers.map((t, i) => <>{i > 0 && ', '}<a href={`/instructors/${t.id}/`}>{t.data.name}</a></>)}</p>
       </section>
     )}
+    <CommunityPanel type="style" id={style.id} name={s.name} />
   </div>
 </BaseLayout>

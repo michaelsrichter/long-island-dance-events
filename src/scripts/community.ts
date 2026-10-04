@@ -2,6 +2,7 @@
  * Loads the community panel code only when the panel is about to scroll into view
  * (or right away after signing in, when the address ends in #community).
  */
+export {};
 const panel = document.querySelector<HTMLElement>('[data-community]');
 if (panel) {
   let started = false;

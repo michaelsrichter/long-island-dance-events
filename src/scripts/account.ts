@@ -1,4 +1,5 @@
 /** Account page: profile (display name, neutral age question, rules), data download, account deletion. */
+export {};
 const root = document.querySelector<HTMLElement>('[data-account]');
 
 async function api(path: string, init: RequestInit = {}) {

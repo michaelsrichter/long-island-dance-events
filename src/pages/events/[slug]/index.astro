@@ -11,6 +11,7 @@ import ShareControls from '../../../components/ShareControls.astro';
 import EventCard from '../../../components/EventCard.astro';
 import RelativeWhen from '../../../components/RelativeWhen.astro';
 import PersonLinks from '../../../components/PersonLinks.astro';
+import CommunityPanel from '../../../components/CommunityPanel.astro';
 import { buildNow, calendarEventOf, getAllEvents, getSettings, shareInputOf, type PersonRef, type ResolvedEvent } from '../../../lib/content';
 import { breadcrumbJsonLd, eventJsonLd } from '../../../lib/seo';
 import { isUpcoming } from '../../../lib/event-core';
@@ -234,6 +235,8 @@ const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at $
               <a class="btn btn--secondary btn--small" href={reportUrl} rel="noopener" data-track="report_problem" data-track-location="event"><Icon name="info" />Report a problem with this listing</a>
             </p>
           </section>
+
+          <CommunityPanel type="event" id={e.eventId} name={e.title} date={e.date} />
         </div>
 
         <aside class="event-aside no-print" aria-label="Event actions">

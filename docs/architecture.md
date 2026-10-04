@@ -24,10 +24,12 @@ flowchart TB
     D[(src/content/**<br/>events, venues, organizers,<br/>instructors, performers, styles, sources)]
     CI[CI: types, unit, Python, e2e, axe,<br/>links, Lighthouse, gitleaks]
   end
-  subgraph Azure["Azure (Free tier)"]
+  subgraph Azure["Azure (personal subscription, Static Web Apps Standard)"]
     SWA[Static Web App<br/>static pages + feeds]
-    FN[Managed Functions<br/>CMS sign-in, telemetry;<br/>later: submit, feedback, admin]
-    ST[(Storage: Tables + Blobs<br/>phase 5-6)]
+    FN[Managed Functions<br/>CMS sign-in, telemetry,<br/>likes, notes, photos, moderation]
+    ST[(Storage: Tables + Blobs<br/>community data)]
+    EXT[Entra External ID<br/>visitor sign-in]
+    CS[AI Content Safety]
   end
   S1 --> F
   S2 --> F
@@ -38,6 +40,8 @@ flowchart TB
   D --> CI --> SWA
   CMS[Decap CMS at /admin/] -->|commits / PRs| D
   SWA --- FN --- ST
+  SWA --- EXT
+  FN --- CS
 ```
 
 ## Ingest pipeline
@@ -86,6 +90,10 @@ flowchart LR
 | `/faq/`, `/about/`, `/privacy/` | Plain-language help. |
 | `/admin/` | Decap CMS. |
 | `/api/auth`, `/api/callback`, `/api/telemetry` | CMS sign-in bridge and first-party telemetry (Azure Functions). |
+| `/.auth/login/extid`, `/.auth/logout`, `/.auth/me` | Visitor sign-in (Static Web Apps + Entra External ID). |
+| `/account/`, `/community-rules/`, `/moderate/` | Your account (name, age check, download, delete), community rules, moderation queue (admins). |
+| `/api/roles`, `/api/me*`, `/api/likes`, `/api/comments`, `/api/photos`, `/api/flags`, `/api/admin/*` | Community API (see below). |
+| `/community-pages.json` | Pages that accept likes, notes and photos (the API checks keys against it). |
 | `/llms.txt`, `/robots.txt`, `/sitemap-index.xml` | Machine-readable summaries. |
 
 ## Security and privacy
@@ -100,10 +108,41 @@ flowchart LR
 | Personal data | Only public business contact details from public listings. Private contacts and members' names are not recorded. |
 | Analytics | Consent-gated; telemetry strips unknown fields and rate-limits. |
 
+## Community features (likes, notes, photos)
+
+Decided in P21 (details and options: [proposals/social-sign-in-and-community-features.md](proposals/social-sign-in-and-community-features.md)). Pages stay static: approved notes, photos and like counts are read by the browser straight from Blob Storage; only writes go through Functions.
+
+```mermaid
+flowchart LR
+  V["Visitor's browser"] -->|"pages"| SWA["Static Web App, Standard<br/>longisland.dance"]
+  V -->|"/.auth/login/extid"| AUTH["SWA sign-in"]
+  AUTH -->|"OpenID Connect"| EXT["Entra External ID<br/>longislanddance.ciamlogin.com<br/>email one-time code"]
+  AUTH -->|"each sign-in"| ROLES["/api/roles:<br/>member, admin"]
+  V -->|"like, note, photo, report<br/>with SWA cookie"| FN["Managed Functions /api"]
+  FN --> CS["AI Content Safety"]
+  FN --> TS[("Table Storage:<br/>Users, Comments, Photos, Likes,<br/>Flags, ModQueue, ModLog, Limits")]
+  FN --> PEND[("Blob: pending photos<br/>private")]
+  FN -->|"rewrite after each change"| PUB[("Blob: community JSON<br/>+ approved photos, public")]
+  V -->|"read, cached 60 s"| PUB
+  M["Moderators at /moderate/"] -->|"/api/admin/*"| FN
+```
+
+| API | What it does |
+| --- | --- |
+| `POST /api/roles` | SWA `rolesSource`: after each sign-in, saves the profile (no email) and returns `member` (unless banned or under 13) and `admin` (emails in `ADMIN_EMAILS`). |
+| `GET /api/me`, `POST /api/me/profile`, `GET /api/me/likes`, `GET /api/me/export`, `POST /api/me/delete` | Profile (display name, neutral age question: only "13+" and "18+" are kept), my likes, download, delete. |
+| `POST /api/likes` | One like per person per page (`Likes`: PartitionKey page key, RowKey user id). |
+| `POST /api/comments` | Notes (AI: 0 publish, 2 queue, 4+ reject; links/phones/emails queue) and private corrections (always queue; optional GitHub issue). |
+| `POST /api/photos` | 18+; type sniffed, EXIF/GPS removed, 480/1024/2048 px WebP, AI image check, then **always** the human queue. |
+| `POST /api/flags` | Reports; 3 people (or a safety reason) hide the item until reviewed. |
+| `/api/admin/queue`, `photo`, `decide`, `ban`, `unban`, `log` | Moderation (route rule requires `admin`). Every decision is written to `ModLog`. |
+
+Page keys are `<type>:<id>` (`event:<series id>`, `venue:<id>`, `organizer:`, `instructor:`, `performer:`, `style:`). Public files: `community/<type>/<id>.json`, `community/counts/<type>.json`, `photos/<type>/<id>/<photo id>-<size>.webp`.
+
 ## Planned (later phases)
 
 - **Duplicates (phase 3):** exact `matchKey` pass, then local embeddings (bge-small, run in CI, no API key). Cosine ≥ 0.9 merges; 0.8-0.9 goes to a human review queue.
-- **Admin (phase 5):** Static Web Apps built-in auth with GitHub and an `admin` role; moderation queue, source panel, feedback and bug inbox. Functions write to Table Storage and open GitHub issues.
+- **Admin (phase 5):** source panel and bug inbox. (The moderation queue and private corrections shipped with the community features below.)
 - **Azure (phase 6):** Bicep for Static Web App, Storage account (Tables for mutable state, Blobs for raw snapshots) and settings.
 - **Scheduled runs (built):** `.github/workflows/ingest-scheduled.yml` runs each source on its `cadence` (daily, Monday + Thursday, Sunday), updates one rolling pull request with the report, requests review from and @mentions the owner on Sundays (the weekly email), and files an issue with a metadata-only snapshot when a source finds nothing or returns invalid data. `report-database.yml` builds the SQLite report database; `source-discovery.yml` searches for new sources monthly. See [database-plan.md](database-plan.md).
 

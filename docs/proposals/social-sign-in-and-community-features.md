@@ -1,6 +1,6 @@
 # Proposal: sign-in, comments, photos and likes
 
-**Status:** proposal, **waiting for the owner to decide**. Nothing here is built, and no Azure resources or live-site settings were changed.
+**Status:** **decided and built (2026-10-03).** The owner chose **Option 2** (SWA Standard + Entra External ID), with photos in the first release, and moved the whole site to a personal Azure subscription (decisions P21, P35, P36). What was built is described in [architecture.md](../architecture.md#community-features-likes-notes-photos); this page is kept as the original analysis.
 **Date:** 2026-10-03. Every vendor fact was checked on this date against the official page linked in [Sources](#sources). Anything we could not confirm says **unverified**.
 
 ## Summary
@@ -532,11 +532,11 @@ erDiagram
 | `Comments` | page key | reverse ticks + comment id | `userId`, `displayName` (copy), `kind` (`comment` or `correction`), `body`, `occurrenceDate`, `status` (`pending`, `published`, `rejected`, `hidden`), `ai` (scores JSON), `reason`, `flagCount`, `decidedBy`, `decidedAt`, `githubIssue` (corrections) |
 | `Photos` | page key | reverse ticks + photo id | `userId`, `caption`, `alt`, `width`, `height`, `status`, `ai`, `consent` (own photo, people agreed, no children), `decidedBy`, `decidedAt` |
 | `Likes` | page key | user id | `createdAt` |
-| `UserItems` | user id | `like#<page key>`, `comment#<page key>#<row key>`, `photo#...` | pointer back to the row (for "download my data" and account deletion) |
+| `UserItems` | user id | `like~<page key>`, `comment~<page key>~<row key>`, `photo~...` | pointer back to the row (for "download my data" and account deletion) |
 | `Flags` | item id | reporter user id | `reason`, `note`, `createdAt` |
 | `ModQueue` | `pending` | ticks + item type + item id | page key, row key, why it is waiting (`ai_gray`, `rule_link`, `reports`, `photo`), short AI summary |
 | `ModLog` | `yyyy-mm` | reverse ticks + id | `actor` (GitHub username or `ai`), `action`, `targetType`, `targetId`, `reason`, `ai`, `before`, `after` (append-only) |
-| `Limits` | user id | `<action>#<yyyymmddhh>` | `count` (deleted by the weekly clean-up) |
+| `Limits` | user id | `<action>~<yyyymmddhh>` | `count` (deleted by the weekly clean-up) |
 
 | Blob container | Access | Contents |
 | --- | --- | --- |

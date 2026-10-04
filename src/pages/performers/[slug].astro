@@ -9,6 +9,7 @@ import { upcomingFor } from '../../lib/content';
 import { linksOf } from '../../lib/links';
 import { PERFORMER_TYPE_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
+import CommunityPanel from '../../components/CommunityPanel.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('performers')).map((p) => ({ params: { slug: p.id }, props: { person: p } }));
@@ -33,5 +34,6 @@ const lede = p.description ?? `${PERFORMER_TYPE_LABELS[p.type]}${p.genres.length
       <div class="mt-5"><EventSeriesList events={events} empty={`No upcoming events with ${p.name} are listed right now`} /></div>
     </section>
     {p.dancing && <DancingFacts name={p.name} kind="performer" rating={p.dancing.rating} kinds={p.dancing.kinds} notes={p.dancing.notes} evidence={p.dancing.evidence} confidence={p.dancing.confidence} checked={p.dancing.checked} />}
+    <CommunityPanel type="performer" id={person.id} name={p.name} />
   </div>
 </BaseLayout>

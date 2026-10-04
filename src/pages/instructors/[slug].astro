@@ -7,6 +7,7 @@ import PersonLinks from '../../components/PersonLinks.astro';
 import { upcomingFor } from '../../lib/content';
 import { linksOf } from '../../lib/links';
 import { breadcrumbJsonLd } from '../../lib/seo';
+import CommunityPanel from '../../components/CommunityPanel.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('instructors')).map((p) => ({ params: { slug: p.id }, props: { person: p } }));
@@ -41,5 +42,6 @@ const lede = p.description ?? `Dance teacher${styles.length ? ` (${styles.map((s
         </dl>
       </section>
     )}
+    <CommunityPanel type="instructor" id={person.id} name={p.name} />
   </div>
 </BaseLayout>

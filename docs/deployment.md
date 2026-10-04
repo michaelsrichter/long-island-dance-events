@@ -74,6 +74,63 @@ Common settings:
 | `METRICS_PREFIX` | optional | Prefix for OTel metrics, default `site`. |
 | `GITHUB_OAUTH_CLIENT_ID` | for CMS sign-in | GitHub OAuth app client id. |
 | `GITHUB_OAUTH_CLIENT_SECRET` | for CMS sign-in | GitHub OAuth app secret. |
+| `EXTID_CLIENT_ID` | for visitor sign-in | Entra External ID app (client) id. Set by `infra/configure-external-id.ps1 -NewSecret`. |
+| `EXTID_CLIENT_SECRET` | for visitor sign-in | Its client secret (expires after 2 years; rerun the script with `-NewSecret`). |
+| `COMMUNITY_STORAGE` | for community features | Connection string of the community Storage account. |
+| `CONTENT_SAFETY_ENDPOINT` | for community features | Azure AI Content Safety endpoint. |
+| `CONTENT_SAFETY_KEY` | for community features | Its key. Without it every note waits for a person. |
+| `ADMIN_EMAILS` | for moderation | Comma-separated emails that get the `admin` role at sign-in. |
+| `SITE_URL` | optional | Used in GitHub issues opened for corrections. |
+| `GITHUB_ISSUES_TOKEN` | optional | Fine-grained token with "Issues: write" on this repo; private corrections then also open an issue. |
+| `MODERATION_DENY_WORDS` | optional | Comma-separated words that always reject a note. |
+
+## Visitor sign-in and community features
+
+Likes, notes, private corrections and photos (decision P21) need four things. Everything lives in the owner's personal subscription `fd38bfe4-1b60-405d-bff9-020f3ff54d88` (decision P35).
+
+| Piece | Where | Made by |
+| --- | --- | --- |
+| Static Web App, **Standard** plan (custom sign-in needs it) | `rg-li-dance-events-web` / `swa-li-dance-events-web` | `infra/main.bicep` (`skuName = 'Standard'`) |
+| Storage account `stlongislanddance` (tables, `pending`/`photos`/`community`/`backups` containers, CORS, lifecycle rules) | same group | `infra/main.bicep` |
+| Azure AI Content Safety `cs-longislanddance` (Free tier) | same group | `infra/main.bicep` |
+| Entra External ID tenant `longislanddance.onmicrosoft.com` (`a72c253f-3125-4592-b3c6-b8e23ed18054`) | `rg-li-dance-identity` | `infra/external-id.bicep`, then `infra/configure-external-id.ps1` |
+
+Set up from scratch:
+
+```powershell
+az login --tenant <personal-directory-id>        # an account that may create tenants
+az deployment group create -g rg-li-dance-identity -f infra/external-id.bicep
+az deployment group create -g rg-li-dance-events-web -f infra/main.bicep -p infra/main.bicepparam
+./infra/configure-external-id.ps1 -NewSecret      # app registration, email-code user flow, client secret -> SWA settings
+```
+
+Then set `COMMUNITY_STORAGE`, `CONTENT_SAFETY_ENDPOINT`, `CONTENT_SAFETY_KEY` and `ADMIN_EMAILS` (see the table above). The sign-in provider itself is in `public/staticwebapp.config.json` (`auth`), with the tenant's OpenID address.
+
+The script registers `https://longisland.dance/.auth/login/extid/callback` as the redirect address. Pull-request preview sites have other addresses, so sign-in does not work on previews (everything else does).
+
+### Add Google or Facebook sign-in (owner)
+
+Both are free. Create the app with **your own** account, then add it to the tenant (Entra admin center → **External Identities** → **All identity providers**) and to the user flow ("Long Island Dance sign-up and sign-in" → **Identity providers**).
+
+- **Google:** Google Cloud console → new project → **OAuth consent screen**: External, app name "Long Island Dance Events", support email, authorized domains `ciamlogin.com` and `microsoftonline.com`, home page `https://longisland.dance/`, privacy policy `https://longisland.dance/privacy/`. Only the `openid`, `email` and `profile` scopes, so Google needs no verification. **Credentials** → OAuth client ID → Web application, redirect URIs:
+  - `https://login.microsoftonline.com`
+  - `https://login.microsoftonline.com/te/a72c253f-3125-4592-b3c6-b8e23ed18054/oauth2/authresp`
+  - `https://login.microsoftonline.com/te/longislanddance.onmicrosoft.com/oauth2/authresp`
+  - `https://a72c253f-3125-4592-b3c6-b8e23ed18054.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/federation/oidc/accounts.google.com`
+  - `https://a72c253f-3125-4592-b3c6-b8e23ed18054.ciamlogin.com/longislanddance.onmicrosoft.com/federation/oidc/accounts.google.com`
+  - `https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/federation/oauth2`
+  - `https://longislanddance.ciamlogin.com/longislanddance.onmicrosoft.com/federation/oauth2`
+  Paste the client id and secret into the tenant's **Google** provider.
+- **Facebook:** developers.facebook.com → **Create app** → type **Consumer** (it cannot be changed later) → add **Facebook Login**. Privacy policy URL `https://longisland.dance/privacy/`, data deletion instructions URL `https://longisland.dance/privacy/#delete-your-account`. `public_profile` and `email` need no app review. Valid OAuth redirect URIs: follow [Add Facebook as an identity provider](https://learn.microsoft.com/entra/external-id/customers/how-to-facebook-federation-customers) (they use the same `ciamlogin.com` addresses). Switch the app to **Live**, then paste the app id and secret into the tenant's **Facebook** provider.
+- **Instagram** sign-in is not possible for personal accounts (Meta ended it on December 4, 2024).
+
+### Moving `longisland.dance` to a new Static Web App
+
+1. Add both host names to the new app with TXT validation: `az staticwebapp hostname set -n <app> -g <rg> --hostname longisland.dance --validation-method dns-txt-token --no-wait` (and `www.longisland.dance`), then read the tokens with `az staticwebapp hostname list`.
+2. At the DNS host (Namecheap): add TXT records `_dnsauth` and `_dnsauth.www` with those tokens.
+3. When both show **Ready**, point DNS at the new app: `www` CNAME → `<new>.azurestaticapps.net`, and the bare domain ALIAS → `<new>.azurestaticapps.net` (replacing the old A record).
+4. In the portal, make `longisland.dance` the **default** domain so the other addresses redirect to it.
+5. Run `node scripts/smoke.mjs https://longisland.dance`.
 
 ## GitHub variables
 

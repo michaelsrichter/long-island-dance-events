@@ -21,6 +21,9 @@ const PAGES = [
   '/about/',
   '/faq/',
   '/privacy/',
+  '/community-rules/',
+  '/account/',
+  '/moderate/',
   '/this-page-does-not-exist/',
 ];
 

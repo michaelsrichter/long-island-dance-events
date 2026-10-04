@@ -1,4 +1,5 @@
 /** Moderation page: lists the queue and sends decisions. All user text is inserted with textContent. */
+export {};
 const root = document.querySelector<HTMLElement>('[data-moderate]');
 
 type Item = {
