@@ -12,6 +12,7 @@
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
+import { seedEmptyFiles } from './community-seed.mjs';
 
 const require = createRequire(join(fileURLToPath(new URL('.', import.meta.url)), '..', 'api', 'package.json'));
 const { TableClient } = require('@azure/data-tables');
@@ -36,7 +37,7 @@ async function remove(t, e) {
   if (!dryRun) await t.deleteEntity(e.partitionKey, e.rowKey);
 }
 
-// 0. Empty read-model files for pages without any activity yet
+// 0. Empty read-model files for pages without any activity yet (never overwrites a file the API wrote meanwhile)
 {
   const res = await fetch(`${site}/community-pages.json`);
   if (!res.ok) throw new Error(`community-pages.json: HTTP ${res.status}`);
@@ -44,21 +45,7 @@ async function remove(t, e) {
   const community = blobs.getContainerClient('community');
   const existing = new Set();
   for await (const b of community.listBlobsFlat()) existing.add(b.name);
-  for (const key of keys) {
-    const [type, id] = key.split(':');
-    const path = `${type}/${id}.json`;
-    if (existing.has(path)) continue;
-    counts.seeded++;
-    if (!dryRun) {
-      const doc = { v: 1, key, likes: 0, comments: [], photos: [], updatedAt: new Date(now).toISOString() };
-      await community.getBlockBlobClient(path).uploadData(Buffer.from(JSON.stringify(doc)), { blobHTTPHeaders: { blobContentType: 'application/json; charset=utf-8', blobCacheControl: 'public, max-age=60' } });
-    }
-  }
-  for (const type of ['event', 'venue', 'organizer', 'instructor', 'performer', 'style']) {
-    const path = `counts/${type}.json`;
-    if (existing.has(path) || dryRun) continue;
-    await community.getBlockBlobClient(path).uploadData(Buffer.from(JSON.stringify({ v: 1, type, likes: {}, updatedAt: new Date(now).toISOString() })), { blobHTTPHeaders: { blobContentType: 'application/json; charset=utf-8', blobCacheControl: 'public, max-age=300' } });
-  }
+  counts.seeded = await seedEmptyFiles(community, { keys, existing, now, dryRun });
 }
 
 // 1. Backups
