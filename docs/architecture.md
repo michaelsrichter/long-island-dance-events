@@ -91,9 +91,10 @@ flowchart LR
 | `/admin/` | Decap CMS. |
 | `/api/auth`, `/api/callback`, `/api/telemetry` | CMS sign-in bridge and first-party telemetry (Azure Functions). |
 | `/.auth/login/extid`, `/.auth/logout`, `/.auth/me` | Visitor sign-in (Static Web Apps + Entra External ID). |
-| `/account/`, `/community-rules/`, `/moderate/` | Your account (name, age check, download, delete), community rules, moderation queue (admins). |
-| `/api/roles`, `/api/me*`, `/api/likes`, `/api/comments`, `/api/photos`, `/api/flags`, `/api/moderation/*` | Community API (see below). |
+| `/account/`, `/saved/`, `/community-rules/`, `/moderate/` | Your account (name, age check, download, delete), your saved events (private), community rules, moderation queue (admins). |
+| `/api/roles`, `/api/me*`, `/api/likes`, `/api/saves`, `/api/comments`, `/api/photos`, `/api/flags`, `/api/moderation/*` | Community API (see below). |
 | `/community-pages.json` | Pages that accept likes, notes and photos (the API checks keys against it). |
+| `/saved-events.json` | Next dates, time and place of every event series, for the Saved events page (built with the site). |
 | `/llms.txt`, `/robots.txt`, `/sitemap-index.xml` | Machine-readable summaries. |
 
 ## Security and privacy
@@ -130,8 +131,9 @@ flowchart LR
 | API | What it does |
 | --- | --- |
 | `POST /api/roles` | SWA `rolesSource`: after each sign-in, saves the profile (no email) and returns `member` (unless banned or under 13) and `admin` (emails in `ADMIN_EMAILS`). |
-| `GET /api/me`, `POST /api/me/profile`, `GET /api/me/likes`, `GET /api/me/export`, `POST /api/me/delete` | Profile (display name, neutral age question: only "13+" and "18+" are kept), my likes, download, delete. |
-| `POST /api/likes` | One like per person per page (`Likes`: PartitionKey page key, RowKey user id). |
+| `GET /api/me`, `POST /api/me/profile`, `GET /api/me/likes`, `GET /api/me/saves`, `GET /api/me/export`, `POST /api/me/delete` | Profile (display name, neutral age question: only "13+" and "18+" are kept), my likes (all of them when no `keys` are given, for list pages), my saved events, download, delete. |
+| `POST /api/likes` | One like per person per page (`Likes`: PartitionKey page key, RowKey user id). Like buttons with counts are on every event card and at the top of every detail page (`Reactions.astro`, `scripts/reactions.ts`); counts come from `community/counts/<type>.json`. |
+| `POST /api/saves` | Save or unsave an event (events only). A private bookmark in `UserItems` (`save~<page key>`), never public; listed at `/saved/`, included in the download and removed with the account. |
 | `POST /api/comments` | Notes (AI: 0 publish, 2 queue, 4+ reject; links/phones/emails queue) and private corrections (always queue; never posted anywhere public). |
 | `POST /api/photos` | 18+; type sniffed, EXIF/GPS removed, 480/1024/2048 px WebP, AI image check, then **always** the human queue. |
 | `POST /api/flags` | Reports; 3 people (or a safety reason) hide the item until reviewed. |

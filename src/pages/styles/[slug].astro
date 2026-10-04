@@ -6,6 +6,7 @@ import EventSeriesList from '../../components/EventSeriesList.astro';
 import { upcomingFor } from '../../lib/content';
 import { breadcrumbJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
+import Reactions from '../../components/Reactions.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('styles')).map((s) => ({ params: { slug: s.id }, props: { style: s } }));
@@ -24,6 +25,7 @@ const crumbs = [
 ---
 <BaseLayout title={`${s.name} on Long Island: where to dance and take classes`} description={`${s.summary} Find ${s.name} dances and classes in Nassau and Suffolk.`.slice(0, 165)} pageType="style" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
   <PageHeader title={s.name} lede={s.summary} crumbs={crumbs}>
+      <Reactions type="style" id={style.id} name={s.name} variant="hero" />
     <p class="btn-row mt-5"><a class="btn btn--secondary" href={`/events/?style=${style.id}`}>Filter all events by {s.name}</a></p>
   </PageHeader>
   <div class="container section stack-l">

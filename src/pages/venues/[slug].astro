@@ -9,6 +9,7 @@ import { upcomingFor } from '../../lib/content';
 import { breadcrumbJsonLd } from '../../lib/seo';
 import { displayHost } from '../../lib/links';
 import CommunityPanel from '../../components/CommunityPanel.astro';
+import Reactions from '../../components/Reactions.astro';
 
 export async function getStaticPaths() {
   return (await getCollection('venues')).map((v) => ({ params: { slug: v.id }, props: { venue: v } }));
@@ -41,6 +42,7 @@ const telOf = (p: string) => `tel:+1${p.replace(/[^0-9]/g, '').replace(/^1(?=\d{
 ---
 <BaseLayout title={v.seoTitle ?? `${v.name}, ${v.town}: dance events`} description={v.seoDescription ?? `${v.name}, ${v.address}, ${v.town}. Directions, parking and ${events.length ? 'upcoming dance events' : 'dance events'} at this venue.`} pageType="venue" jsonLd={[placeLd, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={v.name} lede={`${v.address}, ${v.town}, ${v.state} ${v.postalCode ?? ''} · ${v.county} County`} crumbs={crumbs}>
+      <Reactions type="venue" id={venue.id} name={v.name} variant="hero" />
     <div class="btn-row mt-5">
       <a class="btn btn--primary" href={google} target="_blank" rel="noopener" data-track="get_directions" data-track-method="google" data-track-location="venue"><Icon name="directions" />Google Maps<span class="visually-hidden"> (opens in a new tab)</span></a>
       <a class="btn btn--secondary" href={apple} target="_blank" rel="noopener" data-track="get_directions" data-track-method="apple" data-track-location="venue"><Icon name="pin" />Apple Maps<span class="visually-hidden"> (opens in a new tab)</span></a>

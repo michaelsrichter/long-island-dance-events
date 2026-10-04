@@ -12,7 +12,7 @@ const years = Array.from({ length: 101 }, (_, i) => thisYear - i);
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 ---
 <BaseLayout title="Your account" description="Your Long Island Dance Events account: display name, community rules, download or delete your data." pageType="account" noindex>
-  <PageHeader title="Your account" lede="An account lets you like pages, leave notes and share photos. Browsing never needs one." crumbs={crumbs} />
+  <PageHeader title="Your account" lede="An account lets you like pages, save events, leave notes and share photos. Browsing never needs one." crumbs={crumbs} />
   <div class="container section stack-l account" data-account>
     <p class="spinner js-only" data-loading role="status">Loading your account…</p>
     <noscript><p class="alert alert--info">Your account page needs JavaScript turned on.</p></noscript>
@@ -70,12 +70,18 @@ const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
       <p class="btn-row"><a class="btn btn--primary" href="/moderate/">Open the moderation queue</a></p>
     </section>
 
+    <section class="panel" data-signed-in hidden aria-labelledby="acct-saved-h">
+      <h2 id="acct-saved-h">Your saved events</h2>
+      <p>Tap <strong>Save</strong> on any event to keep it in one list with its next date. Only you can see it.</p>
+      <p class="btn-row"><a class="btn btn--primary" href="/saved/"><Icon name="bookmark" />See your saved events</a></p>
+    </section>
+
     <section class="panel" data-signed-in hidden aria-labelledby="acct-data-h">
       <h2 id="acct-data-h">Your data</h2>
-      <p>Download a copy of everything we keep about you: your name, likes, notes, photos and the posts you reported.</p>
+      <p>Download a copy of everything we keep about you: your name, likes, saved events, notes, photos and the posts you reported.</p>
       <p class="btn-row"><a class="btn btn--secondary" href="/api/me/export" download><Icon name="download" />Download my data</a></p>
       <h3 class="mt-5">Delete my account</h3>
-      <p>This deletes your profile, likes, notes, photos and reports from this website right away. Your sign-in account is removed within 30 days.</p>
+      <p>This deletes your profile, likes, saved events, notes, photos and reports from this website right away. Your sign-in account is removed within 30 days.</p>
       <form class="community__form" data-delete-form novalidate>
         <div class="field">
           <label for="acct-delete">Type DELETE to confirm</label>

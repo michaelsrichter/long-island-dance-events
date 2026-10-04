@@ -6,6 +6,7 @@ const LIMITS = {
   comment: { hour: 10, day: 30 },
   photo: { hour: 5, day: 10 },
   like: { hour: 120, day: 300 },
+  save: { hour: 120, day: 300 },
   flag: { hour: 20, day: 50 },
   profile: { hour: 10, day: 20 },
 };

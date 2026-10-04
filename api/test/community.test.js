@@ -40,7 +40,7 @@ const handlers = {};
 functions.app.http = (name, opts) => {
   handlers[name] = opts.handler;
 };
-for (const f of ['roles', 'me', 'likes', 'comments', 'photos', 'flags', 'moderation']) require(`../src/functions/${f}`);
+for (const f of ['roles', 'me', 'likes', 'saves', 'comments', 'photos', 'flags', 'moderation']) require(`../src/functions/${f}`);
 
 const moderate = require('../src/lib/moderate');
 const { ageFrom } = require('../src/lib/users');
@@ -228,6 +228,44 @@ test('likes: unknown pages, cross-site requests and signed-out visitors are refu
   assert.equal((await call('likes', '/api/likes', { method: 'POST', user: u2, body: { key: PAGES[0], like: true }, json: false })).status, 415);
 });
 
+test('likes: with no keys, /api/me/likes lists every page I liked (for list pages)', async () => {
+  const u2 = principal('user0002aa');
+  await call('likes', '/api/likes', { method: 'POST', user: u2, body: { key: PAGES[1], like: true } });
+  const all = await call('meLikes', '/api/me/likes', { user: u2 });
+  assert.equal(all.body.liked[PAGES[0]], true);
+  assert.equal(all.body.liked[PAGES[1]], true);
+  assert.equal(all.body.liked[PAGES[2]], undefined);
+  assert.deepEqual((await call('meLikes', '/api/me/likes')).body.liked, {}, 'signed-out visitors get an empty list');
+  // Rapid double taps never count twice.
+  const both = await Promise.all([1, 2].map(() => call('likes', '/api/likes', { method: 'POST', user: u2, body: { key: PAGES[1], like: true } })));
+  assert.ok(both.every((r) => r.status === 200 && r.body.count === 1));
+  assert.equal(fake.rows('Likes', PAGES[1]).length, 1);
+  await call('likes', '/api/likes', { method: 'POST', user: u2, body: { key: PAGES[1], like: false } });
+});
+
+test('saves: only events, private to me, one row per event, and unsave works', async () => {
+  const u2 = principal('user0002aa');
+  const save = (body, opts = {}) => call('saves', '/api/saves', { method: 'POST', user: u2, body, ...opts });
+  const publicFiles = () => JSON.stringify([...fake.blobs.entries()].map(([k, v]) => [k, v.data.length]));
+  const before = publicFiles();
+  assert.equal((await save({ key: PAGES[1], save: true, date: '2026-10-07' })).body.saved, true);
+  assert.equal((await save({ key: PAGES[1], save: true, date: '2026-10-07' })).status, 200, 'saving twice is fine');
+  assert.equal(fake.rows('UserItems', 'user0002aa').filter((r) => r.rowKey.startsWith('save~')).length, 1);
+  const mine = await call('meSaves', '/api/me/saves', { user: u2 });
+  assert.equal(mine.raw.headers['Cache-Control'], 'no-store');
+  assert.deepEqual(mine.body.saved.map((s) => [s.key, s.date]), [[PAGES[1], '2026-10-07']]);
+  assert.deepEqual((await call('meSaves', '/api/me/saves', { user: principal('user0003aa') })).body.saved, [], 'other people never see my saves');
+  assert.deepEqual((await call('meSaves', '/api/me/saves')).body, { signedIn: false, saved: [] });
+  assert.equal((await save({ key: PAGES[0], save: true })).status, 400, 'venues cannot be saved');
+  assert.equal((await save({ key: 'event:not-a-real-event', save: true })).status, 400);
+  assert.equal((await save({ key: PAGES[1], save: true, date: 'next tuesday' })).status, 400);
+  assert.equal((await save({ key: PAGES[1], save: true }, { origin: 'https://evil.example' })).status, 403);
+  assert.equal((await call('saves', '/api/saves', { method: 'POST', body: { key: PAGES[1], save: true } })).status, 401);
+  assert.equal(publicFiles(), before, 'saving never writes or changes a public file');
+  assert.equal((await save({ key: PAGES[1], save: false })).body.saved, false);
+  assert.deepEqual((await call('meSaves', '/api/me/saves', { user: u2 })).body.saved, []);
+});
+
 test('comments: clean ones publish, unsure ones queue, severe ones are refused', async () => {
   const u2 = principal('user0002aa');
   const ok = await call('comments', '/api/comments', { method: 'POST', user: u2, body: { key: PAGES[1], text: 'Great teachers and a friendly crowd!', date: '2026-10-06' } });
@@ -369,10 +407,12 @@ test('admin: only moderators; bans stop posting and can hide content; log record
 test('account: export lists my data; delete removes it and updates public pages', async () => {
   const me = principal('user0003aa');
   await call('likes', '/api/likes', { method: 'POST', user: me, body: { key: PAGES[2], like: true } });
+  await call('saves', '/api/saves', { method: 'POST', user: me, body: { key: PAGES[1], save: true, date: '2026-10-07' } });
   const exp = await handlers.meExport(req('/api/me/export', { user: me }), ctx);
   assert.match(exp.headers['Content-Disposition'], /attachment/);
   const data = JSON.parse(exp.body);
   assert.ok(data.likes.some((l) => l.page === PAGES[2]));
+  assert.deepEqual(data.saved.map((s) => [s.page, s.date]), [[PAGES[1], '2026-10-07']], 'my saved events are in the download');
   assert.ok(data.comments.some((c) => c.kind === 'correction'));
   assert.ok(data.reports.some((r) => r.page === PAGES[1] && r.reason === 'rude'), 'my reports are in the download');
   const myFlags = () => [...(fake.tables.get('Flags')?.values() || [])].flatMap((p) => [...p.values()]).filter((f) => f.rowKey === 'user0003aa');

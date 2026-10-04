@@ -119,7 +119,7 @@ Visitors use the "Report a problem" button on each event, or the forms on the **
 
 ## Moderate notes and photos
 
-Signed-in visitors can like pages, leave notes, send private corrections and post photos (see the [community rules](https://longisland.dance/community-rules/)). An AI checker reads every note first; anything it is unsure about, every private correction and **every photo** waits for a person.
+Signed-in visitors can like pages, save events to their own private list, leave notes, send private corrections and post photos (see the [community rules](https://longisland.dance/community-rules/)). An AI checker reads every note first; anything it is unsure about, every private correction and **every photo** waits for a person.
 
 1. Go to **https://longisland.dance/moderate/** and sign in with your moderator email (the owner adds it to the `ADMIN_EMAILS` app setting). You get a one-time code by email.
 2. Each card shows the post, why it is waiting, the AI scores (0 = safe, 2 = unsure, 4 or more = harmful), any reports, and the poster's record.

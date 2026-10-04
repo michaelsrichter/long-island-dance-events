@@ -3,9 +3,10 @@
  * The signed-in visitor's own account:
  *   GET  /api/me                 profile + status
  *   POST /api/me/profile         display name, age check (only "13+"/"18+" is kept), accept rules
- *   GET  /api/me/likes?keys=...  which of these pages I liked
+ *   GET  /api/me/likes?keys=...  which of these pages I liked (no keys: every page I liked)
+ *   GET  /api/me/saves           the events I saved (private bookmarks)
  *   GET  /api/me/export          download everything we keep about me (JSON)
- *   POST /api/me/delete          delete my profile, likes, comments, photos and reports
+ *   POST /api/me/delete          delete my profile, likes, saved events, comments, photos and reports
  */
 require('../telemetry-setup');
 const { app } = require('@azure/functions');
@@ -93,11 +94,37 @@ app.http('meLikes', {
   handler: async (request) => {
     const principal = readPrincipal(request);
     if (!principal) return json(200, { liked: {} });
-    const keys = (new URL(request.url).searchParams.get('keys') || '').split(',').filter(isPageKey).slice(0, 20);
-    const likes = table(TABLES.likes);
     const liked = {};
+    const asked = new URL(request.url).searchParams.get('keys');
+    if (asked === null) {
+      // No list: every page this person liked (one read), for list pages with many like buttons.
+      // Page keys never contain '~' and use only characters that sort before it, so 'like~~' ends the range.
+      const rows = await table(TABLES.userItems).list(principal.userId, { from: 'like~', to: 'like~~', limit: 2000 });
+      for (const row of rows) {
+        const k = row.rowKey.slice('like~'.length);
+        if (isPageKey(k)) liked[k] = true;
+      }
+      return json(200, { liked });
+    }
+    const keys = asked.split(',').filter(isPageKey).slice(0, 20);
+    const likes = table(TABLES.likes);
     await Promise.all(keys.map(async (k) => { if (await likes.get(k, principal.userId)) liked[k] = true; }));
     return json(200, { liked });
+  },
+});
+
+app.http('meSaves', {
+  methods: ['GET'],
+  authLevel: 'anonymous',
+  route: 'me/saves',
+  handler: async (request) => {
+    const principal = readPrincipal(request);
+    if (!principal) return json(200, { signedIn: false, saved: [] });
+    const rows = await table(TABLES.userItems).list(principal.userId, { from: 'save~', to: 'save~~', limit: 2000 });
+    const saved = rows
+      .map((row) => ({ key: row.rowKey.slice('save~'.length), at: row.at || '', ...(row.date ? { date: row.date } : {}) }))
+      .filter((s) => isPageKey(s.key));
+    return { status: 200, headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' }, body: JSON.stringify({ signedIn: true, saved }) };
   },
 });
 
@@ -114,7 +141,7 @@ app.http('meExport', {
     if (!principal) return signIn();
     const user = await getUser(principal.userId);
     const items = await myItems(principal.userId);
-    const out = { exportedAt: new Date().toISOString(), profile: null, likes: [], comments: [], photos: [], reports: [] };
+    const out = { exportedAt: new Date().toISOString(), profile: null, likes: [], saved: [], comments: [], photos: [], reports: [] };
     if (user) out.profile = { displayName: user.displayName || '', status: user.status, over13: Boolean(user.age13), over18: Boolean(user.age18), rulesAcceptedAt: user.rulesAcceptedAt || '', photoTermsAt: user.photoTermsAt || '', createdAt: user.createdAt || '' };
     for (const it of items) {
       const [kind, key, rk] = it.rowKey.split('~');
@@ -122,6 +149,7 @@ app.http('meExport', {
         const f = await table(TABLES.flags).get(`${it.itemType}~${it.key}~${it.itemId}`, principal.userId);
         if (f) out.reports.push({ page: it.key, itemType: it.itemType, reason: f.reason, note: f.note || '', at: f.at });
       } else if (kind === 'like') out.likes.push({ page: key, at: it.at });
+      else if (kind === 'save') out.saved.push({ page: key, ...(it.date ? { date: it.date } : {}), at: it.at });
       else if (kind === 'comment') {
         const c = await table(TABLES.comments).get(key, rk);
         if (c) out.comments.push({ page: key, kind: c.kind, text: c.body, status: c.status, at: c.createdAt });
@@ -141,9 +169,10 @@ async function deleteUserData(userId) {
   const likeChanged = new Set();
   for (const it of items) {
     const [kind, key, rk] = it.rowKey.split('~');
-    if (kind === 'flag') {
-      // The report itself goes; the item's report count and any queue entry stay for moderators.
-      await table(TABLES.flags).remove(`${it.itemType}~${it.key}~${it.itemId}`, userId);
+    if (kind === 'flag' || kind === 'save') {
+      // A report: the report itself goes; the item's report count and any queue entry stay for moderators.
+      // A saved event: private to this person, so only the row goes (no public page changes).
+      if (kind === 'flag') await table(TABLES.flags).remove(`${it.itemType}~${it.key}~${it.itemId}`, userId);
       await table(TABLES.userItems).remove(userId, it.rowKey);
       continue;
     }

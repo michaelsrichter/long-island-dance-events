@@ -6,6 +6,7 @@ import DancingBadge from './DancingBadge.astro';
 import TicketDate from './TicketDate.astro';
 import RelativeWhen from './RelativeWhen.astro';
 import StyleTags from './StyleTags.astro';
+import Reactions from './Reactions.astro';
 import PersonName from './PersonName.astro';
 import { formatDateLong } from '../lib/time';
 
@@ -71,5 +72,6 @@ const filterData = {
       </p>
     )}
     <StyleTags styles={e.styles} max={3} />
+    <Reactions type="event" id={e.eventId} name={e.title} date={e.date} save={!past && e.status !== 'cancelled'} />
   </div>
 </li>

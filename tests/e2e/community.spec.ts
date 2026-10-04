@@ -26,12 +26,18 @@ const DOC = {
 };
 
 async function mockCommunity(page: import('@playwright/test').Page, { signedIn = false } = {}) {
-  await page.route('**/community/venue/huntington-moose-lodge.json', (r) => r.fulfill({ json: DOC }));
+  if (signedIn) await page.addInitScript(() => localStorage.setItem('li-account', JSON.stringify({ name: 'Ann B', admin: false })));
+  await page.route('**/community/venue/huntington-moose-lodge.json', async (r) => {
+    // Arrives late on purpose: a slow count file must never undo a like the visitor just made.
+    if (signedIn) await new Promise((res) => setTimeout(res, 1200));
+    await r.fulfill({ json: DOC });
+  });
+  await page.route('**/community/counts/venue.json', (r) => r.fulfill({ json: { v: 1, type: 'venue', likes: { 'huntington-moose-lodge': 4 } } }));
   await page.route('**/.auth/me', (r) => r.fulfill({ json: { clientPrincipal: signedIn ? { userId: 'u1', userRoles: ['anonymous', 'authenticated', 'member'] } : null } }));
   await page.route('**/api/me', (r) =>
     r.fulfill({ json: signedIn ? { signedIn: true, user: { displayName: 'Ann B', status: 'active', needsProfile: false, canPostPhotos: true, adult: true, isAdmin: false } } : { signedIn: false } }),
   );
-  await page.route('**/api/me/likes?**', (r) => r.fulfill({ json: { liked: {} } }));
+  await page.route('**/api/me/likes**', (r) => r.fulfill({ json: { liked: {} } }));
   await page.route('**/api/likes', (r) => r.fulfill({ json: { key: DOC.key, liked: true, count: 5 } }));
   await page.route('**/api/comments', (r) => r.fulfill({ json: { status: 'pending', message: 'Thanks! A volunteer will check your post before it appears.' } }));
 }
@@ -47,7 +53,8 @@ test.describe('community panel', () => {
     await page.goto(`${VENUE}#community`);
     const panel = page.locator('[data-community]');
     await expect(panel.getByRole('heading', { name: "Dancers' notes and photos" })).toBeVisible();
-    await expect(panel.locator('[data-like-count]')).toHaveText('4');
+    await expect(page.locator('.page-header [data-react] [data-like-count]')).toContainText('4');
+    await expect(panel.locator('[data-like]'), 'Like lives at the top of the page now').toHaveCount(0);
     await expect(panel.locator('.community__comment')).toHaveCount(2);
     await expect(panel.getByText('<script>alert(1)</script> shown as text')).toBeVisible();
     await expect(panel.getByText('<img src=x onerror=alert(1)>')).toBeVisible();
@@ -64,11 +71,14 @@ test.describe('community panel', () => {
     await page.goto(`${VENUE}#community`);
     const panel = page.locator('[data-community]');
     await expect(panel.getByRole('link', { name: /Sign in to like/ })).toBeHidden();
-    const like = panel.locator('[data-like]');
+    const like = page.locator('.page-header [data-react] [data-like]');
     await expect(like).toBeEnabled();
     await like.click();
     await expect(like).toHaveAttribute('aria-pressed', 'true');
-    await expect(panel.locator('[data-like-count]')).toHaveText('5');
+    await expect(like.locator('[data-like-count]')).toContainText('5');
+    // The page's public file arrives 1.2 s late (see mockCommunity); it must not undo the new count.
+    await page.waitForTimeout(1500);
+    await expect(like.locator('[data-like-count]')).toContainText('5');
     await panel.getByLabel('Your note').fill('Lovely place to dance.');
     await panel.getByRole('button', { name: 'Send', exact: true }).click();
     await expect(panel.locator('[data-status]')).toContainText('A volunteer will check');
@@ -133,5 +143,114 @@ test.describe('community panel', () => {
     await expect(link).toHaveAttribute('href', '/account/');
     await expect(link).toContainText('Mike');
     await expect(page.locator('.site-footer').getByRole('link', { name: 'Sign out' })).toBeVisible();
+  });
+});
+
+test.describe('likes and saves on lists and detail pages', () => {
+  /** Mock the community API with a little state, so liking twice behaves like the real one (one like per person). */
+  async function mockReactions(page: import('@playwright/test').Page, { signedIn = true, startCount = 7 } = {}) {
+    const state = { liked: new Set<string>(), saved: new Map<string, string | undefined>(), counts: new Map<string, number>() };
+    if (signedIn) await page.addInitScript(() => localStorage.setItem('li-account', JSON.stringify({ name: 'Ann B', admin: false })));
+    await page.route('**/community/counts/event.json', async (r) => {
+      // Every event starts with the same count, so the test does not depend on this week's listings.
+      const pages = await (await page.request.get('/community-pages.json')).json();
+      const likes = Object.fromEntries((pages.keys as string[]).filter((k) => k.startsWith('event:')).map((k) => [k.slice(6), startCount]));
+      await r.fulfill({ json: { v: 1, type: 'event', likes } });
+    });
+    await page.route('**/community/event/*.json', (r) => r.fulfill({ status: 404, body: '' }));
+    await page.route('**/.auth/me', (r) => r.fulfill({ json: { clientPrincipal: signedIn ? { userId: 'u1', userDetails: 'Ann B', userRoles: ['anonymous', 'authenticated', 'member'] } : null } }));
+    await page.route('**/.auth/login/**', (r) => r.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>sign in</title><h1>Sign-in page</h1>' }));
+    await page.route('**/api/me/likes**', (r) => r.fulfill({ json: { liked: Object.fromEntries([...state.liked].map((k) => [k, true])) } }));
+    await page.route('**/api/me/saves', (r) => r.fulfill({ json: { signedIn, saved: [...state.saved].map(([key, date]) => ({ key, at: '2026-10-03T12:00:00Z', ...(date ? { date } : {}) })) } }));
+    await page.route('**/api/likes', async (r) => {
+      const { key, like } = r.request().postDataJSON();
+      const had = state.liked.has(key);
+      if (like) state.liked.add(key);
+      else state.liked.delete(key);
+      const base = state.counts.get(key) ?? startCount;
+      const count = base + (like && !had ? 1 : !like && had ? -1 : 0);
+      state.counts.set(key, count);
+      await r.fulfill({ json: { key, liked: like, count } });
+    });
+    await page.route('**/api/saves', async (r) => {
+      const { key, save, date } = r.request().postDataJSON();
+      if (save) state.saved.set(key, date);
+      else state.saved.delete(key);
+      await r.fulfill({ json: { key, saved: save } });
+    });
+    return state;
+  }
+
+  test('every event card has Like with a count and Save; signed-out visitors are sent to sign in', async ({ pinned: page }) => {
+    await mockReactions(page, { signedIn: false });
+    await page.goto('/events/');
+    const card = page.locator('[data-upcoming-list] [data-event]:not([hidden])').first();
+    const like = card.locator('[data-like]');
+    await expect(like).toBeEnabled();
+    await expect(like.locator('[data-like-count]')).toContainText('7');
+    await expect(like).toHaveAttribute('aria-pressed', 'false');
+    await expect(card.locator('[data-save]')).toBeVisible();
+    await like.click();
+    // Sign in, then the welcome step at /account/, then back to the events list.
+    await expect(page).toHaveURL(/\/\.auth\/login\/extid\?post_login_redirect_uri=.*account.*next%3D%252Fevents%252F/);
+  });
+
+  test('signed in: a person can like an event once, unlike it, and save it to their list', async ({ pinned: page }) => {
+    const state = await mockReactions(page);
+    await page.goto('/events/');
+    const card = page.locator('[data-upcoming-list] [data-event]:not([hidden])').first();
+    const key = (await card.locator('[data-react]').getAttribute('data-key'))!;
+    const title = (await card.locator('[data-like] .visually-hidden').first().textContent())!.trim();
+    const like = card.locator('[data-like]');
+    await like.click();
+    await expect(like).toHaveAttribute('aria-pressed', 'true');
+    await expect(like).toContainText('Liked');
+    await expect(like.locator('[data-like-count]')).toContainText('8');
+    // Every card for the same event shows the same state.
+    for (const other of await page.locator(`[data-react][data-key="${key}"] [data-like]`).all()) await expect(other).toHaveAttribute('aria-pressed', 'true');
+    await like.click();
+    await expect(like).toHaveAttribute('aria-pressed', 'false');
+    await expect(like.locator('[data-like-count]')).toContainText('7');
+    expect(state.liked.size).toBe(0);
+
+    const save = card.locator('[data-save]');
+    await save.click();
+    await expect(save).toHaveAttribute('aria-pressed', 'true');
+    await expect(save).toContainText('Saved');
+    await expect(page.locator('[data-toast]')).toContainText('Saved!');
+    expect(state.saved.has(key)).toBe(true);
+
+    await page.goto('/saved/');
+    const list = page.locator('[data-upcoming-list]');
+    await expect(list.getByRole('link', { name: title })).toBeVisible();
+    await list.getByRole('button', { name: new RegExp(`Remove ${title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`) }).click();
+    await expect(page.getByRole('heading', { name: "You haven't saved any events yet." })).toBeVisible();
+    expect(state.saved.size).toBe(0);
+  });
+
+  test('the top of an event page has Like and Save, and they remember what you chose', async ({ pinned: page }) => {
+    const state = await mockReactions(page);
+    await page.goto('/events/');
+    const href = (await page.locator('[data-upcoming-list] [data-event]:not([hidden]) .event-card__title a').first().getAttribute('href'))!;
+    await page.goto(href);
+    const top = page.locator('.event-hero [data-react]');
+    const key = (await top.getAttribute('data-key'))!;
+    state.liked.add(key);
+    state.saved.set(key, undefined);
+    await page.reload();
+    await expect(top.locator('[data-like]')).toHaveAttribute('aria-pressed', 'true');
+    await expect(top.locator('[data-save]')).toHaveAttribute('aria-pressed', 'true');
+    await expect(top.locator('[data-save]')).toContainText('Saved');
+  });
+
+  test('the saved page asks signed-out visitors to sign in, and has no serious accessibility problems', async ({ pinned: page }) => {
+    await mockReactions(page, { signedIn: false });
+    await page.goto('/saved/');
+    const signIn = page.locator('[data-signed-out]').getByRole('link', { name: 'Sign in or create an account' });
+    await expect(signIn).toBeVisible();
+    expect(await signIn.getAttribute('href')).toMatch(/^\/\.auth\/login\/extid\?post_login_redirect_uri=.*account.*next%3D%252Fsaved%252F/);
+    const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
+    const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
+    expect(serious.map((v) => `${v.id}: ${v.help}`)).toEqual([]);
   });
 });

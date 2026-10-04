@@ -50,6 +50,7 @@ const issues = `${s.repoUrl}/issues/new/choose`;
         <h2 id="footer-account">Your account</h2>
         <ul>
           <li><a href="/account/" data-account-link><span data-account-label>Sign in or create an account</span></a></li>
+          <li data-account-when="in" hidden><a href="/saved/">Saved events</a></li>
           <li data-account-when="admin" hidden><a href="/moderate/">Moderation queue</a></li>
           <li data-account-when="in" hidden><a href="/.auth/logout" data-account-signout>Sign out</a></li>
           <li><a href="/community-rules/">Community rules</a></li>

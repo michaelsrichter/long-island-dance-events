@@ -32,6 +32,8 @@
     { "route": "/api/moderation/*", "allowedRoles": ["admin"] },
     { "route": "/account/*", "headers": { "Cache-Control": "no-cache" } },
     { "route": "/moderate/*", "headers": { "Cache-Control": "no-cache", "X-Robots-Tag": "noindex" } },
+    { "route": "/saved/*", "headers": { "Cache-Control": "no-cache", "X-Robots-Tag": "noindex" } },
+    { "route": "/saved-events.json", "headers": { "Cache-Control": "public, max-age=600" } },
     { "route": "/community-pages.json", "headers": { "Cache-Control": "public, max-age=600" } }
   ],
   "responseOverrides": { "404": { "rewrite": "/404.html", "statusCode": 404 } },
