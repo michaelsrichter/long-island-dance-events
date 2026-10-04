@@ -1,0 +1,25 @@
+{
+  "title": "Dance with live music at Necromantic Brew Co",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-04T14:00",
+  "end": "2026-10-04T16:00",
+  "timezone": "America/New_York",
+  "venueId": "necromantic-brew-co-farmingdale",
+  "town": "Farmingdale",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/%f0%9f%8e%83%f0%9f%91%bb-spooky-doings-horror-trivia-is-turning-2-%f0%9f%91%bb%f0%9f%8e%83/",
+  "status": "active",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/%f0%9f%8e%83%f0%9f%91%bb-spooky-doings-horror-trivia-is-turning-2-%f0%9f%91%bb%f0%9f%8e%83/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-04",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|necromantic-brew-co-farmingdale||sunday|14:00|live-music|||2026-10-04",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

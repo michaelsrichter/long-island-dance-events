@@ -1,18 +1,26 @@
 {
   "name": "Lily Flanagan's Pub (Babylon) - music calendar",
-  "url": "https://www.lilyflanaganspub.com/musicevents",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
   "attribution": "Some listings come from Lily Flanagan's Pub (Babylon). We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Babylon: Friday happy-hour cover bands, Saturday pub bands.",
-  "rateLimitSeconds": 5,
+  "cadence": "twice-weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "lilys-babylon",
-    "town": "Babylon"
+    "town": "Babylon",
+    "venueId": "lilys-babylon"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a clean, dated pub-band calendar with iCal links, even though the dance signal is indirect."
+  "description": "Live music listings in Babylon: Friday happy-hour cover bands, Saturday pub bands.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 45,
+    "kept": 15,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T03:47:59.034Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a clean, dated pub-band calendar with iCal links, even though the dance signal is indirect.",
+  "url": "https://www.lilyflanaganspub.com/musicevents"
 }

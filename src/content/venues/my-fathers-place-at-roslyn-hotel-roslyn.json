@@ -1,0 +1,11 @@
+{
+  "name": "My Father’s Place at Roslyn Hotel",
+  "address": "1221 Old Northern Blvd.",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Roslyn",
+  "latitude": 40.801083,
+  "longitude": -73.652243,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,22 @@
+{
+  "title": "East Coast Swing social dance",
+  "summary": "An evening of East Coast Swing social dancing.",
+  "category": "social-dance",
+  "danceStyles": [
+    "east-coast-swing"
+  ],
+  "start": "2026-10-21",
+  "timezone": "America/New_York",
+  "town": "Huntington",
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "dancemanhattan-li-swing",
+  "sourceUrl": "http://dancemanhattan.com/calendar/event/113",
+  "sourceName": "Dance Manhattan - Long Island swing dances list",
+  "sourceRef": "events page 2026-10-21",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.45,
+  "matchKey": "dancemanhattan-li-swing|huntington||wednesday|tba|social-dance||east-coast-swing|2026-10-21",
+  "reviewNotes": "Venue not found in the listing. No start time found."
+}

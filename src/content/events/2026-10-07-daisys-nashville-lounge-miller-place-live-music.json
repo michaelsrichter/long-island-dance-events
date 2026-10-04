@@ -1,0 +1,23 @@
+{
+  "title": "Dance with live music at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-07",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "price": 1,
+  "priceMax": 3,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/wing-wednesday-miller-place/2026-10-07/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/wing-wednesday-miller-place/2026-10-07/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-07",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.65,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||wednesday|tba|live-music|||2026-10-07",
+  "reviewNotes": "No start time found."
+}

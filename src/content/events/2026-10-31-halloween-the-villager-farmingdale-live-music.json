@@ -1,0 +1,21 @@
+{
+  "title": "Halloween Dance with live music at The Villager",
+  "summary": "Dance to live music. Costumes are welcome.",
+  "category": "live-music",
+  "start": "2026-10-31",
+  "timezone": "America/New_York",
+  "venueId": "the-villager-farmingdale",
+  "town": "Farmingdale",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.thevillagerfarmingdale.com/livemusic/halloween-party-amp-costume-contest",
+  "status": "pending-review",
+  "sourceId": "villager-farmingdale",
+  "sourceUrl": "https://www.thevillagerfarmingdale.com/livemusic/halloween-party-amp-costume-contest",
+  "sourceName": "The Villager (Farmingdale) - live music calendar",
+  "sourceRef": "events page 2026-10-31",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.55,
+  "matchKey": "villager-farmingdale|the-villager-farmingdale||saturday|tba|live-music|||2026-10-31|halloween",
+  "reviewNotes": "No start time found."
+}

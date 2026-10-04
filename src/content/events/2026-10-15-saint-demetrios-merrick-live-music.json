@@ -1,0 +1,19 @@
+{
+  "title": "Dance with live music at Saint Demetrios Greek Orthodox Church",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-15T19:00",
+  "timezone": "America/New_York",
+  "venueId": "saint-demetrios-merrick",
+  "town": "Merrick",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "saint-demetrios-merrick",
+  "sourceUrl": "https://saint-demetrios.com/dance",
+  "sourceName": "Saint Demetrios (Merrick) - dinner dance",
+  "sourceRef": "events page 2026-10-15",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.75,
+  "matchKey": "saint-demetrios-merrick|saint-demetrios-merrick||thursday|19:00|live-music|||2026-10-15"
+}

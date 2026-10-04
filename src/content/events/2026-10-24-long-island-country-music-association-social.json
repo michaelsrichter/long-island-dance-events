@@ -1,0 +1,24 @@
+{
+  "title": "Country Two-Step and Line Dancing social dance",
+  "summary": "An evening of Country Two-Step and Line Dancing social dancing.",
+  "category": "social-dance",
+  "danceStyles": [
+    "country-two-step",
+    "line-dancing"
+  ],
+  "start": "2026-10-24",
+  "timezone": "America/New_York",
+  "town": "Deer Park",
+  "organizerId": "long-island-country-music-association",
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "licma",
+  "sourceUrl": "https://licma.org/",
+  "sourceName": "Long Island Country Music Association (LICMA) - dances",
+  "sourceRef": "events page 2026-10-24",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.45,
+  "matchKey": "licma|deer-park|long-island-country-music-association|saturday|tba|social-dance||country-two-step+line-dancing|2026-10-24",
+  "reviewNotes": "Venue not found in the listing. No start time found."
+}

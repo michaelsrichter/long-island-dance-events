@@ -1,0 +1,23 @@
+{
+  "title": "Dance with live music by Electric Dudes at Palmer's American Grille",
+  "summary": "Dance to live music by Electric Dudes.",
+  "category": "live-music",
+  "start": "2026-10-17T19:00",
+  "end": "2026-10-17T22:00",
+  "timezone": "America/New_York",
+  "venueId": "palmers-american-grille-farmingdale",
+  "town": "Farmingdale",
+  "performerIds": [
+    "electric-dudes"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "electric-dudes",
+  "sourceUrl": "https://electricdudes.com/events",
+  "sourceName": "Electric Dudes - Long Island music dates",
+  "sourceRef": "events page 2026-10-17",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "electric-dudes|palmers-american-grille-farmingdale||saturday|19:00|live-music|electric-dudes||2026-10-17"
+}

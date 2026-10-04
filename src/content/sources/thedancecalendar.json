@@ -4,6 +4,7 @@
   "adapter": "thedancecalendar",
   "attribution": "Many listings come from The Dance Calendar, a monthly dance newsletter for Long Island and nearby areas. We write our own short summaries and link to each issue.",
   "cadence": "weekly",
+  "catalogStatus": "live",
   "description": "Monthly PDF newsletter with a day-by-day calendar of dances and classes. We read the current issue each week.",
   "enabled": true,
   "focus": "dance",
@@ -13,9 +14,8 @@
     "needsReview": 0,
     "outOfArea": 73
   },
-  "lastScraped": "2026-10-03T04:49:17.061Z",
+  "lastScraped": "2026-10-04T03:49:45.787Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
-  "url": "https://www.thedancecalendar.com/dance-calendar",
-  "catalogStatus": "live"
+  "url": "https://www.thedancecalendar.com/dance-calendar"
 }

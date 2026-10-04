@@ -1,0 +1,24 @@
+{
+  "title": "Dance with live music by Come Together at The Villager",
+  "summary": "Dance to live music by Come Together.",
+  "category": "live-music",
+  "start": "2026-10-16T18:00",
+  "end": "2026-10-16T21:00",
+  "timezone": "America/New_York",
+  "venueId": "the-villager-farmingdale",
+  "town": "Farmingdale",
+  "performerIds": [
+    "come-together"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.thevillagerfarmingdale.com/livemusic/live-music-come-together",
+  "status": "active",
+  "sourceId": "villager-farmingdale",
+  "sourceUrl": "https://www.thevillagerfarmingdale.com/livemusic/live-music-come-together",
+  "sourceName": "The Villager (Farmingdale) - live music calendar",
+  "sourceRef": "events page 2026-10-16",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "villager-farmingdale|the-villager-farmingdale||friday|18:00|live-music|come-together||2026-10-16"
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Ballroom and Latin social dance at Brumidi Lodge (Sons of Italy)",
+  "summary": "An evening of Ballroom and Latin social dancing.",
+  "category": "social-dance",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "start": "2026-10-22T18:30",
+  "timezone": "America/New_York",
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "club-brumidi",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "brumidi-lodge-deer-park",
+  "sourceUrl": "https://sonsofitalyli.com/events/",
+  "sourceName": "Club Brumidi at Brumidi Lodge (Deer Park) - events",
+  "sourceRef": "events page 2026-10-22",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|thursday|18:30|social-dance||ballroom+latin-ballroom|2026-10-22"
+}

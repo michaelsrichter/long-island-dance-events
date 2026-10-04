@@ -1,0 +1,22 @@
+{
+  "title": "Halloween Dance with live music at Patchogue Theatre for the Performing Arts",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-29T19:30",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "patchogue-theatre",
+  "sourceUrl": "https://www.patchoguetheatre.org/events/",
+  "sourceName": "Patchogue Theatre - events",
+  "sourceRef": "events page 2026-10-29",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.75,
+  "matchKey": "patchogue-theatre|patchogue-theatre-patchogue||thursday|19:30|live-music|||2026-10-29|halloween"
+}

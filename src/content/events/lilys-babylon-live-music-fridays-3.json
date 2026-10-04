@@ -1,0 +1,29 @@
+{
+  "title": "Dance with live music by Victims Of Rock at Lily's Babylon",
+  "summary": "Dance to live music by Victims Of Rock.",
+  "category": "live-music",
+  "start": "2026-10-30T18:00",
+  "end": "2026-10-30T22:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-12-04"
+    ]
+  },
+  "venueId": "lilys-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "victims-of-rock"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.lilyflanaganspub.com/musicevents/2026/8/30/happy-hour-band-victims-of-rock",
+  "status": "active",
+  "sourceId": "lily-flanagans-babylon",
+  "sourceUrl": "https://www.lilyflanaganspub.com/musicevents/2026/8/30/happy-hour-band-victims-of-rock",
+  "sourceName": "Lily Flanagan's Pub (Babylon) - music calendar",
+  "sourceRef": "events page 2026-10-30",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "lily-flanagans-babylon|lilys-babylon||friday|18:00|live-music|victims-of-rock||repeat"
+}

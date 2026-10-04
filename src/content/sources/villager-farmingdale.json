@@ -1,18 +1,26 @@
 {
   "name": "The Villager (Farmingdale) - live music calendar",
-  "url": "https://www.thevillagerfarmingdale.com/livemusic",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
   "attribution": "Some listings come from The Villager (Farmingdale). We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Farmingdale: local cover bands, pub live music.",
-  "rateLimitSeconds": 5,
+  "cadence": "twice-weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "the-villager-farmingdale",
-    "town": "Farmingdale"
+    "town": "Farmingdale",
+    "venueId": "the-villager-farmingdale"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many current dated band nights in an easy format."
+  "description": "Live music listings in Farmingdale: local cover bands, pub live music.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 45,
+    "kept": 14,
+    "needsReview": 1,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T03:49:56.320Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many current dated band nights in an easy format.",
+  "url": "https://www.thevillagerfarmingdale.com/livemusic"
 }

@@ -1,0 +1,11 @@
+{
+  "name": "Six Harbors Brewing Company",
+  "address": "243 New York Avenue",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Huntington Matters events. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Huntington",
+  "latitude": 40.874195,
+  "longitude": -73.424968,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Social dance at Dance With Me Long Island",
+  "summary": "An evening of social dancing.",
+  "category": "social-dance",
+  "start": "2026-10-31",
+  "timezone": "America/New_York",
+  "venueId": "dance-with-me-greenvale",
+  "town": "Greenvale",
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "dance-with-me-greenvale",
+  "sourceUrl": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+  "sourceName": "Dance With Me Long Island (Greenvale) - class schedule",
+  "sourceRef": "events page 2026-10-31",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.55,
+  "matchKey": "dance-with-me-greenvale|dance-with-me-greenvale||saturday|tba|social-dance|||2026-10-31",
+  "reviewNotes": "No start time found."
+}

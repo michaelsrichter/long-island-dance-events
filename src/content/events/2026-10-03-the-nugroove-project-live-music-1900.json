@@ -1,0 +1,24 @@
+{
+  "title": "Dance with live music by The NuGroove Project at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Dance to live music by The NuGroove Project.",
+  "category": "live-music",
+  "start": "2026-10-03T19:00",
+  "end": "2026-10-03T23:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "the-nugroove-project"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/nugroove-4/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/nugroove-4/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-03",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.9,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||saturday|19:00|live-music|the-nugroove-project||2026-10-03"
+}

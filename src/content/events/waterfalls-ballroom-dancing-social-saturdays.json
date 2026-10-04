@@ -1,0 +1,29 @@
+{
+  "title": "Ballroom social dance at The Waterfalls Clubhouse Ballroom",
+  "summary": "An evening of Ballroom social dancing.",
+  "category": "social-dance",
+  "danceStyles": [
+    "ballroom"
+  ],
+  "start": "2026-10-10T19:00",
+  "end": "2026-10-10T23:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-10-24"
+    ]
+  },
+  "venueId": "waterfalls-ballroom",
+  "town": "Lake Ronkonkoma",
+  "organizerId": "waterfalls-ballroom-dancing",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "waterfalls-ballroom",
+  "sourceUrl": "https://waterfallsapartments.com/event-calendar/",
+  "sourceName": "The Waterfalls (Lake Ronkonkoma) - community event calendar",
+  "sourceRef": "events page 2026-10-10",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "waterfalls-ballroom|waterfalls-ballroom|waterfalls-ballroom-dancing|saturday|19:00|social-dance||ballroom|repeat"
+}

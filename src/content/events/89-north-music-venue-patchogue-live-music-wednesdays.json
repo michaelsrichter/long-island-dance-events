@@ -1,0 +1,23 @@
+{
+  "title": "Dance with live music at 89 North Music Venue",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-07",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=MONTHLY;BYDAY=1WE,3WE;UNTIL=20261104"
+  },
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "eighty-nine-north",
+  "sourceUrl": "https://89northmusic.com/calendar",
+  "sourceName": "89 North (Patchogue) - music calendar",
+  "sourceRef": "events page 2026-10-07",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.55,
+  "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||wednesday|tba|live-music|||repeat",
+  "reviewNotes": "No start time found."
+}

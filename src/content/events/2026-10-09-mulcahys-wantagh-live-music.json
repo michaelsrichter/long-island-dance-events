@@ -1,0 +1,24 @@
+{
+  "title": "Dance with live music at Mulcahy's",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-09T20:30",
+  "end": "2026-10-09T23:30",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/love-in-the-club-2000s-hiphop-and-rb-dance-party/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/love-in-the-club-2000s-hiphop-and-rb-dance-party/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2026-10-09",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "dance-party"
+  ],
+  "confidence": 0.85,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|20:30|live-music|||2026-10-09"
+}

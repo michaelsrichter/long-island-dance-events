@@ -1,0 +1,21 @@
+{
+  "title": "Dance with live music at Bartini Bar & Lounge",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-05T19:30",
+  "end": "2026-10-05T23:00",
+  "timezone": "America/New_York",
+  "venueId": "bartini-babylon",
+  "town": "Babylon",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/open-mike-with-dave-drew-mondays-at-bartini-bar/2026-10-05/",
+  "status": "active",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/open-mike-with-dave-drew-mondays-at-bartini-bar/2026-10-05/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-05",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|bartini-babylon||monday|19:30|live-music|||2026-10-05"
+}

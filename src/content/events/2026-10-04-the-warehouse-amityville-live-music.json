@@ -1,0 +1,25 @@
+{
+  "title": "Dance with live music at The Warehouse",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-04T11:00",
+  "end": "2026-10-04T14:00",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/b5318ce8-119c-456d-934e-2e212bba3a12",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/b5318ce8-119c-456d-934e-2e212bba3a12",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-04",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon",
+    "brunch"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|the-warehouse-amityville||sunday|11:00|live-music|||2026-10-04"
+}

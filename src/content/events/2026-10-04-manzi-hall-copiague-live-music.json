@@ -1,0 +1,25 @@
+{
+  "title": "Dance with live music at Manzi Hall",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-04T13:00",
+  "end": "2026-10-04T18:00",
+  "timezone": "America/New_York",
+  "venueId": "manzi-hall-copiague",
+  "town": "Copiague",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://ilovebabylon.com/event/the-blessing-of-the-animals-autumn-makers-market/",
+  "status": "active",
+  "sourceId": "i-love-babylon",
+  "sourceUrl": "https://ilovebabylon.com/event/the-blessing-of-the-animals-autumn-makers-market/",
+  "sourceName": "I Love Babylon events",
+  "sourceRef": "calendar feed 2026-10-04",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "i-love-babylon|manzi-hall-copiague||sunday|13:00|live-music|||2026-10-04",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

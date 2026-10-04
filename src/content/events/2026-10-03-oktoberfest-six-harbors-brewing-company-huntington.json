@@ -1,0 +1,26 @@
+{
+  "title": "Oktoberfest Social dance at Six Harbors Brewing Company",
+  "summary": "An evening of social dancing.",
+  "category": "social-dance",
+  "start": "2026-10-03T12:00",
+  "timezone": "America/New_York",
+  "venueId": "six-harbors-brewing-company-huntington",
+  "town": "Huntington",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/oktoberfest-26-at-six-harbors-brewing-company/?occurrence=2026-10-03&time=1791028800",
+  "status": "active",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/oktoberfest-26-at-six-harbors-brewing-company/?occurrence=2026-10-03&time=1791028800",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-10-03",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon",
+    "festival"
+  ],
+  "confidence": 0.85,
+  "matchKey": "huntington-matters|six-harbors-brewing-company-huntington||saturday|12:00|social-dance|||2026-10-03|oktoberfest",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

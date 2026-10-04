@@ -1,0 +1,20 @@
+{
+  "title": "Dance with live music by Talisman & Cruecified at 89 North Music Venue",
+  "summary": "Dance to live music by Talisman & Cruecified.",
+  "category": "live-music",
+  "start": "2026-11-07",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "eighty-nine-north",
+  "sourceUrl": "https://89northmusic.com/calendar",
+  "sourceName": "89 North (Patchogue) - music calendar",
+  "sourceRef": "events page 2026-11-07",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.55,
+  "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||saturday|tba|live-music|talismanandcruecified||2026-11-07",
+  "reviewNotes": "Band or DJ not researched yet: Talisman & Cruecified. No start time found."
+}

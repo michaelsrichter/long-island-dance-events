@@ -1,0 +1,24 @@
+{
+  "title": "Dance with live music by Decadia and Stereomatic at 89 North Music Venue",
+  "summary": "Dance to live music by Decadia and Stereomatic.",
+  "category": "live-music",
+  "start": "2026-11-14",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "decadia"
+  ],
+  "priceNotes": "Pay at the door",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "eighty-nine-north",
+  "sourceUrl": "https://89northmusic.com/calendar",
+  "sourceName": "89 North (Patchogue) - music calendar",
+  "sourceRef": "events page 2026-11-14",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.6,
+  "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||saturday|tba|live-music|decadia+stereomatic||2026-11-14",
+  "reviewNotes": "Band or DJ not researched yet: Stereomatic. No start time found."
+}

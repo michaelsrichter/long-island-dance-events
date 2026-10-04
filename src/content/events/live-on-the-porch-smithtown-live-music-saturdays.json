@@ -1,0 +1,28 @@
+{
+  "title": "Dance with live music by The 90's Band at Live On The Porch",
+  "summary": "Dance to live music by The 90's Band.",
+  "category": "live-music",
+  "start": "2026-10-24T20:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-11-21"
+    ]
+  },
+  "venueId": "live-on-the-porch-smithtown",
+  "town": "Smithtown",
+  "performerIds": [
+    "the-90s-band"
+  ],
+  "price": 35,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "live-on-the-porch",
+  "sourceUrl": "https://liveontheporch.com/events/",
+  "sourceName": "Live On The Porch (Smithtown) - show calendar",
+  "sourceRef": "event data on the page 2026-10-24",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.9,
+  "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||saturday|20:00|live-music|the-90s-band||repeat"
+}

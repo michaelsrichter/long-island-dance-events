@@ -1,0 +1,20 @@
+{
+  "title": "Dance with live music at Conklin Barn",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-12-13",
+  "timezone": "America/New_York",
+  "venueId": "conklin-barn-huntington",
+  "town": "Huntington",
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "jazz-at-the-barn",
+  "sourceUrl": "https://jazzatthebarn.com/",
+  "sourceName": "Jazz at the Barn (Huntington) - upcoming shows",
+  "sourceRef": "events page 2026-12-13",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.55,
+  "matchKey": "jazz-at-the-barn|conklin-barn-huntington||sunday|tba|live-music|||2026-12-13",
+  "reviewNotes": "No start time found."
+}

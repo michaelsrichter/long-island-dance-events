@@ -1,0 +1,29 @@
+{
+  "title": "Dance with live music by The Byrne Unit at Lily's Babylon",
+  "summary": "Dance to live music by The Byrne Unit.",
+  "category": "live-music",
+  "start": "2026-10-16T18:00",
+  "end": "2026-10-16T22:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-11-27"
+    ]
+  },
+  "venueId": "lilys-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "the-byrne-unit"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.lilyflanaganspub.com/musicevents/2026/10/16/happy-hour-band-the-byrne-unit",
+  "status": "active",
+  "sourceId": "lily-flanagans-babylon",
+  "sourceUrl": "https://www.lilyflanaganspub.com/musicevents/2026/10/16/happy-hour-band-the-byrne-unit",
+  "sourceName": "Lily Flanagan's Pub (Babylon) - music calendar",
+  "sourceRef": "events page 2026-10-16",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "lily-flanagans-babylon|lilys-babylon||friday|18:00|live-music|the-byrne-unit||repeat"
+}

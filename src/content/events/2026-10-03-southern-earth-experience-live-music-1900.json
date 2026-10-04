@@ -1,0 +1,25 @@
+{
+  "title": "Dance with live music by The Southern Earth Experience at Salt Shack",
+  "summary": "Dance to live music by The Southern Earth Experience.",
+  "category": "live-music",
+  "start": "2026-10-03T19:00",
+  "timezone": "America/New_York",
+  "venueId": "salt-shack-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "southern-earth-experience"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "salt-shack-cedar-beach",
+  "sourceUrl": "https://saltshackny.com/",
+  "sourceName": "Salt Shack at Cedar Beach (Babylon) - beach music calendar",
+  "sourceRef": "events page 2026-10-03",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "tribute"
+  ],
+  "confidence": 0.8,
+  "matchKey": "salt-shack-cedar-beach|salt-shack-babylon||saturday|19:00|live-music|southern-earth-experience||2026-10-03"
+}

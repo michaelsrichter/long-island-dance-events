@@ -1,18 +1,26 @@
 {
   "name": "Stereo Garden (Patchogue) - concerts and dance parties",
-  "url": "https://www.stereogardenli.com/stereo-garden-li-events/",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
   "attribution": "Some listings come from Stereo Garden (Patchogue). We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Patchogue: salsa, reggaeton, freestyle and old-school, tribute concerts.",
-  "rateLimitSeconds": 5,
+  "cadence": "twice-weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "stereo-garden-patchogue",
-    "town": "Patchogue"
+    "town": "Patchogue",
+    "venueId": "stereo-garden-patchogue"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many future events and several are clearly dance parties, not just concerts."
+  "description": "Live music listings in Patchogue: salsa, reggaeton, freestyle and old-school, tribute concerts.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 42,
+    "kept": 12,
+    "needsReview": 6,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T03:49:23.381Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many future events and several are clearly dance parties, not just concerts.",
+  "url": "https://www.stereogardenli.com/stereo-garden-li-events/"
 }

@@ -1,0 +1,22 @@
+{
+  "title": "Dance with live music",
+  "summary": "Dance to live music. Snacks are included.",
+  "category": "live-music",
+  "start": "2026-10-06",
+  "timezone": "America/New_York",
+  "town": "Huntington",
+  "price": 15,
+  "priceMax": 20,
+  "priceNotes": "Members pay less",
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "dancemanhattan-li-swing",
+  "sourceUrl": "http://dancemanhattan.com/calendar/event/113",
+  "sourceName": "Dance Manhattan - Long Island swing dances list",
+  "sourceRef": "events page 2026-10-06",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.4,
+  "matchKey": "dancemanhattan-li-swing|huntington||tuesday|tba|live-music|||2026-10-06",
+  "reviewNotes": "Venue not found in the listing. No start time found."
+}

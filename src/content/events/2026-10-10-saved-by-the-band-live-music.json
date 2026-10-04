@@ -1,0 +1,24 @@
+{
+  "title": "Dance with live music by Saved by the Band at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Dance to live music by Saved by the Band.",
+  "category": "live-music",
+  "start": "2026-10-10T19:00",
+  "end": "2026-10-10T23:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "saved-by-the-band"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/saved-by-the-band/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/saved-by-the-band/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-10",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.9,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||saturday|19:00|live-music|saved-by-the-band||2026-10-10"
+}

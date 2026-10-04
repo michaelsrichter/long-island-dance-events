@@ -1,0 +1,22 @@
+{
+  "title": "Dance with live music by Town & Country at The Villager",
+  "summary": "Dance to live music by Town & Country.",
+  "category": "live-music",
+  "start": "2026-10-10T18:00",
+  "end": "2026-10-10T21:00",
+  "timezone": "America/New_York",
+  "venueId": "the-villager-farmingdale",
+  "town": "Farmingdale",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.thevillagerfarmingdale.com/livemusic/live-music-town-amp-country",
+  "status": "active",
+  "sourceId": "villager-farmingdale",
+  "sourceUrl": "https://www.thevillagerfarmingdale.com/livemusic/live-music-town-amp-country",
+  "sourceName": "The Villager (Farmingdale) - live music calendar",
+  "sourceRef": "events page 2026-10-10",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.75,
+  "matchKey": "villager-farmingdale|the-villager-farmingdale||saturday|18:00|live-music|townandcountry||2026-10-10",
+  "reviewNotes": "Band or DJ not researched yet: Town & Country."
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Ballroom social dance at JLR Dance Unlimited",
+  "summary": "An evening of Ballroom social dancing.",
+  "category": "social-dance",
+  "danceStyles": [
+    "ballroom"
+  ],
+  "start": "2026-10-11T19:00",
+  "end": "2026-10-11T22:00",
+  "timezone": "America/New_York",
+  "venueId": "jlr-dance-unlimited",
+  "town": "Bay Shore",
+  "organizerId": "kl-dance",
+  "price": 20.5,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "jlr-dance-unlimited",
+  "sourceUrl": "https://www.jlrdanceunlimited.com/events/sunday-night-dance-social-5",
+  "sourceName": "JLR Dance Unlimited (Bay Shore) - events",
+  "sourceRef": "event data on the page 2026-10-11",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.9,
+  "matchKey": "jlr-dance-unlimited|jlr-dance-unlimited|kl-dance|sunday|19:00|social-dance||ballroom|2026-10-11"
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Dance with live music at The Coop Nashville Kitchen",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-06T08:00",
+  "end": "2026-10-06T17:00",
+  "timezone": "America/New_York",
+  "venueId": "the-coop-nashville-kitchen-farmingdale",
+  "town": "Farmingdale",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/join-us-every-week-for-live-music-at-the-coop-in-farmingdale-%f0%9f%8e%b6%f0%9f%8e%b8/2026-10-06/",
+  "status": "active",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/join-us-every-week-for-live-music-at-the-coop-in-farmingdale-%f0%9f%8e%b6%f0%9f%8e%b8/2026-10-06/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-06",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|the-coop-nashville-kitchen-farmingdale||tuesday|08:00|live-music|||2026-10-06",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

@@ -1,0 +1,30 @@
+{
+  "title": "East Coast Swing and Lindy Hop dance with live music at Huntington Moose Lodge",
+  "summary": "Dance to live music. Dance styles: East Coast Swing and Lindy Hop.",
+  "category": "live-music",
+  "danceStyles": [
+    "east-coast-swing",
+    "lindy-hop"
+  ],
+  "start": "2026-12-15",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-12-29"
+    ]
+  },
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "sdli-events",
+  "sourceUrl": "http://www.sdli.org/index.php/sdli/events/",
+  "sourceName": "Swing Dance Long Island (SDLI) - upcoming events",
+  "sourceRef": "events page 2026-12-15",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.6,
+  "matchKey": "sdli-events|huntington-moose-lodge|swing-dance-long-island|tuesday|tba|live-music||east-coast-swing+lindy-hop|repeat",
+  "reviewNotes": "No start time found."
+}

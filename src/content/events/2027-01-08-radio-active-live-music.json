@@ -1,0 +1,22 @@
+{
+  "title": "Dance with live music by Radio Active at Daisy's Nashville Lounge (Patchogue)",
+  "summary": "Dance to live music by Radio Active.",
+  "category": "live-music",
+  "start": "2027-01-08T19:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "radio-active"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "radio-active",
+  "sourceUrl": "https://radioactiveny.com/",
+  "sourceName": "Radio Active - events calendar",
+  "sourceRef": "events page 2027-01-08",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "radio-active|daisys-nashville-lounge-patchogue||friday|19:00|live-music|radio-active||2027-01-08"
+}

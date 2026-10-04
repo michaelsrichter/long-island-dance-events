@@ -1,14 +1,22 @@
 {
   "name": "Dancing With Deanna - line-dance events",
-  "url": "https://www.dancingwithdeanna.com/events-1",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Dancing With Deanna. We write our own short summaries and link back to the original page.",
-  "description": "Dance listings in Manorville, Port Jefferson, North Patchogue and Patchogue: country line dancing, country music events.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
-  "reviewNotes": "Catalog check 2026-10-03: Keep it because it has several Long Island public line-dance events and current dated listings."
+  "description": "Dance listings in Manorville, Port Jefferson, North Patchogue and Patchogue: country line dancing, country music events.",
+  "enabled": true,
+  "focus": "dance",
+  "lastCounts": {
+    "found": 10,
+    "kept": 1,
+    "needsReview": 1,
+    "outOfArea": 3
+  },
+  "lastScraped": "2026-10-04T03:44:02.730Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it because it has several Long Island public line-dance events and current dated listings.",
+  "url": "https://www.dancingwithdeanna.com/events-1"
 }

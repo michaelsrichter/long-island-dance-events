@@ -1,0 +1,22 @@
+{
+  "title": "Dance with live music at Eleanor's Lounge",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-04T19:30",
+  "end": "2026-10-04T23:30",
+  "timezone": "America/New_York",
+  "venueId": "eleanors-lounge-bohemia",
+  "town": "Bohemia",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/%f0%9f%8e%a4%e2%9c%a8-sunday-funday-karaoke-%e2%9c%a8%f0%9f%8e%a4/2026-10-04/",
+  "status": "active",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/%f0%9f%8e%a4%e2%9c%a8-sunday-funday-karaoke-%e2%9c%a8%f0%9f%8e%a4/2026-10-04/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-04",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|eleanors-lounge-bohemia||sunday|19:30|live-music|||2026-10-04"
+}

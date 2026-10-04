@@ -1,0 +1,21 @@
+{
+  "title": "Dance with live music at Eleanor's Lounge",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-10T20:00",
+  "end": "2026-10-10T23:00",
+  "timezone": "America/New_York",
+  "venueId": "eleanors-lounge-bohemia",
+  "town": "Bohemia",
+  "price": 5,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "eleanors-lounge",
+  "sourceUrl": "https://eleanorslounge.com/",
+  "sourceName": "Eleanor's Lounge (Bohemia) - bands and DJs",
+  "sourceRef": "events page 2026-10-10",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.75,
+  "matchKey": "eleanors-lounge|eleanors-lounge-bohemia||saturday|20:00|live-music|||2026-10-10"
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Dance with live music by Erich Glaubitz at Mezza Luna",
+  "summary": "Dance to live music by Erich Glaubitz.",
+  "category": "live-music",
+  "start": "2026-10-23T18:00",
+  "end": "2026-10-23T21:00",
+  "timezone": "America/New_York",
+  "venueId": "mezza-luna-hauppauge",
+  "town": "Hauppauge",
+  "performerIds": [
+    "erich-glaubitz"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.mezzalunafinedining.com/events/erich-glaubitz",
+  "status": "active",
+  "sourceId": "mezza-luna",
+  "sourceUrl": "https://www.mezzalunafinedining.com/events/erich-glaubitz",
+  "sourceName": "Mezza Luna (Hauppauge) - events",
+  "sourceRef": "events page 2026-10-23",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "mezza-luna|mezza-luna-hauppauge||friday|18:00|live-music|erich-glaubitz||2026-10-23"
+}

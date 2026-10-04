@@ -1,0 +1,29 @@
+{
+  "title": "Ballroom, Hustle and West Coast Swing dance with live music by Louis Del Prete",
+  "summary": "Dance to live music by Louis Del Prete. Dance styles: Ballroom, Hustle and West Coast Swing. Food is included, and there is a cash bar.",
+  "category": "live-music",
+  "danceStyles": [
+    "ballroom",
+    "hustle",
+    "west-coast-swing"
+  ],
+  "start": "2026-10-16T19:00",
+  "end": "2026-10-16T22:30",
+  "timezone": "America/New_York",
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "club-brumidi",
+  "performerIds": [
+    "louis-del-prete"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "brumidi-lodge-deer-park",
+  "sourceUrl": "https://sonsofitalyli.com/events/",
+  "sourceName": "Club Brumidi at Brumidi Lodge (Deer Park) - events",
+  "sourceRef": "events page 2026-10-16",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|friday|19:00|live-music|louis-del-prete|ballroom+hustle+west-coast-swing|2026-10-16"
+}

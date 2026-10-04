@@ -1,0 +1,24 @@
+{
+  "title": "Social dance",
+  "summary": "An evening of social dancing.",
+  "category": "social-dance",
+  "start": "2026-10-14T20:30",
+  "end": "2026-10-14T22:30",
+  "timezone": "America/New_York",
+  "town": "East Northport",
+  "price": 10,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "dancemanhattan-li-swing",
+  "sourceUrl": "http://dancemanhattan.com/calendar/event/113",
+  "sourceName": "Dance Manhattan - Long Island swing dances list",
+  "sourceRef": "events page 2026-10-14",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "dj"
+  ],
+  "confidence": 0.6,
+  "matchKey": "dancemanhattan-li-swing|east-northport||wednesday|20:30|social-dance|||2026-10-14",
+  "reviewNotes": "Venue not found in the listing."
+}

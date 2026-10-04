@@ -1,0 +1,21 @@
+{
+  "title": "Social dance at Saint Demetrios Greek Orthodox Church",
+  "summary": "An evening of social dancing. Food is included.",
+  "category": "social-dance",
+  "start": "2026-10-10",
+  "timezone": "America/New_York",
+  "venueId": "saint-demetrios-merrick",
+  "town": "Merrick",
+  "price": 75,
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "saint-demetrios-merrick",
+  "sourceUrl": "https://saint-demetrios.com/dance",
+  "sourceName": "Saint Demetrios (Merrick) - dinner dance",
+  "sourceRef": "events page 2026-10-10",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.55,
+  "matchKey": "saint-demetrios-merrick|saint-demetrios-merrick||saturday|tba|social-dance|||2026-10-10",
+  "reviewNotes": "No start time found."
+}

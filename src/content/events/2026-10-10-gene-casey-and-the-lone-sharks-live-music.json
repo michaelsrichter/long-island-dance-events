@@ -1,0 +1,29 @@
+{
+  "title": "Dance with live music by Gene Casey & the Lone Sharks at Sylvester Manor",
+  "summary": "Dance to live music by Gene Casey & the Lone Sharks.",
+  "category": "live-music",
+  "start": "2026-10-10T14:00",
+  "end": "2026-10-10T17:00",
+  "timezone": "America/New_York",
+  "venueId": "sylvester-manor-shelter-island",
+  "town": "Shelter Island",
+  "performerIds": [
+    "gene-casey-and-the-lone-sharks"
+  ],
+  "price": 40,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://genecasey.com/event/gene-lone-sharks-hoodoo-loungers-shelter-island/",
+  "status": "active",
+  "sourceId": "gene-casey-lone-sharks",
+  "sourceUrl": "https://genecasey.com/event/gene-lone-sharks-hoodoo-loungers-shelter-island/",
+  "sourceName": "Gene Casey & the Lone Sharks - show calendar",
+  "sourceRef": "calendar feed 2026-10-10",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "gene-casey-lone-sharks|sylvester-manor-shelter-island||saturday|14:00|live-music|gene-casey-and-the-lone-sharks||2026-10-10",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

@@ -1,0 +1,28 @@
+{
+  "title": "East Coast Swing social dance with a lesson at Huntington Moose Lodge",
+  "summary": "A group lesson at 7:30 PM, then open social dancing. Dance styles: East Coast Swing. Snacks are included.",
+  "category": "lesson-party",
+  "danceStyles": [
+    "east-coast-swing"
+  ],
+  "start": "2026-10-06T19:30",
+  "end": "2026-10-06T22:00",
+  "timezone": "America/New_York",
+  "lessonTime": "19:30",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "price": 10,
+  "priceMax": 15,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.huntingtonarts.org/event/pizza-night-with-swing-dance-long-island/2026-10-06/",
+  "status": "active",
+  "sourceId": "huntington-arts-council-dance",
+  "sourceUrl": "https://www.huntingtonarts.org/event/pizza-night-with-swing-dance-long-island/2026-10-06/",
+  "sourceName": "Huntington Arts Council - events calendar, Dance category",
+  "sourceRef": "calendar feed 2026-10-06",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.9,
+  "matchKey": "huntington-arts-council-dance|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|lesson-party||east-coast-swing|2026-10-06"
+}

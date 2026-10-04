@@ -1,0 +1,25 @@
+{
+  "title": "Dance with live music at Ristegio's Restaurant & Lounge",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-09T16:00",
+  "end": "2026-10-09T19:00",
+  "timezone": "America/New_York",
+  "venueId": "ristegios-patchogue",
+  "town": "Patchogue",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://dpe-li.com/upcoming-shows/ristegios-5/",
+  "status": "active",
+  "sourceId": "dance-party-explosion",
+  "sourceUrl": "https://dpe-li.com/upcoming-shows/ristegios-5/",
+  "sourceName": "Dance Party Explosion - upcoming shows",
+  "sourceRef": "event data on the page 2026-10-09",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "dance-party-explosion|ristegios-patchogue||friday|16:00|live-music|||2026-10-09"
+}

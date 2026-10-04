@@ -1,0 +1,22 @@
+{
+  "title": "Dance with live music by The Byrne Unit at Salt Shack",
+  "summary": "Dance to live music by The Byrne Unit.",
+  "category": "live-music",
+  "start": "2026-10-04T17:00",
+  "timezone": "America/New_York",
+  "venueId": "salt-shack-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "the-byrne-unit"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "salt-shack-cedar-beach",
+  "sourceUrl": "https://saltshackny.com/",
+  "sourceName": "Salt Shack at Cedar Beach (Babylon) - beach music calendar",
+  "sourceRef": "events page 2026-10-04",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "salt-shack-cedar-beach|salt-shack-babylon||sunday|17:00|live-music|the-byrne-unit||2026-10-04"
+}

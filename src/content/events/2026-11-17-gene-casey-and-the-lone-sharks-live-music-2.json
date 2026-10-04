@@ -1,0 +1,28 @@
+{
+  "title": "East Coast Swing and Lindy Hop dance with live music by Gene Casey & the Lone Sharks at Huntington Moose Lodge",
+  "summary": "Dance to live music by Gene Casey & the Lone Sharks. Dance styles: East Coast Swing and Lindy Hop.",
+  "category": "live-music",
+  "danceStyles": [
+    "east-coast-swing",
+    "lindy-hop"
+  ],
+  "start": "2026-11-17",
+  "timezone": "America/New_York",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "performerIds": [
+    "gene-casey-and-the-lone-sharks"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "sdli-events",
+  "sourceUrl": "http://www.sdli.org/index.php/sdli/events/",
+  "sourceName": "Swing Dance Long Island (SDLI) - upcoming events",
+  "sourceRef": "events page 2026-11-17",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.6,
+  "matchKey": "sdli-events|huntington-moose-lodge|swing-dance-long-island|tuesday|tba|live-music|gene-casey-and-the-lone-sharks|east-coast-swing+lindy-hop|2026-11-17",
+  "reviewNotes": "No start time found."
+}

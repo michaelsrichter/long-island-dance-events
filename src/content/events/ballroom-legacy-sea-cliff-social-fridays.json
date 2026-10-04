@@ -1,0 +1,26 @@
+{
+  "title": "Latin and Ballroom social dance at Ballroom Legacy Dance Studio",
+  "summary": "An evening of Latin and Ballroom social dancing.",
+  "category": "social-dance",
+  "danceStyles": [
+    "latin-ballroom",
+    "ballroom"
+  ],
+  "start": "2026-11-06T19:30",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=MONTHLY;BYDAY=1FR;UNTIL=20270305"
+  },
+  "venueId": "ballroom-legacy-sea-cliff",
+  "town": "Sea Cliff",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "ballroom-legacy-sea-cliff",
+  "sourceUrl": "https://www.ballroomlegacy.us/event-details-registration/friday-night-latin-dance-fever-2027-03-05-19-30",
+  "sourceName": "Ballroom Legacy Dance Studio (Sea Cliff) - events",
+  "sourceRef": "pages 2026, 2027",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.9,
+  "matchKey": "ballroom-legacy-sea-cliff|ballroom-legacy-sea-cliff||friday|19:30|social-dance||ballroom+latin-ballroom|repeat"
+}

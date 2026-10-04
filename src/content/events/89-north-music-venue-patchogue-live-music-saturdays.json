@@ -1,0 +1,27 @@
+{
+  "title": "Dance with live music by Pour Some 80s on Me at 89 North Music Venue",
+  "summary": "Dance to live music by Pour Some 80s on Me.",
+  "category": "live-music",
+  "start": "2026-10-31T22:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-12-05"
+    ]
+  },
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "pour-some-80s-on-me"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "pour-some-80s",
+  "sourceUrl": "https://poursome80sonme.org/",
+  "sourceName": "Pour Some 80s On Me - show calendar",
+  "sourceRef": "events page 2026-10-31",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "pour-some-80s|89-north-music-venue-patchogue||saturday|22:00|live-music|pour-some-80s-on-me||repeat"
+}

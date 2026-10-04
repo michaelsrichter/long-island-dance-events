@@ -1,19 +1,27 @@
 {
   "name": "Electric Dudes - Long Island music dates",
-  "url": "https://electricdudes.com/events",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Electric Dudes. We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Bethpage and Farmingdale: party band, rock cover band, acoustic duo.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
     "performerIds": [
       "electric-dudes"
     ]
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep because it has a small clear Nassau schedule for a danceable cover band."
+  "description": "Live music listings in Bethpage and Farmingdale: party band, rock cover band, acoustic duo.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 6,
+    "kept": 1,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T03:44:29.569Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep because it has a small clear Nassau schedule for a danceable cover band.",
+  "url": "https://electricdudes.com/events"
 }

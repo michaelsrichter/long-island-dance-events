@@ -1,0 +1,28 @@
+{
+  "title": "Dance with live music by Ann Wilson and Tripsitter at Patchogue Theatre for the Performing Arts",
+  "summary": "Dance to live music by Ann Wilson and Tripsitter.",
+  "category": "live-music",
+  "start": "2026-10-04T19:00",
+  "end": "2026-10-04T22:00",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "ann-wilson"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/673a141d85fecd094f0230779fbe9579867765f0",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/673a141d85fecd094f0230779fbe9579867765f0",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-04",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.9,
+  "matchKey": "webtunes-li|patchogue-theatre-patchogue||sunday|19:00|live-music|ann-wilson+tripsitter||2026-10-04",
+  "reviewNotes": "Band or DJ not researched yet: Tripsitter."
+}

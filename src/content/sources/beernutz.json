@@ -1,19 +1,27 @@
 {
   "name": "Beer Nutz - 2026 gigs",
-  "url": "https://www.beernutzmusic.com/",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Beer Nutz. We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Farmingdale, Babylon, Bay Shore and Baldwin: rock cover band, bar band.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
     "performerIds": [
       "beer-nutz"
     ]
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep because it has six clean LI bar-band dates and repeat venues for cross-checking."
+  "description": "Live music listings in Farmingdale, Babylon, Bay Shore and Baldwin: rock cover band, bar band.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 6,
+    "kept": 4,
+    "needsReview": 0,
+    "outOfArea": 1
+  },
+  "lastScraped": "2026-10-04T03:43:30.571Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep because it has six clean LI bar-band dates and repeat venues for cross-checking.",
+  "url": "https://www.beernutzmusic.com/"
 }

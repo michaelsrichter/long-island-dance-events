@@ -1,0 +1,25 @@
+{
+  "title": "Dance with live music at Stereo Garden",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-03T17:00",
+  "end": "2026-10-03T21:00",
+  "timezone": "America/New_York",
+  "venueId": "stereo-garden-patchogue",
+  "town": "Patchogue",
+  "organizerId": "club-30-plus-new-york",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-brr6m-bpen6",
+  "status": "active",
+  "sourceId": "stereo-garden-patchogue",
+  "sourceUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-brr6m-bpen6",
+  "sourceName": "Stereo Garden (Patchogue) - concerts and dance parties",
+  "sourceRef": "events page 2026-10-03",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "dance-party"
+  ],
+  "confidence": 0.75,
+  "matchKey": "stereo-garden-patchogue|stereo-garden-patchogue|club-30-plus-new-york|saturday|17:00|live-music|||2026-10-03"
+}

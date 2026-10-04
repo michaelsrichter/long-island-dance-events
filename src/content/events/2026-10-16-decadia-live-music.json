@@ -1,0 +1,22 @@
+{
+  "title": "Dance with live music by Decadia at Live On The Porch",
+  "summary": "Dance to live music by Decadia.",
+  "category": "live-music",
+  "start": "2026-10-16T20:00",
+  "timezone": "America/New_York",
+  "venueId": "live-on-the-porch-smithtown",
+  "town": "Smithtown",
+  "performerIds": [
+    "decadia"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "decadia",
+  "sourceUrl": "https://www.decadialive.com/home",
+  "sourceName": "Decadia - upcoming shows",
+  "sourceRef": "events page 2026-10-16",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "decadia|live-on-the-porch-smithtown||friday|20:00|live-music|decadia||2026-10-16"
+}

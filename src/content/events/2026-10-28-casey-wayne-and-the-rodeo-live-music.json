@@ -1,0 +1,23 @@
+{
+  "title": "Dance with live music by Casey Wayne & The Rodeo at 89 North Music Venue",
+  "summary": "Dance to live music by Casey Wayne & The Rodeo.",
+  "category": "live-music",
+  "start": "2026-10-28",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "casey-wayne-and-the-rodeo"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "eighty-nine-north",
+  "sourceUrl": "https://89northmusic.com/calendar",
+  "sourceName": "89 North (Patchogue) - music calendar",
+  "sourceRef": "events page 2026-10-28",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.6,
+  "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||wednesday|tba|live-music|casey-wayne-and-the-rodeo||2026-10-28",
+  "reviewNotes": "No start time found."
+}

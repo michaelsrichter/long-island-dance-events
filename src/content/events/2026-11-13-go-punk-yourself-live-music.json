@@ -1,0 +1,24 @@
+{
+  "title": "Dance with live music by Go Punk Yourself at Mulcahy's",
+  "summary": "Dance to live music by Go Punk Yourself.",
+  "category": "live-music",
+  "start": "2026-11-13T21:00",
+  "end": "2026-11-13T23:30",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "performerIds": [
+    "go-punk-yourself"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/go-punk-yourself-a-night-of-pop-punk-classics/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/go-punk-yourself-a-night-of-pop-punk-classics/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2026-11-13",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.9,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|21:00|live-music|go-punk-yourself||2026-11-13"
+}

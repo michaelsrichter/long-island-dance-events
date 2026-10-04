@@ -1,0 +1,22 @@
+{
+  "title": "Halloween Dance with live music by SEA Monster at Bartini Bar & Lounge",
+  "summary": "Dance to live music by SEA Monster.",
+  "category": "live-music",
+  "start": "2026-10-31T19:30",
+  "timezone": "America/New_York",
+  "venueId": "bartini-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "sea-monster"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bartini-babylon",
+  "sourceUrl": "https://www.bartinibabylon.com/event-calendar",
+  "sourceName": "Bartini Bar & Lounge (Babylon) - event calendar",
+  "sourceRef": "events page 2026-10-31",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "bartini-babylon|bartini-babylon||saturday|19:30|live-music|sea-monster||2026-10-31|halloween"
+}

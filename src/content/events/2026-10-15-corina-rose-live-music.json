@@ -1,0 +1,24 @@
+{
+  "title": "Dance with live music by Corina Rose at The Villager",
+  "summary": "Dance to live music by Corina Rose.",
+  "category": "live-music",
+  "start": "2026-10-15T18:00",
+  "end": "2026-10-15T21:00",
+  "timezone": "America/New_York",
+  "venueId": "the-villager-farmingdale",
+  "town": "Farmingdale",
+  "performerIds": [
+    "corina-rose"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.thevillagerfarmingdale.com/livemusic/live-music-corina-rose",
+  "status": "active",
+  "sourceId": "villager-farmingdale",
+  "sourceUrl": "https://www.thevillagerfarmingdale.com/livemusic/live-music-corina-rose",
+  "sourceName": "The Villager (Farmingdale) - live music calendar",
+  "sourceRef": "events page 2026-10-15",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "villager-farmingdale|the-villager-farmingdale||thursday|18:00|live-music|corina-rose||2026-10-15"
+}

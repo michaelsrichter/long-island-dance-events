@@ -1,0 +1,24 @@
+{
+  "title": "Dance with live music by Say Uncle at Kitty Mulligan's Irish Pub",
+  "summary": "Dance to live music by Say Uncle.",
+  "category": "live-music",
+  "start": "2026-10-17T19:30",
+  "end": "2026-10-17T22:30",
+  "timezone": "America/New_York",
+  "venueId": "kitty-mulligans-bay-shore",
+  "town": "Bay Shore",
+  "performerIds": [
+    "say-uncle"
+  ],
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "kitty-mulligans-bay-shore",
+  "sourceUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+  "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
+  "sourceRef": "events page 2026-10-17",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "kitty-mulligans-bay-shore|kitty-mulligans-bay-shore||saturday|19:30|live-music|say-uncle||2026-10-17"
+}

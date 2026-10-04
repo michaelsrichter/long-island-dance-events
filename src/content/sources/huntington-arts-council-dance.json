@@ -1,15 +1,23 @@
 {
   "name": "Huntington Arts Council - events calendar, Dance category",
-  "url": "https://www.huntingtonarts.org/events/category/dance/",
   "type": "ical",
   "adapter": "ical",
-  "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Huntington Arts Council. We write our own short summaries and link back to the original page.",
-  "description": "Dance listings in Greenlawn and Roslyn Harbor: swing (SDLI), dance performances.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
+  "description": "Dance listings in Greenlawn and Roslyn Harbor: swing (SDLI), dance performances.",
+  "enabled": true,
   "feedUrl": "https://www.huntingtonarts.org/events/category/dance/?ical=1",
-  "reviewNotes": "Catalog check 2026-10-03: Keep only as a fallback. The feed is clean but mostly duplicates SDLI."
+  "focus": "dance",
+  "lastCounts": {
+    "found": 3,
+    "kept": 3,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T03:44:46.969Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep only as a fallback. The feed is clean but mostly duplicates SDLI.",
+  "url": "https://www.huntingtonarts.org/events/category/dance/"
 }

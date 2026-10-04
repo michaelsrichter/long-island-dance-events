@@ -1,0 +1,25 @@
+{
+  "title": "Dance with live music by Band-Maid World Tour 2026 at The Paramount",
+  "summary": "Dance to live music by Band-Maid World Tour 2026.",
+  "category": "live-music",
+  "start": "2026-10-05T20:00",
+  "end": "2026-10-05T23:00",
+  "timezone": "America/New_York",
+  "venueId": "paramount-huntington",
+  "town": "Huntington",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/14a44481b583c0d0277c5ec26b3de8a3380ac7f3",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/14a44481b583c0d0277c5ec26b3de8a3380ac7f3",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-05",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|paramount-huntington||monday|20:00|live-music|bandmaidworldtour2026||2026-10-05",
+  "reviewNotes": "Band or DJ not researched yet: Band-Maid World Tour 2026."
+}

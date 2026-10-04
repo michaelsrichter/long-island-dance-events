@@ -1,0 +1,28 @@
+{
+  "title": "Dance with live music at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-04T12:00",
+  "end": "2026-10-04T16:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=SU;UNTIL=20261011"
+  },
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/music-city-brunch/2026-10-04/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/music-city-brunch/2026-10-04/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-04",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon",
+    "brunch"
+  ],
+  "confidence": 0.85,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||sunday|12:00|live-music|||repeat"
+}

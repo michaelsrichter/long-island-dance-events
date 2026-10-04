@@ -1,0 +1,28 @@
+{
+  "title": "Dance with live music by Gene Casey & the Lone Sharks at COREY CREEK Tap Room",
+  "summary": "Dance to live music by Gene Casey & the Lone Sharks.",
+  "category": "live-music",
+  "start": "2026-12-19T13:00",
+  "end": "2026-12-19T17:00",
+  "timezone": "America/New_York",
+  "venueId": "corey-creek-tap-room-southold",
+  "town": "Southold",
+  "performerIds": [
+    "gene-casey-and-the-lone-sharks"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://genecasey.com/event/gene-solo-corey-creek-tap-room/",
+  "status": "active",
+  "sourceId": "gene-casey-lone-sharks",
+  "sourceUrl": "https://genecasey.com/event/gene-solo-corey-creek-tap-room/",
+  "sourceName": "Gene Casey & the Lone Sharks - show calendar",
+  "sourceRef": "calendar feed 2026-12-19",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "gene-casey-lone-sharks|corey-creek-tap-room-southold||saturday|13:00|live-music|gene-casey-and-the-lone-sharks||2026-12-19",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

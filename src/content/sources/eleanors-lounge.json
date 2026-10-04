@@ -1,18 +1,26 @@
 {
   "name": "Eleanor's Lounge (Bohemia) - bands and DJs",
-  "url": "https://eleanorslounge.com/",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
   "attribution": "Some listings come from Eleanor's Lounge (Bohemia). We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Bohemia: local rock cover bands, karaoke, DJs.",
-  "rateLimitSeconds": 5,
+  "cadence": "twice-weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "eleanors-lounge-bohemia",
-    "town": "Bohemia"
+    "town": "Bohemia",
+    "venueId": "eleanors-lounge-bohemia"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it as a local bar-music source. It looks dance-friendly but needs HTML scraping and filtering."
+  "description": "Live music listings in Bohemia: local rock cover bands, karaoke, DJs.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 6,
+    "kept": 1,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T03:44:24.392Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it as a local bar-music source. It looks dance-friendly but needs HTML scraping and filtering.",
+  "url": "https://eleanorslounge.com/"
 }

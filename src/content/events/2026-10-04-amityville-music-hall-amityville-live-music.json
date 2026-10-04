@@ -1,0 +1,20 @@
+{
+  "title": "Dance with live music at Amityville Music Hall",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-04",
+  "timezone": "America/New_York",
+  "venueId": "amityville-music-hall-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "amityville-music-hall",
+  "sourceUrl": "https://amh.live/",
+  "sourceName": "Amityville Music Hall - show list",
+  "sourceRef": "events page 2026-10-04",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.55,
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||sunday|tba|live-music|||2026-10-04",
+  "reviewNotes": "No start time found."
+}

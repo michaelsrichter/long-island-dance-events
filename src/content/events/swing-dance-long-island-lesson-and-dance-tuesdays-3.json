@@ -1,0 +1,28 @@
+{
+  "title": "East Coast Swing and Lindy Hop social dance with a lesson at Huntington Moose Lodge",
+  "summary": "A group lesson, then open social dancing. Dance styles: East Coast Swing and Lindy Hop.",
+  "category": "lesson-party",
+  "danceStyles": [
+    "east-coast-swing",
+    "lindy-hop"
+  ],
+  "start": "2026-11-24",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=MONTHLY;BYDAY=4TU;UNTIL=20270126"
+  },
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "sdli-events",
+  "sourceUrl": "http://www.sdli.org/index.php/sdli/events/",
+  "sourceName": "Swing Dance Long Island (SDLI) - upcoming events",
+  "sourceRef": "pages 2026, 2027",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.6,
+  "matchKey": "sdli-events|huntington-moose-lodge|swing-dance-long-island|tuesday|tba|lesson-party||east-coast-swing+lindy-hop|repeat",
+  "reviewNotes": "No start time found."
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Christmas Dance with live music by Gene Casey & the Lone Sharks at Suffolk Theater",
+  "summary": "Dance to live music by Gene Casey & the Lone Sharks.",
+  "category": "live-music",
+  "start": "2026-12-13T17:00",
+  "end": "2026-12-13T17:00",
+  "timezone": "America/New_York",
+  "venueId": "suffolk-theater-riverhead",
+  "town": "Riverhead",
+  "performerIds": [
+    "gene-casey-and-the-lone-sharks"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://genecasey.com/event/another-rockabilly-christmas-at-the-suffolk/",
+  "status": "active",
+  "sourceId": "gene-casey-lone-sharks",
+  "sourceUrl": "https://genecasey.com/event/another-rockabilly-christmas-at-the-suffolk/",
+  "sourceName": "Gene Casey & the Lone Sharks - show calendar",
+  "sourceRef": "calendar feed 2026-12-13",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.9,
+  "matchKey": "gene-casey-lone-sharks|suffolk-theater-riverhead||sunday|17:00|live-music|gene-casey-and-the-lone-sharks||2026-12-13|christmas",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

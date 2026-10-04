@@ -1,0 +1,22 @@
+{
+  "title": "Dance with live music by Rose Thorns at Bartini Bar & Lounge",
+  "summary": "Dance to live music by Rose Thorns.",
+  "category": "live-music",
+  "start": "2026-12-05T20:00",
+  "timezone": "America/New_York",
+  "venueId": "bartini-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "rose-thorns"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bartini-babylon",
+  "sourceUrl": "https://www.bartinibabylon.com/event-calendar",
+  "sourceName": "Bartini Bar & Lounge (Babylon) - event calendar",
+  "sourceRef": "events page 2026-12-05",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "bartini-babylon|bartini-babylon||saturday|20:00|live-music|rose-thorns||2026-12-05"
+}

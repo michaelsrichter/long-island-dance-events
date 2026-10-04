@@ -1,0 +1,22 @@
+{
+  "title": "Social dance at Polish American Cultural Association",
+  "summary": "An evening of social dancing.",
+  "category": "social-dance",
+  "start": "2026-10-11T14:00",
+  "timezone": "America/New_York",
+  "venueId": "polish-american-cultural-association-port-washington",
+  "town": "Port Washington",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "polish-club-port-washington",
+  "sourceUrl": "https://portwashingtonpolishclub.com/upcoming-events",
+  "sourceName": "Polish American Cultural Association (Port Washington) - upcoming events",
+  "sourceRef": "events page 2026-10-11",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.75,
+  "matchKey": "polish-club-port-washington|polish-american-cultural-association-port-washington||sunday|14:00|social-dance|||2026-10-11"
+}

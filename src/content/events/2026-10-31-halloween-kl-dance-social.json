@@ -1,0 +1,25 @@
+{
+  "title": "Halloween Hustle social dance at JLR Dance Unlimited",
+  "summary": "An evening of Hustle social dancing. Costumes are welcome. Snacks are included.",
+  "category": "social-dance",
+  "danceStyles": [
+    "hustle"
+  ],
+  "start": "2026-10-31T20:00",
+  "end": "2026-10-31T23:00",
+  "timezone": "America/New_York",
+  "venueId": "jlr-dance-unlimited",
+  "town": "Bay Shore",
+  "organizerId": "kl-dance",
+  "price": 20.5,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "jlr-dance-unlimited",
+  "sourceUrl": "https://www.jlrdanceunlimited.com/events/halloween-dance-social",
+  "sourceName": "JLR Dance Unlimited (Bay Shore) - events",
+  "sourceRef": "event data on the page 2026-10-31",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.9,
+  "matchKey": "jlr-dance-unlimited|jlr-dance-unlimited|kl-dance|saturday|20:00|social-dance||hustle|2026-10-31|halloween"
+}

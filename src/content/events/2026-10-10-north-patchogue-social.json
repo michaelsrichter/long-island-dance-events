@@ -1,0 +1,19 @@
+{
+  "title": "Social dance",
+  "summary": "An evening of social dancing.",
+  "category": "social-dance",
+  "start": "2026-10-10",
+  "timezone": "America/New_York",
+  "town": "North Patchogue",
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "dancing-with-deanna",
+  "sourceUrl": "https://www.dancingwithdeanna.com/events-1",
+  "sourceName": "Dancing With Deanna - line-dance events",
+  "sourceRef": "events page 2026-10-10",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.4,
+  "matchKey": "dancing-with-deanna|north-patchogue||saturday|tba|social-dance|||2026-10-10",
+  "reviewNotes": "Venue not found in the listing. No start time found."
+}

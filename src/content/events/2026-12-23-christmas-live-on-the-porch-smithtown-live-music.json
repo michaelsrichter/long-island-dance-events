@@ -1,0 +1,19 @@
+{
+  "title": "Christmas Dance with live music at Live On The Porch",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-12-23T19:30",
+  "timezone": "America/New_York",
+  "venueId": "live-on-the-porch-smithtown",
+  "town": "Smithtown",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "live-on-the-porch",
+  "sourceUrl": "https://liveontheporch.com/events/",
+  "sourceName": "Live On The Porch (Smithtown) - show calendar",
+  "sourceRef": "event data on the page 2026-12-23",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.85,
+  "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||wednesday|19:30|live-music|||2026-12-23|christmas"
+}

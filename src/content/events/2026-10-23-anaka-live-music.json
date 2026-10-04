@@ -1,0 +1,24 @@
+{
+  "title": "Dance with live music by Anaka at Stereo Garden",
+  "summary": "Dance to live music by Anaka.",
+  "category": "live-music",
+  "start": "2026-10-23",
+  "timezone": "America/New_York",
+  "venueId": "stereo-garden-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "anaka"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-c2wl5-ksdrb-6b67d-aaa4w-p55fz-d7586-wtkwb-7w3ze-stm4a-7w83k-2bdfa-y8hl3",
+  "status": "active",
+  "sourceId": "stereo-garden-patchogue",
+  "sourceUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-c2wl5-ksdrb-6b67d-aaa4w-p55fz-d7586-wtkwb-7w3ze-stm4a-7w83k-2bdfa-y8hl3",
+  "sourceName": "Stereo Garden (Patchogue) - concerts and dance parties",
+  "sourceRef": "events page 2026-10-23",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.6,
+  "matchKey": "stereo-garden-patchogue|stereo-garden-patchogue||friday|tba|live-music|anaka||2026-10-23",
+  "reviewNotes": "No start time found."
+}

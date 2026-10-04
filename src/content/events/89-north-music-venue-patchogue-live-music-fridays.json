@@ -1,0 +1,28 @@
+{
+  "title": "Dance with live music by Lovesong at 89 North Music Venue",
+  "summary": "Dance to live music by Lovesong.",
+  "category": "live-music",
+  "start": "2026-10-09",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-11-13"
+    ]
+  },
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "lovesong"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "eighty-nine-north",
+  "sourceUrl": "https://89northmusic.com/calendar",
+  "sourceName": "89 North (Patchogue) - music calendar",
+  "sourceRef": "events page 2026-10-09",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.6,
+  "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||friday|tba|live-music|lovesong||repeat",
+  "reviewNotes": "No start time found."
+}

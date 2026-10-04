@@ -1,0 +1,22 @@
+{
+  "title": "Dance with live music by Pour Some 80s on Me at The Warehouse",
+  "summary": "Dance to live music by Pour Some 80s on Me.",
+  "category": "live-music",
+  "start": "2027-01-15T22:00",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "pour-some-80s-on-me"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "pour-some-80s",
+  "sourceUrl": "https://poursome80sonme.org/",
+  "sourceName": "Pour Some 80s On Me - show calendar",
+  "sourceRef": "events page 2027-01-15",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "pour-some-80s|the-warehouse-amityville||friday|22:00|live-music|pour-some-80s-on-me||2027-01-15"
+}

@@ -1,18 +1,26 @@
 {
   "name": "Salt Shack at Cedar Beach (Babylon) - beach music calendar",
-  "url": "https://saltshackny.com/",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
   "attribution": "Some listings come from Salt Shack at Cedar Beach (Babylon). We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Babylon: beach DJs, party and variety bands, seasonal live music.",
-  "rateLimitSeconds": 5,
+  "cadence": "twice-weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "salt-shack-babylon",
-    "town": "Babylon"
+    "town": "Babylon",
+    "venueId": "salt-shack-babylon"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it during the season. It has current beach-bar events and direct dance wording."
+  "description": "Live music listings in Babylon: beach DJs, party and variety bands, seasonal live music.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 5,
+    "kept": 4,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T03:49:12.642Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it during the season. It has current beach-bar events and direct dance wording.",
+  "url": "https://saltshackny.com/"
 }

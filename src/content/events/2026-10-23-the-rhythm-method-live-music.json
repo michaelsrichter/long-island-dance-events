@@ -1,0 +1,25 @@
+{
+  "title": "Latin dance with live music by The Rhythm Method at Bartini Bar & Lounge",
+  "summary": "Dance to live music by The Rhythm Method. Dance styles: Latin.",
+  "category": "live-music",
+  "danceStyles": [
+    "latin-ballroom"
+  ],
+  "start": "2026-10-23T20:30",
+  "timezone": "America/New_York",
+  "venueId": "bartini-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "the-rhythm-method"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bartini-babylon",
+  "sourceUrl": "https://www.bartinibabylon.com/event-calendar",
+  "sourceName": "Bartini Bar & Lounge (Babylon) - event calendar",
+  "sourceRef": "events page 2026-10-23",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.8,
+  "matchKey": "bartini-babylon|bartini-babylon||friday|20:30|live-music|the-rhythm-method|latin-ballroom|2026-10-23"
+}

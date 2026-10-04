@@ -1,0 +1,25 @@
+{
+  "title": "Dance with live music by Sunset Prix Fixe Supper at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Dance to live music by Sunset Prix Fixe Supper.",
+  "category": "live-music",
+  "start": "2026-10-07T15:00",
+  "end": "2026-10-07T22:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/sunset-prix-fixe-supper/2026-10-07/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/sunset-prix-fixe-supper/2026-10-07/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-07",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||wednesday|15:00|live-music|sunsetprixfixesupper||2026-10-07",
+  "reviewNotes": "Band or DJ not researched yet: Sunset Prix Fixe Supper."
+}

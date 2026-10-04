@@ -1,0 +1,27 @@
+{
+  "title": "Dance with live music by John Genua at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Dance to live music by John Genua.",
+  "category": "live-music",
+  "start": "2026-10-11T14:00",
+  "end": "2026-10-11T17:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "john-genua"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/john-genua-6/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/john-genua-6/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-11",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||sunday|14:00|live-music|john-genua||2026-10-11"
+}

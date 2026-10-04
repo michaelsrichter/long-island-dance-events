@@ -1,0 +1,32 @@
+{
+  "title": "Beginner East Coast Swing and West Coast Swing classes at Huntington Moose Lodge",
+  "summary": "Group class in East Coast Swing and West Coast Swing for beginners. You do not need a partner.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "east-coast-swing",
+    "west-coast-swing"
+  ],
+  "start": "2026-10-13T19:30",
+  "end": "2026-10-13T22:00",
+  "timezone": "America/New_York",
+  "lessonTime": "19:30",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "price": 10,
+  "priceMax": 15,
+  "skillLevel": "beginner",
+  "infoUrl": "https://www.huntingtonarts.org/event/dj-dancing-with-swing-dance-long-island/2026-10-13/",
+  "status": "active",
+  "sourceId": "huntington-arts-council-dance",
+  "sourceUrl": "https://www.huntingtonarts.org/event/dj-dancing-with-swing-dance-long-island/2026-10-13/",
+  "sourceName": "Huntington Arts Council - events calendar, Dance category",
+  "sourceRef": "calendar feed 2026-10-13",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "dj"
+  ],
+  "confidence": 0.9,
+  "matchKey": "huntington-arts-council-dance|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|class-lesson||east-coast-swing+west-coast-swing|2026-10-13"
+}

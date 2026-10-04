@@ -1,0 +1,27 @@
+{
+  "title": "Dance with live music by Gene Casey & the Lone Sharks at Billy’s By The Bay",
+  "summary": "Dance to live music by Gene Casey & the Lone Sharks.",
+  "category": "live-music",
+  "start": "2026-10-31T14:00",
+  "end": "2026-10-31T18:00",
+  "timezone": "America/New_York",
+  "venueId": "billys-by-the-bay-greenport",
+  "town": "Greenport",
+  "performerIds": [
+    "gene-casey-and-the-lone-sharks"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://genecasey.com/event/billys-by-the-bay/",
+  "status": "active",
+  "sourceId": "gene-casey-lone-sharks",
+  "sourceUrl": "https://genecasey.com/event/billys-by-the-bay/",
+  "sourceName": "Gene Casey & the Lone Sharks - show calendar",
+  "sourceRef": "calendar feed 2026-10-31",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "gene-casey-lone-sharks|billys-by-the-bay-greenport||saturday|14:00|live-music|gene-casey-and-the-lone-sharks||2026-10-31"
+}

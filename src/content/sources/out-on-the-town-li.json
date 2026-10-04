@@ -1,16 +1,24 @@
 {
   "name": "Out on the Town - Long Island event calendar",
-  "url": "https://outonthetownli.com/",
   "type": "ical",
   "adapter": "ical",
-  "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
   "attribution": "Some listings come from Out on the Town. We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Farmingdale, Patchogue, Rockville Centre and Manorville: country nights, Latin nights, bar dance parties.",
-  "rateLimitSeconds": 5,
+  "cadence": "twice-weekly",
   "catalogStatus": "verified",
+  "description": "Live music listings in Farmingdale, Patchogue, Rockville Centre and Manorville: country nights, Latin nights, bar dance parties.",
+  "enabled": true,
   "feedUrl": "https://outonthetownli.com/events/?ical=1",
+  "focus": "music",
   "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
-  "reviewNotes": "Catalog check 2026-10-03: Keep as a low-priority nightlife backup; it needs keyword filtering and human review."
+  "lastCounts": {
+    "found": 30,
+    "kept": 16,
+    "needsReview": 0,
+    "outOfArea": 2
+  },
+  "lastScraped": "2026-10-04T03:48:20.333Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep as a low-priority nightlife backup; it needs keyword filtering and human review.",
+  "url": "https://outonthetownli.com/"
 }

@@ -1,0 +1,24 @@
+{
+  "title": "Halloween Dance with live music at Stereo Garden",
+  "summary": "Dance to live music.",
+  "category": "live-music",
+  "start": "2026-10-24",
+  "timezone": "America/New_York",
+  "venueId": "stereo-garden-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-brr6m-bpen6-kjsbp",
+  "status": "pending-review",
+  "sourceId": "stereo-garden-patchogue",
+  "sourceUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-brr6m-bpen6-kjsbp",
+  "sourceName": "Stereo Garden (Patchogue) - concerts and dance parties",
+  "sourceRef": "events page 2026-10-24",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "dj"
+  ],
+  "confidence": 0.55,
+  "matchKey": "stereo-garden-patchogue|stereo-garden-patchogue||saturday|tba|live-music|||2026-10-24|halloween",
+  "reviewNotes": "No start time found."
+}

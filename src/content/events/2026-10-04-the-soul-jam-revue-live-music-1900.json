@@ -1,0 +1,28 @@
+{
+  "title": "Dance with live music by The Soul Jam Revue at CM Performing Arts Center",
+  "summary": "Dance to live music by The Soul Jam Revue.",
+  "category": "live-music",
+  "start": "2026-10-04T19:00",
+  "end": "2026-10-04T22:00",
+  "timezone": "America/New_York",
+  "venueId": "cm-performing-arts-center-oakdale",
+  "town": "Oakdale",
+  "performerIds": [
+    "the-soul-jam-revue"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/d70339fd-25cc-482a-8727-c9d6a67af284",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/d70339fd-25cc-482a-8727-c9d6a67af284",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-04",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "dancingCues": [
+    "jam",
+    "theater"
+  ],
+  "confidence": 0.9,
+  "matchKey": "webtunes-li|cm-performing-arts-center-oakdale||sunday|19:00|live-music|the-soul-jam-revue||2026-10-04"
+}
