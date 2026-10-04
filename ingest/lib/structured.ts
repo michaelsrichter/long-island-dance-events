@@ -552,6 +552,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       schedule: [],
       skillLevel,
       facts: text.toLowerCase(),
+      focus,
     };
     const plain = { ...describe, theme: undefined };
     const venueKey = venueId ?? slugify(place.name);
