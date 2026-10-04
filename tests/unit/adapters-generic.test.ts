@@ -382,11 +382,38 @@ describe("the listing's own words decide what it is", () => {
     expect(r.skipped.map((s) => s.reason)).toEqual(['no live music or dancing named in the listing']);
     expect(r.candidates.map((c) => c.date)).toEqual(['2026-10-17', '2026-10-18']);
   });
+  it('skips karaoke, bingo, film and no-music happy hours on every calendar, even misspelled', async () => {
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const ctx = context({ adapter: 'ical', type: 'ical', focus: 'music', include: 'music|rock', defaults: { venueId: 'sample-pub' } });
+    const r = toCandidates(
+      [
+        listing('Sample Singer Karoake', 'Sing along with live music.'),
+        listing('Kara Okee Night', 'Music all night.', { start: '2026-10-17T20:00' }),
+        listing('Pretend Horror Picture Show', 'A rock musical film.', { start: '2026-10-18T20:00' }),
+        listing('Honky Tonk Happy Hour', 'Drink specials 3-7 PM.', { start: '2026-10-19T15:00' }),
+        listing('Happy Hour Band: The Fictionals', 'Live music 6-10 PM.', { start: '2026-10-20T18:00' }),
+      ],
+      ctx,
+      { structured: true },
+    );
+    expect(r.candidates.map((c) => c.date)).toEqual(['2026-10-20']);
+  });
   it('lists music on a dance-focused town calendar as music, not as a dance', async () => {
     const { toCandidates } = await import('../../ingest/lib/structured');
     const ctx = context({ adapter: 'jsonld', type: 'jsonld', focus: 'dance' });
     const r = toCandidates([listing('Oktoberfest', 'German food and live accordion music.', { locationName: 'Sample Pub', locality: 'Babylon' })], ctx, { structured: true });
     expect(r.candidates[0]).toMatchObject({ category: 'live-music', title: 'Oktoberfest live music at Sample Pub' });
+  });
+  it('puts a listing at the sister location its text names (one feed, two locations)', async () => {
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const reg = fixtureRegistry();
+    reg.venues.set('sample-pub-bay-shore', { name: 'Sample Pub (Bay Shore)', aliases: ['Sample Pub Bay Shore'], address: '9 Pretend Ave', town: 'Bay Shore', county: 'Suffolk' as const, state: 'NY' });
+    const ctx = context({ adapter: 'ical', type: 'ical', focus: 'music', defaults: { venueId: 'sample-pub' } }, reg);
+    const r = toCandidates([listing('The Fictionals', 'Live at Sample Pub Bay Shore at 8.'), listing('Midnight Fiction', 'Live band.', { start: '2026-10-17T20:00' })], ctx, { structured: true });
+    expect(r.candidates.map((c) => c.venueId)).toEqual(['sample-pub-bay-shore', 'sample-pub']);
+    // A different business named in passing does not move the listing.
+    const r2 = toCandidates([listing('The Fictionals', 'Live band, as seen at Sample Tavern.')], context({ adapter: 'ical', type: 'ical', focus: 'music', defaults: { venueId: 'sample-pub' } }), { structured: true });
+    expect(r2.candidates[0]!.venueId).toBe('sample-pub');
   });
   it('knows band names that sound like places, and strips tour names from titles', async () => {
     const { tidyTitleAct } = await import('../../ingest/lib/structured');

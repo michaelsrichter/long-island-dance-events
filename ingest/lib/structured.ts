@@ -124,7 +124,7 @@ export function entityNameFromSource(name: string): string {
   return name.split(/\s+[-–—|]\s+/)[0]!.replace(/\s*\([^)]*\)\s*$/, '').trim();
 }
 
-const NON_EVENT = /\b(closed|private (?:party|event)|trivia|bingo|karaoke|comedy|comedian|stand-?up|paint (?:and|&) sip|yoga|gift cards?|holiday hours|now hiring|drag (?:brunch|show|bingo|queen)|picture show|screening|film|movie|circus|game show|psychic|medium)\b/i;
+const NON_EVENT = /\b(closed|private (?:party|event)|trivia|bingo|kara[- ]?ok[ei]{1,2}|karoake|karoke|mundy-oke|comedy|comedian|stand-?up|paint (?:and|&) sip|yoga|gift cards?|holiday hours|now hiring|drag (?:brunch|show|bingo|queen)|picture show|screening|film|movie|circus|game show|psychic|medium)\b/i;
 // Never a dance or live-music listing, even when an aggregator's text mentions "music".
 const NEVER_EVENT = /\b(street fair|carnival|craft fair|farmer['’]?s market|flea market|yard sale|car show|vintage pop[- ]?up|pop[- ]?up (?:shop|market)|football|soccer|baseball|hockey|golf outing)\b/i;
 const FESTIVAL = /\b(festival|fest\b|dance weekend|congress|dance camp|marathon)\b/i;
@@ -497,6 +497,13 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     }
     if (locName || f.address) venueId = findVenue(reg, locName, f.address, place?.name);
     if (!venueId && defaultVenue && (!ownPlace || ownPlace.name === townOfVenue(reg, defaultVenue)?.name)) venueId = defaultVenue;
+    // One feed for two locations ("Saved by the Band takes over Daisy's Patchogue" in the Daisy's
+    // Miller Place feed): a sister location named in the listing wins over the default.
+    if (venueId && venueId === defaultVenue) {
+      const named = reg.matchVenue(own);
+      const brand = (id: string) => normalizeText((reg.venues.get(id)?.name ?? '').replace(/\s*\([^)]*\)\s*$/, ''));
+      if (named && named !== defaultVenue && brand(named) === brand(defaultVenue)) venueId = named;
+    }
     // A new venue only with a street address (never invented); it gets a review note.
     if (!venueId && locName && hasStreetAddress(f.address) && place && locName.length <= 80) {
       const id = idFrom(`${locName} ${place.name}`);
