@@ -87,6 +87,12 @@ describe("Ira's List weekly list", () => {
     expect(unsure).toMatchObject({ start: undefined, end: undefined, reviewNotes: [expect.stringMatching(/not sure of the time \(3pm\?\)/)] });
     for (const c of r.candidates) expect(() => eventSchema.parse({ ...c, reviewNotes: c.reviewNotes.join(' ') || undefined, start: c.date, firstSeen: c.date, lastSeen: c.date })).not.toThrow();
   });
+  it('does not call the venue its own act ("Example Pub - See Venue for Details")', () => {
+    const reg = fixtureRegistry();
+    const r = normalizeIraRows([{ date: '2031-01-02', ...parseEntry('-Example Pub- See Venue for Details.')! }], { sourceId: 'iraslist', sourceUrl: 'https://example.org/', registry: reg, outsideVenues: [] });
+    expect(r.candidates[0]).toMatchObject({ venueId: 'example-pub', title: 'Live music at Example Pub' });
+    expect(r.unresearched.acts).not.toContain('Example Pub');
+  });
 });
 
 const base: DancingInput = { category: 'live-music', sourceFocus: 'music', styles: [], cues: [], performers: [] };
