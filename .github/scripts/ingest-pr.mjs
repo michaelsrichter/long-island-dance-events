@@ -7,7 +7,7 @@
 // Env: GH_TOKEN, BRANCH (ingest/updates), REVIEWER, NOTIFY (true/false), RESET (true when the
 //      branch was restarted from main), CADENCE, RUN_URL.
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -19,6 +19,11 @@ const RESET = process.env.RESET === 'true';
 const CADENCE = process.env.CADENCE ?? 'manual';
 const RUN_URL = process.env.RUN_URL ?? '';
 const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+
+if (process.env.GITHUB_ACTIONS !== 'true') {
+  console.log('This script commits, pushes and opens pull requests, so it only runs inside GitHub Actions.');
+  process.exit(0);
+}
 
 const sh = (cmd, args, opts = {}) => execFileSync(cmd, args, { encoding: 'utf8', ...opts }).trim();
 const report = existsSync(reportFile) ? readFileSync(reportFile, 'utf8') : '_No report was written._';
@@ -48,8 +53,9 @@ const header = [
   '',
 ].join('\n');
 const body = (header + report).slice(0, 60000);
-const bodyFile = join(tmpdir(), 'ingest-pr-body.md');
-writeFileSync(bodyFile, body);
+// A private folder of our own in the temp directory (not a predictable shared file name).
+const bodyFile = join(mkdtempSync(join(tmpdir(), 'ingest-pr-')), 'body.md');
+writeFileSync(bodyFile, body, { mode: 0o600 });
 
 const open = JSON.parse(sh('gh', ['pr', 'list', '--head', BRANCH, '--state', 'open', '--json', 'number,url']));
 let number;

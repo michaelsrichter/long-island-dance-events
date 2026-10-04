@@ -9,23 +9,26 @@
 // Third failure in a row: the source is paused (enabled: false) in the collection pull request.
 // When a source works again, its open issue is closed with a note.
 //
-// Usage: node .github/scripts/ingest-issues.mjs .cache/ingest/report.json   (needs GH_TOKEN; without it, prints what it would do)
+// Usage: node .github/scripts/ingest-issues.mjs .cache/ingest/report.json   (acts only in GitHub Actions with GH_TOKEN; otherwise a dry run)
 import { execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const reportFile = process.argv[2] ?? '.cache/ingest/report.json';
-if (!existsSync(reportFile)) {
+let report;
+try {
+  report = JSON.parse(readFileSync(reportFile, 'utf8'));
+} catch {
   console.log(`No report at ${reportFile}; nothing to do.`);
   process.exit(0);
 }
-const report = JSON.parse(readFileSync(reportFile, 'utf8'));
 const CACHE = '.cache/ingest';
 const LABEL = 'ingest-failure';
 const RUN_URL = process.env.RUN_URL ?? '';
 const today = report.today ?? new Date().toISOString().slice(0, 10);
-const dry = !process.env.GH_TOKEN;
+// Only act for real inside GitHub Actions; anywhere else, print what would happen.
+const dry = process.env.GITHUB_ACTIONS !== 'true' || !process.env.GH_TOKEN;
 
 const gh = (...args) => {
   if (dry) {
@@ -39,9 +42,18 @@ const gh = (...args) => {
 function snapshot(url) {
   const key = createHash('sha1').update(url).digest('hex').slice(0, 20);
   const file = join(CACHE, key);
-  if (!existsSync(file)) return `- ${url}: not downloaded (blocked, unreachable or not allowed by robots.txt)`;
-  const meta = existsSync(`${file}.json`) ? JSON.parse(readFileSync(`${file}.json`, 'utf8')) : {};
-  const buf = readFileSync(file);
+  let buf;
+  try {
+    buf = readFileSync(file);
+  } catch {
+    return `- ${url}: not downloaded (blocked, unreachable or not allowed by robots.txt)`;
+  }
+  let meta = {};
+  try {
+    meta = JSON.parse(readFileSync(`${file}.json`, 'utf8'));
+  } catch {
+    // No saved headers for this download.
+  }
   const text = buf.toString('utf8');
   const title = (/<title[^>]*>([^<]{0,200})<\/title>/i.exec(text)?.[1] ?? '').replace(/\s+/g, ' ').trim().slice(0, 80);
   const facts = [
@@ -82,8 +94,12 @@ function issueBody(s) {
 
 function pauseSource(id, issueNumber) {
   const file = join('src', 'content', 'sources', `${id}.json`);
-  if (!existsSync(file)) return false;
-  const data = JSON.parse(readFileSync(file, 'utf8'));
+  let data;
+  try {
+    data = JSON.parse(readFileSync(file, 'utf8'));
+  } catch {
+    return false; // no such source file
+  }
   if (data.enabled === false) return false;
   data.enabled = false;
   data.reviewNotes = `${data.reviewNotes ? `${data.reviewNotes} ` : ''}Paused on ${today} after 3 failed runs in a row (issue #${issueNumber}).`;

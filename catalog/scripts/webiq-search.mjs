@@ -11,7 +11,7 @@
 //
 // Options: --queries <file> --cache <dir> --log <file> --max-results <n> --delay-ms <n> --dry-run
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 const ENDPOINT = 'https://api.microsoft.ai/v3/search/web';
@@ -81,16 +81,21 @@ for (const [group, queries] of Object.entries(groups)) {
     const file = join(cacheDir, `${key}.json`);
     let data;
     let cached = false;
-    if (existsSync(file)) {
+    try {
       data = JSON.parse(readFileSync(file, 'utf8'));
       cached = true;
-    } else if (dryRun) {
+    } catch {
+      // Not cached yet.
+    }
+    if (!data && dryRun) {
       data = { status: 0, webResults: [] };
-    } else {
+    } else if (!data) {
       data = await search(query);
       data.fetchedAt = new Date().toISOString();
       calls++;
-      if (data.status === 200) writeFileSync(file, JSON.stringify({ query, params, ...data }, null, 1));
+      // Keep only the fields this script reads (no full page text), in a cache outside the repository.
+      const keep = (data.webResults || []).map((r) => ({ title: String(r.title ?? '').slice(0, 300), url: String(r.url ?? ''), lastUpdatedAt: r.lastUpdatedAt }));
+      if (data.status === 200) writeFileSync(file, JSON.stringify({ query, params, status: 200, fetchedAt: data.fetchedAt, webResults: keep }, null, 1), { flag: 'wx' });
       await sleep(delayMs);
     }
     const results = (data.webResults || []).map((r, i) => {
