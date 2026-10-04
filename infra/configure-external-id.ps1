@@ -126,8 +126,7 @@ if (-not $flow) {
   $flowPath = "/identity/authenticationEventsFlows/$($flow.id)"
   $collected = @((G GET $flowPath).onAttributeCollection.attributes | ForEach-Object { $_.id })
   if ($collected | Where-Object { $_ -ne 'email' }) {
-    # Older versions of this script also asked for a display name: show only the (hidden) email input, then drop the extra attributes.
-    G PATCH $flowPath @{ '@odata.type' = '#microsoft.graph.externalUsersSelfServiceSignUpEventsFlow'; onAttributeCollection = @{ '@odata.type' = $emailOnly.'@odata.type'; attributeCollectionPage = $emailOnly.attributeCollectionPage } } | Out-Null
+    # Older versions of this script also asked for a display name. Removing the attribute also removes its input.
     foreach ($id in $collected | Where-Object { $_ -ne 'email' }) {
       G DELETE "$flowPath/microsoft.graph.externalUsersSelfServiceSignUpEventsFlow/onAttributeCollection/microsoft.graph.onAttributeCollectionExternalUsersSelfServiceSignUp/attributes/$id/`$ref" | Out-Null
     }
