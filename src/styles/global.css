@@ -486,9 +486,11 @@
   .consent[hidden] { display: none; }
   .consent h2 { font-size: 1.15rem; }
   .consent p { font-size: 0.97rem; }
+  /* While the banner shows, analytics.ts sets --consent-space so fields scroll clear of it. */
+  html { scroll-padding-bottom: var(--consent-space, 0px); }
 
   /* Footer */
-  .site-footer { background: var(--c-night); color: var(--c-on-night); padding-block: var(--space-7) var(--space-5); margin-top: var(--space-8); }
+  .site-footer { background: var(--c-night); color: var(--c-on-night); padding-block: var(--space-7) calc(var(--space-5) + var(--consent-space, 0px)); margin-top: var(--space-8); }
   .site-footer a { color: var(--c-on-night); }
   .site-footer__grid { display: grid; gap: var(--space-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); }
   .site-footer h2 { font-size: 1.1rem; color: var(--c-gold); margin-bottom: var(--space-3); }
