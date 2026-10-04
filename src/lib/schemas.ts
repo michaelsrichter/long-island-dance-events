@@ -22,10 +22,10 @@ export const CATEGORY_LABELS: Record<(typeof EVENT_CATEGORIES)[number], string> 
 };
 /** One-line plain-language meaning of each category (shown in filters and the FAQ). */
 export const CATEGORY_HELP: Record<(typeof EVENT_CATEGORIES)[number], string> = {
-  'social-dance': 'A night of dancing with a DJ. You find partners on the floor.',
+  'social-dance': 'A night of dancing, usually with a DJ.',
   'class-lesson': 'A class where a teacher shows you steps. Some are a series.',
   'lesson-party': 'A short group lesson first, then open dancing.',
-  'live-music': 'A band or singer plays live, and you can dance.',
+  'live-music': 'A band or singer plays live. The dancing score tells you if people dance.',
   festival: 'A big event, often over a full day or weekend.',
 };
 
@@ -57,7 +57,50 @@ export const ORGANIZER_TYPE_LABELS: Record<(typeof ORGANIZER_TYPES)[number], str
 };
 export const SOURCE_TYPES = ['jsonld', 'ical', 'html', 'pdf', 'api'] as const;
 export const SOURCE_STATUSES = ['never', 'ok', 'empty', 'invalid', 'error', 'skipped'] as const;
+export const SOURCE_CADENCES = ['daily', 'twice-weekly', 'weekly', 'monthly', 'seasonal', 'manual'] as const;
+export const SOURCE_CATALOG_STATUSES = ['live', 'in-progress', 'verified', 'recheck-from-ci', 'needs-permission', 'manual-intake', 'seasonal-recheck'] as const;
+export const SOURCE_PERMISSION_STATUSES = ['not-needed', 'needed', 'requested', 'granted', 'denied'] as const;
 export const STYLE_FAMILIES = ['swing', 'ballroom', 'latin', 'tango', 'country', 'other'] as const;
+
+/**
+ * Three kinds of dancing. Every dance style belongs to one, and venues and bands record which kinds
+ * people actually do there (see src/lib/dancing.ts).
+ */
+export const DANCE_TYPES = ['partner', 'line', 'freestyle'] as const;
+export type DanceType = (typeof DANCE_TYPES)[number];
+export const DANCE_TYPE_LABELS: Record<DanceType, string> = {
+  partner: 'Partner dancing',
+  line: 'Line dancing',
+  freestyle: 'Party dancing',
+};
+export const DANCE_TYPE_HELP: Record<DanceType, string> = {
+  partner: 'Two people dance together with steps you can learn, like swing, salsa, hustle, tango or ballroom. You can come alone and ask people to dance.',
+  line: 'Everyone does the same steps in rows, often to country music. No partner needed.',
+  freestyle: 'Dance however you like to a band or DJ, like at a club, bar or wedding. No steps or partner needed.',
+};
+
+/** What a venue is like for dancing, from research. */
+export const VENUE_FLOORS = ['dance-floor', 'open-space', 'small', 'seated', 'unknown'] as const;
+export const VENUE_FLOOR_LABELS: Record<(typeof VENUE_FLOORS)[number], string> = {
+  'dance-floor': 'Has a dance floor',
+  'open-space': 'Room to dance near the band',
+  small: 'Small space; a few people dance',
+  seated: 'Mostly seats; little or no dancing',
+  unknown: 'Not sure yet',
+};
+export const VENUE_KINDS = ['bar', 'restaurant', 'nightclub', 'brewery', 'winery', 'distillery', 'theater', 'concert-hall', 'park', 'beach', 'library', 'lodge-hall', 'dance-studio', 'school', 'festival', 'marina-club', 'other'] as const;
+/** How much people dance at a band's or DJ's shows, from research. */
+export const BAND_RATINGS = ['dance-band', 'party', 'mixed', 'listening', 'unknown'] as const;
+export const BAND_RATING_LABELS: Record<(typeof BAND_RATINGS)[number], string> = {
+  'dance-band': 'Plays for dancers',
+  party: 'Party band: crowds often dance',
+  mixed: 'Some people dance',
+  listening: 'Mostly for listening',
+  unknown: 'Not sure yet',
+};
+/** Hints an adapter reads from a listing that help guess whether people will dance. */
+export const DANCING_CUES = ['dj', 'dance-party', 'theater', 'library', 'brunch', 'festival', 'outdoor', 'tribute', 'acoustic', 'jam', 'afternoon'] as const;
+export type DancingCue = (typeof DANCING_CUES)[number];
 
 /** Treat CMS empty values ("", null) as "not provided". */
 const blank = (v: unknown) => (v === '' || v === null ? undefined : v);
@@ -93,6 +136,32 @@ const seo = {
 };
 /** Other spellings used by sources, for matching (e.g. "Club Brumidi", "Brumidi Lodge"). */
 const aliases = list(z.string().min(2));
+/** A web page, review or photo page that supports a fact, described in our own words. */
+const evidence = list(z.object({ url: z.url({ message: 'Enter a full web address starting with https://' }), note: z.string().max(240) }));
+const researchConfidence = z.enum(['high', 'medium', 'low']).default('low');
+
+/** Is there dancing at this venue, and what kind? From research (venue site, reviews, public photos). */
+export const venueDancingSchema = z.object({
+  floor: z.enum(VENUE_FLOORS).default('unknown'),
+  policy: z.enum(['encouraged', 'allowed', 'discouraged', 'unknown']).default('unknown'),
+  kinds: list(z.enum(DANCE_TYPES)),
+  notes: opt(z.string().max(400)),
+  evidence,
+  confidence: researchConfidence,
+  checked: opt(dateField),
+});
+
+/** Do people dance at this band's or DJ's shows, and how? From research. */
+export const performerDancingSchema = z.object({
+  rating: z.enum(BAND_RATINGS).default('unknown'),
+  kinds: list(z.enum(DANCE_TYPES)),
+  /** Dance style ids people do at their shows (e.g. freestyle, line-dancing, east-coast-swing). */
+  styles: list(idRef),
+  notes: opt(z.string().max(400)),
+  evidence,
+  confidence: researchConfidence,
+  checked: opt(dateField),
+});
 const socials = {
   website: url,
   facebookUrl: url,
@@ -172,6 +241,16 @@ export const eventSchema = z
     confidence: z.coerce.number().min(0).max(1).default(1),
     /** Optional cached vector for "find similar" and dedup. Normally kept outside the content files. */
     embedding: optList(z.number()),
+    /** Hints from the listing about dancing (set by the adapter, e.g. "theater", "dj"). */
+    dancingCues: list(z.enum(DANCING_CUES)),
+    /** Editor's answer to "can you dance here?". Overrides the computed dancing score. */
+    dancing: opt(
+      z.object({
+        likelihood: z.coerce.number().min(0).max(1),
+        kinds: list(z.enum(DANCE_TYPES)),
+        notes: opt(z.string().max(300)),
+      }),
+    ),
     /** Ids of duplicate records that were merged into this one. */
     mergedFrom: list(z.string()),
     /** Fields an editor fixed by hand. The weekly scrape never overwrites them. */
@@ -217,6 +296,8 @@ export const venueSchema = z.object({
   /** Where facts such as parking came from. */
   factsSource: opt(z.string()),
   description: opt(z.string().max(600)),
+  kind: opt(z.enum(VENUE_KINDS)),
+  dancing: opt(venueDancingSchema),
   ...seo,
   reviewNotes: opt(z.string()),
 });
@@ -228,6 +309,7 @@ export const performerSchema = z.object({
   genres: list(z.string()),
   ...socials,
   description: opt(z.string().max(600)),
+  dancing: opt(performerDancingSchema),
   ...seo,
   reviewNotes: opt(z.string()),
 });
@@ -263,6 +345,8 @@ export const organizerSchema = z.object({
 export const styleSchema = z.object({
   name: z.string(),
   family: z.enum(STYLE_FAMILIES),
+  /** Partner, line or party (freestyle) dancing. */
+  danceType: z.enum(DANCE_TYPES).default('partner'),
   order: z.coerce.number().int().default(50),
   /** Words that mean this style in listings (case-insensitive, whole words), e.g. "WCS". */
   aliases,
@@ -277,8 +361,39 @@ export const sourceSchema = z.object({
   type: z.enum(SOURCE_TYPES),
   /** Adapter module name in ingest/adapters/. */
   adapter: slugField,
-  cadence: z.enum(['weekly', 'monthly', 'manual']).default('weekly'),
+  cadence: z.enum(SOURCE_CADENCES).default('weekly'),
+  /** dance = a dance calendar (everything listed is a dance or class); music = a live-music list (dancing varies). */
+  focus: z.enum(['dance', 'music']).default('dance'),
   enabled: z.boolean().default(true),
+  /** .ics feed, JSON-LD sitemap/list page or JSON API the generic adapters read. */
+  feedUrl: url,
+  /** Extra pages to read (event detail pages, month pages). */
+  pageUrls: list(z.url()),
+  /** Facts used when a listing does not say them (registry ids). */
+  defaults: opt(
+    z.object({
+      venueId: opt(idRef),
+      town: opt(z.string()),
+      organizerId: opt(idRef),
+      performerIds: list(idRef),
+      danceStyles: list(idRef),
+      category: opt(z.enum(EVENT_CATEGORIES)),
+    }),
+  ),
+  /** Keep / drop listings whose title or text matches (case-insensitive regex). */
+  include: opt(z.string().max(200)),
+  exclude: opt(z.string().max(200)),
+  /** Catalog status (catalog/sources.json) and why the source is off. */
+  catalogStatus: opt(z.enum(SOURCE_CATALOG_STATUSES)),
+  permission: opt(
+    z.object({
+      status: z.enum(SOURCE_PERMISSION_STATUSES),
+      note: opt(z.string().max(300)),
+      requestedAt: opt(dateField),
+      decidedAt: opt(dateField),
+      feedUrl: url,
+    }),
+  ),
   /** Plain-language credit shown on the Sources page. */
   attribution: z.string().max(300),
   description: opt(z.string().max(400)),

@@ -1,0 +1,48 @@
+{
+  "name": "Cooperage Inn",
+  "aliases": [
+    "The Cooperage Inn",
+    "Cooperage Inn Baiting Hollow",
+    "Cooperage Inn Fall Festival"
+  ],
+  "address": "2218 Sound Ave",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.cooperageinn.com/fallfestival",
+        "note": "Restaurant's Fall Festival page lists Nitework (Oct 3) and Slingshot (Oct 4); the outdoor festival runs weekends, noon to 6 PM."
+      },
+      {
+        "url": "https://www.danspapers.com/2019/10/the-cooperage-inn-fall-festival-weekends/",
+        "note": "Article describes the large outdoor festival area with a beer tent and live bands that draw a big crowd."
+      },
+      {
+        "url": "https://allevents.in/calverton/tasty-wave-at-cooperage-inn-oct-10th-27th-annual-fall-festival-no-cover/200030707065804",
+        "note": "A band's listing for its Oct 10 festival set calls it an 80s dance party (band's own words)."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The Fall Festival is outdoors, with bands playing in the afternoon for a big crowd. Bands bill some sets as dance parties, so expect casual dancing on the grass near the band.",
+    "policy": "allowed"
+  },
+  "description": "A country-style restaurant on Sound Avenue in wine country. On fall weekends it runs an outdoor festival with food, a beer tent and live cover bands on the lawn.",
+  "facebookUrl": "https://www.facebook.com/CooperageInn/",
+  "factsSource": "Checked October 3, 2026. Source: cooperageinn.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Cooperage+Inn%2C+2218+Sound+Ave%2C+Baiting+Hollow%2C+NY+11933",
+  "kind": "restaurant",
+  "phone": "(631) 727-8994",
+  "postalCode": "11933",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Some listings say Calverton; Baiting Hollow is the hamlet (ZIP 11933 is shared). Dancing judgement is based on event descriptions, not photos or reviews.",
+  "state": "NY",
+  "town": "Baiting Hollow",
+  "website": "https://www.cooperageinn.com/",
+  "latitude": 40.955759,
+  "longitude": -72.75452,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

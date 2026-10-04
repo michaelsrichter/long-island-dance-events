@@ -1,0 +1,26 @@
+{
+  "name": "Wicked Games",
+  "type": "band",
+  "aliases": [
+    "Wicked Games Band",
+    "Wickedgamesrocks"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://allevents.in/west-babylon/wicked-games-at-riptides-in-lindenhurst/200030766728915",
+        "note": "Band post: annual Octoberfest Jam at Riptides, Oct 3, 7:30 pm."
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=w_K2g8mIeVU",
+        "note": "Fan video from a 2024 Toomey's Tavern show; the poster praises the song selection."
+      }
+    ],
+    "notes": "We could not find its song list or any description of crowds dancing at its shows.",
+    "rating": "unknown"
+  },
+  "description": "Long Island cover band that plays South Shore bars and clam bars such as Riptides, Farrell's, Toomey's Tavern and Bayside Clam Bar; on Oct 3 it holds its yearly 'Octoberfest Jam' at Riptides.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Bandsintown 'Wicked Games' (original pop/rock/country project) or the DC-area 'Wicked Game Band'. An Instagram 'wickedgames36' appears in search but was not verified."
+}

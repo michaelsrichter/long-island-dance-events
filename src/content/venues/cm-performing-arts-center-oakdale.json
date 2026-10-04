@@ -1,0 +1,45 @@
+{
+  "name": "CM Performing Arts Center",
+  "aliases": [
+    "CM Performing Arts Oakdale",
+    "CMPAC",
+    "CM Performing Arts"
+  ],
+  "address": "931 Montauk Hwy",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.tripadvisor.com/Attraction_Review-g48313-d12237830-Reviews-CM_Performing_Arts_Center-Long_Island_Oakdale.html",
+        "note": "Theater description says it seats 330, including a VIP section of raised banquet seats."
+      },
+      {
+        "url": "https://www.cmpac.com/shows/thesouljamrevue/",
+        "note": "Venue page for The Soul Jam Revue (Oct 4, 7 PM) offers cabaret-style VIP seating with table service."
+      },
+      {
+        "url": "https://www.yelp.com/biz/cm-performing-arts-center-oakdale-6",
+        "note": "Reviews talk about plays, candlelight concerts and comfortable seating; none mention dancing."
+      }
+    ],
+    "floor": "seated",
+    "notes": "The theater has rows of seats plus a raised VIP section with cabaret tables, and we found no dance floor. Concert ads say the music makes you want to dance, but expect a seated show.",
+    "policy": "unknown"
+  },
+  "description": "A nonprofit community theater of about 330 seats on Montauk Highway in Oakdale. It stages musicals and also hosts tribute concerts, comedy and candlelight shows.",
+  "facebookUrl": "https://www.facebook.com/cmpac",
+  "factsSource": "Checked October 3, 2026. Source: cmpac.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=CM+Performing+Arts+Center%2C+931+Montauk+Hwy%2C+Oakdale%2C+NY+11769",
+  "kind": "theater",
+  "phone": "(631) 218-2810",
+  "postalCode": "11769",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Same place as Ira's 'CMPAC'. The Oct 4 show is The Soul Jam Revue, a Philly soul tribute concert.",
+  "state": "NY",
+  "town": "Oakdale",
+  "website": "https://www.cmpac.com/",
+  "latitude": 40.738094,
+  "longitude": -73.120534,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

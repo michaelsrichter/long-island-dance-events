@@ -1,0 +1,42 @@
+{
+  "name": "The Soul Jam Revue",
+  "type": "band",
+  "aliases": [
+    "Soul Jam Revue",
+    "The Soul Jam Revue: A Tribute to Philly Soul"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.thesouljamrevue.com/",
+        "note": "Band site: high-energy soul, funk and R&B show that makes you want to dance and sing along."
+      },
+      {
+        "url": "https://www.cmpac.com/shows/thesouljamrevue/",
+        "note": "CM Performing Arts Center page: Philly soul tribute, Sunday Oct 4 at 7 pm."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The band plays upbeat soul and funk meant to get people dancing, but the Oct 4 show is a seated theater concert, so expect mostly listening with some dancing.",
+    "rating": "mixed",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "Long Island soul and funk revue paying tribute to the 1970s Sound of Philadelphia (The O'Jays, The Spinners, Teddy Pendergrass) plus Earth, Wind & Fire and Kool & the Gang.",
+  "facebookUrl": "https://www.facebook.com/thesouljamrevue",
+  "genres": [
+    "Philly soul",
+    "funk",
+    "R&B",
+    "70s soul"
+  ],
+  "instagramUrl": "https://www.instagram.com/the_soul_jam_revue/",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Theater setting this weekend; the band also plays outdoor concerts and festivals where dancing is more likely.",
+  "website": "https://www.thesouljamrevue.com/",
+  "youtubeUrl": "https://www.youtube.com/channel/UC3gFhD8EmKM9MdVHGFGmG6w"
+}

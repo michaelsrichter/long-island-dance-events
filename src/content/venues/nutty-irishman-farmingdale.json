@@ -1,0 +1,49 @@
+{
+  "name": "The Nutty Irishman",
+  "aliases": [
+    "Nutty Irishman",
+    "Nutty Irishman Farmingdale",
+    "Nutty Country"
+  ],
+  "address": "323 Main St",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://www.thenuttyirishman.com/venues",
+        "note": "Venue tour page says the back bar has a large hardwood dance floor, with DJs between band sets and a Tuesday country night where dancers teach the steps."
+      },
+      {
+        "url": "https://www.liblogger.com/events/tuesday-country-night-at-the-nutty-irishman-farmingdale-2-10-2026",
+        "note": "Weekly Tuesday Country Night listing with a DJ and line-dancing lessons."
+      },
+      {
+        "url": "https://restaurantguru.com/The-Nutty-Irishman-Farmingdale",
+        "note": "Visitor review mentions line-dancing songs, two bar areas and a large dance floor."
+      }
+    ],
+    "floor": "dance-floor",
+    "kinds": [
+      "line",
+      "freestyle"
+    ],
+    "notes": "The back room has a large wood dance floor. Tuesday is country night with line-dance lessons, and on Friday and Saturday people dance to cover bands and DJs.",
+    "policy": "encouraged"
+  },
+  "description": "A big bar and restaurant on Main Street in Farmingdale village with a front pub, a back room with a stage, and an outdoor bar. It is known for weekend cover bands, DJs and a weekly country night.",
+  "facebookUrl": "https://www.facebook.com/NuttyIrishmanFarmingdale/",
+  "factsSource": "Checked October 3, 2026. Source: thenuttyirishman.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Nutty+Irishman+323+Main+St+Farmingdale+NY+11735",
+  "kind": "bar",
+  "phone": "(516) 293-9700",
+  "postalCode": "11735",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List has a venue page (/nuttyirishman). Farmingdale village is in Nassau County (Town of Oyster Bay). The Nutty Country Facebook page (facebook.com/NuttyCountry) is a separate page for the Tuesday country night. Faces for Radio gig on Oct 3 was not checked on the venue calendar.",
+  "state": "NY",
+  "town": "Farmingdale",
+  "website": "https://www.thenuttyirishman.com/",
+  "latitude": 40.73191,
+  "longitude": -73.44565,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

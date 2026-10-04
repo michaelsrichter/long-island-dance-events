@@ -1,0 +1,43 @@
+{
+  "name": "FiveStone",
+  "type": "band",
+  "aliases": [
+    "FiveStone Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.5stonebandsite.com/about-us",
+        "note": "Band describes itself as a high-energy cover band playing classic rock, 80s/90s, pop, dance and party rock."
+      },
+      {
+        "url": "https://www.thebash.com/coverband/fivestone",
+        "note": "Booking profile tags it as a dance band, wedding band and Top 40 band."
+      },
+      {
+        "url": "https://longislandplaybook.com/events/annual-massapequa-park-village-street-fair",
+        "note": "Massapequa Park Street Fair on Oct 4 has three live bands playing all day."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A party rock cover band that lists itself as a dance and wedding band. Its Oct 4 gig is the Massapequa Park street fair.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A Long Island five-piece party rock cover band playing classic rock, 80s and 90s, pop and dance hits at bars, festivals and weddings.",
+  "facebookUrl": "https://www.facebook.com/pages/Fivestone/102556973119278",
+  "genres": [
+    "classic rock, 80s and 90s covers",
+    "pop and dance hits",
+    "party rock"
+  ],
+  "instagramUrl": "https://www.instagram.com/fivestoneband",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List venue 'Mass Park LIRR' seems to be the street fair on Park Blvd by the train station; band's own Oct 4 listing not checked. Not the same as '5 Stone', a classic rock trio.",
+  "website": "https://5stonebandsite.com/"
+}

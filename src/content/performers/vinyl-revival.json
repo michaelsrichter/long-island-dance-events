@@ -1,0 +1,45 @@
+{
+  "name": "Vinyl Revival",
+  "type": "band",
+  "aliases": [
+    "Vinyl Revival Band",
+    "Vinyl Revival LI"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.vinylproductions.com/vinyl-revival",
+        "note": "Official band page: high-energy dance/disco/Motown/rock band aiming to get people dancing."
+      },
+      {
+        "url": "https://saltshackny.com/artist/vinyl-revival/",
+        "note": "Salt Shack artist page: 7-8 piece high-energy dance band; dance, disco, rock, Motown."
+      },
+      {
+        "url": "https://longisland.kidsoutandabout.com/content/annual-malverne-chamber-commerce-fall-festival-and-classic-car-show-0",
+        "note": "Malverne Fall Festival (Oct 3) lists Vinyl Revival as its live band."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Calls itself a dance party band that tries to get everyone on the floor with disco and old-school medleys; beach venues tag its shows 'Dance'.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "Seven-to-eight-piece Long Island dance party band covering disco, Motown, soul and classic rock (Doobie Brothers, Hall & Oates, Donna Summer, The Temptations) at beach bars, festivals and private events.",
+  "facebookUrl": "https://www.facebook.com/VinylRevivalLI/",
+  "genres": [
+    "disco",
+    "Motown",
+    "dance hits",
+    "classic rock"
+  ],
+  "instagramUrl": "https://www.instagram.com/vinylrevivalbandny/",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Other bands share the name (a UK rock/pop band at vinylrevival.rocks). The domain vinylrevival.band linked from venue pages now redirects to a gambling site, so it is not used. Socials taken from Salt Shack's artist page.",
+  "website": "https://www.vinylproductions.com/vinyl-revival"
+}

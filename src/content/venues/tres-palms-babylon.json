@@ -1,0 +1,41 @@
+{
+  "name": "Tres Palms",
+  "aliases": [
+    "Tres Palm Babylon",
+    "Tres Palms Babylon",
+    "Tres Palm"
+  ],
+  "address": "16 East Ct",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://webtunes.com/venues/tres-palms",
+        "note": "Venue guide: waterfront bar with live bands and DJs, outdoor deck, upbeat evening crowds."
+      },
+      {
+        "url": "https://www.tripadvisor.ca/Restaurant_Review-g47266-d4130836-Reviews-Tres_Palms-Babylon_Long_Island_New_York.html",
+        "note": "Review says live music was by the front door and did not intrude on the dining room."
+      }
+    ],
+    "floor": "unknown",
+    "notes": "Bands and DJs play here in season, often outdoors by the water, but we found no clear reports about dancing. One diner said the music stays near the entrance.",
+    "policy": "unknown"
+  },
+  "description": "A tropical-style waterfront restaurant and bar on the Great South Bay in Babylon with an outdoor deck, boat slips, seafood and live music in season.",
+  "facebookUrl": "https://www.facebook.com/trespalmsrestaurant/",
+  "factsSource": "Checked October 3, 2026. Source: trespalms.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Tres+Palms+16+East+Ct+Babylon+NY+11702",
+  "kind": "restaurant",
+  "phone": "(631) 482-1465",
+  "postalCode": "11702",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira wrote 'Tres Palm'; the business is Tres Palms. The 'Oyster Fest' on Sun Oct 4 at 2 pm was not found on the venue's events page (it showed no events). Do not confuse it with the Oyster Bay Oyster Festival (Oct 17-18 at Theodore Roosevelt Park).",
+  "state": "NY",
+  "town": "Babylon",
+  "website": "https://trespalms.com/",
+  "latitude": 40.68217,
+  "longitude": -73.315822,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

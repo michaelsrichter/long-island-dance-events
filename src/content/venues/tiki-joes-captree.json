@@ -1,0 +1,39 @@
+{
+  "name": "Tiki Joe's at Captree Boat Basin",
+  "aliases": [
+    "Tiki Joe's Captree",
+    "Tiki Joe's Captree Boat Basin"
+  ],
+  "address": "3500 Ocean Pkwy (Captree Boat Basin, Captree State Park)",
+  "coordinatesSource": "OpenStreetMap Nominatim (Captree State Park; approximate)",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://tikijoes.com/tiki-joes-captree-boat-basin/",
+        "note": "Official page: concession and Captain's Table restaurant at the boat basin, with a music schedule link."
+      },
+      {
+        "url": "https://www.tripadvisor.com/Restaurant_Review-g47286-d17804837-Reviews-Tiki_Joe_s-Bay_Shore_Long_Island_New_York.html",
+        "note": "Review mentions a band setting up on a Sunday afternoon; no mention of dancing."
+      }
+    ],
+    "floor": "unknown",
+    "notes": "Bands play here on weekend afternoons by the boat basin, but we found no reports about dancing. It is mostly a casual place to eat and drink by the water.",
+    "policy": "unknown"
+  },
+  "description": "A waterfront seafood restaurant and snack concession at the Captree State Park boat basin, with indoor and outdoor seating, bay views and weekend bands.",
+  "facebookUrl": "https://www.facebook.com/tikijoescaptree/",
+  "factsSource": "Checked October 3, 2026. Source: tikijoes.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Tiki+Joe%27s+at+Captree+Boat+Basin+3500+Ocean+Pkwy",
+  "kind": "restaurant",
+  "latitude": 40.638981,
+  "longitude": -73.2599777,
+  "phone": "(631) 333-1063",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Tiki Joe's has more than one location (for example at Cedar Beach); Ira specified Captree. Postal city/ZIP varies by listing (Babylon 11702, Bay Shore 11706, or 11757), so ZIP is left out. It is inside Captree State Park, where a state parking fee may apply. Mach 5 on Oct 4 not checked on the music schedule page. Ira's List has a /tiki-joes-venues page.",
+  "state": "NY",
+  "town": "Captree",
+  "website": "https://tikijoes.com/tiki-joes-captree-boat-basin/"
+}

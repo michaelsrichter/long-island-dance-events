@@ -1,0 +1,41 @@
+{
+  "name": "The Legendary Murphys",
+  "type": "band",
+  "aliases": [
+    "Legendary Murphys"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.thelegendarymurphys.com/shows",
+        "note": "Band calendar lists Oct 3, 6-10 PM, full band at Lily Flanagan's in Babylon; also offers an acoustic duo."
+      },
+      {
+        "url": "https://www.thelegendarymurphys.com/",
+        "note": "Band plays guitar-driven classic rock with male and female vocals since 2003."
+      },
+      {
+        "url": "https://allevents.in/org/the-legendary-murphys/4028074",
+        "note": "Organizer page: classic and southern rock on Long Island for 15+ years."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A classic rock band at bars and beach clubs. Some songs are danceable, but we found no direct sign of a dance floor.",
+    "rating": "mixed",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A Long Island classic rock band since 2003 with male and female vocals, covering artists like Fleetwood Mac, CCR and the Allman Brothers.",
+  "facebookUrl": "https://www.facebook.com/TheLegendaryMurphys",
+  "genres": [
+    "classic rock covers",
+    "southern rock"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List 'Lily's Babylon' matches the band's listing for Lily Flanagan's, Babylon. Dancing rating is a guess from genre and venue.",
+  "website": "https://www.thelegendarymurphys.com/"
+}

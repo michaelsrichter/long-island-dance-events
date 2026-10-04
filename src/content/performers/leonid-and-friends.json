@@ -1,0 +1,41 @@
+{
+  "name": "Leonid & Friends",
+  "type": "band",
+  "aliases": [
+    "Leonid & Friends Tribute To Chicago"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://leonidandf.com/tour.html",
+        "note": "Official tour page lists theater and performing arts center dates."
+      },
+      {
+        "url": "https://www.livenation.com/event/vv1A6Zk8MGkd8y6MX/leonid-friends",
+        "note": "Live Nation lists the band in Skokie, IL on Oct 3, 2026."
+      },
+      {
+        "url": "https://www.boultoncenter.org/calendar",
+        "note": "Boulton Center lists 'Beginnings - A Celebration of the Music of Chicago' on Oct 2 and a different show on Oct 3."
+      },
+      {
+        "url": "https://www.setlist.fm/setlist/leonid-and-friends/2025/count-basie-center-for-the-arts-hackensack-meridian-health-theatre-red-bank-nj-135801f5.html",
+        "note": "Gig history shows the band played Patchogue Theatre on Long Island in May 2025."
+      }
+    ],
+    "notes": "A theater concert where people sit and listen closely to precise horn-band versions of Chicago songs.",
+    "rating": "listening"
+  },
+  "description": "An 11-piece band started in Moscow by Leonid Vorobyev, famous online for note-perfect covers of Chicago's horn-rock hits, now touring U.S. theaters.",
+  "facebookUrl": "https://www.facebook.com/Leonidandfriends/",
+  "genres": [
+    "tribute to Chicago (the band)",
+    "horn rock",
+    "70s jazz-rock"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Likely listing error: Leonid & Friends play Skokie, IL on Oct 3, 2026, and Boulton Center shows a different Chicago tribute ('Beginnings') on Oct 2. Owner should confirm before publishing this gig.",
+  "website": "https://leonidandf.com/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCD5ZsXiIFlrWrbOCM6rEDKQ"
+}

@@ -1,0 +1,45 @@
+{
+  "name": "New York Ska-Jazz Ensemble",
+  "type": "band",
+  "aliases": [
+    "NY SKA Jazz Ensemble",
+    "NYSJE"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://247valencia.com/new-york-ska-jazz-ensemble-fires-up-the-house/",
+        "note": "Club review says the sold-out audience danced, skanked, sang and clapped through the show."
+      },
+      {
+        "url": "https://www.newyorkskajazzensemble.com/bio",
+        "note": "Bio: created the ska-jazz style in 1994, 15 albums, many European tours."
+      },
+      {
+        "url": "https://www.concertarchives.org/bands/new-york-ska-jazz-ensemble",
+        "note": "Concert history shows ska and punk festival bookings."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Ska beats get club crowds skanking (a bouncy freestyle dance), but this gig is at a French bistro, where most people will probably eat and listen.",
+    "rating": "mixed",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "Veteran New York band, formed in 1994, that mixes Jamaican ska and rocksteady beats with jazz solos and tours the US, Europe and beyond.",
+  "facebookUrl": "https://www.facebook.com/nysje/",
+  "genres": [
+    "ska",
+    "jazz",
+    "rocksteady"
+  ],
+  "instagramUrl": "https://www.instagram.com/nysjensemble",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). The band's own shows page is out of date, so the Brasserie by Chef Aless (Massapequa) date could not be confirmed there; name match is strong. A restaurant gig may be a smaller lineup.",
+  "website": "https://www.newyorkskajazzensemble.com/",
+  "youtubeUrl": "https://www.youtube.com/@nysjeofficial2464"
+}

@@ -1,0 +1,37 @@
+{
+  "name": "Almost Queen",
+  "type": "band",
+  "aliases": [
+    "Almost Queen - A Tribute To Queen"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.paramountny.com/events/almost-queen-a-tribute-to-queen-3",
+        "note": "Paramount lists the Oct 3, 2026 show (doors 7, show 8) with The Super 70's Rock Show; stresses harmonies and musical detail."
+      },
+      {
+        "url": "https://www.eventticketscenter.com/almost-queen-a-tribute-to-queen-huntington-tickets/1417748/e",
+        "note": "Tour list shows the band mostly plays seated theaters and performing arts centers."
+      },
+      {
+        "url": "https://paramounthudsonvalley.showare.com/ordertickets.asp?p=1135.",
+        "note": "Another theater describes a concert-style show with costumes and harmonies."
+      }
+    ],
+    "notes": "A ticketed theater concert at The Paramount. Fans mostly watch and sing along to Queen anthems rather than dance.",
+    "rating": "listening"
+  },
+  "description": "A touring four-piece tribute band that recreates Queen's live shows, with four-part vocal harmonies and costumes.",
+  "facebookUrl": "https://www.facebook.com/almostqueen",
+  "genres": [
+    "tribute to Queen",
+    "classic rock"
+  ],
+  "instagramUrl": "https://www.instagram.com/almost_queen",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Rating based on the show format and theater venues, not crowd videos. Socials taken from almostqueen.com.",
+  "website": "https://www.almostqueen.com/",
+  "youtubeUrl": "https://www.youtube.com/almostqueenny"
+}

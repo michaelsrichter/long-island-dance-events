@@ -1,0 +1,44 @@
+{
+  "name": "That 70's Band",
+  "type": "band",
+  "aliases": [
+    "That Seventies Band",
+    "That 70's Band NY"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "http://that70sbandny.com/",
+        "note": "Band site: NY's leading 70s dance/disco/funk group playing to packed dance floors; lists Oct 3 Car Show LI at Tobay Beach."
+      },
+      {
+        "url": "https://saltshackny.com/artist/that-70s-band/",
+        "note": "Salt Shack artist page tags the band 'Dance' and calls it a high-energy dance band."
+      },
+      {
+        "url": "https://www.bandsintown.com/a/1091185-that-70's-band",
+        "note": "Artist bio repeats the 70s dance/disco/funk focus, for weddings and concerts."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A disco and funk band that says it plays to packed dance floors every week, and beach venues file its shows under 'Dance'. Expect lots of freestyle dancing.",
+    "rating": "dance-band",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "New York and Long Island '70s dance band covering disco and funk hits by Earth, Wind & Fire, Kool & the Gang, Donna Summer, Chic and the Bee Gees for concerts, weddings and dinner dances.",
+  "facebookUrl": "https://www.facebook.com/that70sbandlive/",
+  "genres": [
+    "70s disco",
+    "funk",
+    "soul"
+  ],
+  "instagramUrl": "https://www.instagram.com/that70sbandny/",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Disco crowds sometimes do partner hustle, but no evidence was found for this band, so only freestyle is listed. Oct 3 gig is the Tobay Beach car show.",
+  "website": "http://that70sbandny.com/"
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Faces for Radio at The Nutty Irishman",
+  "summary": "Live music by Faces for Radio at The Nutty Irishman in Farmingdale. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-03",
+  "timezone": "America/New_York",
+  "venueId": "nutty-irishman-farmingdale",
+  "town": "Farmingdale",
+  "performerIds": [
+    "faces-for-radio"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 3, 2026",
+  "sourceRef": "saturday list",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-03|nutty-irishman-farmingdale|faces-for-radio|2026-10-03|special"
+}

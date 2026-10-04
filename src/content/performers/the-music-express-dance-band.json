@@ -1,0 +1,36 @@
+{
+  "name": "The Music Express Dance Band",
+  "type": "band",
+  "aliases": [
+    "The Music Express",
+    "Music Express Dance Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://allevents.in/north%20patchogue/the-music-express-dance-band-live-at-rudis-bar-and-grill/200027854006234",
+        "note": "Rudi's Bar post: eat, then hit the dance floor with the Music Express Dance Band."
+      },
+      {
+        "url": "https://allevents.in/east-patchogue/new-years-eve-ristegio%E2%80%99s-with-the-music-express-dance-band/200029313104935",
+        "note": "New Year's Eve party at Ristegio's with the band."
+      },
+      {
+        "url": "https://allevents.in/org/the-music-express-dance-band/20218522",
+        "note": "Organizer page lists past gigs at Eleanor's Lounge, the Oar House and a public library."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Its event posts tell people to 'hit the dance floor', and it plays Ristegio's dinner-and-dance nights, so freestyle dancing is expected.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "Long Island dance band that plays restaurants, bars, library concerts and New Year's Eve parties around Patchogue, including regular nights at Ristegio's.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). No official website or verified social page found; song list and genres unknown. No evidence of partner dancing found."
+}

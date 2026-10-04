@@ -1,0 +1,47 @@
+{
+  "name": "Daisy's Nashville Lounge (Patchogue)",
+  "aliases": [
+    "Daisy's Patchogue",
+    "Daisy's Main Street Patchogue"
+  ],
+  "address": "22 W Main St, Suite 11",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://daisysli.com/calendar/",
+        "note": "Venue calendar promotes Nugroove on Saturday Oct 3 with live music and a packed dance floor."
+      },
+      {
+        "url": "https://daisysli.com/event/nugroove/",
+        "note": "Earlier venue listing: Nugroove plays Patchogue's Saturday nights, starting at 7 PM with a DJ."
+      },
+      {
+        "url": "https://daisysli.com/event/the-right-mixx/",
+        "note": "Patchogue Friday listing: band at 7 PM followed by the house country DJ."
+      }
+    ],
+    "floor": "dance-floor",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Saturday band nights are promoted as a packed dance floor, and a country DJ keeps it going after the band. Line dancing is promoted mostly at the Miller Place location.",
+    "policy": "encouraged"
+  },
+  "description": "A Nashville-themed country bar and restaurant on Main Street in Patchogue. It has live bands on weekends followed by a country DJ, plus karaoke.",
+  "facebookUrl": "https://www.facebook.com/daisys.li/",
+  "factsSource": "Checked October 3, 2026. Source: daisysli.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Daisy%27s+Nashville+Lounge+%28Patchogue%29%2C+22+W+Main+St%2C+Suite+11%2C+Patchogue%2C+NY+11772",
+  "kind": "bar",
+  "phone": "(631) 438-0296",
+  "postalCode": "11772",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Country DJ nights may include line dancing here too, but we only found line dance events advertised for Miller Place.",
+  "state": "NY",
+  "town": "Patchogue",
+  "website": "https://daisysli.com/",
+  "latitude": 40.765656,
+  "longitude": -73.015589,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

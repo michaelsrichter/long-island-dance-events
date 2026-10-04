@@ -1,0 +1,46 @@
+{
+  "name": "North Hempstead Beach Park",
+  "aliases": [
+    "North Hempstead Beach Pk",
+    "N Hempstead Beach Park"
+  ],
+  "address": "175 West Shore Rd",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://northhempsteadny.gov/news_detail_T7_R197.php",
+        "note": "Town press release: Fall Family Festival, Sat Oct 3, 12-5 PM at North Hempstead Beach Park, free, with live music."
+      },
+      {
+        "url": "https://longislandwave.com/events/363/fall-family-festival-at-north-hempstead-beach-park/",
+        "note": "Listing names the bands Kamellot and Dock Holiday, plus a beer and wine tent and kids' activities."
+      },
+      {
+        "url": "https://dockholiday.org/",
+        "note": "Dock Holiday's site lists the Oct 3, 4 PM festival set at 175 W. Shore Road; it bills itself as funk-country-pop-rock-n-soul."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "On Oct 3 the town's free Fall Family Festival has live bands outdoors. There is lots of open space near the stage, but it is a family festival, not a dance event.",
+    "policy": "allowed"
+  },
+  "description": "A town beach park on Hempstead Harbor in Port Washington with a beach, boardwalk, picnic areas and big lawns. The town holds festivals and concerts here.",
+  "factsSource": "Checked October 3, 2026. Source: northhempsteadny.gov.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=North+Hempstead+Beach+Park%2C+175+West+Shore+Rd%2C+Port+Washington%2C+NY+11050",
+  "kind": "park",
+  "phone": "(516) 869-6311",
+  "postalCode": "11050",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Bar Beach (1 W Shore Dr) is a separate park next door; not the same place. One event site wrongly calls this a Town of Hempstead festival in Roslyn; it is the Town of North Hempstead, in Port Washington.",
+  "state": "NY",
+  "town": "Port Washington",
+  "website": "https://www.northhempsteadny.gov/departments/parks_recreation/north_hempstead_beach_park.php",
+  "latitude": 40.828133,
+  "longitude": -73.65722,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

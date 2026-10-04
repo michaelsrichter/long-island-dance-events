@@ -216,6 +216,14 @@ describe('merging runs', () => {
     const next = mergeDrafts(stored, draft({ title: 'Scraped title' }), { sourceId: 's', today: '2026-10-02' });
     expect(next.events.get(id)!.title).toBe('Edited by hand');
   });
+  it('keeps an editor note when the editor locked the status', () => {
+    const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
+    const [id, e] = [...first.events][0]!;
+    const held = eventSchema.parse({ ...e, status: 'pending-review', lockedFields: ['status'], reviewNotes: 'Band is on tour that night.' });
+    const next = mergeDrafts(new Map([[id, held]]), draft(), { sourceId: 's', today: '2026-10-02' });
+    expect(next.events.get(id)).toMatchObject({ status: 'pending-review', reviewNotes: 'Band is on tour that night.' });
+    expect(next.stats).toMatchObject({ updated: 0, unchanged: 1 });
+  });
   it('marks ended events past and vanished ones for review, without deleting', () => {
     const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
     const stored = new Map([...first.events].map(([id, e]) => [id, eventSchema.parse(e)]));

@@ -8,9 +8,16 @@ import { displayHost } from '../lib/links';
 import { formatDateShort } from '../lib/time';
 
 const settings = await getSettings();
-const sources = (await getCollection('sources')).sort((a, b) => a.data.name.localeCompare(b.data.name));
+const allSources = (await getCollection('sources')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 const events = await getCollection('events');
 const count = (id: string) => events.filter((e) => e.data.sourceId === id && e.data.status !== 'pending-review').length;
+// Only sources we read now (or that still have listings on the site). The rest are summed up in one line.
+const shown = allSources.filter((s) => s.data.enabled || count(s.id) > 0);
+const offCount = allSources.length - shown.length;
+const groups = [
+  { id: 'dance', title: 'Dance calendars', lede: 'Everything these list is a dance, a class or a dance party.', sources: shown.filter((s) => s.data.focus === 'dance') },
+  { id: 'music', title: 'Live-music lists', lede: 'Bands and DJs. Some are dance nights and some are concerts, so each listing gets a dancing score.', sources: shown.filter((s) => s.data.focus === 'music') },
+].filter((g) => g.sources.length);
 const issues = `${settings.repoUrl}/issues/new`;
 const crumbs = [
   { name: 'Home', href: '/' },
@@ -33,23 +40,27 @@ const statusText: Record<string, string> = { ok: 'Worked', empty: 'Found nothing
 
     <section aria-labelledby="src-h">
       <h2 id="src-h">Our sources</h2>
-      <div class="table-scroll mt-3">
-        <table class="data-table">
-          <caption class="visually-hidden">Sources and when we last checked them</caption>
-          <thead><tr><th scope="col">Source</th><th scope="col">What we take</th><th scope="col">Listings</th><th scope="col">Last checked</th></tr></thead>
-          <tbody>
-            {sources.map((s) => (
-              <tr>
-                <th scope="row"><a href={s.data.url} rel="noopener">{s.data.name}</a><br /><span class="muted">{displayHost(s.data.url)}</span></th>
-                <td>{s.data.attribution}</td>
-                <td>{count(s.id)}</td>
-                <td>{s.data.lastScraped ? `${formatDateShort(s.data.lastScraped.slice(0, 10), true)} (${statusText[s.data.lastStatus] ?? s.data.lastStatus})` : 'Not yet'}</td>
-              </tr>
+      {groups.map((g) => (
+        <section class="mt-3" aria-labelledby={`src-${g.id}`}>
+          <h3 id={`src-${g.id}`}>{g.title}</h3>
+          <p class="muted">{g.lede}</p>
+          <ul class="source-list mt-3">
+            {g.sources.map((s) => (
+              <li class="panel source-card">
+                <h4 class="source-card__name"><a href={s.data.url} rel="noopener">{s.data.name}</a></h4>
+                <p class="muted source-card__host">{displayHost(s.data.url)}</p>
+                <p>{s.data.attribution}</p>
+                <dl class="source-card__meta">
+                  <div><dt>Listings</dt><dd>{count(s.id)}</dd></div>
+                  <div><dt>Last checked</dt><dd>{s.data.lastScraped ? `${formatDateShort(s.data.lastScraped.slice(0, 10), true)} (${statusText[s.data.lastStatus] ?? s.data.lastStatus})` : 'Not yet'}</dd></div>
+                </dl>
+              </li>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </ul>
+        </section>
+      ))}
       <p class="muted mt-3">"Listings" counts the events we show from each source, including repeating events counted once.</p>
+      {offCount > 0 && <p class="muted" data-testid="sources-off">We also know about {offCount} more {offCount === 1 ? 'calendar' : 'calendars'} that we do not read yet. Some are waiting for the owner's permission, and some we add by hand from flyers.</p>}
     </section>
 
     <section aria-labelledby="corrections" id="corrections">

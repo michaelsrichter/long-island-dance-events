@@ -1,0 +1,42 @@
+{
+  "name": "Half Hollow Hills Community Library (Dix Hills)",
+  "aliases": [
+    "Half Hollow Hills Library",
+    "Half Hollow Hills Community Library",
+    "Half Hollow Hills Library Dix Hills",
+    "HHH Library Dix Hills"
+  ],
+  "address": "55 Vanderbilt Pkwy",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.hhhlibrary.org/events/day/2026/10/04",
+        "note": "Library calendar: Almost Elton/Almost Billy, Sun Oct 4, 2-3:30 PM, Lecture Room 111 at Dix Hills, registration required."
+      },
+      {
+        "url": "https://www.hhhlibrary.org/services/adults",
+        "note": "Adult events page shows the Oct 4 concert as full, with registration closed."
+      }
+    ],
+    "floor": "seated",
+    "notes": "Library concerts are held in a lecture room with chairs, and you must register ahead. Expect to sit and sing along rather than dance.",
+    "policy": "unknown"
+  },
+  "description": "The Dix Hills branch of the public library serving the Half Hollow Hills area. It hosts free concerts and programs in its lecture room, usually with sign-up required.",
+  "facebookUrl": "https://www.facebook.com/HHHCL/",
+  "factsSource": "Checked October 3, 2026. Source: hhhlibrary.org.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Half+Hollow+Hills+Community+Library+%28Dix+Hills%29%2C+55+Vanderbilt+Pkwy%2C+Dix+Hills%2C+NY+11746",
+  "kind": "library",
+  "phone": "(631) 421-4530",
+  "postalCode": "11746",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). The library also has a Melville branch (510 Sweet Hollow Rd); the Oct 4 concert is at Dix Hills. The show was already full when checked.",
+  "state": "NY",
+  "town": "Dix Hills",
+  "website": "https://www.hhhlibrary.org/",
+  "latitude": 40.804802,
+  "longitude": -73.358677,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

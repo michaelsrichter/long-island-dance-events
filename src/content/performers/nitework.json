@@ -1,0 +1,49 @@
+{
+  "name": "Nitework",
+  "type": "band",
+  "aliases": [
+    "Nitework Band",
+    "Nite Work"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://niteworkband.net/",
+        "note": "Band site calls itself Long Island's hottest dance band, playing top 40 and classic dance tunes since 2008."
+      },
+      {
+        "url": "https://niteworkband.net/videos-photos",
+        "note": "Videos page features a promo video billing the group as a premier dance band for all occasions."
+      },
+      {
+        "url": "https://allevents.in/port-jefferson/nitework/200030151019128",
+        "note": "Black Pearl (Port Jefferson) listing describes a mix of dance, pop and party music."
+      },
+      {
+        "url": "https://www.cooperageinn.com/fallfestival",
+        "note": "Cooperage Inn Fall Festival band list shows Nitework on Saturday, Oct 3."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Nitework sells itself as a dance band and plays upbeat pop and classic dance hits, so people usually dance freestyle in front of the band at bars and outdoor festivals.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "Long Island cover band, active since 2008, that plays top 40 hits and classic dance songs at bars, beach spots, fall festivals and private parties.",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=100063562267891",
+  "genres": [
+    "top 40 covers",
+    "classic dance hits",
+    "pop"
+  ],
+  "instagramUrl": "https://www.instagram.com/niteworkband.ny/",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Scottish group Niteworks; matched by Long Island venues (Cooperage Inn, Black Pearl, Tiki Joe's). Rating based on band and venue text, not on watching crowd videos.",
+  "website": "https://niteworkband.net/",
+  "youtubeUrl": "https://www.youtube.com/@nitework"
+}

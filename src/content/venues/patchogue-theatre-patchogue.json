@@ -1,0 +1,45 @@
+{
+  "name": "Patchogue Theatre for the Performing Arts",
+  "aliases": [
+    "Patchogue Theater",
+    "Patchogue Theatre",
+    "PTPA"
+  ],
+  "address": "71 E Main St",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.patchoguetheatre.org/seating",
+        "note": "Official seating chart shows fixed rows of numbered seats on the main level and balcony."
+      },
+      {
+        "url": "https://www.tripadvisor.com/Attraction_Review-g60803-d7385917-Reviews-Patchogue_Theatre_for_the_Performing_Arts-Long_Island_Patchogue.html",
+        "note": "Listing calls it Suffolk County's largest theater with nearly 1,200 seats."
+      },
+      {
+        "url": "https://www.patchoguetheatre.org/events/2026-10-03-y-chtley-cr-w",
+        "note": "Official event page for Yachtley Crew on Oct 3 (reserved seating, buy-tickets page)."
+      }
+    ],
+    "floor": "seated",
+    "notes": "Concerts here are reserved-seat shows in a traditional theater, and there is no dance floor. Go for the show, not for dancing.",
+    "policy": "unknown"
+  },
+  "description": "A historic nonprofit theater on Main Street in Patchogue village with nearly 1,200 seats. It hosts touring concerts, tribute bands, comedy and family shows.",
+  "facebookUrl": "https://www.facebook.com/patchoguetheatre/",
+  "factsSource": "Checked October 3, 2026. Source: patchoguetheatre.org.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Patchogue+Theatre+for+the+Performing+Arts+71+E+Main+St+Patchogue+NY+11772",
+  "kind": "theater",
+  "phone": "(631) 207-1313",
+  "postalCode": "11772",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Both gigs confirmed: Yachtley Crew Sat Oct 3 (8 pm per ticket sites) and Ann Wilson Sun Oct 4 at 7 pm. Box office 631-207-1313; main office 631-207-1300. We found no house rule about dancing in the aisles.",
+  "state": "NY",
+  "town": "Patchogue",
+  "website": "https://www.patchoguetheatre.org/",
+  "latitude": 40.765793,
+  "longitude": -73.012533,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

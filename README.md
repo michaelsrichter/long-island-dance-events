@@ -39,9 +39,13 @@ flowchart LR
 | Source | Type | Status |
 | --- | --- | --- |
 | [The Dance Calendar](https://www.thedancecalendar.com/dance-calendar) | Monthly PDF newsletter | Live (adapter `thedancecalendar`) |
-| [Ira's List LI](https://www.iraslistli.com/) | Website | Planned for phase 3 |
+| [Ira's List LI](https://www.iraslistli.com/) | Weekly live-music list (home page text) | Live (adapter `iraslist`). The embedded calendar widget blocks bots, so only the home-page list is read. |
 
-New sources are proposed in [docs/source-proposals.md](docs/source-proposals.md) (24 candidates from the discovery pass) and added only after the owner approves them. Organizers can [ask for a correction](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=listing-correction.yml), [suggest a listing](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=add-listing.yml) or [opt out](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=remove-listing.yml).
+The owner approved all proposed sources in [docs/source-proposals.md](docs/source-proposals.md) plus the larger catalog in PR #8; they are being added one by one. Sources whose `robots.txt` or terms do not allow reading stay turned off until the owner gets permission. Organizers can [ask for a correction](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=listing-correction.yml), [suggest a listing](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=add-listing.yml) or [opt out](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=remove-listing.yml).
+
+## Can you dance there?
+
+Live-music listings are a mix of dance nights and sit-down concerts, so every listing that is not from a dance calendar gets a **dancing score** from 0 to 10 and the **kinds of dancing** you will likely see: partner, line or party dancing (freestyle). The score blends what we found about the **venue** (dance floor, seated theater, standing room) and the **band or DJ** (dance band, tribute act, listening music), then adjusts for clues in the listing (DJ, "dance party", theater, library, acoustic, brunch, jam). Each event page shows the score, the reasons and the web pages we checked. Editors can override it. Logic: `src/lib/dancing.ts`; research fields: `dancing` on venues and performers.
 
 ## Run it on your computer
 
@@ -71,6 +75,7 @@ npx astro preview --port 4321
 npm run ingest -- --dry-run                 # show what would change, write nothing
 npm run ingest                              # all enabled sources; writes src/content/**
 npm run ingest -- --source thedancecalendar
+npm run ingest -- --cadence daily,twice-weekly   # only sources with these cadences
 npm run ingest -- --offline                 # reuse cached downloads only (.cache/ingest)
 npm run ingest -- --report report.md --json report.json --strict
 ```
@@ -89,7 +94,7 @@ What a run does:
 
 1. Get the owner's approval (see [docs/source-proposals.md](docs/source-proposals.md)).
 2. Check `robots.txt` and the site's terms. Prefer structured data: schema.org Event JSON-LD, then iCal (`.ics`), then HTML, then PDF.
-3. Add `src/content/sources/<id>.json` (copy `thedancecalendar.json`; set `enabled`, `type`, `url`, `attribution`, `rateLimitSeconds`).
+3. Add `src/content/sources/<id>.json` (copy `thedancecalendar.json`; set `enabled`, `type`, `url`, `attribution`, `rateLimitSeconds`, `cadence` and `focus`: `dance` for a dance calendar, `music` for a live-music list).
 4. Add `ingest/adapters/<id>.ts` exporting `adapter: Adapter` with `fetch(ctx)` and `normalize(docs, ctx)` that return `Candidate`s (see `ingest/lib/types.ts`). Reuse the helpers in `ingest/lib/` for times, prices, places and descriptions.
 5. Save a small sample of the source in `ingest/fixtures/` and add a golden-file test in `tests/unit/ingest.test.ts` (regenerate with `UPDATE_GOLDEN=1`).
 6. Run `npm run ingest -- --source <id> --dry-run`, review the report, then run without `--dry-run` and open a pull request.
@@ -157,7 +162,7 @@ docs/             decisions, content audit, content model, architecture, editor 
 
 1. ✅ Scaffold: Astro + Decap, entity schemas, dance-style list, CI.
 2. ✅ The Dance Calendar end-to-end (PDF) → data files → browsable, filterable site. **MVP checkpoint.**
-3. Ira's List LI adapter; duplicate detection (exact match key, then local embeddings with bge-small: ≥ 0.9 merge, 0.8-0.9 human review).
+3. ✅ Ira's List LI adapter and dancing score. Next: duplicate detection (exact match key, then local embeddings with bge-small: ≥ 0.9 merge, 0.8-0.9 human review).
 4. Submit-an-event form (to a moderation queue).
 5. Admin area (GitHub sign-in, `admin` role): moderation queue, source panel, feedback and bug inbox (Table Storage + GitHub issues).
 6. Azure: ✅ Static Web Apps Free + managed Functions + monitoring (Bicep, `infra/`). Storage account comes with phase 5, when its first Functions need it.

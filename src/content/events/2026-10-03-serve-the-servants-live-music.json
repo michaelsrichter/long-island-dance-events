@@ -1,0 +1,23 @@
+{
+  "title": "Serve The Servants and Love Hate Love at The Warehouse",
+  "summary": "Live music by Serve The Servants and Love Hate Love at The Warehouse in Amityville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-03",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "serve-the-servants",
+    "love-hate-love"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 3, 2026",
+  "sourceRef": "saturday list",
+  "firstSeen": "2026-10-03",
+  "lastSeen": "2026-10-03",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-03|the-warehouse-amityville|serve-the-servants-love-hate-love|2026-10-03|special"
+}

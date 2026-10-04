@@ -1274,3 +1274,39 @@ h3.day-heading { font-size: 1rem; }
 .events-map .leaflet-control-attribution { background: color-mix(in srgb, var(--c-surface) 88%, transparent); color: var(--c-ink-soft); }
 .events-map .leaflet-control-attribution a { color: var(--c-link); }
 .events-map .leaflet-popup-content-wrapper, .events-map .leaflet-popup-tip { background: var(--c-surface); color: var(--c-ink); }
+
+/* Kind of dancing: badge on cards, and the "Can you dance here?" panel (components/DancingBadge.astro, DancingPanel.astro). */
+.dance-badge { display: inline-flex; align-items: center; gap: 0.35rem; padding: 0.12rem 0.6rem 0.12rem 0.5rem; border-radius: 999px; border: 1px solid var(--c-line); background: var(--c-surface); color: var(--c-ink); font-size: 0.74rem; font-weight: 700; line-height: 1.5; white-space: nowrap; }
+.dance-badge::before { content: ''; flex: none; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--c-red-ink); }
+.dance-badge--partner::before { background: var(--grad-red); }
+.dance-badge--line::before { background: linear-gradient(135deg, #d4d6dc, #6b6e78); }
+.dance-badge--freestyle::before { background: conic-gradient(from 45deg, #c1121f, #c9ccd3, #c1121f); }
+.dance-badge--listen { color: var(--c-ink-soft); }
+.dance-badge--listen::before { background: transparent; border: 2px solid var(--c-ink-soft); width: 0.45rem; height: 0.45rem; }
+.dance-badge--some { border-style: dashed; }
+.event-hero .dance-badge { background: rgb(255 255 255 / 0.08); border-color: rgb(255 255 255 / 0.24); color: #ffffff; }
+.dance-panel__headline { font-size: 1.05rem; }
+.dance-meter { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.75rem; margin-top: 0.6rem; }
+.dance-meter__bar { display: inline-grid; grid-template-columns: repeat(10, 1fr); gap: 3px; width: min(14rem, 100%); }
+.dance-meter__step { height: 0.6rem; border-radius: 3px; background: var(--c-muted-bg); }
+.dance-meter__step.is-on { background: var(--grad-red); }
+.dance-meter__text { font-weight: 700; font-size: 0.92rem; }
+.dance-kinds { list-style: none; padding: 0; margin: 0.75rem 0 0; display: grid; gap: 0.5rem; }
+.dance-kinds li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35rem 0.6rem; }
+.dance-reasons { margin: 0.35rem 0 0; padding-left: 1.2rem; display: grid; gap: 0.3rem; }
+.dance-reasons li::marker { color: var(--c-red-ink); }
+.dance-evidence > summary { cursor: pointer; font-weight: 700; min-height: var(--tap); display: inline-flex; align-items: center; gap: 0.55rem; list-style: none; color: var(--c-link, var(--c-brand)); }
+.dance-evidence > summary::-webkit-details-marker { display: none; }
+.dance-evidence > summary::after { content: ''; width: 0.5em; height: 0.5em; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); flex: none; }
+.dance-evidence[open] > summary::after { transform: rotate(-135deg) translateY(-2px); }
+.dance-evidence ul { margin: 0.25rem 0 0; padding-left: 1.2rem; display: grid; gap: 0.35rem; font-size: 0.92rem; }
+.dance-facts { display: grid; gap: 0.4rem; }
+
+/* Sources page: one card per source (phone-first; no sideways scrolling). */
+.source-list { list-style: none; padding: 0; display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+.source-card { display: grid; gap: 0.4rem; align-content: start; }
+.source-card__name { font-size: 1.15rem; margin: 0; }
+.source-card__host { margin: 0; font-size: 0.92rem; overflow-wrap: anywhere; }
+.source-card__meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; margin: 0.3rem 0 0; }
+.source-card__meta dt { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--c-ink-soft); }
+.source-card__meta dd { margin: 0; font-weight: 600; }

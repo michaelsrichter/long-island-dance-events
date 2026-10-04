@@ -1,0 +1,44 @@
+{
+  "name": "The Southern Earth Experience",
+  "type": "band",
+  "aliases": [
+    "Southern Earth Exp",
+    "Southern Earth Experience",
+    "Southern Earth",
+    "Southern Earth Band"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.thebash.com/rock/southern-earth",
+        "note": "Booking profile: self-described high-energy dance party band mixing rock, funk and disco; song list included."
+      },
+      {
+        "url": "https://thesouthernearthband.bandzoogle.com/",
+        "note": "Band site blends disco, funk and classic rock and lists the Oct 3 Salt Shack gig."
+      },
+      {
+        "url": "https://saltshackny.com/events/",
+        "note": "Salt Shack calendar shows Southern Earth Experience on Saturday, Oct 3 at 7 pm."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Calls itself a high-energy dance party band and plays disco and funk staples (KC and the Sunshine Band, Wild Cherry, Commodores), so expect freestyle dancing.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "New York City band first formed in the early 1970s and later reunited, mixing disco, funk and classic rock hits from the '70s.",
+  "genres": [
+    "70s disco",
+    "funk",
+    "classic rock"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). No evidence of partner hustle at their shows, so only freestyle is listed. Booking profile places them in Middle Village, Queens.",
+  "website": "https://thesouthernearthband.bandzoogle.com/"
+}

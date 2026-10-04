@@ -1,0 +1,43 @@
+{
+  "name": "The Cove Restaurant & Oyster Bar",
+  "aliases": [
+    "The Cove Glen Cove"
+  ],
+  "address": "74 Shore Rd",
+  "county": "Nassau",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.thecoveny.com/events-1",
+        "note": "Events page lists a DJ on Sat Oct 3, 7:30-11 pm; 23+ for women, 25+ for men; elegant smart attire, no hats."
+      },
+      {
+        "url": "https://www.atly.com/location/The-Cove-Restaurant-Oyster-Bar",
+        "note": "Summary says live music and DJs create a lively, nightclub-like and noisy atmosphere."
+      },
+      {
+        "url": "https://www.discoverlongisland.com/event/dj-nights-on-the-water/130021/",
+        "note": "Tourism listing for weekly 'DJ Nights on the Water': come for dinner, stay for the music."
+      }
+    ],
+    "floor": "unknown",
+    "notes": "After dinner a DJ plays on weekend nights, with an age limit and a dress code. Reviews describe a nightclub-like mood, but we could not confirm a dance floor.",
+    "policy": "unknown"
+  },
+  "description": "An upscale waterfront seafood restaurant next to a marina on Glen Cove Creek, with a patio, weekend brunch and DJ nights later in the evening.",
+  "facebookUrl": "https://www.facebook.com/thecoveny/",
+  "factsSource": "Checked October 3, 2026. Source: thecoveny.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Cove+Restaurant+%26+Oyster+Bar+74+Shore+Rd+Glen+Cove+NY+11542",
+  "kind": "restaurant",
+  "phone": "(516) 676-1211",
+  "postalCode": "11542",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'DJ - The Cove Glen Cove' matches the venue's own Oct 3 'DJ TBD' listing. Strict age and dress-code rules apply on DJ nights. Some listings add suite '#3427' to the address.",
+  "state": "NY",
+  "town": "Glen Cove",
+  "website": "https://www.thecoveny.com/",
+  "latitude": 40.855693,
+  "longitude": -73.642074,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

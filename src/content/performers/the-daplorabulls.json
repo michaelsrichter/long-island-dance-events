@@ -1,0 +1,43 @@
+{
+  "name": "The Daplorabulls",
+  "type": "band",
+  "aliases": [
+    "Daplorabulls"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://allevents.in/lindenhurst/the-daplorabulls-live-goccia-doro-ii/200029259468953",
+        "note": "Band post: high-energy 6-piece band of dance, soul, funk and disco."
+      },
+      {
+        "url": "https://eleanorslounge.com/events/feel-good-fridays-with-the-daplorabulls/",
+        "note": "Eleanor's Lounge residency: come dance the night away with the band."
+      },
+      {
+        "url": "https://www.youtube.com/@thedaplorabulls",
+        "note": "Channel of live covers such as I Love the Nightlife, Hot Stuff and You Should Be Dancing."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Bills itself as a party and dance band and invites crowds to dance the night away; its videos are mostly disco and funk covers like Hot Stuff and Play That Funky Music.",
+    "rating": "party",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "Six-piece Long Island party band playing dance, soul, funk and disco covers, with a twice-monthly 'Feel Good Fridays' night at Eleanor's Lounge in Bohemia.",
+  "facebookUrl": "https://www.facebook.com/TheDaplorabulls",
+  "genres": [
+    "dance and party covers",
+    "soul",
+    "funk",
+    "disco"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Popei's Clam Bar has Coram and Deer Park locations; Ira's List says Coram.",
+  "youtubeUrl": "https://www.youtube.com/@thedaplorabulls"
+}

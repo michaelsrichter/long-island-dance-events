@@ -1,0 +1,42 @@
+{
+  "name": "Frogzz Bar 'N' Grill",
+  "aliases": [
+    "Frogzz Yaphank",
+    "Frogzz Bar and Grill"
+  ],
+  "address": "450 Main St",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://www.groovehub.io/events/jim-morans-sunday-funday-open-mic-jam/20260920",
+        "note": "Listing for Jim Moran's free Sunday open jam at Frogzz, 3 PM, with house drums, amps and PA."
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=tt4E8YEFH0w",
+        "note": "Public video of a rock and blues jam at Frogzz (Aug 30, 2026); the description lists the musicians only."
+      },
+      {
+        "url": "https://www.restaurantji.com/ny/yaphank/frogzz-bar-n-grill-/",
+        "note": "Listing summary: local dive bar under new owners, jukebox and frequent local bands; no mention of dancing."
+      }
+    ],
+    "floor": "unknown",
+    "notes": "Frogzz has live bands and a Sunday jam session, but we found no reviews or photos that talk about dancing. Treat it as a place to listen unless you hear otherwise.",
+    "policy": "unknown"
+  },
+  "description": "A neighborhood bar and grill on Main Street in Yaphank with pool, darts and an outdoor deck. It has local bands, karaoke and a Sunday afternoon open jam.",
+  "factsSource": "Checked October 3, 2026. Source: restaurantji.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Frogzz+Bar+%27N%27+Grill%2C+450+Main+St%2C+Yaphank%2C+NY+11980",
+  "kind": "bar",
+  "phone": "(631) 775-0186",
+  "postalCode": "11980",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). No official website found, and two different Facebook pages are listed online, so we left Facebook out. Do not confuse with Frogzz Saloon in Lake Ronkonkoma, a different bar.",
+  "state": "NY",
+  "town": "Yaphank",
+  "latitude": 40.837812,
+  "longitude": -72.924221,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

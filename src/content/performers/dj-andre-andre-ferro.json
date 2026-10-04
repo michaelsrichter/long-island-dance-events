@@ -1,0 +1,39 @@
+{
+  "name": "DJ Andre (Andre Ferro)",
+  "type": "dj",
+  "aliases": [
+    "LIR Dance Party"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "high",
+    "evidence": [
+      {
+        "url": "https://www.liblogger.com/events/lir-dance-party-at-lushes-10-17-2026",
+        "note": "Lushes (Oceanside) listing: DJ Andre spins 80s, 90s, 2000s, top hits and dance favorites; no cover."
+      },
+      {
+        "url": "https://www.facebook.com/stereomaticband/posts/1280918072840777/",
+        "note": "Band post after an LIR night with DJ Andre says everyone danced the entire night."
+      },
+      {
+        "url": "https://www.theotherroomli.com/events/pmm94xz49pqqnm0nzaw6be5z8epnnc",
+        "note": "Venue invites guests to dance the night away with DJ Andre of LIR."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A DJ dance party, sometimes with the new wave band Stereomatic. Posts from these nights say the crowd danced all night.",
+    "rating": "dance-band",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "genres": [
+    "80s new wave",
+    "alternative",
+    "80s-2000s dance hits"
+  ],
+  "reviewNotes": "Added from Ira's List research (2026-10-03)."
+}

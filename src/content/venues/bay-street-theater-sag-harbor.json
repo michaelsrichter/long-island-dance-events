@@ -1,0 +1,46 @@
+{
+  "name": "Bay Street Theater & Sag Harbor Center for the Arts",
+  "aliases": [
+    "Bay St Theater Sag Harbor",
+    "Bay Street Theater",
+    "Bay Street Theatre",
+    "Bay Street Theater Sag Harbor"
+  ],
+  "address": "1 Long Wharf",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "medium",
+    "evidence": [
+      {
+        "url": "https://www.baystreet.org/plan-your-visit/",
+        "note": "Theater describes itself as a 299-seat professional regional theater on Long Wharf."
+      },
+      {
+        "url": "https://www.yelp.com/biz/bay-street-theater-sag-harbor",
+        "note": "Reviews describe a cozy little theater with good seats; none mention dancing."
+      },
+      {
+        "url": "https://www.baystreet.org/performance/the-chain-a-fleetwood-mac-experience-2/",
+        "note": "Venue page for The Chain (Fleetwood Mac tribute) on Oct 3 at 8 PM; the band bio says fans like to sing along and dance."
+      }
+    ],
+    "floor": "seated",
+    "notes": "This is a seated theater with rows of seats and no dance floor. Plan on a sit-down concert.",
+    "policy": "unknown"
+  },
+  "description": "A nonprofit professional theater with about 300 seats on Long Wharf at the foot of Main Street in Sag Harbor. It puts on plays, comedy and live music concerts.",
+  "facebookUrl": "https://www.facebook.com/baysttheater/",
+  "factsSource": "Checked October 3, 2026. Source: baystreet.org.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Bay+Street+Theater+%26+Sag+Harbor+Center+for+the+Arts%2C+1+Long+Wharf%2C+Sag+Harbor%2C+NY+11963",
+  "kind": "theater",
+  "phone": "(631) 725-9500",
+  "postalCode": "11963",
+  "reviewNotes": "Added from Ira's List research (2026-10-03).",
+  "state": "NY",
+  "town": "Sag Harbor",
+  "website": "https://www.baystreet.org/",
+  "latitude": 41.001637,
+  "longitude": -72.29761,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

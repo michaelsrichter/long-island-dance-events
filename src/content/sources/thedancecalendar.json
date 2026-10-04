@@ -6,6 +6,7 @@
   "cadence": "weekly",
   "description": "Monthly PDF newsletter with a day-by-day calendar of dances and classes. We read the current issue each week.",
   "enabled": true,
+  "focus": "dance",
   "lastCounts": {
     "found": 185,
     "kept": 112,

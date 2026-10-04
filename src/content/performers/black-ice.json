@@ -1,0 +1,38 @@
+{
+  "name": "Black Ice",
+  "type": "band",
+  "aliases": [
+    "Black Ice Rocks"
+  ],
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://blackicerocks.com/",
+        "note": "Band site lists Oct 3 at Trotters, Franklin Square, 9 PM-12 AM, dinner reservations suggested; says it plays high-energy shows to packed bars."
+      },
+      {
+        "url": "https://www.liblogger.com/events/black-ice-rocks-bantry-bay",
+        "note": "Typical gig: two sets of classic hard rock hits at a pub with food and drink."
+      }
+    ],
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "A hard rock cover band at bar-restaurants where people book dinner tables. Some fans may dance to the hits, but we found no clear sign of a dance floor.",
+    "rating": "mixed",
+    "styles": [
+      "freestyle"
+    ]
+  },
+  "description": "A Queens-based cover band that plays big classic rock and hard rock hits at bars and restaurants in Queens and on Long Island.",
+  "facebookUrl": "https://www.facebook.com/blackicerocks",
+  "genres": [
+    "classic rock and hard rock covers"
+  ],
+  "instagramUrl": "https://www.instagram.com/blackicerocks",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Many acts are named Black Ice (e.g., an Oakland deathrock band on Bandsintown). This NYC/LI cover band is confirmed by its own listing of the Oct 3 Trotters show.",
+  "website": "https://blackicerocks.com/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCb7eDKea22aXdIOKEEg58FA"
+}

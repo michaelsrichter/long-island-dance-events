@@ -1,0 +1,48 @@
+{
+  "name": "Black Pearl Seafood Chophouse",
+  "aliases": [
+    "Black Pearl",
+    "Black Pearl Port Jeff",
+    "Black Pearl Danfords"
+  ],
+  "address": "25 East Broadway",
+  "county": "Suffolk",
+  "dancing": {
+    "checked": "2026-10-03",
+    "confidence": "low",
+    "evidence": [
+      {
+        "url": "https://blackpearlportjeff.com/calendar/",
+        "note": "Restaurant calendar lists In the Groove on Sunday Oct 4, 3-6 PM, plus other weekend bands."
+      },
+      {
+        "url": "https://allevents.in/port-jefferson/in-the-groove-boogies-at-the-black-pearl-in-danfords-marina-and-hotel/200029893816653",
+        "note": "In The Groove's listing for an earlier Black Pearl show tells fans to bring their dancing shoes."
+      },
+      {
+        "url": "https://dpe-li.com/upcoming-shows/black-pearl/",
+        "note": "A dance-party band lists a Black Pearl date; its blurb promises to pack the dance floor (band's own words, not the venue's)."
+      }
+    ],
+    "floor": "open-space",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Party cover bands play here often and invite people to dance. We could not confirm how much open floor there is, so call ahead if dancing matters to you.",
+    "policy": "allowed"
+  },
+  "description": "A waterfront seafood and steak restaurant inside Danford's Hotel & Marina in Port Jefferson village. It has a bar, outdoor seating by the harbor and live bands most weekends.",
+  "facebookUrl": "https://www.facebook.com/BlackPearlPortJeff",
+  "factsSource": "Checked October 3, 2026. Source: blackpearlportjeff.com.",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Black+Pearl+Seafood+Chophouse%2C+25+East+Broadway%2C+Port+Jefferson%2C+NY+11777",
+  "kind": "restaurant",
+  "phone": "(631) 676-7025",
+  "postalCode": "11777",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Chose the Port Jefferson Black Pearl because In The Groove plays there often and its calendar lists In the Groove on Oct 4 (venue says 3-6 PM; Ira says 3-8 PM). A 'Black Pearl Lounge' in Baldwin is permanently closed.",
+  "state": "NY",
+  "town": "Port Jefferson",
+  "website": "https://blackpearlportjeff.com/",
+  "latitude": 40.947455,
+  "longitude": -73.068878,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}
