@@ -84,7 +84,7 @@ export function init(panel: HTMLElement) {
   const commentForm = q<HTMLFormElement>(panel, '[data-comment-form]')!;
   const photoForm = q<HTMLFormElement>(panel, '[data-photo-form]');
   const photoNeeds = q<HTMLElement>(panel, '[data-photo-needs]');
-  const preview = q<HTMLImageElement>(panel, '[data-photo-preview]');
+  const preview = q<HTMLCanvasElement>(panel, '[data-photo-preview]');
   const reportDialog = q<HTMLDialogElement>(panel, '[data-report-dialog]')!;
   const reportForm = q<HTMLFormElement>(panel, '[data-report-form]')!;
   const signin = q<HTMLAnchorElement>(panel, '[data-signin]')!;
@@ -257,13 +257,22 @@ export function init(panel: HTMLElement) {
 
   if (photoForm && preview) {
     const fileInput = q<HTMLInputElement>(photoForm, 'input[type=file]')!;
-    fileInput.addEventListener('change', () => {
+    // Preview by drawing the picked photo on a canvas (no object URLs; the file is never put in the page as markup or a link).
+    fileInput.addEventListener('change', async () => {
       const f = fileInput.files?.[0];
-      if (preview.src.startsWith('blob:')) URL.revokeObjectURL(preview.src);
-      if (f) {
-        preview.src = URL.createObjectURL(f);
+      preview.hidden = true;
+      if (!f || !/^image\/(jpeg|png|webp)$/.test(f.type) || !('createImageBitmap' in window)) return;
+      try {
+        const bmp = await createImageBitmap(f, { imageOrientation: 'from-image' } as ImageBitmapOptions);
+        const scale = Math.min(1, 512 / Math.max(bmp.width, bmp.height));
+        preview.width = Math.max(1, Math.round(bmp.width * scale));
+        preview.height = Math.max(1, Math.round(bmp.height * scale));
+        preview.getContext('2d')!.drawImage(bmp, 0, 0, preview.width, preview.height);
+        bmp.close();
         preview.hidden = false;
-      } else preview.hidden = true;
+      } catch {
+        preview.hidden = true;
+      }
     });
     photoForm.addEventListener('submit', async (ev) => {
       ev.preventDefault();

@@ -1,0 +1,3 @@
+# Findings already in git history that are not secrets (see docs/deployment.md).
+# Public Microsoft Graph permission id for offline_access, flagged by the generic-api-key rule.
+366dd98d148d6acbbbd74eb6b41c6ee87f72ba3d:infra/configure-external-id.ps1:generic-api-key:54

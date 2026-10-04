@@ -49,11 +49,12 @@ function G([string]$Method, [string]$Path, $Body) {
 }
 
 $graphAppId = '00000003-0000-0000-c000-000000000000'
+# Well-known, public Microsoft Graph delegated permission ids (the same in every tenant).
 $scopes = [ordered]@{
-  openid = '37f7f235-527c-4136-accd-4a02d197296e'
-  offline_access = '7427e0e9-2fba-42fe-b0c0-848c9e6a8182'
-  profile = '14dad69e-099b-42c9-810b-d002981feec1'
-  email = '64a6cdd6-aab1-4aaf-94b8-3cc8405e90d0'
+  openid = '37f7f235-527c-4136-accd-4a02d197296e' # gitleaks:allow (public Microsoft Graph permission id)
+  offline_access = '7427e0e9-2fba-42fe-b0c0-848c9e6a8182' # gitleaks:allow (public Microsoft Graph permission id)
+  profile = '14dad69e-099b-42c9-810b-d002981feec1' # gitleaks:allow (public Microsoft Graph permission id)
+  email = '64a6cdd6-aab1-4aaf-94b8-3cc8405e90d0' # gitleaks:allow (public Microsoft Graph permission id)
 }
 $callback = "$($SiteUrl.TrimEnd('/'))/.auth/login/extid/callback"
 
