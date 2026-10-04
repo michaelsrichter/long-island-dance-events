@@ -125,6 +125,8 @@ export function entityNameFromSource(name: string): string {
 }
 
 const NON_EVENT = /\b(closed|private (?:party|event)|trivia|bingo|kara[- ]?ok[ei]{1,2}|karoake|karoke|mundy-oke|comedy|comedian|stand-?up|paint (?:and|&) sip|yoga|gift cards?|holiday hours|now hiring|drag (?:brunch|show|bingo|queen)|picture show|screening|film|movie|circus|game show|psychic|medium)\b/i;
+/** Food and drink specials: listed only when they also name a band, DJ, live music or dancing. */
+const FOOD_OR_DRINK = /\b(happy hour|brunch|prix fixe|supper|prime rib|steak night|wing night|wings|tacos?|lobster|clam ?bake|buffet|dinner special|drink specials?|wine tasting|beer tasting|tasting menu)\b/i;
 // Never a dance or live-music listing, even when an aggregator's text mentions "music".
 const NEVER_EVENT = /\b(street fair|carnival|craft fair|farmer['’]?s market|flea market|yard sale|car show|vintage pop[- ]?up|pop[- ]?up (?:shop|market)|football|soccer|baseball|hockey|golf outing)\b/i;
 const FESTIVAL = /\b(festival|fest\b|dance weekend|congress|dance camp|marathon)\b/i;
@@ -452,8 +454,10 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     // Trivia, bingo, comedy and film nights are skipped on every calendar, even when a source's
     // "include" pattern matches ("Rocky Horror" contains "rock"), unless the title names a dance.
     const nonEvent = NON_EVENT.test(f.title) && !DANCE_TEXT.test(f.title);
-    // A happy hour counts only when it names a band, DJ or live music ("Happy Hour Band: ...").
-    const plainHappyHour = /\bhappy hour\b/i.test(f.title) && !MUSIC_TEXT.test(`${f.title} ${f.description ?? ''}`) && !reg.matchPerformers(`${f.title} ${f.description ?? ''}`).length;
+    // A happy hour or food special counts only when it names a band, DJ, live music or dancing
+    // ("Happy Hour Band: ...", "Jazz Brunch", "Dinner Dance"), not "Prime Rib Night".
+    const listingWords = `${f.title} ${f.description ?? ''}`;
+    const plainHappyHour = FOOD_OR_DRINK.test(f.title) && !MUSIC_TEXT.test(listingWords) && !DANCE_TEXT.test(listingWords) && !reg.matchPerformers(listingWords).length;
     if ((include && !include.test(text)) || (exclude && exclude.test(text)) || nonEvent || plainHappyHour || NEVER_EVENT.test(f.title)) {
       skipped.push({ reason: 'not a dance or live-music listing', ref: `${ref} ${f.title}`.slice(0, 160) });
       continue;

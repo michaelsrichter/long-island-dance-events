@@ -384,7 +384,7 @@ describe("the listing's own words decide what it is", () => {
   });
   it('skips karaoke, bingo, film and no-music happy hours on every calendar, even misspelled', async () => {
     const { toCandidates } = await import('../../ingest/lib/structured');
-    const ctx = context({ adapter: 'ical', type: 'ical', focus: 'music', include: 'music|rock', defaults: { venueId: 'sample-pub' } });
+    const ctx = context({ adapter: 'ical', type: 'ical', focus: 'music', include: 'music|rock|jazz', defaults: { venueId: 'sample-pub' } });
     const r = toCandidates(
       [
         listing('Sample Singer Karoake', 'Sing along with live music.'),
@@ -392,11 +392,14 @@ describe("the listing's own words decide what it is", () => {
         listing('Pretend Horror Picture Show', 'A rock musical film.', { start: '2026-10-18T20:00' }),
         listing('Honky Tonk Happy Hour', 'Drink specials 3-7 PM.', { start: '2026-10-19T15:00' }),
         listing('Happy Hour Band: The Fictionals', 'Live music 6-10 PM.', { start: '2026-10-20T18:00' }),
+        listing('Pretend City Brunch', 'Nashville style breakfast every Sunday.', { start: '2026-10-21T12:00' }),
+        listing('Prime Rib Night', 'Dinner special while supplies last.', { start: '2026-10-22T17:00' }),
+        listing('Jazz Brunch', 'With the Sample Trio.', { start: '2026-10-23T12:00' }),
       ],
       ctx,
       { structured: true },
     );
-    expect(r.candidates.map((c) => c.date)).toEqual(['2026-10-20']);
+    expect(r.candidates.map((c) => c.date)).toEqual(['2026-10-20', '2026-10-23']);
   });
   it('lists music on a dance-focused town calendar as music, not as a dance', async () => {
     const { toCandidates } = await import('../../ingest/lib/structured');
