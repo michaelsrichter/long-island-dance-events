@@ -1,6 +1,6 @@
 {
-  "title": "Dance with live music by Tom McGuire at Mezza Luna",
-  "summary": "Dance to live music by Tom McGuire.",
+  "title": "Tom McGuire at Mezza Luna",
+  "summary": "Live music by Tom McGuire at Mezza Luna. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-10-16T18:00",
   "end": "2026-10-16T21:00",
@@ -18,7 +18,7 @@
   "sourceName": "Mezza Luna (Hauppauge) - events",
   "sourceRef": "events page 2026-10-16",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "confidence": 0.8,
   "matchKey": "mezza-luna|mezza-luna-hauppauge||friday|18:00|live-music|tom-mcguire||2026-10-16"
 }

@@ -1,0 +1,23 @@
+{
+  "title": "Mike DelGuidice at Live On The Porch",
+  "summary": "Live music by Mike DelGuidice at Live On The Porch. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-23T20:00",
+  "timezone": "America/New_York",
+  "venueId": "live-on-the-porch-smithtown",
+  "town": "Smithtown",
+  "performerIds": [
+    "mike-delguidice"
+  ],
+  "price": 45,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "live-on-the-porch",
+  "sourceUrl": "https://liveontheporch.com/events/",
+  "sourceName": "Live On The Porch (Smithtown) - show calendar",
+  "sourceRef": "event data on the page 2026-10-23",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.9,
+  "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||friday|20:00|live-music|mike-delguidice||2026-10-23"
+}

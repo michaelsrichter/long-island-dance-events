@@ -8,7 +8,7 @@
   "town": "Smithtown",
   "price": 45,
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "live-on-the-porch",
   "sourceUrl": "https://liveontheporch.com/events/",
   "sourceName": "Live On The Porch (Smithtown) - show calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-10-03",
   "confidence": 0.85,
   "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||friday|20:00|live-music|mikedelguidiceclassicliveontheporchshow||2026-10-23",
-  "reviewNotes": "Band or DJ not researched yet: Mike DelGuidice — Classic Live on The Porch Show."
+  "reviewNotes": "Band or DJ not researched yet: Mike DelGuidice — Classic Live on The Porch Show. Not found in the latest live-on-the-porch run on 2026-10-04. Check whether it was cancelled or moved."
 }

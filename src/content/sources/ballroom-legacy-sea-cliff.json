@@ -15,11 +15,11 @@
   "focus": "dance",
   "lastCounts": {
     "found": 20,
-    "kept": 5,
+    "kept": 6,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T03:43:19.957Z",
+  "lastScraped": "2026-10-04T14:56:52.343Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. The Wix page is JS-heavy, but the event sitemap confirms future Latin Dance Fever pages.",

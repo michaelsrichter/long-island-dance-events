@@ -1,6 +1,6 @@
 {
-  "title": "Dance with live music at Ristegio's Restaurant & Lounge",
-  "summary": "Dance to live music.",
+  "title": "Live music at Ristegio's Restaurant & Lounge",
+  "summary": "Live music at Ristegio's Restaurant & Lounge. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-11-20T15:00",
   "end": "2026-11-20T18:00",
@@ -21,7 +21,7 @@
   "sourceName": "Dance Party Explosion - upcoming shows",
   "sourceRef": "event data on the page 2026-11-20",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "dancingCues": [
     "afternoon"
   ],

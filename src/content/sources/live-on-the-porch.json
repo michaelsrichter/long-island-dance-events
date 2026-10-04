@@ -15,10 +15,10 @@
   "lastCounts": {
     "found": 17,
     "kept": 17,
-    "needsReview": 0,
+    "needsReview": 4,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T03:48:04.152Z",
+  "lastScraped": "2026-10-04T15:00:56.605Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority for live music. It is structured and current, but it is a listening/concert room.",

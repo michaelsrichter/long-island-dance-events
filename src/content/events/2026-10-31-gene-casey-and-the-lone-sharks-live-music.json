@@ -1,6 +1,6 @@
 {
-  "title": "Dance with live music by Gene Casey & the Lone Sharks at Billy’s By The Bay",
-  "summary": "Dance to live music by Gene Casey & the Lone Sharks.",
+  "title": "Gene Casey & the Lone Sharks at Billy’s By The Bay",
+  "summary": "Live music by Gene Casey & the Lone Sharks at Billy’s By The Bay. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-10-31T14:00",
   "end": "2026-10-31T18:00",
@@ -18,7 +18,7 @@
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
   "sourceRef": "calendar feed 2026-10-31",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "dancingCues": [
     "afternoon"
   ],

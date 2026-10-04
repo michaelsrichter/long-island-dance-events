@@ -1,6 +1,6 @@
 {
-  "title": "Dance with live music by Gene Casey & the Lone Sharks at Bedell Cellars",
-  "summary": "Dance to live music by Gene Casey & the Lone Sharks.",
+  "title": "Gene Casey & the Lone Sharks at Bedell Cellars",
+  "summary": "Live music by Gene Casey & the Lone Sharks at Bedell Cellars. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-10-25T13:00",
   "end": "2026-10-25T17:00",
@@ -23,11 +23,10 @@
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
   "sourceRef": "calendar feed 2026-10-25",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "dancingCues": [
     "afternoon"
   ],
   "confidence": 0.9,
-  "matchKey": "gene-casey-lone-sharks|bedell-cellars-cutchogue||sunday|13:00|live-music|gene-casey-and-the-lone-sharks||repeat",
-  "reviewNotes": "New venue was added automatically. Check it."
+  "matchKey": "gene-casey-lone-sharks|bedell-cellars-cutchogue||sunday|13:00|live-music|gene-casey-and-the-lone-sharks||repeat"
 }

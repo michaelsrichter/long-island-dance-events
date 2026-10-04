@@ -1,6 +1,6 @@
 {
-  "title": "Dance with live music by Pour Some 80s on Me at Daisy's Nashville Lounge (Miller Place)",
-  "summary": "Dance to live music by Pour Some 80s on Me.",
+  "title": "Pour Some 80s on Me at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Pour Some 80s on Me at Daisy's Nashville Lounge (Miller Place). The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-10-09T21:00",
   "timezone": "America/New_York",
@@ -16,7 +16,7 @@
   "sourceName": "Pour Some 80s On Me - show calendar",
   "sourceRef": "events page 2026-10-09",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "confidence": 0.8,
   "matchKey": "pour-some-80s|daisys-nashville-lounge-miller-place||friday|21:00|live-music|pour-some-80s-on-me||2026-10-09"
 }

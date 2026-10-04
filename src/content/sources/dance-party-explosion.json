@@ -19,7 +19,7 @@
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T03:43:46.939Z",
+  "lastScraped": "2026-10-04T14:57:10.150Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep because the schedule is clean JSON-LD and the band has an explicit dance-floor signal.",

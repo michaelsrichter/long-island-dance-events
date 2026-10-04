@@ -1,0 +1,23 @@
+{
+  "title": "Electric Dudes at MR BEERYS",
+  "summary": "Live music by Electric Dudes at MR BEERYS. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-16",
+  "timezone": "America/New_York",
+  "venueId": "mr-beerys-bethpage",
+  "town": "Bethpage",
+  "performerIds": [
+    "electric-dudes"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "electric-dudes",
+  "sourceUrl": "https://electricdudes.com/events",
+  "sourceName": "Electric Dudes - Long Island music dates",
+  "sourceRef": "events page 2026-10-16",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.6,
+  "matchKey": "electric-dudes|mr-beerys-bethpage||friday|tba|live-music|electric-dudes||2026-10-16",
+  "reviewNotes": "No start time found."
+}

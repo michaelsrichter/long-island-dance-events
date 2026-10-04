@@ -15,11 +15,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 6,
-    "kept": 1,
+    "kept": 2,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T03:44:29.569Z",
+  "lastScraped": "2026-10-04T14:57:40.947Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep because it has a small clear Nassau schedule for a danceable cover band.",

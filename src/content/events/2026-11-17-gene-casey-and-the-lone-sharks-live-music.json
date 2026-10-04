@@ -1,6 +1,6 @@
 {
-  "title": "East Coast Swing dance with live music by Gene Casey & the Lone Sharks at Huntington Moose Lodge",
-  "summary": "Dance to live music by Gene Casey & the Lone Sharks. Dance styles: East Coast Swing.",
+  "title": "Gene Casey & the Lone Sharks at Huntington Moose Lodge",
+  "summary": "Live music by Gene Casey & the Lone Sharks at Huntington Moose Lodge. The dancing score on this page says whether people usually dance. Dance styles: East Coast Swing.",
   "category": "live-music",
   "danceStyles": [
     "east-coast-swing"
@@ -22,7 +22,7 @@
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
   "sourceRef": "calendar feed 2026-11-17",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "confidence": 0.9,
   "matchKey": "gene-casey-lone-sharks|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|live-music|gene-casey-and-the-lone-sharks|east-coast-swing|2026-11-17"
 }

@@ -14,12 +14,12 @@
   "focus": "music",
   "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
   "lastCounts": {
-    "found": 37,
-    "kept": 3,
+    "found": 36,
+    "kept": 2,
     "needsReview": 1,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T03:44:40.121Z",
+  "lastScraped": "2026-10-04T14:57:51.954Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep only as a low-priority live-music source. It is current but mostly listening/background music.",

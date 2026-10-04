@@ -1,6 +1,6 @@
 {
-  "title": "Dance with live music by Beer Nutz at The Villager",
-  "summary": "Dance to live music by Beer Nutz.",
+  "title": "Beer Nutz at The Villager",
+  "summary": "Live music by Beer Nutz at The Villager. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-10-17T19:00",
   "timezone": "America/New_York",
@@ -16,7 +16,7 @@
   "sourceName": "Beer Nutz - 2026 gigs",
   "sourceRef": "events page 2026-10-17",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "confidence": 0.8,
   "matchKey": "beernutz|the-villager-farmingdale||saturday|19:00|live-music|beer-nutz||2026-10-17"
 }

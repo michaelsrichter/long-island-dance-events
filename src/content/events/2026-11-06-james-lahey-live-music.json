@@ -1,6 +1,6 @@
 {
-  "title": "Dance with live music by James Lahey at Mezza Luna",
-  "summary": "Dance to live music by James Lahey.",
+  "title": "James Lahey at Mezza Luna",
+  "summary": "Live music by James Lahey at Mezza Luna. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-11-06T18:00",
   "end": "2026-11-06T21:00",
@@ -18,7 +18,7 @@
   "sourceName": "Mezza Luna (Hauppauge) - events",
   "sourceRef": "events page 2026-11-06",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "confidence": 0.8,
   "matchKey": "mezza-luna|mezza-luna-hauppauge||friday|18:00|live-music|james-lahey||2026-11-06"
 }

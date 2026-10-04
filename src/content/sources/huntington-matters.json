@@ -11,11 +11,11 @@
   "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
   "lastCounts": {
     "found": 12,
-    "kept": 2,
+    "kept": 3,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T03:44:52.204Z",
+  "lastScraped": "2026-10-04T14:58:04.510Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep with keyword filters; occasional dance/music items in a broad calendar.",

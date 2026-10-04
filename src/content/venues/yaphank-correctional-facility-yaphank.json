@@ -1,0 +1,11 @@
+{
+  "name": "Yaphank Correctional Facility",
+  "address": "200 Glover Drive",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Huntington Matters events. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Yaphank",
+  "latitude": 40.818839,
+  "longitude": -72.918228,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

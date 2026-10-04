@@ -1,6 +1,6 @@
 {
-  "title": "Dance with live music by Gene Casey & the Lone Sharks at American Legion 360",
-  "summary": "Dance to live music by Gene Casey & the Lone Sharks.",
+  "title": "Gene Casey & the Lone Sharks at American Legion 360",
+  "summary": "Live music by Gene Casey & the Lone Sharks at American Legion 360. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-11-14T19:00",
   "end": "2026-11-14T19:00",
@@ -18,8 +18,7 @@
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
   "sourceRef": "calendar feed 2026-11-14",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "confidence": 0.9,
-  "matchKey": "gene-casey-lone-sharks|american-legion-360-huntington||saturday|19:00|live-music|gene-casey-and-the-lone-sharks||2026-11-14",
-  "reviewNotes": "New venue was added automatically. Check it."
+  "matchKey": "gene-casey-lone-sharks|american-legion-360-huntington||saturday|19:00|live-music|gene-casey-and-the-lone-sharks||2026-11-14"
 }

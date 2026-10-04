@@ -1,0 +1,26 @@
+{
+  "title": "Social dance at Yaphank Correctional Facility",
+  "summary": "An evening of social dancing.",
+  "category": "social-dance",
+  "start": "2026-10-04T11:00",
+  "end": "2026-10-04T15:00",
+  "timezone": "America/New_York",
+  "venueId": "yaphank-correctional-facility-yaphank",
+  "town": "Yaphank",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/suffolk-county-sheriffs-office-open-house-family-day-free/?occurrence=2026-10-04",
+  "status": "active",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/suffolk-county-sheriffs-office-open-house-family-day-free/?occurrence=2026-10-04",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-10-04",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "huntington-matters|yaphank-correctional-facility-yaphank||sunday|11:00|social-dance|||2026-10-04",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

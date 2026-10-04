@@ -12,9 +12,9 @@
     "found": 11,
     "kept": 6,
     "needsReview": 3,
-    "outOfArea": 5
+    "outOfArea": 3
   },
-  "lastScraped": "2026-10-04T03:43:57.350Z",
+  "lastScraped": "2026-10-04T14:57:20.469Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a cross-check. It catches LI swing nights that are otherwise social-only, but it is free text.",

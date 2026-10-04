@@ -1,6 +1,6 @@
 {
-  "title": "Dance with live music by Radio Active at Daisy's Nashville Lounge (Patchogue)",
-  "summary": "Dance to live music by Radio Active.",
+  "title": "Radio Active at Daisy's Nashville Lounge (Patchogue)",
+  "summary": "Live music by Radio Active at Daisy's Nashville Lounge (Patchogue). The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-11-20T20:00",
   "timezone": "America/New_York",
@@ -16,7 +16,7 @@
   "sourceName": "Radio Active - events calendar",
   "sourceRef": "events page 2026-11-20",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "confidence": 0.8,
   "matchKey": "radio-active|daisys-nashville-lounge-patchogue||friday|20:00|live-music|radio-active||2026-11-20"
 }

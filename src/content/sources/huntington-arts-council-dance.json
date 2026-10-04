@@ -15,7 +15,7 @@
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T03:44:46.969Z",
+  "lastScraped": "2026-10-04T14:57:59.083Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep only as a fallback. The feed is clean but mostly duplicates SDLI.",

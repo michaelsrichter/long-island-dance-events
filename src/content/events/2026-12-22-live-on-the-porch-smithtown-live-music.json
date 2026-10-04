@@ -1,6 +1,6 @@
 {
-  "title": "Dance with live music by John vs Paul at Live On The Porch",
-  "summary": "Dance to live music by John vs Paul.",
+  "title": "John vs Paul at Live On The Porch",
+  "summary": "Live music by John vs Paul at Live On The Porch. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-12-22T20:00",
   "timezone": "America/New_York",
@@ -13,7 +13,7 @@
   "sourceName": "Live On The Porch (Smithtown) - show calendar",
   "sourceRef": "event data on the page 2026-12-22",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-03",
+  "lastSeen": "2026-10-04",
   "confidence": 0.85,
   "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||tuesday|20:00|live-music|johnvspaul||2026-12-22",
   "reviewNotes": "Band or DJ not researched yet: John vs Paul."
