@@ -127,6 +127,11 @@ jobs:
           fi
           cat .cache/ingest/report.md >> "$GITHUB_STEP_SUMMARY"
 
+      # Pull requests opened by this workflow do not start other workflows (GitHub rule), so the
+      # "Venue map locations" job would not run on them. New venues get their map pin here instead.
+      - name: Fill in map coordinates for new venues
+        run: node scripts/geocode-venues.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+
       - name: File or update issues for sources that failed
         env:
           GH_TOKEN: ${{ github.token }}

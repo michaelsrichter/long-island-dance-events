@@ -12,7 +12,7 @@ import { adapter as ical, foundFromIcs, icsTimeToLocal, parseIcs, splitLocation 
 import { adapter as jsonld, eventNodes, jsonLdBlocks, sitemapLinks } from '../../ingest/adapters/jsonld';
 import { collapse } from '../../ingest/lib/collapse';
 import { Registry, ROOT } from '../../ingest/lib/registry';
-import { cleanVenueName, displayActOk, ensurePerformer, entityNameFromSource, findPlaceInText, findVenue, htmlToLines, isoToLocal, performerNameOk } from '../../ingest/lib/structured';
+import { cleanVenueName, displayActOk, ensurePerformer, entityNameFromSource, findPlaceInText, findVenue, htmlToLines, isoToLocal, performerNameOk, tidyTitleAct, titleActOk } from '../../ingest/lib/structured';
 import type { Adapter, AdapterContext, FetchedDocument } from '../../ingest/lib/types';
 
 const TODAY = '2026-10-03';
@@ -92,10 +92,23 @@ describe('names and venues are checked before anything new is created', () => {
   it('only adds bands and DJs with clean names', () => {
     for (const bad of ['-10:30pmLive Music: 4 Shades of GreySaturday', 'Ann Wilson: The Voice of Heart & Tripsitter', 'AMH', 'John vs Paul — Matinee', 'Show No Mercy, Damage Inc., & Chaotica', 'Halloween Party w/ Hello Brooklyn', 'COLUMBUS DAY STREET FAIR & CARNIVAL'])
       expect(performerNameOk(bad), bad).toBe(false);
-    for (const good of ['The Fictionals', 'Gene Casey & the Lone Sharks', 'DJ Sample', '4 Shades of Grey', '10 Cent Redemption', 'Smells Like Nirvana'])
+    for (const good of ['The Fictionals', 'Gene Casey & the Lone Sharks', 'DJ Sample', '4 Shades of Grey', '10 Cent Redemption', 'Smells Like Nirvana', 'Joe Sample & The Groove', 'Annabelle and Friends', 'Rose & Co'])
       expect(performerNameOk(good), good).toBe(true);
+    // Two acts on one bill, or a theme night: title only.
+    for (const bill of ['The Fictionals & Sample Band', 'Pretend Act and DJ Sample', 'Golden Era EDM']) expect(performerNameOk(bill), bill).toBe(false);
     expect(displayActOk('Ann Wilson: The Voice of Heart & Tripsitter')).toBe(true);
     expect(displayActOk('-10:30pmLive Music: RevivalFriday')).toBe(false);
+  });
+  it('keeps event wording, dates, abbreviations and repeats out of titles', async () => {
+    for (const bad of ['Happy Hour with live music by Pretend Act', 'Grammy Nominated', 'Sat 11/ & Sample Band', 's-Giving', 'AMH', 'FDNY'])
+      expect(titleActOk(bad), bad).toBe(false);
+    expect(titleActOk('The Fictionals')).toBe(true);
+    expect(tidyTitleAct('JEFF SAMPLE “Me and My Guitar')).toBe('JEFF SAMPLE');
+    expect(tidyTitleAct('Pretend vs Act (Postponed from 9/27)')).toBe('Pretend vs Act');
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const ctx = context({ adapter: 'jsonld', type: 'jsonld', focus: 'music', defaults: { venueId: 'sample-pub' } });
+    const r = toCandidates([{ title: 'Pretend Act', performers: ['Pretend Act', 'Pretend Act: Twenty Years Tour'], start: '2026-10-16T20:00', pageUrl: 'https://example.test/e' }], ctx, { structured: true });
+    expect(r.candidates[0]!.title).toBe('Dance with live music by Pretend Act at Sample Pub');
   });
   it('matches existing venues by name, alias or street address in the same town', () => {
     const reg = fixtureRegistry();
@@ -123,6 +136,29 @@ describe('names and venues are checked before anything new is created', () => {
     expect(r.candidates).toHaveLength(0);
     expect(r.skipped).toEqual([{ reason: 'venue not researched yet', ref: 'listing 2026-10-20 New Place (Babylon)' }]);
     expect([...ctx.registry.created.venues]).toEqual([]);
+  });
+  it('does not call "world-class musicians" a dance class', async () => {
+    const ctx = context({ adapter: 'ical', type: 'ical', focus: 'music', defaults: { venueId: 'sample-pub' } });
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const found = (description: string, start: string) => ({ title: 'The Fictionals', description, start, pageUrl: 'https://example.test/e' });
+    const r = toCandidates([found('A live show with world-class musicians. A class act!', '2026-10-16T20:00'), found('Line dance lessons at 7, band at 8.', '2026-10-17T19:00')], ctx, { structured: true });
+    expect(r.candidates.map((c) => c.category)).toEqual(['live-music', 'class-lesson']);
+  });
+  it('fixes feeds whose times are 4 or 5 hours early, and holds morning start times for review', async () => {
+    const { toCandidates, fixShiftedClock } = await import('../../ingest/lib/structured');
+    const shifted = { title: 'The Fictionals', description: 'Live from 8:30 PM to 11 PM.', start: '2026-10-16T16:30', end: '2026-10-16T19:00', pageUrl: 'https://example.test/e' };
+    expect(fixShiftedClock(shifted)).toMatchObject({ start: '2026-10-16T20:30', end: '2026-10-16T23:00' });
+    expect(fixShiftedClock({ ...shifted, description: 'Doors at 6:30 PM.' }).start).toBe('2026-10-16T16:30');
+    const ctx = context({ adapter: 'jsonld', type: 'jsonld', focus: 'music', defaults: { venueId: 'sample-pub' } });
+    const r = toCandidates([{ title: 'The Fictionals', start: '2026-10-16T06:30', pageUrl: 'https://example.test/e' }], ctx, { structured: true });
+    expect(r.candidates[0]!.reviewNotes).toContain('Start time looks wrong (6:30 in the morning). Check the source.');
+  });
+  it('skips fairs, markets and sports even when an aggregator filter matches "music"', async () => {
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const ctx = context({ adapter: 'jsonld', type: 'jsonld', focus: 'music', include: 'music', defaults: { venueId: 'sample-pub' } });
+    const r = toCandidates([{ title: 'Pretend Farmer’s Market', description: 'Live music all morning.', start: '2026-10-16T09:00', pageUrl: 'https://example.test/e' }], ctx, { structured: true });
+    expect(r.candidates).toHaveLength(0);
+    expect(r.skipped[0]!.reason).toBe('not a dance or live-music listing');
   });
 });
 
@@ -161,6 +197,10 @@ describe('iCal adapter', () => {
     expect(icsTimeToLocal('20261018T180000Z', {})).toBe('2026-10-18T14:00');
     expect(icsTimeToLocal('20261006T193000', { TZID: 'America/New_York' })).toBe('2026-10-06T19:30');
     expect(icsTimeToLocal('20261006T193000', { TZID: 'America/Chicago' })).toBe('2026-10-06T20:30');
+    // TZID=UTC from WordPress sites left on UTC means the clock time the venue typed.
+    expect(icsTimeToLocal('20261009T160000', { TZID: 'UTC' })).toBe('2026-10-09T16:00');
+    const placeholder = 'BEGIN:VCALENDAR\r\nBEGIN:VEVENT\r\nDTSTART;TZID=UTC:20261101T000000\r\nDTEND;TZID=UTC:20261101T000000\r\nSUMMARY:The Fictionals\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n';
+    expect(foundFromIcs(placeholder, 'https://example.test/feed.ics', TODAY).map((f) => [f.start, f.end])).toEqual([['2026-11-01', undefined]]);
     expect(icsTimeToLocal('20261107', { VALUE: 'DATE' })).toBe('2026-11-07');
   });
   it('splits a location into name, street and town', () => {

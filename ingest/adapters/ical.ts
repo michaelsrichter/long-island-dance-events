@@ -66,6 +66,10 @@ export function icsTimeToLocal(value: string, params: Record<string, string>): s
   const time = `${m[4]}:${m[5]}`;
   if (m[7]) return toNewYork(new Date(`${date}T${time}:${m[6] ?? '00'}Z`));
   const tz = params.TZID;
+  // WordPress "The Events Calendar" writes TZID=UTC when the site's time zone is left at UTC, but
+  // the times are what the venue typed (Mulcahy's "Happy Hour 4-7 PM" = TZID=UTC:...T160000).
+  // Real UTC uses the Z suffix (handled above), so a UTC/GMT label is read as local clock time.
+  if (tz && /^(?:Etc\/)?(?:UTC|GMT|Z)$/i.test(tz)) return `${date}T${time}`;
   if (tz && tz !== 'America/New_York') {
     try {
       return toNewYork(zonedToUtc(date, time, tz));
@@ -112,10 +116,13 @@ export function foundFromIcs(raw: string, feedUrl: string, today: string, horizo
     const ds = first(e, 'DTSTART');
     const summary = first(e, 'SUMMARY');
     if (!ds || !summary) continue;
-    const start = icsTimeToLocal(ds.value, ds.params);
-    if (!start) continue;
+    const start0 = icsTimeToLocal(ds.value, ds.params);
+    if (!start0) continue;
     const de = first(e, 'DTEND');
     let end = de ? icsTimeToLocal(de.value, de.params) : undefined;
+    // Midnight to midnight is a "no time given" placeholder (the text then says "1 PM"); keep the date only.
+    const start = start0.endsWith('T00:00') && (!end || end === start0) ? start0.slice(0, 10) : start0;
+    if (start !== start0) end = undefined;
     // All-day events end the next day in iCalendar; keep them single-day.
     if (end && end.length === 10 && start.length === 10) end = undefined;
     const uid = first(e, 'UID')?.value ?? '';

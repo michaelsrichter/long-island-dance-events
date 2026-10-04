@@ -119,8 +119,11 @@ export function entityNameFromSource(name: string): string {
 }
 
 const NON_EVENT = /\b(closed|private (?:party|event)|trivia|bingo|karaoke|comedy|paint (?:and|&) sip|yoga|gift cards?|holiday hours|now hiring)\b/i;
+// Never a dance or live-music listing, even when an aggregator's text mentions "music".
+const NEVER_EVENT = /\b(street fair|carnival|craft fair|farmer['’]?s market|flea market|yard sale|car show|vintage pop[- ]?up|pop[- ]?up (?:shop|market)|football|soccer|baseball|hockey|golf outing)\b/i;
 const FESTIVAL = /\b(festival|fest\b|dance weekend|congress|dance camp|marathon)\b/i;
-const CLASS = /\b(class(?:es)?|lessons?|workshops?|boot ?camp|instruction)\b/i;
+// "world-class musicians" and "a class act" are not classes.
+const CLASS = /(?<!-)\b(class(?:es)?(?![-\w]|\s+act\b)|lessons?|workshops?|boot ?camp|instruction)\b/i;
 const SOCIAL = /\b(social|dance party|dance night|milonga|practica|open dancing|dancing to)\b/i;
 const LIVE = /\b(live (?:music|band|entertainment)|band\b|concert|tribute|orchestra|in concert|acoustic|performs|on stage)\b/i;
 
@@ -148,6 +151,22 @@ function skillOf(text: string, category: EventCategory): SkillLevel {
 }
 
 const timeOf = (local: string | undefined) => (local && local.length >= 16 ? local.slice(11, 16) : undefined);
+const minutesOf = (hhmm: string) => Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5));
+const shiftLocal = (local: string, minutes: number) => new Date(Date.parse(`${local.slice(0, 16)}:00Z`) + minutes * 60000).toISOString().slice(0, 16);
+
+/**
+ * Some WordPress feeds treat the venue's clock time as UTC and convert it, so every time comes out
+ * 4 or 5 hours early (Huntington Matters: "8:30 AM" in the text, 04:30 in the data). When the time
+ * written in the listing is exactly that much later than the feed time, the written time wins.
+ */
+export function fixShiftedClock(f: FoundEvent): FoundEvent {
+  const feed = timeOf(f.start);
+  const written = feed ? parseTimes(`${f.title}. ${f.description ?? ''}`).start : undefined;
+  if (!feed || !written) return f;
+  const diff = (minutesOf(written) - minutesOf(feed) + 1440) % 1440;
+  if (diff !== 240 && diff !== 300) return f;
+  return { ...f, start: shiftLocal(f.start, diff), end: f.end && f.end.length >= 16 ? shiftLocal(f.end, diff) : f.end };
+}
 
 const ACT_PREFIX = /^(?:live (?:music|band|entertainment)(?: with| by| featuring)?|(?:(?:mon|tues|wednes|thurs|fri|satur|sun)day |happy hour |live |house )?band|featuring|presents?|tonight|appearing|on stage|music by)\s*[:\-–—]?\s*/i;
 const NOT_AN_ACT =
@@ -196,7 +215,7 @@ export function displayActOk(name: string): boolean {
 
 const JOINED_ACTS = /[:;|/+@#!?()[\]]|,|\s[-–—]\s|\b(?:vs\.?|versus|w\/|with|featuring|feat\.?|ft\.?|presents|plus|tribute to|the music of|matinee|tour|edition|anniversary|night|party|festival|fest|show|live at)\b/i;
 const EVENT_WORDS =
-  /\b(grammy|nominated|award|winning|pop[- ]?up|supper|prix fixe|showcase|holidays|reunion|pipes|drums and|package|special|series|benefit|fundraiser|closed|private|trivia|bingo|karaoke|comedy|brunch|specials?|menu|tickets?|sold out|doors|free|admission|reservations?|open mic|open jam|jam session|jam|dinner|buffet|cover|read more|more info|details|rsvp|register|coming soon|tba|tbd|to be announced|fair|carnival|club|social|bash|celebration|parade|market|halloween|thanksgiving|christmas|holiday|new year|(?:mon|tues|wednes|thurs|fri|satur|sun)day|january|february|march|april|june|july|august|september|october|november|december)\b/i;
+  /\b(grammy|nominated|award|winning|edm|pop[- ]?up|supper|prix fixe|showcase|holidays|reunion|pipes|drums and|package|special|series|benefit|fundraiser|closed|private|trivia|bingo|karaoke|comedy|brunch|specials?|menu|tickets?|sold out|doors|free|admission|reservations?|open mic|open jam|jam session|jam|dinner|buffet|cover|read more|more info|details|rsvp|register|coming soon|tba|tbd|to be announced|fair|carnival|club|social|bash|celebration|parade|market|halloween|thanksgiving|christmas|holiday|new year|(?:mon|tues|wednes|thurs|fri|satur|sun)day|january|february|march|april|june|july|august|september|october|november|december)\b/i;
 
 /**
  * Strict check before adding a band or DJ to the registry. A name that fails (two acts joined,
@@ -209,6 +228,9 @@ export function performerNameOk(name: string): boolean {
   if (!displayActOk(s) || s.length < 3 || s.length > 50) return false;
   if (!/^[A-Z0-9]/.test(s) || /["“”«»]/.test(s)) return false; // "s-Giving", unbalanced quotes
   if ((s.match(/&| and /gi) ?? []).length > 1) return false; // "Ernie & The Band & Dysfunktone"
+  // One "&" is a single act only in forms like "Joe Louis & The Groove", "Annabelle and Friends" or
+  // "Rose & Co". "Foreign Journey & AeroZep" is two bands on one bill, so it stays in the title.
+  if (/\s(?:&|and)\s/i.test(s) && !/\s(?:&|and)\s+(?:the|his|her|their|friends|co\.?|company)\b/i.test(s)) return false;
   if (!s.includes(' ') && (GENERIC_ONE_WORD.test(s) || s.length < 4)) return false;
   if (JOINED_ACTS.test(s) || EVENT_WORDS.test(s)) return false;
   if (!s.includes(' ') && s === s.toUpperCase() && s.replace(/[^A-Z]/g, '').length <= 4) return false; // "AMH", "LHT"
@@ -217,6 +239,46 @@ export function performerNameOk(name: string): boolean {
 }
 
 const noBand = (s: string) => s.replace(/band$/, '');
+
+const TITLE_JUNK = /\b(happy hour|live music by|grammy|nominated|award|showcase|pop[- ]?up|brunch|special|secret|tickets?|doors|sold out|read more|more info|rsvp|tba|tbd)\b/i;
+const DATE_BITS = /\b\d{1,2}\/\d{0,2}(?!\d)|\b(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*\.?\s+\d/i;
+
+/** "JEFF REID “Me and My Guitar" -> "JEFF REID"; "John vs Paul (Postponed from 9/27)" -> "John vs Paul". */
+export function tidyTitleAct(name: string): string {
+  let s = name.replace(/\s*\((?:postponed|rescheduled|moved|new date|sold out|cancel)[^)]*\)/gi, '').trim();
+  if ((s.match(/["“”]/g) ?? []).length % 2 === 1) s = s.slice(0, s.search(/["“”]/)).trim();
+  return s;
+}
+
+/**
+ * Can this act text go in an event title even though it is not a researched band? Drops event
+ * wording ("Happy Hour with live music by …", "Grammy Nominated"), dates ("Sat 11/"), lowercase
+ * fragments ("s-Giving") and bare abbreviations ("AMH", "FDNY").
+ */
+export function titleActOk(name: string): boolean {
+  const s = name.trim();
+  if (!displayActOk(s) || !/^[A-Z0-9]/.test(s) || TITLE_JUNK.test(s) || DATE_BITS.test(s)) return false;
+  return !(/^[A-Z]{2,5}$/.test(s));
+}
+
+/** Drop act texts that repeat one already shown ("Skillet" and "Skillet: Comatose 20 Years Tour"). */
+function distinctActs(shown: string[], acts: string[]): string[] {
+  const out: string[] = [];
+  const prefix = (a: string, b: string) => {
+    let i = 0;
+    while (i < a.length && a[i] === b[i]) i++;
+    return i;
+  };
+  for (const a of acts) {
+    const c = compactName(a);
+    const dup = [...shown, ...out].some((b) => {
+      const d = compactName(b);
+      return (d.length >= 5 && c.startsWith(d)) || (c.length >= 5 && d.startsWith(c)) || prefix(c, d) >= 12;
+    });
+    if (c && !dup) out.push(a);
+  }
+  return out;
+}
 
 export function findPerformer(reg: Registry, name: string): string | undefined {
   const n = compactName(name);
@@ -333,7 +395,8 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
   const unresearched = new Set<string>();
   const unresearchedActs = new Set<string>();
 
-  for (const f of found) {
+  for (const listing of found) {
+    const f = fixShiftedClock(listing);
     const date = f.start.slice(0, 10);
     const ref = `${f.ref ?? 'listing'} ${date}`;
     const text = cleanListingText([f.title, f.description, f.locationName, f.address, f.locality].filter(Boolean).join('. '));
@@ -345,7 +408,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       continue;
     }
     if (date < ctx.today || date > horizon) continue;
-    if ((include && !include.test(text)) || (exclude && exclude.test(text)) || (!include && NON_EVENT.test(f.title))) {
+    if ((include && !include.test(text)) || (exclude && exclude.test(text)) || (!include && NON_EVENT.test(f.title)) || NEVER_EVENT.test(f.title)) {
       skipped.push({ reason: 'not a dance or live-music listing', ref });
       continue;
     }
@@ -407,7 +470,13 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     // Who: researched bands/DJs, plus new ones only when the name passes a strict check.
     // Other act names stay in the title only.
     const performerIds = [...defaultPerformers];
-    const titleOnlyActs: string[] = [];
+    const listedActs: string[] = [];
+    // Act text for the title only: tidied, and dropped when it is event wording or an abbreviation.
+    const addTitleAct = (text: string, rawText = text) => {
+      unresearchedActs.add(text);
+      const t = tidyTitleAct(text);
+      if (titleActOk(t) && titleActOk(tidyTitleAct(rawText))) listedActs.push(t);
+    };
     const venueName = venueId ? reg.venues.get(venueId)?.name ?? '' : locName ?? '';
     const named = f.performers?.length ? f.performers : defaults.venueId && focus === 'music' ? [actName(f.title)].filter((x): x is string => Boolean(x)) : [];
     for (const raw of named) {
@@ -421,22 +490,20 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
           const pid = knownParts[i];
           if (pid) {
             if (!performerIds.includes(pid)) performerIds.push(pid);
-          } else if (displayActOk(x)) {
-            titleOnlyActs.push(x);
-            unresearchedActs.add(x);
-          }
+          } else if (displayActOk(x)) addTitleAct(x);
         });
         continue;
       }
       const id = ensurePerformer(reg, raw, src.name); // raw: the abbreviation check needs "FDNY", not "Fdny"
       if (id) {
         if (!performerIds.includes(id)) performerIds.push(id);
-      } else {
-        titleOnlyActs.push(name);
-        unresearchedActs.add(name);
-      }
+      } else addTitleAct(name, raw);
     }
     for (const id of reg.matchPerformers(`${f.title} ${(f.performers ?? []).join(' ')}`)) if (!performerIds.includes(id)) performerIds.push(id);
+    const titleOnlyActs = distinctActs(
+      performerIds.map((id) => reg.performers.get(id)?.name ?? id),
+      listedActs,
+    );
     if (titleOnlyActs.length) notes.push(`Band or DJ not researched yet: ${titleOnlyActs.join(', ')}.`);
     const organizerId =
       (defaults.organizerId && reg.organizers.has(defaults.organizerId) ? defaults.organizerId : undefined) ??
@@ -463,6 +530,12 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       confidence -= 0.1;
       notes.push('No start time found.');
     }
+    // A dance or show starting between 1 and 8 in the morning is almost always a typo on the source
+    // ("6:30 AM" for 6:30 PM), so a person checks it before it is shown.
+    if (start && minutesOf(start) >= 60 && minutesOf(start) < 480) {
+      notes.push(`Start time looks wrong (${Number(start.slice(0, 2))}:${start.slice(3, 5)} in the morning). Check the source.`);
+      confidence = Math.min(confidence, 0.4);
+    }
     const prices = f.price !== undefined || f.isFree ? { price: f.price, priceMax: f.priceMax, isFree: f.isFree, notes: [] as string[] } : parsePrices(f.priceText ?? f.description ?? '');
     const skillLevel = skillOf(text, category);
     const theme = themeOf(f.title);
@@ -483,7 +556,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     const plain = { ...describe, theme: undefined };
     const venueKey = venueId ?? slugify(place.name);
     // The same listing often appears twice on a page (a list and a calendar grid).
-    const dupKey = [date, start ?? '', venueKey, [...performerIds].sort().join('+'), category].join('|');
+    const dupKey = [date, start ?? '', venueKey, [...performerIds, ...titleOnlyActs.map(compactName)].sort().join('+'), category].join('|');
     if (seen.has(dupKey)) continue;
     seen.add(dupKey);
     if (date > last) last = date;
@@ -522,7 +595,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       }),
       confidence: Math.max(0, Math.min(1, confidence)),
       reviewNotes: notes,
-      seriesKey: [src.id, venueKey, organizerId ?? '', weekdayOf(date), start ?? 'tba', category, [...performerIds].sort().join('+'), [...danceStyles].sort().join('+')].join('|'),
+      seriesKey: [src.id, venueKey, organizerId ?? '', weekdayOf(date), start ?? 'tba', category, [...performerIds, ...titleOnlyActs.map(compactName)].sort().join('+'), [...danceStyles].sort().join('+')].join('|'),
       oneOff: Boolean(theme),
     });
   }

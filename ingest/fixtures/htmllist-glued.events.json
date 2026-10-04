@@ -67,7 +67,7 @@
     },
     {
       "id": "2026-10-16-sample-pub-live-music",
-      "matchKey": "test-source|sample-pub||friday|21:00|live-music|||2026-10-16",
+      "matchKey": "test-source|sample-pub||friday|21:00|live-music|annexamplethevoiceoffictionandpretendsitter||2026-10-16",
       "dates": [
         "2026-10-16"
       ],
@@ -100,8 +100,8 @@
         "2026-10-17"
       ],
       "data": {
-        "title": "Dance with live music by SPH at Sample Pub",
-        "summary": "Dance to live music by SPH.",
+        "title": "Dance with live music at Sample Pub",
+        "summary": "Dance to live music.",
         "category": "live-music",
         "danceStyles": [],
         "start": "2026-10-17T14:00",
@@ -119,8 +119,7 @@
         "dancingCues": [
           "afternoon"
         ],
-        "confidence": 0.75,
-        "reviewNotes": "Band or DJ not researched yet: SPH."
+        "confidence": 0.75
       }
     }
   ]
