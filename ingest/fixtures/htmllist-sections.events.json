@@ -1,0 +1,108 @@
+{
+  "outOfArea": [],
+  "skipped": [],
+  "created": {
+    "venues": [
+      "the-pretend-hall-huntington"
+    ],
+    "performers": []
+  },
+  "drafts": [
+    {
+      "id": "2026-10-06-example-lodge-lesson-and-dance",
+      "matchKey": "test-source|example-lodge||tuesday|19:30|lesson-party||east-coast-swing|2026-10-06",
+      "dates": [
+        "2026-10-06"
+      ],
+      "data": {
+        "title": "East Coast Swing social dance with a lesson at Example Lodge",
+        "summary": "A group lesson at 7:30 PM, then open social dancing. Dance styles: East Coast Swing. Snacks are included.",
+        "category": "lesson-party",
+        "danceStyles": [
+          "east-coast-swing"
+        ],
+        "start": "2026-10-06T19:30",
+        "end": "2026-10-06T22:30",
+        "timezone": "America/New_York",
+        "lessonTime": "19:30",
+        "venueId": "example-lodge",
+        "town": "Huntington",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://swing-list.example/long-island",
+        "sourceName": "Swing list",
+        "sourceRef": "events page 2026-10-06",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.8
+      }
+    },
+    {
+      "id": "2026-10-21-the-pretend-hall-huntington-lesson-and-dance",
+      "matchKey": "test-source|the-pretend-hall-huntington||wednesday|19:00|lesson-party|||2026-10-21",
+      "dates": [
+        "2026-10-21"
+      ],
+      "data": {
+        "title": "Social dance with a lesson at The Pretend Hall",
+        "summary": "A group lesson at 7:00 PM, then open social dancing.",
+        "category": "lesson-party",
+        "danceStyles": [],
+        "start": "2026-10-21T19:00",
+        "end": "2026-10-21T22:30",
+        "timezone": "America/New_York",
+        "lessonTime": "19:00",
+        "venueId": "the-pretend-hall-huntington",
+        "town": "Huntington",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://swing-list.example/long-island",
+        "sourceName": "Swing list",
+        "sourceRef": "events page 2026-10-21",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.75,
+        "reviewNotes": "New venue was added automatically. Check it."
+      }
+    },
+    {
+      "id": "sample-pub-social-saturdays",
+      "matchKey": "test-source|sample-pub||saturday|19:30|social-dance|||repeat",
+      "dates": [
+        "2026-10-10",
+        "2026-11-14",
+        "2026-12-12"
+      ],
+      "data": {
+        "title": "Social dance at Sample Pub",
+        "summary": "An evening of social dancing.",
+        "category": "social-dance",
+        "danceStyles": [],
+        "start": "2026-10-10T19:30",
+        "end": "2026-10-10T23:30",
+        "timezone": "America/New_York",
+        "venueId": "sample-pub",
+        "town": "Babylon",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://swing-list.example/long-island",
+        "sourceName": "Swing list",
+        "sourceRef": "events page 2026-10-10",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.75,
+        "recurrence": {
+          "rrule": "FREQ=MONTHLY;BYDAY=2SA;UNTIL=20261212",
+          "rdates": [],
+          "exdates": []
+        }
+      }
+    }
+  ]
+}

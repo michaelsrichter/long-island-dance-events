@@ -32,6 +32,8 @@ export interface SourceReport {
   merge?: MergeStats | undefined;
   review: { id: string; reason: string }[];
   invalid: { id: string; error: string }[];
+  /** New listings not added because another source already lists the same evening. */
+  duplicates?: { id: string; of: string }[] | undefined;
 }
 
 export interface RunReport {
@@ -66,6 +68,7 @@ export function reportMarkdown(r: RunReport): string {
   for (const s of r.sources) {
     if (s.message) lines.push(`- **${s.name}:** ${s.message}`);
     if (s.outOfArea.length) lines.push(`- ${s.name}: skipped ${s.outOfArea.reduce((n, o) => n + o.count, 0)} listings outside Long Island (${s.outOfArea.map((o) => `${o.town} ${o.count}`).join(', ')}).`);
+    if (s.duplicates?.length) lines.push(`- ${s.name}: ${s.duplicates.length} listings were already on the site from another source, so they were not added twice (${s.duplicates.slice(0, 5).map((d) => `\`${d.of}\``).join(', ')}${s.duplicates.length > 5 ? ', …' : ''}).`);
     if (s.invalid.length) lines.push(`- ${s.name}: ${s.invalid.length} records failed validation and were not saved: ${s.invalid.map((i) => `\`${i.id}\` (${i.error})`).join('; ')}`);
   }
   const created = Object.entries(r.created).filter(([, v]) => v.length);
@@ -96,7 +99,11 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
   const only = typeof a.source === 'string' ? a.source : undefined;
   const cadences = typeof a.cadence === 'string' ? new Set(a.cadence.split(',').map((c) => c.trim()).filter(Boolean)) : undefined;
 
-  for (const [id, source] of registry.sources) {
+  // A venue's, club's or band's own calendar goes before calendars that list everything, so when two
+  // sources name the same evening the record comes from the people running it.
+  const allInOne = (s: SourceData) => !(s.defaults?.venueId || s.defaults?.organizerId || s.defaults?.performerIds?.length);
+  const ordered = [...registry.sources].sort(([, a], [, b]) => Number(allInOne(a)) - Number(allInOne(b)));
+  for (const [id, source] of ordered) {
     if (only && id !== only) continue;
     if (cadences && !only && !cadences.has(source.cadence)) continue;
     const sr: SourceReport = { id, name: source.name, status: 'skipped', documents: [], found: 0, kept: 0, outOfArea: [], review: [], invalid: [] };
@@ -132,6 +139,7 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
       }
       sr.merge = merged.stats;
       sr.review = merged.review;
+      sr.duplicates = merged.duplicates;
       sr.status = sr.invalid.length > Math.max(3, drafts.length / 10) ? 'invalid' : 'ok';
       if (sr.status === 'invalid') sr.message = `${sr.invalid.length} of ${drafts.length} records failed validation.`;
     } catch (e) {

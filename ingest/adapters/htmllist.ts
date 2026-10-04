@@ -16,7 +16,7 @@
 import { readFileSync } from 'node:fs';
 import { addDays } from '../../src/lib/time';
 import { findTimes, parseTimes } from '../lib/times';
-import { actName, decodeEntities, htmlToLines, plainText, settingsOf, toCandidates, type FoundEvent } from '../lib/structured';
+import { actName, DANCE_TEXT, decodeEntities, findPlaceInText, htmlToLines, plainText, settingsOf, toCandidates, type FoundEvent } from '../lib/structured';
 import type { Adapter, AdapterContext, FetchedDocument, NormalizeResult } from '../lib/types';
 
 const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
@@ -79,8 +79,18 @@ export function findDates(line: string, today: string): DateHit[] {
     p.re.lastIndex = 0;
     for (const m of line.matchAll(p.re)) {
       const parts = p.read(m as RegExpExecArray, line);
-      const date = parts && inferDate(parts, today);
+      let date = parts && inferDate(parts, today);
       if (!date) continue;
+      // "Saturday Dec 18" on an old post: Dec 18 is a Friday this year, so it is not this year's date.
+      const said = (
+        /^(sun|mon|tue|wed|thu|fri|sat)/i.exec(m[0].trim()) ??
+        /^\s*[-–—,·|(]?\s*(sun(?:day)?|mon(?:day)?|tue(?:s|sday)?|wed(?:nesday)?|thu(?:r|rs|rsday)?|fri(?:day)?|sat(?:urday)?)\.?(?=\s*(?:$|[),·|•–—-]))/i.exec(line.slice(m.index! + m[0].length))
+      )?.[1]?.slice(0, 3).toLowerCase();
+      if (said && weekdayName(date) !== said) {
+        const next = parts!.y ? undefined : inferDate({ ...parts!, y: Number(date.slice(0, 4)) + 1 }, today);
+        if (!next || weekdayName(next) !== said) continue;
+        date = next;
+      }
       const index = m.index!;
       if (hits.some((h) => index < h.index + h.length && h.index < index + m[0].length)) continue;
       hits.push({ index, length: m[0].length, date });
@@ -89,11 +99,25 @@ export function findDates(line: string, today: string): DateHit[] {
   return hits.sort((a, b) => a.index - b.index);
 }
 
+const weekdayName = (iso: string) => ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'][new Date(`${iso}T12:00:00Z`).getUTCDay()]!;
+
+/**
+ * Words right before a date that mean it is not the day of an event: a deadline ("RSVP by",
+ * "offer expires"), the end of a range ("through", "until"), a day off ("no class on") or when a
+ * post was written ("Posted by Tom on").
+ */
+export const NOT_AN_EVENT_DATE =
+  /\b(?:by|before|no later than|deadline|due|expires?|expiration|ends?|until|till|through|thru|posted(?: by [\w.]+)? on|updated(?: on)?|published(?: on)?|no (?:dance )?class(?:es)? on|no dance on|closed on|except|cancell?ed on|postponed (?:from|until))\s*[:\-–—]?\s*\(?\s*(?:(?:mon|tue|tues|wed|thu|thur|thurs|fri|sat|sun)[a-z]*\.?,?\s*)?$/i;
+/** "Oct 1 – Dec 10": the second date only ends the range. */
+const RANGE_JOIN = /^\s*(?:-|–|—|to|through|thru|until)\s*$/i;
+
 interface Block {
   date: string;
   lines: string[];
   /** Line just above the date, used only when nothing follows the date. */
   before?: string | undefined;
+  /** A page heading right above the date (often the event's name). */
+  heading?: string | undefined;
 }
 
 const MONTH_ONLY = /^(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?$/i;
@@ -121,10 +145,14 @@ export function joinDateParts(lines: string[]): string[] {
  * several events under one date) each following line with its own start time becomes its own
  * listing on the same date.
  */
-export function dateBlocks(lines: string[], today: string, maxLines = 4, splitTimedLines = false): Block[] {
+export function dateBlocks(lines: string[], today: string, maxLines = 4, splitTimedLines = false, isHeading: (line: string) => boolean = () => false): Block[] {
   const blocks: Block[] = [];
   let cur: Block | undefined;
   let prevPlain: string | undefined;
+  let prevLine = '';
+  const addToCurrent = (text: string) => {
+    if (cur && text && cur.lines.length < maxLines && text.length < 300) cur.lines.push(text);
+  };
   for (const line of joinDateParts(lines)) {
     const hits = findDates(line, today);
     if (!hits.length) {
@@ -133,21 +161,39 @@ export function dateBlocks(lines: string[], today: string, maxLines = 4, splitTi
         blocks.push(cur);
       } else if (cur && cur.lines.length < maxLines && line.length < 300) cur.lines.push(line);
       else prevPlain = line.length < 120 ? line : undefined;
+      prevLine = line;
       continue;
     }
+    const heading = prevLine && isHeading(prevLine) ? prevLine : undefined;
+    // That heading names the next listing, not the end of the one before ("Swing Night" must not
+    // make the hockey night above it look like a dance).
+    if (heading && cur?.lines.at(-1) === heading) cur.lines.pop();
+    let started = false;
     hits.forEach((h, i) => {
+      const prevEnd = i === 0 ? 0 : hits[i - 1]!.index + hits[i - 1]!.length;
+      const between = line.slice(prevEnd, h.index);
       const rest = line.slice(h.index + h.length, hits[i + 1]?.index ?? line.length).replace(/^[\s,:|•·–—-]+/, '').trim();
-      const before = i === 0 ? line.slice(0, h.index).replace(/[\s,:|•·–—-]+$/, '').trim() : '';
+      // Not an event day: the end of "Oct 1 – Dec 10", "RSVP by Oct 10", "offer expires 10/31",
+      // "no class on Oct 18", "Posted by Tom on Oct 2". The words stay with the listing above.
+      const context = i === 0 ? between.trim() || prevLine : between;
+      if ((i > 0 && RANGE_JOIN.test(between)) || NOT_AN_EVENT_DATE.test(context)) {
+        if (started && rest) cur!.lines[0] = `${cur!.lines[0] ?? ''} ${rest}`.trim();
+        else if (!started && i === 0) addToCurrent(line);
+        return;
+      }
+      const before = i === 0 ? between.replace(/[\s,:|•·–—-]+$/, '').trim() : '';
       // Same date again right away (e.g. "Oct 2 ... Friday, October 2, 2026"): one listing, not two.
       if (cur && cur.date === h.date && cur.lines.length <= 2) {
         if (rest) cur.lines.push(rest);
         return;
       }
       const head = [before, rest].filter(Boolean).join(' ');
-      cur = { date: h.date, lines: head ? [head] : [], before: i === 0 ? prevPlain : undefined };
+      cur = { date: h.date, lines: head ? [head] : [], before: i === 0 ? prevPlain : undefined, heading: i === 0 ? heading : undefined };
       blocks.push(cur);
+      started = true;
     });
     prevPlain = undefined;
+    prevLine = line;
   }
   for (const b of blocks) if (!b.lines.length && b.before) b.lines.push(b.before);
   return blocks.filter((b) => b.lines.join(' ').trim().length >= 3);
@@ -237,27 +283,141 @@ export function spotappsEvents(html: string, pageUrl: string): FoundEvent[] {
   return out;
 }
 
+/** Texts of the page's headings (h1-h6), as htmlToLines would print them. */
+function headingTexts(html: string): Set<string> {
+  return new Set([...html.matchAll(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi)].map((m) => plainText(m[1]!)).filter(Boolean));
+}
+
+/** The page's title or main heading names a dance ("LICMA Dances", "Recommended Swing Dances"). */
+export function pageNamesDance(html: string): boolean {
+  const title = /<title[^>]*>([\s\S]*?)<\/title>/i.exec(html)?.[1] ?? '';
+  const h1 = [...html.matchAll(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi)].map((m) => m[1]!).join(' · ');
+  return DANCE_TEXT.test(plainText(`${title} · ${h1}`));
+}
+
+const RULE_LINE = /^[=_*~#-]{8,}$/;
+
+/** "Charlotte's Speakeasy, 294 Main Street in Farmingdale NY" -> name, street and town. */
+export function locationLine(text: string): Pick<FoundEvent, 'locationName' | 'address' | 'locality'> {
+  const parts = text.split(/\s*,\s*/).map((p) => p.trim()).filter(Boolean);
+  const name = parts[0] && !/^\d/.test(parts[0]) ? parts[0] : undefined;
+  const street = parts.find((p) => /^\d{1,6}[A-Za-z]?\s+\S/.test(p))?.split(/\s+in\s+/i)[0];
+  return { locationName: name, address: street, locality: findPlaceInText(text)?.name };
+}
+
+/**
+ * Hand-made lists that put each event between rule lines ("=====") with its name first, then the
+ * date, then "Location: ...". Each section is one listing, on every date named in its first dated
+ * line ("Sat, Oct 3, 7:30-11:30pm (Next Nov 7, Dec 5)").
+ */
+export function sectionEvents(lines: string[], pageUrl: string, today: string): FoundEvent[] | undefined {
+  if (lines.filter((l) => RULE_LINE.test(l)).length < 3) return undefined;
+  const sections: string[][] = [[]];
+  for (const l of lines) {
+    if (RULE_LINE.test(l)) sections.push([]);
+    else sections.at(-1)!.push(l);
+  }
+  const out: FoundEvent[] = [];
+  for (const s of sections.slice(1)) {
+    const dateLine = s.find((l) => findDates(l, today).some((h) => !NOT_AN_EVENT_DATE.test(l.slice(0, h.index))));
+    const title = s.find((l) => meaningfulLine(l, today));
+    if (!dateLine || !title) continue;
+    const text = s.join(' · ');
+    const t = parseTimes(dateLine).start ? parseTimes(dateLine) : parseTimes(text);
+    const loc = s.map((l) => /^location:\s*(.+)$/i.exec(l)?.[1]).find(Boolean);
+    for (const h of findDates(dateLine, today)) {
+      if (NOT_AN_EVENT_DATE.test(dateLine.slice(0, h.index))) continue;
+      out.push({
+        title: title.replace(/^[\s.@·•-]+/, '').slice(0, 140),
+        description: text.slice(0, 600),
+        start: t.start ? `${h.date}T${t.start}` : h.date,
+        end: t.end ? `${h.date}T${t.end}` : undefined,
+        ...(loc ? locationLine(loc) : {}),
+        ref: 'events page',
+        pageUrl,
+      });
+    }
+  }
+  return out;
+}
+
+/**
+ * WordPress event posts from /wp-json/wp/v2/<type> (sites whose calendar page hides the name or
+ * date in separate boxes). Each post has a real title; the date and time are in its text
+ * ("Saturday, October 31 from 6:30 pm to 10:30 pm"). Posts without a dated day ("every
+ * Wednesday", "no class on Oct 18") are skipped.
+ */
+export function wordpressEvents(raw: string, today: string): FoundEvent[] {
+  let posts: { title?: { rendered?: string }; content?: { rendered?: string }; link?: string }[];
+  try {
+    posts = JSON.parse(raw);
+  } catch {
+    return [];
+  }
+  if (!Array.isArray(posts)) return [];
+  const out: FoundEvent[] = [];
+  for (const p of posts) {
+    const title = plainText(p.title?.rendered ?? '');
+    const text = plainText((p.content?.rendered ?? '').replace(/<\/?(p|br|div|li|h[1-6])\b[^>]*>/gi, ' . '))
+      .replace(/(?:\s*\.\s*){2,}/g, '. ')
+      .replace(/\b(?:upcoming|additional|other|more|next)\s+(?:\d{4}\s+)?dates\b[\s\S]*$/i, '')
+      .trim();
+    const hit = findDates(text, today).find((h) => !NOT_AN_EVENT_DATE.test(text.slice(Math.max(0, h.index - 60), h.index)));
+    if (!title || !hit || !p.link) continue;
+    const t = parseTimes(text.slice(hit.index, hit.index + 160));
+    out.push({
+      title,
+      description: text.slice(0, 600),
+      start: t.start ? `${hit.date}T${t.start}` : hit.date,
+      end: t.end ? `${hit.date}T${t.end}` : undefined,
+      url: p.link,
+      ref: 'event page',
+      pageUrl: p.link,
+    });
+  }
+  return out;
+}
+
 export function foundFromHtml(html: string, pageUrl: string, today: string, mode: 'venue' | 'band' | 'list'): FoundEvent[] {
   if (/<article class="eventlist-event/.test(html)) return squarespaceEvents(html, pageUrl);
   if (/class="event-calendar-card/.test(html)) return spotappsEvents(html, pageUrl);
+  const danceOnly = pageNamesDance(html) || undefined;
+  const lines = htmlToLines(html);
+  const sections = sectionEvents(lines, pageUrl, today);
+  if (sections) return sections.map((f) => ({ ...f, pageNamesDance: danceOnly }));
+  const headings = headingTexts(html);
   const out: FoundEvent[] = [];
-  for (const b of dateBlocks(htmlToLines(html), today, 4, mode === 'list')) {
+  for (const b of dateBlocks(lines, today, 4, mode === 'list', (l) => headings.has(l))) {
     // The name is the first real line after the date, or the line just above it.
     const title = b.lines.find((l) => meaningfulLine(l, today)) ?? (b.before && meaningfulLine(b.before, today) ? b.before : undefined);
     if (!title) continue; // a calendar cell, a "Book" button or a lone end time
     const text = b.lines.join(' · ').replace(/\s+/g, ' ').trim();
-    const f: FoundEvent = { title: title.slice(0, 140), description: text.slice(0, 600), start: b.date, ref: 'events page', pageUrl };
+    const f: FoundEvent = { title: title.slice(0, 140), description: text.slice(0, 600), start: b.date, ref: 'events page', pageUrl, heading: b.heading, pageNamesDance: danceOnly };
     if (mode === 'band') f.locationName = venueName(text);
+    // The same listing twice (a short card, then its details): one listing with both texts.
+    const twin = out.find((o) => o.start === f.start && o.title === f.title);
+    if (twin) {
+      twin.description = `${twin.description} · ${text}`.slice(0, 600);
+      twin.heading ??= f.heading;
+      continue;
+    }
     out.push(f);
   }
   return out;
 }
+
+const isWordpressFeed = (url: string | undefined): url is string => Boolean(url && /\/wp-json\/wp\/v2\/[\w-]+\/?(?:\?|$)/.test(url));
+
 export const adapter: Adapter = {
   id: 'htmllist',
   async fetch(ctx: AdapterContext): Promise<FetchedDocument[]> {
     const src = settingsOf(ctx);
+    // A WordPress event feed replaces the calendar page (the page stays the attribution link).
+    const urls = isWordpressFeed(src.feedUrl)
+      ? [/[?&]per_page=/.test(src.feedUrl) ? src.feedUrl : `${src.feedUrl}${src.feedUrl.includes('?') ? '&' : '?'}per_page=100`]
+      : [...new Set([src.url, ...(src.pageUrls ?? [])])];
     const docs: FetchedDocument[] = [];
-    for (const url of [...new Set([src.url, ...(src.pageUrls ?? [])])]) {
+    for (const url of urls) {
       const r = await ctx.fetcher.get(url, src.rateLimitSeconds);
       docs.push({ url, file: r.file, contentType: r.contentType, meta: {} });
     }
@@ -266,7 +426,10 @@ export const adapter: Adapter = {
   async normalize(docs: FetchedDocument[], ctx: AdapterContext): Promise<NormalizeResult> {
     const src = settingsOf(ctx);
     const mode = src.defaults?.venueId ? 'venue' : src.defaults?.performerIds?.length ? 'band' : 'list';
-    const found = docs.flatMap((d) => foundFromHtml(readFileSync(d.file, 'utf8'), d.url, ctx.today, mode));
+    const found = docs.flatMap((d) => {
+      const raw = readFileSync(d.file, 'utf8');
+      return isWordpressFeed(d.url) ? wordpressEvents(raw, ctx.today) : foundFromHtml(raw, d.url, ctx.today, mode);
+    });
     return toCandidates(found, ctx, { structured: false, horizonDays: 180 });
   },
 };

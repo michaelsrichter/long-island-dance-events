@@ -1,0 +1,32 @@
+[
+  {
+    "id": 101,
+    "title": { "rendered": "Autumn Dinner Dance" },
+    "content": { "rendered": "<p>Join us on Saturday, October 24 from 6:30 pm to 10:30 pm for dinner and dancing with DJ Sample. RSVP by October 17.</p>" },
+    "link": "https://example-lodge.example/event/autumn-dinner-dance/"
+  },
+  {
+    "id": 102,
+    "title": { "rendered": "Pretend Heritage Night" },
+    "content": { "rendered": "<p>Members, join us at the arena on Thursday, October 22 at 7:30 pm.</p>" },
+    "link": "https://example-lodge.example/event/heritage-night/"
+  },
+  {
+    "id": 103,
+    "title": { "rendered": "Group Dance Lessons" },
+    "content": { "rendered": "<p>Monday group lessons at 4:45 pm.</p><p>NOTE: No dance class on Oct 19.</p>" },
+    "link": "https://example-lodge.example/event/group-lessons/"
+  },
+  {
+    "id": 104,
+    "title": { "rendered": "Friday Night Dance Social" },
+    "content": { "rendered": "<p>Join us Friday, November 6 from 7 pm to 10:30 pm for a social dance with a free lesson.</p><p>Upcoming Dates: Oct 10 Outside Festival, Dec 18</p>" },
+    "link": "https://example-lodge.example/event/friday-social/"
+  },
+  {
+    "id": 105,
+    "title": { "rendered": "Wednesday Night Dance Social" },
+    "content": { "rendered": "<p>Every Wednesday from 6 pm to 10 pm.</p>" },
+    "link": "https://example-lodge.example/event/wednesday-social/"
+  }
+]

@@ -40,6 +40,8 @@ describe('time parsing', () => {
     ['Brunch dance 11-2pm', '11:00', '14:00', undefined],
     ['Call 631-476-3707 for details.', undefined, undefined, undefined],
     ['Advanced ticket sales close at 5PM the day of this event.', undefined, undefined, undefined],
+    ['A decision will be made by 3 PM if we must cancel because of bad weather.', undefined, undefined, undefined],
+    ['Dinner, followed by 8 PM to 11 PM dancing.', '20:00', '23:00', undefined],
   ];
   it.each(cases)('%s', (text, start, end, lesson) => {
     const t = parseTimes(text);
@@ -237,5 +239,21 @@ describe('merging runs', () => {
   it('sends low-confidence listings to review', () => {
     const r = mergeDrafts(new Map(), draft({ confidence: 0.4 }), { sourceId: 's', today: '2026-10-01' });
     expect([...r.events.values()][0]!.status).toBe('pending-review');
+  });
+  it('does not add the same evening twice when another source already lists it', () => {
+    const atLodge = { venueId: 'example-lodge', sourceId: 'lodge-calendar', seriesKey: 'lodge' };
+    const first = mergeDrafts(new Map(), draft(atLodge), { sourceId: 'lodge-calendar', today: '2026-10-01' });
+    const stored = new Map([...first.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    const other = { venueId: 'example-lodge', sourceId: 'town-calendar', seriesKey: 'town' };
+    // Same place and day, 15 minutes apart, same kind: already listed.
+    const dup = mergeDrafts(stored, draft({ ...other, start: '19:45', category: 'lesson-party' }), { sourceId: 'town-calendar', today: '2026-10-02' });
+    expect(dup.duplicates).toEqual([{ id: expect.any(String), of: [...stored.keys()][0] }]);
+    expect(dup.stats).toMatchObject({ new: 0, duplicates: 1 });
+    expect(dup.events.size).toBe(1);
+    // A show two hours later, or a different kind of event (a concert, not a dance), is a different event.
+    expect(mergeDrafts(stored, draft({ ...other, start: '21:30' }), { sourceId: 'town-calendar', today: '2026-10-02' }).stats.new).toBe(1);
+    expect(mergeDrafts(stored, draft({ ...other, category: 'live-music' }), { sourceId: 'town-calendar', today: '2026-10-02' }).stats.new).toBe(1);
+    // The venue's own source updating its own listing is never a duplicate.
+    expect(mergeDrafts(stored, draft(atLodge), { sourceId: 'lodge-calendar', today: '2026-10-02' }).stats).toMatchObject({ unchanged: 1, duplicates: 0 });
   });
 });

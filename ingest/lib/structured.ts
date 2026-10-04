@@ -50,6 +50,12 @@ export interface FoundEvent {
   /** Page or feed the event came from (attribution link). */
   pageUrl: string;
   notes?: string[] | undefined;
+  /** A heading right above the listing on the page (often its name, e.g. "Dinner Dance"). */
+  heading?: string | undefined;
+  /** The page itself is about dancing (its title or main heading names a dance), so each listing on it is one. */
+  pageNamesDance?: boolean | undefined;
+  /** What the source's own data calls it (schema.org MusicEvent or DanceEvent). */
+  kind?: 'music' | 'dance' | undefined;
 }
 
 export interface SourceDefaults {
@@ -118,14 +124,47 @@ export function entityNameFromSource(name: string): string {
   return name.split(/\s+[-–—|]\s+/)[0]!.replace(/\s*\([^)]*\)\s*$/, '').trim();
 }
 
-const NON_EVENT = /\b(closed|private (?:party|event)|trivia|bingo|karaoke|comedy|paint (?:and|&) sip|yoga|gift cards?|holiday hours|now hiring)\b/i;
+const NON_EVENT = /\b(closed|private (?:party|event)|trivia|bingo|kara[- ]?ok[ei]{1,2}|karoake|karoke|mundy-oke|comedy|comedian|stand-?up|paint (?:and|&) sip|yoga|gift cards?|holiday hours|now hiring|drag (?:brunch|show|bingo|queen)|picture show|screening|film|movie|circus|game show|psychic|medium)\b/i;
+/** Food and drink specials: listed only when they also name a band, DJ, live music or dancing. */
+const FOOD_OR_DRINK = /\b(happy hour|brunch|prix fixe|supper|prime rib|steak night|wing night|wings|tacos?|lobster|clam ?bake|buffet|dinner special|drink specials?|wine tasting|beer tasting|tasting menu)\b/i;
 // Never a dance or live-music listing, even when an aggregator's text mentions "music".
 const NEVER_EVENT = /\b(street fair|carnival|craft fair|farmer['’]?s market|flea market|yard sale|car show|vintage pop[- ]?up|pop[- ]?up (?:shop|market)|football|soccer|baseball|hockey|golf outing)\b/i;
 const FESTIVAL = /\b(festival|fest\b|dance weekend|congress|dance camp|marathon)\b/i;
 // "world-class musicians" and "a class act" are not classes.
 const CLASS = /(?<!-)\b(class(?:es)?(?![-\w]|\s+act\b)|lessons?|workshops?|boot ?camp|instruction)\b/i;
-const SOCIAL = /\b(social|dance party|dance night|milonga|practica|open dancing|dancing to)\b/i;
+const SOCIAL = /\b(social|dance party|dance night|milonga|practica|open dancing|dancing to|dancing until|dancing (?:from|begins|starts)|dj'?d music|dj music|music (?:&|and) dancing)\b|\d\s*(?:pm)?\s*\/\s*music\b/i;
 const LIVE = /\b(live (?:music|band|entertainment)|band\b|concert|tribute|orchestra|in concert|acoustic|performs|on stage)\b/i;
+
+/**
+ * Words that say a listing is a dance. Style names that are also music words ("standards",
+ * "smooth", "rhythm", "latin", "country") are left out on purpose; "swing" counts unless it is a
+ * kind of band or music.
+ */
+export const DANCE_TEXT =
+  /(?<![-\w])(danc(?:e|es|ing|ers?)|ballroom|milongas?|practicas?|sock hop|hoedown|two[- ]?step|2[- ]step|cotillion|tango|bachata|salsa|merengue|hustle|waltz|fox ?trot|quickstep|cha[- ]?cha|rumba|samba|paso doble|kizomba|zouk|lindy(?: hop)?|jitterbug|polka|swing(?!\s+(?:band|music|orchestra|era|jazz)))(?![-\w])/i;
+/** Words that say a listing has live music or a DJ. */
+export const MUSIC_TEXT =
+  /(?<![-\w])(live (?:music|band|entertainment|performance)|music by|musicians?|concerts?|bands?|dj|djs|dj_\w+|disc jockey|sings?|singers?|songwriters?|acoustic|jazz|blues|rock|tribute|orchestra|symphony|quartet|trio|duo|ensemble|motown|doo[- ]?wop|bluegrass|reggae|hip[- ]?hop|r&b|funk|accordion|guitar|piano|fiddle|mariachi|polka|open jam|jam session|performs?|performing)(?![-\w])/i;
+/** Plain "music" counts on a venue's or band's own calendar, not on calendars of everything ("Halloween music" at a haunted walk). */
+const ANY_MUSIC = /(?<![-\w])(music|musical)(?![-\w])/i;
+
+/** Does the text name a dance? A class or lesson counts too, except on calendars that list everything (pottery class). */
+export function namesDance(text: string, lessonsCount = true): boolean {
+  return DANCE_TEXT.test(text) || (lessonsCount && CLASS.test(text.replace(/private lessons?/gi, '')));
+}
+
+/** Does the text name live music, a DJ, or a band or DJ we know? */
+export function namesMusic(text: string, reg: Registry, plainMusicCounts = true): boolean {
+  return MUSIC_TEXT.test(text) || (plainMusicCounts && ANY_MUSIC.test(text)) || reg.matchPerformers(text).length > 0;
+}
+
+/**
+ * Text that says the listing happens somewhere off Long Island ("5th Avenue Manhattan", "in
+ * Brooklyn"). Band names like "Manhattan Transfer" do not count: a place word must follow
+ * "in", "at", "on" or "down", or be a street in Manhattan.
+ */
+const OFF_ISLAND =
+  /\b(?:in|at|on|down|to)\s+(?:the\s+)?(?:manhattan|brooklyn|queens|the bronx|bronx|staten island|new york city|nyc|westchester|new jersey|connecticut)\b|\b(?:5th|fifth)\s+ave(?:nue)?\.?,?\s+(?:in\s+)?(?:manhattan|new york city|nyc)\b|\bmanhattan,?\s+ny\b/i;
 
 function categoryOf(text: string, focus: 'dance' | 'music', liveActs: number, djs: number, fallback?: EventCategory): EventCategory {
   if (fallback) return fallback;
@@ -247,6 +286,8 @@ const DATE_BITS = /\b\d{1,2}\/\d{0,2}(?!\d)|\b(?:mon|tue|wed|thu|fri|sat|sun)[a-
 export function tidyTitleAct(name: string): string {
   let s = name.replace(/\s*\((?:postponed|rescheduled|moved|new date|sold out|cancel)[^)]*\)/gi, '').trim();
   if ((s.match(/["“”]/g) ?? []).length % 2 === 1) s = s.slice(0, s.search(/["“”]/)).trim();
+  // "Band-Maid World Tour 2026", "Mitchell Tenpenny: Speed of Light Tour 2026" -> the act's name.
+  s = s.replace(/\s*[:–—-]\s+[^:–—-]*\btour\b[^:–—-]*$/i, '').replace(/\s+(?:world\s+|\d{4}\s+|north american\s+|farewell\s+)*tour(?:\s+\d{4})?$/i, '').trim();
   return s;
 }
 
@@ -375,8 +416,10 @@ function regexOrUndefined(s: string | undefined): RegExp | undefined {
 export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToCandidatesOptions = {}): NormalizeResult {
   const reg = ctx.registry;
   const src = settingsOf(ctx);
-  const focus = src.focus ?? 'dance';
+  const sourceFocus = src.focus ?? 'dance';
   const defaults: SourceDefaults = src.defaults ?? {};
+  // A calendar that lists everything in an area (no default venue, organizer or band).
+  const allInOneCalendar = !defaults.venueId && !defaults.organizerId && !defaults.performerIds?.length;
   const include = regexOrUndefined(src.include);
   const exclude = regexOrUndefined(src.exclude);
   const horizon = addDays(ctx.today, opts.horizonDays ?? 180);
@@ -399,7 +442,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     const f = fixShiftedClock(listing);
     const date = f.start.slice(0, 10);
     const ref = `${f.ref ?? 'listing'} ${date}`;
-    const text = cleanListingText([f.title, f.description, f.locationName, f.address, f.locality].filter(Boolean).join('. '));
+    const text = cleanListingText([f.heading, f.title, f.description, f.locationName, f.address, f.locality].filter(Boolean).join('. '));
     const key = `${normalizeText(f.title)}|${f.start}|${normalizeText(f.locationName ?? '')}`;
     if (seen.has(key)) continue;
     seen.add(key);
@@ -408,13 +451,40 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       continue;
     }
     if (date < ctx.today || date > horizon) continue;
-    if ((include && !include.test(text)) || (exclude && exclude.test(text)) || (!include && NON_EVENT.test(f.title)) || NEVER_EVENT.test(f.title)) {
-      skipped.push({ reason: 'not a dance or live-music listing', ref });
+    // Trivia, bingo, comedy and film nights are skipped on every calendar, even when a source's
+    // "include" pattern matches ("Rocky Horror" contains "rock"), unless the title names a dance.
+    const nonEvent = NON_EVENT.test(f.title) && !DANCE_TEXT.test(f.title);
+    // A happy hour or food special counts only when it names a band, DJ, live music or dancing
+    // ("Happy Hour Band: ...", "Jazz Brunch", "Dinner Dance"), not "Prime Rib Night".
+    const listingWords = `${f.title} ${f.description ?? ''}`;
+    const plainHappyHour = FOOD_OR_DRINK.test(f.title) && !MUSIC_TEXT.test(listingWords) && !DANCE_TEXT.test(listingWords) && !reg.matchPerformers(listingWords).length;
+    if ((include && !include.test(text)) || (exclude && exclude.test(text)) || nonEvent || plainHappyHour || NEVER_EVENT.test(f.title)) {
+      skipped.push({ reason: 'not a dance or live-music listing', ref: `${ref} ${f.title}`.slice(0, 160) });
       continue;
     }
     const optedOut = reg.isOptedOut(text);
     if (optedOut) {
       skipped.push({ reason: `organizer ${optedOut} opted out`, ref });
+      continue;
+    }
+    // The listing's own words decide what it is, not the source's settings: a lodge calendar also
+    // lists hockey nights and bingo, and a town calendar lists pumpkin picking.
+    const own = cleanListingText([f.heading, f.title, f.description].filter(Boolean).join('. '));
+    const ownDance = f.kind === 'dance' || f.pageNamesDance || namesDance(own, !allInOneCalendar);
+    const ownMusic = f.kind === 'music' || namesMusic(own, reg, !allInOneCalendar);
+    let focus = sourceFocus;
+    if (sourceFocus === 'dance' && !ownDance) {
+      if (allInOneCalendar && ownMusic) focus = 'music';
+      else {
+        skipped.push({ reason: 'no dance named in the listing', ref: `${ref} ${f.title}`.slice(0, 160) });
+        continue;
+      }
+    } else if (sourceFocus === 'music' && allInOneCalendar && !ownDance && !ownMusic) {
+      skipped.push({ reason: 'no live music or dancing named in the listing', ref: `${ref} ${f.title}`.slice(0, 160) });
+      continue;
+    }
+    if (OFF_ISLAND.test(own)) {
+      outOfArea.set('outside Nassau and Suffolk', (outOfArea.get('outside Nassau and Suffolk') ?? 0) + 1);
       continue;
     }
     const notes = [...(f.notes ?? [])];
@@ -431,6 +501,13 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     }
     if (locName || f.address) venueId = findVenue(reg, locName, f.address, place?.name);
     if (!venueId && defaultVenue && (!ownPlace || ownPlace.name === townOfVenue(reg, defaultVenue)?.name)) venueId = defaultVenue;
+    // One feed for two locations ("Saved by the Band takes over Daisy's Patchogue" in the Daisy's
+    // Miller Place feed): a sister location named in the listing wins over the default.
+    if (venueId && venueId === defaultVenue) {
+      const named = reg.matchVenue(own);
+      const brand = (id: string) => normalizeText((reg.venues.get(id)?.name ?? '').replace(/\s*\([^)]*\)\s*$/, ''));
+      if (named && named !== defaultVenue && brand(named) === brand(defaultVenue)) venueId = named;
+    }
     // A new venue only with a street address (never invented); it gets a review note.
     if (!venueId && locName && hasStreetAddress(f.address) && place && locName.length <= 80) {
       const id = idFrom(`${locName} ${place.name}`);
@@ -465,7 +542,11 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       continue;
     }
     if (venueId) confidence += 0.15;
-    else notes.push('Venue not found in the listing.');
+    else {
+      // Only a town: a person adds the venue before it is shown (the dancing score needs one).
+      confidence -= 0.1;
+      notes.push('Venue not found in the listing.');
+    }
 
     // Who: researched bands/DJs, plus new ones only when the name passes a strict check.
     // Other act names stay in the title only.
@@ -530,9 +611,9 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       confidence -= 0.1;
       notes.push('No start time found.');
     }
-    // A dance or show starting between 1 and 8 in the morning is almost always a typo on the source
+    // A dance or show starting between 1 and 9 in the morning is almost always a typo on the source
     // ("6:30 AM" for 6:30 PM), so a person checks it before it is shown.
-    if (start && minutesOf(start) >= 60 && minutesOf(start) < 480) {
+    if (start && minutesOf(start) >= 60 && minutesOf(start) < 540) {
       notes.push(`Start time looks wrong (${Number(start.slice(0, 2))}:${start.slice(3, 5)} in the morning). Check the source.`);
       confidence = Math.min(confidence, 0.4);
     }
@@ -602,8 +683,21 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
   }
   if (unresearched.size) ctx.log(`${src.id}: venues to research: ${[...unresearched].sort().join('; ')}`);
   if (unresearchedActs.size) ctx.log(`${src.id}: bands/DJs to research: ${[...unresearchedActs].sort().join('; ')}`);
+  // Calendar pages often mention the same evening more than once ("Next dance on Oct 24", "Doors
+  // open at 6:30", a weather note). A listing without a start time is dropped when the same source
+  // has a timed listing that day at the same place, of the same kind, with the same bands or more.
+  const dances = new Set<EventCategory>(['social-dance', 'lesson-party']);
+  const sameKind = (a: EventCategory, b: EventCategory) => a === b || (dances.has(a) && dances.has(b));
+  const kept = candidates.filter(
+    (c) =>
+      c.start ||
+      !candidates.some(
+        (t) => t.start && t.date === c.date && (t.venueId ?? t.town) === (c.venueId ?? c.town) && sameKind(t.category, c.category) && c.performerIds.every((p) => t.performerIds.includes(p)),
+      ),
+  );
+  for (const c of candidates) if (!kept.includes(c)) skipped.push({ reason: 'same evening listed again without a time', ref: c.sourceRef });
   return {
-    candidates,
+    candidates: kept,
     found: found.length,
     outOfArea: [...outOfArea].map(([town, count]) => ({ town, count })).sort((a, b) => b.count - a.count),
     skipped,

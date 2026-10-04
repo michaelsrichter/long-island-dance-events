@@ -1,0 +1,117 @@
+{
+  "outOfArea": [
+    {
+      "town": "outside Nassau and Suffolk",
+      "count": 1
+    }
+  ],
+  "skipped": [
+    {
+      "reason": "no dance named in the listing",
+      "ref": "events page 2026-10-22 Members meet at the arena for the game."
+    },
+    {
+      "reason": "no dance named in the listing",
+      "ref": "events page 2026-11-13 . Doors open 6:30 pm."
+    }
+  ],
+  "created": {
+    "venues": [],
+    "performers": []
+  },
+  "drafts": [
+    {
+      "id": "2026-10-08-example-lodge-classes",
+      "matchKey": "test-source|example-lodge||thursday|18:15|class-lesson||line-dancing|2026-10-08",
+      "dates": [
+        "2026-10-08"
+      ],
+      "data": {
+        "title": "Line Dancing class at Example Lodge",
+        "summary": "Group class in Line Dancing.",
+        "category": "class-lesson",
+        "danceStyles": [
+          "line-dancing"
+        ],
+        "start": "2026-10-08T18:15",
+        "end": "2026-10-08T19:45",
+        "timezone": "America/New_York",
+        "venueId": "example-lodge",
+        "town": "Huntington",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://example-lodge.example/events",
+        "sourceName": "Example Lodge - events",
+        "sourceRef": "events page 2026-10-08",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.8
+      }
+    },
+    {
+      "id": "2026-10-17-example-lodge-social",
+      "matchKey": "test-source|example-lodge||saturday|19:00|social-dance|dj-sample||2026-10-17",
+      "dates": [
+        "2026-10-17"
+      ],
+      "data": {
+        "title": "Social dance with DJ Sample at Example Lodge",
+        "summary": "An evening of social dancing with music by DJ Sample. Food is included.",
+        "category": "social-dance",
+        "danceStyles": [],
+        "start": "2026-10-17T19:00",
+        "end": "2026-10-17T23:00",
+        "timezone": "America/New_York",
+        "venueId": "example-lodge",
+        "town": "Huntington",
+        "performerIds": [
+          "dj-sample"
+        ],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://example-lodge.example/events",
+        "sourceName": "Example Lodge - events",
+        "sourceRef": "events page 2026-10-17",
+        "status": "active",
+        "dancingCues": [
+          "dj"
+        ],
+        "confidence": 0.8
+      }
+    },
+    {
+      "id": "2026-10-30-example-lodge-lesson-and-dance",
+      "matchKey": "test-source|example-lodge||friday|19:30|lesson-party||east-coast-swing|2026-10-30",
+      "dates": [
+        "2026-10-30"
+      ],
+      "data": {
+        "title": "East Coast Swing social dance with a lesson at Example Lodge",
+        "summary": "A group lesson at 7:30 PM, then open social dancing. Dance styles: East Coast Swing.",
+        "category": "lesson-party",
+        "danceStyles": [
+          "east-coast-swing"
+        ],
+        "start": "2026-10-30T19:30",
+        "end": "2026-10-30T23:00",
+        "timezone": "America/New_York",
+        "lessonTime": "19:30",
+        "venueId": "example-lodge",
+        "town": "Huntington",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://example-lodge.example/events",
+        "sourceName": "Example Lodge - events",
+        "sourceRef": "events page 2026-10-30",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.8
+      }
+    }
+  ]
+}
