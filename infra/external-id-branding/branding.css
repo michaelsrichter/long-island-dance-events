@@ -7,14 +7,10 @@
 body {
   font-family: 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
   color: #0b0b0d;
-  background-color: #0b0b0d;
 }
 
-.ext-background-image,
-.ext-middle {
-  background: radial-gradient(1100px 620px at 88% -12%, rgba(193, 18, 31, 0.55), rgba(193, 18, 31, 0) 62%),
-    radial-gradient(900px 520px at -8% 112%, rgba(163, 17, 31, 0.32), rgba(163, 17, 31, 0) 60%), #0b0b0d;
-}
+/* The red glow on wide screens is the branding background image (background.jpg); Microsoft hides it on
+   phones and shows a plain white page there, where its gray footer links stay readable. */
 
 .ext-sign-in-box {
   background-color: #ffffff;
@@ -34,28 +30,28 @@ body {
   color: #4b4e57;
 }
 
-a,
-a:link,
+/* Only selectors from Microsoft's template are kept (a rule with any other selector is dropped whole).
+   Links use plain "a" (not "a:link") so the footer's own class can override the color. */
+a {
+  color: #a3111f;
+}
+
 .ext-link {
   color: #a3111f;
 }
 
-a:hover,
-.ext-link:hover {
-  color: #7d0c18;
+a:hover {
   text-decoration: underline;
 }
 
-a:focus,
-a:focus:hover,
-.ext-link:focus {
+a:focus {
   outline: 3px solid #1757c2;
   outline-offset: 2px;
 }
 
-a:active,
-.ext-link:active {
-  color: #5e0912;
+a:focus:hover {
+  outline: 3px solid #1757c2;
+  outline-offset: 2px;
 }
 
 .ext-button.ext-primary {
@@ -139,20 +135,5 @@ a:active,
   background-color: transparent;
 }
 
-.ext-footer-item,
-.ext-footer-item a,
-.ext-footer-item a:link,
-a.ext-footer-item,
-a.ext-footer-item:link,
-a.ext-footer-item:visited,
-.ext-debug-item,
-a.ext-debug-item,
-a.ext-debug-item:link {
-  color: #c9ccd3;
-}
-
-.ext-footer-item a:hover,
-a.ext-footer-item:hover,
-a.ext-debug-item:hover {
-  color: #ffffff;
-}
+/* Microsoft's sign-in pages keep only the template selectors exactly as listed: the footer-link selectors
+   (.ext-footer-item, .ext-debug-item), doubled classes and @media rules are dropped. */

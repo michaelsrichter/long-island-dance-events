@@ -74,10 +74,11 @@ $files = [ordered]@{
   squareLogo = 'square-logo.png'
   squareLogoDark = 'square-logo.png'
   favicon = 'favicon.png'
+  backgroundImage = 'background.jpg'
   customCSS = 'branding.css'
 }
 foreach ($f in $files.GetEnumerator()) {
-  $type = if ($f.Value -like '*.css') { 'text/css' } else { 'image/png' }
+  $type = switch -Wildcard ($f.Value) { '*.css' { 'text/css' } '*.jpg' { 'image/jpeg' } default { 'image/png' } }
   Invoke-RestMethod -Method PUT -Uri "$branding/localizations/0/$($f.Key)" -Headers $auth -ContentType $type -InFile (Join-Path $PSScriptRoot $f.Value) | Out-Null
   Write-Host "Uploaded $($f.Key) ($($f.Value))"
 }

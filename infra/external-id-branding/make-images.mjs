@@ -26,10 +26,23 @@ async function banner() {
 
 const square = (px) => sharp(icon, { density: 600 }).resize(px, px).png({ compressionLevel: 9 }).toBuffer();
 
+/** Wide-screen page background: near-black with the site's red glow (Microsoft hides it on phones). */
+function background() {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080">
+  <defs>
+    <radialGradient id="a" cx="88%" cy="-12%" r="70%"><stop offset="0" stop-color="#c1121f" stop-opacity="0.6"/><stop offset="1" stop-color="#c1121f" stop-opacity="0"/></radialGradient>
+    <radialGradient id="b" cx="-8%" cy="112%" r="55%"><stop offset="0" stop-color="#a3111f" stop-opacity="0.35"/><stop offset="1" stop-color="#a3111f" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="#0b0b0d"/><rect width="1920" height="1080" fill="url(#a)"/><rect width="1920" height="1080" fill="url(#b)"/>
+</svg>`;
+  return sharp(Buffer.from(svg)).jpeg({ quality: 82, progressive: true }).toBuffer();
+}
+
 const files = {
   'banner-logo.png': await banner(),
   'square-logo.png': await square(240),
   'favicon.png': await square(32),
+  'background.jpg': await background(),
 };
 for (const [name, data] of Object.entries(files)) {
   await writeFile(here(name), data);
