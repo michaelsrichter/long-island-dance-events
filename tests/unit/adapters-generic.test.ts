@@ -133,7 +133,7 @@ describe('names and venues are checked before anything new is created', () => {
   it('never invents a venue without a street address', async () => {
     const ctx = context({ adapter: 'jsonld', type: 'jsonld', focus: 'music' });
     const { toCandidates } = await import('../../ingest/lib/structured');
-    const r = toCandidates([{ title: 'The Fictionals', start: '2026-10-20T20:00', locationName: 'New Place', locality: 'Babylon', pageUrl: 'https://example.test/e' }], ctx, { structured: true });
+    const r = toCandidates([{ title: 'The Fictionals', description: 'Live band.', start: '2026-10-20T20:00', locationName: 'New Place', locality: 'Babylon', pageUrl: 'https://example.test/e' }], ctx, { structured: true });
     expect(r.candidates).toHaveLength(0);
     expect(r.skipped).toEqual([{ reason: 'venue not researched yet', ref: 'listing 2026-10-20 New Place (Babylon)' }]);
     expect([...ctx.registry.created.venues]).toEqual([]);
@@ -325,6 +325,82 @@ describe('HTML list adapter', () => {
     expect(result.skipped.map((s) => s.reason)).toContain('venue not researched yet');
     expect(drafts.every((d) => d.data.performerIds?.includes('the-pretend-band'))).toBe(true);
     expect(drafts.find((d) => d.data.town === 'Huntington')?.data).toMatchObject({ venueId: 'example-lodge', start: '2026-10-24T20:00', end: '2026-10-24T23:00' });
+  });
+  it('keeps only dances from a lodge calendar that lists everything (no deadlines, parades or old posts)', async () => {
+    const { drafts, result } = await runGolden('htmllist-lodge', htmllist, 'htmllist-lodge.html', 'https://example-lodge.example/events', {
+      name: 'Example Lodge - events',
+      focus: 'dance',
+      defaults: { venueId: 'example-lodge', town: 'Huntington' },
+    });
+    expect(drafts.map((d) => d.data.start).sort()).toEqual(['2026-10-08T18:15', '2026-10-17T19:00', '2026-10-30T19:30']);
+    // Hockey night and bunco name no dance; the parade is in Manhattan.
+    expect(result.skipped.filter((s) => s.reason === 'no dance named in the listing')).toHaveLength(2);
+    expect(result.outOfArea).toEqual([{ town: 'outside Nassau and Suffolk', count: 1 }]);
+    // "RSVP by Oct 10", "through Dec 10", "no class on Nov 26", "posted on Oct 2", "offer expires 10/31" and
+    // "December 18 - Saturday" (a Friday this year) never become listings.
+    for (const day of ['2026-10-10', '2026-12-10', '2026-11-26', '2026-10-02', '2026-10-31', '2026-12-18']) expect(drafts.some((d) => d.dates.includes(day)), day).toBe(false);
+    expect(drafts.find((d) => d.data.start === '2026-10-08T18:15')?.data).toMatchObject({ category: 'class-lesson', danceStyles: ['line-dancing'], end: '2026-10-08T19:45' });
+  });
+  it('reads hand-made lists split by rule lines, with the place from each "Location:" line', async () => {
+    const { drafts, ctx } = await runGolden('htmllist-sections', htmllist, 'htmllist-sections.html', 'https://swing-list.example/long-island', { name: 'Swing list', focus: 'dance' });
+    expect(drafts.flatMap((d) => d.dates).sort()).toEqual(['2026-10-06', '2026-10-10', '2026-10-21', '2026-11-14', '2026-12-12']);
+    expect(drafts.find((d) => d.dates.includes('2026-10-06'))?.data).toMatchObject({ venueId: 'example-lodge', category: 'lesson-party' });
+    expect(drafts.find((d) => d.dates.includes('2026-10-10'))?.data.venueId).toBe('sample-pub');
+    expect([...ctx.registry.created.venues]).toEqual(['the-pretend-hall-huntington']);
+  });
+  it('reads WordPress event posts: the real title, the first real date in the text', async () => {
+    const { drafts, result } = await runGolden('wordpress-events', htmllist, 'wordpress-events.json', 'https://example-lodge.example/wp-json/wp/v2/event?per_page=100', {
+      name: 'Example Lodge - events',
+      focus: 'dance',
+      feedUrl: 'https://example-lodge.example/wp-json/wp/v2/event',
+      defaults: { venueId: 'example-lodge' },
+    });
+    // "No dance class on Oct 19" and "every Wednesday" have no event day; the heritage night names no dance.
+    expect(result.found).toBe(3);
+    expect(drafts.map((d) => [d.data.start, d.data.end, d.data.category])).toEqual([
+      ['2026-10-24T18:30', '2026-10-24T22:30', 'social-dance'],
+      ['2026-11-06T19:00', '2026-11-06T22:30', 'lesson-party'],
+    ]);
+    expect(drafts.every((d) => d.data.sourceUrl.startsWith('https://example-lodge.example/event/'))).toBe(true);
+  });
+});
+
+describe("the listing's own words decide what it is", () => {
+  const listing = (title: string, description = '', extra: Record<string, unknown> = {}) => ({ title, description, start: '2026-10-16T20:00', pageUrl: 'https://example.test/e', ...extra });
+  it('drops listings on everything-calendars that name no music or dancing, even with "Halloween music"', async () => {
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const ctx = context({ adapter: 'ical', type: 'ical', focus: 'music' });
+    const r = toCandidates(
+      [
+        listing('Pretendfest', 'Haunted walk, face painting and Halloween music.', { locationName: 'Sample Pub', locality: 'Babylon' }),
+        listing('The Fictionals', 'Live band on the patio.', { locationName: 'Sample Pub', locality: 'Babylon', start: '2026-10-17T20:00' }),
+        listing('Pretend World Tour 2026', '', { locationName: 'Sample Pub', locality: 'Babylon', start: '2026-10-18T20:00', kind: 'music' }),
+      ],
+      ctx,
+      { structured: true },
+    );
+    expect(r.skipped.map((s) => s.reason)).toEqual(['no live music or dancing named in the listing']);
+    expect(r.candidates.map((c) => c.date)).toEqual(['2026-10-17', '2026-10-18']);
+  });
+  it('lists music on a dance-focused town calendar as music, not as a dance', async () => {
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const ctx = context({ adapter: 'jsonld', type: 'jsonld', focus: 'dance' });
+    const r = toCandidates([listing('Oktoberfest', 'German food and live accordion music.', { locationName: 'Sample Pub', locality: 'Babylon' })], ctx, { structured: true });
+    expect(r.candidates[0]).toMatchObject({ category: 'live-music', title: 'Oktoberfest live music at Sample Pub' });
+  });
+  it('knows band names that sound like places, and strips tour names from titles', async () => {
+    const { tidyTitleAct } = await import('../../ingest/lib/structured');
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const ctx = context({ adapter: 'jsonld', type: 'jsonld', focus: 'music', defaults: { venueId: 'sample-pub' } });
+    expect(toCandidates([listing('Manhattan Pretend Transfer tribute', 'A tribute band.')], ctx, { structured: true }).candidates).toHaveLength(1);
+    expect(tidyTitleAct('Pretend-Band World Tour 2026')).toBe('Pretend-Band');
+    expect(tidyTitleAct('Sample Singer: Speed of Pretend Tour 2026')).toBe('Sample Singer');
+    expect(tidyTitleAct('The Pretend Tour Band')).toBe('The Pretend Tour Band');
+  });
+  it('reads MusicEvent and DanceEvent types from the page data', async () => {
+    const { foundFromNode } = await import('../../ingest/adapters/jsonld');
+    expect(foundFromNode({ '@type': 'MusicEvent', name: 'Pretend Act', startDate: '2026-10-10T20:00' }, 'https://example.test/')?.kind).toBe('music');
+    expect(foundFromNode({ '@type': ['Event', 'DanceEvent'], name: 'Pretend Social', startDate: '2026-10-10T20:00' }, 'https://example.test/')?.kind).toBe('dance');
   });
 });
 
