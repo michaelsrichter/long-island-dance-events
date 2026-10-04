@@ -229,7 +229,8 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
       continue;
     }
     const performerIds = reg.matchPerformers(row.act).filter((id) => !(venue && reg.performers.get(id)?.name === venue.name));
-    const pieces = row.act.split(/\s*\/\s*/).map((p) => p.trim()).filter((p) => p.length >= 2 && !GENERIC_ACTS.test(p));
+    // "89 North - See Venue for Details": the venue's own name is not an act.
+    const pieces = row.act.split(/\s*\/\s*/).map((p) => p.trim()).filter((p) => p.length >= 2 && !GENERIC_ACTS.test(p) && reg.matchVenue(p) !== venueId);
     for (const p of pieces) if (!reg.matchPerformers(p).length && !reg.matchOrganizer(p)) unActs.add(p);
     const organizerId = reg.matchOrganizer(row.act);
     const cues = cuesFor(row);
