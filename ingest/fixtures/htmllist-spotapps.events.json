@@ -16,8 +16,8 @@
         "2026-10-04"
       ],
       "data": {
-        "title": "Dance with live music at Sample Tavern",
-        "summary": "Dance to live music.",
+        "title": "Live music at Sample Tavern",
+        "summary": "Live music at Sample Tavern. The dancing score on this page says whether people usually dance.",
         "category": "live-music",
         "danceStyles": [],
         "start": "2026-10-04T18:00",
@@ -47,8 +47,8 @@
         "2026-10-09"
       ],
       "data": {
-        "title": "Dance with live music by The Fictionals at Sample Tavern",
-        "summary": "Dance to live music by The Fictionals.",
+        "title": "The Fictionals at Sample Tavern",
+        "summary": "Live music by The Fictionals at Sample Tavern. The dancing score on this page says whether people usually dance.",
         "category": "live-music",
         "danceStyles": [],
         "start": "2026-10-09T19:00",
@@ -77,8 +77,8 @@
         "2026-10-17"
       ],
       "data": {
-        "title": "Dance with live music by Midnight Fiction at Sample Tavern",
-        "summary": "Dance to live music by Midnight Fiction.",
+        "title": "Midnight Fiction at Sample Tavern",
+        "summary": "Live music by Midnight Fiction at Sample Tavern. The dancing score on this page says whether people usually dance.",
         "category": "live-music",
         "danceStyles": [],
         "start": "2026-10-17T19:30",

@@ -68,6 +68,8 @@ export interface DescribeInput {
   /** Lowercased source text, used only to detect facts (food, costumes, partner policy). */
   facts: string;
   cadence?: string | undefined;
+  /** 'music' = a bar, venue or band calendar: say "live music", not "dance", and let the dancing score tell visitors. */
+  focus?: 'dance' | 'music' | undefined;
 }
 
 const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
@@ -98,9 +100,12 @@ export function makeTitle(d: DescribeInput): string {
   const lessonStyles = styleTitle(d.lessonStyles ?? []);
   const theme = d.theme ? `${d.theme} ` : '';
   let what: string;
+  const music = d.focus === 'music';
   switch (d.category) {
     case 'live-music':
-      what = `${theme}${styles ? `${styles} dance` : 'Dance'} with live music${d.liveActs.length ? ` by ${joinAnd(d.liveActs)}` : ''}`;
+      // Bar, venue and band calendars do not promise dancing; the dancing score on the page does that.
+      if (music) what = d.liveActs.length ? (d.theme ? `${d.theme} show with ${joinAnd(d.liveActs)}` : joinAnd(d.liveActs)) : `${theme}live music`;
+      else what = `${theme}${styles ? `${styles} dance` : 'Dance'} with live music${d.liveActs.length ? ` by ${joinAnd(d.liveActs)}` : ''}`;
       break;
     case 'lesson-party':
       what = lessonStyles
@@ -115,7 +120,7 @@ export function makeTitle(d: DescribeInput): string {
       break;
     }
     case 'festival':
-      what = `${theme}${styles ? `${styles} ` : 'Dance '}festival`;
+      what = `${theme}${styles ? `${styles} ` : music ? '' : 'Dance '}festival`;
       break;
     default:
       what = `${theme}${styles ? `${styles} social dance` : 'Social dance'}${d.djs.length === 1 ? ` with ${d.djs[0]}` : ''}`;
@@ -133,7 +138,8 @@ export function makeSummary(d: DescribeInput): string {
   const teachers = d.instructors.length ? ` with ${joinAnd(d.instructors)}` : '';
   switch (d.category) {
     case 'live-music':
-      parts.push(`Dance to live music${d.liveActs.length ? ` by ${joinAnd(d.liveActs)}` : ''}.`);
+      if (d.focus === 'music') parts.push(`Live music${d.liveActs.length ? ` by ${joinAnd(d.liveActs)}` : ''}${d.venueName ? ` at ${d.venueName}` : ''}. The dancing score on this page says whether people usually dance.`);
+      else parts.push(`Dance to live music${d.liveActs.length ? ` by ${joinAnd(d.liveActs)}` : ''}.`);
       if (styles) parts.push(`Dance styles: ${styles}.`);
       if (d.lessonTime) parts.push(`A group lesson starts${lessonAt}${teachers}.`);
       break;
@@ -151,7 +157,7 @@ export function makeSummary(d: DescribeInput): string {
       break;
     }
     case 'festival':
-      parts.push(`A larger dance event${styles ? ` for ${styles}` : ''}.`);
+      parts.push(d.focus === 'music' ? `A larger event with live music${d.venueName ? ` at ${d.venueName}` : ''}.` : `A larger dance event${styles ? ` for ${styles}` : ''}.`);
       break;
     default:
       parts.push(`An evening of${styles ? ` ${styles}` : ''} social dancing${d.djs.length ? ` with music by ${joinAnd(d.djs)}` : ''}.`);

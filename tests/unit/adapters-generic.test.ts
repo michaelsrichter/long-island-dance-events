@@ -11,6 +11,7 @@ import { adapter as htmllist, actName, dateBlocks, findDates, inferDate, meaning
 import { adapter as ical, foundFromIcs, icsTimeToLocal, parseIcs, splitLocation } from '../../ingest/adapters/ical';
 import { adapter as jsonld, eventNodes, jsonLdBlocks, sitemapLinks } from '../../ingest/adapters/jsonld';
 import { collapse } from '../../ingest/lib/collapse';
+import { makeSummary, makeTitle } from '../../ingest/lib/describe';
 import { Registry, ROOT } from '../../ingest/lib/registry';
 import { cleanVenueName, displayActOk, ensurePerformer, entityNameFromSource, findPlaceInText, findVenue, htmlToLines, isoToLocal, performerNameOk, tidyTitleAct, titleActOk } from '../../ingest/lib/structured';
 import type { Adapter, AdapterContext, FetchedDocument } from '../../ingest/lib/types';
@@ -108,7 +109,7 @@ describe('names and venues are checked before anything new is created', () => {
     const { toCandidates } = await import('../../ingest/lib/structured');
     const ctx = context({ adapter: 'jsonld', type: 'jsonld', focus: 'music', defaults: { venueId: 'sample-pub' } });
     const r = toCandidates([{ title: 'Pretend Act', performers: ['Pretend Act', 'Pretend Act: Twenty Years Tour'], start: '2026-10-16T20:00', pageUrl: 'https://example.test/e' }], ctx, { structured: true });
-    expect(r.candidates[0]!.title).toBe('Dance with live music by Pretend Act at Sample Pub');
+    expect(r.candidates[0]!.title).toBe('Pretend Act at Sample Pub');
   });
   it('matches existing venues by name, alias or street address in the same town', () => {
     const reg = fixtureRegistry();
@@ -324,5 +325,20 @@ describe('HTML list adapter', () => {
     expect(result.skipped.map((s) => s.reason)).toContain('venue not researched yet');
     expect(drafts.every((d) => d.data.performerIds?.includes('the-pretend-band'))).toBe(true);
     expect(drafts.find((d) => d.data.town === 'Huntington')?.data).toMatchObject({ venueId: 'example-lodge', start: '2026-10-24T20:00', end: '2026-10-24T23:00' });
+  });
+});
+
+describe('titles for bar, venue and band calendars (focus music)', () => {
+  const base = { styles: [], djs: [], instructors: [], schedule: [], skillLevel: 'all-levels', facts: '', venueName: 'Patchogue Theatre' };
+  it('names the act and place without promising dancing', () => {
+    expect(makeTitle({ ...base, category: 'live-music', liveActs: ['Toad the Wet Sprocket'], focus: 'music' })).toBe('Toad the Wet Sprocket at Patchogue Theatre');
+    expect(makeTitle({ ...base, category: 'live-music', liveActs: [], focus: 'music' })).toBe('Live music at Patchogue Theatre');
+    expect(makeTitle({ ...base, category: 'live-music', liveActs: ['The Pretend Band'], theme: 'Halloween', focus: 'music' })).toBe('Halloween show with The Pretend Band at Patchogue Theatre');
+    expect(makeTitle({ ...base, category: 'festival', liveActs: [], focus: 'music' })).toBe('Festival at Patchogue Theatre');
+    expect(makeSummary({ ...base, category: 'live-music', liveActs: ['Toad the Wet Sprocket'], focus: 'music' })).toMatch(/^Live music by Toad the Wet Sprocket at Patchogue Theatre\. The dancing score/);
+  });
+  it('keeps dance wording for dance calendars', () => {
+    expect(makeTitle({ ...base, category: 'live-music', liveActs: ['The Swing Kings'], styles: ['east-coast-swing'] })).toBe('East Coast Swing dance with live music by The Swing Kings at Patchogue Theatre');
+    expect(makeTitle({ ...base, category: 'festival', liveActs: [] })).toBe('Dance festival at Patchogue Theatre');
   });
 });
