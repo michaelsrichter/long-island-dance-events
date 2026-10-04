@@ -1,0 +1,19 @@
+{
+  "name": "Dead Ahead Band - tour dates",
+  "url": "https://deadaheadband.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Dead Ahead Band. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Riverhead: jam band, Grateful Dead, blues, Motown.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "dead-ahead-band"
+    ]
+  },
+  "reviewNotes": "Switched off on 2026-10-03: the tour-dates page shows only month totals; the dated list loads in a web browser (JavaScript). Ask the band for a calendar link. Catalog check 2026-10-03: Keep because it has three Suffolk public gigs at the same brewery and easy dates."
+}

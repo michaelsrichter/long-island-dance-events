@@ -1,0 +1,18 @@
+{
+  "name": "Eventbrite event pages",
+  "url": "https://www.eventbrite.com/d/ny--central-islip/salsa/",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Eventbrite event pages. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Long Island: dance events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "allowed, but sampled URL returned HTTP 405. Eventbrite terms prohibit web scraping; use the official API or organizer permission."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Needs permission. Do not scrape Eventbrite; use API or organizer feeds only if needed."
+}

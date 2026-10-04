@@ -1,0 +1,19 @@
+{
+  "name": "Dance With Me Long Island",
+  "aliases": [
+    "Dance With Me Greenvale",
+    "Dance With Me Studio Long Island"
+  ],
+  "address": "27 Glen Cove Rd",
+  "town": "Greenvale",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11548",
+  "website": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+  "kind": "dance-studio",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://dancewithmeusa.com/studio/long-island-dance-studio/.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 40.810615,
+  "longitude": -73.628463,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

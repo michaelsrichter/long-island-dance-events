@@ -1,0 +1,14 @@
+{
+  "name": "Village of Mineola calendar",
+  "url": "https://www.mineola-ny.gov/calendar.aspx?view=list&CID=28",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from Village of Mineola calendar. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Mineola: village concerts, municipal events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck for summer concerts; real page but no current dance/live music."
+}

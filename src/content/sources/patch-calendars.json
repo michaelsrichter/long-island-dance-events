@@ -1,0 +1,18 @@
+{
+  "name": "Patch town calendars (e.g., Israeli Dancing, Plainview)",
+  "url": "https://patch.com/new-york/plainview/calendar/event/20260908/5d3cfa39-097a-4ec8-ac79-1b74ffbbc7ee/israeli-dancing",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Patch town calendars (e.g., Israeli Dancing, Plainview). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Long Island: dance events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "allowed. Patch terms forbid spiders, robots, scraping, and data mining for cataloging content."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Needs permission. The data is readable, but Patch terms forbid automated collection without permission."
+}

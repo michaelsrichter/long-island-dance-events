@@ -60,9 +60,11 @@ test.describe('finding something to dance to', () => {
     await page.goto('/events/');
     await expect(page.locator('input[name="category"][value="dances"]')).toBeChecked();
     const visible = page.locator('[data-upcoming-list] [data-event]:not([hidden])');
-    const dances = await visible.count();
+    // One read for the whole list (hundreds of events): faster, and not upset by the list re-rendering.
+    const categories = await visible.evaluateAll((els) => els.map((e) => e.getAttribute('data-category')));
+    const dances = categories.length;
     expect(dances).toBeGreaterThan(0);
-    for (const c of await visible.all()) expect(await c.getAttribute('data-category')).not.toBe('class-lesson');
+    expect(categories).not.toContain('class-lesson');
     await page.locator('.chip', { hasText: 'Everything' }).click();
     await expect(page).toHaveURL(/category=all/);
     expect(await visible.count()).toBeGreaterThan(dances);

@@ -1,0 +1,18 @@
+{
+  "name": "Hotel Moraine",
+  "aliases": [
+    "Hotel Moraine Greenport"
+  ],
+  "address": "62005 County Rd 48",
+  "town": "Greenport",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11944",
+  "website": "https://www.hotelmoraine.com/",
+  "kind": "other",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://www.hotelmoraine.com/events.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 41.099478,
+  "longitude": -72.38961,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

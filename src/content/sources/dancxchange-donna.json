@@ -1,0 +1,14 @@
+{
+  "name": "DancXchange / Donna DeSimone",
+  "url": "https://donnadesimone.us/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from DancXchange / Donna DeSimone. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Long Island: dance events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "manual-intake",
+  "reviewNotes": "Events are only in social posts or picture flyers. Add them by hand (flyer intake). Catalog check 2026-10-03: Manual intake. The source has real events, but updates are bulletin/flyer/social style rather than a clean feed."
+}

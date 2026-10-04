@@ -1,0 +1,22 @@
+{
+  "name": "Stage 317 (Farmingdale) - concerts and dance parties",
+  "url": "https://www.stage317.com/upcoming-events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Stage 317 (Farmingdale). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Farmingdale: DJ dance party, 80s and new-wave cover bands, dueling pianos.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "stage-317-farmingdale",
+    "town": "Farmingdale"
+  },
+  "permission": {
+    "status": "needed",
+    "note": "The calendar only shows up in a web browser (it is drawn by JavaScript), so our collector cannot read it. Ask for an .ics link or another public feed."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. It has current events and at least some clear dance-party programming, but most items are concerts."
+}

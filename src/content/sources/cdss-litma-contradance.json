@@ -1,0 +1,19 @@
+{
+  "name": "LITMA Contradances (Smithtown) - CDSS calendar",
+  "url": "https://cdss.org/organizer/long-island-traditional-music-association/",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from LITMA Contradances (Smithtown). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Smithtown: contra dance.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "feedUrl": "https://cdss.org/organizer/long-island-traditional-music-association/?ical=1",
+  "permission": {
+    "status": "needed",
+    "note": "The CDSS calendar answered HTTP 403 (blocked) to our collector on 2026-10-03. Ask CDSS or LITMA for permission or a calendar link."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. Clean CDSS iCal and JSON-LD show LITMA contra dances in Smithtown through July 2027."
+}

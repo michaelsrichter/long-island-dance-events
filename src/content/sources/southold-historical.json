@@ -1,0 +1,14 @@
+{
+  "name": "Southold Historical Museum - Line Dancing in the Barn",
+  "url": "https://www.southoldhistorical.org/event-details/line-dancing-in-the-barn-3",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "dance",
+  "cadence": "seasonal",
+  "enabled": false,
+  "attribution": "Some listings come from Southold Historical Museum. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Southold: line dancing.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "seasonal-recheck",
+  "reviewNotes": "No upcoming dates right now (seasonal). Check again in April. Catalog check 2026-10-03: Recheck seasonally because the museum had a real Long Island line-dance event, but no future date is listed now."
+}

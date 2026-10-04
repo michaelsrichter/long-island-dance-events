@@ -1,0 +1,18 @@
+{
+  "name": "Ballroom Factory Dance Studio (Patchogue) - group classes",
+  "url": "https://ballroomfactory.com/group-classes-workshop/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Ballroom Factory Dance Studio (Patchogue). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Patchogue: cha cha, foxtrot, Lindy, salsa/bachata.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "allowed, but page returned HTTP 403 bot challenge."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Needs permission. The site now answers 403 to our bot, so ask for consent or a feed."
+}

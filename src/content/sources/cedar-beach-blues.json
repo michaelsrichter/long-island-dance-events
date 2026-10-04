@@ -1,0 +1,17 @@
+{
+  "name": "Cedar Beach Blues Festival",
+  "url": "https://cedarbeachbluesfestival.com/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Cedar Beach Blues Festival. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Port Jefferson: blues festival, waterfront blues, rock-blues bands.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "town": "Babylon"
+  },
+  "reviewNotes": "Once-a-year festival that already happened this year. Check again in spring. Catalog check 2026-10-03: Keep as annual source; clear LI live-music event but only one date per year."
+}

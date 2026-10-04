@@ -1,0 +1,23 @@
+{
+  "name": "The Second Street Band - shows",
+  "url": "https://www.thesecondstreetband.com/event-list",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from The Second Street Band. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Baldwin, Bohemia, Lynbrook and East Rockaway: cover band, bar band, acoustic shows.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "the-second-street-band"
+    ]
+  },
+  "permission": {
+    "status": "needed",
+    "note": "The calendar only shows up in a web browser (it is drawn by JavaScript), so our collector cannot read it. Ask for an .ics link or another public feed."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep because it has a dense October schedule across both counties, though Wix adds effort."
+}

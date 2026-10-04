@@ -1,0 +1,19 @@
+{
+  "name": "Hotel Moraine (Greenport) - events",
+  "url": "https://www.hotelmoraine.com/events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Hotel Moraine (Greenport). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Greenport: happy-hour acoustic music, hotel events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "hotel-moraine-greenport",
+    "town": "Greenport"
+  },
+  "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
+  "reviewNotes": "Catalog check 2026-10-03: Keep only as a low-priority live-music source. It is current but mostly listening/background music."
+}

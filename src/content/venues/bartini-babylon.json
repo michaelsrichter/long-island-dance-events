@@ -1,0 +1,20 @@
+{
+  "name": "Bartini Bar & Lounge",
+  "aliases": [
+    "Bartini",
+    "Bartini Babylon",
+    "Bartini Bar"
+  ],
+  "address": "124 N Carll Ave",
+  "town": "Babylon",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11702",
+  "website": "https://www.bartinibabylon.com/",
+  "kind": "bar",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://www.bartinibabylon.com/ (home page: next to the Babylon train station).",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 40.700749,
+  "longitude": -73.325946,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

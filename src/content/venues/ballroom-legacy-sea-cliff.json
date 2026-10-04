@@ -1,0 +1,19 @@
+{
+  "name": "Ballroom Legacy Dance Studio",
+  "aliases": [
+    "Ballroom Legacy",
+    "Ballroom Legacy Sea Cliff"
+  ],
+  "address": "185 Glen Cove Ave, Suite A",
+  "town": "Sea Cliff",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11579",
+  "website": "https://www.ballroomlegacy.us/",
+  "kind": "dance-studio",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://www.ballroomlegacy.us/ (event pages list the studio address).",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 40.851813,
+  "longitude": -73.635325,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

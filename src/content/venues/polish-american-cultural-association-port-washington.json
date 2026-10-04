@@ -1,0 +1,20 @@
+{
+  "name": "Polish American Cultural Association",
+  "aliases": [
+    "Port Washington Polish Club",
+    "Polish Club Port Washington",
+    "Polish American Club of Port Washington"
+  ],
+  "address": "5 Pulaski Pl",
+  "town": "Port Washington",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11050",
+  "website": "https://portwashingtonpolishclub.com/",
+  "kind": "lodge-hall",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://portwashingtonpolishclub.com/contact-us.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 40.844209,
+  "longitude": -73.695933,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

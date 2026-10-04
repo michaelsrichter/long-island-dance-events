@@ -1,0 +1,20 @@
+{
+  "name": "Conklin Barn",
+  "aliases": [
+    "Jazz at the Barn",
+    "Conklin Barn Huntington",
+    "Huntington Historical Society Conklin Barn"
+  ],
+  "address": "2 High St",
+  "town": "Huntington",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11743",
+  "website": "https://jazzatthebarn.com/",
+  "kind": "concert-hall",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://jazzatthebarn.com/ (shows are at the Conklin Barn, 2 High Street).",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 40.868131,
+  "longitude": -73.425747,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

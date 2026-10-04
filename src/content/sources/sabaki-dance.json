@@ -1,0 +1,17 @@
+{
+  "name": "sabaki.dance (Latin dance aggregator) - city pages",
+  "url": "https://sabaki.dance/events/Sea-Cliff",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "dance",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from sabaki.dance (Latin dance aggregator). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Sea Cliff and Levittown: salsa, bachata, kizomba.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "pageUrls": [
+    "https://sabaki.dance/events/Levittown"
+  ],
+  "reviewNotes": "Catalog check 2026-10-03: Keep only with a hard Nassau/Suffolk address filter; most nearby hits are NYC or Westchester."
+}

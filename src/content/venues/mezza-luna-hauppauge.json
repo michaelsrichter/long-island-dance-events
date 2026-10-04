@@ -1,0 +1,19 @@
+{
+  "name": "Mezza Luna",
+  "aliases": [
+    "Mezza Luna Fine Italian",
+    "Mezza Luna Hauppauge"
+  ],
+  "address": "644 Vanderbilt Motor Pkwy",
+  "town": "Hauppauge",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11788",
+  "website": "https://www.mezzalunafinedining.com/",
+  "kind": "restaurant",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://www.mezzalunafinedining.com/events.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 40.805455,
+  "longitude": -73.233015,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

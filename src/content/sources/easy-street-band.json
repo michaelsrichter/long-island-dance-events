@@ -1,0 +1,23 @@
+{
+  "name": "The Band Easy Street - upcoming events",
+  "url": "https://thebandeasystreet.com/",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from The Band Easy Street. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Babylon, Dix Hills, Jones Beach and Stony Brook: dance, funk, soul, rock and roll.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "the-band-easy-street"
+    ]
+  },
+  "permission": {
+    "status": "needed",
+    "note": "The band's calendar is a Google Calendar, and Google's calendar feed host blocks bots. Ask the band for permission or another feed."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep because it has strong dance-band signals and a few public LI dates, but the schedule is sparse and widget-based."
+}

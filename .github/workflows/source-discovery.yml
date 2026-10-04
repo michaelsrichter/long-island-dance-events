@@ -1,0 +1,69 @@
+name: Find and recheck sources (monthly)
+
+# On the 1st of each month:
+#  1. Search the web with Microsoft Web IQ (85 queries in catalog/search-queries.json) for new
+#     Long Island dance and live-music sources. Needs the repository secret WEBIQ_API_KEY; without it
+#     this step is skipped. Cost after the free evaluation: about $1.06 a month at $12.50 per 1,000 calls.
+#  2. Recheck every tracked source in catalog/sources.json politely (robots.txt, page opens,
+#     upcoming dates), with our own User-Agent and a pause between requests.
+#  3. Open an issue with the results. Nothing is added or switched on automatically.
+on:
+  schedule:
+    - cron: '0 11 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: source-discovery
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    name: Search, recheck and report
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+
+      - name: Search with Web IQ
+        env:
+          WEBIQ_API_KEY: ${{ secrets.WEBIQ_API_KEY }}
+        run: |
+          if [ -z "$WEBIQ_API_KEY" ]; then
+            echo "::notice::The WEBIQ_API_KEY secret is not set, so the search is skipped. The source recheck still runs."
+            exit 0
+          fi
+          node catalog/scripts/webiq-search.mjs --cache "$RUNNER_TEMP/webiq" --log "$RUNNER_TEMP/search-log.json"
+
+      - name: Recheck tracked sources and write the report
+        run: |
+          args=(--cache "$RUNNER_TEMP/verify" --out "$RUNNER_TEMP/discovery.md")
+          if [ -f "$RUNNER_TEMP/search-log.json" ]; then args+=(--search-log "$RUNNER_TEMP/search-log.json"); fi
+          python catalog/scripts/discovery_report.py "${args[@]}"
+          cat "$RUNNER_TEMP/discovery.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: source-discovery-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/discovery.md
+            ${{ runner.temp }}/search-log.json
+            ${{ runner.temp }}/verify/verify.json
+          if-no-files-found: ignore
+          retention-days: 90
+
+      - name: Open the monthly issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create source-discovery --color 0E8A16 --description "Monthly source search and recheck" 2>/dev/null || true
+          gh issue create --title "Monthly source check: $(date -u +'%B %Y')" --label source-discovery --body-file "$RUNNER_TEMP/discovery.md"

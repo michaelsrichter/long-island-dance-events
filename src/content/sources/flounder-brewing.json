@@ -1,0 +1,18 @@
+{
+  "name": "Flounder Brewing Co. - music and events",
+  "url": "https://www.flounderbrewing.com/music-and-events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Flounder Brewing Co.. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Riverhead: brewery acoustic music, old-time jam, small bands.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "recheck-from-ci",
+  "defaults": {
+    "venueId": "flounder-brewing-co-riverhead",
+    "town": "Riverhead"
+  },
+  "reviewNotes": "Our office network could not open this site. Check robots.txt from GitHub Actions, then switch it on. Catalog check 2026-10-03: Keep only as a low-priority listening source. It has many events, but they read like brewery listening nights."
+}

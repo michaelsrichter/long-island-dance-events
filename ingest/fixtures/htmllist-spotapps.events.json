@@ -1,0 +1,104 @@
+{
+  "outOfArea": [],
+  "skipped": [],
+  "created": {
+    "venues": [],
+    "performers": [
+      "the-fictionals",
+      "midnight-fiction"
+    ]
+  },
+  "drafts": [
+    {
+      "id": "2026-10-04-sample-tavern-live-music",
+      "matchKey": "test-source|sample-tavern||sunday|18:00|live-music|||2026-10-04",
+      "dates": [
+        "2026-10-04"
+      ],
+      "data": {
+        "title": "Dance with live music at Sample Tavern",
+        "summary": "Dance to live music.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-04T18:00",
+        "end": "2026-10-04T21:00",
+        "timezone": "America/New_York",
+        "venueId": "sample-tavern",
+        "town": "Bay Shore",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://sample-tavern.example/events",
+        "sourceName": "Sample Tavern (Bay Shore) - events",
+        "sourceRef": "events page 2026-10-04",
+        "status": "active",
+        "dancingCues": [
+          "jam"
+        ],
+        "confidence": 0.75,
+        "reviewNotes": "The venue lists this as repeating (Monthly on every first Sunday); only the date shown was kept."
+      }
+    },
+    {
+      "id": "2026-10-09-the-fictionals-live-music",
+      "matchKey": "test-source|sample-tavern||friday|19:00|live-music|the-fictionals||2026-10-09",
+      "dates": [
+        "2026-10-09"
+      ],
+      "data": {
+        "title": "Dance with live music by The Fictionals at Sample Tavern",
+        "summary": "Dance to live music by The Fictionals.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-09T19:00",
+        "end": "2026-10-09T22:00",
+        "timezone": "America/New_York",
+        "venueId": "sample-tavern",
+        "town": "Bay Shore",
+        "performerIds": [
+          "the-fictionals"
+        ],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://sample-tavern.example/events",
+        "sourceName": "Sample Tavern (Bay Shore) - events",
+        "sourceRef": "events page 2026-10-09",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.8
+      }
+    },
+    {
+      "id": "2026-10-17-midnight-fiction-live-music",
+      "matchKey": "test-source|sample-tavern||saturday|19:30|live-music|midnight-fiction||2026-10-17",
+      "dates": [
+        "2026-10-17"
+      ],
+      "data": {
+        "title": "Dance with live music by Midnight Fiction at Sample Tavern",
+        "summary": "Dance to live music by Midnight Fiction.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-17T19:30",
+        "end": "2026-10-17T22:30",
+        "timezone": "America/New_York",
+        "venueId": "sample-tavern",
+        "town": "Bay Shore",
+        "performerIds": [
+          "midnight-fiction"
+        ],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://sample-tavern.example/events",
+        "sourceName": "Sample Tavern (Bay Shore) - events",
+        "sourceRef": "events page 2026-10-17",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.8
+      }
+    }
+  ]
+}

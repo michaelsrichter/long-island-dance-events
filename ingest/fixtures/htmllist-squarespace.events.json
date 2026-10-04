@@ -1,0 +1,48 @@
+{
+  "outOfArea": [],
+  "skipped": [
+    {
+      "reason": "not a dance or live-music listing",
+      "ref": "events page 2026-10-24"
+    }
+  ],
+  "created": {
+    "venues": [],
+    "performers": [
+      "the-fictionals"
+    ]
+  },
+  "drafts": [
+    {
+      "id": "2026-10-16-the-fictionals-live-music",
+      "matchKey": "test-source|sample-tavern||friday|21:00|live-music|the-fictionals||2026-10-16",
+      "dates": [
+        "2026-10-16"
+      ],
+      "data": {
+        "title": "Dance with live music by The Fictionals at Sample Tavern",
+        "summary": "Dance to live music by The Fictionals.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-16T21:00",
+        "end": "2026-10-16T00:00",
+        "timezone": "America/New_York",
+        "venueId": "sample-tavern",
+        "town": "Bay Shore",
+        "performerIds": [
+          "the-fictionals"
+        ],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "infoUrl": "https://sample-tavern.example/music/2026/10/16/the-fictionals",
+        "sourceId": "test-source",
+        "sourceUrl": "https://sample-tavern.example/music/2026/10/16/the-fictionals",
+        "sourceName": "Sample Tavern (Bay Shore) - music calendar",
+        "sourceRef": "events page 2026-10-16",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.8
+      }
+    }
+  ]
+}

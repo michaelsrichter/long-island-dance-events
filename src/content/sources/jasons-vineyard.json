@@ -1,0 +1,18 @@
+{
+  "name": "Jason's Vineyard (Jamesport) - live music schedule",
+  "url": "https://www.jasonsvineyard.com/events",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Jason's Vineyard (Jamesport). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Jamesport: winery live music, afternoon bands.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "recheck-from-ci",
+  "defaults": {
+    "venueId": "jasons-vineyard-jamesport",
+    "town": "Jamesport"
+  },
+  "reviewNotes": "Our office network could not open this site. Check robots.txt from GitHub Actions, then switch it on. Catalog check 2026-10-03: Recheck from CI. It has a long dated music schedule, but it is more winery listening than dancing."
+}

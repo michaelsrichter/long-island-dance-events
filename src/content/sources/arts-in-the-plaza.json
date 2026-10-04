@@ -1,0 +1,17 @@
+{
+  "name": "Arts in the Plaza live music calendar",
+  "url": "https://www.artsintheplaza.com/live-music-calendar.html",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Arts in the Plaza live music calendar. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Long Beach: live music, DJ, dance party, plaza performances.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "town": "Long Beach"
+  },
+  "reviewNotes": "Switched off: On 2026-10-03 it listed 48 dates, but none were at a venue we have researched yet (most listings do not name the venue). Add those venue files in src/content/venues (address and dance-floor research), then switch it back on. Catalog check 2026-10-03: Keep it; seasonal but easy to parse and includes live music plus a dance party."
+}

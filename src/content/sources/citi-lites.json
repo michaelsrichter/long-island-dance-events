@@ -1,0 +1,19 @@
+{
+  "name": "The Citi-Lites Band - upcoming shows",
+  "url": "https://citilitesbandlongisland.com/upcoming-shows/",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from The Citi-Lites Band. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Bayport: rock, blues, disco, oldies.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "the-citi-lites-band"
+    ]
+  },
+  "reviewNotes": "Switched off: On 2026-10-03 it listed 13 dates, but none were at a venue we have researched yet (for example Bayport Bluepoint Library (Bayport)). Add those venue files in src/content/venues (address and dance-floor research), then switch it back on. Catalog check 2026-10-03: Keep as a small clean source with one future Suffolk public show and machine-readable data."
+}

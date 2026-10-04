@@ -1,0 +1,19 @@
+{
+  "name": "Pour Some 80s On Me - show calendar",
+  "url": "https://poursome80sonme.org/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "weekly",
+  "enabled": true,
+  "attribution": "Some listings come from Pour Some 80s On Me. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Miller Place, Oyster Bay, Farmingdale and Brookhaven: 80s rock, party band, cover band.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "pour-some-80s-on-me"
+    ]
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep as a strong source with many public LI bar gigs and repeat venues."
+}

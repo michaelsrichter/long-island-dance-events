@@ -66,10 +66,10 @@ export function findTimes(text: string): TimeToken[] {
   return tokens.sort((a, b) => a.index - b.index);
 }
 
-/** Times that are not when the event starts (doors, coffee, food, deadlines). */
+/** Times that are not when the event starts (doors, coffee, food, deadlines, ticket sales closing). */
 function isSideTime(text: string, t: TimeToken): boolean {
   const before = text.slice(Math.max(0, t.index - 28), t.index).toLowerCase();
-  return /(doors? open|coffee|dessert|buffet|dinner served|available|served|until|till|rsvp by|reserve by|deadline|reserv)\W*(at|from)?\W*$/.test(before);
+  return /(doors? open|coffee|dessert|buffet|dinner served|available|served|until|till|rsvp by|reserve by|deadline|reserv|sales? close|closes?|ends?)\W*(at|from)?\W*$/.test(before);
 }
 
 export function findLessonTime(text: string, tokens: TimeToken[] = findTimes(text)): string | undefined {

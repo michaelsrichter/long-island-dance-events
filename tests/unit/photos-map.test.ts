@@ -70,6 +70,9 @@ describe('venue geocoding', () => {
     const dir = join(__dirname, '..', '..', 'src', 'content', 'venues');
     for (const f of readdirSync(dir).filter((x) => x.endsWith('.json'))) {
       const v = JSON.parse(readFileSync(join(dir, f), 'utf8'));
+      // A venue the collector just added may wait for an editor when no geocoder knows its address
+      // (the collection run lists it under "Could not place on the map"). Researched venues may not.
+      if (v.latitude === undefined && /^Added automatically/.test(v.reviewNotes ?? '')) continue;
       expect(v.latitude, f).toBeGreaterThan(40.5);
       expect(v.latitude, f).toBeLessThan(41.2);
       expect(v.longitude, f).toBeGreaterThan(-74.1);

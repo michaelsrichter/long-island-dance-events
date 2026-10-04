@@ -1,0 +1,17 @@
+{
+  "name": "Blues Groupie live music listings",
+  "url": "https://bluesgroupie.com/sun-tues",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Blues Groupie live music listings. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Amagansett, Amityville, Babylon and Bay Shore: blues jams, bar bands, recurring gigs.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "pageUrls": [
+    "https://bluesgroupie.com/tues-thurs"
+  ],
+  "reviewNotes": "Switched off on 2026-10-03: both pages still showed September dates, so the site is updated irregularly. The monthly source check will show when it has upcoming dates again. Catalog check 2026-10-03: Keep with checks; current blues/jam listings but free-text parsing."
+}

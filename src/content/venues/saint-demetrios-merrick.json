@@ -1,0 +1,20 @@
+{
+  "name": "Saint Demetrios Greek Orthodox Church",
+  "aliases": [
+    "Saint Demetrios",
+    "St. Demetrios Merrick",
+    "Saint Demetrios Merrick"
+  ],
+  "address": "2421 Hewlett Ave",
+  "town": "Merrick",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11566",
+  "website": "https://saint-demetrios.com/",
+  "kind": "other",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://saint-demetrios.com/dance.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 40.658914,
+  "longitude": -73.54704,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

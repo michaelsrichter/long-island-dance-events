@@ -3,7 +3,7 @@
   "type": "html",
   "adapter": "iraslist",
   "attribution": "Live bands and DJs come from Ira's List, a weekly guide to live music on Long Island. We list the facts and link back; check with the venue before you go.",
-  "cadence": "weekly",
+  "cadence": "daily",
   "description": "Weekly list of live bands and DJs at Long Island bars, restaurants, parks and theaters. We read the \"This week\" list on the home page.",
   "enabled": true,
   "focus": "music",
@@ -16,5 +16,6 @@
   "lastScraped": "2026-10-03T23:40:41.194Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
-  "url": "https://www.iraslistli.com/"
+  "url": "https://www.iraslistli.com/",
+  "catalogStatus": "live"
 }

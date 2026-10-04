@@ -1,0 +1,18 @@
+{
+  "name": "Societelle - Boots & Beats line dancing at 89 North",
+  "url": "https://www.societelle.com/event-details/boots-beats-a-night-of-line-dancing",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Societelle. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Patchogue: country line dancing, live music.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "unverified (429)."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Future Long Island line-dance event is readable, but ask permission or a feed because robots.txt returned 429."
+}

@@ -1,0 +1,22 @@
+{
+  "name": "The Paramount (Huntington) - show calendar",
+  "url": "https://www.paramountny.com/show-calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from The Paramount (Huntington). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Huntington: concerts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "defaults": {
+    "venueId": "the-paramount-huntington",
+    "town": "Huntington"
+  },
+  "permission": {
+    "status": "needed",
+    "note": "allowed robots.txt; page returned 429."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep only for permission outreach. The site rate-limited or blocked the request, so we should not retry around it."
+}

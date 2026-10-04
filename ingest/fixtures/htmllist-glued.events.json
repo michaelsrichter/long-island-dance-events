@@ -1,0 +1,126 @@
+{
+  "outOfArea": [],
+  "skipped": [],
+  "created": {
+    "venues": [],
+    "performers": [
+      "revival-fictional"
+    ]
+  },
+  "drafts": [
+    {
+      "id": "2026-10-09-sample-pub-live-music",
+      "matchKey": "test-source|sample-pub||friday|19:30|live-music|||2026-10-09",
+      "dates": [
+        "2026-10-09"
+      ],
+      "data": {
+        "title": "Dance with live music at Sample Pub",
+        "summary": "Dance to live music.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-09T19:30",
+        "end": "2026-10-09T22:30",
+        "timezone": "America/New_York",
+        "venueId": "sample-pub",
+        "town": "Babylon",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://sample-pub.example/calendar",
+        "sourceName": "Sample Pub (Babylon) - live music",
+        "sourceRef": "events page 2026-10-09",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.75
+      }
+    },
+    {
+      "id": "2026-10-10-revival-fictional-live-music",
+      "matchKey": "test-source|sample-pub||saturday|20:00|live-music|revival-fictional||2026-10-10",
+      "dates": [
+        "2026-10-10"
+      ],
+      "data": {
+        "title": "Dance with live music by Revival Fictional at Sample Pub",
+        "summary": "Dance to live music by Revival Fictional.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-10T20:00",
+        "timezone": "America/New_York",
+        "venueId": "sample-pub",
+        "town": "Babylon",
+        "performerIds": [
+          "revival-fictional"
+        ],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://sample-pub.example/calendar",
+        "sourceName": "Sample Pub (Babylon) - live music",
+        "sourceRef": "events page 2026-10-10",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.8
+      }
+    },
+    {
+      "id": "2026-10-16-sample-pub-live-music",
+      "matchKey": "test-source|sample-pub||friday|21:00|live-music|annexamplethevoiceoffictionandpretendsitter||2026-10-16",
+      "dates": [
+        "2026-10-16"
+      ],
+      "data": {
+        "title": "Dance with live music by Ann Example: The Voice of Fiction & Pretendsitter at Sample Pub",
+        "summary": "Dance to live music by Ann Example: The Voice of Fiction & Pretendsitter.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-16T21:00",
+        "timezone": "America/New_York",
+        "venueId": "sample-pub",
+        "town": "Babylon",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://sample-pub.example/calendar",
+        "sourceName": "Sample Pub (Babylon) - live music",
+        "sourceRef": "events page 2026-10-16",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.75,
+        "reviewNotes": "Band or DJ not researched yet: Ann Example: The Voice of Fiction & Pretendsitter."
+      }
+    },
+    {
+      "id": "2026-10-17-sample-pub-live-music",
+      "matchKey": "test-source|sample-pub||saturday|14:00|live-music|||2026-10-17",
+      "dates": [
+        "2026-10-17"
+      ],
+      "data": {
+        "title": "Dance with live music at Sample Pub",
+        "summary": "Dance to live music.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-17T14:00",
+        "timezone": "America/New_York",
+        "venueId": "sample-pub",
+        "town": "Babylon",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://sample-pub.example/calendar",
+        "sourceName": "Sample Pub (Babylon) - live music",
+        "sourceRef": "events page 2026-10-17",
+        "status": "active",
+        "dancingCues": [
+          "afternoon"
+        ],
+        "confidence": 0.75
+      }
+    }
+  ]
+}

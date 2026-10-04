@@ -1,0 +1,20 @@
+{
+  "name": "Kitty Mulligan's Irish Pub",
+  "aliases": [
+    "Kitty Mulligan's",
+    "Kitty Mulligans",
+    "Kitty Mulligan's Bay Shore"
+  ],
+  "address": "615 E Main St",
+  "town": "Bay Shore",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11706",
+  "website": "https://kittymulligans.com/",
+  "kind": "bar",
+  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://kittymulligans.com/.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "latitude": 40.727335,
+  "longitude": -73.231207,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

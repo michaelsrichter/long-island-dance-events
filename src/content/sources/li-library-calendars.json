@@ -1,0 +1,15 @@
+{
+  "name": "Long Island public library calendars (e.g., Amityville, Hicksville)",
+  "url": "https://www.amityvillepubliclibrary.org/event/intermediate-line-dancing-person-vfw-hall-10186",
+  "type": "ical",
+  "adapter": "ical",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Long Island public library calendars (e.g., Amityville, Hicksville). We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Amityville and Hicksville: line dancing, ballroom.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "feedUrl": "https://hicksvillelibrary.libcal.com/event/16949892/ical",
+  "reviewNotes": "Each library uses its own calendar system. Add one library at a time with its own feed. Catalog check 2026-10-03: Keep only with filtering. Libraries have useful dance classes, but many platforms and resident limits."
+}

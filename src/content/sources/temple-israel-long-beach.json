@@ -1,0 +1,18 @@
+{
+  "name": "Temple Israel Long Beach - Step Into Israeli Dance",
+  "url": "https://www.tilb.org/event/step-into-israeli-dance-2/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Temple Israel Long Beach. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Long Beach: Israeli dance, folk dance.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "unverified (403)."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep for permission or an organizer feed because the event page is blocked by a 403 challenge."
+}

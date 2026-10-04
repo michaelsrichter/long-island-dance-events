@@ -1,0 +1,22 @@
+{
+  "name": "The Space at Westbury - upcoming concerts",
+  "url": "https://www.thespaceatwestbury.com/upcoming-concerts",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from The Space at Westbury. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Westbury: concert hall shows, tribute concerts, pop and rock events.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "the-space-at-westbury-westbury",
+    "town": "Westbury"
+  },
+  "permission": {
+    "status": "needed",
+    "note": "The calendar only shows up in a web browser (it is drawn by JavaScript), so our collector cannot read it. Ask for an .ics link or another public feed."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority for live music. It is current but mostly seated/standing concerts."
+}

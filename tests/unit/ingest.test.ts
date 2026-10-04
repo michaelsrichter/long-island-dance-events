@@ -39,6 +39,7 @@ describe('time parsing', () => {
     ['Doors open 6:30PM. Music starts 7PM. Coffee available at 10pm.', '19:00', undefined, undefined],
     ['Brunch dance 11-2pm', '11:00', '14:00', undefined],
     ['Call 631-476-3707 for details.', undefined, undefined, undefined],
+    ['Advanced ticket sales close at 5PM the day of this event.', undefined, undefined, undefined],
   ];
   it.each(cases)('%s', (text, start, end, lesson) => {
     const t = parseTimes(text);

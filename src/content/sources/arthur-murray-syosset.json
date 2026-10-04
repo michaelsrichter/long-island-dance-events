@@ -1,0 +1,14 @@
+{
+  "name": "Arthur Murray Syosset calendar images",
+  "url": "https://arthurmurraysyosset.com/dance-lessons-long-island",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "dance",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Arthur Murray Syosset calendar images. We write our own short summaries and link back to the original page.",
+  "description": "Dance listings in Syosset: ballroom, Latin, salsa, swing.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "manual-intake",
+  "reviewNotes": "Events are only in social posts or picture flyers. Add them by hand (flyer intake). Catalog check 2026-10-03: Use manual intake if wanted because the calendar is an image, not readable event text or a feed."
+}

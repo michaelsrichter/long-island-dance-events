@@ -1,0 +1,74 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Fictional Test Calendar//EN
+X-WR-CALNAME:Example Lodge Dances (fictional)
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+DTSTART:20070311T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:weekly-swing@example.test
+DTSTART;TZID=America/New_York:20261006T193000
+DTEND;TZID=America/New_York:20261006T223000
+RRULE:FREQ=WEEKLY;BYDAY=TU;UNTIL=20261103T235959Z
+EXDATE;TZID=America/New_York:20261013T193000
+SUMMARY:Tuesday East Coast Swing\, lesson and social
+DESCRIPTION:Beginner lesson at 7:30pm\, then social dancing until 10:30.\n
+ $15 at the door. No partner needed.
+LOCATION:Example Lodge\, 12 Fictional Ave\, Huntington\, NY 11743
+URL:https://example-lodge.example/swing/
+BEGIN:VALARM
+TRIGGER:-PT1H
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:weekly-swing@example.test
+RECURRENCE-ID;TZID=America/New_York:20261027T193000
+DTSTART;TZID=America/New_York:20261027T200000
+DTEND;TZID=America/New_York:20261027T230000
+SUMMARY:Halloween East Coast Swing party
+DESCRIPTION:Costume contest. Live band.
+LOCATION:Example Lodge\, 12 Fictional Ave\, Huntington\, NY 11743
+END:VEVENT
+BEGIN:VEVENT
+UID:contra@example.test
+DTSTART:20261018T180000Z
+DTEND:20261018T210000Z
+SUMMARY:Contra dance with live band and caller
+LOCATION:Sample Barn\, 211 Pretend St\, Smithtown\, NY 11787
+END:VEVENT
+BEGIN:VEVENT
+UID:festival@example.test
+DTSTART;VALUE=DATE:20261107
+DTEND;VALUE=DATE:20261108
+SUMMARY:Fall Line Dance Festival
+LOCATION:Sample Hall\, Riverhead\, NY
+END:VEVENT
+BEGIN:VEVENT
+UID:cancelled@example.test
+DTSTART;TZID=America/New_York:20261009T200000
+SUMMARY:Salsa night
+STATUS:CANCELLED
+LOCATION:Example Lodge\, Huntington\, NY
+END:VEVENT
+BEGIN:VEVENT
+UID:queens@example.test
+DTSTART;TZID=America/New_York:20261012T200000
+SUMMARY:Hustle social
+LOCATION:Studio Q\, 5 Test Blvd\, Astoria\, NY 11102
+END:VEVENT
+BEGIN:VEVENT
+UID:daily@example.test
+DTSTART;TZID=America/New_York:20261005T090000
+RRULE:FREQ=DAILY;COUNT=3
+SUMMARY:Line dance boot camp
+LOCATION:Sample Hall\, Riverhead\, NY
+END:VEVENT
+END:VCALENDAR

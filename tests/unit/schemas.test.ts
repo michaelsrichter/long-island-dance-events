@@ -96,8 +96,10 @@ describe('links between entities', () => {
     }
   });
   it('every event is attributed to its source and written in our own words', () => {
+    // Secure links, except for the few sources whose own site has no https version.
+    const plainHttp = new Set(load('sources', '.json').filter((s) => /^http:\/\//.test(String(s.data.url))).map((s) => s.id));
     for (const { id, data } of events) {
-      expect(data.sourceUrl, id).toMatch(/^https:\/\//);
+      expect(data.sourceUrl, id).toMatch(plainHttp.has(data.sourceId) ? /^https?:\/\// : /^https:\/\//);
       expect(data.summary.length, id).toBeLessThanOrEqual(320);
       expect(data.summary, `${id} should not contain the source's phone-book style text`).not.toMatch(/Ad pg|Info:|For more information call/i);
     }

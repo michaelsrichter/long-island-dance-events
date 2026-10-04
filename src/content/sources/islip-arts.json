@@ -1,0 +1,18 @@
+{
+  "name": "Islip Arts Council",
+  "url": "https://isliparts.org/",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from Islip Arts Council. We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Islip: arts concerts.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "permission": {
+    "status": "needed",
+    "note": "robots and page returned 406/unknown. Terms not checked because page returned 406"
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep for permission or CI recheck; possible arts source but office bot failed."
+}

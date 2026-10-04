@@ -38,10 +38,12 @@ flowchart LR
 
 | Source | Type | Status |
 | --- | --- | --- |
-| [The Dance Calendar](https://www.thedancecalendar.com/dance-calendar) | Monthly PDF newsletter | Live (adapter `thedancecalendar`) |
-| [Ira's List LI](https://www.iraslistli.com/) | Weekly live-music list (home page text) | Live (adapter `iraslist`). The embedded calendar widget blocks bots, so only the home-page list is read. |
+| [The Dance Calendar](https://www.thedancecalendar.com/dance-calendar) | Monthly PDF newsletter | Live (adapter `thedancecalendar`), weekly |
+| [Ira's List LI](https://www.iraslistli.com/) | Weekly live-music list (home page text) | Live (adapter `iraslist`), daily. The embedded calendar widget blocks bots, so only the home-page list is read. |
+| 42 more calendars: dance clubs and studios, bars and music venues with researched venue files, band pages, town and library calendars | Calendar feeds, built-in event data, web page lists | Switched on (generic adapters `ical`, `jsonld`, `htmllist`), twice a week or weekly |
+| 101 more that we know about | Blocked by `robots.txt` or bot checks, social media or flyers only, seasonal, need a feed, or all their listings are at venues nobody has researched yet | Off, with a note in each file saying why and what to do |
 
-The owner approved all proposed sources in [docs/source-proposals.md](docs/source-proposals.md) plus the larger catalog in PR #8; they are being added one by one. Sources whose `robots.txt` or terms do not allow reading stay turned off until the owner gets permission. Organizers can [ask for a correction](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=listing-correction.yml), [suggest a listing](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=add-listing.yml) or [opt out](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=remove-listing.yml).
+The owner approved all proposed sources in [docs/source-proposals.md](docs/source-proposals.md) plus the larger catalog in [docs/source-catalog.md](docs/source-catalog.md) (PR #8). Each one has a file in `src/content/sources/`. Sources whose `robots.txt`, terms or bot protection do not allow reading stay turned off (`enabled: false` with a `permission` note) until the organizer agrees or shares a calendar feed; we never get around a block, and screenshots or reading text from images count as automated access too. Organizers can [ask for a correction](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=listing-correction.yml), [suggest a listing](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=add-listing.yml) or [opt out](https://github.com/michaelsrichter/long-island-dance-events/issues/new?template=remove-listing.yml).
 
 ## Can you dance there?
 
@@ -90,13 +92,27 @@ What a run does:
 6. Merges with existing files. It keeps `firstSeen`, respects `lockedFields` (fields an editor fixed by hand), marks ended events as `past`, and never deletes anything. Listings that vanish from a month the source still covers, or that the program is unsure about (confidence below 0.6), become `pending-review` and are hidden until someone checks them.
 7. Validates every file with the Zod schemas, writes sorted JSON, and prints a run report.
 
+### Scheduled runs (GitHub Actions)
+
+| Workflow | When | What it does |
+| --- | --- | --- |
+| `ingest-scheduled.yml` | Daily (`cadence: daily`), Monday and Thursday (`twice-weekly`), Sunday (`weekly`, `monthly`) | Collects, validates, builds the report database, and updates **one** rolling pull request (`ingest/updates`). The Sunday run requests review from and @mentions the owner, which is the weekly email. A source that finds nothing or breaks gets an issue labeled `ingest-failure` with a snapshot (sizes, hashes, page type; never the page text); after 3 failures in a row it is switched off in the pull request. |
+| `report-database.yml` | Every change to `src/content/**` on `main`, and monthly | Builds `data/li-dance.sqlite` (see [docs/database-plan.md](docs/database-plan.md)) and saves it, with the sample reports, as a download on the run page. |
+| `source-discovery.yml` | 1st of each month | Searches for new sources with Microsoft Web IQ (needs the repository secret `WEBIQ_API_KEY`), rechecks every tracked source politely, and opens an issue with the results. Nothing is switched on automatically. |
+
+One-time settings for the owner: allow GitHub Actions to create pull requests (Settings → Actions → General → Workflow permissions), and add the `WEBIQ_API_KEY` secret for discovery.
+
 ### Add a new source
 
-1. Get the owner's approval (see [docs/source-proposals.md](docs/source-proposals.md)).
-2. Check `robots.txt` and the site's terms. Prefer structured data: schema.org Event JSON-LD, then iCal (`.ics`), then HTML, then PDF.
-3. Add `src/content/sources/<id>.json` (copy `thedancecalendar.json`; set `enabled`, `type`, `url`, `attribution`, `rateLimitSeconds`, `cadence` and `focus`: `dance` for a dance calendar, `music` for a live-music list).
-4. Add `ingest/adapters/<id>.ts` exporting `adapter: Adapter` with `fetch(ctx)` and `normalize(docs, ctx)` that return `Candidate`s (see `ingest/lib/types.ts`). Reuse the helpers in `ingest/lib/` for times, prices, places and descriptions.
-5. Save a small sample of the source in `ingest/fixtures/` and add a golden-file test in `tests/unit/ingest.test.ts` (regenerate with `UPDATE_GOLDEN=1`).
+1. Get the owner's approval (see [docs/source-catalog.md](docs/source-catalog.md); new finds come from the monthly discovery issue).
+2. Check `robots.txt` and the site's terms. Prefer structured data: schema.org Event JSON-LD, then iCal (`.ics`), then a tidy web page list, then PDF.
+3. Add `src/content/sources/<id>.json`. Set `enabled`, `type`, `url`, `attribution`, `rateLimitSeconds`, `cadence` and `focus` (`dance` for a dance calendar, club or studio; `music` for a band, bar or venue music list).
+4. Try a generic adapter first. No code is needed:
+   - `ical` reads a calendar feed: set `feedUrl` (for example `.../events/?ical=1` on WordPress "The Events Calendar").
+   - `jsonld` reads schema.org Event data on the page; set `feedUrl` to an event sitemap (`.xml`) if the list page has none.
+   - `htmllist` reads dated lists on a web page (and Squarespace event lists). Set `defaults.venueId` + `defaults.town` for a venue's own page, or `defaults.performerIds` for a band's own page.
+   - Optional: `pageUrls` (more pages), `defaults.organizerId`, `defaults.danceStyles`, `defaults.category`, and `include` / `exclude` (case-insensitive patterns on the listing text).
+5. Only if none of those work, add `ingest/adapters/<id>.ts` exporting `adapter: Adapter` with `fetch(ctx)` and `normalize(docs, ctx)` that return `Candidate`s (see `ingest/lib/types.ts` and `ingest/lib/structured.ts`), with a small fictional fixture in `ingest/fixtures/` and a golden-file test (regenerate with `UPDATE_GOLDEN=1`).
 6. Run `npm run ingest -- --source <id> --dry-run`, review the report, then run without `--dry-run` and open a pull request.
 
 No core code changes are needed: `ingest/run.ts` loads `ingest/adapters/<adapter>.ts` by name.
@@ -111,7 +127,7 @@ No core code changes are needed: `ingest/run.ts` loads `ingest/adapters/<adapter
 | Instructor (teacher) | `src/content/instructors/*.json` | organizers, styles |
 | Performer (band or DJ) | `src/content/performers/*.json` | genres |
 | Dance style | `src/content/styles/*.yml` | aliases used for matching |
-| Source | `src/content/sources/*.json` | adapter, last run status and counts |
+| Source | `src/content/sources/*.json` | adapter, focus (dance or music), cadence, feed and defaults, permission, last run status and counts |
 
 Schemas: [`src/lib/schemas.ts`](src/lib/schemas.ts). Repeating events use a small, tested subset of iCalendar RRULE ([`src/lib/rrule.ts`](src/lib/rrule.ts)). Field-by-field details: [docs/content-model.md](docs/content-model.md).
 
@@ -166,12 +182,12 @@ docs/             decisions, content audit, content model, architecture, editor 
 4. Submit-an-event form (to a moderation queue).
 5. Admin area (GitHub sign-in, `admin` role): moderation queue, source panel, feedback and bug inbox (Table Storage + GitHub issues).
 6. Azure: ✅ Static Web Apps Free + managed Functions + monitoring (Bicep, `infra/`). Storage account comes with phase 5, when its first Functions need it.
-7. Weekly GitHub Actions run that opens a pull request with the run report and @mentions the owner (GitHub sends the email); an issue is filed if a source breaks.
-8. Discovery of more sources (owner approves each), docs, launch.
+7. ✅ Scheduled GitHub Actions runs (daily, twice weekly, weekly) that update one pull request with the run report and @mention the owner weekly (GitHub sends the email); an issue is filed if a source breaks. A report database (SQLite) is built on every change.
+8. ✅ Discovery: 218 websites checked with Web IQ; 145 source files; monthly search and recheck ([docs/source-catalog.md](docs/source-catalog.md), [docs/database-plan.md](docs/database-plan.md)). Next: permission requests for blocked sources, flyer intake, AI help for messy pages (owner decisions), launch.
 
 ## Cost
 
-Designed for about **$0/month**: Azure Static Web Apps Free tier, managed Functions, one Storage account (pennies), free GitHub Actions minutes for the weekly run, OpenStreetMap tiles and geocoding (Nominatim, 1 request per second).
+Designed for about **$0/month**: Azure Static Web Apps Free tier, managed Functions, one Storage account (pennies), free GitHub Actions minutes for the scheduled runs, OpenStreetMap tiles and geocoding (Nominatim, 1 request per second). Optional: monthly Web IQ discovery, about $1.06 a month after the free evaluation. Full cost table: [docs/database-plan.md](docs/database-plan.md#10-cost-table).
 
 ## Security and privacy
 

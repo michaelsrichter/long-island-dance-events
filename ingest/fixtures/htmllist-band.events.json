@@ -1,0 +1,85 @@
+{
+  "outOfArea": [
+    {
+      "town": "town not stated",
+      "count": 1
+    }
+  ],
+  "skipped": [
+    {
+      "reason": "not a dance or live-music listing",
+      "ref": "events page 2026-11-14"
+    },
+    {
+      "reason": "venue not researched yet",
+      "ref": "events page 2026-12-05 Sample Hall (Riverhead)"
+    }
+  ],
+  "created": {
+    "venues": [],
+    "performers": [
+      "the-pretend-band"
+    ]
+  },
+  "drafts": [
+    {
+      "id": "2026-10-17-the-pretend-band-live-music",
+      "matchKey": "test-source|sample-pub||saturday|21:00|live-music|the-pretend-band||2026-10-17",
+      "dates": [
+        "2026-10-17"
+      ],
+      "data": {
+        "title": "Dance with live music by The Pretend Band at Sample Pub",
+        "summary": "Dance to live music by The Pretend Band.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-17T21:00",
+        "timezone": "America/New_York",
+        "venueId": "sample-pub",
+        "town": "Babylon",
+        "performerIds": [
+          "the-pretend-band"
+        ],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://pretend-band.example/shows",
+        "sourceName": "The Pretend Band - shows",
+        "sourceRef": "events page 2026-10-17",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.8
+      }
+    },
+    {
+      "id": "2026-10-24-the-pretend-band-live-music",
+      "matchKey": "test-source|example-lodge||saturday|20:00|live-music|the-pretend-band||2026-10-24",
+      "dates": [
+        "2026-10-24"
+      ],
+      "data": {
+        "title": "Dance with live music by The Pretend Band at Example Lodge",
+        "summary": "Dance to live music by The Pretend Band.",
+        "category": "live-music",
+        "danceStyles": [],
+        "start": "2026-10-24T20:00",
+        "end": "2026-10-24T23:00",
+        "timezone": "America/New_York",
+        "venueId": "example-lodge",
+        "town": "Huntington",
+        "performerIds": [
+          "the-pretend-band"
+        ],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "sourceId": "test-source",
+        "sourceUrl": "https://pretend-band.example/shows",
+        "sourceName": "The Pretend Band - shows",
+        "sourceRef": "events page 2026-10-24",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.8
+      }
+    }
+  ]
+}

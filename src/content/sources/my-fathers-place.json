@@ -1,0 +1,22 @@
+{
+  "name": "My Father's Place (Roslyn) - supper club events",
+  "url": "https://www.mfpproductions.com/blank-2",
+  "type": "html",
+  "adapter": "htmllist",
+  "focus": "music",
+  "cadence": "manual",
+  "enabled": false,
+  "attribution": "Some listings come from My Father's Place (Roslyn). We write our own short summaries and link back to the original page.",
+  "description": "Live music listings in Roslyn: supper club concerts, tribute bands, jazz and roots shows.",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "my-fathers-place-roslyn",
+    "town": "Roslyn"
+  },
+  "permission": {
+    "status": "needed",
+    "note": "The calendar only shows up in a web browser (it is drawn by JavaScript), so our collector cannot read it. Ask for an .ics link or another public feed."
+  },
+  "reviewNotes": "Catalog check 2026-10-03: Keep only as a low-priority live-music source. It is current, but mainly seated listening shows."
+}
