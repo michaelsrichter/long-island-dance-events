@@ -86,7 +86,7 @@ await check('Likes and notes need sign-in and our own pages', async () => {
   const cross = await get('/api/comments', { method: 'POST', headers: { 'content-type': 'application/json', origin: 'https://evil.example' }, body: JSON.stringify({ key: COMMUNITY_KEY, text: 'hi' }) });
   assert(cross.status === 403, `cross-site note: status ${cross.status}`);
 });
-await check('Moderator API is locked', async () => { const r = await get('/api/admin/queue'); assert(r.status === 401 || r.status === 403, `status ${r.status}`); return `status ${r.status}`; });
+await check('Moderator API is locked', async () => { const r = await get('/api/moderation/queue'); assert(r.status === 401 || r.status === 403, `status ${r.status}`); return `status ${r.status}`; });
 await check('Venue page has the community panel and CSP allows its data', async () => {
   const r = await get('/venues/huntington-moose-lodge/');
   const html = await r.text();

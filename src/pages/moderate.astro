@@ -7,12 +7,14 @@ const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Moderation', href: '/moderate/' },
 ];
-const here = new URL('/moderate/', Astro.site).toString();
+
 ---
 <BaseLayout title="Moderation queue" description="Moderators review posts and photos waiting for a person." pageType="moderate" noindex>
   <PageHeader title="Moderation queue" lede="Posts and photos waiting for a person. Approve, reject or hide each one. Every decision is logged." crumbs={crumbs} />
   <div class="container section stack-l moderate" data-moderate>
-    <p class="alert alert--info" data-mod-signin hidden>Moderators only. <a href={loginHref(here)}>Sign in</a> with the email address listed as a moderator.</p>
+    <p class="spinner" data-mod-loading role="status">Loading the queue…</p>
+    <p class="alert alert--warn" data-mod-notmod hidden>You're signed in, but your account isn't a moderator. The site owner can add your email address to the moderator list (the ADMIN_EMAILS setting). Then sign out and sign in again.</p>
+    <p class="alert alert--info" data-mod-signin hidden>Moderators only. <a href={loginHref(Astro.site!, '/moderate/')} data-mod-signin-link>Sign in</a> with the email address listed as a moderator.</p>
     <div class="btn-row" data-mod-tools hidden>
       <button type="button" class="btn btn--secondary btn--small" data-mod-refresh>Refresh</button>
       <button type="button" class="btn btn--secondary btn--small" data-mod-log>Show this month's log</button>

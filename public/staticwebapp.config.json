@@ -26,7 +26,7 @@
     { "route": "/media/*", "headers": { "Cache-Control": "public, max-age=604800" } },
     { "route": "/.auth/login/github", "statusCode": 404 },
     { "route": "/.auth/login/aad", "statusCode": 404 },
-    { "route": "/api/admin/*", "allowedRoles": ["admin"] },
+    { "route": "/api/moderation/*", "allowedRoles": ["admin"] },
     { "route": "/account/*", "headers": { "Cache-Control": "no-cache" } },
     { "route": "/moderate/*", "headers": { "Cache-Control": "no-cache", "X-Robots-Tag": "noindex" } },
     { "route": "/community-pages.json", "headers": { "Cache-Control": "public, max-age=600" } }

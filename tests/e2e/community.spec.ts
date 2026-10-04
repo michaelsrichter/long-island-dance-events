@@ -86,7 +86,52 @@ test.describe('community panel', () => {
   test('account page offers sign-in when signed out', async ({ pinned: page }) => {
     await page.route('**/api/me', (r) => r.fulfill({ json: { signedIn: false } }));
     await page.goto('/account/');
-    await expect(page.getByRole('link', { name: 'Sign in or create an account' })).toBeVisible();
-    await expect(page.getByLabel('Display name (shown next to your posts)')).toBeHidden();
+    await expect(page.getByRole('link', { name: 'Sign in or create an account' }).first()).toBeVisible();
+    await expect(page.getByLabel('Your name, as other dancers will see it')).toBeHidden();
+  });
+
+  test('first sign-in: welcome step with a birth-year dropdown, then back to the page', async ({ pinned: page }) => {
+    let saved: Record<string, unknown> | null = null;
+    await page.route('**/api/me', (r) =>
+      r.fulfill({ json: { signedIn: true, suggestedName: 'Mike R', user: { displayName: '', status: 'active', needsProfile: true, canPostPhotos: false, adult: false, ageConfirmed: false, rulesAccepted: false, isAdmin: true } } }),
+    );
+    await page.route('**/api/me/profile', async (r) => {
+      saved = r.request().postDataJSON();
+      await r.fulfill({ json: { user: { displayName: 'Mike R', status: 'active', needsProfile: false, canPostPhotos: true, adult: true, ageConfirmed: true, rulesAccepted: true, isAdmin: false } } });
+    });
+    await page.route('**/venues/huntington-moose-lodge/**', (r) => r.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>back</title><h1>Back on the venue page</h1>' }));
+    await page.goto(`/account/?next=${encodeURIComponent('/venues/huntington-moose-lodge/#community')}`);
+    await expect(page.getByRole('heading', { name: 'Welcome! One more step' })).toBeVisible();
+    await expect(page.getByLabel('Your name, as other dancers will see it')).toHaveValue('Mike R');
+    await expect(page.getByRole('heading', { name: 'Your data' })).toBeHidden();
+    const year = page.getByLabel('Year');
+    expect(await year.locator('option').count()).toBeGreaterThan(90);
+    await page.getByLabel('Month').selectOption({ label: 'May' });
+    await year.selectOption('1990');
+    await page.getByRole('checkbox', { name: /I agree to the community rules/ }).check();
+    await page.getByRole('checkbox', { name: /I am 18 or older/ }).check();
+    await page.getByRole('button', { name: 'Save and continue' }).click();
+    await expect(page.getByRole('heading', { name: 'Back on the venue page' })).toBeVisible();
+    expect(saved).toMatchObject({ displayName: 'Mike R', birthMonth: 5, birthYear: 1990, acceptRules: true, photoTerms: true });
+  });
+
+  test('returning sign-in goes straight back to the page', async ({ pinned: page }) => {
+    await page.route('**/api/me', (r) => r.fulfill({ json: { signedIn: true, user: { displayName: 'Mike R', status: 'active', needsProfile: false, isAdmin: false } } }));
+    await page.route('**/styles/west-coast-swing/**', (r) => r.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>back</title><h1>Back on the style page</h1>' }));
+    await page.goto(`/account/?next=${encodeURIComponent('/styles/west-coast-swing/')}`);
+    await expect(page.getByRole('heading', { name: 'Back on the style page' })).toBeVisible();
+  });
+
+  test('header shows "Sign in", then the person\'s name linking to their profile', async ({ pinned: page }) => {
+    await page.goto('/');
+    const link = page.locator('.site-header [data-account-header]');
+    await expect(link).toHaveAttribute('href', /^\/\.auth\/login\/extid\?post_login_redirect_uri=/);
+    await expect(link).toContainText('Sign in');
+    await page.route('**/.auth/me', (r) => r.fulfill({ json: { clientPrincipal: { userId: 'u1', userDetails: 'Mike R', userRoles: ['anonymous', 'authenticated', 'member'] } } }));
+    await page.evaluate(() => localStorage.setItem('li-account', JSON.stringify({ name: 'Mike Richter', admin: false })));
+    await page.reload();
+    await expect(link).toHaveAttribute('href', '/account/');
+    await expect(link).toContainText('Mike');
+    await expect(page.locator('.site-footer').getByRole('link', { name: 'Sign out' })).toBeVisible();
   });
 });

@@ -134,6 +134,8 @@ if ($NewSecret) {
   Remove-Variable pw
 }
 
+
+
 [pscustomobject]@{
   tenantId = $TenantId
   clientId = $app.appId

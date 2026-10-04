@@ -2,6 +2,7 @@
  * Community panel: likes, notes, corrections, photos and reports for one page.
  * All user text is inserted with textContent (never innerHTML).
  */
+import { loginUrl, rememberAccount } from './account-state';
 type Comment = { id: string; name: string; text: string; at: string; date?: string };
 type Photo = { id: string; by: string; caption: string; alt: string; w: number; h: number; at: string; src: { s: string; m: string; l: string } };
 type Doc = { likes: number; comments: Comment[]; photos: Photo[] };
@@ -88,11 +89,9 @@ export function init(panel: HTMLElement) {
   const reportDialog = q<HTMLDialogElement>(panel, '[data-report-dialog]')!;
   const reportForm = q<HTMLFormElement>(panel, '[data-report-form]')!;
   const signin = q<HTMLAnchorElement>(panel, '[data-signin]')!;
-  const signout = q<HTMLAnchorElement>(panel, '[data-signout]');
+  const panelLoading = q<HTMLElement>(panel, '[data-panel-loading]');
 
-  const back = `${location.origin}${location.pathname}#community`;
-  signin.href = `/.auth/login/extid?post_login_redirect_uri=${encodeURIComponent(back)}`;
-  if (signout) signout.href = `/.auth/logout?post_logout_redirect_uri=${encodeURIComponent(`${location.origin}${location.pathname}`)}`;
+  signin.href = loginUrl(`${location.pathname}#community`);
 
   let me: Me | null = null;
   let liked = false;
@@ -188,6 +187,22 @@ export function init(panel: HTMLElement) {
     } catch {
       render(EMPTY);
     }
+    if (panelLoading) panelLoading.hidden = true;
+  }
+
+  /** Disable a button and show a short "working" label until `work` finishes. */
+  async function busy<T>(btn: HTMLButtonElement, label: string, work: () => Promise<T>): Promise<T> {
+    const kids = Array.from(btn.childNodes);
+    btn.disabled = true;
+    btn.setAttribute('aria-busy', 'true');
+    btn.textContent = label;
+    try {
+      return await work();
+    } finally {
+      btn.disabled = false;
+      btn.removeAttribute('aria-busy');
+      btn.replaceChildren(...kids);
+    }
   }
 
   function applyMe() {
@@ -195,6 +210,7 @@ export function init(panel: HTMLElement) {
     signedOut.hidden = on;
     member.hidden = !on;
     if (!me) return;
+    rememberAccount({ name: me.displayName || 'You', admin: me.isAdmin });
     profileNeeded.hidden = !me.needsProfile;
     const isBlocked = me.status === 'banned' || me.status === 'under13';
     blocked.hidden = !isBlocked;
@@ -225,9 +241,7 @@ export function init(panel: HTMLElement) {
       location.href = signin.href;
       return;
     }
-    likeBtn.disabled = true;
-    const r = await api('/api/likes', { method: 'POST', body: JSON.stringify({ key, like: !liked }) });
-    likeBtn.disabled = false;
+    const r = await busy(likeBtn, liked ? 'Removing…' : 'Liking…', () => api('/api/likes', { method: 'POST', body: JSON.stringify({ key, like: !liked }) }));
     if (r.status === 200) {
       liked = r.data.liked;
       likes = r.data.count;
@@ -245,9 +259,7 @@ export function init(panel: HTMLElement) {
       return;
     }
     const btn = q<HTMLButtonElement>(commentForm, 'button[type=submit]')!;
-    btn.disabled = true;
-    const r = await api('/api/comments', { method: 'POST', body: JSON.stringify({ key, kind: data.get('kind'), text, ...(date ? { date } : {}) }) });
-    btn.disabled = false;
+    const r = await busy(btn, 'Sending…', () => api('/api/comments', { method: 'POST', body: JSON.stringify({ key, kind: data.get('kind'), text, ...(date ? { date } : {}) }) }));
     if (r.status === 200 || r.status === 422) {
       say(r.data.message);
       if (r.status === 200) commentForm.reset();
@@ -291,15 +303,13 @@ export function init(panel: HTMLElement) {
         return;
       }
       const btn = q<HTMLButtonElement>(photoForm, 'button[type=submit]')!;
-      btn.disabled = true;
-      say('Getting your photo ready…');
-      const small = await shrink(f);
-      data.set('file', small, 'photo.jpg');
-      data.set('key', key);
-      if (date) data.set('date', date);
-      say('Uploading…');
-      const r = await api('/api/photos', { method: 'POST', body: data });
-      btn.disabled = false;
+      const r = await busy(btn, 'Uploading… (this can take a few seconds)', async () => {
+        const small = await shrink(f);
+        data.set('file', small, 'photo.jpg');
+        data.set('key', key);
+        if (date) data.set('date', date);
+        return api('/api/photos', { method: 'POST', body: data });
+      });
       if (r.status === 200 || r.status === 422) {
         say(r.data.message);
         if (r.status === 200) {

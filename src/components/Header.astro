@@ -44,6 +44,10 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : href === '/ev
       </div>
     </nav>
     <ThemeSwitch variant="button" location="header" />
+    <a class="header-account" href="/account/" data-account-link data-account-header>
+      <Icon name="people" />
+      <span class="header-account__label" data-account-label>Sign in</span>
+    </a>
     {settings.facebookUrl && (
       <a class="header-social" href={settings.facebookUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="facebook" data-track-location="header" data-track-target="facebook.com" title={settings.facebookLabel ?? 'Facebook'}>
         <Icon name="facebook" />
@@ -54,4 +58,5 @@ const isCurrent = (href: string) => (href === '/' ? path === '/' : href === '/ev
 </header>
 <script>
   import '../scripts/nav';
+  import '../scripts/account-nav';
 </script>

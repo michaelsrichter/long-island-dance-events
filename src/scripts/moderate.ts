@@ -1,5 +1,6 @@
 /** Moderation page: lists the queue and sends decisions. All user text is inserted with textContent. */
-export {};
+import { loginUrl } from './account-state';
+
 const root = document.querySelector<HTMLElement>('[data-moderate]');
 
 type Item = {
@@ -126,7 +127,7 @@ if (root) {
     li.appendChild(field);
 
     const decide = async (decision: string) => {
-      const r = await api('/api/admin/decide', { key: it.key, itemType: it.itemType, itemId: it.itemId, decision, reason: reason.value });
+      const r = await api('/api/moderation/decide', { key: it.key, itemType: it.itemType, itemId: it.itemId, decision, reason: reason.value });
       if (r.status === 200) {
         say(`${kind} ${r.data.status}.`);
         li.remove();
@@ -145,7 +146,7 @@ if (root) {
         if (days === null) return;
         const why = prompt('Why? (kept in the log)', reason.value || 'Broke the community rules') || '';
         const removeContent = confirm('Also hide everything this person has posted?');
-        const r = await api('/api/admin/ban', { userId: it.user.id, days: Number(days) || 0, reason: why, removeContent });
+        const r = await api('/api/moderation/ban', { userId: it.user.id, days: Number(days) || 0, reason: why, removeContent });
         say(r.status === 200 ? `Banned. ${r.data.hidden} posts hidden.` : r.data?.message || 'Could not ban.');
         if (r.status === 200) load();
       }),
@@ -155,17 +156,19 @@ if (root) {
   }
 
   async function load() {
-    say('Loading…');
-    const r = await api('/api/admin/queue');
+    say('');
+    const r = await api('/api/moderation/queue');
     const tools = root!.querySelector<HTMLElement>('[data-mod-tools]')!;
     const signin = root!.querySelector<HTMLElement>('[data-mod-signin]')!;
+    const notMod = root!.querySelector<HTMLElement>('[data-mod-notmod]')!;
+    root!.querySelector<HTMLElement>('[data-mod-loading]')!.hidden = true;
+    root!.querySelector<HTMLAnchorElement>('[data-mod-signin-link]')!.href = loginUrl('/moderate/');
+    signin.hidden = r.status !== 401;
+    notMod.hidden = r.status !== 403;
     if (r.status === 401 || r.status === 403 || r.status === 404) {
-      signin.hidden = false;
       tools.hidden = true;
-      say('');
       return;
     }
-    signin.hidden = true;
     tools.hidden = false;
     const items: Item[] = r.data?.items || [];
     list.replaceChildren(...items.map(card));
@@ -176,7 +179,7 @@ if (root) {
   root.querySelector('[data-mod-log]')!.addEventListener('click', async () => {
     const panel = root.querySelector<HTMLElement>('[data-mod-log-panel]')!;
     const ol = root.querySelector<HTMLOListElement>('[data-mod-log-list]')!;
-    const r = await api('/api/admin/log');
+    const r = await api('/api/moderation/log');
     ol.replaceChildren(
       ...((r.data?.entries || []) as any[]).map((e) => el('li', `${new Date(e.at).toLocaleString()} · ${e.actor} · ${e.action} ${e.targetType} ${e.key || ''} ${e.reason ? `· ${e.reason}` : ''}`)),
     );

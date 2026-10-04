@@ -19,9 +19,10 @@ export function readModelUrl(key: string): string {
   return `${COMMUNITY.blobBase}/community/${type}/${id}.json`;
 }
 
-/** Sign-in link that brings the visitor back to `returnTo` (an absolute URL on this site). */
-export function loginHref(returnTo: string): string {
-  return `/.auth/login/${COMMUNITY.loginProvider}?post_login_redirect_uri=${encodeURIComponent(returnTo)}`;
+/** Sign-in link: after signing in, the visitor passes the one-time welcome step at /account/ and returns to `nextPath`. */
+export function loginHref(site: URL, nextPath: string): string {
+  const back = new URL(`/account/?next=${encodeURIComponent(nextPath)}`, site).toString();
+  return `/.auth/login/${COMMUNITY.loginProvider}?post_login_redirect_uri=${encodeURIComponent(back)}`;
 }
 
 export function logoutHref(returnTo: string): string {

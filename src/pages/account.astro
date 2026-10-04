@@ -2,63 +2,77 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import Icon from '../components/Icon.astro';
-import { loginHref } from '../lib/community';
 
 const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Your account', href: '/account/' },
 ];
-const here = new URL('/account/', Astro.site).toString();
 const thisYear = new Date().getFullYear();
+const years = Array.from({ length: 101 }, (_, i) => thisYear - i);
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 ---
 <BaseLayout title="Your account" description="Your Long Island Dance Events account: display name, community rules, download or delete your data." pageType="account" noindex>
   <PageHeader title="Your account" lede="An account lets you like pages, leave notes and share photos. Browsing never needs one." crumbs={crumbs} />
   <div class="container section stack-l account" data-account>
-    <section class="panel" data-signed-out aria-labelledby="acct-signin-h">
-      <h2 id="acct-signin-h">Sign in</h2>
-      <p>We email you a one-time code. There is no password to remember.</p>
-      <p class="btn-row"><a class="btn btn--primary" href={loginHref(here)} data-signin><Icon name="people" />Sign in or create an account</a></p>
+    <p class="spinner js-only" data-loading role="status">Loading your account…</p>
+    <noscript><p class="alert alert--info">Your account page needs JavaScript turned on.</p></noscript>
+
+    <section class="panel" data-signed-out hidden aria-labelledby="acct-signin-h">
+      <h2 id="acct-signin-h">Sign in or create an account</h2>
+      <p>It's free. Enter your email and we send you a one-time code. There is no password to remember.</p>
+      <p class="btn-row"><a class="btn btn--primary" href="/account/" data-signin><Icon name="people" />Sign in or create an account</a></p>
       <p class="muted">By signing in you agree to the <a href="/community-rules/">community rules</a>. See <a href="/privacy/#accounts">what we keep</a>.</p>
     </section>
 
-    <section class="panel" data-signed-in hidden aria-labelledby="acct-profile-h">
-      <h2 id="acct-profile-h">Your profile</h2>
+    <p class="spinner" data-returning hidden role="status">You're signed in. Taking you back…</p>
+
+    <section class="panel" data-profile hidden aria-labelledby="acct-profile-h">
+      <h2 id="acct-profile-h" data-profile-heading>Your profile</h2>
+      <p data-profile-intro></p>
       <p class="alert alert--warn" data-blocked hidden></p>
       <form class="community__form" data-profile-form novalidate>
         <div class="field">
-          <label for="acct-name">Display name (shown next to your posts)</label>
-          <input id="acct-name" name="displayName" type="text" minlength="2" maxlength="40" required autocomplete="nickname" />
+          <label for="acct-name">Your name, as other dancers will see it</label>
+          <input id="acct-name" name="displayName" type="text" minlength="2" maxlength="40" required autocomplete="nickname" placeholder="For example: Maria S." />
         </div>
         <fieldset class="community__choice" data-age-fields>
           <legend>When were you born?</legend>
-          <p class="muted">We only keep whether you are 13 or older, and 18 or older. We never store the date.</p>
+          <p class="muted">We only keep whether you are 13 or older, and 18 or older. We never store your birth date.</p>
           <div class="account__birth">
             <div class="field">
               <label for="acct-month">Month</label>
               <select id="acct-month" name="birthMonth" required>
-                <option value="">Choose…</option>
+                <option value="">Choose a month</option>
                 {months.map((m, i) => <option value={String(i + 1)}>{m}</option>)}
               </select>
             </div>
             <div class="field">
               <label for="acct-year">Year</label>
-              <input id="acct-year" name="birthYear" type="number" inputmode="numeric" min={thisYear - 110} max={thisYear} required />
+              <select id="acct-year" name="birthYear" required>
+                <option value="">Choose a year</option>
+                {years.map((y) => <option value={String(y)}>{y}</option>)}
+              </select>
             </div>
           </div>
         </fieldset>
-        <fieldset class="community__choice">
-          <legend>Rules</legend>
-          <label data-rules-row><input type="checkbox" name="acceptRules" value="yes" /> I agree to the <a href="/community-rules/">community rules</a>.</label>
-          <label data-photo-row><input type="checkbox" name="photoTerms" value="yes" /> I am 18 or older and agree to the photo rules (only needed to post photos).</label>
+        <fieldset class="community__choice" data-rules-fields>
+          <legend>Community rules</legend>
+          <label data-rules-row><input type="checkbox" name="acceptRules" value="yes" /><span>I agree to the <a href="/community-rules/">community rules</a> (be kind, no personal details, no photos of children).</span></label>
+          <label data-photo-row><input type="checkbox" name="photoTerms" value="yes" /><span>I am 18 or older and I want to share photos. I agree to the photo rules.</span></label>
         </fieldset>
-        <p class="btn-row"><button type="submit" class="btn btn--primary">Save</button></p>
+        <p class="btn-row"><button type="submit" class="btn btn--primary" data-save>Save</button></p>
       </form>
+    </section>
+
+    <section class="panel account__mod" data-moderator hidden aria-labelledby="acct-mod-h">
+      <h2 id="acct-mod-h">You're a moderator</h2>
+      <p>Notes the AI was unsure about, private corrections and every new photo wait for you in the queue.</p>
+      <p class="btn-row"><a class="btn btn--primary" href="/moderate/">Open the moderation queue</a></p>
     </section>
 
     <section class="panel" data-signed-in hidden aria-labelledby="acct-data-h">
       <h2 id="acct-data-h">Your data</h2>
-      <p>Download a copy of everything we keep about you: your display name, likes, notes and photos.</p>
+      <p>Download a copy of everything we keep about you: your name, likes, notes and photos.</p>
       <p class="btn-row"><a class="btn btn--secondary" href="/api/me/export" download><Icon name="download" />Download my data</a></p>
       <h3 class="mt-5">Delete my account</h3>
       <p>This deletes your profile, likes, notes and photos from this website right away. Your sign-in account is removed within 30 days.</p>
@@ -71,9 +85,8 @@ const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 
       </form>
     </section>
 
-    <p class="btn-row" data-signed-in hidden><a class="btn btn--secondary" href="/.auth/logout" data-signout>Sign out</a></p>
+    <p class="btn-row" data-signed-in hidden><a class="btn btn--secondary" href="/.auth/logout" data-account-signout>Sign out</a></p>
     <p class="community__status" role="status" aria-live="polite" data-status></p>
-    <noscript><p class="alert alert--info">Your account page needs JavaScript.</p></noscript>
   </div>
 </BaseLayout>
 <script>

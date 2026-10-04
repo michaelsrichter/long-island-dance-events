@@ -45,7 +45,11 @@ app.http('roles', {
   handler: async (request, context) => {
     try {
       const payload = await request.json();
-      return { status: 200, jsonBody: { roles: await rolesFor(payload) } };
+      const roles = await rolesFor(payload);
+      // No personal data in logs: only whether an email claim arrived and which roles were given.
+      const claims = Array.isArray(payload && payload.claims) ? payload.claims : [];
+      context.log(`roles: emailClaim=${Boolean(claim(claims, 'email'))} roles=${roles.join(',') || 'none'}`);
+      return { status: 200, jsonBody: { roles } };
     } catch (err) {
       context.warn(`roles: ${err && err.message}`);
       // Fail closed: signed in, but no extra roles.

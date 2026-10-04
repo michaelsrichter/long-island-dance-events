@@ -18,7 +18,7 @@ interface Props {
 }
 const { type, id, name, date } = Astro.props;
 const key = pageKey(type, id);
-const here = new URL(`${Astro.url.pathname}#community`, Astro.site).toString();
+const back = `${Astro.url.pathname}#community`;
 const noun = { event: 'event', venue: 'place', organizer: 'organizer', instructor: 'teacher', performer: 'band or DJ', style: 'dance style' }[type];
 ---
 <section
@@ -45,24 +45,26 @@ const noun = { event: 'event', venue: 'place', organizer: 'organizer', instructo
 
   <div class="community__photos" data-photo-list hidden></div>
   <ol class="community__comments" data-comment-list hidden></ol>
+  <p class="spinner js-only" data-panel-loading role="status">Loading notes and photos…</p>
   <p class="muted" data-empty hidden>No notes yet. Be the first!</p>
 
   <div class="community__signin" data-signed-out>
-    <a class="btn btn--primary btn--small" href={loginHref(here)} data-signin><Icon name="people" />Sign in to like, comment or add a photo</a>
+    <a class="btn btn--primary btn--small" href={loginHref(Astro.site!, back)} data-signin><Icon name="people" />Sign in to like, comment or add a photo</a>
     <p class="muted">Free. We email you a one-time code; no password. <a href="/community-rules/">Community rules</a> · <a href="/privacy/#accounts">Privacy</a></p>
   </div>
 
   <div class="community__member" data-signed-in hidden>
-    <p class="alert alert--info" data-profile-needed hidden>
-      Almost there: <a href={`/account/?next=${encodeURIComponent(Astro.url.pathname + '#community')}`}>finish your profile</a> (pick a display name and agree to the rules) to post.
-    </p>
+    <div class="alert alert--info" data-profile-needed hidden>
+      <p>Almost there! Pick the name other dancers will see and agree to the rules. It takes a minute and you only do it once.</p>
+      <p class="btn-row"><a class="btn btn--primary btn--small" href={`/account/?next=${encodeURIComponent(back)}`}>Finish signing up</a></p>
+    </div>
     <p class="alert alert--warn" data-blocked hidden></p>
 
     <form class="community__form" data-comment-form novalidate>
       <fieldset class="community__choice">
         <legend>What would you like to send?</legend>
-        <label><input type="radio" name="kind" value="comment" checked /> A public note for other dancers</label>
-        <label><input type="radio" name="kind" value="correction" /> A private correction for our editors</label>
+        <label><input type="radio" name="kind" value="comment" checked /><span>A public note for other dancers</span></label>
+        <label><input type="radio" name="kind" value="correction" /><span>A private correction for our editors</span></label>
       </fieldset>
       <div class="field">
         <label for="community-text">Your note</label>
@@ -92,16 +94,16 @@ const noun = { event: 'event', venue: 'place', organizer: 'organizer', instructo
           </div>
           <fieldset class="community__choice">
             <legend>Please confirm</legend>
-            <label><input type="checkbox" name="own" value="yes" required /> I took this photo or have the right to share it.</label>
-            <label><input type="checkbox" name="people" value="yes" required /> People who can be recognized agreed to be posted.</label>
-            <label><input type="checkbox" name="noKids" value="yes" required /> No one under 18 can be recognized.</label>
+            <label><input type="checkbox" name="own" value="yes" required /><span>I took this photo or have the right to share it.</span></label>
+            <label><input type="checkbox" name="people" value="yes" required /><span>People who can be recognized agreed to be posted.</span></label>
+            <label><input type="checkbox" name="noKids" value="yes" required /><span>No one under 18 can be recognized.</span></label>
           </fieldset>
           <p class="muted">We remove location data (GPS) and resize the photo. Anyone pictured can ask us to take it down.</p>
           <p class="btn-row"><button type="submit" class="btn btn--primary btn--small">Send photo for review</button></p>
         </form>
       </details>
     )}
-    <p class="muted community__links"><a href="/account/">Your account</a> · <a href="/community-rules/">Community rules</a> · <a data-signout href="/.auth/logout">Sign out</a></p>
+    <p class="muted community__links"><a href="/account/">Your account</a> · <a href="/community-rules/">Community rules</a> · <a data-account-signout href="/.auth/logout">Sign out</a></p>
   </div>
 
   <p class="community__status" role="status" aria-live="polite" data-status></p>
@@ -114,13 +116,13 @@ const noun = { event: 'event', venue: 'place', organizer: 'organizer', instructo
       </div>
       <fieldset class="community__choice">
         <legend>What is wrong?</legend>
-        <label><input type="radio" name="reason" value="rude" checked /> Rude, hateful or harassing</label>
-        <label><input type="radio" name="reason" value="spam" /> Spam or an ad</label>
-        <label><input type="radio" name="reason" value="private" /> Shares someone's private details</label>
-        <label><input type="radio" name="reason" value="shows-me" /> It shows me and I want it removed</label>
-        <label><input type="radio" name="reason" value="child" /> It shows a child</label>
-        <label><input type="radio" name="reason" value="not-mine" /> Someone else's photo</label>
-        <label><input type="radio" name="reason" value="other" /> Something else</label>
+        <label><input type="radio" name="reason" value="rude" checked /><span>Rude, hateful or harassing</span></label>
+        <label><input type="radio" name="reason" value="spam" /><span>Spam or an ad</span></label>
+        <label><input type="radio" name="reason" value="private" /><span>Shares someone's private details</span></label>
+        <label><input type="radio" name="reason" value="shows-me" /><span>It shows me and I want it removed</span></label>
+        <label><input type="radio" name="reason" value="child" /><span>It shows a child</span></label>
+        <label><input type="radio" name="reason" value="not-mine" /><span>Someone else's photo</span></label>
+        <label><input type="radio" name="reason" value="other" /><span>Something else</span></label>
       </fieldset>
       <div class="field">
         <label for="report-note">Anything else? (optional)</label>

@@ -1,12 +1,12 @@
 'use strict';
 /**
  * Moderator API (route rule in staticwebapp.config.json also requires the "admin" role):
- *   GET  /api/admin/queue                     items waiting for a person, oldest first
- *   GET  /api/admin/photo?key=&id=&size=s|m|l preview of a pending (private) photo
- *   POST /api/admin/decide { key, itemType, itemId, decision, reason }
- *   POST /api/admin/ban    { userId, days, reason, removeContent }
- *   POST /api/admin/unban  { userId }
- *   GET  /api/admin/log?month=YYYY-MM         audit log
+ *   GET  /api/moderation/queue                     items waiting for a person, oldest first
+ *   GET  /api/moderation/photo?key=&id=&size=s|m|l preview of a pending (private) photo
+ *   POST /api/moderation/decide { key, itemType, itemId, decision, reason }
+ *   POST /api/moderation/ban    { userId, days, reason, removeContent }
+ *   POST /api/moderation/unban  { userId }
+ *   GET  /api/moderation/log?month=YYYY-MM         audit log
  */
 require('../telemetry-setup');
 const { app } = require('@azure/functions');
@@ -29,7 +29,7 @@ const safeJson = (s) => {
 app.http('adminQueue', {
   methods: ['GET'],
   authLevel: 'anonymous',
-  route: 'admin/queue',
+  route: 'moderation/queue',
   handler: async (request) => {
     const a = requireAdmin(request);
     if (a.response) return a.response;
@@ -56,7 +56,7 @@ app.http('adminQueue', {
         at: q.at,
         status: item.status,
         ...(isPhoto
-          ? { caption: item.caption, alt: item.alt, width: item.width, height: item.height, preview: `/api/admin/photo?key=${encodeURIComponent(q.key)}&id=${encodeURIComponent(q.itemKey)}&size=m` }
+          ? { caption: item.caption, alt: item.alt, width: item.width, height: item.height, preview: `/api/moderation/photo?key=${encodeURIComponent(q.key)}&id=${encodeURIComponent(q.itemKey)}&size=m` }
           : { text: item.body, githubIssue: item.githubIssue || '' }),
         date: item.occurrenceDate || '',
         user: { id: item.userId, name: item.displayName || '', status: (u && u.status) || 'unknown', approved: Number(u && u.approvedCount) || 0, rejected: Number(u && u.rejectedCount) || 0 },
@@ -70,7 +70,7 @@ app.http('adminQueue', {
 app.http('adminPhoto', {
   methods: ['GET'],
   authLevel: 'anonymous',
-  route: 'admin/photo',
+  route: 'moderation/photo',
   handler: async (request) => {
     const a = requireAdmin(request);
     if (a.response) return a.response;
@@ -109,7 +109,7 @@ async function movePhoto(key, photoId, toPublic) {
 app.http('adminDecide', {
   methods: ['POST'],
   authLevel: 'anonymous',
-  route: 'admin/decide',
+  route: 'moderation/decide',
   handler: async (request) => {
     if (!sameOrigin(request)) return error(403, 'origin', 'Not allowed.');
     const a = requireAdmin(request);
@@ -146,7 +146,7 @@ app.http('adminDecide', {
 app.http('adminBan', {
   methods: ['POST'],
   authLevel: 'anonymous',
-  route: 'admin/ban',
+  route: 'moderation/ban',
   handler: async (request) => {
     if (!sameOrigin(request)) return error(403, 'origin', 'Not allowed.');
     const a = requireAdmin(request);
@@ -187,7 +187,7 @@ app.http('adminBan', {
 app.http('adminUnban', {
   methods: ['POST'],
   authLevel: 'anonymous',
-  route: 'admin/unban',
+  route: 'moderation/unban',
   handler: async (request) => {
     if (!sameOrigin(request)) return error(403, 'origin', 'Not allowed.');
     const a = requireAdmin(request);
@@ -205,7 +205,7 @@ app.http('adminUnban', {
 app.http('adminLog', {
   methods: ['GET'],
   authLevel: 'anonymous',
-  route: 'admin/log',
+  route: 'moderation/log',
   handler: async (request) => {
     const a = requireAdmin(request);
     if (a.response) return a.response;

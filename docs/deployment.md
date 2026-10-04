@@ -110,7 +110,7 @@ The script registers `https://longisland.dance/.auth/login/extid/callback` as th
 
 ### Add Google or Facebook sign-in (owner)
 
-Both are free. Create the app with **your own** account, then add it to the tenant (Entra admin center → **External Identities** → **All identity providers**) and to the user flow ("Long Island Dance sign-up and sign-in" → **Identity providers**).
+Both are free. Create the app with **your own** Google or Facebook account (steps below), then put its id and secret into the tenant (last bullet).
 
 - **Google:** Google Cloud console → new project → **OAuth consent screen**: External, app name "Long Island Dance Events", support email, authorized domains `ciamlogin.com` and `microsoftonline.com`, home page `https://longisland.dance/`, privacy policy `https://longisland.dance/privacy/`. Only the `openid`, `email` and `profile` scopes, so Google needs no verification. **Credentials** → OAuth client ID → Web application, redirect URIs:
   - `https://login.microsoftonline.com`
@@ -121,7 +121,15 @@ Both are free. Create the app with **your own** account, then add it to the tena
   - `https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/federation/oauth2`
   - `https://longislanddance.ciamlogin.com/longislanddance.onmicrosoft.com/federation/oauth2`
   Paste the client id and secret into the tenant's **Google** provider.
-- **Facebook:** developers.facebook.com → **Create app** → type **Consumer** (it cannot be changed later) → add **Facebook Login**. Privacy policy URL `https://longisland.dance/privacy/`, data deletion instructions URL `https://longisland.dance/privacy/#delete-your-account`. `public_profile` and `email` need no app review. Valid OAuth redirect URIs: follow [Add Facebook as an identity provider](https://learn.microsoft.com/entra/external-id/customers/how-to-facebook-federation-customers) (they use the same `ciamlogin.com` addresses). Switch the app to **Live**, then paste the app id and secret into the tenant's **Facebook** provider.
+- **Facebook:** developers.facebook.com → **Create App** → "Authenticate and request data from users with Facebook Login" → not a game → app name "Long Island Dance Events". In **App settings → Basic**: privacy policy URL `https://longisland.dance/privacy/`, terms URL `https://longisland.dance/community-rules/`, user data deletion URL `https://longisland.dance/privacy/#delete-your-account`, a category; **Add platform → Website** with site URL `https://longisland.dance/`. Under **Use cases → Authentication and account creation → Facebook Login settings**, Valid OAuth Redirect URIs:
+  - `https://login.microsoftonline.com/te/a72c253f-3125-4592-b3c6-b8e23ed18054/oauth2/authresp`
+  - `https://login.microsoftonline.com/te/longislanddance.onmicrosoft.com/oauth2/authresp`
+  - `https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/federation/oidc/www.facebook.com`
+  - `https://longislanddance.ciamlogin.com/longislanddance.onmicrosoft.com/federation/oidc/www.facebook.com`
+  - `https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/federation/oauth2`
+  - `https://longislanddance.ciamlogin.com/longislanddance.onmicrosoft.com/federation/oauth2`
+  Add the **email** permission (`public_profile` and `email` need no app review), then **Go live**. Copy the **App ID** and **App Secret**.
+- **Put them in the tenant (both):** [Entra admin center](https://entra.microsoft.com) → switch to the **Long Island Dance** directory → **Entra ID → External Identities → All identity providers** → **Google** (or **Facebook**) → **Configure** → paste the id and secret → Save. Then **External Identities → User flows → "Long Island Dance sign-up and sign-in" → Identity providers** → tick Google and Facebook → Save. The sign-in page shows the new buttons right away; nothing on the website changes. (The Azure CLI cannot do this step: Microsoft does not let its app manage identity providers.)
 - **Instagram** sign-in is not possible for personal accounts (Meta ended it on December 4, 2024).
 
 ### Moving `longisland.dance` to a new Static Web App

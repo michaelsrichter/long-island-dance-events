@@ -92,7 +92,7 @@ flowchart LR
 | `/api/auth`, `/api/callback`, `/api/telemetry` | CMS sign-in bridge and first-party telemetry (Azure Functions). |
 | `/.auth/login/extid`, `/.auth/logout`, `/.auth/me` | Visitor sign-in (Static Web Apps + Entra External ID). |
 | `/account/`, `/community-rules/`, `/moderate/` | Your account (name, age check, download, delete), community rules, moderation queue (admins). |
-| `/api/roles`, `/api/me*`, `/api/likes`, `/api/comments`, `/api/photos`, `/api/flags`, `/api/admin/*` | Community API (see below). |
+| `/api/roles`, `/api/me*`, `/api/likes`, `/api/comments`, `/api/photos`, `/api/flags`, `/api/moderation/*` | Community API (see below). |
 | `/community-pages.json` | Pages that accept likes, notes and photos (the API checks keys against it). |
 | `/llms.txt`, `/robots.txt`, `/sitemap-index.xml` | Machine-readable summaries. |
 
@@ -124,7 +124,7 @@ flowchart LR
   FN --> PEND[("Blob: pending photos<br/>private")]
   FN -->|"rewrite after each change"| PUB[("Blob: community JSON<br/>+ approved photos, public")]
   V -->|"read, cached 60 s"| PUB
-  M["Moderators at /moderate/"] -->|"/api/admin/*"| FN
+  M["Moderators at /moderate/"] -->|"/api/moderation/*"| FN
 ```
 
 | API | What it does |
@@ -135,7 +135,7 @@ flowchart LR
 | `POST /api/comments` | Notes (AI: 0 publish, 2 queue, 4+ reject; links/phones/emails queue) and private corrections (always queue; optional GitHub issue). |
 | `POST /api/photos` | 18+; type sniffed, EXIF/GPS removed, 480/1024/2048 px WebP, AI image check, then **always** the human queue. |
 | `POST /api/flags` | Reports; 3 people (or a safety reason) hide the item until reviewed. |
-| `/api/admin/queue`, `photo`, `decide`, `ban`, `unban`, `log` | Moderation (route rule requires `admin`). Every decision is written to `ModLog`. |
+| `/api/moderation/queue`, `photo`, `decide`, `ban`, `unban`, `log` | Moderation (route rule requires `admin`). Every decision is written to `ModLog`. |
 
 Page keys are `<type>:<id>` (`event:<series id>`, `venue:<id>`, `organizer:`, `instructor:`, `performer:`, `style:`). Public files: `community/<type>/<id>.json`, `community/counts/<type>.json`, `photos/<type>/<id>/<photo id>-<size>.webp`.
 

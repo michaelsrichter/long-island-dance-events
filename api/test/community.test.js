@@ -35,7 +35,7 @@ const handlers = {};
 functions.app.http = (name, opts) => {
   handlers[name] = opts.handler;
 };
-for (const f of ['roles', 'me', 'likes', 'comments', 'photos', 'flags', 'admin']) require(`../src/functions/${f}`);
+for (const f of ['roles', 'me', 'likes', 'comments', 'photos', 'flags', 'moderation']) require(`../src/functions/${f}`);
 
 const moderate = require('../src/lib/moderate');
 const { ageFrom } = require('../src/lib/users');
@@ -143,6 +143,16 @@ test('photos: real type is sniffed and all EXIF/GPS metadata is removed', async 
     assert.ok(v.width <= v.px && v.width <= 900, 'never upscaled');
   }
   assert.equal((await processPhoto(Buffer.from('not an image at all'))).code, 'bad_type');
+});
+
+test('no Function route uses the reserved "admin" prefix (the Functions host refuses to load them)', () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const dir = path.join(__dirname, '..', 'src', 'functions');
+  for (const f of fs.readdirSync(dir)) {
+    const src = fs.readFileSync(path.join(dir, f), 'utf8');
+    for (const m of src.matchAll(/route:\s*'([^']+)'/g)) assert.ok(!/^admin(\/|$)/i.test(m[1]), `${f}: route "${m[1]}" is reserved`);
+  }
 });
 
 /* ---------------- flows ---------------- */
@@ -280,12 +290,12 @@ test('photos: 18+ only, consent required, always queued, approved photos become 
 
   // Moderator approves it.
   const admin = principal('admin001aa', ['member', 'admin'], 'Boss');
-  const queue = await call('adminQueue', '/api/admin/queue', { user: admin });
+  const queue = await call('adminQueue', '/api/moderation/queue', { user: admin });
   const item = queue.body.items.find((i) => i.itemType === 'photo');
-  assert.ok(item.preview.startsWith('/api/admin/photo?'));
+  assert.ok(item.preview.startsWith('/api/moderation/photo?'));
   const preview = await handlers.adminPhoto(req(item.preview, { user: admin }), ctx);
   assert.equal(preview.headers['Content-Type'], 'image/webp');
-  const d = await call('adminDecide', '/api/admin/decide', { method: 'POST', user: admin, body: { key: item.key, itemType: 'photo', itemId: item.itemId, decision: 'approve' } });
+  const d = await call('adminDecide', '/api/moderation/decide', { method: 'POST', user: admin, body: { key: item.key, itemType: 'photo', itemId: item.itemId, decision: 'approve' } });
   assert.equal(d.body.status, 'published');
   assert.ok(fake.blobs.has(`photos/venue/huntington-moose-lodge/${row.photoId}-480.webp`));
   assert.equal(fake.blobs.get(`photos/venue/huntington-moose-lodge/${row.photoId}-480.webp`).cacheControl, 'public, max-age=31536000, immutable');
@@ -297,15 +307,15 @@ test('photos: 18+ only, consent required, always queued, approved photos become 
 
 test('admin: only moderators; bans stop posting and can hide content; log records it', async () => {
   const member = principal('user0002aa');
-  assert.equal((await call('adminQueue', '/api/admin/queue', { user: member })).status, 403);
+  assert.equal((await call('adminQueue', '/api/moderation/queue', { user: member })).status, 403);
   const admin = principal('admin001aa', ['member', 'admin'], 'Boss');
-  const ban = await call('adminBan', '/api/admin/ban', { method: 'POST', user: admin, body: { userId: 'user0002aa', days: 7, reason: 'spam', removeContent: true } });
+  const ban = await call('adminBan', '/api/moderation/ban', { method: 'POST', user: admin, body: { userId: 'user0002aa', days: 7, reason: 'spam', removeContent: true } });
   assert.equal(ban.status, 200);
   assert.ok(ban.body.hidden >= 1);
   assert.equal(fake.json('community/venue/huntington-moose-lodge.json').photos.length, 0, 'banned user content hidden');
   assert.equal((await call('likes', '/api/likes', { method: 'POST', user: member, body: { key: PAGES[2], like: true } })).status, 403);
-  assert.equal((await call('adminUnban', '/api/admin/unban', { method: 'POST', user: admin, body: { userId: 'user0002aa' } })).status, 200);
-  const log = await call('adminLog', '/api/admin/log', { user: admin });
+  assert.equal((await call('adminUnban', '/api/moderation/unban', { method: 'POST', user: admin, body: { userId: 'user0002aa' } })).status, 200);
+  const log = await call('adminLog', '/api/moderation/log', { user: admin });
   assert.ok(log.body.entries.some((e) => e.action === 'ban'));
 });
 

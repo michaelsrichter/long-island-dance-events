@@ -1353,3 +1353,23 @@ h3.day-heading { font-size: 1rem; }
 .moderate__photo { display: block; max-width: min(100%, 32rem); height: auto; border-radius: var(--radius-s); }
 .moderate__text { margin: 0; padding: var(--space-3); border-left: 4px solid var(--c-line); background: var(--c-sand); white-space: pre-wrap; overflow-wrap: anywhere; }
 .moderate__log { font-size: var(--step--1); display: grid; gap: 0.3rem; overflow-wrap: anywhere; }
+/* Header account link: icon on phones, icon + "Sign in" or the person's first name on wider screens. */
+.header-account { flex: none; display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; min-width: var(--tap); height: var(--tap); padding: 0; border-radius: 999px; border: 2px solid var(--c-ink); color: var(--c-ink); text-decoration: none; font-weight: 700; }
+.site-header .header-account { border-color: rgb(255 255 255 / 0.55); color: #ffffff; }
+.header-account:hover { background: var(--c-sand); }
+.site-header .header-account:hover { background: rgb(255 255 255 / 0.12); }
+.header-account svg { width: 1.25rem; height: 1.25rem; flex: none; }
+.header-account__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (min-width: 40rem) {
+  .header-account { padding: 0 0.9rem 0 0.7rem; max-width: 12rem; }
+  .header-account__label { position: static; width: auto; height: auto; clip: auto; overflow: hidden; text-overflow: ellipsis; }
+}
+
+/* Loading spinner (stops for people who prefer less motion). */
+.spinner { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--c-ink-soft); font-weight: 600; }
+.spinner::before { content: ''; width: 1.1rem; height: 1.1rem; border-radius: 50%; border: 3px solid var(--c-line); border-top-color: var(--c-accent); animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(1turn); } }
+@media (prefers-reduced-motion: reduce) { .spinner::before { animation-duration: 2.4s; } }
+.btn[aria-busy='true'] { opacity: 0.75; cursor: progress; }
+.account__welcome { border-left: 4px solid var(--c-accent); }
+.account__mod { display: grid; gap: var(--space-2); justify-items: start; }
