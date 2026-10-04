@@ -12,7 +12,7 @@ import { adapter as ical, foundFromIcs, icsTimeToLocal, parseIcs, splitLocation 
 import { adapter as jsonld, eventNodes, jsonLdBlocks, sitemapLinks } from '../../ingest/adapters/jsonld';
 import { collapse } from '../../ingest/lib/collapse';
 import { Registry, ROOT } from '../../ingest/lib/registry';
-import { displayActOk, entityNameFromSource, findPlaceInText, findVenue, htmlToLines, isoToLocal, performerNameOk } from '../../ingest/lib/structured';
+import { cleanVenueName, displayActOk, ensurePerformer, entityNameFromSource, findPlaceInText, findVenue, htmlToLines, isoToLocal, performerNameOk } from '../../ingest/lib/structured';
 import type { Adapter, AdapterContext, FetchedDocument } from '../../ingest/lib/types';
 
 const TODAY = '2026-10-03';
@@ -104,6 +104,17 @@ describe('names and venues are checked before anything new is created', () => {
     expect(findVenue(reg, 'The Pub on Pretend Lane', '5 Pretend Ln', 'Babylon')).toBe('sample-pub');
     expect(findVenue(reg, 'Sample Pub', undefined, 'Riverhead')).toBeUndefined();
     expect(findVenue(reg, 'Somewhere New', undefined, 'Babylon')).toBeUndefined();
+  });
+  it('cleans venue names without cutting real words', () => {
+    expect(cleanVenueName('Six Harbors Brewing Company')).toBe('Six Harbors Brewing Company');
+    expect(cleanVenueName('First and South (Greenport NY)')).toBe('First and South');
+    expect(cleanVenueName('Sample Pub, NY')).toBe('Sample Pub');
+    expect(cleanVenueName('Montauk, NY')).toBeUndefined();
+  });
+  it('checks abbreviations before tidying a name (FDNY is not a band)', () => {
+    const reg = fixtureRegistry();
+    expect(ensurePerformer(reg, 'FDNY', 'Test')).toBeUndefined();
+    expect([...reg.created.performers]).toEqual([]);
   });
   it('never invents a venue without a street address', async () => {
     const ctx = context({ adapter: 'jsonld', type: 'jsonld', focus: 'music' });

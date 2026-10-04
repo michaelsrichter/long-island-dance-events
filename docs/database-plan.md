@@ -19,7 +19,7 @@
 
 | Piece | Where | State |
 | --- | --- | --- |
-| Source files for every accepted and tracked source (145) | `src/content/sources/*.json` | **68 switched on** (The Dance Calendar, Ira's List, and 66 more); 77 off with a reason (needs permission, browser-only calendar, seasonal, hand entry, or our office network could not check it) |
+| Source files for every accepted and tracked source (145) | `src/content/sources/*.json` | **44 switched on** (The Dance Calendar, Ira's List, and 42 more); 101 off with a reason (needs permission, browser-only calendar, seasonal, hand entry, our office network could not check it, or every listing was at a venue nobody has researched yet) |
 | Generic adapters | `ingest/adapters/ical.ts`, `jsonld.ts`, `htmllist.ts` + `ingest/lib/structured.ts` | Built, with golden tests on fictional fixtures. A live dry run on October 3 read 59 of the 66 new sources; the rest had only past or off-island dates that day |
 | Scheduled collection | `.github/workflows/ingest-scheduled.yml` | Daily, Monday + Thursday, Sunday. One rolling pull request; weekly review request (the weekly email); issues for broken sources |
 | Report database | `catalog/schema.sql`, `catalog/scripts/build-sqlite.ts`, `.github/workflows/report-database.yml` | Built on every change to the data; download from the run page |
@@ -351,7 +351,7 @@ Not included: the domain name renewal and any paid plan the owner chooses later.
 | Phase | What | Result |
 | --- | --- | --- |
 | 1 ✅ (PR #8) | Source catalog, database design, SQLite build in CI with sample reports, plan | Owner can see every source and run reports |
-| 2 ✅ (PR #8) | 145 source files (68 switched on); generic JSON-LD, iCal and HTML-list adapters with golden tests; scheduled workflows (daily + twice weekly + weekly), one rolling PR with the report, issue on failure; monthly Web IQ rediscovery | Dozens of sources collected automatically |
+| 2 ✅ (PR #8) | 145 source files (44 switched on); generic JSON-LD, iCal and HTML-list adapters with golden tests; scheduled workflows (daily + twice weekly + weekly), one rolling PR with the report, issue on failure; monthly Web IQ rediscovery | Dozens of sources collected automatically |
 | 3 | Permission requests for blocked sources; first `.ics` feeds from organizers; duplicate detection with embeddings | More events, fewer duplicates |
 | 4 | Foundry resource + gpt-5-nano for messy pages (after a 10-page test); dancing score from venue and band facts | The long tail of bar and band sites |
 | 5 | Admin area: review queue, flyer upload, permission records in Azure SQL free offer (or Table Storage) | Editors work in the site, not in git |

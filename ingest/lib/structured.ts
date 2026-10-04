@@ -196,7 +196,7 @@ export function displayActOk(name: string): boolean {
 
 const JOINED_ACTS = /[:;|/+@#!?()[\]]|,|\s[-–—]\s|\b(?:vs\.?|versus|w\/|with|featuring|feat\.?|ft\.?|presents|plus|tribute to|the music of|matinee|tour|edition|anniversary|night|party|festival|fest|show|live at)\b/i;
 const EVENT_WORDS =
-  /\b(grammy|nominated|award|winning|pop[- ]?up|supper|prix fixe|showcase|holidays|reunion|pipes|drums and|package|special|series|benefit|fundraiser|closed|private|trivia|bingo|karaoke|comedy|brunch|specials?|menu|tickets?|sold out|doors|free|admission|reservations?|open mic|open jam|jam session|dinner|buffet|cover|read more|more info|details|rsvp|register|coming soon|tba|tbd|to be announced|fair|carnival|club|social|bash|celebration|parade|market|halloween|thanksgiving|christmas|holiday|new year|(?:mon|tues|wednes|thurs|fri|satur|sun)day|january|february|march|april|june|july|august|september|october|november|december)\b/i;
+  /\b(grammy|nominated|award|winning|pop[- ]?up|supper|prix fixe|showcase|holidays|reunion|pipes|drums and|package|special|series|benefit|fundraiser|closed|private|trivia|bingo|karaoke|comedy|brunch|specials?|menu|tickets?|sold out|doors|free|admission|reservations?|open mic|open jam|jam session|jam|dinner|buffet|cover|read more|more info|details|rsvp|register|coming soon|tba|tbd|to be announced|fair|carnival|club|social|bash|celebration|parade|market|halloween|thanksgiving|christmas|holiday|new year|(?:mon|tues|wednes|thurs|fri|satur|sun)day|january|february|march|april|june|july|august|september|october|november|december)\b/i;
 
 /**
  * Strict check before adding a band or DJ to the registry. A name that fails (two acts joined,
@@ -258,7 +258,7 @@ const streetOf = (address: string) => normalizeAddress(address.split(',')[0]!.re
 /** "First and South (Greenport NY)" -> "First and South"; "Montauk, NY" -> "" (just a town). */
 export function cleanVenueName(name: string | undefined): string | undefined {
   if (!name) return undefined;
-  const s = name.replace(/\s*\([^)]*\)\s*$/, '').replace(/,?\s*(?:NY|New York)\.?$/i, '').replace(/[\s,/-]+$/, '').trim();
+  const s = name.replace(/\s*\([^)]*\)\s*$/, '').replace(/(?:,\s*|\s+)(?:NY|N\.Y\.|New York)\.?$/, '').replace(/[\s,/-]+$/, '').trim();
   if (!s || lookupPlace(s)) return undefined;
   return s;
 }
@@ -428,7 +428,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
         });
         continue;
       }
-      const id = ensurePerformer(reg, name, src.name);
+      const id = ensurePerformer(reg, raw, src.name); // raw: the abbreviation check needs "FDNY", not "Fdny"
       if (id) {
         if (!performerIds.includes(id)) performerIds.push(id);
       } else {
