@@ -28,12 +28,16 @@ export const GET: APIRoute = async () => {
     if (better) eventUrl.set(o.eventId, { url: o.url, t, upcoming });
   }
   const urls: Record<string, string> = {};
-  for (const e of events) urls[pageKey('event', e.id)] = eventUrl.get(e.id)?.url ?? '/events/';
-  for (const v of venues) urls[pageKey('venue', v.id)] = `/venues/${v.id}/`;
-  for (const o of organizers) urls[pageKey('organizer', o.id)] = `/organizers/${o.id}/`;
-  for (const i of instructors) urls[pageKey('instructor', i.id)] = `/instructors/${i.id}/`;
-  for (const p of performers) urls[pageKey('performer', p.id)] = `/performers/${p.id}/`;
-  for (const s of styles) urls[pageKey('style', s.id)] = `/styles/${s.id}/`;
+  const names: Record<string, string> = {};
+  for (const e of events) {
+    urls[pageKey('event', e.id)] = eventUrl.get(e.id)?.url ?? '/events/';
+    names[pageKey('event', e.id)] = e.data.title;
+  }
+  for (const v of venues) [urls[pageKey('venue', v.id)], names[pageKey('venue', v.id)]] = [`/venues/${v.id}/`, v.data.name];
+  for (const o of organizers) [urls[pageKey('organizer', o.id)], names[pageKey('organizer', o.id)]] = [`/organizers/${o.id}/`, o.data.name];
+  for (const i of instructors) [urls[pageKey('instructor', i.id)], names[pageKey('instructor', i.id)]] = [`/instructors/${i.id}/`, i.data.name];
+  for (const p of performers) [urls[pageKey('performer', p.id)], names[pageKey('performer', p.id)]] = [`/performers/${p.id}/`, p.data.name];
+  for (const s of styles) [urls[pageKey('style', s.id)], names[pageKey('style', s.id)]] = [`/styles/${s.id}/`, s.data.name];
   const keys = Object.keys(urls).sort();
-  return new Response(JSON.stringify({ v: 1, keys, urls }), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
+  return new Response(JSON.stringify({ v: 1, keys, urls, names }), { headers: { 'Content-Type': 'application/json; charset=utf-8' } });
 };

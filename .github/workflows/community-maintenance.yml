@@ -2,10 +2,15 @@ name: Community maintenance
 
 # Daily: create empty public files for new pages, back up community tables, delete rejected posts
 # older than 90 days, moderation log older than 2 years and old rate-limit counters
-# (see the privacy page and docs/deployment.md).
+# (see the privacy page and docs/deployment.md). Also runs after each production deploy so new
+# pages get their empty file within minutes. Same-day reruns overwrite that day's backup.
 on:
   schedule:
     - cron: '30 10 * * *' # every morning U.S. Eastern time, after the nightly site rebuild
+  workflow_run:
+    workflows: ['Azure Static Web Apps']
+    types: [completed]
+    branches: [main]
   workflow_dispatch:
     inputs:
       dry_run:
@@ -16,8 +21,13 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: community-maintenance
+  cancel-in-progress: false
+
 jobs:
   maintain:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event != 'pull_request')
     runs-on: ubuntu-latest
     timeout-minutes: 15
     env:

@@ -106,6 +106,8 @@ az deployment group create -g rg-li-dance-events-web -f infra/main.bicep -p infr
 
 Then set `COMMUNITY_STORAGE`, `CONTENT_SAFETY_ENDPOINT`, `CONTENT_SAFETY_KEY` and `ADMIN_EMAILS` (see the table above). The sign-in provider itself is in `public/staticwebapp.config.json` (`auth`), with the tenant's OpenID address.
 
+Also save the same Storage connection string as the GitHub secret `COMMUNITY_STORAGE`. The **Community maintenance** workflow (`.github/workflows/community-maintenance.yml`) uses it every morning and after each production deploy. It creates an empty file for each new page (so browsers never get a "not found" error), backs up the tables, and deletes old rejected posts and old log rows.
+
 The script registers `https://longisland.dance/.auth/login/extid/callback` as the redirect address. Pull-request preview sites have other addresses, so sign-in does not work on previews (everything else does).
 
 ### Add Google or Facebook sign-in (owner)

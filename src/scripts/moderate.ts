@@ -58,13 +58,24 @@ function el<K extends keyof HTMLElementTagNameMap>(tag: K, text?: string, cls?: 
 }
 
 let pageUrls: Record<string, string> = {};
+let pageNames: Record<string, string> = {};
 async function loadPageUrls() {
   try {
     const r = await fetch('/community-pages.json');
-    if (r.ok) pageUrls = (await r.json()).urls || {};
+    if (r.ok) ({ urls: pageUrls = {}, names: pageNames = {} } = await r.json());
   } catch {
     pageUrls = {};
+    pageNames = {};
   }
+}
+
+const KINDS: Record<string, string> = { event: 'event', venue: 'venue', organizer: 'organizer', instructor: 'teacher', performer: 'band or DJ', style: 'dance style' };
+const AI_LABELS: Record<string, string> = { SelfHarm: 'Self-harm' };
+const whenFull = (iso: string) => new Date(iso).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
+const whenDay = (day: string) => new Date(`${day}T12:00:00Z`).toLocaleDateString(undefined, { dateStyle: 'medium' });
+function pageLabel(key: string) {
+  const type = key.split(':')[0];
+  return pageNames[key] ? `${pageNames[key]} (${KINDS[type] || type})` : key;
 }
 
 if (root) {
@@ -84,16 +95,16 @@ if (root) {
     const isCorrection = it.itemType === 'correction';
     const head = el('p', undefined, 'moderate__meta');
     const kind = it.itemType === 'photo' ? 'Photo' : isCorrection ? 'Correction' : 'Note';
-    head.append(el('strong', `${kind}`), document.createTextNode(` · ${REASONS[it.reason] || it.reason.replace(/^reports:/, 'Reported: ')} · ${new Date(it.at).toLocaleString()}`));
+    head.append(el('strong', `${kind}`), document.createTextNode(` · ${REASONS[it.reason] || it.reason.replace(/^reports:/, 'Reported: ')} · ${whenFull(it.at)}`));
     li.appendChild(head);
     const page = el('p');
     const url = pageUrls[it.key];
     if (url) {
-      const a = el('a', it.key);
+      const a = el('a', pageLabel(it.key));
       a.href = url;
       page.append(document.createTextNode('Page: '), a);
-    } else page.textContent = `Page: ${it.key}`;
-    if (it.date) page.append(document.createTextNode(` · about the ${it.date} event`));
+    } else page.textContent = `Page: ${pageLabel(it.key)}`;
+    if (it.date) page.append(document.createTextNode(` · went on ${whenDay(it.date)}`));
     li.appendChild(page);
     if (it.itemType === 'photo' && it.preview) {
       const img = el('img', undefined, 'moderate__photo');
@@ -111,7 +122,7 @@ if (root) {
       a.rel = 'noopener';
       li.appendChild(el('p')).appendChild(a);
     }
-    if (it.ai) li.appendChild(el('p', `AI scores (0 safe, 2 unsure, 4+ harmful): ${Object.entries(it.ai).map(([k, v]) => `${k} ${v}`).join(', ')}`, 'muted'));
+    if (it.ai) li.appendChild(el('p', `AI scores (0 safe, 2 unsure, 4+ harmful): ${Object.entries(it.ai).map(([k, v]) => `${AI_LABELS[k] || k} ${v}`).join(', ')}`, 'muted'));
     if (it.flags.length) li.appendChild(el('p', `Reports: ${it.flags.map((f) => f.reason + (f.note ? ` ("${f.note}")` : '')).join('; ')}`, 'muted'));
     li.appendChild(el('p', `By ${it.user.name || 'unknown'} · ${it.user.status} · ${it.user.approved} approved, ${it.user.rejected} rejected before`, 'muted'));
 
@@ -181,7 +192,7 @@ if (root) {
     const ol = root.querySelector<HTMLOListElement>('[data-mod-log-list]')!;
     const r = await api('/api/moderation/log');
     ol.replaceChildren(
-      ...((r.data?.entries || []) as any[]).map((e) => el('li', `${new Date(e.at).toLocaleString()} · ${e.actor} · ${e.action} ${e.targetType} ${e.key || ''} ${e.reason ? `· ${e.reason}` : ''}`)),
+      ...((r.data?.entries || []) as any[]).map((e) => el('li', `${whenFull(e.at)} · ${e.actor} · ${e.action} ${e.targetType}${e.key ? ` on ${pageLabel(e.key)}` : ''}${e.reason ? ` · ${e.reason}` : ''}`)),
     );
     panel.hidden = false;
   });

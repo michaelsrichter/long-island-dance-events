@@ -1,7 +1,7 @@
 name: Azure Static Web Apps
 
 # Production deploys on every merge to main. Pull requests get a preview environment
-# (Free plan: up to 3 at a time). A nightly rebuild keeps "upcoming" lists and the
+# (Standard plan: up to 10 at a time). A nightly rebuild keeps "upcoming" lists and the
 # homepage "next dance" current, and advances recurring-series dates.
 # Until infra/deploy.ps1 has stored the AZURE_STATIC_WEB_APPS_API_TOKEN secret, the site is
 # still built (as a check) but the deploy and smoke-test steps are skipped.
