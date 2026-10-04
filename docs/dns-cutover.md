@@ -1,14 +1,14 @@
 # DNS cutover: longisland.dance
 
-The site's address is **https://longisland.dance** (the "apex" or root domain). `www.longisland.dance` and the Azure address https://black-dune-0e0f3e40f.1.azurestaticapps.net redirect there (301).
+The site's address is **https://longisland.dance** (the "apex" or root domain). `www.longisland.dance` and the Azure address https://gentle-glacier-01b92ea0f.3.azurestaticapps.net redirect there (301).
 
-Status (October 3, 2026, 6:31 PM): **done.** Both domains are `Ready` with free HTTPS certificates; `longisland.dance` is the default domain; `SITE_URL` is `https://longisland.dance`; smoke test 23/23. Search engines are still blocked until launch.
+Status (October 4, 2026, 12:30 PM): **done, on the new Azure app** (see below). First set up October 3, 2026, 6:31 PM: Both domains are `Ready` with free HTTPS certificates; `longisland.dance` is the default domain; `SITE_URL` is `https://longisland.dance`; smoke test 23/23. Search engines are still blocked until launch.
 
 ## Move to the new Azure app (October 4, 2026)
 
 The site is moving from the old Azure app (`black-dune…`, Microsoft work subscription) to a new one in the owner's own subscription (**Richter Cloud 150Credit**, resource group `rg-li-dance-events-web`, address **https://gentle-glacier-01b92ea0f.3.azurestaticapps.net**). The new app also has the storage, content-safety and visitor sign-in settings for the community features. Deploys from `main` already go to the new app. `longisland.dance` keeps showing the old app until the DNS records below change.
 
-Done by the developer: the new app has the latest site (smoke test 23/23), and Azure is waiting to verify both names on it (`Validating`).
+**Status: done (October 4, 2026, about 12:30 PM).** Both names are `Ready` on the new app. `longisland.dance` is its default domain, the ALIAS and CNAME point at it, and `www` and the Azure address redirect (301) to https://longisland.dance. Smoke test 23/23 on https://longisland.dance; screenshots checked in light and dark, phone and desktop, and at 320 px. Both names were removed from the old app. The old app (`black-dune…`, paid Standard plan) still exists until the owner decides to delete it. The old TXT records (`_fzdvr…`, `_fvpz3…`) can be deleted at Namecheap.
 
 **Step 1: TXT records for the new app (no downtime).** At Namecheap, Advanced DNS, the TXT values must be **exactly** these. On October 4 at 12:06 PM the first codes (`_1z5hq…` and `_vb8ey…`) were replaced: Azure checked once before those records existed and never checked again, so both names were removed and added back with new codes.
 
