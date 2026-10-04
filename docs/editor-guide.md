@@ -128,4 +128,13 @@ Visitors use the "Report a problem" button on each event, or the forms on the **
 
 ## Sign-in setup (for the site owner)
 
-Create a GitHub OAuth app: Homepage `https://<domain>`, callback `https://<domain>/api/callback`, and **untick "Expire user access tokens"**. Then add these Azure Static Web Apps settings: `GITHUB_OAUTH_CLIENT_ID`, `GITHUB_OAUTH_CLIENT_SECRET`, `ALLOWED_HOSTS=<domain>,<azure-host>`. Update the callback when the domain changes. Editors need write access to the repository. Work accounts managed by a company (Enterprise Managed Users) cannot be added to a personal repository.
+**Done on 2026-10-03.** The GitHub OAuth app is **"Long Island Dance Events CMS"** under the owner's GitHub account (Settings → Developer settings → OAuth Apps). Its sign-in return addresses are `https://longisland.dance/api/callback` and `https://www.longisland.dance/api/callback`, and "Expire user access tokens" is off. The Azure Static Web App `swa-li-dance-events-web` has the settings `GITHUB_OAUTH_CLIENT_ID`, `GITHUB_OAUTH_CLIENT_SECRET` and `ALLOWED_HOSTS` (longisland.dance, www.longisland.dance and the azurestaticapps.net address). The editor asks GitHub only for **public repositories** access (`auth_scope: public_repo` in `cms/config.yml`), so signing in never opens your private repositories.
+
+To set it up again (new domain, or a lost secret):
+
+1. GitHub → Settings → Developer settings → OAuth Apps → the app. Set Homepage `https://<domain>` and the return address `https://<domain>/api/callback`. Keep **"Expire user access tokens" unticked**.
+2. Click **Generate a new client secret**. Copy it straight into the Azure setting `GITHUB_OAUTH_CLIENT_SECRET`. Never paste it in a file, chat or email.
+3. Add the new domain to `ALLOWED_HOSTS`.
+4. Check: `https://<domain>/api/auth` should send you to github.com. If it shows "CMS sign-in is not configured", a setting is missing.
+
+Editors need write access to the repository (Settings → Collaborators). Work accounts managed by a company (Enterprise Managed Users) cannot be added to a personal repository; editors must use a personal GitHub account.

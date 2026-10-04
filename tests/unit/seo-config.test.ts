@@ -80,6 +80,8 @@ describe('Decap CMS configuration', () => {
   it('points at this repository and uses the editorial workflow', () => {
     expect(config.backend.name).toBe('github');
     expect(config.backend.repo).toBe('michaelsrichter/long-island-dance-events');
+    // Least access: the repository is public, so sign-in must not ask for every private repository.
+    expect(config.backend.auth_scope).toBe('public_repo');
     expect(config.publish_mode).toBe('editorial_workflow');
     expect(existsSync(join(root, config.media_folder))).toBe(true);
   });
