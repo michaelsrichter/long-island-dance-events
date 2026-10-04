@@ -25,10 +25,8 @@ function render(account: CachedAccount | null) {
 
 render(cachedAccount());
 window.addEventListener('li-account', (e) => render((e as CustomEvent<CachedAccount | null>).detail));
-document.addEventListener('click', (e) => {
-  if ((e.target as Element | null)?.closest?.('[data-account-signout]')) rememberAccount(null);
-});
 
+// The saved name is cleared only when /.auth/me says the session is really gone (not when "Sign out" is clicked).
 const cached = cachedAccount();
 if (cached) {
   whoAmI().then((me) => {

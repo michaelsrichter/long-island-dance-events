@@ -11,7 +11,10 @@
             "clientIdSettingName": "EXTID_CLIENT_ID",
             "clientCredential": { "clientSecretSettingName": "EXTID_CLIENT_SECRET" },
             "openIdConnectConfiguration": {
-              "wellKnownOpenIdConfiguration": "https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/v2.0/.well-known/openid-configuration"
+              "authorizationEndpoint": "https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/oauth2/v2.0/authorize",
+              "tokenEndpoint": "https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/oauth2/v2.0/token",
+              "issuer": "https://a72c253f-3125-4592-b3c6-b8e23ed18054.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/v2.0",
+              "certificationUri": "https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/discovery/v2.0/keys"
             }
           },
           "login": { "nameClaimType": "name", "scopes": ["openid", "profile", "email"], "loginParameterNames": [] }
