@@ -65,6 +65,17 @@ Use Azure portal or CLI:
 az staticwebapp appsettings set --name <swa-name> --resource-group <rg> --setting-names KEY=value
 ```
 
+**Each environment has its own copy of the app settings.** A pull-request preview copies production's settings when it is created; after that, changing a setting without `--environment-name` changes **production only** (`default`). To change a setting everywhere (for example `ADMIN_EMAILS`), set it on every environment:
+
+```powershell
+$app = 'swa-li-dance-events-web'; $rg = 'rg-li-dance-events-web'
+foreach ($envName in az staticwebapp environment list -n $app -g $rg --query "[].name" -o tsv) {
+  az staticwebapp appsettings set -n $app -g $rg --environment-name $envName --setting-names "ADMIN_EMAILS=a@example.com,b@example.com" --output none
+}
+```
+
+Moderator (`admin`) roles are given at sign-in, so a new moderator signs out and in again afterwards.
+
 Common settings:
 
 | Setting | Required? | Description |
@@ -80,8 +91,6 @@ Common settings:
 | `CONTENT_SAFETY_ENDPOINT` | for community features | Azure AI Content Safety endpoint. |
 | `CONTENT_SAFETY_KEY` | for community features | Its key. Without it every note waits for a person. |
 | `ADMIN_EMAILS` | for moderation | Comma-separated emails that get the `admin` role at sign-in. |
-| `SITE_URL` | optional | Used in GitHub issues opened for corrections. |
-| `GITHUB_ISSUES_TOKEN` | optional | Fine-grained token with "Issues: write" on this repo; private corrections then also open an issue. |
 | `MODERATION_DENY_WORDS` | optional | Comma-separated words that always reject a note. |
 
 ## Visitor sign-in and community features
@@ -108,7 +117,9 @@ Then set `COMMUNITY_STORAGE`, `CONTENT_SAFETY_ENDPOINT`, `CONTENT_SAFETY_KEY` an
 
 Also save the same Storage connection string as the GitHub secret `COMMUNITY_STORAGE`. The **Community maintenance** workflow (`.github/workflows/community-maintenance.yml`) uses it every morning and after each production deploy. It creates an empty file for each new page (so browsers never get a "not found" error), backs up the tables, and deletes old rejected posts and old log rows.
 
-The script registers `https://longisland.dance/.auth/login/extid/callback` as the redirect address. Pull-request preview sites have other addresses, so sign-in does not work on previews (everything else does).
+The script registers `https://longisland.dance/.auth/login/extid/callback` (and `-ExtraSiteUrls`) as redirect addresses and keeps any already on the app. To test sign-in on a pull-request preview, add that preview's `https://<preview-host>/.auth/login/extid/callback` to the app registration.
+
+"Sign out" ends only the site's session. `staticwebapp.config.json` lists the External ID endpoints itself instead of the discovery document, so Static Web Apps never sends people to External ID's sign-out page (that page asks "Which account do you want to sign out of?" and often lists no account). The user flow asks only for the email address; the site's welcome step asks for the public name.
 
 ### Add Google or Facebook sign-in (owner)
 

@@ -64,7 +64,7 @@ Costs are per month at three sizes: **tiny** (200 signed-in users, 50 photos a m
 **Phase 1: likes and text comments (about 11-15 developer-days).**
 
 - External ID tenant with **Google + email code** first. Add **Facebook** when the Meta app, privacy page and data-deletion page are ready (no Meta app review is needed for basic login).
-- Like button and comment box on every event, venue, organizer, teacher, band/DJ and dance-style page. "Suggest a correction" sends private feedback to editors and opens a GitHub issue (replaces the GitHub-account requirement in decision P12 for signed-in visitors).
+- Like button and comment box on every event, venue, organizer, teacher, band/DJ and dance-style page. "Suggest a correction" sends private feedback to editors in the moderation queue (replaces the GitHub-account requirement in decision P12 for signed-in visitors; never posted publicly).
 - AI text checks (Content Safety free tier), a "Report" button, rate limits, bans, an audit log, and a moderation page for admins (GitHub sign-in with an `admin` role, as already planned for phase 5).
 - Account page: change display name, download my data, delete my account.
 - Privacy page, community rules and FAQ updates.
@@ -354,7 +354,7 @@ flowchart TD
 Each page gets two different buttons:
 
 - **Comment** (public): goes through the flow above and shows on the page.
-- **Suggest a correction** (private, to editors): saved in a `Feedback` table **and** turned into a GitHub issue by the Function, labeled `correction`, with the page link and the suggested fix (after the AI check). **No name, email or user id goes into the public issue.** The Function uses a fine-grained GitHub token limited to "Issues: write" on this one repo, kept in app settings.
+- **Suggest a correction** (private, to editors): saved in the `Comments` table and shown only in the moderation queue. **Changed 2026-10-04 (owner):** corrections and reports never create GitHub issues (the repository is public); they stay in Azure Storage and `/moderate/`.
 - People without an account keep using today's GitHub issue forms (decision P12). A later anonymous form with Turnstile can replace them.
 
 ## 8. Cost table
@@ -477,7 +477,6 @@ flowchart LR
   FN --> PRIV[("Blob Storage, private:<br/>photos waiting for review")]
   FN -->|"text and image checks"| CS["Azure AI Content Safety"]
   FN -->|"rewrite JSON after each change"| PUB
-  FN -->|"private corrections"| GH["GitHub issues"]
   M["Moderators"] -->|"GitHub sign-in, admin role"| SWA
   M -->|"/moderate/ page calls /api/admin"| FN
   GHA["GitHub Actions, weekly"] -->|"clean-up and table backup"| TS
@@ -529,7 +528,7 @@ erDiagram
 | `Users` | user id (random) | `profile` | `idpUserId` (External ID object id), `displayName`, `status` (`active`, `muted`, `banned`), `bannedUntil`, `banReason`, `trust` (0 new, 1 trusted), `approvedCount`, `rejectedCount`, `age13Confirmed`, `age18Confirmed`, `photoTermsAcceptedAt`, `createdAt`, `lastSeenAt`. **No email.** |
 | `UserIndex` | `idp` | External ID object id | `userId` (fast lookup at sign-in) |
 | `Sessions` | SHA-256 of the session id | `s` | `userId`, `createdAt`, `expiresAt` |
-| `Comments` | page key | reverse ticks + comment id | `userId`, `displayName` (copy), `kind` (`comment` or `correction`), `body`, `occurrenceDate`, `status` (`pending`, `published`, `rejected`, `hidden`), `ai` (scores JSON), `reason`, `flagCount`, `decidedBy`, `decidedAt`, `githubIssue` (corrections) |
+| `Comments` | page key | reverse ticks + comment id | `userId`, `displayName` (copy), `kind` (`comment` or `correction`), `body`, `occurrenceDate`, `status` (`pending`, `published`, `rejected`, `hidden`), `ai` (scores JSON), `reason`, `flagCount`, `decidedBy`, `decidedAt` |
 | `Photos` | page key | reverse ticks + photo id | `userId`, `caption`, `alt`, `width`, `height`, `status`, `ai`, `consent` (own photo, people agreed, no children), `decidedBy`, `decidedAt` |
 | `Likes` | page key | user id | `createdAt` |
 | `UserItems` | user id | `like~<page key>`, `comment~<page key>~<row key>`, `photo~...` | pointer back to the row (for "download my data" and account deletion) |
@@ -541,7 +540,7 @@ erDiagram
 | Blob container | Access | Contents |
 | --- | --- | --- |
 | `pending` | private | Cleaned photos waiting for review (`<photo id>-480.webp`, `-1024`, `-2048`). Deleted automatically after 30 days by a lifecycle rule. |
-| `photos` | public read | Approved photos: `<type>/<id>/<photo id>-<size>.webp`, `Cache-Control: public, max-age=31536000, immutable` |
+| `photos` | public read | Approved photos: `<type>/<id>/<photo id>-<size>.webp`, `Cache-Control: public, max-age=3600` (moved back to `pending` at once when hidden or rejected) |
 | `community` | public read | Read model: `<type>/<id>.json` (likes count, latest approved comments, photo list) and `counts/<type>.json`, `Cache-Control: public, max-age=60` |
 | `backups` | private | Weekly table exports, kept 5 weeks |
 
@@ -561,9 +560,9 @@ Table Storage has no automatic expiry, so a **weekly GitHub Actions workflow** d
 **`api/`**
 
 - New helpers: `src/lib/session.js` (create, read, revoke sessions; cookie flags), `src/lib/oidc.js` (External ID code flow with `openid-client`), `src/lib/store.js` (`@azure/data-tables`, `@azure/storage-blob`), `src/lib/moderate.js` (Content Safety REST calls + the decision rules as a pure, unit-tested function), `src/lib/images.js` (`sharp`), `src/lib/turnstile.js`, `src/lib/readmodel.js` (rebuild one page's JSON).
-- New Functions: `login.js` (`/api/login`, `/api/login/callback`, `/api/logout`), `me.js` (`/api/me`, data export, account deletion, "did I like these?"), `likes.js`, `comments.js` (comments and corrections → GitHub issue), `photos.js`, `flags.js`, `admin.js` (queue list, decide, ban, unban), and optionally `facebook-deletion.js`.
+- New Functions: `login.js` (`/api/login`, `/api/login/callback`, `/api/logout`), `me.js` (`/api/me`, data export, account deletion, "did I like these?"), `likes.js`, `comments.js` (comments and private corrections), `photos.js`, `flags.js`, `admin.js` (queue list, decide, ban, unban), and optionally `facebook-deletion.js`.
 - Reuse `hosts.js` and the same-origin check from `telemetry.js` on every write (CSRF protection together with `SameSite=Lax`), keep `Cache-Control: no-store` on personal answers, and add telemetry counters (posts, AI decisions, queue size).
-- New app settings (never in git): `EXTERNAL_ID_ISSUER`, `EXTERNAL_ID_CLIENT_ID`, `EXTERNAL_ID_CLIENT_SECRET`, `COMMUNITY_STORAGE_CONNECTION` (or a SAS per service), `CONTENT_SAFETY_ENDPOINT`, `CONTENT_SAFETY_KEY`, `TURNSTILE_SECRET`, `GITHUB_ISSUES_TOKEN`. `ALLOWED_HOSTS` must include `longisland.dance` so the callback is built as `https://longisland.dance/api/login/callback`. Because SWA Free Functions cannot use managed identity (decision P20), use a **separate storage account only for community data**, and rotate its keys twice a year.
+- New app settings (never in git): `EXTERNAL_ID_ISSUER`, `EXTERNAL_ID_CLIENT_ID`, `EXTERNAL_ID_CLIENT_SECRET`, `COMMUNITY_STORAGE_CONNECTION` (or a SAS per service), `CONTENT_SAFETY_ENDPOINT`, `CONTENT_SAFETY_KEY`, `TURNSTILE_SECRET`. `ALLOWED_HOSTS` must include `longisland.dance` so the callback is built as `https://longisland.dance/api/login/callback`. Because SWA Free Functions cannot use managed identity (decision P20), use a **separate storage account only for community data**, and rotate its keys twice a year.
 - Tests (`node --test`): validators, moderation decision rules, session cookie flags, like idempotency, read-model builder, image cleaning (EXIF really removed). `package-lock.json` changes must be normalized with `npm run lockfile:normalize`.
 
 **`infra/main.bicep` and `infra/deploy.ps1`**

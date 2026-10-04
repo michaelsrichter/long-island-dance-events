@@ -5,7 +5,10 @@
 .DESCRIPTION
   1. App registration "Long Island Dance website" (web app, redirect https://<site>/.auth/login/extid/callback,
      ID tokens with the optional "email" claim, admin consent for openid/profile/email/offline_access).
-  2. Sign-up and sign-in user flow with email one-time passcode, collecting a display name.
+     Redirect addresses already on the app (for example pull-request previews) are kept. No front-channel
+     logout address: the site's "Sign out" ends only the site's session (see staticwebapp.config.json).
+  2. Sign-up and sign-in user flow with email one-time passcode. It asks for nothing else: the site's
+     welcome step asks for the public name (an existing flow is updated to match).
   3. Links the app to the user flow.
   4. With -NewSecret: creates a client secret and stores it (and the client id) in the Static Web App's
      app settings without printing it.
@@ -59,20 +62,21 @@ $scopes = [ordered]@{
 $callback = "$($SiteUrl.TrimEnd('/'))/.auth/login/extid/callback"
 
 # 1. App registration
+$app = (G GET "/applications?`$filter=displayName eq '$([uri]::EscapeDataString($AppName))'").value | Select-Object -First 1
+$redirects = @(@($callback) + @($ExtraSiteUrls | Where-Object { $_ } | ForEach-Object { "$($_.TrimEnd('/'))/.auth/login/extid/callback" }) + @($app.web.redirectUris | Where-Object { $_ })) | Select-Object -Unique
 $appBody = @{
   displayName = $AppName
   signInAudience = 'AzureADMyOrg'
   web = @{
     homePageUrl = $SiteUrl
-    redirectUris = @(@($callback) + @($ExtraSiteUrls | Where-Object { $_ } | ForEach-Object { "$($_.TrimEnd('/'))/.auth/login/extid/callback" }))
-    logoutUrl = "$($SiteUrl.TrimEnd('/'))/.auth/logout/extid/callback"
+    redirectUris = @($redirects)
+    logoutUrl = $null
     implicitGrantSettings = @{ enableIdTokenIssuance = $true; enableAccessTokenIssuance = $false }
   }
   info = @{ privacyStatementUrl = "$($SiteUrl.TrimEnd('/'))/privacy/"; termsOfServiceUrl = "$($SiteUrl.TrimEnd('/'))/community-rules/" }
   optionalClaims = @{ idToken = @(@{ name = 'email'; essential = $false }) }
   requiredResourceAccess = @(@{ resourceAppId = $graphAppId; resourceAccess = @($scopes.Values | ForEach-Object { @{ id = $_; type = 'Scope' } }) })
 }
-$app = (G GET "/applications?`$filter=displayName eq '$([uri]::EscapeDataString($AppName))'").value | Select-Object -First 1
 if ($app) { G PATCH "/applications/$($app.id)" $appBody | Out-Null; Write-Host "Updated app registration $($app.appId)" }
 else { $app = G POST '/applications' $appBody; Write-Host "Created app registration $($app.appId)" }
 
@@ -86,7 +90,21 @@ if ($grant) { G PATCH "/oauth2PermissionGrants/$($grant.id)" @{ scope = $scopeTe
 else { G POST '/oauth2PermissionGrants' @{ clientId = $sp.id; consentType = 'AllPrincipals'; resourceId = $graphSp.id; scope = $scopeText } | Out-Null }
 Write-Host "Admin consent: $scopeText"
 
-# 2. User flow: email one-time passcode, collect display name
+# 2. User flow: email one-time passcode only. The site's welcome step asks for the public name, so the
+#    flow collects nothing else and people never see an extra "Add details" page.
+$emailOnly = @{
+  '@odata.type' = '#microsoft.graph.onAttributeCollectionExternalUsersSelfServiceSignUp'
+  attributes = @(
+    @{ id = 'email'; displayName = 'Email Address'; description = 'Email address of the user'; userFlowAttributeType = 'builtIn'; dataType = 'string' }
+  )
+  attributeCollectionPage = @{
+    views = @(@{
+        inputs = @(
+          @{ attribute = 'email'; label = 'Email address'; inputType = 'text'; hidden = $true; editable = $false; writeToDirectory = $true; required = $true; validationRegEx = '^[^@\s]+@[^@\s]+\.[^@\s]+$' }
+        )
+      })
+  }
+}
 $flow = (G GET '/identity/authenticationEventsFlows').value | Where-Object { $_.displayName -eq $FlowName } | Select-Object -First 1
 if (-not $flow) {
   $flow = G POST '/identity/authenticationEventsFlows' @{
@@ -100,24 +118,22 @@ if (-not $flow) {
       '@odata.type' = '#microsoft.graph.onInteractiveAuthFlowStartExternalUsersSelfServiceSignUp'
       isSignUpAllowed = $true
     }
-    onAttributeCollection = @{
-      '@odata.type' = '#microsoft.graph.onAttributeCollectionExternalUsersSelfServiceSignUp'
-      attributes = @(
-        @{ id = 'email'; displayName = 'Email Address'; description = 'Email address of the user'; userFlowAttributeType = 'builtIn'; dataType = 'string' },
-        @{ id = 'displayName'; displayName = 'Display Name'; description = 'Name shown next to your posts'; userFlowAttributeType = 'builtIn'; dataType = 'string' }
-      )
-      attributeCollectionPage = @{
-        views = @(@{
-            inputs = @(
-              @{ attribute = 'email'; label = 'Email address'; inputType = 'text'; hidden = $true; editable = $false; writeToDirectory = $true; required = $true; validationRegEx = '^[^@\s]+@[^@\s]+\.[^@\s]+$' },
-              @{ attribute = 'displayName'; label = 'Name to show next to your posts'; inputType = 'text'; hidden = $false; editable = $true; writeToDirectory = $true; required = $true; validationRegEx = "^[A-Za-z0-9 .'_-]{2,40}$" }
-            )
-          })
-      }
-    }
+    onAttributeCollection = $emailOnly
   }
   Write-Host "Created user flow $($flow.id)"
-} else { Write-Host "User flow exists $($flow.id)" }
+} else {
+  Write-Host "User flow exists $($flow.id)"
+  $flowPath = "/identity/authenticationEventsFlows/$($flow.id)"
+  $collected = @((G GET $flowPath).onAttributeCollection.attributes | ForEach-Object { $_.id })
+  if ($collected | Where-Object { $_ -ne 'email' }) {
+    # Older versions of this script also asked for a display name: show only the (hidden) email input, then drop the extra attributes.
+    G PATCH $flowPath @{ '@odata.type' = '#microsoft.graph.externalUsersSelfServiceSignUpEventsFlow'; onAttributeCollection = @{ '@odata.type' = $emailOnly.'@odata.type'; attributeCollectionPage = $emailOnly.attributeCollectionPage } } | Out-Null
+    foreach ($id in $collected | Where-Object { $_ -ne 'email' }) {
+      G DELETE "$flowPath/microsoft.graph.externalUsersSelfServiceSignUpEventsFlow/onAttributeCollection/microsoft.graph.onAttributeCollectionExternalUsersSelfServiceSignUp/attributes/$id/`$ref" | Out-Null
+    }
+    Write-Host "User flow now asks only for the email address (removed: $(($collected | Where-Object { $_ -ne 'email' }) -join ', '))"
+  }
+}
 
 # 3. Link the app to the flow
 $linked = (G GET "/identity/authenticationEventsFlows/$($flow.id)/conditions/applications/includeApplications").value | Where-Object { $_.appId -eq $app.appId }

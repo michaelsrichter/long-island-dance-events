@@ -132,7 +132,7 @@ flowchart LR
 | `POST /api/roles` | SWA `rolesSource`: after each sign-in, saves the profile (no email) and returns `member` (unless banned or under 13) and `admin` (emails in `ADMIN_EMAILS`). |
 | `GET /api/me`, `POST /api/me/profile`, `GET /api/me/likes`, `GET /api/me/export`, `POST /api/me/delete` | Profile (display name, neutral age question: only "13+" and "18+" are kept), my likes, download, delete. |
 | `POST /api/likes` | One like per person per page (`Likes`: PartitionKey page key, RowKey user id). |
-| `POST /api/comments` | Notes (AI: 0 publish, 2 queue, 4+ reject; links/phones/emails queue) and private corrections (always queue; optional GitHub issue). |
+| `POST /api/comments` | Notes (AI: 0 publish, 2 queue, 4+ reject; links/phones/emails queue) and private corrections (always queue; never posted anywhere public). |
 | `POST /api/photos` | 18+; type sniffed, EXIF/GPS removed, 480/1024/2048 px WebP, AI image check, then **always** the human queue. |
 | `POST /api/flags` | Reports; 3 people (or a safety reason) hide the item until reviewed. |
 | `/api/moderation/queue`, `photo`, `decide`, `ban`, `unban`, `log` | Moderation (route rule requires `admin`). Every decision is written to `ModLog`. |
