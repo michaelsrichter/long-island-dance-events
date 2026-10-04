@@ -1,0 +1,54 @@
+name: Community maintenance
+
+# Daily: create empty public files for new pages, back up community tables, delete rejected posts
+# older than 90 days, moderation log older than 2 years and old rate-limit counters
+# (see the privacy page and docs/deployment.md). Also runs after each production deploy so new
+# pages get their empty file within minutes. Same-day reruns overwrite that day's backup.
+on:
+  schedule:
+    - cron: '30 10 * * *' # every morning U.S. Eastern time, after the nightly site rebuild
+  workflow_run:
+    workflows: ['Azure Static Web Apps']
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Only report what would change'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: community-maintenance
+  cancel-in-progress: false
+
+jobs:
+  maintain:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event != 'pull_request')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      HAS_STORAGE: ${{ secrets.COMMUNITY_STORAGE != '' }}
+    steps:
+      - name: Not configured yet
+        if: env.HAS_STORAGE != 'true'
+        run: echo "::notice::COMMUNITY_STORAGE secret is not set; nothing to do."
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        if: env.HAS_STORAGE == 'true'
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        if: env.HAS_STORAGE == 'true'
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: api/package-lock.json
+      - run: npm ci --prefix api --omit=dev --ignore-scripts
+        if: env.HAS_STORAGE == 'true'
+      - name: Back up and clean up
+        if: env.HAS_STORAGE == 'true'
+        env:
+          COMMUNITY_STORAGE: ${{ secrets.COMMUNITY_STORAGE }}
+          SITE_URL: ${{ vars.SITE_URL }}
+        run: node scripts/community-maintenance.mjs ${{ inputs.dry_run && '--dry-run' || '' }}

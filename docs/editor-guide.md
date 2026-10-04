@@ -117,6 +117,24 @@ Visitors use the "Report a problem" button on each event, or the forms on the **
 | `add-listing` | Check it is in Nassau or Suffolk and real; add it by hand, or ask a developer to add the calendar as a source. |
 | `remove-listing` | Act within a week: turn on **Opted out** for the organizer, or remove the item. Reply when done. |
 
+## Moderate notes and photos
+
+Signed-in visitors can like pages, leave notes, send private corrections and post photos (see the [community rules](https://longisland.dance/community-rules/)). An AI checker reads every note first; anything it is unsure about, every private correction and **every photo** waits for a person.
+
+1. Go to **https://longisland.dance/moderate/** and sign in with your moderator email (the owner adds it to the `ADMIN_EMAILS` app setting). You get a one-time code by email.
+2. Each card shows the post, why it is waiting, the AI scores (0 = safe, 2 = unsure, 4 or more = harmful), any reports, and the poster's record.
+3. Choose:
+   - **Approve**: it follows the rules. It appears on the page within a minute.
+   - **Reject**: it breaks the rules. For photos: reject if a child can be recognized, if it looks like people did not agree to be posted, or if it is not from a dance.
+   - **Hide**: takes a public post down while you check.
+   - **Done** (corrections): fix the listing in the CMS first (lock the fields you changed), then press Done.
+   - **Ban this person…**: stops them posting for some days or for good, and can hide everything they posted.
+4. Add a short reason; it goes into the log (**Show this month's log**).
+
+Please check the queue at least every two days. Removal requests ("It shows me") hide the photo at once; reject it within 48 hours. If a photo might show child sexual abuse, do not download or share it: reject it and report it to the [NCMEC CyberTipline](https://report.cybertip.org/).
+
+To delete someone's sign-in account (after they deleted their data), open the Entra admin center → tenant **Long Island Dance** → **Users**, and delete the user named in the log entry.
+
 ## Fix a mistake
 
 | Problem | What to do |

@@ -8,8 +8,9 @@
 - Black, dark red, silver and white design with light and dark modes, built for phones first.
 - Every event links to its venue, organizer, teachers, bands and DJs, and each of those pages lists what is coming up.
 - Add any event to Google, Outlook or Apple calendars, or subscribe to the whole list (`/events/all.ics`, `/events/rss.xml`).
+- Optional free account (email one-time code, Microsoft Entra External ID): like pages, leave notes, send private corrections and share photos. Every note is checked by AI; unclear notes and every photo wait for a volunteer. Browsing never needs an account.
 
-Status: **MVP (build phases 1-2), live at <https://longisland.dance>** on Azure Static Web Apps (Free). Search engines are kept away until launch (`ALLOW_INDEXING=false`). See [Roadmap](#roadmap).
+Status: **MVP (build phases 1-2) plus community features, live at <https://longisland.dance>** on Azure Static Web Apps (Standard) in the owner's personal Azure subscription. Search engines are kept away until launch (`ALLOW_INDEXING=false`). See [Roadmap](#roadmap).
 
 ## How it works
 
@@ -181,14 +182,14 @@ docs/             decisions, content audit, content model, architecture, editor 
 2. ✅ The Dance Calendar end-to-end (PDF) → data files → browsable, filterable site. **MVP checkpoint.**
 3. ✅ Ira's List LI adapter and dancing score. Next: duplicate detection (exact match key, then local embeddings with bge-small: ≥ 0.9 merge, 0.8-0.9 human review).
 4. Submit-an-event form (to a moderation queue).
-5. Admin area (GitHub sign-in, `admin` role): moderation queue, source panel, feedback and bug inbox (Table Storage + GitHub issues).
-6. Azure: ✅ Static Web Apps Free + managed Functions + monitoring (Bicep, `infra/`). Storage account comes with phase 5, when its first Functions need it.
+5. Admin area: ✅ moderation queue and private corrections (community features, decision P21); source panel and bug inbox still to come.
+6. Azure: ✅ Static Web Apps Standard + managed Functions + monitoring + community Storage and AI Content Safety + Entra External ID (Bicep and scripts in `infra/`, decisions P21, P37, P38).
 7. ✅ Scheduled GitHub Actions runs (daily, twice weekly, weekly) that update one pull request with the run report and @mention the owner weekly (GitHub sends the email); an issue is filed if a source breaks. A report database (SQLite) is built on every change.
 8. ✅ Discovery: 218 websites checked with Web IQ; 145 source files; monthly search and recheck ([docs/source-catalog.md](docs/source-catalog.md), [docs/database-plan.md](docs/database-plan.md)). Next: permission requests for blocked sources, flyer intake, AI help for messy pages (owner decisions), launch.
 
 ## Cost
 
-Designed for about **$0/month**: Azure Static Web Apps Free tier, managed Functions, one Storage account (pennies), free GitHub Actions minutes for the scheduled runs, OpenStreetMap tiles and geocoding (Nominatim, 1 request per second). Optional: monthly Web IQ discovery, about $1.06 a month after the free evaluation. Full cost table: [docs/database-plan.md](docs/database-plan.md#10-cost-table).
+About **$9/month**: Azure Static Web Apps Standard ($9 per app per month; needed for visitor sign-in), managed Functions, one Storage account (pennies), Entra External ID (free up to 50,000 signed-in users a month), AI Content Safety (free tier: 5,000 notes and 5,000 photos a month), free GitHub Actions minutes for the scheduled runs, OpenStreetMap tiles and geocoding (Nominatim, 1 request per second). Optional: monthly Web IQ discovery, about $1.06 a month after the free evaluation. Full cost table: [docs/database-plan.md](docs/database-plan.md#10-cost-table).
 
 ## Security and privacy
 

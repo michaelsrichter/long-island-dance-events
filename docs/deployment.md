@@ -65,6 +65,17 @@ Use Azure portal or CLI:
 az staticwebapp appsettings set --name <swa-name> --resource-group <rg> --setting-names KEY=value
 ```
 
+**Each environment has its own copy of the app settings.** A pull-request preview copies production's settings when it is created; after that, changing a setting without `--environment-name` changes **production only** (`default`). To change a setting everywhere (for example `ADMIN_EMAILS`), set it on every environment:
+
+```powershell
+$app = 'swa-li-dance-events-web'; $rg = 'rg-li-dance-events-web'
+foreach ($envName in az staticwebapp environment list -n $app -g $rg --query "[].name" -o tsv) {
+  az staticwebapp appsettings set -n $app -g $rg --environment-name $envName --setting-names "ADMIN_EMAILS=a@example.com,b@example.com" --output none
+}
+```
+
+Moderator (`admin`) roles are given at sign-in, so a new moderator signs out and in again afterwards.
+
 Common settings:
 
 | Setting | Required? | Description |
@@ -74,6 +85,73 @@ Common settings:
 | `METRICS_PREFIX` | optional | Prefix for OTel metrics, default `site`. |
 | `GITHUB_OAUTH_CLIENT_ID` | for CMS sign-in | GitHub OAuth app client id. |
 | `GITHUB_OAUTH_CLIENT_SECRET` | for CMS sign-in | GitHub OAuth app secret. |
+| `EXTID_CLIENT_ID` | for visitor sign-in | Entra External ID app (client) id. Set by `infra/configure-external-id.ps1 -NewSecret`. |
+| `EXTID_CLIENT_SECRET` | for visitor sign-in | Its client secret (expires after 2 years; rerun the script with `-NewSecret`). |
+| `COMMUNITY_STORAGE` | for community features | Connection string of the community Storage account. |
+| `CONTENT_SAFETY_ENDPOINT` | for community features | Azure AI Content Safety endpoint. |
+| `CONTENT_SAFETY_KEY` | for community features | Its key. Without it every note waits for a person. |
+| `ADMIN_EMAILS` | for moderation | Comma-separated emails that get the `admin` role at sign-in. |
+| `MODERATION_DENY_WORDS` | optional | Comma-separated words that always reject a note. |
+
+## Visitor sign-in and community features
+
+Likes, notes, private corrections and photos (decision P21) need four things. Everything lives in the owner's personal subscription `fd38bfe4-1b60-405d-bff9-020f3ff54d88` (decision P37).
+
+| Piece | Where | Made by |
+| --- | --- | --- |
+| Static Web App, **Standard** plan (custom sign-in needs it) | `rg-li-dance-events-web` / `swa-li-dance-events-web` | `infra/main.bicep` (`skuName = 'Standard'`) |
+| Storage account `stlongislanddance` (tables, `pending`/`photos`/`community`/`backups` containers, CORS, lifecycle rules) | same group | `infra/main.bicep` |
+| Azure AI Content Safety `cs-longislanddance` (Free tier) | same group | `infra/main.bicep` |
+| Entra External ID tenant `longislanddance.onmicrosoft.com` (`a72c253f-3125-4592-b3c6-b8e23ed18054`) | `rg-li-dance-identity` | `infra/external-id.bicep`, then `infra/configure-external-id.ps1` |
+
+Set up from scratch:
+
+```powershell
+az login --tenant <personal-directory-id>        # an account that may create tenants
+az deployment group create -g rg-li-dance-identity -f infra/external-id.bicep
+az deployment group create -g rg-li-dance-events-web -f infra/main.bicep -p infra/main.bicepparam
+./infra/configure-external-id.ps1 -NewSecret      # app registration, email-code user flow, client secret -> SWA settings
+```
+
+Then set `COMMUNITY_STORAGE`, `CONTENT_SAFETY_ENDPOINT`, `CONTENT_SAFETY_KEY` and `ADMIN_EMAILS` (see the table above). The sign-in provider itself is in `public/staticwebapp.config.json` (`auth`), with the tenant's OpenID address.
+
+Also save the same Storage connection string as the GitHub secret `COMMUNITY_STORAGE`. The **Community maintenance** workflow (`.github/workflows/community-maintenance.yml`) uses it every morning and after each production deploy. It creates an empty file for each new page (so browsers never get a "not found" error), backs up the tables, and deletes old rejected posts and old log rows.
+
+The script registers `https://longisland.dance/.auth/login/extid/callback` (and `-ExtraSiteUrls`) as redirect addresses and keeps any already on the app. To test sign-in on a pull-request preview, add that preview's `https://<preview-host>/.auth/login/extid/callback` to the app registration.
+
+"Sign out" ends only the site's session. `staticwebapp.config.json` lists the External ID endpoints itself instead of the discovery document, so Static Web Apps never sends people to External ID's sign-out page (that page asks "Which account do you want to sign out of?" and often lists no account). The user flow asks only for the email address; the site's welcome step asks for the public name.
+
+### Add Google or Facebook sign-in (owner)
+
+Both are free. Create the app with **your own** Google or Facebook account (steps below), then put its id and secret into the tenant (last bullet).
+
+- **Google:** Google Cloud console → new project → **OAuth consent screen**: External, app name "Long Island Dance Events", support email, authorized domains `ciamlogin.com` and `microsoftonline.com`, home page `https://longisland.dance/`, privacy policy `https://longisland.dance/privacy/`. Only the `openid`, `email` and `profile` scopes, so Google needs no verification. **Credentials** → OAuth client ID → Web application, redirect URIs:
+  - `https://login.microsoftonline.com`
+  - `https://login.microsoftonline.com/te/a72c253f-3125-4592-b3c6-b8e23ed18054/oauth2/authresp`
+  - `https://login.microsoftonline.com/te/longislanddance.onmicrosoft.com/oauth2/authresp`
+  - `https://a72c253f-3125-4592-b3c6-b8e23ed18054.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/federation/oidc/accounts.google.com`
+  - `https://a72c253f-3125-4592-b3c6-b8e23ed18054.ciamlogin.com/longislanddance.onmicrosoft.com/federation/oidc/accounts.google.com`
+  - `https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/federation/oauth2`
+  - `https://longislanddance.ciamlogin.com/longislanddance.onmicrosoft.com/federation/oauth2`
+  Paste the client id and secret into the tenant's **Google** provider.
+- **Facebook:** developers.facebook.com → **Create App** → "Authenticate and request data from users with Facebook Login" → not a game → app name "Long Island Dance Events". In **App settings → Basic**: privacy policy URL `https://longisland.dance/privacy/`, terms URL `https://longisland.dance/community-rules/`, user data deletion URL `https://longisland.dance/privacy/#delete-your-account`, a category; **Add platform → Website** with site URL `https://longisland.dance/`. Under **Use cases → Authentication and account creation → Facebook Login settings**, Valid OAuth Redirect URIs:
+  - `https://login.microsoftonline.com/te/a72c253f-3125-4592-b3c6-b8e23ed18054/oauth2/authresp`
+  - `https://login.microsoftonline.com/te/longislanddance.onmicrosoft.com/oauth2/authresp`
+  - `https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/federation/oidc/www.facebook.com`
+  - `https://longislanddance.ciamlogin.com/longislanddance.onmicrosoft.com/federation/oidc/www.facebook.com`
+  - `https://longislanddance.ciamlogin.com/a72c253f-3125-4592-b3c6-b8e23ed18054/federation/oauth2`
+  - `https://longislanddance.ciamlogin.com/longislanddance.onmicrosoft.com/federation/oauth2`
+  Add the **email** permission (`public_profile` and `email` need no app review), then **Go live**. Copy the **App ID** and **App Secret**.
+- **Put them in the tenant (both):** [Entra admin center](https://entra.microsoft.com) → switch to the **Long Island Dance** directory → **Entra ID → External Identities → All identity providers** → **Google** (or **Facebook**) → **Configure** → paste the id and secret → Save. Then **External Identities → User flows → "Long Island Dance sign-up and sign-in" → Identity providers** → tick Google and Facebook → Save. The sign-in page shows the new buttons right away; nothing on the website changes. (The Azure CLI cannot do this step: Microsoft does not let its app manage identity providers.)
+- **Instagram** sign-in is not possible for personal accounts (Meta ended it on December 4, 2024).
+
+### Moving `longisland.dance` to a new Static Web App
+
+1. Add both host names to the new app with TXT validation: `az staticwebapp hostname set -n <app> -g <rg> --hostname longisland.dance --validation-method dns-txt-token --no-wait` (and `www.longisland.dance`), then read the tokens with `az staticwebapp hostname list`.
+2. At the DNS host (Namecheap): add TXT records `_dnsauth` and `_dnsauth.www` with those tokens.
+3. When both show **Ready**, point DNS at the new app: `www` CNAME → `<new>.azurestaticapps.net`, and the bare domain ALIAS → `<new>.azurestaticapps.net` (replacing the old A record).
+4. In the portal, make `longisland.dance` the **default** domain so the other addresses redirect to it.
+5. Run `node scripts/smoke.mjs https://longisland.dance`.
 
 ## GitHub variables
 

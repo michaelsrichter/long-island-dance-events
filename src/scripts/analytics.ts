@@ -244,6 +244,9 @@ if (cfg.eventSlug) track('view_event', { event_status: html.dataset.eventStatus,
 
 // Consent banner
 const banner = document.querySelector<HTMLElement>('[data-consent]');
+// While the banner shows, leave that much room under the page (and when scrolling to a field) so it never hides a button or form field.
+const roomForBanner = () => document.documentElement.style.setProperty('--consent-space', banner && !banner.hidden ? `${banner.offsetHeight + 16}px` : '0px');
+if (banner && 'ResizeObserver' in window) new ResizeObserver(roomForBanner).observe(banner);
 const hasThirdParty = Boolean(cfg.ga || cfg.clarity);
 if (hasThirdParty) {
   if (consentGranted()) {
@@ -256,8 +259,10 @@ if (hasThirdParty) {
     b.addEventListener('click', () => {
       setConsent(b.dataset.consentChoice as Consent);
       banner.hidden = true;
+      roomForBanner();
     }),
   );
+  roomForBanner();
 }
 document.querySelectorAll<HTMLButtonElement>('[data-consent-open]').forEach((b) => {
   if (!hasThirdParty) {
@@ -267,6 +272,7 @@ document.querySelectorAll<HTMLButtonElement>('[data-consent-open]').forEach((b) 
   b.addEventListener('click', () => {
     if (!banner) return;
     banner.hidden = false;
+    roomForBanner();
     banner.querySelector<HTMLButtonElement>('[data-consent-choice]')?.focus();
   });
 });

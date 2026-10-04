@@ -13,9 +13,14 @@ param(
   [Parameter(Mandatory)][string]$Repo,
   [string]$CustomDomain = '',
   [string]$OAuthClientId = '',
+  # Emails that get the moderator (admin) role at sign-in, comma-separated.
+  [string]$AdminEmails = '',
+  # Subscription to deploy into (default: the Azure CLI's current one).
+  [string]$Subscription = '',
   [securestring]$OAuthClientSecret
 )
 $ErrorActionPreference = 'Stop'
+if ($Subscription) { az account set --subscription $Subscription }
 
 $base = $Name.ToLowerInvariant() -replace '[^a-z0-9-]', '-'
 if (-not $ResourceGroup) { $ResourceGroup = "rg-$base-web" }
@@ -45,5 +50,13 @@ if ($OAuthClientId -and $OAuthClientSecret) {
   try { $plain = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr) } finally { [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr) }
   $settings += "GITHUB_OAUTH_CLIENT_ID=$OAuthClientId", "GITHUB_OAUTH_CLIENT_SECRET=$plain"
 }
+if ($out.communityStorageName.value) {
+  $storageConn = az storage account show-connection-string --name $out.communityStorageName.value --resource-group $ResourceGroup --query connectionString --output tsv
+  $csKey = az cognitiveservices account keys list --name $out.contentSafetyName.value --resource-group $ResourceGroup --query key1 --output tsv
+  $settings += "COMMUNITY_STORAGE=$storageConn", "CONTENT_SAFETY_ENDPOINT=$($out.contentSafetyEndpoint.value)", "CONTENT_SAFETY_KEY=$csKey", "SITE_URL=$siteUrl"
+  $storageConn | gh secret set COMMUNITY_STORAGE --repo $Repo
+}
+if ($AdminEmails) { $settings += "ADMIN_EMAILS=$AdminEmails" }
 az staticwebapp appsettings set --name $StaticWebAppName --resource-group $ResourceGroup --setting-names @settings --output none
+Write-Host 'Visitor sign-in: run ./infra/configure-external-id.ps1 -NewSecret (see docs/deployment.md).'
 Write-Host 'App settings updated (values not shown).'

@@ -56,7 +56,7 @@ for (const file of files(dist)) {
     }
     checked++;
     const url = new URL(own ?? href, `https://site.local${rel}`);
-    if (url.pathname.startsWith('/api/')) continue;
+    if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/.auth/')) continue; // served by Azure Functions / Static Web Apps sign-in
     const target = resolveFile(url.pathname);
     if (!target) {
       broken.push(`${rel} -> ${href} (missing page)`);

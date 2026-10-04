@@ -47,6 +47,67 @@ await check('CMS admin page', async () => { const r = await get('/admin/'); asse
 await check('CMS sign-in endpoint', async () => { const r = await get('/api/auth?provider=github&scope=public_repo'); if (r.status === 302) return `redirects to ${new URL(r.headers.get('location')).host}`; assert(r.status === 503, `status ${r.status}`); return '503: OAuth not configured yet'; });
 await check('Telemetry endpoint rejects cross-origin posts', async () => { const r = await get('/api/telemetry', { method: 'POST', headers: { 'content-type': 'application/json', origin: 'https://evil.example' }, body: '{}' }); assert(r.status === 403, `status ${r.status}`); });
 
+// ---------- Community: sign-in, API protection, public data ----------
+const COMMUNITY_KEY = 'venue:huntington-moose-lodge';
+let blobBase = '';
+await check('Visitor sign-in goes to Entra External ID', async () => {
+  // SWA first redirects to itself (adding a nonce and a cookie), then to the identity provider.
+  let url = `${base}/.auth/login/extid`;
+  const jar = new Map();
+  for (let hop = 0; hop < 4; hop++) {
+    const cookie = [...jar].map(([k, v]) => `${k}=${v}`).join('; ');
+    const r = await fetch(url, { redirect: 'manual', headers: cookie ? { cookie } : {} });
+    for (const c of r.headers.getSetCookie?.() ?? []) { const [pair] = c.split(';'); const i = pair.indexOf('='); jar.set(pair.slice(0, i).trim(), pair.slice(i + 1)); }
+    assert(r.status === 302, `hop ${hop}: status ${r.status}`);
+    const next = new URL(r.headers.get('location'), url);
+    if (next.host !== new URL(base).host) {
+      assert(next.host.endsWith('.ciamlogin.com'), `redirects to ${next.host}`);
+      return `redirects to ${next.host}`;
+    }
+    url = next.toString();
+  }
+  throw new Error('too many redirects');
+});
+await check('Signed-out visitors are anonymous', async () => {
+  const me = await (await get('/.auth/me')).json();
+  assert(me.clientPrincipal === null, 'expected no signed-in user');
+  const api = await (await get('/api/me')).json();
+  assert(api.signedIn === false, 'api/me should say signed out');
+});
+await check('Community pages list', async () => {
+  const r = await get('/community-pages.json'); assert(r.status === 200, `status ${r.status}`);
+  const data = await r.json(); assert(data.keys.includes(COMMUNITY_KEY), `missing ${COMMUNITY_KEY}`);
+  return `${data.keys.length} pages`;
+});
+await check('Likes and notes need sign-in and our own pages', async () => {
+  const body = JSON.stringify({ key: COMMUNITY_KEY, like: true });
+  const anon = await get('/api/likes', { method: 'POST', headers: { 'content-type': 'application/json', origin: base }, body });
+  assert(anon.status === 401, `signed-out like: status ${anon.status}`);
+  const cross = await get('/api/comments', { method: 'POST', headers: { 'content-type': 'application/json', origin: 'https://evil.example' }, body: JSON.stringify({ key: COMMUNITY_KEY, text: 'hi' }) });
+  assert(cross.status === 403, `cross-site note: status ${cross.status}`);
+});
+await check('Moderator API is locked', async () => { const r = await get('/api/moderation/queue'); assert(r.status === 401 || r.status === 403, `status ${r.status}`); return `status ${r.status}`; });
+await check('Venue page has the community panel and CSP allows its data', async () => {
+  const r = await get('/venues/huntington-moose-lodge/');
+  const html = await r.text();
+  const m = html.match(/data-src="(https:\/\/[^"]+\/community\/venue\/huntington-moose-lodge\.json)"/);
+  assert(m, 'panel missing');
+  blobBase = new URL(m[1]).origin;
+  const csp = r.headers.get('content-security-policy') || '';
+  assert(csp.includes(blobBase), 'CSP does not allow the community data host');
+  return blobBase;
+});
+await check('Community data allows our site (CORS)', async () => {
+  assert(blobBase, 'no data host');
+  const origin = new URL(base).origin;
+  const r = await fetch(`${blobBase}/community/counts/venue.json`, { method: 'OPTIONS', headers: { Origin: origin, 'Access-Control-Request-Method': 'GET' } });
+  assert(r.status === 200, `preflight status ${r.status}`);
+  assert(r.headers.get('access-control-allow-origin') === origin || r.headers.get('access-control-allow-origin') === '*', 'origin not allowed');
+});
+await check('Account, moderation and rules pages', async () => {
+  for (const p of ['/account/', '/moderate/', '/community-rules/']) { const r = await get(p); assert(r.status === 200, `${p} status ${r.status}`); }
+});
+
 const width = Math.max(...results.map((r) => r.name.length));
 for (const r of results) console.log(`${r.ok ? 'PASS' : 'FAIL'}  ${r.name.padEnd(width)}  ${r.detail}`);
 const failed = results.filter((r) => !r.ok).length;

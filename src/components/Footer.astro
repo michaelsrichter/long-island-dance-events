@@ -46,6 +46,16 @@ const issues = `${s.repoUrl}/issues/new/choose`;
           <li><a href="/events/rss.xml">RSS feed</a></li>
         </ul>
       </section>
+      <section aria-labelledby="footer-account">
+        <h2 id="footer-account">Your account</h2>
+        <ul>
+          <li><a href="/account/" data-account-link><span data-account-label>Sign in or create an account</span></a></li>
+          <li data-account-when="admin" hidden><a href="/moderate/">Moderation queue</a></li>
+          <li data-account-when="in" hidden><a href="/.auth/logout" data-account-signout>Sign out</a></li>
+          <li><a href="/community-rules/">Community rules</a></li>
+          <li><a href="/privacy/#accounts">What we keep about you</a></li>
+        </ul>
+      </section>
     </div>
     <p class="site-footer__note">We collect listings from public calendars and organizers. Details can change, so <strong>always check with the organizer before you go</strong>.</p>
     <ThemeSwitch variant="choice" location="footer" class="theme-choice--footer" />
