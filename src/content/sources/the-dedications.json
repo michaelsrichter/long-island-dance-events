@@ -4,8 +4,8 @@
   "type": "html",
   "adapter": "htmllist",
   "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
+  "cadence": "manual",
+  "enabled": false,
   "attribution": "Some listings come from The Dedications. We write our own short summaries and link back to the original page.",
   "description": "Live music listings in Northport: doo-wop, 50s and 60s rock and roll, oldies.",
   "rateLimitSeconds": 5,
@@ -15,5 +15,5 @@
       "the-dedications"
     ]
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep at low priority because only one upcoming LI public date remains."
+  "reviewNotes": "Switched off: On 2026-10-03 it listed 13 dates, but none were at a venue we have researched yet (for example Northport Library Northport NY (Northport)). Add those venue files in src/content/venues (address and dance-floor research), then switch it back on. Catalog check 2026-10-03: Keep at low priority because only one upcoming LI public date remains."
 }

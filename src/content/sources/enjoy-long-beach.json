@@ -4,8 +4,8 @@
   "type": "html",
   "adapter": "htmllist",
   "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
+  "cadence": "manual",
+  "enabled": false,
   "attribution": "Some listings come from Enjoy Long Beach music and events. We write our own short summaries and link back to the original page.",
   "description": "Live music listings in Long Beach: DJs, bar bands, rooftop events, free concerts.",
   "rateLimitSeconds": 5,
@@ -13,5 +13,5 @@
   "defaults": {
     "town": "Long Beach"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it; useful Long Beach music/DJ items, but terms URL returned 429."
+  "reviewNotes": "Switched off: On 2026-10-03 it listed 20 dates, but none were at a venue we have researched yet (most listings do not name the venue). Add those venue files in src/content/venues (address and dance-floor research), then switch it back on. Catalog check 2026-10-03: Keep it; useful Long Beach music/DJ items, but terms URL returned 429."
 }

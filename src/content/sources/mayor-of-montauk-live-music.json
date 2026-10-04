@@ -4,11 +4,11 @@
   "type": "jsonld",
   "adapter": "jsonld",
   "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
+  "cadence": "manual",
+  "enabled": false,
   "attribution": "Some listings come from Mayor of Montauk Guide. We write our own short summaries and link back to the original page.",
   "description": "Live music listings in Montauk and East Hampton: acoustic, rock, bar bands, nightlife.",
   "rateLimitSeconds": 5,
   "catalogStatus": "verified",
-  "reviewNotes": "Catalog check 2026-10-03: Keep it as a strong Montauk source, with venue/time checks."
+  "reviewNotes": "Switched off: On 2026-10-03 it listed 43 dates, but none were at a venue we have researched yet (for example Montauk, NY (Montauk)). Add those venue files in src/content/venues (address and dance-floor research), then switch it back on. Catalog check 2026-10-03: Keep it as a strong Montauk source, with venue/time checks."
 }

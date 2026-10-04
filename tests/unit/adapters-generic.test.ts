@@ -239,12 +239,27 @@ describe('HTML list adapter', () => {
     });
     const names = [...ctx.registry.performers.values()].map((p) => p.name);
     for (const n of names) expect(n).not.toMatch(/\d(am|pm)|[a-z](Saturday|Sunday)|^-|Live Music/);
-    expect([...ctx.registry.created.performers].sort()).toEqual(['4-shades-of-fiction', 'revival-fictional']);
+    expect([...ctx.registry.created.performers].sort()).toEqual(['revival-fictional']);
+    // A day name printed right after the act could belong to the act ("Taking Back Sunday"), so that act is not named at all.
+    const oct9 = drafts.find((d) => d.data.start === '2026-10-09T19:30')!.data;
+    expect(oct9.performerIds).toEqual([]);
+    expect(oct9.title).not.toMatch(/Saturday|pm/);
     const oct16 = drafts.find((d) => d.data.start === '2026-10-16T21:00')!.data;
     // Two acts joined with a colon: shown in the title, not added as a band.
     expect(oct16.title).toContain('Ann Example: The Voice of Fiction & Pretendsitter');
     expect(oct16.performerIds).toEqual([]);
     expect(drafts.find((d) => d.data.start === '2026-10-17T14:00')?.data.performerIds).toEqual([]);
+  });
+  it('reads SpotApps calendar cards (date and time from the card, name from its heading)', async () => {
+    const { drafts, ctx } = await runGolden('htmllist-spotapps', htmllist, 'htmllist-spotapps.html', 'https://sample-tavern.example/events', {
+      name: 'Sample Tavern (Bay Shore) - events',
+      focus: 'music',
+      defaults: { venueId: 'sample-tavern', town: 'Bay Shore' },
+    });
+    expect(drafts.map((d) => d.data.start).sort()).toEqual(['2026-10-04T18:00', '2026-10-09T19:00', '2026-10-17T19:30']);
+    expect(drafts.find((d) => d.data.start === '2026-10-09T19:00')?.data).toMatchObject({ end: '2026-10-09T22:00', performerIds: ['the-fictionals'] });
+    expect(drafts.find((d) => d.data.start === '2026-10-17T19:30')?.data.performerIds).toEqual(['midnight-fiction']);
+    expect([...ctx.registry.created.performers].sort()).toEqual(['midnight-fiction', 'the-fictionals']);
   });
   it("matches the golden events for a band's own page", async () => {
     const { drafts, result } = await runGolden('htmllist-band', htmllist, 'htmllist-band.html', 'https://pretend-band.example/shows', {

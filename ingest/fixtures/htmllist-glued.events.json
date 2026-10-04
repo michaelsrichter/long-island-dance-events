@@ -4,20 +4,19 @@
   "created": {
     "venues": [],
     "performers": [
-      "4-shades-of-fiction",
       "revival-fictional"
     ]
   },
   "drafts": [
     {
-      "id": "2026-10-09-4-shades-of-fiction-live-music",
-      "matchKey": "test-source|sample-pub||friday|19:30|live-music|4-shades-of-fiction||2026-10-09",
+      "id": "2026-10-09-sample-pub-live-music",
+      "matchKey": "test-source|sample-pub||friday|19:30|live-music|||2026-10-09",
       "dates": [
         "2026-10-09"
       ],
       "data": {
-        "title": "Dance with live music by 4 Shades of Fiction at Sample Pub",
-        "summary": "Dance to live music by 4 Shades of Fiction.",
+        "title": "Dance with live music at Sample Pub",
+        "summary": "Dance to live music.",
         "category": "live-music",
         "danceStyles": [],
         "start": "2026-10-09T19:30",
@@ -25,9 +24,7 @@
         "timezone": "America/New_York",
         "venueId": "sample-pub",
         "town": "Babylon",
-        "performerIds": [
-          "4-shades-of-fiction"
-        ],
+        "performerIds": [],
         "instructorIds": [],
         "skillLevel": "all-levels",
         "sourceId": "test-source",
@@ -36,7 +33,7 @@
         "sourceRef": "events page 2026-10-09",
         "status": "active",
         "dancingCues": [],
-        "confidence": 0.8
+        "confidence": 0.75
       }
     },
     {

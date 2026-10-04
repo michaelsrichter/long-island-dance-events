@@ -15,7 +15,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { addDays } from '../../src/lib/time';
-import { findTimes } from '../lib/times';
+import { findTimes, parseTimes } from '../lib/times';
 import { actName, decodeEntities, htmlToLines, plainText, settingsOf, toCandidates, type FoundEvent } from '../lib/structured';
 import type { Adapter, AdapterContext, FetchedDocument, NormalizeResult } from '../lib/types';
 
@@ -206,8 +206,40 @@ export function squarespaceEvents(html: string, pageUrl: string): FoundEvent[] {
   return out;
 }
 
+/**
+ * SpotApps event calendars ("event-calendar-card", used by many bars and restaurants): each card
+ * carries its date and start time as data attributes and the name in an h2.
+ */
+export function spotappsEvents(html: string, pageUrl: string): FoundEvent[] {
+  const out: FoundEvent[] = [];
+  const starts = [...html.matchAll(/<div\b[^>]*class="event-calendar-card[^"]*"[^>]*>/g)];
+  starts.forEach((m, i) => {
+    const tag = m[0];
+    const date = /data-event-start-date="(\d{4}-\d{2}-\d{2})/.exec(tag)?.[1];
+    const time = /data-event-start-time="(\d{1,2}:\d{2})"/.exec(tag)?.[1];
+    const repeat = /data-event-recurrence-type="([^"]*)"/.exec(tag)?.[1] ?? '';
+    const body = html.slice(m.index! + tag.length, starts[i + 1]?.index ?? m.index! + tag.length + 4000);
+    const title = plainText(/<h2[^>]*>([\s\S]*?)<\/h2>/.exec(body)?.[1] ?? '');
+    if (!date || !title) return;
+    const timeText = plainText(/class="event-main-text event-time"[^>]*>([\s\S]*?)<\/p>/.exec(body)?.[1] ?? '');
+    const end = timeText ? parseTimes(timeText).end : undefined;
+    const info = plainText(/class="event-info-text"[^>]*>([\s\S]*?)<\/div>\s*<div class="event-read-more/.exec(body)?.[1] ?? '');
+    out.push({
+      title,
+      description: info.slice(0, 600) || undefined,
+      start: time ? `${date}T${time.padStart(5, '0')}` : date,
+      end: end ? `${date}T${end}` : undefined,
+      ref: 'events page',
+      pageUrl,
+      notes: repeat && !/does not repeat/i.test(repeat) ? [`The venue lists this as repeating (${repeat}); only the date shown was kept.`] : undefined,
+    });
+  });
+  return out;
+}
+
 export function foundFromHtml(html: string, pageUrl: string, today: string, mode: 'venue' | 'band' | 'list'): FoundEvent[] {
   if (/<article class="eventlist-event/.test(html)) return squarespaceEvents(html, pageUrl);
+  if (/class="event-calendar-card/.test(html)) return spotappsEvents(html, pageUrl);
   const out: FoundEvent[] = [];
   for (const b of dateBlocks(htmlToLines(html), today, 4, mode === 'list')) {
     // The name is the first real line after the date, or the line just above it.

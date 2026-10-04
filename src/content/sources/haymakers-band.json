@@ -4,8 +4,8 @@
   "type": "html",
   "adapter": "htmllist",
   "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
+  "cadence": "manual",
+  "enabled": false,
   "attribution": "Some listings come from The Haymakers (band). We write our own short summaries and link back to the original page.",
   "description": "Live music listings in Farmingdale and Lindenhurst: rock & roll / swing-friendly band night.",
   "rateLimitSeconds": 5,
@@ -15,5 +15,5 @@
       "the-haymakers"
     ]
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep as low priority. It is dance-friendly live music, but the dance signal is stronger on Dance Manhattan."
+  "reviewNotes": "Switched off: On 2026-10-03 it listed 20 dates, but none were at a venue we have researched yet (for example Charlotte's Speakeasy - A Special Friday Night Show! / (Farmingdale); Charlotte's Speakeasy - The 1st Saturday of Every Month / (Farmingdale); Charlotte's Speakeasy / (Farmingdale); Sand City South's Annual Breast Cancer Fundraiser (Lindenhurst)). Add those venue files in src/content/venues (address and dance-floor research), then switch it back on. Catalog check 2026-10-03: Keep as low priority. It is dance-friendly live music, but the dance signal is stronger on Dance Manhattan."
 }

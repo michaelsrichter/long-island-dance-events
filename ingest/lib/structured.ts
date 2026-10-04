@@ -157,14 +157,12 @@ const CALENDAR_WORD = /^(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*\.?$|^(?:jan|feb|ma
 /** Band or DJ name in a venue listing ("Happy Hour Band: Calm Coast 6-10pm" -> "Calm Coast"). */
 export function actName(text: string): string | undefined {
   let s = text;
-  for (const t of findTimes(s).sort((a, b) => b.index - a.index)) s = s.slice(0, t.index) + s.slice(t.index + t.length);
+  for (const t of findTimes(s).sort((a, b) => b.index - a.index)) if (/\d/.test(s.slice(t.index, t.index + t.length))) s = s.slice(0, t.index) + s.slice(t.index + t.length); // keep words like "Midnight"
   s = s.replace(/\$\s?\d+(?:\.\d{2})?/g, ' ').replace(/\b\d{1,2}:\d{2}\b/g, ' ');
   s = s.split(/\s+[|@•·]\s+|\s+[-–—]\s+|\s+at\s+(?=[A-Z])/)[0]!;
   const withAct = /\b(?:with|featuring|feat\.?|ft\.?)\s+([A-Z0-9].*)$/.exec(s);
   if (withAct) s = withAct[1]!;
   s = s.replace(/^[\s,.;:!"“”]+/, '').replace(ACT_PREFIX, '').replace(/[,.;:!?"“”\s]+$/, '').replace(/^[,.;:!"“”\s]+/, '').replace(/\s+/g, ' ').trim();
-  // Calendars often print the next day's name right after the act ("4 Shades of Grey Saturday").
-  s = s.replace(/\s+(?:mon|tues|wednes|thurs|fri|satur|sun)day\b.*$/i, '').trim();
   if (s.length < 3 || s.length > 50 || !/[A-Za-z]{2}/.test(s) || NOT_AN_ACT.test(s) || CALENDAR_WORD.test(s)) return undefined;
   if (s.split(' ').length > 10 || /[!?]/.test(s)) return undefined;
   return s;
@@ -198,37 +196,48 @@ export function displayActOk(name: string): boolean {
 
 const JOINED_ACTS = /[:;|/+@#!?()[\]]|,|\s[-–—]\s|\b(?:vs\.?|versus|w\/|with|featuring|feat\.?|ft\.?|presents|plus|tribute to|the music of|matinee|tour|edition|anniversary|night|party|festival|fest|show|live at)\b/i;
 const EVENT_WORDS =
-  /\b(closed|private|trivia|bingo|karaoke|comedy|brunch|specials?|menu|tickets?|sold out|doors|free|admission|reservations?|open mic|open jam|jam session|dinner|buffet|cover|read more|more info|details|rsvp|register|coming soon|tba|tbd|to be announced|fair|carnival|club|social|bash|celebration|parade|market|halloween|thanksgiving|christmas|holiday|new year|(?:mon|tues|wednes|thurs|fri|satur|sun)day|january|february|march|april|june|july|august|september|october|november|december)\b/i;
+  /\b(grammy|nominated|award|winning|pop[- ]?up|supper|prix fixe|showcase|holidays|reunion|pipes|drums and|package|special|series|benefit|fundraiser|closed|private|trivia|bingo|karaoke|comedy|brunch|specials?|menu|tickets?|sold out|doors|free|admission|reservations?|open mic|open jam|jam session|dinner|buffet|cover|read more|more info|details|rsvp|register|coming soon|tba|tbd|to be announced|fair|carnival|club|social|bash|celebration|parade|market|halloween|thanksgiving|christmas|holiday|new year|(?:mon|tues|wednes|thurs|fri|satur|sun)day|january|february|march|april|june|july|august|september|october|november|december)\b/i;
 
 /**
  * Strict check before adding a band or DJ to the registry. A name that fails (two acts joined,
  * an abbreviation such as "AMH", an event description) stays in the title only.
  */
+const GENERIC_ONE_WORD = /^(country|rock|jazz|blues|swing|salsa|latin|disco|karaoke|acoustic|music|live|band|dj|wing|wings|tacos?|brunch|trivia|bingo|comedy|open|special|guest|tba|tbd|various|artists?)$/i;
+
 export function performerNameOk(name: string): boolean {
   const s = name.replace(/\s+/g, ' ').trim();
   if (!displayActOk(s) || s.length < 3 || s.length > 50) return false;
+  if (!/^[A-Z0-9]/.test(s) || /["“”«»]/.test(s)) return false; // "s-Giving", unbalanced quotes
+  if ((s.match(/&| and /gi) ?? []).length > 1) return false; // "Ernie & The Band & Dysfunktone"
+  if (!s.includes(' ') && (GENERIC_ONE_WORD.test(s) || s.length < 4)) return false;
   if (JOINED_ACTS.test(s) || EVENT_WORDS.test(s)) return false;
   if (!s.includes(' ') && s === s.toUpperCase() && s.replace(/[^A-Z]/g, '').length <= 4) return false; // "AMH", "LHT"
   if (s.split(' ').length > 6) return false;
   return true;
 }
 
-function findPerformer(reg: Registry, name: string): string | undefined {
+const noBand = (s: string) => s.replace(/band$/, '');
+
+export function findPerformer(reg: Registry, name: string): string | undefined {
   const n = compactName(name);
   if (!n) return undefined;
   for (const [id, p] of reg.performers) if ([p.name, ...p.aliases].some((a) => compactName(a) === n)) return id;
+  if (n.length >= 6) for (const [id, p] of reg.performers) if ([p.name, ...p.aliases].some((a) => noBand(compactName(a)) === noBand(n))) return id;
   return undefined;
 }
+
+/** File id from a name: apostrophes dropped first ("Flanagan's Pub" -> "flanagans-pub"). */
+export const idFrom = (s: string, max = 60) => slugify(s.replace(/['’‘`]/g, ''), max);
 
 /**
  * Match a band/DJ name to the registry. Only when `create` is true and the name passes the strict
  * check is a new band/DJ added (with a review note); otherwise undefined.
  */
-export function ensurePerformer(reg: Registry, name: string, sourceName: string, id = slugify(name, 60), create = true): string | undefined {
+export function ensurePerformer(reg: Registry, name: string, sourceName: string, id = idFrom(name), create = true): string | undefined {
   const clean = tidyName(name);
   const known = reg.performers.has(id) ? id : findPerformer(reg, clean);
   if (known) return known;
-  if (!create || !performerNameOk(clean)) return undefined;
+  if (!create || !performerNameOk(name) || !performerNameOk(clean)) return undefined;
   reg.performers.set(id, {
     name: clean,
     type: /^dj\b/i.test(clean) ? 'dj' : 'band',
@@ -243,6 +252,17 @@ export function ensurePerformer(reg: Registry, name: string, sourceName: string,
 /** A street address: a house number followed by a street name ("345 Deer Park Ave"). */
 export const hasStreetAddress = (s: string | undefined): s is string => Boolean(s && /\b\d{1,6}[A-Za-z]?\s+[A-Za-z0-9.'-]+(?:\s+[A-Za-z0-9.'-]+)*/.test(s) && /[A-Za-z]{3}/.test(s));
 
+/** "185 Glen Cove Ave, Suite A" and "185 Glen Cove Ave Suite A" -> "185 glen cove ave". */
+const streetOf = (address: string) => normalizeAddress(address.split(',')[0]!.replace(/\s+(?:suite|ste|unit|#)\s*\w+$/i, ''));
+
+/** "First and South (Greenport NY)" -> "First and South"; "Montauk, NY" -> "" (just a town). */
+export function cleanVenueName(name: string | undefined): string | undefined {
+  if (!name) return undefined;
+  const s = name.replace(/\s*\([^)]*\)\s*$/, '').replace(/,?\s*(?:NY|New York)\.?$/i, '').replace(/[\s,/-]+$/, '').trim();
+  if (!s || lookupPlace(s)) return undefined;
+  return s;
+}
+
 /**
  * An existing venue with this name or alias (or this street address) in the same town.
  * Checked before anything new is created, so the same place never gets two files.
@@ -254,8 +274,12 @@ export function findVenue(reg: Registry, name: string | undefined, address: stri
     for (const [id, v] of reg.venues) if (sameTown(v) && [v.name, ...v.aliases].some((a) => compactName(a) === n)) return id;
   }
   if (hasStreetAddress(address)) {
-    const a = normalizeAddress(address.split(',')[0]!);
-    for (const [id, v] of reg.venues) if (sameTown(v) && v.address && normalizeAddress(v.address.split(',')[0]!) === a) return id;
+    const a = streetOf(address);
+    for (const [id, v] of reg.venues) if (sameTown(v) && v.address && streetOf(v.address) === a) return id;
+    // Same street address and the same name, but the town is written differently.
+    if (n.length >= 3)
+      for (const [id, v] of reg.venues)
+        if (v.address && streetOf(v.address) === a && [v.name, ...v.aliases].some((x) => { const cx = compactName(x); return cx === n || cx.startsWith(n) || n.startsWith(cx); })) return id;
   }
   const text = [name, address].filter(Boolean).join(' ');
   const id = text ? reg.matchVenue(text, town) : undefined;
@@ -335,20 +359,21 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
 
     // Where: the listing's own place first, then the source's default venue or town.
     const ownPlace = lookupPlace(f.locality) ?? (f.address || f.locationName ? findPlaceInText(`${f.locationName ?? ''} ${f.address ?? ''}`) : undefined);
+    const locName = cleanVenueName(f.locationName);
     let venueId: string | undefined;
     let place: Place | undefined = ownPlace;
     if (!ownPlace && f.locality) {
       outOfArea.set(f.locality, (outOfArea.get(f.locality) ?? 0) + 1);
       continue;
     }
-    if (f.locationName || f.address) venueId = findVenue(reg, f.locationName, f.address, place?.name);
+    if (locName || f.address) venueId = findVenue(reg, locName, f.address, place?.name);
     if (!venueId && defaultVenue && (!ownPlace || ownPlace.name === townOfVenue(reg, defaultVenue)?.name)) venueId = defaultVenue;
     // A new venue only with a street address (never invented); it gets a review note.
-    if (!venueId && f.locationName && hasStreetAddress(f.address) && place && f.locationName.length <= 80) {
-      const id = slugify(`${f.locationName} ${place.name}`, 60);
+    if (!venueId && locName && hasStreetAddress(f.address) && place && locName.length <= 80) {
+      const id = idFrom(`${locName} ${place.name}`);
       if (!reg.venues.has(id)) {
         reg.venues.set(id, {
-          name: f.locationName,
+          name: locName,
           aliases: [],
           address: f.address.split(',')[0]!.trim(),
           town: place.name,
@@ -370,8 +395,8 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       outOfArea.set('town not stated', (outOfArea.get('town not stated') ?? 0) + 1);
       continue;
     }
-    if (!venueId && (f.locationName || focus === 'music')) {
-      const label = `${f.locationName ?? 'venue not named'} (${place.name})`;
+    if (!venueId && (locName || focus === 'music')) {
+      const label = `${locName ?? 'venue not named'} (${place.name})`;
       unresearched.add(label);
       skipped.push({ reason: 'venue not researched yet', ref: `${ref} ${label}`.slice(0, 160) });
       continue;
@@ -383,11 +408,26 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     // Other act names stay in the title only.
     const performerIds = [...defaultPerformers];
     const titleOnlyActs: string[] = [];
-    const venueName = venueId ? reg.venues.get(venueId)?.name ?? '' : f.locationName ?? '';
+    const venueName = venueId ? reg.venues.get(venueId)?.name ?? '' : locName ?? '';
     const named = f.performers?.length ? f.performers : defaults.venueId && focus === 'music' ? [actName(f.title)].filter((x): x is string => Boolean(x)) : [];
     for (const raw of named) {
       const name = tidyName(raw);
       if (!displayActOk(name) || compactName(name) === compactName(venueName) || compactName(name) === compactName(f.locationName ?? '')) continue;
+      // "Decadia & DJ Mike Savage": when a part is a band we know, link it and keep the rest in the title.
+      const parts = name.split(/\s+(?:&|and|\+|w\/|with)\s+/i).map((x) => x.trim()).filter((x) => x.length >= 2);
+      const knownParts = parts.length > 1 ? parts.map((x) => findPerformer(reg, x)) : [];
+      if (knownParts.some(Boolean)) {
+        parts.forEach((x, i) => {
+          const pid = knownParts[i];
+          if (pid) {
+            if (!performerIds.includes(pid)) performerIds.push(pid);
+          } else if (displayActOk(x)) {
+            titleOnlyActs.push(x);
+            unresearchedActs.add(x);
+          }
+        });
+        continue;
+      }
       const id = ensurePerformer(reg, name, src.name);
       if (id) {
         if (!performerIds.includes(id)) performerIds.push(id);

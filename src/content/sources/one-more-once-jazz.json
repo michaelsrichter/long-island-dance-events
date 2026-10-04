@@ -4,8 +4,8 @@
   "type": "html",
   "adapter": "htmllist",
   "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
+  "cadence": "manual",
+  "enabled": false,
   "attribution": "Some listings come from One More Once Jazz Ensemble. We write our own short summaries and link back to the original page.",
   "description": "Live music listings in Plainview, Sayville and Bohemia: big band jazz, jazz concert, library concert.",
   "rateLimitSeconds": 5,
@@ -15,5 +15,5 @@
       "one-more-once-jazz-ensemble"
     ]
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep at low priority as a listening-only jazz source with a few LI dates."
+  "reviewNotes": "Switched off: On 2026-10-03 it listed 12 dates, but none were at a venue we have researched yet (for example Butera's Restaurant of Sayville (Sayville)). Add those venue files in src/content/venues (address and dance-floor research), then switch it back on. Catalog check 2026-10-03: Keep at low priority as a listening-only jazz source with a few LI dates."
 }
