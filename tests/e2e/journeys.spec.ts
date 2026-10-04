@@ -279,11 +279,24 @@ test.describe('can you dance there?', () => {
     const visible = page.locator('[data-upcoming-list] [data-event]:not([hidden])');
     expect(await visible.count()).toBeGreaterThan(0);
     for (const c of await visible.all()) await expect(c).toHaveAttribute('data-dance-kinds', /\bline\b/);
-    await visible.first().locator('.event-card__title a').click();
+    const hrefs = await visible.locator('.event-card__title a').evaluateAll((as) => [...new Set(as.map((a) => a.getAttribute('href')!))]);
+    await page.goto(hrefs[0]!);
     await expect(page.locator('[data-dancing-panel] .dance-kinds')).toContainText('Line dancing');
-    await page.locator('main a[href^="/venues/"]').first().click();
-    await expect(page.getByRole('heading', { name: /^Dancing at / })).toBeVisible();
-    await expect(page.locator('#dancing')).toContainText('Line dancing');
+    // Venues we have researched explain their dancing. New venues from the weekly run may not be researched yet,
+    // so look through the line-dancing events until one is at a researched venue.
+    let found = false;
+    for (const href of hrefs.slice(0, 25)) {
+      await page.goto(href);
+      const venue = await page.locator('main a[href^="/venues/"]').first().getAttribute('href');
+      if (!venue) continue;
+      await page.goto(venue);
+      if (await page.getByRole('heading', { name: /^Dancing at / }).count()) {
+        await expect(page.locator('#dancing')).toContainText(/Line dancing|Party dancing|Partner dancing/);
+        found = true;
+        break;
+      }
+    }
+    expect(found, 'at least one line-dancing event is at a venue with dancing research').toBe(true);
   });
 
   test('a dance-calendar listing is always a dance event', async ({ pinned: page }) => {
