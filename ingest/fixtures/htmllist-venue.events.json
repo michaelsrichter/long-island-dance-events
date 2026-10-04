@@ -3,7 +3,7 @@
   "skipped": [
     {
       "reason": "not a dance or live-music listing",
-      "ref": "events page 2026-10-14"
+      "ref": "events page 2026-10-14 Trivia Night 8pm"
     }
   ],
   "created": {
@@ -21,8 +21,8 @@
         "2026-10-09"
       ],
       "data": {
-        "title": "Dance with live music by The Fictionals at Sample Pub",
-        "summary": "Dance to live music by The Fictionals.",
+        "title": "The Fictionals at Sample Pub",
+        "summary": "Live music by The Fictionals at Sample Pub. The dancing score on this page says whether people usually dance.",
         "category": "live-music",
         "danceStyles": [],
         "start": "2026-10-09T18:00",
@@ -84,8 +84,8 @@
         "2026-10-23"
       ],
       "data": {
-        "title": "Halloween Dance with live music by The Pretend Band at Sample Pub",
-        "summary": "Dance to live music by The Pretend Band. Costumes are welcome.",
+        "title": "Halloween show with The Pretend Band at Sample Pub",
+        "summary": "Live music by The Pretend Band at Sample Pub. The dancing score on this page says whether people usually dance. Costumes are welcome.",
         "category": "live-music",
         "danceStyles": [],
         "start": "2026-10-23T21:00",

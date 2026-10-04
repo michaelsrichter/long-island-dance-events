@@ -23,6 +23,8 @@ export interface MergeStats {
   needsReview: number;
   expired: number;
   missing: number;
+  /** New listings not added because another source already lists the same event. */
+  duplicates?: number;
 }
 
 export interface MergeResult {
@@ -32,6 +34,8 @@ export interface MergeResult {
   stats: MergeStats;
   /** Ids now waiting for review, with the reason. */
   review: { id: string; reason: string }[];
+  /** New listings skipped as the same event another source already lists (id it would have had, and the existing id). */
+  duplicates: { id: string; of: string }[];
 }
 
 type Stored = EventRecord;
@@ -50,6 +54,34 @@ function datesOf(e: Pick<EventRecord, 'start' | 'recurrence'>): string[] {
 
 const comparable = (e: EventRecord) => JSON.stringify({ ...e, lastSeen: undefined });
 
+const minutes = (hhmm: string | null | undefined) => (hhmm ? Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5)) : undefined);
+const DANCE_FAMILY = new Set(['social-dance', 'lesson-party']);
+const sameFamily = (a: string | undefined, b: string | undefined) => a === b || (DANCE_FAMILY.has(String(a)) && DANCE_FAMILY.has(String(b)));
+
+/**
+ * The same evening listed by another source: a band's calendar, the venue's calendar and Ira's
+ * List often name the same gig. Same venue and day, and either a shared band or DJ (within two
+ * hours) or the same kind of event within 30 minutes (or no time on one of them), with no
+ * different bands named. Only one-day listings are checked; repeating series are left alone.
+ */
+export function otherSourceTwin(events: Map<string, EventRecord>, d: Draft, sourceId: string): string | undefined {
+  if (d.dates.length !== 1 || !d.data.venueId) return undefined;
+  const date = d.dates[0]!;
+  const time = minutes(parseLocal(String(d.data.start)).time);
+  const acts = d.data.performerIds ?? [];
+  for (const [id, e] of events) {
+    if (e.sourceId === sourceId || e.venueId !== d.data.venueId) continue;
+    if (e.status !== 'active' && e.status !== 'pending-review') continue;
+    if (!datesOf(e).includes(date)) continue;
+    const eTime = minutes(parseLocal(String(e.start)).time);
+    const gap = time === undefined || eTime === undefined ? 0 : Math.abs(time - eTime);
+    const eActs = e.performerIds ?? [];
+    const shared = acts.some((p) => eActs.includes(p));
+    if (shared ? gap <= 120 : !(acts.length && eActs.length) && gap <= 30 && sameFamily(d.data.category, e.category)) return id;
+  }
+  return undefined;
+}
+
 export function mergeDrafts(
   existing: Map<string, EventData>,
   drafts: Draft[],
@@ -60,8 +92,9 @@ export function mergeDrafts(
   const before = new Map([...events].map(([id, e]) => [id, comparable(e)]));
   const byKey = new Map<string, string>();
   for (const [id, e] of existing) if (e.matchKey && e.sourceId === opts.sourceId) byKey.set(e.matchKey, id);
-  const stats: MergeStats = { new: 0, updated: 0, unchanged: 0, needsReview: 0, expired: 0, missing: 0 };
+  const stats: MergeStats = { new: 0, updated: 0, unchanged: 0, needsReview: 0, expired: 0, missing: 0, duplicates: 0 };
   const review: MergeResult['review'] = [];
+  const duplicates: MergeResult['duplicates'] = [];
   const seen = new Set<string>();
 
   const statusFor = (confidence: number, dates: string[], prev?: Stored): EventStatus => {
@@ -74,6 +107,12 @@ export function mergeDrafts(
   for (const d of drafts) {
     const id = byKey.get(d.matchKey);
     if (!id) {
+      const twin = otherSourceTwin(events, d, opts.sourceId);
+      if (twin) {
+        duplicates.push({ id: d.id, of: twin });
+        stats.duplicates!++;
+        continue;
+      }
       const status = statusFor(d.data.confidence ?? 1, d.dates);
       events.set(d.id, { ...d.data, matchKey: d.matchKey, firstSeen: opts.today, lastSeen: opts.today, status });
       seen.add(d.id);
@@ -142,5 +181,5 @@ export function mergeDrafts(
     }
   }
   stats.needsReview = [...events.values()].filter((e) => e.status === 'pending-review').length;
-  return { events, changed, stats, review };
+  return { events, changed, stats, review, duplicates };
 }

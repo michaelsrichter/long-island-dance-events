@@ -1,0 +1,74 @@
+{
+  "outOfArea": [],
+  "skipped": [
+    {
+      "reason": "no dance named in the listing",
+      "ref": "event page 2026-10-22 Pretend Heritage Night"
+    }
+  ],
+  "created": {
+    "venues": [],
+    "performers": []
+  },
+  "drafts": [
+    {
+      "id": "2026-10-24-example-lodge-social",
+      "matchKey": "test-source|example-lodge||saturday|18:30|social-dance|||2026-10-24",
+      "dates": [
+        "2026-10-24"
+      ],
+      "data": {
+        "title": "Social dance at Example Lodge",
+        "summary": "An evening of social dancing. Food is included.",
+        "category": "social-dance",
+        "danceStyles": [],
+        "start": "2026-10-24T18:30",
+        "end": "2026-10-24T22:30",
+        "timezone": "America/New_York",
+        "venueId": "example-lodge",
+        "town": "Huntington",
+        "performerIds": [],
+        "instructorIds": [],
+        "skillLevel": "all-levels",
+        "infoUrl": "https://example-lodge.example/event/autumn-dinner-dance/",
+        "sourceId": "test-source",
+        "sourceUrl": "https://example-lodge.example/event/autumn-dinner-dance/",
+        "sourceName": "Example Lodge - events",
+        "sourceRef": "event page 2026-10-24",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.75
+      }
+    },
+    {
+      "id": "2026-11-06-example-lodge-lesson-and-dance",
+      "matchKey": "test-source|example-lodge||friday|19:00|lesson-party|||2026-11-06",
+      "dates": [
+        "2026-11-06"
+      ],
+      "data": {
+        "title": "Social dance with a lesson at Example Lodge",
+        "summary": "A group lesson, then open social dancing.",
+        "category": "lesson-party",
+        "danceStyles": [],
+        "start": "2026-11-06T19:00",
+        "end": "2026-11-06T22:30",
+        "timezone": "America/New_York",
+        "venueId": "example-lodge",
+        "town": "Huntington",
+        "performerIds": [],
+        "instructorIds": [],
+        "priceNotes": "Free lesson included",
+        "skillLevel": "all-levels",
+        "infoUrl": "https://example-lodge.example/event/friday-social/",
+        "sourceId": "test-source",
+        "sourceUrl": "https://example-lodge.example/event/friday-social/",
+        "sourceName": "Example Lodge - events",
+        "sourceRef": "event page 2026-11-06",
+        "status": "active",
+        "dancingCues": [],
+        "confidence": 0.75
+      }
+    }
+  ]
+}

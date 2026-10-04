@@ -86,7 +86,7 @@ Common settings:
 
 ## Visitor sign-in and community features
 
-Likes, notes, private corrections and photos (decision P21) need four things. Everything lives in the owner's personal subscription `fd38bfe4-1b60-405d-bff9-020f3ff54d88` (decision P35).
+Likes, notes, private corrections and photos (decision P21) need four things. Everything lives in the owner's personal subscription `fd38bfe4-1b60-405d-bff9-020f3ff54d88` (decision P37).
 
 | Piece | Where | Made by |
 | --- | --- | --- |

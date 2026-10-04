@@ -4,7 +4,44 @@ The site's address is **https://longisland.dance** (the "apex" or root domain). 
 
 Status (October 3, 2026, 6:31 PM): **done.** Both domains are `Ready` with free HTTPS certificates; `longisland.dance` is the default domain; `SITE_URL` is `https://longisland.dance`; smoke test 23/23. Search engines are still blocked until launch.
 
-## Records to add at Namecheap
+## Move to the new Azure app (October 4, 2026)
+
+The site is moving from the old Azure app (`black-dune…`, Microsoft work subscription) to a new one in the owner's own subscription (**Richter Cloud 150Credit**, resource group `rg-li-dance-events-web`, address **https://gentle-glacier-01b92ea0f.3.azurestaticapps.net**). The new app also has the storage, content-safety and visitor sign-in settings for the community features. Deploys from `main` already go to the new app. `longisland.dance` keeps showing the old app until the DNS records below change.
+
+Done by the developer: the new app has the latest site (smoke test 23/23), and Azure is waiting to verify both names on it (`Validating`).
+
+**Step 1: TXT records for the new app (no downtime).** At Namecheap, Advanced DNS, the TXT values must be **exactly** these. On October 4 at 12:06 PM the first codes (`_1z5hq…` and `_vb8ey…`) were replaced: Azure checked once before those records existed and never checked again, so both names were removed and added back with new codes.
+
+| Type | Host | Value | TTL |
+| --- | --- | --- | --- |
+| TXT Record | `@` | `_0sb092kfpr2wabeium2mql1p6gj1ilw` | Automatic |
+| TXT Record | `_dnsauth.www` | `_z5bc1gizrs5yslniimu1s2jdrp79nct` | Automatic |
+
+Edit the two records you added before (`_1z5hq…` at `@`, `_vb8ey…` at `_dnsauth.www`) and paste the new values. Also delete the old app's TXT records (`_fzdvr…` at `@`, `_fvpz3…` at `_dnsauth.www`); the old app is already verified and doesn't need them. That leaves one Azure code per host, plus the SPF record at `@`, which stays.
+
+**Step 2: after the developer confirms both names show `Ready` on the new app, point the site at it.** Edit the two existing records:
+
+| Type | Host | Old value | New value |
+| --- | --- | --- | --- |
+| ALIAS Record | `@` | `black-dune-0e0f3e40f.1.azurestaticapps.net` | `gentle-glacier-01b92ea0f.3.azurestaticapps.net` |
+| CNAME Record | `www` | `black-dune-0e0f3e40f.1.azurestaticapps.net` | `gentle-glacier-01b92ea0f.3.azurestaticapps.net` |
+
+In a hurry? You can do step 1 and step 2 together. The site may then show a certificate warning for a few minutes up to about an hour, until Azure finishes. It is not launched yet, so that is low risk.
+
+**Step 3 (developer):** set `longisland.dance` as the default domain on the new app, run the smoke test against `https://longisland.dance`, and check light and dark mode on phone and desktop. Then remove the two names from the old app. Once the owner agrees, delete the old app; it is on the paid Standard plan. After that, the old TXT records (`_fzdvr…` and `_fvpz3…`) can be deleted.
+
+Check progress (new app):
+
+```powershell
+az staticwebapp hostname list -n swa-li-dance-events-web -g rg-li-dance-events-web --subscription "Richter Cloud 150Credit" --query "[].{domain:name, status:status}" -o table
+Resolve-DnsName longisland.dance -Type TXT
+```
+
+Rollback: point the ALIAS and CNAME back at `black-dune-0e0f3e40f.1.azurestaticapps.net` (the old app keeps its names until step 3).
+
+If a name sits at `Validating` for more than an hour while `Resolve-DnsName` already shows the right code, Azure has stopped checking. Remove the name and add it again on the new app (`az staticwebapp hostname delete`, then `hostname set --validation-method dns-txt-token`), and put the new code in DNS.
+
+## Records to add at Namecheap (original setup, October 3)
 
 Namecheap: **Domain List → Manage** next to `longisland.dance` → **Advanced DNS** tab → **Host Records**.
 

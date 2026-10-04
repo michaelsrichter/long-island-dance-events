@@ -75,4 +75,13 @@ if (NOTIFY) {
   const totals = /Totals: ([^\n]+)/.exec(report)?.[1] ?? 'see the report';
   sh('gh', ['pr', 'comment', number, '--body', `@${REVIEWER} This week's collection is ready for review. ${totals}`]);
 }
+// A pull request opened or updated with the workflow's own token does not start other workflows (a
+// GitHub rule), so CI would never run on it. Start CI on the branch directly: its checks then show
+// on this pull request, with no "Approve workflows to run" step.
+try {
+  sh('gh', ['workflow', 'run', 'ci.yml', '--ref', BRANCH]);
+  console.log(`Started CI on ${BRANCH}.`);
+} catch (e) {
+  console.log(`Could not start CI (the workflow needs "actions: write"): ${e.message.split('\n')[0]}`);
+}
 console.log(`Pull request #${number} is up to date.`);

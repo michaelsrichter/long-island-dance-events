@@ -69,8 +69,11 @@ export function findTimes(text: string): TimeToken[] {
 /** Times that are not when the event starts (doors, coffee, food, deadlines, ticket sales closing). */
 function isSideTime(text: string, t: TimeToken): boolean {
   const before = text.slice(Math.max(0, t.index - 28), t.index).toLowerCase();
-  return /(doors? open|coffee|dessert|buffet|dinner served|available|served|until|till|rsvp by|reserve by|deadline|reserv|sales? close|closes?|ends?)\W*(at|from)?\W*$/.test(before);
+  return /(doors? open|coffee|dessert|buffet|dinner served|available|served|until|till|rsvp by|reserve by|deadline|reserv|sales? close|closes?|ends?)\W*(at|from)?\W*$/.test(before) || DEADLINE_BY.test(text.slice(Math.max(0, t.index - 70), t.index).toLowerCase());
 }
+
+/** "A decision will be made by 3 PM", "register by 5pm": a deadline, not when the event starts ("followed by 8 PM" is fine). */
+const DEADLINE_BY = /\b(?:decision|decided|announce\w*|notif\w*|cancel\w*|purchase\w*|register\w*|registration|order\w*|reserv\w*|reply|respond|rsvp|sign up|tickets?)\b[^.!?]{0,40}\bby\W*$/;
 
 export function findLessonTime(text: string, tokens: TimeToken[] = findTimes(text)): string | undefined {
   const lower = text.toLowerCase();

@@ -35,6 +35,8 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  # Start CI on the collection branch (pull requests opened with this token do not start it).
+  actions: write
 
 concurrency:
   group: ingest

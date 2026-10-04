@@ -47,6 +47,15 @@ describe("Ira's List weekly list", () => {
   it('drops a gig listed twice on the same day', () => {
     expect(rows.filter((r) => r.date === '2031-01-01' && r.act === 'Sample Party Band')).toHaveLength(1);
   });
+  it('reads short day headings ("MON 10/5", "THUR 10/8") and skips one whose weekday does not match', () => {
+    const list = '<p>SUNDAY 10/4</p><p>-Sample Party Band-Example Pub 7p</p><p>MON 10/5</p><p>OTHERS</p><p>-Open Jam-Example Pub</p><p>THUR 10/8</p><p>-Quiet Tribute Show-Example Playhouse 7p</p><p>FRI 10/10</p><p>-Wrong Day Band-Example Pub</p><p>© 2026 Example</p>';
+    const r = parseWeeklyList(list, '2026-10-03');
+    expect(r.map((x) => [x.date, x.act])).toEqual([
+      ['2026-10-04', 'Sample Party Band'],
+      ['2026-10-05', 'Open Jam'],
+      ['2026-10-08', 'Quiet Tribute Show'],
+    ]);
+  });
   it('splits act and venue, and normalizes times', () => {
     expect(splitEntry('Club 40+ Party @ Example Pub')).toEqual({ act: 'Club 40+ Party', venue: 'Example Pub' });
     expect(splitEntry('Leonid & Friends Tribute To Chicago - Boulton Center')).toEqual({ act: 'Leonid & Friends Tribute To Chicago', venue: 'Boulton Center' });
@@ -77,6 +86,12 @@ describe("Ira's List weekly list", () => {
     const unsure = normalizeIraRows([{ date: '2031-01-02', ...parseEntry('Sample Party Band @ Example Pub 3pm?')! }], { sourceId: 'iraslist', sourceUrl: 'https://example.org/', registry: reg, outsideVenues: [] }).candidates[0]!;
     expect(unsure).toMatchObject({ start: undefined, end: undefined, reviewNotes: [expect.stringMatching(/not sure of the time \(3pm\?\)/)] });
     for (const c of r.candidates) expect(() => eventSchema.parse({ ...c, reviewNotes: c.reviewNotes.join(' ') || undefined, start: c.date, firstSeen: c.date, lastSeen: c.date })).not.toThrow();
+  });
+  it('does not call the venue its own act ("Example Pub - See Venue for Details")', () => {
+    const reg = fixtureRegistry();
+    const r = normalizeIraRows([{ date: '2031-01-02', ...parseEntry('-Example Pub- See Venue for Details.')! }], { sourceId: 'iraslist', sourceUrl: 'https://example.org/', registry: reg, outsideVenues: [] });
+    expect(r.candidates[0]).toMatchObject({ venueId: 'example-pub', title: 'Live music at Example Pub' });
+    expect(r.unresearched.acts).not.toContain('Example Pub');
   });
 });
 

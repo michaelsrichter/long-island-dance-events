@@ -97,6 +97,7 @@ export function foundFromNode(node: Json, pageUrl: string): FoundEvent | undefin
   if (!start || !title) return undefined;
   const status = String(node.eventStatus ?? '').toLowerCase();
   const url = text(node.url) ?? (typeof node['@id'] === 'string' && /^https?:/.test(node['@id']) ? node['@id'] : undefined);
+  const types = asArray(node['@type'] as string | string[]).map((t) => String(t).toLowerCase());
   return {
     title,
     description: text(node.description)?.slice(0, 1500),
@@ -110,6 +111,7 @@ export function foundFromNode(node: Json, pageUrl: string): FoundEvent | undefin
     cancelled: status.includes('cancelled'),
     ref: 'event data on the page',
     pageUrl: url ?? pageUrl,
+    kind: types.includes('danceevent') ? 'dance' : types.includes('musicevent') ? 'music' : undefined,
   };
 }
 

@@ -88,10 +88,11 @@ What a run does:
 1. Downloads each enabled source (respecting `robots.txt` and `rateLimitSeconds`).
 2. Reads the listings. For PDFs, `ingest/pdf/extract_calendar.py` uses font sizes and bold text to find day headings, sections and towns.
 3. Skips anything outside Nassau and Suffolk.
-4. Matches venues, organizers, teachers, bands/DJs and dance styles against the existing files (by name and aliases). Unknown venues and DJs are created with a review note.
-5. Combines dates of the same listing into one repeating event with a rule such as "every Tuesday" or "1st and 3rd Friday of the month".
-6. Merges with existing files. It keeps `firstSeen`, respects `lockedFields` (fields an editor fixed by hand), marks ended events as `past`, and never deletes anything. Listings that vanish from a month the source still covers, or that the program is unsure about (confidence below 0.6), become `pending-review` and are hidden until someone checks them.
-7. Validates every file with the Zod schemas, writes sorted JSON, and prints a run report.
+4. Checks each listing's own words. On a dance calendar a listing must name a dance (or a class or lesson); on a calendar of everything in a town it must name a dance, live music or a band or DJ. A deadline ("RSVP by Oct 10"), the end of a date range, a "no class on" day, a post date, or a weekday that does not match the date never becomes a listing. A listing that says it happens off Long Island ("5th Avenue Manhattan") is skipped.
+5. Matches venues, organizers, teachers, bands/DJs and dance styles against the existing files (by name and aliases). Unknown venues and DJs are created with a review note.
+6. Combines dates of the same listing into one repeating event with a rule such as "every Tuesday" or "1st and 3rd Friday of the month".
+7. Merges with existing files. It keeps `firstSeen`, respects `lockedFields` (fields an editor fixed by hand), marks ended events as `past`, and never deletes anything. Listings that vanish from a month the source still covers, or that the program is unsure about (confidence below 0.6), become `pending-review` and are hidden until someone checks them. A new listing for an evening another source already lists (same venue and day, same band or the same kind of event at about the same time) is not added twice; venues', clubs' and bands' own calendars run first, so their version is the one kept.
+8. Validates every file with the Zod schemas, writes sorted JSON, and prints a run report.
 
 ### Scheduled runs (GitHub Actions)
 
@@ -101,7 +102,7 @@ What a run does:
 | `report-database.yml` | Every change to `src/content/**` on `main`, and monthly | Builds `data/li-dance.sqlite` (see [docs/database-plan.md](docs/database-plan.md)) and saves it, with the sample reports, as a download on the run page. |
 | `source-discovery.yml` | 1st of each month | Searches for new sources with Microsoft Web IQ (needs the repository secret `WEBIQ_API_KEY`), rechecks every tracked source politely, and opens an issue with the results. Nothing is switched on automatically. |
 
-One-time settings for the owner: allow GitHub Actions to create pull requests (Settings → Actions → General → Workflow permissions), and add the `WEBIQ_API_KEY` secret for discovery.
+One-time settings for the owner: allow GitHub Actions to create pull requests (Settings → Actions → General → Workflow permissions), and add the `WEBIQ_API_KEY` secret for discovery. A pull request opened by a workflow does not start other workflows by itself (a GitHub rule), so after each push to `ingest/updates` the collection run starts CI on that branch (`gh workflow run ci.yml`); its checks appear on the pull request without the "Approve workflows to run" button.
 
 ### Add a new source
 
@@ -111,7 +112,7 @@ One-time settings for the owner: allow GitHub Actions to create pull requests (S
 4. Try a generic adapter first. No code is needed:
    - `ical` reads a calendar feed: set `feedUrl` (for example `.../events/?ical=1` on WordPress "The Events Calendar").
    - `jsonld` reads schema.org Event data on the page; set `feedUrl` to an event sitemap (`.xml`) if the list page has none.
-   - `htmllist` reads dated lists on a web page (and Squarespace event lists). Set `defaults.venueId` + `defaults.town` for a venue's own page, or `defaults.performerIds` for a band's own page.
+   - `htmllist` reads dated lists on a web page (and Squarespace event lists, SpotApps cards, and hand-made lists split by `=====` lines with a `Location:` line). Set `defaults.venueId` + `defaults.town` for a venue's own page, or `defaults.performerIds` for a band's own page. If the calendar page hides names or dates in separate boxes but the site is WordPress, set `feedUrl` to its `/wp-json/wp/v2/<event type>` address: each post's title and the date written in its text are used instead of the page. When the page's title or main heading names a dance ("Swing Dances", "LICMA Dances"), every listing on it counts as a dance; otherwise each listing must name one.
    - Optional: `pageUrls` (more pages), `defaults.organizerId`, `defaults.danceStyles`, `defaults.category`, and `include` / `exclude` (case-insensitive patterns on the listing text).
 5. Only if none of those work, add `ingest/adapters/<id>.ts` exporting `adapter: Adapter` with `fetch(ctx)` and `normalize(docs, ctx)` that return `Candidate`s (see `ingest/lib/types.ts` and `ingest/lib/structured.ts`), with a small fictional fixture in `ingest/fixtures/` and a golden-file test (regenerate with `UPDATE_GOLDEN=1`).
 6. Run `npm run ingest -- --source <id> --dry-run`, review the report, then run without `--dry-run` and open a pull request.
@@ -182,7 +183,7 @@ docs/             decisions, content audit, content model, architecture, editor 
 3. ✅ Ira's List LI adapter and dancing score. Next: duplicate detection (exact match key, then local embeddings with bge-small: ≥ 0.9 merge, 0.8-0.9 human review).
 4. Submit-an-event form (to a moderation queue).
 5. Admin area: ✅ moderation queue and private corrections (community features, decision P21); source panel and bug inbox still to come.
-6. Azure: ✅ Static Web Apps Standard + managed Functions + monitoring + community Storage and AI Content Safety + Entra External ID (Bicep and scripts in `infra/`, decisions P21, P35, P36).
+6. Azure: ✅ Static Web Apps Standard + managed Functions + monitoring + community Storage and AI Content Safety + Entra External ID (Bicep and scripts in `infra/`, decisions P21, P37, P38).
 7. ✅ Scheduled GitHub Actions runs (daily, twice weekly, weekly) that update one pull request with the run report and @mention the owner weekly (GitHub sends the email); an issue is filed if a source breaks. A report database (SQLite) is built on every change.
 8. ✅ Discovery: 218 websites checked with Web IQ; 145 source files; monthly search and recheck ([docs/source-catalog.md](docs/source-catalog.md), [docs/database-plan.md](docs/database-plan.md)). Next: permission requests for blocked sources, flyer intake, AI help for messy pages (owner decisions), launch.
 

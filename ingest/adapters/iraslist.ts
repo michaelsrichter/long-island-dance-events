@@ -63,7 +63,8 @@ export function htmlLines(html: string): string[] {
   return out;
 }
 
-const DAY_RE = /^(MON|TUES|WEDNES|THURS|FRI|SATUR|SUN)DAY\s+(\d{1,2})\s*\/\s*(\d{1,2})\b/i;
+const DAY_RE = /^(MON|TUES?|WED(?:NES|S)?|THU(?:RS?)?|FRI|SAT(?:UR)?|SUN)(?:DAY)?\.?,?\s+(\d{1,2})\s*\/\s*(\d{1,2})\b/i;
+const WEEKDAY_ABBR = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
 const EMOJI_RE = /[\p{Extended_Pictographic}\p{Regional_Indicator}\u{FE0F}\u{200D}\u{20E3}]/gu;
 const SPONSOR_RE = /\(\s*Ira[^)]*?Sponsor[^)]*\)/i;
 const TIME_WORD = String.raw`\d{1,2}(?::\d{2})?\s*(?:a|p)\.?m?\.?`;
@@ -138,6 +139,8 @@ export function parseWeeklyList(html: string, today: string): IraRow[] {
     const d = DAY_RE.exec(line);
     if (d) {
       date = dateFor(Number(d[2]), Number(d[3]), today);
+      // "MON 10/5" must be a Monday; a heading that does not match its date is skipped, not guessed.
+      if (WEEKDAY_ABBR[new Date(`${date}T12:00:00Z`).getUTCDay()] !== d[1]!.slice(0, 3).toLowerCase()) date = undefined;
       sponsor = false;
       continue;
     }
@@ -173,7 +176,7 @@ export function parseWeeklyList(html: string, today: string): IraRow[] {
 }
 
 /** Shows that are not live music for dancing (theater, comedy, drag brunch, trivia). */
-const NOT_MUSIC_RE = /\b(the musical|musical\b|comedy|comedian|stand[- ]up|magician|magic show|drag (brunch|show)|trivia|bingo|paint (and|&) sip|book (talk|signing))\b/i;
+const NOT_MUSIC_RE = /\b(the musical|musical\b|comedy|comedian|stand[- ]up|magician|magic show|drag (brunch|show)|trivia|bingo|kara[- ]?ok[ei]{1,2}|karoake|karoke|paint (and|&) sip|book (talk|signing))\b/i;
 
 export { cuesFor };
 
@@ -226,7 +229,8 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
       continue;
     }
     const performerIds = reg.matchPerformers(row.act).filter((id) => !(venue && reg.performers.get(id)?.name === venue.name));
-    const pieces = row.act.split(/\s*\/\s*/).map((p) => p.trim()).filter((p) => p.length >= 2 && !GENERIC_ACTS.test(p));
+    // "89 North - See Venue for Details": the venue's own name is not an act.
+    const pieces = row.act.split(/\s*\/\s*/).map((p) => p.trim()).filter((p) => p.length >= 2 && !GENERIC_ACTS.test(p) && reg.matchVenue(p) !== venueId);
     for (const p of pieces) if (!reg.matchPerformers(p).length && !reg.matchOrganizer(p)) unActs.add(p);
     const organizerId = reg.matchOrganizer(row.act);
     const cues = cuesFor(row);

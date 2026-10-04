@@ -1,6 +1,6 @@
 # Proposal: sign-in, comments, photos and likes
 
-**Status:** **decided and built (2026-10-03).** The owner chose **Option 2** (SWA Standard + Entra External ID), with photos in the first release, and moved the whole site to a personal Azure subscription (decisions P21, P35, P36). What was built is described in [architecture.md](../architecture.md#community-features-likes-notes-photos); this page is kept as the original analysis.
+**Status:** **decided and built (2026-10-03).** The owner chose **Option 2** (SWA Standard + Entra External ID), with photos in the first release, and moved the whole site to a personal Azure subscription (decisions P21, P37, P38). What was built is described in [architecture.md](../architecture.md#community-features-likes-notes-photos); this page is kept as the original analysis.
 **Date:** 2026-10-03. Every vendor fact was checked on this date against the official page linked in [Sources](#sources). Anything we could not confirm says **unverified**.
 
 ## Summary
