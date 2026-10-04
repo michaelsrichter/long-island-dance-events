@@ -1,0 +1,11 @@
+{
+  "name": "Fadeley’s Deli Pub",
+  "address": "422 W Main St",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Out on the Town - Long Island event calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Patchogue",
+  "latitude": 40.761578,
+  "longitude": -73.028761,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

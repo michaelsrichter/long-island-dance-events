@@ -1,0 +1,26 @@
+{
+  "title": "Christmas Ballroom and Latin social dance at Brumidi Lodge (Sons of Italy)",
+  "summary": "An evening of Ballroom and Latin social dancing. Food is included.",
+  "category": "social-dance",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "start": "2026-12-19",
+  "timezone": "America/New_York",
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "club-brumidi",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://sonsofitalyli.com/event/christmas-party-dinner-dance/",
+  "status": "active",
+  "sourceId": "brumidi-lodge-deer-park",
+  "sourceUrl": "https://sonsofitalyli.com/event/christmas-party-dinner-dance/",
+  "sourceName": "Club Brumidi at Brumidi Lodge (Deer Park) - events",
+  "sourceRef": "event page 2026-12-19",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.6,
+  "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|saturday|tba|social-dance||ballroom+latin-ballroom|2026-12-19|christmas",
+  "reviewNotes": "No start time found."
+}

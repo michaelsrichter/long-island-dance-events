@@ -1,0 +1,24 @@
+{
+  "title": "The Melting Pots at The Villager",
+  "summary": "Live music by The Melting Pots at The Villager. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-24T18:00",
+  "end": "2026-10-24T21:00",
+  "timezone": "America/New_York",
+  "venueId": "the-villager-farmingdale",
+  "town": "Farmingdale",
+  "performerIds": [
+    "the-melting-pots"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.thevillagerfarmingdale.com/livemusic/live-music-the-melting-pots",
+  "status": "active",
+  "sourceId": "villager-farmingdale",
+  "sourceUrl": "https://www.thevillagerfarmingdale.com/livemusic/live-music-the-melting-pots",
+  "sourceName": "The Villager (Farmingdale) - live music calendar",
+  "sourceRef": "events page 2026-10-24",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.8,
+  "matchKey": "villager-farmingdale|the-villager-farmingdale||saturday|18:00|live-music|the-melting-pots||2026-10-24"
+}

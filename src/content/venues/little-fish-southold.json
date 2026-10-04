@@ -1,0 +1,11 @@
+{
+  "name": "Little Fish",
+  "address": "50 N Sea Dr",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Southold",
+  "latitude": 41.071624,
+  "longitude": -72.454487,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

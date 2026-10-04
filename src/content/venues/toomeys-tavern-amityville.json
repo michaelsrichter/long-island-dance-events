@@ -1,0 +1,11 @@
+{
+  "name": "Toomey’s Tavern",
+  "address": "251 S Ketcham Ave",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from I Love Babylon events. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Amityville",
+  "latitude": 40.662728,
+  "longitude": -73.423521,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

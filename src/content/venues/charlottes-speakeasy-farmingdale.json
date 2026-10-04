@@ -1,0 +1,11 @@
+{
+  "name": "Charlotte's Speakeasy",
+  "address": "294 Main Street",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Dance Manhattan - Long Island swing dances list. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Farmingdale",
+  "latitude": 40.73253,
+  "longitude": -73.445908,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

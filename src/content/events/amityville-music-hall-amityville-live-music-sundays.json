@@ -1,0 +1,22 @@
+{
+  "title": "Live music at Amityville Music Hall",
+  "summary": "Live music at Amityville Music Hall. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-11T19:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=SU;UNTIL=20261018"
+  },
+  "venueId": "amityville-music-hall-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "amityville-music-hall",
+  "sourceUrl": "https://amh.live/",
+  "sourceName": "Amityville Music Hall - show list",
+  "sourceRef": "events page 2026-10-11",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.75,
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||sunday|19:00|live-music|||repeat"
+}

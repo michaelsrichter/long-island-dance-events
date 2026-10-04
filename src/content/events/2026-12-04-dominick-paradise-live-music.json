@@ -1,0 +1,30 @@
+{
+  "title": "Ballroom dance with live music by Dominick Paradise and the Sounds of Our Generation",
+  "summary": "Dance to live music by Dominick Paradise and the Sounds of Our Generation. Dance styles: Ballroom. Food is included, and there is a cash bar.",
+  "category": "live-music",
+  "danceStyles": [
+    "ballroom"
+  ],
+  "start": "2026-12-04T19:00",
+  "end": "2026-12-04T23:00",
+  "timezone": "America/New_York",
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "club-brumidi",
+  "performerIds": [
+    "dominick-paradise"
+  ],
+  "price": 25,
+  "priceNotes": "Pay at the door",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://sonsofitalyli.com/event/dinner-dance-with-dominick-paradise/",
+  "status": "active",
+  "sourceId": "brumidi-lodge-deer-park",
+  "sourceUrl": "https://sonsofitalyli.com/event/dinner-dance-with-dominick-paradise/",
+  "sourceName": "Club Brumidi at Brumidi Lodge (Deer Park) - events",
+  "sourceRef": "event page 2026-12-04",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.8,
+  "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|friday|19:00|live-music|dominick-paradise|ballroom|2026-12-04"
+}

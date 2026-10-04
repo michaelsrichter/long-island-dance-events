@@ -1,19 +1,27 @@
 {
   "name": "Ballroom Legacy Dance Studio (Sea Cliff) - events",
-  "url": "https://www.ballroomlegacy.us/",
   "type": "jsonld",
   "adapter": "jsonld",
-  "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Ballroom Legacy Dance Studio (Sea Cliff). We write our own short summaries and link back to the original page.",
-  "description": "Dance listings in Sea Cliff: Latin social, ballroom.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
-  "feedUrl": "https://www.ballroomlegacy.us/event-pages-sitemap.xml",
   "defaults": {
-    "venueId": "ballroom-legacy-sea-cliff",
-    "town": "Sea Cliff"
+    "town": "Sea Cliff",
+    "venueId": "ballroom-legacy-sea-cliff"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it. The Wix page is JS-heavy, but the event sitemap confirms future Latin Dance Fever pages."
+  "description": "Dance listings in Sea Cliff: Latin social, ballroom.",
+  "enabled": true,
+  "feedUrl": "https://www.ballroomlegacy.us/event-pages-sitemap.xml",
+  "focus": "dance",
+  "lastCounts": {
+    "found": 20,
+    "kept": 6,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:06:10.545Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. The Wix page is JS-heavy, but the event sitemap confirms future Latin Dance Fever pages.",
+  "url": "https://www.ballroomlegacy.us/"
 }

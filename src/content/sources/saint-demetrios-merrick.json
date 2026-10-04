@@ -1,18 +1,26 @@
 {
   "name": "Saint Demetrios (Merrick) - dinner dance",
-  "url": "https://saint-demetrios.com/dance",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Saint Demetrios (Merrick). We write our own short summaries and link back to the original page.",
-  "description": "Dance listings in Merrick: Greek dinner dance, live Greek band.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "saint-demetrios-merrick",
-    "town": "Merrick"
+    "town": "Merrick",
+    "venueId": "saint-demetrios-merrick"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it because it is a future Long Island dinner dance with live music and ticket details."
+  "description": "Dance listings in Merrick: Greek dinner dance, live Greek band.",
+  "enabled": true,
+  "focus": "dance",
+  "lastCounts": {
+    "found": 1,
+    "kept": 1,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:11:04.983Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it because it is a future Long Island dinner dance with live music and ticket details.",
+  "url": "https://saint-demetrios.com/dance"
 }

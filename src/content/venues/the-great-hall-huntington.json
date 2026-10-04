@@ -1,0 +1,11 @@
+{
+  "name": "The Great Hall",
+  "address": "12 Prospect St",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Dance Manhattan - Long Island swing dances list. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Huntington",
+  "latitude": 40.870356,
+  "longitude": -73.429648,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

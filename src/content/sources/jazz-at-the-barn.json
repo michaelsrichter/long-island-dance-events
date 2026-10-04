@@ -1,18 +1,26 @@
 {
   "name": "Jazz at the Barn (Huntington) - upcoming shows",
-  "url": "https://jazzatthebarn.com/",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from Jazz at the Barn (Huntington). We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Huntington: jazz listening shows, small ensemble concerts.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "conklin-barn-huntington",
-    "town": "Huntington"
+    "town": "Huntington",
+    "venueId": "conklin-barn-huntington"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority. It is current but is a listening-room jazz source."
+  "description": "Live music listings in Huntington: jazz listening shows, small ensemble concerts.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 3,
+    "kept": 2,
+    "needsReview": 2,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:07:21.166Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority. It is current but is a listening-room jazz source.",
+  "url": "https://jazzatthebarn.com/"
 }

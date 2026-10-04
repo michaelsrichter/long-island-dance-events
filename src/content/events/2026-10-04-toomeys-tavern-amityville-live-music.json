@@ -1,0 +1,25 @@
+{
+  "title": "Live music at Toomey’s Tavern",
+  "summary": "Live music at Toomey’s Tavern. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-04T15:30",
+  "end": "2026-10-04T19:30",
+  "timezone": "America/New_York",
+  "venueId": "toomeys-tavern-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://ilovebabylon.com/event/lets-be-frank-at-toomeys-tavern/",
+  "status": "active",
+  "sourceId": "i-love-babylon",
+  "sourceUrl": "https://ilovebabylon.com/event/lets-be-frank-at-toomeys-tavern/",
+  "sourceName": "I Love Babylon events",
+  "sourceRef": "calendar feed 2026-10-04",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "i-love-babylon|toomeys-tavern-amityville||sunday|15:30|live-music|||2026-10-04",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Upside Down Band at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Upside Down Band at Daisy's Nashville Lounge (Miller Place). The dancing score on this page says whether people usually dance. Food is included.",
+  "category": "live-music",
+  "start": "2026-10-09T19:00",
+  "end": "2026-10-09T23:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "upside-down-band"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/upside-down-band/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/upside-down-band/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-09",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.9,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||friday|19:00|live-music|upside-down-band||2026-10-09"
+}

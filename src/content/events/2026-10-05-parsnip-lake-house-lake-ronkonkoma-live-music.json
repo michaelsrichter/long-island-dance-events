@@ -1,0 +1,23 @@
+{
+  "title": "Open Jam at Parsnip Lake House",
+  "summary": "Live music by Open Jam at Parsnip Lake House in Lake Ronkonkoma. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-05",
+  "timezone": "America/New_York",
+  "venueId": "parsnip-lake-house-lake-ronkonkoma",
+  "town": "Lake Ronkonkoma",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 4, 2026",
+  "sourceRef": "monday list",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "jam"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-05|parsnip-lake-house-lake-ronkonkoma|open-jam|2026-10-05|special",
+  "reviewNotes": "Band or DJ not researched yet: Open Jam."
+}

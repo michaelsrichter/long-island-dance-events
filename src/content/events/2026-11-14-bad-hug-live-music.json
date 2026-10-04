@@ -1,0 +1,22 @@
+{
+  "title": "BAD HUG at Bartini Bar & Lounge",
+  "summary": "Live music by BAD HUG at Bartini Bar & Lounge. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-14T20:00",
+  "timezone": "America/New_York",
+  "venueId": "bartini-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "bad-hug"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bartini-babylon",
+  "sourceUrl": "https://www.bartinibabylon.com/event-calendar",
+  "sourceName": "Bartini Bar & Lounge (Babylon) - event calendar",
+  "sourceRef": "events page 2026-11-14",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.8,
+  "matchKey": "bartini-babylon|bartini-babylon||saturday|20:00|live-music|bad-hug||2026-11-14"
+}

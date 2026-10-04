@@ -1,19 +1,27 @@
 {
   "name": "Daisy's (Miller Place) - live music calendar",
-  "url": "https://daisysli.com/calendar/",
   "type": "ical",
   "adapter": "ical",
-  "focus": "music",
-  "cadence": "twice-weekly",
-  "enabled": true,
   "attribution": "Some listings come from Daisy's (Miller Place). We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Miller Place and Patchogue: country bar dancing, rock and pop cover bands, DJ and karaoke nights.",
-  "rateLimitSeconds": 5,
+  "cadence": "twice-weekly",
   "catalogStatus": "verified",
-  "feedUrl": "https://daisysli.com/events/?ical=1",
   "defaults": {
-    "venueId": "daisys-nashville-lounge-miller-place",
-    "town": "Miller Place"
+    "town": "Miller Place",
+    "venueId": "daisys-nashville-lounge-miller-place"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many current Long Island events, a feed, and clear dance-floor wording."
+  "description": "Live music listings in Miller Place and Patchogue: country bar dancing, rock and pop cover bands, DJ and karaoke nights.",
+  "enabled": true,
+  "feedUrl": "https://daisysli.com/events/?ical=1",
+  "focus": "music",
+  "lastCounts": {
+    "found": 30,
+    "kept": 12,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:06:33.083Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many current Long Island events, a feed, and clear dance-floor wording.",
+  "url": "https://daisysli.com/calendar/"
 }

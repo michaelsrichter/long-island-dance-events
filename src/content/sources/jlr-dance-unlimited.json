@@ -1,19 +1,27 @@
 {
   "name": "JLR Dance Unlimited (Bay Shore) - events",
-  "url": "https://www.jlrdanceunlimited.com/events-2",
   "type": "jsonld",
   "adapter": "jsonld",
-  "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from JLR Dance Unlimited (Bay Shore). We write our own short summaries and link back to the original page.",
-  "description": "Dance listings in Bay Shore: ballroom, Latin, hustle.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
-  "feedUrl": "https://www.jlrdanceunlimited.com/event-pages-sitemap.xml",
   "defaults": {
-    "venueId": "jlr-dance-unlimited",
-    "town": "Bay Shore"
+    "town": "Bay Shore",
+    "venueId": "jlr-dance-unlimited"
   },
-  "reviewNotes": "Catalog check 2026-10-03: Keep with care. Wix sitemap and hidden page data confirm a few Bay Shore dance socials."
+  "description": "Dance listings in Bay Shore: ballroom, Latin, hustle.",
+  "enabled": true,
+  "feedUrl": "https://www.jlrdanceunlimited.com/event-pages-sitemap.xml",
+  "focus": "dance",
+  "lastCounts": {
+    "found": 29,
+    "kept": 2,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-04T16:09:56.424Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Catalog check 2026-10-03: Keep with care. Wix sitemap and hidden page data confirm a few Bay Shore dance socials.",
+  "url": "https://www.jlrdanceunlimited.com/events-2"
 }

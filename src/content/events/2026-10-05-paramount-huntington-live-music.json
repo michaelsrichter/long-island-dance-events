@@ -1,0 +1,25 @@
+{
+  "title": "Band-Maid at The Paramount",
+  "summary": "Live music by Band-Maid at The Paramount. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-05T20:00",
+  "end": "2026-10-05T23:00",
+  "timezone": "America/New_York",
+  "venueId": "paramount-huntington",
+  "town": "Huntington",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/14a44481b583c0d0277c5ec26b3de8a3380ac7f3",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/14a44481b583c0d0277c5ec26b3de8a3380ac7f3",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-05",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|paramount-huntington||monday|20:00|live-music|bandmaid||2026-10-05",
+  "reviewNotes": "Band or DJ not researched yet: Band-Maid."
+}

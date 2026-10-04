@@ -1,0 +1,22 @@
+{
+  "title": "The Legendary Murphys at Salt Shack",
+  "summary": "Live music by The Legendary Murphys at Salt Shack. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-10T19:00",
+  "timezone": "America/New_York",
+  "venueId": "salt-shack-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "the-legendary-murphys"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "salt-shack-cedar-beach",
+  "sourceUrl": "https://saltshackny.com/",
+  "sourceName": "Salt Shack at Cedar Beach (Babylon) - beach music calendar",
+  "sourceRef": "events page 2026-10-10",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.8,
+  "matchKey": "salt-shack-cedar-beach|salt-shack-babylon||saturday|19:00|live-music|the-legendary-murphys||2026-10-10"
+}
