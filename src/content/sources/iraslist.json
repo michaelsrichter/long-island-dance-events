@@ -9,12 +9,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 51,
-    "kept": 48,
-    "needsReview": 1,
+    "found": 58,
+    "kept": 31,
+    "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T03:45:02.891Z",
+  "lastScraped": "2026-10-04T15:20:21.133Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "url": "https://www.iraslistli.com/"

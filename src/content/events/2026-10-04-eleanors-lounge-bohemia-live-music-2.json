@@ -1,0 +1,20 @@
+{
+  "title": "Karaoke Wednesday at Eleanor's Lounge",
+  "summary": "Live music by Karaoke Wednesday at Eleanor's Lounge in Bohemia. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-04",
+  "timezone": "America/New_York",
+  "venueId": "eleanors-lounge-bohemia",
+  "town": "Bohemia",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 4, 2026",
+  "sourceRef": "sunday list",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-04|eleanors-lounge-bohemia|karaoke-wednesday|2026-10-04|special",
+  "reviewNotes": "Band or DJ not researched yet: Karaoke Wednesday."
+}

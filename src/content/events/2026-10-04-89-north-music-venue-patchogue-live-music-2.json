@@ -1,0 +1,20 @@
+{
+  "title": "Country Wednesdays at 89 North Music Venue",
+  "summary": "Live music by Country Wednesdays at 89 North Music Venue in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-04",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List, week of October 4, 2026",
+  "sourceRef": "sunday list",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-04|89-north-music-venue-patchogue|country-wednesdays|2026-10-04|special",
+  "reviewNotes": "Band or DJ not researched yet: Country Wednesdays."
+}
