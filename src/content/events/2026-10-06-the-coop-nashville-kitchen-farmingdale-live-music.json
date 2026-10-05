@@ -3,7 +3,6 @@
   "summary": "Live music at The Coop Nashville Kitchen. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-10-06T20:00",
-  "end": "2026-10-06T17:00",
   "timezone": "America/New_York",
   "venueId": "the-coop-nashville-kitchen-farmingdale",
   "town": "Farmingdale",
@@ -23,7 +22,8 @@
   "matchKey": "out-on-the-town-li|the-coop-nashville-kitchen-farmingdale||tuesday|08:00|live-music|||2026-10-06",
   "lockedFields": [
     "status",
-    "start"
+    "start",
+    "end"
   ],
-  "reviewNotes": "Start time looks wrong (8:00 in the morning). Check the source. Published in the review center on 2026-10-05 after fixing start."
+  "reviewNotes": "Start time looks wrong (8:00 in the morning). Check the source. Published in the review center on 2026-10-05 after fixing start. The old end time (17:00) no longer fit the new start, so it was removed."
 }
