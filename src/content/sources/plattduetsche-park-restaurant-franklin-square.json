@@ -1,0 +1,19 @@
+{
+  "name": "Plattduetsche Park Restaurant - live music calendar",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "attribution": "Some listings come from Plattduetsche Park Restaurant. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "plattduetsche-park-franklin-square",
+    "town": "Franklin Square"
+  },
+  "description": "Franklin Square venue calendar has frequent Oktoberfest bands, German dancing demonstrations and live bands through December.",
+  "enabled": true,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Franklin Square venue calendar has frequent Oktoberfest bands, German dancing demonstrations and live bands through December.",
+  "url": "https://parkrestaurant.com/events/",
+  "include": "\\blive\\b|music|band|\\bdj\\b|danc|disco|accordion|concert|orchestra|polka"
+}

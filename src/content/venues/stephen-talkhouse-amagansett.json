@@ -1,0 +1,48 @@
+{
+  "name": "Stephen Talkhouse",
+  "aliases": [
+    "The Stephen Talkhouse",
+    "Talkhouse",
+    "The Talkhouse",
+    "Stephen Talkhouse Amagansett"
+  ],
+  "address": "161 Main St",
+  "town": "Amagansett",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11930",
+  "phone": "(631) 267-3117",
+  "website": "https://www.stephentalkhouse.com/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Stephen+Talkhouse%2C+161+Main+St%2C+Amagansett%2C+NY+11930",
+  "kind": "concert-hall",
+  "description": "A small, long-running music club and bar on Amagansett's Main Street. It books famous touring acts as well as local East End bands, often playing late into the night.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Many shows have tables and seats, and the crowd is asked to stay quiet at listening shows. For dance-style shows (reggae, party and jam bands) the staff take the tables out so people can dance. The front room, where the bands play, is known for late-night dancing.",
+    "evidence": [
+      {
+        "url": "https://www.stephentalkhouse.com/faq",
+        "note": "The club's FAQ says tables are removed for dance-oriented shows such as reggae so the crowd can dance; those shows use one general-admission price."
+      },
+      {
+        "url": "https://maps.roadtrippers.com/us/amagansett-ny/entertainment/stephen-talkhouse",
+        "note": "Travel guide says the front room is where the live music and dancing happen, with local bands most nights after 10 PM."
+      },
+      {
+        "url": "https://www.tripadvisor.com/Attraction_Review-g29806-d2406776-Reviews-The_Stephen_Talkhouse-Amagansett_Long_Island_New_York.html",
+        "note": "Visitor reviews include a 2019 review describing a late-night spot with good music and dancing."
+      }
+    ],
+    "confidence": "high",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: stephentalkhouse.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.975454,
+  "longitude": -72.140592,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "Oakdale Brew House (Oakdale) - live music calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from Oakdale Brew House (Oakdale). We write our own short summaries and link back to the original page.",
+  "cadence": "twice-weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "oakdale-brew-house-oakdale",
+    "town": "Oakdale"
+  },
+  "description": "Oakdale brewery calendar has live music almost every Friday and Saturday plus music bingo through October.",
+  "enabled": true,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Oakdale brewery calendar has live music almost every Friday and Saturday plus music bingo through October.",
+  "url": "https://www.oakdalebrewhouse.com/events",
+  "exclude": "books|breakfast|brunch|character|trivia|bingo|paint|craft|kids|story ?time"
+}

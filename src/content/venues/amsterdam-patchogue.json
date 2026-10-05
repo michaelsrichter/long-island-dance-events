@@ -1,11 +1,54 @@
 {
   "name": "Amsterdam",
-  "address": "52 W Main St",
-  "county": "Suffolk",
-  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
-  "state": "NY",
+  "aliases": [
+    "Amsterdam's",
+    "Amsterdam Patchogue",
+    "Amsterdam's Patchogue",
+    "Amsterdam (formerly That Meetball Place)",
+    "That Meetball Place",
+    "That Meetball Place Patchogue"
+  ],
+  "address": "54 W Main St",
   "town": "Patchogue",
-  "latitude": 40.765696,
-  "longitude": -73.016197,
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11772",
+  "phone": "(631) 569-5888",
+  "website": "https://www.amsterdamlive.net/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Amsterdam%2C+54+W+Main+St%2C+Patchogue%2C+NY+11772",
+  "kind": "restaurant",
+  "description": "A bar and New American restaurant on West Main Street in Patchogue village that replaced That Meetball Place in late 2025. Cover bands play Friday and Saturday nights from 7:30 PM, then a DJ keeps the party going late.",
+  "dancing": {
+    "floor": "dance-floor",
+    "policy": "encouraged",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The venue sells its weekends as dinner that turns into a dance party: a band on a raised stage at 7:30 PM, then a DJ at 10:30 PM. Party cover bands are booked, and band listings promise a moving dance floor. Expect freestyle dancing to rock, funk and 80s and 90s hits.",
+    "evidence": [
+      {
+        "url": "https://www.amsterdamlive.net/",
+        "note": "Official site promotes live bands every Friday and Saturday at 7:30 PM and a DJ from 10:30 PM, under the heading that dinner meets the dance floor."
+      },
+      {
+        "url": "https://greaterlongisland.com/patchogues-meetball-place-reborn-as-amsterdam-and-millies-smash-bar/",
+        "note": "Nov 2025 local news: the former Meetball Place was rebuilt as Amsterdam with a raised platform for live music and a focus on bands and DJs."
+      },
+      {
+        "url": "https://stayhappening.com/e/slingshot-jams-live-amsterdam-patchogue-E2ISYDL11IR",
+        "note": "Band night listing for Slingshot Jams at Amsterdam describes a high-energy dance party with a busy dance floor after happy hour."
+      },
+      {
+        "url": "https://happeningnext.com/event/amsterdam-fri-nite-dance-party-w-slingshot-and-dj-juni-spin-eid3a0dolrmt0",
+        "note": "June 12, 2026 event billed as a Friday night dance party with a live band and a DJ."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: amsterdamlive.net.",
+  "reviewNotes": "Added automatically from Ira's List's calendar, then researched in the town-by-town source search (2026-10-05). Some listings give 52 W Main St; the venue's map listings and local news use 54 W Main St.",
+  "latitude": 40.765698,
+  "longitude": -73.016238,
   "coordinatesSource": "U.S. Census Bureau Geocoder"
 }

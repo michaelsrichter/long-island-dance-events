@@ -1,0 +1,42 @@
+{
+  "name": "Generation Gap",
+  "type": "band",
+  "aliases": [
+    "Gen Gap",
+    "GenGap"
+  ],
+  "genres": [
+    "rock covers",
+    "classic rock",
+    "modern rock"
+  ],
+  "website": "https://gengapmusic.com/",
+  "facebookUrl": "https://www.facebook.com/gengapmusic/",
+  "instagramUrl": "https://www.instagram.com/gengapmusic/",
+  "description": "Four-piece Long Island rock cover band made up of two millennials and two Gen-Xers who play high-energy crowd-pleasing rock hits. It plays South Shore Nassau spots such as Kitty O'Hara's in Baldwin and Montana Bros in Freeport, plus free summer concerts on Freeport's Nautical Mile.",
+  "dancing": {
+    "rating": "party",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [],
+    "notes": "A bar rock band that promises high-energy crowd pleasers; people may freestyle dance at its pub and pizzeria shows, but we found no report or photo caption describing dancing.",
+    "evidence": [
+      {
+        "url": "https://gengapmusic.com/",
+        "note": "Band site: four-piece, high-energy rock 'n' roll cover band from Long Island playing crowd pleasers."
+      },
+      {
+        "url": "https://gengapmusic.com/shows",
+        "note": "Show list: Kitty O'Hara's (Baldwin), Montana Bros (Freeport), BrightEye Beer Co. (Long Beach), 8-11 pm sets."
+      },
+      {
+        "url": "https://www.liacf.org/event-details-registration/free-summer-concerts-generation-gap",
+        "note": "Long Island Arts Council at Freeport listing for a free Aug 13, 2026 Nautical Mile concert by the band."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source generation-gap. A YouTube channel '@GenerationGap-Band' posts 2026 videos from a Pennsylvania car show; we did not confirm it is this band, so it is not linked."
+}

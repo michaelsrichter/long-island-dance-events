@@ -1,0 +1,50 @@
+{
+  "name": "Uncle Frank's Pizza & Cocktails",
+  "aliases": [
+    "Uncle Frank's",
+    "Uncle Frank's Pizza and Cocktails",
+    "Uncle Frank's Wood Fired Pizza & Cocktails",
+    "Uncle Franks Wantagh"
+  ],
+  "address": "3274 Railroad Ave",
+  "town": "Wantagh",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11793",
+  "phone": "(516) 308-3044",
+  "website": "https://www.unclefranksli.com/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Uncle+Frank%27s+Pizza+%26+Cocktails%2C+3274+Railroad+Ave%2C+Wantagh%2C+NY+11793",
+  "kind": "restaurant",
+  "description": "A wood-fired pizza and cocktail restaurant next to the Wantagh train station. It has live music on Thursday nights, mostly singers, duos and small bands, and bands play outside during Wantagh's summer Thursday Night Live street events on Railroad Avenue.",
+  "dancing": {
+    "floor": "unknown",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Indoors this is a sit-down dining room, and reviewers describe it as fairly quiet and relaxing, with live music on Thursdays. We found no dance floor or reports of dancing. The summer street events outside have more room, but we could not confirm dancing there either.",
+    "evidence": [
+      {
+        "url": "https://www.unclefranksli.com/music-and-events/",
+        "note": "Venue music page lists dated performers, mostly on Thursdays, from October into late November 2026."
+      },
+      {
+        "url": "https://www.restaurantji.com/ny/wantagh/uncle-franks-/",
+        "note": "Review summary calls the dining room semi-quiet and relaxing, with live music on Thursdays."
+      },
+      {
+        "url": "https://www.dannylangdon.com/event-details/dlb-danny-langdon-band-thursday-night-live-on-railroad-ave-at-uncle-franks-wood-fired-pizza-cocktails-3",
+        "note": "Band calendar shows a 2025 Thursday Night Live show on Railroad Ave at Uncle Frank's, 6 to 9 PM."
+      },
+      {
+        "url": "https://mommypoppins.com/long-island-kids/event/events/thursday-night-live-in-wantagh",
+        "note": "Listing for Wantagh's summer Thursday Night Live street events with live music on select 2026 dates from May to August."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: unclefranksli.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source uncle-franks-pizza-and-cocktails-wantagh. No official Facebook page was linked from the venue site, so we left it out.",
+  "latitude": 40.672781,
+  "longitude": -73.508389,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

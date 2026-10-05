@@ -34,9 +34,47 @@ def domain(u: str) -> str:
         return ""
 
 
-def new_domains(search_log: dict, catalog: list[dict], committed_log: dict) -> list[dict]:
+def load_log(path: str) -> dict:
+    """Read a search log; compact logs (catalog/search-log-towns.json) are expanded to the full shape."""
+    with open(path, encoding="utf-8") as f:
+        log = json.load(f)
+    if "urls" in log:
+        urls = log["urls"]
+        log["queries"] = [
+            {"group": q.get("g"), "query": q["q"], "status": q.get("s"),
+             "results": [{"url": urls[i][0], "title": urls[i][1], "domain": domain(urls[i][0])} for i in q.get("r", [])]}
+            for q in log["queries"]
+        ]
+    return log
+
+
+def merge_logs(logs: list[dict]) -> dict:
+    merged = {"queries": [q for lg in logs for q in lg.get("queries", [])]}
+    merged["totals"] = {
+        "queries": len(merged["queries"]),
+        "uniqueDomains": len({r.get("domain") or domain(r.get("url", "")) for q in merged["queries"] for r in q.get("results", [])}),
+    }
+    return merged
+
+
+def committed_domains() -> set[str]:
+    """Websites already looked at: the committed search logs and the triage list (catalog/search-triage.json)."""
+    known: set[str] = set()
+    for name in ("search-log.json", "search-log-towns.json"):
+        p = os.path.join(ROOT, "catalog", name)
+        if os.path.exists(p):
+            with open(p, encoding="utf-8") as f:
+                known |= {d["domain"] for d in json.load(f).get("domains", [])}
+    p = os.path.join(ROOT, "catalog", "search-triage.json")
+    if os.path.exists(p):
+        with open(p, encoding="utf-8") as f:
+            known |= set(json.load(f).get("domains", {}))
+    return known
+
+
+def new_domains(search_log: dict, catalog: list[dict], committed: set[str]) -> list[dict]:
     known = {domain(u) for s in catalog for u in [s["url"], *(s.get("evidence") or [])]}
-    known |= {d["domain"] for d in committed_log.get("domains", [])}
+    known |= committed
     found: dict[str, dict] = {}
     for q in search_log.get("queries", []):
         for r in q.get("results", []):
@@ -71,13 +109,13 @@ def recheck(catalog: list[dict], cache: str, today: str) -> list[dict]:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--search-log")
+    ap.add_argument("--search-log", action="append", default=[], help="search log (repeat for the core and town logs)")
     ap.add_argument("--cache", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--today", default=dt.date.today().isoformat())
     a = ap.parse_args()
     catalog = json.load(open(os.path.join(ROOT, "catalog", "sources.json"), encoding="utf-8"))
-    committed = json.load(open(os.path.join(ROOT, "catalog", "search-log.json"), encoding="utf-8"))
+    committed = committed_domains()
     by_id = {s["id"]: s for s in catalog}
     lines = [f"# Monthly source check ({a.today})", ""]
     lines += [
@@ -87,8 +125,9 @@ def main() -> None:
         "",
     ]
 
-    if a.search_log and os.path.exists(a.search_log):
-        log = json.load(open(a.search_log, encoding="utf-8"))
+    logs = [load_log(p) for p in a.search_log if os.path.exists(p)]
+    if logs:
+        log = merge_logs(logs)
         fresh = new_domains(log, catalog, committed)
         lines += [f"## New websites from Web IQ ({len(fresh)})", ""]
         lines += [f"{log['totals']['queries']} searches, {log['totals']['uniqueDomains']} websites. Websites already in the catalog or set aside before are not repeated.", ""]

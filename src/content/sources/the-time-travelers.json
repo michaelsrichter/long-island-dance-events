@@ -1,0 +1,19 @@
+{
+  "name": "The Time Travelers - live music calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from The Time Travelers. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "the-time-travelers"
+    ]
+  },
+  "description": "Long Island cover band page lists three upcoming bar gigs in Nassau and Suffolk through January.",
+  "enabled": true,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Long Island cover band page lists three upcoming bar gigs in Nassau and Suffolk through January.",
+  "url": "https://www.timetravelersli.com/upcoming-shows"
+}

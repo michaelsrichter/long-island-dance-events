@@ -1,0 +1,19 @@
+{
+  "name": "Generation Gap - live music calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from Generation Gap. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "generation-gap"
+    ]
+  },
+  "description": "Long Island cover-band shows page lists public bar gigs in Baldwin and Freeport through December.",
+  "enabled": true,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Long Island cover-band shows page lists public bar gigs in Baldwin and Freeport through December.",
+  "url": "https://gengapmusic.com/shows"
+}

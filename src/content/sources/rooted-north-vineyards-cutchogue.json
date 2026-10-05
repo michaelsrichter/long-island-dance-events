@@ -1,0 +1,19 @@
+{
+  "name": "Rooted North Vineyards - live music calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from Rooted North Vineyards. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "rooted-north-tasting-room-cutchogue",
+    "town": "Cutchogue"
+  },
+  "description": "Cutchogue winery calendar lists weekly Friday live-music nights into December.",
+  "enabled": true,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Cutchogue winery calendar lists weekly Friday live-music nights into December.",
+  "url": "https://rootednorthvineyards.com/events/",
+  "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano"
+}

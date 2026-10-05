@@ -1,0 +1,44 @@
+{
+  "name": "The Gateway",
+  "aliases": [
+    "Gateway Playhouse",
+    "The Gateway Playhouse",
+    "The Gateway Bellport",
+    "Performing Arts Center of Suffolk County",
+    "Gateway's Haunted Playhouse"
+  ],
+  "address": "215 South Country Rd",
+  "town": "Bellport",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11713",
+  "phone": "(631) 286-1133",
+  "website": "https://thegateway.org/",
+  "facebookUrl": "https://www.facebook.com/TheGatewayPACSC",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Gateway%2C+215+South+Country+Rd%2C+Bellport%2C+NY+11713",
+  "kind": "theater",
+  "description": "A nonprofit professional theater in Bellport, also known as the Gateway Playhouse, that stages Broadway-style musicals and holiday shows. It also runs a Halloween haunted house, acting classes and special fundraiser events.",
+  "dancing": {
+    "floor": "seated",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Shows here are in a traditional theater with numbered seats in rows, so there is no dance floor. Go to watch the show, not to dance.",
+    "evidence": [
+      {
+        "url": "https://thegateway.org/",
+        "note": "Official site: 2026 season of stage musicals such as Million Dollar Quartet Christmas, the Haunted Playhouse, classes, and the box office address and phone."
+      },
+      {
+        "url": "https://www.tickpick.com/venues/gateway-playhouse/seating-chart/",
+        "note": "Ticket site seating chart shows assigned seats by row and seat number in the theater."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: thegateway.org.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.762188,
+  "longitude": -72.931841,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,18 @@
+{
+  "name": "The Audrey (Oyster Bay) - live music calendar",
+  "type": "jsonld",
+  "adapter": "jsonld",
+  "attribution": "Some listings come from The Audrey (Oyster Bay). We write our own short summaries and link back to the original page.",
+  "cadence": "twice-weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "the-audrey-oyster-bay",
+    "town": "Oyster Bay"
+  },
+  "description": "Oyster Bay venue lists frequent dated live music and karaoke nights through October.",
+  "enabled": true,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Oyster Bay venue lists frequent dated live music and karaoke nights through October.",
+  "url": "https://theaudreyob.com/events/"
+}

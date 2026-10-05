@@ -1,0 +1,49 @@
+{
+  "name": "Garden Social Beer Garden & Kitchen",
+  "aliases": [
+    "Garden Social",
+    "Garden Social East Meadow",
+    "Garden Social Beer Garden",
+    "Garden Social LI"
+  ],
+  "address": "1964 Hempstead Tpke",
+  "town": "East Meadow",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11554",
+  "phone": "(516) 750-5338",
+  "website": "https://www.gardensocialli.com/",
+  "facebookUrl": "https://www.facebook.com/GardenSocial/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Garden+Social+Beer+Garden+%26+Kitchen%2C+1964+Hempstead+Tpke%2C+East+Meadow%2C+NY+11554",
+  "kind": "bar",
+  "description": "A large craft beer garden and restaurant on Hempstead Turnpike with indoor and outdoor seating and many beers on tap. It books live bands and holds themed nights, including country line dancing.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "encouraged",
+    "kinds": [
+      "line"
+    ],
+    "notes": "Garden Social has hosted country nights with line dancing lessons led by a local instructor and a DJ, and a local paper describes dancers of all ages out on the floor. On regular band nights it is mainly a place to eat and drink, so dancing then is less certain.",
+    "evidence": [
+      {
+        "url": "https://www.liherald.com/eastmeadow/stories/in-east-meadow-country-fusion-meets-garden-social,213073",
+        "note": "Local news story about country line dancing classes held at Garden Social, with dancers of all ages and skill levels."
+      },
+      {
+        "url": "https://www.instagram.com/p/DIpd5s9N0S6/",
+        "note": "Venue post invites guests to a line dancing night with an instructor and a DJ in April 2025."
+      },
+      {
+        "url": "https://www.setlist.fm/setlist/tiger-rose-band/2026/garden-social-beer-garden-and-kitchen-east-meadow-ny-7b741a00.html",
+        "note": "Setlist page logs a band show at Garden Social on May 17, 2026."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: gardensocialli.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.724212,
+  "longitude": -73.563869,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

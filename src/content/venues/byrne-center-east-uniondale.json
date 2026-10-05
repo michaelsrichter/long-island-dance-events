@@ -1,0 +1,55 @@
+{
+  "name": "John J. Byrne Community Center",
+  "aliases": [
+    "Byrne Center - East",
+    "Byrne Center – East",
+    "Byrne Center East",
+    "John J. Byrne Community Center – East",
+    "Byrne Community Center",
+    "Byrn Center"
+  ],
+  "address": "925 Jerusalem Avenue",
+  "town": "Uniondale",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11553",
+  "phone": "(516) 554-8124",
+  "website": "https://byrncenter.org/",
+  "facebookUrl": "https://facebook.com/byrncenter",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=John+J.+Byrne+Community+Center%2C+925+Jerusalem+Avenue%2C+Uniondale%2C+NY+11553",
+  "kind": "other",
+  "description": "A nonprofit community center in Uniondale whose main building is called Byrne Center – East. It runs youth, senior and wellness programs and hosts dance classes, including Chicago Steppin' workshops, Haitian folklore dance and Afro-Caribbean dance sessions.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "encouraged",
+    "kinds": [
+      "partner"
+    ],
+    "notes": "Dancing here is mostly classes, not nights out with a band. The Steppers Society of NY teaches Chicago Steppin' (a partner dance) to beginners every other Wednesday evening in fall 2026, no partner needed. The center has also hosted hip-hop fusion, Haitian folklore and Afro-Caribbean wellness dance sessions. We could not confirm the room's size or floor type.",
+    "evidence": [
+      {
+        "url": "https://byrncenter.org/series/steppers-society-of-ny-beginners-workshop-8-week-session-i/",
+        "note": "Center calendar: Chicago Steppin' beginner workshop by the Steppers Society of NY, every other Wednesday 7-8:30 PM, August to November 2026."
+      },
+      {
+        "url": "https://www.stepperssocietyofny.com/",
+        "note": "The steppers group lists the Byrne Center in Uniondale as one of its two workshop locations."
+      },
+      {
+        "url": "https://byrncenter.org/dance-to-health/",
+        "note": "The center's Dance to Health program page, with hip-hop fusion and modern fusion classes for adults and kids."
+      },
+      {
+        "url": "https://byrncenter.org/venue/byrn-center-east/",
+        "note": "Venue page for Byrne Center – East at 925 Jerusalem Avenue with its upcoming events."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: byrncenter.org.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source john-j-byrne-community-center-uniondale. The center also uses satellite buildings at 800 and 806 Jerusalem Avenue; this file is the main building at 925. Dance activity found is classes and workshops, not band nights.",
+  "latitude": 40.695895,
+  "longitude": -73.582987,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

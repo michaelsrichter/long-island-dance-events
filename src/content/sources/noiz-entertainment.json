@@ -1,0 +1,20 @@
+{
+  "name": "NOIZ Entertainment - live music calendar",
+  "type": "ical",
+  "adapter": "ical",
+  "attribution": "Some listings come from NOIZ Entertainment. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "noiz-entertainment"
+    ]
+  },
+  "description": "Long Island party band schedule has public North Fork live-music dates plus private dance-floor events in October.",
+  "enabled": true,
+  "feedUrl": "https://noizentertainment.com/schedule/?ical=1",
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Long Island party band schedule has public North Fork live-music dates plus private dance-floor events in October.",
+  "url": "https://noizentertainment.com/schedule/%f0%9f%8c%8a%e2%98%80%ef%b8%8f-sunday-funday-with-noiz-at-dockers-%e2%98%80%ef%b8%8f%f0%9f%8c%8a/"
+}

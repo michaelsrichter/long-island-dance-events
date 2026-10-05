@@ -4,19 +4,21 @@
   "type": "ical",
   "adapter": "ical",
   "focus": "dance",
-  "cadence": "manual",
-  "enabled": false,
+  "cadence": "weekly",
+  "enabled": true,
   "attribution": "Some listings come from DiVa Ballroom / Dance with Lourdes Cruz. We write our own short summaries and link back to the original page.",
-  "description": "Dance listings in Deer Park, Great Neck, Merrick and Hicksville: ballroom, Latin, salsa, West Coast Swing.",
+  "description": "Group dance classes on Long Island by Lourdes Cruz (DiVa Ballroom): ballroom, Latin and West Coast Swing in Deer Park and Greenlawn.",
   "rateLimitSeconds": 5,
-  "catalogStatus": "needs-permission",
+  "catalogStatus": "verified",
   "feedUrl": "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
   "defaults": {
-    "organizerId": "dance-with-lourdes"
+    "organizerId": "dance-with-lourdes",
+    "category": "class-lesson"
   },
   "permission": {
-    "status": "needed",
-    "note": "site robots allowed, but calendar.google.com robots disallows our bot."
+    "status": "not-needed",
+    "note": "Public Google Calendar feed. Google documents this address for other apps to subscribe, so robots.txt does not apply to it (decision P40)."
   },
-  "reviewNotes": "Catalog check 2026-10-03: Needs permission. The public Google Calendar is useful, but Google robots.txt blocks our bot."
+  "reviewNotes": "Switched on 2026-10-05 after the owner shared the calendar. Read as a class calendar (defaults.category class-lesson). Skipped: Town of Hempstead residents-only classes (Levittown Hall, Echo Park, Merrick Golf Course) and Great Neck Community Education courses (30 Cumberland Ave), which need pre-registration and are not open drop-in; cardio/fitness sessions; the Wednesday practice social (Great Neck Ballroom lists its own); and the Brumidi Lodge dances (the lodge has its own source). Queens (Little Neck) listings are out of area.",
+  "exclude": "practice social|residents only|preregister|cardio|fitness|^brumidi\\b|donna's dance|levittown hall|echo park|merrick golf|cumberland ave"
 }

@@ -52,7 +52,7 @@ export function normalizeAddress(s: string): string {
   const map: Record<string, string> = {
     avenue: 'ave', road: 'rd', street: 'st', turnpike: 'tpke', tpk: 'tpke', boulevard: 'blvd', expressway: 'expy', exwy: 'expy', expwy: 'expy',
     drive: 'dr', place: 'pl', lane: 'ln', parkway: 'pkwy', highway: 'hwy', court: 'ct', west: 'w', east: 'e', north: 'n', south: 's', first: '1st',
-    one: '1', two: '2', three: '3',
+    one: '1', two: '2', three: '3', pk: 'park', route: 'rte', rt: 'rte',
   };
   return normalizeText(s)
     .split(' ')
@@ -165,11 +165,17 @@ export class Registry {
     return unique(aliasHits(text, this.instructors).sort((a, b) => a.index - b.index).map((h) => h.id));
   }
 
-  /** Dance styles named in the text. Longer aliases win ("West Coast Swing" is not also "Swing"). */
-  matchStyles(text: string): string[] {
+  /**
+   * Dance styles named in the text. Longer aliases win ("West Coast Swing" is not also "Swing").
+   * Short all-capital aliases ("WCS", "ECS") count only when `abbreviations` is on (dance calendars):
+   * on bar and band calendars "WCS" is often the band Worst Case Scenario.
+   */
+  matchStyles(text: string, opts: { abbreviations?: boolean } = {}): string[] {
+    const abbreviations = opts.abbreviations ?? true;
     let norm = ` ${normalizeText(text)} `;
     const aliases: { id: string; p: string }[] = [];
-    for (const [id, s] of this.styles) for (const a of [s.name, ...s.aliases]) aliases.push({ id, p: normalizeText(a) });
+    for (const [id, s] of this.styles)
+      for (const a of [s.name, ...s.aliases]) if (abbreviations || !/^[A-Z]{2,4}$/.test(a.trim())) aliases.push({ id, p: normalizeText(a) });
     aliases.sort((a, b) => b.p.length - a.p.length);
     const found: { id: string; index: number }[] = [];
     for (const { id, p } of aliases) {

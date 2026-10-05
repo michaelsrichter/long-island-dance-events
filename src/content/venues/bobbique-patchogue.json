@@ -1,0 +1,52 @@
+{
+  "name": "Bobbique",
+  "aliases": [
+    "BOBBIQUE",
+    "Bobbique Patchogue",
+    "Bobbique BBQ"
+  ],
+  "address": "70 W Main St",
+  "town": "Patchogue",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11772",
+  "phone": "(631) 447-7744",
+  "website": "https://www.bobbique.com/",
+  "facebookUrl": "https://www.facebook.com/bobbiqueny/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Bobbique%2C+70+W+Main+St%2C+Patchogue%2C+NY+11772",
+  "kind": "restaurant",
+  "description": "A Memphis-style barbecue restaurant and bar on Main Street in Patchogue that has a stage for live music. Blues, rock and cover bands play most Friday and Saturday nights, and there is an open jam on Wednesdays.",
+  "dancing": {
+    "floor": "unknown",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Bands play on a stage inside the bar and restaurant. Most reviews talk about eating and listening, and the room gets loud and busy on band nights. Some band nights have been promoted as dance parties, so people do get up to dance, but we found no clear dance floor. Room to dance likely depends on the crowd.",
+    "evidence": [
+      {
+        "url": "https://www.bobbique.com/upcoming-events/",
+        "note": "Venue calendar lists a Wednesday night jam plus Friday and Saturday bands (blues, rock and covers) through late October 2026."
+      },
+      {
+        "url": "https://greaterlongisland.com/20-years-of-smoke-sauce-and-staying-power-at-patchogues-bobbique/",
+        "note": "2026 news story: the owner chose the space because it already had a stage and built the restaurant around food, drinks and live music."
+      },
+      {
+        "url": "https://happeningnext.com/event/the-ultimate-dance-party-at-bobbique-in-patchogue-with-the-good-times-band-eid3a0dgtvir4",
+        "note": "Older event listing billed a Good Times Band night at Bobbique as a dance party and told guests to bring their dancing shoes."
+      },
+      {
+        "url": "https://whataretheysaying.com/bobbique-patchogue-ny/",
+        "note": "Summary of Google reviews describes a lively, loud room when blues bands play; it talks about listening, not dancing."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: bobbique.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source bobbique-patchogue. Dancing is not confirmed; check whether there is open space near the stage.",
+  "latitude": 40.76572,
+  "longitude": -73.016562,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

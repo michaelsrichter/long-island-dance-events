@@ -1,0 +1,48 @@
+{
+  "name": "The Village Pub",
+  "aliases": [
+    "Village Pub",
+    "Village Pub Massapequa",
+    "The Village Pub Massapequa",
+    "Village Pub North Massapequa"
+  ],
+  "address": "923 N Broadway",
+  "town": "North Massapequa",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11758",
+  "phone": "(516) 798-9699",
+  "facebookUrl": "https://www.facebook.com/thevillagepubmassapequa",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Village+Pub%2C+923+N+Broadway%2C+North+Massapequa%2C+NY+11758",
+  "kind": "bar",
+  "description": "A long-running neighborhood tavern on North Broadway with craft beer on tap and food from a food truck out back. It books local cover and tribute bands, mostly on weekends.",
+  "dancing": {
+    "floor": "unknown",
+    "policy": "encouraged",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The pub's own Facebook page thanked a party-rock band for getting the crowd dancing, so people do get up and move on band nights. We found no details on how much open floor there is; it is a regular bar room, so space is probably limited.",
+    "evidence": [
+      {
+        "url": "https://www.facebook.com/thevillagepubmassapequa/posts/853719820095545/",
+        "note": "The pub's own post praises an 80s party band for getting the crowd dancing and joining in."
+      },
+      {
+        "url": "https://webtunes.com/venues/the-village-pub",
+        "note": "Music listing describes a laid-back local pub with cover bands, acoustic acts and weekend entertainment."
+      },
+      {
+        "url": "https://www.restaurantji.com/ny/north-massapequa/village-pub-/",
+        "note": "Review summary calls it an old-school local pub with live music, free pool on Tuesdays and food made in a truck in back."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: facebook.com/thevillagepubmassapequa.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.701636,
+  "longitude": -73.462347,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

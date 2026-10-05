@@ -1,0 +1,19 @@
+{
+  "name": "Amici Restaurant (Mount Sinai) - live music calendar",
+  "type": "ical",
+  "adapter": "ical",
+  "attribution": "Some listings come from Amici Restaurant (Mount Sinai). We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "amici-restaurant-mount-sinai",
+    "town": "Mount Sinai"
+  },
+  "description": "Mount Sinai restaurant calendar lists weekly Friday and Saturday live music events through October.",
+  "enabled": true,
+  "feedUrl": "https://amicirestaurant.org/events/?ical=1",
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Mount Sinai restaurant calendar lists weekly Friday and Saturday live music events through October.",
+  "url": "https://amicirestaurant.org/event/"
+}

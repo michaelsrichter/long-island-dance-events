@@ -1,0 +1,54 @@
+{
+  "name": "Montana Brothers",
+  "aliases": [
+    "Montana Bros",
+    "Montana Brothers Freeport",
+    "Montana Brothers In The Garden",
+    "Montana Brothers - The Garden",
+    "The Garden at Montana Brothers",
+    "Montana Brothers Pizzeria & Catering"
+  ],
+  "address": "385 S Main St",
+  "town": "Freeport",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11520",
+  "phone": "(516) 379-3053",
+  "website": "https://montanabrothers.com/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Montana+Brothers%2C+385+S+Main+St%2C+Freeport%2C+NY+11520",
+  "kind": "restaurant",
+  "description": "A family-owned Italian restaurant, pizzeria and caterer on South Main Street in Freeport, open since 1989. It books cover bands and DJs for dinner shows, including tented outdoor nights in its space called The Garden.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "encouraged",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Special nights are sold as dinner-and-dance packages, such as a disco band with a DJ and a Halloween party with a DJ, and band nights in The Garden tent invite guests to dance and party. Some band nights are more of a dinner show played near the tables, so reserve ahead and expect dancing in whatever open space is set up.",
+    "evidence": [
+      {
+        "url": "https://discounlimitedband.com/event/montana-brothers-the-garden/",
+        "note": "Disco Unlimited and a DJ played The Garden at Montana Brothers on Apr 11, 2026, sold as a three-course dinner with beer and wine, by reservation."
+      },
+      {
+        "url": "https://allevents.in/events/montana-brothers-13th-annual-halloween-party/200030766216938",
+        "note": "The restaurant's Oct 31, 2026 Halloween party is promoted as dinner, dancing and a show with a DJ at 385 South Main Street."
+      },
+      {
+        "url": "https://allevents.in/freeport/wildfire-debuts-at-montana-brothers-in-the-garden/200030538510928",
+        "note": "Band Wildfire played The Garden under a tent on Aug 21, 2026; the listing invites guests to eat and then dance and party all night."
+      },
+      {
+        "url": "https://allevents.in/freeport/live-at-montana-brothers/200029487355834",
+        "note": "Generation Gap's Feb 20, 2026 show: rock, pop and blues played near the tables, with reservations recommended."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: montanabrothers.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.646908,
+  "longitude": -73.575729,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

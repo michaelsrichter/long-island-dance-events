@@ -1,10 +1,51 @@
 {
-  "name": "Katies of Smithtown",
+  "name": "Katie's of Smithtown",
+  "aliases": [
+    "Katies of Smithtown",
+    "Katie's Smithtown",
+    "Katies Smithtown"
+  ],
   "address": "145 W Main St",
-  "county": "Suffolk",
-  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
-  "state": "NY",
   "town": "Smithtown",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11787",
+  "phone": "(631) 360-8556",
+  "website": "https://www.katiesofsmithtown.com/",
+  "facebookUrl": "https://www.facebook.com/KatiesofSmithtown",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Katie's+of+Smithtown%2C+145+W+Main+St%2C+Smithtown%2C+NY+11787",
+  "kind": "bar",
+  "description": "A historic two-level Irish-style pub on Smithtown's Main Street, famous for its ghost stories. It has full bands on weekends, a Tuesday jam, a Wednesday open mic and karaoke.",
+  "dancing": {
+    "floor": "unknown",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Full bands play on Friday and Saturday nights. The basement has hosted DJ dance nights, such as the Velvet Fang goth dance club. We could not confirm how much room there is to dance on band nights.",
+    "evidence": [
+      {
+        "url": "https://openjamevents.com/katies-smithtown",
+        "note": "Venue guide: two floors, a patio, full bands on Friday and Saturday, a Tuesday solo or jam night and a Wednesday open mic."
+      },
+      {
+        "url": "https://happeningnext.com/event/velvet-fang-one-last-time-eid1ef0ew75gf6r",
+        "note": "Event page for Velvet Fang, a goth night with a live DJ that tells guests to get ready to dance in Katie's basement."
+      },
+      {
+        "url": "https://www.eventbrite.com/e/velvet-fang-gothic-dance-club-tickets-1388680463649",
+        "note": "Ticket page titled 'Velvet Fang - Gothic Dance Club' at Katies of Smithtown (June 2025)."
+      },
+      {
+        "url": "https://www.liblogger.com/events/venue/katies-of-smithtown",
+        "note": "Event calendar for the bar showing the weekly Tuesday jam, Wednesday open mic and Thursday karaoke."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: katiesofsmithtown.com.",
+  "reviewNotes": "Added automatically from Ira's List's calendar, then researched in the town-by-town source search (2026-10-05).",
   "latitude": 40.855711,
   "longitude": -73.200223,
   "coordinatesSource": "U.S. Census Bureau Geocoder"

@@ -1,0 +1,48 @@
+{
+  "name": "Sand City South",
+  "aliases": [
+    "Sand City Brewing Lindenhurst",
+    "Sand City Brewing Co. South",
+    "Sand City Lindenhurst",
+    "Sand City Brewing (Lindenhurst)"
+  ],
+  "address": "150 S Wellwood Ave",
+  "town": "Lindenhurst",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11757",
+  "phone": "(631) 651-2767",
+  "website": "https://www.sandcitybeer.com/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Sand+City+South%2C+150+S+Wellwood+Ave%2C+Lindenhurst%2C+NY+11757",
+  "kind": "brewery",
+  "description": "Sand City Brewing's large Lindenhurst taproom near the train station. Its stage hosts weekend cover bands, indie and punk shows, comedy and themed music nights.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The tasting room is big, with an open floor plan and a stage. Cover bands often play on weekends, and one visitor wrote that a band had the crowd dancing and singing all night. We could not confirm a marked dance floor.",
+    "evidence": [
+      {
+        "url": "https://pos.do/en/lindenhurst/restaurant/sand-city-brewing-lindenhurst",
+        "note": "Visitor reviews mention weekend live music and say a cover band had the place dancing and singing all night."
+      },
+      {
+        "url": "https://www.bandsintown.com/v/10260118-sand-city-brewing",
+        "note": "Concert listings and fan reviews for shows at the Lindenhurst brewery; one fan notes it now has a stage."
+      },
+      {
+        "url": "https://www.vividseats.com/sand-city-south-tickets/venue/52092",
+        "note": "Venue overview: live music, comedy and community events, with room to mingle between sets."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: sandcitybeer.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.686179,
+  "longitude": -73.372664,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -11,9 +11,10 @@ import { adapter as htmllist, actName, dateBlocks, findDates, inferDate, meaning
 import { adapter as ical, foundFromIcs, icsTimeToLocal, parseIcs, splitLocation } from '../../ingest/adapters/ical';
 import { adapter as jsonld, eventNodes, jsonLdBlocks, sitemapLinks } from '../../ingest/adapters/jsonld';
 import { collapse } from '../../ingest/lib/collapse';
-import { makeSummary, makeTitle } from '../../ingest/lib/describe';
-import { Registry, ROOT } from '../../ingest/lib/registry';
-import { cleanVenueName, displayActOk, ensurePerformer, entityNameFromSource, findPlaceInText, findVenue, htmlToLines, isoToLocal, performerNameOk, tidyTitleAct, titleActOk } from '../../ingest/lib/structured';
+import { displayActs, makeSummary, makeTitle } from '../../ingest/lib/describe';
+import { findTimes } from '../../ingest/lib/times';
+import { Registry, ROOT, normalizeAddress } from '../../ingest/lib/registry';
+import { cleanVenueName, displayActOk, ensurePerformer, entityNameFromSource, findPlaceInText, findVenue, htmlToLines, isoToLocal, namesDance, performerNameOk, tidyTitleAct, titleActOk } from '../../ingest/lib/structured';
 import type { Adapter, AdapterContext, FetchedDocument } from '../../ingest/lib/types';
 
 const TODAY = '2026-10-03';
@@ -118,6 +119,41 @@ describe('names and venues are checked before anything new is created', () => {
     expect(findVenue(reg, 'The Pub on Pretend Lane', '5 Pretend Ln', 'Babylon')).toBe('sample-pub');
     expect(findVenue(reg, 'Sample Pub', undefined, 'Riverhead')).toBeUndefined();
     expect(findVenue(reg, 'Somewhere New', undefined, 'Babylon')).toBeUndefined();
+    // "Pk" is short for "Park" in addresses ("2075 Deer Pk Ave").
+    expect(normalizeAddress('2075 Deer Pk Ave')).toBe(normalizeAddress('2075 Deer Park Avenue'));
+    // "WCS" is West Coast Swing on a dance teacher's calendar, but often the band Worst Case
+    // Scenario on bar and band calendars, so it only counts on dance calendars.
+    expect(namesDance('Lourdes: Advanced WCS *must RSVP', true, true)).toBe(true);
+    expect(namesDance('WCS Unplugged', false, false)).toBe(false);
+    expect(namesDance('Pottery for adults')).toBe(false);
+    // The same goes for dance styles: "WCS" on a bar calendar is not tagged West Coast Swing.
+    expect(real.matchStyles('WCS Unplugged at The Snug', { abbreviations: false })).toEqual([]);
+    expect(real.matchStyles('Advanced WCS class')).toEqual(['west-coast-swing']);
+    expect(real.matchStyles('West Coast Swing social', { abbreviations: false })).toEqual(['west-coast-swing']);
+    // Leftover HTML (class="dialog") on a band page is not a class.
+    expect(namesDance('Sand City South share-dialog class="dialog dialog-share"')).toBe(false);
+  });
+  it('shows each act once in titles', () => {
+    expect(displayActs(['The ’90s Band live', "The 90's Band"])).toEqual(['The ’90s Band']);
+    expect(displayActs(['Chelsea Takami', 'Chelsea'])).toEqual(['Chelsea Takami']);
+    expect(displayActs(['Oktoberfest with die Spitzbuam'], 'Oktoberfest')).toEqual(['die Spitzbuam']);
+    expect(displayActs(['The Fictionals', 'Sample Band'])).toEqual(['The Fictionals', 'Sample Band']);
+  });
+  it('reads "Midnight Roma" as a band, not a midnight start', () => {
+    expect(findTimes('Midnight Roma 7-10pm').map((t) => t.start)).not.toContain('00:00');
+    expect(findTimes('Dancing until midnight').map((t) => t.start)).toContain('00:00');
+    expect(findTimes('Live at the High Noon Saloon').map((t) => t.start)).toEqual([]);
+  });
+  it('still reads "Noon To 4 PM" as starting at noon, in any letter case', async () => {
+    const { parseTimes } = await import('../../ingest/lib/times');
+    for (const text of ['SAT OCT 10 NOON TO 4PM Harvest Fest', 'Sunday Noon To 4 PM', 'Noon Til 5pm on the lawn', 'Fall Fest, Noon - 4 PM']) {
+      expect(parseTimes(text).start, text).toBe('12:00');
+    }
+  });
+  it('never uses a weekday with a year or a time as a title', () => {
+    expect(meaningfulLine('Fri 2026', TODAY)).toBe(false);
+    expect(meaningfulLine('Sat 8:00 PM', TODAY)).toBe(false);
+    expect(meaningfulLine('Rich Mahogany', TODAY)).toBe(true);
   });
   it('cleans venue names without cutting real words', () => {
     expect(cleanVenueName('Six Harbors Brewing Company')).toBe('Six Harbors Brewing Company');
@@ -431,6 +467,58 @@ describe("the listing's own words decide what it is", () => {
     const { foundFromNode } = await import('../../ingest/adapters/jsonld');
     expect(foundFromNode({ '@type': 'MusicEvent', name: 'Pretend Act', startDate: '2026-10-10T20:00' }, 'https://example.test/')?.kind).toBe('music');
     expect(foundFromNode({ '@type': ['Event', 'DanceEvent'], name: 'Pretend Social', startDate: '2026-10-10T20:00' }, 'https://example.test/')?.kind).toBe('dance');
+  });
+});
+
+describe('who plays, where and when on venue, band and card pages', () => {
+  const listing = (title: string, description = '', extra: Record<string, unknown> = {}) => ({ title, description, start: '2026-10-16T20:00', pageUrl: 'https://example.test/e', ...extra });
+  it('reads card grids one card at a time, even when the date comes last', async () => {
+    const { foundFromHtml } = await import('../../ingest/adapters/htmllist');
+    const card = (venue: string, town: string, date: string) => `<a href="#"><div class="col"><div class="card shadow-sm"><div class="card-body"><p><strong>${venue}<br />${town}, NY</strong></p><p class="fs-6">${date}</p></div></div></div></a>`;
+    const html = `<html><body><h1>Events</h1>${card('Sample Pub', 'Babylon', 'Sat, Oct 10th 2026')}${card('Example Lodge', 'Huntington', 'Fri, Oct 23rd 2026')}${card('Sample Tavern', 'Bay Shore', 'Sat, Oct 24th 2026')}</body></html>`;
+    expect(foundFromHtml(html, 'https://pretend-band.example/', TODAY, 'band').map((f) => [f.start, f.locationName])).toEqual([
+      ['2026-10-10', 'Sample Pub'],
+      ['2026-10-23', 'Example Lodge'],
+      ['2026-10-24', 'Sample Tavern'],
+    ]);
+  });
+  it("names a side project listed on a band's own page instead of the band", async () => {
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const reg = fixtureRegistry();
+    reg.performers.set('the-pretend-band', { name: 'The Pretend Band', type: 'band', aliases: [], genres: [] });
+    const ctx = context({ name: 'The Pretend Band - shows', focus: 'music', defaults: { performerIds: ['the-pretend-band'] } }, reg);
+    const at = { locationName: 'Sample Pub', locality: 'Babylon' };
+    const r = toCandidates(
+      [
+        listing('Sample Pub, Babylon', 'Members of the band join friends.', { heading: 'The Fictional Traffic Band @ Sample Pub', ...at }),
+        listing('Sample Pub, Babylon', 'Our usual show.', { heading: 'Pretend Band Live @ Sample Pub', ...at, start: '2026-10-17T20:00' }),
+        listing('Sample Pub, Babylon', 'An afternoon of music.', { heading: 'Fund Raiser for the firemen at historic Sample Pub', ...at, start: '2026-10-18T20:00' }),
+      ],
+      ctx,
+      { structured: false },
+    );
+    expect(r.candidates.map((c) => c.performerIds)).toEqual([['the-fictional-traffic-band'], ['the-pretend-band'], ['the-pretend-band']]);
+    expect(r.candidates[0]!.title).toBe('The Fictional Traffic Band at Sample Pub');
+  });
+  it('finds the act, not the caterer, the word "live" or a festival name', () => {
+    expect(actName('Pretend Halloween with musical guests Sample & Friends & food by Example Que')).toBe('Sample & Friends');
+    expect(actName('Last Jam with food by Chef Example')).toBe('Last Jam');
+    expect(actName('The Fictionals live')).toBe('The Fictionals');
+    const reg = fixtureRegistry();
+    reg.performers.set('pretend-stones-live', { name: 'Pretend Stones Live', type: 'band', aliases: [], genres: [] });
+    expect(ensurePerformer(reg, actName('Pretend Stones Live')!, 'Test source')).toBe('pretend-stones-live');
+    for (const bad of ['Sample Irishfest VI', 'Autumn Acoustics in the Garden']) expect(performerNameOk(bad), bad).toBe(false);
+  });
+  it('does not take a contest or raffle time as the start', async () => {
+    const { parseTimes } = await import('../../ingest/lib/times');
+    expect(parseTimes('Live accordion music, a mug holding contest in the bar at 8 p.m. and giveaways.').start).toBeUndefined();
+    expect(parseTimes('Live accordion music at 8 p.m.').start).toBe('20:00');
+  });
+  it('ignores a placeholder price of 0 when the text names a cover charge', async () => {
+    const { foundFromNode } = await import('../../ingest/adapters/jsonld');
+    const node = { '@type': 'Event', name: 'Pretend Act', startDate: '2026-10-10', offers: { price: '0' }, description: 'Live music, $8 cover.' };
+    expect(foundFromNode(node, 'https://example.test/')?.isFree).toBeUndefined();
+    expect(foundFromNode({ ...node, description: 'Live music.' }, 'https://example.test/')?.isFree).toBe(true);
   });
 });
 

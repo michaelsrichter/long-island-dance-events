@@ -1,0 +1,48 @@
+{
+  "name": "Still Partners",
+  "aliases": [
+    "Still Partners Sea Cliff",
+    "Still Partners Bar",
+    "Still Partners Gastropub"
+  ],
+  "address": "225 Sea Cliff Ave",
+  "town": "Sea Cliff",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11579",
+  "phone": "(516) 200-9229",
+  "website": "https://www.stillpartners.com/",
+  "facebookUrl": "https://www.facebook.com/StillPartnersBar/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Still+Partners%2C+225+Sea+Cliff+Ave%2C+Sea+Cliff%2C+NY+11579",
+  "kind": "bar",
+  "description": "A small neighborhood pub and gastropub on Sea Cliff Avenue with craft beer and a full kitchen. Local bands and acoustic players perform many nights, with full bands mostly on weekends.",
+  "dancing": {
+    "floor": "small",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "It is a cozy room with booths and a small stage area in the back. One reviewer says you can sit in a booth or move up near the band and dance, so expect a little open space by the stage on band nights, not a real dance floor.",
+    "evidence": [
+      {
+        "url": "https://www.chamberofcommerce.com/business-directory/new-york/sea-cliff/bar-grill/2029141845-still-partners",
+        "note": "Review roundup includes a 2024 comment that you can relax in a booth or get up close to the band and dance."
+      },
+      {
+        "url": "https://crescat.io/venues/still-partners",
+        "note": "Venue profile describes wood-paneled walls, booth and bar seating, and a small stage toward the back, with bands Thursday to Saturday."
+      },
+      {
+        "url": "https://www.facebook.com/StillPartnersBar/",
+        "note": "The bar's Facebook page posts weekly live music lineups, such as reggae and rock bands, and calls its music a main draw."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: stillpartners.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.84907,
+  "longitude": -73.644757,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Amici Restaurant",
+  "aliases": [
+    "Amici",
+    "Amici Mount Sinai",
+    "Amici Mt Sinai",
+    "Amici Great Pastabilities"
+  ],
+  "address": "304 Route 25A",
+  "town": "Mount Sinai",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11766",
+  "phone": "(631) 473-2400",
+  "website": "https://amicirestaurant.org/",
+  "facebookUrl": "https://www.facebook.com/amicigreatpastabilities",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Amici+Restaurant%2C+304+Route+25A%2C+Mount+Sinai%2C+NY+11766",
+  "kind": "restaurant",
+  "description": "A family-run Italian restaurant and bar on Route 25A that has served Mount Sinai for about 30 years. Its lounge hosts acoustic duos, trios and the occasional tribute act on Friday and Saturday evenings.",
+  "dancing": {
+    "floor": "seated",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Music is mostly acoustic duos and trios playing covers, from crooner standards to country and pop, from 6:30 to 9:30 PM. The restaurant calls the space a cozy lounge, and its rooms are set with tables. We found no mention of a dance floor or of people dancing, so expect a dinner-and-listen crowd.",
+    "evidence": [
+      {
+        "url": "https://amicirestaurant.org/events/",
+        "note": "The restaurant's events page lists live music on Friday and Saturday nights in October 2026, 6:30-9:30 PM."
+      },
+      {
+        "url": "https://amicirestaurant.org/venue/amici-restaurant/",
+        "note": "Venue calendar showing September 2026 acts: acoustic duos and trios plus a Fleetwood Mac tribute."
+      },
+      {
+        "url": "https://amicirestaurant.org/catering-parties/",
+        "note": "Party page: the back room seats about 40 and the front dining room about 60 at tables."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: amicirestaurant.org.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source amici-restaurant-mount-sinai. Floor and policy are a guess; no dance floor or dancing found in any source.",
+  "latitude": 40.933925,
+  "longitude": -73.025668,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

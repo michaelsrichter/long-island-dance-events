@@ -26,6 +26,8 @@ const T = String.raw`(\d{1,2})(?::([0-5]\d))?`;
 const RANGE_RE = new RegExp(String.raw`\b${T}\s*${MER}?\s*(?:-|–|—|to|until|till)\s*${T}\s*${MER}(?![a-z])`, 'gi');
 const SINGLE_RE = new RegExp(String.raw`\b${T}\s*${MER}(?![a-z])`, 'gi');
 const NOON_RE = /\b(noon|midnight)\b/gi;
+/** Words after "Noon" that make it a time ("Noon To 4 PM", "Noon Til Close", "Noon Sharp"). */
+const TIME_CONNECTOR = /^(?:to|til|till|until|thru|through|and|or|am|pm|a\.m\.|p\.m\.|sharp|start|starts|on|onward|onwards|daily|close)$/i;
 
 const pad = (n: number) => String(n).padStart(2, '0');
 const isPm = (m: string | undefined) => Boolean(m && /^p/i.test(m));
@@ -61,6 +63,10 @@ export function findTimes(text: string): TimeToken[] {
     if (t) tokens.push({ start: t, index: i, length: m[0].length });
   }
   for (const m of text.matchAll(NOON_RE)) {
+    // "Midnight Roma" or "High Noon Saloon": a title-case word followed by another name word is a name,
+    // not a time. "Noon To 4 PM" and "NOON TO 4PM" are times.
+    const next = /^\s+([A-Za-z.]+)/.exec(text.slice(m.index! + m[0].length, m.index! + m[0].length + 12))?.[1] ?? '';
+    if (/^[A-Z][a-z]+$/.test(m[1]!) && /^[A-Z]/.test(next) && !TIME_CONNECTOR.test(next)) continue;
     tokens.push({ start: m[1]!.toLowerCase() === 'noon' ? '12:00' : '00:00', index: m.index!, length: m[0].length });
   }
   return tokens.sort((a, b) => a.index - b.index);
@@ -69,8 +75,11 @@ export function findTimes(text: string): TimeToken[] {
 /** Times that are not when the event starts (doors, coffee, food, deadlines, ticket sales closing). */
 function isSideTime(text: string, t: TimeToken): boolean {
   const before = text.slice(Math.max(0, t.index - 28), t.index).toLowerCase();
-  return /(doors? open|coffee|dessert|buffet|dinner served|available|served|until|till|rsvp by|reserve by|deadline|reserv|sales? close|closes?|ends?)\W*(at|from)?\W*$/.test(before) || DEADLINE_BY.test(text.slice(Math.max(0, t.index - 70), t.index).toLowerCase());
+  return /(doors? open|coffee|dessert|buffet|dinner served|available|served|until|till|rsvp by|reserve by|deadline|reserv|sales? close|closes?|ends?)\W*(at|from)?\W*$/.test(before) || DEADLINE_BY.test(text.slice(Math.max(0, t.index - 70), t.index).toLowerCase()) || SIDE_ACTIVITY.test(text.slice(Math.max(0, t.index - 60), t.index).toLowerCase());
 }
+
+/** "a mug holding contest in the bar at 8 p.m.", "raffle drawing at 9": part of the night, not its start. */
+const SIDE_ACTIVITY = /\b(?:contest|raffle|drawing|giveaways?|prizes?|costume parade|keg tapping|toast)\b(?:\s+(?:in|on|at)\s+the\s+[\w-]+)?\s+(?:at|from|begins at|starts at)\W*$/;
 
 /** "A decision will be made by 3 PM", "register by 5pm": a deadline, not when the event starts ("followed by 8 PM" is fine). */
 const DEADLINE_BY = /\b(?:decision|decided|announce\w*|notif\w*|cancel\w*|purchase\w*|register\w*|registration|order\w*|reserv\w*|reply|respond|rsvp|sign up|tickets?)\b[^.!?]{0,40}\bby\W*$/;

@@ -80,6 +80,8 @@ export interface FetchedDocument {
 
 export interface Adapter {
   id: string;
+  /** True when finding nothing to read is normal (a newsletter with no new issue), so it is not reported as a failure. */
+  quietWhenNoDocuments?: boolean;
   fetch(ctx: AdapterContext): Promise<FetchedDocument[]>;
   normalize(docs: FetchedDocument[], ctx: AdapterContext): Promise<NormalizeResult>;
 }

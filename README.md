@@ -33,7 +33,9 @@ flowchart LR
 - **Heavy work happens at build time** (scraping, PDF reading, matching). The live site is static files plus thin Azure Functions.
 - **Polite collecting:** the bot follows each site's `robots.txt`, waits between requests, caches downloads, and identifies itself (`LongIslandDanceEventsBot/1.0`).
 - **Our own words:** titles and summaries are generated from facts (date, time, place, price, style, people). Original text is never republished. Every event records `sourceId` and `sourceUrl`, and the [Sources page](src/pages/sources.astro) credits each source and explains corrections, opt-outs and takedowns.
-- **Scope:** only Nassau and Suffolk counties. Towns are checked against `src/data/long-island-places.json` (283 places). Listings in Queens, Brooklyn and elsewhere are skipped and counted in the run report.
+- **Scope:** only Nassau and Suffolk counties. Towns are checked against `src/data/long-island-places.json` (303 places). Listings in Queens, Brooklyn and elsewhere are skipped and counted in the run report.
+
+**What runs every week, where, and what you need to do:** see [docs/how-weekly-updates-work.md](docs/how-weekly-updates-work.md) (plain language, with a diagram and the schedule).
 
 ## Where the listings come from
 
@@ -100,9 +102,9 @@ What a run does:
 | --- | --- | --- |
 | `ingest-scheduled.yml` | Daily (`cadence: daily`), Monday and Thursday (`twice-weekly`), Sunday (`weekly`, `monthly`) | Collects, validates, builds the report database, and updates **one** rolling pull request (`ingest/updates`). The Sunday run requests review from and @mentions the owner, which is the weekly email. A source that finds nothing or breaks gets an issue labeled `ingest-failure` with a snapshot (sizes, hashes, page type; never the page text); after 3 failures in a row it is switched off in the pull request. |
 | `report-database.yml` | Every change to `src/content/**` on `main`, and monthly | Builds `data/li-dance.sqlite` (see [docs/database-plan.md](docs/database-plan.md)) and saves it, with the sample reports, as a download on the run page. |
-| `source-discovery.yml` | 1st of each month | Searches for new sources with Microsoft Web IQ (needs the repository secret `WEBIQ_API_KEY`), rechecks every tracked source politely, and opens an issue with the results. Nothing is switched on automatically. |
+| `source-discovery.yml` | 1st of each month | Searches for new sources with Microsoft Web IQ (needs the repository secret `WEBIQ_API_KEY`): 85 Long Island-wide queries plus one twelfth of the town-by-town queries (`catalog/search-matrix.json`, every town again once a year). Rechecks every tracked source politely, and opens an issue with the results. Nothing is switched on automatically. |
 
-One-time settings for the owner: allow GitHub Actions to create pull requests (Settings → Actions → General → Workflow permissions), and add the `WEBIQ_API_KEY` secret for discovery. A pull request opened by a workflow does not start other workflows by itself (a GitHub rule), so after each push to `ingest/updates` the collection run starts CI on that branch (`gh workflow run ci.yml`); its checks appear on the pull request without the "Approve workflows to run" button.
+One-time settings for the owner: allow GitHub Actions to create pull requests (Settings → Actions → General → Workflow permissions), add the `WEBIQ_API_KEY` secret for discovery, and the `AGENTMAIL_API_KEY` and `AGENTMAIL_INBOX` secrets for newsletters. A pull request opened by a workflow does not start other workflows by itself (a GitHub rule), so after each push to `ingest/updates` the collection run starts CI on that branch (`gh workflow run ci.yml`); its checks appear on the pull request without the "Approve workflows to run" button. The whole weekly process is explained in plain language in [docs/how-weekly-updates-work.md](docs/how-weekly-updates-work.md).
 
 ### Add a new source
 
@@ -189,7 +191,7 @@ docs/             decisions, content audit, content model, architecture, editor 
 
 ## Cost
 
-About **$9/month**: Azure Static Web Apps Standard ($9 per app per month; needed for visitor sign-in), managed Functions, one Storage account (pennies), Entra External ID (free up to 50,000 signed-in users a month), AI Content Safety (free tier: 5,000 notes and 5,000 photos a month), free GitHub Actions minutes for the scheduled runs, OpenStreetMap tiles and geocoding (Nominatim, 1 request per second). Optional: monthly Web IQ discovery, about $1.06 a month after the free evaluation. Full cost table: [docs/database-plan.md](docs/database-plan.md#10-cost-table).
+About **$9/month**: Azure Static Web Apps Standard ($9 per app per month; needed for visitor sign-in), managed Functions, one Storage account (pennies), Entra External ID (free up to 50,000 signed-in users a month), AI Content Safety (free tier: 5,000 notes and 5,000 photos a month), free GitHub Actions minutes for the scheduled runs, OpenStreetMap tiles and geocoding (Nominatim, 1 request per second). Monthly Web IQ discovery: about $4.25 a month (about 340 searches). The newsletter inbox uses the AgentMail free plan ($0). Full cost table: [docs/database-plan.md](docs/database-plan.md#10-cost-table); weekly process and costs in plain language: [docs/how-weekly-updates-work.md](docs/how-weekly-updates-work.md#what-it-costs).
 
 ## Security and privacy
 

@@ -1,0 +1,45 @@
+{
+  "name": "Blackstone Steakhouse",
+  "aliases": [
+    "Blackstone",
+    "Blackstone Steakhouse Melville"
+  ],
+  "address": "10 Pinelawn Road",
+  "town": "Melville",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11747",
+  "phone": "(631) 271-7780",
+  "website": "https://www.blackstonesteakhouse.com/",
+  "facebookUrl": "https://www.facebook.com/blackstonesteak",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Blackstone+Steakhouse%2C+10+Pinelawn+Road%2C+Melville%2C+NY+11747",
+  "kind": "restaurant",
+  "description": "An upscale steak and sushi restaurant in Melville that also hosts weddings and private parties. A jazz band plays in the bar and lounge on select Thursday evenings.",
+  "dancing": {
+    "floor": "seated",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "The public jazz nights happen in the bar and lounge while guests dine and have drinks, and dining reservations are suggested. We found no mention of dancing at these nights. The venue also hosts weddings and private parties, which are not open to the public.",
+    "evidence": [
+      {
+        "url": "https://huntingtonmatters.com/events/second-chance-jazz-band-thursday-night-jazz-free/",
+        "note": "Community calendar lists the Second Chance Jazz Band in Blackstone's lounge on select Thursdays, 7:30 to 10:30 PM, free, with dining reservations suggested."
+      },
+      {
+        "url": "https://www.blackstonesteakhouse.com/",
+        "note": "Venue home page describes a fine-dining steakhouse with an outdoor lounge and lists its weekly dining specials."
+      },
+      {
+        "url": "https://www.blackstonesteakhouse.com/private-events/",
+        "note": "Private events page offers weddings, mitzvahs, Sweet 16s and corporate parties in its indoor and outdoor spaces."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Sources: blackstonesteakhouse.com, huntingtonmatters.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source blackstone-steakhouse-melville. The jazz nights were not listed on the venue's own Happenings page when we checked; the dates come from a community calendar.",
+  "latitude": 40.788035,
+  "longitude": -73.414929,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

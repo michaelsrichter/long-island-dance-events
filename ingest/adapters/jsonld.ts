@@ -98,14 +98,18 @@ export function foundFromNode(node: Json, pageUrl: string): FoundEvent | undefin
   const status = String(node.eventStatus ?? '').toLowerCase();
   const url = text(node.url) ?? (typeof node['@id'] === 'string' && /^https?:/.test(node['@id']) ? node['@id'] : undefined);
   const types = asArray(node['@type'] as string | string[]).map((t) => String(t).toLowerCase());
+  const description = text(node.description)?.slice(0, 1500);
+  // Some calendar plugins write "price": "0" on every event; "$8 cover" in the text wins.
+  const offers = offersOf(node.offers, node.isAccessibleForFree);
+  const placeholderFree = offers.isFree && node.isAccessibleForFree !== true && /\$\s?\d/.test(description ?? '');
   return {
     title,
-    description: text(node.description)?.slice(0, 1500),
+    description,
     start,
     end: isoToLocal(text(node.endDate)),
     ...placeOf(node.location),
     url,
-    ...offersOf(node.offers, node.isAccessibleForFree),
+    ...(placeholderFree ? {} : offers),
     performers: names(node.performer),
     organizerName: names(node.organizer)[0],
     cancelled: status.includes('cancelled'),

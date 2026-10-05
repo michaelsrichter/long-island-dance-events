@@ -239,6 +239,63 @@ def platform_of(body: str) -> list[str]:
     return [k for k, v in marks.items() if any(x in b for x in v)]
 
 
+GCAL_EMBED_RE = re.compile(r'''calendar\.google\.com/calendar/(?:u/\d+/)?embed\?([^"'<>\s]+)''', re.I)
+
+
+def google_calendar_ids(body: str) -> list[str]:
+    """Calendar ids from embedded Google Calendars (src=...); their public feed is
+    https://calendar.google.com/calendar/ical/<id>/public/basic.ics (decision P40)."""
+    ids = []
+    for m in GCAL_EMBED_RE.finditer(body):
+        q = urllib.parse.parse_qs(html.unescape(m.group(1)))
+        for v in q.get("src", []):
+            v = v.strip()
+            # Google's own holiday and contacts calendars are not event sources.
+            if v and v not in ids and not v.endswith("group.v.calendar.google.com"):
+                ids.append(v)
+    return ids[:6]
+
+
+# Mail services behind newsletter sign-up forms (form actions, scripts or links).
+NEWSLETTER_MARKS = {
+    "mailchimp": ["list-manage.com", "chimpstatic.com", "mailchi.mp", "eepurl.com", "mc4wp"],
+    "constant-contact": ["constantcontact.com", "ctctcdn.com", "lp.constantcontactpages.com", "visitor.r20.constantcontact"],
+    "klaviyo": ["klaviyo.com"],
+    "mailerlite": ["mailerlite.com", "ml-form"],
+    "brevo": ["sibforms.com", "sendinblue.com", "brevo.com"],
+    "substack": ["substack.com"],
+    "convertkit": ["convertkit.com", "ck.page", "kit.com/"],
+    "beehiiv": ["beehiiv.com"],
+    "flodesk": ["flodesk.com"],
+    "emma": ["myemma.com", "e2ma.net"],
+    "aweber": ["aweber.com"],
+    "squarespace-newsletter": ["newsletter-form", "newsletter-block"],
+    "wix-forms": ["wixforms", "wix-forms", "subscribe-form"],
+    "hubspot": ["hsforms.net", "hs-form"],
+    "jotform": ["jotform.com"],
+}
+NEWSLETTER_WORDS = re.compile(r"\b(newsletter|mailing list|email list|e-?mail updates|join our list|sign up for (?:our )?(?:emails?|updates)|subscribe)\b", re.I)
+
+
+def newsletter_facts(body: str, base_url: str) -> dict | None:
+    b = body[:600_000]
+    low = b.lower()
+    platforms = [k for k, v in NEWSLETTER_MARKS.items() if any(x in low for x in v)]
+    email_input = bool(re.search(r'''<input[^>]+type=["']?email''', b, re.I)) or bool(re.search(r'''<input[^>]+name=["']?(?:email|EMAIL|e-mail)''', b))
+    words = bool(NEWSLETTER_WORDS.search(visible_text(b)))
+    links = []
+    for m in re.finditer(r'''(?i)(?:href|action)=["']([^"']+)["']''', b):
+        u = html.unescape(m.group(1))
+        lu = u.lower()
+        if any(x in lu for v in NEWSLETTER_MARKS.values() for x in v) or re.search(r"newsletter|subscribe|mailing-?list|email-?list|signup|sign-up", lu):
+            full = urllib.parse.urljoin(base_url, u)
+            if full.startswith("http") and full not in links:
+                links.append(full)
+    if not (platforms or (email_input and words) or links):
+        return None
+    return {"platforms": platforms, "emailInput": email_input, "words": words, "signupLinks": links[:4]}
+
+
 def visible_text(body: str) -> str:
     b = re.sub(r"(?is)<(script|style|noscript)[^>]*>.*?</\1>", " ", body)
     b = re.sub(r"(?s)<[^>]+>", " ", b)
@@ -295,6 +352,8 @@ def verify(cand: dict, cache_dir: str, today: dt.date, places: list[str]) -> dic
             "jsonldLatest": max(jl_dates).isoformat() if jl_dates else None,
             "jsonldLocalities": sorted({e["locality"] for e in jl if e.get("locality")})[:6],
             "icalLinks": ical, "textChars": len(text),
+            "googleCalendarIds": google_calendar_ids(body),
+            "newsletter": newsletter_facts(body, rec.get("finalUrl") or u),
             **extract_dates(text + " " + (body if "wix" in platform_of(body) else ""), today),
         })
     low = " " + all_text.lower() + " "

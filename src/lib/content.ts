@@ -258,6 +258,17 @@ export async function upcomingFor(test: (e: ResolvedEvent) => boolean): Promise<
   return (await getAllEvents()).filter((e) => isUpcoming(e, now) && test(e));
 }
 
+/**
+ * Share pictures (social.png, social-square.png) are made only for dates in the next three weeks,
+ * when people share an event. Two pictures for every date up to 120 days ahead were about 40% of the
+ * whole website; the nightly rebuild adds them as dates come closer. Later dates use the site picture.
+ */
+export const SHARE_IMAGE_DAYS = 21;
+
+export function hasShareImage(e: Pick<ResolvedEvent, 'date'> & Parameters<typeof isUpcoming>[0], now: Date): boolean {
+  return isUpcoming(e, now) && e.date <= addDays(dateInZone(now, DEFAULT_TZ), SHARE_IMAGE_DAYS - 1);
+}
+
 export function calendarEventOf(e: ResolvedEvent, site: URL | string): CalendarEvent {
   const url = new URL(e.url, site).toString();
   const parts = [

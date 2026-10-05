@@ -1,0 +1,47 @@
+{
+  "name": "Mixed Vibes Band",
+  "type": "band",
+  "aliases": [
+    "Mixed Vibes",
+    "MixedVibesBand"
+  ],
+  "genres": [
+    "party rock covers",
+    "pop",
+    "pop punk",
+    "country",
+    "90s and 2000s rock"
+  ],
+  "website": "https://mixedvibesband.com/",
+  "facebookUrl": "https://www.facebook.com/mixedvibesbandny/",
+  "instagramUrl": "https://www.instagram.com/mixedvibesband/",
+  "youtubeUrl": "https://www.youtube.com/@MixedVibesBand",
+  "description": "Six-piece Long Island party cover band, formed in 2024, that mixes rock, pop, pop-punk and country hits from many decades and changes its set list for each crowd. It plays mostly Suffolk bars such as Daisy's Nashville Lounge (Patchogue and Miller Place), Flanagan's Pub in Lake Ronkonkoma and Birdies in Patchogue.",
+  "dancing": {
+    "rating": "party",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [
+      "freestyle"
+    ],
+    "notes": "A bar party band whose own pages and show listings promise a night of singing and dancing. It often plays Daisy's Nashville Lounge, a country bar, and covers country hits, but we found no report of line dancing to the band itself.",
+    "evidence": [
+      {
+        "url": "https://mixedvibesband.com/about-us/",
+        "note": "Band bio: six-piece party cover band from Long Island that says its shows make people want to dance, sing and party all night."
+      },
+      {
+        "url": "https://www.bandsintown.com/e/108897426-mixed-vibes-band-at-birdies",
+        "note": "Listing for the Oct 23, 2026 Birdies (Patchogue) show, billed as a night of live music, drinks and dancing with a second band."
+      },
+      {
+        "url": "https://mixedvibesband.com/epk/",
+        "note": "Press kit with the list of Long Island venues played and artists covered, from Bon Jovi and Green Day to Luke Combs and Shania Twain."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source mixed-vibes-band. Booking phone on the site is a 203 (Connecticut) number; the band says it is from Long Island and every listed show is in Suffolk."
+}
