@@ -131,6 +131,29 @@ test.describe('directory detail pages', () => {
     expect(place.address.addressRegion).toBe('NY');
   });
 
+  test('logos are never shown wider than their file (no stretched, blurry logos)', async ({ pinned: page }) => {
+    for (const path of ['/organizers/swing-dance-long-island/', '/instructors/lourdes-cruz/', '/organizers/', '/venues/']) {
+      await page.goto(path);
+      const stretched = await page.evaluate(async () => {
+        const imgs = Array.from(document.querySelectorAll<HTMLImageElement>('.entity-hero__logo img, .entity-hero--logo img, .person-card__media--logo img, .person-card__badge img'));
+        const out: string[] = [];
+        for (const img of imgs) {
+          img.loading = 'eager';
+          if (!img.complete) await new Promise((r) => { img.onload = img.onerror = r; });
+          const src = img.currentSrc || img.src;
+          if (!src || /\.svg(\?|$)/.test(src)) continue;
+          const file = new Image();
+          file.src = src;
+          await file.decode().catch(() => {});
+          const shown = img.getBoundingClientRect().width;
+          if (shown > file.naturalWidth + 0.5) out.push(`${src.split('/').pop()}: shown ${shown.toFixed(0)} px, file ${file.naturalWidth} px`);
+        }
+        return out;
+      });
+      expect(stretched, path).toEqual([]);
+    }
+  });
+
   test('a page without a photo or logo keeps the full-width header (no empty picture column)', async ({ pinned: page }) => {
     await page.goto('/performers/');
     const href = await page.locator('.person-card:has(.person-card__media--blank) .person-card__name a').first().getAttribute('href');

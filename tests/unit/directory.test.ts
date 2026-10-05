@@ -5,7 +5,7 @@ import YAML from 'yaml';
 import sharp from 'sharp';
 import { MAX_ENTITY_PHOTOS, instructorSchema, organizerSchema, performerSchema, styleSchema, venueSchema } from '../../src/lib/schemas';
 import { linkIcon, linksOf, telHref } from '../../src/lib/links';
-import { cardMedia, entityImageOptions, initialsOf, searchText, upcomingLabel } from '../../src/lib/directory';
+import { cardMedia, entityImageOptions, initialsOf, logoSizes, searchText, upcomingLabel } from '../../src/lib/directory';
 import { instructorJsonLd, organizerJsonLd, performerJsonLd, venueJsonLd } from '../../src/lib/seo';
 import { buildCmsConfig } from '../../scripts/build-cms-config.mjs';
 
@@ -205,6 +205,37 @@ describe('directory helpers', () => {
     expect(entityImageOptions(img(600, 900).image, 'photo')).toMatchObject({ widths: [400], width: 400, height: 225 });
     expect(entityImageOptions(img(150, 150).image, 'logo')).toMatchObject({ widths: [150], width: 150, height: 150 });
     expect(entityImageOptions(img(150, 150).image, 'logo')).not.toHaveProperty('fit');
+  });
+  it('never shows a logo wider than its file', () => {
+    expect(logoSizes('12rem', 160)).toBe('160px');
+    expect(logoSizes('10rem', 320)).toBe('10rem');
+    expect(logoSizes('3rem', 160)).toBe('3rem');
+    expect(logoSizes('200px', 150)).toBe('150px');
+    expect(logoSizes('(min-width: 40rem) 12rem, 8rem', 100)).toBe('(min-width: 40rem) 12rem, 8rem');
+  });
+});
+
+describe('SVG logos (the CMS accepts them)', () => {
+  const svg = Buffer.from('<svg xmlns="http://www.w3.org/2000/svg" width="240" height="80" viewBox="0 0 240 80"><rect width="240" height="80" fill="#c1121f"/><text x="20" y="50" fill="#fff">Logo</text></svg>');
+  const meta = { src: '/_astro/logo.svg', width: 240, height: 80, format: 'svg' } as any;
+  const config = { service: { entrypoint: './src/lib/focus-image-service.mjs', config: {} } } as any;
+  const logger = { warn: () => {}, info: () => {}, error: () => {} } as any;
+  it('are passed through unchanged instead of converted (conversion would stop every build)', async () => {
+    const opts = entityImageOptions(meta, 'logo');
+    expect(opts).toMatchObject({ format: 'svg', width: 240, height: 80 });
+    expect(opts.widths).toBeUndefined();
+    expect(opts).not.toHaveProperty('quality');
+    const { default: service } = await import('../../src/lib/focus-image-service.mjs');
+    const { widths: _w, ...transform } = opts;
+    const out = await service.transform(svg, { src: meta.src, ...transform }, config, logger);
+    expect(out.format).toBe('svg');
+    expect(Buffer.from(out.data).toString()).toContain('<svg');
+    // What happened before this fix: asking for WebP throws, and Astro stops the build.
+    await expect(service.transform(svg, { src: meta.src, width: 160, height: 53, format: 'webp', quality: 86 }, config, logger)).rejects.toThrow(/SVG/);
+  });
+  it('keep a sensible size when the file is huge or has no size', () => {
+    expect(entityImageOptions({ ...meta, width: 2000, height: 500 }, 'logo')).toMatchObject({ width: 320, height: 80, format: 'svg' });
+    expect(entityImageOptions({ ...meta, width: 0, height: 0 }, 'logo')).toMatchObject({ width: 320, height: 160, format: 'svg' });
   });
 });
 

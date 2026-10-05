@@ -60,6 +60,13 @@ export function upcomingLabel(n: number): string {
  * galleries, JSON-LD) means Astro makes each file once. Never asks for more pixels than the original has.
  */
 export function entityImageOptions(src: ImageMetadata, kind: 'photo' | 'logo', focus?: string) {
+  // SVGs are passed through as they are: Astro's image service cannot convert them (it throws), and they scale cleanly.
+  if (src.format === 'svg') {
+    const w = src.width || 320;
+    const h = src.height || Math.round(w / 2);
+    const width = Math.min(w, 320);
+    return { widths: undefined, width, height: Math.round((width * h) / w), format: 'svg' as const };
+  }
   const aspect = kind === 'photo' ? 16 / 9 : undefined;
   const wanted = kind === 'photo' ? [400, 800] : [160, 320];
   const maxW = aspect ? Math.min(src.width, Math.floor(src.height * aspect)) : src.width;
@@ -75,4 +82,15 @@ export function entityImageOptions(src: ImageMetadata, kind: 'photo' | 'logo', f
     quality: kind === 'logo' ? 86 : 72,
     ...(aspect ? { fit: 'cover' as const, position: focus ?? '50% 50%' } : {}),
   };
+}
+
+/**
+ * `sizes` for a logo that never asks the browser to show it wider than its file (a 160-pixel logo in a
+ * 12rem box stays 160 pixels wide instead of being stretched and blurry). Takes a single length such as "12rem".
+ */
+export function logoSizes(sizes: string, fileWidth: number): string {
+  const m = sizes.trim().match(/^(\d+(?:\.\d+)?)(rem|px)$/);
+  if (!m || !fileWidth) return sizes;
+  const px = Number(m[1]) * (m[2] === 'rem' ? 16 : 1);
+  return px > fileWidth ? `${fileWidth}px` : sizes;
 }
