@@ -5,7 +5,9 @@ This guide is for people who keep the listings correct. You do not need to know 
 ## How editing works
 
 - Go to **`/admin/`** on the website and sign in with GitHub.
-- Every save becomes a change in the project's history on GitHub (a "commit"). The website rebuilds by itself in a few minutes.
+- **Save publishes.** When you press **Save**, the change goes straight to the website: it is saved in the project's history on GitHub (a "commit") and the website rebuilds by itself. It shows up **a few minutes later** (usually about 5). There is no draft, no "Workflow" tab and no separate **Publish** button.
+- **Check before you save.** The preview on the right shows how the entry will look. If you saved something wrong, change it back and save again.
+- Several quick saves are fine: the website catches up with all of them in the next rebuild.
 - Nothing is ever lost. Any change can be undone (see [Fix a mistake](#fix-a-mistake)).
 - Most events are collected **automatically every week** from public calendars. Your main jobs are to **check things the program was unsure about** and **fix mistakes**.
 
@@ -25,7 +27,7 @@ This table lists each tab of the review center, what it shows, and what you can 
 | **Community posts** | Notes and photos waiting for a person (see [Moderate notes and photos](#moderate-notes-and-photos)). | Approve, reject, hide, ban. |
 | **Log** | Every decision, newest first, by month. | |
 
-**How changes reach the website.** Each button saves a small change to the website's files on GitHub (the master copy). The website rebuilds by itself, so changes show on the website **about 10 minutes** later. Every field you fix is added to **Locked fields**, so the weekly check never changes it back. Nothing is ever deleted: **Hide** sets the status to "Hidden by an editor".
+**How changes reach the website.** Each button saves a small change to the website's files on GitHub (the master copy). The website rebuilds by itself, so changes show on the website **a few minutes** later (usually about 5). Every field you fix is added to **Locked fields**, so the weekly check never changes it back. Nothing is ever deleted: **Hide** sets the status to "Hidden by an editor".
 
 **One-time setup.** The first time, the To do tab asks you to **Connect to GitHub**. Be signed in to GitHub as `michaelsrichter`. GitHub shows "Create GitHub App": press the green button. Then choose **Only select repositories** (a repository is a project on GitHub), pick **long-island-dance-events**, and press **Install**. That's all. The helper app can only work on this one website.
 
@@ -221,10 +223,10 @@ To delete someone's sign-in account (after they deleted their data), open the En
 
 | Problem | What to do |
 | --- | --- |
-| I saved something wrong | Open the entry, change it back, save. |
+| I saved something wrong | Open the entry, change it back, save. It is fixed on the website after the next rebuild (a few minutes). |
 | I deleted an entry by mistake | Ask a developer to restore it from the GitHub history (nothing is lost). |
 | The weekly run keeps changing my fix | Add the field to **Locked fields**. |
-| The site did not update | Wait 5 minutes. If it still did not change, check the "Actions" tab on GitHub for a red X and ask a developer. |
+| The site did not update | Wait 10 minutes. If it still did not change, check the "Actions" tab on GitHub for a red X and ask a developer. |
 
 ## Sign-in setup (for the site owner)
 

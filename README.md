@@ -137,7 +137,7 @@ Schemas: [`src/lib/schemas.ts`](src/lib/schemas.ts). Repeating events use a smal
 
 ## Editing (CMS)
 
-Editors use **Decap CMS** at `/admin/`, signing in with GitHub. Each save becomes a commit or pull request.
+Editors use **Decap CMS** at `/admin/`, signing in with GitHub. Each save is a commit on `main` (no draft pull request; decision P55) and goes live with the next deploy.
 
 > **Deviation from the brief:** the brief asked for Keystatic. This project keeps **Decap CMS** because the base template (`michaelsrichter/community-site-starter` and the community-site-kit) is built and tested around it: OAuth bridge Function, generated config, CSP, editor guide and e2e tests. Both are git-backed, so the GitOps model is the same. Recorded in [docs/decision-log.md](docs/decision-log.md).
 

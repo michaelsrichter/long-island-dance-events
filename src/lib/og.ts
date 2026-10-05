@@ -1,6 +1,8 @@
 /** Build-time social images (Open Graph 1200x630 and square 1080x1080) rendered with satori + sharp. */
-import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { mkdirSync, readFileSync, renameSync, utimesSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
+import { dirname, join } from 'node:path';
 import satori from 'satori';
 import sharp from 'sharp';
 
@@ -15,6 +17,104 @@ function getFonts() {
   ];
   return fonts;
 }
+
+/*
+ * Saved pictures (Phase 0 of docs/proposals/postgres-live-site.md). Drawing ~1,700 share pictures took about
+ * 4 of the 5.5 minutes of every build, and most are the same as last time. Each finished picture is saved under
+ * a fingerprint of everything that goes into it: the card (text, photo or logo), the size, this file's drawing
+ * code, the fonts and the satori and sharp versions. A later build with the same fingerprint reuses the file.
+ * The deploy workflow keeps the folder between runs and drops pictures not used for 14 days (a reused picture
+ * gets a fresh date). OG_CACHE_DIR picks the folder (default .cache/og); OG_CACHE_DIR=off turns it off.
+ */
+const SOURCE = join(process.cwd(), 'src', 'lib', 'og.ts');
+const sha = (...parts: (string | Buffer)[]) => {
+  const h = createHash('sha256');
+  for (const p of parts) h.update(p).update('\0');
+  return h.digest('hex');
+};
+function packageVersion(name: string): string {
+  try {
+    let dir = dirname(require.resolve(name));
+    for (let i = 0; i < 6; i++, dir = dirname(dir)) {
+      try {
+        const pkg = JSON.parse(readFileSync(join(dir, 'package.json'), 'utf8')) as { name?: string; version?: string };
+        if (pkg.name === name) return pkg.version ?? '';
+      } catch {
+        /* not here: look one folder up */
+      }
+    }
+  } catch {
+    /* not installed the usual way */
+  }
+  return '';
+}
+type Store = { dir: string; design: string; hits: number; drawn: number };
+let store: Store | null | undefined;
+function getStore(): Store | null {
+  if (store !== undefined) return store;
+  const setting = process.env.OG_CACHE_DIR;
+  if (setting === 'off') return (store = null);
+  let code: Buffer;
+  try {
+    // Without the drawing code we cannot tell when the design changed, so nothing is saved.
+    code = readFileSync(SOURCE);
+  } catch {
+    return (store = null);
+  }
+  const design = sha(code, ...getFonts().map((f) => f.data), packageVersion('satori'), JSON.stringify(sharp.versions));
+  const s: Store = { dir: setting || join(process.cwd(), '.cache', 'og'), design, hits: 0, drawn: 0 };
+  process.once('exit', () => {
+    if (s.hits || s.drawn) console.log(`[og] share pictures: ${s.hits} reused, ${s.drawn} drawn (saved in ${s.dir})`);
+  });
+  return (store = s);
+}
+
+/** How many pictures were reused and drawn so far (for tests and the build log). */
+export function ogCacheStats(): { enabled: boolean; dir?: string; hits: number; drawn: number } {
+  const s = getStore();
+  return s ? { enabled: true, dir: s.dir, hits: s.hits, drawn: s.drawn } : { enabled: false, hits: 0, drawn: 0 };
+}
+
+/** The saved copy of a picture with this fingerprint, or draw it once and save it. */
+async function saved(kind: string, parts: (string | Buffer)[], draw: () => Promise<Buffer>): Promise<Buffer> {
+  const s = getStore();
+  if (!s) return draw();
+  const key = sha(s.design, kind, ...parts);
+  const file = join(s.dir, key.slice(0, 2), `${key}.${kind}`);
+  try {
+    const buf = readFileSync(file);
+    s.hits++;
+    try {
+      const now = new Date();
+      utimesSync(file, now, now);
+    } catch {
+      /* only used to keep pictures that are still in use */
+    }
+    return buf;
+  } catch {
+    /* not saved yet */
+  }
+  const buf = await draw();
+  s.drawn++;
+  try {
+    mkdirSync(dirname(file), { recursive: true });
+    const tmp = `${file}.${process.pid}.tmp`;
+    writeFileSync(tmp, buf);
+    renameSync(tmp, file);
+  } catch {
+    /* saving is only a speed-up */
+  }
+  return buf;
+}
+
+/** Fingerprint of a photo or logo file, so a new photo under the same name is drawn again. */
+const fileFingerprint = (path: string): string => {
+  try {
+    return sha(readFileSync(path));
+  } catch {
+    return `missing:${path}`;
+  }
+};
 
 type Node = { type: string; props: Record<string, unknown> & { children?: unknown } };
 const h = (type: string, style: Record<string, unknown>, children?: unknown): Node => ({ type, props: { style, children } });
@@ -118,17 +218,21 @@ function tree(card: SocialCard, w: number, hgt: number): Node {
 }
 
 export async function renderSocialPng(card: SocialCard, size: 'og' | 'square'): Promise<Buffer> {
-  const [w, hgt] = size === 'og' ? [1200, 630] : [1080, 1080];
-  const svg = await satori(tree(card, w, hgt) as never, { width: w, height: hgt, fonts: getFonts() });
-  // A 256-colour palette looks the same for these flat cards and halves the file size,
-  // which keeps the site well under the Static Web Apps size limit (two images per upcoming event).
-  return sharp(Buffer.from(svg)).png({ palette: true, quality: 90, effort: 10, compressionLevel: 9, dither: 1 }).toBuffer();
+  return saved('png', [size, JSON.stringify(card)], async () => {
+    const [w, hgt] = size === 'og' ? [1200, 630] : [1080, 1080];
+    const svg = await satori(tree(card, w, hgt) as never, { width: w, height: hgt, fonts: getFonts() });
+    // A 256-colour palette looks the same for these flat cards and halves the file size,
+    // which keeps the site well under the Static Web Apps size limit (two images per upcoming event).
+    return sharp(Buffer.from(svg)).png({ palette: true, quality: 90, effort: 10, compressionLevel: 9, dither: 1 }).toBuffer();
+  });
 }
 
 /** Cards with a photo or logo are JPEG (photos look wrong in a 256-colour palette). */
 export async function renderSocialJpeg(card: SocialCard): Promise<Buffer> {
-  const svg = await satori(tree(card, 1200, 630) as never, { width: 1200, height: 630, fonts: getFonts() });
-  return sharp(Buffer.from(svg)).jpeg({ quality: 80, mozjpeg: true, chromaSubsampling: '4:2:0' }).toBuffer();
+  return saved('jpg', ['og', JSON.stringify(card)], async () => {
+    const svg = await satori(tree(card, 1200, 630) as never, { width: 1200, height: 630, fonts: getFonts() });
+    return sharp(Buffer.from(svg)).jpeg({ quality: 80, mozjpeg: true, chromaSubsampling: '4:2:0' }).toBuffer();
+  });
 }
 
 /**
@@ -136,6 +240,12 @@ export async function renderSocialJpeg(card: SocialCard): Promise<Buffer> {
  * Returns undefined when the photo is too small (we never stretch a photo more than a little).
  */
 export async function photoPanel(path: string, focus = '50% 50%'): Promise<string | undefined> {
+  // An empty saved file means "too small": the answer is remembered too.
+  const buf = await saved('panel', [fileFingerprint(path), focus], async () => (await cropPanel(path, focus)) ?? Buffer.alloc(0));
+  return buf.length ? `data:image/jpeg;base64,${buf.toString('base64')}` : undefined;
+}
+
+async function cropPanel(path: string, focus: string): Promise<Buffer | undefined> {
   const { width: W, height: H } = PHOTO_PANEL;
   const img = sharp(path).rotate();
   const meta = await img.metadata();
@@ -148,18 +258,19 @@ export async function photoPanel(path: string, focus = '50% 50%'): Promise<strin
   const [fx, fy] = focus.split(/\s+/).map((p) => (Number.parseFloat(p) || 50) / 100) as [number, number];
   const left = Math.min(rw - W, Math.max(0, Math.round((fx ?? 0.5) * rw - W / 2)));
   const top = Math.min(rh - H, Math.max(0, Math.round((fy ?? 0.5) * rh - H / 2)));
-  const buf = await sharp(path).rotate().resize(rw, rh).extract({ left, top, width: W, height: H }).jpeg({ quality: 82 }).toBuffer();
-  return `data:image/jpeg;base64,${buf.toString('base64')}`;
+  return sharp(path).rotate().resize(rw, rh).extract({ left, top, width: W, height: H }).jpeg({ quality: 82 }).toBuffer();
 }
 
 /** A logo as a PNG data: URL that fits the white plate (SVG logos are drawn by sharp). */
 export async function logoPlate(path: string): Promise<string | undefined> {
-  try {
-    const buf = await sharp(path, { density: 300 }).resize(268, 268, { fit: 'inside', withoutEnlargement: false }).png().toBuffer();
-    return `data:image/png;base64,${buf.toString('base64')}`;
-  } catch {
-    return undefined;
-  }
+  const buf = await saved('logo', [fileFingerprint(path)], async () => {
+    try {
+      return await sharp(path, { density: 300 }).resize(268, 268, { fit: 'inside', withoutEnlargement: false }).png().toBuffer();
+    } catch {
+      return Buffer.alloc(0);
+    }
+  });
+  return buf.length ? `data:image/png;base64,${buf.toString('base64')}` : undefined;
 }
 
 import type { ResolvedEvent } from './content';

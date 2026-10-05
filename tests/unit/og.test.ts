@@ -1,9 +1,12 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import sharp from 'sharp';
-import { mkdtempSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { photoPanel, renderSocialJpeg, renderSocialPng } from '../../src/lib/og';
+
+// Saved pictures go to a fresh folder for this test file (never the project's .cache/og).
+process.env.OG_CACHE_DIR = mkdtempSync(join(tmpdir(), 'og-cache-'));
+const { ogCacheStats, photoPanel, renderSocialJpeg, renderSocialPng } = await import('../../src/lib/og');
 
 describe('social images', () => {
   it('renders real glyphs (fonts decode correctly)', async () => {
@@ -43,5 +46,59 @@ describe('social images', () => {
     const meta = await sharp(jpg).metadata();
     expect([meta.format, meta.width, meta.height]).toEqual(['jpeg', 1200, 630]);
     expect(jpg.length).toBeLessThan(120 * 1024);
+  }, 30_000);
+});
+
+describe('saved share pictures (faster builds)', () => {
+  const card = { title: 'Swing at the Lodge', month: 'Nov', day: '7', weekday: 'Sat', lines: ['8 PM · $20', 'Brumidi Lodge, Deer Park'], footer: 'Partner dancing' };
+
+  it('reuses the saved picture when nothing on the card changed', async () => {
+    const before = ogCacheStats();
+    const first = await renderSocialPng(card, 'og');
+    const second = await renderSocialPng({ ...card }, 'og');
+    const after = ogCacheStats();
+    expect(after.enabled).toBe(true);
+    expect(after.drawn - before.drawn).toBe(1);
+    expect(after.hits - before.hits).toBe(1);
+    expect(second.equals(first)).toBe(true);
+    expect(readdirSync(after.dir!).length).toBeGreaterThan(0);
+  }, 30_000);
+
+  it('draws a new picture when any fact or the size changes', async () => {
+    const base = await renderSocialPng(card, 'og');
+    const before = ogCacheStats();
+    const moved = await renderSocialPng({ ...card, lines: ['9 PM · $20', 'Brumidi Lodge, Deer Park'] }, 'og');
+    const cancelled = await renderSocialPng({ ...card, status: 'Cancelled' }, 'og');
+    const square = await renderSocialPng(card, 'square');
+    expect(ogCacheStats().drawn - before.drawn).toBe(3);
+    expect(moved.equals(base)).toBe(false);
+    expect(cancelled.equals(base)).toBe(false);
+    expect((await sharp(square).metadata()).width).toBe(1080);
+  }, 30_000);
+
+  it('notices a new photo saved under the same file name', async () => {
+    sharp.cache(false); // Windows: sharp's file cache keeps the old file open, so it could not be replaced
+    const dir = mkdtempSync(join(tmpdir(), 'og-photo-'));
+    const file = join(dir, 'venue.jpg');
+    writeFileSync(file, await sharp({ create: { width: 1200, height: 900, channels: 3, background: '#3a6ea5' } }).jpeg().toBuffer());
+    const blue = await photoPanel(file);
+    expect(await photoPanel(file)).toBe(blue);
+    writeFileSync(file, await sharp({ create: { width: 1200, height: 900, channels: 3, background: '#a53a3a' } }).jpeg().toBuffer());
+    const red = await photoPanel(file);
+    expect(red).toMatch(/^data:image\/jpeg;base64,/);
+    expect(red).not.toBe(blue);
+  }, 30_000);
+
+  it('can be turned off with OG_CACHE_DIR=off', async () => {
+    vi.resetModules();
+    const saved = process.env.OG_CACHE_DIR;
+    process.env.OG_CACHE_DIR = 'off';
+    try {
+      const og = await import('../../src/lib/og');
+      await og.renderSocialPng({ title: 'Not saved', lines: ['Nothing written'] }, 'og');
+      expect(og.ogCacheStats()).toEqual({ enabled: false, hits: 0, drawn: 0 });
+    } finally {
+      process.env.OG_CACHE_DIR = saved;
+    }
   }, 30_000);
 });

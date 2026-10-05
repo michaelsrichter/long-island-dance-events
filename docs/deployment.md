@@ -251,12 +251,14 @@ Both are free. Create the app with **your own** Google or Facebook account (step
 
 The deployment action:
 
-1. Installs dependencies.
-2. Builds `dist/`.
-3. Checks the site size (`npm run test:size`) and saves the live site's `/sitemap-state.json`.
+1. Installs dependencies, then restores the saved share pictures and resized photos from earlier builds (`.cache/og/` and `node_modules/.astro/assets/`, decision P55).
+2. Builds `dist/`. Share pictures whose facts did not change are reused instead of drawn again; the build log ends with a line like `[og] share pictures: 1980 reused, 12 drawn`.
+3. Checks the site size (`npm run test:size`), forgets saved pictures not used for 14 days, saves the rest for the next build, and saves the live site's `/sitemap-state.json`.
 4. Uploads static output and `api/`, then runs the smoke test.
 5. Production only: sends new and changed pages to IndexNow (when `INDEXNOW_KEY` is set). This step never fails the deploy.
 6. Azure serves static files and Functions.
+
+If a share picture ever looks out of date, start fresh: on GitHub, open **Actions → Caches** and delete the entries whose names start with `site-images-` and `ci-images-`, then run the workflow again. The next build draws every picture (about 5 minutes longer, once). Any change to `src/lib/og.ts`, the fonts or the satori and sharp versions does this by itself.
 
 Before enabling indexing, verify the deployed host:
 

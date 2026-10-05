@@ -1,6 +1,6 @@
 # Proposal: a live database, so changes show up in seconds
 
-> **Status: proposal, waiting for the owner's approval.** Written October 5, 2026. Nothing on the live site or in Azure has changed.
+> **Status: proposal, waiting for the owner's approval.** Written October 5, 2026. Nothing on the live site or in Azure has changed, except Phase 0 ([section 12](#12-phase-0-quick-wins-we-can-ship-right-after-approval), 0a and 0b), which shipped on October 5, 2026 (decision P55).
 > Prices are Azure list prices for East US 2, checked October 5, 2026 (see [Prices we checked](#18-prices-we-checked)).
 > Related: [database-plan.md](../database-plan.md), [architecture.md](../architecture.md), decisions P46, P47, P48, P51 and P52 in [decision-log.md](../decision-log.md).
 

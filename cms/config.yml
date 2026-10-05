@@ -1,6 +1,6 @@
 # Decap CMS configuration for Long Island Dance Events.
-# Editors sign in with GitHub at /admin/. Every change becomes a pull request (editorial workflow),
-# is checked by automated tests, gets a preview website, and goes live when it is published (merged).
+# Editors sign in with GitHub at /admin/. Each save is a commit on main and goes live with the next deploy
+# (a few minutes); there is no draft or "Publish" step (Phase 0 of docs/proposals/postgres-live-site.md, decision P55).
 # The weekly scrape writes the same JSON files. Fields listed in "Locked fields" are never overwritten by it.
 backend:
   name: github
@@ -17,7 +17,8 @@ backend:
     uploadMedia: 'Upload "{{path}}"'
     deleteMedia: 'Delete "{{path}}"'
 
-publish_mode: editorial_workflow
+# "simple": Save publishes straight to main. "editorial_workflow" would make every save a draft pull request.
+publish_mode: simple
 show_preview_links: true
 locale: en
 
