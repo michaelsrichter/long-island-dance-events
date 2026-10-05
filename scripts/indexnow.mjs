@@ -40,19 +40,32 @@ async function main() {
     if (dryRun) console.log(urls.slice(0, 20).join('\n'));
     return;
   }
+  // Right after a deploy the key file can take a moment to show up everywhere; IndexNow says 403 until it does.
+  const keyLocation = `${site}/${key}.txt`;
+  for (let i = 0; i < 6; i++) {
+    const ok = await fetch(keyLocation, { signal: AbortSignal.timeout(10000) })
+      .then(async (r) => r.ok && (await r.text()).trim() === key)
+      .catch(() => false);
+    if (ok) break;
+    await new Promise((r) => setTimeout(r, 10000));
+  }
   for (let i = 0; i < urls.length; i += 10000) {
     const urlList = urls.slice(i, i + 10000);
-    try {
-      const res = await fetch('https://api.indexnow.org/indexnow', {
-        method: 'POST',
-        headers: { 'content-type': 'application/json; charset=utf-8' },
-        body: JSON.stringify({ host, key, keyLocation: `${site}/${key}.txt`, urlList }),
-        signal: AbortSignal.timeout(30000),
-      });
-      // 200 = received, 202 = received and the key is being checked.
-      console.log(`[indexnow] sent ${urlList.length} addresses: HTTP ${res.status}`);
-    } catch (err) {
-      console.log(`[indexnow] could not reach IndexNow: ${err?.message ?? err}`);
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      try {
+        const res = await fetch('https://api.indexnow.org/indexnow', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json; charset=utf-8' },
+          body: JSON.stringify({ host, key, keyLocation, urlList }),
+          signal: AbortSignal.timeout(30000),
+        });
+        // 200 = received, 202 = received and the key is being checked, 403 = key not (yet) found.
+        console.log(`[indexnow] sent ${urlList.length} addresses: HTTP ${res.status}`);
+        if (res.status !== 403 && res.status !== 429) break;
+      } catch (err) {
+        console.log(`[indexnow] could not reach IndexNow: ${err?.message ?? err}`);
+      }
+      if (attempt < 3) await new Promise((r) => setTimeout(r, 30000));
     }
   }
 }
