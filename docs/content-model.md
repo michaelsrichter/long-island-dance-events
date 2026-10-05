@@ -77,8 +77,8 @@ These fields are shared by the directory entities. They are all optional, so old
 | `hours` | venues, organizers | Plain text, e.g. "Tue-Sun 4 PM-midnight; closed Mon" (max 300). |
 | `address`, `postalCode`, `county` | organizers (venues already have them) | Only for an organizer's own studio or office. |
 | `town` | bands/DJs, teachers | Home base, town only. |
-| `logo` | venues, organizers, bands/DJs, teachers who run a school | One image: `image`, `alt` (required when there is an image), `credit`, `creditUrl` (page it came from), `imageSource` (original file address, not shown). An empty logo box saved by the CMS counts as "no logo". |
-| `photos` | all five | Up to 6 images: `image`, `alt` (required), `credit`, `creditUrl`, `licenseUrl` (Creative Commons photos), `imageSource`, `caption`, `focus` ("x% y%", what to keep in view when cropped). The first photo is the card picture and the page-top picture. |
+| `logo` | venues, organizers, bands/DJs, teachers who run a school | One image: `image`, `alt` (optional; pages fall back to "<name> logo"), `credit`, `creditUrl` (page it came from), `imageSource` (original file address, not shown). An empty logo box saved by the CMS counts as "no logo". |
+| `photos` | all five | Up to 6 images: `image`, `alt` (required), `credit` (required), `creditUrl`, `licenseUrl` (Creative Commons photos), `imageSource`, `caption`, `focus` ("x% y%", what to keep in view when cropped). The first photo is the card picture and the page-top picture. |
 | `evidence` | all five | Sources for these details: list of `url` + `note` (our own words, max 240). |
 | `factsSource` | venues, organizers, teachers, bands/DJs | One public line, e.g. "Checked October 4, 2026. Sources: example.com, facebook.com." |
 

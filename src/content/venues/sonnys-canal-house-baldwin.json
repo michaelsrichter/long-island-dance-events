@@ -9,9 +9,48 @@
   "website": "http://sonnyscanalhouse.com/",
   "facebookUrl": "https://www.facebook.com/sonnyscanalhouse/",
   "kind": "restaurant",
-  "factsSource": "Checked October 4, 2026. Source: Bing Places (via Web IQ). Waterfront restaurant and bar on a canal.",
+  "factsSource": "Checked October 4, 2026. Sources: sonnyscanalhouse.com, tiktok.com, facebook.com, opentable.com.",
   "latitude": 40.636993,
   "longitude": -73.59844,
   "coordinatesSource": "Bing Places (via Web IQ); the free geocoders did not find this address",
-  "reviewNotes": "Ira's List's calendar lists live bands here. Research the dance floor."
+  "reviewNotes": "Ira's List's calendar lists live bands here. Research the dance floor.\n\nDirectory research 2026-10-04: The website footer says: 'The content on this website is owned by us and our licensors. Do not copy any content (including images) without our consent.' Following the image rule, no logo or photos were taken (we also skipped their social-page images). If the owner wants images, ask Sonny's for permission; candidates are the fish logo (https://cdn.websites.hibu.com/8c9d3600429644058ce51e5831736d0f/dms3rep/multi/Fish+Logo+Slant+Web+Back.jpg) and the home-page photos IMG_4232, IMG_9292 and IMG_1667. Website corrected to https://www.sonnyscanalhouse.com/ (the old http address redirects there). The X account @Sonnys11510 matches the bar but looks inactive (newest post seen is from 2013), so it is not recorded; the website's X icon links nowhere specific. The Google listing also links a personal LinkedIn profile (not recorded). Dance floor: a band calls it 'huge' and 'expanded' (2026); diner reviews differ (ample vs. small). The 'Event Schedule' page loads its calendar with a script that we did not read. Locals call the area Baldwin Harbor; the mailing town is Baldwin.",
+  "instagramUrl": "https://www.instagram.com/sonnys_canalhouse/",
+  "tiktokUrl": "https://www.tiktok.com/@sonnyscanalhousebaldwin",
+  "email": "info@sonnyscanalhouse.com",
+  "hours": "Sun-Thu 11 AM-12 AM; Fri-Sat 11 AM-2 AM; kitchen until 9:30 PM (Fri-Sat 10:30 PM)",
+  "description": "A restaurant and bar on a canal in Baldwin Harbor, with an outdoor deck and a dock for guests who come by boat. It has live music every week, from local bands to acoustic acts, and a dance floor near the band.",
+  "evidence": [
+    {
+      "url": "https://www.sonnyscanalhouse.com/",
+      "note": "Venue's own site: 1 Jefferson Pl, Baldwin NY 11510, (516) 867-9833, info@ email, open 7 days, waterfront deck, boat dock, weekly live entertainment; links Facebook and Instagram."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=6220208699636743659",
+      "note": "Google listing: same address and phone, 'Live music', hours Sun-Thu 11 AM-12 AM and Fri-Sat 11 AM-2 AM (marked confirmed by the business); profiles link the same Facebook and Instagram."
+    },
+    {
+      "url": "https://www.tiktok.com/@sonnyscanalhousebaldwin",
+      "note": "TikTok profile bio repeats the bar's slogan and gives 1 Jefferson Pl, Baldwin, NY."
+    },
+    {
+      "url": "https://www.facebook.com/Track9band/posts/-its-going-to-be-a-party-saturday-night-as-the-band-returns-home-to-the-one-and-/1607224808081852/",
+      "note": "Track 9 Band's post (also on Instagram) about playing Sonny's says it has a 'huge expanded dance floor'."
+    },
+    {
+      "url": "https://www.opentable.com/r/sonnys-canal-house-restaurant-and-bar-baldwin",
+      "note": "One OpenTable diner review calls the dance floor small; a TripAdvisor review calls it ample - reports differ."
+    },
+    {
+      "url": "https://webtunes.com/venues/sonnys",
+      "note": "Webtunes lists Sonny's Canal House as a live-music venue at 1 Jefferson Pl, Baldwin, with local bands and acoustic acts."
+    },
+    {
+      "url": "https://www.sonnyscanalhouse.com/contact",
+      "note": "Shows the email and phone number."
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Baldwin,_Nassau_County,_New_York",
+      "note": "Shows the county."
+    }
+  ]
 }

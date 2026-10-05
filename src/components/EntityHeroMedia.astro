@@ -3,16 +3,19 @@
 import EntityImage from './EntityImage.astro';
 import type { EntityImageData } from '../lib/directory';
 interface Props {
+  /** Whose picture this is (fallback alt text for a logo). */
+  name: string;
   photo?: EntityImageData | undefined;
   logo?: EntityImageData | undefined;
 }
-const { photo, logo } = Astro.props;
+const { name, photo, logo } = Astro.props;
+const logoAlt = logo?.alt || `${name} logo`;
 ---
 {photo ? (
   <figure class="entity-hero">
     <div class="entity-hero__frame">
-      <EntityImage src={photo.image} alt={photo.alt} focus={photo.focus} sizes="(min-width: 56rem) 26rem, calc(100vw - 2rem)" loading="eager" />
-      {logo && <span class="entity-hero__logo"><EntityImage kind="logo" src={logo.image} alt={logo.alt} sizes="4.5rem" loading="eager" /></span>}
+      <EntityImage src={photo.image} alt={photo.alt ?? ''} focus={photo.focus} sizes="(min-width: 56rem) 26rem, calc(100vw - 2rem)" loading="eager" />
+      {logo && <span class="entity-hero__logo"><EntityImage kind="logo" src={logo.image} alt={logoAlt} sizes="4.5rem" loading="eager" /></span>}
     </div>
     {photo.credit && (
       <figcaption class="entity-hero__credit">
@@ -23,6 +26,6 @@ const { photo, logo } = Astro.props;
   </figure>
 ) : logo ? (
   <div class="entity-hero entity-hero--logo">
-    <EntityImage kind="logo" src={logo.image} alt={logo.alt} sizes="12rem" loading="eager" />
+    <EntityImage kind="logo" src={logo.image} alt={logoAlt} sizes="12rem" loading="eager" />
   </div>
 ) : null}

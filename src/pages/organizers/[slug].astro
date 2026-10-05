@@ -36,7 +36,7 @@ const ld = organizerJsonLd(org.id, o, site, { ...(await entityImageUrls(o, site)
 ---
 <BaseLayout title={o.seoTitle ?? `${o.name}: dances and classes`} description={o.seoDescription ?? `${o.description ?? `${ORGANIZER_TYPE_LABELS[o.type]}${o.town ? ` in ${o.town}` : ''}.`} Upcoming events, contact details and links.`.slice(0, 165)} pageType="organizer" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={o.name} lede={o.description ?? `${ORGANIZER_TYPE_LABELS[o.type]}${o.town ? ` in ${o.town}` : ''}.`} crumbs={crumbs}>
-    {(photo || o.logo) && <EntityHeroMedia slot="media" photo={photo} logo={o.logo} />}
+    {(photo || o.logo) && <EntityHeroMedia slot="media" name={o.name} photo={photo} logo={o.logo} />}
     <Reactions type="organizer" id={org.id} name={o.name} variant="hero" />
     <PersonLinks links={links} name={o.name} variant="buttons" location="organizer" class="mt-5" />
   </PageHeader>

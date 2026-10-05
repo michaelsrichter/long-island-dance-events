@@ -18,7 +18,7 @@ const { photos, heading = 'Photos' } = Astro.props;
       {photos.map((p) => (
         <li>
           <figure>
-            <EntityImage src={p.image} alt={p.alt} focus={p.focus} sizes="(min-width: 64rem) 22rem, (min-width: 38rem) 46vw, calc(100vw - 2rem)" />
+            <EntityImage src={p.image} alt={p.alt ?? ''} focus={p.focus} sizes="(min-width: 64rem) 22rem, (min-width: 38rem) 46vw, calc(100vw - 2rem)" />
             {(p.caption || p.credit) && (
               <figcaption>
                 {p.caption && <span>{p.caption} </span>}

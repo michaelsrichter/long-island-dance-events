@@ -37,7 +37,7 @@ const hasContact = Boolean(p.phone || p.email || p.bookingUrl || links.length ||
 ---
 <BaseLayout title={p.seoTitle ?? `${p.name}: where to dance to them on Long Island`} description={p.seoDescription ?? `${p.name} (${PERFORMER_TYPE_LABELS[p.type]}). Upcoming dances and gigs in Nassau and Suffolk.`} pageType="person" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={p.name} lede={lede} crumbs={crumbs}>
-    {(photo || p.logo) && <EntityHeroMedia slot="media" photo={photo} logo={p.logo} />}
+    {(photo || p.logo) && <EntityHeroMedia slot="media" name={p.name} photo={photo} logo={p.logo} />}
     {p.description && <p class="page-header__meta">{kindLine}</p>}
     <Reactions type="performer" id={person.id} name={p.name} variant="hero" />
     <PersonLinks links={links} name={p.name} variant="buttons" location="performer" class="mt-5" />

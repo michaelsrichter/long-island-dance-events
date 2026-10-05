@@ -78,7 +78,7 @@ x-photo-fields: &photo-fields
   # Uploaded photos are resized to 1600 pixels wide and saved as JPG without camera data (location, date, camera).
   - { label: 'Photo', name: image, widget: image, choose_url: false, media_processing: { enabled: true, format: { enabled: true, default: jpeg }, quality: 82, strip_metadata: true, width: 1600 }, hint: 'JPG, PNG or WebP, at least 600 pixels wide. It is resized and saved as a JPG when you upload it; the site makes smaller copies for phones.' }
   - { label: 'Alt text', name: alt, widget: string, hint: 'Describe the photo in plain words for people who cannot see it, for example "The brick front of the hall with a red awning".' }
-  - { label: 'Credit', name: credit, widget: string, required: false, hint: 'Shown under the photo, for example "Photo: The Nutty Irishman (website)" or "Photo: Jane Doe, CC BY-SA 4.0, via Wikimedia Commons".' }
+  - { label: 'Credit', name: credit, widget: string, hint: 'Required. Shown under the photo, for example "Photo: The Nutty Irishman (website)" or "Photo: Jane Doe, CC BY-SA 4.0, via Wikimedia Commons".' }
   - { label: 'Credit link', name: creditUrl, widget: string, required: false, hint: 'The page where you found the photo.' }
   - { label: 'License link (Creative Commons photos only)', name: licenseUrl, widget: string, required: false }
   - { label: 'Original file address (not shown)', name: imageSource, widget: string, required: false, hint: 'Web address of the original image file, for our records.' }
@@ -102,7 +102,7 @@ x-logo: &logo
   widget: object
   required: false
   collapsed: true
-  hint: 'Their own logo, from their website. If you add one, also fill in the alt text (for example "The Nutty Irishman logo").'
+  hint: 'Their own logo, from their website. Also fill in the alt text (for example "The Nutty Irishman logo"); if you leave it empty the site says "<name> logo".'
   fields:
     - { label: 'Logo file', name: image, widget: image, required: false, choose_url: false, hint: 'PNG, SVG or JPG. A square-ish logo at least 200 pixels wide works best.' }
     - { label: 'Alt text', name: alt, widget: string, required: false, hint: 'Needed when there is a logo. Usually "<name> logo".' }

@@ -131,6 +131,14 @@ test.describe('directory detail pages', () => {
     expect(place.address.addressRegion).toBe('NY');
   });
 
+  test('a page without a photo or logo keeps the full-width header (no empty picture column)', async ({ pinned: page }) => {
+    await page.goto('/performers/');
+    const href = await page.locator('.person-card:has(.person-card__media--blank) .person-card__name a').first().getAttribute('href');
+    await page.goto(href!);
+    await expect(page.locator('.page-header')).toBeVisible();
+    await expect(page.locator('.page-header--media, .page-header__media')).toHaveCount(0);
+  });
+
   test('dance style pages credit their openly licensed photos', async ({ pinned: page }) => {
     await page.goto('/styles/east-coast-swing/');
     await expect(page.locator('.entity-hero img')).toBeVisible();

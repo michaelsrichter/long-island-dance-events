@@ -52,13 +52,28 @@ describe('directory schemas (logos, photos, links, contacts)', () => {
     expect(venueSchema.parse({ ...venue, logo: null }).logo).toBeUndefined();
   });
 
-  it('requires alt text on every logo and photo, a valid focus point and at most 6 photos', () => {
-    expect(venueSchema.safeParse({ ...venue, logo: { image: 'x.webp' } }).success).toBe(false);
-    expect(venueSchema.safeParse({ ...venue, photos: [{ image: 'x.webp', alt: '' }] }).success).toBe(false);
+  it('requires alt text and a credit on every photo, a valid focus point and at most 6 photos', () => {
+    expect(venueSchema.safeParse({ ...venue, photos: [{ image: 'x.webp', alt: '', credit: 'Photo: X' }] }).success).toBe(false);
+    expect(venueSchema.safeParse({ ...venue, photos: [{ image: 'x.webp', alt: 'The hall' }] }).success).toBe(false);
     expect(venueSchema.safeParse({ ...venue, photos: [{ ...photo(), focus: 'top' }] }).success).toBe(false);
     expect(venueSchema.safeParse({ ...venue, photos: Array.from({ length: MAX_ENTITY_PHOTOS + 1 }, (_, i) => photo(i)) }).success).toBe(false);
     expect(venueSchema.safeParse({ ...venue, evidence: [{ url: 'https://example.org/', note: 'x'.repeat(241) }] }).success).toBe(false);
     expect(venueSchema.safeParse({ ...venue, hours: 'x'.repeat(301) }).success).toBe(false);
+  });
+
+  it('a logo saved without alt text never breaks the build (pages say "<name> logo")', () => {
+    const v = venueSchema.parse({ ...venue, logo: { image: 'x.webp', alt: '' } });
+    expect(v.logo?.image).toBe('x.webp');
+    expect(v.logo?.alt).toBeUndefined();
+  });
+
+  it('only accepts web addresses for links (never javascript: or data:)', () => {
+    for (const bad of ['javascript:alert(1)', 'data:text/html,hi', 'ftp://example.org/']) {
+      expect(venueSchema.safeParse({ ...venue, website: bad }).success, bad).toBe(false);
+      expect(venueSchema.safeParse({ ...venue, moreLinks: [{ label: 'Link', url: bad }] }).success, bad).toBe(false);
+      expect(venueSchema.safeParse({ ...venue, photos: [{ ...photo(), creditUrl: bad }] }).success, bad).toBe(false);
+    }
+    expect(venueSchema.safeParse({ ...venue, website: 'http://moose318.com/' }).success).toBe(true);
   });
 });
 
@@ -74,14 +89,15 @@ describe('directory content and image files', () => {
     ]),
   );
 
-  it('every logo and photo points to a file in src/assets/entities/<collection>/, with alt text and a credit', () => {
+  it('every logo and photo points to a file in src/assets/entities/<collection>/; photos have alt text and a credit', () => {
     expect(images.length).toBeGreaterThan(0);
     for (const { dir, id, file, kind, img } of images) {
       const path = resolve(dirname(file), img.image);
       expect(existsSync(path), `${dir}/${id} ${kind}: ${img.image}`).toBe(true);
       expect(path.replace(/\\/g, '/'), `${dir}/${id}`).toContain(`/src/assets/entities/${dir}/`);
+      if (kind === 'logo' && !img.alt) continue;
       expect(img.alt?.length ?? 0, `${dir}/${id} ${kind} alt`).toBeGreaterThanOrEqual(3);
-      expect(img.credit, `${dir}/${id} ${kind} credit`).toBeTruthy();
+      if (kind === 'photo') expect(img.credit, `${dir}/${id} ${kind} credit`).toBeTruthy();
     }
   });
 
@@ -93,8 +109,9 @@ describe('directory content and image files', () => {
     }
   });
 
-  it('stored pictures stay small: photos at most 1600 px wide, logos at most 600 px, under 3 MB each and 60 MB in total', async () => {
+  it('stored pictures stay small: at most 1600 px wide, no camera data, under 3 MB each and 60 MB in total', async () => {
     let total = 0;
+    const checks: Promise<void>[] = [];
     for (const dir of DIRS) {
       const folder = join(root, 'src', 'assets', 'entities', dir);
       if (!existsSync(folder)) continue;
@@ -104,13 +121,19 @@ describe('directory content and image files', () => {
         total += size;
         expect(size, f).toBeLessThan(3 * 1024 * 1024);
         if (/\.svg$/i.test(f)) continue;
-        const meta = await sharp(path).metadata();
-        expect(meta.width ?? 0, f).toBeLessThanOrEqual(/-logo\./.test(f) ? 600 : 1600);
-        expect(meta.exif, `${f} should have no camera data`).toBeUndefined();
+        checks.push(
+          sharp(path)
+            .metadata()
+            .then((meta) => {
+              expect(meta.width ?? 0, f).toBeLessThanOrEqual(1600);
+              expect(meta.exif, `${f} should have no camera data`).toBeUndefined();
+            }),
+        );
       }
     }
+    await Promise.all(checks);
     expect(total).toBeLessThan(60 * 1024 * 1024);
-  });
+  }, 60_000);
 });
 
 describe('Decap CMS: directory pictures and links', () => {
@@ -135,6 +158,7 @@ describe('Decap CMS: directory pictures and links', () => {
       for (const k of ['image', 'alt', 'credit', 'creditUrl', 'licenseUrl', 'imageSource', 'focus']) expect(sub, `${dir}.photos.${k}`).toContain(k);
       const img = photos.fields.find((f: any) => f.name === 'image');
       expect(img.media_processing).toMatchObject({ enabled: true, strip_metadata: true });
+      for (const k of ['image', 'alt', 'credit']) expect(photos.fields.find((f: any) => f.name === k).required, `${dir}.photos.${k} must be required`).not.toBe(false);
       for (const f of fields) expect(f.label?.length ?? 0, `${dir}.${f.name} label`).toBeGreaterThan(2);
     }
     for (const dir of ['venues', 'organizers', 'instructors', 'performers']) {

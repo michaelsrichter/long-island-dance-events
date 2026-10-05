@@ -80,7 +80,7 @@ Every card in the lists shows a picture on top: the first photo, or the logo, or
 
 1. Open the venue, organizer, band or teacher and expand **Logo**.
 2. Under **Logo file**, choose **Upload** and pick the file. PNG or SVG with a see-through background is best; a square-ish logo at least 200 pixels wide works well. Logos show on a white box, so use the version made for white backgrounds.
-3. Fill in **Alt text**: usually "<name> logo". This is required when there is a logo.
+3. Fill in **Alt text**: usually "<name> logo". If you forget, the site uses "<name> logo".
 4. Fill in **Credit** ("Logo: The Nutty Irishman") and **Credit link** (the page where you found it).
 
 **Add photos**
@@ -88,7 +88,7 @@ Every card in the lists shows a picture on top: the first photo, or the logo, or
 1. Expand **Photos** and click **Add photos**. You can add up to 6. The first one is used on the card and at the top of the page; the rest appear under "More photos".
 2. **Photo**: upload a JPG, PNG or WebP at least 600 pixels wide. The editor resizes it to 1600 pixels wide and saves it as a JPG (removing hidden camera data such as location); the site then makes small copies for phones.
 3. **Alt text** (required): say what the photo shows in plain words, for example "The brick front of the hall with a red awning" or "Couples swing dancing under string lights". Do not start with "Image of".
-4. **Credit** and **Credit link**: who took it or whose website it came from, for example "Photo: The Nutty Irishman (website)". For Creative Commons photos write the author and license ("Photo: Jane Doe, CC BY-SA 4.0, via Wikimedia Commons") and fill in **License link**.
+4. **Credit** (required) and **Credit link**: who took it or whose website it came from, for example "Photo: The Nutty Irishman (website)". For Creative Commons photos write the author and license ("Photo: Jane Doe, CC BY-SA 4.0, via Wikimedia Commons") and fill in **License link**.
 5. **Focus point** (optional): photos are cropped to a wide box. If heads get cut off, type where the important part is, as two percentages across and down from the top-left. "50% 30%" keeps the upper middle. Then check the preview.
 
 Credits show under each photo and in the **Pictures** line at the bottom of the details box. Owners who want a picture changed or removed can use the [corrections process](https://longisland.dance/sources/#corrections); remove it the same day.

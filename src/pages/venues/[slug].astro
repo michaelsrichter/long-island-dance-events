@@ -36,7 +36,7 @@ const placeLd = venueJsonLd(venue.id, v, site, { ...(await entityImageUrls(v, si
 ---
 <BaseLayout title={v.seoTitle ?? `${v.name}, ${v.town}: dance events`} description={v.seoDescription ?? `${v.name}, ${v.address}, ${v.town}. Directions, parking and ${events.length ? 'upcoming dance events' : 'dance events'} at this venue.`} pageType="venue" jsonLd={[placeLd, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={v.name} lede={`${v.address}, ${v.town}, ${v.state} ${v.postalCode ?? ''} · ${v.county} County`} crumbs={crumbs}>
-    {(photo || v.logo) && <EntityHeroMedia slot="media" photo={photo} logo={v.logo} />}
+    {(photo || v.logo) && <EntityHeroMedia slot="media" name={v.name} photo={photo} logo={v.logo} />}
     <Reactions type="venue" id={venue.id} name={v.name} variant="hero" />
     <div class="btn-row mt-5">
       <a class="btn btn--primary" href={google} target="_blank" rel="noopener" data-track="get_directions" data-track-method="google" data-track-location="venue"><Icon name="directions" />Google Maps<span class="visually-hidden"> (opens in a new tab)</span></a>

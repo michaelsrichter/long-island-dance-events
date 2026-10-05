@@ -4,7 +4,8 @@ import type { ImageMetadata } from 'astro';
 /** A logo or photo as stored in content (after Astro has resolved the file). */
 export interface EntityImageData {
   image: ImageMetadata;
-  alt: string;
+  /** Required for photos; optional for logos (pages then say "<name> logo"). */
+  alt?: string | undefined;
   focus?: string | undefined;
   caption?: string | undefined;
   credit?: string | undefined;

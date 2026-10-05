@@ -7,13 +7,14 @@ interface Props {
 }
 const { title, lede, crumbs } = Astro.props;
 // Detail pages for venues, bands, teachers, organizers and styles can pass a photo or logo (slot="media").
-const hasMedia = Astro.slots.has('media');
+// Astro defines the slot even when the page's condition is false, so check what it actually renders.
+const media = Astro.slots.has('media') ? (await Astro.slots.render('media')).trim() : '';
 ---
-{hasMedia ? (
+{media ? (
   <header class="page-header page-header--media">
     <div class="container page-header__grid">
       {crumbs && <div class="page-header__crumbs"><Breadcrumbs items={crumbs} /></div>}
-      <div class="page-header__media"><slot name="media" /></div>
+      <div class="page-header__media"><Fragment set:html={media} /></div>
       <div class="page-header__text">
         <h1>{title}</h1>
         {lede && <p class="page-header__lede">{lede}</p>}

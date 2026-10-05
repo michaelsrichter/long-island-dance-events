@@ -12,9 +12,34 @@
   "phone": "(516) 804-0276",
   "facebookUrl": "https://www.facebook.com/The-SNUG-101625409231097",
   "kind": "bar",
-  "factsSource": "Checked October 4, 2026. Source: Bing Places (via Web IQ). Ira's List's calendar lists \"WCS Unplugged\" West Coast Swing nights at \"The SNUG\"; this Wantagh bar writes its name the same way.",
+  "factsSource": "Checked October 4, 2026. Sources: instagram.com, irloc.com, x.com, en.wikipedia.org.",
   "latitude": 40.673256,
   "longitude": -73.50988,
   "coordinatesSource": "Bing Places (via Web IQ)",
-  "reviewNotes": "Small Irish pub near the Wantagh train station. Research the dance floor."
+  "reviewNotes": "Small Irish pub near the Wantagh train station. Research the dance floor.\n\nDirectory research 2026-10-04: Open; Nassau County. No website (the Google listing uses the Facebook page as its website). IMPORTANT: this venue's upcoming event 'WCS Unplugged' (Fri Oct 9, 6 PM) is an acoustic set by Worst Case Scenario, a Long Island rock cover band (@wcs_rocks, wcsrocks.com) - 'WCS' here is the band, not West Coast Swing. The current factsSource and any West Coast Swing style on that event should be corrected (the Ira's List adapter treats 'WCS' as West Coast Swing). Dance floor: none found; it is a small neighborhood pub. Two other Facebook pages ('The Snug Wantagh', id 100093071125732, and 'The SNUG', id 100083284753569) also showed up in search; not verified and not used. The Instagram bio and a Wantagh Chamber listing give a second phone number that public people-search sites tie to a private person's mobile, so it is not recorded. No logo or photos: no website, Facebook/Instagram images need a login, and Facebook's picture endpoint is blocked by robots.txt. Hours are from the Google listing; the Instagram bio's opening times agree.",
+  "instagramUrl": "https://www.instagram.com/the_snug_wantagh/",
+  "hours": "Mon-Thu 3 PM-2 AM; Fri 3 PM-3 AM; Sat 12 PM-3 AM; Sun 12 PM-2 AM",
+  "description": "A small, cozy Irish bar near the Wantagh train station, with outdoor seating. It serves drinks and light pub food and has live music on some nights, often acoustic sets.",
+  "evidence": [
+    {
+      "url": "https://www.google.com/maps?cid=4960741883881343343",
+      "note": "Google listing: The Snug (bar), 1941 Wantagh Ave, Wantagh NY 11793, (516) 804-0276, weekly hours, 'Live performances' and outdoor seating; its website is this Facebook page and its profiles are Facebook and Instagram."
+    },
+    {
+      "url": "https://www.instagram.com/the_snug_wantagh/",
+      "note": "Instagram @the_snug_wantagh bio (seen in search results): 'The Snug Bar and Lounge', 1941 Wantagh Ave, Wantagh NY; opens 3 PM Mon-Fri and 12 PM Sat-Sun."
+    },
+    {
+      "url": "https://www.irloc.com/events/cmur5hugk0025py1o6yb9cesi",
+      "note": "IRLOC: 'WCS Unplugged' at The SNUG, Fri Oct 9 at 6 PM, is described as 'Worst Case Scenario unplugged' - an acoustic set by a band, not a West Coast Swing night."
+    },
+    {
+      "url": "https://x.com/NyScenario",
+      "note": "Worst Case Scenario NY (@wcs_rocks) calls itself a Long Island rock cover band (classic rock, 80s-10s, country), which explains the WCS name."
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Wantagh,_New_York",
+      "note": "Shows the county."
+    }
+  ]
 }

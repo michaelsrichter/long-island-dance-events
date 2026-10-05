@@ -48,7 +48,7 @@ const credits = (s.photos ?? []).filter((p) => p.credit);
 ---
 <BaseLayout title={`${s.name} on Long Island: where to dance and take classes`} description={`${s.summary} Find ${s.name} dances and classes in Nassau and Suffolk.`.slice(0, 165)} pageType="style" jsonLd={[styleLd, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={s.name} lede={s.summary} crumbs={crumbs}>
-    {photo && <EntityHeroMedia slot="media" photo={photo} />}
+    {photo && <EntityHeroMedia slot="media" name={s.name} photo={photo} />}
     <p class="page-header__meta">{DANCE_TYPE_LABELS[s.danceType]}{s.music && <> · Music: {s.music}</>}</p>
     <Reactions type="style" id={style.id} name={s.name} variant="hero" />
     <p class="btn-row mt-5"><a class="btn btn--secondary" href={`/events/?style=${style.id}`}>Filter all events by {s.name}</a></p>
