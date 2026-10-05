@@ -135,6 +135,7 @@ export function foundFromIcs(raw: string, feedUrl: string, today: string, horizo
       ...loc,
       url: urlProp && /^https?:\/\//i.test(urlProp) ? urlProp : undefined,
       cancelled: /CANCELLED/i.test(first(e, 'STATUS')?.value ?? '') || CANCELLED_TITLE.test(unescapeIcs(summary.value)),
+      modified: first(e, 'LAST-MODIFIED')?.value,
       ref: 'calendar feed',
       pageUrl: urlProp && /^https?:\/\//i.test(urlProp) ? urlProp : feedUrl,
       notes,
