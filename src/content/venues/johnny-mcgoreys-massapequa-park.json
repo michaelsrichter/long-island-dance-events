@@ -1,0 +1,21 @@
+{
+  "name": "Johnny McGorey's Pub",
+  "aliases": [
+    "Johnny McGorey's",
+    "Johnny McGoreys",
+    "McGorey's Massapequa Park"
+  ],
+  "address": "131 Front St",
+  "town": "Massapequa Park",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11762",
+  "phone": "(516) 797-8584",
+  "website": "https://johnnymcgoreys.com/",
+  "kind": "bar",
+  "factsSource": "Checked October 4, 2026. Sources: Apple Maps, Chamber of Commerce directory, and the band Worst Case Scenario's show list (wcsrocks.com), which places its McGorey's shows in Massapequa Park.",
+  "latitude": 40.678125,
+  "longitude": -73.454298,
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "reviewNotes": "Irish pub with live bands. Another Johnny McGorey's is in Lynbrook (46 Atlantic Ave); Ira's List's \"Johnny McGorey's Pub\" gigs are this one. Research the dance floor."
+}

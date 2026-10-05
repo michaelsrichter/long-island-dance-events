@@ -178,10 +178,11 @@ describe("Ira's List calendar feed", () => {
     expect(reg.created.venues.has(tavern.venueId!)).toBe(true);
     expect(reg.venues.get(tavern.venueId!)).toMatchObject({ name: 'The Fictional Tavern', address: '77 Imaginary Rd', county: 'Suffolk' });
     expect([...reg.created.venues].some((id) => /^\d/.test(id)), 'no venue named after a house number').toBe(false);
-    // "WCS at Example Pub": the style is named, the venue's name is not an act.
+    // "WCS at Example Pub": on Ira's List "WCS" is a band (Worst Case Scenario), not West Coast Swing, and the
+    // venue's name is not an act.
     const wcs = r.candidates.find((c) => c.date === '2031-01-05')!;
-    expect(wcs).toMatchObject({ title: 'West Coast Swing dance with live music at Example Pub', venueId: 'example-pub' });
-    expect(wcs.danceStyles).toContain('west-coast-swing');
+    expect(wcs).toMatchObject({ title: 'WCS at Example Pub', venueId: 'example-pub' });
+    expect(wcs.danceStyles).not.toContain('west-coast-swing');
     expect(r.outOfArea).toEqual([{ town: 'Astoria', count: 1 }]);
     for (const c of r.candidates) expect(() => eventSchema.parse({ ...c, reviewNotes: c.reviewNotes.join(' ') || undefined, start: c.start ? `${c.date}T${c.start}` : c.date, end: undefined, firstSeen: c.date, lastSeen: c.date })).not.toThrow();
   });
@@ -201,10 +202,14 @@ describe("Ira's List calendar feed", () => {
     expect(one('Salsa Night - Example Pub')).toMatchObject({ title: 'Salsa dance with live music at Example Pub', danceStyles: ['salsa'] });
     expect(styleLabel(reg, 'Salsa Night w')).toEqual(['salsa']);
     expect(styleLabel(reg, 'Hustle Wednesdays')).toEqual(['hustle']);
-    // An event's own name keeps its words, and a dance word in it still tags the style.
+    // An event's own name keeps its words.
+    // Initials are a band's name on a music calendar ("WCS" is Worst Case Scenario); a spelled-out dance still counts.
     const wcs = one('WCS Unplugged - Example Pub');
     expect(wcs.title).toBe('WCS Unplugged at Example Pub');
-    expect(wcs.danceStyles).toContain('west-coast-swing');
+    expect(wcs.danceStyles).not.toContain('west-coast-swing');
+    expect(one('WCS - Example Pub').title).toBe('WCS at Example Pub');
+    expect(styleLabel(reg, 'WCS')).toEqual([]);
+    expect(one('West Coast Swing Night - Example Pub')).toMatchObject({ title: 'West Coast Swing dance with live music at Example Pub', danceStyles: ['west-coast-swing'] });
     const hustle = one('\u{1F483}\u{1F3FB}\u{1F57A} Not Just Hustle Wednesdays- Example Pub');
     expect(hustle.title).toBe('Not Just Hustle Wednesdays at Example Pub');
     expect(hustle.danceStyles).toContain('hustle');
