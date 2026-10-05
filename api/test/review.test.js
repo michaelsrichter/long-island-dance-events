@@ -546,8 +546,12 @@ test('outreach: sends from production with labels, records the request without t
 
 test('outreach: answers show in the review center and are marked read when opened', async () => {
   const row = fake.rows('ReviewState', 'outreach').find((x) => x.rowKey === 'source~s3');
-  mail.receive(row.threadId, 'Club Three <hello@clubthree.example>', 'Yes, go ahead! Our calendar feed is https://clubthree.example/cal.ics');
   let r = await call('reviewOutreach', '/api/review/outreach', { user: ADMIN });
+  const waiting = r.body.threads.find((x) => x.key === 'source:s3');
+  assert.ok(waiting, 'a request with no answer yet is listed too');
+  assert.deepEqual([waiting.hasReply, waiting.unread], [false, false]);
+  mail.receive(row.threadId, 'Club Three <hello@clubthree.example>', 'Yes, go ahead! Our calendar feed is https://clubthree.example/cal.ics');
+  r = await call('reviewOutreach', '/api/review/outreach', { user: ADMIN });
   assert.equal(r.status, 200);
   assert.equal(r.body.canSend, true);
   const t = r.body.threads.find((x) => x.key === 'source:s3');

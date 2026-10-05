@@ -190,7 +190,10 @@ function threadSummary(t, inbox) {
 
 async function listThreads(cfg) {
   if (!cfg.configured) return [];
-  const d = await am(cfg, 'GET', `${inboxPath(cfg)}/threads?labels=${LABEL}&limit=100`);
+  // AgentMail's thread list leaves out threads with no received email unless the filter names "sent",
+  // so a custom label alone misses every request still waiting for an answer. Each outreach thread
+  // starts with our sent email, so asking for both labels finds all of them.
+  const d = await am(cfg, 'GET', `${inboxPath(cfg)}/threads?labels=${LABEL}&labels=sent&limit=100`);
   return (d.threads || []).map((t) => threadSummary(t, cfg.inbox));
 }
 
