@@ -46,8 +46,9 @@ const nextDates = (events: ResolvedEvent[]) => [...new Map(events.map((e) => [e.
 
 async function previousState(): Promise<SitemapState> {
   const site = process.env.SITE_URL;
-  if (!site || site.includes('example.org') || process.env.SITEMAP_STATE === 'off') return {};
+  if (!site || process.env.SITEMAP_STATE === 'off') return {};
   try {
+    if (new URL(site).hostname === 'example.org') return {};
     const res = await fetch(new URL('/sitemap-state.json', site), { signal: AbortSignal.timeout(8000) });
     if (!res.ok) return {};
     const body = (await res.json()) as { urls?: SitemapState };
