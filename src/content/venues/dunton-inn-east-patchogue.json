@@ -1,0 +1,11 @@
+{
+  "name": "Dunton Inn",
+  "address": "701 S Country Rd",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "East Patchogue",
+  "latitude": 40.756677,
+  "longitude": -72.962878,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

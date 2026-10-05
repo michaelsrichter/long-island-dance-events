@@ -1,0 +1,11 @@
+{
+  "name": "Dox",
+  "address": "10 Broadway",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Island Park",
+  "latitude": 40.612115,
+  "longitude": -73.643719,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Jet City at Heckscher Park",
+  "summary": "Live music by Jet City at Heckscher Park in Huntington. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-09T19:30",
+  "end": "2026-10-09T21:30",
+  "timezone": "America/New_York",
+  "venueId": "heckscher-park-huntington",
+  "town": "Huntington",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "festival"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-09|heckscher-park-huntington|jet-city|2026-10-09|special",
+  "reviewNotes": "Band or DJ not researched yet: Jet City."
+}

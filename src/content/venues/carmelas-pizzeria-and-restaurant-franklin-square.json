@@ -1,0 +1,11 @@
+{
+  "name": "Carmela's Pizzeria & Restaurant",
+  "address": "912 Hempstead Turnpike",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Franklin Square",
+  "latitude": 40.707307,
+  "longitude": -73.67383,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

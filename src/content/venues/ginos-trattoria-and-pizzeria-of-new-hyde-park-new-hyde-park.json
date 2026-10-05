@@ -1,0 +1,11 @@
+{
+  "name": "Gino's Trattoria & Pizzeria of New Hyde Park",
+  "address": "1113 Jericho Tpke",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "New Hyde Park",
+  "latitude": 40.732772,
+  "longitude": -73.684557,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

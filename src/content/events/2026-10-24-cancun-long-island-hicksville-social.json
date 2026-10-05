@@ -1,0 +1,27 @@
+{
+  "title": "Dance party with Halloween monster bash and DJ REZ at Cancun Long Island",
+  "summary": "A dance party with Halloween monster bash and DJ REZ at Cancun Long Island in Hicksville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "social-dance",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-24T22:00",
+  "end": "2026-10-24T04:00",
+  "timezone": "America/New_York",
+  "venueId": "cancun-long-island-hicksville",
+  "town": "Hicksville",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "dj"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-24|cancun-long-island-hicksville|halloween-monster-bash-ft-dj-rez|2026-10-24|special",
+  "reviewNotes": "Band or DJ not researched yet: Halloween monster bash, DJ REZ."
+}

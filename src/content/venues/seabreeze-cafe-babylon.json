@@ -1,0 +1,11 @@
+{
+  "name": "Seabreeze Cafe",
+  "address": "470 Fire Island Ave",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Babylon",
+  "latitude": 40.685537,
+  "longitude": -73.316858,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

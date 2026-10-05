@@ -1,0 +1,21 @@
+{
+  "title": "Funk Filharmonik at The Warehouse",
+  "summary": "Live music by Funk Filharmonik at The Warehouse in Amityville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-13T19:00",
+  "end": "2026-10-13T23:00",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-13|the-warehouse-amityville|funk-filharmonik|2026-10-13|special",
+  "reviewNotes": "Band or DJ not researched yet: Funk Filharmonik."
+}

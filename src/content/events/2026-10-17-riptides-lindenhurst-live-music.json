@@ -1,0 +1,21 @@
+{
+  "title": "Gotcha Covered at RipTides Cocktails and Grill",
+  "summary": "Live music by Gotcha Covered at RipTides Cocktails and Grill in Lindenhurst. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-17T20:15",
+  "end": "2026-10-17T23:15",
+  "timezone": "America/New_York",
+  "venueId": "riptides-lindenhurst",
+  "town": "Lindenhurst",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-17|riptides-lindenhurst|gotcha-covered|2026-10-17|special",
+  "reviewNotes": "Band or DJ not researched yet: Gotcha Covered."
+}

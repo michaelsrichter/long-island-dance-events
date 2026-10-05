@@ -1,0 +1,25 @@
+{
+  "title": "In The Groove at The Spot at Oakdale Yacht",
+  "summary": "Live music by In The Groove at The Spot at Oakdale Yacht in Oakdale. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-24",
+  "timezone": "America/New_York",
+  "venueId": "the-spot-at-oakdale-yacht-oakdale",
+  "town": "Oakdale",
+  "performerIds": [
+    "in-the-groove"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-24|the-spot-at-oakdale-yacht-oakdale|in-the-groove|2026-10-24|special"
+}
