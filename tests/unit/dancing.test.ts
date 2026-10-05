@@ -178,10 +178,11 @@ describe("Ira's List calendar feed", () => {
     expect(reg.created.venues.has(tavern.venueId!)).toBe(true);
     expect(reg.venues.get(tavern.venueId!)).toMatchObject({ name: 'The Fictional Tavern', address: '77 Imaginary Rd', county: 'Suffolk' });
     expect([...reg.created.venues].some((id) => /^\d/.test(id)), 'no venue named after a house number').toBe(false);
-    // "WCS at Example Pub": the style is named, the venue's name is not an act.
+    // "WCS at Example Pub": on Ira's List "WCS" is a band (Worst Case Scenario), not West Coast Swing, and the
+    // venue's name is not an act.
     const wcs = r.candidates.find((c) => c.date === '2031-01-05')!;
-    expect(wcs).toMatchObject({ title: 'West Coast Swing dance with live music at Example Pub', venueId: 'example-pub' });
-    expect(wcs.danceStyles).toContain('west-coast-swing');
+    expect(wcs).toMatchObject({ title: 'WCS at Example Pub', venueId: 'example-pub' });
+    expect(wcs.danceStyles).not.toContain('west-coast-swing');
     expect(r.outOfArea).toEqual([{ town: 'Astoria', count: 1 }]);
     for (const c of r.candidates) expect(() => eventSchema.parse({ ...c, reviewNotes: c.reviewNotes.join(' ') || undefined, start: c.start ? `${c.date}T${c.start}` : c.date, end: undefined, firstSeen: c.date, lastSeen: c.date })).not.toThrow();
   });
@@ -201,15 +202,28 @@ describe("Ira's List calendar feed", () => {
     expect(one('Salsa Night - Example Pub')).toMatchObject({ title: 'Salsa dance with live music at Example Pub', danceStyles: ['salsa'] });
     expect(styleLabel(reg, 'Salsa Night w')).toEqual(['salsa']);
     expect(styleLabel(reg, 'Hustle Wednesdays')).toEqual(['hustle']);
-    // An event's own name keeps its words, and a dance word in it still tags the style.
+    // An event's own name keeps its words.
+    // Initials are a band's name on a music calendar ("WCS" is Worst Case Scenario); a spelled-out dance still counts.
     const wcs = one('WCS Unplugged - Example Pub');
     expect(wcs.title).toBe('WCS Unplugged at Example Pub');
-    expect(wcs.danceStyles).toContain('west-coast-swing');
+    expect(wcs.danceStyles).not.toContain('west-coast-swing');
+    expect(one('WCS - Example Pub').title).toBe('WCS at Example Pub');
+    expect(styleLabel(reg, 'WCS')).toEqual([]);
+    expect(one('West Coast Swing Night - Example Pub')).toMatchObject({ title: 'West Coast Swing dance with live music at Example Pub', danceStyles: ['west-coast-swing'] });
     const hustle = one('\u{1F483}\u{1F3FB}\u{1F57A} Not Just Hustle Wednesdays- Example Pub');
     expect(hustle.title).toBe('Not Just Hustle Wednesdays at Example Pub');
     expect(hustle.danceStyles).toContain('hustle');
     expect(one("DJ Friday's - Example Pub").title).toBe('Dance party at Example Pub');
     expect(one('Spooky Bash ft/ DJ Nobody - Example Pub').title).toBe('Dance party with Spooky Bash and DJ Nobody at Example Pub');
     expect(styleLabel(reg, 'Smooth Operators')).toEqual([]);
+  });
+  it('skips a gig whose calendar title says it is cancelled or postponed', () => {
+    const ev = (uid: string, summary: string) => `BEGIN:VEVENT\r\nDTSTART;TZID=America/New_York:20310110T170000\r\nDTEND;TZID=America/New_York:20310110T200000\r\nUID:${uid}\r\nSUMMARY:${summary}\r\nLOCATION:Example Pub\\, 1 Fictional Ave\\, Farmingdale\\, NY 11735\\, USA\r\nEND:VEVENT\r\n`;
+    const cal = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\n${ev('c1', 'CANCELLED Sample Party Band-Example Pub')}${ev('c2', '❌ Postponed: DJ Example-Example Pub')}${ev('c3', 'Quiet Tribute Show-Example Pub')}END:VCALENDAR\r\n`;
+    const rows = rowsFromIcs(cal, '2031-01-01', feedUrl, 30);
+    expect(rows.map((r) => r.act)).toEqual(['Quiet Tribute Show']);
+    const r = normalizeIraRows([{ date: '2031-01-10', ...parseEntry('CANCELLED Sample Party Band - Example Pub')! }], { sourceId: 'iraslist', sourceUrl: 'https://example.org/', registry: fixtureRegistry(), outsideVenues: [] });
+    expect(r.candidates).toHaveLength(0);
+    expect(r.skipped.map((s) => s.reason)).toEqual(['cancelled by the source']);
   });
 });
