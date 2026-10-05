@@ -47,7 +47,7 @@ Test copies of the website (pull-request previews) never send email: they show w
 2. **Held listings:** for each card, open the source page (where we found it). Then press the suggested button (Publish, Fix, Mark cancelled or Hide).
 3. **Messages:** answer anything waiting. Answer requests to remove a listing first (within 7 days).
 4. **Community posts:** approve or reject anything waiting.
-5. **Sources:** look for anything under "Stopped working". Press **Try again now**, or **Ask Copilot to fix it**.
+5. **Sources:** look for anything under "Stopped working". Press **Try again now**, or **Ask Copilot to fix it**. If a website owner answered your email, it says **new answer!** under "Waiting for an answer". Read it, then press the button that matches what they said.
 
 ## What you will see in the editor
 
