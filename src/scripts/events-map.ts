@@ -4,10 +4,11 @@
  */
 import L from 'leaflet';
 import { track } from './analytics';
+import { fillFilterForm, filterParams, matchesEvent, ranges, readFilterForm, setupFilterPanel, syncFilterLinks } from './event-match';
 
 const mapEl = document.querySelector<HTMLElement>('[data-events-map]');
 const list = document.querySelector<HTMLElement>('[data-upcoming-list="map"]');
-const form = document.querySelector<HTMLFormElement>('[data-map-filters]');
+const form = document.querySelector<HTMLFormElement>('[data-event-filters][data-view="map"]');
 
 interface Place {
   el: HTMLElement;
@@ -23,7 +24,6 @@ interface Place {
 
 const MAX_EVENTS = 3;
 const SVG = 'http://www.w3.org/2000/svg';
-const nyDate = (d: Date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
 
 function pinIcon(host: Place['host']): L.DivIcon {
   const el = document.createElement('span');
@@ -127,29 +127,17 @@ if (mapEl && list) {
     if (fromList) track('select_event', { location: 'map_list' });
   }
 
-  const count = document.querySelector<HTMLElement>('[data-map-count]');
+  const showActive = form ? setupFilterPanel(form) : () => {};
+  const count = form?.querySelector<HTMLElement>('[data-result-count]');
   const empty = document.querySelector<HTMLElement>('[data-map-empty]');
-  const fields = ['type', 'when'] as const;
-  type Values = Record<(typeof fields)[number], string>;
-
-  function values(): Values {
-    const fd = form ? new FormData(form) : new FormData();
-    return { type: String(fd.get('type') ?? 'dance'), when: String(fd.get('when') ?? 'all') };
-  }
+  const unplaced = [...document.querySelectorAll<HTMLElement>('[data-map-unplaced]')];
+  const r = ranges();
+  /** Old links used ?type=dance|class|all; the list, calendar and map now share ?category=. */
+  const LEGACY_TYPE: Record<string, string> = { dance: 'dances', class: 'class-lesson', all: 'all' };
 
   function apply(source: 'load' | 'change') {
-    const v = values();
-    const today = nyDate(new Date());
-    const weekEnd = nyDate(new Date(Date.now() + 6 * 86400000));
-    const month = today.slice(0, 7);
-    const matches = (e: HTMLElement) => {
-      if (e.hasAttribute('data-expired')) return false;
-      if (v.type && v.type !== 'all' && e.dataset.host !== v.type) return false;
-      const d = e.dataset.date ?? '';
-      if (v.when === 'week' && (d < today || d > weekEnd)) return false;
-      if (v.when === 'month' && !d.startsWith(month)) return false;
-      return true;
-    };
+    const v = form ? readFilterForm(form) : ({ category: 'dances' } as ReturnType<typeof readFilterForm>);
+    const matches = (e: HTMLElement) => !e.hasAttribute('data-expired') && matchesEvent(e.dataset, e.textContent ?? '', v, r);
     let shown = 0;
     const visible: L.LatLng[] = [];
     for (const p of places) {
@@ -166,34 +154,42 @@ if (mapEl && list) {
         labelMarker(p);
       } else layer.removeLayer(p.marker);
     }
+    for (const e of unplaced) e.hidden = !matches(e);
     if (count) count.textContent = `${shown} ${shown === 1 ? 'place' : 'places'} shown`;
     if (empty) empty.hidden = shown !== 0;
     if (visible.length) map.fitBounds(L.latLngBounds(visible), { padding: [28, 28], maxZoom: 13 });
     else if (source === 'load') map.setView([40.8, -73.2], 9);
     // Long Island is wide and short: never zoom out further than needed to show the island.
     if (map.getZoom() < 8.5) map.setZoom(8.5);
-    if (form) {
-      const params = new URLSearchParams();
-      if (v.type && v.type !== 'dance') params.set('type', v.type);
-      if (v.when && v.when !== 'all') params.set('when', v.when);
-      const qs = params.toString();
-      history.replaceState(null, '', `${qs ? `?${qs}` : location.pathname}${location.hash}`);
-    }
-    if (source === 'change') track('filter_events', { location: 'map', filter: [v.type !== 'dance' && 'type', v.when !== 'all' && 'when'].filter(Boolean).join(',') || 'none', value: [v.type, v.when].join(',').slice(0, 100), results: shown });
+    if (form) syncFilterLinks(filterParams(v));
+    showActive(v);
+    if (source === 'change') track('filter_events', { location: 'map', filter: filterParams(v).toString().slice(0, 100) || 'none', results: shown });
   }
 
   if (form) {
     const params = new URLSearchParams(location.search);
-    for (const f of fields) {
-      const val = params.get(f);
-      const el = form.elements.namedItem(f);
-      if (val && el instanceof RadioNodeList) el.value = val;
+    const legacy = params.get('type');
+    if (legacy && !params.get('category') && LEGACY_TYPE[legacy]) params.set('category', LEGACY_TYPE[legacy]!);
+    params.delete('type');
+    if (['dance', 'county', 'town', 'day', 'price', 'level', 'venue', 'person'].some((k) => params.get(k))) {
+      const more = form.querySelector<HTMLDetailsElement>('.filters__more');
+      if (more) more.open = true;
     }
+    fillFilterForm(form, params);
     // A link to a place that only has classes (e.g. from a venue page) shows everything, so its pin is there.
     const linked = places.find((p) => `#place-${p.id}` === location.hash);
-    const typeEl = form.elements.namedItem('type');
-    if (linked && !params.get('type') && typeEl instanceof RadioNodeList && linked.events.every((e) => e.dataset.host !== 'dance')) typeEl.value = 'all';
-    form.addEventListener('change', () => apply('change'));
+    const category = form.elements.namedItem('category');
+    if (linked && !params.get('category') && category instanceof RadioNodeList && linked.events.every((e) => e.dataset.host !== 'dance')) category.value = 'all';
+    let debounce: number | undefined;
+    form.addEventListener('input', (e) => {
+      window.clearTimeout(debounce);
+      debounce = window.setTimeout(() => apply('change'), (e.target as HTMLElement).matches('input[type=search]') ? 250 : 0);
+    });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      apply('change');
+    });
+    form.addEventListener('reset', () => setTimeout(() => apply('change'), 0));
   }
   apply('load');
 

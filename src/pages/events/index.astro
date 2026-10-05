@@ -1,37 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import EventViews from '../../components/EventViews.astro';
 import EventCard from '../../components/EventCard.astro';
+import EventFilters from '../../components/EventFilters.astro';
 import EmptyState from '../../components/EmptyState.astro';
 import Icon from '../../components/Icon.astro';
 import RelativeDay from '../../components/RelativeDay.astro';
 import { byDay, getEventGroups, getSettings, isDance } from '../../lib/content';
-import { DANCE_TYPES, DANCE_TYPE_LABELS, SKILL_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
 
 const { upcoming } = await getEventGroups();
 const settings = await getSettings();
-const styles = (await getCollection('styles')).sort((a, b) => a.data.order - b.data.order);
-const usedStyles = styles.filter((s) => upcoming.some((e) => e.styles.some((x) => x.id === s.id)));
-const venues = [...new Map(upcoming.filter((e) => e.venue).map((e) => [e.venue!.id, e.venue!])).values()].sort((a, b) => a.data.name.localeCompare(b.data.name));
-const towns = [...new Set(upcoming.map((e) => e.location.town).filter(Boolean) as string[])].sort();
-const people = [...new Map(upcoming.flatMap((e) => [...e.performers, ...e.instructors]).map((p) => [p.id, p])).values()].sort((a, b) => a.name.localeCompare(b.name));
 const days = byDay(upcoming);
 const dances = upcoming.filter(isDance);
-/** "Dances & live music" is the default view; classes are one tap away. */
-const types = [
-  { value: 'dances', label: 'Dances & live music' },
-  ...(upcoming.some((e) => e.category === 'live-music') ? [{ value: 'live-music', label: 'Live music' }] : []),
-  ...(upcoming.some((e) => e.category === 'class-lesson') ? [{ value: 'class-lesson', label: 'Classes' }] : []),
-  { value: 'all', label: 'Everything' },
-];
-/** Kind of dancing. Partner, line and party (freestyle) dancing; only kinds that have upcoming events. */
-const danceKinds = [
-  { value: '', label: 'Any' },
-  ...DANCE_TYPES.filter((k) => upcoming.some((e) => e.dancing.kinds.includes(k))).map((k) => ({ value: k, label: DANCE_TYPE_LABELS[k] })),
-];
 const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Events', href: '/events/' },
@@ -43,8 +25,6 @@ const when = [
   { value: 'week', label: 'Next 7 days' },
   { value: 'month', label: 'This month' },
 ];
-const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
-const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 ---
 <BaseLayout
   title={`Dance events on ${settings.region}`}
@@ -57,108 +37,7 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
   </PageHeader>
 
   <div class="container section stack-l">
-    <form class="filters js-only" data-event-filters aria-label="Filter events">
-      <fieldset>
-        <legend>When</legend>
-        <div class="quick-views">
-          {when.map((q, i) => (
-            <label class="chip">
-              <input type="radio" name="when" value={q.value} checked={i === 0} />
-              <span>{q.label}</span>
-            </label>
-          ))}
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Type of event</legend>
-        <div class="quick-views">
-          {types.map((t) => (
-            <label class="chip"><input type="radio" name="category" value={t.value} checked={t.value === 'dances'} /><span>{t.label}</span></label>
-          ))}
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>Kind of dancing</legend>
-        <div class="quick-views">
-          {danceKinds.map((k, i) => (
-            <label class="chip"><input type="radio" name="dance" value={k.value} checked={i === 0} /><span>{k.label}</span></label>
-          ))}
-        </div>
-      </fieldset>
-      <div class="filters__row">
-        <div class="field">
-          <label for="f-style">Dance style</label>
-          <select id="f-style" name="style">
-            <option value="">Any style</option>
-            {usedStyles.map((s) => <option value={s.id}>{s.data.name}</option>)}
-          </select>
-        </div>
-        <div class="field">
-          <label for="f-q">Search</label>
-          <input id="f-q" name="q" type="search" placeholder="Name or town" autocomplete="off" />
-        </div>
-      </div>
-      <details class="filters__more">
-        <summary><Icon name="menu" />More filters</summary>
-        <div class="filters__row">
-          <div class="field">
-            <label for="f-county">County</label>
-            <select id="f-county" name="county">
-              <option value="">Nassau and Suffolk</option>
-              <option value="Nassau">Nassau</option>
-              <option value="Suffolk">Suffolk</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-town">Town</label>
-            <select id="f-town" name="town">
-              <option value="">Any town</option>
-              {towns.map((t) => <option value={t}>{t}</option>)}
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-day">Day of the week</label>
-            <select id="f-day" name="day">
-              <option value="">Any day</option>
-              {weekdays.map((d) => <option value={d}>{cap(d)}</option>)}
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-price">Price</label>
-            <select id="f-price" name="price">
-              <option value="">Free or paid</option>
-              <option value="free">Free only</option>
-              <option value="paid">Paid</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-level">Level</label>
-            <select id="f-level" name="level">
-              <option value="">Any level</option>
-              {(['beginner', 'intermediate', 'advanced'] as const).map((k) => <option value={k}>{SKILL_LABELS[k]}</option>)}
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-venue">Venue</label>
-            <select id="f-venue" name="venue">
-              <option value="">Any venue</option>
-              {venues.map((v) => <option value={v.id}>{v.data.name}</option>)}
-            </select>
-          </div>
-          <div class="field">
-            <label for="f-person">Teacher, band or DJ</label>
-            <select id="f-person" name="person">
-              <option value="">Anyone</option>
-              {people.map((p) => <option value={p.id}>{p.name}</option>)}
-            </select>
-          </div>
-        </div>
-      </details>
-      <div class="btn-row filters__foot">
-        <p class="result-count" data-result-count aria-live="polite">{dances.length} events shown</p>
-        <button type="reset" class="btn btn--secondary btn--small">Clear filters</button>
-      </div>
-    </form>
+    <EventFilters events={upcoming} view="list" when={when} countText={`${dances.length} events shown`} kindChips />
 
     {upcoming.length === 0 ? (
       <EmptyState title="No upcoming events are listed right now">

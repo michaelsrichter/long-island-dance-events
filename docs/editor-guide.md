@@ -108,6 +108,21 @@ Credits show under each photo and in the **Pictures** line at the bottom of the 
 - **Booking page** (bands, DJs) and **Lessons or booking page** (teachers): their own page for booking or lessons.
 - Add the pages that show these facts under **Sources for these details**, and update **Checked on (shown on the page)**, for example "Checked October 4, 2026. Sources: their website and Facebook page."
 
+## Badges on events (DJ, Live band, Lesson, Free...)
+
+Event cards, the month calendar and the map show small badges. You do not type them: the site works them out from the event and the records it links to, so fix the facts and the badge follows.
+
+| Badge | Shows when |
+| --- | --- |
+| DJ | A DJ is listed under **Bands and DJs** (a performer whose type is DJ), or the listing says DJ. |
+| Live band | A band or singer is listed, or the event type is **Live music**. |
+| Lesson | The event type is **Class or lesson** or **Lesson + dance party**, or it has a **Lesson time**. |
+| Free | **Free** is ticked. |
+| Beginners welcome | **Level** is Beginner, or the summary says beginners, no partner needed or no experience needed. |
+| Daytime | It starts before 5 PM. |
+| Outdoors | The venue is a park or beach, or the summary says outdoors, under the stars, on the lawn or beach, or bandshell. |
+
+A badge that only repeats the event type is not shown on the card ("Lesson" on a class, or "Live band" on a live-music listing that names no band or singer), but it still works in the **What's there** filter. When a live-music listing names its act, the badge says **Live band** or, for a solo act, **Live singer**.
 ## Can you dance there? (the dancing score)
 
 Listings from dance calendars are always dance events. Live-music listings (bands and DJs at bars, restaurants, parks and theaters) get a **dancing score** from 0 to 10, worked out from:

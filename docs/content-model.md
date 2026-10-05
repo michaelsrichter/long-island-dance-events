@@ -62,6 +62,8 @@ One file per listing. A repeating listing ("every Tuesday") is one file with a `
 | `mergedFrom`, `embedding` | | Reserved for duplicate detection (phase 3). |
 | `seoTitle`, `seoDescription` | | Optional search-result overrides. |
 
+**Badges and filters are worked out, not stored.** src/lib/event-features.ts turns an event and its linked records into features (DJ, Live band, Lesson, Free, Beginners welcome, Daytime, Outdoors) for the badges and the "What's there" filter on the list, month calendar and map (decision P43; the editor guide lists the rules).
+
 How the site uses it: each date of a repeating event becomes its own page (`/events/<date>-<id>/`) for the next 120 days. Ended events move to "Past events" by themselves, even before the next rebuild.
 
 ## Directory pictures, links and contacts (venues, organizers, teachers, bands and DJs, styles)

@@ -1493,3 +1493,49 @@ h3.day-heading { font-size: 1rem; }
 .entity-gallery figure { margin: 0; overflow: hidden; border-radius: 16px; border: 1px solid var(--c-line); background: var(--c-surface); box-shadow: var(--shadow-1); }
 .entity-gallery img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
 .entity-gallery figcaption { padding: 0.55rem 0.8rem; font-size: 0.85rem; color: var(--c-ink-soft); }
+/* ---------- Event feature badges (DJ, Live band, Lesson, Free...) and the shared list / calendar / map filters ----------
+   Icon + text, never color alone. Colors come from the theme tokens, so light and dark mode both pass WCAG AA. */
+/* Feature icons (lib/event-features.ts) as CSS masks: badges repeat on every event card and calendar square, so one copy here is far smaller than an inline <svg> each time. Paths match components/Icon.astro (checked in tests/unit/event-features.test.ts). */
+.fi { display: inline-block; width: 1em; height: 1em; flex: none; background-color: currentColor; -webkit-mask: var(--fi) center / contain no-repeat; mask: var(--fi) center / contain no-repeat; }
+.fi--music { --fi: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18V5l11-2v13'/%3E%3Ccircle cx='6.5' cy='18' r='2.5'/%3E%3Ccircle cx='17.5' cy='16' r='2.5'/%3E%3C/svg%3E"); }
+.fi--star { --fi: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.5 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z'/%3E%3C/svg%3E"); }
+.fi--people { --fi: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='8' cy='8' r='3'/%3E%3Ccircle cx='17' cy='9' r='2.5'/%3E%3Cpath d='M2.5 20c.5-3.5 3-5.5 5.5-5.5s5 2 5.5 5.5M14 15c2.5-.8 6 .5 7.5 4.5'/%3E%3C/svg%3E"); }
+.fi--ticket { --fi: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z'/%3E%3Cpath d='M14 6v12' stroke-dasharray='2 2'/%3E%3C/svg%3E"); }
+.fi--shoe { --fi: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 15c0-3 1-7 3-9 1 2 3 3 6 3l3 1c3 1 6 2 6 5v2H3z'/%3E%3Cpath d='M3 17h18'/%3E%3C/svg%3E"); }
+.fi--sun { --fi: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4'/%3E%3C/svg%3E"); }
+.fi--pin { --fi: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z'/%3E%3Ccircle cx='12' cy='9.5' r='2.5'/%3E%3C/svg%3E"); }
+@media (forced-colors: active) { .fi { forced-color-adjust: none; background-color: CanvasText; } }
+.feat-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.12rem 0.55rem; border-radius: 999px; border: 1px solid transparent; font-size: 0.74rem; font-weight: 700; line-height: 1.5; white-space: nowrap; }
+.feat-badge .fi { width: 0.95em; height: 0.95em; }
+.feat-badge--small { font-size: 0.68rem; padding: 0.05rem 0.45rem; }
+.feat-badge--dj { background: color-mix(in srgb, var(--c-ink) 8%, var(--c-surface)); color: var(--c-ink); border-color: color-mix(in srgb, var(--c-ink) 22%, transparent); }
+.feat-badge--dj .fi { color: var(--c-red-ink); }
+.feat-badge--live { background: color-mix(in srgb, var(--c-red-ink) 12%, var(--c-surface)); color: var(--c-red-ink); }
+.feat-badge--lesson { background: var(--c-sand); color: var(--c-ink); }
+.feat-badge--free { background: var(--c-ok-bg); color: var(--c-ok); }
+.feat-badge--beginner { background: var(--c-warn-bg); color: var(--c-warn); }
+.feat-badge--daytime { background: transparent; color: var(--c-ink-soft); border-color: var(--c-line); }
+.feat-badge--outdoor { background: transparent; color: var(--c-ok); border-color: currentColor; }
+.event-filters .quick-views--wrap { flex-wrap: wrap; overflow: visible; }
+.chip--feature span svg { width: 1rem; height: 1rem; margin-right: 0.35rem; flex: none; }
+.chip--feature input:checked + span svg { display: none; }
+
+/* Month calendar: tiny feature icons in each entry, and "+N more" on crowded days. */
+/* The calendar arrives in its default filtered state (MonthCalendar.astro); scripts/calendar-filter.ts lifts data-cal-pending. */
+.js [data-cal-pending] [data-off] { display: none; }
+.cal__feats { display: inline-flex; gap: 2px; margin-left: 0.25rem; vertical-align: -0.15em; }
+.cal__feat { display: inline-grid; place-items: center; width: 1.05rem; height: 1.05rem; border-radius: 4px; background: rgb(255 255 255 / 0.22); }
+.cal__feat .fi { width: 0.72rem; height: 0.72rem; }
+.cal__event--class-lesson .cal__feat, .cal__event--past .cal__feat { background: var(--c-sand); }
+.legend-icon { width: 1.5rem; height: 1.5rem; background: var(--c-sand); color: var(--c-ink); border-radius: 6px; }
+.legend-icon svg { width: 0.95rem; height: 0.95rem; }
+.cal__more { display: block; width: 100%; margin-top: 0.25rem; padding: 0.15rem 0.4rem; min-height: 24px; border: 1px dashed var(--c-line); border-radius: 8px; background: transparent; color: var(--c-link); font: inherit; font-size: 0.8rem; font-weight: 700; text-align: left; cursor: pointer; }
+.cal__more:hover { border-color: var(--c-link); text-decoration: underline; }
+td[data-cal-open] { background: color-mix(in srgb, var(--c-red-ink) 4%, transparent); }
+/* Calendar and map: the filters fold into a "Filters" button on phones so the calendar or map comes first. */
+.filters-panel > .filters-panel__toggle { display: inline-flex; align-items: center; gap: 0.5rem; min-height: var(--tap); padding: 0 1.1rem; border-radius: 999px; border: 1px solid var(--c-line); background: var(--c-surface); color: var(--c-ink); font-weight: 700; cursor: pointer; list-style: none; box-shadow: var(--shadow-1); }
+.filters-panel > .filters-panel__toggle::-webkit-details-marker { display: none; }
+.filters-panel > .filters-panel__toggle svg { width: 1.1rem; height: 1.1rem; color: var(--c-red-ink); }
+.filters-panel__count { color: var(--c-red-ink); }
+.filters-panel[open] > .filters-panel__toggle { margin-bottom: 0.75rem; }
+.filters-panel > .event-filters { margin-top: 0; }

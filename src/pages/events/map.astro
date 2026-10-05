@@ -6,6 +6,9 @@ import EventViews from '../../components/EventViews.astro';
 import RelativeWhen from '../../components/RelativeWhen.astro';
 import EmptyState from '../../components/EmptyState.astro';
 import Icon from '../../components/Icon.astro';
+import EventFilters from '../../components/EventFilters.astro';
+import FeatureBadges from '../../components/FeatureBadges.astro';
+import { eventFilterData } from '../../lib/event-filter-data';
 import { getEventGroups, type ResolvedEvent } from '../../lib/content';
 import { isDanceLevel } from '../../lib/dancing';
 import { groupByPlace } from '../../lib/map-places';
@@ -20,17 +23,15 @@ const crumbs = [
   { name: 'Events', href: '/events/' },
   { name: 'Map', href: '/events/map/' },
 ];
-/** Dances and live music first, like the event list; classes and everything are one tap away. */
-const types = [
-  { value: 'dance', label: 'Dances & live music' },
-  { value: 'class', label: 'Classes' },
-  { value: 'all', label: 'Everything' },
-];
+/** The same date choices as the event list, so filters carry over between views. */
 const whens = [
   { value: 'all', label: 'All upcoming' },
+  { value: 'today', label: 'Today' },
+  { value: 'weekend', label: 'This weekend' },
   { value: 'week', label: 'Next 7 days' },
   { value: 'month', label: 'This month' },
 ];
+const dancePlaces = places.filter((p) => p.events.some((e) => e.category !== 'class-lesson' && isDanceLevel(e.dancing.level))).length;
 /** dance = dances and live music with dancing; class = classes; listen = concerts where people mostly listen. */
 const kind = (e: ResolvedEvent) => (e.category === 'class-lesson' ? 'class' : isDanceLevel(e.dancing.level) ? 'dance' : 'listen');
 const placeKind = (list: ResolvedEvent[]) => (list.some((e) => kind(e) === 'dance') ? 'dance' : list.some((e) => kind(e) === 'class') ? 'class' : 'listen');
@@ -47,28 +48,9 @@ const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` 
   </PageHeader>
 
   <div class="container section stack-l">
-    <form class="filters js-only" data-map-filters aria-label="Filter the map">
-      <fieldset>
-        <legend>Type of event</legend>
-        <div class="quick-views">
-          {types.map((h, i) => (
-            <label class="chip"><input type="radio" name="type" value={h.value} checked={i === 0} /><span>{h.label}</span></label>
-          ))}
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>When</legend>
-        <div class="quick-views">
-          {whens.map((w, i) => (
-            <label class="chip"><input type="radio" name="when" value={w.value} checked={i === 0} /><span>{w.label}</span></label>
-          ))}
-        </div>
-      </fieldset>
-      <div class="btn-row filters__foot">
-        <p class="result-count" data-map-count aria-live="polite">{places.length} places shown</p>
-        <button type="button" class="btn btn--secondary btn--small" data-map-locate><Icon name="pin" />Show places near me</button>
-      </div>
-    </form>
+    <EventFilters events={upcoming} view="map" when={whens} collapsible countText={`${dancePlaces} ${dancePlaces === 1 ? 'place' : 'places'} shown`}>
+      <button type="button" class="btn btn--secondary btn--small" data-map-locate><Icon name="pin" />Show places near me</button>
+    </EventFilters>
 
     <div class="map-layout">
       <div class="map-panel js-only">
@@ -97,11 +79,12 @@ const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` 
                   </div>
                   <ul class="map-place__events">
                     {p.events.map((e, i) => (
-                      <li data-event data-map-event data-host={kind(e)} data-date={e.date} data-end={String(e.end.getTime())} hidden={i >= MAX_EVENTS}>
+                      <li data-event data-map-event data-host={kind(e)} {...eventFilterData(e)} hidden={i >= MAX_EVENTS}>
                         <a href={e.url} data-track="select_event" data-track-location="map">{e.title}</a>
                         <span class="map-place__when">{when(e)}</span>
                         <span class="map-place__badges">
                           <span class:list={['cat-badge', 'cat-badge--small', `cat-badge--${e.category}`]}>{e.categoryLabel}</span>
+                          <FeatureBadges event={e} max={2} small />
                           <RelativeWhen start={e.start} end={e.end} allDay={e.timeTba} />
                         </span>
                       </li>
@@ -125,7 +108,7 @@ const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` 
             <h2 id="unplaced-h" class="h4">Also coming up (place not on the map yet)</h2>
             <ul class="map-place__events mt-3" data-upcoming-list="map_unplaced">
               {unplaced.map((e) => (
-                <li data-event data-host={kind(e)} data-date={e.date} data-end={String(e.end.getTime())}>
+                <li data-event data-map-unplaced data-host={kind(e)} {...eventFilterData(e)}>
                   <a href={e.url} data-track="select_event" data-track-location="map">{e.title}</a>
                   <span class="map-place__when">{when(e)}{e.location.town ? ` · ${e.location.town}` : ''}</span>
                 </li>

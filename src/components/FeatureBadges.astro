@@ -1,0 +1,14 @@
+---
+/** Small badges for what an event has (DJ, Live band, Lesson, Free...), from lib/event-features.ts. Icon (a CSS mask, .fi in global.css) + text, never color alone. */
+import { FEATURE_INFO, featureBadges, type FeatureInput } from '../lib/event-features';
+interface Props {
+  event: FeatureInput;
+  max?: number;
+  small?: boolean;
+}
+const { event, max = 3, small = false } = Astro.props;
+const badges = featureBadges(event).slice(0, max);
+---
+{badges.map((b) => (
+  <span class:list={['feat-badge', `feat-badge--${b.id}`, small && 'feat-badge--small']} title={FEATURE_INFO[b.id].help}><span class={`fi fi--${FEATURE_INFO[b.id].icon}`} aria-hidden="true"></span>{b.label}</span>
+))}
