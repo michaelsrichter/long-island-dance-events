@@ -2,14 +2,14 @@
   "title": "Live music at The Coop Nashville Kitchen",
   "summary": "Live music at The Coop Nashville Kitchen. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
-  "start": "2026-10-06T08:00",
+  "start": "2026-10-06T20:00",
   "end": "2026-10-06T17:00",
   "timezone": "America/New_York",
   "venueId": "the-coop-nashville-kitchen-farmingdale",
   "town": "Farmingdale",
   "skillLevel": "all-levels",
   "infoUrl": "https://outonthetownli.com/event/join-us-every-week-for-live-music-at-the-coop-in-farmingdale-%f0%9f%8e%b6%f0%9f%8e%b8/2026-10-06/",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "out-on-the-town-li",
   "sourceUrl": "https://outonthetownli.com/event/join-us-every-week-for-live-music-at-the-coop-in-farmingdale-%f0%9f%8e%b6%f0%9f%8e%b8/2026-10-06/",
   "sourceName": "Out on the Town - Long Island event calendar",
@@ -21,5 +21,9 @@
   ],
   "confidence": 0.4,
   "matchKey": "out-on-the-town-li|the-coop-nashville-kitchen-farmingdale||tuesday|08:00|live-music|||2026-10-06",
-  "reviewNotes": "Start time looks wrong (8:00 in the morning). Check the source."
+  "lockedFields": [
+    "status",
+    "start"
+  ],
+  "reviewNotes": "Start time looks wrong (8:00 in the morning). Check the source. Published in the review center on 2026-10-05 after fixing start."
 }
