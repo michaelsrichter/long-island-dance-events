@@ -134,6 +134,29 @@ test.describe('SEO metadata', () => {
     }
   });
 
+  test('event pages have a share picture with alt text and When/Where labels for link previews', async ({ page }) => {
+    await page.goto(await firstEventUrl(page));
+    const image = await page.locator('meta[property="og:image"]').getAttribute('content');
+    expect(image).toMatch(/\/(social\.png|og\/series\/.+\.png)$/);
+    await expect(page.locator('meta[property="og:image:type"]')).toHaveAttribute('content', 'image/png');
+    await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute('content', /.{20,}/);
+    await expect(page.locator('meta[name="twitter:label1"]')).toHaveAttribute('content', 'When');
+    await expect(page.locator('meta[name="twitter:label2"]')).toHaveAttribute('content', 'Where');
+    const res = await page.request.get(new URL(image!).pathname);
+    expect(res.status()).toBe(200);
+    expect(res.headers()['content-type']).toContain('image/png');
+  });
+
+  test('every venue page has its own share picture', async ({ page }) => {
+    await page.goto('/venues/');
+    const href = await page.locator('a[href^="/venues/"][href$="/"]:not([href="/venues/"])').first().getAttribute('href');
+    await page.goto(href!);
+    const image = await page.locator('meta[property="og:image"]').getAttribute('content');
+    expect(image).toMatch(/\/og\/venues\/.+\.jpg$/);
+    await expect(page.locator('meta[property="og:image:type"]')).toHaveAttribute('content', 'image/jpeg');
+    expect((await page.request.get(new URL(image!).pathname)).status()).toBe(200);
+  });
+
   test('event pages include Event structured data with the place and organizer', async ({ page }) => {
     await page.goto(await firstEventUrl(page));
     const blocks = await page.locator('script[type="application/ld+json"]').allTextContents();

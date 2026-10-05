@@ -27,8 +27,8 @@ All accepted events can go to OpenTelemetry. GA4 and Clarity receive events only
 | `view_event` | Event detail page | `event_slug`, `event_status`, `days_until`, `page_type` |
 | `select_event` | Opened an event from a card, map, hero or list | `location` |
 | `add_to_calendar` | Google, Outlook, Outlook work/school, per-event `.ics`, feed subscription | `method` (`google`, `outlook`, `office365`, `ics`, `subscribe_feed`), `location` |
-| `share` | Native share, copy link, copy details, Facebook, email, SMS, download image | `method`, `event_slug`, `location` |
-| `share_open` | Share fallback dialog opened | `event_slug`, `location` |
+| `share` | Shared an event or a directory page. `method`: `native` (phone share menu), `copy_text`, `copy_link`, `whatsapp`, `facebook`, `x`, `email`, `sms`, `download_image` | `method`, `event_slug` or `entity` (e.g. `venue:the-paramount`), `location` |
+| `share_open` | Share preview opened (picture + text) | `event_slug` or `entity`, `location` |
 | `copy_failed` | Clipboard copy failed | `method`, `location` |
 | `get_directions` | Directions opened | `method` (`google`, `apple`), `location` |
 | `outbound_click` | Website/social/phone/email/reviews link opened | `method`, `location`, `target` |

@@ -1,44 +1,28 @@
-/** Plain-text summaries and share links for events. */
+/** Share links for events and directory pages (prefilled WhatsApp, Facebook, X, email and text message). */
 
-export interface ShareInput {
+export interface ShareLinkInput {
   title: string;
-  dateLabel: string; // "Tuesday, October 6, 2026"
-  timeLabel?: string | undefined; // "7:30 PM"
-  venueName?: string | undefined;
-  town?: string | undefined;
   url: string;
-  status?: string | undefined;
+  /** Multi-line text that ends with the page address. */
+  blurb: string;
+  /** One line without the address (for X). */
+  short: string;
 }
 
-/** One-line summary used for copy, SMS, email and native share. */
-export function shareText(i: ShareInput): string {
-  const prefix = i.status === 'cancelled' ? 'CANCELLED: ' : i.status === 'postponed' ? 'POSTPONED: ' : '';
-  const when = i.timeLabel ? `${i.dateLabel} at ${i.timeLabel}` : `${i.dateLabel} (time to be announced)`;
-  const where = [i.venueName, i.town].filter(Boolean).join(', ');
-  return `${prefix}${i.title}, ${when}${where ? `, ${where}` : ''}. ${i.url}`;
+/** The blurb without its last line when that line is the page address (the share menu adds the link itself). */
+export function blurbWithoutUrl(blurb: string, url: string): string {
+  const lines = blurb.split('\n');
+  return lines.at(-1)?.trim() === url ? lines.slice(0, -1).join('\n') : blurb;
 }
 
-/** Multi-line summary for "Copy event details" (for posting manually to Instagram etc.). */
-export function detailText(i: ShareInput & { lesson?: string | undefined; admission?: string | undefined; beginners?: boolean }): string {
-  const lines = [
-    `${i.status === 'cancelled' ? 'CANCELLED: ' : ''}${i.title}`,
-    `📅 ${i.dateLabel}${i.timeLabel ? `, ${i.timeLabel}` : ''}`,
-  ];
-  if (i.venueName || i.town) lines.push(`📍 ${[i.venueName, i.town].filter(Boolean).join(', ')}`);
-  if (i.lesson) lines.push(`💃 ${i.lesson}`);
-  if (i.admission) lines.push(`🎟️ ${i.admission}`);
-  if (i.beginners) lines.push('Beginners welcome. No partner needed.');
-  lines.push(`More info: ${i.url}`);
-  return lines.join('\n');
-}
-
-export function shareLinks(i: ShareInput) {
-  const text = shareText(i);
+export function shareLinks(i: ShareLinkInput) {
   const enc = encodeURIComponent;
+  const withUrl = i.blurb.includes(i.url) ? i.blurb : `${i.blurb}\n${i.url}`;
   return {
+    whatsapp: `https://wa.me/?text=${enc(withUrl)}`,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${enc(i.url)}`,
-    email: `mailto:?subject=${enc(i.title)}&body=${enc(text)}`,
-    sms: `sms:?&body=${enc(text)}`,
-    text,
+    x: `https://x.com/intent/tweet?text=${enc(i.short)}&url=${enc(i.url)}`,
+    email: `mailto:?subject=${enc(i.title)}&body=${enc(`${withUrl}\n\nShared from Long Island Dance Events`)}`,
+    sms: `sms:?&body=${enc(withUrl)}`,
   };
 }

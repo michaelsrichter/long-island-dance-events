@@ -39,6 +39,7 @@ const PROP_KEYS = new Set([
   'nav',
   'mode',
   'target',
+  'entity',
 ]);
 const VITALS = new Set(['LCP', 'INP', 'CLS', 'FCP', 'TTFB']);
 const SAFE = /^[\w\-.,:/ #()&']{0,100}$/;

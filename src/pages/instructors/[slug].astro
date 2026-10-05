@@ -13,6 +13,8 @@ import { entityImageUrls } from '../../lib/entity-images';
 import { breadcrumbJsonLd, instructorJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
 import Reactions from '../../components/Reactions.astro';
+import ShareControls from '../../components/ShareControls.astro';
+import { instructorMeta } from '../../lib/entity-meta';
 
 export async function getStaticPaths() {
   return (await getCollection('instructors')).map((p) => ({ params: { slug: p.id }, props: { person: p } }));
@@ -37,12 +39,14 @@ const ld = instructorJsonLd(person.id, p, site, {
   styles: styles.map((s) => s.data.name),
   organizations: orgs.map((o) => ({ name: o.data.name, url: new URL(`/organizers/${o.id}/`, site).toString() })),
 });
+const meta = await instructorMeta(person, events, site);
 ---
-<BaseLayout title={p.seoTitle ?? `${p.name}: dance classes on Long Island`} description={p.seoDescription ?? `${lede} Upcoming classes and lessons with ${p.name} in Nassau and Suffolk.`.slice(0, 165)} pageType="person" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
+<BaseLayout title={p.seoTitle ?? `${p.name}: dance classes on Long Island`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="person" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={p.name} lede={lede} crumbs={crumbs}>
     {(photo || p.logo) && <EntityHeroMedia slot="media" name={p.name} photo={photo} logo={p.logo} />}
     <Reactions type="instructor" id={person.id} name={p.name} variant="hero" />
     <PersonLinks links={links} name={p.name} variant="buttons" location="instructor" class="mt-5" />
+    <div class="btn-row mt-3"><ShareControls share={meta.share} variant="button" buttonClass="btn btn--secondary btn--small" location="instructor" heading={`Share ${p.name}`} /></div>
   </PageHeader>
   <div class="container section stack-l">
     <section aria-labelledby="on-h">

@@ -14,6 +14,8 @@ import { DANCE_TYPE_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
 import Reactions from '../../components/Reactions.astro';
+import ShareControls from '../../components/ShareControls.astro';
+import { styleMeta } from '../../lib/entity-meta';
 
 export async function getStaticPaths() {
   return (await getCollection('styles')).map((s) => ({ params: { slug: s.id }, props: { style: s } }));
@@ -45,12 +47,14 @@ const styleLd = {
   ...(learn.length ? { sameAs: learn.map((l) => l.url) } : {}),
 };
 const credits = (s.photos ?? []).filter((p) => p.credit);
+const meta = styleMeta(style, events, site);
 ---
-<BaseLayout title={`${s.name} on Long Island: where to dance and take classes`} description={`${s.summary} Find ${s.name} dances and classes in Nassau and Suffolk.`.slice(0, 165)} pageType="style" jsonLd={[styleLd, breadcrumbJsonLd(crumbs, site)]}>
+<BaseLayout title={`${s.name} on Long Island: where to dance and take classes`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="style" jsonLd={[styleLd, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={s.name} lede={s.summary} crumbs={crumbs}>
     {photo && <EntityHeroMedia slot="media" name={s.name} photo={photo} />}
     <p class="page-header__meta">{DANCE_TYPE_LABELS[s.danceType]}{s.music && <> · Music: {s.music}</>}</p>
     <Reactions type="style" id={style.id} name={s.name} variant="hero" />
+    <div class="btn-row mt-5"><a class="btn btn--secondary" href={`/events/?style=${style.id}`}>Filter all events by {s.name}</a><ShareControls share={meta.share} variant="button" location="style" heading={`Share ${s.name}`} /></div>
     <p class="btn-row mt-5"><a class="btn btn--secondary" href={`/events/?style=${style.id}`}>Filter all events by {s.name}</a></p>
   </PageHeader>
   <div class="container section stack-l">

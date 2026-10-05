@@ -273,12 +273,14 @@ pull-request previews together.
 | Measured October 5, 2026 (all sources collected) | Size | Files |
 | --- | ---: | ---: |
 | Before this change | 237.9 MB | 5,571 |
-| Now (share pictures only for the next 3 weeks) | 190.1 MB | 4,667 |
+| Share pictures only for the next 3 weeks | 190.1 MB | 4,667 |
+| Now (plus a share picture for every venue, band, teacher, organizer, style, list page and event series) | 233.3 MB | 5,429 |
 
 - The biggest part used to be the **share pictures**: two for every event date up to 120 days ahead.
   Now they are made only for dates in the next three weeks; the nightly rebuild adds them as dates
   come closer (decision P46).
 - Event pages grow with the number of events. Each new weekly class adds about 17 dates.
+- Every build checks the size (`npm run test:size`) and fails above **12,000 files or 400 MB**, well under the limits.
 - If the site ever grows past about 300 MB, the next step is to keep the share pictures in Azure
   Storage instead of in the website folder.
 

@@ -14,6 +14,8 @@ import { linksOf } from '../../lib/links';
 import { entityImageUrls } from '../../lib/entity-images';
 import CommunityPanel from '../../components/CommunityPanel.astro';
 import Reactions from '../../components/Reactions.astro';
+import ShareControls from '../../components/ShareControls.astro';
+import { venueMeta } from '../../lib/entity-meta';
 
 export async function getStaticPaths() {
   return (await getCollection('venues')).map((v) => ({ params: { slug: v.id }, props: { venue: v } }));
@@ -33,8 +35,9 @@ const crumbs = [
 const links = linksOf(v);
 const [photo, ...morePhotos] = v.photos ?? [];
 const placeLd = venueJsonLd(venue.id, v, site, { ...(await entityImageUrls(v, site)), links });
+const meta = venueMeta(venue, events, site);
 ---
-<BaseLayout title={v.seoTitle ?? `${v.name}, ${v.town}: dance events`} description={v.seoDescription ?? `${v.name}, ${v.address}, ${v.town}. Directions, parking and ${events.length ? 'upcoming dance events' : 'dance events'} at this venue.`} pageType="venue" jsonLd={[placeLd, breadcrumbJsonLd(crumbs, site)]}>
+<BaseLayout title={v.seoTitle ?? `${v.name}, ${v.town}: dance events`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="venue" jsonLd={[placeLd, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={v.name} lede={`${v.address}, ${v.town}, ${v.state} ${v.postalCode ?? ''} · ${v.county} County`} crumbs={crumbs}>
     {(photo || v.logo) && <EntityHeroMedia slot="media" name={v.name} photo={photo} logo={v.logo} />}
     <Reactions type="venue" id={venue.id} name={v.name} variant="hero" />
@@ -43,6 +46,7 @@ const placeLd = venueJsonLd(venue.id, v, site, { ...(await entityImageUrls(v, si
       <a class="btn btn--secondary" href={apple} target="_blank" rel="noopener" data-track="get_directions" data-track-method="apple" data-track-location="venue"><Icon name="pin" />Apple Maps<span class="visually-hidden"> (opens in a new tab)</span></a>
       {v.googleMapsUrl && <a class="btn btn--secondary" href={v.googleMapsUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="reviews" data-track-location="venue" data-track-target="google.com"><Icon name="star" />Photos and reviews<span class="visually-hidden"> on Google Maps (opens in a new tab)</span></a>}
       {v.latitude !== undefined && events.length > 0 && <a class="btn btn--secondary" href={`/events/map/#place-${venue.id}`}><Icon name="pin" />See it on the dance map</a>}
+      <ShareControls share={meta.share} variant="button" location="venue" heading="Share this venue" />
     </div>
   </PageHeader>
   <div class="container section stack-l">

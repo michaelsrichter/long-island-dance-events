@@ -86,6 +86,8 @@ flowchart LR
 | `/events/map/` | Leaflet + OpenStreetMap; star pins for dances and live music, round pins for classes; list fallback. |
 | `/events/<date>-<id>/` | One date of an event: when, where, price, organizer, teachers, bands/DJs, repeat rule, other dates, add to calendar, share, source credit, "Report a problem". |
 | `/events/<slug>/calendar.ics` | One date as an iCalendar file. |
+| `/events/<slug>/social.png`, `social-square.png` | Share pictures for dates in the next 21 days (P46). |
+| `/og/series/<event id>.png`, `/og/<type>/<id>.jpg`, `/og/page/<page>.png` | Share pictures: one per event series for later dates, one per venue, band/DJ, teacher, organizer and dance style (with its photo or logo), one per list page (P47). |
 | `/events/all.ics`, `/events/rss.xml` | Subscribe to everything. |
 | `/events/past/`, `/events/past/<year>/` | Archive. |
 | `/venues/`, `/organizers/`, `/instructors/`, `/performers/`, `/styles/` and `/<type>/<id>/` | Directory pages; each lists its upcoming events. |

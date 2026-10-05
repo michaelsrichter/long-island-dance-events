@@ -28,7 +28,7 @@ jobs:
     name: Build and deploy
     if: github.event_name != 'pull_request' || github.event.action != 'closed'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     environment:
       name: ${{ github.event_name == 'pull_request' && 'preview' || 'production' }}
     env:
@@ -51,6 +51,8 @@ jobs:
           PUBLIC_ANALYTICS_CONSENT_MODE: ${{ vars.PUBLIC_ANALYTICS_CONSENT_MODE || 'opt-in' }}
           PUBLIC_TELEMETRY_ENDPOINT: ${{ vars.PUBLIC_TELEMETRY_ENDPOINT }}
           PUBLIC_RELEASE: ${{ github.sha }}
+      - name: Site size stays well under the Azure limits
+        run: npm run test:size
       - name: Deployment not configured yet
         if: env.HAS_SWA_TOKEN != 'true'
         run: echo "::notice::AZURE_STATIC_WEB_APPS_API_TOKEN is not set, so the deploy was skipped. Run infra/deploy.ps1 (see docs/deployment.md)."

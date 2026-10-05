@@ -14,6 +14,8 @@ import { ORGANIZER_TYPE_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd, organizerJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
 import Reactions from '../../components/Reactions.astro';
+import ShareControls from '../../components/ShareControls.astro';
+import { organizerMeta } from '../../lib/entity-meta';
 
 export async function getStaticPaths() {
   return (await getCollection('organizers')).map((o) => ({ params: { slug: o.id }, props: { org: o } }));
@@ -33,12 +35,14 @@ const site = Astro.site!;
 const links = linksOf(o);
 const [photo, ...morePhotos] = o.photos ?? [];
 const ld = organizerJsonLd(org.id, o, site, { ...(await entityImageUrls(o, site)), links });
+const meta = await organizerMeta(org, events, site);
 ---
-<BaseLayout title={o.seoTitle ?? `${o.name}: dances and classes`} description={o.seoDescription ?? `${o.description ?? `${ORGANIZER_TYPE_LABELS[o.type]}${o.town ? ` in ${o.town}` : ''}.`} Upcoming events, contact details and links.`.slice(0, 165)} pageType="organizer" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
+<BaseLayout title={o.seoTitle ?? `${o.name}: dances and classes`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="organizer" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={o.name} lede={o.description ?? `${ORGANIZER_TYPE_LABELS[o.type]}${o.town ? ` in ${o.town}` : ''}.`} crumbs={crumbs}>
     {(photo || o.logo) && <EntityHeroMedia slot="media" name={o.name} photo={photo} logo={o.logo} />}
     <Reactions type="organizer" id={org.id} name={o.name} variant="hero" />
     <PersonLinks links={links} name={o.name} variant="buttons" location="organizer" class="mt-5" />
+    <div class="btn-row mt-3"><ShareControls share={meta.share} variant="button" buttonClass="btn btn--secondary btn--small" location="organizer" heading={`Share ${o.name}`} /></div>
   </PageHeader>
   <div class="container section stack-l">
     <section aria-labelledby="on-h">
