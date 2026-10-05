@@ -12,5 +12,28 @@
   ],
   "description": "A traveling early-evening club night for people over 30, with DJs, disco balls and confetti, running 5 to 9 PM so guests are home early.",
   "optOut": false,
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Club 30+ is a franchise that started in Europe and is touring North America. DJ names were not published."
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Club 30+ is a franchise that started in Europe and is touring North America. DJ names were not published.\n\nDirectory research 2026-10-04: The only official web presence found is the US promoter's ticket pages: club30plus.us (redirects to the Patchogue Universe ticket page) and the 'Club 30+ USA' Eventbrite organizer profile. No Facebook, Instagram or Spotify link could be verified (the ticket text mentions a Spotify playlist but gives no link; search-engine summaries suggesting handles like 'club30usa' could not be confirmed). This US 'Club 30+' does not appear to be the Irish/UK 'The 30+ Club' (the30plus.club, which sells through Ticket Tailor). Logo is the 200x200 profile image from the Eventbrite organizer page (small but above 120 px); the Universe profile image is only 50 px and the other images are text flyers, so no photos. A contact name and phone printed on one third-party listing (events.longisland.com) belong to an individual and were not recorded. The Patchogue dates (Oct 2-3, 2026) have now passed and no further Long Island dates were listed; the Universe host profile gives its base as 'East Patchogue'. Town left empty because it is a touring event.",
+  "website": "https://www.club30plus.us/",
+  "logo": {
+    "image": "../../assets/entities/organizers/club-30-plus-new-york-logo.webp",
+    "alt": "Club 30+ logo: the words Club 30+ in white bubble letters on a bright blue circle",
+    "credit": "Logo: Club 30+ USA",
+    "creditUrl": "https://www.eventbrite.com/o/club-30-usa-121722063524",
+    "imageSource": "https://cdn.evbuc.com/images/1193046657/3013366875552/1/original.20260909-112224"
+  },
+  "evidence": [
+    {
+      "url": "https://www.eventbrite.com/o/club-30-usa-121722063524",
+      "note": "Eventbrite organizer profile 'Club 30+ USA' (organizer of 'Club 30+ : PATCHOGUE NY (Stereo Garden)', Sat Oct 3, 2026, 5-9 PM) lists its website as www.club30plus.us."
+    },
+    {
+      "url": "https://www.universe.com/api/v2/listings/MQTZ8H",
+      "note": "Universe ticket listing 'Club 30+ : (Patchogue)' hosted by 'Club 30+': Stereo Garden, 9 Railroad Ave, Patchogue; Oct 2 and Oct 3, 2026, 5 PM start; text says it sold out clubs across Europe and is on a North American tour, playing…"
+    },
+    {
+      "url": "https://www.club30plus.us/",
+      "note": "club30plus.us currently redirects straight to the Universe ticket page for the Patchogue event."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: eventbrite.com, universe.com, club30plus.us."
 }

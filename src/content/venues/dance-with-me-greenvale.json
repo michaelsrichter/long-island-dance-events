@@ -11,9 +11,30 @@
   "postalCode": "11548",
   "website": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
   "kind": "dance-studio",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://dancewithmeusa.com/studio/long-island-dance-studio/.",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Source: dancewithmeusa.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Address and phone confirmed on the studio's page and Google Maps; Greenvale (11548) is in Nassau County. The Facebook (DanceWithMeUSA) and Instagram (@dancewithme) links in the studio's contact box are the national chain's accounts, not Long Island-only pages; the chain also has YouTube (youtube.com/user/DanceWIthMeOfficial) and X (@DanceWithMeUSA). The studio page also shows widgets for another branch (Instagram @dwmwoodlands, Yelp for The Woodlands, TX) - template leftovers, ignored. The logo is the chain's crest (SVG, scales to any size). No photos recorded: the dance photos on the page are chain-wide marketing images (file names mention Atlanta and Boca), and we could not confirm any of them shows the Greenvale studio. No public email; hours not published on the page (Google shows closed Sunday, opening 11:30 AM Tuesday). Has a dance floor (it is a dance studio) and holds social dance parties.",
   "latitude": 40.810615,
   "longitude": -73.628463,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/DanceWithMeUSA",
+  "instagramUrl": "https://www.instagram.com/dancewithme/",
+  "phone": "(516) 774-2577",
+  "description": "A ballroom and Latin dance studio on Glen Cove Road in Greenvale, part of the Dance With Me studio chain. It teaches adults private lessons and group classes in salsa, bachata and ballroom, and holds social dance parties. No partner or experience needed.",
+  "logo": {
+    "image": "../../assets/entities/venues/dance-with-me-greenvale-logo.webp",
+    "alt": "Dance With Me logo: a gold crest with two lions, a crown and the letters DWM above the words dance studios",
+    "credit": "Logo: Dance With Me",
+    "creditUrl": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+    "imageSource": "https://dancewithmeusa.com/wp-content/themes/dwm_theme/dist/images/studio-single-new/logo.svg"
+  },
+  "evidence": [
+    {
+      "url": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+      "note": "Studio page: 27 Glen Cove Road, Greenvale, NY 11548, 516.774.2577; adult ballroom, salsa and Latin classes since 2007; October 2026 group class schedule (Latin, Sensual Bachata, Salsa) and social dance parties."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=5838347057113585390",
+      "note": "Google Maps: Dance With Me Long Island, dance school, 27 Glen Cove Rd, Greenvale, NY 11548, (516) 774-2577; closed Sunday, opens 11:30 AM Tuesday."
+    }
+  ]
 }

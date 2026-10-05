@@ -31,16 +31,66 @@
   },
   "description": "A nonprofit professional theater with about 300 seats on Long Wharf at the foot of Main Street in Sag Harbor. It puts on plays, comedy and live music concerts.",
   "facebookUrl": "https://www.facebook.com/baysttheater/",
-  "factsSource": "Checked October 3, 2026. Source: baystreet.org.",
+  "factsSource": "Checked October 4, 2026. Sources: baystreet.org, facebook.com, pictame.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Bay+Street+Theater+%26+Sag+Harbor+Center+for+the+Arts%2C+1+Long+Wharf%2C+Sag+Harbor%2C+NY+11963",
   "kind": "theater",
   "phone": "(631) 725-9500",
   "postalCode": "11963",
-  "reviewNotes": "Added from Ira's List research (2026-10-03).",
+  "reviewNotes": "Added from Ira's List research (2026-10-03).\n\nDirectory research 2026-10-04: The theater site does not link any social pages that we could find. Facebook (facebook.com/baysttheater) is kept from our current data, not re-verified on Facebook. Instagram @baystreettheater found by search (name and location match, about 8.5K followers) but not linked from the site; owner may want to confirm. Photo file names suggest photographers (Harun Zankel for the banners photo; 'Heller' for the band photo); credits could add their names. An audience photo was skipped because it shows many faces and may include minors. Admin office phone is (631) 725-0818 (not recorded). Existing description still fits; it is a seated theater, so no dance floor.",
   "state": "NY",
   "town": "Sag Harbor",
   "website": "https://www.baystreet.org/",
   "latitude": 41.001637,
   "longitude": -72.29761,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/baystreettheater/",
+  "email": "boxoffice@baystreet.org",
+  "hours": "Box office Wed-Sat 12 PM-5 PM and 30 minutes before showtime",
+  "logo": {
+    "image": "../../assets/entities/venues/bay-street-theater-sag-harbor-logo.webp",
+    "alt": "Bay Street Theater logo: the words Bay Street Theater in tall white serif letters on a black square",
+    "credit": "Logo: Bay Street Theater",
+    "creditUrl": "https://www.baystreet.org/",
+    "imageSource": "https://www.baystreet.org/wp-content/uploads/2025/04/Bay-Street-Theater-1.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/bay-street-theater-sag-harbor-1.webp",
+      "alt": "Bright blue Bay Street Theater banners hanging outside the theater building on the wharf, with trees and string lights",
+      "credit": "Photo: Bay Street Theater (website)",
+      "creditUrl": "https://www.baystreet.org/plan-your-visit/",
+      "imageSource": "https://www.baystreet.org/wp-content/uploads/2025/04/outdoor-bay-street-patio-_HangingBanner_1-Harun-Zankel-993x1024.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/venues/bay-street-theater-sag-harbor-2.webp",
+      "alt": "A band plays guitars on the Bay Street Theater stage in front of a British flag backdrop while a full house watches",
+      "credit": "Photo: Bay Street Theater (website)",
+      "creditUrl": "https://www.baystreet.org/",
+      "imageSource": "https://www.baystreet.org/wp-content/uploads/2025/04/Heller_Beatles-vs-Rolling-Stones-at-BST-2-7-15_2164_7x-1024x683.jpg",
+      "focus": "70% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.baystreet.org/plan-your-visit/",
+      "note": "Theater site: not-for-profit 299-seat professional theater; box office at 1 Long Wharf, Sag Harbor, NY 11963, (631) 725-9500, boxoffice@baystreet.org; at the corner of Main and Bay Streets; paid parking on Long Wharf."
+    },
+    {
+      "url": "https://www.baystreet.org/",
+      "note": "Home page footer: box office hours noon-5 PM Wednesday-Saturday or 30 minutes before showtime; season includes live music tribute concerts, comedy and plays."
+    },
+    {
+      "url": "https://www.baystreet.org/about/",
+      "note": "About page: year-round not-for-profit theater and community cultural center since 1991; the home photo caption is the 2015 'Beatles vs. the Rolling Stones' battle of the bands."
+    },
+    {
+      "url": "https://www.facebook.com/baysttheater/",
+      "note": "Shows the Facebook page."
+    },
+    {
+      "url": "https://pictame.com/en/instagram/baystreettheater/1364277889",
+      "note": "Shows the Instagram page."
+    }
+  ]
 }

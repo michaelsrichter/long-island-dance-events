@@ -1,5 +1,57 @@
 {
   "name": "Erich Glaubitz",
   "type": "band",
-  "reviewNotes": "Added automatically from Mezza Luna (Hauppauge) - events. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mezza Luna (Hauppauge) - events. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: His website is shared with his band Yellowfly (yellowfly.net); I used the 'About Erich' page as his website. The social links on that site belong to the band, so they are not recorded as his: Facebook https://www.facebook.com/Yellowfly-219527384805406/, YouTube https://www.youtube.com/@YellowflyMusic (includes his solo videos), Spotify (Yellowfly) https://open.spotify.com/artist/3M1irXKWehQhf6SwH9Gs48. A Spotify artist 'Erich Glaubitz' (https://open.spotify.com/artist/3yChBgc2bLCWoL9A2KUOQs) holds TV/production library music, likely his writing work, not his live act; not recorded. The contact email is the Yellowfly Gmail on the site's contact page (a band/business contact he publishes). Both photos are older images from his site (the portrait looks decades old); the gallery is mostly Yellowfly band shots. No logo for the solo act (Yellowfly has one).",
+  "website": "https://www.yellowfly.net/about-erich",
+  "bookingUrl": "https://www.yellowfly.net/contact",
+  "email": "yellowflymusic@gmail.com",
+  "genres": [
+    "acoustic covers",
+    "classic rock",
+    "Motown",
+    "standards",
+    "singer-songwriter"
+  ],
+  "description": "Long Island singer and guitarist who plays solo shows at restaurants, bars and wineries, covering standards, Motown and R&B, 50s and 60s rock and later pop and rock hits. He also fronts the rock band Yellowfly.",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/erich-glaubitz-1.webp",
+      "alt": "Black-and-white portrait of Erich Glaubitz with tousled light hair and a dark T-shirt, looking into the camera",
+      "credit": "Photo: Erich Glaubitz / Yellowfly (website)",
+      "creditUrl": "https://www.yellowfly.net/about-erich",
+      "imageSource": "https://static.wixstatic.com/media/52803e_8dd6e00f35444d9885199423e9710896~mv2_d_3985_4527_s_4_2.jpg/v1/fill/w_1000,h_1136,al_c,q_85/52803e_8dd6e00f35444d9885199423e9710896~mv2_d_3985_4527_s_4_2.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/erich-glaubitz-2.webp",
+      "alt": "Erich Glaubitz singing into a microphone and playing an electric guitar on a dark stage, with a drum kit and Marshall amp behind him",
+      "credit": "Photo: Erich Glaubitz / Yellowfly (website)",
+      "creditUrl": "https://www.yellowfly.net/gallery",
+      "imageSource": "https://static.wixstatic.com/media/52803e_f177936060e1406f9e66c4b785e47954~mv2_d_2048_1536_s_2.jpg/v1/fill/w_1200,h_900,al_c,q_85/52803e_f177936060e1406f9e66c4b785e47954~mv2_d_2048_1536_s_2.jpg",
+      "focus": "45% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.mezzalunafinedining.com/events/erich-glaubitz",
+      "note": "Mezza Luna (644 Vanderbilt Motor Pkwy, Hauppauge) lists Erich Glaubitz playing Friday Oct 23, 2026, 6-9 PM."
+    },
+    {
+      "url": "https://www.yellowfly.net/about-erich",
+      "note": "His own site: solo singer/guitarist, songwriter for TV and film, lead singer and guitarist of Yellowfly; live shows mix his voice and guitar with crowd participation."
+    },
+    {
+      "url": "https://www.yellowfly.net/",
+      "note": "Home page lists upcoming public shows on Long Island in Oct 2026 (Patchogue, Port Washington, Commack, Port Jefferson, Northport, North Fork wineries), including solo dates."
+    },
+    {
+      "url": "https://www.yellowfly.net/song-list",
+      "note": "Solo song list covers standards, R&B and Motown, 50s rock and roll, 60s rock and more."
+    },
+    {
+      "url": "https://www.yellowfly.net/contact",
+      "note": "Shows the booking page and email."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mezzalunafinedining.com, yellowfly.net."
 }

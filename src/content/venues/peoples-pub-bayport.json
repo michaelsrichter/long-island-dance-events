@@ -2,10 +2,35 @@
   "name": "People’s Pub",
   "address": "291 Bayport Avenue",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: The venue's website (peoplespubbayport.com, a Wix site) could not be opened from our network (the connection is reset), so no logo, photos, email or hours could be taken from it; please re-check from another network. Address, phone and website come from Google Maps and match several directories. Hours are not recorded because sources disagree (Google shows Sunday closed today; directories list Wed-Sat 4-9 PM or 4-10 PM and Sunday 11/12 PM-5/6 PM; Mon-Tue closed). The Facebook page is recorded by its numeric ID (vanity name not visible without login); Instagram @peoplespubbayport is matched by name and a band's post tagging it, not by a link from the site. Candidate logo (not used, not from the venue's own site): the Bandsintown venue profile picture https://photos.bandsintown.com/thumb/18526057.jpeg (dog on a bicycle playing a trumpet, 300x300). The pub's posts mention 'singing & dancing encouraged' at a music bingo night, but no dance floor is described. Not to be confused with Peoples Pub & Sports Bar in East Northport.",
   "state": "NY",
   "town": "Bayport",
   "latitude": 40.746032,
   "longitude": -73.050735,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.peoplespubbayport.com/",
+  "facebookUrl": "https://www.facebook.com/117798798085785",
+  "instagramUrl": "https://www.instagram.com/peoplespubbayport/",
+  "phone": "(631) 205-6401",
+  "postalCode": "11705",
+  "description": "A pub and restaurant on Bayport Avenue in Bayport with a small stage for live music. It hosts local bands, open mic and trivia nights, and ticketed shows by touring Americana, bluegrass and rock acts, plus an outdoor Pub Garden in warm weather.",
+  "evidence": [
+    {
+      "url": "https://www.google.com/maps?cid=1925165677058506250",
+      "note": "Google Maps lists People's Pub Bayport (restaurant) at 291 Bayport Ave, Bayport, NY 11705, phone (631) 205-6401, website peoplespubbayport.com; shows closed on Sunday (Oct 4, 2026)."
+    },
+    {
+      "url": "https://www.bandsintown.com/v/10418404-people's-pub-bayport",
+      "note": "Verified Bandsintown venue page lists 8 upcoming concerts for October-November 2026 (Americana, bluegrass, tribute and singer-songwriter acts)."
+    },
+    {
+      "url": "https://www.findglocal.com/US/Bayport/117798798085785/People%E2%80%99s-Pub",
+      "note": "Mirror of the pub's Facebook page (ID 117798798085785) with the same address, phone and website; posts list weekly open mic, trivia, Irish sessions and live bands, and a band post tags @peoplespubbayport."
+    },
+    {
+      "url": "https://www.restaurantji.com/ny/bayport/people-s-pub-bayport-/",
+      "note": "Directory page (crawled Oct 3, 2026) confirms address and phone and mentions live music and an outdoor patio."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: bandsintown.com, findglocal.com, restaurantji.com."
 }

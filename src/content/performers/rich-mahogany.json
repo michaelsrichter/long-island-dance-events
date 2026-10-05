@@ -32,7 +32,7 @@
     ]
   },
   "description": "Six-piece Long Island party band formed in 2006 that mixes classic rock, Billy Joel, modern rock, reggae, disco and country covers; well known around Bay Shore, Brightwaters and Fire Island.",
-  "facebookUrl": "https://www.facebook.com/pg/Rich-Mahogany-46187720660",
+  "facebookUrl": "https://www.facebook.com/46187720660",
   "genres": [
     "classic and modern rock covers",
     "Billy Joel",
@@ -40,6 +40,38 @@
     "disco",
     "country"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'The Spot at Oaksale Yacht' is likely The Spot at the Oakdale Yacht Club (typo). Band site events page is outdated.",
-  "website": "https://therichmahoganyband.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'The Spot at Oaksale Yacht' is likely The Spot at the Oakdale Yacht Club (typo). Band site events page is outdated.\n\nDirectory research 2026-10-04: Facebook: the site links facebook.com/pg/Rich-Mahogany-46187720660 (old 'pg' style URL); recorded as the numeric page URL facebook.com/46187720660, which points to the same page. The current reviewNotes say the events page is outdated, but it now lists an Oct 3, 2026 show at The Spot @ Oakdale Yacht Club, which also confirms Ira's 'Oaksale' was a typo for Oakdale. The contact page links a personal-name Gmail address of the band leader; not recorded (booking form on the contact page used instead). Phone is the band's 'Get In Touch' number on its home page. No usable band photos on the site (only individual headshots, joke celebrity images and an interview still). No Instagram found. A search summary suggested richmahoganyband.com and facebook.com/richmahoganyband, but those are not linked from the band's site, so not used.",
+  "website": "https://therichmahoganyband.com/",
+  "bookingUrl": "https://therichmahoganyband.com/contact/",
+  "phone": "(631) 860-1233",
+  "logo": {
+    "image": "../../assets/entities/performers/rich-mahogany-logo.webp",
+    "alt": "Rich Mahogany logo: a red round badge with a lighthouse and music notes, the band name around the top and 'Est. 2006' at the bottom",
+    "credit": "Logo: Rich Mahogany",
+    "creditUrl": "https://therichmahoganyband.com/",
+    "imageSource": "https://therichmahoganyband.com/wp-content/uploads/2024/04/rm_logo_2024b.png"
+  },
+  "evidence": [
+    {
+      "url": "https://therichmahoganyband.com/",
+      "note": "Band site home page: 'Get In Touch' phone number, link to the band's Facebook page, and booking contact."
+    },
+    {
+      "url": "https://therichmahoganyband.com/events/",
+      "note": "Events page is now current: The Spot @ Oakdale Yacht Club, Oakdale, Sat Oct 3 (2026), 3 PM."
+    },
+    {
+      "url": "https://therichmahoganyband.com/about/",
+      "note": "About page lists six members (Greg Rabin, Peter Kletchka, Mike Dickson, George McRedmond, Rich Krabak, Tim O'Connor)."
+    },
+    {
+      "url": "https://www.fireislandnews.com/arts-culture/arts-theatre/i18d5nzisy9sef11f8ur9x8d311hxu/",
+      "note": "Fire Island News reports Rich Mahogany selling out the Boulton Center in Bay Shore."
+    },
+    {
+      "url": "https://therichmahoganyband.com/contact/",
+      "note": "Shows the booking page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: therichmahoganyband.com, fireislandnews.com."
 }

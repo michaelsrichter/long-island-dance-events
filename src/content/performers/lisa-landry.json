@@ -1,5 +1,31 @@
 {
   "name": "Lisa Landry",
   "type": "band",
-  "reviewNotes": "Added automatically from Kitty Mulligan's Irish Pub (Bay Shore) - events. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Kitty Mulligan's Irish Pub (Bay Shore) - events. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: The calendar entry is really 'The Core, with Lisa Landry'; the band name may be The Core (consider renaming the entity or adding an alias). The same singer also leads 'Lisa Landry and the Southern Blues Band' (SBB), which plays Patchogue and East Northport. A Facebook page named 'Lisa Landry and the Southern Blues Band' exists (seen only via a photo-album link, https://www.facebook.com/media/set/?set=a.122098584158161943), but I could not get its page URL, so it is not recorded. No website or booking page found. NOT the same person as comedian Lisa Landry (Los Angeles; comedy albums on Spotify/Apple Music) or Lisa Landy (lisalandymusic.com, Massachusetts/Redfeather Band); The Core is not the UK covers band 'The Core Band' or the NJ stoner-rock band Core.",
+  "genres": [
+    "rock",
+    "blues",
+    "soul",
+    "classic rock covers"
+  ],
+  "description": "Long Island singer who fronts bar bands playing rock, blues and soul covers, including Lisa Landry and the Southern Blues Band and, at Kitty Mulligan's in Bay Shore, the band The Core.",
+  "evidence": [
+    {
+      "url": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+      "note": "Kitty Mulligan's (Bay Shore) lists 'Live Music: The Core, with Lisa Landry' on Sat Oct 24, 2026, 7:30-10:30 PM, described as rock and roll with soul."
+    },
+    {
+      "url": "https://webtunes.com/events/071efecd-cea2-4324-b5b0-ce8850e4c1a5",
+      "note": "Lisa Landry and the Southern Blues Band played Bobbique, Patchogue, Mar 20, 2026: rock, blues and country, 'rock n roll with soul'."
+    },
+    {
+      "url": "https://allevents.in/east-northport/sbb-live-the-twisted-cow-distillery/200029635508051",
+      "note": "Lisa Landry and the Southern Blues Band at Twisted Cow Distillery, East Northport, Feb 7, 2026."
+    },
+    {
+      "url": "https://www.bobbique.com/event/lisa-landry/",
+      "note": "Bobbique (Patchogue) listed Lisa Landry and The Southern Blues Band on Dec 12, 2025."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: kittymulligans.com, webtunes.com, allevents.in, bobbique.com."
 }

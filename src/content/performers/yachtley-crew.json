@@ -37,7 +37,42 @@
     "70s and 80s soft rock"
   ],
   "instagramUrl": "https://www.instagram.com/yachtleycrew/",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Nationally touring act, not a local cover band.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Nationally touring act, not a local cover band.\n\nDirectory research 2026-10-04: Nationally touring Southern California act, not a local band; its Long Island stop was the Patchogue Theatre on Oct 3, 2026. Booking is through an agency, so no email/phone recorded (agents' addresses are on the contact page). X link on the site uses twitter.com/yachtleycrew, normalized to x.com. The band name is styled 'Yächtley Crëw' on its site. Other images on the site are merch and record covers, so only one band photo was taken. Current description and genres still fit.",
   "website": "https://www.yachtleycrew.com/",
-  "youtubeUrl": "https://www.youtube.com/yachtleycrew"
+  "youtubeUrl": "https://www.youtube.com/yachtleycrew",
+  "xUrl": "https://x.com/yachtleycrew",
+  "spotifyUrl": "https://open.spotify.com/artist/1MKnjx7jf1vRZEUz6gfQv5",
+  "bookingUrl": "https://www.yachtleycrew.com/contact",
+  "logo": {
+    "image": "../../assets/entities/performers/yachtley-crew-logo.webp",
+    "alt": "Yachtley Crew logo: the band name in pink neon script inside a blue neon circle, with a small captain's-hat skull and crossed oars below",
+    "credit": "Logo: Yachtley Crew",
+    "creditUrl": "https://www.yachtleycrew.com/",
+    "imageSource": "https://static.wixstatic.com/media/b11842_3780a87987d9493684fffa9233a3c68b~mv2.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/yachtley-crew-1.webp",
+      "alt": "The seven members of Yachtley Crew in captain's hats, sunglasses and navy blazers, standing in a row under their pink neon logo",
+      "credit": "Photo: Yachtley Crew (website)",
+      "creditUrl": "https://www.yachtleycrew.com/",
+      "imageSource": "https://static.wixstatic.com/media/b11842_2c4966111c1046d3a4b600e6058b6734~mv2.jpg",
+      "focus": "50% 75%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.yachtleycrew.com/",
+      "note": "Band site: a Los Angeles-area band playing 70s and early 80s soft rock ('yacht rock'); links Facebook, Instagram, X, YouTube and Spotify."
+    },
+    {
+      "url": "https://www.yachtleycrew.com/contact",
+      "note": "Contact page lists booking agents (Pinnacle Entertainment), management and publicity contacts."
+    },
+    {
+      "url": "https://www.bandsintown.com/e/108852827-yachtley-crew-at-patchogue-theatre-for-the-performing-arts",
+      "note": "Bandsintown lists Yachtley Crew at the Patchogue Theatre for the Performing Arts on Long Island (Sat Oct 3, 2026)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: yachtleycrew.com, bandsintown.com."
 }

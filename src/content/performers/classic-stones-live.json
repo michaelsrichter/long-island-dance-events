@@ -1,5 +1,76 @@
 {
   "name": "Classic Stones Live",
   "type": "band",
-  "reviewNotes": "Added automatically from Patchogue Theatre - events. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Patchogue Theatre - events. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Touring tribute act (not Long Island-based; agent is in NJ) that plays Long Island theaters. The band's own site is branded \"The Glimmer Twins\" but its shows are billed as Classic Stones Live. Phone is the booking agency's office line from the agency page; the band's contact page gives the agent's cell instead (not recorded). The X account (stonestribute1) is linked from the band site but may be inactive. Some site photos carry a \"LOVE images\" photographer watermark and were skipped. No Instagram, YouTube channel or Spotify found.",
+  "website": "https://theglimmertwins.com/",
+  "facebookUrl": "https://www.facebook.com/TheGlimmerTwins.net/",
+  "xUrl": "https://x.com/stonestribute1",
+  "bookingUrl": "https://blueravenartists.com/artists/classic-stones-live/",
+  "email": "bill@blueravenartists.com",
+  "phone": "(973) 928-3565",
+  "genres": [
+    "Rolling Stones tribute",
+    "classic rock"
+  ],
+  "description": "An eight-piece Rolling Stones tribute band led by look-alikes of Mick Jagger (Keith Call) and Keith Richards (Bernie Bollendorf). They recreate a classic Stones concert with the big hits and tour theaters around the Northeast, including the Patchogue Theatre.",
+  "logo": {
+    "image": "../../assets/entities/performers/classic-stones-live-logo.webp",
+    "alt": "Classic Stones Live logo: the words in red and black around a big red tongue-and-lips mouth",
+    "credit": "Logo: Classic Stones Live",
+    "creditUrl": "https://theglimmertwins.com/",
+    "imageSource": "https://theglimmertwins.com/wp-content/uploads/2019/03/CSL_2019.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/classic-stones-live-1.webp",
+      "alt": "Classic Stones Live singer leaping in the air on stage in a Jagger-style scarf while the guitarists play under green stage lights",
+      "credit": "Photo: Classic Stones Live (website)",
+      "creditUrl": "https://theglimmertwins.com/",
+      "imageSource": "https://theglimmertwins.com/wp-content/uploads/2023/09/ClassicStonesLivea7iv9.16.2023-248.jpg",
+      "focus": "40% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/classic-stones-live-2.webp",
+      "alt": "Sepia photo of the Classic Stones Live singer and guitarist sharing a microphone under bright stage spotlights",
+      "credit": "Photo: Classic Stones Live (website)",
+      "creditUrl": "https://theglimmertwins.com/",
+      "imageSource": "https://theglimmertwins.com/wp-content/uploads/2023/09/ClassicStonesLivea7iv9.16.2023-502.jpg",
+      "focus": "45% 50%"
+    },
+    {
+      "image": "../../assets/entities/performers/classic-stones-live-3.webp",
+      "alt": "Black-and-white photo of the Classic Stones Live guitarist kicking up a leg while playing, with the band behind him",
+      "credit": "Photo: Classic Stones Live (website)",
+      "creditUrl": "https://theglimmertwins.com/",
+      "imageSource": "https://theglimmertwins.com/wp-content/uploads/2023/09/ClassicStonesLivea7iv9.16.2023-683.jpg",
+      "focus": "40% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.patchoguetheatre.org/events/",
+      "note": "Patchogue Theatre lists \"Classic Stones Live - The Greatest Rock And Roll Tribute In The World!\" on Saturday, Jan 23, 2027 at 8 PM."
+    },
+    {
+      "url": "https://theglimmertwins.com/the-band/",
+      "note": "Official band site (The Glimmer Twins / Classic Stones Live) lists the members and describes their Rolling Stones tribute show."
+    },
+    {
+      "url": "https://theglimmertwins.com/contact-3/",
+      "note": "Band contact page sends bookings to Blue Raven Entertainment (bill@blueravenartists.com) and links Facebook and X."
+    },
+    {
+      "url": "https://theglimmertwins.com/past-events/",
+      "note": "Past shows include Classic Stones Live in Massapequa, Long Island (Aug 11, 2026)."
+    },
+    {
+      "url": "https://theglimmertwins.com/",
+      "note": "Shows the website."
+    },
+    {
+      "url": "https://blueravenartists.com/artists/classic-stones-live/",
+      "note": "Shows the phone number and facts in the description."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: patchoguetheatre.org, theglimmertwins.com, blueravenartists.com."
 }

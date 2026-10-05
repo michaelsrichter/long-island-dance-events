@@ -2,10 +2,60 @@
   "name": "Charlotte's Speakeasy",
   "address": "294 Main Street",
   "county": "Nassau",
-  "reviewNotes": "Added automatically from Dance Manhattan - Long Island swing dances list. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Dance Manhattan - Long Island swing dances list. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Name and address confirmed. The calendar widget calls Oct 2-3 'The Texas Blues Weekend' (a password theme), but the band list on the same page shows The Haymakers on Sat 10/3, matching our event. Entry may need a weekly password posted on the site. Hours are from the events page (open Fri-Sat; calendar shows 7 PM-midnight); not a separately published hours list. Only one usable photo: it is on the site's Media page, which also collects press clippings, so the original photographer might be a news outlet; owner may want to confirm. Logo file is large (3300 px). X/Twitter link from the site footer (twitter.com/charlotteseasy) may be inactive. Instagram linked from the site.",
   "state": "NY",
   "town": "Farmingdale",
   "latitude": 40.73253,
   "longitude": -73.445908,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.charlottesspeakeasy.com/",
+  "facebookUrl": "https://www.facebook.com/charlottesspeakeasy/",
+  "instagramUrl": "https://www.instagram.com/charlottesspeakeasy/",
+  "youtubeUrl": "https://www.youtube.com/channel/UChzk0Q8OIk2sliEgzBKM8TA",
+  "xUrl": "https://x.com/charlotteseasy",
+  "email": "info@charlottesspeakeasy.com",
+  "phone": "(516) 586-8530",
+  "hours": "Fri-Sat 7 PM-12 AM (closed holidays); $5 cover",
+  "postalCode": "11735",
+  "description": "A Prohibition-style speakeasy bar in the cellar under Charlotte's dessert shop on Main Street in Farmingdale village, reached through a hidden bookcase door. It is open Friday and Saturday nights with live blues, jazz and swing bands, including The Haymakers swing band about once a month.",
+  "logo": {
+    "image": "../../assets/entities/venues/charlottes-speakeasy-farmingdale-logo.webp",
+    "alt": "Charlotte's logo: a black ornate fleur-de-lis above the name Charlotte's in script",
+    "credit": "Logo: Charlotte's Speakeasy",
+    "creditUrl": "https://www.charlottesspeakeasy.com/",
+    "imageSource": "https://www.charlottesspeakeasy.com/wp-content/uploads/2017/11/CharlottesSpeakeasy_Logo-FINAL-04-1.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/charlottes-speakeasy-farmingdale-1.webp",
+      "alt": "A narrow wooden staircase with warm lights leading down to the speakeasy's herringbone wood floor",
+      "credit": "Photo: Charlotte's Speakeasy (website)",
+      "creditUrl": "https://www.charlottesspeakeasy.com/media/",
+      "imageSource": "https://www.charlottesspeakeasy.com/wp-content/uploads/2017/11/charlottes-1512056587-4038.jpg",
+      "focus": "50% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.charlottesspeakeasy.com/contact/",
+      "note": "Venue site contact page: 294 Main Street, Farmingdale, NY 11735, (516) 586-8530, info@charlottesspeakeasy.com."
+    },
+    {
+      "url": "https://www.charlottesspeakeasy.com/events/",
+      "note": "Events page: open Friday and Saturday (except holidays), $5 cover, no hoodies or sneakers; band list includes The Haymakers on 10/3, 11/7 and 12/5."
+    },
+    {
+      "url": "https://www.charlottesspeakeasy.com/about-2/",
+      "note": "About page: hidden bookcase door past Charlotte's Desserts' frozen yogurt; restored speakeasy opened by the DeVito brothers in November 2017."
+    },
+    {
+      "url": "http://dancemanhattan.com/calendar/event/113",
+      "note": "Dance Manhattan's Long Island swing list (our source) points swing dancers to the Haymakers nights here."
+    },
+    {
+      "url": "https://www.charlottesspeakeasy.com/",
+      "note": "Shows the website, Facebook page, Instagram page, YouTube channel and X page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: charlottesspeakeasy.com, dancemanhattan.com."
 }

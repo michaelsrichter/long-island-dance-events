@@ -24,15 +24,44 @@
     "notes": "This is an outdoor car show with a free daytime concert. People mostly walk around and watch; we found no reports of dancing.",
     "policy": "unknown"
   },
-  "description": "A Town of Oyster Bay beach on Ocean Parkway with ocean and bay sides, a marina and a spray park. On Oct 3 it hosts the free Car Show Long Island Fall Classic with a live band.",
-  "factsSource": "Checked October 3, 2026. Source: oysterbaytown.com.",
+  "description": "A Town of Oyster Bay beach on Ocean Parkway, about 4 miles east of Jones Beach, with an ocean side and a calmer bay side, a marina, a spray park, playgrounds and waterfront restaurants. Beach parking is mainly for Town of Oyster Bay residents.",
+  "factsSource": "Checked October 4, 2026. Sources: oysterbaytown.com, longisland.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=TOBAY+Beach+Ocean+Pkwy+Massapequa+NY+11758",
   "kind": "beach",
   "latitude": 40.6090352,
   "longitude": -73.4285892,
   "postalCode": "11758",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira listed an event, not a venue; we used TOBAY Beach (Town of Oyster Bay) as the venue. Event info line from the town: 516-797-4121; extra parking and a shuttle from Jones Beach Field 5. TOBAY Beach is normally limited to Town of Oyster Bay residents, with limited non-resident access. Kind could also be 'festival' for this event.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira listed an event, not a venue; we used TOBAY Beach (Town of Oyster Bay) as the venue. Event info line from the town: 516-797-4121; extra parking and a shuttle from Jones Beach Field 5. TOBAY Beach is normally limited to Town of Oyster Bay residents, with limited non-resident access. Kind could also be 'festival' for this event.\n\nDirectory research 2026-10-04: TOBAY is a Town of Oyster Bay park, so the logo is the town seal (allowed by the brief). The beach has no social pages of its own; the town's pages are not recorded here. Hours are the 2026 beach season hours (the marina and restaurants keep other hours; the marina runs to Oct 31). The Oct 3 car show was an outside event held here; the town event info line (516-797-4121) from our existing notes was not re-checked. The photo is a small, older picture (upscaled header banner, a bit soft); people in it are far away and not identifiable. Old description mentioned only the Oct 3 car show; offered a general one.",
   "state": "NY",
   "town": "Massapequa",
-  "website": "https://oysterbaytown.com/tobay/"
+  "website": "https://oysterbaytown.com/tobay/",
+  "phone": "(516) 679-3900",
+  "hours": "Beach season (late June-early Sept): daily 8 AM-5 PM; lifeguards from 9 AM; weekends only from late May",
+  "logo": {
+    "image": "../../assets/entities/venues/tobay-beach-massapequa-logo.webp",
+    "alt": "Town of Oyster Bay seal: a white seagull and the year 1653 on a gold circle reading Town of Oyster Bay, New York",
+    "credit": "Logo: Town of Oyster Bay",
+    "creditUrl": "https://oysterbaytown.com/tobay/",
+    "imageSource": "https://oysterbaytown.com/wp-content/uploads/2014/03/tob-logoonly.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/tobay-beach-massapequa-1.webp",
+      "alt": "Waves rolling onto the wide sandy ocean beach at TOBAY, with lifeguard stands and a few beachgoers in the distance",
+      "credit": "Photo: Town of Oyster Bay (website)",
+      "creditUrl": "https://oysterbaytown.com/tobay/",
+      "imageSource": "https://oysterbaytown.com/wp-content/uploads/TOBAY-Header-1536x569.png",
+      "focus": "40% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://oysterbaytown.com/tobay/",
+      "note": "Town of Oyster Bay TOBAY page: Ocean Parkway, Massapequa, (516) 679-3900; ocean and bay beaches, transient marina, spray park, restaurants; 2026 season hours 8 AM-5 PM; resident parking fees."
+    },
+    {
+      "url": "https://www.longisland.com/business/tobay-beach.html",
+      "note": "Directory listing gives the ZIP 11758 for TOBAY Beach, Ocean Parkway, Massapequa."
+    }
+  ]
 }

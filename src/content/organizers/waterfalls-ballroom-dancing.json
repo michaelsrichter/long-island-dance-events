@@ -12,7 +12,43 @@
     "ballroom",
     "latin-ballroom"
   ],
-  "reviewNotes": "Venue calendar names the organizer as \"The Waterfalls Management\" with music by DJ Valerie; no separate organization name is published. Email only appears in The Dance Calendar.",
+  "reviewNotes": "Venue calendar names the organizer as \"The Waterfalls Management\" with music by DJ Valerie; no separate organization name is published. Email only appears in The Dance Calendar.\n\nDirectory research 2026-10-04: The dances are run in the clubhouse ballroom of The Waterfalls 55+ rental community, so the address is the community's (same place as the waterfalls-ballroom venue). Phone and email are the reservation contacts published for the dance (phone on the community's site; email and a second number, 631-487-3203, only in The Dance Calendar directory). The community's main office line (631) 738-6700 was not used. No logo recorded: the community's site logo is only 110 px and the touch icon 114 px (below the 120 px minimum). Photo 1 is the poster frame of the community's own 'Waterfalls - Ballroom Dancing' video (an older, slightly soft photo). A dedicated page also exists at https://waterfallsapartments.com/ballroom-dancing/. No Facebook/Instagram found for the dance.",
   "website": "https://waterfallsapartments.com/event-calendar",
-  "description": "Ballroom and Latin dances with DJ Valerie on the 2nd and 4th Saturday in the clubhouse ballroom at The Waterfalls."
+  "description": "Ballroom and Latin dances with DJ Valerie on the 2nd and 4th Saturday in the clubhouse ballroom at The Waterfalls.",
+  "address": "400 Cassata Rd",
+  "postalCode": "11779",
+  "county": "Suffolk",
+  "photos": [
+    {
+      "image": "../../assets/entities/organizers/waterfalls-ballroom-dancing-1.webp",
+      "alt": "Older couples dancing in the clubhouse ballroom, with tall arched windows outlined in small lights behind them",
+      "credit": "Photo: The Waterfalls (website video)",
+      "creditUrl": "https://waterfallsapartments.com/event-calendar/",
+      "imageSource": "https://cdn.jwplayer.com/v2/media/5WJax0bi/poster.jpg?width=1280",
+      "focus": "60% 35%"
+    },
+    {
+      "image": "../../assets/entities/organizers/waterfalls-ballroom-dancing-2.webp",
+      "alt": "A stone waterfall and pond at The Waterfalls entrance, with the clubhouse and its cupola behind the trees",
+      "credit": "Photo: The Waterfalls (website)",
+      "creditUrl": "https://waterfallsapartments.com/gallery/",
+      "imageSource": "https://waterfallsapartments.com/wp-content/uploads/2016/04/Grounds1.jpg",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://waterfallsapartments.com/event-calendar/",
+      "note": "The Waterfalls event calendar: 'Ballroom Dancing' 7-11 PM on Oct 10 and Oct 24, 2026, organizer 'The Waterfalls Management', DJ Valerie (631) 581-8509, in the clubhouse ballroom; BYOB; reservations or walk-ins."
+    },
+    {
+      "url": "https://waterfallsapartments.com/ballroom-dancing/",
+      "note": "Dedicated page: DJ Valerie, every 2nd and 4th Saturday 7-11 PM in the clubhouse ballroom; community address 400 Cassata Road, Lake Ronkonkoma, NY 11779."
+    },
+    {
+      "url": "https://www.thedancecalendar.com/find-venues-events",
+      "note": "The Dance Calendar venue directory: 'Ballroom Dancing at Waterfalls Ballroom', 400 Cassata Road, Lake Ronkonkoma; 631-581-8509 or 631-487-3203; valmdance@yahoo.com."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: waterfallsapartments.com, thedancecalendar.com."
 }

@@ -29,16 +29,63 @@
   },
   "description": "A laid-back cocktail bar and grill on Montauk Highway in Lindenhurst serving seafood and bar food, with local party bands on some nights.",
   "facebookUrl": "https://www.facebook.com/riptidescocktailsandgrill",
-  "factsSource": "Checked October 3, 2026. Source: riptidescocktailsandgrills.com.",
+  "factsSource": "Checked October 4, 2026. Source: riptidescocktailsandgrills.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=RipTides+Cocktails+and+Grill+168+E+Montauk+Hwy+Lindenhurst+NY+11757",
   "kind": "bar",
   "phone": "(631) 505-3200",
   "postalCode": "11757",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Confirmed as the Lindenhurst Riptides because the band's own Oct 3 event names Riptides in Lindenhurst. One event listing shows 172 9th Ave, West Babylon, which looks like a map error. Website domain now ends in 'grills.com'; older listings use riptidescocktailsandgrill.com. Ira listed this gig twice (duplicate line).",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Confirmed as the Lindenhurst Riptides because the band's own Oct 3 event names Riptides in Lindenhurst. One event listing shows 172 9th Ave, West Babylon, which looks like a map error. Website domain now ends in 'grills.com'; older listings use riptidescocktailsandgrill.com. Ira listed this gig twice (duplicate line).\n\nDirectory research 2026-10-04: Site says it is owned by American Sherpa, which explains the americansherpatours.com email. Accessible entrance at the side door; street parking nearby (per the site). Current description is still accurate. Photo 1 is a very large original (5719 px, about 10 MB) - resize before use.",
   "state": "NY",
   "town": "Lindenhurst",
   "website": "https://riptidescocktailsandgrills.com/",
   "latitude": 40.680567,
   "longitude": -73.359485,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/riptidescocktailsandgrill/",
+  "tiktokUrl": "https://www.tiktok.com/@riptides54",
+  "email": "riptides@americansherpatours.com",
+  "hours": "Mon 3 PM-12 AM; Tue-Sun 2 PM-12 AM",
+  "logo": {
+    "image": "../../assets/entities/venues/riptides-lindenhurst-logo.webp",
+    "alt": "RipTides Cocktails and Grill logo: white script 'RipTides' over a blue curling wave on black",
+    "credit": "Logo: RipTides Cocktails and Grill",
+    "creditUrl": "https://riptidescocktailsandgrills.com/",
+    "imageSource": "https://riptidescocktailsandgrills.com/photo/logo.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/riptides-lindenhurst-1.webp",
+      "alt": "A rock band plays in the corner of the bar: a long-haired singer at the mic, guitarists and a drummer under colored lights",
+      "credit": "Photo: RipTides Cocktails and Grill (website)",
+      "creditUrl": "https://riptidescocktailsandgrills.com/",
+      "imageSource": "https://riptidescocktailsandgrills.com/photo/4.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/venues/riptides-lindenhurst-2.webp",
+      "alt": "A crowd stands and watches a band at the far end of the room, with disco lights on the ceiling and TVs above the bar",
+      "credit": "Photo: RipTides Cocktails and Grill (website)",
+      "creditUrl": "https://riptidescocktailsandgrills.com/",
+      "imageSource": "https://riptidescocktailsandgrills.com/photo/8.jpg",
+      "focus": "60% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/riptides-lindenhurst-3.webp",
+      "alt": "The bright bar room with a green pool table, a wooden bar with stools and beach-style wood paneling",
+      "credit": "Photo: RipTides Cocktails and Grill (website)",
+      "creditUrl": "https://riptidescocktailsandgrills.com/",
+      "imageSource": "https://riptidescocktailsandgrills.com/photo/13.jpg",
+      "focus": "50% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://riptidescocktailsandgrills.com/",
+      "note": "Bar's own site: 168 East Montauk Highway, Lindenhurst, NY 11757; hours Mon 3 PM-12 AM, Tue-Sun 2 PM-12 AM; +1 631-505-3200; riptides@americansherpatours.com; links Instagram, Facebook and TikTok; photo gallery shows bands playing in the…"
+    },
+    {
+      "url": "https://www.google.com/maps?cid=16141075725060606294",
+      "note": "Google Maps: RipTides Cocktails and Grill (restaurant), 168 E Montauk Hwy, Lindenhurst, NY 11757, phone (631) 505-3200, website riptidescocktailsandgrills.com."
+    }
+  ]
 }

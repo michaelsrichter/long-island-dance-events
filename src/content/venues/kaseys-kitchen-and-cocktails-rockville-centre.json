@@ -2,10 +2,36 @@
   "name": "Kasey’s Kitchen & Cocktails",
   "address": "23 N Park Ave",
   "county": "Nassau",
-  "reviewNotes": "Added automatically from Out on the Town - Long Island event calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Out on the Town - Long Island event calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: LIKELY CLOSED: Google Maps marks the main listing (now named KC's RVC) as permanently closed, and the website kcsrvc.com (and kaseysrvcny.com) shows 'Account Suspended'. The Facebook page's last posts (late Aug 2026) advertise selling off the bar 'before the weather gets cold'. A separate Google listing for the rooftop (Rooftop 32) is not marked closed. Please confirm before listing the 2 upcoming events from Out on the Town; some ticket sites (SeatGeek, Songkick) list shows here that look auto-generated. The venue was renamed from Kasey's Kitchen & Cocktails to KC's RVC (KC's Rooftop). Not recorded because they could not be checked without a login or are not on an official site: Facebook https://www.facebook.com/kaseysrvc/ (page titled Kasey's Kitchen & Cocktails; the current page is Facebook ID 215119725169243, 'KC's RVC'), Facebook https://www.facebook.com/Rooftop32/, Instagram @kcsrvc (also @kaseys_rvc in one directory), and directory emails kaseyskitchenandcocktails@gmail.com / kaseyshh@gmail.com. Directory hours conflict with each other, so no hours recorded. The phone may no longer be answered. Rockville Centre is in Nassau County. No official logo or photos available (website down).",
   "state": "NY",
   "town": "Rockville Centre",
   "latitude": 40.65692,
   "longitude": -73.645109,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "phone": "(516) 766-5049",
+  "postalCode": "11570",
+  "description": "A restaurant and bar on North Park Avenue in Rockville Centre with private party rooms and a rooftop lounge (Rooftop 32, later called KC's Rooftop) that hosted DJs, karaoke and live music. It was renamed KC's RVC.",
+  "evidence": [
+    {
+      "url": "https://www.google.com/maps?cid=424777800680645658",
+      "note": "Google Maps lists 'KC's RVC' at 23 N Park Ave, Rockville Centre, NY 11570, phone (516) 766-5049, website kcsrvc.com, and marks it Permanently closed (checked Oct 4, 2026)."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=421888770113639377",
+      "note": "A second Google Maps listing, 'Rooftop 32 at Kaseys Kitchen & Cocktails' (nightlife), has the same address, phone and website and is not marked closed; it shows no hours."
+    },
+    {
+      "url": "https://kcsrvc.com/",
+      "note": "The venue's website (kcsrvc.com, and the older kaseysrvcny.com, which redirects there) now shows a hosting 'Account Suspended' page."
+    },
+    {
+      "url": "https://www.findglocal.com/US/Rockville-Centre/215119725169243/KC%27s-RVC",
+      "note": "Mirror of the KC's RVC Facebook page: posts through late August 2026 promote rooftop DJs, karaoke and live music, and an Aug 28-29 'drinking the bar dry' sale."
+    },
+    {
+      "url": "https://restaurantjump.com/kcs-rvc-11570/",
+      "note": "Directory page ties the KC's RVC name to 23 N Park Ave, phone (516) 766-5049, kcsrvc.com and Instagram @kcsrvc."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: kcsrvc.com, findglocal.com, restaurantjump.com."
 }

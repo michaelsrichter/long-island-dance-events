@@ -28,16 +28,69 @@
     "policy": "unknown"
   },
   "description": "A French brasserie on Merrick Road in Massapequa with a Paris-style dining room and bar. It hosts live jazz and DJ nights.",
-  "factsSource": "Checked October 3, 2026. Source: brasseriebychefaless.com.",
+  "factsSource": "Checked October 4, 2026. Sources: brasseriebychefaless.com, allevents.in.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Brasserie+by+Chef+Aless%2C+5590+Merrick+Rd%2C+Massapequa%2C+NY+11758",
   "kind": "restaurant",
   "phone": "(585) 486-2305",
   "postalCode": "11758",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Could not confirm the Oct 3 NY Ska Jazz Ensemble show on the restaurant's site. The phone number has a 585 area code but is the one the restaurant publishes. No Facebook page found (Instagram: @brasseriebychefaless).",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Could not confirm the Oct 3 NY Ska Jazz Ensemble show on the restaurant's site. The phone number has a 585 area code but is the one the restaurant publishes. No Facebook page found (Instagram: @brasseriebychefaless).\n\nDirectory research 2026-10-04: Live jazz dinners appear on event listing sites (e.g. Paumanok Stompers on Oct 17, 2026) but not on the restaurant's own Events page, which currently only shows a Thanksgiving menu; we did not confirm DJ nights. The 585 phone number is the one the restaurant itself publishes (and Google shows). No Facebook page linked from the site; no public email (contact form only). Photo URLs are the site's gallery images requested as 1400 px JPEGs. Current description still fits.",
   "state": "NY",
   "town": "Massapequa",
   "website": "https://www.brasseriebychefaless.com/",
   "latitude": 40.669298,
   "longitude": -73.431749,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/brasseriebychefaless/",
+  "hours": "Tue-Thu 4-9 PM; Fri-Sat 4-9:30 PM (bar until 11 PM); Sun 3-9 PM; closed Mon",
+  "logo": {
+    "image": "../../assets/entities/venues/brasserie-by-chef-aless-massapequa-logo.webp",
+    "alt": "Brasserie by Chef Aless logo: the word Brasserie in orange-red letters with the Eiffel Tower as the A, and 'By: Chef Aless' in script",
+    "credit": "Logo: Brasserie by Chef Aless",
+    "creditUrl": "https://www.brasseriebychefaless.com/",
+    "imageSource": "https://images.getbento.com/accounts/20d195eecbf8a09b50915abdfa053457/media/images/74358brasserie-logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/brasserie-by-chef-aless-massapequa-1.webp",
+      "alt": "The open front doors of Brasserie under a black-and-white Brasserie 2023 Massapequa sign, with the chef posing in the doorway",
+      "credit": "Photo: Brasserie by Chef Aless (website)",
+      "creditUrl": "https://www.brasseriebychefaless.com/gallery/gallery/",
+      "imageSource": "https://images.getbento.com/accounts/20d195eecbf8a09b50915abdfa053457/media/images/71971IMG_8011.jpg?w=1400&fit=max&fm=jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/venues/brasserie-by-chef-aless-massapequa-2.webp",
+      "alt": "Diners at a long bar with wood stools, a lit wall of bottles and globe lights over a tiled floor",
+      "credit": "Photo: Brasserie by Chef Aless (website)",
+      "creditUrl": "https://www.brasseriebychefaless.com/gallery/gallery/",
+      "imageSource": "https://images.getbento.com/accounts/20d195eecbf8a09b50915abdfa053457/media/images/9611IMG_0725.JPEG?w=1400&fit=max&fm=jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/brasserie-by-chef-aless-massapequa-3.webp",
+      "alt": "A dining room with dark wood paneling, a long table set for a party and pendant lights by tall windows",
+      "credit": "Photo: Brasserie by Chef Aless (website)",
+      "creditUrl": "https://www.brasseriebychefaless.com/gallery/gallery/",
+      "imageSource": "https://images.getbento.com/accounts/20d195eecbf8a09b50915abdfa053457/media/images/38636IMG_0432.jpg?w=1400&fit=max&fm=jpg",
+      "focus": "45% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.brasseriebychefaless.com/location/brasserie-long-island/",
+      "note": "Restaurant's own Hours & Location page: 5590 Merrick Rd, Massapequa, NY 11758, (585) 486-2305, open Tue-Sun from late afternoon (bar open until 11 PM Fri-Sat)."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=13384063368141793937",
+      "note": "Google Maps lists 'Brasserie by Chef Aless' (French restaurant) at the same address and phone, website brasseriebychefaless.com."
+    },
+    {
+      "url": "https://allevents.in/massapequa/dinner-and-jazz-with-the-paumanok-stompers-at-brasserie-by-chef-aless/200030164974647",
+      "note": "Event listing: 'Dinner and jazz with the Paumanok Stompers' at Brasserie by Chef Aless, Oct 17, 2026, 7-10 PM."
+    },
+    {
+      "url": "https://www.brasseriebychefaless.com/",
+      "note": "Shows the Instagram page."
+    }
+  ]
 }

@@ -30,16 +30,42 @@
   },
   "description": "An old-style single-screen movie theater across from the Bellmore train station. Its Showplace stage also hosts live tribute concerts.",
   "facebookUrl": "https://www.facebook.com/BellmoreMovies/",
-  "factsSource": "Checked October 3, 2026. Source: bellmoremovie.com.",
+  "factsSource": "Checked October 4, 2026. Source: bellmoremovie.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Bellmore+Movies+%26+Showplace%2C+222+Pettit+Ave%2C+Bellmore%2C+NY+11710",
   "kind": "theater",
   "phone": "(516) 783-7200",
   "postalCode": "11710",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'Bellmore Showplace Theater' is the Showplace stage inside Bellmore Movies. A promoter called Bellmore Concerts also runs shows at this address.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'Bellmore Showplace Theater' is the Showplace stage inside Bellmore Movies. A promoter called Bellmore Concerts also runs shows at this address.\n\nDirectory research 2026-10-04: Current description is still accurate. The site lists events (e.g. a tribute show 'Hopelessly Olivia' and 'Dolly and Divas' on Nov 21, 2026) but no opening hours (it runs by showtimes) and no public email. The site has no photos of the building or the room, only event posters, so no photos recorded. Contact page also gives (516) 783-3199 for rentals and promoters.",
   "state": "NY",
   "town": "Bellmore",
   "website": "https://www.bellmoremovie.com/",
   "latitude": 40.668836,
   "longitude": -73.530364,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/bellmoremovies/",
+  "logo": {
+    "image": "../../assets/entities/venues/bellmore-movies-showplace-bellmore-logo.webp",
+    "alt": "Bellmore Movies and Showplace wordmark in white outlined letters on a blue background",
+    "credit": "Logo: Bellmore Movies & Showplace",
+    "creditUrl": "https://www.bellmoremovie.com/",
+    "imageSource": "https://cms-assets.webediamovies.pro/production/2/9fe9c53d17733f46fd197b60ee783599.png"
+  },
+  "evidence": [
+    {
+      "url": "https://www.bellmoremovie.com/contactus/",
+      "note": "Theater's own contact page: 222 Pettit Avenue, Bellmore, NY 11710; (516) 783-7200; second line (516) 783-3199 for party and promoter questions."
+    },
+    {
+      "url": "https://www.bellmoremovie.com/about-us/",
+      "note": "About page: built in 1915, run by the Stampfel family since 1986; Nassau County's last single-screen cinema; shows films plus live shows, plays, comedy and concerts."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=5539103248681807123",
+      "note": "Google Maps lists 'Bellmore Movies & The Showplace' (movie theater) at 222 Pettit Ave, Bellmore, NY 11710, phone (516) 783-7200."
+    },
+    {
+      "url": "https://www.bellmoremovie.com/",
+      "note": "Shows the website, Facebook page and Instagram page."
+    }
+  ]
 }

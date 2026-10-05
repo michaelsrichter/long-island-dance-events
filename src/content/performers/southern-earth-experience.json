@@ -39,6 +39,45 @@
     "funk",
     "classic rock"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). No evidence of partner hustle at their shows, so only freestyle is listed. Booking profile places them in Middle Village, Queens.",
-  "website": "https://thesouthernearthband.bandzoogle.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). No evidence of partner hustle at their shows, so only freestyle is listed. Booking profile places them in Middle Village, Queens.\n\nDirectory research 2026-10-04: Website changed: the band's own contact page names www.SouthernEarthBand.com; the old bandzoogle subdomain in current blocks robots, so use https://southernearthband.com/. Phone and email are the founder Carl's, published on the band's EPK as the booking contact; the owner may prefer to show only the contact page. They do play Long Island (Salt Shack, Babylon, Oct 3, 2026) even though playsAt is empty. No photos recorded: the live photos on the site carry a photographer's corner watermark ('Dominick Totino Photography'), and the vintage 1970s photos show the members as young teens. The site also mentions a 'GreenpointMusic' YouTube channel that is not band-specific, so no YouTube is recorded.",
+  "website": "https://southernearthband.com/",
+  "facebookUrl": "https://www.facebook.com/p/Southern-Earth-61576228091747/",
+  "instagramUrl": "https://www.instagram.com/southernearthband/",
+  "bookingUrl": "https://southernearthband.com/email-phone-sms",
+  "email": "captain613@yahoo.com",
+  "phone": "(631) 671-4465",
+  "logo": {
+    "image": "../../assets/entities/performers/southern-earth-experience-logo.webp",
+    "alt": "The Southern Earth Experience logo: the word Southern in heavy black retro letters with the word Earth in red running down the side",
+    "credit": "Logo: The Southern Earth Experience",
+    "creditUrl": "https://southernearthband.com/",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/1197003/08a5f4e5a1d994be325ffe6a681aa4526bfbf6f2/original/logo3.jpg/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg"
+  },
+  "evidence": [
+    {
+      "url": "https://southernearthband.com/",
+      "note": "Band site/EPK describes a New York City band blending disco, funk and classic rock, and lists an Oct 3 gig at Salt Shack in Babylon, Long Island."
+    },
+    {
+      "url": "https://saltshackny.com/event/81718e0c71f3tbd-2026-09-11/",
+      "note": "Salt Shack (100 Ocean Pkwy, Babylon) lists 'Southern Earth Experience', live band, Sat Oct 3, 2026 at 7 PM."
+    },
+    {
+      "url": "https://southernearthband.com/the-legacy",
+      "note": "Founders Carl Battista and Joe Caputo started Southern Earth as kids in Williamsburg, Brooklyn in the early 1970s and still lead the band."
+    },
+    {
+      "url": "https://southernearthband.com/email-phone-sms",
+      "note": "Contact page gives a phone/text number for Carl and an email, and names www.SouthernEarthBand.com as the website."
+    },
+    {
+      "url": "https://www.thebash.com/rock/southern-earth",
+      "note": "The Bash booking profile lists Southern Earth as a cover band in Middle Village, Queens."
+    },
+    {
+      "url": "https://southernearthband.com/social-media",
+      "note": "Shows the Facebook page and Instagram page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: southernearthband.com, saltshackny.com, thebash.com."
 }

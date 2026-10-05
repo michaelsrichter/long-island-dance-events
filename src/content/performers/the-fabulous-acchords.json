@@ -1,5 +1,71 @@
 {
   "name": "The Fabulous Acchords",
   "type": "band",
-  "reviewNotes": "Added automatically from The Fabulous Acchords - appearance schedule. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from The Fabulous Acchords - appearance schedule. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Check the linked venue: the band's own schedule shows no Knights of Columbus Hall, Patchogue date; its only Knights of Columbus show is a Feb 13, 2027 dinner dance at Infant Jesus Parish, 110 Myrtle Ave, Port Jefferson. The Patchogue event may be mis-matched, or may come from a different source (e.g. The Dance Calendar). No official Facebook, Instagram or YouTube found; YouTube clips exist on members' or fans' channels only. Several gallery images look digitally composited (studio portraits and a stage with a very large crowd); they are the group's own promo images, but the owner may prefer a plain performance photo.",
+  "website": "https://theacchords.com/",
+  "spotifyUrl": "https://open.spotify.com/artist/4yKXlNHdu1NLXbTgtegMXd",
+  "bookingUrl": "https://theacchords.com/contact",
+  "phone": "(516) 314-7637",
+  "genres": [
+    "doo-wop",
+    "oldies",
+    "50s and 60s vocal harmony"
+  ],
+  "description": "A four-man doo-wop vocal harmony group from the New York area that sings hits of the 1950s, 60s and 70s in matching sequined jackets. They play concerts, dinner dances, sock hops, street fairs and private parties on Long Island, in New York City and in New Jersey.",
+  "logo": {
+    "image": "../../assets/entities/performers/the-fabulous-acchords-logo.webp",
+    "alt": "The Fabulous Acchords logo in gold script beside a black vinyl record and music notes",
+    "credit": "Logo: The Fabulous Acchords",
+    "creditUrl": "https://theacchords.com/",
+    "imageSource": "https://theacchords.com/airo-assets/images/logo/horizontal"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/the-fabulous-acchords-1.webp",
+      "alt": "The four singers of The Fabulous Acchords smiling together in black sequined jackets and silver bow ties",
+      "credit": "Photo: The Fabulous Acchords (website)",
+      "creditUrl": "https://theacchords.com/gallery",
+      "imageSource": "https://theacchords.com/airo-assets/images/gallery/acchords-2026-color-portrait",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-fabulous-acchords-2.webp",
+      "alt": "The Fabulous Acchords in silver jackets on a theater stage in front of a large audience",
+      "credit": "Photo: The Fabulous Acchords (website)",
+      "creditUrl": "https://theacchords.com/gallery",
+      "imageSource": "https://theacchords.com/airo-assets/images/gallery/acchords-concert-stage",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-fabulous-acchords-3.webp",
+      "alt": "Black-and-white portrait of the four members of The Fabulous Acchords in tuxedo jackets",
+      "credit": "Photo: The Fabulous Acchords (website)",
+      "creditUrl": "https://theacchords.com/gallery",
+      "imageSource": "https://theacchords.com/airo-assets/images/gallery/acchords-2026-bw-portrait",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://theacchords.com/about",
+      "note": "Official site: doo-wop vocal group (Tommy, Warren, Joe and Dennis) keeping the music of the 50s, 60s and 70s alive; 2011 Wildwood NJ Music Award."
+    },
+    {
+      "url": "https://theacchords.com/schedule",
+      "note": "2026-27 schedule includes New Hyde Park (Cellini Lodge sock hop), Levittown, Hicksville Library and a Feb 13, 2027 Knights of Columbus Dinner Dance at Infant Jesus Parish, Port Jefferson."
+    },
+    {
+      "url": "https://theacchords.com/contact",
+      "note": "Contact page: booking form and (516) 314-7637."
+    },
+    {
+      "url": "https://theacchords.com/song-page",
+      "note": "Song page links the group's Spotify artist page and Apple Music/Amazon albums."
+    },
+    {
+      "url": "https://theacchords.com/",
+      "note": "Shows the website and kind of music."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: theacchords.com."
 }

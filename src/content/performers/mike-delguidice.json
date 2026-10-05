@@ -1,5 +1,69 @@
 {
   "name": "Mike DelGuidice",
   "type": "band",
-  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Booking email and phone are his booking agent's, as published on his own bookings page (203 area code). He is billed as a solo name but usually plays with his band Big Shot (Billy Joel tribute); the Big Shot site (bigshotmusic.com) did not load and its image host blocks robots. Both photos are site menu tiles with a caption band across the bottom ('TOUR DATES' / 'MIKE DELGUIDICE'); crop from the top or drop them if captions are not acceptable. A clean stage photo on the bio page was skipped because it carries a photographer's watermark. The logo is white text on a transparent background (needs a dark backdrop). X link given as x.com (site links twitter.com/mikedelguidice1).",
+  "website": "https://mikedelguidice.com/",
+  "facebookUrl": "https://www.facebook.com/mikedelguidiceofficial/",
+  "instagramUrl": "https://www.instagram.com/mike_delguidice/",
+  "youtubeUrl": "https://www.youtube.com/user/deljuicy0309",
+  "xUrl": "https://x.com/mikedelguidice1",
+  "spotifyUrl": "https://open.spotify.com/artist/08aCzumYmIvyhEOGPpdsGS",
+  "bookingUrl": "https://mikedelguidice.com/bookings/",
+  "email": "miracleconcerts@gmail.com",
+  "phone": "(203) 208-3166",
+  "genres": [
+    "Billy Joel tribute",
+    "piano rock",
+    "classic rock",
+    "pop"
+  ],
+  "description": "Long Island singer and multi-instrumentalist who tours as a member of Billy Joel's band. With his own band (Big Shot) he plays Billy Joel songs, classic rock and pop covers, and his own songs, including the theme from the sitcom 'Kevin Can Wait'.",
+  "logo": {
+    "image": "../../assets/entities/performers/mike-delguidice-logo.webp",
+    "alt": "Mike DelGuidice wordmark in white capital letters",
+    "credit": "Logo: Mike DelGuidice",
+    "creditUrl": "https://mikedelguidice.com/",
+    "imageSource": "https://mikedelguidice.com/wp-content/uploads/2019/05/mike-d.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/mike-delguidice-1.webp",
+      "alt": "Mike DelGuidice and his band, about ten musicians holding saxophones and trumpets, posing outdoors in front of trees",
+      "credit": "Photo: Mike DelGuidice (website)",
+      "creditUrl": "https://mikedelguidice.com/",
+      "imageSource": "https://mikedelguidice.com/wp-content/uploads/2023/06/tour-dates.jpg",
+      "focus": "50% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/mike-delguidice-2.webp",
+      "alt": "Mike DelGuidice in a white shirt smiling on stage in front of a drum kit under stage lights",
+      "credit": "Photo: Mike DelGuidice (website)",
+      "creditUrl": "https://mikedelguidice.com/",
+      "imageSource": "https://mikedelguidice.com/wp-content/uploads/2022/03/mike-delguidice.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mulcahyslongisland.com/event/mike-delguidice/",
+      "note": "Mulcahy's (Wantagh) lists its annual Thanksgiving show featuring Mike DelGuidice on Sat Nov 28, 9 PM."
+    },
+    {
+      "url": "https://mikedelguidice.com/bio/",
+      "note": "Official bio: one of Long Island's best-known performers, tours with Billy Joel, plays bass, guitar, piano and drums, wrote the 'Kevin Can Wait' theme, and still performs with his own band."
+    },
+    {
+      "url": "https://mikedelguidice.com/bookings/",
+      "note": "Bookings page lists the booking agent (Miracle Concerts) with phone 203-208-3166 and miracleconcerts@gmail.com for national and international bookings."
+    },
+    {
+      "url": "https://mikedelguidice.com/",
+      "note": "Official site links Instagram mike_delguidice, Facebook mikedelguidiceofficial, X/Twitter mikedelguidice1, YouTube deljuicy0309 and Spotify."
+    },
+    {
+      "url": "https://mikedelguidice.com/mike-delguidice-goes-from-big-shot-cover-band-to-touring-with-the-piano-man-long-island-pulse/",
+      "note": "Shows the kind of music."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mulcahyslongisland.com, mikedelguidice.com."
 }

@@ -30,16 +30,69 @@
   },
   "description": "A nonprofit community theater of about 330 seats on Montauk Highway in Oakdale. It stages musicals and also hosts tribute concerts, comedy and candlelight shows.",
   "facebookUrl": "https://www.facebook.com/cmpac",
-  "factsSource": "Checked October 3, 2026. Source: cmpac.com.",
+  "factsSource": "Checked October 4, 2026. Source: cmpac.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=CM+Performing+Arts+Center%2C+931+Montauk+Hwy%2C+Oakdale%2C+NY+11769",
   "kind": "theater",
   "phone": "(631) 218-2810",
   "postalCode": "11769",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Same place as Ira's 'CMPAC'. The Oct 4 show is The Soul Jam Revue, a Philly soul tribute concert.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Same place as Ira's 'CMPAC'. The Oct 4 show is The Soul Jam Revue, a Philly soul tribute concert.\n\nDirectory research 2026-10-04: Current description still accurate. The theater is in the Lighthouse Commons shopping center. Logo file is the version made for dark backgrounds (white and gold letters on transparent). Photo 3 is a smaller rental room shown on the venue rentals page.",
   "state": "NY",
   "town": "Oakdale",
   "website": "https://www.cmpac.com/",
   "latitude": 40.738094,
   "longitude": -73.120534,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/cmperformingarts/",
+  "youtubeUrl": "https://www.youtube.com/@CMPerformingArtsCenterOakdale",
+  "tiktokUrl": "https://www.tiktok.com/@cmperformingarts",
+  "xUrl": "https://x.com/cmpac",
+  "email": "info@cmpac.com",
+  "hours": "Box office Mon-Fri 10 AM-6 PM; Sat 10 AM-3 PM; Sun closed except show days; opens 2 hours before every show",
+  "logo": {
+    "image": "../../assets/entities/venues/cm-performing-arts-center-oakdale-logo.webp",
+    "alt": "CM Performing Arts Center logo: 'CM' between gold stage curtains, with 'Performing Arts Center' in white and gold script",
+    "credit": "Logo: CM Performing Arts Center",
+    "creditUrl": "https://www.cmpac.com/",
+    "imageSource": "https://www.cmpac.com/wp-content/uploads/2023/09/CM-Performing-Arts-Center-black-background-scaled-2048x430.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/cm-performing-arts-center-oakdale-1.webp",
+      "alt": "The front of CM Performing Arts Center at dusk: a lit 'CM Performing Arts Center' sign over glass doors in a shopping center",
+      "credit": "Photo: CM Performing Arts Center (website)",
+      "creditUrl": "https://www.cmpac.com/venue-rentals/",
+      "imageSource": "https://www.cmpac.com/wp-content/uploads/2023/09/332293732_916617006179547_52037025208799583_n-2.jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/cm-performing-arts-center-oakdale-2.webp",
+      "alt": "View from the stage across rows of red theater seats under chandeliers",
+      "credit": "Photo: CM Performing Arts Center (website)",
+      "creditUrl": "https://www.cmpac.com/venue-rentals/",
+      "imageSource": "https://www.cmpac.com/wp-content/uploads/2023/09/image1_79C8571E-250C-4AE4-9DA950B98F40838D_4c2800bc-751b-471f-8e58f7d7f9227aaa-2.jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/cm-performing-arts-center-oakdale-3.webp",
+      "alt": "A smaller rental room with a light wood floor, red curtains and rows of red chairs",
+      "credit": "Photo: CM Performing Arts Center (website)",
+      "creditUrl": "https://www.cmpac.com/venue-rentals/",
+      "imageSource": "https://www.cmpac.com/wp-content/uploads/2023/09/IMG_1075-scaled-2-2048x2048.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.cmpac.com/contact-us/",
+      "note": "Theater's own contact page: 931 Montauk Highway, Oakdale, NY 11769; (631) 218-2810; info@cmpac.com; box office hours Mon-Fri 10-6, Sat 10-3, Sun closed except show days."
+    },
+    {
+      "url": "https://www.cmpac.com/",
+      "note": "Site header and footer link Facebook (cmpac), Instagram (cmperformingarts), TikTok (@cmperformingarts), X (cmpac) and YouTube (@CMPerformingArtsCenterOakdale); menu lists cover band concerts and a Cover Band Pass."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=9757586675276737293",
+      "note": "Google Maps: CM Performing Arts Center (performing arts theater) at 931 Montauk Hwy, Oakdale, NY 11769, in Lighthouse Commons; phone (631) 218-2810."
+    }
+  ]
 }

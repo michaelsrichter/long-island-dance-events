@@ -16,5 +16,56 @@
   ],
   "website": "https://divaballroomdancing.com/",
   "facebookUrl": "https://www.facebook.com/INNERLIGHTMOVEMENTSTUDIO",
-  "reviewNotes": "Facebook page is titled \"Lourdes' Dance\" (Long Island & Fishkill, NY) and links to divaballroomdancing.com."
+  "reviewNotes": "Facebook page is titled \"Lourdes' Dance\" (Long Island & Fishkill, NY) and links to divaballroomdancing.com.\n\nDirectory research 2026-10-04: Phone (845) 977-3482 is the number on her studio site and in her own Dance Calendar listing; the organizer dance-with-lourdes currently has (845) 702-1481, which I could not find on her site (it may be older) - please check. Instagram is DiVa studio's account (handle says Chester NY), linked from her site; DiVa also has a Chester Facebook page (facebook.com/divadancestudiochester/). Logo is DiVa's header logo (263 px wide; no larger version found). No photo used: her site headshot is only 200 px, and the large slider photos either do not clearly show her or are student showcase shots. Country two-step and bachata in current styles were not confirmed on her own pages (she lists ballroom/Latin, WCS, Argentine tango, hustle, folk, belly dance). A LinkedIn profile mentions YMCA of Long Island and Town of Hempstead classes but is not used.",
+  "instagramUrl": "https://www.instagram.com/divadancestudiochesterny/",
+  "bookingUrl": "https://divaballroomdancing.com/contact-us/",
+  "email": "lourdes@divaballroomdancing.com",
+  "phone": "(845) 977-3482",
+  "description": "Lourdes Cruz teaches West Coast Swing, ballroom and Latin dancing in group classes and private lessons. On Long Island her classes meet at halls such as the Sons of Italy lodge in Deer Park and the Huntington Moose Lodge in Greenlawn. She also owns DiVa Ballroom Dance Studio in Chester, NY.",
+  "logo": {
+    "image": "../../assets/entities/instructors/lourdes-cruz-logo.webp",
+    "alt": "Diva Dance Studio logo: a drawing of a ballroom couple, the woman in a flowing yellow gown, next to the words Ballroom Grace & Poise",
+    "credit": "Logo: DiVa Ballroom Dance Studio",
+    "creditUrl": "https://divaballroomdancing.com/",
+    "imageSource": "https://divaballroomdancing.com/wp-content/uploads/2024/06/Diva-Logo-FINAL_Small_Header.jpg"
+  },
+  "evidence": [
+    {
+      "url": "https://www.thedancecalendar.com/find-an-instructor",
+      "note": "Her own instructor listing in The Dance Calendar: certified in American ballroom/Latin and West Coast Swing; group and private lessons; text/call (845) 977-3482 and lourdes@divaballroomdancing.com."
+    },
+    {
+      "url": "https://divaballroomdancing.com/long-island-calendar/",
+      "note": "DiVa's site has a Long Island classes and events calendar page with call/text (845) 977-3482; the site header shows the same number."
+    },
+    {
+      "url": "https://www.theknot.com/marketplace/diva-ballroom-dance-studio-chester-ny-525343",
+      "note": "The Knot vendor page for DiVa Ballroom Dance Studio (Chester, NY) names Lourdes as the owner, so DiVa is her own branded school."
+    },
+    {
+      "url": "https://www.facebook.com/INNERLIGHTMOVEMENTSTUDIO",
+      "note": "Facebook page titled \"Lourdes' Dance\" (dance studio) links to divaballroomdancing.com and was posting events as of July 2026."
+    },
+    {
+      "url": "https://sonsofitalyli.com/event/group-and-private-dance-lessons/",
+      "note": "Brumidi Lodge (Sons of Italy, Deer Park) lists group and private lessons with Lourdes Cruz: West Coast Swing, ballroom mix and Latin mix."
+    },
+    {
+      "url": "http://www.sdli.org/index.php/sdli/archives/",
+      "note": "Swing Dance Long Island's archive lists West Coast Swing lessons and dances with Lourdes Cruz at the Huntington Moose Lodge in 2026."
+    },
+    {
+      "url": "https://divaballroomdancing.com/",
+      "note": "Shows the website."
+    },
+    {
+      "url": "https://divaballroomdancing.com/teachers/",
+      "note": "Shows the Instagram page."
+    },
+    {
+      "url": "https://divaballroomdancing.com/contact-us/",
+      "note": "Shows the booking page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thedancecalendar.com, divaballroomdancing.com, theknot.com, facebook.com."
 }

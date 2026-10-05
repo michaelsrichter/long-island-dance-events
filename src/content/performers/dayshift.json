@@ -1,5 +1,26 @@
 {
   "name": "Dayshift",
   "type": "band",
-  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: This is not a band or a single DJ: Dayshift is a branded touring party (Locomotive Live) that stops at Mulcahy's. The owner may want to treat it as an event/organizer rather than a performer profile. Website recorded is the Long Island page on locomotivelive.com (it sits behind a Cloudflare check, so it was confirmed via search snapshots and the ticket page). The DJs are not named. No Dayshift-specific Facebook/Instagram was confirmed. No logo or photos taken (company site blocks automated fetches).",
+  "website": "https://www.locomotivelive.com/dayshift/long-island",
+  "genres": [
+    "80s, 90s and 2000s hits",
+    "DJ dance party"
+  ],
+  "description": "Not a band: a touring early-evening dance party for adults over 30, run by the event company Locomotive Live in many U.S. cities. DJs play the biggest '80s, '90s and 2000s hits from about 5 to 9 PM, with dancers, disco balls and confetti.",
+  "evidence": [
+    {
+      "url": "https://mulcahyslongisland.com/event/dayshift/",
+      "note": "Mulcahy's (Wantagh) event page: Dayshift on Sat Oct 10, 5-9 PM, 21+, a daytime club party for the 30+ crowd with DJs and 80s/90s/00s music."
+    },
+    {
+      "url": "https://www.locomotivelive.com/products/dayshift-long-island/2026-05-30",
+      "note": "Locomotive Live sells tickets for 'Dayshift Long Island - The 30+ Day Party at Mulcahy's' (Oct 10, 5-9 PM), with the same description."
+    },
+    {
+      "url": "https://www.locomotivelive.com/products/heartbreakers-sacramento",
+      "note": "Locomotive Live's menu lists Dayshift among its touring party brands, running in dozens of cities including Long Island and Manhattan."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mulcahyslongisland.com, locomotivelive.com."
 }

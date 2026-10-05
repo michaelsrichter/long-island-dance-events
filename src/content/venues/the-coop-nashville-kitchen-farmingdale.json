@@ -1,11 +1,62 @@
 {
   "name": "The Coop Nashville Kitchen",
-  "address": "346 Main Street",
+  "address": "342 Main Street",
   "county": "Nassau",
-  "reviewNotes": "Added automatically from Out on the Town - Long Island event calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Out on the Town - Long Island event calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Address corrected: our record says 346 Main Street, but the venue's own site, its gift card links and Google Maps all say 342 Main Street. Phone comes from Google Maps (the site shows none). The two interior photos have a white photo-frame border built into the image, so crop to the center. No public email (catering via a form). Line dancing appears on the schedule (e.g. with 'The Salty Cowboy') but we could not tell how often; please confirm.",
   "state": "NY",
   "town": "Farmingdale",
   "latitude": 40.731507,
   "longitude": -73.445728,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.thecoopli.com/",
+  "facebookUrl": "https://www.facebook.com/thecoopfarmingdale/",
+  "instagramUrl": "https://www.instagram.com/thecoop.farmingdale/",
+  "phone": "(516) 730-8906",
+  "hours": "Bar: Tue-Wed 3-11 PM; Thu 3 PM-12 AM; Fri-Sat 12 PM-2 AM; Sun 12-9 PM; closed Mon (kitchen closes earlier)",
+  "postalCode": "11735",
+  "description": "A Nashville-themed bar, lounge and Southern kitchen on Main Street in Farmingdale village, serving fried chicken and barbecue. It has live bands and DJs on weekends, karaoke or dueling pianos on Thursdays, and some line dancing nights.",
+  "logo": {
+    "image": "../../assets/entities/venues/the-coop-nashville-kitchen-farmingdale-logo.webp",
+    "alt": "The Coop logo: 'The Coop' in large cream retro script with 'Bar - Lounge - Nashville Kitchen' beside it",
+    "credit": "Logo: The Coop Nashville Kitchen",
+    "creditUrl": "https://www.thecoopli.com/",
+    "imageSource": "https://static.wixstatic.com/media/ca2290_8a19699b1f004107aee55af55423a59b~mv2.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/the-coop-nashville-kitchen-farmingdale-1.webp",
+      "alt": "A three-piece band with keyboards and drums plays under a red neon 'The Coop Bar & Lounge' sign and a neon cowgirl",
+      "credit": "Photo: The Coop Nashville Kitchen (website)",
+      "creditUrl": "https://www.thecoopli.com/",
+      "imageSource": "https://static.wixstatic.com/media/ca2290_5e513950efbb46a6a23c8224db68770ef000.jpg",
+      "focus": "40% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-coop-nashville-kitchen-farmingdale-2.webp",
+      "alt": "The bar room with red stools, high-top tables, neon signs and chandeliers over a striped wood floor",
+      "credit": "Photo: The Coop Nashville Kitchen (website)",
+      "creditUrl": "https://www.thecoopli.com/",
+      "imageSource": "https://static.wixstatic.com/media/ca2290_c0ff58d548e24e5db2e00261f0f84326~mv2.png",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-coop-nashville-kitchen-farmingdale-3.webp",
+      "alt": "The lounge with leather sofas and armchairs, dark curtains and string lights near the front windows",
+      "credit": "Photo: The Coop Nashville Kitchen (website)",
+      "creditUrl": "https://www.thecoopli.com/",
+      "imageSource": "https://static.wixstatic.com/media/ca2290_87a718168d8f47da857bfc24a89fb700~mv2.png",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thecoopli.com/",
+      "note": "Venue's own site: Nashville-style bar and Southern kitchen at 342 Main Street in Farmingdale village; weekly lineup of bands, DJs, karaoke, dueling pianos and 'Line dancing w/ The Salty Cowboy' (Wed 9/30); kitchen and bar hours; links to…"
+    },
+    {
+      "url": "https://www.google.com/maps?cid=9871006666809786348",
+      "note": "Google Maps lists 'The Coop Nashville Kitchen Bar & Lounge' (live music bar) at 342 Main St, Farmingdale, NY 11735, phone (516) 730-8906, website thecoopli.com."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: thecoopli.com."
 }

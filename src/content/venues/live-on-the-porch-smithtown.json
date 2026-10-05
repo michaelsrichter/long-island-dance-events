@@ -10,9 +10,38 @@
   "postalCode": "11787",
   "website": "https://liveontheporch.com/",
   "kind": "concert-hall",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://liveontheporch.com/events/ (event data on the venue's own site).",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Sources: liveontheporch.com, wlit.fm, greaterlongisland.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Bing/Google-style places listing matches the address and the Mon-Sat 6 PM-midnight hours; Apple Maps still shows 'Temporarily Closed' (out of date, the venue is open with shows through December 2026). No public phone or email: contact is by web form only (https://liveontheporch.com/contact/), which also handles booking. It is a seated listening room; no dance floor is mentioned anywhere, so dancing is unlikely except standing at shows. Photos skipped: the only large images on the site are an AI-style painted illustration with a generator watermark and a text-heavy 'Opening Spring 2026' promo graphic, not real photos of the room. Logo is the 150 px site icon (largest version on the site).",
   "latitude": 40.845057,
   "longitude": -73.17399,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/liveontheporch/",
+  "instagramUrl": "https://www.instagram.com/liveontheporchny/",
+  "hours": "Mon-Sat 6 PM-midnight on show nights (bar and lobby open at 6 PM unless noted)",
+  "description": "A 127-seat listening room on the Smithtown Bypass, opened in 2026 by Long Island musician Mike DelGuidice. It books original artists, singer-songwriters, tribute and cover shows and comedy, and has a full bar and small snack menu. General-admission floor seats are first come, first served.",
+  "logo": {
+    "image": "../../assets/entities/venues/live-on-the-porch-smithtown-logo.webp",
+    "alt": "Live On The Porch logo: a painted porch with a guitarist and a dog, and the words Mike DelGuidice's Live On The Porch",
+    "credit": "Logo: Live On The Porch",
+    "creditUrl": "https://liveontheporch.com/",
+    "imageSource": "https://liveontheporch.com/images/LOTP-profile-150x150.png"
+  },
+  "evidence": [
+    {
+      "url": "https://liveontheporch.com/",
+      "note": "Venue's own site: schema data gives 602 Smithtown Bypass, Smithtown NY 11787, Mon-Sat 6 PM to midnight, and links its Facebook and Instagram pages."
+    },
+    {
+      "url": "https://liveontheporch.com/events/",
+      "note": "Events page says doors and bar open 6 PM unless noted, and general-admission floor seating is first come, first served (guests may need to stand)."
+    },
+    {
+      "url": "https://wlit.fm/post/mike-delguidice-live-on-the-porch-smithtown",
+      "note": "WLIT (Aug 2026) describes it as a new 127-seat listening room at 602 Smithtown Bypass focused on original artists, singer-songwriters, comedy and select cover acts."
+    },
+    {
+      "url": "https://greaterlongisland.com/smithtown-is-home-to-long-islands-newest-music-venue/",
+      "note": "Greater Long Island (May 2026) reports the 4,000-square-foot venue opened in May 2026."
+    }
+  ]
 }

@@ -35,6 +35,24 @@
   "genres": [
     "80s, 90s and early 2000s pop and rock covers"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Assumed the Parsnip gig is Voices Carry LI. A different 'Voices Carry' 80s 'Bandaoke' act exists on Facebook; not confirmed which plays Parsnip.",
-  "youtubeUrl": "https://www.youtube.com/@VoicesCarryLI"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Assumed the Parsnip gig is Voices Carry LI. A different 'Voices Carry' 80s 'Bandaoke' act exists on Facebook; not confirmed which plays Parsnip.\n\nDirectory research 2026-10-04: Two Long Island acts may share this name: (1) Voices Carry LI (this entry) - 5-piece 80s-2000s cover band, confirmed only through its YouTube channel, whose profile picture is the logo recorded here; (2) 'Voices Carry - The 80's band with You as lead singer (Bandaoke!)', Facebook page https://www.facebook.com/voicescarryband/ (seen in search results; Facebook is blocked by robots.txt for our checks, so not opened). They might be the same band, but I could not confirm, so no Facebook recorded. The Parsnip Lake House show (Oct 3, 2026) is billed just 'Voices Carry', so which act plays there is still unconfirmed. No website, Instagram or booking contact found. No photos (only YouTube video frames exist). Current description still fits the YouTube channel.",
+  "youtubeUrl": "https://www.youtube.com/@VoicesCarryLI",
+  "logo": {
+    "image": "../../assets/entities/performers/voices-carry-li-logo.webp",
+    "alt": "Voices Carry LI written in bright pink, orange and lime 80s-style lettering on a black circle",
+    "credit": "Logo: Voices Carry LI",
+    "creditUrl": "https://www.youtube.com/@VoicesCarryLI",
+    "imageSource": "https://yt3.googleusercontent.com/Zva0MuYk_XRE8z8YsxWLAF6GFqwKgpEqVaTojvEh9W1Wu5IBLNdXJJUIGMvzexp7EueYtbn6=s900-c-k-c0x00ffffff-no-rj"
+  },
+  "evidence": [
+    {
+      "url": "https://www.youtube.com/@VoicesCarryLI",
+      "note": "YouTube channel 'Voices Carry LI': a 5-piece cover band playing forgotten hits from the 80s through the early 2000s; 19 live cover videos (Pour Some Sugar On Me, We Got The Beat, She Bop, Kryptonite and more) from 2025-2026."
+    },
+    {
+      "url": "https://www.liblogger.com/events/saturday-night-voices-carry",
+      "note": "Listing 'Saturday Night - Voices Carry' at 432 Smithtown Blvd, Lake Ronkonkoma (Parsnip Lake House), Sat Oct 3, 2026, 8 PM - billed only as 'Voices Carry'."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: youtube.com, liblogger.com."
 }

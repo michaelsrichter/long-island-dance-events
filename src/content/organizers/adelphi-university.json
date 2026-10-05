@@ -13,5 +13,19 @@
   ],
   "website": "https://www.adelphi.edu/ce-course/workshop/ballroom-dancing/",
   "description": "Adelphi University non-credit course in social and ballroom dancing, held Friday evenings on the Garden City campus.",
-  "reviewNotes": "Added so Richard Fiore's class has an organizer; registration is online via the course page."
+  "reviewNotes": "Added so Richard Fiore's class has an organizer; registration is online via the course page.\n\nDirectory research 2026-10-04: Phone (516) 877-4260 is the course coordinator's office line in the School of Health Sciences as listed on the course page; the coordinator's personal staff email was not recorded. The social links are Adelphi University's main accounts (linked from the course page), not a dance-specific page. Address = main campus (One South Avenue); classes are in Woodruff Hall, Room 304. No logo saved: the site logo is an inline SVG sprite (not a downloadable image) and the touch icons are too small or a one-color mask. No photos of the dance class on the course page (its share image shows an unrelated person). Fall 2026 series ends Nov 20, 2026.",
+  "facebookUrl": "https://www.facebook.com/AdelphiU",
+  "instagramUrl": "https://www.instagram.com/adelphiu/",
+  "youtubeUrl": "https://www.youtube.com/AdelphiUniv",
+  "tiktokUrl": "https://www.tiktok.com/@adelphiu",
+  "address": "1 South Ave",
+  "postalCode": "11530",
+  "county": "Nassau",
+  "evidence": [
+    {
+      "url": "https://www.adelphi.edu/ce-course/workshop/ballroom-dancing/",
+      "note": "Course page 'Social and Ballroom Dancing' (non-credit workshop series): 11 Friday sessions Sept 11-Nov 20, 2026, 7:00-8:30 PM, Woodruff Hall Room 304; instructor Richard Fiore; $75 Adelphi community / $125 general; online registration;…"
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: adelphi.edu."
 }

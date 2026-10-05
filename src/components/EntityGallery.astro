@@ -1,0 +1,38 @@
+---
+/**
+ * "Photos" section on a venue, band, teacher, organizer or style page. Every photo shows its credit.
+ * Uses the same 16:9 crops as the cards and page tops, so no extra image files are made.
+ */
+import EntityImage from './EntityImage.astro';
+import type { EntityImageData } from '../lib/directory';
+interface Props {
+  photos: EntityImageData[];
+  heading?: string;
+}
+const { photos, heading = 'Photos' } = Astro.props;
+---
+{photos.length > 0 && (
+  <section aria-labelledby="photos-h" class="entity-gallery">
+    <h2 id="photos-h">{heading}</h2>
+    <ul class="entity-gallery__grid mt-5">
+      {photos.map((p) => (
+        <li>
+          <figure>
+            <EntityImage src={p.image} alt={p.alt ?? ''} focus={p.focus} sizes="(min-width: 64rem) 22rem, (min-width: 38rem) 46vw, calc(100vw - 2rem)" />
+            {(p.caption || p.credit) && (
+              <figcaption>
+                {p.caption && <span>{p.caption} </span>}
+                {p.credit && (
+                  <span class="entity-gallery__credit">
+                    {p.creditUrl ? <a href={p.creditUrl} target="_blank" rel="noopener nofollow">{p.credit}<span class="visually-hidden"> (opens in a new tab)</span></a> : p.credit}
+                    {p.licenseUrl && <> (<a href={p.licenseUrl} target="_blank" rel="noopener license">license</a>)</>}
+                  </span>
+                )}
+              </figcaption>
+            )}
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

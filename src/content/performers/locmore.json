@@ -1,5 +1,28 @@
 {
   "name": "LoCMore",
   "type": "band",
-  "reviewNotes": "Added automatically from 89 North (Patchogue) - music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from 89 North (Patchogue) - music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Clearly a real local country act with repeat bookings at Long Island country nights (89 North, Daisy's), but I found no website, Facebook, Instagram or booking page of its own; venue pages never link one. Spelling varies: LoCMore / LOCMORE / Locmore / Locmore Trio. Worth noting for dancers: the 89 North 'Country Wednesday' nights include line dance lessons. No logo or photos (only venue flyers exist).",
+  "genres": [
+    "country"
+  ],
+  "description": "A Long Island country band (sometimes billed as the Locmore Trio) that plays country dance nights at 89 North in Patchogue and Daisy's Nashville Lounge in Patchogue and Miller Place.",
+  "evidence": [
+    {
+      "url": "https://booketing.com/microsite/89northmusicvenue/event/1767/864976/country-wednesday-with-locmore?eventcode=EVE86497600020261014",
+      "note": "89 North ticket page: 'Country Wednesday with LoCMore', Wed Oct 14, 2026, doors 6 PM, 21+, tickets at the door; every Wednesday has line dance lessons and a country DJ until 10:30."
+    },
+    {
+      "url": "https://www.liblogger.com/events/country-wednesdays-featuring-locmore-1-29-2025",
+      "note": "Earlier 'Country Wednesdays - Featuring LoCMore' at 89 North, Patchogue (Jan 29, 2025), so this is a repeat booking."
+    },
+    {
+      "url": "https://daisysli.com/event/country-club-fridays-with-locmore-2/",
+      "note": "Daisy's (country bar) 'Country Club Fridays with LOCMORE' (May 3, 2024); other Daisy's pages list Locmore at the Miller Place (Nov 2024) and Patchogue (Feb 2025) locations."
+    },
+    {
+      "url": "https://happeningnext.com/event/locmore-trio-eid3a0dod9i1n",
+      "note": "Listing for 'Locmore Trio' at Daisy's Nashville Lounge, 22 West Main St, Patchogue, Fri May 29, 2026, 7 PM."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: booketing.com, liblogger.com, daisysli.com, happeningnext.com."
 }

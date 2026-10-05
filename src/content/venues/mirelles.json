@@ -8,7 +8,7 @@
   "town": "Westbury",
   "county": "Nassau",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: argentinetangolovers.com, mirellesrestaurant.com, google.com.",
+  "factsSource": "Checked October 4, 2026. Sources: mirellesrestaurant.com, argentinetangolovers.com.",
   "postalCode": "11590",
   "phone": "(516) 338-4933",
   "website": "https://mirellesrestaurant.com/",
@@ -17,5 +17,53 @@
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance, parking lot, restroom and seating.",
   "latitude": 40.755063,
   "longitude": -73.587773,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/MirellesRestaurant/",
+  "hours": "Tue tango night 6-10 PM; Thu dinner 5-10 PM and salsa night 7 PM-12 AM; Fri dinner 5-10 PM; Sat call for reservations; Sun brunch 1-6 PM; private events daily",
+  "description": "A Haitian and Caribbean restaurant and catering hall on Post Avenue in Westbury, with a ballroom and an outdoor courtyard. It hosts a weekly Argentine tango night on Tuesdays, a salsa night, and Sunday brunch.",
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/mirelles-1.webp",
+      "alt": "The cream-colored Mirelle's building on Post Avenue with a Mirelle's sign, evergreen trees and red shrubs along a low wall",
+      "credit": "Photo: Mirelle's (website)",
+      "creditUrl": "https://mirellesrestaurant.com/?page_id=24",
+      "imageSource": "https://mirellesrestaurant.com/wp-content/uploads/2021/05/223.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/venues/mirelles-2.webp",
+      "alt": "Mirelle's ballroom set for a party, with round tables, gold chair covers, candles and a chandelier under purple lighting",
+      "credit": "Photo: Mirelle's (website)",
+      "creditUrl": "https://mirellesrestaurant.com/?page_id=24",
+      "imageSource": "https://mirellesrestaurant.com/wp-content/uploads/2021/06/TABLE-RECEPTION.jpeg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/venues/mirelles-3.webp",
+      "alt": "Mirelle's outdoor courtyard with palm plants, round tables with pastel tablecloths and silver chairs on a brick patio",
+      "credit": "Photo: Mirelle's (website)",
+      "creditUrl": "https://mirellesrestaurant.com/?page_id=1410",
+      "imageSource": "https://mirellesrestaurant.com/wp-content/uploads/2021/06/Courtyard.jpeg",
+      "focus": "60% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mirellesrestaurant.com/",
+      "note": "Restaurant's home page: restaurant and catering hall at 170 Post Ave, Westbury NY 11590, reservations 516-338-4933; weekly schedule lists a Tango Dance night, a Salsa Dance night (7 PM-12 AM) and Sunday brunch."
+    },
+    {
+      "url": "https://mirellesrestaurant.com/?page_id=685",
+      "note": "Contact page repeats the address and phone and links to the Facebook page."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=11590847970585050672",
+      "note": "Google Maps lists Mirelle's Restaurant (Haitian restaurant) at 170 Post Ave, Westbury, NY 11590, phone (516) 338-4933, website mirellesrestaurant.com."
+    },
+    {
+      "url": "https://www.argentinetangolovers.com/service-page/tango-tuesdays",
+      "note": "Argentine Tango Lovers of Long Island hold Tango Tuesdays (and a monthly milonga) at Mirelle's in Westbury."
+    }
+  ],
+  "reviewNotes": "Directory research 2026-10-04: Hours come from the home page's weekly schedule, which is laid out in columns: Tuesday = tango 6-10 PM, Thursday = dinner 5-10 PM plus salsa 7 PM-12 AM, Friday = dinner 5-10 PM. The column reading for salsa (Thursday vs Friday) is our best reading of the layout; please confirm with the venue. The tango group's own listing says Tuesdays run 7-10:30 PM. The contact page lists a personal-looking Yahoo email and a second (516) 578 number; we left both out. The site's Instagram link goes to a personal account named after the owner (instagram.com/mireillelaguerre), so we did not record it as the venue's Instagram. No logo on the site (the header image is a photo of the building), so logo is empty. Facebook page is linked from the site but needs a login to view."
 }

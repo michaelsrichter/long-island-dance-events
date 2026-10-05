@@ -29,18 +29,48 @@
     "notes": "All seats are fixed theater seats on a sloped floor, and we found no dance area. Plan on a seated concert.",
     "policy": "unknown"
   },
-  "description": "A small theater of about 260 seats in an old movie house on Bay Shore's Main Street, run with the YMCA. It hosts concerts, tribute bands and comedy.",
-  "facebookUrl": "https://www.facebook.com/BoultonCenter/",
-  "factsSource": "Checked October 3, 2026. Source: boultoncenter.org.",
+  "description": "A 260-seat theater on Main Street in downtown Bay Shore, in a former movie house built in 1929. A nonprofit foundation runs it, and it hosts concerts, tribute bands and comedy shows most weekends.",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=61551692775450",
+  "factsSource": "Checked October 4, 2026. Source: boultoncenter.org.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Boulton+Center+for+the+Performing+Arts%2C+37+W+Main+St%2C+Bay+Shore%2C+NY+11706",
   "kind": "theater",
   "phone": "(631) 969-1101",
   "postalCode": "11706",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). CHECK THE GIG: the Boulton Center's own site lists 'From Dublin to Duluth' on Oct 3, and Leonid & Friends' tour page puts them in Skokie, IL that night. Ira's Leonid & Friends listing here looks wrong. Facebook URL comes from a venue directory, not the venue's site.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). CHECK THE GIG: the Boulton Center's own site lists 'From Dublin to Duluth' on Oct 3, and Leonid & Friends' tour page puts them in Skokie, IL that night. Ira's Leonid & Friends listing here looks wrong. Facebook URL comes from a venue directory, not the venue's site.\n\nDirectory research 2026-10-04: Description updated: the current text says it is run with the YMCA, which is out of date - the YMCA era ended in 2020; since reopening in Nov 2023 it is run by The Great South Bay Arts and Entertainment Foundation (Boulton family). Facebook changed: the site links a newer page (profile.php?id=61551692775450); the current https://www.facebook.com/BoultonCenter/ came from a directory and is probably the old YMCA-era page. The TikTok handle really is @the.boulton.cente (no final 'r'; the account exists). A second public email, GM@boultoncenter.org (general manager), is on the contact page. Hours recorded are box-office hours; shows run on their own schedule. It is a seated theater with no dance floor. Photos: the site's stage photos carry a 'Photo by Steven Sandick' watermark, and two theater-interior images are AI-generated (file names 'ChatGPT Image'), so no photos were recorded; the owner could ask the theater for unwatermarked photos. The Oct 3 'Leonid & Friends' listing flagged earlier is not on the venue's calendar (its upcoming shows start Oct 10).",
   "state": "NY",
   "town": "Bay Shore",
   "website": "https://www.boultoncenter.org/",
   "latitude": 40.721122,
   "longitude": -73.248321,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/theboultoncenter/",
+  "youtubeUrl": "https://www.youtube.com/@TheBoultonCenter",
+  "tiktokUrl": "https://www.tiktok.com/@the.boulton.cente",
+  "email": "boxoffice@boultoncenter.org",
+  "hours": "Box office: Wed-Sat 9 AM-5 PM; closed Sun-Tue (shows as scheduled)",
+  "logo": {
+    "image": "../../assets/entities/venues/boulton-center-bay-shore-logo.webp",
+    "alt": "Boulton Center for the Performing Arts logo: a gold line drawing of the theater's tower above the words Boulton Center (gold on a transparent background)",
+    "credit": "Logo: Boulton Center for the Performing Arts",
+    "creditUrl": "https://www.boultoncenter.org/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/6a4288bd2ff57a5bc6d0d83a/09df3175-c186-4c6e-8f46-24d55350f815/slazzer-preview-9s3k4.png"
+  },
+  "evidence": [
+    {
+      "url": "https://www.boultoncenter.org/contact-us",
+      "note": "Theater's contact page: 37 West Main Street, Bay Shore, NY 11706; box office (631) 969-1101, boxoffice@boultoncenter.org; box office open Wed-Sat 9 AM-5 PM."
+    },
+    {
+      "url": "https://www.boultoncenter.org/learn-about-us",
+      "note": "Our Story page: 260-seat theater in the former Regent movie theater (1929); YMCA ran it 2003-2020; the Boulton family bought it back in 2023 and a nonprofit foundation now runs it."
+    },
+    {
+      "url": "https://www.boultoncenter.org/",
+      "note": "Home page lists October-November 2026 shows (tribute bands, rock, comedy) and links Facebook, Instagram, TikTok and YouTube."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=18281046916212253184",
+      "note": "Google Maps: Boulton Center For The Performing Arts, performing arts theater, 37 W Main St, Bay Shore, NY 11706, (631) 969-1101."
+    }
+  ]
 }

@@ -33,16 +33,66 @@
   },
   "description": "A country-style restaurant on Sound Avenue in wine country. On fall weekends it runs an outdoor festival with food, a beer tent and live cover bands on the lawn.",
   "facebookUrl": "https://www.facebook.com/CooperageInn/",
-  "factsSource": "Checked October 3, 2026. Source: cooperageinn.com.",
+  "factsSource": "Checked October 4, 2026. Source: cooperageinn.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Cooperage+Inn%2C+2218+Sound+Ave%2C+Baiting+Hollow%2C+NY+11933",
   "kind": "restaurant",
   "phone": "(631) 727-8994",
   "postalCode": "11933",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Some listings say Calverton; Baiting Hollow is the hamlet (ZIP 11933 is shared). Dancing judgement is based on event descriptions, not photos or reviews.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Some listings say Calverton; Baiting Hollow is the hamlet (ZIP 11933 is shared). Dancing judgement is based on event descriptions, not photos or reviews.\n\nDirectory research 2026-10-04: Current description is still accurate, so no new one. The logo is a white wordmark on a transparent background; it needs a dark background to be visible. Baiting Hollow is a hamlet in the Town of Riverhead (the site itself writes 'Baiting Hollow (Calverton)'). Dancing is at the outdoor Fall Festival band stage on the lawn; no indoor dance floor is mentioned. A reservations link goes to OpenTable (opentable.com/restaurant/profile/67750), not recorded.",
   "state": "NY",
   "town": "Baiting Hollow",
   "website": "https://www.cooperageinn.com/",
   "latitude": 40.955759,
   "longitude": -72.75452,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/cooperageinn/",
+  "email": "info@cooperageinn.com",
+  "hours": "Sun-Thu 11:30 AM-8 PM; Fri-Sat 11:30 AM-9 PM. Outdoor Fall Festival: weekends 12 PM-6 PM, weekend after Labor Day through late October (weather permitting)",
+  "logo": {
+    "image": "../../assets/entities/venues/cooperage-inn-baiting-hollow-logo.webp",
+    "alt": "Cooperage Inn logo: the words Cooperage Inn in white outlined capital letters",
+    "credit": "Logo: The Cooperage Inn",
+    "creditUrl": "https://www.cooperageinn.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/65401f2958ba0921bf98e9d7/620d4abf-d68b-43fa-aa36-c43ac9a0629b/White-logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/cooperage-inn-baiting-hollow-1.webp",
+      "alt": "The front of the Cooperage Inn: a white farmhouse-style building with a curved blue sign, an arched entrance, patio tables and flowers",
+      "credit": "Photo: The Cooperage Inn (website)",
+      "creditUrl": "https://www.cooperageinn.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/65401f2958ba0921bf98e9d7/70388658-4503-43c6-a38b-f074c061c530/Coop_Outdoors9.jpg?format=1000w",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/cooperage-inn-baiting-hollow-2.webp",
+      "alt": "A cover band playing under a blue tent on the lawn at the Cooperage Inn Fall Festival, with guests standing in front and pennant flags overhead",
+      "credit": "Photo: The Cooperage Inn (website)",
+      "creditUrl": "https://www.cooperageinn.com/fallfestival",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/65401f2958ba0921bf98e9d7/1759785215759-Q2KOWILNBH28MYNXO4P7/IMG_9737.jpg?format=1000w",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/cooperage-inn-baiting-hollow-3.webp",
+      "alt": "The Cooperage Inn's garden patio with green-clothed tables, white umbrellas and potted plants",
+      "credit": "Photo: The Cooperage Inn (website)",
+      "creditUrl": "https://www.cooperageinn.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/65401f2958ba0921bf98e9d7/f25fbf52-a7cf-4d3f-865a-dddb2ccbb094/Coop_Outdoors1.jpg?format=1000w",
+      "focus": "45% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.cooperageinn.com/",
+      "note": "Restaurant site footer: 2218 Sound Avenue, Baiting Hollow (Calverton) NY 11933, 631.727.8994, info@cooperageinn.com, hours Sun-Thu 11:30am-8pm and Fri-Sat 11:30am-9pm; links Facebook and Instagram."
+    },
+    {
+      "url": "https://www.cooperageinn.com/fallfestival",
+      "note": "Fall Festival page lists a cover band every Saturday and Sunday (Sept 12-Oct 25, 2026) and says it is outdoors, weekends only 12-6 PM, separate from indoor dining."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=Cooperage+Inn%2C+2218+Sound+Ave%2C+Baiting+Hollow%2C+NY+11933",
+      "note": "A places listing for Cooperage Inn (American restaurant) matches the address, phone, hours and the same Facebook and Instagram pages."
+    }
+  ]
 }

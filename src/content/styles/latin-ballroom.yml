@@ -17,3 +17,40 @@ aliases:
   - Jive
 summary: Ballroom versions of Latin dances, like the cha-cha and rumba. Hips move a lot.
 music: Latin pop, ballroom Latin
+description: Latin and Rhythm are the ballroom versions of dances like the cha-cha, rumba, samba, paso doble and jive. Couples mostly stay in one spot and use quick footwork and a lot of hip motion. Many of these dances come from Cuba and other parts of Latin America; the cha-cha grew out of Cuban dance music in the early 1950s.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/Latin_dance
+photos:
+  - image: ../../assets/entities/styles/latin-ballroom-1.webp
+    alt: A couple in Latin costumes dances the cha-cha on a large wooden floor, the woman in a bright yellow fringe dress with one arm raised
+    credit: "Photo: Ailura, CC BY-SA 3.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Cha-Cha-Cha_Sivak_Raczova_0670.JPG
+    licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Cha-Cha-Cha_Sivak_Raczova_0670.JPG/1280px-Cha-Cha-Cha_Sivak_Raczova_0670.JPG
+    focus: 40% 45%
+  - image: ../../assets/entities/styles/latin-ballroom-2.webp
+    alt: Couples in black and red dance at a college ballroom event in a gym; a man in a red shirt turns his partner under his arm
+    credit: "Photo: Liza, CC BY 2.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Ballroom_dance_in_Somerville,_Massachusetts,_2008.jpg
+    licenseUrl: https://creativecommons.org/licenses/by/2.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Ballroom_dance_in_Somerville%2C_Massachusetts%2C_2008.jpg/1280px-Ballroom_dance_in_Somerville%2C_Massachusetts%2C_2008.jpg
+    focus: 70% 30%
+  - image: ../../assets/entities/styles/latin-ballroom-3.webp
+    alt: A man in black and a woman in a pink dress dance the rumba in a closed hold in a school hall
+    credit: "Photo: Sandra Cohen-Rose and Colin Rose, CC BY-SA 2.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Spotlight_2009_Rumba_-_Nassym_%26_Remo_(3630609696).jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/c/ca/Spotlight_2009_Rumba_-_Nassym_%26_Remo_%283630609696%29.jpg
+    focus: 50% 50%
+evidence:
+  - url: https://en.wikipedia.org/wiki/Latin_dance
+    note: "Wikipedia: Latin dance is a label in partner dance competition for ballroom and folk dances mostly from Latin America."
+  - url: https://en.wikipedia.org/wiki/Cha-cha-cha_(dance)
+    note: "Wikipedia: the cha-cha-cha is of Cuban origin, danced to music introduced by Enrique Jorrin in the early 1950s."
+  - url: https://commons.wikimedia.org/wiki/File:Cha-Cha-Cha_Sivak_Raczova_0670.JPG
+    note: "Commons file page: cha-cha-cha at the 2012 WDSF Latin championships in Vienna, own work by Ailura, CC BY-SA 3.0 (supported by Wikimedia Austria)."
+  - url: https://commons.wikimedia.org/wiki/File:Ballroom_dance_in_Somerville,_Massachusetts,_2008.jpg
+    note: "Commons file page: ballroom dance in Somerville, MA, Dec 2008, by Liza (Flickr), CC BY 2.0; coordinates point to the Tufts University campus."
+  - url: https://commons.wikimedia.org/wiki/File:Spotlight_2009_Rumba_-_Nassym_%26_Remo_(3630609696).jpg
+    note: "Commons file page: 'Spotlight 2009 Rumba' at Centre Ballroom Dance Sport, Montreal, by Sandra Cohen-Rose and Colin Rose, CC BY-SA 2.0."

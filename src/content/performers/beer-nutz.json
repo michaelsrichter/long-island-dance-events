@@ -1,5 +1,69 @@
 {
   "name": "Beer Nutz",
   "type": "band",
-  "reviewNotes": "Added automatically from Beer Nutz - 2026 gigs. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Beer Nutz - 2026 gigs. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: The band spells its name \"Beernutz\" (one word) on its own site; our listing uses \"Beer Nutz\". The Facebook icon on the band's own site points to a broken Wix address (facebook.com/beernutzmusicok.com/wix); the Facebook page beernutzforbeer was matched by name and Long Island show posts, not by a link from the site. Booking is through the contact form at the bottom of the home page; no public email or phone.",
+  "website": "https://www.beernutzmusic.com/",
+  "facebookUrl": "https://www.facebook.com/beernutzforbeer/",
+  "instagramUrl": "https://www.instagram.com/nutzforbeernutz/",
+  "youtubeUrl": "https://www.youtube.com/channel/UC2TuwS0SOqBrNew3rZbNpIw",
+  "bookingUrl": "https://www.beernutzmusic.com/",
+  "genres": [
+    "classic rock",
+    "party rock",
+    "dance hits",
+    "70s-90s covers"
+  ],
+  "description": "A Long Island cover band that plays classic rock, party rock and dance hits from the 70s, 80s and 90s at bars, breweries and beach venues. The six-piece lineup has a female lead singer, guitars, keyboards and drums.",
+  "logo": {
+    "image": "../../assets/entities/performers/beer-nutz-logo.webp",
+    "alt": "Beernutz logo in bold yellow brush letters with small burst lines around it",
+    "credit": "Logo: Beer Nutz",
+    "creditUrl": "https://www.beernutzmusic.com/",
+    "imageSource": "https://static.wixstatic.com/media/60a720_2d5bf860b49f4d62ab7b1a9adb6bcc67~mv2.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/beer-nutz-1.webp",
+      "alt": "The six members of Beer Nutz standing in a row on a dark stage",
+      "credit": "Photo: Beer Nutz (website)",
+      "creditUrl": "https://www.beernutzmusic.com/",
+      "imageSource": "https://static.wixstatic.com/media/60a720_ad7d0625e9934cac9ac89d51047bb159~mv2.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/beer-nutz-2.webp",
+      "alt": "Beer Nutz playing outdoors under a blue tent, the singer at the microphone between two guitarists",
+      "credit": "Photo: Beer Nutz (website)",
+      "creditUrl": "https://www.beernutzmusic.com/",
+      "imageSource": "https://static.wixstatic.com/media/60a720_879e6d726d0746a989ca00630968dc8a~mv2.jpg/v1/fill/w_2400,h_1600,al_c,q_85/60a720_879e6d726d0746a989ca00630968dc8a~mv2.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/beer-nutz-3.webp",
+      "alt": "Beer Nutz band members posing together on an outdoor stage with their instruments",
+      "credit": "Photo: Beer Nutz (website)",
+      "creditUrl": "https://www.beernutzmusic.com/",
+      "imageSource": "https://static.wixstatic.com/media/60a720_31e28554932644879b4fa0dcbcf55745~mv2.jpg",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.beernutzmusic.com/",
+      "note": "Band site calls itself a Long Island cover band and lists 2026 gigs at The Villager (Farmingdale), Lily's (Babylon), Great South Bay Brewery and Sonny's Canal House; links Instagram and YouTube."
+    },
+    {
+      "url": "https://saltshackny.com/artist/beernutz/",
+      "note": "Salt Shack at Cedar Beach lists BeerNutz as a classic rock cover band playing 70s-90s hits and links the same site, Instagram and YouTube."
+    },
+    {
+      "url": "https://www.facebook.com/beernutzforbeer/posts/this-saturday-at-tobay-beach-at-the-boat-yard-waterfront-bar-and-grill-lets-kick/770405058110897/",
+      "note": "Facebook page \"Beernutz\" (beernutzforbeer) posts about a show at The Boat Yard at Tobay Beach, Long Island."
+    },
+    {
+      "url": "https://www.lilyflanaganspub.com/musicevents/2026/8/23/happy-hour-band-beer-nutz",
+      "note": "Lily Flanagan's in Babylon lists a Beer Nutz happy hour show."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: beernutzmusic.com, saltshackny.com, facebook.com, lilyflanaganspub.com."
 }

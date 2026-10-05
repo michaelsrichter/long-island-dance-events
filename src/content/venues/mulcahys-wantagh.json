@@ -12,9 +12,67 @@
   "postalCode": "11793",
   "website": "https://mulcahyslongisland.com/",
   "kind": "concert-hall",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://mulcahyslongisland.com/concert-events/ (calendar feed gives the address).",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Source: mulcahyslongisland.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Wantagh is in Nassau County (Town of Hempstead). The site warns that hours on Google are often wrong; the venue opens for events only, so hours are given as event-based. Bing/Yelp hours (Mon-Thu 9-5, Fri-Sat 9-11:30 PM) were not used. Short domain muls.com is used in their posts; mulcahyslongisland.com is the site itself. No modern exterior photo on the venue site (only a sketch and a 1960s archive photo), so photos are of the ballroom. Capacity about 1,200 per a ticket site (not recorded).",
   "latitude": 40.672606,
   "longitude": -73.51009,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/MulcahysLongIsland/",
+  "instagramUrl": "https://www.instagram.com/mulcahyslongisland/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCV_yQYEEiXlnblOnsHASubg",
+  "email": "info@mulcahys.com",
+  "phone": "(516) 783-7500",
+  "hours": "Open for scheduled shows and parties; door times vary by event (see each listing). Office Mon-Sat 10 AM-6 PM",
+  "description": "A big concert hall and pub next to the Wantagh train station, with a main ballroom stage, several bars and private party rooms. It hosts touring and tribute bands, country nights and DJ dance parties such as 80s and 90s nights.",
+  "logo": {
+    "image": "../../assets/entities/venues/mulcahys-wantagh-logo.webp",
+    "alt": "Mulcahy's logo: the name in green script on a banner over an electric guitar, with the words Good Clean Fun",
+    "credit": "Logo: Mulcahy's",
+    "creditUrl": "https://mulcahyslongisland.com/about/history/",
+    "imageSource": "https://mulcahyslongisland.com/wp-content/uploads/2024/10/xl-logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/mulcahys-wantagh-1.webp",
+      "alt": "The empty ballroom stage at Mulcahy's with a big video screen, stage lights, a disco ball and a tiled floor in front",
+      "credit": "Photo: Mulcahy's (website)",
+      "creditUrl": "https://mulcahyslongisland.com/private-events-catering/rooms/ballroom/",
+      "imageSource": "https://mulcahyslongisland.com/wp-content/uploads/2024/08/Ballroom-1.jpg",
+      "focus": "55% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/mulcahys-wantagh-2.webp",
+      "alt": "Wide view of the Mulcahy's ballroom: a large open tiled floor, a square island bar and the stage at the back",
+      "credit": "Photo: Mulcahy's (website)",
+      "creditUrl": "https://mulcahyslongisland.com/private-events-catering/rooms/ballroom/",
+      "imageSource": "https://mulcahyslongisland.com/wp-content/uploads/2024/08/Ballroom-2.jpg",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/mulcahys-wantagh-3.webp",
+      "alt": "A long lit-up bar in the Mulcahy's ballroom with a raised seating area on the left and the stage on the right",
+      "credit": "Photo: Mulcahy's (website)",
+      "creditUrl": "https://mulcahyslongisland.com/private-events-catering/rooms/ballroom/",
+      "imageSource": "https://mulcahyslongisland.com/wp-content/uploads/2024/08/Ballroom-3.jpg",
+      "focus": "50% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mulcahyslongisland.com/about/hours/",
+      "note": "Venue site footer gives 3232 Railroad Ave, Wantagh, NY 11793 and 516.783.7500; says there is no set closing time and door times depend on each show; office is open Mon-Sat 10 AM-6 PM."
+    },
+    {
+      "url": "https://mulcahyslongisland.com/contact/",
+      "note": "Contact page links the Facebook, Instagram and YouTube pages and lists info@mulcahys.com and the 516 phone."
+    },
+    {
+      "url": "https://mulcahyslongisland.com/about/full-venue/",
+      "note": "Venue tour page describes the 2019 expansion from a small railroad tavern into a full event center with a ballroom stage and several rooms."
+    },
+    {
+      "url": "https://mulcahyslongisland.com/",
+      "note": "Home page event list shows tribute bands, an 80s vs 90s DJ night, a 2000s hip hop and R&B party and country shows."
+    }
+  ]
 }

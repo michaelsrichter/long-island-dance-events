@@ -40,6 +40,41 @@
     "classic rock"
   ],
   "instagramUrl": "https://www.instagram.com/vinylrevivalbandny/",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Other bands share the name (a UK rock/pop band at vinylrevival.rocks). The domain vinylrevival.band linked from venue pages now redirects to a gambling site, so it is not used. Socials taken from Salt Shack's artist page.",
-  "website": "https://www.vinylproductions.com/vinyl-revival"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Other bands share the name (a UK rock/pop band at vinylrevival.rocks). The domain vinylrevival.band linked from venue pages now redirects to a gambling site, so it is not used. Socials taken from Salt Shack's artist page.\n\nDirectory research 2026-10-04: Current links confirmed. Email and phone belong to Vinyl Productions, the company that runs the band's page and takes bookings. Confirmed again that vinylrevival.band (still linked by Salt Shack) now redirects to a gambling site; do not use it. The band page offers its logo for download ('Download Band Logo Pack'), so logo use is intended. Band page says hi-res band photos are 'coming soon'; only the header crowd/stage photo was usable. Current description is accurate; not replaced.",
+  "website": "https://www.vinylproductions.com/vinyl-revival",
+  "bookingUrl": "https://www.vinylproductions.com/vinyl-revival",
+  "email": "vinylproductionsli@gmail.com",
+  "phone": "(516) 384-0363",
+  "logo": {
+    "image": "../../assets/entities/performers/vinyl-revival-logo.webp",
+    "alt": "Vinyl Revival logo: a dark record with a rainbow rim, a yellow 45 rpm adapter in the middle and the band name around it",
+    "credit": "Logo: Vinyl Revival",
+    "creditUrl": "https://www.vinylproductions.com/vinyl-revival",
+    "imageSource": "https://irp.cdn-website.com/fa5c5c85/files/uploaded/Vinyl-Revival-logo600.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/vinyl-revival-1.webp",
+      "alt": "A packed outdoor crowd dancing under string lights at night while Vinyl Revival plays on a lit stage with its logo banner",
+      "credit": "Photo: Vinyl Revival (Vinyl Productions website)",
+      "creditUrl": "https://www.vinylproductions.com/vinyl-revival",
+      "imageSource": "https://irp.cdn-website.com/fa5c5c85/dms3rep/multi/opt/vr-hdr-1-2880w.jpg",
+      "focus": "65% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.vinylproductions.com/vinyl-revival",
+      "note": "Official band page on Vinyl Productions: Long Island dance/disco/Motown/rock party band; past schedule includes Nutty Irishman, Salt Shack, Smith Point; lists booking email, phone and contact form; offers a band logo download."
+    },
+    {
+      "url": "https://89northmusic.com/calendar",
+      "note": "89 North Music Venue (Patchogue) calendar lists 'Vinyl Revival & Gacht Rock' on Fri Nov 6, matching our listing."
+    },
+    {
+      "url": "https://saltshackny.com/artist/vinyl-revival/",
+      "note": "Salt Shack's artist page links facebook.com/VinylRevivalLI and instagram.com/vinylrevivalbandny (and the old vinylrevival.band domain)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: vinylproductions.com, 89northmusic.com, saltshackny.com."
 }

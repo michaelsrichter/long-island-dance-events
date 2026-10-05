@@ -14,6 +14,13 @@
     "ballroom",
     "latin-ballroom"
   ],
-  "reviewNotes": "Name as printed in The Dance Calendar directory; no website or social page found.",
-  "description": "Long-running afternoon ballroom dansants with strict-tempo music at the Merrick Golf Course clubhouse; reservations required."
+  "reviewNotes": "Name as printed in The Dance Calendar directory; no website or social page found.\n\nDirectory research 2026-10-04: Still no website, Facebook or other page found; The Dance Calendar directory (and its printed listings) is the only source, so identity is medium and nothing new beyond the existing contact details could be confirmed. Phone (a Brooklyn 718 number) and email are the ones the organizers list in The Dance Calendar for their dances. No own venue: town = Merrick Golf Course clubhouse location. No logo or photos available.",
+  "description": "Long-running afternoon ballroom dansants with strict-tempo music at the Merrick Golf Course clubhouse; reservations required.",
+  "evidence": [
+    {
+      "url": "https://www.thedancecalendar.com/find-venues-events",
+      "note": "The Dance Calendar venue directory: 'Nick & Pearl's Society Tempo Dances', Merrick Golf Course, 2550 Clubhouse Rd, Merrick, NY 11566; 718.332.7825; dancezee@aol.com."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: thedancecalendar.com."
 }

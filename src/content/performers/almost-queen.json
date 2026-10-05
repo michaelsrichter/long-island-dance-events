@@ -31,7 +31,62 @@
     "classic rock"
   ],
   "instagramUrl": "https://www.instagram.com/almost_queen",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Rating based on the show format and theater venues, not crowd videos. Socials taken from almostqueen.com.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Rating based on the show format and theater venues, not crowd videos. Socials taken from almostqueen.com.\n\nDirectory research 2026-10-04: All current links re-verified from the official site; current description is accurate, so no new one. Logo and two promo photos come from the band's own 'Marketing Assets' page meant for promoters; the live photo is from their gallery, credited there to photographer Mike Vernazza. Skipped header images with big text and gallery photos with photographer watermarks. The site's Bandcamp link is guitarist Steve Leonard's page (steveleonard.bandcamp.com) for the single 'Almost', so it is not recorded as the band's. The tour page currently shows no dates.",
   "website": "https://www.almostqueen.com/",
-  "youtubeUrl": "https://www.youtube.com/almostqueenny"
+  "youtubeUrl": "https://www.youtube.com/almostqueenny",
+  "xUrl": "https://x.com/almost_queen",
+  "bookingUrl": "https://www.almostqueen.com/contact",
+  "email": "booking@almostqueen.com",
+  "logo": {
+    "image": "../../assets/entities/performers/almost-queen-logo.webp",
+    "alt": "Almost Queen logo: a crest with a white phoenix, lions and fairies around the words ALMOST QUEEN, A TRIBUTE TO QUEEN",
+    "credit": "Logo: Almost Queen",
+    "creditUrl": "https://www.almostqueen.com/assets",
+    "imageSource": "https://www.almostqueen.com/assets/Almost-Queen-Logo-Transparent-1080.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/almost-queen-1.webp",
+      "alt": "Almost Queen seen from behind the drums on an outdoor stage at night, facing a huge crowd",
+      "credit": "Photo: Mike Vernazza, via Almost Queen (website)",
+      "creditUrl": "https://www.almostqueen.com/gallery/",
+      "imageSource": "https://www.almostqueen.com/gallery/images/aq-stone-pony-02.jpg",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/performers/almost-queen-2.webp",
+      "alt": "The four members of Almost Queen lit from above against a black background, posed like the cover of Queen's 'Queen II' album",
+      "credit": "Photo: Almost Queen (website)",
+      "creditUrl": "https://www.almostqueen.com/assets",
+      "imageSource": "https://www.almostqueen.com/assets/Almost-Queen-Queen-II-Album-Photo-hires.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/almost-queen-3.webp",
+      "alt": "Black-and-white photo of the four members of Almost Queen in leather jackets in front of a drum kit and gong",
+      "credit": "Photo: Almost Queen (website)",
+      "creditUrl": "https://www.almostqueen.com/assets",
+      "imageSource": "https://www.almostqueen.com/assets/Almost-Queen-The-Game-Album-Promo.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.almostqueen.com/",
+      "note": "Official site: four-piece Queen tribute with four-part harmonies and costumes; links Facebook, Instagram, YouTube and X."
+    },
+    {
+      "url": "https://www.almostqueen.com/contact",
+      "note": "Contact page gives booking@almostqueen.com for booking and info@almostqueen.com for general questions."
+    },
+    {
+      "url": "https://www.almostqueen.com/assets",
+      "note": "Marketing Assets page offers the logo and hi-res promo photos for promoters."
+    },
+    {
+      "url": "https://www.almostqueen.com/band",
+      "note": "Band page lists members (singer Joseph Russo saw Queen at Nassau Coliseum as a child)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: almostqueen.com."
 }

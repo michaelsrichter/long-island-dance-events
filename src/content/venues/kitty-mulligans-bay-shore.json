@@ -12,9 +12,54 @@
   "postalCode": "11706",
   "website": "https://kittymulligans.com/",
   "kind": "bar",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://kittymulligans.com/.",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Source: kittymulligans.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Facebook: the site links the numeric page facebook.com/383479678171873; Bing lists facebook.com/Kittymulligans/, which is most likely the same page (could not open Facebook to confirm). Email is a Gmail address, but it is the pub's published business contact. The site does not mention a dance floor; bands play in the bar room. Only 2 photos used; other site photos are food or show diners up close.",
   "latitude": 40.727335,
   "longitude": -73.231207,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/383479678171873/",
+  "instagramUrl": "https://www.instagram.com/kittymulligans/",
+  "email": "kittymulliganspub@gmail.com",
+  "phone": "(631) 315-3571",
+  "hours": "Mon-Thu 11 AM-11 PM; Fri-Sat 11 AM-1 AM; Sun 11 AM-11 PM",
+  "description": "A neighborhood Irish pub and grill in a shopping plaza on East Main Street in Bay Shore, with a free parking lot. It has live classic rock and local bands on Friday and Saturday nights, an open jam on some Sundays, and music bingo.",
+  "logo": {
+    "image": "../../assets/entities/venues/kitty-mulligans-bay-shore-logo.webp",
+    "alt": "Kitty Mulligan's Irish Pub logo: white lettering and a green shamrock on a round black and green badge, Estb. 2021",
+    "credit": "Logo: Kitty Mulligan's Irish Pub",
+    "creditUrl": "https://kittymulligans.com/",
+    "imageSource": "https://static.spotapps.co/website_images/ab_websites/126923_website_v1/logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/kitty-mulligans-bay-shore-1.webp",
+      "alt": "Kitty Mulligan's at night: a lit Kitty Mulligan's sign and an Irish Pub sign with shamrocks over the storefront windows in a strip plaza",
+      "credit": "Photo: Kitty Mulligan's Irish Pub (website)",
+      "creditUrl": "https://kittymulligans.com/",
+      "imageSource": "https://static.spotapps.co/website_images/ab_websites/126923_website_v1/video_poster_2.jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/kitty-mulligans-bay-shore-2.webp",
+      "alt": "Inside Kitty Mulligan's: high-top tables on a wood floor, a stone wall with TVs and a barn door, with guests at tables",
+      "credit": "Photo: Kitty Mulligan's Irish Pub (website)",
+      "creditUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-about",
+      "imageSource": "https://static.spotapps.co/website_images/ab_websites/126923_website_v1/about_2.jpg",
+      "focus": "50% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://kittymulligans.com/",
+      "note": "Venue site structured data and footer give 615 East Main Street, Bay Shore, NY 11706, phone 631-315-3571, email and hours; it links Facebook (page id 383479678171873) and Instagram (kittymulligans)."
+    },
+    {
+      "url": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+      "note": "Events page lists live bands Friday and Saturday 7:30-10:30 PM (classic rock and local cover bands, no cover), an open jam on the 1st and 3rd Sundays 6-9 PM, and music bingo every other Thursday."
+    },
+    {
+      "url": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-about",
+      "note": "About page describes a family-friendly neighborhood Irish pub with live entertainment, a private party room and a free parking lot."
+    }
+  ]
 }

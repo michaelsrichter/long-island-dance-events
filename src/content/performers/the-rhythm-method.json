@@ -1,5 +1,27 @@
 {
   "name": "The Rhythm Method",
   "type": "band",
-  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Medium confidence: the Facebook page name (\"The Rhythm Method Long Island Band\") matches, but the page is new, only shows with a login, and is not linked from a band website. No website or Instagram found. Not the New York City string quartet called The Rhythm Method (therhythmmethod.nyc), and not the YouTube channel @therhythmmethod8794. No logo or photos (Facebook images need login).",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=61591741274331",
+  "genres": [
+    "classic rock",
+    "rock covers",
+    "60s to today"
+  ],
+  "description": "A Long Island cover band that plays classic rock and newer rock hits from the 1960s to today at local bars and music rooms such as Bartini in Babylon and The Warehouse in Amityville.",
+  "evidence": [
+    {
+      "url": "https://www.bartinibabylon.com/event-calendar",
+      "note": "Bartini Bar & Lounge in Babylon lists \"THE RHYTHM METHOD\" at 8:30 PM on Friday, October 23 (no link given)."
+    },
+    {
+      "url": "https://www.facebook.com/thewarehouseli/posts/saturday-august-15-2026-get-ready-to-rock-out-with-us-the-rhythm-method-make-the/1655622026569818/",
+      "note": "The Warehouse (Amityville) announced The Rhythm Method's debut there on August 15, 2026, as a band covering classic rock and new rock from the 60s to today."
+    },
+    {
+      "url": "https://www.facebook.com/61591741274331/videos/933212256455676/",
+      "note": "A Facebook page named \"The Rhythm Method Long Island Band\" posts band videos."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: bartinibabylon.com, facebook.com."
 }

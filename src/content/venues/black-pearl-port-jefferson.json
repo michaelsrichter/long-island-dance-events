@@ -33,16 +33,61 @@
   },
   "description": "A waterfront seafood and steak restaurant inside Danford's Hotel & Marina in Port Jefferson village. It has a bar, outdoor seating by the harbor and live bands most weekends.",
   "facebookUrl": "https://www.facebook.com/BlackPearlPortJeff",
-  "factsSource": "Checked October 3, 2026. Source: blackpearlportjeff.com.",
+  "factsSource": "Checked October 4, 2026. Source: blackpearlportjeff.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Black+Pearl+Seafood+Chophouse%2C+25+East+Broadway%2C+Port+Jefferson%2C+NY+11777",
   "kind": "restaurant",
   "phone": "(631) 676-7025",
   "postalCode": "11777",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Chose the Port Jefferson Black Pearl because In The Groove plays there often and its calendar lists In the Groove on Oct 4 (venue says 3-6 PM; Ira says 3-8 PM). A 'Black Pearl Lounge' in Baldwin is permanently closed.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Chose the Port Jefferson Black Pearl because In The Groove plays there often and its calendar lists In the Groove on Oct 4 (venue says 3-6 PM; Ira says 3-8 PM). A 'Black Pearl Lounge' in Baldwin is permanently closed.\n\nDirectory research 2026-10-04: Hours conflict on the contact page: one block says dining/bar Sun-Thu 11:30 AM-10 PM and Fri-Sat to 11 PM, the footer says restaurant daily to 10 PM and bar/lounge to 11 PM Sun-Thu and 1 AM Fri-Sat; we used the footer. The site's email address is hidden (obfuscated), so no email recorded. The sales office line (631) 676-7024 belongs to Pearl at Danford's catering (pearlcatering.events). The site is built on a restaurant template and still shows some placeholder demo text and images (team photos, sample menu) which we ignored. Photo 1 shows the whole Danford's property, which includes the restaurant. The site has an events calendar with an iCal feed: https://blackpearlportjeff.com/events/?ical=1.",
   "state": "NY",
   "town": "Port Jefferson",
   "website": "https://blackpearlportjeff.com/",
   "latitude": 40.947455,
   "longitude": -73.068878,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/blackpearlportjeff/",
+  "hours": "Restaurant daily 11:30 AM-10 PM; bar/lounge Sun-Thu 11:30 AM-11 PM, Fri-Sat 11:30 AM-1 AM; happy hour Mon-Fri 3-6 PM",
+  "logo": {
+    "image": "../../assets/entities/venues/black-pearl-port-jefferson-logo.webp",
+    "alt": "Black Pearl Seafood Chophouse logo: black curling wave lines above the words Black Pearl Seafood Chophouse",
+    "credit": "Logo: Black Pearl Seafood Chophouse",
+    "creditUrl": "https://blackpearlportjeff.com/",
+    "imageSource": "https://blackpearlportjeff.com/wp-content/uploads/2025/04/cropped-BlackPearlIG-Profile.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/black-pearl-port-jefferson-1.webp",
+      "alt": "Aerial view of Danford's Hotel & Marina on Port Jefferson Harbor, with white waterfront buildings, a small lighthouse and dock tables under blue umbrellas",
+      "credit": "Photo: Black Pearl Seafood Chophouse (website)",
+      "creditUrl": "https://blackpearlportjeff.com/",
+      "imageSource": "https://blackpearlportjeff.com/wp-content/uploads/2025/04/danfords-full-property-photow.2000x0.jpg",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/black-pearl-port-jefferson-2.webp",
+      "alt": "The waterfront dock deck at sunset, with potted palm trees, high-top tables lit in blue and a small lighthouse on the harbor",
+      "credit": "Photo: Black Pearl Seafood Chophouse (website)",
+      "creditUrl": "https://blackpearlportjeff.com/",
+      "imageSource": "https://blackpearlportjeff.com/wp-content/uploads/2025/04/bcam1812.2000x0.jpg",
+      "focus": "55% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://blackpearlportjeff.com/contact-us/",
+      "note": "Contact page: 25 E Broadway, Port Jefferson; restaurant (631) 676-7025, sales office (631) 676-7024; restaurant 11:30 AM-10 PM daily, bar/lounge to 11 PM Sun-Thu and 1 AM Fri-Sat; links Facebook and Instagram."
+    },
+    {
+      "url": "https://blackpearlportjeff.com/",
+      "note": "Home page says the restaurant is inside Danford's Hotel & Marina on the Port Jefferson waterfront, with live music in the evenings ('Music Schedule')."
+    },
+    {
+      "url": "https://blackpearlportjeff.com/wp-json/tribe/events/v1/events?per_page=10",
+      "note": "The venue's own event feed lists live bands (e.g. Peat Moss & The Fertilizers, 6-9 PM) for October 2026."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=Black+Pearl+Seafood+Chophouse%2C+25+East+Broadway%2C+Port+Jefferson%2C+NY+11777",
+      "note": "Places listing for Black Pearl Seafood Chophouse matches 25 East Broadway, Port Jefferson 11777 and (631) 676-7025."
+    }
+  ]
 }

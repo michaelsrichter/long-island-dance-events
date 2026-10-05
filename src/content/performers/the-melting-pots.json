@@ -1,5 +1,36 @@
 {
   "name": "The Melting Pots",
   "type": "band",
-  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: The band's own name is 'Melting Pots' (venue bills it as 'The Melting Pots'). Its website meltingpotsny.com returns 403 Forbidden to all requests from here, so its pages, booking contact, logo and photos could not be checked; social links come from a 2019 LongIslandSound.love feature and the TikTok handle from search results, so check they are still active. The Facebook page may also be reachable as facebook.com/377823292401494. Lineup in 2019: James Chiarella, Tom Gallagher, Andrew Friedman (may have changed).",
+  "website": "https://www.meltingpotsny.com/",
+  "facebookUrl": "https://www.facebook.com/meltingpotsny/",
+  "instagramUrl": "https://www.instagram.com/meltingpotsny/",
+  "tiktokUrl": "https://www.tiktok.com/@meltingpotsny",
+  "xUrl": "https://x.com/meltingpotsny",
+  "genres": [
+    "funk",
+    "rock",
+    "blues",
+    "original music"
+  ],
+  "description": "A Long Island band that plays a danceable mix of funk, rock and blues, including its own songs. At its core it is a trio (bass and vocals, guitar, drums) that often adds guest keyboard or horn players.",
+  "evidence": [
+    {
+      "url": "https://www.thevillagerfarmingdale.com/livemusic/live-music-the-melting-pots",
+      "note": "The Villager Farmingdale lists 'Live Music: The Melting Pots' on Sat Oct 24, 2026, 6-9 PM."
+    },
+    {
+      "url": "https://www.longislandsound.love/featured-artists/2019/6/5/melting-pots",
+      "note": "LongIslandSound.love feature (2019): Long Island funk/rock/blues power trio, renamed Melting Pots in 2015 (formerly Funktion Jungle); links facebook, instagram and twitter handles 'meltingpotsny'."
+    },
+    {
+      "url": "https://www.findglocal.com/US/Farmingdale/377823292401494/Melting-Pots",
+      "note": "Directory copy of the band's Facebook page places 'Melting Pots' in Farmingdale, NY (page id 377823292401494)."
+    },
+    {
+      "url": "https://www.tiktok.com/@meltingpotsny",
+      "note": "Shows the TikTok page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thevillagerfarmingdale.com, longislandsound.love, findglocal.com, tiktok.com."
 }

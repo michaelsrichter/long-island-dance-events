@@ -25,7 +25,7 @@
     "notes": "A Nirvana tribute is a rock concert where fans watch, sing and sometimes mosh. This weekend's show is billed as Unplugged (acoustic), so expect a listening crowd.",
     "rating": "listening"
   },
-  "description": "Long Island Nirvana tribute trio, active since 2023, that recreates Nirvana's live show; on Oct 3 it plays an 'Unplugged' acoustic night at The Warehouse in Amityville.",
+  "description": "A Long Island Nirvana tribute trio, playing since 2023, that recreates Nirvana's early-90s live show, from the guitar and vocals to the bass lines and hard-hitting drums.",
   "facebookUrl": "https://www.facebook.com/p/Serve-The-Servants-Nirvana-Tribute-61556565905790/",
   "genres": [
     "tribute to Nirvana",
@@ -33,6 +33,45 @@
     "90s alternative rock"
   ],
   "instagramUrl": "https://www.instagram.com/servetheservantsliny",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Band site lists Oct 3 as 'Unplugged at Katie's / Katies of Smithtown', but AllEvents and Ira's List put the Unplugged show at The Warehouse, Amityville. Owner may want to confirm the venue.",
-  "website": "https://www.servetheservantstribute.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Band site lists Oct 3 as 'Unplugged at Katie's / Katies of Smithtown', but AllEvents and Ira's List put the Unplugged show at The Warehouse, Amityville. Owner may want to confirm the venue.\n\nDirectory research 2026-10-04: Current links confirmed from the band's own site; added TikTok and the band's public contact email. No separate contact/booking page (the /contact URL is a 404; contact is a section of the home page). Upcoming LI show not in our data: 89 North, Patchogue, Dec 12, 2026 (with No Doubt tribute Hella Doubt); other listed dates are in Brooklyn and Stroudsburg, PA. The Oct 3 'Unplugged' venue question (Katie's of Smithtown vs. The Warehouse, Amityville) is now past and no longer on the band's list, so I could not settle it. No logo file on the site (the logo only appears on a stage banner in photo 2). Skipped a photo with a heavy scratched-film effect and a background texture.",
+  "website": "https://www.servetheservantstribute.com/",
+  "tiktokUrl": "https://www.tiktok.com/@servetheservantsny",
+  "email": "servetheservantsliny@yahoo.com",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/serve-the-servants-1.webp",
+      "alt": "The three members of Serve The Servants in a round fisheye-lens promo shot, the singer in the middle with blond hair, white sunglasses and a flannel shirt",
+      "credit": "Photo: Serve The Servants (website)",
+      "creditUrl": "https://www.servetheservantstribute.com/",
+      "imageSource": "https://static.wixstatic.com/media/444760_ac831db652194a199892c920f50563fb~mv2.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/serve-the-servants-2.webp",
+      "alt": "Serve The Servants playing a theater stage in red light and haze, with their band banner behind them and an audience in front",
+      "credit": "Photo: Serve The Servants (website)",
+      "creditUrl": "https://www.servetheservantstribute.com/",
+      "imageSource": "https://static.wixstatic.com/media/444760_d97880b3fbab4deb9e7c411dbe32d18a~mv2.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/performers/serve-the-servants-3.webp",
+      "alt": "Serve The Servants on a small club stage under purple and green lights: bassist, drummer, and a singer-guitarist with green-blond hair",
+      "credit": "Photo: Serve The Servants (website)",
+      "creditUrl": "https://www.servetheservantstribute.com/",
+      "imageSource": "https://static.wixstatic.com/media/444760_c691460427f74847bc97f52fd53d623b~mv2.jpg",
+      "focus": "50% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.servetheservantstribute.com/",
+      "note": "Band site: 'Long Island's Premier Nirvana Tribute', active since 2023, trio that aims to copy Nirvana's live show; links Facebook, Instagram and TikTok; contact email listed."
+    },
+    {
+      "url": "https://www.servetheservantstribute.com/event-details/90s-night-with-hella-doubt",
+      "note": "Upcoming Long Island show on the band's site: '90s Night with Hella Doubt' at 89 North, 89 N Ocean Ave, Patchogue, Sat Dec 12, 2026, 7-11 PM."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: servetheservantstribute.com."
 }

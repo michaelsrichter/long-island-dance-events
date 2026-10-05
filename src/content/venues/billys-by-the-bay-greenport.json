@@ -2,14 +2,40 @@
   "name": "Billy’s By The Bay",
   "address": "2530 Manhanset Ave",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Seasonal outdoor waterfront restaurant (Facebook posts mention seating under a tent); we found no information about a dance floor. Hours change with the weather and the season; the venue says it updates hours only on Facebook and Google. The email published on the site is lisa.billysbythebay@aol.com (business contact on the restaurant's page). The site's images are hosted on nebula.wsimg.com, which blocks downloads in robots.txt, and Facebook images need a login, so no logo or photos. The website only works over http (no https). Name on the site and Google is 'Billy's by the Bay' (Google writes 'Billys by the Bay').",
   "state": "NY",
   "town": "Greenport",
-  "postalCode": "11944",
-  "phone": "(631) 477-8300",
   "website": "http://billysbythebayrestaurant.com/",
+  "facebookUrl": "https://www.facebook.com/billysbythebaygreenport/",
+  "email": "lisa.billysbythebay@aol.com",
+  "phone": "(631) 477-8300",
+  "hours": "Seasonal, weather permitting. Fall 2026: Mon 12-6:30 PM; Thu-Sat 12-7:30 PM; Sun 12-6 PM; closed Tue-Wed in October",
+  "postalCode": "11944",
+  "description": "A casual seafood restaurant and tiki bar at Safe Harbor Marina in Greenport, open from spring into the fall. It has live bands on Thursday and Friday evenings and on some weekend afternoons.",
+  "evidence": [
+    {
+      "url": "http://billysbythebayrestaurant.com/our-location-1.html",
+      "note": "Restaurant's own site: 2530 Manhanset Ave, Greenport NY 11944 (Safe Harbor Marina, formerly Brewer's Yacht Yard), phone 631-477-8300, contact email, and Facebook page name Billysbythebay."
+    },
+    {
+      "url": "http://billysbythebayrestaurant.com/live-music-schedule.html",
+      "note": "Live music schedule for October 2026 (Sahara, The Sitting Ducks, The Leafy Greens, Gene Casey & the Lone Sharks on Oct 11 and Oct 31); live music every Thursday (Lobster Night) and Friday 5-8 PM."
+    },
+    {
+      "url": "http://billysbythebayrestaurant.com/",
+      "note": "Home page lists fall hours, says hours depend on the weather and are only updated on Facebook or Google, and describes a seafood restaurant with a Key West-style feel."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=7166860038695492319",
+      "note": "Google Maps listing 'Billys by the Bay' (seafood restaurant) at 2530 Manhanset Ave, Greenport, NY 11944, phone (631) 477-8300, website billysbythebayrestaurant.com."
+    },
+    {
+      "url": "https://www.facebook.com/billysbythebaygreenport/",
+      "note": "Shows the Facebook page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: billysbythebayrestaurant.com, facebook.com.",
   "kind": "restaurant",
-  "factsSource": "Checked October 4, 2026. Source: Bing Places (via Web IQ). Seafood restaurant and tiki bar at Brewer's yacht yard with live music.",
   "latitude": 41.11054,
   "longitude": -72.35563,
   "coordinatesSource": "Bing Places (via Web IQ); the free geocoders did not find this address"

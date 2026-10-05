@@ -1,5 +1,59 @@
 {
   "name": "Toad the Wet Sprocket",
   "type": "band",
-  "reviewNotes": "Added automatically from Patchogue Theatre - events. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Patchogue Theatre - events. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: National touring band (not Long Island based); Long Island link is the Oct 24, 2026 Patchogue Theatre acoustic show. Booking phone is the Madison House agency office line published on the band's contact page for tour/booking inquiries (the site adds 'ext 1042' for their agent). I did not record agent or manager emails (individual staff addresses). Spotify artist page verified by its title; the band site links only an album. Only one photo: other site images are text banners and album art. Photo is 600 px wide (minimum). Logo came as WebP from a .png URL.",
+  "website": "https://toadthewetsprocket.com/",
+  "facebookUrl": "https://www.facebook.com/toadthewetsprocketmusic",
+  "instagramUrl": "https://www.instagram.com/toadthewetsprocket/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCginMr9ckWfpOAByimQ6suw",
+  "xUrl": "https://x.com/toadwetsprocket",
+  "spotifyUrl": "https://open.spotify.com/artist/4j7EVY3kuDwLPfD2jfC7LC",
+  "bookingUrl": "https://toadthewetsprocket.com/contact/",
+  "phone": "(303) 544-9900",
+  "genres": [
+    "alternative rock",
+    "90s rock",
+    "folk rock"
+  ],
+  "description": "A four-piece alternative rock band from Santa Barbara, California, best known for 1990s hits like 'All I Want' and 'Walk on the Ocean' from the album Fear. Their songs are melodic, guitar-based rock with a folk touch.",
+  "logo": {
+    "image": "../../assets/entities/performers/toad-the-wet-sprocket-logo.webp",
+    "alt": "Toad the Wet Sprocket logo: the word TOAD in big mustard-yellow block letters with 'The Wet Sprocket' and 'Since 1986' below",
+    "credit": "Logo: Toad the Wet Sprocket",
+    "creditUrl": "https://toadthewetsprocket.com/",
+    "imageSource": "https://toadthewetsprocket.com/wp-content/uploads/2026/01/toad-logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/toad-the-wet-sprocket-1.webp",
+      "alt": "Three members of Toad the Wet Sprocket sitting with acoustic guitars in front of a rustic wooden barn",
+      "credit": "Photo: Toad the Wet Sprocket (website)",
+      "creditUrl": "https://toadthewetsprocket.com/the-band/",
+      "imageSource": "https://toadthewetsprocket.com/wp-content/uploads/2026/01/toad-alt.jpg",
+      "focus": "50% 75%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.patchoguetheatre.org/events/",
+      "note": "Patchogue Theatre lists 'Toad the Wet Sprocket - Rings: The Acoustic Tour, with special guest Willy Porter' on Sat Oct 24, 2026 at 8:00 PM."
+    },
+    {
+      "url": "https://toadthewetsprocket.com/the-band/",
+      "note": "Official bio: Santa Barbara quartet; 1991 album Fear went platinum with top-20 hits 'All I Want' and 'Walk on the Ocean'."
+    },
+    {
+      "url": "https://toadthewetsprocket.com/contact/",
+      "note": "Contact page: management emails, and for tour/booking inquiries the Madison House agency (office phone listed)."
+    },
+    {
+      "url": "https://toadthewetsprocket.com/",
+      "note": "Official site links Facebook, Instagram, X (Twitter) and the band's YouTube channel; 'Toad' logo in the header."
+    },
+    {
+      "url": "https://open.spotify.com/artist/4j7EVY3kuDwLPfD2jfC7LC",
+      "note": "Shows the Spotify page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: patchoguetheatre.org, toadthewetsprocket.com, open.spotify.com."
 }

@@ -2,10 +2,43 @@
   "name": "Liam’s Landing",
   "address": "248 S Ketcham Ave",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: The old website liamslanding.com now returns 'Site not found' (checked 2026-10-04), so no website, logo or photos from an official site. Facebook and Instagram come from the Bing and Apple Maps listings (Apple Maps uses the Facebook page as the website); both sites block automated checks, so they were not opened directly. A TikTok account @liamslanding shows up in search but could not be confirmed as the venue's, so it was left out. Hours come from map listings (Bing and Apple agree), not from the venue itself. Dance floor not confirmed: reviews mention a new back room with a water view and bands on Sundays, but no dance floor is described. Only map/review-site photos exist, which we do not use.",
   "state": "NY",
   "town": "Amityville",
   "latitude": 40.662882,
   "longitude": -73.423379,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/LiamsLanding/",
+  "instagramUrl": "https://www.instagram.com/liamslanding/",
+  "phone": "(631) 691-2722",
+  "hours": "Tue-Thu 12 PM-2 AM; Fri-Sat 12 PM-3 AM; Sun 12 PM-12 AM; closed Mon",
+  "postalCode": "11701",
+  "description": "A family-owned bar and restaurant on Amityville Creek in South Amityville, with outdoor seating by the water, free boat docking and live local bands.",
+  "evidence": [
+    {
+      "url": "https://maps.apple.com/place?place-id=I6AEEA0486020C1A3",
+      "note": "Apple Maps listing: Liam's Landing bar and restaurant, 248 S Ketcham Ave, Amityville, NY 11701, +1 (631) 691-2722, website given as facebook.com/LiamsLanding, live music, hours closed Monday."
+    },
+    {
+      "url": "https://onthewaterrestaurants.com/restaurants/liams-landing-amityville",
+      "note": "Waterfront dining guide: family-owned waterfront bar and restaurant on Amityville Creek / Great South Bay with free docking, live music, private events and craft beer."
+    },
+    {
+      "url": "https://www.chamberofcommerce.com/business-directory/new-york/amityville/restaurant/2012160102-liam-s-landing",
+      "note": "Business directory confirms the 248 S Ketcham Ave address and (631) 691-2722 phone."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Redrgc2P0yM",
+      "note": "Video of a local band playing at Liam's Landing, Amityville, showing it hosts live bands."
+    },
+    {
+      "url": "https://www.bing.com/maps?q=Liam%27s+Landing+248+S+Ketcham+Ave+Amityville+NY",
+      "note": "Shows the Instagram page."
+    },
+    {
+      "url": "https://www.yellowpages.com/amityville-ny/mip/liams-landing-555748489",
+      "note": "Shows the county."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: maps.apple.com, onthewaterrestaurants.com, chamberofcommerce.com, youtube.com."
 }

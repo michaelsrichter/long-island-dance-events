@@ -12,9 +12,70 @@
   "postalCode": "11735",
   "website": "https://www.thevillagerfarmingdale.com/",
   "kind": "bar",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://www.thevillagerfarmingdale.com/livemusic.",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Source: thevillagerfarmingdale.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Website, email, phone and address confirmed on the venue's own site; address and phone also match Google Maps. The venue site does not publish hours: hours come from the Bing local listing, and Google Maps (which only showed the current day) agrees for Sunday 11 AM-3 AM; please re-check. Farmingdale is in Nassau County. Part of the LFRG restaurant group, which also runs a separate The Villager in Babylon (thevillagerbabylon.com) - not the same venue. Live music happens in the outdoor beer garden area in season; the site does not describe a dance floor. Photos come from the Farmingdale site's own Squarespace account (not the Babylon site). The logo is white on a transparent background, so it needs a dark backdrop. Photo 3 shows a bar that looks like the outdoor bar in the beer garden (daylight from the side), so it is tagged 'other'.",
   "latitude": 40.732293,
   "longitude": -73.44587,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/TheVillagerFarmingdale/",
+  "instagramUrl": "https://www.instagram.com/thevillagerfarmingdale/",
+  "email": "info@thevillagerfarmingdale.com",
+  "phone": "(516) 461-4880",
+  "hours": "Mon-Wed 3 PM-3 AM; Thu-Sun 11 AM-3 AM",
+  "description": "A gastropub on Main Street in downtown Farmingdale with 24 rotating draft beers and a large outdoor beer garden. Local bands and singers play most Thursday, Friday and Saturday evenings.",
+  "logo": {
+    "image": "../../assets/entities/venues/the-villager-farmingdale-logo.webp",
+    "alt": "The Villager Farmingdale logo: the name in white script inside a white oval, with Farmingdale, NY underneath (white on a transparent background)",
+    "credit": "Logo: The Villager Farmingdale",
+    "creditUrl": "https://www.thevillagerfarmingdale.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/6213e71e4edcd23a3f068c73/92e25b42-69e7-49dd-b222-c814c7a6c8dd/Villager+Farmingdale+-+White+Transparent+copy.png?format=1000w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/the-villager-farmingdale-1.webp",
+      "alt": "The Villager's brick-paved beer garden with dark tables and chairs under red umbrellas and string lights, and an outdoor bar on the right",
+      "credit": "Photo: The Villager Farmingdale (website)",
+      "creditUrl": "https://www.thevillagerfarmingdale.com/livemusic",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/6213e71e4edcd23a3f068c73/1658864993191-TPN3PGXF39U6RJKRS1DH/IMG_1725.JPG?format=1500w",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-villager-farmingdale-2.webp",
+      "alt": "Wooden picnic tables on gravel under green umbrellas in The Villager's outdoor beer garden",
+      "credit": "Photo: The Villager Farmingdale (website)",
+      "creditUrl": "https://www.thevillagerfarmingdale.com/catering",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/6213e71e4edcd23a3f068c73/1741223666360-TJ1PZPFL6T68DDM1T7NH/Villager%2BBeer%2BGarden3.jpg?format=1500w",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-villager-farmingdale-3.webp",
+      "alt": "A bar counter with rows of liquor bottles on shelves against a dark blue wall under a wood-beam ceiling",
+      "credit": "Photo: The Villager Farmingdale (website)",
+      "creditUrl": "https://www.thevillagerfarmingdale.com/catering",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/6213e71e4edcd23a3f068c73/c6905192-8df0-4340-a332-c61ff35242d6/View+recent+photos.jpg?format=1500w",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thevillagerfarmingdale.com/contact",
+      "note": "Venue's own contact page lists 306 Main St., Farmingdale, NY 11735, phone 516-461-4880 and info@thevillagerfarmingdale.com."
+    },
+    {
+      "url": "https://www.thevillagerfarmingdale.com/livemusic",
+      "note": "Venue's live music calendar lists bands and singers Thursday to Saturday, 6 to 9 PM, through October 2026."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=12635909058478573338",
+      "note": "Google Maps lists The Villager Farmingdale (bar & grill) at 306 Main St, Farmingdale, NY 11735, phone (516) 461-4880, website thevillagerfarmingdale.com; shows Sunday 11 AM to 3 AM."
+    },
+    {
+      "url": "https://www.bing.com/maps?q=The+Villager+Farmingdale+306+Main+St+Farmingdale+NY",
+      "note": "Bing local listing gives weekly hours (Mon-Wed 3 PM-3 AM, Thu-Sun 11 AM-3 AM) and links the same Facebook and Instagram pages."
+    },
+    {
+      "url": "https://www.thevillagerfarmingdale.com/",
+      "note": "Shows the Facebook page and Instagram page."
+    }
+  ]
 }

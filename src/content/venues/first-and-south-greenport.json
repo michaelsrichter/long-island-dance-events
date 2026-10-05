@@ -2,10 +2,45 @@
   "name": "First and South",
   "address": "100 South Street",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Hours differ on the restaurant's own site: the weekly 'What's happening' page (used here) says Mon 3-9, Tue 12-9, Thu-Sat 12-10, Sun brunch 10-3, closed Wed, while the page's structured data says Mon/Tue/Thu/Fri 12-9, Sat 11-9, Sun 10-3. Please confirm. The site also links a personal LinkedIn profile (not recorded). No usable venue photos: the site shows only food and drink close-ups and a text-heavy chalk mural, no room, bar or stage views. No dance floor is mentioned; music is a dinner set by rotating musicians.",
   "state": "NY",
   "town": "Greenport",
   "latitude": 41.103487,
   "longitude": -72.361002,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.firstandsouth.com/",
+  "facebookUrl": "https://www.facebook.com/firstandsouth/",
+  "instagramUrl": "https://www.instagram.com/firstandsouth/",
+  "xUrl": "https://x.com/FirstAndSouth",
+  "email": "gm@firstandsouth.com",
+  "phone": "(631) 333-2200",
+  "hours": "Mon 3 PM-9 PM; Tue 12 PM-9 PM; Thu-Sat 12 PM-10 PM; Sun brunch 10 AM-3 PM; closed Wed",
+  "postalCode": "11944",
+  "description": "A bar and restaurant in Greenport village serving local North Fork food and drinks, with live music on Tuesday evenings (6-9 PM) and on the first Friday of each month.",
+  "logo": {
+    "image": "../../assets/entities/venues/first-and-south-greenport-logo.webp",
+    "alt": "First and South Bar & Restaurant logo in navy and red with the words Eat . Drink . Play",
+    "credit": "Logo: First and South",
+    "creditUrl": "https://www.firstandsouth.com/",
+    "imageSource": "https://images.getbento.com/accounts/4599b921925b46f4a86e9249376daaea/media/images/7650FS_LOGO_FULL.png"
+  },
+  "evidence": [
+    {
+      "url": "https://www.firstandsouth.com/contact/",
+      "note": "Restaurant's own contact page: 100 South St, Greenport, NY 11944, phone (631) 333-2200 (also 631-333-2201) and email gm@firstandsouth.com."
+    },
+    {
+      "url": "https://www.firstandsouth.com/whats-happening-in-greenport-this-week/",
+      "note": "Weekly page: live music Tuesdays 6-9 PM with rotating musicians and live music the first Friday of every month 6-9 PM; closed Wednesdays; Sunday brunch."
+    },
+    {
+      "url": "https://www.firstandsouth.com/",
+      "note": "Home page links Facebook, Twitter/X and Instagram pages for First and South and a reservations page."
+    },
+    {
+      "url": "https://www.tripadvisor.com/Restaurant_Review-g47827-d3184151-Reviews-First_and_South-Greenport_North_Fork_Long_Island_New_York.html",
+      "note": "Shows the county."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: firstandsouth.com, tripadvisor.com."
 }

@@ -1,5 +1,49 @@
 {
   "name": "Smells Like Nirvana",
   "type": "band",
-  "reviewNotes": "Added automatically from Stereo Garden (Patchogue) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Stereo Garden (Patchogue) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Touring act based in Chicago, not Long Island; the Long Island date is a ticketed concert at Stereo Garden. Booking email is their agent at Atomic Music Group, published on the band site. A second site photo has a photographer watermark (\"KING\") and the crowd photos show fans, so both were skipped. Photo 1 shows stage props from Nirvana's In Utero tour (anatomical angel mannequins) - owner may prefer to skip it.",
+  "website": "https://www.smellslikenirvanatribute.com/",
+  "facebookUrl": "https://www.facebook.com/smellslikenirvanatribute/",
+  "instagramUrl": "https://www.instagram.com/smellslikenirvanatribute/",
+  "youtubeUrl": "https://www.youtube.com/smellslikenirvanatribute",
+  "bookingUrl": "https://www.smellslikenirvanatribute.com/#booking-section",
+  "email": "kyle@atomicmusicgroup.com",
+  "genres": [
+    "Nirvana tribute",
+    "grunge",
+    "90s rock"
+  ],
+  "description": "A touring Nirvana tribute band based in Chicago and fronted by Paul Wandtke (ex-Trivium). They play songs from Bleach, Nevermind, In Utero and MTV Unplugged, live without backing tracks, and sometimes do an acoustic \"Unplugged\" show, as at Stereo Garden in Patchogue.",
+  "logo": {
+    "image": "../../assets/entities/performers/smells-like-nirvana-logo.webp",
+    "alt": "Smells Like Nirvana Tribute logo: yellow lettering above a yellow smiley face with X eyes and a tongue sticking out",
+    "credit": "Logo: Smells Like Nirvana",
+    "creditUrl": "https://www.smellslikenirvanatribute.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/5c0f2d692487fd65437daf54/607485ac-edd5-4a1f-b2d5-8838efdfe064/0+SLNLOGO+yello.png?format=1500w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/smells-like-nirvana-1.webp",
+      "alt": "Smells Like Nirvana guitarist playing on a smoky stage with the drummer behind him and angel-winged mannequin props like Nirvana's In Utero tour",
+      "credit": "Photo: Smells Like Nirvana (website)",
+      "creditUrl": "https://www.smellslikenirvanatribute.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5c0f2d692487fd65437daf54/1544500625450-EP0XZYQPSA4OEMOENMH5/Photo+A.jpg?format=2500w",
+      "focus": "45% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-gc72p-etxsf-alzah-2hnpz",
+      "note": "Stereo Garden (Patchogue) lists Smells Like Nirvana performing MTV Unplugged on Sunday Oct 4, 2026; says the band is based in Chicago and fronted by Paul Wandtke."
+    },
+    {
+      "url": "https://www.smellslikenirvanatribute.com/",
+      "note": "Official site links Instagram and YouTube, lists a Patchogue, NY date and tour dates across the U.S. and Europe, and gives a booking email."
+    },
+    {
+      "url": "http://www.paulwandtke.com/smells-like-nirvana-2/",
+      "note": "Paul Wandtke's own site confirms he leads the tribute and links facebook.com/smellslikenirvanatribute."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: stereogardenli.com, smellslikenirvanatribute.com, paulwandtke.com."
 }

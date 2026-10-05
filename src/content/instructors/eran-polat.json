@@ -7,5 +7,45 @@
     "argentine-tango-lovers"
   ],
   "website": "https://www.eranpolat.com/",
-  "reviewNotes": "Also a classical/tango guitarist."
+  "reviewNotes": "Also a classical/tango guitarist.\n\nDirectory research 2026-10-04: Website confirmed. The booking email on his site is for music bookings (he does not publish a separate lesson contact); tango class questions go through the club. His site's only linked social account is SoundCloud (soundcloud.com/eranpolatmusic), which has no field here. Photos are guitar promo shots from his own gallery; several other gallery photos carry a photographer watermark (\"TSERNOV\") and were skipped. No tango-dancing photo of usable quality was found on his site.",
+  "bookingUrl": "https://www.eranpolat.com/booking",
+  "email": "eranpolatmusic@gmail.com",
+  "description": "Eran Polat is an Argentine tango dancer and teacher who leads the intermediate group lessons for Argentine Tango Lovers of Long Island on Tuesdays at Mirelle's in Westbury. He is also a classical Spanish guitarist who plays tango and classical music at concerts, weddings and parties.",
+  "photos": [
+    {
+      "image": "../../assets/entities/instructors/eran-polat-1.webp",
+      "alt": "Eran Polat in a red shirt leans against a stone column holding a classical guitar, with a stained-glass wall behind him",
+      "credit": "Photo: Eran Polat (website)",
+      "creditUrl": "https://www.eranpolat.com/gallery",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5579c402e4b0bc2317b6c00d/1493593384355-REKSDRM8GWMFM1BZB7KY/11390259_10200716547791724_2110172880076550083_n.jpg",
+      "focus": "40% 25%"
+    },
+    {
+      "image": "../../assets/entities/instructors/eran-polat-2.webp",
+      "alt": "Eran Polat sits cross-legged on a wooden floor playing a classical guitar in a room with paper screens and a brick wall",
+      "credit": "Photo: Eran Polat (website)",
+      "creditUrl": "https://www.eranpolat.com/gallery",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5579c402e4b0bc2317b6c00d/1493594507782-ZUB99DL81SPC0C3MI8CI/12376839_1036966506364064_5715591856088982783_n.jpg",
+      "focus": "50% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eranpolat.com/about",
+      "note": "His own site describes him as a classical Spanish guitarist and Argentine tango dancer and instructor, trained at Nassau Community College and Stony Brook University."
+    },
+    {
+      "url": "https://www.eranpolat.com/booking",
+      "note": "His booking page gives eranpolatmusic@gmail.com for hiring him (weddings, venues, private parties, corporate events, wineries)."
+    },
+    {
+      "url": "https://www.argentinetangolovers.com/",
+      "note": "Argentine Tango Lovers of Long Island's home page: Tuesday intermediate/group lessons with Eran Polat at Mirelle's, 170 Post Avenue, Westbury, with a buffet dinner."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=Zg8aKq7oF4M",
+      "note": "Third-party (Tangobro) video titled \"Argentine tango dancer & Guitarist Eran Polat\" from a New York milonga, matching both roles."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: eranpolat.com, argentinetangolovers.com, youtube.com."
 }

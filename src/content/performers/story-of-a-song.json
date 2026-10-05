@@ -1,5 +1,21 @@
 {
   "name": "Story of a Song",
   "type": "band",
-  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: This is a touring concert package, not a Long Island band, and it is a sit-down listening show rather than a dance night; the owner may prefer to drop it from the performer directory. It has no website or social pages of its own: the official info lives on Nine Days' tour page (https://ninedaysband.com/tours/), and each artist has their own band pages (Nine Days, The Verve Pipe, Wheatus, Spin Doctors), which were not recorded here because they belong to those bands. Booking for Nine Days is through Universal Attractions Agency (listed on that page); not recorded as this show's booking contact.",
+  "genres": [
+    "90s rock",
+    "acoustic"
+  ],
+  "description": "Touring acoustic show, not a regular band: singers from '90s rock bands (Nine Days, The Verve Pipe, Wheatus and Spin Doctors) take turns playing their hits unplugged and telling the stories behind the songs.",
+  "evidence": [
+    {
+      "url": "https://mulcahyslongisland.com/event/story-of-a-song/",
+      "note": "Mulcahy's (Wantagh) lists '94.3 The Shark presents: Story of a Song', an unplugged '90s show on Oct 22, 2026 with John Hampson (Nine Days), Brian Vander Ark (The Verve Pipe), Brendan Brown (Wheatus) and Chris Barron (Spin Doctors)."
+    },
+    {
+      "url": "https://ninedaysband.com/tours/",
+      "note": "Nine Days' official tour page lists 'Story of A Song - A 90's Unplugged Experience' dates, including Mulcahy's Wantagh on Oct 22 (doors 6 PM, show 8 PM, 18+)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mulcahyslongisland.com, ninedaysband.com."
 }

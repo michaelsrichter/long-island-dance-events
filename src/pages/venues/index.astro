@@ -3,13 +3,17 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import PersonCard from '../../components/PersonCard.astro';
+import DirectoryFilters from '../../components/DirectoryFilters.astro';
 import { getEventGroups } from '../../lib/content';
+import { cardMedia, searchText } from '../../lib/directory';
+import { linksOf } from '../../lib/links';
 import { COUNTIES } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
 
 const venues = (await getCollection('venues')).sort((a, b) => a.data.town.localeCompare(b.data.town) || a.data.name.localeCompare(b.data.name));
 const { upcoming } = await getEventGroups();
 const count = (id: string) => new Set(upcoming.filter((e) => e.venue?.id === id).map((e) => e.eventId)).size;
+const towns = [...new Set(venues.map((v) => v.data.town))].sort((a, b) => a.localeCompare(b));
 const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Venues', href: '/venues/' },
@@ -18,13 +22,28 @@ const crumbs = [
 <BaseLayout title="Dance venues on Long Island" description={`${venues.length} places to dance in Nassau and Suffolk, with addresses, parking notes and what's on.`} pageType="venues" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
   <PageHeader title="Venues" lede="Studios, halls, lodges and ballrooms where dances and classes happen. Pick one to see what's on and how to get there." crumbs={crumbs} />
   <div class="container section stack-l">
+    <DirectoryFilters noun="venues" one="venue" total={venues.length} towns={towns} searchPlaceholder="Name, town or street" />
     {COUNTIES.map((county) => {
       const list = venues.filter((v) => v.data.county === county);
       return list.length > 0 && (
-        <section aria-labelledby={`c-${county}`}>
+        <section aria-labelledby={`c-${county}`} data-dir-group>
           <h2 id={`c-${county}`}>{county} County</h2>
-          <ul class="grid grid--3 mt-5 person-grid">
-            {list.map((v) => <PersonCard name={v.data.name} href={`/venues/${v.id}/`} kicker={v.data.town} icon="pin" upcomingCount={count(v.id)} note={v.data.address} />)}
+          <ul class="person-grid mt-5">
+            {list.map((v) => (
+              <PersonCard
+                name={v.data.name}
+                href={`/venues/${v.id}/`}
+                kicker={v.data.town}
+                icon="pin"
+                upcomingCount={count(v.id)}
+                note={v.data.address}
+                links={linksOf(v.data)}
+                like={{ type: 'venue', id: v.id }}
+                {...cardMedia(v.data)}
+                search={searchText(v.data.name, ...v.data.aliases, v.data.town, v.data.address, v.data.kind)}
+                filters={{ town: v.data.town }}
+              />
+            ))}
           </ul>
         </section>
       );

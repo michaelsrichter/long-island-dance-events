@@ -5,9 +5,13 @@ import PageHeader from '../../components/PageHeader.astro';
 import EventSeriesList from '../../components/EventSeriesList.astro';
 import Icon from '../../components/Icon.astro';
 import DancingFacts from '../../components/DancingFacts.astro';
+import EntityHeroMedia from '../../components/EntityHeroMedia.astro';
+import EntityContact from '../../components/EntityContact.astro';
+import EntityGallery from '../../components/EntityGallery.astro';
 import { upcomingFor } from '../../lib/content';
-import { breadcrumbJsonLd } from '../../lib/seo';
-import { displayHost } from '../../lib/links';
+import { breadcrumbJsonLd, venueJsonLd } from '../../lib/seo';
+import { linksOf } from '../../lib/links';
+import { entityImageUrls } from '../../lib/entity-images';
 import CommunityPanel from '../../components/CommunityPanel.astro';
 import Reactions from '../../components/Reactions.astro';
 
@@ -26,23 +30,14 @@ const crumbs = [
   { name: 'Venues', href: '/venues/' },
   { name: v.name, href: `/venues/${venue.id}/` },
 ];
-const placeLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Place',
-  '@id': new URL(`/venues/${venue.id}/#place`, site).toString(),
-  name: v.name,
-  telephone: v.phone,
-  address: { '@type': 'PostalAddress', streetAddress: v.address, addressLocality: v.town, addressRegion: v.state, postalCode: v.postalCode, addressCountry: 'US' },
-  ...(v.latitude !== undefined && v.longitude !== undefined ? { geo: { '@type': 'GeoCoordinates', latitude: v.latitude, longitude: v.longitude } } : {}),
-  ...(v.googleMapsUrl ? { hasMap: v.googleMapsUrl } : {}),
-  ...(v.website ? { sameAs: [v.website] } : {}),
-  url: new URL(`/venues/${venue.id}/`, site).toString(),
-};
-const telOf = (p: string) => `tel:+1${p.replace(/[^0-9]/g, '').replace(/^1(?=\d{10}$)/, '')}`;
+const links = linksOf(v);
+const [photo, ...morePhotos] = v.photos ?? [];
+const placeLd = venueJsonLd(venue.id, v, site, { ...(await entityImageUrls(v, site)), links });
 ---
 <BaseLayout title={v.seoTitle ?? `${v.name}, ${v.town}: dance events`} description={v.seoDescription ?? `${v.name}, ${v.address}, ${v.town}. Directions, parking and ${events.length ? 'upcoming dance events' : 'dance events'} at this venue.`} pageType="venue" jsonLd={[placeLd, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={v.name} lede={`${v.address}, ${v.town}, ${v.state} ${v.postalCode ?? ''} · ${v.county} County`} crumbs={crumbs}>
-      <Reactions type="venue" id={venue.id} name={v.name} variant="hero" />
+    {(photo || v.logo) && <EntityHeroMedia slot="media" name={v.name} photo={photo} logo={v.logo} />}
+    <Reactions type="venue" id={venue.id} name={v.name} variant="hero" />
     <div class="btn-row mt-5">
       <a class="btn btn--primary" href={google} target="_blank" rel="noopener" data-track="get_directions" data-track-method="google" data-track-location="venue"><Icon name="directions" />Google Maps<span class="visually-hidden"> (opens in a new tab)</span></a>
       <a class="btn btn--secondary" href={apple} target="_blank" rel="noopener" data-track="get_directions" data-track-method="apple" data-track-location="venue"><Icon name="pin" />Apple Maps<span class="visually-hidden"> (opens in a new tab)</span></a>
@@ -57,18 +52,26 @@ const telOf = (p: string) => `tel:+1${p.replace(/[^0-9]/g, '').replace(/^1(?=\d{
       <div class="mt-5"><EventSeriesList events={events} empty="No upcoming events are listed here right now" /></div>
     </section>
     {v.dancing && <DancingFacts name={v.name} kind="venue" floor={v.dancing.floor} kinds={v.dancing.kinds} notes={v.dancing.notes} evidence={v.dancing.evidence} confidence={v.dancing.confidence} checked={v.dancing.checked} />}
-    <section class="panel" aria-labelledby="facts-h">
-      <h2 id="facts-h">Venue details</h2>
-      <dl class="dl">
-        <div><dt>Address</dt><dd>{v.address}<br />{v.town}, {v.state} {v.postalCode}</dd></div>
-        {v.description && <div><dt>Good to know</dt><dd>{v.description}</dd></div>}
-        {v.parkingNotes && <div><dt>Parking</dt><dd>{v.parkingNotes}</dd></div>}
-        {v.accessibilityNotes && <div><dt>Accessibility</dt><dd>{v.accessibilityNotes}</dd></div>}
-        {v.phone && <div><dt>Phone</dt><dd><a href={telOf(v.phone)}>{v.phone}</a></dd></div>}
-        {v.website && <div><dt>Website</dt><dd><a href={v.website} target="_blank" rel="noopener" data-track="outbound_click" data-track-location="venue" data-track-target={displayHost(v.website)}>{displayHost(v.website)}<span class="visually-hidden"> (opens in a new tab)</span></a></dd></div>}
-      </dl>
-      {v.factsSource && <p class="muted mt-3">{v.factsSource} Something wrong? <a href="/sources/#corrections">Tell us</a>.</p>}
-    </section>
+    <EntityContact
+      heading="Venue details"
+      name={v.name}
+      location="venue"
+      address={{ street: v.address, town: v.town, state: v.state, postalCode: v.postalCode }}
+      phone={v.phone}
+      email={v.email}
+      hours={v.hours}
+      links={links}
+      evidence={v.evidence}
+      factsSource={v.factsSource}
+      logo={v.logo}
+      photos={v.photos}
+      ownerPrompt="Something wrong or missing?"
+    >
+      {v.description && <div><dt>Good to know</dt><dd>{v.description}</dd></div>}
+      {v.parkingNotes && <div><dt>Parking</dt><dd>{v.parkingNotes}</dd></div>}
+      {v.accessibilityNotes && <div><dt>Accessibility</dt><dd>{v.accessibilityNotes}</dd></div>}
+    </EntityContact>
+    <EntityGallery photos={morePhotos} heading={`More photos of ${v.name}`} />
     <CommunityPanel type="venue" id={venue.id} name={v.name} />
   </div>
 </BaseLayout>

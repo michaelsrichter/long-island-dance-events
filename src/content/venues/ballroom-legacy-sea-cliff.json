@@ -11,9 +11,43 @@
   "postalCode": "11579",
   "website": "https://www.ballroomlegacy.us/",
   "kind": "dance-studio",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://www.ballroomlegacy.us/ (event pages list the studio address).",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Source: ballroomlegacy.us.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: The site lists a second number, 516-609-3268 (call/text); we recorded the main 609-3269 (also in Bing). The site still says 'Strict Covid-19 Protocols' in the hours box. Site icon (dancing couple logo) used as the logo; the header wordmark is a small black banner. No usable studio photos: site images are flyers with text, competition photos with text overlays, or Wix stock photos; Bing/Yelp photos not used. No Instagram or YouTube found. 'Book Online' page recorded as the booking link for lessons.",
   "latitude": 40.851813,
   "longitude": -73.635325,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/ballroomlegacydancestudio/",
+  "email": "info@ballroomlegacy.us",
+  "phone": "(516) 609-3269",
+  "hours": "By appointment: Mon 2 PM-10 PM; Tue-Thu 1 PM-10 PM; Fri 2 PM-10 PM; Sat 10 AM-8 PM; Sun 10 AM-4 PM",
+  "description": "A ballroom and Latin dance studio on Glen Cove Avenue in Sea Cliff, teaching on Long Island since 2005. It offers private lessons and group classes such as salsa, bachata and Argentine tango, plus Latin dance parties and tea dances. No partner needed.",
+  "logo": {
+    "image": "../../assets/entities/venues/ballroom-legacy-sea-cliff-logo.webp",
+    "alt": "Ballroom Legacy Dance Studio logo: red and black curved shapes of a dancing couple above the words Ballroom Legacy Dance Studio Sea Cliff",
+    "credit": "Logo: Ballroom Legacy Dance Studio",
+    "creditUrl": "https://www.ballroomlegacy.us/",
+    "imageSource": "https://static.wixstatic.com/media/fd920f_a3760ac6e30b4aed9ffa1caaa71edd47.jpg/v1/fit/w_800,h_800,q_90/fd920f_a3760ac6e30b4aed9ffa1caaa71edd47.jpg"
+  },
+  "evidence": [
+    {
+      "url": "https://www.ballroomlegacy.us/contact",
+      "note": "Studio site lists 185 Glen Cove Avenue A, Sea Cliff, NY 11579, call/text (516) 609-3269 or 516-609-3268, info@ballroomlegacy.us, and hours by appointment."
+    },
+    {
+      "url": "https://www.ballroomlegacy.us/about",
+      "note": "About page: locally owned ballroom and Latin studio serving Long Island since 2005; social or competitive level; no partner required."
+    },
+    {
+      "url": "https://www.ballroomlegacy.us/classes",
+      "note": "Classes page lists Argentine tango workshops (Wed and Thu 7 PM), bachata (Fri 6 PM) and salsa on 2 (Mon 7 PM)."
+    },
+    {
+      "url": "https://www.ballroomlegacy.us/events",
+      "note": "Events page lists 'Friday Night Latin Dance Fever' with ticket sales."
+    },
+    {
+      "url": "https://www.ballroomlegacy.us/",
+      "note": "Shows the website, Facebook page and booking page."
+    }
+  ]
 }

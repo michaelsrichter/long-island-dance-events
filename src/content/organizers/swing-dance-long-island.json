@@ -16,5 +16,27 @@
   "facebookUrl": "https://www.facebook.com/swingdancelongisland",
   "email": "info@sdli.org",
   "description": "All-volunteer nonprofit running Tuesday swing dances with a beginner lesson at the Huntington Moose Lodge in Greenlawn.",
-  "reviewNotes": "Town = where its weekly dances are held; mailing address is a P.O. box in Centereach. Email is from SDLI's Facebook page (not shown on sdli.org)."
+  "reviewNotes": "Town = where its weekly dances are held; mailing address is a P.O. box in Centereach. Email is from SDLI's Facebook page (not shown on sdli.org).\n\nDirectory research 2026-10-04: No own studio: town = where the weekly Tuesday dances are held (Huntington Moose Lodge, Greenlawn); mailing address is P.O. Box 508, Centereach, NY 11720, so no street address recorded. Email is published on the Facebook page, not on sdli.org. The logo is the older 'flaming shoes' graphic from the site's sponsor page (283x121, small). Homepage carousel photos are hosted on SmugMug, which blocks downloads in robots.txt, so no photos were taken; the other images on sdli.org are event flyers. The site gives the Tuesday end time as both 10:00 PM and 10:30 PM. No Instagram/YouTube found.",
+  "logo": {
+    "image": "../../assets/entities/organizers/swing-dance-long-island-logo.webp",
+    "alt": "Swing Dance Long Island logo in gold script on black, with a pair of flaming two-tone dance shoes",
+    "credit": "Logo: Swing Dance Long Island",
+    "creditUrl": "http://www.sdli.org/index.php/sdli/sponsor/swing_dance_long_island_inc/",
+    "imageSource": "http://www.sdli.org/images/uploads/SDLI_Feet_on_Fire_copy.gif"
+  },
+  "evidence": [
+    {
+      "url": "https://www.sdli.org/",
+      "note": "Own site: all-volunteer nonprofit; dances every Tuesday at Huntington Moose Lodge, 631 Pulaski Road, Greenlawn, with a 7:30 PM beginner lesson; 24-hour dance hotline 631-476-3707; mailing address P.O. Box 508, Centereach."
+    },
+    {
+      "url": "https://www.facebook.com/swingdancelongisland/about/",
+      "note": "Facebook page 'Swing Dance Long Island, Inc.' (nonprofit) lists info@sdli.org and links to sdli.org."
+    },
+    {
+      "url": "https://www.huntingtonarts.org/event/dj-dancing-with-swing-dance-long-island/2026-09-08/",
+      "note": "Huntington Arts Council listing for SDLI's Tuesday DJ dance with the same phone and $10-$15 admission."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: sdli.org, facebook.com, huntingtonarts.org."
 }

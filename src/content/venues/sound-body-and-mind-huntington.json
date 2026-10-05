@@ -2,10 +2,64 @@
   "name": "SOUND Body & Mind",
   "address": "125 West Shore Road",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Huntington Matters events. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Huntington Matters events. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: This is a yoga and Pilates studio, not a dance venue; it is in the directory only because of its free Fall Festival on the Harbor (Oct 4, 2026). Consider whether it should stay listed after the event. No email on the site (form only). The site does not publish opening hours (classes by online schedule); third-party listings show roughly 7:30 AM-8:30 PM weekdays, unverified. The logo file is WebP because the image host converts it; it is the same logo shown in the site header. Identifiable adults appear only from behind or lying down in photo 3.",
   "state": "NY",
   "town": "Huntington",
   "latitude": 40.887813,
   "longitude": -73.42418,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://soundbm.com/",
+  "facebookUrl": "https://www.facebook.com/SoundBodyAndMind125/",
+  "instagramUrl": "https://www.instagram.com/soundbodyandmind/",
+  "phone": "(631) 683-5857",
+  "postalCode": "11743",
+  "description": "A yoga and wellness studio on West Shore Road by Huntington Harbor, with a large, bright room with a wood floor. It teaches yoga, sculpt, Pilates and kids' aerial yoga. It is not a dance venue, but it sometimes hosts free community events such as a fall festival on the harbor with live music.",
+  "logo": {
+    "image": "../../assets/entities/venues/sound-body-and-mind-huntington-logo.webp",
+    "alt": "SOUND Body & Mind logo: blue wave lines in a circle next to the word SOUND and the words Body & Mind",
+    "credit": "Logo: SOUND Body & Mind",
+    "creditUrl": "https://soundbm.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/57a12e4d59cc688c3e2f1377/1487605095076-RHQHWZSJUR5S1PI8TRSA/sound-logo-final-inline.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/sound-body-and-mind-huntington-1.webp",
+      "alt": "The empty main studio: a long, shiny wood floor under white ceiling beams with aerial yoga straps, potted palms and tall windows",
+      "credit": "Photo: SOUND Body & Mind (website)",
+      "creditUrl": "https://soundbm.com/studio-pics",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/57a12e4d59cc688c3e2f1377/1579546783470-U58X3H6H9ZKQP5PKOW5P/IMG_9258.jpg?format=1000w",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/sound-body-and-mind-huntington-2.webp",
+      "alt": "Sunlight from a large arched window falling across the studio's wood floor, with palms and glass doors",
+      "credit": "Photo: SOUND Body & Mind (website)",
+      "creditUrl": "https://soundbm.com/studio-pics",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/57a12e4d59cc688c3e2f1377/1579546810687-PGF99A6J5FQLOH1SDAP5/IMG_9358.jpg?format=1000w",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/sound-body-and-mind-huntington-3.webp",
+      "alt": "A full yoga class lying on mats in rows across the bright studio floor",
+      "credit": "Photo: SOUND Body & Mind (website)",
+      "creditUrl": "https://soundbm.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/57a12e4d59cc688c3e2f1377/1739373323101-EO4094399CAUI913HRU4/DSC07859+%281%29.jpg?format=1000w",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://soundbm.com/contact-us",
+      "note": "Studio contact page: 125 West Shore Road, Huntington NY 11743, phone 631-683-5857; contact by web form."
+    },
+    {
+      "url": "https://soundbm.com/",
+      "note": "Home page describes a yoga studio offering yoga, hybrid sculpt and Pilates classes, online sign-up only (no drop-ins), and links Facebook and Instagram."
+    },
+    {
+      "url": "https://huntingtonmatters.com/events/sound-body-mind-fall-festival-on-the-harbor-free/",
+      "note": "Huntington Matters lists the free 'SOUND Body & Mind Fall Festival on the Harbor', postponed to Oct 4, which is the event that added this venue."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: soundbm.com, huntingtonmatters.com."
 }

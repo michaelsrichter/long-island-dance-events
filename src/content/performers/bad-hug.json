@@ -1,5 +1,18 @@
 {
   "name": "BAD HUG",
   "type": "band",
-  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Instagram handle comes from the venue's calendar; it could not be opened to double-check (Instagram blocks automated visits). No website, Facebook or booking page found. A SoundCloud account 'bad hug' from Port Washington (soundcloud.com/bad-hug, original tracks from 2017) may be an older, unrelated project; not recorded. The word 'cover' in the description is inferred from 'your favorite heavy rock from the 70s to today'.",
+  "instagramUrl": "https://www.instagram.com/badhugmusic/",
+  "genres": [
+    "hard rock",
+    "classic rock"
+  ],
+  "description": "Local Long Island trio that plays heavy rock covers, from 1970s hard rock up to recent songs.",
+  "evidence": [
+    {
+      "url": "https://www.bartinibabylon.com/event-calendar",
+      "note": "Bartini Bar & Lounge (Babylon) lists BAD HUG on Sat Nov 14 at 8 PM as a local trio playing heavy rock from the 70s to today, and points to instagram.com/badhugmusic."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: bartinibabylon.com."
 }

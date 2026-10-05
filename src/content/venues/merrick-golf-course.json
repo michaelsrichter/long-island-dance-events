@@ -7,15 +7,42 @@
   "town": "Merrick",
   "county": "Nassau",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: divaballroomdancing.com, hempsteadny.gov, merrickgc.com, thedancecalendar.com, google.com.",
+  "factsSource": "Checked October 4, 2026. Sources: hempsteadny.gov, merrickgc.com.",
   "postalCode": "11566",
   "phone": "(516) 868-4650",
-  "website": "https://hempsteadny.gov/facilities/facility/details/merrickgolfcourse-31",
+  "website": "https://hempsteadny.gov/facilities/facility/details/Merrick-Golf-Course-31",
   "googleMapsUrl": "https://www.google.com/maps?cid=7493017510355899013",
   "parkingNotes": "Free parking (dansant organizer's ad).",
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
-  "reviewNotes": "Town of Hempstead facility; operator site https://merrickgc.com/. Just east of the Meadowbrook Pkwy, south of Merrick Rd.",
+  "reviewNotes": "Town of Hempstead facility; operator site https://merrickgc.com/. Just east of the Meadowbrook Pkwy, south of Merrick Rd.\n\nDirectory research 2026-10-04: Town of Hempstead facility run day to day by The 9 @ Merrick (merrickgc.com, Brooke Holdings). The operator's site and its logo/photos could not be downloaded from here (connection timed out), so the logo is the Town of Hempstead seal from the town's facility page. The town page calls the room the 'Merrick Road Golf Clubhouse'. Pro shop line on the town page is (516) 223-1255. No venue-specific social pages found (only town-wide accounts). No usable photos: the town page only has a scorecard graphic.",
   "latitude": 40.649624,
   "longitude": -73.557994,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "hours": "Golf course: first tee time 6 AM, open six days a week, closed Wednesdays (call to confirm)",
+  "description": "The clubhouse of the Town of Hempstead's nine-hole public golf course, just east of the Meadowbrook Parkway and south of Merrick Road. The town runs beginner ballroom dance classes here on Friday evenings, and dance groups also hold events in the room.",
+  "logo": {
+    "image": "../../assets/entities/venues/merrick-golf-course-logo.webp",
+    "alt": "Town of Hempstead seal: a gold ring reading 'Town of Hempstead, N.Y., Founded 1644' around an eagle with a shield",
+    "credit": "Logo: Town of Hempstead",
+    "creditUrl": "https://hempsteadny.gov/facilities/facility/details/Merrick-Golf-Course-31",
+    "imageSource": "https://hempsteadny.gov/ImageRepository/Document?documentId=89"
+  },
+  "evidence": [
+    {
+      "url": "https://hempsteadny.gov/facilities/facility/details/Merrick-Golf-Course-31",
+      "note": "Town of Hempstead facility page: Merrick Golf Course, 2550 Clubhouse Road, Merrick, NY 11566; office (516) 868-4650; nine-hole course east of the Meadowbrook Pkwy and south of Merrick Rd; closed Wednesdays."
+    },
+    {
+      "url": "https://hempsteadny.gov/294/Ballroom-Dancing",
+      "note": "Town Parks & Recreation lists Beginner Ballroom Dancing at the 'Merrick Road Golf Clubhouse', Fridays 7:30-9:30 PM, Sept 25 - Nov 13, 2026."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=7493017510355899013",
+      "note": "Google Maps: Merrick Golf Course, 2550 Clubhouse Rd Ste 1, Merrick, NY 11566, phone (516) 868-4650, website on hempsteadny.gov."
+    },
+    {
+      "url": "https://merrickgc.com/",
+      "note": "Operator site 'The 9 @ Merrick Golf Course' (Brooke Holdings) gives the same address and phone for tee times."
+    }
+  ]
 }

@@ -1,5 +1,70 @@
 {
   "name": "Calm Coast",
   "type": "band",
-  "reviewNotes": "Added automatically from Lily Flanagan's Pub (Babylon) - music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Lily Flanagan's Pub (Babylon) - music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Matched by name plus local context: the only Long Island act found with this name is Calm Coast Collective (also billed as Calm Coast Trio), the band of Long Island musician Christian Montanez, and it plays The Villager Farmingdale, a sister bar of Lily's Babylon. The Lily's listing itself does not link the band, so confidence is medium. The band has no separate website or social pages; website, booking form and social links are Christian Montanez's own (cmontymusic), which promote the band. Not the Apple Music \"Calm Coast\" (nature/relaxation sound singles). Consider renaming to \"Calm Coast Collective\" with \"Calm Coast\" and \"Calm Coast Trio\" as aliases.",
+  "website": "https://www.cmontymusic.com/",
+  "facebookUrl": "https://www.facebook.com/cmontymusic",
+  "instagramUrl": "https://www.instagram.com/cmontymusic/",
+  "youtubeUrl": "https://www.youtube.com/user/cmontyy",
+  "tiktokUrl": "https://www.tiktok.com/@cmonty.music",
+  "bookingUrl": "https://www.cmontymusic.com/contact",
+  "genres": [
+    "party covers",
+    "tropical party band",
+    "pop",
+    "wedding band"
+  ],
+  "description": "Long Island party band led by singer and guitarist Christian Montanez, billed as a tropical party band. It plays popular cover songs at bars, weddings and private events, in sizes from a trio up to a full band with a horn section.",
+  "logo": {
+    "image": "../../assets/entities/performers/calm-coast-logo.webp",
+    "alt": "Calm Coast Collective logo: script lettering with a palm tree, birds and a yellow sun",
+    "credit": "Logo: Calm Coast Collective",
+    "creditUrl": "https://www.cmontymusic.com/weddings",
+    "imageSource": "https://static.wixstatic.com/media/d36018_1e291e30b64f4c74a4c5bef94d4e14c4~mv2.jpg/v1/crop/x_1120,y_1880,w_3780,h_2140/fill/w_1200,h_679,al_c,q_90/calm-coast-logo.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/calm-coast-1.webp",
+      "alt": "Black-and-white photo of the Calm Coast band playing under a party tent, with a singer, guitarist, drummer and trumpet player",
+      "credit": "Photo: Christian Montanez / Calm Coast (website)",
+      "creditUrl": "https://www.cmontymusic.com/weddings",
+      "imageSource": "https://static.wixstatic.com/media/d36018_305a81b1ae0a41d2aa1b517fd5a26168~mv2.jpg/v1/fit/w_1600,h_1600,q_85/calm-coast-band.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/calm-coast-2.webp",
+      "alt": "Bandleader Christian Montanez standing barefoot on a beach holding an acoustic guitar",
+      "credit": "Photo: Christian Montanez / Calm Coast (website)",
+      "creditUrl": "https://www.cmontymusic.com/weddings",
+      "imageSource": "https://static.wixstatic.com/media/d36018_51144ce719c84df693a2525579357cf9~mv2.jpg/v1/fit/w_1600,h_1600,q_85/cmonty.jpg",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.lilyflanaganspub.com/musicevents/2026/10/10/happy-hour-band-calm-coast",
+      "note": "Lily Flanagan's (Lily's Babylon, 345 Deer Park Ave) lists \"Saturday Band: Calm Coast\" on Oct 10, 2026, 6-10 PM. No band link given."
+    },
+    {
+      "url": "https://www.cmontymusic.com/media",
+      "note": "Long Island guitarist-singer Christian Montanez (CMonty) says his band Calm Coast Collective is made up of Long Island musicians, can be sized to the event and is billed as a tropical party band."
+    },
+    {
+      "url": "https://www.cmontymusic.com/weddings",
+      "note": "Weddings page calls the band \"Calm Coast\" and shows the Calm Coast Collective logo and band photo."
+    },
+    {
+      "url": "https://www.thevillagerfarmingdale.com/livemusic/live-music-by-calm-coast-collective-1",
+      "note": "The Villager Farmingdale (same restaurant group as Lily's Babylon, per Lily's site footer) books \"Calm Coast Collective\" and \"Calm Coast Trio\"."
+    },
+    {
+      "url": "https://www.cmontymusic.com/contact",
+      "note": "Shows the Facebook page, Instagram page and booking page."
+    },
+    {
+      "url": "https://www.cmontymusic.com/",
+      "note": "Shows the YouTube channel."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: lilyflanaganspub.com, cmontymusic.com, thevillagerfarmingdale.com."
 }

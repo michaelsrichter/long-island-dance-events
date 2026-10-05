@@ -38,7 +38,64 @@
     "dance and party hits"
   ],
   "instagramUrl": "https://www.instagram.com/krush.the.band/",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). The Oct 3 date at The Inn was not on the band calendar we read, but the band plays there often.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). The Oct 3 date at The Inn was not on the band calendar we read, but the band plays there often.\n\nDirectory research 2026-10-04: Current description is still accurate, so no new description. Booking is through the contact form on the band site; the site does not show an email or phone in its text (an address only appears in hidden site settings, so not recorded). Several live photos on the band site carry a \"Chris Nova Productions\" watermark; those were skipped. YouTube channel is not linked from the band site but its name and Long Island description match.",
   "website": "https://www.krushtheband.com/",
-  "youtubeUrl": "https://www.youtube.com/@krushthebandny4208"
+  "youtubeUrl": "https://www.youtube.com/@krushthebandny4208",
+  "bookingUrl": "https://www.krushtheband.com/contact",
+  "logo": {
+    "image": "../../assets/entities/performers/krush-logo.webp",
+    "alt": "Krush logo in curly white letters on black with the words Rock N Roll underneath",
+    "credit": "Logo: Krush",
+    "creditUrl": "https://www.krushtheband.com/",
+    "imageSource": "https://static1.squarespace.com/static/66abf287d6952d6a81d0e669/t/6945ca779e309b73747d7ea9/1766181495912/krush+OG+logo.jpeg?format=1500w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/krush-1.webp",
+      "alt": "Krush playing on stage in a grand ballroom with a chandelier while wedding guests dance in front of them",
+      "credit": "Photo: Krush (website)",
+      "creditUrl": "https://www.krushtheband.com/about-1",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/66abf287d6952d6a81d0e669/e667d56f-1981-4812-97a6-dd4822611977/241a3e59-f1c4-424f-9795-3872cbe08244.JPG?format=1500w",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/performers/krush-2.webp",
+      "alt": "Krush lead singer in sunglasses singing into a microphone under blue stage lights",
+      "credit": "Photo: Krush (website)",
+      "creditUrl": "https://www.krushtheband.com/about-1",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/66abf287d6952d6a81d0e669/838b2fc1-f870-4339-8693-0b78054cb8af/_MG_8311.jpg?format=1500w",
+      "focus": "55% 25%"
+    },
+    {
+      "image": "../../assets/entities/performers/krush-3.webp",
+      "alt": "Krush female singer in sunglasses smiling and holding a microphone",
+      "credit": "Photo: Krush (website)",
+      "creditUrl": "https://www.krushtheband.com/about-1",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/66abf287d6952d6a81d0e669/f6f68b65-ffee-4bc2-887e-336139515e02/DSC_9531_Original.jpg?format=1500w",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.krushtheband.com/",
+      "note": "Band site lists 2026 shows at Long Island spots (Salt Shack, The Boatyard in Massapequa, The Inn in Long Beach, Dublin Deck in Patchogue, Daisy's Miller Place) and links the Facebook and Instagram pages."
+    },
+    {
+      "url": "https://www.krushtheband.com/about-1",
+      "note": "About page describes Krush as a rock band that also plays weddings and private parties, and says it opened for Less Than Jake."
+    },
+    {
+      "url": "https://mulcahyslongisland.com/event/krush/",
+      "note": "Mulcahy's in Wantagh lists \"KRUSH - The Best of Rock\" on Saturday, October 24, 2026."
+    },
+    {
+      "url": "https://www.youtube.com/@krushthebandny4208",
+      "note": "YouTube channel \"Krush The Band NY\" describes a five-piece cover and original band based on Long Island."
+    },
+    {
+      "url": "https://www.krushtheband.com/contact",
+      "note": "Shows the booking page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: krushtheband.com, mulcahyslongisland.com, youtube.com."
 }

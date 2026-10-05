@@ -32,7 +32,58 @@
     "tribute to Billy Joel",
     "piano rock"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Other Elton tributes use the 'Almost Elton' name (e.g., a Memphis band at almostelton.com). Chose the NY band because its site lists this exact library date. Rating is based on venue and format; no crowd video watched.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Other Elton tributes use the 'Almost Elton' name (e.g., a Memphis band at almostelton.com). Chose the NY band because its site lists this exact library date. Rating is based on venue and format; no crowd video watched.\n\nDirectory research 2026-10-04: Booking email and phone are published by the band itself under \"BOOKING\" on its contact page. Parts of the band site are still unedited website-template filler (a fake European tour, sample album and band member names on the About and Elton & Billy pages); we used only the real show dates, contact info, logo and gallery photos. The site's Instagram, X and Spotify icons point to generic home pages, so none recorded. Current description is still accurate.",
   "website": "https://almosteltonnyband.com/",
-  "youtubeUrl": "https://www.youtube.com/@AlmostEltonNyTributeBand"
+  "youtubeUrl": "https://www.youtube.com/@AlmostEltonNyTributeBand",
+  "bookingUrl": "https://almosteltonnyband.com/contact",
+  "email": "drdoobie1@yahoo.com",
+  "phone": "(631) 289-3100",
+  "logo": {
+    "image": "../../assets/entities/performers/almost-elton-and-almost-billy-logo.webp",
+    "alt": "Almost Elton logo in red and orange letters inside a lit-up marquee sign with colored bulbs",
+    "credit": "Logo: Almost Elton",
+    "creditUrl": "https://almosteltonnyband.com/",
+    "imageSource": "https://assets.zyrosite.com/MBfviKCyT8Zk46vS/generated/generated-UmBHlR2zYKMy1GCF.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/almost-elton-and-almost-billy-1.webp",
+      "alt": "Almost Elton playing a red grand piano on a purple-lit stage with an ELTON sign and flowers on the piano",
+      "credit": "Photo: Almost Elton (website)",
+      "creditUrl": "https://almosteltonnyband.com/",
+      "imageSource": "https://assets.zyrosite.com/MBfviKCyT8Zk46vS/img_0638-fNqKhlWHIR7JhfYZ.jpg",
+      "focus": "55% 45%"
+    },
+    {
+      "image": "../../assets/entities/performers/almost-elton-and-almost-billy-2.webp",
+      "alt": "The tribute band on a club stage, with a singer in a red feather boa and the Elton performer in a sparkly cap at the piano",
+      "credit": "Photo: Almost Elton (website)",
+      "creditUrl": "https://almosteltonnyband.com/gallery",
+      "imageSource": "https://assets.zyrosite.com/MBfviKCyT8Zk46vS/538294041_122152869350798150_6136224853715578932_n-TUN3buKqc2RMbGFx.jpg",
+      "focus": "60% 40%"
+    },
+    {
+      "image": "../../assets/entities/performers/almost-elton-and-almost-billy-3.webp",
+      "alt": "The Elton performer in a white hat and big white glasses singing at a red piano",
+      "credit": "Photo: Almost Elton (website)",
+      "creditUrl": "https://almosteltonnyband.com/gallery",
+      "imageSource": "https://assets.zyrosite.com/MBfviKCyT8Zk46vS/493586410_122130479978798150_8426859173084262254_n-IMduhJfewRZLCfzh.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://almosteltonnyband.com/",
+      "note": "Band site (copyright ALMOSTELTONNY) lists Almost Elton & Almost Billy at Half Hollow Hills Library, Dix Hills NY on 10/04 at 2 PM, matching our listing."
+    },
+    {
+      "url": "https://almosteltonnyband.com/contact",
+      "note": "Contact page lists a booking email and a 631 (Suffolk County) phone number under the heading BOOKING."
+    },
+    {
+      "url": "https://almosteltonnyband.com/elton-and-billy",
+      "note": "Elton & Billy page describes a combined tribute show of Elton John and Billy Joel hits."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: almosteltonnyband.com."
 }

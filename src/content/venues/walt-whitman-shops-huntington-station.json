@@ -2,10 +2,39 @@
   "name": "Walt Whitman Shops",
   "address": "160 Walt Whitman Rd",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Huntington Matters events. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Huntington Matters events. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Website is the mall's page on simon.com (no separate domain). Phone recorded is Mall Management; the Shopping Line is (631) 271-1741. No public email (Simon uses a contact form). No photos recorded: the only real mall photo on simon.com is 546 px wide (under 600) and the large banner version is darkened for text overlay (that banner does show the Walt Whitman statue at the main entrance). A mall is not a regular dance venue; the listed event came from Huntington Matters and likely uses an outdoor plaza or common area, so check the event's exact spot.",
   "state": "NY",
   "town": "Huntington Station",
   "latitude": 40.824421,
   "longitude": -73.412247,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.simon.com/mall/walt-whitman-shops",
+  "facebookUrl": "https://www.facebook.com/waltwhitmanshops/",
+  "instagramUrl": "https://www.instagram.com/waltwhitmanshops/",
+  "phone": "(631) 271-1746",
+  "hours": "Mon-Thu 11 AM-8 PM; Fri-Sat 10 AM-8 PM; Sun 11 AM-6 PM",
+  "postalCode": "11746",
+  "description": "A Simon shopping mall on Walt Whitman Road in Huntington Station with more than 85 stores and restaurants and a statue of Walt Whitman at its main entrance.",
+  "logo": {
+    "image": "../../assets/entities/venues/walt-whitman-shops-huntington-station-logo.webp",
+    "alt": "Walt Whitman Shops, A Simon Mall logo in black capital letters under a linked-loop symbol",
+    "credit": "Logo: Walt Whitman Shops",
+    "creditUrl": "https://www.simon.com/mall/walt-whitman-shops",
+    "imageSource": "https://assets.simon.com/malllogosv2/106/106.svg"
+  },
+  "evidence": [
+    {
+      "url": "https://www.simon.com/mall/walt-whitman-shops/about",
+      "note": "Mall's own Simon page: 160 Walt Whitman Rd, Huntington Station, NY 11746; Mall Management (631) 271-1746, Shopping Line (631) 271-1741, Security (631) 697-9137; Suffolk County Transit and HART buses stop there."
+    },
+    {
+      "url": "https://www.simon.com/mall/walt-whitman-shops/hours",
+      "note": "Regular hours: Monday-Thursday 11 AM-8 PM, Friday-Saturday 10 AM-8 PM, Sunday 11 AM-6 PM."
+    },
+    {
+      "url": "https://www.simon.com/mall/walt-whitman-shops",
+      "note": "Home page calls it 'The North Shore's Favorite Shopping Destination. 85+ Stores' and links its Facebook and Instagram pages."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: simon.com."
 }

@@ -1,5 +1,57 @@
 {
   "name": "Renee D'Angelo",
   "type": "band",
-  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Solo singer-guitarist, not a band (our type says band). Booking is through the contact form on her one-page site (no public email or phone), so bookingUrl was left empty; the site also has a Weddings section. Her site's TikTok icon links only to tiktok.com (no handle), so no TikTok recorded. YouTube link on the site is a YouTube Music channel; recorded as the matching youtube.com channel URL. No logo.",
+  "website": "https://www.musicbyrenee.com/",
+  "facebookUrl": "https://www.facebook.com/reneedangelomusic/",
+  "instagramUrl": "https://www.instagram.com/reneedangelomusic/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCk0hCmccanZ__1vUJNzBCZw",
+  "spotifyUrl": "https://open.spotify.com/artist/1cDD8fy3tMJFLyHNzsZjJk",
+  "genres": [
+    "country",
+    "country pop",
+    "acoustic covers"
+  ],
+  "description": "Long Island country singer, songwriter and guitarist. She plays her own songs plus covers from many styles and decades at restaurants, vineyards, breweries and country bars, and also sings at weddings.",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/renee-dangelo-1.webp",
+      "alt": "Renee D'Angelo singing into a microphone and playing an acoustic guitar outdoors in front of green trees",
+      "credit": "Photo: Renee D'Angelo (website)",
+      "creditUrl": "https://www.musicbyrenee.com/",
+      "imageSource": "https://static.wixstatic.com/media/5a7c3e_1a4a22d226cb4d6ebe210def24622155~mv2.png",
+      "focus": "45% 25%"
+    },
+    {
+      "image": "../../assets/entities/performers/renee-dangelo-2.webp",
+      "alt": "Promo photo of Renee D'Angelo holding a vintage microphone in front of sparkling gold lights",
+      "credit": "Photo: Renee D'Angelo (website)",
+      "creditUrl": "https://www.musicbyrenee.com/",
+      "imageSource": "https://static.wixstatic.com/media/5a7c3e_9115532df87d4bc3b5e72953aabf7de3~mv2.jpg",
+      "focus": "45% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/renee-dangelo-3.webp",
+      "alt": "Renee D'Angelo smiling with her acoustic guitar at a microphone in a cozy room with wine bottles on shelves",
+      "credit": "Photo: Renee D'Angelo (website)",
+      "creditUrl": "https://www.musicbyrenee.com/",
+      "imageSource": "https://static.wixstatic.com/media/5a7c3e_fbcab4ac43384306aba7fda2424afcb3~mv2.png/v1/fill/w_1240,h_2288,al_c,q_90,enc_jpg/5a7c3e_fbcab4ac43384306aba7fda2424afcb3~mv2.jpg",
+      "focus": "50% 28%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://daisysli.com/event/renee-dangelo-3/",
+      "note": "Daisy's Nashville Lounge lists Renee D'Angelo taking the stage at 6 PM for \"Smashville Thursday\"."
+    },
+    {
+      "url": "https://www.musicbyrenee.com/",
+      "note": "Her own site: singer, songwriter and guitarist from Long Island; crowned My Country 96.1 Next Big Country Star; plays restaurants, vineyards, breweries and weddings; links her social pages."
+    },
+    {
+      "url": "https://patch.com/new-york/longisland/long-island-s-own-country-queen-just-took-wild-left-turn",
+      "note": "Patch article calls her Long Island's own country singer and covers her pop-leaning new single."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: daisysli.com, musicbyrenee.com, patch.com."
 }

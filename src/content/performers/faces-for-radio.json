@@ -36,6 +36,30 @@
     "80s, 90s and 2000s hits"
   ],
   "instagramUrl": "https://www.instagram.com/facesforradionyc/",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Instagram handle taken from the band's Linktree title (@FacesForRadioNYC); no official website found. Nutty Irishman listing not checked directly.",
-  "youtubeUrl": "https://www.youtube.com/@FacesForRadioBand"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Instagram handle taken from the band's Linktree title (@FacesForRadioNYC); no official website found. Nutty Irishman listing not checked directly.\n\nDirectory research 2026-10-04: Current Instagram and YouTube kept (Instagram handle is the title of the band's Linktree, linktr.ee/facesforradionyc; Linktree itself is blocked by robots.txt, so its other links could not be checked). Added The Bash profile as the booking link; a GigSalad profile also seems to exist (gigsalad.com/faces_for_radio_washington) but was blocked by a bot check, so not recorded. A Facebook page at facebook.com/facesforradionyc was suggested by a search summary but not verified, so not recorded. No official website. The Bash photos (uploaded by the band) could not be downloaded (HTTP 403), so no images. Current description is fine.",
+  "youtubeUrl": "https://www.youtube.com/@FacesForRadioBand",
+  "bookingUrl": "https://www.thebash.com/cover-band/facesforradio",
+  "evidence": [
+    {
+      "url": "https://www.thebash.com/cover-band/facesforradio",
+      "note": "The Bash booking profile: NYC party band (member since 2021) playing 60s-to-today hits, focused on 80s, 90s, 2000s and current pop-rock; says they play NYC, the Hamptons and the Jersey Shore and bring their own sound and lights."
+    },
+    {
+      "url": "https://outonthetownli.com/event/%F0%9F%8E%B8%F0%9F%94%A5-faces-for-radio-is-live-at-the-nutty-irishman-%F0%9F%94%A5%F0%9F%8E%B8/",
+      "note": "Long Island events listing: Faces For Radio live at The Nutty Irishman, Farmingdale, Sat Oct 3, 2026, 7-10 PM."
+    },
+    {
+      "url": "https://concerts50.com/show/faces-for-radio-in-amagansett-tickets-aug-29-2026",
+      "note": "Ticket listing: Faces for Radio at The Stephen Talkhouse, Amagansett, Aug 29, 2026."
+    },
+    {
+      "url": "https://www.youtube.com/@FacesForRadioBand",
+      "note": "YouTube channel FacesForRadioBand (re-checked; page loads)."
+    },
+    {
+      "url": "https://linktr.ee/facesforradionyc",
+      "note": "Shows the Instagram page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thebash.com, outonthetownli.com, concerts50.com, youtube.com."
 }

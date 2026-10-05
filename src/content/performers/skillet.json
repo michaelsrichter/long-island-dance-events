@@ -27,7 +27,56 @@
     "Christian rock"
   ],
   "instagramUrl": "https://www.instagram.com/skilletmusic",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Confirmed the national band on tour, not a local cover band. Facebook URL not verified, so omitted.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Confirmed the national band on tour, not a local cover band. Facebook URL not verified, so omitted.\n\nDirectory research 2026-10-04: Nationally touring band, not a local act; current description is accurate. Facebook is now verified (linked from skillet.com). Booking is through agencies listed on the contact page (named agents' emails not copied). Logo is white on transparent, so it needs a dark background. The Oct 4 Huntington show is today (2026-10-04), so this entity will have no upcoming events after tonight.",
   "website": "https://www.skillet.com/",
-  "youtubeUrl": "https://www.youtube.com/@skilletband"
+  "youtubeUrl": "https://www.youtube.com/@skilletband",
+  "facebookUrl": "https://www.facebook.com/skillet",
+  "tiktokUrl": "https://www.tiktok.com/@skilletmusic",
+  "xUrl": "https://x.com/skilletmusic",
+  "spotifyUrl": "https://open.spotify.com/artist/49bzE5vRBRIota4qeHtQM8",
+  "bookingUrl": "https://www.skillet.com/contact",
+  "logo": {
+    "image": "../../assets/entities/performers/skillet-logo.webp",
+    "alt": "Skillet logo: the band name in white, sharp angular capital letters (on a transparent background, needs a dark backdrop)",
+    "credit": "Logo: Skillet",
+    "creditUrl": "https://www.skillet.com/home",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/669fdf5780feab1c02fe8d62/9abd42d3-a86b-4539-823a-ffd8b889d421/SkilletLogo.png?format=1500w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/skillet-1.webp",
+      "alt": "Dark black-and-white promo photo of the four members of Skillet sitting together in a beam of light",
+      "credit": "Photo: Skillet (website)",
+      "creditUrl": "https://www.skillet.com/home",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/669fdf5780feab1c02fe8d62/b84bc37d-047a-4297-a550-e38c794fd645/skillet_back_photo.jpg?format=2500w",
+      "focus": "35% 55%"
+    },
+    {
+      "image": "../../assets/entities/performers/skillet-2.webp",
+      "alt": "Wide black-and-white promo image of the four members of Skillet as silhouettes against bright backlights",
+      "credit": "Photo: Skillet (website)",
+      "creditUrl": "https://www.skillet.com/home",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/669fdf5780feab1c02fe8d62/65bfcc7e-35c1-431c-8b90-eacc309ac24b/GridPhoto.jpg?format=2500w",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.skillet.com/shows",
+      "note": "Official tour page lists Oct 4, 2026, Huntington NY, on the \"Comatose 20 Years, Still Screaming Tour\" (The Paramount)."
+    },
+    {
+      "url": "https://www.skillet.com/home",
+      "note": "Official site links Facebook (facebook.com/skillet), X, Instagram, YouTube, Spotify, Apple Music and TikTok."
+    },
+    {
+      "url": "https://www.skillet.com/contact",
+      "note": "Contact page lists management, general booking (Platform Artists), CCM booking and press contacts."
+    },
+    {
+      "url": "https://www.skillet.com/",
+      "note": "Shows the website."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: skillet.com."
 }

@@ -25,16 +25,51 @@
   },
   "description": "The historic public library of Roslyn village, the oldest in Nassau County, which runs free programs and afternoon concerts for the community.",
   "facebookUrl": "https://www.facebook.com/bryantlibrary/",
-  "factsSource": "Checked October 3, 2026. Source: bryantlibrary.libcal.com.",
+  "factsSource": "Checked October 4, 2026. Sources: web.archive.org, bryantlibrary.org, bryantlibrary.libcal.com, en.wikipedia.org.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Bryant+Library+2+Paper+Mill+Rd+Roslyn+NY+11576",
   "kind": "library",
   "phone": "(516) 621-2240",
   "postalCode": "11576",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Free event; registration through the library calendar. ZIP 11576 is the standard Roslyn ZIP (the Bing listing gave no ZIP).",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Free event; registration through the library calendar. ZIP 11576 is the standard Roslyn ZIP (the Bing listing gave no ZIP).\n\nDirectory research 2026-10-04: bryantlibrary.org sits behind a Cloudflare bot check (HTTP 403 for scripts), so its pages and the logo file were read from Internet Archive copies (Feb-Mar 2026); the logo SVG is the library's own site icon. The footer email info@bryantlibrary.org is hidden by Cloudflare email protection and was decoded from the archived page; LibCal also lists publicrelations@bryantlibrary.org. The site links Facebook as /pages/The-Bryant-Library/91630034807; current data has facebook.com/bryantlibrary/ (also used by Bing), likely the same page but not confirmed, so the site-linked URL is given. No photos: none of the library building or concert room were found on the library's own pages, and map/review photos are not allowed. Bing also lists a separate Roberta Balfus Book Store at 1 Paper Mill Rd (library's used-book shop).",
   "state": "NY",
   "town": "Roslyn",
   "website": "https://www.bryantlibrary.org/",
   "latitude": 40.797044,
   "longitude": -73.648624,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/bryantlibrary/",
+  "youtubeUrl": "https://www.youtube.com/channel/UC9dwx_gkiSikrj6WhVXzwCg",
+  "tiktokUrl": "https://www.tiktok.com/@bryantlibrary",
+  "xUrl": "https://x.com/bryantlibrary",
+  "email": "info@bryantlibrary.org",
+  "hours": "Mon-Tue 9 AM-8 PM; Wed 10 AM-8 PM; Thu-Fri 9 AM-8 PM; Sat 9 AM-5 PM; Sun 1 PM-5 PM (Sundays Oct 4, 2026-May 2, 2027 only)",
+  "logo": {
+    "image": "../../assets/entities/venues/bryant-library-roslyn-logo.webp",
+    "alt": "Green line drawing of the Bryant Library building in Roslyn, with its cupola, arched windows and columned entrance among trees",
+    "credit": "Logo: The Bryant Library",
+    "creditUrl": "https://www.bryantlibrary.org/",
+    "imageSource": "https://web.archive.org/web/2026id_/https://bryantlibrary.org/wp-content/uploads/2024/04/Bryant-Logo-updated-bldg.svg"
+  },
+  "evidence": [
+    {
+      "url": "https://web.archive.org/web/20260222153109/https://bryantlibrary.org/",
+      "note": "Library's own home page (archived Feb 2026, live site blocks automated visits): 2 Paper Mill Rd, Roslyn, NY 11576, 516-621-2240, links to Facebook, Instagram, X, TikTok and YouTube."
+    },
+    {
+      "url": "https://bryantlibrary.org/library-hours-and-holiday-schedules/",
+      "note": "Hours page (read via a March 2026 archive copy): Mon-Fri mostly 9 AM-8 PM (Wed from 10 AM), Sat 9-5, Sun 1-5, and a note that Sundays are open Oct 4, 2026-May 2, 2027."
+    },
+    {
+      "url": "https://bryantlibrary.libcal.com/",
+      "note": "Library's LibCal event calendar, used for program registration; its location record lists publicrelations@bryantlibrary.org as a contact."
+    },
+    {
+      "url": "https://www.bryantlibrary.org/",
+      "note": "Shows the website."
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/The_Bryant_Library",
+      "note": "Shows the county."
+    }
+  ]
 }

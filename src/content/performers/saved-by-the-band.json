@@ -1,5 +1,29 @@
 {
   "name": "Saved by the Band",
   "type": "band",
-  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Medium confidence: the Facebook page was matched by name, its \"ny\" handle and a 90s/2000s party-band description; it does not name Long Island towns in the public part. The website it lists (savedbythe.band) returned 403 Forbidden when we checked, so it is not recorded. A YouTube channel @SavedbytheBandny (2 subscribers, no description) likely belongs to the same band but was not confirmed. Other bands with this name exist (an Alanis Morissette/\"lady jams\" show at facebook.com/savedbytheband, a Los Angeles 90s band, and Instagram @_savedbytheband_ with an unconfirmed location) and should not be linked. Our record says it was auto-added from Daisy's Miller Place calendar, but the event page is for Daisy's Patchogue. No logo or photos (Facebook images need login).",
+  "facebookUrl": "https://www.facebook.com/savedbythebandny/",
+  "genres": [
+    "90s and 2000s covers",
+    "pop",
+    "rock",
+    "R&B",
+    "dance hits"
+  ],
+  "description": "A New York cover band that plays 90s and 2000s pop, rock, R&B and dance hits as a throwback party. It plays Long Island bars such as Daisy's in Patchogue.",
+  "evidence": [
+    {
+      "url": "https://daisysli.com/event/saved-by-the-band/",
+      "note": "Daisy's in Patchogue lists Saved by the Band for its American Saturday Nights on October 10, 7 PM, followed by a country DJ."
+    },
+    {
+      "url": "https://www.facebook.com/savedbythebandny/",
+      "note": "Public Facebook page \"Saved by the Band\" (handle savedbythebandny, musician/band) describes a 90s and 2000s throwback party band playing pop, rock, R&B and dance hits; it lists the site savedbythe.band."
+    },
+    {
+      "url": "https://www.liblogger.com/events/saved-by-the-band-live",
+      "note": "A Long Island events guide lists \"Saved By the Band live\" in Franklin Square on April 17, 2026."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: daisysli.com, facebook.com, liblogger.com."
 }

@@ -37,16 +37,45 @@
   },
   "description": "A live music club in downtown Patchogue with a stage, a big bar, table seating and standing room. It books tribute and rock bands on weekends and runs a weekly country night.",
   "facebookUrl": "https://www.facebook.com/89northmusic/",
-  "factsSource": "Checked October 3, 2026. Source: 89northmusic.com.",
+  "factsSource": "Checked October 4, 2026. Source: 89northmusic.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=89+North+Music+Venue%2C+89+N+Ocean+Ave%2C+Patchogue%2C+NY+11772",
   "kind": "concert-hall",
   "phone": "(631) 730-8992",
   "postalCode": "11772",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Oct 3 is a metal tribute night (Slayer and Metallica tributes), so expect a standing rock crowd, not social dancing. A review summary says the venue discourages moshing.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Oct 3 is a metal tribute night (Slayer and Metallica tributes), so expect a standing rock crowd, not social dancing. A review summary says the venue discourages moshing.\n\nDirectory research 2026-10-04: No usable venue photos: the site's photos are either a text-heavy private-events flyer, very short banner strips (about 1068x210, 3 photos side by side) or a blurry phone photo, so we skipped them. Facebook page photos need a login. The site does not publish regular opening hours (open on show nights); a Bing map listing shows Wed-Thu 6 PM-12 AM and Fri-Sat 7 PM-2 AM, which we did not record. Bands apply at https://89northmusic.com/band-booking-contact/ (booking@89northmusicvenue.com) and private events (events@89northmusicvenue.com). The X link is from the site footer; x.com blocks automated checks, so it was not opened. Current description still fits.",
   "state": "NY",
   "town": "Patchogue",
   "website": "https://89northmusic.com/",
   "latitude": 40.76657,
   "longitude": -73.015012,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/89northmusic/",
+  "youtubeUrl": "https://www.youtube.com/@89NorthMusicVenue",
+  "xUrl": "https://x.com/89northmusic",
+  "email": "info@89northmusicvenue.com",
+  "logo": {
+    "image": "../../assets/entities/venues/89-north-music-venue-patchogue-logo.webp",
+    "alt": "89 North logo: a red star with the number 89 next to the words North, Live Music & Events, on black",
+    "credit": "Logo: 89 North Music Venue",
+    "creditUrl": "https://89northmusic.com/",
+    "imageSource": "https://89northmusic.com/wp-content/uploads/2025/11/Logo2025.jpg"
+  },
+  "evidence": [
+    {
+      "url": "https://89northmusic.com/contact-us/",
+      "note": "Venue's contact page gives 89 North Ocean Avenue, Patchogue, NY 11772, the phone 631-730-8992 and a general inquiries email (info@); booking and private events have their own addresses."
+    },
+    {
+      "url": "https://89northmusic.com/",
+      "note": "Home page footer links to the venue's Facebook, Instagram, X (Twitter) and YouTube pages and lists upcoming shows, including a weekly country Wednesday."
+    },
+    {
+      "url": "https://89northmusic.com/about-us/",
+      "note": "About page describes a live music club steps from Main Street and a short walk from the Patchogue LIRR station, with a full stage, sound and lights."
+    },
+    {
+      "url": "https://89northmusic.com/private-events/",
+      "note": "Private events flyer lists a 400-person capacity and two large bars."
+    }
+  ]
 }

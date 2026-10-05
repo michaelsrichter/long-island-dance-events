@@ -12,5 +12,60 @@
   "instagramUrl": "https://www.instagram.com/thestudiobyhillstreet/",
   "phone": "(631) 377-3087",
   "description": "Adult ballroom and Latin studio in Southampton Village with group classes, private lessons, kids classes and wedding dance prep.",
-  "reviewNotes": "Instagram handle is from the studio's press announcement and event listings; the Instagram page itself could not be opened (blocked)."
+  "reviewNotes": "Instagram handle is from the studio's press announcement and event listings; the Instagram page itself could not be opened (blocked).\n\nDirectory research 2026-10-04: Studio shares the Hill Street Boxing building (33 Hill St). The website FAQ once gives (631) 377-7087 for the front desk, but every other mention (header, contact page, classes page) says (631) 377-3087, so 377-7087 looks like a typo. No opening hours published (booking is through MindBody). Website calls itself adult-focused, but a Sept 2026 Patch listing confirms a kids program, so the current description stands. No Facebook page found. Logo is the horizontal black header version; a stacked square version also exists at /wp-content/uploads/2025/07/Asset-1@4x.png.",
+  "address": "33 Hill St",
+  "postalCode": "11968",
+  "county": "Suffolk",
+  "logo": {
+    "image": "../../assets/entities/organizers/the-studio-by-hill-street-logo.webp",
+    "alt": "The Studio, Southampton NY logo: a black silhouette of a ballroom couple next to the words THE STUDIO",
+    "credit": "Logo: The Studio by Hill Street",
+    "creditUrl": "https://thestudiobyhillstreet.com/",
+    "imageSource": "https://thestudiobyhillstreet.com/wp-content/uploads/2025/07/Asset-3@4x.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/organizers/the-studio-by-hill-street-1.webp",
+      "alt": "Couples practicing partner dancing on a light wood floor in a studio with black walls, mirrors and red neon signs",
+      "credit": "Photo: The Studio by Hill Street (website)",
+      "creditUrl": "https://thestudiobyhillstreet.com/ballroom-dance-classes/",
+      "imageSource": "https://thestudiobyhillstreet.com/wp-content/uploads/2025/09/DSC07104.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/organizers/the-studio-by-hill-street-2.webp",
+      "alt": "Adults in a group dance class following along with the steps in the studio",
+      "credit": "Photo: The Studio by Hill Street (website)",
+      "creditUrl": "https://thestudiobyhillstreet.com/ballroom-dance-classes/",
+      "imageSource": "https://thestudiobyhillstreet.com/wp-content/uploads/2025/09/DSC07232.jpg",
+      "focus": "50% 30%"
+    },
+    {
+      "image": "../../assets/entities/organizers/the-studio-by-hill-street-3.webp",
+      "alt": "A man in a light blue suit and a woman in a red and black dress dancing hand in hand on the studio floor",
+      "credit": "Photo: The Studio by Hill Street (website)",
+      "creditUrl": "https://thestudiobyhillstreet.com/about-the-studio-by-hill-street/",
+      "imageSource": "https://thestudiobyhillstreet.com/wp-content/uploads/2025/09/Monito-Heather.jpg",
+      "focus": "50% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://thestudiobyhillstreet.com/",
+      "note": "Own site: adult ballroom and Latin studio at 33 Hill St, Southampton, NY 11968; first group class free; call (631) 377-3087; booking online and via the MindBody app."
+    },
+    {
+      "url": "https://thestudiobyhillstreet.com/contact-the-studio/",
+      "note": "Contact page lists info@thestudiobyhillstreet.com, (631) 377.3087 and the Instagram account."
+    },
+    {
+      "url": "https://jameslanepost.com/dance-comes-to-the-hamptons-grand-opening-of-the-studio-by-hill-street-in-southampton/08/11/2025/Hamptons-News-Happenings",
+      "note": "Local press on the 2025 grand opening: studio is inside the Hill Street Boxing facility at 33 Hill Street."
+    },
+    {
+      "url": "https://patch.com/new-york/southampton/calendar/event/20260915/98f932cd-2773-42f9-aeeb-e4a4e4e5c52a/new-kids-ballroom-latin-dance-semester-starts-tuesday-september-15",
+      "note": "Patch listing for a fall 2026 kids ballroom and Latin semester at the studio, so the kids classes in our description are still current."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thestudiobyhillstreet.com, jameslanepost.com, patch.com."
 }

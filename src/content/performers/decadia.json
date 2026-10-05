@@ -1,5 +1,74 @@
 {
   "name": "Decadia",
   "type": "band",
-  "reviewNotes": "Added automatically from Decadia - upcoming shows. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Decadia - upcoming shows. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Site also links a second Facebook URL (facebook.com/decadia.live); the JSON-LD on the site names facebook.com/decadialive/ as the official page, so that one is recorded. YouTube channel is the one linked from the site (also reachable as @DecadiaNY). Booking is via the site's contact form; the only published email is info@decadialive.com (EPK). The site also promotes a Phil Collins/Genesis tribute ('Follow You Follow Me') by the same musicians. Photos are webp files because the image host served webp.",
+  "website": "https://www.decadialive.com/",
+  "facebookUrl": "https://www.facebook.com/decadialive/",
+  "instagramUrl": "https://www.instagram.com/decadia_live/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCoSB-kkft-7XaWZct8OTFcg",
+  "bookingUrl": "https://www.decadialive.com/contact",
+  "email": "info@decadialive.com",
+  "genres": [
+    "80s hits",
+    "70s and 90s pop and rock",
+    "movie soundtrack songs",
+    "Top 40"
+  ],
+  "description": "An eight-piece New York-area cover band, formed in 2011, with three lead singers. They play dance hits from the '80s along with '70s, '90s, movie-soundtrack and current songs, and also put on a Phil Collins and Genesis tribute show.",
+  "logo": {
+    "image": "../../assets/entities/performers/decadia-logo.webp",
+    "alt": "Decadia logo: the word DECADIA across a large red letter D inside a black ring on a white paint-splash circle",
+    "credit": "Logo: Decadia",
+    "creditUrl": "https://www.decadialive.com/home",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/180448/36096200a2910254013563ec4bf94da86394db38/original/decadia-2020-black-logo.png/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/decadia-1.webp",
+      "alt": "The full Decadia band on a wide stage with colored lasers and smoke jets, singers out front and guitarists on both sides",
+      "credit": "Photo: Decadia (website)",
+      "creditUrl": "https://www.decadialive.com/epk",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/180448/704ea7bc71572fba27da0934890a766e4b88a4fb/original/full-band-fish-eye-2.jpg/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/performers/decadia-2.webp",
+      "alt": "Decadia playing on a big club stage under fans of green laser beams, with the band's logo on the screen behind them",
+      "credit": "Photo: Decadia (website)",
+      "creditUrl": "https://www.decadialive.com/videos-and-photos",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/180448/896c1e17458ef04e5fac33419f272bd34cd70bbd/original/decadia-072.jpg/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 70%"
+    },
+    {
+      "image": "../../assets/entities/performers/decadia-3.webp",
+      "alt": "Decadia's saxophone player playing a gold tenor sax on stage under blue light and green lasers",
+      "credit": "Photo: Decadia (website)",
+      "creditUrl": "https://www.decadialive.com/videos-and-photos",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/180448/aeccbaf8e4ae801c211892624ad04ac3eb6fc211/original/decadia-032.jpg/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.decadialive.com/home",
+      "note": "Band site lists upcoming shows at Salt Shack (Babylon), Live on the Porch (Smithtown), Mulcahy's (Wantagh) and 89 North (Patchogue), matching our listings."
+    },
+    {
+      "url": "https://www.decadialive.com/bio",
+      "note": "Bio: started as an '80s cover band, now an 8-piece with three singers covering '70s to current hits; voted a top Long Island band by Digital Journal."
+    },
+    {
+      "url": "https://www.decadialive.com/epk",
+      "note": "EPK says the band formed in 2011, plays the New York area, offers a Blockbusters movie-soundtrack show, and gives info@decadialive.com for inquiries."
+    },
+    {
+      "url": "https://www.youtube.com/@DecadiaNY",
+      "note": "YouTube channel 'Decadia Music' (@DecadiaNY) describes a New York band playing '80s, '90s and current songs and points to decadialive.com."
+    },
+    {
+      "url": "https://www.decadialive.com/contact",
+      "note": "Shows the booking page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: decadialive.com, youtube.com."
 }

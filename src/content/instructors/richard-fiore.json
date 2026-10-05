@@ -7,5 +7,26 @@
   "affiliatedOrganizerIds": [
     "adelphi-university"
   ],
-  "reviewNotes": "No personal website found. He also writes the newsletter's technique column."
+  "reviewNotes": "No personal website found. He also writes the newsletter's technique column.\n\nDirectory research 2026-10-04: No personal website or social page found; the website field is Adelphi's course page, which is the only official page naming him (it is also the adelphi-university organizer's website). His own listing in The Dance Calendar's Find an Instructor directory gives a lesson phone and a Yahoo email; not recorded because the brief limits teacher contacts to their own website or business page - owner may choose to add them. No photo of him was found on Adelphi's site.",
+  "website": "https://www.adelphi.edu/ce-course/workshop/ballroom-dancing/",
+  "description": "Richard Fiore teaches the Friday evening social and ballroom dance course at Adelphi University in Garden City, covering dances such as foxtrot, waltz, rumba, cha-cha, tango, swing and hustle. He is licensed by the Imperial Society of Teachers of Dancing and writes a dance technique column for The Dance Calendar.",
+  "evidence": [
+    {
+      "url": "https://www.adelphi.edu/ce-course/workshop/ballroom-dancing/",
+      "note": "Adelphi's Social and Ballroom Dancing course page names Richard Fiore (Dual Licentiate, Imperial Society of Teachers of Dancing) as instructor; fall 2026 classes run Fridays 7-8:30 PM in Woodruff Hall, Room 304."
+    },
+    {
+      "url": "https://www.adelphi.edu/news/fall-2018-noncredit-ballroom-dancing-class/",
+      "note": "Adelphi news post shows he has taught the same non-credit ballroom course since at least 2018."
+    },
+    {
+      "url": "https://www.thedancecalendar.com/articles",
+      "note": "The Dance Calendar's articles page describes Richard Fiore as a professional dance educator and trainer who writes its technique articles."
+    },
+    {
+      "url": "https://www.thedancecalendar.com/find-an-instructor",
+      "note": "He has an instructor listing (ISTD Licentiate in Latin, ballroom and tango) offering syllabus-based ballroom lessons, with a phone and Yahoo email."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: adelphi.edu, thedancecalendar.com."
 }

@@ -5,8 +5,24 @@
     "Ballroom",
     "Latin"
   ],
-  "reviewNotes": "Added because the venue calendar names her as the DJ for \"Hosted by Valerie\" dances; no website found.",
+  "reviewNotes": "Added because the venue calendar names her as the DJ for \"Hosted by Valerie\" dances; no website found.\n\nDirectory research 2026-10-04: Only a first name is published; no website, business Facebook/Instagram or DJ booking page was found. Her own ad in The Dance Calendar (Oct 2026, ad page 4) and the venue page give reservation phone numbers (one marked as a cell) and a personal-style Yahoo email for her dances; these look like personal lines, so they are NOT recorded here. If the owner wants a reservation contact, it may belong on the Waterfalls dance event/organizer entry rather than this DJ profile. The same Dance Calendar page 4 ad block mentions afternoon 'Autumn Dansants' and a Halloween Bash next to her contact line, but the PDF layout mixes several ads, so it is unclear whether those are hers; not used.",
   "aliases": [
     "Hosted by Valerie"
-  ]
+  ],
+  "description": "A DJ and dance host who plays ballroom and Latin dance music for the Saturday night social dances in the clubhouse ballroom at The Waterfalls in Lake Ronkonkoma.",
+  "evidence": [
+    {
+      "url": "https://waterfallsapartments.com/ballroom-dancing/",
+      "note": "The Waterfalls (55+ community, 400 Cassata Rd, Lake Ronkonkoma) lists 'DJ Valerie' for its ballroom dancing every 2nd and 4th Saturday, 7-11 PM, in the clubhouse ballroom."
+    },
+    {
+      "url": "https://waterfallsapartments.com/event-calendar/",
+      "note": "Venue event calendar shows Ballroom Dancing with DJ Valerie on Oct 10 and Oct 24, 2026."
+    },
+    {
+      "url": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+      "note": "October 2026 Dance Calendar lists 'Ballroom & Latin Dancing at The Waterfalls Ballroom ... Hosted by Valerie', 7-11 PM, $20, with her ad on page 4."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: waterfallsapartments.com, thedancecalendar.com."
 }

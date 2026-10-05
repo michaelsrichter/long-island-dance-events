@@ -32,16 +32,61 @@
     "policy": "encouraged"
   },
   "description": "An outdoor tiki bar and restaurant on the docks of the Oakdale Yacht marina, with a band stage, waterfront seating and live music most weekends in season.",
-  "factsSource": "Checked October 3, 2026. Source: thespotoakdale.com.",
+  "factsSource": "Checked October 4, 2026. Source: thespotoakdale.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Spot+at+Oakdale+Yacht+520+Shore+Dr+Oakdale+NY+11769",
   "kind": "bar",
   "phone": "(631) 319-9993",
   "postalCode": "11769",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'Oaksale' is a typo for Oakdale. The Spot sits at the Oakdale Yacht marina (Oakdale Yacht Club); Ira's List has pages /oakdale-yacht-club and /yacht-club-mondays-oakdale-yacht for it. Bing lists 500 Shore Dr; the official site says 520 Shore Dr. Ira gave no time; the venue lists 3-7 pm. No official Facebook URL confirmed. Kind could also be 'marina-club'.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'Oaksale' is a typo for Oakdale. The Spot sits at the Oakdale Yacht marina (Oakdale Yacht Club); Ira's List has pages /oakdale-yacht-club and /yacht-club-mondays-oakdale-yacht for it. Bing lists 500 Shore Dr; the official site says 520 Shore Dr. Ira gave no time; the venue lists 3-7 pm. No official Facebook URL confirmed. Kind could also be 'marina-club'.\n\nDirectory research 2026-10-04: Facebook is now confirmed: the venue's own site links facebook.com/thespotoyc (and Instagram @thespotoyc). County (Suffolk) follows from the Oakdale 11769 address (Town of Islip). Hours are seasonal and not on the venue's site; aggregators list Fri 4 PM-12 AM and Sat-Sun 12 PM-12 AM, closed Mon-Thu, but that was not recorded. No public email (the contact form only). The dance photo shows an adult crowd under the tent; please check before use if you prefer photos without recognizable faces. Some photo file names on the site look like old Facebook uploads, but they are hosted on the venue's own Squarespace site.",
   "state": "NY",
   "town": "Oakdale",
   "website": "https://www.thespotoakdale.com/",
   "latitude": 40.728728,
   "longitude": -73.147509,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/thespotoyc/",
+  "instagramUrl": "https://www.instagram.com/thespotoyc/",
+  "logo": {
+    "image": "../../assets/entities/venues/the-spot-at-oakdale-yacht-oakdale-logo.webp",
+    "alt": "The Spot at Oakdale Yacht round badge logo: a sport-fishing boat and palm trees against an orange sunset, with THE SPOT in cream letters on navy",
+    "credit": "Logo: The Spot at Oakdale Yacht",
+    "creditUrl": "https://www.thespotoakdale.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/6806a59600ea157be4e7adfb/05539477-cab9-4015-8945-a924f1d5aa86/TheSpotOakdaleYacht_LogomarkFullColor-01.png?format=1500w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/the-spot-at-oakdale-yacht-oakdale-1.webp",
+      "alt": "The Spot's thatched tiki bar with its blue sign, bar stools and guests ordering at the counter",
+      "credit": "Photo: The Spot at Oakdale Yacht (website)",
+      "creditUrl": "https://www.thespotoakdale.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/6806a59600ea157be4e7adfb/cb8fe226-0124-459d-9716-f1ba6725a32f/A7307472+%281%29.jpg?format=1500w",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-spot-at-oakdale-yacht-oakdale-2.webp",
+      "alt": "The open dock area at The Spot with a white tent, tables and chairs, and the tiki bar beside the marina building",
+      "credit": "Photo: The Spot at Oakdale Yacht (website)",
+      "creditUrl": "https://www.thespotoakdale.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/6806a59600ea157be4e7adfb/adec7343-e7d0-4c01-b98d-7ab0b9cfa333/A7307483.jpg?format=1500w",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-spot-at-oakdale-yacht-oakdale-3.webp",
+      "alt": "A big crowd dancing and cheering under the string-lit tent at The Spot during a night band show",
+      "credit": "Photo: The Spot at Oakdale Yacht (website)",
+      "creditUrl": "https://www.thespotoakdale.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/6806a59600ea157be4e7adfb/31f1586f-88f7-4d4d-ba83-2aa3f45483a2/68430996_2278068455841923_4157992048672112640_n.jpg?format=1500w",
+      "focus": "50% 65%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thespotoakdale.com/",
+      "note": "Venue's own site: 520 Shore Dr, Oakdale, NY 11769, (631) 319-9993; a dockside tiki bar with weekly live music and dancing; links Instagram and Facebook @thespotoyc."
+    },
+    {
+      "url": "https://www.thespotoakdale.com/calendar",
+      "note": "The venue's events page ('What's Happening at The Spot?') repeats the 520 Shore Dr, Oakdale address and phone; the event list itself loads by script."
+    }
+  ]
 }

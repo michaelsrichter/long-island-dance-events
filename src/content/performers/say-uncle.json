@@ -1,5 +1,82 @@
 {
   "name": "Say Uncle",
   "type": "band",
-  "reviewNotes": "Added automatically from Kitty Mulligan's Irish Pub (Bay Shore) - events. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Kitty Mulligan's Irish Pub (Bay Shore) - events. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Website is a free Wix subdomain (grobber1101.wixsite.com/sayuncleband-li); the older Weebly site still exists and points to it. Facebook is a profile-style page id (no vanity name). Instagram handle on the site is 'SayUncle5' (written in lowercase here). A second YouTube channel '@sayunclebandli4236' has older 2019 gig videos; the site links @SayUncle-br8vh. Skipped a site photo that shows party guests up close. Not the same as 'Say Uncle!' on Apple Music (folk/indie album 'Scattered Seeds').",
+  "website": "https://grobber1101.wixsite.com/sayuncleband-li",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=100064616685442",
+  "instagramUrl": "https://www.instagram.com/sayuncle5/",
+  "youtubeUrl": "https://www.youtube.com/@SayUncle-br8vh",
+  "bookingUrl": "https://grobber1101.wixsite.com/sayuncleband-li/contact",
+  "email": "sayuncle5li@gmail.com",
+  "genres": [
+    "rock covers",
+    "pop covers",
+    "classic rock",
+    "party band"
+  ],
+  "description": "Six-piece Long Island cover band, many of them family members, that plays popular rock and pop covers for dancing at bars and parties, from classic rock to 2000s hits like Matchbox 20, Foo Fighters and The Killers.",
+  "logo": {
+    "image": "../../assets/entities/performers/say-uncle-logo.webp",
+    "alt": "Say Uncle logo: the words SAY UNCLE in bold red letters with a yellow outline",
+    "credit": "Logo: Say Uncle",
+    "creditUrl": "https://grobber1101.wixsite.com/sayuncleband-li",
+    "imageSource": "https://static.wixstatic.com/media/d36803_7d975ab837eb40feb26ad8e6a32879c8~mv2.png/v1/fill/w_370,h_432,al_c,q_85/d36803_7d975ab837eb40feb26ad8e6a32879c8~mv2.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/say-uncle-1.webp",
+      "alt": "Say Uncle playing on a rooftop at night with the lit-up Manhattan skyline and the Empire State Building behind them",
+      "credit": "Photo: Say Uncle (website)",
+      "creditUrl": "https://grobber1101.wixsite.com/sayuncleband-li",
+      "imageSource": "https://static.wixstatic.com/media/d36803_2748c33f4bf84074bca63dd548a956e6~mv2.jpg/v1/crop/x_0,y_386,w_4608,h_2685/fill/w_1600,h_932,al_c,q_85/IMG_0074_JPG.jpg",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/performers/say-uncle-2.webp",
+      "alt": "Say Uncle performing in a pub under blue and purple lights, with the band name on the bass drum",
+      "credit": "Photo: Say Uncle (website)",
+      "creditUrl": "https://grobber1101.wixsite.com/sayuncleband-li/photos",
+      "imageSource": "https://static.wixstatic.com/media/d36803_65b990c50ddd4ffd8d74418752ff242d~mv2.jpg/v1/fill/w_960,h_719,al_c,q_85/d36803_65b990c50ddd4ffd8d74418752ff242d~mv2.jpg",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/performers/say-uncle-3.webp",
+      "alt": "Overhead view of the six members of Say Uncle with guitars, drums and keyboards set up in a big room with tall windows",
+      "credit": "Photo: Say Uncle (website)",
+      "creditUrl": "https://grobber1101.wixsite.com/sayuncleband-li/photos",
+      "imageSource": "https://static.wixstatic.com/media/d36803_05a7ea68d77a4d13af8a710bf74192bd~mv2.jpeg/v1/fill/w_972,h_720,al_c,q_85/IMG_3920_JPG-1.jpeg",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+      "note": "Kitty Mulligan's (Bay Shore) lists 'Live Music: Say Uncle!' on Sat Oct 17, 2026, calling them local favorites."
+    },
+    {
+      "url": "https://grobber1101.wixsite.com/sayuncleband-li/about",
+      "note": "Band's current site: Long Island cover band playing popular covers to get people dancing; lists six members; links Facebook, Instagram and YouTube."
+    },
+    {
+      "url": "https://sayuncletheband.weebly.com/",
+      "note": "Older site 'Say Uncle - The Band, Long Island, NY' points visitors to the new Wix site and lists a past Kitty Mulligan's show."
+    },
+    {
+      "url": "https://www.bandmix.com/joechicky/",
+      "note": "BandMix profile: Say Uncle, cover/pop/rock band in Commack, NY, made up of cousins and uncles."
+    },
+    {
+      "url": "https://grobber1101.wixsite.com/sayuncleband-li",
+      "note": "Shows the Facebook page, Instagram page and YouTube channel."
+    },
+    {
+      "url": "https://grobber1101.wixsite.com/sayuncleband-li/contact",
+      "note": "Shows the booking page and email."
+    },
+    {
+      "url": "https://sayuncletheband.weebly.com/song-list.html",
+      "note": "Shows the kind of music."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: kittymulligans.com, grobber1101.wixsite.com, sayuncletheband.weebly.com, bandmix.com."
 }

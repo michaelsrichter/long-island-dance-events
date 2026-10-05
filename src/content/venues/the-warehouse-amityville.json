@@ -34,16 +34,54 @@
   },
   "description": "A live-music club, bar and event space in Amityville village with a raised stage, a 40-foot bar, tiered seating and a kitchen, hosting local cover bands, tribute acts and themed brunches.",
   "facebookUrl": "https://www.facebook.com/thewarehouseli",
-  "factsSource": "Checked October 3, 2026. Source: thewarehouseli.com.",
+  "factsSource": "Checked October 4, 2026. Source: thewarehouseli.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Warehouse+203+Broadway+Amityville+NY+11701",
   "kind": "bar",
   "phone": "(631) 238-1820",
   "postalCode": "11701",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List venue page (/the-warehouse) links to thewarehouseli.com/calendar, so 'Warehouse' is The Warehouse in Amityville, not another business with that name. Gigs this weekend: Taylor Swift Eras Drag Brunch (Sat and Sun) and Serve The Servants / Love Hate Love (Sat night); not checked on the venue calendar. Reviews say reserved tables carry a fee and food/drink minimums.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List venue page (/the-warehouse) links to thewarehouseli.com/calendar, so 'Warehouse' is The Warehouse in Amityville, not another business with that name. Gigs this weekend: Taylor Swift Eras Drag Brunch (Sat and Sun) and Serve The Servants / Love Hate Love (Sat night); not checked on the venue calendar. Reviews say reserved tables carry a fee and food/drink minimums.\n\nDirectory research 2026-10-04: Email whtable@gmail.com is the site's general/private-event address; band booking is 203grille@gmail.com (ATTN: Band Booking). The site does not publish opening hours and Google only shows Sunday 6:30 PM-1 AM, so hours left out (it runs by event calendar). Photo 1 is the site's darkened black-and-white background image of the crowd; it shows the room well but is dim. The second photo is a singer on what looks like the venue's stage (from the site's music section). A white version of the logo is used in the header; we took the dark footer logo. Current description still accurate.",
   "state": "NY",
   "town": "Amityville",
   "website": "https://www.thewarehouseli.com/",
   "latitude": 40.678384,
   "longitude": -73.417374,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/thewarehouseli/",
+  "xUrl": "https://x.com/thewarehouseli",
+  "email": "whtable@gmail.com",
+  "logo": {
+    "image": "../../assets/entities/venues/the-warehouse-amityville-logo.webp",
+    "alt": "The Warehouse logo: bold dark lettering over a vinyl record, with 'Live Music, Events, Craft Kitchen' and 'Amityville NY'",
+    "credit": "Logo: The Warehouse",
+    "creditUrl": "https://www.thewarehouseli.com/",
+    "imageSource": "https://www.thewarehouseli.com/wp-content/uploads/2026/03/Warehouse-logo-footer.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/the-warehouse-amityville-1.webp",
+      "alt": "A packed crowd dancing with hands in the air in front of the stage at The Warehouse, seen from behind the singer (black and white)",
+      "credit": "Photo: The Warehouse (website)",
+      "creditUrl": "https://www.thewarehouseli.com/",
+      "imageSource": "https://www.thewarehouseli.com/wp-content/uploads/2026/01/Warehouse-drowd-background.jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-warehouse-amityville-2.webp",
+      "alt": "A singer with long blond hair sings into a microphone on stage, with a drummer behind her and colored stage lights",
+      "credit": "Photo: The Warehouse (website)",
+      "creditUrl": "https://www.thewarehouseli.com/",
+      "imageSource": "https://www.thewarehouseli.com/wp-content/uploads/2025/12/Lady-Singer.jpg",
+      "focus": "50% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thewarehouseli.com/",
+      "note": "Venue's own site: live music venue, craft kitchen and event space in Amityville village since 2018; 203 Broadway, Amityville, NY 11701; (631) 238-1820; email whtable@gmail.com; band booking via 203grille@gmail.com; links to Facebook,…"
+    },
+    {
+      "url": "https://www.google.com/maps?cid=8421809179399075314",
+      "note": "Google Maps lists The Warehouse (live music venue) at 203 Broadway, Amityville, NY 11701, phone (631) 238-1820, website thewarehouseli.com."
+    }
+  ]
 }

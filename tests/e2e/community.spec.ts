@@ -151,12 +151,11 @@ test.describe('likes and saves on lists and detail pages', () => {
   async function mockReactions(page: import('@playwright/test').Page, { signedIn = true, startCount = 7 } = {}) {
     const state = { liked: new Set<string>(), saved: new Map<string, string | undefined>(), counts: new Map<string, number>() };
     if (signedIn) await page.addInitScript(() => localStorage.setItem('li-account', JSON.stringify({ name: 'Ann B', admin: false })));
-    await page.route('**/community/counts/event.json', async (r) => {
-      // Every event starts with the same count, so the test does not depend on this week's listings.
-      const pages = await (await page.request.get('/community-pages.json')).json();
-      const likes = Object.fromEntries((pages.keys as string[]).filter((k) => k.startsWith('event:')).map((k) => [k.slice(6), startCount]));
-      await r.fulfill({ json: { v: 1, type: 'event', likes } });
-    });
+    // Every event starts with the same count, so the test does not depend on this week's listings. Read the page
+    // list once here: a request made inside the route handler can still be running when the test ends.
+    const pages = await (await page.request.get('/community-pages.json')).json();
+    const startLikes = Object.fromEntries((pages.keys as string[]).filter((k) => k.startsWith('event:')).map((k) => [k.slice(6), startCount]));
+    await page.route('**/community/counts/event.json', (r) => r.fulfill({ json: { v: 1, type: 'event', likes: startLikes } }));
     await page.route('**/community/event/*.json', (r) => r.fulfill({ status: 404, body: '' }));
     await page.route('**/.auth/me', (r) => r.fulfill({ json: { clientPrincipal: signedIn ? { userId: 'u1', userDetails: 'Ann B', userRoles: ['anonymous', 'authenticated', 'member'] } : null } }));
     await page.route('**/.auth/login/**', (r) => r.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>sign in</title><h1>Sign-in page</h1>' }));

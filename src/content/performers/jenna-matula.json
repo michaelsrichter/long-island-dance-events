@@ -1,5 +1,28 @@
 {
   "name": "Jenna Matula",
   "type": "band",
-  "reviewNotes": "Added automatically from 89 North (Patchogue) - music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from 89 North (Patchogue) - music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Jenna Matula is a solo singer, not a band; the type should probably be 'solo'. Matched by her rare name plus the Long Island location (GigSalad profile in Centereach) and the matching style (Broadway/musical-theater songs) in 89 North's show description. I could not open the GigSalad page itself (Cloudflare bot check), so its details come only from search-result summaries; no website, Facebook or Instagram found. No photos or logo recorded (only source would be GigSalad, which I could not load). Search summaries also mention local theater credits (Broadhollow, CMPAC, Theatre Three) - not verified, not recorded.",
+  "bookingUrl": "https://www.gigsalad.com/jenna_matula_centereach",
+  "genres": [
+    "Broadway and show tunes",
+    "pop",
+    "jazz standards",
+    "cabaret"
+  ],
+  "description": "A singer from Centereach, Long Island, who performs Broadway and musical-theater songs, pop and jazz standards, and some of her own acoustic songs in cabaret-style shows that mix music and storytelling.",
+  "evidence": [
+    {
+      "url": "https://89northmusic.com/calendar",
+      "note": "89 North (Patchogue) calendar lists 'Jenna Matula' on Thu, Oct 15, 2026."
+    },
+    {
+      "url": "https://booketing.com/microsite/89northmusicvenue/event/1767/864976/jenna-matula?eventcode=EVE86497600020261015",
+      "note": "89 North ticket page: Thu Oct 15, 7 PM; describes a night of live music and storytelling from Broadway showstoppers to acoustic originals. Tickets $15-$35 plus fees."
+    },
+    {
+      "url": "https://www.gigsalad.com/jenna_matula_centereach",
+      "note": "GigSalad booking profile 'Jenna Matula - Broadway Style Entertainment in Centereach, NY' (seen in search results; the page itself is behind a bot check). Search summary: vocalist blending pop, jazz standards and musical theatre, cabaret…"
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: 89northmusic.com, booketing.com, gigsalad.com."
 }

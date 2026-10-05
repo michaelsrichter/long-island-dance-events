@@ -13,5 +13,63 @@
     "latin-ballroom"
   ],
   "email": "dancefarmingdale@gmail.com",
-  "description": "Farmingdale studio, formerly Dance Obsession, teaching wedding first dances, adult ballroom and Latin, and kids classes since 1986."
+  "description": "Farmingdale studio, formerly Dance Obsession, teaching wedding first dances, adult ballroom and Latin, and kids classes since 1986.",
+  "instagramUrl": "https://www.instagram.com/first_dance_farmingdale/",
+  "address": "18 Hempstead Tpke",
+  "postalCode": "11735",
+  "county": "Nassau",
+  "hours": "Mon 1 PM-6 PM; Tue-Fri 1 PM-9 PM; Sat by appointment",
+  "logo": {
+    "image": "../../assets/entities/organizers/first-dance-studio-logo.webp",
+    "alt": "First Dance site icon: a gold and pink drawing of a dancing couple inside a swirl",
+    "credit": "Logo: First Dance Wedding and Social Dance Studio",
+    "creditUrl": "https://1st-dance.com/",
+    "imageSource": "https://1st-dance.com/wp-content/uploads/2026/07/cropped-favicon.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/organizers/first-dance-studio-1.webp",
+      "alt": "Two adult couples dancing ballroom across a wide studio floor with mirrors along the wall",
+      "credit": "Photo: First Dance Wedding and Social Dance Studio (website)",
+      "creditUrl": "https://1st-dance.com/",
+      "imageSource": "https://1st-dance.com/wp-content/uploads/2026/07/adults.webp",
+      "focus": "40% 45%"
+    },
+    {
+      "image": "../../assets/entities/organizers/first-dance-studio-2.webp",
+      "alt": "The empty studio: a large light wood dance floor, a mirrored wall and a disco ball hanging from the ceiling",
+      "credit": "Photo: First Dance Wedding and Social Dance Studio (website)",
+      "creditUrl": "https://1st-dance.com/",
+      "imageSource": "https://1st-dance.com/wp-content/uploads/2026/07/studio.webp",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/organizers/first-dance-studio-3.webp",
+      "alt": "A couple practicing with an instructor during a private lesson in the bright studio",
+      "credit": "Photo: First Dance Wedding and Social Dance Studio (website)",
+      "creditUrl": "https://1st-dance.com/",
+      "imageSource": "https://1st-dance.com/wp-content/uploads/2026/07/private-lessons.webp",
+      "focus": "55% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://1st-dance.com/contact-us/",
+      "note": "Contact page: 18 Hempstead Tpke, Farmingdale, NY 11735; call (631) 513-8706 or text (877) 611-5114; dancefarmingdale@gmail.com; studio hours Mon 1-6 PM, Tue-Fri 1-9 PM, Sat by appointment."
+    },
+    {
+      "url": "https://1st-dance.com/",
+      "note": "Homepage: established 1986, formerly Dance Obsession; wedding first dances, adult ballroom and Latin, salsa/bachata/hustle/Argentine tango, kids classes, studio rental; $49 intro lesson; links Instagram first_dance_farmingdale."
+    },
+    {
+      "url": "https://www.facebook.com/danceobsessionballroom/menu/",
+      "note": "Older Facebook page 'Dance Obsession Ballroom Studio' at the same 18 Hempstead Tpke address, confirming the former name (not linked from the new site)."
+    },
+    {
+      "url": "https://creativeedgedancestudio.com/dance-classes-near-me/first-dance-wedding-and-social-dance-studio",
+      "note": "Shows the county."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: 1st-dance.com, facebook.com, creativeedgedancestudio.com.",
+  "reviewNotes": "Directory research 2026-10-04: Logo is the site icon (512 px illustration); the site header shows the name as text only. Photos are the studio's own pictures from the homepage cards; other homepage images (wedding hands, outdoor crowd, bride bouquet, kids class) look like stock photos and were skipped. County: Farmingdale village is in Nassau (listing sites also say Nassau County) even though the phone uses a 631 area code. A Facebook page under the old name (facebook.com/danceobsessionballroom) exists at the same address but is not linked from the current site and may be inactive, so it was not recorded. Text line (877) 611-5114 not recorded as the main phone."
 }

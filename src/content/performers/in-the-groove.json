@@ -38,6 +38,50 @@
     "dance hits from the 70s to today"
   ],
   "instagramUrl": "https://www.instagram.com/inthegroove.band/",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Rated dance-band because the band markets itself around dance music; no evidence of partner or hustle dancing. Crowd video not watched.",
-  "website": "https://www.inthegroove.band/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Rated dance-band because the band markets itself around dance music; no evidence of partner or hustle dancing. Crowd video not watched.\n\nDirectory research 2026-10-04: All current links still correct and linked from the band's site. The site lists two booking contacts by first name: Andrew (631) 774-2373 and Tony (631) 848-0285; recorded the first as the band phone. No standalone logo on the site (the logo appears only inside a promo graphic; the apple-touch icon is a 'Find us on Facebook' badge). The YouTube video linked from the site is on a member's personal channel (@AndrewGJustGroovin), so no band YouTube recorded. Skipped two Meet-the-Band photos watermarked 'Corsetti Creative'. Current description is accurate; not replaced.",
+  "website": "https://www.inthegroove.band/",
+  "bookingUrl": "https://www.inthegroove.band/",
+  "email": "inthegroovelive@yahoo.com",
+  "phone": "(631) 774-2373",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/in-the-groove-1.webp",
+      "alt": "Black-and-white photo of In The Groove's three female singers singing together on stage with the drummer behind them",
+      "credit": "Photo: In The Groove (website)",
+      "creditUrl": "https://www.inthegroove.band/meet-the-band-.html",
+      "imageSource": "https://www.inthegroove.band/_Media/img_3596_med_hr-2.jpeg",
+      "focus": "50% 25%"
+    },
+    {
+      "image": "../../assets/entities/performers/in-the-groove-2.webp",
+      "alt": "An In The Groove singer in sunglasses and a white shirt dancing at the microphone on an outdoor waterfront stage, with the band's banner behind him",
+      "credit": "Photo: In The Groove (website)",
+      "creditUrl": "https://www.inthegroove.band/meet-the-band-.html",
+      "imageSource": "https://www.inthegroove.band/_Media/34318296_1813993612243504_7_med_hr-2.jpeg",
+      "focus": "60% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/in-the-groove-3.webp",
+      "alt": "In The Groove's guitarist playing a red electric guitar in front of a glowing orange screen",
+      "credit": "Photo: In The Groove (website)",
+      "creditUrl": "https://www.inthegroove.band/meet-the-band-.html",
+      "imageSource": "https://www.inthegroove.band/_Media/12778895_1510942805881921_6_med_hr-2.jpeg",
+      "focus": "50% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.inthegroove.band/",
+      "note": "Band site: 70s dance music show recreating Earth, Wind & Fire, Brothers Johnson, Donna Summer, Teena Marie, Barry White, plus dance hits from the 70s to today; lists email, two contact phone numbers, Facebook and Instagram."
+    },
+    {
+      "url": "https://www.inthegroove.band/calendar.html",
+      "note": "Schedule lists Sat Oct 4 at Black Pearl @ Danfords Marina, Port Jefferson, 3-8 PM (matches our listing), plus Oakdale Yacht Club, The Warehouse Amityville and Ristegios Patchogue."
+    },
+    {
+      "url": "https://www.inthegroove.band/meet-the-band-.html",
+      "note": "Meet the Band page shows a large lineup: several lead singers, sax, trumpet, bass, drums, keyboards and guitar."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: inthegroove.band."
 }
