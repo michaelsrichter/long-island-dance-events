@@ -56,6 +56,8 @@ const comparable = (e: EventRecord) => JSON.stringify({ ...e, lastSeen: undefine
 
 const minutes = (hhmm: string | null | undefined) => (hhmm ? Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5)) : undefined);
 const DANCE_FAMILY = new Set(['social-dance', 'lesson-party']);
+/** Dances and classes (not concerts): used when two calendars name the same style at the same minute. */
+const DANCE_KINDS = new Set(['social-dance', 'lesson-party', 'class-lesson']);
 const sameFamily = (a: string | undefined, b: string | undefined) => a === b || (DANCE_FAMILY.has(String(a)) && DANCE_FAMILY.has(String(b)));
 
 /**
@@ -89,7 +91,9 @@ export function otherSourceTwin(events: Map<string, EventRecord>, d: Draft, sour
  * The organizer's or band's own calendar wins over a calendar that lists everything (The Dance
  * Calendar, Ira's List). Own-calendar listings match when they are at the same venue, the same kind
  * of event, by the same organizer or with a shared band, and start at about the same time (within 30
- * minutes, or two hours for the same band; a listing without a time matches any time). Works for
+ * minutes, or two hours for the same band; a listing without a time matches any time). A dance or
+ * class in the same style at the exact same start time also matches, whoever the other calendar says
+ * runs it. Works for
  * repeating series too (a monthly PDF and the organizer's Google Calendar both list the Monday
  * classes). `all` says whether those listings cover all, or nearly all, of the draft's upcoming dates
  * (one in ten may be missing); otherwise only the `covered` dates are copies.
@@ -111,13 +115,18 @@ export function ownCalendarTwin(
   let of: string | undefined;
   for (const [id, e] of events) {
     if (e.sourceId === sourceId || !e.sourceId || !isOwnCalendar(e.sourceId) || e.status !== 'active') continue;
-    if (e.venueId !== venueId || !sameFamily(category, e.category)) continue;
+    if (e.venueId !== venueId) continue;
+    const eTime = minutes(parseLocal(String(e.start)).time);
+    // The same dance style at the same place and the exact same start time is the same afternoon, even
+    // when the calendar of everything names the wrong organizer or calls a "lesson and practice" a class.
+    const sameSlot =
+      time !== undefined && eTime === time && DANCE_KINDS.has(String(category)) && DANCE_KINDS.has(String(e.category)) && (d.data.danceStyles ?? []).some((s) => (e.danceStyles ?? []).includes(s));
+    if (!sameSlot && !sameFamily(category, e.category)) continue;
     // The same organizer's classes, or the same band's gig ("Mixed Vibes Band at Daisy's").
     const sameOrganizer = Boolean(organizerId && e.organizerId === organizerId);
     const sameAct = acts.some((p) => (e.performerIds ?? []).includes(p));
-    if (!sameOrganizer && !sameAct) continue;
+    if (!sameOrganizer && !sameAct && !sameSlot) continue;
     // A 2 PM class and an 8 PM social by the same organizer on one day are two events.
-    const eTime = minutes(parseLocal(String(e.start)).time);
     if (time !== undefined && eTime !== undefined && Math.abs(time - eTime) > (sameAct ? 120 : 30)) continue;
     const shared = datesOf(e).filter((x) => days.has(x));
     if (!shared.length) continue;

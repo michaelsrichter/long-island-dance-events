@@ -293,6 +293,19 @@ describe('merging runs', () => {
     const socials = new Map([...social.events].map(([id, e]) => [id, eventSchema.parse(e)]));
     expect(mergeDrafts(socials, cls({ sourceId: 'pdf-calendar', seriesKey: 'pdf', category: 'lesson-party', start: '14:00' }, weeks), opts).stats).toMatchObject({ new: 1, duplicates: 0 });
   });
+  it('treats the same dance style at the same place and minute as one event, even under another organizer', () => {
+    const one = (o: Record<string, unknown>) =>
+      collapse([{ ...cand, oneOff: true, date: '2026-10-11', start: '14:00', venueId: 'example-lodge', danceStyles: ['west-coast-swing'], ...o } as Parameters<typeof collapse>[0][number]]);
+    const own = mergeDrafts(new Map(), one({ sourceId: 'teacher-calendar', seriesKey: 'own', category: 'class-lesson', organizerId: 'practice-studio' }), { sourceId: 'teacher-calendar', today: '2026-10-01' });
+    const stored = new Map([...own.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    const opts = { sourceId: 'pdf-calendar', today: '2026-10-02', allInOne: true, isOwnCalendar: (s: string) => s === 'teacher-calendar' };
+    // The PDF guessed the venue's usual club as organizer and calls it a lesson and practice.
+    const pdf = { sourceId: 'pdf-calendar', seriesKey: 'pdf', category: 'lesson-party', organizerId: 'other-club' };
+    expect(mergeDrafts(stored, one(pdf), opts).stats).toMatchObject({ new: 0, duplicates: 1 });
+    // An hour later, or another style, is another event.
+    expect(mergeDrafts(stored, one({ ...pdf, start: '15:00' }), opts).stats.new).toBe(1);
+    expect(mergeDrafts(stored, one({ ...pdf, danceStyles: ['hustle'] }), opts).stats.new).toBe(1);
+  });
   it('trims, not hides, an older series when the own calendar covers only some of its dates', () => {
     const tuesdays = ['2026-10-06', '2026-10-13', '2026-10-20', '2026-10-27'];
     const series = (o: Record<string, unknown>, dates: string[]) =>
