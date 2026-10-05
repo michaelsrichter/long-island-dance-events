@@ -5,7 +5,7 @@
  */
 import { relativeLabel } from '../lib/relative';
 import type { SavedIndex, SavedIndexDate } from '../lib/saved-index';
-import { loginUrl, whoAmI } from './account-state';
+import { ensureSession, loginUrl, signInFor, takeAction } from './account-state';
 import { toast } from './toast';
 
 type Saved = { key: string; at: string; date?: string };
@@ -51,6 +51,7 @@ if (root) {
   function removeButton(key: string, name: string, li: HTMLLIElement) {
     const b = el('button', 'btn btn--secondary btn--small saved-item__remove');
     b.type = 'button';
+    b.dataset.key = key;
     b.append('Remove', el('span', 'visually-hidden', ` ${name} from saved events`));
     b.addEventListener('click', async () => {
       b.disabled = true;
@@ -59,6 +60,9 @@ if (root) {
         li.remove();
         refresh();
         toast(`Removed ${name} from your saved events.`);
+      } else if (res && res.status === 401) {
+        // The site session ended while the page was open: sign in again and remove it on return.
+        signInFor({ type: 'unsave', key }, '/saved/');
       } else {
         b.disabled = false;
         toast('Something went wrong. Please try again.');
@@ -114,7 +118,7 @@ if (root) {
   }
 
   (async () => {
-    const me = await whoAmI();
+    const me = await ensureSession();
     loading.hidden = true;
     if (!me.signedIn) {
       signedOut.hidden = false;
@@ -145,5 +149,9 @@ if (root) {
     loading.hidden = true;
     if (!mine) toast('Could not load your saved events. Please try again.');
     refresh();
+    // A Remove pressed just before the site session ended: finish it now.
+    for (const s of saved) {
+      if (takeAction(s.key, ['unsave'])) root.querySelector<HTMLButtonElement>(`.saved-item__remove[data-key="${CSS.escape(s.key)}"]`)?.click();
+    }
   })();
 }
