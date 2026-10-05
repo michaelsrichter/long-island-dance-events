@@ -125,6 +125,8 @@ export function entityNameFromSource(name: string): string {
 }
 
 const NON_EVENT = /\b(closed|private (?:party|event)|trivia|bingo|kara[- ]?ok[ei]{1,2}|karoake|karoke|mundy-oke|comedy|comedian|stand-?up|paint (?:and|&) sip|yoga|gift cards?|holiday hours|now hiring|drag (?:brunch|show|bingo|queen)|picture show|screening|film|movie|circus|game show|psychic|medium)\b/i;
+/** A title that starts by saying the event is off ("CANCELLED Byrne Unit-Salt Shack", "Postponed: ..."). */
+export const CANCELLED_TITLE = /^[^A-Za-z0-9]*(?:cancell?ed|postponed|rained out)\b/i;
 /** Food and drink specials: listed only when they also name a band, DJ, live music or dancing. */
 const FOOD_OR_DRINK = /\b(happy hour|brunch|prix fixe|supper|prime rib|steak night|wing night|wings|tacos?|lobster|clam ?bake|buffet|dinner special|drink specials?|wine tasting|beer tasting|tasting menu)\b/i;
 // Never a dance or live-music listing, even when an aggregator's text mentions "music".
@@ -447,7 +449,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     const key = `${normalizeText(f.title)}|${f.start}|${normalizeText(f.locationName ?? '')}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    if (f.cancelled) {
+    if (f.cancelled || CANCELLED_TITLE.test(f.title)) {
       skipped.push({ reason: 'cancelled by the source', ref });
       continue;
     }

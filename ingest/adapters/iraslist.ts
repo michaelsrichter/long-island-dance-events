@@ -25,7 +25,7 @@ import { normalizeText, slugify } from '../lib/text';
 import { cuesFor } from '../lib/cues';
 import { stripTags } from '../lib/html';
 import { parseTimes } from '../lib/times';
-import { cleanVenueName, compactName, findPlaceInText, findVenue, hasStreetAddress, idFrom, titleActOk, tidyTitleAct } from '../lib/structured';
+import { CANCELLED_TITLE, cleanVenueName, compactName, findPlaceInText, findVenue, hasStreetAddress, idFrom, titleActOk, tidyTitleAct } from '../lib/structured';
 import { styleTitle } from '../lib/describe';
 import { foundFromIcs } from './ical';
 import type { Adapter, AdapterContext, Candidate, FetchedDocument, NormalizeResult } from '../lib/types';
@@ -350,6 +350,10 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
   for (const row of rows) {
     const ref = fromFeed ? 'calendar' : `${weekdayOf(row.date)} list`;
     const label = `${row.date} ${row.act} @ ${row.venue || '?'}`;
+    if (CANCELLED_TITLE.test(row.text)) {
+      skipped.push({ reason: 'cancelled by the source', ref: label });
+      continue;
+    }
     if (NOT_MUSIC_RE.test(row.text)) {
       skipped.push({ reason: 'not live music for dancing (theater, comedy or drag show)', ref: label });
       continue;

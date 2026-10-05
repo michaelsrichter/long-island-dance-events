@@ -11,7 +11,7 @@ import { readFileSync } from 'node:fs';
 import { occurrenceDates, validateRRule } from '../../src/lib/rrule';
 import { addDays, zonedToUtc } from '../../src/lib/time';
 import { lookupPlace } from '../lib/registry';
-import { settingsOf, toCandidates, toNewYork, type FoundEvent } from '../lib/structured';
+import { CANCELLED_TITLE, settingsOf, toCandidates, toNewYork, type FoundEvent } from '../lib/structured';
 import type { Adapter, AdapterContext, FetchedDocument, NormalizeResult } from '../lib/types';
 
 export interface IcsProp {
@@ -134,7 +134,7 @@ export function foundFromIcs(raw: string, feedUrl: string, today: string, horizo
       description: first(e, 'DESCRIPTION') ? unescapeIcs(first(e, 'DESCRIPTION')!.value).slice(0, 1500) : undefined,
       ...loc,
       url: urlProp && /^https?:\/\//i.test(urlProp) ? urlProp : undefined,
-      cancelled: /CANCELLED/i.test(first(e, 'STATUS')?.value ?? ''),
+      cancelled: /CANCELLED/i.test(first(e, 'STATUS')?.value ?? '') || CANCELLED_TITLE.test(unescapeIcs(summary.value)),
       ref: 'calendar feed',
       pageUrl: urlProp && /^https?:\/\//i.test(urlProp) ? urlProp : feedUrl,
       notes,

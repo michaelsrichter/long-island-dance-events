@@ -212,4 +212,13 @@ describe("Ira's List calendar feed", () => {
     expect(one('Spooky Bash ft/ DJ Nobody - Example Pub').title).toBe('Dance party with Spooky Bash and DJ Nobody at Example Pub');
     expect(styleLabel(reg, 'Smooth Operators')).toEqual([]);
   });
+  it('skips a gig whose calendar title says it is cancelled or postponed', () => {
+    const ev = (uid: string, summary: string) => `BEGIN:VEVENT\r\nDTSTART;TZID=America/New_York:20310110T170000\r\nDTEND;TZID=America/New_York:20310110T200000\r\nUID:${uid}\r\nSUMMARY:${summary}\r\nLOCATION:Example Pub\\, 1 Fictional Ave\\, Farmingdale\\, NY 11735\\, USA\r\nEND:VEVENT\r\n`;
+    const cal = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\n${ev('c1', 'CANCELLED Sample Party Band-Example Pub')}${ev('c2', '❌ Postponed: DJ Example-Example Pub')}${ev('c3', 'Quiet Tribute Show-Example Pub')}END:VCALENDAR\r\n`;
+    const rows = rowsFromIcs(cal, '2031-01-01', feedUrl, 30);
+    expect(rows.map((r) => r.act)).toEqual(['Quiet Tribute Show']);
+    const r = normalizeIraRows([{ date: '2031-01-10', ...parseEntry('CANCELLED Sample Party Band - Example Pub')! }], { sourceId: 'iraslist', sourceUrl: 'https://example.org/', registry: fixtureRegistry(), outsideVenues: [] });
+    expect(r.candidates).toHaveLength(0);
+    expect(r.skipped.map((s) => s.reason)).toEqual(['cancelled by the source']);
+  });
 });
