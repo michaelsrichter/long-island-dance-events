@@ -163,6 +163,9 @@ Both are free. Create the app with **your own** Google or Facebook account (step
 | `PUBLIC_CLARITY_ID` | `abcd123` | Optional Clarity. |
 | `PUBLIC_ANALYTICS_CONSENT_MODE` | `opt-in` | Consent mode; keep `opt-in` unless reviewed. |
 | `PUBLIC_TELEMETRY_ENDPOINT` | `/api/telemetry` or `off` | Browser telemetry endpoint. |
+| `INDEXNOW_KEY` | 32 letters and digits | Optional. Turns on IndexNow: the site serves `/<key>.txt` and each production deploy sends new and changed pages to Bing and other IndexNow search engines (`scripts/indexnow.mjs`). The key is public by design. |
+| `PUBLIC_GOOGLE_SITE_VERIFICATION` | code from Search Console | Optional. Adds `<meta name="google-site-verification">` if the owner verifies with an HTML tag instead of DNS. |
+| `PUBLIC_BING_SITE_VERIFICATION` | code from Bing Webmaster Tools | Optional. Adds `<meta name="msvalidate.01">`. |
 
 ## Deployment workflow
 
@@ -170,8 +173,10 @@ The deployment action:
 
 1. Installs dependencies.
 2. Builds `dist/`.
-3. Uploads static output and `api/`.
-4. Azure serves static files and Functions.
+3. Checks the site size (`npm run test:size`) and saves the live site's `/sitemap-state.json`.
+4. Uploads static output and `api/`, then runs the smoke test.
+5. Production only: sends new and changed pages to IndexNow (when `INDEXNOW_KEY` is set). This step never fails the deploy.
+6. Azure serves static files and Functions.
 
 Before enabling indexing, verify the deployed host:
 

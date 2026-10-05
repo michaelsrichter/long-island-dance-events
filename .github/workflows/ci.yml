@@ -63,8 +63,8 @@ jobs:
         run: npm run build
       - name: Site size stays well under the Azure limits (files and MB)
         run: npm run test:size
-      - name: Unit tests against the built site (headers, sitemap, robots)
-        run: npm test -- tests/unit/seo-config.test.ts
+      - name: Unit tests against the built site (headers, sitemaps, robots, AI files)
+        run: npm test -- tests/unit/seo-config.test.ts tests/unit/seo-built.test.ts
       - name: Check internal links and #anchors
         run: npm run test:links
 

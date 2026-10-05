@@ -100,7 +100,10 @@ flowchart LR
 | `/api/roles`, `/api/me*`, `/api/likes`, `/api/saves`, `/api/comments`, `/api/photos`, `/api/flags`, `/api/moderation/*` | Community API (see below). |
 | `/community-pages.json` | Pages that accept likes, notes and photos (the API checks keys against it). |
 | `/saved-events.json` | Next dates, time and place of every event series, for the Saved events page (built with the site). |
-| `/llms.txt`, `/robots.txt`, `/sitemap-index.xml` | Machine-readable summaries. |
+| `/towns/`, `/towns/<town>/` | Dancing town by town: what's coming up in each town, its places, styles and nearby towns (P48). Towns with nothing coming up are `noindex`. |
+| `/llms.txt`, `/llms-full.txt`, `/events/upcoming.json` | Guides for AI assistants: summary with links, every upcoming event as one line, and the same as JSON (P48). |
+| `/robots.txt` | Welcomes search engines and AI assistants by name; keeps `/admin/`, `/api/` and `/.auth/` private. |
+| `/sitemap-index.xml`, `/sitemap-<kind>.xml`, `/sitemap-state.json` | Sitemaps by kind (pages, events, venues, people, styles, towns) with real last-changed dates and pictures; the state file holds each page's fingerprint (P48). |
 
 ## Security and privacy
 

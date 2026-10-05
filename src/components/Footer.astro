@@ -1,6 +1,7 @@
 ---
 import type { Settings } from '../lib/content';
 import ThemeSwitch from './ThemeSwitch.astro';
+import { buildNow } from '../lib/content';
 interface Props {
   settings: Settings;
 }
@@ -8,6 +9,7 @@ const { settings: s } = Astro.props;
 const year = new Date().getFullYear();
 const hasConsent = Boolean(import.meta.env.PUBLIC_GA4_ID || import.meta.env.PUBLIC_CLARITY_ID);
 const issues = `${s.repoUrl}/issues/new/choose`;
+const updated = new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }).format(buildNow());
 ---
 <footer class="site-footer">
   <div class="container">
@@ -32,6 +34,7 @@ const issues = `${s.repoUrl}/issues/new/choose`;
           <li><a href="/instructors/">Teachers</a></li>
           <li><a href="/performers/">Bands and DJs</a></li>
           <li><a href="/styles/">Dance styles explained</a></li>
+          <li><a href="/towns/">Town by town</a></li>
           <li><a href="/events/past/">Past events</a></li>
         </ul>
       </section>
@@ -58,7 +61,7 @@ const issues = `${s.repoUrl}/issues/new/choose`;
         </ul>
       </section>
     </div>
-    <p class="site-footer__note">We collect listings from public calendars and organizers. Details can change, so <strong>always check with the organizer before you go</strong>.</p>
+    <p class="site-footer__note">We collect listings from public calendars and organizers. Details can change, so <strong>always check with the organizer before you go</strong>. Listings last updated <time datetime={buildNow().toISOString()}>{updated}</time>.</p>
     <ThemeSwitch variant="choice" location="footer" class="theme-choice--footer" />
     <div class="site-footer__base">
       <p>© {year} {s.siteName}. A free community guide. Not connected with the events listed.</p>

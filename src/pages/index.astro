@@ -9,6 +9,7 @@ import RelativeDay from '../components/RelativeDay.astro';
 import { byDay, getEventGroups, getSettings, isDance } from '../lib/content';
 import { photos } from '../lib/photos';
 import { formatDateLong } from '../lib/time';
+import { getTowns, seriesCount, townHref } from '../lib/towns';
 
 const settings = await getSettings();
 const { upcoming, tonight, weekend, nextSevenDays, today } = await getEventGroups();
@@ -23,6 +24,10 @@ const classIndex = new Map(weekClasses.map((e, i) => [e.slug, i]));
 const styles = (await getCollection('styles')).sort((a, b) => a.data.order - b.data.order);
 const styleCounts = styles.map((s) => ({ s, n: upcoming.filter((e) => e.styles.some((x) => x.id === s.id)).length })).filter((x) => x.n > 0);
 const places = new Set(weekDancesAll.map((e) => e.venue?.id ?? e.location.town)).size;
+const topTowns = (await getTowns())
+  .filter((t) => t.events.length > 0)
+  .sort((a, b) => seriesCount(b.events) - seriesCount(a.events) || a.name.localeCompare(b.name))
+  .slice(0, 12);
 const quick = [
   { href: '/events/?when=week', label: 'This week', count: weekDancesAll.length, icon: 'calendar' as const, primary: true },
   { href: '/events/?when=today', label: 'Today', count: dancesToday.length, icon: 'clock' as const },
@@ -142,6 +147,25 @@ const quick = [
         <ul class="style-grid">
           {styleCounts.map(({ s, n }) => (
             <li><a class="style-chip" href={`/styles/${s.id}/`}><span>{s.data.name}</span><span class="style-chip__count">{n} {n === 1 ? 'event' : 'events'}</span></a></li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  {topTowns.length > 0 && (
+    <section class="section" aria-labelledby="towns-h">
+      <div class="container">
+        <div class="section__head">
+          <div>
+            <h2 id="towns-h">Dancing town by town</h2>
+            <p>The Long Island towns with the most going on right now.</p>
+          </div>
+          <a class="btn btn--secondary" href="/towns/">All towns</a>
+        </div>
+        <ul class="style-grid">
+          {topTowns.map((t) => (
+            <li><a class="style-chip" href={townHref(t.name)}><span>{t.name}</span><span class="style-chip__count">{seriesCount(t.events)} coming up</span></a></li>
           ))}
         </ul>
       </div>

@@ -9,7 +9,8 @@ import EntityHeroMedia from '../../components/EntityHeroMedia.astro';
 import EntityContact from '../../components/EntityContact.astro';
 import EntityGallery from '../../components/EntityGallery.astro';
 import { upcomingFor } from '../../lib/content';
-import { breadcrumbJsonLd, venueJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, itemListJsonLd, venueJsonLd } from '../../lib/seo';
+import { townHref } from '../../lib/towns';
 import { linksOf } from '../../lib/links';
 import { entityImageUrls } from '../../lib/entity-images';
 import CommunityPanel from '../../components/CommunityPanel.astro';
@@ -36,8 +37,9 @@ const links = linksOf(v);
 const [photo, ...morePhotos] = v.photos ?? [];
 const placeLd = venueJsonLd(venue.id, v, site, { ...(await entityImageUrls(v, site)), links });
 const meta = venueMeta(venue, events, site);
+const series = events.filter((e, i, list) => list.findIndex((x) => x.eventId === e.eventId) === i);
 ---
-<BaseLayout title={v.seoTitle ?? `${v.name}, ${v.town}: dance events`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="venue" jsonLd={[placeLd, breadcrumbJsonLd(crumbs, site)]}>
+<BaseLayout title={v.seoTitle ?? `${v.name}, ${v.town}: dance events`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="venue" htmlData={{ 'data-entity': `venue:${venue.id}`, 'data-town': v.town }} jsonLd={[placeLd, breadcrumbJsonLd(crumbs, site), ...(series.length ? [itemListJsonLd(`Events at ${v.name}`, series.map((e) => e.url), site)] : [])]}>
   <PageHeader title={v.name} lede={`${v.address}, ${v.town}, ${v.state} ${v.postalCode ?? ''} · ${v.county} County`} crumbs={crumbs}>
     {(photo || v.logo) && <EntityHeroMedia slot="media" name={v.name} photo={photo} logo={v.logo} />}
     <Reactions type="venue" id={venue.id} name={v.name} variant="hero" />
@@ -52,7 +54,7 @@ const meta = venueMeta(venue, events, site);
   <div class="container section stack-l">
     <section aria-labelledby="on-h">
       <h2 id="on-h">What's on here</h2>
-      <p class="muted">Repeating events show their next date.</p>
+      <p class="muted">Repeating events show their next date. <a href={townHref(v.town)}>More places to dance in {v.town}</a>.</p>
       <div class="mt-5"><EventSeriesList events={events} empty="No upcoming events are listed here right now" /></div>
     </section>
     {v.dancing && <DancingFacts name={v.name} kind="venue" floor={v.dancing.floor} kinds={v.dancing.kinds} notes={v.dancing.notes} evidence={v.dancing.evidence} confidence={v.dancing.confidence} checked={v.dancing.checked} />}

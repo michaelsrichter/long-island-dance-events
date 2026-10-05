@@ -11,7 +11,7 @@ import { upcomingFor } from '../../lib/content';
 import { linksOf } from '../../lib/links';
 import { entityImageUrls } from '../../lib/entity-images';
 import { DANCE_TYPE_LABELS } from '../../lib/schemas';
-import { breadcrumbJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
 import Reactions from '../../components/Reactions.astro';
 import ShareControls from '../../components/ShareControls.astro';
@@ -49,7 +49,7 @@ const styleLd = {
 const credits = (s.photos ?? []).filter((p) => p.credit);
 const meta = styleMeta(style, events, site);
 ---
-<BaseLayout title={`${s.name} on Long Island: where to dance and take classes`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="style" jsonLd={[styleLd, breadcrumbJsonLd(crumbs, site)]}>
+<BaseLayout title={`${s.name} on Long Island: where to dance and take classes`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="style" htmlData={{ 'data-entity': `style:${style.id}` }} jsonLd={[styleLd, breadcrumbJsonLd(crumbs, site), ...(events.length ? [itemListJsonLd(`${s.name} events on Long Island`, events.filter((e, i, l) => l.findIndex((x) => x.eventId === e.eventId) === i).map((e) => e.url), site)] : [])]}>
   <PageHeader title={s.name} lede={s.summary} crumbs={crumbs}>
     {photo && <EntityHeroMedia slot="media" name={s.name} photo={photo} />}
     <p class="page-header__meta">{DANCE_TYPE_LABELS[s.danceType]}{s.music && <> · Music: {s.music}</>}</p>

@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 
 // SITE_URL is the canonical origin. Until DNS cutover it should be the Azure Static Web Apps hostname.
 const site = (process.env.SITE_URL || 'https://example.org').replace(/\/$/, '');
@@ -21,9 +20,5 @@ export default defineConfig({
   prefetch: false,
   // Built-in sharp service plus precise focus-point crops (position: "35% 40%").
   image: { service: { entrypoint: './src/lib/focus-image-service.mjs' } },
-  integrations: [
-    sitemap({
-      filter: (page) => !page.includes('/admin/') && !page.includes('/404') && !page.includes('/account/') && !page.includes('/moderate/') && !page.includes('/saved/'),
-    }),
-  ],
+  // Sitemaps are built by src/pages/sitemap-*.ts (split by kind of page, with real last-changed dates; decision P48).
 });

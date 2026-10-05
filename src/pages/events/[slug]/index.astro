@@ -21,6 +21,7 @@ import { formatDateShort } from '../../../lib/time';
 import { displayHost } from '../../../lib/links';
 import { eventShare } from '../../../lib/entity-meta';
 import { eventDescription, eventLabels } from '../../../lib/page-meta';
+import { townHref } from '../../../lib/towns';
 
 export async function getStaticPaths() {
   const all = await getAllEvents();
@@ -69,6 +70,7 @@ const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at $
   labels={eventLabels(e)}
   ogType="event"
   pageType="event"
+  robots={upcomingNow ? undefined : 'noindex, follow'}
   bodyClass="has-action-bar"
   htmlData={{ 'data-event-slug': e.slug, 'data-event-status': e.status, 'data-days-until': String(daysUntil) }}
   jsonLd={[eventJsonLd(e, settings, site, new URL(share.image.src, site).toString()), breadcrumbJsonLd(crumbs, site)]}
@@ -152,12 +154,12 @@ const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at $
                     <>
                       <strong><a href={`/venues/${e.venue.id}/`}>{e.location.name}</a></strong><br />
                       {e.location.address}<br />
-                      {e.location.town}, {e.location.state} {e.location.postalCode}
+                      {e.location.town && <a href={townHref(e.location.town)}>{e.location.town}</a>}, {e.location.state} {e.location.postalCode}
                       {e.venue.data.parkingNotes && <p class="muted mt-3"><span class="fact-label">Parking:</span> {e.venue.data.parkingNotes}</p>}
                       {e.venue.data.accessibilityNotes && <p class="muted"><span class="fact-label">Access:</span> {e.venue.data.accessibilityNotes}</p>}
                     </>
                   ) : (
-                    <span>{e.location.town}. The exact place is not listed. Ask the organizer.</span>
+                    <span>{e.location.town && <a href={townHref(e.location.town)}>{e.location.town}</a>}. The exact place is not listed. Ask the organizer.</span>
                   )}
                 </dd>
               </div>

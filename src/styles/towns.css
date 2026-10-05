@@ -1,0 +1,10 @@
+/* Town pages (/towns/). Unlayered, like the end of global.css. */
+.town-grid { list-style: none; padding: 0; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr)); }
+.town-grid a { display: grid; gap: 0.15rem; min-height: var(--tap); padding: 0.7rem 0.9rem; border: 1px solid var(--c-line); border-radius: 14px; background: var(--c-surface); color: var(--c-ink); text-decoration: none; box-shadow: var(--shadow-1); }
+.town-grid a:hover { border-color: var(--c-red-ink); }
+.town-grid a:focus-visible { outline: 3px solid var(--c-focus); outline-offset: 2px; }
+.town-grid strong { font-weight: 700; }
+.town-grid span { font-size: 0.88rem; color: var(--c-ink-soft); }
+.town-places { list-style: none; padding: 0; display: grid; gap: 0.6rem; }
+.town-places li { display: grid; gap: 0.1rem; }
+.town-places a { font-weight: 700; }

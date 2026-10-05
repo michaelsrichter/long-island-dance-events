@@ -17,6 +17,8 @@ const PAGES = [
   '/performers/dj-ray/',
   '/styles/',
   '/styles/west-coast-swing/',
+  '/towns/',
+  '/towns/greenlawn/',
   '/sources/',
   '/about/',
   '/faq/',
