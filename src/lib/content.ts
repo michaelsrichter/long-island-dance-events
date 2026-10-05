@@ -4,7 +4,6 @@ import { cadenceOf, isUpcoming, partition, priceOf, priceText, resolveOccurrence
 import type { CalendarEvent } from './calendar';
 import { CATEGORY_LABELS, SKILL_LABELS, type County, type EventCategory } from './schemas';
 import { addDays, dateInZone, formatDateLong, formatTime, weekdayOf, DEFAULT_TZ } from './time';
-import type { ShareInput } from './share';
 import { linksOf, type ExternalLink } from './links';
 import { assessDancing, isDanceLevel, type DancingAssessment } from './dancing';
 
@@ -292,17 +291,5 @@ export function calendarEventOf(e: ResolvedEvent, site: URL | string): CalendarE
     status: e.status === 'cancelled' ? 'CANCELLED' : 'CONFIRMED',
     latitude: e.location.latitude,
     longitude: e.location.longitude,
-  };
-}
-
-export function shareInputOf(e: ResolvedEvent, site: URL | string): ShareInput {
-  return {
-    title: e.title,
-    dateLabel: e.dateLabel,
-    timeLabel: e.timeLabel,
-    venueName: e.location.name,
-    town: e.location.town,
-    url: new URL(e.url, site).toString(),
-    status: e.status,
   };
 }

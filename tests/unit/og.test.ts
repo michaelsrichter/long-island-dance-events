@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import sharp from 'sharp';
-import { renderSocialPng } from '../../src/lib/og';
+import { mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { photoPanel, renderSocialJpeg, renderSocialPng } from '../../src/lib/og';
 
 describe('social images', () => {
   it('renders real glyphs (fonts decode correctly)', async () => {
@@ -25,5 +28,20 @@ describe('social images', () => {
     expect(og.length).toBeLessThan(75 * 1024);
     expect(sq.length).toBeLessThan(75 * 1024);
     expect((await sharp(og).metadata()).format).toBe('png');
+  }, 30_000);
+
+  it('puts a photo on directory cards, as a JPEG under 120 KB', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'og-'));
+    const big = join(dir, 'big.jpg');
+    const small = join(dir, 'small.jpg');
+    writeFileSync(big, await sharp({ create: { width: 1600, height: 1000, channels: 3, background: '#3a6ea5' } }).jpeg().toBuffer());
+    writeFileSync(small, await sharp({ create: { width: 200, height: 150, channels: 3, background: '#3a6ea5' } }).jpeg().toBuffer());
+    const photo = await photoPanel(big, '30% 50%');
+    expect(photo).toMatch(/^data:image\/jpeg;base64,/);
+    expect(await photoPanel(small)).toBeUndefined(); // never stretch a small photo
+    const jpg = await renderSocialJpeg({ title: 'The Paramount', kicker: 'Venue · Huntington', lines: ['12 events coming up', 'Next: Sat, Oct 10'], footer: 'Address, parking and directions', photo });
+    const meta = await sharp(jpg).metadata();
+    expect([meta.format, meta.width, meta.height]).toEqual(['jpeg', 1200, 630]);
+    expect(jpg.length).toBeLessThan(120 * 1024);
   }, 30_000);
 });

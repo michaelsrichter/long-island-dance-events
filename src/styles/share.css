@@ -1,0 +1,16 @@
+/* Share preview card and options (ShareControls.astro). Unlayered, like the end of global.css. */
+.share-card { margin: 0; overflow: hidden; border: 1px solid var(--c-line); border-radius: 14px; background: var(--c-surface); }
+.share-card img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630; object-fit: cover; background: #0b0b0d; }
+.share-card figcaption { display: grid; gap: 0.35rem; padding: 0.7rem 0.85rem 0.8rem; border-top: 1px solid var(--c-line); }
+.share-card__label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-ink-soft); }
+.share-card__text { white-space: pre-line; overflow-wrap: anywhere; font-size: 0.92rem; line-height: 1.45; color: var(--c-ink); }
+.share-card--inline .share-card__text { max-height: 12.5rem; overflow: auto; }
+dialog.share-dialog { margin: auto; max-height: calc(100dvh - 2rem); overflow: auto; }
+.share-dialog .share-card__text { max-height: 9rem; overflow: auto; }
+.share-options { display: grid; gap: 0.5rem; }
+.share-options .btn { justify-content: flex-start; width: 100%; }
+@media (min-width: 22rem) {
+  .share-options { grid-template-columns: 1fr 1fr; }
+  .share-options [data-share-native], .share-options a[download] { grid-column: 1 / -1; }
+}
+.share-header-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-top: 1rem; }

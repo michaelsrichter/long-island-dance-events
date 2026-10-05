@@ -117,6 +117,26 @@ test.describe('an event page', () => {
     await expect(page.locator('[data-toast]')).toHaveText('Link copied.');
     expect(await page.evaluate(() => (window as any).__copied.at(-1))).toBe(canonical);
     await expect(share.getByRole('link', { name: /Facebook/ })).toHaveAttribute('href', /^https:\/\/www\.facebook\.com\/sharer\//);
+    await share.getByRole('button', { name: 'Copy text' }).click();
+    await expect(page.locator('[data-toast]')).toHaveText('Text copied. Paste it anywhere.');
+    const text = (await page.evaluate(() => (window as any).__copied.at(-1))) as string;
+    expect(text.split('\n')[1]).toMatch(/^📅 \w+day, \w+ \d{1,2}/);
+    expect(text.trim().endsWith(canonical!)).toBe(true);
+    const whatsapp = await share.getByRole('link', { name: /WhatsApp/ }).getAttribute('href');
+    expect(decodeURIComponent(whatsapp!.replace('https://wa.me/?text=', ''))).toBe(text);
+  });
+
+  test('directory pages can be shared with a preview of the picture and text', async ({ pinned: page }) => {
+    await page.addInitScript(() => Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }));
+    await page.goto('/venues/');
+    await page.locator('a[href^="/venues/"][href$="/"]:not([href="/venues/"])').first().click();
+    await page.locator('.page-header [data-share-open]').click();
+    const dialog = page.getByRole('dialog', { name: 'Share this venue' });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator('.share-card img')).toHaveAttribute('src', /^\/og\/venues\/.+\.jpg$/);
+    await expect(dialog.locator('.share-card__text')).toContainText((await page.locator('link[rel="canonical"]').getAttribute('href'))!);
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeHidden();
   });
 
   test('links to its venue, which lists what is on there', async ({ pinned: page }) => {

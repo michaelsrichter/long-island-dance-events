@@ -13,12 +13,14 @@ import RelativeWhen from '../../../components/RelativeWhen.astro';
 import PersonLinks from '../../../components/PersonLinks.astro';
 import CommunityPanel from '../../../components/CommunityPanel.astro';
 import Reactions from '../../../components/Reactions.astro';
-import { buildNow, calendarEventOf, getAllEvents, getSettings, hasShareImage, shareInputOf, type PersonRef, type ResolvedEvent } from '../../../lib/content';
+import { buildNow, calendarEventOf, getAllEvents, getSettings, type PersonRef, type ResolvedEvent } from '../../../lib/content';
 import { breadcrumbJsonLd, eventJsonLd } from '../../../lib/seo';
 import { isUpcoming } from '../../../lib/event-core';
 import { CATEGORY_HELP } from '../../../lib/schemas';
 import { formatDateShort } from '../../../lib/time';
 import { displayHost } from '../../../lib/links';
+import { eventShare } from '../../../lib/entity-meta';
+import { eventDescription, eventLabels } from '../../../lib/page-meta';
 
 export async function getStaticPaths() {
   const all = await getAllEvents();
@@ -34,9 +36,7 @@ const site = Astro.site!;
 const d = e.data;
 const upcomingNow = isUpcoming(e, now);
 const cal = calendarEventOf(e, site);
-const share = shareInputOf(e, site);
-const socialImage = hasShareImage(e, now) ? `${e.url}social.png` : undefined;
-const socialSquare = hasShareImage(e, now) ? `${e.url}social-square.png` : undefined;
+const share = eventShare(e, site, now);
 const upcoming = all.filter((x) => isUpcoming(x, now));
 const otherDates = upcoming.filter((x) => x.eventId === e.eventId && x.slug !== e.slug).slice(0, 6);
 const atVenue = e.venue ? upcoming.filter((x) => x.venue?.id === e.venue!.id && x.eventId !== e.eventId).slice(0, 3) : [];
@@ -47,9 +47,7 @@ const crumbs = [
   { name: e.title, href: e.url },
 ];
 const title = d.seoTitle ?? `${e.title}, ${formatDateShort(e.date)}${e.location.town ? ` in ${e.location.town}` : ''}`;
-const description =
-  d.seoDescription ??
-  [e.status === 'cancelled' ? 'CANCELLED.' : '', `${e.dateLabel}${e.timeLabel ? `, ${e.timeLabel}` : ''}${e.location.town ? `, ${e.location.town}` : ''}.`, d.summary].filter(Boolean).join(' ').slice(0, 165);
+const description = d.seoDescription ?? eventDescription(e);
 const daysUntil = Math.ceil((e.start.getTime() - now.getTime()) / 86400000);
 const telOf = (p: string) => `tel:+1${p.replace(/[^0-9]/g, '').replace(/^1(?=\d{10}$)/, '')}`;
 const people: { role: string; icon: 'music' | 'people' | 'star'; p: PersonRef }[] = [
@@ -65,13 +63,15 @@ const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at $
 <BaseLayout
   title={title}
   description={description}
-  image={socialImage}
-  imageAlt={socialImage ? `${e.title}, ${e.dateLabel}` : undefined}
+  image={share.image.src}
+  imageAlt={share.image.alt}
+  imageType={share.image.type}
+  labels={eventLabels(e)}
   ogType="event"
   pageType="event"
   bodyClass="has-action-bar"
   htmlData={{ 'data-event-slug': e.slug, 'data-event-status': e.status, 'data-days-until': String(daysUntil) }}
-  jsonLd={[eventJsonLd(e, settings, site, socialImage ? new URL(socialImage, site).toString() : undefined), breadcrumbJsonLd(crumbs, site)]}
+  jsonLd={[eventJsonLd(e, settings, site, new URL(share.image.src, site).toString()), breadcrumbJsonLd(crumbs, site)]}
 >
   <article data-event-detail data-end={String(e.end.getTime())} aria-labelledby="event-title">
     <header class="event-hero">
@@ -259,7 +259,7 @@ const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at $
           )}
           <section class="panel actions" id="share" aria-labelledby="share-h">
             <h2 id="share-h">Share this event</h2>
-            <ShareControls share={share} details={{ lesson: lessonLine, admission: e.priceLine }} slug={e.slug} socialImage={socialSquare} variant="inline" />
+            <ShareControls share={share} variant="inline" />
           </section>
           <section class="panel actions" aria-labelledby="q-h">
             <h2 id="q-h">Questions?</h2>
@@ -312,7 +312,7 @@ const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at $
     ) : (
       <a href="#source"><Icon name="info" />Source</a>
     )}
-    <ShareControls share={share} details={{ lesson: lessonLine, admission: e.priceLine }} slug={e.slug} socialImage={socialSquare} variant="button" buttonClass="action-bar__btn" location="action_bar" />
+    <ShareControls share={share} variant="button" buttonClass="action-bar__btn" location="action_bar" noJsHref={`${e.url}#share`} />
   </nav>
 </BaseLayout>
 <script>

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { buildIcs, googleCalendarUrl, icsEscape, icsFold, outlookCalendarUrl, type CalendarEvent } from '../../src/lib/calendar';
-import { detailText, shareLinks, shareText } from '../../src/lib/share';
+import { blurbWithoutUrl, shareLinks } from '../../src/lib/share';
 
 const base: CalendarEvent = {
   uid: '2026-10-06-thursday-night-swing@example.org',
@@ -66,35 +66,29 @@ describe('calendar links', () => {
   });
 });
 
-describe('share text', () => {
+describe('share links', () => {
   const input = {
     title: 'Thursday Night Swing',
-    dateLabel: 'Tuesday, October 6, 2026',
-    timeLabel: '7:30 PM',
-    venueName: 'Riverbend Community Hall',
-    town: 'Riverbend',
     url: 'https://example.org/events/2026-10-06-thursday-night-swing/',
+    blurb: 'Thursday Night Swing\n📅 Tuesday, October 6 · 7:30 PM\n📍 Riverbend Community Hall, Riverbend\nhttps://example.org/events/2026-10-06-thursday-night-swing/',
+    short: 'Thursday Night Swing at Riverbend Community Hall, Riverbend, Tue, Oct 6 at 7:30 PM',
   };
-  it('includes the event name, date, start time, venue, town and URL', () => {
-    expect(shareText(input)).toBe(
-      'Thursday Night Swing, Tuesday, October 6, 2026 at 7:30 PM, Riverbend Community Hall, Riverbend. https://example.org/events/2026-10-06-thursday-night-swing/',
-    );
-  });
-  it('flags cancelled and postponed events', () => {
-    expect(shareText({ ...input, status: 'cancelled' })).toMatch(/^CANCELLED: /);
-    expect(shareText({ ...input, status: 'postponed' })).toMatch(/^POSTPONED: /);
-  });
-  it('builds encoded Facebook, email and SMS links', () => {
+  it('prefills WhatsApp, X, email and text messages with the full text and link', () => {
     const l = shareLinks(input);
     expect(l.facebook).toBe(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(input.url)}`);
+    expect(decodeURIComponent(l.whatsapp.split('text=')[1]!)).toBe(input.blurb);
+    expect(new URL(l.x).searchParams.get('text')).toBe(input.short);
+    expect(new URL(l.x).searchParams.get('url')).toBe(input.url);
     expect(l.email).toMatch(/^mailto:\?subject=Thursday%20Night%20Swing&body=/);
+    expect(decodeURIComponent(l.email)).toContain('📍 Riverbend Community Hall');
     expect(decodeURIComponent(l.sms)).toContain(input.url);
   });
-  it('builds a multi-line summary for manual Instagram posts', () => {
-    const t = detailText({ ...input, lesson: 'Lesson at 7:30 PM', admission: '$15', beginners: true });
-    expect(t.split('\n')).toHaveLength(7);
-    expect(t).toContain('Beginners welcome. No partner needed.');
+  it('adds the link when the text does not end with it', () => {
+    const l = shareLinks({ ...input, blurb: 'Swing tonight' });
+    expect(decodeURIComponent(l.whatsapp)).toContain(`Swing tonight\n${input.url}`);
+  });
+  it('leaves the link out of the phone share text (the share menu adds it)', () => {
+    expect(blurbWithoutUrl(input.blurb, input.url)).not.toContain('https://');
+    expect(blurbWithoutUrl('no link here', input.url)).toBe('no link here');
   });
 });
-
-

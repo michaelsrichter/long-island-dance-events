@@ -22,7 +22,7 @@ jobs:
   quality:
     name: Type check, tests, build, links
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -61,6 +61,8 @@ jobs:
 
       - name: Build
         run: npm run build
+      - name: Site size stays well under the Azure limits (files and MB)
+        run: npm run test:size
       - name: Unit tests against the built site (headers, sitemap, robots)
         run: npm test -- tests/unit/seo-config.test.ts
       - name: Check internal links and #anchors
