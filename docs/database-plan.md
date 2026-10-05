@@ -4,6 +4,8 @@
 > Prices were checked on October 3, 2026 from official sources (links in [Prices we checked](#prices-we-checked)). "Unverified" means we could not confirm it.
 > Companion files: [`catalog/schema.sql`](../catalog/schema.sql) (the database design), [`catalog/queries.sql`](../catalog/queries.sql) (sample reports),
 > [`catalog/scripts/build-sqlite.ts`](../catalog/scripts/build-sqlite.ts) (builds the database), [`docs/source-catalog.md`](source-catalog.md) (the sources).
+>
+> **Update, October 5, 2026:** a proposal to move the site to a live PostgreSQL database, so edits show up in seconds without republishing, is waiting for the owner's approval: [proposals/postgres-live-site.md](proposals/postgres-live-site.md) (decision P53). Until it is approved, this page describes how things work.
 
 ## The short version
 
