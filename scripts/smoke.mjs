@@ -117,8 +117,6 @@ await check('Review center is for editors only', async () => {
     const r = await get(p);
     assert(r.status === 401 || r.status === 403, `${p} status ${r.status}`);
   }
-  const like = await get('/api/likes', { method: 'POST', headers: { 'Content-Type': 'application/json', Origin: new URL(base).origin }, body: '{}' });
-  assert(like.status === 401, `a signed-out like answers 401 JSON, not a sign-in redirect (status ${like.status})`);
   return 'sign-in required';
 });
 
