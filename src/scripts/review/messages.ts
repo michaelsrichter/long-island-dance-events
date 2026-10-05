@@ -33,7 +33,7 @@ const KIND: Record<string, { label: string; help: string; replies: { label: stri
     label: 'Fix for a listing',
     help: 'Check the facts on the organizer\'s own website. Fix the event in the editor and add the field you changed to "Locked fields" (so the weekly check won\'t change it back). Then reply and close.',
     replies: [
-      { label: 'Fixed', text: 'Thank you! We fixed the listing. The change will show on the website in about 10 minutes.' },
+      { label: 'Fixed', text: 'Thank you! We fixed the listing. The change will show on the website in a few minutes.' },
       { label: 'Already right', text: "Thanks for writing! We checked, and the listing matches the organizer's own page, so we left it as it is. If the organizer changes it, please let us know.", reason: 'not_planned' },
     ],
   },
@@ -41,7 +41,7 @@ const KIND: Record<string, { label: string; help: string; replies: { label: stri
     label: 'New event to add',
     help: 'Check that it is a real event in Nassau or Suffolk. Add it in the editor (Events, New Event), or ask Copilot to add their calendar as a source so new dates show up by themselves.',
     replies: [
-      { label: 'Added', text: "Thank you! We added it. It will be on the website in about 10 minutes." },
+      { label: 'Added', text: "Thank you! We added it. It will be on the website in a few minutes." },
       { label: 'Added their calendar', text: "Thank you! We added their calendar, so new dates will show up on the website by themselves each week." },
       { label: 'Outside our area', text: "Thanks for the tip! This one is outside Nassau and Suffolk counties, so it's outside the area we cover.", reason: 'not_planned' },
     ],

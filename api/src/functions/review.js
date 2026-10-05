@@ -5,7 +5,7 @@
  * The route rule in staticwebapp.config.json requires the "admin" role for /api/review/*; every
  * handler checks it again. Writes need a same-origin JSON request (like the moderation API) and are
  * written to the ModLog table. Listing and source decisions become one commit on main per request
- * (git stays the master copy); the site rebuilds in about 10 minutes.
+ * (git stays the master copy); the site rebuilds in a few minutes.
  *
  *   GET  /api/review/status                      GitHub connection, community queue count
  *   GET  /api/review/listings                    held listings (status pending-review on main)

@@ -196,4 +196,4 @@ export function emptyState(text: string): HTMLElement {
   return box;
 }
 
-export const LIVE = 'Live on the website in about 10 minutes.';
+export const LIVE = 'Live on the website in a few minutes.';
