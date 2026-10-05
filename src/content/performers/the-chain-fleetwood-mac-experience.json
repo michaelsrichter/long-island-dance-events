@@ -27,6 +27,59 @@
     "Stevie Nicks",
     "classic rock"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Several bands use the name 'The Chain' (e.g., thechainband.com, thechainrocks.com). This is the Long Island group whose site shows Bay Street Theater videos. Its site sits behind a browser check, so socials were not collected.",
-  "website": "https://thechainlongisland.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Several bands use the name 'The Chain' (e.g., thechainband.com, thechainrocks.com). This is the Long Island group whose site shows Bay Street Theater videos. Its site sits behind a browser check, so socials were not collected.\n\nDirectory research 2026-10-04: The site no longer shows a browser check, so socials were collected this time. Phone is the booking agency's (RJM Entertainment), as the band publishes it for bookings; email is the band's own published address. Bandsintown artist page: https://www.bandsintown.com/a/15489431-the-chain-a-fleetwood-mac-experience (not fetched; blocked). No Instagram linked from the site. The site's tour page loads shows from Bandsintown by script, so no upcoming dates could be read. Several photo-gallery items are phone screenshots of Facebook/messages; those were skipped. Current description is accurate; not replaced.",
+  "website": "https://thechainlongisland.com/",
+  "facebookUrl": "https://www.facebook.com/thechainlongisland/",
+  "youtubeUrl": "https://www.youtube.com/@thechain-afleetwoodmacexpe4594",
+  "bookingUrl": "https://thechainlongisland.com/contact/",
+  "email": "fleetwoodmacexperience@gmail.com",
+  "phone": "(516) 314-4848",
+  "logo": {
+    "image": "../../assets/entities/performers/the-chain-fleetwood-mac-experience-logo.webp",
+    "alt": "The Chain logo: black silhouettes of six band members in front of a full golden moon, with the words A Fleetwood Mac Experience",
+    "credit": "Logo: The Chain - A Fleetwood Mac Experience",
+    "creditUrl": "https://thechainlongisland.com/",
+    "imageSource": "https://thechainlongisland.com/wp-content/uploads/2026/07/the-chain-logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/the-chain-fleetwood-mac-experience-1.webp",
+      "alt": "The six members of The Chain posing on a lawn by the water at sunset, with an outdoor stage behind them",
+      "credit": "Photo: The Chain - A Fleetwood Mac Experience (website)",
+      "creditUrl": "https://thechainlongisland.com/",
+      "imageSource": "https://thechainlongisland.com/wp-content/uploads/2026/07/chain-tribute-1200x524.webp",
+      "focus": "55% 40%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-chain-fleetwood-mac-experience-2.webp",
+      "alt": "The Chain performing on a theater stage lit in blue, with the singer at center and the band logo on a screen behind them",
+      "credit": "Photo: The Chain - A Fleetwood Mac Experience (website)",
+      "creditUrl": "https://thechainlongisland.com/photos/",
+      "imageSource": "https://thechainlongisland.com/wp-content/uploads/2026/07/8726209014379021721.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-chain-fleetwood-mac-experience-3.webp",
+      "alt": "The members of The Chain standing in front of their moon logo backdrop with candles on stage",
+      "credit": "Photo: The Chain - A Fleetwood Mac Experience (website)",
+      "creditUrl": "https://thechainlongisland.com/photos/",
+      "imageSource": "https://thechainlongisland.com/wp-content/uploads/2026/07/IMG_4247-scaled.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://thechainlongisland.com/",
+      "note": "Band site: Long Island-based Fleetwood Mac and Stevie Nicks tribute, fronted by Mary McDermott, playing New York, New Jersey and Pennsylvania; links Facebook, YouTube and Bandsintown; booking through RJM Entertainment."
+    },
+    {
+      "url": "https://thechainlongisland.com/contact/",
+      "note": "Contact page: direct email fleetwoodmacexperience@gmail.com and booking agency RJM Entertainment (516) 314-4848, plus a contact form."
+    },
+    {
+      "url": "https://www.youtube.com/@thechain-afleetwoodmacexpe4594",
+      "note": "YouTube channel 'The Chain - A Fleetwood Mac Experience' describes a Fleetwood Mac tribute band; linked from the band's site."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thechainlongisland.com, youtube.com."
 }

@@ -38,6 +38,32 @@
     "funk",
     "disco"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Popei's Clam Bar has Coram and Deer Park locations; Ira's List says Coram.",
-  "youtubeUrl": "https://www.youtube.com/@thedaplorabulls"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Popei's Clam Bar has Coram and Deer Park locations; Ira's List says Coram.\n\nDirectory research 2026-10-04: Facebook not confirmed: facebook.com is blocked by robots.txt for our checks, and an Oct 2024 event posted by the 'TheDaplorabulls' Facebook page (HappeningNext copy) announced 'our new name OFF THE HOOK' (offthehookli.com, facebook.com/offthehookli). But Off The Hook's own site lists a different lineup, and venues still book 'The Daplorabulls' in 2025-2026, so they look like separate bands now. The current facebookUrl (facebook.com/TheDaplorabulls) may now belong to Off The Hook - owner should check it while signed in; I left it out. No website, Instagram or booking contact found. Logo is the YouTube profile picture. No band photos from an official source (only venue/flyer images). Current description still fits.",
+  "youtubeUrl": "https://www.youtube.com/@thedaplorabulls",
+  "logo": {
+    "image": "../../assets/entities/performers/the-daplorabulls-logo.webp",
+    "alt": "Bass drum head printed with The Daplorabulls logo, a bull in a red no-symbol with music notes, and the words Long Island's Party Band",
+    "credit": "Logo: The Daplorabulls",
+    "creditUrl": "https://www.youtube.com/@thedaplorabulls",
+    "imageSource": "https://yt3.googleusercontent.com/sAgi-qEsE-EzlmikaYEBoEafGKXPZ8pCB0COa5dkbmw8R_Ka2f2CoGL0BYLwcTr0ckF8aiaJ=s900-c-k-c0x00ffffff-no-rj"
+  },
+  "evidence": [
+    {
+      "url": "https://www.lilyflanaganspub.com/musicevents/2026/11/6/happy-hour-band-the-daplorabulls",
+      "note": "Lily's Babylon lists 'Happy Hour Band: The Daplorabulls' on Fri Nov 6, 2026, 6-10 PM, at 345 Deer Park Ave, Babylon."
+    },
+    {
+      "url": "https://eleanorslounge.com/events/feel-good-fridays-with-the-daplorabulls/",
+      "note": "Eleanor's Lounge (Bohemia): 'Feel Good Fridays' with the Daplorabulls, a Long Island party and dance band, every 2nd and last Friday, 8-11 PM, $5 cover; runs Oct 2025 to Apr 2027."
+    },
+    {
+      "url": "https://www.theotherroomli.com/events/fall-dance-party",
+      "note": "The Other Room (Deer Park) billed 'Long Island's Party Band The Daplorabulls' with six named members (May 2024)."
+    },
+    {
+      "url": "https://www.youtube.com/@thedaplorabulls",
+      "note": "YouTube channel 'The Daplorabulls'; its profile picture is the band logo reading 'Long Island's Party Band'."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: lilyflanaganspub.com, eleanorslounge.com, theotherroomli.com, youtube.com."
 }

@@ -28,16 +28,67 @@
   },
   "description": "An upscale waterfront seafood restaurant next to a marina on Glen Cove Creek, with a patio, weekend brunch and DJ nights later in the evening.",
   "facebookUrl": "https://www.facebook.com/thecoveny/",
-  "factsSource": "Checked October 3, 2026. Source: thecoveny.com.",
+  "factsSource": "Checked October 4, 2026. Source: thecoveny.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Cove+Restaurant+%26+Oyster+Bar+74+Shore+Rd+Glen+Cove+NY+11542",
   "kind": "restaurant",
   "phone": "(516) 676-1211",
   "postalCode": "11542",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'DJ - The Cove Glen Cove' matches the venue's own Oct 3 'DJ TBD' listing. Strict age and dress-code rules apply on DJ nights. Some listings add suite '#3427' to the address.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'DJ - The Cove Glen Cove' matches the venue's own Oct 3 'DJ TBD' listing. Strict age and dress-code rules apply on DJ nights. Some listings add suite '#3427' to the address.\n\nDirectory research 2026-10-04: Hours conflict on the site: the footer says closed Mon-Tue, Wed 4-9 PM, Thu 4-10:30 PM, Fri-Sat noon-11 PM, Sun noon-9 PM, while the scrolling banner says 'Open 12 PM daily' and the schema data gives noon opening every day. We used the footer (likely current fall hours). Private-party enquiries go to thecoveny@gmail.com (not recorded as main email). Site says it opened in May 2016 and sits beside Safe Harbor Marina. Dress code applies in the Tiki Bar & Lounge after 8 PM (no hats, athletic wear, sports jerseys, cut-offs or backpacks). Logo is WebP because the image host converted the PNG. Current description is still accurate.",
   "state": "NY",
   "town": "Glen Cove",
   "website": "https://www.thecoveny.com/",
   "latitude": 40.855693,
   "longitude": -73.642074,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/thecoveny/",
+  "tiktokUrl": "https://www.tiktok.com/@thecoveny",
+  "email": "info@thecoveny.com",
+  "hours": "Wed 4 PM-9 PM; Thu 4 PM-10:30 PM; Fri-Sat 12 PM-11 PM; Sun 12 PM-9 PM; closed Mon-Tue (fall hours; DJ Thu-Sun)",
+  "logo": {
+    "image": "../../assets/entities/venues/the-cove-glen-cove-logo.webp",
+    "alt": "The Cove restaurant & oyster bar logo: the word Cove in navy script under a blue brushstroke wave",
+    "credit": "Logo: The Cove Restaurant & Oyster Bar",
+    "creditUrl": "https://www.thecoveny.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/5f22dbed38398e1c5e2d8c6e/1596120105565-X48P4PF8P809GPP8YVNE/TheCove_Logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/the-cove-glen-cove-1.webp",
+      "alt": "Aerial night view of The Cove on the marina, with its lit patio tent, blue-lit dock and a boat tied up in front",
+      "credit": "Photo: The Cove Restaurant & Oyster Bar (website)",
+      "creditUrl": "https://www.thecoveny.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5f22dbed38398e1c5e2d8c6e/28fa3858-c115-4974-a9ef-b9c4d99c7bdc/DJI_0149.jpg?format=1000w",
+      "focus": "55% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-cove-glen-cove-2.webp",
+      "alt": "An arch of bright pink flowers over the walkway to The Cove's waterfront patio, with white railings and the marina beyond",
+      "credit": "Photo: The Cove Restaurant & Oyster Bar (website)",
+      "creditUrl": "https://www.thecoveny.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5f22dbed38398e1c5e2d8c6e/98e07be1-e1c8-40fd-8e2b-8ceb31c3309e/DSC02637.jpg?format=1000w",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-cove-glen-cove-3.webp",
+      "alt": "The Cove's main dining room with white-clothed tables, hanging pendant lights and a high wood ceiling",
+      "credit": "Photo: The Cove Restaurant & Oyster Bar (website)",
+      "creditUrl": "https://www.thecoveny.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5f22dbed38398e1c5e2d8c6e/c865bc01-0799-43cc-9139-c03c792717ac/IMG_8141.jpeg?format=1000w",
+      "focus": "50% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thecoveny.com/",
+      "note": "Restaurant site: 74 Shore Road, Glen Cove NY 11542, (516) 676-1211, info@thecoveny.com; banner says DJ Thursday-Sunday; dress code for the Tiki Bar & Lounge after 8 PM; links TikTok, Instagram and Facebook."
+    },
+    {
+      "url": "https://www.thecoveny.com/upcoming-events",
+      "note": "Upcoming Events page is headed 'DJ Nights at The Cove' and repeats the address, phone and current hours (closed Mon-Tue)."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=The+Cove+Restaurant+%26+Oyster+Bar+74+Shore+Rd+Glen+Cove+NY+11542",
+      "note": "Map search for the same name and address (the site's schema data also links a Google business profile)."
+    }
+  ]
 }

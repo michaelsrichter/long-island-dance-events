@@ -8,3 +8,38 @@ aliases:
   - Lindyhop
 summary: The original swing dance from 1920s Harlem in New York City. It is bouncy and playful.
 music: Big-band swing and jazz
+description: Lindy Hop is the original swing dance, born in the African American dance halls of Harlem, New York City, in the late 1920s. It is energetic and playful, mixing eight-count swingouts with six-count moves, kicks and room for improvising. It is danced to big-band swing and jazz, and was hugely popular in the late 1930s and early 1940s.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/Lindy_Hop
+photos:
+  - image: ../../assets/entities/styles/lindy-hop-1.webp
+    alt: A packed ballroom of couples swing dancing in front of a stage where a big band and singer perform under purple lights
+    credit: "Photo: Jay Kuntz (jayjjj1955), CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:PittStop_2025_by_Jay_Kuntz_13.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/PittStop_2025_by_Jay_Kuntz_13.jpg/1280px-PittStop_2025_by_Jay_Kuntz_13.jpg
+    focus: 50% 45%
+  - image: ../../assets/entities/styles/lindy-hop-2.webp
+    alt: Couples swing out across a wooden ballroom floor; in front, a man in a red shirt and tie leads his smiling partner by the hand
+    credit: "Photo: Jay Kuntz (jayjjj1955), CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:PittStop_2025_by_Jay_Kuntz_09.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/PittStop_2025_by_Jay_Kuntz_09.jpg/1280px-PittStop_2025_by_Jay_Kuntz_09.jpg
+    focus: 45% 40%
+  - image: ../../assets/entities/styles/lindy-hop-3.webp
+    alt: A smiling couple dances Lindy Hop in a close hold on a crowded social dance floor
+    credit: "Photo: Jay Kuntz (jayjjj1955), CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:PittStop_2025_by_Jay_Kuntz_07.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/PittStop_2025_by_Jay_Kuntz_07.jpg/1280px-PittStop_2025_by_Jay_Kuntz_07.jpg
+    focus: 45% 30%
+evidence:
+  - url: https://en.wikipedia.org/wiki/Lindy_Hop
+    note: "Wikipedia: Lindy Hop was born in the African American communities of Harlem, NYC, in 1928 and was very popular in the late 1930s and early 1940s; it is part of the swing dance family."
+  - url: https://commons.wikimedia.org/wiki/File:PittStop_2025_by_Jay_Kuntz_13.jpg
+    note: "Commons file page: 'Lindy Hop at an exchange in Pittsburgh' (PittStop 2025), by jayjjj1955 (Jay Kuntz, Flickr), CC BY-SA 4.0."
+  - url: https://commons.wikimedia.org/wiki/File:PittStop_2025_by_Jay_Kuntz_09.jpg
+    note: "Commons file page: Lindy Hop at the PittStop 2025 exchange in Pittsburgh, by jayjjj1955 (Jay Kuntz), CC BY-SA 4.0."
+  - url: https://commons.wikimedia.org/wiki/File:PittStop_2025_by_Jay_Kuntz_07.jpg
+    note: "Commons file page: Lindy Hop at the PittStop 2025 exchange in Pittsburgh, by jayjjj1955 (Jay Kuntz), CC BY-SA 4.0."

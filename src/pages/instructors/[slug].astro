@@ -4,9 +4,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import EventSeriesList from '../../components/EventSeriesList.astro';
 import PersonLinks from '../../components/PersonLinks.astro';
+import EntityHeroMedia from '../../components/EntityHeroMedia.astro';
+import EntityContact from '../../components/EntityContact.astro';
+import EntityGallery from '../../components/EntityGallery.astro';
 import { upcomingFor } from '../../lib/content';
 import { linksOf } from '../../lib/links';
-import { breadcrumbJsonLd } from '../../lib/seo';
+import { entityImageUrls } from '../../lib/entity-images';
+import { breadcrumbJsonLd, instructorJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
 import Reactions from '../../components/Reactions.astro';
 
@@ -24,26 +28,47 @@ const crumbs = [
   { name: p.name, href: `/instructors/${person.id}/` },
 ];
 const lede = p.description ?? `Dance teacher${styles.length ? ` (${styles.map((s) => s.data.name).join(', ')})` : ''}.`;
+const links = linksOf(p);
+const site = Astro.site!;
+const [photo, ...morePhotos] = p.photos ?? [];
+const ld = instructorJsonLd(person.id, p, site, {
+  ...(await entityImageUrls(p, site)),
+  links,
+  styles: styles.map((s) => s.data.name),
+  organizations: orgs.map((o) => ({ name: o.data.name, url: new URL(`/organizers/${o.id}/`, site).toString() })),
+});
 ---
-<BaseLayout title={p.seoTitle ?? `${p.name}: dance classes on Long Island`} description={p.seoDescription ?? `${lede} Upcoming classes and lessons with ${p.name} in Nassau and Suffolk.`.slice(0, 165)} pageType="person" jsonLd={[{ '@context': 'https://schema.org', '@type': 'Person', name: p.name, jobTitle: 'Dance teacher', sameAs: linksOf(p).map((l) => l.url) }, breadcrumbJsonLd(crumbs, Astro.site!)]}>
+<BaseLayout title={p.seoTitle ?? `${p.name}: dance classes on Long Island`} description={p.seoDescription ?? `${lede} Upcoming classes and lessons with ${p.name} in Nassau and Suffolk.`.slice(0, 165)} pageType="person" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={p.name} lede={lede} crumbs={crumbs}>
-      <Reactions type="instructor" id={person.id} name={p.name} variant="hero" />
-    <PersonLinks links={linksOf(p)} name={p.name} variant="buttons" location="instructor" class="mt-5" />
+    {(photo || p.logo) && <EntityHeroMedia slot="media" name={p.name} photo={photo} logo={p.logo} />}
+    <Reactions type="instructor" id={person.id} name={p.name} variant="hero" />
+    <PersonLinks links={links} name={p.name} variant="buttons" location="instructor" class="mt-5" />
   </PageHeader>
   <div class="container section stack-l">
     <section aria-labelledby="on-h">
       <h2 id="on-h">Upcoming classes and events</h2>
       <div class="mt-5"><EventSeriesList events={events} empty={`No upcoming events with ${p.name} are listed right now`} /></div>
     </section>
-    {(orgs.length > 0 || styles.length > 0) && (
-      <section class="panel" aria-labelledby="d-h">
-        <h2 id="d-h">Details</h2>
-        <dl class="dl">
-          {styles.length > 0 && <div><dt>Teaches</dt><dd>{styles.map((s, i) => <>{i > 0 && ', '}<a href={`/styles/${s.id}/`}>{s.data.name}</a></>)}</dd></div>}
-          {orgs.length > 0 && <div><dt>Teaches with</dt><dd>{orgs.map((o, i) => <>{i > 0 && ', '}<a href={`/organizers/${o.id}/`}>{o.data.name}</a></>)}</dd></div>}
-        </dl>
-      </section>
-    )}
+    <EntityContact
+      heading="Details and lessons"
+      name={p.name}
+      location="instructor"
+      phone={p.phone}
+      email={p.email}
+      bookingUrl={p.bookingUrl}
+      bookingLabel="Lessons"
+      links={links}
+      evidence={p.evidence}
+      factsSource={p.factsSource}
+      logo={p.logo}
+      photos={p.photos}
+      ownerPrompt="Are you this teacher? Something wrong or missing?"
+    >
+      {styles.length > 0 && <div><dt>Teaches</dt><dd>{styles.map((s, i) => <>{i > 0 && ', '}<a href={`/styles/${s.id}/`}>{s.data.name}</a></>)}</dd></div>}
+      {orgs.length > 0 && <div><dt>Teaches with</dt><dd>{orgs.map((o, i) => <>{i > 0 && ', '}<a href={`/organizers/${o.id}/`}>{o.data.name}</a></>)}</dd></div>}
+      {p.town && <div><dt>Based in</dt><dd>{p.town}</dd></div>}
+    </EntityContact>
+    <EntityGallery photos={morePhotos} heading={`More photos of ${p.name}`} />
     <CommunityPanel type="instructor" id={person.id} name={p.name} />
   </div>
 </BaseLayout>

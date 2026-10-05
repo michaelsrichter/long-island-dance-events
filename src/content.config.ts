@@ -4,14 +4,14 @@ import {
   eventSchema,
   faqSchema,
   gallerySchema,
-  instructorSchema,
-  organizerSchema,
+  instructorSchemaWith,
+  organizerSchemaWith,
   pageSchema,
-  performerSchema,
+  performerSchemaWith,
   settingsSchema,
   sourceSchema,
-  styleSchema,
-  venueSchema,
+  styleSchemaWith,
+  venueSchemaWith,
 } from './lib/schemas';
 
 const md = (dir: string) => glob({ pattern: '**/*.md', base: `./src/content/${dir}` });
@@ -21,12 +21,12 @@ const json = (dir: string) => glob({ pattern: '**/*.json', base: `./src/content/
 
 export const collections = {
   events: defineCollection({ loader: json('events'), schema: eventSchema }),
-  venues: defineCollection({ loader: json('venues'), schema: venueSchema }),
-  performers: defineCollection({ loader: json('performers'), schema: performerSchema }),
-  instructors: defineCollection({ loader: json('instructors'), schema: instructorSchema }),
-  organizers: defineCollection({ loader: json('organizers'), schema: organizerSchema }),
+  venues: defineCollection({ loader: json('venues'), schema: ({ image }) => venueSchemaWith(image) }),
+  performers: defineCollection({ loader: json('performers'), schema: ({ image }) => performerSchemaWith(image) }),
+  instructors: defineCollection({ loader: json('instructors'), schema: ({ image }) => instructorSchemaWith(image) }),
+  organizers: defineCollection({ loader: json('organizers'), schema: ({ image }) => organizerSchemaWith(image) }),
   sources: defineCollection({ loader: json('sources'), schema: sourceSchema }),
-  styles: defineCollection({ loader: yml('styles'), schema: styleSchema }),
+  styles: defineCollection({ loader: yml('styles'), schema: ({ image }) => styleSchemaWith(image) }),
   pages: defineCollection({ loader: md('pages'), schema: ({ image }) => pageSchema(image) }),
   gallery: defineCollection({ loader: yml('gallery'), schema: ({ image }) => gallerySchema(image) }),
   faqs: defineCollection({ loader: yml('faqs'), schema: faqSchema }),

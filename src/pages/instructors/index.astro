@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import PersonCard from '../../components/PersonCard.astro';
 import { getEventGroups } from '../../lib/content';
+import { cardMedia } from '../../lib/directory';
 import { linksOf } from '../../lib/links';
 import { breadcrumbJsonLd } from '../../lib/seo';
 
@@ -19,8 +20,20 @@ const crumbs = [
 <BaseLayout title="Dance teachers on Long Island" description={`${people.length} dance teachers with classes and lessons in Nassau and Suffolk.`} pageType="instructors" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
   <PageHeader title="Teachers" lede="Teachers named in the listings. Pick a teacher to see every class they have coming up." crumbs={crumbs} />
   <div class="container section">
-    <ul class="grid grid--3 person-grid">
-      {people.map((p) => <PersonCard name={p.data.name} href={`/instructors/${p.id}/`} kicker="Teacher" icon="people" links={linksOf(p.data)} upcomingCount={count(p.id)} note={p.data.styles.map((s) => styles.get(s)).filter(Boolean).slice(0, 3).join(', ')} />)}
+    <ul class="person-grid">
+      {people.map((p) => (
+        <PersonCard
+          name={p.data.name}
+          href={`/instructors/${p.id}/`}
+          kicker={`Teacher${p.data.town ? ` · ${p.data.town}` : ''}`}
+          icon="people"
+          links={linksOf(p.data)}
+          upcomingCount={count(p.id)}
+          note={p.data.styles.map((s) => styles.get(s)).filter(Boolean).slice(0, 3).join(', ')}
+          like={{ type: 'instructor', id: p.id }}
+          {...cardMedia(p.data)}
+        />
+      ))}
     </ul>
   </div>
 </BaseLayout>

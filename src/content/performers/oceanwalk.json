@@ -26,5 +26,16 @@
     "acoustic covers",
     "songs from the '60s to today"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). No official website or social pages found. Not the Russian rapper 'OceanWalk' or the Pennsylvania metal band 'The Ocean Walker'. Identity based on same name at nearby Merrick/Bellmore venues."
+  "reviewNotes": "Added from Ira's List research (2026-10-03). No official website or social pages found. Not the Russian rapper 'OceanWalk' or the Pennsylvania metal band 'The Ocean Walker'. Identity based on same name at nearby Merrick/Bellmore venues.\n\nDirectory research 2026-10-04: Still no official website, Facebook, Instagram or YouTube found for this Bellmore-area acoustic trio; it appears to be billed as \"OCEANWALK Music\". Current description and genres are confirmed by the Bellmore Memorial Library listing. Not the SoundCloud/Last.fm \"OceanWalk\" (a different, recorded-music artist), the Astronautalis song \"Oceanwalk\", or the Oceanwalk homeowners association. No logo or photos found.",
+  "evidence": [
+    {
+      "url": "https://bellmorelibrary.org/summer-ice-cream-social-feat-oceanwalk-music/",
+      "note": "Bellmore Memorial Library billed \"OCEANWALK Music\", an acoustic trio playing covers from the 60s to today, for its adult summer reading ice cream social on Wednesday, August 12 (2026). Page now sits behind a bot check; text seen in search…"
+    },
+    {
+      "url": "https://www.facebook.com/bellmorelibrary/videos/last-week-we-had-an-ice-cream-social-for-adults-to-celebrate-summer-reading-we-e/1397094802300699/",
+      "note": "The library's own Facebook post thanks \"OCEANWALK Music\" for the live music at the event, confirming the trio played in Bellmore."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: bellmorelibrary.org, facebook.com."
 }

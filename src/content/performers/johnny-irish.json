@@ -1,5 +1,34 @@
 {
   "name": "Johnny Irish",
   "type": "band",
-  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Most likely the Bay Shore guitarist Johnny \"Irish\" Borland (stage name Johnny Irish): every listing is a South Shore Long Island bar, and his SoundCloud names Bay Shore. No official website or booking page found. TikTok johnnyirishnyc matched by name + #johnnyirishli tag + acoustic-cover content, but it is not linked from any official page, so confirm before publishing. An Instagram handle '@johnnyirishli' shows up in a people-search listing but could not be checked (not recorded). The SoundCloud page is old and inactive. Not to be confused with Facebook 'John Irish-Musician' (a New Hampshire 603 area-code performer) or Irish fiddle act 'Johnny Irish Murphy'.",
+  "tiktokUrl": "https://www.tiktok.com/@johnnyirishnyc",
+  "genres": [
+    "acoustic covers",
+    "classic rock"
+  ],
+  "description": "Solo acoustic singer and guitarist from Bay Shore who plays cover sets, mostly classic rock and '70s favorites, at bars and restaurants on Long Island's South Shore.",
+  "evidence": [
+    {
+      "url": "https://www.thevillagerfarmingdale.com/livemusic/live-music-johnny-irish",
+      "note": "The Villager (Farmingdale) lists 'Live Music: Johnny Irish'."
+    },
+    {
+      "url": "https://www.theharpandhoundny.com/events2/johnny-irish-sept12",
+      "note": "The Harp & Hound lists Johnny Irish performing live on Sep 12, 2026; he also appears on Oakdale Brew House and The Wharf Oakdale calendars."
+    },
+    {
+      "url": "https://soundcloud.com/johnny-irish",
+      "note": "Older SoundCloud artist page 'Johnny Irish' gives the name John Borland and the town Bay Shore."
+    },
+    {
+      "url": "https://www.tiktok.com/tag/johnnyirishli",
+      "note": "TikTok account johnnyirishnyc posts acoustic guitar covers (Peter Gabriel, Bee Gees, Grateful Dead, '70s songs) tagged #johnnyirishli."
+    },
+    {
+      "url": "https://music.apple.com/us/artist/johnny-irish-borland/1622906008",
+      "note": "Apple Music lists Johnny \"Irish\" Borland as a featured guitarist on a 2022 single; a Huntington Patch listing calls Johnny \"Irish\" Borland a local guitarist."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thevillagerfarmingdale.com, theharpandhoundny.com, soundcloud.com, tiktok.com."
 }

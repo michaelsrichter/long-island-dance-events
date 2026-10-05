@@ -2,10 +2,69 @@
   "name": "Little Fish",
   "address": "50 N Sea Dr",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Facts confirmed on the restaurant's own site and Google Maps. This is a seasonal beach restaurant: the site says the current fall hours run through Columbus Day (Oct 12, 2026), so it may close or cut hours after that - check before listing late-season events. Live music is one act on Friday/Saturday evenings at dinner; the site does not mention a dance floor. No Facebook page is linked from the site. Photo 2 is a large PNG (about 4 MB) from the site's catering gallery. Southold is in Suffolk County.",
   "state": "NY",
   "town": "Southold",
   "latitude": 41.071624,
   "longitude": -72.454487,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.littlefishnofo.com/",
+  "instagramUrl": "https://www.instagram.com/littlefishnofo/",
+  "email": "littlefishnofo@gmail.com",
+  "phone": "(631) 765-8756",
+  "hours": "Fall, through Columbus Day: Mon-Fri 5 PM-9 PM; Sat-Sun 12 PM-3 PM and 5 PM-9 PM (seasonal)",
+  "postalCode": "11971",
+  "description": "A seasonal seafood restaurant at Kenney's Beach in Southold on the North Fork. It serves lunch and dinner, and in season a musician or band plays from 6 to 9 PM on Friday and Saturday nights.",
+  "logo": {
+    "image": "../../assets/entities/venues/little-fish-southold-logo.webp",
+    "alt": "Little Fish logo: the name in pink script across the open jaws of a gray shark (transparent background)",
+    "credit": "Logo: Little Fish",
+    "creditUrl": "https://www.littlefishnofo.com/",
+    "imageSource": "https://static.wixstatic.com/media/c4672a_503017964d4a469bb3d9dda3a81a18ab~mv2.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/little-fish-southold-1.webp",
+      "alt": "Little Fish's upstairs dining room with peach walls, green chairs draped in shaggy yellow covers, palm plants and big windows",
+      "credit": "Photo: Little Fish (website)",
+      "creditUrl": "https://www.littlefishnofo.com/about-4",
+      "imageSource": "https://static.wixstatic.com/media/09c843_d7f66e97728e469897b7f9c823b13d97~mv2.jpg/v1/fit/w_1600,h_1600,q_85/09c843_d7f66e97728e469897b7f9c823b13d97~mv2.jpg",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/little-fish-southold-2.webp",
+      "alt": "An outdoor picnic table set with plates and glasses outside Little Fish, under a pink and orange sunset sky",
+      "credit": "Photo: Little Fish (website)",
+      "creditUrl": "https://www.littlefishnofo.com/about-4",
+      "imageSource": "https://static.wixstatic.com/media/09c843_82f8918807794ef78fadada52bb13569~mv2.png/v1/fit/w_1600,h_1600,q_85/09c843_82f8918807794ef78fadada52bb13569~mv2.png",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/little-fish-southold-3.webp",
+      "alt": "The entrance at Little Fish: a coral wall with a neon sign inside a shark-jaw frame, plants, and pastel chairs with fluffy covers",
+      "credit": "Photo: Little Fish (website)",
+      "creditUrl": "https://www.littlefishnofo.com/about-4",
+      "imageSource": "https://static.wixstatic.com/media/09c843_fb0d2f55b05546bbbc19059230fcfa9f~mv2.jpg/v1/fit/w_1600,h_1600,q_85/09c843_fb0d2f55b05546bbbc19059230fcfa9f~mv2.jpg",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.littlefishnofo.com/contact-5",
+      "note": "Restaurant's contact page: 50 N Sea Drive, Southold, NY 11971, 631-765-8756, littlefishnofo@gmail.com, and daily hours."
+    },
+    {
+      "url": "https://www.littlefishnofo.com/",
+      "note": "Home page: fall hours through Columbus Day, lunch on weekends 12-3 PM, dinner nightly 5-9 PM, live music 6-9 PM Friday and Saturday nights; links Instagram @littlefishnofo."
+    },
+    {
+      "url": "https://www.littlefishnofo.com/general-1",
+      "note": "Press page lists articles about Little Fish opening at Kenney's Beach in Southold (Northforker, Greater Long Island, Patch)."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=16056991523223056748",
+      "note": "Google Maps: Little Fish, seafood restaurant, 50 N Sea Dr, Southold, NY 11971, (631) 765-8756, littlefishnofo.com; Sunday hours 12-3 PM and 5-9 PM."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: littlefishnofo.com."
 }

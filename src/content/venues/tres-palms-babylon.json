@@ -26,16 +26,66 @@
   },
   "description": "A tropical-style waterfront restaurant and bar on the Great South Bay in Babylon with an outdoor deck, boat slips, seafood and live music in season.",
   "facebookUrl": "https://www.facebook.com/trespalmsrestaurant/",
-  "factsSource": "Checked October 3, 2026. Source: trespalms.com.",
+  "factsSource": "Checked October 4, 2026. Sources: trespalms.com, restaurantji.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Tres+Palms+16+East+Ct+Babylon+NY+11702",
   "kind": "restaurant",
   "phone": "(631) 482-1465",
   "postalCode": "11702",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira wrote 'Tres Palm'; the business is Tres Palms. The 'Oyster Fest' on Sun Oct 4 at 2 pm was not found on the venue's events page (it showed no events). Do not confuse it with the Oyster Bay Oyster Festival (Oct 17-18 at Theodore Roosevelt Park).",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira wrote 'Tres Palm'; the business is Tres Palms. The 'Oyster Fest' on Sun Oct 4 at 2 pm was not found on the venue's events page (it showed no events). Do not confuse it with the Oyster Bay Oyster Festival (Oct 17-18 at Theodore Roosevelt Park).\n\nDirectory research 2026-10-04: The site sits behind a Cloudflare check: the home page loaded in a normal browser but the Events page did not, so live-music dates could not be confirmed. The Instagram handle is trespalms_babylon (linked from the site), not trespalms. Hours come from the site's schema data; Monday is not listed (a third-party listing says Mon 12-9:30 PM), and waterfront hours may change by season. The site also promotes 'Jodigirl Charters' (boat trips), not recorded. Current description is still accurate.",
   "state": "NY",
   "town": "Babylon",
   "website": "https://trespalms.com/",
   "latitude": 40.68217,
   "longitude": -73.315822,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/trespalms_babylon/",
+  "email": "trespalmsrestaurant@gmail.com",
+  "hours": "Tue-Thu 12 PM-10 PM; Fri-Sat 12 PM-11 PM; Sun 11 AM-10 PM (Monday not listed)",
+  "logo": {
+    "image": "../../assets/entities/venues/tres-palms-babylon-logo.webp",
+    "alt": "Tres Palms Coastal Dining logo: palm trees against a yellow sunset with a bridge, above the words Tres Palms and Coastal Dining",
+    "credit": "Logo: Tres Palms",
+    "creditUrl": "https://trespalms.com/",
+    "imageSource": "https://static-content.owner.com/funnel/images/216ffb3a-80e8-410b-b73e-49d33ce090b9"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/tres-palms-babylon-1.webp",
+      "alt": "Guests eating at colorful picnic tables under navy umbrellas on Tres Palms' waterfront dock, with the bay and boats behind",
+      "credit": "Photo: Tres Palms (website)",
+      "creditUrl": "https://trespalms.com/",
+      "imageSource": "https://static-content.owner.com/funnel/images/67cb52c1-1555-4c4a-abbe-92c912cb0eb9",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/tres-palms-babylon-2.webp",
+      "alt": "The Tres Palms Coastal Dining sign with palm trees on the restaurant's shingled outside wall",
+      "credit": "Photo: Tres Palms (website)",
+      "creditUrl": "https://trespalms.com/",
+      "imageSource": "https://static-content.owner.com/funnel/images/a365c796-65d3-4954-a9ed-60163aa19d3a",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/tres-palms-babylon-3.webp",
+      "alt": "Inside Tres Palms: a bright green dining room with white tablecloths, wicker-back chairs and windows on the water",
+      "credit": "Photo: Tres Palms (website)",
+      "creditUrl": "https://trespalms.com/",
+      "imageSource": "https://static-content.owner.com/funnel/images/196d6f21-b8d4-4b45-a152-9c24faadb6a2",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://trespalms.com/",
+      "note": "Restaurant site (viewed in a browser): 16 East Ct, Babylon NY 11702, (631) 482-1465, trespalmsrestaurant@gmail.com; schema data lists hours and 'live-music-bar'; links Facebook /trespalmsrestaurant and Instagram /trespalms_babylon."
+    },
+    {
+      "url": "https://www.restaurantji.com/ny/babylon/tres-palms-/",
+      "note": "Third-party listing matches name, address and phone and mentions live music."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=16%20East%20Ct%2C%20Babylon%2C%20NY%2011702%2C%20USA&query_place_id=ChIJ--HVa9zS6YkRBm4NIx8SiLE",
+      "note": "Shows the county."
+    }
+  ]
 }

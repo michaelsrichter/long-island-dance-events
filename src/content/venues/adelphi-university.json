@@ -8,16 +8,59 @@
   "town": "Garden City",
   "county": "Nassau",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: adelphi.edu, google.com.",
+  "factsSource": "Checked October 4, 2026. Source: adelphi.edu.",
   "postalCode": "11530",
   "phone": "(800) 233-5744",
   "website": "https://www.adelphi.edu/",
   "googleMapsUrl": "https://www.google.com/maps?cid=5764565024136057826",
   "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot at Woodruff Hall. LIRR Nassau Boulevard station is a short walk.",
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot for Woodruff Hall.",
-  "description": "Ballroom classes meet in Woodruff Hall, Room 304.",
-  "reviewNotes": "Ballroom classes are a Continuing Education course (Ruth S. Ammon College of Education & Health Sciences) held in Woodruff Hall, Room 304. Dance-shoe rules apply on the special floor.",
+  "description": "A private university in Garden City. Its continuing education program runs a public ballroom and social dance class on Friday evenings in the dance studio in Woodruff Hall (Room 304), which has a special floor that needs clean dance shoes.",
+  "reviewNotes": "Ballroom classes are a Continuing Education course (Ruth S. Ammon College of Education & Health Sciences) held in Woodruff Hall, Room 304. Dance-shoe rules apply on the special floor.\n\nDirectory research 2026-10-04: Social links are the university-wide accounts (linked from adelphi.edu), not dance-specific. The class contact on the course page is the School of Health Sciences, 516-877-4260, with a staff coordinator's personal work email (not recorded). The studio photo is the course page's own feature image; it may not be Room 304 itself. No hours recorded (campus building; class times are on the course page).",
   "latitude": 40.719764,
   "longitude": -73.651972,
-  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)",
+  "facebookUrl": "https://www.facebook.com/AdelphiU/",
+  "instagramUrl": "https://www.instagram.com/adelphiu/",
+  "youtubeUrl": "https://www.youtube.com/AdelphiUniv",
+  "tiktokUrl": "https://www.tiktok.com/@adelphiu",
+  "logo": {
+    "image": "../../assets/entities/venues/adelphi-university-logo.webp",
+    "alt": "Adelphi University New York logo in gold capital letters",
+    "credit": "Logo: Adelphi University",
+    "creditUrl": "https://www.adelphi.edu/",
+    "imageSource": "https://www.adelphi.edu/brand/wp-content/uploads/sites/55/2020/07/Adelphi-New-York-Primary-Logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/adelphi-university-1.webp",
+      "alt": "Adelphi's green campus lawn with flowering trees, a flagpole flying the U.S. and Adelphi flags, and brick buildings behind",
+      "credit": "Photo: Adelphi University (website)",
+      "creditUrl": "https://www.adelphi.edu/",
+      "imageSource": "https://www.adelphi.edu/wp-content/uploads/2020/06/Adelphi-campus-1-1024x684.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/adelphi-university-2.webp",
+      "alt": "A young woman and an older man practice dance steps side by side in a bright studio with a piano and a wooden floor",
+      "credit": "Photo: Adelphi University (website)",
+      "creditUrl": "https://www.adelphi.edu/ce-course/workshop/ballroom-dancing/",
+      "imageSource": "https://www.adelphi.edu/wp-content/uploads/2018/07/AlexaAnnesse_Feature.jpg",
+      "focus": "60% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.adelphi.edu/ce-course/workshop/ballroom-dancing/",
+      "note": "Course page: Social and Ballroom Dancing (non-credit), Fridays 7-8:30 PM, Sept 11 - Nov 20, 2026, in Woodruff Hall Room 304; max 24; $125 public / $75 Adelphi community; instructor Richard Fiore; special floor needs clean dance shoes."
+    },
+    {
+      "url": "https://www.adelphi.edu/",
+      "note": "University site: One South Avenue, Garden City, NY 11530; 800-233-5744; links to Facebook AdelphiU, Instagram adelphiu, TikTok @adelphiu and YouTube AdelphiUniv."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=16040112239777709664",
+      "note": "Google Maps lists Adelphi University at 1 South Ave, Garden City, NY 11530, phone (800) 233-5744."
+    }
+  ]
 }

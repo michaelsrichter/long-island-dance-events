@@ -41,7 +41,40 @@
     "Grease songs",
     "country-pop"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Bryant Library (Roslyn) listing not checked directly. 'Mor' is the performer's stage name.",
-  "website": "https://www.morhits.com/olivia-grease-vs-dolly-divas",
-  "youtubeUrl": "https://www.youtube.com/@OliviaVsDolly"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Bryant Library (Roslyn) listing not checked directly. 'Mor' is the performer's stage name.\n\nDirectory research 2026-10-04: The current website URL (morhits.com/olivia-grease-vs-dolly-divas) now loads a blank page and morhits.com redirects to Mor's new site morlive.net, so I replaced it with the matching morlive.net page. Social links are the show's own pages as linked from that page (Facebook/Instagram/TikTok still use the older 'Hopelessly Olivia' name); YouTube @OliviaVsDolly confirmed. Mor's general pages also exist: facebook.com/MorHits, instagram.com/mor.hits, linktr.ee/morhits (not recorded as this show's links). Booking email/phone are published by Mor for bookings; a second booking number (929) 696-4488 is also listed. Bryant Library show confirmed on Mor's events page; the 2 PM time comes from search results for the library's LibCal page, not opened directly. No images: the site's Google Sites image links returned HTTP 403 to the download helper, and Linktree is blocked by robots.txt. Current description is accurate; not changed.",
+  "website": "https://www.morlive.net/tributes/olivia-grease-vs-dolly-divas",
+  "youtubeUrl": "https://www.youtube.com/@OliviaVsDolly",
+  "facebookUrl": "https://www.facebook.com/HopelesslyOlivia/",
+  "instagramUrl": "https://www.instagram.com/hopelesslyolivia/",
+  "tiktokUrl": "https://www.tiktok.com/@hopelesslyolivia",
+  "bookingUrl": "https://www.morlive.net/contact",
+  "email": "morsinging@gmail.com",
+  "phone": "(631) 394-8296",
+  "evidence": [
+    {
+      "url": "https://www.morlive.net/tributes/olivia-grease-vs-dolly-divas",
+      "note": "Mor's own site: 'Olivia & Grease vs. Dolly & Divas' is a tribute band starring Mor, with Olivia Newton-John, Dolly Parton, Shania Twain, Carrie Underwood and Grease songs; lists the show's social pages and booking email/phone."
+    },
+    {
+      "url": "https://www.morlive.net/events/upcoming-events",
+      "note": "Mor's events page lists 'Olivia & Grease vs. Dolly & Divas @ The Bryant Library', 2 Paper Mill Rd, Roslyn - confirms the Bryant Library show."
+    },
+    {
+      "url": "https://bryantlibrary.libcal.com/event/15648050",
+      "note": "Bryant Library event 'Mor Presents: Olivia & Dolly' (search result; reported as Sun Oct 4, 2026, 2 PM, free, registration required)."
+    },
+    {
+      "url": "https://www.youtube.com/@OliviaVsDolly",
+      "note": "YouTube channel 'Olivia & Grease vs. Dolly & Divas' describes itself as a New York tribute band by Mor featuring Olivia Newton-John and Dolly Parton music."
+    },
+    {
+      "url": "https://www.morlive.net/epk",
+      "note": "Mor's EPK: Long Island singer-producer; 5-piece band shows 'Hopelessly Olivia' and 'Dolly & Divas'; plays CMPAC, BayWay Arts Center, Bellmore Theatre, My Father's Place and libraries including Bryant."
+    },
+    {
+      "url": "https://www.morlive.net/contact",
+      "note": "Shows the booking page and email."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: morlive.net, bryantlibrary.libcal.com, youtube.com."
 }

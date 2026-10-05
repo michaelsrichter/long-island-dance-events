@@ -1,5 +1,34 @@
 {
   "name": "Apollo’s Creed",
   "type": "band",
-  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Identity is based on the name plus Long Island context: the Bartini listing gives only the name, and the only Long Island act found with this name is the Creed tribute whose YouTube channel is recorded. No website, Facebook, Instagram or booking page was found. Spelling differs slightly: the venue writes 'Apollo's Creed', the band's YouTube writes 'Apollos Creed'. Do NOT link the Bandcamp/Spotify/Apple Music 'Apollo's Creed' (Halifax, Nova Scotia original band). Logo is the YouTube channel picture (downloadable without login).",
+  "youtubeUrl": "https://www.youtube.com/@ApollosCreedtribute",
+  "genres": [
+    "Creed tribute",
+    "hard rock",
+    "post-grunge"
+  ],
+  "description": "A Long Island tribute band that plays the songs of Creed, the hard rock band known for late-1990s and 2000s radio hits.",
+  "logo": {
+    "image": "../../assets/entities/performers/apollos-creed-logo.webp",
+    "alt": "Apollos Creed logo: silver carved letters over a dark red and gold oval emblem on black",
+    "credit": "Logo: Apollos Creed (YouTube channel)",
+    "creditUrl": "https://www.youtube.com/@ApollosCreedtribute",
+    "imageSource": "https://yt3.googleusercontent.com/dJXDqM2jRJ4c4GU4DkwXsR1Stxb1k3ADVkCaRdkYtubMmvN2a26HZ2P53KOhj_7oHz62Vxj8Iw=s900-c-k-c0x00ffffff-no-rj"
+  },
+  "evidence": [
+    {
+      "url": "https://www.bartinibabylon.com/event-calendar",
+      "note": "Bartini Bar & Lounge in Babylon lists 'APOLLO'S CREED' for live music on Fri Oct 30 at 8 PM, matching our listing."
+    },
+    {
+      "url": "https://www.youtube.com/@ApollosCreedtribute",
+      "note": "YouTube channel 'Apollos Creed tribute' calls itself the Long Island, NY tribute to the band Creed and posts live clips from local bars such as TC's Whiskey Rocks and Katie's of Smithtown."
+    },
+    {
+      "url": "https://apolloscreed.bandcamp.com/",
+      "note": "A different band named Apollo's Creed (original music on Bandcamp, Spotify and Apple Music) is from Halifax, Nova Scotia, so it is not this act."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: bartinibabylon.com, youtube.com, apolloscreed.bandcamp.com."
 }

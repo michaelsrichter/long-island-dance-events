@@ -14,3 +14,20 @@ aliases:
   - Country Partner
 summary: A traveling country partner dance with a quick-quick-slow-slow rhythm.
 music: Country music
+description: The country two-step is a partner dance that travels counterclockwise around the floor to country music, with a quick-quick-slow-slow rhythm. It is the classic dance of Texas dance halls and honky-tonks, which is why many people call it the Texas two-step. It is related to the foxtrot and the polka.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/Country-western_two-step
+photos:
+  - image: ../../assets/entities/styles/country-two-step-1.webp
+    alt: A smiling couple in western-style dance costumes and boots dances the two-step across a wooden competition floor
+    credit: "Photo: Gridiron Steamroller, CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Jack_Armstrong_%26_Faith_Wailes,_Two-Step,_2023,_TS5.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/8/83/Jack_Armstrong_%26_Faith_Wailes%2C_Two-Step%2C_2023%2C_TS5.jpg
+    focus: 55% 30%
+evidence:
+  - url: https://en.wikipedia.org/wiki/Country-western_two-step
+    note: "Wikipedia: the country/western two-step, often called the Texas two-step, is danced to country music and is related to the polka, the Texas waltz and the foxtrot."
+  - url: https://commons.wikimedia.org/wiki/File:Jack_Armstrong_%26_Faith_Wailes,_Two-Step,_2023,_TS5.jpg
+    note: "Commons file page: Two-Step at the 2023 UCWDC Country Dance World Championships, Phoenix; own work by Gridiron Steamroller, CC BY-SA 4.0."

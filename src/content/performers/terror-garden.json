@@ -27,7 +27,37 @@
     "heavy metal"
   ],
   "instagramUrl": "https://www.instagram.com/terrorgardenband",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Could not confirm the Lucky Strike Port Jefferson date outside Ira's List.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Could not confirm the Lucky Strike Port Jefferson date outside Ira's List.\n\nDirectory research 2026-10-04: Current links, genres and description are still correct; added X, Spotify, Bandcamp and a press-kit link. Our batch shows 0 upcoming events, but the band's press kit lists Long Island shows on Oct 24 (Oceanside), Nov 14 (Lindenhurst) and Apr 3, 2027 (Riverhead) - may be worth adding. bookingUrl is their ReverbNation press kit (it has a contact button); no public booking email or phone. Original metal band, not a dance act. No band photo found on their own pages (Linktree images are blocked by robots.txt; press-kit images are album covers and flyers), so no photos recorded. Logo is the band's Bandcamp profile image.",
   "website": "https://linktr.ee/terrorgardenband",
-  "youtubeUrl": "https://www.youtube.com/terrorgarden"
+  "youtubeUrl": "https://www.youtube.com/terrorgarden",
+  "xUrl": "https://x.com/terror_garden",
+  "spotifyUrl": "https://open.spotify.com/artist/6Z50rWSE72Z0IAmIC9paTU",
+  "bandcampUrl": "https://terrorgarden.bandcamp.com/",
+  "bookingUrl": "https://legacy.reverbnation.com/rpk/2893048",
+  "logo": {
+    "image": "../../assets/entities/performers/terror-garden-logo.webp",
+    "alt": "Terror Garden logo: the band name in jagged, distressed white capital letters on black",
+    "credit": "Logo: Terror Garden",
+    "creditUrl": "https://terrorgarden.bandcamp.com/",
+    "imageSource": "https://f4.bcbits.com/img/0042200637_10.jpg"
+  },
+  "evidence": [
+    {
+      "url": "https://linktr.ee/terrorgardenband",
+      "note": "Band's official Linktree links Facebook, Instagram, YouTube, X, Bandcamp, Spotify and a ReverbNation press kit."
+    },
+    {
+      "url": "https://legacy.reverbnation.com/rpk/2893048",
+      "note": "Press kit: Terror Garden from Amityville, NY; genre metal, hard rock and groove metal; lists five members; 2026 self-titled EP."
+    },
+    {
+      "url": "https://legacy.reverbnation.com/rpk/shows/2893048",
+      "note": "Upcoming shows: South Shore Craft Brewery (Oceanside) Oct 24, 2026; Village Pub TC's (Lindenhurst) Nov 14, 2026; North Fork Tasting Room (Riverhead) Apr 3, 2027."
+    },
+    {
+      "url": "https://terrorgarden.bandcamp.com/",
+      "note": "Bandcamp page header: \"Long Island original hard rock/metal (est. 2010)\", with several albums."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: linktr.ee, legacy.reverbnation.com, terrorgarden.bandcamp.com."
 }

@@ -1,5 +1,25 @@
 {
   "name": "Strange Brew",
   "type": "band",
-  "reviewNotes": "Added automatically from Lily Flanagan's Pub (Babylon) - music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Lily Flanagan's Pub (Babylon) - music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Medium confidence only: the YouTube channel 'Strange Brew Band LI' matches the name and Long Island, but nothing directly ties it to the Lily Flanagan's happy-hour booking, and its upload dates could not be read (channel has about 16 subscribers). No website, Facebook, Instagram or booking contact found for the Long Island band, so no description or genres recorded. Do not confuse with Strange Brew - The Clapton Project (strangebrew.com, New Jersey) or other Cream tribute bands of the same name.",
+  "youtubeUrl": "https://www.youtube.com/@strangebrewbandli4261",
+  "evidence": [
+    {
+      "url": "https://www.lilyflanaganspub.com/musicevents/2026/11/13/happy-hour-band-strange-brew",
+      "note": "Lily Flanagan's Pub, 345 Deer Park Ave, Babylon, lists 'Happy Hour Band: Strange Brew' on Fri Nov 13, 2026, 6-10 PM; no band link."
+    },
+    {
+      "url": "https://www.youtube.com/watch?v=wrGrEsynskQ",
+      "note": "YouTube channel 'Strange Brew Band LI' (@strangebrewbandli4261) posts videos titled 'Strange Brew Band Live Long Island New York', so a Long Island band of this name exists."
+    },
+    {
+      "url": "https://www.strangebrew.com/schedule.html",
+      "note": "Different band: 'Strange Brew - The Clapton Project' is a northern New Jersey Eric Clapton tribute (201 phone, Fort Lee and Garwood NJ shows), not this Long Island act."
+    },
+    {
+      "url": "https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=wrGrEsynskQ&format=json",
+      "note": "Shows the YouTube channel."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: lilyflanaganspub.com, youtube.com, strangebrew.com."
 }

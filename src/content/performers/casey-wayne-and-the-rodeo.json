@@ -1,5 +1,39 @@
 {
   "name": "Casey Wayne & The Rodeo",
   "type": "band",
-  "reviewNotes": "Added automatically from 89 North (Patchogue) - music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from 89 North (Patchogue) - music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: No band website found. The Facebook URL uses the numeric page ID taken from a directory mirror (findglocal) whose posts match this band; Facebook blocks automated checks, so the owner should open it once to confirm and swap in the vanity URL if there is one. An Instagram 'kountrywayne' showed up in search but was not confirmed as the band's or Casey's, so it is not recorded. Casey Wayne also DJs country nights and plays solo acoustic sets; he formerly fronted 'Urban Rodeo' (facebook.com/UrbanRodeoNY) - a separate, older act. No logo or photos: the only photos found are on promoter/venue pages, not the band's own site.",
+  "facebookUrl": "https://www.facebook.com/905662949289331/",
+  "genres": [
+    "country",
+    "modern country hits",
+    "classic country"
+  ],
+  "description": "A Long Island country cover band led by singer and guitarist Casey Wayne, with a second singer, bass and drums. They play modern country hits plus some classic country at country nights where line dancing is welcome, such as Country Wednesdays at 89 North in Patchogue.",
+  "evidence": [
+    {
+      "url": "https://89northmusic.com/calendar",
+      "note": "89 North (Patchogue) calendar lists 'Country Wednesday with Casey Wayne & The Rodeo' on Wed Oct 28, with line dance lessons and a country DJ."
+    },
+    {
+      "url": "https://www.giotopiahub.com/post/casey-wayne-the-rodeo-bringing-nashville-energy-to-long-island",
+      "note": "Promoter Giotopia profiles the band as a Long Island 'party country' act: Casey Wayne (vocals/guitar), Donna Domingo (vocals/guitar), Carmine Gonzalez (bass), Keith Ross (drums)."
+    },
+    {
+      "url": "https://www.findglocal.com/US/Central-Islip/905662949289331/Casey-Wayne-%26-The-Rodeo",
+      "note": "Directory mirror of the band's Facebook page (Central Islip, NY; Musicians/Bands) with posts about their March 2026 debut at 89 North; gives the Facebook page ID."
+    },
+    {
+      "url": "https://daisysli.com/event/casey-wayne-the-rodeo/",
+      "note": "Daisy's Nashville Lounge (Miller Place) hosted Casey Wayne & The Rodeo for an 'American Saturday Night' show on Aug 8."
+    },
+    {
+      "url": "https://smithtownchronicle.town.news/g/smithtown-ny/n/38806/wedding-bands-urban-rodeo",
+      "note": "Older article: Casey Wayne previously fronted the Long Island country cover band Urban Rodeo, playing country hits for line dancers."
+    },
+    {
+      "url": "https://www.newsbreak.com/event/6985c2b655a855d51c78c617-casey-wayne-the-rodeo-debut-at-89-north-",
+      "note": "Shows the kind of music."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: 89northmusic.com, giotopiahub.com, findglocal.com, daisysli.com."
 }

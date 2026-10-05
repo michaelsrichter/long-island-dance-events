@@ -43,7 +43,61 @@
     "pop"
   ],
   "instagramUrl": "https://www.instagram.com/niteworkband.ny/",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Scottish group Niteworks; matched by Long Island venues (Cooperage Inn, Black Pearl, Tiki Joe's). Rating based on band and venue text, not on watching crowd videos.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Scottish group Niteworks; matched by Long Island venues (Cooperage Inn, Black Pearl, Tiki Joe's). Rating based on band and venue text, not on watching crowd videos.\n\nDirectory research 2026-10-04: All current links confirmed from the band's own site. Booking phones published by the band: John Cipriani (646) 472-4296 (recorded) and Arnold Flor (516) 286-1979. No public email. The site lists upcoming shows at Ristegio's in Patchogue (Oct 16, Nov 7, Dec 12) that are not yet in our data. Images were downloaded at 1000 px (the image server upscales beyond the original size). Photo 1 has the band name printed across the top; focus is set lower to keep the people. Current description is accurate; not replaced.",
   "website": "https://niteworkband.net/",
-  "youtubeUrl": "https://www.youtube.com/@nitework"
+  "youtubeUrl": "https://www.youtube.com/@nitework",
+  "bookingUrl": "https://niteworkband.net/contact",
+  "phone": "(646) 472-4296",
+  "logo": {
+    "image": "../../assets/entities/performers/nitework-logo.webp",
+    "alt": "Nitework logo: the band name in red script under a mirror ball, with the words Long Island's Hottest Dance Band",
+    "credit": "Logo: Nitework",
+    "creditUrl": "https://niteworkband.net/contact",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/1213081/9dbf8e7b58582ea575038888f8bc5a0072bcd7fe/original/nitework-newer-logo.jpg/!!/b%3AW1sicmVzaXplIiwxMDAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/nitework-1.webp",
+      "alt": "The eight members of Nitework standing together outside a waterfront restaurant, with the band name in red letters across the top",
+      "credit": "Photo: Nitework (website)",
+      "creditUrl": "https://niteworkband.net/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/1213081/7f90ed0edca70a2b1c99b926cbbf5a51c52b8029/original/fb-img-1760005878630.jpg/!!/b%3AW1sicmVzaXplIiwxMDAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/performers/nitework-2.webp",
+      "alt": "Nitework's guitarist singing into a microphone while playing an electric guitar on stage",
+      "credit": "Photo: Nitework (website)",
+      "creditUrl": "https://niteworkband.net/videos-photos",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/1213081/aed237370dfb19c4e55d63351368bf1ee170b287/original/fb-img-1760005797730.jpg/!!/b%3AW1sicmVzaXplIiwxMDAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 25%"
+    },
+    {
+      "image": "../../assets/entities/performers/nitework-3.webp",
+      "alt": "Nitework's lead singer in a black sequined dress singing into a microphone in front of a brick wall",
+      "credit": "Photo: Nitework (website)",
+      "creditUrl": "https://niteworkband.net/videos-photos",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/1213081/ecaa41ae4820023af164c2e98b653b4ea5e945d4/original/1000011185.jpg/!!/b%3AW1sicmVzaXplIiwxMDAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 25%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://niteworkband.net/bio",
+      "note": "Bio: Long Island dance band since 2008 playing medleys of dance hits (Bruno Mars, Donna Summer, Earth Wind & Fire, KC & The Sunshine Band, Chic, Kool & The Gang, Bee Gees, Stevie Wonder)."
+    },
+    {
+      "url": "https://niteworkband.net/shows",
+      "note": "Shows page lists Ristegio's Patchogue on Oct 16, Nov 7 and Dec 12, 2026, and 2026 past shows at Tiki Joe's, Black Pearl (Port Jefferson), The Oar (Patchogue) and Oakdale Yacht Club."
+    },
+    {
+      "url": "https://niteworkband.net/contact",
+      "note": "Contact page gives two phone numbers for bookings (John Cipriani and Arnold Flor)."
+    },
+    {
+      "url": "https://niteworkband.net/",
+      "note": "Shows the website, Facebook page, Instagram page and YouTube channel."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: niteworkband.net."
 }

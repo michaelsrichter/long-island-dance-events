@@ -10,5 +10,44 @@
   "affiliatedOrganizerIds": [
     "the-studio-by-hill-street"
   ],
-  "reviewNotes": "Studio site uses only \"Monito\"; full name from the James Lane Post opening article. Another site spells it \"Gotchev\"."
+  "reviewNotes": "Studio site uses only \"Monito\"; full name from the James Lane Post opening article. Another site spells it \"Gotchev\".\n\nDirectory research 2026-10-04: No personal website or professional social page found; the website field is the studio's About page that features him. Bookings and contact go through the studio (organizer the-studio-by-hill-street already has phone/email), so no phone/email is recorded on the teacher. Surname spelled Gochev (James Lane Post) and Gotchev (Danznik, a 2016 YouTube video title); keep the alias. A TikTok @momchilb ('Just for fun') may be his but is not linked from any official page, so not recorded. The partners in the photos are not named in alt text.",
+  "website": "https://thestudiobyhillstreet.com/about-the-studio-by-hill-street/",
+  "description": "Monito (Momchil Gochev) is the lead teacher at The Studio by Hill Street in Southampton. He teaches adults ballroom and Latin dances such as waltz, foxtrot, tango, salsa, bachata, cha-cha and rumba in weekly group classes and private lessons, and he also preps couples for wedding first dances.",
+  "photos": [
+    {
+      "image": "../../assets/entities/instructors/monito-1.webp",
+      "alt": "Monito, in a light blue suit, smiles as he leads a partner in a red and black dress across the wooden floor of The Studio in Southampton",
+      "credit": "Photo: The Studio by Hill Street (website)",
+      "creditUrl": "https://thestudiobyhillstreet.com/about-the-studio-by-hill-street/",
+      "imageSource": "https://thestudiobyhillstreet.com/wp-content/uploads/2025/09/Monito-Heather-1536x1024.jpg",
+      "focus": "45% 30%"
+    },
+    {
+      "image": "../../assets/entities/instructors/monito-2.webp",
+      "alt": "Monito holds hands with a dance partner in a ballroom pose on a sandy beach with the ocean behind them",
+      "credit": "Photo: The Studio by Hill Street (website)",
+      "creditUrl": "https://thestudiobyhillstreet.com/styles-of-dance-we-teach/",
+      "imageSource": "https://thestudiobyhillstreet.com/wp-content/uploads/2025/07/DSC04160-1024x683.webp",
+      "focus": "50% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://thestudiobyhillstreet.com/about-the-studio-by-hill-street/",
+      "note": "Studio's About page says the studio is led by instructor, choreographer and pro competitor Monito; the photo file on this page is named after Monito."
+    },
+    {
+      "url": "https://thestudiobyhillstreet.com/styles-of-dance-we-teach/",
+      "note": "Studio page lists the Latin (salsa, bachata, cha-cha, rumba, samba) and ballroom (waltz, foxtrot, tango, quickstep, Viennese waltz) styles Monito teaches, plus wedding dance lessons."
+    },
+    {
+      "url": "https://jameslanepost.com/dance-comes-to-the-hamptons-grand-opening-of-the-studio-by-hill-street-in-southampton/08/11/2025/Hamptons-News-Happenings",
+      "note": "2025 opening article names the head instructor as Momchil Gochev, known as Monito, at 33 Hill Street, Southampton; its courtesy photo shows the same man as the studio's photos."
+    },
+    {
+      "url": "https://www.danznik.com/team/monito-gotchev/",
+      "note": "Danznik (NYC/Westchester) lists Momchil \"Monito\" Gotchev as a guest ballroom instructor with a flamenco background, confirming the alternate spelling."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thestudiobyhillstreet.com, jameslanepost.com, danznik.com."
 }

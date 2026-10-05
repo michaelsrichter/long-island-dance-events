@@ -8,7 +8,7 @@
   "town": "Lake Ronkonkoma",
   "county": "Suffolk",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: waterfallsapartments.com, google.com.",
+  "factsSource": "Checked October 4, 2026. Source: waterfallsapartments.com.",
   "postalCode": "11779",
   "phone": "(631) 738-6700",
   "website": "https://waterfallsapartments.com/",
@@ -16,8 +16,30 @@
   "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot.",
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
   "description": "Clubhouse ballroom in a 55+ community. The public dances are open to walk-ins.",
-  "reviewNotes": "Ballroom is in the clubhouse of a 55+ rental community; public dances are on its event calendar. Official street name is Cassata Road (newsletter calendar says \"Ave\").",
+  "reviewNotes": "Ballroom is in the clubhouse of a 55+ rental community; public dances are on its event calendar. Official street name is Cassata Road (newsletter calendar says \"Ave\").\n\nDirectory research 2026-10-04: Still active: public ballroom dances every 2nd and 4th Saturday, 7-11 PM (DJ, BYOB, walk-ins welcome) per the community's calendar; the DJ's personal phone is listed there but was not recorded. The phone is the rental community's office line. No official social pages: Bing links an old-style page https://www.facebook.com/pages/The-Waterfalls/195212641101662 that the website does not link, so it was not recorded. Bing shows office hours Mon-Fri 9 AM-5 PM (the office, not the dances). No logo of usable size (site logo is 110x113 and the touch icon 114x114, both under 120 px). The site's gallery and slider photos of the clubhouse are Google Street View-style captures with faint Google watermarks, so none were used; no ballroom interior photos are on the site. The site mentions a short video about the dances but it is loaded by script and could not be identified.",
   "latitude": 40.835532,
   "longitude": -73.096974,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "evidence": [
+    {
+      "url": "https://waterfallsapartments.com/contact/",
+      "note": "Community's own contact page: 400 Cassata Road, Lake Ronkonkoma, NY 11779, phone (631) 738-6700 (fax 738-0608)."
+    },
+    {
+      "url": "https://waterfallsapartments.com/amenities/",
+      "note": "Amenities page says the clubhouse has a formal ballroom with a professional dance floor, ballroom lighting and a sound system."
+    },
+    {
+      "url": "https://waterfallsapartments.com/event-calendar/",
+      "note": "Event calendar lists Ballroom Dancing with a DJ every 2nd and 4th Saturday, 7-11 PM, in the clubhouse ballroom; refreshments, BYOB allowed, walk-ins welcome (Oct 10 and Oct 24, 2026 shown)."
+    },
+    {
+      "url": "https://waterfallsapartments.com/",
+      "note": "Shows the website."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=9650492865616719017",
+      "note": "Shows the county."
+    }
+  ]
 }

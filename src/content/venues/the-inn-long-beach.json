@@ -33,16 +33,35 @@
   },
   "description": "A two-level bar and restaurant in Long Beach's West End with three bars, bar food, and live bands and DJs that run late into the night.",
   "facebookUrl": "https://www.facebook.com/TheLongBeachInn/",
-  "factsSource": "Checked October 3, 2026. Source: theinnlbny.com.",
+  "factsSource": "Checked October 4, 2026. Source: theinnlbny.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Inn+943+W+Beech+St+Long+Beach+NY+11561",
   "kind": "bar",
   "phone": "(516) 432-9220",
   "postalCode": "11561",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). 'LB' = Long Beach. Krush's Oct 3 5 pm show was not found on the band's or venue's calendar, but Krush plays The Inn often. Long Beach is a city in Nassau County.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). 'LB' = Long Beach. Krush's Oct 3 5 pm show was not found on the band's or venue's calendar, but Krush plays The Inn often. Long Beach is a city in Nassau County.\n\nDirectory research 2026-10-04: Address, phone, hours and social links confirmed on the venue's own site; address and phone match Google Maps. Long Beach is a city in Nassau County. Site footer also lists a fax, (516) 432-2547 (not recorded). No public email on the site. The site's images are all event flyers and specials posters (text-heavy), plus Wix stock backgrounds, so no photos were recorded. Logo says 'Estd. LBNY 1950 - Restaurant, Bar, Live Music'. Current description kept (Google also calls it bi-level with live bands and DJs); the site's events page shows a ticketed concert (Nov 13) and themed DJ nights. No dance floor described on the site.",
   "state": "NY",
   "town": "Long Beach",
   "website": "https://www.theinnlbny.com/",
   "latitude": 40.586076,
   "longitude": -73.693608,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/theinnlbny/",
+  "hours": "Mon-Fri 4 PM-4 AM; Sat-Sun 12 PM-4 AM",
+  "logo": {
+    "image": "../../assets/entities/venues/the-inn-long-beach-logo.webp",
+    "alt": "The Inn logo: 'The Inn' in old-style lettering with red and white stripes, above 'Estd. LBNY 1950' and 'Restaurant, Bar, Live Music' in navy",
+    "credit": "Logo: The Inn Long Beach",
+    "creditUrl": "https://www.theinnlbny.com/",
+    "imageSource": "https://static.wixstatic.com/media/fce958_6655fb6fd2434f76ac73ae6a2c6f6e3b~mv2.png"
+  },
+  "evidence": [
+    {
+      "url": "https://www.theinnlbny.com/",
+      "note": "Venue's own site footer: 943 W Beech St., Long Beach, NY 11561, phone (516)-432-9220; hours Sun & Sat 12 PM-4 AM, Mon-Fri 4 PM-4 AM; links Instagram theinnlbny and Facebook TheLongBeachInn."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=14805091089043118166",
+      "note": "Google Maps: The Inn, restaurant at 943 W Beech St, Long Beach, NY 11561, (516) 432-9220; summary describes a bi-level spot with live bands and DJs; closes 4 AM."
+    }
+  ]
 }

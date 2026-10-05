@@ -1,5 +1,47 @@
 {
   "name": "SEA Monster",
   "type": "band",
-  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Identity is solid: the Bartini listing links the band's own site. Only one usable photo: most site photos are under 600 px wide, and some show topless/burlesque dancers on stage, which I skipped on purpose. The logo is the site's header artwork (monster drawing plus band name), not a stand-alone wordmark. YouTube videos are linked from the site but no official channel; no Instagram found. The band's own shows page is empty.",
+  "website": "https://seamonstermusic.com/",
+  "facebookUrl": "https://www.facebook.com/SeaMonsterFromBelow/",
+  "bookingUrl": "https://seamonstermusic.com/contact-sea-monster.php",
+  "genres": [
+    "punk rock",
+    "garage rock",
+    "psychobilly",
+    "rock and roll"
+  ],
+  "description": "A Long Island rock and roll band that mixes punk, psychobilly and blues. Formed in the mid-1980s, it was a regular at New York City punk clubs such as CBGB and still plays its own songs live.",
+  "logo": {
+    "image": "../../assets/entities/performers/sea-monster-logo.webp",
+    "alt": "Bright green drawing of a scaly sea monster with the band name Sea Monster in yellow old-style letters",
+    "credit": "Logo: Sea Monster",
+    "creditUrl": "https://seamonstermusic.com/",
+    "imageSource": "https://seamonstermusic.com/images/sea-monster-header.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/sea-monster-1.webp",
+      "alt": "Four members of Sea Monster posing on a club stage under a Continental sign, one holding a red electric guitar",
+      "credit": "Photo: Sea Monster (website)",
+      "creditUrl": "https://seamonstermusic.com/sea-monster-photos.php",
+      "imageSource": "https://seamonstermusic.com/images/live-photos/sea-monster-001.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.bartinibabylon.com/event-calendar",
+      "note": "Bartini Bar & Lounge (Babylon) lists its Halloween party on Sat Oct 31 at 7:30 PM 'featuring SEA MONSTER' and points to seamonstermusic.com."
+    },
+    {
+      "url": "https://seamonstermusic.com/",
+      "note": "Official site: rock and roll band from Long Island combining punk, psychobilly and blues; first record 1986; house band at CBGB around 1990; links the band's Facebook page."
+    },
+    {
+      "url": "https://seamonstermusic.com/contact-sea-monster.php",
+      "note": "The band takes messages through a contact form; no public email or phone shown."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: bartinibabylon.com, seamonstermusic.com."
 }

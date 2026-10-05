@@ -1,5 +1,26 @@
 {
   "name": "Country Road",
   "type": "band",
-  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: A Long Island-area modern country cover show (Mulcahy's Wantagh, The Paramount Huntington, Daryl's House Club Pawling per ticket sites). No official website or social page found; the venue pages give no band links. Ticket resellers mix it up with other acts: 'Country Roads' (UK-style country classics production, facebook.com/CountryRoadsShow), 'Country Roads' John Denver tribute (Minneapolis, Dennis Curley), and The Country Roads Band featuring Kat Perkins (Minnesota). None of those are recorded. Bandsintown artist page https://www.bandsintown.com/a/429516-country-road may list socials; worth a manual look.",
+  "genres": [
+    "country",
+    "modern country",
+    "country covers"
+  ],
+  "description": "Live country cover show that plays today's country radio hits and older favorites, from Luke Combs, Morgan Wallen and Chris Stapleton to Shania Twain, Garth Brooks and Dolly Parton.",
+  "evidence": [
+    {
+      "url": "https://mulcahyslongisland.com/event/country-road/",
+      "note": "Mulcahy's (Wantagh) event page: Country Road on Fri Oct 16, 2026, 8 PM, 18+; a full-band show of current and classic country hits (Luke Combs, Morgan Wallen, Zach Bryan, Chris Stapleton, Shania Twain, Garth Brooks and more)."
+    },
+    {
+      "url": "https://www.paramountny.com/events/country-road-with-special-guest-dj-rumer",
+      "note": "The Paramount (Huntington) hosted 'Country Road, With Special Guest: DJ Rumer' on Jul 10, 2026, billed as 'performing all your favorite country hits'."
+    },
+    {
+      "url": "https://www.bandsintown.com/e/1039900578-country-road-at-mulcahy's-pub-and-concert-hall",
+      "note": "Bandsintown lists the Mulcahy's show under an artist page 'COUNTRY ROAD' (artist id 429516); the artist page itself was blocked to our crawler."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mulcahyslongisland.com, paramountny.com, bandsintown.com."
 }

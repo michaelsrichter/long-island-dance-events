@@ -27,17 +27,63 @@
     "policy": "encouraged"
   },
   "description": "A stylish restaurant and cocktail bar in downtown Garden City with global-style American food, brunch, private rooms and DJ nights at the bar.",
-  "facebookUrl": "https://www.facebook.com/1374227202797949/",
-  "factsSource": "Checked October 3, 2026. Source: revelrestaurant.com.",
+  "facebookUrl": "https://www.facebook.com/RevelGardenCity",
+  "factsSource": "Checked October 4, 2026. Source: revelrestaurant.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Revel+Restaurant+%26+Bar+835+Franklin+Ave+Garden+City+NY+11530",
   "kind": "restaurant",
   "phone": "(516) 246-9111",
   "postalCode": "11530",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira wrote only 'Revel'. Revel Restaurant & Bar in Garden City is the only Long Island venue named Revel we found that runs DJ nights, so it is the likely match, but we could not confirm a DJ Jolie booking there on Sat Oct 3 (OpenTable lists DJs Thursday and Friday). A DJ Jolie found online is an NYC-based event DJ. Owner should confirm.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira wrote only 'Revel'. Revel Restaurant & Bar in Garden City is the only Long Island venue named Revel we found that runs DJ nights, so it is the likely match, but we could not confirm a DJ Jolie booking there on Sat Oct 3 (OpenTable lists DJs Thursday and Friday). A DJ Jolie found online is an NYC-based event DJ. Owner should confirm.\n\nDirectory research 2026-10-04: Venue facts are confirmed (high confidence that this is Revel Restaurant & Bar in Garden City), but identityConfidence is medium because it is still not confirmed that Ira's 'Revel' (DJ Jolie, Sat Oct 3) means this place: the Revel site does not mention DJs, live music or a dance floor anywhere we checked (home, bar, announcements pages). Our current description mentions 'DJ nights at the bar' based on OpenTable; that is not on the restaurant's own site. Facebook: the site links facebook.com/RevelGardenCity; our current numeric URL (1374227202797949) is probably the same page. Logo is white on transparent (needs a dark background).",
   "state": "NY",
   "town": "Garden City",
   "website": "https://www.revelrestaurant.com/",
   "latitude": 40.727161,
   "longitude": -73.634637,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/revelgardencity/",
+  "email": "info@revelrestaurant.com",
+  "hours": "Lunch Mon-Fri 11:30 AM-4 PM; brunch Sat-Sun 11 AM-2:30 PM; dinner Mon-Thu 4 PM-10 PM, Fri-Sat 4 PM-11 PM, Sun 4 PM-9 PM",
+  "logo": {
+    "image": "../../assets/entities/venues/revel-garden-city-logo.webp",
+    "alt": "Revel Restaurant & Bar logo: the word REVEL in thin white capital letters with blue accents above Restaurant & Bar",
+    "credit": "Logo: Revel Restaurant & Bar",
+    "creditUrl": "https://www.revelrestaurant.com/",
+    "imageSource": "https://static.mywebsites360.com/e92e3fb8a2a44d74b71ac9fff908a05e/i/df923dbdf1c14a02a7b85e5cd73d9801/1/5feFb8zhrk/Logo%20-%20white.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/revel-garden-city-1.webp",
+      "alt": "The brick front of Revel with white awnings, a Revel sign, blue patio umbrellas and planters full of flowers",
+      "credit": "Photo: Revel Restaurant & Bar (website)",
+      "creditUrl": "https://www.revelrestaurant.com/",
+      "imageSource": "https://static.mywebsites360.com/e92e3fb8a2a44d74b71ac9fff908a05e/i/b30dc1d40ed942329dafdbeeded1482f/1/GCuCv727RiYFXYTGZEWtdJ/_KSS3312.jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/revel-garden-city-2.webp",
+      "alt": "Revel's dining room with teal chairs, a large colorful mural, flower arrangements and sparkly hanging lights",
+      "credit": "Photo: Revel Restaurant & Bar (website)",
+      "creditUrl": "https://www.revelrestaurant.com/",
+      "imageSource": "https://static.mywebsites360.com/e92e3fb8a2a44d74b71ac9fff908a05e/i/ac5d395374f449c18bb98b3b1cfc7084/1/GCuCv727RiYFXYTGZEWtdJ/_KSS3149.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/revel-garden-city-3.webp",
+      "alt": "A private dining nook at Revel framed by pink flowers, with round crystal chandeliers and a long table",
+      "credit": "Photo: Revel Restaurant & Bar (website)",
+      "creditUrl": "https://www.revelrestaurant.com/",
+      "imageSource": "https://static.mywebsites360.com/e92e3fb8a2a44d74b71ac9fff908a05e/i/e59ffa9c9ae1425fb83ddf1fbec4f5e5/1/GCuCv727RiYFXYTGZEWtdJ/_KSS3212.jpg",
+      "focus": "50% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.revelrestaurant.com/",
+      "note": "Restaurant site lists 835 Franklin Ave, Garden City, NY 11530, (516) 246-9111, info@revelrestaurant.com and lunch, brunch and dinner hours; links Facebook (RevelGardenCity) and Instagram (revelgardencity)."
+    },
+    {
+      "url": "https://www.revelrestaurant.com/the-bar",
+      "note": "Bar page describes the cocktail bar; it does not mention DJs or live music."
+    }
+  ]
 }

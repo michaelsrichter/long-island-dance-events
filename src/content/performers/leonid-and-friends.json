@@ -35,7 +35,20 @@
     "horn rock",
     "70s jazz-rock"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Likely listing error: Leonid & Friends play Skokie, IL on Oct 3, 2026, and Boulton Center shows a different Chicago tribute ('Beginnings') on Oct 2. Owner should confirm before publishing this gig.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Likely listing error: Leonid & Friends play Skokie, IL on Oct 3, 2026, and Boulton Center shows a different Chicago tribute ('Beginnings') on Oct 2. Owner should confirm before publishing this gig.\n\nDirectory research 2026-10-04: Confirms the earlier suspicion: on Oct 3, 2026 the band plays Skokie, Illinois, and its tour page lists no Long Island or New York dates, so the Long Island listing that created this entry looks like an error (likely a different Chicago tribute). Owner should not publish a Long Island gig for them without a new source. Booking email is the US (Western Hemisphere) booking agent at Paladin Artists, published on the band's site for bookings; I left out the Eastern Hemisphere contact's phone and personal-domain email. No images: the site's /images/ folder is blocked by robots.txt. No Instagram, Spotify or X link on the site.",
   "website": "https://leonidandf.com/",
-  "youtubeUrl": "https://www.youtube.com/channel/UCD5ZsXiIFlrWrbOCM6rEDKQ"
+  "youtubeUrl": "https://www.youtube.com/channel/UCD5ZsXiIFlrWrbOCM6rEDKQ",
+  "bookingUrl": "https://leonidandf.com/",
+  "email": "gil@paladinartists.com",
+  "evidence": [
+    {
+      "url": "https://leonidandf.com/",
+      "note": "Official site: tribute band from Moscow that recreates the music of the rock band Chicago; links Facebook and YouTube; lists booking contacts (Western Hemisphere agent at Paladin Artists)."
+    },
+    {
+      "url": "https://leonidandf.com/tour.html",
+      "note": "Official tour page shows Sat 10/3/26 at the North Shore Center for the Performing Arts in Skokie, Illinois (3 PM and 8 PM, sold out) and no New York or Long Island dates."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: leonidandf.com."
 }

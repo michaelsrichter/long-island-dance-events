@@ -29,16 +29,35 @@
   },
   "description": "A craft distillery in East Northport with a farm-industrial tasting room serving cocktails made from its own spirits, plus tours, trivia and live music.",
   "facebookUrl": "https://www.facebook.com/tc.distillery/",
-  "factsSource": "Checked October 3, 2026. Source: twistedcowdistillery.net.",
+  "factsSource": "Checked October 4, 2026. Sources: discoverlongisland.com, facebook.com, flufi.me.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Twisted+Cow+Distillery+13+Hewitt+Square+East+Northport+NY+11731",
   "kind": "distillery",
   "phone": "(631) 980-8269",
   "postalCode": "11731",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Phone is published as 631-980-TCOW (= 631-980-8269). SqueezePlay confirmed for Oct 3; the second act Ira listed, 'CarTunes', was not found on the venue site (an acoustic act also appears that day).",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Phone is published as 631-980-TCOW (= 631-980-8269). SqueezePlay confirmed for Oct 3; the second act Ira listed, 'CarTunes', was not found on the venue site (an acoustic act also appears that day).\n\nDirectory research 2026-10-04: The venue's website twistedcowdistillery.net could not be opened from our network (our proxy blocks it, HTTP 470), so no logo, photos, email or published hours could be taken from it this time; please re-check from another network. Phone 631-980-TCOW (= (631) 980-8269) is confirmed by Discover Long Island. Instagram @twistedcowdistillery is matched by name and posts about the distillery seen through a profile mirror, not by a link from the site. Hours not recorded: directory summaries say Tue-Thu 4-10 PM, Fri-Sat 2-11 PM, Sun 1-7 PM, closed Mon (Google agrees for Sunday and Tuesday's opening) - confirm on the site. Google notes it is 'located in 14 Hewitt Square' (the building), the address itself is 13 Hewitt Square. Current description kept. Nothing found about a dance floor; live music is in the tasting room.",
   "state": "NY",
   "town": "East Northport",
   "website": "https://twistedcowdistillery.net/",
   "latitude": 40.876394,
   "longitude": -73.323369,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/twistedcowdistillery/",
+  "evidence": [
+    {
+      "url": "https://www.google.com/maps?cid=3520183569113918467",
+      "note": "Google Maps lists Twisted Cow Distillery (distillery) at 13 Hewitt Square, East Northport, NY 11731, website twistedcowdistillery.net; shows Sunday 1-7 PM and opening 4 PM Tuesday (closed Monday). No phone on the listing."
+    },
+    {
+      "url": "https://www.discoverlongisland.com/listing/twisted-cow-distillery/7401/",
+      "note": "Discover Long Island (the regional tourism bureau) lists the distillery and tasting room at 13 Hewitt Square, East Northport, phone 631-980-TCOW, website twistedcowdistillery.net."
+    },
+    {
+      "url": "https://www.facebook.com/tc.distillery/posts/596540095807844/",
+      "note": "A public post on the facebook.com/tc.distillery page is titled 'Twisted Cow Distillery', matching the Facebook link found on the venue's site in the Oct 3 check."
+    },
+    {
+      "url": "https://flufi.me/profile/TwistedCowDistillery",
+      "note": "Shows the Instagram page."
+    }
+  ]
 }

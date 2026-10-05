@@ -20,5 +20,31 @@
   "genres": [
     "rock and blues guitar"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03)."
+  "reviewNotes": "Added from Ira's List research (2026-10-03).\n\nDirectory research 2026-10-04: No official website found (jimmoranband.com does not resolve). facebook.com/jimmoranband looks like Jim Moran's own public profile (not a business page) that he uses to promote his jams; check the owner is comfortable linking it. The YouTube channel at youtube.com/jimmoranband (display name 'Stratcat 57') matches by URL and 'Jim Moran Live' videos but its videos are about 17 years old, so it is inactive. No public booking contact, logo or official photos found (Facebook images need a login). Not the same as Jim Oran (jimoranmusic.com) or Jim Morano (drummer).",
+  "facebookUrl": "https://www.facebook.com/jimmoranband/",
+  "youtubeUrl": "https://www.youtube.com/jimmoranband",
+  "description": "A Long Island rock and blues guitarist and singer who has hosted open jam sessions for many years. He runs a free Sunday afternoon open mic jam at Frogzz Bar 'N' Grill in Yaphank and also plays classic rock with the Jim Moran Band.",
+  "evidence": [
+    {
+      "url": "https://www.groovehub.io/events/jim-morans-sunday-funday-open-mic-jam/20260920",
+      "note": "Weekly Sunday 3 PM open mic jam at Frogzz Bar 'N' Grill, 450 Main Street, Yaphank, hosted by guitarist Jim Moran; free; blues, rock, soul and more."
+    },
+    {
+      "url": "https://westisliplibrary.libnet.info/event/16939682",
+      "note": "West Islip Public Library 'After Hours Concert: The Jim Moran Band' (Oct 2, 2026): classic rock with guitarist Jim Moran and friends."
+    },
+    {
+      "url": "https://www.facebook.com/LongIslandBluesSociety/posts/738993271589689/",
+      "note": "Long Island Blues Society post says Jim Moran has hosted jam sessions on Long Island for decades."
+    },
+    {
+      "url": "https://www.facebook.com/jimmoranband/photos/join-us-at-3pm-for-jim-morans-sunday-funday-open-mic-jam-with-friends-today-were/10227572328188197/",
+      "note": "Public posts under facebook.com/jimmoranband promote 'Jim Moran's Sunday Funday Open Mic Jam'."
+    },
+    {
+      "url": "https://www.youtube.com/jimmoranband/featured",
+      "note": "YouTube channel at /jimmoranband (named 'Stratcat 57') has a 'Jim Moran Live' playlist, including a Richie Cannata jam at The Bitter End."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: groovehub.io, westisliplibrary.libnet.info, facebook.com, youtube.com."
 }

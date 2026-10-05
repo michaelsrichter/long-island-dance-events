@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import PersonCard from '../../components/PersonCard.astro';
 import { getEventGroups } from '../../lib/content';
+import { cardMedia } from '../../lib/directory';
 import { linksOf } from '../../lib/links';
 import { ORGANIZER_TYPE_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
@@ -19,8 +20,20 @@ const crumbs = [
 <BaseLayout title="Dance studios, clubs and organizers on Long Island" description={`${orgs.length} studios, clubs, DJs and teachers who run dances and classes in Nassau and Suffolk.`} pageType="organizers" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
   <PageHeader title="Studios, clubs and organizers" lede="The people and groups who run the events. Contact them with questions about their events." crumbs={crumbs} />
   <div class="container section">
-    <ul class="grid grid--3 person-grid">
-      {orgs.map((o) => <PersonCard name={o.data.name} href={`/organizers/${o.id}/`} kicker={`${ORGANIZER_TYPE_LABELS[o.data.type]}${o.data.town ? ` · ${o.data.town}` : ''}`} icon="people" links={linksOf(o.data)} upcomingCount={count(o.id)} />)}
+    <ul class="person-grid">
+      {orgs.map((o) => (
+        <PersonCard
+          name={o.data.name}
+          href={`/organizers/${o.id}/`}
+          kicker={`${ORGANIZER_TYPE_LABELS[o.data.type]}${o.data.town ? ` · ${o.data.town}` : ''}`}
+          icon="people"
+          links={linksOf(o.data)}
+          upcomingCount={count(o.id)}
+          note={o.data.description}
+          like={{ type: 'organizer', id: o.id }}
+          {...cardMedia(o.data)}
+        />
+      ))}
     </ul>
   </div>
 </BaseLayout>

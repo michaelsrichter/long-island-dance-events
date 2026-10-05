@@ -32,16 +32,62 @@
   },
   "description": "A neighborhood sports bar and grill on Hempstead Turnpike in Franklin Square with a main bar, dining room, quieter side room, big parking lot and rock bands on weekend nights.",
   "facebookUrl": "https://www.facebook.com/TrottersBarandGrill/",
-  "factsSource": "Checked October 3, 2026. Source: trottersbarandgrill.com.",
+  "factsSource": "Checked October 4, 2026. Source: trottersbarandgrill.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Trotters+Bar+%26+Grill+1050+Hempstead+Tpke+Franklin+Square+NY+11010",
   "kind": "bar",
   "phone": "(516) 355-5681",
   "postalCode": "11010",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List has a /trotters venue page (sponsored venue). Black Ice's own site confirms the show Sat Oct 3, 9 pm-12 am at Trotters, 1050 Hempstead Tpke, Franklin Square. The band's site lists phone (516) 335-5681, but the official site shows (516) 355-5681, which we used. Formerly Shackleton's.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List has a /trotters venue page (sponsored venue). Black Ice's own site confirms the show Sat Oct 3, 9 pm-12 am at Trotters, 1050 Hempstead Tpke, Franklin Square. The band's site lists phone (516) 335-5681, but the official site shows (516) 355-5681, which we used. Formerly Shackleton's.\n\nDirectory research 2026-10-04: Phone (516) 355-5681 confirmed on both the bar's site and Google (the (516) 335-5681 number on a band site looks like a typo). Hours on the site are kitchen hours; bar hours are not published (Google showed 'closes 11 PM' on a Sunday). The site's own show list says 'No upcoming shows scheduled' but the home page still says live music every Friday and Saturday at 9 PM. Site photos date from 2015. The front-of-building image on the site is a heavily filtered graphic, so we used the real photos of the back entrance, bar and party room. Current description still accurate.",
   "state": "NY",
   "town": "Franklin Square",
   "website": "https://www.trottersbarandgrill.com/",
   "latitude": 40.707815,
   "longitude": -73.679037,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/trottersbarandgrill/",
+  "email": "info@trottersbarandgrill.com",
+  "hours": "Kitchen Sun 12 PM-9 PM; Mon-Thu 12 PM-9:30 PM; Fri-Sat 12 PM-10:30 PM; live music Fri-Sat from 9 PM",
+  "logo": {
+    "image": "../../assets/entities/venues/trotters-bar-grill-franklin-square-logo.webp",
+    "alt": "Trotters Bar & Grill logo: gold serif lettering on a black sign shape",
+    "credit": "Logo: Trotters Bar & Grill",
+    "creditUrl": "https://www.trottersbarandgrill.com/",
+    "imageSource": "https://www.trottersbarandgrill.com/wp-content/uploads/2015/02/trotters-logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/trotters-bar-grill-franklin-square-1.webp",
+      "alt": "The back entrance of Trotters Bar & Grill: a black 'Trotters' awning over a brick patio lined with potted plants and shrubs",
+      "credit": "Photo: Trotters Bar & Grill (website)",
+      "creditUrl": "https://www.trottersbarandgrill.com/",
+      "imageSource": "https://www.trottersbarandgrill.com/wp-content/uploads/2015/06/Trotters-rear.jpg",
+      "focus": "35% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/trotters-bar-grill-franklin-square-2.webp",
+      "alt": "Inside Trotters: a long bar under a row of big TV screens, with booths and checkered tablecloths in front",
+      "credit": "Photo: Trotters Bar & Grill (website)",
+      "creditUrl": "https://www.trottersbarandgrill.com/",
+      "imageSource": "https://www.trottersbarandgrill.com/wp-content/uploads/2015/06/FullSizeRender.jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/trotters-bar-grill-franklin-square-3.webp",
+      "alt": "The private party room with round tables set with white cloths and dark napkins on a wood floor",
+      "credit": "Photo: Trotters Bar & Grill (website)",
+      "creditUrl": "https://www.trottersbarandgrill.com/",
+      "imageSource": "https://www.trottersbarandgrill.com/wp-content/uploads/2015/06/party-2.jpg",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.trottersbarandgrill.com/",
+      "note": "Bar's own site: Trotters Bar & Grill (formerly Shackleton's), 1050 Hempstead Turnpike, Franklin Square, NY 11010; (516) 355-5681; info@trottersbarandgrill.com; kitchen hours; live music every Friday and Saturday from 9 PM; private party…"
+    },
+    {
+      "url": "https://www.google.com/maps?cid=13204585431096607902",
+      "note": "Google Maps: Trotters Bar & Grill (bar & grill), 1050 Hempstead Turnpike, Franklin Square, NY 11010, phone (516) 355-5681."
+    }
+  ]
 }

@@ -1,5 +1,70 @@
 {
   "name": "The Cosmic Orchestra",
   "type": "band",
-  "reviewNotes": "Added automatically from Live On The Porch (Smithtown) - show calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Live On The Porch (Smithtown) - show calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: The band's site has no social links. A Linktree (linktr.ee/TheCosmicOrchestra) reportedly lists a Facebook page, but Linktree is blocked by robots.txt, so Facebook was not verified or recorded. Spotify artist ID comes from their track 'Evil' (with Eugene Ruffolo). This is a seated concert act (soulful reworked covers), not a dance band. No logo on the site. Skipped album-cover art and a backstage selfie.",
+  "website": "https://thecosmicorchestra.com/",
+  "youtubeUrl": "https://www.youtube.com/@thecosmicorchestra",
+  "spotifyUrl": "https://open.spotify.com/artist/2EGLMCf0yh6RaqmnSyUPX6",
+  "bookingUrl": "https://thecosmicorchestra.com/contact",
+  "email": "thecosmicorchestra@gmail.com",
+  "genres": [
+    "reimagined covers",
+    "singer-songwriter",
+    "folk rock",
+    "soul"
+  ],
+  "description": "Collective of New York and Long Island studio musicians and singer-songwriters (including producer Ben Wisch and singers Eugene Ruffolo and Jon Preddice) who play their own soulful, reworked arrangements of well-known songs, mostly in concert settings.",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/the-cosmic-orchestra-1.webp",
+      "alt": "The Cosmic Orchestra on a dim stage with keyboards, drums and acoustic guitars, lit from the front with the audience in shadow",
+      "credit": "Photo: The Cosmic Orchestra (website)",
+      "creditUrl": "https://thecosmicorchestra.com/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/776264/8850bea9f89c01b61f33c6005a5429013ee7e89c/original/cosmic-6.png/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-cosmic-orchestra-2.webp",
+      "alt": "Band members playing cello, piano, upright bass, drums and guitars on a stage with red curtains",
+      "credit": "Photo: The Cosmic Orchestra (website)",
+      "creditUrl": "https://thecosmicorchestra.com/photos",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/776264/dc2959ee52e1185b6b50504ae39974f5c10e8d1b/original/mike-and-band.jpg/!!/b%3AW1siZXh0cmFjdCIseyJsZWZ0IjoxMTE0LCJ0b3AiOjI0Mywid2lkdGgiOjI3MjYsImhlaWdodCI6MTUzM31dLFsicmVzaXplIiwyMDAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-cosmic-orchestra-3.webp",
+      "alt": "Seven musicians of The Cosmic Orchestra standing together on a stage, one holding an acoustic guitar",
+      "credit": "Photo: The Cosmic Orchestra (website)",
+      "creditUrl": "https://thecosmicorchestra.com/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/776264/c8e12d7194c11fd733da40cdbe388c1ff1ec9f09/original/img-2006.jpeg/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://liveontheporch.com/events/",
+      "note": "Live On The Porch (Smithtown) lists The Cosmic Orchestra on Sat Oct 17, 2026, 'Soulful Reinterpretations' of familiar songs."
+    },
+    {
+      "url": "https://thecosmicorchestra.com/",
+      "note": "Band site promotes the same Oct 17 Live On The Porch show and a past show at the Boulton Center, Bay Shore (Oct 2025); describes the group as a collective reinterpreting well-known songs."
+    },
+    {
+      "url": "https://thecosmicorchestra.com/bio",
+      "note": "Bio names members including Eugene Ruffolo (NYC studio singer), Grammy-winning producer Ben Wisch, and Long Island singer-songwriter Jon Preddice."
+    },
+    {
+      "url": "https://www.youtube.com/@thecosmicorchestra/videos",
+      "note": "YouTube channel 'The Cosmic Orchestra' lists the same members (Ben Wisch, Eugene Ruffolo, Jon Preddice and others)."
+    },
+    {
+      "url": "https://open.spotify.com/track/6KNUecQYCPIu8HjtUQd6Ko",
+      "note": "Shows the Spotify page."
+    },
+    {
+      "url": "https://thecosmicorchestra.com/contact",
+      "note": "Shows the booking page and email."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: liveontheporch.com, thecosmicorchestra.com, youtube.com, open.spotify.com."
 }

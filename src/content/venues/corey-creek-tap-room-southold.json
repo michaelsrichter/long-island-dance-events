@@ -2,10 +2,30 @@
   "name": "COREY CREEK Tap Room",
   "address": "45470 Main Rd",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Our work network blocks winery and brewery websites, so we could not open coreycreektaproom.com, Northforker or the Long Island wine sites directly; facts come from Google Maps, the Facebook page and web search summaries of those pages. Because of that, no logo or photos, and hours are left out: search results quote the site as Mon-Thu 11 AM-6 PM, Fri 11 AM-8 PM, Sat 11 AM-7 PM, Sun 11 AM-6 PM, but we could not confirm them. Instagram @coreycreektaproom (https://www.instagram.com/coreycreektaproom/) is named in search results but we could not confirm it (Instagram blocks automated checks and the site is blocked for us), so it is not recorded. The Facebook page lists (631) 734-7537, which appears to be the Bedell Cellars number; we kept Google's (631) 765-4168 for the tap room. Group reservations go through a Bedell Cellars email per search results (not recorded). The site's music page is https://www.coreycreektaproom.com/events. Name on Google is 'Corey Creek Tap Room' (our record has it in capitals).",
   "state": "NY",
   "town": "Southold",
   "latitude": 41.047302,
   "longitude": -72.446564,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.coreycreektaproom.com/",
+  "facebookUrl": "https://www.facebook.com/coreycreektaproom/",
+  "phone": "(631) 765-4168",
+  "postalCode": "11971",
+  "description": "A wine tasting room on Main Road (Route 25) in Southold, a sister of Bedell Cellars, that pours its own small-batch wines on tap. It has live music on Friday evenings ('Friday Night Flights') and on some weekend afternoons.",
+  "evidence": [
+    {
+      "url": "https://www.google.com/maps?cid=16214690697152189132",
+      "note": "Google Maps listing 'Corey Creek Tap Room' (winery) at 45470 Main Rd, Southold, NY 11971, phone (631) 765-4168, website coreycreektaproom.com."
+    },
+    {
+      "url": "https://www.facebook.com/coreycreektaproom/",
+      "note": "Facebook page 'Corey Creek Tap Room | Southold NY' describing sustainably farmed small-batch wines from tap and bottle."
+    },
+    {
+      "url": "https://northforker.com/events/friday-night-flights-corey-creek-tap-room/",
+      "note": "Search results (Northforker and the tap room's music schedule page) describe weekly 'Friday Night Flights' 4-8 PM with live music, and weekend afternoon sets; performers include Gene Casey."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: facebook.com, northforker.com."
 }

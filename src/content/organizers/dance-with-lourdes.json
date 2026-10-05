@@ -5,7 +5,7 @@
     "Dance with Lourdes",
     "Lourdes Cruz"
   ],
-  "phone": "(845) 702-1481",
+  "phone": "(845) 977-3482",
   "danceStyles": [
     "west-coast-swing",
     "ballroom",
@@ -15,8 +15,57 @@
     "salsa"
   ],
   "website": "https://divaballroomdancing.com/",
-  "facebookUrl": "https://www.facebook.com/INNERLIGHTMOVEMENTSTUDIO",
+  "facebookUrl": "https://www.facebook.com/divadancestudiochester/",
   "email": "lourdes@divaballroomdancing.com",
   "description": "Group and private classes with Lourdes Cruz in West Coast Swing, ballroom, Latin and tango at Long Island and Queens venues.",
-  "reviewNotes": "Website is DiVa Ballroom Dance Studio (Chester, NY and Long Island locations); its Long Island calendar lists her classes. Home town not published, so town omitted."
+  "reviewNotes": "Website is DiVa Ballroom Dance Studio (Chester, NY and Long Island locations); its Long Island calendar lists her classes. Home town not published, so town omitted.\n\nDirectory research 2026-10-04: Two phone numbers are published for her lessons: (845) 977-3482 (DiVa's studio line '845-977-DIVA' on divaballroomdancing.com and in The Dance Calendar instructor directory) and (845) 702-1481 (The Dance Calendar 'Find a Studio' directory, https://www.thedancecalendar.com/find-a-studio). We recorded 977-3482 because it is on her own studio website; owner may prefer to keep 702-1481 or list both. The current Facebook link (facebook.com/INNERLIGHTMOVEMENTSTUDIO) could not be tied to Lourdes; the only match found is an InnerLight Movement Studio in Poughkeepsie, so it was replaced with the Facebook and Instagram pages linked from the DiVa website (named for the Chester, NY studio). The logo and photos are DiVa Ballroom Dance Studio's (her studio brand, from its own site); the photos are likely from the Chester location, not Long Island. Her Long Island classes are at rented venues (e.g. Brumidi Lodge, Deer Park), so no studio address/town recorded. YouTube competition videos of her exist only on event channels (not her own).",
+  "instagramUrl": "https://www.instagram.com/divadancestudiochesterny/",
+  "logo": {
+    "image": "../../assets/entities/organizers/dance-with-lourdes-logo.webp",
+    "alt": "DiVa Dance Studio logo: a sketched ballroom couple in a flowing yellow gown beside the words Ballroom Grace & Poise, Diva Dance Studio",
+    "credit": "Logo: DiVa Ballroom Dance Studio",
+    "creditUrl": "https://divaballroomdancing.com/",
+    "imageSource": "https://divaballroomdancing.com/wp-content/uploads/2024/06/Diva-Logo-FINAL_Small_Header.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/organizers/dance-with-lourdes-1.webp",
+      "alt": "A couple dancing a Latin routine under purple stage lights, the woman in a leopard-print dress",
+      "credit": "Photo: DiVa Ballroom Dance Studio (website)",
+      "creditUrl": "https://divaballroomdancing.com/",
+      "imageSource": "https://divaballroomdancing.com/wp-content/uploads/2021/11/image4.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/organizers/dance-with-lourdes-2.webp",
+      "alt": "Adult students in pairs practicing a partner dance during a group class on a wooden studio floor",
+      "credit": "Photo: DiVa Ballroom Dance Studio (website)",
+      "creditUrl": "https://divaballroomdancing.com/",
+      "imageSource": "https://divaballroomdancing.com/wp-content/uploads/2023/07/Adult_Group_Classes1.png",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thedancecalendar.com/find-an-instructor",
+      "note": "The Dance Calendar instructor directory: Lourdes Cruz, certified in American ballroom/Latin and West Coast Swing; group and private lessons; text/call 845-977-3482; email lourdes@divaballroomdancing.com."
+    },
+    {
+      "url": "https://divaballroomdancing.com/long-island-calendar/",
+      "note": "DiVa Ballroom Dance Studio site (Chester and Long Island locations) has a Long Island class calendar and the same call/text number (845) 977-3482; links its Facebook and Instagram."
+    },
+    {
+      "url": "https://sonsofitalyli.com/event/group-and-private-dance-lessons/",
+      "note": "Brumidi Lodge, Deer Park: Monday group lessons with Lourdes Cruz (West Coast Swing, ballroom mix, Latin mix from 4:45 PM), private lessons available."
+    },
+    {
+      "url": "https://divaballroomdancing.com/",
+      "note": "Shows the Facebook page and Instagram page."
+    },
+    {
+      "url": "https://divaballroomdancing.com/contact-us/",
+      "note": "Shows the booking page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thedancecalendar.com, divaballroomdancing.com, sonsofitalyli.com."
 }

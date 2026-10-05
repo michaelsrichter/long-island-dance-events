@@ -4,15 +4,69 @@
   "town": "Southampton",
   "county": "Suffolk",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: thestudiobyhillstreet.com, jameslanepost.com, patch.com, google.com.",
+  "factsSource": "Checked October 4, 2026. Sources: thestudiobyhillstreet.com, jameslanepost.com.",
   "postalCode": "11968",
   "phone": "(631) 377-3087",
   "website": "https://thestudiobyhillstreet.com/",
   "googleMapsUrl": "https://www.google.com/maps?cid=17799032631081207053",
   "parkingNotes": "Onsite parking (studio's Patch business listing).",
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible parking lot.",
-  "reviewNotes": "Studio is inside the Hill Street Boxing facility. Website FAQ also shows (631) 377-7087 and Google Maps shows (631) 443-1032; only the header number from the website is recorded.",
+  "reviewNotes": "Studio is inside the Hill Street Boxing facility. Website FAQ also shows (631) 377-7087 and Google Maps shows (631) 443-1032; only the header number from the website is recorded.\n\nDirectory research 2026-10-04: No Facebook page found (the site links only Instagram). No opening hours are published. The site also shows (631) 377-7087 in one spot and Google lists (631) 443-1032; the header/contact number (631) 377-3087 is used. press@thestudiobyhillstreet.com is also listed for press. Description added because current had none.",
   "latitude": 40.883553,
   "longitude": -72.393774,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/thestudiobyhillstreet/",
+  "email": "info@thestudiobyhillstreet.com",
+  "description": "An adult ballroom and Latin dance studio on Hill Street in Southampton village. It teaches group classes, private lessons and wedding first-dance lessons in styles such as salsa, bachata, cha-cha, waltz, foxtrot and tango.",
+  "logo": {
+    "image": "../../assets/entities/venues/the-studio-by-hill-street-logo.webp",
+    "alt": "The Studio logo: a black silhouette of a ballroom couple beside the words THE STUDIO, Southampton NY",
+    "credit": "Logo: The Studio by Hill Street",
+    "creditUrl": "https://thestudiobyhillstreet.com/",
+    "imageSource": "https://thestudiobyhillstreet.com/wp-content/uploads/2025/07/Asset-3@4x.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/the-studio-by-hill-street-1.webp",
+      "alt": "A couple practicing a partner dance on the studio's light wood floor during a group class, with mirrors, black walls and red neon lights behind them",
+      "credit": "Photo: The Studio by Hill Street (website)",
+      "creditUrl": "https://thestudiobyhillstreet.com/ballroom-dance-classes/",
+      "imageSource": "https://thestudiobyhillstreet.com/wp-content/uploads/2025/09/DSC07104-1024x683.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-studio-by-hill-street-2.webp",
+      "alt": "Two dance teachers holding hands and smiling on the studio's wood dance floor, with a wall of mirrors behind them",
+      "credit": "Photo: The Studio by Hill Street (website)",
+      "creditUrl": "https://thestudiobyhillstreet.com/about-the-studio-by-hill-street/",
+      "imageSource": "https://thestudiobyhillstreet.com/wp-content/uploads/2025/09/Monito-Heather-1024x683.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/venues/the-studio-by-hill-street-3.webp",
+      "alt": "A teacher leading a student in a Latin dance step in front of the studio's mirror wall while other students practice nearby",
+      "credit": "Photo: The Studio by Hill Street (website)",
+      "creditUrl": "https://thestudiobyhillstreet.com/styles-of-dance-we-teach/",
+      "imageSource": "https://thestudiobyhillstreet.com/wp-content/uploads/2025/11/DSC07189-1024x683.jpg",
+      "focus": "55% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://thestudiobyhillstreet.com/",
+      "note": "Studio's own site header gives +1 (631) 377-3087 and 33 Hill St, Southampton, NY 11968, links Instagram and a Book Now page."
+    },
+    {
+      "url": "https://thestudiobyhillstreet.com/contact-the-studio/",
+      "note": "Contact page lists info@thestudiobyhillstreet.com, phone (631) 377.3087 and the Instagram account."
+    },
+    {
+      "url": "https://thestudiobyhillstreet.com/styles-of-dance-we-teach/",
+      "note": "Lists the Latin (salsa, bachata, cha-cha, rumba, samba) and ballroom (waltz, foxtrot, tango, quickstep, Viennese waltz) styles taught, plus wedding dance lessons."
+    },
+    {
+      "url": "https://jameslanepost.com/dance-comes-to-the-hamptons-grand-opening-of-the-studio-by-hill-street-in-southampton/08/11/2025/Hamptons-News-Happenings",
+      "note": "Local news story on the studio's 2025 grand opening in Southampton."
+    }
+  ]
 }

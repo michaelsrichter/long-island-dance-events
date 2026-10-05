@@ -37,16 +37,42 @@
   },
   "description": "A long-running lounge on Sunrise Highway in Bohemia, popular with an over-40 crowd. It has live bands on weekends, karaoke, bingo and DJ dance nights.",
   "facebookUrl": "https://www.facebook.com/EleanorsLounge/",
-  "factsSource": "Checked October 3, 2026. Source: eleanorslounge.com.",
+  "factsSource": "Checked October 4, 2026. Source: eleanorslounge.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Eleanor%27s+Lounge%2C+4103+Sunrise+Hwy%2C+Bohemia%2C+NY+11716",
   "kind": "bar",
   "phone": "(631) 256-7443",
   "postalCode": "11716",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Map listings show (631) 244-7090; the venue's own website shows 631-256-7443, which we used.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Map listings show (631) 244-7090; the venue's own website shows 631-256-7443, which we used.\n\nDirectory research 2026-10-04: The lounge now brands itself 'The New Eleanor's Lounge'. Map listings show (631) 244-7090; the venue's own site shows 631-256-7443 on every page, which we kept. A map listing also shows Monday 5-8 PM, but the site says closed Monday. The site also links a Facebook group (https://www.facebook.com/groups/676091942419597), not recorded as the page. The only real interior photo on the site is a blurry background image under a heavy purple tint (dance floor with a disco ball), so no photos were saved; all other images are text-heavy band flyers. The YouTube channel comes from the site's own schema data; we could not check how active it is.",
   "state": "NY",
   "town": "Bohemia",
   "website": "https://eleanorslounge.com/",
   "latitude": 40.749793,
   "longitude": -73.134197,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/eleanorslounge/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCLT2DLJPRkRhNgkKFnRfcxA",
+  "xUrl": "https://x.com/eleanorslounge",
+  "email": "eleanorslounge@gmail.com",
+  "hours": "Tue 6:30 PM-11 PM; Wed-Thu and Sun 6:30 PM-midnight; Fri-Sat 6:30 PM-1 AM; closed Mon",
+  "logo": {
+    "image": "../../assets/entities/venues/eleanors-lounge-bohemia-logo.webp",
+    "alt": "The New Eleanor's Lounge logo in white letters on black, with a martini glass and music notes",
+    "credit": "Logo: Eleanor's Lounge",
+    "creditUrl": "https://eleanorslounge.com/",
+    "imageSource": "https://eleanorslounge.com/wp-content/uploads/2025/09/b1eleanorslounge-logo.jpg"
+  },
+  "evidence": [
+    {
+      "url": "https://eleanorslounge.com/contact-us/",
+      "note": "Lounge contact page: 4103 Sunrise Hwy, Bohemia NY 11716, 631-256-7443, eleanorslounge@gmail.com, and opening hours (closed Monday)."
+    },
+    {
+      "url": "https://eleanorslounge.com/",
+      "note": "Home page lists karaoke Sundays/Wednesdays/Thursdays, Tuesday bingo and live bands on Fridays and Saturdays (e.g. 1984, Killin Time, The Mechanix) in Oct-Nov 2026; links Facebook, X and Instagram, and its schema data adds a YouTube channel."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=Eleanor%27s+Lounge%2C+4103+Sunrise+Hwy%2C+Bohemia%2C+NY+11716",
+      "note": "Places listing for Eleanor's Lounge (bar) matches the address and the same Facebook and Instagram pages, but shows phone (631) 244-7090."
+    }
+  ]
 }

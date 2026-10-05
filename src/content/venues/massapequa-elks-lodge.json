@@ -7,7 +7,7 @@
   "town": "Massapequa",
   "county": "Nassau",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: massapequaelks.org, elks.org, google.com.",
+  "factsSource": "Checked October 4, 2026. Sources: massapequaelks.org, elks.org, facebook.com.",
   "postalCode": "11758",
   "phone": "(516) 798-2162",
   "website": "https://massapequaelks.org/",
@@ -16,5 +16,31 @@
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
   "latitude": 40.67764,
   "longitude": -73.468515,
-  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)",
+  "facebookUrl": "https://www.facebook.com/206765362670428/",
+  "email": "elks2162@gmail.com",
+  "description": "The home of Elks Lodge No. 2162, behind the Massapequa train station, with a members' bar and a banquet hall with a dance floor for 50 to 220 guests. It hosts private parties and some public dances, such as oldies nights.",
+  "evidence": [
+    {
+      "url": "https://massapequaelks.org/contacts.html",
+      "note": "Lodge site contact page: Massapequa Elks Lodge 2162, 2162 Veterans Blvd, Massapequa, NY 11758-4956, 516-798-2162."
+    },
+    {
+      "url": "https://www.elks.org/lodges/contactus.cfm?lodge=2162",
+      "note": "Official Elks national site lists the lodge at 2162 Veterans Blvd behind the Massapequa LIRR station, phone (516) 798-2162 and the website massapequaelks.org."
+    },
+    {
+      "url": "https://www.elks.org/lodges/home.cfm?LodgeNumber=2162",
+      "note": "Elks.org lodge page gives Elks2162@gmail.com for general information and Secretary2162@gmail.com for membership."
+    },
+    {
+      "url": "https://massapequaelks.org/events.html",
+      "note": "Lodge 'Catering' page (URL events.html) describes a banquet hall for 50 to 220 guests next to the train station, with a catering manager contact; it shows a dance floor photo."
+    },
+    {
+      "url": "https://www.facebook.com/Massapequa-Elks-Lodge-206765362670428/timeline/",
+      "note": "Facebook page 'Massapequa Elks Lodge' (from search results) shows the same address, phone, email elks2162@gmail.com and website."
+    }
+  ],
+  "reviewNotes": "Directory research 2026-10-04: massapequaelks.org returns HTTP 403 to our research bot, so the image helper could not download anything from it (dance-floor-2.jpg, table-floor.jpg and buffet photos exist on https://massapequaelks.org/events.html; owner could get them by hand or ask the lodge). Elks.org has a lodge front photo, but it is only 480 px wide. No logo on the lodge site. Facebook page found through search (not linked from the lodge site) but name, address, phone, email and website all match. The town listing on the Chamber site uses ZIP 11762 (Massapequa Park); the lodge itself uses 11758. Hours are not published by the lodge (third-party listings show evening bar hours); left blank. The members' Facebook group was not recorded. Banquet/catering contact is a named manager's phone (516-710-0358); not recorded as the venue phone."
 }

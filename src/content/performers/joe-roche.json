@@ -1,5 +1,24 @@
 {
   "name": "Joe Roche",
   "type": "band",
-  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: He appears to be a solo singer/guitarist rather than a band (type 'band' in our data may be wrong). No website, social page or booking contact was found for the Long Island Joe Roche. Do NOT link the 'Joe Roche' electronic DJ/producer on SoundCloud, Apple Music, Audiomack and Skiddle (house music, 'Do As You Please' label) - a different artist. A YouTube channel @JoeRoche27 exists but has no description tying it to Long Island, so it is not recorded. Note: our playsAt says Daisy's Miller Place, but the Oct 4 event (joe-roche-13) is filed under Daisy's Patchogue; he has played both locations.",
+  "genres": [
+    "country"
+  ],
+  "description": "A Long Island solo performer who plays live country music for Sunday afternoon brunch sets at Daisy's Nashville Lounge in Patchogue and Miller Place.",
+  "evidence": [
+    {
+      "url": "https://daisysli.com/event/joe-roche-13/",
+      "note": "Daisy's lists Joe Roche live on Sunday Oct 4, 2-5 PM, as part of its Sunday day-drinking brunch; the event is filed under the Patchogue location."
+    },
+    {
+      "url": "https://daisysli.com/event/sunday-country-music-brunch-joe-roche-live/",
+      "note": "Daisy's Miller Place 'Sunday Country Music Brunch - Joe Roche LIVE' (March 29) advertises live country music."
+    },
+    {
+      "url": "https://www.liblogger.com/events/joe-roche-barbara-grace",
+      "note": "'Joe Roche & Barbara Grace' played Shandon Court in East Islip on Sep 13, 2026, another Long Island gig under the same name."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: daisysli.com, liblogger.com."
 }

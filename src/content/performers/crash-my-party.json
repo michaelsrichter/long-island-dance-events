@@ -38,6 +38,59 @@
     "tribute to Luke Bryan",
     "country"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). No two-step evidence found. The band also plays seated theaters (Smithtown PAC, Paramount) where dancing is less likely. No official Facebook/Instagram confirmed.",
-  "website": "https://loss4wordsproduction.wixsite.com/lukebryantributeband"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). No two-step evidence found. The band also plays seated theaters (Smithtown PAC, Paramount) where dancing is less likely. No official Facebook/Instagram confirmed.\n\nDirectory research 2026-10-04: Facebook and Instagram are now confirmed (linked from the band's own contact page). The (516) number is the booking line of the band's company (CW Events LLC). The domain lukebryantributeband.com in the email does not load as a website; the Wix address is the working site. Current description is still accurate. Logo is white on black.",
+  "website": "https://loss4wordsproduction.wixsite.com/lukebryantributeband",
+  "facebookUrl": "https://www.facebook.com/LukeBryanTributeBand",
+  "instagramUrl": "https://www.instagram.com/lukebryantributeband/",
+  "bookingUrl": "https://loss4wordsproduction.wixsite.com/lukebryantributeband/contact-4",
+  "email": "info@lukebryantributeband.com",
+  "phone": "(516) 652-8111",
+  "logo": {
+    "image": "../../assets/entities/performers/crash-my-party-logo.webp",
+    "alt": "Crash My Party logo: big distressed letters CMP inside a ring of text reading The Ultimate Luke Bryan Tribute Band, white on black",
+    "credit": "Logo: Crash My Party",
+    "creditUrl": "https://loss4wordsproduction.wixsite.com/lukebryantributeband",
+    "imageSource": "https://static.wixstatic.com/media/1b2ed4_18d86c0df98e43fc875d88793de8fce1~mv2.jpg/v1/fit/w_800,h_800,q_90/cmp-logo.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/crash-my-party-1.webp",
+      "alt": "Crash My Party on stage under red lights, with the singer in a cap, a fiddle player and an acoustic guitarist in front of a big CMP flag backdrop",
+      "credit": "Photo: Crash My Party (website)",
+      "creditUrl": "https://loss4wordsproduction.wixsite.com/lukebryantributeband/about-5",
+      "imageSource": "https://static.wixstatic.com/media/1b2ed4_0b6aae0b3d394e9ba796e88c3a090593~mv2.jpg/v1/fit/w_1600,h_1600,q_85/cmp.jpg",
+      "focus": "45% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/crash-my-party-2.webp",
+      "alt": "The Crash My Party singer on an outdoor stage, seen from behind, facing a large crowd at night",
+      "credit": "Photo: Crash My Party (website)",
+      "creditUrl": "https://loss4wordsproduction.wixsite.com/lukebryantributeband/contact-4",
+      "imageSource": "https://static.wixstatic.com/media/1b2ed4_8da66f372d714614813e99833c9ee558~mv2.jpg/v1/fit/w_1800,h_1800,q_85/cmp-contact.jpg",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/performers/crash-my-party-3.webp",
+      "alt": "Crash My Party's keyboard player, drummer and guitarist playing inside a brewery with a Great South Bay sign",
+      "credit": "Photo: Crash My Party (website)",
+      "creditUrl": "https://loss4wordsproduction.wixsite.com/lukebryantributeband/about-5",
+      "imageSource": "https://static.wixstatic.com/media/1b2ed4_e2336cb2529e4e68afa17e346b499a82~mv2.jpg/v1/fit/w_1600,h_1600,q_85/cmp.jpg",
+      "focus": "40% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://loss4wordsproduction.wixsite.com/lukebryantributeband",
+      "note": "Official site: Crash My Party, the Ultimate Luke Bryan Tribute Band, created by singer Casey Wayne; booking by email."
+    },
+    {
+      "url": "https://loss4wordsproduction.wixsite.com/lukebryantributeband/contact-4",
+      "note": "Booking via CW Events LLC: info@lukebryantributeband.com and (516) 652-8111; page links Facebook /LukeBryanTributeBand and Instagram /LukeBryanTributeBand."
+    },
+    {
+      "url": "https://loss4wordsproduction.wixsite.com/lukebryantributeband/about-5",
+      "note": "Pics and Places page shows the debut show at 89 North (Patchogue), a set at Great South Bay Brewery and a Paramount (Huntington) poster, confirming the Long Island base."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: loss4wordsproduction.wixsite.com."
 }

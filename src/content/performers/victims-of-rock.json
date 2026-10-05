@@ -1,5 +1,70 @@
 {
   "name": "Victims Of Rock",
   "type": "band",
-  "reviewNotes": "Added automatically from Lily Flanagan's Pub (Babylon) - music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Lily Flanagan's Pub (Babylon) - music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: The band uses the short name 'VOR'; consider it as an alias. Facebook URL is where the site's Facebook menu link redirects (page id 440691100186); it was not opened (Facebook needs login). No Instagram found. Photo 2 shows an adult bar crowd from the band's own photo page. Two site photos (band1 and band6) are the same picture; only one used.",
+  "website": "https://www.vorvictimsofrock.com/",
+  "facebookUrl": "https://www.facebook.com/VOR-Victims-Of-Rock-440691100186/",
+  "bookingUrl": "https://www.vorvictimsofrock.com/contact",
+  "genres": [
+    "classic rock",
+    "70s rock",
+    "80s rock"
+  ],
+  "description": "Massapequa-based cover band, also called VOR, that plays classic party rock from the 1970s, '80s and later at bars and beach venues across Nassau and Suffolk.",
+  "logo": {
+    "image": "../../assets/entities/performers/victims-of-rock-logo.webp",
+    "alt": "VOR logo: chrome-style letters V, O and R with a red glow behind the O",
+    "credit": "Logo: VOR - Victims of Rock",
+    "creditUrl": "https://www.vorvictimsofrock.com/",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/340580/7ad616c3032ab7617a37b41034b75e20fe537d75/original/vor-square-logo.png/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/victims-of-rock-1.webp",
+      "alt": "Victims of Rock playing on a small bar stage under pink and blue lights, with their VOR banner on the wall behind them",
+      "credit": "Photo: VOR - Victims of Rock (website)",
+      "creditUrl": "https://www.vorvictimsofrock.com/photos",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/340580/5ec25d40f7034aabe0ff792a3c70b628a5f65035/original/band1.jpg/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/performers/victims-of-rock-2.webp",
+      "alt": "A packed crowd dancing with arms in the air in front of the band playing on an outdoor deck stage at night",
+      "credit": "Photo: VOR - Victims of Rock (website)",
+      "creditUrl": "https://www.vorvictimsofrock.com/photos",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/340580/fe230ba9c011d5eb65a759bcec68b2b1c1b2234b/original/band3.jpg/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/victims-of-rock-3.webp",
+      "alt": "Victims of Rock performing in daylight on an outdoor patio stage with a white tiled floor",
+      "credit": "Photo: VOR - Victims of Rock (website)",
+      "creditUrl": "https://www.vorvictimsofrock.com/photos",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/340580/6d6b9922ae3aab28dda434edda0b6b784a5586f7/original/band4.jpg/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.lilyflanaganspub.com/musicevents/2026/8/30/happy-hour-band-victims-of-rock",
+      "note": "Lily Flanagan's Pub (Babylon) lists 'Happy Hour Band: Victims of Rock'."
+    },
+    {
+      "url": "https://www.vorvictimsofrock.com/shows",
+      "note": "Band's own shows page lists VOR at Lily Flanagan's, 345 Deer Park Ave, Babylon (Oct 30) and Toomey's Tavern, Amityville (Oct 10)."
+    },
+    {
+      "url": "https://www.vorvictimsofrock.com/",
+      "note": "Official site: VOR - Victims of Rock, a rock group from Massapequa playing classic party rock; roots back to 1973; lists the four members."
+    },
+    {
+      "url": "https://www.vorvictimsofrock.com/contact",
+      "note": "Contact page has a booking/inquiry form (no email or phone shown)."
+    },
+    {
+      "url": "https://www.vorvictimsofrock.com/facebook",
+      "note": "Shows the Facebook page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: lilyflanaganspub.com, vorvictimsofrock.com."
 }

@@ -8,14 +8,59 @@
   "town": "Greenlawn",
   "county": "Suffolk",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: sdli.org, google.com.",
+  "factsSource": "Checked October 4, 2026. Sources: moose318.com, sdli.org, genecasey.com.",
   "postalCode": "11740",
   "phone": "(631) 757-2777",
   "googleMapsUrl": "https://www.google.com/maps?cid=6872930918112154437",
   "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot.",
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
-  "reviewNotes": "No working official website: Google Maps lists moose318.com but it did not resolve on 2026-10-03. Address/phone verified on SDLI's venue page and Google Maps. Hosts SDLI Tuesdays and DancXchange Club Night (4th Fridays).",
+  "reviewNotes": "No working official website: Google Maps lists moose318.com but it did not resolve on 2026-10-03. Address/phone verified on SDLI's venue page and Google Maps. Hosts SDLI Tuesdays and DancXchange Club Night (4th Fridays).\n\nDirectory research 2026-10-04: moose318.com DOES work, but only over plain http (https fails), which explains the earlier 'did not resolve' note; the site looks unchanged since about 2015. Its footer says the lodge is open Mon, Tue & Thu 7:30-10 PM, but Bing's listing shows Mon 6-10 PM and Tue-Thu 7-11 PM, so hours were left out. No lodge logo of usable size on its site (the text logo is 305x52), so the Moose International emblem from mooseintl.org is used per the lodge/organization rule. The stage photo is in the lodge site's media library (Rockabilly Rumble 5, 2015) but not shown on a current page because the site's slider is broken. Bing also lists a second entry 'The Loyal Order of Moose: Lodge 318' at 631 Pulaski Rd #1703, same phone.",
   "latitude": 40.868155,
   "longitude": -73.353569,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "http://moose318.com/",
+  "facebookUrl": "https://www.facebook.com/moose318/",
+  "logo": {
+    "image": "../../assets/entities/venues/huntington-moose-lodge-logo.webp",
+    "alt": "Blue Moose International logo: the word MOOSE with a moose head and antlers rising from the letters",
+    "credit": "Logo: Moose International",
+    "creditUrl": "https://www.mooseintl.org/",
+    "imageSource": "https://www.mooseintl.org/wp-content/themes/Moose/images/logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/huntington-moose-lodge-1.webp",
+      "alt": "The lodge hall set for a holiday party, with round tables in white cloths around a large wood dance floor and a stage at the far end",
+      "credit": "Photo: Huntington Moose Lodge (website)",
+      "creditUrl": "http://moose318.com/hall-rental/1907943_876200169097567_1576491663517342986_n/",
+      "imageSource": "http://moose318.com/wp-content/uploads/2015/04/1907943_876200169097567_1576491663517342986_n.jpg",
+      "focus": "55% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/huntington-moose-lodge-2.webp",
+      "alt": "A rockabilly band with guitars, upright bass and a singer playing on the lodge's low stage in front of a brick wall under red stage lights",
+      "credit": "Photo: Huntington Moose Lodge (website)",
+      "creditUrl": "http://moose318.com/rockabilly-rumble-5-stage2/",
+      "imageSource": "http://moose318.com/wp-content/uploads/2015/04/Rockabilly-Rumble-5-Stage2.jpg",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "http://moose318.com/",
+      "note": "Lodge's own site (works over http only, not https) gives 631 Pulaski Road, Greenlawn, NY 11740, phone 631-757-2777 and links its Facebook page moose318."
+    },
+    {
+      "url": "http://moose318.com/hall-rental/",
+      "note": "Hall rental page invites people to call 631-757-2777 to see the hall; the dance-floor photo is attached to this page in the site's media library."
+    },
+    {
+      "url": "https://sdli.org/",
+      "note": "Swing Dance Long Island holds its Tuesday dances (lesson 7:30 PM, dancing to 10-10:30 PM) at Huntington Moose Lodge, 631 Pulaski Road, Greenlawn."
+    },
+    {
+      "url": "https://genecasey.com/event/rockabilly-double-whammy-at-moose-lodge/",
+      "note": "Rockabilly band nights (the Rockabilly Rumble series) are held at the Moose Lodge, matching the stage photo from the lodge's site."
+    }
+  ]
 }

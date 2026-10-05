@@ -12,9 +12,43 @@
   "postalCode": "11702",
   "website": "https://www.bartinibabylon.com/",
   "kind": "bar",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://www.bartinibabylon.com/ (home page: next to the Babylon train station).",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Sources: bartinibabylon.com, instagram.com, facebook.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Phone and email are not on the venue's own site; phone (631) 897-0681 is from the Google Maps listing (also Apple Maps and directories). Google shows Sun 2 PM-2 AM while the venue's site says Sun noon-midnight; we used the venue's site. Facebook page is not linked from the website; matched by name and 'Babylon NY'. getNgigs lists a Facebook group (facebook.com/groups/215776448446764) that we did not use. Older domain bartinibar.com no longer loads. All photos on the site are event flyers or under 600 px, so no photos recorded.",
   "latitude": 40.700749,
   "longitude": -73.325946,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=100063636459124",
+  "instagramUrl": "https://www.instagram.com/bartinibarbabylon/",
+  "phone": "(631) 897-0681",
+  "hours": "Mon-Sat 2 PM-2 AM; Sun noon-midnight (shorter hours on some summer nights)",
+  "description": "A laid-back neighborhood bar next to the Babylon train station. Local rock and cover bands play most Friday and Saturday nights, with an open mic on Mondays and karaoke on Thursdays.",
+  "logo": {
+    "image": "../../assets/entities/venues/bartini-babylon-logo.webp",
+    "alt": "Bartini A Bar & Lounge logo: gold letters on a navy art-deco badge with a martini olive on a pick",
+    "credit": "Logo: Bartini Bar & Lounge",
+    "creditUrl": "https://www.bartinibabylon.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/6a4f1b4f3457c60f8fcf9c79/81f85757-fde7-4d37-a1fe-d09bc80c3ec5/bblsign-crop.png?format=1500w"
+  },
+  "evidence": [
+    {
+      "url": "https://www.bartinibabylon.com/",
+      "note": "Venue's own site gives 124 North Carll Ave next to the Babylon train station, regular hours (Mon-Sat 2 PM-2 AM, Sun noon-midnight) and weekend live bands."
+    },
+    {
+      "url": "https://www.bartinibabylon.com/event-calendar",
+      "note": "Event calendar lists live bands on Friday and Saturday nights through November, Monday open mic and Thursday karaoke."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=12498187565483438939",
+      "note": "Google Maps listing 'Bartini Bar & Lounge' (Bar): 124 N Carll Ave, Babylon, NY 11702, phone (631) 897-0681, website bartinibabylon.com."
+    },
+    {
+      "url": "https://www.instagram.com/bartinibarbabylon/",
+      "note": "Instagram bio describes a dive bar and live music venue in Babylon Village at 124 North Carll."
+    },
+    {
+      "url": "https://www.facebook.com/people/Bartini-Bar/100063636459124/",
+      "note": "Facebook page titled 'Bartini Bar | Babylon NY'; also listed as the bar's Facebook on artistandfan.com."
+    }
+  ]
 }

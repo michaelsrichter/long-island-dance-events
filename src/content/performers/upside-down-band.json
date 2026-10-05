@@ -1,5 +1,26 @@
 {
   "name": "Upside Down Band",
   "type": "band",
-  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Medium confidence: Daisy's lists \"Upside Down Band\" with no link. The only Long Island act we found with that name is \"The Upside Down\" (facebook.com/TheUpsideDownNY), which plays 80s-to-today covers at Tiki Joe's Captree in Babylon; it fits but no page ties it directly to the Daisy's date. Please confirm with Daisy's before showing the link. The Daisy's event is listed under Daisy's Patchogue, not Miller Place - please check the venue on our event. Their website (theupsidedownny.com) only redirects to Facebook, so it was not recorded. The Facebook profile picture is blocked by robots.txt and no other official images were found.",
+  "facebookUrl": "https://www.facebook.com/TheUpsideDownNY/",
+  "genres": [
+    "80s covers",
+    "pop and rock covers"
+  ],
+  "description": "Long Island cover band, also billed as The Upside Down, that plays party favorites from the 1980s to today, with a nod to the 80s music of the TV show Stranger Things.",
+  "evidence": [
+    {
+      "url": "https://daisysli.com/event/upside-down-band/",
+      "note": "Daisy's Nashville Lounge lists Upside Down Band live at 7 PM on Friday Oct 9 for \"Country Club Fridays\"; the event is filed under Daisy's Patchogue."
+    },
+    {
+      "url": "https://ilovebabylon.com/event/the-upside-down-returns-to-tiki-joes-captree-7-4/",
+      "note": "Town of Babylon events site: \"The Upside Down\" returns to Tiki Joe's Captree on July 4, 2026, playing favorites from the 80s to today; links the band's Facebook event."
+    },
+    {
+      "url": "https://www.facebook.com/TheUpsideDownNY/",
+      "note": "Public Facebook page \"The Upside Down\" (musician/band): music from and inspired by Stranger Things, 80s and other requests; its website TheUpsideDownNY.com just forwards to this page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: daisysli.com, ilovebabylon.com, facebook.com."
 }

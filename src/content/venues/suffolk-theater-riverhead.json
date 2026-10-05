@@ -2,10 +2,70 @@
   "name": "Suffolk Theater",
   "address": "118 East Main Street",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: The theater now brands itself 'The Suffolk' (website thesuffolk.org); the email domain is still suffolktheater.com. Name in our directory ('Suffolk Theater') is fine as an alias. Hours are box-office hours; show times vary. The policies page says dancing may take place at shows (cabaret tables, no dedicated dance floor described). The site says photos and videos are prohibited during performances (an audience rule, not a notice about reusing its own website images). Photo 3 shows a wedding set-up seen from the balcony (people are tiny and not identifiable). Riverhead is in Suffolk County.",
   "state": "NY",
   "town": "Riverhead",
   "latitude": 40.917468,
   "longitude": -72.660635,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.thesuffolk.org/",
+  "facebookUrl": "https://www.facebook.com/TheSuffolkRiverhead/",
+  "instagramUrl": "https://www.instagram.com/thesuffolkriverhead/",
+  "email": "info@suffolktheater.com",
+  "phone": "(631) 727-4343",
+  "hours": "Box office: Wed-Sun 11 AM-6 PM; doors, bar and kitchen open 1 hour before each show",
+  "postalCode": "11901",
+  "description": "A restored 1930s Art Deco theater on East Main Street in downtown Riverhead. It hosts concerts, tribute bands, comedy and dance shows, with cabaret-style tables plus row seating and a full bar. The theater says dancing may happen during shows.",
+  "logo": {
+    "image": "../../assets/entities/venues/suffolk-theater-riverhead-logo.webp",
+    "alt": "The Suffolk logo: the words The Suffolk in red Art Deco capital letters with gold edging (transparent background)",
+    "credit": "Logo: The Suffolk",
+    "creditUrl": "https://www.thesuffolk.org/",
+    "imageSource": "https://thesuffolk.org/wp-content/uploads/2022/01/The-Suffolk-e1670537448851.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/suffolk-theater-riverhead-1.webp",
+      "alt": "Black-and-white photo of the Suffolk Theater's Art Deco brick front on Main Street, with the SUFFOLK marquee over the entrance",
+      "credit": "Photo: The Suffolk (website)",
+      "creditUrl": "https://thesuffolk.org/venue/",
+      "imageSource": "https://thesuffolk.org/wp-content/uploads/2022/11/Suffolk-Theater-Exterior.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/suffolk-theater-riverhead-2.webp",
+      "alt": "A rock band plays on the Suffolk Theater stage under red and white spotlights, seen from behind the crowd",
+      "credit": "Photo: The Suffolk (website)",
+      "creditUrl": "https://www.thesuffolk.org/",
+      "imageSource": "https://thesuffolk.org/wp-content/uploads/2022/12/DSC_0694-4-scaled.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/venues/suffolk-theater-riverhead-3.webp",
+      "alt": "View from the balcony of the Suffolk Theater's Art Deco hall, with round dinner tables on tiered floors in front of the gold-curtained stage",
+      "credit": "Photo: The Suffolk (website)",
+      "creditUrl": "https://www.thesuffolk.org/",
+      "imageSource": "https://thesuffolk.org/wp-content/uploads/2022/11/ceremony-from-balcony-1400x1400.jpg",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thesuffolk.org/",
+      "note": "Theater's own site footer: 118 E Main Street, Riverhead NY 11901, 631-727-4343, info@suffolktheater.com; links Facebook TheSuffolkRiverhead and Instagram; lists October 2026 shows."
+    },
+    {
+      "url": "https://thesuffolk.org/tips-policies/",
+      "note": "Policies page: cabaret-style table seating plus row seating; doors, bar and kitchen open 60 minutes before shows; 'dancing may take place'; free parking in the municipal lot behind the theater."
+    },
+    {
+      "url": "https://thesuffolk.org/venue/",
+      "note": "Venue page: performing arts center on Main Street in downtown Riverhead with music, comedy, dance and theater, a full bar and small plates; box office Wed-Sun 11 AM-6 PM."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=7859205788173648475",
+      "note": "Google Maps lists it as 'The Suffolk', performing arts theater, 118 E Main St, Riverhead, NY 11901, (631) 727-4343; described as a restored 1930s Art Deco venue."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: thesuffolk.org."
 }

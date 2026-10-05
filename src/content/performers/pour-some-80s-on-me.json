@@ -1,5 +1,55 @@
 {
   "name": "Pour Some 80s on Me",
   "type": "band",
-  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Not to be confused with a different 'Pour Some 80's on Me' cover band from White Plains (Westchester) that also has a The Bash profile. The Bash booking profile used here is the Massapequa Park (Long Island) one; it is not linked from the band's site, so matched by name + Long Island town. The band's own site has no contact page, email or phone. Facebook page taken from The Boat Yard's artist page (not opened, Facebook needs login). The only photo is a crowd shot from the band's site with a small logo in the top-left corner.",
+  "website": "https://poursome80sonme.org/",
+  "facebookUrl": "https://www.facebook.com/poursome80sonme/",
+  "instagramUrl": "https://www.instagram.com/poursome80sonme_li/",
+  "bookingUrl": "https://www.thebash.com/80s-band/pour-some-80-s-on-me",
+  "genres": [
+    "80s rock",
+    "80s pop",
+    "new wave"
+  ],
+  "description": "Long Island cover band that plays '80s hits, from synth-pop and new wave to glam rock and power ballads, at bars, restaurants and beach clubs in Nassau and Suffolk.",
+  "logo": {
+    "image": "../../assets/entities/performers/pour-some-80s-on-me-logo.webp",
+    "alt": "Pour Some 80's On Me logo: glowing chrome '80's' lettering inside a purple and blue neon triangle",
+    "credit": "Logo: Pour Some 80s On Me",
+    "creditUrl": "https://poursome80sonme.org/",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/730473/97e1d760041b3578ec906929ce2b65219504a881/original/80s-logo-really-good.png/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/pour-some-80s-on-me-1.webp",
+      "alt": "A packed crowd with arms raised, singing and dancing at a Pour Some 80s On Me show, with the band logo in the top corner",
+      "credit": "Photo: Pour Some 80s On Me (website)",
+      "creditUrl": "https://poursome80sonme.org/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/730473/9061e492e42aa7759c78a1368f816d19e442a7c2/original/ps80smainpic.jpg/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "60% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://poursome80sonme.org/",
+      "note": "Band's own site (titled 'Pour Some 80s On Me Long Island') lists shows at Daisy's Miller Place (Oct 9), 89 North Patchogue, The Warehouse Amityville, Stage 317 Farmingdale and Painters' Brookhaven."
+    },
+    {
+      "url": "https://daisysli.com/event/pour-some-80s-on-me-9/",
+      "note": "Daisy's Miller Place lists Pour Some 80s on Me live on Friday Oct 9, matching the band's own calendar."
+    },
+    {
+      "url": "https://theboatyardny.com/artist/pour-some-80s-on-me/",
+      "note": "The Boat Yard (Tobay Beach) artist page calls them a Long Island-based '80s cover band and links their website, Instagram and Facebook."
+    },
+    {
+      "url": "https://saltshackny.com/event/pour-some-80s-on-me-2026-08-26/",
+      "note": "Salt Shack (Babylon) event page links the same Instagram account, poursome80sonme_li."
+    },
+    {
+      "url": "https://www.thebash.com/80s-band/pour-some-80-s-on-me",
+      "note": "The Bash profile for an 80s band from Massapequa Park, NY; describes synth-pop, glam rock and power ballad covers and takes quote requests."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: poursome80sonme.org, daisysli.com, theboatyardny.com, saltshackny.com."
 }

@@ -19,5 +19,37 @@
   ],
   "email": "dancxchange@yahoo.com",
   "description": "Melville studio led by Donna DeSimone teaching hustle, West Coast Swing and ballroom; runs monthly DancXchange Club Night dances.",
-  "reviewNotes": "Club Night is the 4th Friday of the month at Huntington Moose Lodge, Greenlawn. Students' Facebook group \"Dancing with Donna De\" is mentioned without a link."
+  "reviewNotes": "Club Night is the 4th Friday of the month at Huntington Moose Lodge, Greenlawn. Students' Facebook group \"Dancing with Donna De\" is mentioned without a link.\n\nDirectory research 2026-10-04: Phone and email are the ones Donna publishes on her own site for classes and lessons. Hours are summarised from the class schedule (the page is still titled '2026 Summer Dance Schedule' but lists a new class starting Oct 7, so it looks current). The Dance Calendar also lists a second teaching location (Attitudes in Motion, 756 Old Bethpage Rd, Old Bethpage) that is not on her own site. No business Facebook/Instagram page found; the students' Facebook group 'Dancing with Donna De' and her personal Facebook profile were not recorded. Only one usable photo on the site (the site's share image, slightly soft); the 'Dance Flyers' page holds only flyers.",
+  "address": "290 Broad Hollow Rd, Suite LL150E",
+  "postalCode": "11747",
+  "county": "Suffolk",
+  "hours": "Group classes Mon-Thu evenings (6:30 PM-9:15 PM); private lessons by appointment",
+  "logo": {
+    "image": "../../assets/entities/organizers/dancxchange-logo.webp",
+    "alt": "The DancXchange Dance Studio logo: black lettering with a blue and pink silhouette of a dancing couple",
+    "credit": "Logo: The DancXchange Dance Studio",
+    "creditUrl": "https://donnadesimone.us/",
+    "imageSource": "https://img1.wsimg.com/isteam/ip/ba87ba8b-c9d6-4856-af0b-622b0e4b71a1/DanceExchange%20Logo_Dance%20Studio-JPEG.jpg/:/rs=w:900,m"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/organizers/dancxchange-1.webp",
+      "alt": "A smiling woman in black and a man in jeans dancing a lively partner dance on a wooden floor in a hall with red walls",
+      "credit": "Photo: Donna DeSimone's DancXchange (website)",
+      "creditUrl": "https://donnadesimone.us/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/ba87ba8b-c9d6-4856-af0b-622b0e4b71a1/blob-900407c.png",
+      "focus": "45% 20%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://donnadesimone.us/",
+      "note": "Own site ('The DancXchange, LLC'): studio in the Bank of America building, lower level suite LL150E, 290 Broad Hollow Rd, Melville NY 11747; weekly hustle, West Coast Swing and foxtrot classes Mon-Thu; cell 516 375-8498 and…"
+    },
+    {
+      "url": "https://www.thedancecalendar.com/find-a-studio",
+      "note": "The Dance Calendar studio directory lists Donna DeSimone's DancXchange at the same Melville address, phone, email and website, plus a second location at Attitudes in Motion, Old Bethpage."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: donnadesimone.us, thedancecalendar.com."
 }

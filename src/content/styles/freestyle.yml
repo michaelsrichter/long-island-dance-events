@@ -12,3 +12,32 @@ description: |-
 
   On this site, "Party dancing" marks live-music nights and DJ parties where people get up and dance. Each listing also shows a dancing score, because not every concert has room or a crowd that dances.
 music: Rock, pop, disco, Motown, 80s, country and dance hits played by cover bands and DJs
+photos:
+  - image: ../../assets/entities/styles/freestyle-1.webp
+    alt: A packed bar dance floor where adults dance freely, arms in the air, to a live band in Colorado Springs
+    credit: "Photo: David Shankbone, CC BY 3.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Dancing_at_Southside_Johnnys_in_Colorado_Springs.jpg
+    licenseUrl: https://creativecommons.org/licenses/by/3.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Dancing_at_Southside_Johnnys_in_Colorado_Springs.jpg/1280px-Dancing_at_Southside_Johnnys_in_Colorado_Springs.jpg
+    focus: 50% 35%
+  - image: ../../assets/entities/styles/freestyle-2.webp
+    alt: Couples dance on a brick patio at night next to a small stage where a band with a keyboard player performs
+    credit: "Photo: Prayitno, CC BY 2.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Dance_the_night_away_-_Bourbon_Street_New_Orleans_2012.jpg
+    licenseUrl: https://creativecommons.org/licenses/by/2.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Dance_the_night_away_-_Bourbon_Street_New_Orleans_2012.jpg/1280px-Dance_the_night_away_-_Bourbon_Street_New_Orleans_2012.jpg
+    focus: 40% 40%
+  - image: ../../assets/entities/styles/freestyle-3.webp
+    alt: A crowd dances under a mirror ball and colorful stage lights at an open-air disco party
+    credit: "Photo: Luckyz, CC BY-SA 3.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Disco_dance.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Disco_dance.jpg/1280px-Disco_dance.jpg
+    focus: 50% 45%
+evidence:
+  - url: https://commons.wikimedia.org/wiki/File:Dancing_at_Southside_Johnnys_in_Colorado_Springs.jpg
+    note: "Commons file page: patrons of a Colorado Springs nightclub dancing to a live band, own work by David Shankbone, CC BY 3.0."
+  - url: https://commons.wikimedia.org/wiki/File:Dance_the_night_away_-_Bourbon_Street_New_Orleans_2012.jpg
+    note: "Commons file page: band on stage playing before a dancing audience, Bourbon Street, New Orleans, by Prayitno (Flickr), CC BY 2.0."
+  - url: https://commons.wikimedia.org/wiki/File:Disco_dance.jpg
+    note: "Commons file page: open-air disco dance in Berlin, own work by Luckyz, CC BY-SA 3.0."

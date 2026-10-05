@@ -125,11 +125,13 @@ export const localDateTimeField = z.preprocess(
 );
 export const timezoneField = z.string().refine(isValidTimeZone, 'Use an IANA timezone such as America/New_York.');
 const money = opt(z.coerce.number().min(0, 'Prices cannot be negative.').max(2000));
-const url = opt(z.url({ message: 'Enter a full web address starting with https://' }));
+/** Web pages only: links shown on the site must never be javascript:, data: or other schemes. */
+const webUrl = () => z.url({ protocol: /^https?$/, message: 'Enter a full web address starting with https://' });
+const url = opt(webUrl());
 const email = opt(z.email({ message: 'Enter a valid email address.' }));
 const phone = opt(z.string().regex(/^[0-9()+.\-\s]{7,25}$/, 'Enter a phone number such as (631) 476-3707.'));
 /** Extra labelled links, e.g. a Meetup group or an events calendar. */
-const moreLinks = optList(z.object({ label: z.string().min(2).max(40), url: z.url({ message: 'Enter a full web address starting with https://' }) }));
+const moreLinks = optList(z.object({ label: z.string().min(2).max(40), url: webUrl() }));
 const seo = {
   seoTitle: opt(z.string().max(70, 'Keep SEO titles under 70 characters.')),
   seoDescription: opt(z.string().max(170, 'Keep SEO descriptions under 170 characters.')),
@@ -137,7 +139,8 @@ const seo = {
 /** Other spellings used by sources, for matching (e.g. "Club Brumidi", "Brumidi Lodge"). */
 const aliases = list(z.string().min(2));
 /** A web page, review or photo page that supports a fact, described in our own words. */
-const evidence = list(z.object({ url: z.url({ message: 'Enter a full web address starting with https://' }), note: z.string().max(240) }));
+const evidenceItem = z.object({ url: webUrl(), note: z.string().max(240) });
+const evidence = list(evidenceItem);
 const researchConfidence = z.enum(['high', 'medium', 'low']).default('low');
 
 /** Is there dancing at this venue, and what kind? From research (venue site, reviews, public photos). */
@@ -167,6 +170,8 @@ const socials = {
   facebookUrl: url,
   instagramUrl: url,
   youtubeUrl: url,
+  tiktokUrl: url,
+  xUrl: url,
   moreLinks,
 };
 /** Point to keep in view when a photo is cropped, as "x% y%" from the top-left. */
@@ -179,9 +184,32 @@ const imageWithAlt = <I extends z.ZodType>(image: ImageHelper<I>) =>
     caption: opt(z.string()),
     credit: opt(z.string()),
     creditUrl: url,
+    /** Creative Commons or other license page, for photos that need one (e.g. Wikimedia Commons). */
+    licenseUrl: url,
+    /** Web address of the original image file (kept for the record; not shown). */
+    imageSource: url,
     focus,
     video: opt(z.string().regex(/^\/media\/videos\/[\w.-]+\.mp4$/, 'Use a path such as /media/videos/clip.mp4.')),
   });
+/** Content files store images as paths; tests and the ingest read them with this plain string helper. */
+const storedImage = () => z.string().min(1);
+export const MAX_ENTITY_PHOTOS = 6;
+/** Logo and photos shown on directory cards and detail pages (venues, bands, teachers, organizers, styles). */
+const entityPhotos = <I extends z.ZodType>(image: ImageHelper<I>) =>
+  z.preprocess((v) => (v === null || v === '' ? undefined : v), z.array(imageWithAlt(image).extend({ credit: z.string().min(3, 'Say who took the photo or where it came from, for example "Photo: Example Hall (website)".') })).max(MAX_ENTITY_PHOTOS, `Add up to ${MAX_ENTITY_PHOTOS} photos.`).optional());
+/**
+ * An optional logo. The CMS may save an empty logo box ({} or no file); that means "no logo".
+ * Alt text is optional here so an incomplete CMS entry never breaks the build; pages fall back to "<name> logo".
+ */
+const entityLogo = <I extends z.ZodType>(image: ImageHelper<I>) =>
+  z.preprocess(
+    (v) => (v === null || v === '' || (typeof v === 'object' && !Array.isArray(v) && !(v as { image?: unknown }).image) ? undefined : v),
+    imageWithAlt(image).extend({ alt: opt(z.string()) }).optional(),
+  );
+/** Free-text opening hours, e.g. "Tue-Sun 4 PM-midnight; closed Mon". */
+const hours = opt(z.string().max(300, 'Keep opening hours under 300 characters.'));
+/** Where the contact details, links and photos came from (venues keep their older factsSource line too). */
+const entitySources = { evidence: optList(evidenceItem), factsSource: opt(z.string()) };
 
 export const recurrenceSchema = z
   .object({
@@ -228,7 +256,7 @@ export const eventSchema = z
     /** Source registry id (src/content/sources). */
     sourceId: idRef,
     /** Where this listing was found (attribution link). */
-    sourceUrl: z.url({ message: 'Enter a full web address starting with https://' }),
+    sourceUrl: webUrl(),
     /** Human attribution, e.g. "The Dance Calendar, October 2026". */
     sourceName: opt(z.string()),
     /** Where in the source, e.g. "page 17". */
@@ -275,85 +303,138 @@ export const eventSchema = z
     if (!e.venueId && !e.town) ctx.addIssue({ code: 'custom', path: ['venueId'], message: 'Choose a venue, or at least enter the town.' });
   });
 
-export const venueSchema = z.object({
-  name: z.string().min(2),
-  aliases,
-  address: z.string(),
-  town: z.string(),
-  county: z.enum(COUNTIES),
-  state: z.string().default('NY'),
-  postalCode: opt(z.string()),
-  phone,
-  website: url,
-  latitude: opt(z.coerce.number().min(-90).max(90)),
-  longitude: opt(z.coerce.number().min(-180).max(180)),
-  /** Where the map coordinates came from, e.g. "U.S. Census Bureau Geocoder" (filled in automatically). */
-  coordinatesSource: opt(z.string()),
-  googleMapsUrl: url,
-  facebookUrl: url,
-  parkingNotes: opt(z.string()),
-  accessibilityNotes: opt(z.string()),
-  /** Where facts such as parking came from. */
-  factsSource: opt(z.string()),
-  description: opt(z.string().max(600)),
-  kind: opt(z.enum(VENUE_KINDS)),
-  dancing: opt(venueDancingSchema),
-  ...seo,
-  reviewNotes: opt(z.string()),
-});
+/**
+ * Entity schemas are builders: Astro passes its `image()` helper so photos are optimized at build time;
+ * the plain `venueSchema` etc. below read image fields as stored paths (ingest, tests).
+ * Every field added for the directory pages (logo, photos, links, contacts, hours) is optional so older
+ * files and new ingest-created stubs stay valid.
+ */
+export const venueSchemaWith = <I extends z.ZodType>(image: ImageHelper<I>) =>
+  z.object({
+    name: z.string().min(2),
+    aliases,
+    address: z.string(),
+    town: z.string(),
+    county: z.enum(COUNTIES),
+    state: z.string().default('NY'),
+    postalCode: opt(z.string()),
+    phone,
+    email,
+    ...socials,
+    hours,
+    latitude: opt(z.coerce.number().min(-90).max(90)),
+    longitude: opt(z.coerce.number().min(-180).max(180)),
+    /** Where the map coordinates came from, e.g. "U.S. Census Bureau Geocoder" (filled in automatically). */
+    coordinatesSource: opt(z.string()),
+    googleMapsUrl: url,
+    parkingNotes: opt(z.string()),
+    accessibilityNotes: opt(z.string()),
+    description: opt(z.string().max(600)),
+    kind: opt(z.enum(VENUE_KINDS)),
+    logo: entityLogo(image),
+    photos: entityPhotos(image),
+    dancing: opt(venueDancingSchema),
+    /** Where facts such as parking came from (shown on the page). */
+    ...entitySources,
+    ...seo,
+    reviewNotes: opt(z.string()),
+  });
+export const venueSchema = venueSchemaWith(storedImage);
 
-export const performerSchema = z.object({
-  name: z.string().min(2),
-  type: z.enum(PERFORMER_TYPES),
-  aliases,
-  genres: list(z.string()),
-  ...socials,
-  description: opt(z.string().max(600)),
-  dancing: opt(performerDancingSchema),
-  ...seo,
-  reviewNotes: opt(z.string()),
-});
+export const performerSchemaWith = <I extends z.ZodType>(image: ImageHelper<I>) =>
+  z.object({
+    name: z.string().min(2),
+    type: z.enum(PERFORMER_TYPES),
+    aliases,
+    genres: list(z.string()),
+    /** Home base, e.g. "Massapequa" (towns, not street addresses). */
+    town: opt(z.string()),
+    ...socials,
+    spotifyUrl: url,
+    bandcampUrl: url,
+    /** Their own booking or contact page. */
+    bookingUrl: url,
+    /** Booking email and phone, only if the act publishes them for bookings. */
+    email,
+    phone,
+    description: opt(z.string().max(600)),
+    logo: entityLogo(image),
+    photos: entityPhotos(image),
+    dancing: opt(performerDancingSchema),
+    ...entitySources,
+    ...seo,
+    reviewNotes: opt(z.string()),
+  });
+export const performerSchema = performerSchemaWith(storedImage);
 
-export const instructorSchema = z.object({
-  name: z.string().min(2),
-  aliases,
-  styles: list(idRef),
-  affiliatedOrganizerIds: list(idRef),
-  ...socials,
-  description: opt(z.string().max(600)),
-  ...seo,
-  reviewNotes: opt(z.string()),
-});
+export const instructorSchemaWith = <I extends z.ZodType>(image: ImageHelper<I>) =>
+  z.object({
+    name: z.string().min(2),
+    aliases,
+    styles: list(idRef),
+    affiliatedOrganizerIds: list(idRef),
+    town: opt(z.string()),
+    ...socials,
+    /** Lesson or booking contact the teacher publishes. Never a private number. */
+    bookingUrl: url,
+    email,
+    phone,
+    description: opt(z.string().max(600)),
+    /** Only for teachers who run their own school or brand. */
+    logo: entityLogo(image),
+    photos: entityPhotos(image),
+    ...entitySources,
+    ...seo,
+    reviewNotes: opt(z.string()),
+  });
+export const instructorSchema = instructorSchemaWith(storedImage);
 
-export const organizerSchema = z.object({
-  name: z.string().min(2),
-  type: z.enum(ORGANIZER_TYPES),
-  aliases,
-  ...socials,
-  email,
-  phone,
-  town: opt(z.string()),
-  homeVenueId: opt(idRef),
-  danceStyles: list(idRef),
-  description: opt(z.string().max(600)),
-  /** The organizer asked not to be listed: the ingest drops their events (brief §5). */
-  optOut: z.boolean().default(false),
-  ...seo,
-  reviewNotes: opt(z.string()),
-});
+export const organizerSchemaWith = <I extends z.ZodType>(image: ImageHelper<I>) =>
+  z.object({
+    name: z.string().min(2),
+    type: z.enum(ORGANIZER_TYPES),
+    aliases,
+    ...socials,
+    email,
+    phone,
+    /** Their own studio or office, when they have one (otherwise use the usual venue). */
+    address: opt(z.string()),
+    town: opt(z.string()),
+    postalCode: opt(z.string()),
+    county: opt(z.enum(COUNTIES)),
+    hours,
+    homeVenueId: opt(idRef),
+    danceStyles: list(idRef),
+    description: opt(z.string().max(600)),
+    logo: entityLogo(image),
+    photos: entityPhotos(image),
+    /** The organizer asked not to be listed: the ingest drops their events (brief §5). */
+    optOut: z.boolean().default(false),
+    ...entitySources,
+    ...seo,
+    reviewNotes: opt(z.string()),
+  });
+export const organizerSchema = organizerSchemaWith(storedImage);
 
-export const styleSchema = z.object({
-  name: z.string(),
-  family: z.enum(STYLE_FAMILIES),
-  /** Partner, line or party (freestyle) dancing. */
-  danceType: z.enum(DANCE_TYPES).default('partner'),
-  order: z.coerce.number().int().default(50),
-  /** Words that mean this style in listings (case-insensitive, whole words), e.g. "WCS". */
-  aliases,
-  summary: z.string().max(240),
-  description: opt(z.string()),
-  music: opt(z.string()),
-});
+export const styleSchemaWith = <I extends z.ZodType>(image: ImageHelper<I>) =>
+  z.object({
+    name: z.string(),
+    family: z.enum(STYLE_FAMILIES),
+    /** Partner, line or party (freestyle) dancing. */
+    danceType: z.enum(DANCE_TYPES).default('partner'),
+    order: z.coerce.number().int().default(50),
+    /** Words that mean this style in listings (case-insensitive, whole words), e.g. "WCS". */
+    aliases,
+    summary: z.string().max(240),
+    description: opt(z.string()),
+    music: opt(z.string()),
+    /** Photos of people dancing this style (openly licensed, with credits). */
+    photos: entityPhotos(image),
+    /** "Learn more" links, e.g. a Wikipedia article. */
+    moreLinks,
+    evidence: optList(evidenceItem),
+  });
+export const styleSchema = styleSchemaWith(storedImage);
 
 export const sourceSchema = z.object({
   name: z.string().min(2),

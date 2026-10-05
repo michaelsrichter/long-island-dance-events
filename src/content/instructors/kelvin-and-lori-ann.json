@@ -10,5 +10,39 @@
   "affiliatedOrganizerIds": [
     "kl-dance"
   ],
-  "reviewNotes": "No personal website or official social page found; Lori Ann also performs as Lori Ann Greenhouse. Demo videos exist only on a third-party YouTube channel."
+  "reviewNotes": "No personal website or official social page found; Lori Ann also performs as Lori Ann Greenhouse. Demo videos exist only on a third-party YouTube channel.\n\nDirectory research 2026-10-04: Still no website or official business page: kldance.net no longer exists (DNS lookup fails). A hustle class guide links personal Instagram accounts @loriannroche and @kelvin.roche.71 for class info; they could not be checked without logging in and are individual accounts, so they are not recorded (owner may add them if wanted). Lesson phone (631) 332-8883 appears in their own Dance Calendar ad and the BOCES listing and is already on the kl-dance organizer; not repeated here, and the Hotmail address in the BOCES listing was not recorded. Only photo found is Kelvin's bio photo at Stepping Out Studios in Manhattan (where he also teaches); no photo of the two together on a studio site.",
+  "description": "Kelvin and Lori Ann Roche are world hustle champions who teach hustle and Latin hustle group classes on Thursday nights at JLR Dance Unlimited in Bay Shore. They also teach, perform and judge at hustle events around the country.",
+  "photos": [
+    {
+      "image": "../../assets/entities/instructors/kelvin-and-lori-ann-1.webp",
+      "alt": "Kelvin Roche smiling in a blue suit, cream vest and dark tie",
+      "credit": "Photo: Stepping Out Studios (website)",
+      "creditUrl": "https://www.steppingoutstudios.com/kelvin-roche",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5b5a001e266c071a7beee2b4/1536762322766-V840DG1X41LG1FNXPSGL/Kelvin+Roche.jpg?format=1500w",
+      "focus": "50% 20%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+      "note": "The Dance Calendar, October 2026: \"KL Dance with Kelvin & Lori Ann at JLR, 5 5th Ave\" (Bay Shore), 8 PM intermediate/advanced Latin hustle group class on Thursdays."
+    },
+    {
+      "url": "https://www.danceislife.love/where-can-i-learn-to-hustle",
+      "note": "Hustle class guide lists Thursday hustle classes with Kelvin and Lori Ann at JLR Dance Unlimited, 5 5th Avenue, Bay Shore (7 PM and 8 PM levels)."
+    },
+    {
+      "url": "https://www.njhustlecongress.com/staff",
+      "note": "NJ Hustle Congress staff page lists Kelvin & Loriann Roche as instructors/judges and nine-time World Hustle Champions who appeared in the films Enchanted and El Cantante."
+    },
+    {
+      "url": "https://www.steppingoutstudios.com/kelvin-roche",
+      "note": "Stepping Out Studios (NYC) teacher bio for Kelvin Roche: hustle, theater arts and International Latin specialist; titles won with partner Lori Ann Greenhouse. Source of the photo."
+    },
+    {
+      "url": "https://artsined.esboces.org/Programdetail.aspx?id=4988",
+      "note": "Eastern Suffolk BOCES arts provider listing for Lori Ann Roche (Lori Ann Greenhouse), Brentwood, with the KL Dance phone and the old kldance.net site."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thedancecalendar.com, danceislife.love, njhustlecongress.com, steppingoutstudios.com."
 }

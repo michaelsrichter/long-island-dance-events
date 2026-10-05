@@ -1,5 +1,75 @@
 {
   "name": "Gene Casey & the Lone Sharks",
   "type": "band",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Facebook, Instagram and YouTube are linked from the official site header. Phone and email are the band's published contact (Gene Casey Music), not a private listing. No logo on the site (album covers only), so logo left empty. Press-kit photos are likely by photographer Barbara Badetti Palumbo (credited on the bio page); credit the band website unless the owner wants the photographer named. Gene also releases solo albums as Gene Casey on Spotify.",
+  "website": "https://genecasey.com/",
+  "facebookUrl": "https://www.facebook.com/lonesharks/",
+  "instagramUrl": "https://www.instagram.com/gene.casey1/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCfROpDrSjfPsSwnSBAHydXg",
+  "spotifyUrl": "https://open.spotify.com/artist/77MHYZ4q6LyV3NHrpeqzee",
+  "bookingUrl": "https://genecasey.com/contact/",
+  "email": "sharksgene@yahoo.com",
+  "phone": "(631) 965-1841",
+  "town": "Greenport",
+  "genres": [
+    "rockabilly",
+    "honky-tonk country",
+    "roots rock",
+    "swing",
+    "Americana"
+  ],
+  "description": "East End Long Island roots band led by singer and guitarist Gene Casey. They play rockabilly, honky-tonk country, swing and early rock and roll, mixed with Gene's own Americana songs, at bars, wineries and outdoor shows from Greenport to Bayport.",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/gene-casey-and-the-lone-sharks-1.webp",
+      "alt": "Gene Casey in a white cowboy hat singing and playing an orange electric guitar at an outdoor evening show",
+      "credit": "Photo: Gene Casey (website press kit)",
+      "creditUrl": "https://genecasey.com/press-kit/",
+      "imageSource": "https://genecasey.com/wp-content/uploads/2017/03/BarbaraGeneConcert-1200x799.jpg",
+      "focus": "45% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/gene-casey-and-the-lone-sharks-2.webp",
+      "alt": "Gene Casey on stage at night with an orange guitar, clapping beside a vintage microphone",
+      "credit": "Photo: Gene Casey (website press kit)",
+      "creditUrl": "https://genecasey.com/press-kit/",
+      "imageSource": "https://genecasey.com/wp-content/uploads/2017/03/GeneTwang-1200x800.jpg",
+      "focus": "45% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/gene-casey-and-the-lone-sharks-3.webp",
+      "alt": "Gene Casey in a cowboy hat sitting with an acoustic guitar in front of a weathered shingled barn",
+      "credit": "Photo: Gene Casey (website press kit)",
+      "creditUrl": "https://genecasey.com/press-kit/",
+      "imageSource": "https://genecasey.com/wp-content/uploads/2019/12/DSC_3398-1200x801.jpg",
+      "focus": "65% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://genecasey.com/bio/",
+      "note": "Official bio: Gene Casey formed the Lone Sharks on Long Island's East End; roots rock, rockabilly and country; Long Island Music Hall of Fame Long Island Sound Award."
+    },
+    {
+      "url": "https://genecasey.com/contact/",
+      "note": "Official contact page lists Gene Casey Music, PO Box in Greenport NY 11944, phone (631) 965-1841 and sharksgene@yahoo.com."
+    },
+    {
+      "url": "https://genecasey.com/event/gene-lone-sharks-hoodoo-loungers-shelter-island/",
+      "note": "Band's own show calendar lists Shelter Island, Greenport and Bayport dates, matching the playsAt venues."
+    },
+    {
+      "url": "https://open.spotify.com/artist/77MHYZ4q6LyV3NHrpeqzee",
+      "note": "Spotify artist page named Gene Casey & The Lone Sharks with the album What Happened, also linked on the band's music page via iTunes."
+    },
+    {
+      "url": "https://genecasey.com/",
+      "note": "Shows the website, Facebook page, Instagram page and YouTube channel."
+    },
+    {
+      "url": "https://genecasey.com/press-kit/",
+      "note": "Shows the kind of music."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: genecasey.com, open.spotify.com."
 }

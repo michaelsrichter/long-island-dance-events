@@ -1,0 +1,82 @@
+---
+/**
+ * Contact and details panel for a venue, band, teacher, organizer or style: address, phone (tap to call),
+ * email, hours, booking page, website and social pages, where the facts came from, and picture credits.
+ * Page-specific rows (parking, styles taught...) go in the default slot as <div><dt/><dd/></div>.
+ */
+import Icon from './Icon.astro';
+import PersonLinks from './PersonLinks.astro';
+import { displayHost, telHref, type ExternalLink } from '../lib/links';
+import type { EntityImageData } from '../lib/directory';
+interface Props {
+  heading: string;
+  /** Whose details these are (screen readers and analytics). */
+  name: string;
+  /** Analytics location, e.g. "venue" or "performer". */
+  location: string;
+  address?: { street?: string | undefined; town?: string | undefined; state?: string | undefined; postalCode?: string | undefined } | undefined;
+  phone?: string | undefined;
+  email?: string | undefined;
+  hours?: string | undefined;
+  bookingUrl?: string | undefined;
+  bookingLabel?: string;
+  links?: ExternalLink[];
+  evidence?: { url: string; note: string }[];
+  factsSource?: string | undefined;
+  logo?: EntityImageData | undefined;
+  photos?: EntityImageData[];
+  /** Words for the correction link, e.g. "Is this your venue?". */
+  ownerPrompt?: string;
+}
+const { heading, name, location, address, phone, email, hours, bookingUrl, bookingLabel = 'Booking', links = [], evidence = [], factsSource, logo, photos = [], ownerPrompt = 'Something wrong or missing?' } = Astro.props;
+const seenCredits = new Set<string>();
+const credits = [...(logo?.credit ? [logo] : []), ...photos.filter((p) => p.credit)].filter((c) => {
+  const k = `${c.credit}|${c.creditUrl ?? ''}|${c.licenseUrl ?? ''}`;
+  if (seenCredits.has(k)) return false;
+  seenCredits.add(k);
+  return true;
+});
+const street = address?.street;
+const place = [address?.town, [address?.state, address?.postalCode].filter(Boolean).join(' ')].filter(Boolean).join(', ');
+---
+<section class="panel entity-contact" aria-labelledby="contact-h" id="contact">
+  <h2 id="contact-h">{heading}</h2>
+  <dl class="dl">
+    {(street || place) && address && <div><dt>Address</dt><dd><address>{street}{street && place && <br />}{place}</address></dd></div>}
+    <slot />
+    {phone && <div><dt>Phone</dt><dd><a class="contact-link" href={telHref(phone)} data-track="outbound_click" data-track-method="phone" data-track-location={location}><Icon name="phone" />{phone}<span class="visually-hidden"> (call {name})</span></a></dd></div>}
+    {email && <div><dt>Email</dt><dd><a class="contact-link" href={`mailto:${email}`} data-track="outbound_click" data-track-method="email" data-track-location={location}><Icon name="mail" />{email}</a></dd></div>}
+    {hours && <div><dt>Hours</dt><dd><span class="contact-link contact-link--text"><Icon name="clock" />{hours}</span></dd></div>}
+    {bookingUrl && <div><dt>{bookingLabel}</dt><dd><a class="contact-link" href={bookingUrl} target="_blank" rel="noopener" data-track="outbound_click" data-track-method="booking" data-track-location={location} data-track-target={displayHost(bookingUrl)}><Icon name="booking" />{displayHost(bookingUrl)}<span class="visually-hidden"> (opens in a new tab)</span></a></dd></div>}
+  </dl>
+  {links.length > 0 && (
+    <div class="entity-contact__links">
+      <h3 class="entity-contact__sub">Website and social pages</h3>
+      <PersonLinks links={links} name={name} location={location} />
+    </div>
+  )}
+  {evidence.length > 0 && (
+    <details class="dance-evidence mt-3">
+      <summary>Where this came from ({evidence.length} {evidence.length === 1 ? 'source' : 'sources'})</summary>
+      <ul>
+        {evidence.map((x) => <li><a href={x.url} target="_blank" rel="noopener nofollow">{displayHost(x.url)}<span class="visually-hidden"> (opens in a new tab)</span></a>: {x.note}</li>)}
+      </ul>
+    </details>
+  )}
+  <p class="muted mt-3">{factsSource && <>{factsSource} </>}{ownerPrompt} <a href="/sources/#corrections">Tell us</a>.</p>
+  {credits.length > 0 && (
+    <p class="entity-credits">
+      <Icon name="camera" />
+      <span>
+        Pictures:{' '}
+        {credits.map((c, i) => (
+          <>
+            {i > 0 && ' · '}
+            {c.creditUrl ? <a href={c.creditUrl} target="_blank" rel="noopener nofollow">{c.credit}<span class="visually-hidden"> (opens in a new tab)</span></a> : c.credit}
+            {c.licenseUrl && <> (<a href={c.licenseUrl} target="_blank" rel="noopener license">license</a>)</>}
+          </>
+        ))}{'. '}Is one of these yours? <a href="/sources/#corrections">Ask us to change or remove it</a>.
+      </span>
+    </p>
+  )}
+</section>

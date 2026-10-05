@@ -1,5 +1,53 @@
 {
   "name": "Less Than Jake",
   "type": "band",
-  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Nationally known touring band (not a local Long Island act); the listing is a ticketed concert at Mulcahy's, not a dance night. No booking agent is named on the band site; email is the band's general info address. The X link on the site uses twitter.com/lessthanjake (recorded as x.com). Only one non-text band photo on the site (other banners have album-art text over the photo). The logo is the band's long-time cartoon mascot (site icon, 250 px).",
+  "website": "https://lessthanjake.com/",
+  "facebookUrl": "https://www.facebook.com/lessthanjake/",
+  "instagramUrl": "https://www.instagram.com/lessthanjake/",
+  "youtubeUrl": "https://www.youtube.com/@lessthanjake",
+  "xUrl": "https://x.com/lessthanjake",
+  "spotifyUrl": "https://open.spotify.com/artist/20oQv3LStCKCjI9oQ0JNha",
+  "email": "info@lessthanjake.com",
+  "genres": [
+    "ska punk",
+    "punk rock"
+  ],
+  "description": "A touring ska-punk band from Gainesville, Florida, playing fast, upbeat punk songs with trombone and saxophone since the 1990s. It comes to Long Island on its national tours, such as the Northeast to Nowhere tour at Mulcahy's in Wantagh.",
+  "logo": {
+    "image": "../../assets/entities/performers/less-than-jake-logo.webp",
+    "alt": "Less Than Jake cartoon mascot: a grinning face with spiky yellow hair and its tongue out",
+    "credit": "Logo: Less Than Jake",
+    "creditUrl": "https://lessthanjake.com/",
+    "imageSource": "https://lessthanjake.com/wp-content/themes/2020-pwm-theme/img/webicon.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/less-than-jake-1.webp",
+      "alt": "The five members of Less Than Jake posing in a brick alley covered in graffiti",
+      "credit": "Photo: Less Than Jake (website)",
+      "creditUrl": "https://lessthanjake.com/",
+      "imageSource": "https://lessthanjake.com/wp-content/uploads/2024/10/our-history-pic.jpg",
+      "focus": "50% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mulcahyslongisland.com/event/less-than-jake/",
+      "note": "Mulcahy's in Wantagh lists Less Than Jake's Northeast to Nowhere 2026 show on Wednesday, December 9, with tickets sold through lessthanjake.com."
+    },
+    {
+      "url": "https://lessthanjake.com/",
+      "note": "Official band site describes the ska-punk band with trombone and sax, and links Facebook, Instagram, X and Spotify."
+    },
+    {
+      "url": "https://lessthanjake.com/contact/",
+      "note": "Contact page lists general info and press email addresses and a contact form."
+    },
+    {
+      "url": "https://www.youtube.com/@lessthanjake",
+      "note": "YouTube channel describes itself as the official Less Than Jake channel."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mulcahyslongisland.com, lessthanjake.com, youtube.com."
 }

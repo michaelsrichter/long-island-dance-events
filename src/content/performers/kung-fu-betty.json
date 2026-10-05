@@ -1,5 +1,29 @@
 {
   "name": "Kung Fu Betty",
   "type": "band",
-  "reviewNotes": "Added automatically from Salt Shack at Cedar Beach (Babylon) - beach music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Salt Shack at Cedar Beach (Babylon) - beach music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Website and Facebook come from Salt Shack's artist page. kungfubetty.com blocks all crawlers in robots.txt (Disallow: /), so its pages, booking details and images were not read; check it by hand for a logo, photos and a booking/contact page. Salt Shack's artist page has a band photo, but it is on the venue's site, not the band's, so it was not used. YouTube @kungfubetty is a personal playlist channel, not the band. Not related to the Connecticut funk band Kung Fu. Did not record the LLC's registered address (private).",
+  "website": "https://kungfubetty.com/",
+  "facebookUrl": "https://www.facebook.com/61566347387963",
+  "genres": [
+    "rock",
+    "pop",
+    "party covers",
+    "cover band"
+  ],
+  "description": "A cover band from Amityville on Long Island's South Shore that plays a wide mix of rock and pop from many decades, from Elvis and Lynyrd Skynyrd to P!nk and My Chemical Romance.",
+  "evidence": [
+    {
+      "url": "https://saltshackny.com/artist/kung-fu-betty/",
+      "note": "Salt Shack's artist page: Long Island South Shore cover band based in Amityville, set runs from Elvis to P!nk and Lynyrd Skynyrd to My Chemical Romance; links the band's website and Facebook; next show Sun Oct 11, 2 PM."
+    },
+    {
+      "url": "https://www.bizapedia.com/ny/kung-fu-betty-llc.html",
+      "note": "NY State business record shows an active Kung Fu Betty LLC in Amityville (filed July 2024), matching the band's home town."
+    },
+    {
+      "url": "https://ilovebabylon.com/event/supper-by-the-bay-featuring-ryan-kreuder/",
+      "note": "Babylon-area events site lists a Kung Fu Betty show in Amityville's 2026 waterfront concert series."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: saltshackny.com, bizapedia.com, ilovebabylon.com."
 }

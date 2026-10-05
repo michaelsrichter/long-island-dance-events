@@ -2,10 +2,76 @@
   "name": "Bedell Cellars",
   "address": "36225 Main Road",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Name and address are correct. Our tools could not open bedellcellars.com directly (connection closed), so we read it through a search crawler (crawled Sept 27 - Oct 3, 2026); the site's 'Social' page mentions Instagram and YouTube but the link targets were not readable. Facebook, Instagram and X come from wine directories and match the exact Bedell handles; please spot-check. YouTube channel not confirmed. IMPORTANT: some Bedell event pages (including Gene Casey on Oct 25) show the event location as '45470 Main Road', which is the address of Bedell's sister tasting room, Corey Creek Tap Room (45470 Main Rd, Southold 11971, 631-765-4168). It may be a template error; check whether those gigs are at Bedell or at Corey Creek. Logo is white on transparent (needs a dark background). Bedell also posts event-day closures (PDF on its home page).",
   "state": "NY",
   "town": "Cutchogue",
   "latitude": 41.02832,
   "longitude": -72.468749,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.bedellcellars.com/",
+  "facebookUrl": "https://www.facebook.com/BedellCellars/",
+  "instagramUrl": "https://www.instagram.com/bedellcellars/",
+  "tiktokUrl": "https://www.tiktok.com/@bedellcellars",
+  "xUrl": "https://x.com/bedellcellars",
+  "email": "wine@bedellcellars.com",
+  "phone": "(631) 734-7537",
+  "hours": "Sun-Thu 11 AM-6 PM; Fri-Sat 11 AM-7 PM (closed for some private events)",
+  "postalCode": "11935",
+  "description": "A family-owned winery on Main Road (Route 25) in Cutchogue on the North Fork. Local musicians play on its outdoor pavilion and lawn on many weekend afternoons and some weekday evenings, with wine and food for sale.",
+  "logo": {
+    "image": "../../assets/entities/venues/bedell-cellars-cutchogue-logo.webp",
+    "alt": "Bedell logo: a large letter B over a line and the word BEDELL, in white",
+    "credit": "Logo: Bedell Cellars",
+    "creditUrl": "https://www.bedellcellars.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/537392d5e4b0d7a46b2eef18/1400520301212-I8MGILXC9ZYKUK9A8ELG/Bedell_white.png?format=1500w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/bedell-cellars-cutchogue-1.webp",
+      "alt": "Aerial view of Bedell Cellars at sunset: white farm buildings, a lawn with picnic tables and an old red truck, and rows of vines behind",
+      "credit": "Photo: Bedell Cellars (website)",
+      "creditUrl": "https://www.bedellcellars.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/537392d5e4b0d7a46b2eef18/1502720839300-B9M2BFTC0Q6BKG0CY227/0001.jpg?format=1500w",
+      "focus": "60% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/bedell-cellars-cutchogue-2.webp",
+      "alt": "Guests at long tables under string lights in Bedell's white open-sided pavilion",
+      "credit": "Photo: Bedell Cellars (website)",
+      "creditUrl": "https://www.bedellcellars.com/visit-bedell",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/537392d5e4b0d7a46b2eef18/1667494593999-5M24CWLJ9W3D7VWO87H0/060422_640.JPG?format=1500w",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/bedell-cellars-cutchogue-3.webp",
+      "alt": "Rows of grapevines stretching toward a pink and blue sunset sky",
+      "credit": "Photo: Bedell Cellars (website)",
+      "creditUrl": "https://www.bedellcellars.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/537392d5e4b0d7a46b2eef18/1434727397919-1S2DZZKG9J95THJ09WWY/0914-_JUL1140.jpg?format=1500w",
+      "focus": "50% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.bedellcellars.com/",
+      "note": "Winery's own site footer: Bedell Cellars, 36225 Main Road, Cutchogue, NY 11935, 631-734-7537, wine@bedellcellars.com; hours 11-6 Sun-Thu and 11-7 Fri-Sat; no reservations for groups up to 15."
+    },
+    {
+      "url": "https://www.bedellcellars.com/events-calendar/",
+      "note": "Music & Events calendar lists live music most weekends (e.g. Gene Casey Sun Oct 25, 1-5 PM) and mentions live music on the pavilion."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=4381127806550168141",
+      "note": "Google Maps lists Bedell Cellars (winery) at 36225 Main Rd, Cutchogue, NY 11935, phone (631) 734-7537."
+    },
+    {
+      "url": "https://www.winerelease.com/WineryInfo/bedellcellars.html",
+      "note": "Winery directory lists Bedell's Facebook (facebook.com/BedellCellars), Instagram (instagram.com/bedellcellars) and X (x.com/bedellcellars)."
+    },
+    {
+      "url": "https://www.tiktok.com/@bedellcellars",
+      "note": "TikTok 'Bedell Cellars' bio: certified sustainable vineyard on the North Fork since 1980, links bedellcellars.com."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: bedellcellars.com, winerelease.com, tiktok.com."
 }

@@ -7,13 +7,38 @@
   "town": "Bay Shore",
   "county": "Suffolk",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: jlrdanceunlimited.com, google.com.",
-  "reviewNotes": "\"JLR\" in the newsletter = JLR Dance Unlimited, where KL Dance teaches Thursday hustle classes. No parking or accessibility details published.",
+  "factsSource": "Checked October 4, 2026. Source: jlrdanceunlimited.com.",
+  "reviewNotes": "\"JLR\" in the newsletter = JLR Dance Unlimited, where KL Dance teaches Thursday hustle classes. No parking or accessibility details published.\n\nDirectory research 2026-10-04: Site meta text names the owners as Joel and Lisa Rodriguez. A map listing shows Mon, Tue, Thu, Fri 3-10 PM and Sat 10 AM-2 PM, but the studio's own site says Mon-Sat by appointment and Sunday closed; we used the site. No public email (contact form only). No usable photos: the large images on the site are stock (one has iStock watermarks) or a black-and-white show-dance photo that does not show the studio and may be stock; Yelp photos are not allowed. No parking or accessibility details found.",
   "postalCode": "11706",
   "phone": "(631) 496-5952",
   "website": "https://www.jlrdanceunlimited.com/",
   "googleMapsUrl": "https://www.google.com/maps?cid=12601710993467832940",
   "latitude": 40.722,
   "longitude": -73.254,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/jlrdanceunlimited/",
+  "instagramUrl": "https://www.instagram.com/jlrdanceunlimited/",
+  "hours": "Mon-Sat by appointment; closed Sun (except scheduled dance socials)",
+  "description": "A ballroom and Latin dance studio on Fifth Avenue in Bay Shore run by Joel and Lisa Rodriguez. It gives private lessons, rents its floor for parties and for other teachers' group classes, and holds its own dance socials.",
+  "logo": {
+    "image": "../../assets/entities/venues/jlr-dance-unlimited-logo.webp",
+    "alt": "JLR Dance Unlimited logo: the letters jlr on a dotted disco-ball circle next to the words Dance Unlimited in teal",
+    "credit": "Logo: JLR Dance Unlimited",
+    "creditUrl": "https://www.jlrdanceunlimited.com/",
+    "imageSource": "https://static.wixstatic.com/media/b0efbd_46035b1f05d9410fb1ba9b07e7261092~mv2.png"
+  },
+  "evidence": [
+    {
+      "url": "https://www.jlrdanceunlimited.com/",
+      "note": "Studio site: Tel. 631-496-5952, 5 5th Ave., Bay Shore NY 11706, Mon-Sat by appointment, Sunday closed; private lessons, party rentals and floor space; links Facebook and Instagram."
+    },
+    {
+      "url": "https://www.jlrdanceunlimited.com/events-2",
+      "note": "Events page lists a Sunday Night Dance Social (Oct 11) and a Halloween Dance Social (Oct 31) at JLR Dance Unlimited."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=12601710993467832940",
+      "note": "Places listing for JLR Dance Unlimited (dance school) matches 5 5th Ave, Bay Shore 11706 and (631) 496-5952, with the same Facebook and Instagram links."
+    }
+  ]
 }

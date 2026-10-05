@@ -32,16 +32,63 @@
   },
   "description": "A Nashville-themed country bar and restaurant on Main Street in Patchogue. It has live bands on weekends followed by a country DJ, plus karaoke.",
   "facebookUrl": "https://www.facebook.com/daisys.li/",
-  "factsSource": "Checked October 3, 2026. Source: daisysli.com.",
+  "factsSource": "Checked October 4, 2026. Source: daisysli.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Daisy%27s+Nashville+Lounge+%28Patchogue%29%2C+22+W+Main+St%2C+Suite+11%2C+Patchogue%2C+NY+11772",
   "kind": "bar",
   "phone": "(631) 438-0296",
   "postalCode": "11772",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Country DJ nights may include line dancing here too, but we only found line dance events advertised for Miller Place.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Country DJ nights may include line dancing here too, but we only found line dance events advertised for Miller Place.\n\nDirectory research 2026-10-04: Photos come from the venue's own site and date from 2022, when Patchogue was the only location, so they show this location. The site only lists opening times; map listings show closing at 2 AM. Email (info@daisysli.com) is shared with Miller Place. Website, social pages and logo are shared with the Miller Place location. We did not find line dance nights advertised for Patchogue (only for Miller Place). The X link is in the site footer (as twitter.com/Daisys_LI); x.com blocks automated checks. Current description still fits.",
   "state": "NY",
   "town": "Patchogue",
   "website": "https://daisysli.com/",
   "latitude": 40.765656,
   "longitude": -73.015589,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/daisys.li/",
+  "xUrl": "https://x.com/Daisys_LI",
+  "email": "info@daisysli.com",
+  "hours": "Tue-Fri from 3 PM; Sat-Sun from 12 PM; closed Mon",
+  "logo": {
+    "image": "../../assets/entities/venues/daisys-nashville-lounge-patchogue-logo.webp",
+    "alt": "Daisy's Nashville Lounge logo: the word Daisy's in large red western letters over Nashville Lounge in yellow",
+    "credit": "Logo: Daisy's Nashville Lounge",
+    "creditUrl": "https://daisysli.com/",
+    "imageSource": "https://daisysli.com/wp-content/uploads/2020/12/Daisys%C2%AE-04-2.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/daisys-nashville-lounge-patchogue-1.webp",
+      "alt": "A three-piece band with guitars and bass singing in front of a brick wall and a Daisy's Live banner",
+      "credit": "Photo: Daisy's Nashville Lounge (website)",
+      "creditUrl": "https://daisysli.com/",
+      "imageSource": "https://daisysli.com/wp-content/uploads/2022/05/DSC05336-1-1536x1024.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/venues/daisys-nashville-lounge-patchogue-2.webp",
+      "alt": "A woman in a cowboy hat dances with her arms up among a crowd on a wood dance floor with red booths behind",
+      "credit": "Photo: Daisy's Nashville Lounge (website)",
+      "creditUrl": "https://daisysli.com/gallery/",
+      "imageSource": "https://daisysli.com/wp-content/uploads/2022/08/DSC08778-scaled.jpg",
+      "focus": "65% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://daisysli.com/contact-us/",
+      "note": "Contact page lists the Patchogue location at 22 West Main Street, Suite 11, Patchogue, NY 11772, phone (631) 438-0296, open Tue-Fri from 3 PM and Sat-Sun from 12 PM."
+    },
+    {
+      "url": "https://daisysli.com/live-music-events-patchogue/",
+      "note": "Patchogue calendar shows Friday and Saturday bands at 7 PM followed by a country DJ for dancing, Tuesday country karaoke, Wednesday country bingo and Sunday afternoon acoustic acts."
+    },
+    {
+      "url": "https://daisysli.com/gallery/",
+      "note": "Venue's own gallery (photos from 2022, before the Miller Place location opened) includes the dance floor and band photos."
+    },
+    {
+      "url": "https://daisysli.com/",
+      "note": "Shows the website, Facebook page, Instagram page and X page."
+    }
+  ]
 }

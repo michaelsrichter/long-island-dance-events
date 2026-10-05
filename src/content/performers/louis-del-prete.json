@@ -12,5 +12,39 @@
   ],
   "website": "https://louisdelprete.com/",
   "facebookUrl": "https://www.facebook.com/louisdelpreteentertainment/",
-  "reviewNotes": "Also works as a DJ, musician and dance teacher."
+  "reviewNotes": "Also works as a DJ, musician and dance teacher.\n\nDirectory research 2026-10-04: Phone and email are the booking contacts he publishes on his own site (the phone is also given by the Sons of Italy lodge for reservations). His site also lists louisdelprete@yahoo.com on the DJ page. The website looks unmaintained (its dance schedule stops in 2019), but it is still online and is his official site. Facebook page is linked from the site but could not be checked without logging in. Site photos are small (under 600 px wide) and old, so no photos recorded; the logo is the text banner from the site header.",
+  "bookingUrl": "https://louisdelprete.com/dj_services.htm",
+  "email": "louis@louisdelprete.com",
+  "phone": "(516) 819-9016",
+  "description": "Long Island singer, DJ and ballroom dancer billed as \"The Ultimate Entertainer.\" He sings and spins ballroom, Latin, hustle and West Coast Swing music at social dances, such as the monthly Friday dances at the Sons of Italy lodge in Deer Park, and also DJs weddings and parties.",
+  "logo": {
+    "image": "../../assets/entities/performers/louis-del-prete-logo.webp",
+    "alt": "Gold script lettering on black reading \"Louis Del Prete, The Ultimate Entertainer\"",
+    "credit": "Logo: Louis Del Prete",
+    "creditUrl": "https://louisdelprete.com/",
+    "imageSource": "https://louisdelprete.com/_borders/1471015138.jpg"
+  },
+  "evidence": [
+    {
+      "url": "https://sonsofitalyli.com/event/friday-night-dance-with-louis-del-prete/",
+      "note": "Sons of Italy Brumidi Lodge, 2075 Deer Park Ave, Deer Park: Friday Night Dance with \"The Ultimate Entertainer\" Louis Del Prete, Oct 16 and Nov 20, 2026, 7-10:30 PM, ballroom, Latin, hustle and West Coast Swing; $25; call Lou at (516)…"
+    },
+    {
+      "url": "https://louisdelprete.com/dj_services.htm",
+      "note": "His own DJ service page: mobile DJ, singer and emcee for weddings, ballroom socials and parties; lists (516) 819-9016 for bookings."
+    },
+    {
+      "url": "https://louisdelprete.com/about_louis.htm",
+      "note": "Bio: drummer, keyboardist, trumpeter and singer; ballroom and Latin dancer and teacher who runs dance venues on Long Island."
+    },
+    {
+      "url": "https://375dancestudio.com/social-dance/",
+      "note": "375 Dance Studio (Carle Place) lists a Social Dance Party hosted by Louis Del Prete with ballroom and social dance music."
+    },
+    {
+      "url": "https://louisdelprete.com/",
+      "note": "Shows the website, Facebook page and email."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: sonsofitalyli.com, louisdelprete.com, 375dancestudio.com."
 }

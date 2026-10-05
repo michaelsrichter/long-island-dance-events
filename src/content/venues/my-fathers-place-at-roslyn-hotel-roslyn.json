@@ -2,10 +2,48 @@
   "name": "My Father’s Place at Roslyn Hotel",
   "address": "1221 Old Northern Blvd.",
   "county": "Nassau",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: myfathersplace.com now redirects to www.mfpproductions.com (same Wix site); the club still lists myfathersplace.com as its address, so that is kept as the website. The site's social icons are Wix template placeholders (facebook.com/wix etc.), so no social pages are confirmed. Candidates seen in search but not verified: Facebook pages 185155141357158 ('My Father's Place', Roslyn) and 100063555642307 ('My Father's Place at The Roslyn Hotel'), and Instagram @myfathersplaceny. No public email (contact form only). No photos: the only photo on the club's own site is a historic 1970s performer shot, and the stage photos on the Atlas bistro page are on a different business's site. The club FAQ warns 'DO NOT follow GOOGLE' for directions; enter the hotel's rear garage. Seating is at tables; no dance floor is described.",
   "state": "NY",
   "town": "Roslyn",
   "latitude": 40.801083,
   "longitude": -73.652243,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.myfathersplace.com/",
+  "phone": "(516) 580-0887",
+  "postalCode": "11576",
+  "description": "A supper-club music room inside The Roslyn Hotel, run by the founder of the original 1970s My Father's Place. It hosts ticketed concerts by touring and local acts and tribute bands, with table seating, dinner service and free garage parking.",
+  "logo": {
+    "image": "../../assets/entities/venues/my-fathers-place-at-roslyn-hotel-roslyn-logo.webp",
+    "alt": "My Father's Place logo in bold black curly 1970s-style letters",
+    "credit": "Logo: My Father's Place",
+    "creditUrl": "https://www.mfpproductions.com/",
+    "imageSource": "https://static.wixstatic.com/media/036687_b4356179e51c46e3b5e93a433b01d6c1~mv2.png"
+  },
+  "evidence": [
+    {
+      "url": "https://www.mfpproductions.com/blank-4",
+      "note": "Club's own contact page (myfathersplace.com redirects here): My Father's Place at The Roslyn, 1221 Old Northern Boulevard, Roslyn, NY 11576, call (516) 580-0887."
+    },
+    {
+      "url": "https://www.mfpproductions.com/faq",
+      "note": "FAQ: inside the Roslyn Hilton Tapestry hotel; free 3-level garage, club on the garage's second level; doors open two hours before shows; no reservations, first come first seated; supper club with table service."
+    },
+    {
+      "url": "https://www.mfpproductions.com/blank-2",
+      "note": "Events page lists weekly ticketed shows through November 2026 (tribute bands, blues, rock and folk acts, a Halloween 'Dead Dance Ball')."
+    },
+    {
+      "url": "https://www.atlasroslyn.com/my-fathers-place/",
+      "note": "The hotel's Atlas New World Bistro page describes the club as the iconic live music club back in Roslyn, with food from the bistro."
+    },
+    {
+      "url": "https://www.mfpproductions.com/",
+      "note": "Shows the website."
+    },
+    {
+      "url": "https://www.roslynlandmarks.org/news/roslyn-times-3-29-24-my-fathers-place-caters-to-grown-up-fanbase-at-the-roslyn-hotel",
+      "note": "Shows the county."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mfpproductions.com, atlasroslyn.com, roslynlandmarks.org."
 }

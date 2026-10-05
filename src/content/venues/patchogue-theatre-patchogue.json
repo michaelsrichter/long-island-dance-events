@@ -30,16 +30,64 @@
   },
   "description": "A historic nonprofit theater on Main Street in Patchogue village with nearly 1,200 seats. It hosts touring concerts, tribute bands, comedy and family shows.",
   "facebookUrl": "https://www.facebook.com/patchoguetheatre/",
-  "factsSource": "Checked October 3, 2026. Source: patchoguetheatre.org.",
+  "factsSource": "Checked October 4, 2026. Sources: patchoguetheatre.org, youtube.com, tiktok.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Patchogue+Theatre+for+the+Performing+Arts+71+E+Main+St+Patchogue+NY+11772",
   "kind": "theater",
   "phone": "(631) 207-1313",
   "postalCode": "11772",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Both gigs confirmed: Yachtley Crew Sat Oct 3 (8 pm per ticket sites) and Ann Wilson Sun Oct 4 at 7 pm. Box office 631-207-1313; main office 631-207-1300. We found no house rule about dancing in the aisles.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Both gigs confirmed: Yachtley Crew Sat Oct 3 (8 pm per ticket sites) and Ann Wilson Sun Oct 4 at 7 pm. Box office 631-207-1313; main office 631-207-1300. We found no house rule about dancing in the aisles.\n\nDirectory research 2026-10-04: Current description is still accurate, so none proposed. Main office line 631-207-1300 (from earlier notes) is not shown on the home page; we kept the box office number. TikTok and YouTube are not linked from the site but match by name, Patchogue location and content.",
   "state": "NY",
   "town": "Patchogue",
   "website": "https://www.patchoguetheatre.org/",
   "latitude": 40.765793,
   "longitude": -73.012533,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/patchoguetheatre/",
+  "youtubeUrl": "https://www.youtube.com/@PatchogueTheatre",
+  "tiktokUrl": "https://www.tiktok.com/@patchoguetheatre",
+  "email": "info@patchoguetheatre.org",
+  "hours": "Box office Wed-Sun 12 PM-6 PM; longer hours on show nights",
+  "logo": {
+    "image": "../../assets/entities/venues/patchogue-theatre-patchogue-logo.webp",
+    "alt": "Patchogue Theatre for the Performing Arts logo: white lettering on a black art-deco marquee with a gold PTPA and Est. 1923",
+    "credit": "Logo: Patchogue Theatre for the Performing Arts",
+    "creditUrl": "https://www.patchoguetheatre.org/",
+    "imageSource": "https://www.patchoguetheatre.org/site-images/29882d03807d19f6430118bfba4bdd85.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/patchogue-theatre-patchogue-1.webp",
+      "alt": "The lit Patchogue marquee over the brick theater front on East Main Street at night, with car light trails on the road",
+      "credit": "Photo: Patchogue Theatre for the Performing Arts (website)",
+      "creditUrl": "https://www.patchoguetheatre.org/about-us",
+      "imageSource": "https://www.patchoguetheatre.org/site-images/6d13a72f644a0fa754a3342d7db563d3.jpg",
+      "focus": "45% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/patchogue-theatre-patchogue-2.webp",
+      "alt": "Inside the theater: rows of red seats facing a lit stage under a painted dome ceiling and a crystal chandelier",
+      "credit": "Photo: Patchogue Theatre for the Performing Arts (website)",
+      "creditUrl": "https://www.patchoguetheatre.org/Rental",
+      "imageSource": "https://www.patchoguetheatre.org/site-images/693eabbc2daf619544fee7b09734d369.jpg",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.patchoguetheatre.org/",
+      "note": "Official site footer: 71 East Main St, Patchogue, NY 11772; box office 631-207-1313; info@patchoguetheatre.org; box office Wed-Sun 12-6 pm with longer hours on show nights; links to Facebook and Instagram."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=8101202743179320552",
+      "note": "Google Maps lists Patchogue Theatre for the Performing Arts (performing arts theater) at 71 E Main St, Patchogue, NY 11772, phone (631) 207-1313."
+    },
+    {
+      "url": "https://www.youtube.com/@PatchogueTheatre",
+      "note": "YouTube channel 'Patchogue Theatre for the Performing Arts' links to PatchogueTheatre.org."
+    },
+    {
+      "url": "https://www.tiktok.com/@patchoguetheatre",
+      "note": "TikTok account 'Patchogue Theatre' posts the same shows that are on the theater's event list (e.g. Golden Girls in October)."
+    }
+  ]
 }

@@ -21,7 +21,7 @@ erDiagram
 - **Dates** are `YYYY-MM-DD`. **Local date-times** are `YYYY-MM-DDTHH:mm` in the event's `timezone` (default `America/New_York`). Never store UTC offsets; the build handles summer/winter time.
 - **Our own words:** `title`, `summary` and `description` are written by us (or generated from facts by the ingest program). Never paste text from a source.
 - **`reviewNotes`** are private notes for editors. They are never shown on the site.
-- **Links** (`website`, `facebookUrl`, `instagramUrl`, `youtubeUrl`, `ticketUrl`, `infoUrl`, `sourceUrl`) must be full `https://` addresses.
+- **Links** (`website`, `facebookUrl`, `instagramUrl`, `youtubeUrl`, `tiktokUrl`, `xUrl`, `spotifyUrl`, `bandcampUrl`, `bookingUrl`, `ticketUrl`, `infoUrl`, `sourceUrl`) must be full web addresses (`https://` whenever the site has it).
 
 ## `events/*.json`
 
@@ -64,26 +64,45 @@ One file per listing. A repeating listing ("every Tuesday") is one file with a `
 
 How the site uses it: each date of a repeating event becomes its own page (`/events/<date>-<id>/`) for the next 120 days. Ended events move to "Past events" by themselves, even before the next rebuild.
 
+## Directory pictures, links and contacts (venues, organizers, teachers, bands and DJs, styles)
+
+These fields are shared by the directory entities. They are all optional, so older files and new files from the weekly run stay valid.
+
+| Field | Who has it | Meaning |
+| --- | --- | --- |
+| `website`, `facebookUrl`, `instagramUrl`, `youtubeUrl`, `tiktokUrl`, `xUrl`, `moreLinks` | venues, organizers, teachers, bands/DJs (styles: `moreLinks` only, e.g. Wikipedia) | Their own pages. Shown as round icon buttons on cards and as labelled buttons on their page. |
+| `spotifyUrl`, `bandcampUrl` | bands/DJs | Music pages. |
+| `bookingUrl` | bands/DJs, teachers | Their own booking or lessons page. |
+| `phone`, `email` | all but styles | Public business contact only. Teachers, DJs and solo acts: only what they publish for bookings. Never a private number, private email or home address. Phone shows as a tap-to-call link, email as a mail link. |
+| `hours` | venues, organizers | Plain text, e.g. "Tue-Sun 4 PM-midnight; closed Mon" (max 300). |
+| `address`, `postalCode`, `county` | organizers (venues already have them) | Only for an organizer's own studio or office. |
+| `town` | bands/DJs, teachers | Home base, town only. |
+| `logo` | venues, organizers, bands/DJs, teachers who run a school | One image: `image`, `alt` (optional; pages fall back to "<name> logo"), `credit`, `creditUrl` (page it came from), `imageSource` (original file address, not shown). An empty logo box saved by the CMS counts as "no logo". |
+| `photos` | all five | Up to 6 images: `image`, `alt` (required), `credit` (required), `creditUrl`, `licenseUrl` (Creative Commons photos), `imageSource`, `caption`, `focus` ("x% y%", what to keep in view when cropped). The first photo is the card picture and the page-top picture. |
+| `evidence` | all five | Sources for these details: list of `url` + `note` (our own words, max 240). |
+| `factsSource` | venues, organizers, teachers, bands/DJs | One public line, e.g. "Checked October 4, 2026. Sources: example.com, facebook.com." |
+
+**Image files** live in `src/assets/entities/<collection>/` (for example `src/assets/entities/venues/the-nutty-irishman-farmingdale-1.webp`) and content files point to them with a relative path (`../../assets/entities/venues/...`). Astro makes small WebP copies at build time: photos are cropped to 16:9 around `focus` at 400 and 800 pixels wide; logos keep their shape at 160 and 320 pixels. Originals are kept at most 1200 pixels wide (logos 400), with EXIF data removed. The cards, page tops, galleries and JSON-LD all use the same copies.
+
 ## `venues/*.json`
 
-`name`, `address`, `town`, `county` (`Nassau` or `Suffolk`), `state`, `postalCode`, `website`, `phone`, `latitude`/`longitude` (filled by `npm run geocode` or the "Venue map locations" workflow), `coordinatesSource`, `googleMapsUrl`, `facebookUrl`, `parkingNotes`, `accessibilityNotes`, `factsSource`, `description`, `aliases` (other names used in listings, for matching), `kind` (`bar`, `restaurant`, `nightclub`, `brewery`, `winery`, `distillery`, `theater`, `concert-hall`, `park`, `beach`, `library`, `lodge-hall`, `dance-studio`, `school`, `festival`, `marina-club`, `other`), `dancing` (research: `floor` = `dance-floor`, `open-space`, `small`, `seated` or `unknown`; `policy` = `encouraged`, `allowed`, `discouraged` or `unknown`; `kinds`; `notes`; `confidence` high/medium/low; `checked` date; `evidence` = list of `url` + `note`), `reviewNotes`.
+`name`, `address`, `town`, `county` (`Nassau` or `Suffolk`), `state`, `postalCode`, `phone`, `email`, `hours`, website and social links (above), `latitude`/`longitude` (filled by `npm run geocode` or the "Venue map locations" workflow), `coordinatesSource`, `googleMapsUrl`, `parkingNotes`, `accessibilityNotes`, `factsSource`, `evidence`, `description`, `logo`, `photos`, `aliases` (other names used in listings, for matching), `kind` (`bar`, `restaurant`, `nightclub`, `brewery`, `winery`, `distillery`, `theater`, `concert-hall`, `park`, `beach`, `library`, `lodge-hall`, `dance-studio`, `school`, `festival`, `marina-club`, `other`), `dancing` (research: `floor` = `dance-floor`, `open-space`, `small`, `seated` or `unknown`; `policy` = `encouraged`, `allowed`, `discouraged` or `unknown`; `kinds`; `notes`; `confidence` high/medium/low; `checked` date; `evidence` = list of `url` + `note`), `reviewNotes`.
 
 ## `organizers/*.json`
 
-`name`, `type` (`studio`, `club`, `nonprofit`, `promoter`, `venue`, `school`, `dj`, `instructor`, `other`), `website`, social links and `moreLinks`, `phone`, `email`, `town`, `homeVenueId`, `danceStyles`, `description`, `aliases`, `optOut` (true = stop listing their events), `reviewNotes`.
+`name`, `type` (`studio`, `club`, `nonprofit`, `promoter`, `venue`, `school`, `dj`, `instructor`, `other`), website and social links (above), `phone`, `email`, `address`, `town`, `postalCode`, `county`, `hours`, `homeVenueId`, `danceStyles`, `description`, `logo`, `photos`, `evidence`, `factsSource`, `aliases`, `optOut` (true = stop listing their events), `reviewNotes`.
 
 ## `instructors/*.json` (teachers)
 
-`name`, `styles`, `affiliatedOrganizerIds`, `website`, social links and `moreLinks`, `description`, `aliases`, `reviewNotes`.
+`name`, `styles`, `affiliatedOrganizerIds`, `town`, website and social links, `bookingUrl`, `email`, `phone`, `description`, `logo` (only if they run their own school), `photos`, `evidence`, `factsSource`, `aliases`, `reviewNotes`.
 
 ## `performers/*.json` (bands and DJs)
 
-`name`, `type` (`band`, `dj`, `solo`), `genres`, `website`, social links and `moreLinks`, `description`, `aliases`, `dancing` (research: `rating` = `dance-band`, `party`, `mixed`, `listening` or `unknown`; `kinds`; `styles` people do at their shows; `notes`; `confidence`; `checked`; `evidence`), `reviewNotes`.
+`name`, `type` (`band`, `dj`, `solo`), `genres`, `town`, website and social links, `spotifyUrl`, `bandcampUrl`, `bookingUrl`, `email`, `phone`, `description`, `logo`, `photos`, `evidence`, `factsSource`, `aliases`, `dancing` (research: `rating` = `dance-band`, `party`, `mixed`, `listening` or `unknown`; `kinds`; `styles` people do at their shows; `notes`; `confidence`; `checked`; `evidence`), `reviewNotes`.
 
 ## `styles/*.yml` (dance styles)
 
-`name`, `family` (`swing`, `ballroom`, `latin`, `tango`, `country`, `other`), `order`, `aliases` (words that mean this style in listings, e.g. "WCS"), `summary` (one plain sentence), `description`, `music`, `danceType` (`partner`, `line` or `freestyle`; default `partner`).
-
+`name`, `family` (`swing`, `ballroom`, `latin`, `tango`, `country`, `other`), `order`, `aliases` (words that mean this style in listings, e.g. "WCS"), `summary` (one plain sentence), `description`, `music`, `danceType` (`partner`, `line` or `freestyle`; default `partner`), `photos` (openly licensed photos of adults dancing the style, with credits), `moreLinks` (learn-more links), `evidence`.
 ## `sources/*.json`
 
 `name`, `url`, `type` (`jsonld`, `ical`, `html`, `pdf`, `api`), `adapter` (file name in `ingest/adapters/`), `cadence` (`daily`, `twice-weekly`, `weekly`, `monthly`, `seasonal`, `manual`), `focus` (`dance` = a dance calendar, everything is a dance or class; `music` = a live-music list, each listing gets a dancing score), `enabled`, `feedUrl` and `pageUrls` (what generic adapters read), `defaults` (venue, town, organizer, performers, styles, category to use when a listing leaves them out), `include` / `exclude` (patterns), `catalogStatus` and `permission` (status, note, dates, feed the owner gave us), `attribution` (shown on the Sources page), `description`, `rateLimitSeconds`, and run results written by the ingest: `lastScraped`, `lastStatus`, `lastMessage`, `lastCounts` (found, kept, outOfArea, needsReview).

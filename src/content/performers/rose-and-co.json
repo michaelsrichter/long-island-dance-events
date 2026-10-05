@@ -1,5 +1,30 @@
 {
   "name": "Rose & Co",
   "type": "band",
-  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: No website or Facebook page found. The Instagram handle comes from the Spotlight @ The Paramount event page; it is assumed to be the same Rose & Co that plays The Villager (same name, same part of Long Island), but no page ties the two listings together directly. Instagram could not be opened to confirm (blocks automated visits). Unrelated: Ari Rose & Co., Rose and Co. candles, Rose & Company (finance), a 2017 SoundCloud 'Rose & Co.' collab account.",
+  "instagramUrl": "https://www.instagram.com/roseandcoband/",
+  "genres": [
+    "alternative rock",
+    "indie rock"
+  ],
+  "description": "Long Island rock band, billed as alternative and indie rock, that plays bars and beach venues in Farmingdale, Greenlawn, Huntington and Lindenhurst.",
+  "evidence": [
+    {
+      "url": "https://www.thevillagerfarmingdale.com/livemusic/live-music-rose-amp-co",
+      "note": "The Villager (Farmingdale) lists 'Live Music: Rose & Co.' on Fri Oct 30, 2026, 6-9 PM; they have played there regularly since 2025."
+    },
+    {
+      "url": "https://www.spotlightny.com/events/campsite-and-rose-co-2",
+      "note": "Spotlight @ The Paramount (Huntington) listed Campsite and Rose & Co. on Jun 5, 2026 as alternative & indie rock and linked Rose & Co's Instagram, roseandcoband."
+    },
+    {
+      "url": "https://www.theragtimes.net/event/rose-co-at-beaus-bar-li/",
+      "note": "Rose & Co. listed at Beau's Bar, Greenlawn (Long Island)."
+    },
+    {
+      "url": "https://webtunes.com/events/42adc9c1-f139-4a4f-83bb-5241277497f3",
+      "note": "Rose & Co listed at Katch at Venetian Shores Beach Hut, Lindenhurst, Aug 14, 2026."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thevillagerfarmingdale.com, spotlightny.com, theragtimes.net, webtunes.com."
 }

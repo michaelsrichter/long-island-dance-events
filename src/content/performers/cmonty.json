@@ -1,5 +1,71 @@
 {
   "name": "Cmonty",
   "type": "band",
-  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Cmonty is a solo act (Christian Montanez), sometimes billed as 'CMONTY Trio' (and 'COMNTY TRIO', a typo, on the Villager calendar). His party band 'Calm Coast Collective' also plays The Villager; if it is in the directory it could be cross-linked. Booking is by web form only; no public email/phone. The logo PNG has a faint baked-in checkerboard background (no real transparency); may need cleanup. Skipped a wedding photo on his site that shows a private couple.",
+  "website": "https://www.cmontymusic.com/",
+  "facebookUrl": "https://www.facebook.com/cmontymusic/",
+  "instagramUrl": "https://www.instagram.com/cmontymusic/",
+  "youtubeUrl": "https://www.youtube.com/user/cmontyy",
+  "bookingUrl": "https://www.cmontymusic.com/contact",
+  "genres": [
+    "pop",
+    "R&B",
+    "rock",
+    "soul",
+    "acoustic covers"
+  ],
+  "description": "Stage name of Long Island singer and guitarist Christian Montanez. He uses a loop pedal to layer guitar, vocals, beatboxing and percussion live, covering pop, R&B, rock and soul hits from many decades; he also plays as a trio and with his party band.",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/cmonty-1.webp",
+      "alt": "Christian Montanez in a blue suit, smiling and playing a nylon-string guitar against a plain gray backdrop",
+      "credit": "Photo: CMONTY (website)",
+      "creditUrl": "https://www.cmontymusic.com/",
+      "imageSource": "https://static.wixstatic.com/media/d36018_617da4aea64e48d699a10a15244aecbc~mv2.jpg/v1/fill/w_1600,h_2400,al_c,q_85/d36018_617da4aea64e48d699a10a15244aecbc~mv2.jpg",
+      "focus": "50% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/cmonty-2.webp",
+      "alt": "Christian Montanez in sunglasses, barefoot on a sand dune, strumming an acoustic guitar",
+      "credit": "Photo: CMONTY (website)",
+      "creditUrl": "https://www.cmontymusic.com/",
+      "imageSource": "https://static.wixstatic.com/media/d36018_89fb7dfbc6a143e5a21b8ae11509fb49~mv2.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/performers/cmonty-3.webp",
+      "alt": "Christian Montanez playing an acoustic guitar among beach grass on a sand dune under a cloudy sky",
+      "credit": "Photo: CMONTY (website)",
+      "creditUrl": "https://www.cmontymusic.com/",
+      "imageSource": "https://static.wixstatic.com/media/d36018_69f76af9e53f4f06be38f8b7a54d905d~mv2.png/v1/fill/w_1400,h_1959,al_c,q_85/d36018_69f76af9e53f4f06be38f8b7a54d905d~mv2.jpg",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.cmontymusic.com/about",
+      "note": "Christian Montanez (CMONTY) describes himself as a Long Island-based guitarist and singer who plays from Montauk to Long Beach and NYC, known for live looping."
+    },
+    {
+      "url": "https://www.cmontymusic.com/",
+      "note": "Official site (logo reads CMONTY) links Instagram and Facebook 'cmontymusic' and YouTube 'cmontyy'; has a booking form on the contact page."
+    },
+    {
+      "url": "https://www.thevillagerfarmingdale.com/livemusic/live-music-cmonty",
+      "note": "The Villager (Farmingdale) lists 'Live Music: CMONTY' on Thu Oct 8, 2026, 6-9 PM; it also lists a 'CMONTY Trio' night on Oct 2."
+    },
+    {
+      "url": "https://www.cmontymusic.com/media",
+      "note": "His media page says he also leads a customizable party band, Calm Coast Collective, made up of Long Island musicians."
+    },
+    {
+      "url": "https://www.cmontymusic.com/contact",
+      "note": "Shows the booking page."
+    },
+    {
+      "url": "https://www.cmontymusic.com/artistlist",
+      "note": "Shows the kind of music."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: cmontymusic.com, thevillagerfarmingdale.com."
 }

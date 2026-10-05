@@ -11,11 +11,45 @@
   "state": "NY",
   "postalCode": "11762",
   "phone": "(516) 797-8584",
-  "website": "https://johnnymcgoreys.com/",
   "kind": "bar",
-  "factsSource": "Checked October 4, 2026. Sources: Apple Maps, Chamber of Commerce directory, and the band Worst Case Scenario's show list (wcsrocks.com), which places its McGorey's shows in Massapequa Park.",
+  "factsSource": "Checked October 4, 2026. Sources: Apple Maps, Chamber of Commerce directory, the band Worst Case Scenario's show list (wcsrocks.com), which places its McGorey's shows in Massapequa Park, the pub's Facebook and Instagram pages, and restaurantji.com.",
   "latitude": 40.678125,
   "longitude": -73.454298,
   "coordinatesSource": "U.S. Census Bureau Geocoder",
-  "reviewNotes": "Irish pub with live bands. Another Johnny McGorey's is in Lynbrook (46 Atlantic Ave); Ira's List's \"Johnny McGorey's Pub\" gigs are this one. Research the dance floor."
+  "reviewNotes": "Irish pub with live bands. Another Johnny McGorey's is in Lynbrook (46 Atlantic Ave); Ira's List's \"Johnny McGorey's Pub\" gigs are this one. Research the dance floor.\n\nDirectory research 2026-10-04: Identity is solid: name, 131 Front St, Massapequa Park, the phone number and the logo all match on the Facebook page, Instagram and Google Maps. I confirmed the phone (516) 797-8584 and ZIP 11762 on Facebook and Google Maps. No Lynbrook pages were used. WEBSITE: removed the old value https://johnnymcgoreys.com/ (it is a parked domain). The Facebook page links to johnnymcgoreyspub.com, but that domain looks parked or dropped: its robots.txt blocks all crawlers, its name servers are brainydns.com and it points to Leaseweb parking-style IPs. Google Maps shows no website either. I did not open its pages. DANCE FLOOR: not confirmed. Neither the pub nor its listings mention a dance floor. Search summaries of reviews say people get up when bands play, but there is no sign of a set dance area, so call or visit to check. LOGO/PHOTOS: none saved. The Facebook profile picture is the logo (black circle, gold script \"Johnny McGorey's\", \"Massapequa Park, NY\"), and the cover photo shows the beer taps. Both are hosted on Meta's image servers (fbcdn.net, cdninstagram.com), whose robots.txt blocks all bots, so fetch-image.mjs refused them. Most other Facebook photos are flyers or customers' party photos. The \"NEW LOCATION OFFICIALLY OPEN\" storefront photo there seems to be the Lynbrook pub. HOURS: \"Daily 12 PM-4 AM\" comes from Restaurantji (a listing site) plus Google Maps' Sunday hours. The pub itself does not post hours (Facebook only says \"Open now\"), and the kitchen may close earlier. TIKTOK: @mcgoreys has no bio and nothing that ties it to Massapequa Park, so I did not record it (per the brief it may be Lynbrook's). X: could not check (Cloudflare bot wall) and I found none in search. YOUTUBE: none found. The Facebook phone is labeled \"Mobile\" but it is the pub's listed business line. Facebook's \"responsible for this Page\" entry is The Marketry Inc. (not recorded). Name, aliases, address, coordinates and coordinatesSource are unchanged. Google's pin (40.678231, -73.454855) is about 50 m from the Census point, which is fine.",
+  "facebookUrl": "https://www.facebook.com/johnnymcgoreyspub/",
+  "instagramUrl": "https://www.instagram.com/johnnymcgoreyspub/",
+  "email": "johnnymcgoreys@gmail.com",
+  "hours": "Daily 12 PM-4 AM",
+  "description": "Irish pub on Front Street in Massapequa Park that serves Irish and American food. It has live music on some nights, such as rock cover bands on Friday evenings and Irish music on Sunday afternoons, and it shows big games and fights on its TVs.",
+  "evidence": [
+    {
+      "url": "https://www.facebook.com/johnnymcgoreyspub/about",
+      "note": "The pub's own Facebook page (2.9K followers, posting this week) lists 131 Front St, Massapequa Park, NY 11762, phone (516) 797-8584 and email johnnymcgoreys@gmail.com. Its profile logo reads \"Johnny McGorey's, Massapequa Park, NY\"."
+    },
+    {
+      "url": "https://www.instagram.com/johnnymcgoreyspub/",
+      "note": "Instagram @johnnymcgoreyspub (Johnny McGoreys, about 1,900 followers, 1,500+ posts). Its bio names Massapequa Park, NY and mentions food, sports and live music."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=14501039114890505928",
+      "note": "Google Maps lists the Irish pub at 131 Front St, Massapequa Park, NY 11762, phone (516) 797-8584, open Sunday 12 PM to 4 AM. It shows no website (\"Add website\")."
+    },
+    {
+      "url": "https://wcsrocks.com/",
+      "note": "The rock cover band Worst Case Scenario lists full-band shows at Johnny McGoreys in Massapequa Park on Friday, Sept 4, 2026 and Friday, Nov 6, 2026, both 6-9 PM."
+    },
+    {
+      "url": "https://www.facebook.com/johnnymcgoreyspub/photos",
+      "note": "The pub's photo posts are mostly flyers: Irish Sundays with live Irish music 4-7 PM (2026), a live act on a Friday at 6 PM, karaoke and DJ nights, and UFC/sports watch parties. Some flyers also promote the Lynbrook location."
+    },
+    {
+      "url": "https://www.restaurantji.com/ny/massapequa-park/johnny-mcgoreys-pub-/",
+      "note": "Listing gives hours of 12 PM to 4 AM every day and links to the same Facebook (johnnymcgoreyspub) and Instagram (johnnymcgoreyspub) accounts."
+    },
+    {
+      "url": "https://webtunes.com/venues/johnny-mcgoreys-pub",
+      "note": "Live-music listing site has a venue page for Johnny McGorey's Pub at 131 Front St, Massapequa Park, NY 11762."
+    }
+  ]
 }

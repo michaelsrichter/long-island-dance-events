@@ -32,17 +32,50 @@
     "notes": "Daisy's holds Sunday line dance nights with an instructor, no partner or experience needed. Saturday band nights are party nights where people dance in front of the band.",
     "policy": "encouraged"
   },
-  "description": "A Nashville-themed country bar and restaurant on Route 25A in Miller Place. It has live country and cover bands, karaoke and a weekly line dance night.",
+  "description": "A Nashville-themed country bar and restaurant on Route 25A in Miller Place. It has live country and cover bands, country karaoke on Tuesdays, and on some Sunday afternoons a 'Dine & Dance' line dance night with lessons.",
   "facebookUrl": "https://www.facebook.com/daisys.li/",
-  "factsSource": "Checked October 3, 2026. Source: daisysli.com.",
+  "factsSource": "Checked October 4, 2026. Source: daisysli.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Daisy%27s+Nashville+Lounge+%28Miller+Place%29%2C+275+Route+25A%2C+Suite+33%2C+Miller+Place%2C+NY+11764",
   "kind": "bar",
   "latitude": 40.948507,
   "longitude": -72.991392,
   "phone": "(631) 403-2900",
   "postalCode": "11764",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Some map listings show 307 Route 25A; the venue's own site says 275 Route 25A, Suite 33. Facebook page is shared with the Patchogue location.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Some map listings show 307 Route 25A; the venue's own site says 275 Route 25A, Suite 33. Facebook page is shared with the Patchogue location.\n\nDirectory research 2026-10-04: Current description said a 'weekly' line dance night; in 2025 the Sunday 'Dine & Dance' line dance night was weekly, but in 2026 the venue's calendar shows it only on some Sundays (Feb 15, Apr 26, Aug 23, Sep 27), and none is listed yet for October. Updated the description to say 'some Sunday afternoons'. The site only lists opening times; map listings show closing at 2 AM. Bing/Yelp map listings still show 307 Route 25A; the venue's own site says 275 NY-25A #33, which we kept. Email (info@daisysli.com, shared by both locations) is protected on the page but decodes from the site's contact link. Website, social pages and logo are shared with the Patchogue location. Miller Place photos on the site are under 600 px wide or staff promo shots, so none were recorded. The X link is in the site footer (as twitter.com/Daisys_LI); x.com blocks automated checks.",
   "state": "NY",
   "town": "Miller Place",
-  "website": "https://daisysli.com/"
+  "website": "https://daisysli.com/",
+  "instagramUrl": "https://www.instagram.com/daisys.li/",
+  "xUrl": "https://x.com/Daisys_LI",
+  "email": "info@daisysli.com",
+  "hours": "Tue-Fri from 3 PM; Sat-Sun from 12 PM; closed Mon",
+  "logo": {
+    "image": "../../assets/entities/venues/daisys-nashville-lounge-miller-place-logo.webp",
+    "alt": "Daisy's Nashville Lounge logo: the word Daisy's in large red western letters over Nashville Lounge in yellow",
+    "credit": "Logo: Daisy's Nashville Lounge",
+    "creditUrl": "https://daisysli.com/",
+    "imageSource": "https://daisysli.com/wp-content/uploads/2020/12/Daisys%C2%AE-04-2.png"
+  },
+  "evidence": [
+    {
+      "url": "https://daisysli.com/contact-us/",
+      "note": "Contact page lists both locations: Miller Place at 275 NY-25A #33, Miller Place, NY 11764, phone (631) 403-2900, plus opening times for each (Tue-Fri from 3 PM, Sat-Sun from 12 PM)."
+    },
+    {
+      "url": "https://daisysli.com/event/dine-dance/",
+      "note": "Venue's own event page: Sunday Sept 27 'Dine & Dance' at the Miller Place location, 4-8 PM, line dancing with instruction throughout the night and no cover."
+    },
+    {
+      "url": "https://daisysli.com/event/dine-dance-daisys-line-dance-night/",
+      "note": "Earlier 'Dine & Dance - Daisy's Line Dance Night' at Miller Place on a Sunday in April 2026, 4-8 PM, DJ plus dance instruction."
+    },
+    {
+      "url": "https://daisysli.com/live-music-events-miller-place/",
+      "note": "Miller Place calendar shows country karaoke on Tuesdays, Thursday night live music and weekend bands."
+    },
+    {
+      "url": "https://daisysli.com/",
+      "note": "Shows the website, Facebook page, Instagram page and X page."
+    }
+  ]
 }

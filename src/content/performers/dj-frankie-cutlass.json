@@ -1,5 +1,63 @@
 {
   "name": "DJ Frankie Cutlass",
   "type": "dj",
-  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: NYC-based (Spanish Harlem) DJ who travels to Long Island for freestyle nights. Email and phone are the business contact for his company, Cutlass Music Group, as published on his own contact page (a named VP; owner may prefer to show only the contact page link). TikTok: his site links tiktok.com/@djfrankiecutlass, but the account actively promoting the Mulcahy's date is tiktok.com/@frankie.cutlass, which we recorded. Logo is his \"THE BOSS\" cartoon site icon (512 px), not a wordmark. Other site images are magazine covers or radio-station graphics and were skipped.",
+  "website": "https://frankiecutlass.com/",
+  "facebookUrl": "https://www.facebook.com/frankiecutlassfanpage/",
+  "instagramUrl": "https://www.instagram.com/frankiecutlass/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCStv59KWvL2alQxfFPBPTAg",
+  "tiktokUrl": "https://www.tiktok.com/@frankie.cutlass",
+  "xUrl": "https://x.com/FrankieCutlass",
+  "spotifyUrl": "https://open.spotify.com/artist/0aj68J40CRvncu2zLlhpxl",
+  "bookingUrl": "https://frankiecutlass.com/contact",
+  "email": "cmg.illeane@gmail.com",
+  "phone": "(917) 444-6518",
+  "genres": [
+    "freestyle",
+    "hip-hop",
+    "house",
+    "dance",
+    "Top 40"
+  ],
+  "description": "New York City club DJ and Grammy-nominated hip-hop producer from Spanish Harlem, known for his 1990s hit \"Puerto Rico\". He spins 1980s freestyle along with hip-hop, house and dance hits, and plays freestyle dance nights around the Northeast, including Mulcahy's in Wantagh.",
+  "logo": {
+    "image": "../../assets/entities/performers/dj-frankie-cutlass-logo.webp",
+    "alt": "Cartoon of Frankie Cutlass grinning and giving a thumbs-up in a black cap that says THE BOSS",
+    "credit": "Logo: DJ Frankie Cutlass",
+    "creditUrl": "https://frankiecutlass.com/",
+    "imageSource": "https://img1.wsimg.com/isteam/ip/3d5dabb4-8ebc-4d46-9d0e-35a517b1ba3e/favicon/3d1e40c1-b2c8-4047-9e1c-f6e15efe2cdf.jpg/:/rs=w:512,h:512,m"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/dj-frankie-cutlass-1.webp",
+      "alt": "Promo portrait of DJ Frankie Cutlass in a white fedora, dark sunglasses and a white shirt",
+      "credit": "Photo: DJ Frankie Cutlass (website)",
+      "creditUrl": "https://frankiecutlass.com/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/3d5dabb4-8ebc-4d46-9d0e-35a517b1ba3e/blob-8473969.png",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mulcahyslongisland.com/event/dj-frankie-cutlass/",
+      "note": "Mulcahy's (Wantagh) lists DJ Frankie Cutlass for an 80s Freestyle Night on Saturday Oct 10, 2026, doors 9 PM, 21+."
+    },
+    {
+      "url": "https://frankiecutlass.com/events",
+      "note": "His own events page lists the Mulcahy's, Wantagh date (Oct 10, 2026) along with shows in Philadelphia, Yonkers, Providence and the Bronx."
+    },
+    {
+      "url": "https://frankiecutlass.com/",
+      "note": "Official site: club and special-events DJ playing freestyle, hip-hop, house, dance and Top 40; NYC clubs since the late 80s; links his social pages."
+    },
+    {
+      "url": "https://frankiecutlass.com/contact",
+      "note": "Contact page lists his company Cutlass Music Group (CMG) with a contact name, phone and email for inquiries."
+    },
+    {
+      "url": "https://www.tiktok.com/@frankie.cutlass/video/7678406227805621517",
+      "note": "Shows the TikTok page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mulcahyslongisland.com, frankiecutlass.com, tiktok.com."
 }

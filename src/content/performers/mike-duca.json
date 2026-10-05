@@ -1,5 +1,52 @@
 {
   "name": "Mike Duca",
   "type": "band",
-  "reviewNotes": "Added automatically from Mezza Luna (Hauppauge) - events. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mezza Luna (Hauppauge) - events. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Billed by Mezza Luna as 'Mike Duca'; his site uses 'Michael Duca'. He is a solo acoustic act, so the current type 'band' should probably be 'solo'. Email and phone are his booking agent's (Ed Jacobs, National Event Connection) as published on his booking page. Website not directly linked by Mezza Luna; matched by name, Long Island, and singer-songwriter-guitarist description. No usable photos: the stage photo on the home page carries a photographer's watermark ('Paola Photo'), another is mostly his logo banner, and the bio portrait hides his face in smoke; the gallery page loads no images. He has streaming releases (e.g. Apple Music artist 1225683849) but no Spotify artist link on his site.",
+  "website": "https://www.michaelducamusic.com/",
+  "facebookUrl": "https://www.facebook.com/michaelducamusic/",
+  "instagramUrl": "https://www.instagram.com/michaelducamusic/",
+  "youtubeUrl": "https://www.youtube.com/@michaelducamusic",
+  "bookingUrl": "https://www.michaelducamusic.com/contact",
+  "email": "ed@nationaleventconnection.com",
+  "phone": "(516) 524-8508",
+  "genres": [
+    "acoustic covers",
+    "rock",
+    "singer-songwriter"
+  ],
+  "description": "A Long Island singer, songwriter and acoustic guitarist (full name Michael Duca) who plays solo sets of acoustic cover songs and his own music at bars, restaurants, wineries and private events.",
+  "logo": {
+    "image": "../../assets/entities/performers/mike-duca-logo.webp",
+    "alt": "Michael Duca Music logo: the name in silver letters under a guitar outline, on a black background",
+    "credit": "Logo: Michael Duca Music",
+    "creditUrl": "https://www.michaelducamusic.com/",
+    "imageSource": "https://static.wixstatic.com/media/f328dd_287a37597aaf4692be2fa2bdf9c4bac1~mv2.jpg"
+  },
+  "evidence": [
+    {
+      "url": "https://www.mezzalunafinedining.com/events",
+      "note": "Mezza Luna (Hauppauge) lists live music with Mike Duca on Fri Oct 9 and Fri Oct 30, 2026, 6-9 PM."
+    },
+    {
+      "url": "https://allevents.in/hauppauge/live-music-with-mike-duca/200029098686744",
+      "note": "Earlier Mezza Luna listing describes Mike Duca as a singer, songwriter and guitarist."
+    },
+    {
+      "url": "https://www.michaelducamusic.com/mike-duca-bio",
+      "note": "His site (bio page URL 'mike-duca-bio') says he is Long Island born and still lives there, plays the local live-music scene, and is booked as a live acoustic guitar soloist."
+    },
+    {
+      "url": "https://www.michaelducamusic.com/contact",
+      "note": "Booking page lists his booking agent's phone and email (National Event Connection) and a booking form."
+    },
+    {
+      "url": "https://www.michaelducamusic.com/",
+      "note": "Shows the Facebook page, Instagram page and YouTube channel."
+    },
+    {
+      "url": "https://www.youtube.com/@michaelducamusic/videos",
+      "note": "Shows the kind of music."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mezzalunafinedining.com, allevents.in, michaelducamusic.com, youtube.com."
 }

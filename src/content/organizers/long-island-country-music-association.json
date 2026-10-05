@@ -14,5 +14,58 @@
   "email": "licma@licma.org",
   "phone": "(516) 775-5678",
   "description": "Nonprofit promoting country music and dance on Long Island; runs monthly western dances with DJ or band and lessons in Deer Park.",
-  "reviewNotes": "Town = where its dances are held (Brumidi Lodge); mailing address is a P.O. box in Commack."
+  "reviewNotes": "Town = where its dances are held (Brumidi Lodge); mailing address is a P.O. box in Commack.\n\nDirectory research 2026-10-04: No own venue: town = where the monthly dances are held (Sons of Italy / Brumidi Lodge, Deer Park); mailing address is a P.O. box in Commack, so no street address recorded. The 'Dance Instruction' page also shows licma85@gmail.com (apparently a second club address); not recorded. Logo is the round 'two boots' logo from the site header (800 px). Photos come from the club's own 2025 and home-page photo galleries. No Instagram/YouTube found.",
+  "facebookUrl": "https://www.facebook.com/licma.org",
+  "logo": {
+    "image": "../../assets/entities/organizers/long-island-country-music-association-logo.webp",
+    "alt": "Long Island Country Music Association logo: two red cowboy boots with music notes inside a circle, with the name around them",
+    "credit": "Logo: Long Island Country Music Association",
+    "creditUrl": "https://licma.org/",
+    "imageSource": "https://img1.wsimg.com/isteam/ip/b95c356d-81b3-4816-8ccc-0e4b3efda0bc/LICMA%20Logo%20no%20background.png/:/rs=w:800"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/organizers/long-island-country-music-association-1.webp",
+      "alt": "Dancers line dancing on a wooden floor in front of a live country band, with holiday garlands overhead",
+      "credit": "Photo: Long Island Country Music Association (website)",
+      "creditUrl": "https://licma.org/2025",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/b95c356d-81b3-4816-8ccc-0e4b3efda0bc/20241207_212513.jpg/:/rs=w:1600",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/organizers/long-island-country-music-association-2.webp",
+      "alt": "A crowded dance floor of smiling adults dancing under chandeliers in a banquet hall",
+      "credit": "Photo: Long Island Country Music Association (website)",
+      "creditUrl": "https://licma.org/2025",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/b95c356d-81b3-4816-8ccc-0e4b3efda0bc/2024-01-06%2020.56.30-da5521e.jpg/:/rs=w:1600",
+      "focus": "45% 45%"
+    },
+    {
+      "image": "../../assets/entities/organizers/long-island-country-music-association-3.webp",
+      "alt": "A couple in black LICMA T-shirts, one in a cowboy hat, walking hand in hand across the dance floor",
+      "credit": "Photo: Long Island Country Music Association (website)",
+      "creditUrl": "https://licma.org/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/b95c356d-81b3-4816-8ccc-0e4b3efda0bc/2020-02-08%2023.34.30.jpg/:/rs=w:1600",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://licma.org/about-us",
+      "note": "About page: nonprofit, P.O. Box 0872, Commack, NY 11725-0872; info line (516) 775-5678; licma@licma.org."
+    },
+    {
+      "url": "https://licma.org/",
+      "note": "Homepage: promoting country music and dancing on Long Island for over 40 years; a dance each month Sept-June with band or DJ and instruction; next dance Sat Oct 24, 2026, 7-11 PM, $20 ($15 members); links the licma.org Facebook page."
+    },
+    {
+      "url": "https://licma.org/contact-us",
+      "note": "Contact page gives directions to the dances at the Sons of Italy Hall, 2075 Deer Park Avenue, Deer Park."
+    },
+    {
+      "url": "https://sonsofitalyli.com/event/western-dance/",
+      "note": "Brumidi Lodge event page 'Western Dance - LICMA' repeats the LICMA phone and email."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: licma.org, sonsofitalyli.com."
 }

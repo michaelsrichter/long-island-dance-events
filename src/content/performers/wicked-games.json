@@ -22,5 +22,20 @@
     "rating": "unknown"
   },
   "description": "Long Island cover band that plays South Shore bars and clam bars such as Riptides, Farrell's, Toomey's Tavern and Bayside Clam Bar; on Oct 3 it holds its yearly 'Octoberfest Jam' at Riptides.",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Bandsintown 'Wicked Games' (original pop/rock/country project) or the DC-area 'Wicked Game Band'. An Instagram 'wickedgames36' appears in search but was not verified."
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Bandsintown 'Wicked Games' (original pop/rock/country project) or the DC-area 'Wicked Game Band'. An Instagram 'wickedgames36' appears in search but was not verified.\n\nDirectory research 2026-10-04: The band is clearly a South Shore Long Island cover band (repeat dates at Riptides in Lindenhurst, Toomey's Tavern in Amityville and Bayside Clam Bar in East Islip), but no website, Facebook page, Instagram or booking page could be confirmed. The Facebook events copied to AllEvents do not show the host page. The handles \"Wickedgamesrocks\" (current alias) and Instagram \"wickedgames36\" still could not be verified. Not the Bandsintown \"Wicked Games\" (original pop/rock/country) or the DC-area \"Wicked Game Band\". Current description is still consistent with the listings.",
+  "evidence": [
+    {
+      "url": "https://allevents.in/west-babylon/wicked-games-at-riptides-in-lindenhurst/200030766728915",
+      "note": "\"Wicked Games at Riptides in Lindenhurst\", 172 9th Avenue, Sat Oct 3, 2026, 7:30 PM (event copied from Facebook)."
+    },
+    {
+      "url": "https://allevents.in/amityville/wicked-games-at-toomeys/200030357602604",
+      "note": "\"Wicked Games at Toomey's\", Toomey's Tavern, 251 S Ketcham Ave, Amityville, July 11, 2026, 4-8 PM."
+    },
+    {
+      "url": "https://allevents.in/east-islip/wicked-games/200030179577922",
+      "note": "Wicked Games at Bayside Clam Bar & Grill, East Islip, June 7, 2026 (search listing)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: allevents.in."
 }

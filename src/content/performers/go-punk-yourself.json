@@ -1,5 +1,25 @@
 {
   "name": "Go Punk Yourself",
   "type": "band",
-  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Not a local band: 'Go Punk Yourself' is a touring branded pop-punk night whose band members are not named. No official website was found; a Linktree 'gopunkyourselfofficial' (likely the show's Instagram hub) appears in search but Linktree blocks automated checks, so no Instagram is recorded - candidate for the owner to check: linktr.ee/gopunkyourselfofficial. Do NOT confuse with the unrelated 'Go Punk Yourself' punk radio show on 98KUPD in Arizona (facebook.com/gopunkyourselfradioshow). The owner may prefer to treat this as an event, not a performer profile.",
+  "genres": [
+    "pop-punk",
+    "2000s rock covers"
+  ],
+  "description": "A touring pop-punk tribute night: a live band plays 2000s pop-punk hits by bands like Blink-182, Fall Out Boy and Sum 41. The show visits clubs in several cities, including Mulcahy's in Wantagh, Gramercy Theatre in Manhattan, Philadelphia and the Chicago area.",
+  "evidence": [
+    {
+      "url": "https://mulcahyslongisland.com/event/go-punk-yourself-a-night-of-pop-punk-classics/",
+      "note": "Mulcahy's (Wantagh) lists 'Go Punk Yourself - A Night of Pop Punk Classics' on Nov 13, 18+, with a live band playing Blink-182, Fall Out Boy, Sum 41 and more."
+    },
+    {
+      "url": "https://events.extrachill.com/events/go-punk-yourself-a-night-of-pop-punk-classics-18",
+      "note": "The same branded show played Gramercy Theatre in Manhattan on Aug 15, 2026."
+    },
+    {
+      "url": "https://www.tixr.com/groups/undergroundarts/events/underground-arts-go-punk-yourself-a-night-of-pop-punk-classics-208229",
+      "note": "Same show with identical wording booked in Philadelphia on Nov 20, 2026, so this is a touring production rather than a Long Island band."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mulcahyslongisland.com, events.extrachill.com, tixr.com."
 }

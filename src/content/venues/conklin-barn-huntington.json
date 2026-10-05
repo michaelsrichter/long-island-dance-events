@@ -12,9 +12,34 @@
   "postalCode": "11743",
   "website": "https://jazzatthebarn.com/",
   "kind": "concert-hall",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://jazzatthebarn.com/ (shows are at the Conklin Barn, 2 High Street).",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Sources: jazzatthebarn.com, huntingtonhistoricalsociety.org, chamberofcommerce.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: The barn belongs to the Huntington Historical Society (office at 209 Main Street, Huntington; socials: facebook.com/huntingtonhistoricalsociety, instagram.com/huntingtonhistoricalsociety, youtube.com/@huntingtonhistorical6432). The phone and email recorded are the Society's (for visits and rentals), not Jazz at the Barn's; Jazz at the Barn publishes no phone or email. We kept jazzatthebarn.com as the website because it is the venue's event calendar; the Society's barn page is https://huntingtonhistoricalsociety.org/rentals/. Logo used is Jazz at the Barn's; the Society's logo (headerlogo2.png) is an alternative. It is a small seated listening room (about 45 people), so dancing is unlikely. The photo shows a private party set-up; a welcome sign at the far left edge shows the hosts' first names (still visible in a 16:9 crop, since that crop keeps the full width), so the owner may prefer to crop the left side or skip this photo. No Jazz at the Barn Facebook page found. No regular opening hours (open for events).",
   "latitude": 40.868131,
   "longitude": -73.425747,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/jazzatthebarn/",
+  "email": "info@huntingtonhistoricalsociety.org",
+  "phone": "(631) 427-7045",
+  "description": "An 1850 barn owned by the Huntington Historical Society in Huntington village. The small, climate-controlled room holds about 45 people and is home to the Jazz at the Barn series of seated jazz concerts; it is also rented for parties and talks.",
+  "logo": {
+    "image": "../../assets/entities/venues/conklin-barn-huntington-logo.webp",
+    "alt": "Jazz at the Barn logo: the words Jazz at the Barn in black on a yellow circle",
+    "credit": "Logo: Jazz at the Barn",
+    "creditUrl": "https://jazzatthebarn.com/",
+    "imageSource": "https://i0.wp.com/jazzatthebarn.com/wp-content/uploads/2025/02/cropped-jazz-test-1.png"
+  },
+  "evidence": [
+    {
+      "url": "https://jazzatthebarn.com/",
+      "note": "Jazz at the Barn, produced by Huntington jazz musician Vince Scuderi, lists upcoming shows at the Conklin Barn, 2 High Street, Huntington, and says to follow @jazzatthebarn."
+    },
+    {
+      "url": "https://huntingtonhistoricalsociety.org/rentals/",
+      "note": "Huntington Historical Society rentals page: the Conklin Barn dates from 1850, is climate controlled, holds up to 45 people, has an accessible ramp and a mini-kitchen; contact info@huntingtonhistoricalsociety.org, (631) 427-7045."
+    },
+    {
+      "url": "https://www.chamberofcommerce.com/business-directory/new-york/huntington/museum/7128764-the-conklin-farmhouse-and-barn",
+      "note": "Directory listing for The Conklin Farmhouse and Barn in Huntington NY 11743 with the Historical Society phone."
+    }
+  ]
 }

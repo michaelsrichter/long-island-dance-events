@@ -34,16 +34,30 @@
   },
   "description": "A big bar and restaurant on Main Street in Farmingdale village with a front pub, a back room with a stage, and an outdoor bar. It is known for weekend cover bands, DJs and a weekly country night.",
   "facebookUrl": "https://www.facebook.com/NuttyIrishmanFarmingdale/",
-  "factsSource": "Checked October 3, 2026. Source: thenuttyirishman.com.",
+  "factsSource": "Checked October 4, 2026. Sources: 943theshark.com, thenuttyirishman.com, liblogger.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Nutty+Irishman+323+Main+St+Farmingdale+NY+11735",
   "kind": "bar",
   "phone": "(516) 293-9700",
   "postalCode": "11735",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List has a venue page (/nuttyirishman). Farmingdale village is in Nassau County (Town of Oyster Bay). The Nutty Country Facebook page (facebook.com/NuttyCountry) is a separate page for the Tuesday country night. Faces for Radio gig on Oct 3 was not checked on the venue calendar.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List has a venue page (/nuttyirishman). Farmingdale village is in Nassau County (Town of Oyster Bay). The Nutty Country Facebook page (facebook.com/NuttyCountry) is a separate page for the Tuesday country night. Faces for Radio gig on Oct 3 was not checked on the venue calendar.\n\nDirectory research 2026-10-04: The venue website (thenuttyirishman.com, a Wix site) could not be reached from our research machine on Oct 4, 2026 (connection reset in both a script and a browser), so we could not check it directly, pull the logo or photos, or confirm hours and email. Facts above come from search results and third-party pages and match our current data. Hours reported by 94.3 The Shark (citing the venue site): closed Mon; Tue-Thu 5 PM-close; Fri 5 PM-4 AM; Sat 12 PM-4 AM; Sun 12 PM-12 AM; not recorded until checked on the venue site. Instagram: one third-party site gives @nuttyfarmingdale, and Nutty Country uses @nuttycountry (instagram.com/nuttycountry); neither confirmed from the venue site, so not recorded. Please re-run this entity when the site is reachable. Existing description still fits; kept.",
   "state": "NY",
   "town": "Farmingdale",
   "website": "https://www.thenuttyirishman.com/",
   "latitude": 40.73191,
   "longitude": -73.44565,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "evidence": [
+    {
+      "url": "https://943theshark.com/venues/the-nutty-irishman/",
+      "note": "Radio station venue page (from search) lists The Nutty Irishman at 323 Main St, Farmingdale, phone 516-293-9700, and points to thenuttyirishman.com."
+    },
+    {
+      "url": "https://www.thenuttyirishman.com/nuttycountry",
+      "note": "Search results show the venue's own Nutty Country page: Tuesday country night with live country bands, DJs and line dance lessons."
+    },
+    {
+      "url": "https://www.liblogger.com/events/tuesday-country-night-at-the-nutty-irishman-farmingdale-5-12-2026",
+      "note": "Local events listing for Tuesday Country Night at The Nutty Irishman, 323 Main St, Farmingdale."
+    }
+  ]
 }

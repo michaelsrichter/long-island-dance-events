@@ -12,9 +12,63 @@
   "postalCode": "11050",
   "website": "https://portwashingtonpolishclub.com/",
   "kind": "lodge-hall",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://portwashingtonpolishclub.com/contact-us.",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Sources: portwashingtonpolishclub.com, ipapolkas.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Dance floor confirmed by the club's own site (2,000 sq ft wood floor and stage in the banquet room). Facebook page (pacainc = PACA, Inc.) comes from the Bing listing; the club's site does not link any social pages, and Facebook blocks automated checks. No public email (the site's contact form is the only email route) and no opening hours published. An Oktoberfest dancing photo on the site was skipped because some dancers may be minors.",
   "latitude": 40.844209,
   "longitude": -73.695933,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/pacainc/",
+  "phone": "(516) 883-5553",
+  "description": "A Polish-American social club and event hall in Port Washington. Its banquet room has a large wood dance floor, a stage and a long bar, and it hosts club dances, line dancing, holiday parties and rentals.",
+  "logo": {
+    "image": "../../assets/entities/venues/polish-american-cultural-association-port-washington-logo.webp",
+    "alt": "PACA Port Washington N.Y. emblem: an eagle above a red, white and blue shield with clasped hands and the letters P A C A",
+    "credit": "Logo: Polish American Cultural Association",
+    "creditUrl": "https://portwashingtonpolishclub.com/",
+    "imageSource": "https://img1.wsimg.com/isteam/ip/c8abcb1a-3cb0-4040-9276-49d96f253ae2/favicon/c5df89aa-1c0f-4c3f-8a39-34503fcf0b36.jpg/:/rs=w:400,h:400,m"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/polish-american-cultural-association-port-washington-1.webp",
+      "alt": "A packed line dance on the hall's wood dance floor, seen from behind the DJ booth, under a ceiling strung with white lights",
+      "credit": "Photo: Polish American Cultural Association (website)",
+      "creditUrl": "https://portwashingtonpolishclub.com/club-pictures",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/c8abcb1a-3cb0-4040-9276-49d96f253ae2/474043320_10236040175891088_818546223341269303.jpg/:/rs=w:1200",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/polish-american-cultural-association-port-washington-2.webp",
+      "alt": "The club's wood-paneled banquet room decorated for the holidays, with a buffet line and round tables in red and green cloths",
+      "credit": "Photo: Polish American Cultural Association (website)",
+      "creditUrl": "https://portwashingtonpolishclub.com/club-pictures",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/c8abcb1a-3cb0-4040-9276-49d96f253ae2/20181209_130840%5B1%5D.jpg/:/rs=w:1200",
+      "focus": "55% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://portwashingtonpolishclub.com/contact-us",
+      "note": "Club's own contact page: Polish American Cultural Association, 5 Pulaski Place, Port Washington, New York 11050, (516) 883-5553."
+    },
+    {
+      "url": "https://portwashingtonpolishclub.com/hall-rental",
+      "note": "Hall rental page: two rooms; a front bar for up to 50 people and a banquet room with an all-wood 2,000 sq ft dance floor, a stage, a 50-foot bar and room for up to 360."
+    },
+    {
+      "url": "https://portwashingtonpolishclub.com/club-pictures",
+      "note": "Club Pictures page shows a crowded line-dance night on the dance floor and holiday events in the banquet room."
+    },
+    {
+      "url": "https://www.ipapolkas.com/locations/polish-american-cultural-association-port-washington-ny/",
+      "note": "The International Polka Association lists the club at 5 Pulaski Place, Port Washington, 516-883-5553, as a polka event location."
+    },
+    {
+      "url": "https://portwashingtonpolishclub.com/",
+      "note": "Shows the website."
+    },
+    {
+      "url": "https://www.bing.com/maps?q=Polish+American+Cultural+Association+5+Pulaski+Pl+Port+Washington+NY",
+      "note": "Shows the Facebook page."
+    }
+  ]
 }

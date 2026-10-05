@@ -1,5 +1,53 @@
 {
   "name": "Despyre",
   "type": "band",
-  "reviewNotes": "Added automatically from Stereo Garden (Patchogue) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Stereo Garden (Patchogue) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Our batch shows 0 upcoming events, but the band and Live Nation list a Stereo Garden (Patchogue) show on Fri Oct 16, 2026 - may be worth adding. Original metal band, not a dance act. Booking email info@despyre.com is from the band's booking page. Spotify links on the site go to an album and a track, not the artist page, so spotifyUrl was left empty; a Bandcamp icon appears but its link could not be read. Other site images are flyers, album covers or blurry live shots and were skipped.",
+  "website": "https://despyre.com/",
+  "facebookUrl": "https://www.facebook.com/despyre",
+  "instagramUrl": "https://www.instagram.com/despyremusic/",
+  "youtubeUrl": "https://www.youtube.com/channel/UC2YALtzJrED-VOilfcZWUXg",
+  "xUrl": "https://x.com/despyreinfo",
+  "bookingUrl": "https://despyre.com/booking",
+  "email": "info@despyre.com",
+  "genres": [
+    "original heavy metal",
+    "alt-metal"
+  ],
+  "description": "Long Island heavy metal band formed in 2015 that writes and plays its own hard-hitting, melodic alt-metal, in the tradition of New York bands like Life of Agony and Anthrax. They play metal shows at clubs such as Stereo Garden in Patchogue.",
+  "logo": {
+    "image": "../../assets/entities/performers/despyre-logo.webp",
+    "alt": "Despyre logo: jagged glowing red letters across a white hand-drawn shield shape on black",
+    "credit": "Logo: Despyre",
+    "creditUrl": "https://despyre.com/",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/200119/b11c1250f9b27aa040e37c68a2590a9634d0fbb2/original/despye-name-logo-bright.jpg/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/despyre-1.webp",
+      "alt": "Black-and-white promo photo of the five members of Despyre standing in a row under the band's glowing red logo",
+      "credit": "Photo: Despyre (website)",
+      "creditUrl": "https://despyre.com/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/200119/559bf8815f4cd0d347da473029ae640814d480a9/original/img-20260731-112715.png/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png",
+      "focus": "50% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://despyre.com/",
+      "note": "Band site promotes \"Despyre Live at Stereo Garden, Patchogue, NY, Friday October 16\" and links Facebook, Instagram, X, YouTube and ReverbNation."
+    },
+    {
+      "url": "https://despyre.com/bio",
+      "note": "Bio: heavy metal band from Long Island, NY, formed in 2015, influenced by NY metal (Biohazard, Life of Agony, Type O Negative, Anthrax); recorded at a Merrick, NY studio."
+    },
+    {
+      "url": "https://www.livenation.com/event/rZ7HnEZ1AfFo7f/despyre-deadstill-steel-reign-martyr-s-crown",
+      "note": "Live Nation lists Despyre with Deadstill, Steel Reign and Martyr's Crown at Stereo Garden (Patchogue), Fri Oct 16, 2026, 21+."
+    },
+    {
+      "url": "https://despyre.com/booking",
+      "note": "Shows the booking page and email."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: despyre.com, livenation.com."
 }

@@ -2,10 +2,62 @@
   "name": "American Legion 360",
   "address": "1 Mill Dam Road",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Better-known name: American Legion Post 360 (Huntington / Halesite). The building is in the Halesite area of Huntington by the harbor; the mailing town is Huntington 11743. No official Facebook or Instagram found linked from the site. No public email on the site (contact form only). The hall is rented for events and concerts, so there are no regular public hours. Logo is the national American Legion emblem as shown on the post's site. Stage photo shows a band setup from a past concert on the hall's wood floor.",
   "state": "NY",
   "town": "Huntington",
   "latitude": 40.884477,
   "longitude": -73.419759,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://americanlegionpost360.com/",
+  "phone": "(631) 423-7575",
+  "postalCode": "11743",
+  "description": "American Legion Post 360, a veterans' post by Huntington Harbor with an event hall: a large main room with a stage and a separate bar room. It hosts ticketed concerts (such as New York Roots Music Association shows), reunions and private parties.",
+  "logo": {
+    "image": "../../assets/entities/venues/american-legion-360-huntington-logo.webp",
+    "alt": "The American Legion emblem: a gold star and wreath around the letters U.S. inside a blue ring that reads American Legion",
+    "credit": "Logo: American Legion Post 360",
+    "creditUrl": "https://americanlegionpost360.com/",
+    "imageSource": "https://img1.wsimg.com/isteam/ip/48e7d20a-6a75-4bb8-9dc1-c72e4fe4ecc1/logo/f018c659-599e-4b1a-8ccf-56b4ca886eb0.gif"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/american-legion-360-huntington-1.webp",
+      "alt": "The gray one-story American Legion Post 360 building with a white columned entrance and a flagpole in front",
+      "credit": "Photo: American Legion Post 360 (website)",
+      "creditUrl": "https://americanlegionpost360.com/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/48e7d20a-6a75-4bb8-9dc1-c72e4fe4ecc1/02DF80D6-B249-4715-AD8D-AAC17FE5E77E.jpeg",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/american-legion-360-huntington-2.webp",
+      "alt": "A band setup with drums, congas, amps and microphones on a wood floor in the hall, with Muscle Shoals-themed banners behind",
+      "credit": "Photo: American Legion Post 360 (website)",
+      "creditUrl": "https://americanlegionpost360.com/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/48e7d20a-6a75-4bb8-9dc1-c72e4fe4ecc1/9304ee39-c25e-4076-9909-b4f0d8033572.JPG/:/rs=w:1600",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/american-legion-360-huntington-3.webp",
+      "alt": "The main hall set for a party with round tables, white chair covers with gold bows and pink uplighting on the walls",
+      "credit": "Photo: American Legion Post 360 (website)",
+      "creditUrl": "https://americanlegionpost360.com/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/48e7d20a-6a75-4bb8-9dc1-c72e4fe4ecc1/1b80d90b-9978-499d-adfa-04da45d64fd4.JPG/:/rs=w:1600",
+      "focus": "50% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://americanlegionpost360.com/",
+      "note": "Post's own site: American Legion Post 360, 1 Mill Dam Road, Huntington, NY 11743, (631) 423-7575; event hall in Huntington Harbor with a large main room with stage option, a separate full-bar room, water view and private parking."
+    },
+    {
+      "url": "https://americanlegionpost360.com/concerts-1",
+      "note": "Concerts page advertises ticketed live music shows at the post, e.g. the New York Roots Music Association's 'Roots '66' on November 14, 2026."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=15579228496627473768",
+      "note": "Google Maps listing 'American Legion Huntington Post 360' (veterans organization), 1 Mill Dam Rd, Huntington, NY 11743, phone (631) 423-7575, website americanlegionpost360.com."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: americanlegionpost360.com."
 }

@@ -1,5 +1,57 @@
 {
   "name": "Homeless House Band",
   "type": "band",
-  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Official name is 'The Homeless House Band' (THHB). The site has only a contact form on the home page (no separate booking page, email or phone; the phone numbers on its events page belong to the venues). No Facebook/Instagram linked; the site's 'THHBPlus YouTube Channel' page embeds videos via a script, so the channel URL could not be confirmed. The only group photo on the site is too small (458 px); the two photos used show single members playing in their rehearsal studio.",
+  "website": "https://www.thehomelesshouseband.com/",
+  "genres": [
+    "classic rock",
+    "Southern rock",
+    "R&B",
+    "originals"
+  ],
+  "description": "Long Island band from the Wantagh and Bellmore area that plays classic rock, Southern rock and R&B covers along with its own original songs, which it records at a studio in North Bellmore.",
+  "logo": {
+    "image": "../../assets/entities/performers/homeless-house-band-logo.webp",
+    "alt": "THHB logo: a black microphone next to the letters THHB, with 'The Homeless House Band' underneath",
+    "credit": "Logo: The Homeless House Band",
+    "creditUrl": "https://www.thehomelesshouseband.com/",
+    "imageSource": "https://static.wixstatic.com/media/b7d05d_d884cf25db4041eb9d72e71be224300f~mv2.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/homeless-house-band-1.webp",
+      "alt": "A band member in glasses and a blue shirt playing a red electric guitar in a rehearsal studio with foam-covered walls",
+      "credit": "Photo: The Homeless House Band (website)",
+      "creditUrl": "https://www.thehomelesshouseband.com/",
+      "imageSource": "https://static.wixstatic.com/media/b7d05d_df9e661638a84add9eaa74e5d2d3f1e1~mv2_d_4032_3024_s_4_2.jpg",
+      "focus": "45% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/homeless-house-band-2.webp",
+      "alt": "A band member in a red T-shirt and baseball cap playing electric guitar on a stool in the rehearsal studio",
+      "credit": "Photo: The Homeless House Band (website)",
+      "creditUrl": "https://www.thehomelesshouseband.com/",
+      "imageSource": "https://static.wixstatic.com/media/b7d05d_0d5ab86e34ba4e8489f24b579127ad00~mv2_d_3024_4032_s_4_2.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.bartinibabylon.com/event-calendar",
+      "note": "Bartini Bar & Lounge (Babylon) lists HOMELESS HOUSE BAND on Fri Nov 20 at 8 PM and points to thehomelesshouseband.com."
+    },
+    {
+      "url": "https://www.thehomelesshouseband.com/upcoming-events-3",
+      "note": "Band's own events page lists Whiskey Rocks (West Babylon) on Oct 17, 2026 and The Bartini Bar (Babylon) on Nov 20, 2026; past events include Bartini's in 2019 and 2023."
+    },
+    {
+      "url": "https://www.thehomelesshouseband.com/hard-drive-studios",
+      "note": "Band says it records and rehearses at Hard Drive Studios in Bellmore, NY; albums 'New Moon Smile' and 'Hello Brooklyn'."
+    },
+    {
+      "url": "https://www.bandmix.com/the-homeless-house-band/",
+      "note": "BandMix profile: Wantagh, NY band of musicians in their 60s playing classic rock plus some originals; lists R&B, classic rock, Southern rock."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: bartinibabylon.com, thehomelesshouseband.com, bandmix.com."
 }

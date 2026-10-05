@@ -5,10 +5,14 @@ import PageHeader from '../../components/PageHeader.astro';
 import EventSeriesList from '../../components/EventSeriesList.astro';
 import PersonLinks from '../../components/PersonLinks.astro';
 import DancingFacts from '../../components/DancingFacts.astro';
+import EntityHeroMedia from '../../components/EntityHeroMedia.astro';
+import EntityContact from '../../components/EntityContact.astro';
+import EntityGallery from '../../components/EntityGallery.astro';
 import { upcomingFor } from '../../lib/content';
 import { linksOf } from '../../lib/links';
+import { entityImageUrls } from '../../lib/entity-images';
 import { PERFORMER_TYPE_LABELS } from '../../lib/schemas';
-import { breadcrumbJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, performerJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
 import Reactions from '../../components/Reactions.astro';
 
@@ -23,12 +27,20 @@ const crumbs = [
   { name: 'Bands and DJs', href: '/performers/' },
   { name: p.name, href: `/performers/${person.id}/` },
 ];
-const lede = p.description ?? `${PERFORMER_TYPE_LABELS[p.type]}${p.genres.length ? ` · ${p.genres.join(', ')}` : ''}`;
+const kindLine = `${PERFORMER_TYPE_LABELS[p.type]}${p.genres.length ? ` · ${p.genres.join(', ')}` : ''}${p.town ? ` · ${p.town}` : ''}`;
+const lede = p.description ?? kindLine;
+const links = linksOf(p);
+const site = Astro.site!;
+const [photo, ...morePhotos] = p.photos ?? [];
+const ld = performerJsonLd(person.id, p, site, { ...(await entityImageUrls(p, site)), links });
+const hasContact = Boolean(p.phone || p.email || p.bookingUrl || links.length || p.evidence?.length || p.logo || p.photos?.length || p.description);
 ---
-<BaseLayout title={p.seoTitle ?? `${p.name}: where to dance to them on Long Island`} description={p.seoDescription ?? `${p.name} (${PERFORMER_TYPE_LABELS[p.type]}). Upcoming dances and gigs in Nassau and Suffolk.`} pageType="person" jsonLd={[{ '@context': 'https://schema.org', '@type': p.type === 'band' ? 'MusicGroup' : 'Person', name: p.name, genre: p.genres, sameAs: linksOf(p).map((l) => l.url) }, breadcrumbJsonLd(crumbs, Astro.site!)]}>
+<BaseLayout title={p.seoTitle ?? `${p.name}: where to dance to them on Long Island`} description={p.seoDescription ?? `${p.name} (${PERFORMER_TYPE_LABELS[p.type]}). Upcoming dances and gigs in Nassau and Suffolk.`} pageType="person" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={p.name} lede={lede} crumbs={crumbs}>
-      <Reactions type="performer" id={person.id} name={p.name} variant="hero" />
-    <PersonLinks links={linksOf(p)} name={p.name} variant="buttons" location="performer" class="mt-5" />
+    {(photo || p.logo) && <EntityHeroMedia slot="media" name={p.name} photo={photo} logo={p.logo} />}
+    {p.description && <p class="page-header__meta">{kindLine}</p>}
+    <Reactions type="performer" id={person.id} name={p.name} variant="hero" />
+    <PersonLinks links={links} name={p.name} variant="buttons" location="performer" class="mt-5" />
   </PageHeader>
   <div class="container section stack-l">
     <section aria-labelledby="on-h">
@@ -36,6 +48,27 @@ const lede = p.description ?? `${PERFORMER_TYPE_LABELS[p.type]}${p.genres.length
       <div class="mt-5"><EventSeriesList events={events} empty={`No upcoming events with ${p.name} are listed right now`} /></div>
     </section>
     {p.dancing && <DancingFacts name={p.name} kind="performer" rating={p.dancing.rating} kinds={p.dancing.kinds} notes={p.dancing.notes} evidence={p.dancing.evidence} confidence={p.dancing.confidence} checked={p.dancing.checked} />}
+    {hasContact && (
+      <EntityContact
+        heading="Contact and booking"
+        name={p.name}
+        location="performer"
+        phone={p.phone}
+        email={p.email}
+        bookingUrl={p.bookingUrl}
+        bookingLabel="Book them"
+        links={links}
+        evidence={p.evidence}
+        factsSource={p.factsSource}
+        logo={p.logo}
+        photos={p.photos}
+        ownerPrompt="Is this your band or DJ business? Something wrong or missing?"
+      >
+        {p.genres.length > 0 && <div><dt>Music</dt><dd>{p.genres.join(', ')}</dd></div>}
+        {p.town && <div><dt>Based in</dt><dd>{p.town}</dd></div>}
+      </EntityContact>
+    )}
+    <EntityGallery photos={morePhotos} heading={`More photos of ${p.name}`} />
     <CommunityPanel type="performer" id={person.id} name={p.name} />
   </div>
 </BaseLayout>

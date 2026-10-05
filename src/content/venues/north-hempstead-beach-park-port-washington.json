@@ -31,16 +31,49 @@
     "policy": "allowed"
   },
   "description": "A town beach park on Hempstead Harbor in Port Washington with a beach, boardwalk, picnic areas and big lawns. The town holds festivals and concerts here.",
-  "factsSource": "Checked October 3, 2026. Source: northhempsteadny.gov.",
+  "factsSource": "Checked October 4, 2026. Source: northhempsteadny.gov.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=North+Hempstead+Beach+Park%2C+175+West+Shore+Rd%2C+Port+Washington%2C+NY+11050",
   "kind": "park",
   "phone": "(516) 869-6311",
   "postalCode": "11050",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Bar Beach (1 W Shore Dr) is a separate park next door; not the same place. One event site wrongly calls this a Town of Hempstead festival in Roslyn; it is the Town of North Hempstead, in Port Washington.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Bar Beach (1 W Shore Dr) is a separate park next door; not the same place. One event site wrongly calls this a Town of Hempstead festival in Roslyn; it is the Town of North Hempstead, in Port Washington.\n\nDirectory research 2026-10-04: Website changed: the current URL (/departments/parks_recreation/north_hempstead_beach_park.php) now returns 404; the park page moved to /departments/parks_recreation/parks_directory/north_hempstead_beach_park.php (Google Maps still links the old URL). CORRECTION to the existing note: the town's own page says North Hempstead Beach Park is the former Bar Beach & Hempstead Harbor Parks combined - Bar Beach is part of this park, not a separate park next door (Google shows a 'Kostal Paddle Bar Beach' rental inside it). The phone is the Town's general/Parks line (516-869-6311; 311 from inside the town). Facebook, YouTube and X are the Town of North Hempstead's accounts (no park-only accounts found); the logo is the Town seal. No park photos on the Town's site (only a generic banner of another location), so none recorded. Concerts and festivals happen on the grounds outdoors; no dance floor. Seasonal beach/parking fees apply. Current description kept ('boardwalk' is called a waterfront promenade by the town).",
   "state": "NY",
   "town": "Port Washington",
-  "website": "https://www.northhempsteadny.gov/departments/parks_recreation/north_hempstead_beach_park.php",
+  "website": "https://www.northhempsteadny.gov/departments/parks_recreation/parks_directory/north_hempstead_beach_park.php",
   "latitude": 40.828133,
   "longitude": -73.65722,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/townofnorthhempstead",
+  "youtubeUrl": "https://www.youtube.com/@townofnorthhempstead",
+  "xUrl": "https://x.com/northhempstead",
+  "hours": "Daily, sunrise to sunset",
+  "logo": {
+    "image": "../../assets/entities/venues/north-hempstead-beach-park-port-washington-logo.webp",
+    "alt": "Seal of the Town of North Hempstead: a profile of a Native American man in a circle with the town name, 1784 and Nassau County, New York",
+    "credit": "Logo: Town of North Hempstead",
+    "creditUrl": "https://www.northhempsteadny.gov/departments/parks_recreation/parks_directory/north_hempstead_beach_park.php",
+    "imageSource": "https://www.northhempsteadny.gov/_assets_/images/logo.png"
+  },
+  "evidence": [
+    {
+      "url": "https://www.northhempsteadny.gov/departments/parks_recreation/parks_directory/north_hempstead_beach_park.php",
+      "note": "Town park page: North Hempstead Beach Park (formerly Bar Beach & Hempstead Harbor Parks), 175 W Shore Rd, Port Washington, NY 11050; open sunrise to sunset; call 311 in town or 516-869-6311; promenade, pier, beach, picnic areas."
+    },
+    {
+      "url": "https://northhempsteadny.gov/news_detail_T7_R197.php",
+      "note": "Town press release: free Fall Family Festival at North Hempstead Beach Park on October 3, 2026, with live music."
+    },
+    {
+      "url": "https://northhempsteadny.gov/news_detail_T7_R185.php",
+      "note": "Town press release: summer concert with a tribute band and fireworks at North Hempstead Beach Park."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=16928723654712055186",
+      "note": "Google Maps: North Hempstead Beach Park, park at 175 W Shore Rd, Port Washington, NY 11050, (516) 869-6311."
+    },
+    {
+      "url": "https://www.northhempsteadny.gov/departments/parks_recreation/parks_directory/index.php",
+      "note": "Shows the website."
+    }
+  ]
 }

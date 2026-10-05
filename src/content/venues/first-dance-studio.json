@@ -8,15 +8,70 @@
   "town": "Farmingdale",
   "county": "Nassau",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: 1st-dance.com, farmingdalenychamber.org, google.com.",
+  "factsSource": "Checked October 4, 2026. Source: 1st-dance.com.",
   "postalCode": "11735",
   "phone": "(631) 513-8706",
   "website": "https://1st-dance.com/",
   "googleMapsUrl": "https://www.google.com/maps?cid=6127969443822797100",
   "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot.",
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance, parking lot and restroom.",
-  "reviewNotes": "Brands itself \"First Dance Wedding\"; formerly Dance Obsession (Barney & Debbie).",
+  "reviewNotes": "Brands itself \"First Dance Wedding\"; formerly Dance Obsession (Barney & Debbie).\n\nDirectory research 2026-10-04: Hours conflict on the studio's own site: the visible contact block says Mon 1-6 PM, Tue-Fri 1-9 PM, Sat by appointment, while hidden schema data says Mon-Fri 3-10 PM and Sat 11 AM-4 PM; we used the visible text (it also matches the map listing). Socials and parties run later in the evening (7:30-10 PM). Facebook: the only page found is the old 'Dance Obsession Ballroom Studio' page (https://www.facebook.com/danceobsessionballroom/) at the same address; not linked from the new site, so not recorded; owner may want to confirm. The site's text line (877) 611-5114 is not recorded as the main phone. Two other large images on the site are stock photos (a crowd from above, a wedding bouquet) and an AI-made background, so they were skipped. The logo is the site icon (270 px); no separate header logo image was found.",
   "latitude": 40.729407,
   "longitude": -73.46313,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/first_dance_farmingdale/",
+  "email": "dancefarmingdale@gmail.com",
+  "hours": "Mon 1 PM-6 PM; Tue-Fri 1 PM-9 PM; Sat by appointment",
+  "description": "A ballroom and social dance studio on Hempstead Turnpike in Farmingdale, open since 1986 and formerly called Dance Obsession. It teaches wedding first dances, ballroom, Latin, salsa, bachata, hustle and Argentine tango, and holds group-class-plus-social dance parties on its wood floor.",
+  "logo": {
+    "image": "../../assets/entities/venues/first-dance-studio-logo.webp",
+    "alt": "First Dance logo: a gold and pink drawing of a couple dancing inside a pink swirl",
+    "credit": "Logo: First Dance Wedding and Social Dance Studio",
+    "creditUrl": "https://1st-dance.com/",
+    "imageSource": "https://1st-dance.com/wp-content/uploads/2026/07/cropped-favicon-270x270.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/first-dance-studio-1.webp",
+      "alt": "The empty studio: a large light wood dance floor with a mirror wall, a disco ball and a small lounge corner",
+      "credit": "Photo: First Dance Wedding and Social Dance Studio (website)",
+      "creditUrl": "https://1st-dance.com/",
+      "imageSource": "https://1st-dance.com/wp-content/uploads/2026/07/studio.webp",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/first-dance-studio-2.webp",
+      "alt": "Two adult couples in black dancewear dancing a Latin dance on the studio's wood floor",
+      "credit": "Photo: First Dance Wedding and Social Dance Studio (website)",
+      "creditUrl": "https://1st-dance.com/",
+      "imageSource": "https://1st-dance.com/wp-content/uploads/2026/07/adults.webp",
+      "focus": "40% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/first-dance-studio-3.webp",
+      "alt": "A couple dancing together during a lesson in the bright studio, with a woman in a black dress dancing nearby",
+      "credit": "Photo: First Dance Wedding and Social Dance Studio (website)",
+      "creditUrl": "https://1st-dance.com/",
+      "imageSource": "https://1st-dance.com/wp-content/uploads/2026/07/private-lessons.webp",
+      "focus": "60% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://1st-dance.com/contact-us/",
+      "note": "Studio contact page: 18 Hempstead Tpke, Farmingdale NY 11735, call (631) 513-8706, text (877) 611-5114, dancefarmingdale@gmail.com, hours Mon 1-6 PM, Tue-Fri 1-9 PM, Sat by appointment."
+    },
+    {
+      "url": "https://1st-dance.com/",
+      "note": "Home page says the studio dates from 1986, was formerly Dance Obsession, teaches wedding, ballroom, Latin, salsa, bachata, hustle and Argentine tango, and links its Instagram."
+    },
+    {
+      "url": "https://1st-dance.com/calendar/",
+      "note": "Calendar lists weekly group classes and themed dance parties (group class plus social dance, 7:30-10 PM)."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=6127969443822797100",
+      "note": "A places listing for First Dance Wedding and Social Dance Studio matches the address and phone, with Mon 1-6 PM and Tue-Fri 1-9 PM hours."
+    }
+  ]
 }

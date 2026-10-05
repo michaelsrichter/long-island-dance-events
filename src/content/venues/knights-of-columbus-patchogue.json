@@ -8,15 +8,64 @@
   "town": "Patchogue",
   "county": "Suffolk",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: purplepenguinentertainment.com, kofc725.com, google.com.",
+  "factsSource": "Checked October 4, 2026. Source: kofc725.com.",
   "postalCode": "11772",
   "phone": "(631) 207-0725",
   "website": "https://kofc725.com/",
   "googleMapsUrl": "https://www.google.com/maps?cid=13070516743131956636",
   "parkingNotes": "Google Maps lists a wheelchair-accessible parking lot.",
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance, parking lot, restroom and seating.",
-  "reviewNotes": "Off Waverly Ave. Google Maps names it \"Monseigneur Hall / Patchogue Knights of Columbus\".",
+  "reviewNotes": "Off Waverly Ave. Google Maps names it \"Monseigneur Hall / Patchogue Knights of Columbus\".\n\nDirectory research 2026-10-04: Address and phone confirmed on the council's own site and Google Maps. The site's HTTPS certificate is broken (it is issued for server301.com), so https://kofc725.com/ shows a security warning; the website is recorded as http://kofc725.com/ (works). The logo is the Knights of Columbus order's general logo used on the council site (small, 301x72 px), not a council-specific emblem. Google Maps shows Sunday 9 AM-6 PM, but the hall has no public opening hours (it is rented by event), so hours are left blank. The hall-rentals page is recorded as the booking link for renting the hall. Photos picked from the hall-rentals gallery avoid images showing guests' faces; photo files are large originals (3-4 MB, 4032 px) and may carry EXIF rotation. No public email or Instagram found.",
   "latitude": 40.767623,
   "longitude": -73.027595,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/PatchogueKnightsOfColumbus725/",
+  "description": "The Knights of Columbus Council 725 hall, called Monseigneur Hall, on West 1st Street in Patchogue just off Waverly Avenue. The renovated hall has a wood dance floor, holds up to 130 people and is rented for parties and dances.",
+  "logo": {
+    "image": "../../assets/entities/venues/knights-of-columbus-patchogue-logo.webp",
+    "alt": "Knights of Columbus logo: the order's shield emblem beside the words Knights of Columbus",
+    "credit": "Logo: Knights of Columbus (Patchogue Council 725 website)",
+    "creditUrl": "http://kofc725.com/",
+    "imageSource": "http://kofc725.com/ewExternalFiles/KofC_logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/knights-of-columbus-patchogue-1.webp",
+      "alt": "Monseigneur Hall set for a party, with a wood dance floor in front of round tables with white covers and blue sashes",
+      "credit": "Photo: Knights of Columbus Council 725 (website)",
+      "creditUrl": "http://kofc725.com/hall-rentals.html",
+      "imageSource": "http://kofc725.com/images/hall-rentals/IMG_0604.jpeg",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/knights-of-columbus-patchogue-2.webp",
+      "alt": "The hall with round tables in black-and-white checkered cloths, pink chairs and retro decorations on the walls",
+      "credit": "Photo: Knights of Columbus Council 725 (website)",
+      "creditUrl": "http://kofc725.com/hall-rentals.html",
+      "imageSource": "http://kofc725.com/images/hall-rentals/IMG_2359.JPG",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/knights-of-columbus-patchogue-3.webp",
+      "alt": "Round tables with black and white covers, gold sashes and black-and-gold balloon centerpieces in the hall",
+      "credit": "Photo: Knights of Columbus Council 725 (website)",
+      "creditUrl": "http://kofc725.com/hall-rentals.html",
+      "imageSource": "http://kofc725.com/images/hall-rentals/IMG_1201.jpeg",
+      "focus": "50% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "http://kofc725.com/",
+      "note": "Council 725's own site lists 38 West 1st Street, Patchogue, NY 11772 (off Waverly Ave.), phone 631.207.0725, and links its Facebook page."
+    },
+    {
+      "url": "http://kofc725.com/hall-rentals.html",
+      "note": "Hall rentals page: the renovated Monseigneur Hall holds up to 130 people for parties; call (631) 207-0725. Photos show a wood dance floor."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=13070516743131956636",
+      "note": "Google Maps: 'Monseigneur Hall / Patchogue Knights of Columbus', banquet hall at 38 W 1st St, Patchogue, NY 11772, phone (631) 207-0725, website kofc725.com."
+    }
+  ]
 }

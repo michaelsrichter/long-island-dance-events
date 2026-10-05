@@ -27,16 +27,39 @@
     "notes": "Frogzz has live bands and a Sunday jam session, but we found no reviews or photos that talk about dancing. Treat it as a place to listen unless you hear otherwise.",
     "policy": "unknown"
   },
-  "description": "A neighborhood bar and grill on Main Street in Yaphank with pool, darts and an outdoor deck. It has local bands, karaoke and a Sunday afternoon open jam.",
-  "factsSource": "Checked October 3, 2026. Source: restaurantji.com.",
+  "description": "A neighborhood bar and grill on Main Street in Yaphank with pool, darts and a back patio. It has local bands, karaoke on Wednesday nights and an open jam on Thursday nights.",
+  "factsSource": "Checked October 4, 2026. Sources: facebook.com, outonthetownli.com, checkle.com, npptpoker.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Frogzz+Bar+%27N%27+Grill%2C+450+Main+St%2C+Yaphank%2C+NY+11980",
   "kind": "bar",
   "phone": "(631) 775-0186",
   "postalCode": "11980",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). No official website found, and two different Facebook pages are listed online, so we left Facebook out. Do not confuse with Frogzz Saloon in Lake Ronkonkoma, a different bar.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). No official website found, and two different Facebook pages are listed online, so we left Facebook out. Do not confuse with Frogzz Saloon in Lake Ronkonkoma, a different bar.\n\nDirectory research 2026-10-04: No official website. Of the two Facebook pages found online, we recorded the active one (profile id 100094907572051, titled 'Frogzz Bar 'N' Grill | Yaphank NY', linked as the bar's site by a pub poker league). The other (facebook.com/111402392033711) only shows a login wall and may belong to the earlier owners; please confirm. Facebook images are blocked by robots.txt, so no logo or photos. Hours not recorded: Google Maps shows 11 AM-12 AM on Sunday, but other listings say 11 AM-4 AM daily. Description updated: the current one mentions a Sunday afternoon open jam, but the latest listings show the open jam on Thursday nights (with Lisa Polizzi) and karaoke on Wednesdays. Not the same bar as Frogzz Saloon in Lake Ronkonkoma.",
   "state": "NY",
   "town": "Yaphank",
   "latitude": 40.837812,
   "longitude": -72.924221,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/people/Frogzz-Bar-N-Grill/100094907572051/",
+  "evidence": [
+    {
+      "url": "https://www.google.com/maps?cid=17223626780220749082",
+      "note": "Google Maps listing 'Frogzz Bar 'N' Grill' (Bar): 450 Main St, Yaphank, NY 11980, phone (631) 775-0186. No website on the listing."
+    },
+    {
+      "url": "https://www.facebook.com/people/Frogzz-Bar-N-Grill/100094907572051/",
+      "note": "Active Facebook page titled 'Frogzz Bar 'N' Grill | Yaphank NY' with about 3,500 followers; a pub poker league lists this page as the bar's website."
+    },
+    {
+      "url": "https://outonthetownli.com/venue/frogzz-bar-n-grill/",
+      "note": "Event calendar lists karaoke every Wednesday 7-10 PM and a Thursday night open jam 7-10 PM at Frogzz, 450 Main St, Yaphank (September 2026)."
+    },
+    {
+      "url": "https://www.checkle.com/biz/frogzz-bar-n-grill-yaphank",
+      "note": "Business blurb mentions cold drinks, hot food, pool, darts, lotto and OTB; reviews mention a renovated back patio and live bands."
+    },
+    {
+      "url": "https://npptpoker.com/new_venues.php?venueId=1291",
+      "note": "Shows the Facebook page."
+    }
+  ]
 }

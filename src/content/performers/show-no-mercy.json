@@ -27,6 +27,21 @@
     "tribute to Slayer",
     "thrash metal"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Confirmed Slayer tribute. Damage Inc. on the same bill is a Metallica tribute.",
-  "youtubeUrl": "https://www.youtube.com/@shownomercyny206"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Confirmed Slayer tribute. Damage Inc. on the same bill is a Metallica tribute.\n\nDirectory research 2026-10-04: No official website or Instagram found; the Facebook page and YouTube channel are the band's official presence. Facebook confirmed indirectly (AllEvents pulls the organizer page and picture from facebook.com/ShowNoMercyNY); it could not be opened without logging in. Logo is the band's YouTube profile picture; note it is drawn over Slayer's eagle crest artwork and includes a pentagram, so the owner may prefer not to show it. No photos found outside Facebook. Current description is accurate (the Oct 3 show has passed).",
+  "youtubeUrl": "https://www.youtube.com/@shownomercyny206",
+  "evidence": [
+    {
+      "url": "https://www.youtube.com/@shownomercyny206",
+      "note": "YouTube channel \"ShowNoMercy NY\" describes itself as the official channel of Show No Mercy, NY's Slayer tribute."
+    },
+    {
+      "url": "https://allevents.in/org/show-no-mercy-nyc-slayer-tribute/15667709",
+      "note": "AllEvents organizer page built from the Facebook page ShowNoMercyNY: \"Show No Mercy: NYC Slayer Tribute\", NYC/LI-based, longest-running four-piece Slayer tribute."
+    },
+    {
+      "url": "https://allevents.in/patchogue/the-big-4-at-89-north-ft-show-no-mercy-damage-inc-and-chaotica/200030700749651",
+      "note": "\"The Big 4\" thrash tribute night at 89 North, Patchogue, with Show No Mercy, Damage Inc. and Chaotica."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: youtube.com, allevents.in."
 }

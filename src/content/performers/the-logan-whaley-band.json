@@ -1,5 +1,63 @@
 {
   "name": "The Logan Whaley Band",
   "type": "band",
-  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: The band now calls itself 'Whaley' (renamed from The Logan Whaley Band), but venues such as The Villager still use the old name; consider adding 'Whaley' as an alias. The site's tour page was empty and its home page still showed an old date, so no booking contact was found (no email, phone or booking form). No real logo on the site (only album-cover art), so none recorded. All three photos are black-and-white live shots from the band's bio page.",
+  "website": "https://whaley.band/",
+  "facebookUrl": "https://www.facebook.com/whaley.band/",
+  "instagramUrl": "https://www.instagram.com/loganwhaleymusic/",
+  "spotifyUrl": "https://open.spotify.com/artist/2FhruAZGTJsxRFkof6syuv",
+  "bandcampUrl": "https://whaley.bandcamp.com/",
+  "genres": [
+    "funk",
+    "rock",
+    "R&B",
+    "reggae",
+    "jazz"
+  ],
+  "description": "Long Island band led by singer and guitarist Logan Whaley, now also billed as 'Whaley'. It mixes funk, rock, R&B, reggae and jazz in danceable sets of original songs (debut album 'Funky Tonight') and covers.",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/the-logan-whaley-band-1.webp",
+      "alt": "Black-and-white photo of Logan Whaley in a patterned shirt and bucket hat singing into a microphone while playing electric guitar",
+      "credit": "Photo: Whaley / The Logan Whaley Band (website)",
+      "creditUrl": "https://whaley.band/bio",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/624b5fc15c0d717cdd01041e/37f905da-cf94-47ba-88ce-1e5a58da46e3/IMG_7058.jpg?format=1500w",
+      "focus": "40% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-logan-whaley-band-2.webp",
+      "alt": "Black-and-white photo of the band's bass player in a backwards cap playing on stage next to a drum kit",
+      "credit": "Photo: Whaley / The Logan Whaley Band (website)",
+      "creditUrl": "https://whaley.band/bio",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/624b5fc15c0d717cdd01041e/96aa7071-21d9-4894-9578-7a31104b13b4/IMG_7104.jpg?format=1500w",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-logan-whaley-band-3.webp",
+      "alt": "Black-and-white photo of the band's drummer smiling behind his drum kit in front of a brick wall",
+      "credit": "Photo: Whaley / The Logan Whaley Band (website)",
+      "creditUrl": "https://whaley.band/bio",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/624b5fc15c0d717cdd01041e/e121d062-925f-42a5-b034-8ffe154d4d49/IMG_5664.jpg?format=1500w",
+      "focus": "55% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thevillagerfarmingdale.com/livemusic/live-music-the-logan-whaley-band",
+      "note": "The Villager (Farmingdale) lists 'Live Music: The Logan Whaley Band' (Oct 31, 2026); the band plays there often."
+    },
+    {
+      "url": "https://whaley.band/press/lwb-is-now-whaley",
+      "note": "Band's own site announces 'LWB is Now Whaley' (the Logan Whaley Band renamed itself Whaley)."
+    },
+    {
+      "url": "https://whaley.band/bio",
+      "note": "Bio: Long Island band led by Logan Whaley, mixing funk, rock, R&B, reggae and jazz; debut album 'Funky Tonight'."
+    },
+    {
+      "url": "https://whaley.band/",
+      "note": "Official site links Bandcamp (whaley.bandcamp.com), Instagram loganwhaleymusic, Facebook whaley.band and Spotify."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thevillagerfarmingdale.com, whaley.band."
 }

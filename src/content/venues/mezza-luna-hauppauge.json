@@ -11,9 +11,66 @@
   "postalCode": "11788",
   "website": "https://www.mezzalunafinedining.com/",
   "kind": "restaurant",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://www.mezzalunafinedining.com/events.",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Source: mezzalunafinedining.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Address, phone, email and hours confirmed on the restaurant's own contact page; address and phone match Google Maps. Hauppauge is in Suffolk County. Hours combine the contact page's table: Sat 5 PM (dining) with the bar opening at 12 PM on Saturday and Sunday. Live music is one performer at dinner on Fridays; the site does not mention a dance floor (the party rooms may have space for dancing at private events, not confirmed). Photo 2 is from the private-events page (a bar in one of the party rooms). The logo is white on a transparent background, so it needs a dark backdrop.",
   "latitude": 40.805455,
   "longitude": -73.233015,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/mezzalunafinedining",
+  "instagramUrl": "https://www.instagram.com/mezzalunafinedining/",
+  "email": "info@mezzalunafinedining.com",
+  "phone": "(631) 273-9407",
+  "hours": "Mon-Thu 12 PM-9 PM; Fri 12 PM-10 PM; Sat 5 PM-10 PM; Sun 3 PM-9 PM (bar opens 12 PM Sat-Sun)",
+  "description": "An Italian fine-dining restaurant on Vanderbilt Motor Parkway in Hauppauge, with a bar and rooms for private parties. A solo singer or musician plays live music on Friday evenings from 6 to 9 PM.",
+  "logo": {
+    "image": "../../assets/entities/venues/mezza-luna-hauppauge-logo.webp",
+    "alt": "Mezza Luna Fine Italian logo: the name in white capital letters beside a crescent moon, with 'Est. 2022' above (white on a transparent background)",
+    "credit": "Logo: Mezza Luna Fine Italian",
+    "creditUrl": "https://www.mezzalunafinedining.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/62e196e6718eff4d3dfd907d/c0a431de-fc37-4092-b3ae-ecc2393b0ff7/MezzaLunaHalfMoonHorizontalLogo-02.png?format=1500w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/mezza-luna-hauppauge-1.webp",
+      "alt": "Mezza Luna's dining room with white tablecloths, dark wood chairs, a herringbone wood floor and a round chandelier",
+      "credit": "Photo: Mezza Luna Fine Italian (website)",
+      "creditUrl": "https://www.mezzalunafinedining.com/gallery",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/62e196e6718eff4d3dfd907d/c283b495-8a61-4af9-9762-15092cae8b31/White+Walls%2C+Black+Trim%2C+Various+White+Table+Cloth+Covered+Tables+With+Dark+Wood+Chairs%2C+Cheveron+Wood+Floors%2C+Circular+Chandeliers+and+Abstract+Art+On+Walls.jpg?format=1500w",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/mezza-luna-hauppauge-2.webp",
+      "alt": "A black wood bar with glassware shelves in a bright room with a herringbone wood floor at Mezza Luna",
+      "credit": "Photo: Mezza Luna Fine Italian (website)",
+      "creditUrl": "https://www.mezzalunafinedining.com/private-events",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/62e196e6718eff4d3dfd907d/ca3b1e00-26d9-4540-8507-d9a67e94f25d/DSC01499.jpg?format=1500w",
+      "focus": "45% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/mezza-luna-hauppauge-3.webp",
+      "alt": "Mezza Luna's party room set with round tables, white tablecloths and gray chairs under globe lights",
+      "credit": "Photo: Mezza Luna Fine Italian (website)",
+      "creditUrl": "https://www.mezzalunafinedining.com/private-events",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/62e196e6718eff4d3dfd907d/92b2abcb-c002-442a-ad19-3d4604ab43bb/DSC08224.jpg?format=1500w",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.mezzalunafinedining.com/contact-us",
+      "note": "Restaurant's contact page gives 644 Vanderbilt Motor Pkwy, Hauppauge, NY 11788, phone (631) 273-9407, info@mezzalunafinedining.com and weekly hours."
+    },
+    {
+      "url": "https://www.mezzalunafinedining.com/events",
+      "note": "Events page lists live music with a solo performer most Fridays, 6 to 9 PM, into November 2026."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=5235336600733769693",
+      "note": "Google Maps lists Mezza Luna (Italian restaurant) at the same address and phone, website mezzalunafinedining.com; Sunday hours 3 to 9 PM match the site."
+    },
+    {
+      "url": "https://www.mezzalunafinedining.com/",
+      "note": "Shows the Facebook page and Instagram page."
+    }
+  ]
 }

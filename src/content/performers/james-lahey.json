@@ -1,5 +1,44 @@
 {
   "name": "James Lahey",
   "type": "band",
-  "reviewNotes": "Added automatically from Mezza Luna (Hauppauge) - events. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mezza Luna (Hauppauge) - events. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: No personal website or verified social page found; booking appears to go through Long Island entertainment agencies (Pure Music Group, and earlier Barattini Productions in St. James). bookingUrl is the agency roster page. The Barattini page is on an older Squarespace address and may be out of date. Not the same as the Canadian session musician on Discogs or the SoundCloud \"James Lahey\" with pheasant-themed tracks. Photo is the agency promo photo (same image on both agency sites). Instagram @jameslahey_ appeared in search but could not be verified.",
+  "bookingUrl": "https://puremusicgroup.org/artists",
+  "genres": [
+    "acoustic rock covers",
+    "60s to today"
+  ],
+  "description": "A Long Island solo acoustic act who sings and plays guitar and harmonica, covering rock songs from the 1960s to today at restaurants, bars and private parties.",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/james-lahey-1.webp",
+      "alt": "James Lahey in a dark suit and tie holding an acoustic guitar in front of blue stage lights",
+      "credit": "Photo: Barattini Productions (James Lahey promo photo)",
+      "creditUrl": "http://barattini-productions-1qet.squarespace.com/james-lahey",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/53d91d06e4b0405bc7fa9315/1417229998660-V0SD1F5THWNJZYD83XY1/image-asset.jpeg?format=1500w",
+      "focus": "50% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.mezzalunafinedining.com/events/james-lahey",
+      "note": "Mezza Luna in Hauppauge lists James Lahey live music on Friday, November 6, 2026, 6-9 PM."
+    },
+    {
+      "url": "https://www.mezzalunafinedining.com/events/live-music-with-james-lahey",
+      "note": "An earlier Mezza Luna listing (January 9, 2026) describes an intimate acoustic guitar-and-vocals performance."
+    },
+    {
+      "url": "https://puremusicgroup.org/artists",
+      "note": "Pure Music Group, a Long Island booking agency whose roster also includes other Mezza Luna performers, lists James Lahey as an acoustic guitar, harmonica and vocals act covering rock from the 60s to today."
+    },
+    {
+      "url": "http://barattini-productions-1qet.squarespace.com/james-lahey",
+      "note": "Barattini Productions of St. James, NY lists James Lahey as a live acoustic singer and wedding emcee, with the same promo photo as the Pure Music Group page."
+    },
+    {
+      "url": "https://events.longisland.com/live-music-at-the-coop-featuring-james-lahey-yellowfly.html",
+      "note": "He also played early sets at The Coop in Farmingdale in fall 2025."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mezzalunafinedining.com, puremusicgroup.org, barattini-productions-1qet.squarespace.com, events.longisland.com."
 }

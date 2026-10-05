@@ -9,15 +9,65 @@
   "town": "Deer Park",
   "county": "Suffolk",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: sonsofitalyli.com, thedancecalendar.com, facebook.com, google.com.",
+  "factsSource": "Checked October 4, 2026. Sources: sonsofitalyli.com, facebook.com.",
   "postalCode": "11729",
   "phone": "(631) 940-2006",
   "website": "https://sonsofitalyli.com/",
   "googleMapsUrl": "https://www.google.com/maps?cid=660608878130361980",
   "parkingNotes": "Large parking lot (\"Huge Parking Lot\" in the lodge's own ad).",
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
-  "reviewNotes": "On Route 231. Facebook: https://www.facebook.com/Brumidilodge. \"Largest dance floor on Long Island\" is the lodge's own claim and is not recorded as fact.",
+  "reviewNotes": "On Route 231. Facebook: https://www.facebook.com/Brumidilodge. \"Largest dance floor on Long Island\" is the lodge's own claim and is not recorded as fact.\n\nDirectory research 2026-10-04: Deer Park is in the Town of Babylon, Suffolk County. The contact page also lists a kitchen line (631) 586-3928, a catering manager line and a separate catering business (brumidicatering.com, info@brumidicatering.com, Facebook /brumidicatering/); not recorded as the venue's main contact. The page also shows the lodge president's home phone, which we did NOT record. No regular opening hours are published (it is open for events). No Instagram found. Gallery photos are mostly posed groups of members (some with children), so they were not used; the lodge emblem used as the logo is the national OSDIA emblem shown on the lodge's own site.",
   "latitude": 40.771306,
   "longitude": -73.333128,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/Brumidilodge/",
+  "email": "lodge@sonsofitalyli.com",
+  "description": "The lodge hall of Constantino Brumidi Lodge #2211, Order Sons and Daughters of Italy in America, on Deer Park Avenue (Route 231). Its ballroom hosts weekly DJ social dances, Western dances, dinner dances and dance lessons, many open to non-members, and it is also rented out as a catering hall.",
+  "logo": {
+    "image": "../../assets/entities/venues/brumidi-lodge-logo.webp",
+    "alt": "Round Order Sons and Daughters of Italy in America emblem with a lion in front of a green, white and red Italian flag",
+    "credit": "Logo: Order Sons and Daughters of Italy in America (Brumidi Lodge website)",
+    "creditUrl": "https://sonsofitalyli.com/",
+    "imageSource": "https://sonsofitalyli.com/wp-content/uploads/2025/02/Sons-of-Italy-Logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/brumidi-lodge-1.webp",
+      "alt": "Front of the Brumidi Lodge hall: a long gray building with a pink arched entrance marked Constantino Brumidi Lodge No. 2211, a wooden pergola and flower beds",
+      "credit": "Photo: Constantino Brumidi Lodge (website)",
+      "creditUrl": "https://sonsofitalyli.com/",
+      "imageSource": "https://sonsofitalyli.com/wp-content/uploads/2024/03/Son-of-Italy-LI.jpg",
+      "focus": "45% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/brumidi-lodge-2.webp",
+      "alt": "The lodge ballroom set for a party, with round tables in white and pink linens, chandeliers and mirrored stone walls",
+      "credit": "Photo: Constantino Brumidi Lodge (website)",
+      "creditUrl": "https://sonsofitalyli.com/",
+      "imageSource": "https://sonsofitalyli.com/wp-content/uploads/2017/04/catering.jpg",
+      "focus": "50% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sonsofitalyli.com/contact-us/",
+      "note": "Lodge contact page gives 2075 Deer Park Avenue, Deer Park NY 11729, lodge office 631-940-2006, kitchen 631-586-3928 and lodge@sonsofitalyli.com."
+    },
+    {
+      "url": "https://sonsofitalyli.com/events/",
+      "note": "Events list shows Monday group dance lessons, Wednesday and Friday night dance socials, Western dances and dinner dances at the lodge."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=660608878130361980",
+      "note": "The lodge site links this Google Maps place (same CID as our record) for Constantino Brumidi Lodge at 2075 Deer Park Ave; a places listing shows phone (631) 940-2006."
+    },
+    {
+      "url": "https://www.facebook.com/Brumidilodge/",
+      "note": "Facebook page linked from the lodge's own website footer."
+    },
+    {
+      "url": "https://sonsofitalyli.com/",
+      "note": "Shows the website and Facebook page."
+    }
+  ]
 }

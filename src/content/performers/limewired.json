@@ -35,7 +35,52 @@
   "genres": [
     "80s, 90s and 2000s rock and pop covers"
   ],
-  "instagramUrl": "https://www.instagram.com/LimeWired",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Instagram link comes from the band site; not opened. No crowd video watched.",
-  "website": "https://limewiredband.com/"
+  "instagramUrl": "https://www.instagram.com/limewiredlive/",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Instagram link comes from the band site; not opened. No crowd video watched.\n\nDirectory research 2026-10-04: Facebook: the band site links the numeric page facebook.com/184550338866502; search results show the same page as facebook.com/LimeWiredBand (Smithtown, NY). Instagram: the band site links instagram.com/LimeWired, but that handle appears to belong to a touring \"LimeWired - Ultimate 2000s Party\" brand (linktr.ee/Limewired); the Salt Shack and Boat Yard artist pages (band-supplied text) link instagram.com/limewiredlive instead, so we recorded limewiredlive (Instagram could not be opened, HTTP 429) - please confirm. No YouTube/TikTok links found (the venue pages' YouTube/TikTok buttons point to Facebook). Contact is via a form on the home page; no booking email or phone published. No clean logo file: the site og:image is a collage of band photos around the lime logo, so it was not used as a logo. Current description is still accurate.",
+  "website": "https://limewiredband.com/",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/limewired-1.webp",
+      "alt": "Limewired singer, bass player and guitarist rocking out on the 89 North stage under colored lights, with the lime Limewired banner beside them",
+      "credit": "Photo: Limewired (website)",
+      "creditUrl": "https://limewiredband.com/gallery",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/16849b81-7eeb-4f75-a5a5-3e3e8898e7ca/(Upload-from-mobile-1767976406)1000016203.jpg/:/rs=w:1600",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/limewired-2.webp",
+      "alt": "The six members of Limewired posing together in rock T-shirts, some in sunglasses, one holding a bass guitar",
+      "credit": "Photo: Limewired (website)",
+      "creditUrl": "https://limewiredband.com/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/16849b81-7eeb-4f75-a5a5-3e3e8898e7ca/blob.png/:/rs=w:1600",
+      "focus": "45% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/limewired-3.webp",
+      "alt": "A Limewired keyboard player in a cowboy hat and green bandana playing keys at a bar gig",
+      "credit": "Photo: Limewired (website)",
+      "creditUrl": "https://limewiredband.com/gallery",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/16849b81-7eeb-4f75-a5a5-3e3e8898e7ca/Bkeys.jpg/:/rs=w:1200",
+      "focus": "40% 25%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://limewiredband.com/",
+      "note": "Band site calls Limewired a Long Island cover band playing 80s, 90s and 2000s hits and lists an Oct 4, 2026 Oktoberfest show at Flanagan's in Ronkonkoma."
+    },
+    {
+      "url": "https://limewiredband.com/shows",
+      "note": "Shows page lists Daisy's Nashville Lounge (Miller Place), 89 North (Patchogue) and other Patchogue dates in Oct-Nov 2026."
+    },
+    {
+      "url": "https://saltshackny.com/artist/limewired/",
+      "note": "Salt Shack (Cedar Beach) artist page: Suffolk County rock band since 2018; links the band site and instagram.com/limewiredlive."
+    },
+    {
+      "url": "https://www.facebook.com/LimeWiredBand/",
+      "note": "Facebook page \"LimeWired\", Smithtown, NY, cover band on Long Island, with check-ins at Long Island bars (search result snippet)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: limewiredband.com, saltshackny.com, facebook.com."
 }
