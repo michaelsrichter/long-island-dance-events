@@ -9,7 +9,7 @@
   "town": "Patchogue",
   "skillLevel": "all-levels",
   "infoUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-n5ded-w4mf8",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "stereo-garden-patchogue",
   "sourceUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-n5ded-w4mf8",
   "sourceName": "Stereo Garden (Patchogue) - concerts and dance parties",
@@ -21,5 +21,8 @@
   ],
   "confidence": 0.4,
   "matchKey": "stereo-garden-patchogue|stereo-garden-patchogue||saturday|04:00|live-music|||2026-10-17",
-  "reviewNotes": "Start time looks wrong (4:00 in the morning). Check the source."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "Start time looks wrong (4:00 in the morning). Check the source. Published in the review center on 2026-10-05."
 }

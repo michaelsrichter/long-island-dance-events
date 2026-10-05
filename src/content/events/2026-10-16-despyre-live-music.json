@@ -12,7 +12,7 @@
   ],
   "skillLevel": "all-levels",
   "infoUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-c2wl5-ksdrb-6b67d-l6lk9-c3fx5-pkz3g-7xey9-wcdkz",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "stereo-garden-patchogue",
   "sourceUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-c2wl5-ksdrb-6b67d-l6lk9-c3fx5-pkz3g-7xey9-wcdkz",
   "sourceName": "Stereo Garden (Patchogue) - concerts and dance parties",
@@ -24,5 +24,8 @@
   ],
   "confidence": 0.4,
   "matchKey": "stereo-garden-patchogue|stereo-garden-patchogue||friday|06:30|live-music|despyre||2026-10-16",
-  "reviewNotes": "Start time looks wrong (6:30 in the morning). Check the source."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "Start time looks wrong (6:30 in the morning). Check the source. Published in the review center on 2026-10-05."
 }
