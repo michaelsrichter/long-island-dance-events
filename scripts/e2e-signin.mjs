@@ -18,14 +18,21 @@
  *                       9 moderate as admin (the email must be in ADMIN_EMAILS first)
  *                      10 account: rename, export, delete          11 sign in again after delete
  *                      13 sign out (run in a new command, i.e. after a browser restart) and sign in again
+ *                      sa  site session ended, sign-in service session still active: name stays, Like works
+ *                          without a reload (also: Like clicked after the session ended completes by itself)
+ *                      sb  browser restart: same day (site cookie kept) and next day (site cookie gone)
+ *                      sc  sign out, then come back: stays signed out (then signs in again for later steps)
+ *                      sd  a fresh private window: "Sign in", no sign-in requests or redirects
  *                      cleanup  delete the test account if it still exists
  *   --out <dir>       screenshots and report.json (default test-results/e2e-signin)
  *   --headed          show the browser
  *   --ux              also take phone/desktop, light/dark screenshots of key pages
  *   --no-cleanup      with step 11: leave the fresh account in place (run "cleanup" later)
+ *   --kmsi yes|no     answer to Microsoft's "Stay signed in?" question, if it is asked (default yes)
  *
  * The browser profile is kept in <out>/profile, so steps can be run in separate commands
  * (for example "1-7", then "9" after adding the email to ADMIN_EMAILS, then "10,11").
+ * Steps always run in the order listed above (10 before sa-sd), so run "10" in its own command last.
  * ADMIN_EMAILS is set per environment: for a PR preview use
  *   az staticwebapp appsettings set ... --environment-name <PR number> --setting-names "ADMIN_EMAILS=..."
  * Everything the test posts is removed again by step 10 (delete my account).
@@ -48,6 +55,7 @@ const STEPS = expandSteps(String(args.steps || '1-7,10'));
 if (STEPS.includes('9') && !STEPS.includes('9b')) STEPS.splice(STEPS.indexOf('9') + 1, 0, '9b');
 if (STEPS.includes('11') && !STEPS.includes('cleanup') && !args['no-cleanup']) STEPS.push('cleanup');
 const HEADED = Boolean(args.headed);
+const KMSI = String(args.kmsi || 'yes').toLowerCase() === 'no' ? 'no' : 'yes';
 
 if (!API_KEY) fail('AGENTMAIL_API_KEY is not set. Put the AgentMail API key in that environment variable (never in a file).');
 if (!/^https?:\/\//.test(BASE)) fail('Pass --base https://<site> (or set E2E_BASE_URL).');
@@ -217,21 +225,29 @@ async function coveredBy(page, locator) {
   });
 }
 
+/** The Like button at the top of a detail page (components/Reactions.astro, variant "hero"). */
+const HERO_LIKE = '[data-react][data-detail] [data-like]';
+
+async function likeCount(page) {
+  const text = (await page.locator(`${HERO_LIKE} [data-like-count]`).textContent()) || '';
+  return Number(text.replace(/\D+/g, '')) || 0;
+}
+
 async function waitPanelReady(page) {
   await page.locator('[data-community]').waitFor({ timeout: 30_000 });
   await dismissConsent(page);
   // The panel code loads only when the panel scrolls into view (or the address ends in #community).
   await page.locator('[data-community]').scrollIntoViewIfNeeded();
   await page.locator('[data-panel-loading]').waitFor({ state: 'hidden', timeout: 60_000 }).catch(() => {});
-  // Signed-in state settles after /api/me returns: the like button is enabled and one of the two blocks shows.
-  await page.waitForFunction(() => {
+  // Signed-in state settles after /api/me returns: the Like button is enabled and one of the two panel blocks shows.
+  await page.waitForFunction((sel) => {
     const p = document.querySelector('[data-community]');
     if (!p) return false;
     const out = p.querySelector('[data-signed-out]');
     const inn = p.querySelector('[data-signed-in]');
-    const like = p.querySelector('[data-like]');
+    const like = document.querySelector(sel);
     return like && !like.disabled && ((out && !out.hidden) !== (inn && !inn.hidden));
-  }, null, { timeout: 60_000 });
+  }, HERO_LIKE, { timeout: 60_000 });
   // Signed-in visitors: wait until /api/me and /api/me/likes have answered and the member area shows.
   if (await principal(page)) await page.locator('#community [data-signed-in]').waitFor({ state: 'visible', timeout: 60_000 });
 }
@@ -325,7 +341,7 @@ async function settle(page, before) {
 /**
  * Drive the hosted External ID pages until we are back on the site. Works for sign-up and sign-in:
  * fills the email, reads the one-time code from AgentMail, fills a display name if asked, and
- * answers "Stay signed in?" with No.
+ * answers "Stay signed in?" with --kmsi (default yes).
  */
 async function completeAuth(page, { signup = false, label = 'auth' } = {}) {
   const t0 = Date.now();
@@ -363,8 +379,8 @@ async function completeAuth(page, { signup = false, label = 'auth' } = {}) {
     else step.shot = await shot(page, `${label}-${i}`);
 
     if (/stay signed in/i.test(body)) {
-      step.action = 'stay-signed-in: No';
-      await page.getByRole('button', { name: /^no$/i }).click().catch(() => clickPrimary(page));
+      step.action = `stay-signed-in: ${KMSI}`;
+      await page.getByRole('button', { name: KMSI === 'yes' ? /^yes$/i : /^no$/i }).click().catch(() => clickPrimary(page));
       await settle(page, before);
       continue;
     }
@@ -448,7 +464,7 @@ async function completeAuth(page, { signup = false, label = 'auth' } = {}) {
 
 /* ---------------- steps ---------------- */
 
-const NEEDS_SIGN_IN = new Set(['3', '4', '5', '6', '7', '8', '9', '9b', '10']);
+const NEEDS_SIGN_IN = new Set(['3', '4', '5', '6', '7', '8', '9', '9b', '10', 'sa', 'sb', 'sc']);
 let blocked = '';
 
 async function step(id, title, fn, page, watchLog) {
@@ -500,6 +516,91 @@ async function signOut(page) {
 }
 
 const hopText = (hops) => hops.map((h) => `[${secs(h.at)}] ${h.action || '-'} :: ${h.text}`).join(' || ');
+
+/* ---------------- session helpers (steps sa-sd) ---------------- */
+
+/** The site's own sign-in cookies (Static Web Apps). The sign-in service's cookies are on ciamlogin.com. */
+const isSiteAuthCookie = (c) => /^(StaticWebAppsAuth|AppServiceAuthSession)/.test(c.name);
+
+/** End only the site's session, as if its cookie expired; the sign-in service session stays. */
+async function dropSiteSession(context) {
+  await context.clearCookies({ name: /^(StaticWebAppsAuth|AppServiceAuthSession)/ });
+}
+
+/** Page loads (including each redirect) and auth-related requests from now on (call stop() to read them). */
+function trackNav(page) {
+  const t0 = Date.now();
+  const navs = [];
+  const authReqs = [];
+  const onReq = (req) => {
+    const u = req.url();
+    let main = false;
+    try {
+      main = req.isNavigationRequest() && req.frame() === page.mainFrame();
+    } catch {
+      main = false;
+    }
+    if (main) {
+      const p = new URL(u);
+      navs.push({ at: Date.now() - t0, host: p.host, path: p.pathname, url: u });
+    }
+    if (/\/\.auth\/|ciamlogin\.com|\/api\/me\b/.test(u)) authReqs.push(`${req.method()} ${u.replace(/\?.*$/, '')}`);
+  };
+  page.on('request', onReq);
+  return {
+    stop() {
+      page.off('request', onReq);
+      return { navs, authReqs, text: navs.map((n) => `[${secs(n.at)}] ${n.host === new URL(ORIGIN).host ? '' : n.host}${n.path}`).join(' > ') };
+    },
+  };
+}
+
+/** Records every text the header account link shows on each page (window.__labels). */
+async function recordHeaderLabels(context) {
+  await context.addInitScript(() => {
+    const w = /** @type {any} */ (window);
+    w.__labels = [];
+    const rec = () => {
+      const el = document.querySelector('[data-account-header] [data-account-label]');
+      const t = el && el.textContent ? el.textContent.trim() : null;
+      if (t !== null && w.__labels[w.__labels.length - 1] !== t) w.__labels.push(t);
+    };
+    new MutationObserver(rec).observe(document, { subtree: true, childList: true, characterData: true });
+  });
+}
+
+/** Header texts after the page's own (static) "Sign in": the name must never turn back into "Sign in". */
+async function headerFlips(page) {
+  const labels = (await page.evaluate(() => /** @type {any} */ (window).__labels || []).catch(() => [])) || [];
+  const firstName = labels.findIndex((l) => l !== 'Sign in');
+  const flipped = firstName >= 0 && labels.slice(firstName).includes('Sign in');
+  return { labels, flipped };
+}
+
+async function waitSettled(page) {
+  // A silent sign-in may leave and come back right after the page loads: start over when that happens.
+  for (const end = Date.now() + 90_000; ; ) {
+    try {
+      await page.waitForLoadState('load').catch(() => {});
+      await page.waitForURL((u) => u.origin === ORIGIN && !u.pathname.startsWith('/.auth/'), { timeout: 60_000 });
+      await page.waitForTimeout(1500);
+      await waitPanelReady(page);
+      return;
+    } catch (e) {
+      if (Date.now() > end || !/context|navigat|destroyed|detached/i.test(String(e?.message))) throw e;
+    }
+  }
+}
+
+/** How long the sign-in service remembers visitors after the browser closes (src/data/community.json). */
+async function signInServiceDays() {
+  try {
+    const cfg = JSON.parse(await readFile(new URL('../src/data/community.json', import.meta.url), 'utf8'));
+    return Number(cfg.signInServiceDays) || 0;
+  } catch {
+    return 0;
+  }
+}
 
 /** From a page's sign-in link to "back on that page": External ID, then /account/ (welcome step if needed). */
 async function signInFromPanel(page, r, { signup, welcome }) {
@@ -613,6 +714,7 @@ async function main() {
     timezoneId: 'America/New_York',
   });
   context.setDefaultTimeout(30_000);
+  await recordHeaderLabels(context);
   const page = context.pages()[0] || (await context.newPage());
   const log = watch(page);
 
@@ -670,7 +772,7 @@ async function main() {
     check(label === NAME.split(' ')[0], `Header label "${label}"`);
     const footerLabel = (await page.locator('.site-footer [data-account-label]').textContent())?.trim();
     check(footerLabel === 'Your profile', `Footer label "${footerLabel}"`);
-    check(await page.locator('.site-footer [data-account-when="in"]').isVisible(), 'Footer "Sign out" hidden');
+    check(await page.locator('.site-footer [data-account-signout]').isVisible(), 'Footer "Sign out" hidden');
     check(!(await page.locator('.site-footer [data-account-when="admin"]').isVisible()), 'Footer shows the moderation link to a non-moderator');
     r.shots.push(await shotEl(page.locator('header').first(), 'header-signed-in'), await shotEl(page.locator('.site-footer section[aria-labelledby=footer-account]'), 'footer-signed-in'));
     if (STEPS.includes('12') || args.ux) {
@@ -683,12 +785,12 @@ async function main() {
   await step('5', 'Like, persist after reload, unlike and like again', async ({ r, check }) => {
     await page.goto(`${VENUE_URL}#community`);
     await waitPanelReady(page);
-    const like = page.locator('[data-like]');
-    const before = Number((await page.locator('[data-like-count]').textContent()) || 0);
+    const like = page.locator(HERO_LIKE);
+    const before = (await likeCount(page));
     if ((await like.getAttribute('aria-pressed')) === 'true') {
       r.notes.push('Already liked from an earlier run; unliking first');
       await like.click();
-      await page.waitForFunction(() => document.querySelector('[data-like]')?.getAttribute('aria-pressed') === 'false');
+      await page.waitForFunction(() => document.querySelector('[data-react][data-detail] [data-like]')?.getAttribute('aria-pressed') === 'false');
     }
     const t = Date.now();
     const resP = page.waitForResponse((x) => x.url().includes('/api/likes'));
@@ -696,33 +798,33 @@ async function main() {
     const res = await resP;
     r.timings.like = Date.now() - t;
     check(res.status() === 200, `POST /api/likes ${res.status()}`);
-    await page.waitForFunction(() => document.querySelector('[data-like]')?.getAttribute('aria-pressed') === 'true');
-    const count = Number((await page.locator('[data-like-count]').textContent()) || 0);
-    r.notes.push(`Count ${before} -> ${count}; status "${await page.locator('#community [data-status]').textContent()}"`);
+    await page.waitForFunction(() => document.querySelector('[data-react][data-detail] [data-like]')?.getAttribute('aria-pressed') === 'true');
+    const count = (await likeCount(page));
+    r.notes.push(`Count ${before} -> ${count}; toast "${(await page.locator('.toast, [data-toast]').last().textContent().catch(() => '')) || ''}"`);
     check(count >= 1, 'Like count did not show');
-    r.shots.push(await shotEl(page.locator('.community__head'), 'liked'));
+    r.shots.push(await shotEl(page.locator('.page-header'), 'liked'));
     const liked = await api(page, `/api/me/likes?keys=${encodeURIComponent(KEY)}`);
     check(liked.data?.liked?.[KEY] === true, `/api/me/likes says ${JSON.stringify(liked.data)}`);
     console.log('  waiting 65 s for the 60-second cache…');
     await sleep(65_000);
     await page.reload();
     await waitPanelReady(page);
-    const after = Number((await page.locator('[data-like-count]').textContent()) || 0);
+    const after = (await likeCount(page));
     check(after === count, `After reload the count is ${after}, expected ${count}`);
     check((await like.getAttribute('aria-pressed')) === 'true', 'After reload the button is not "Liked"');
     const { doc } = await readModel(page);
     check(doc?.likes === count, `Read model likes ${doc?.likes}, expected ${count}`);
-    r.shots.push(await shotEl(page.locator('.community__head'), 'liked-after-reload'));
+    r.shots.push(await shotEl(page.locator('.page-header'), 'liked-after-reload'));
     let t2 = Date.now();
     await like.click();
-    await page.waitForFunction(() => document.querySelector('[data-like]')?.getAttribute('aria-pressed') === 'false');
+    await page.waitForFunction(() => document.querySelector('[data-react][data-detail] [data-like]')?.getAttribute('aria-pressed') === 'false');
     r.timings.unlike = Date.now() - t2;
-    check(Number((await page.locator('[data-like-count]').textContent()) || 0) === count - 1, 'Unlike did not lower the count');
+    check((await likeCount(page)) === count - 1, 'Unlike did not lower the count');
     t2 = Date.now();
     await like.click();
-    await page.waitForFunction(() => document.querySelector('[data-like]')?.getAttribute('aria-pressed') === 'true');
+    await page.waitForFunction(() => document.querySelector('[data-react][data-detail] [data-like]')?.getAttribute('aria-pressed') === 'true');
     r.timings.relike = Date.now() - t2;
-    check(Number((await page.locator('[data-like-count]').textContent()) || 0) === count, 'Like again did not restore the count');
+    check((await likeCount(page)) === count, 'Like again did not restore the count');
     state.likeCount = count;
   }, page, log);
 
@@ -1017,8 +1119,13 @@ async function main() {
     }
     console.log('  waiting 65 s for the 60-second cache…');
     await sleep(65_000);
+    const back = trackNav(page);
     await page.goto(`${VENUE_URL}#community`);
     await waitPanelReady(page);
+    const seenBack = back.stop();
+    check(!seenBack.navs.some((n) => n.host !== new URL(ORIGIN).host || n.path.startsWith('/.auth/')), `Coming back after deleting the account signed in again by itself: ${seenBack.text}`);
+    check(!(await principal(page)), 'Signed in again after deleting the account');
+    check((await page.evaluate(() => localStorage.getItem('li-account'))) === null, 'The saved name is still in this browser after deleting the account');
     const { doc } = await readModel(page);
     const leftovers = [...(doc?.comments || []).filter((c) => [NAME, RENAMED].includes(c.name)), ...(doc?.photos || []).filter((p) => [NAME, RENAMED].includes(p.by))];
     r.notes.push(`Read model after delete: likes ${doc?.likes}, comments ${doc?.comments?.length}, photos ${doc?.photos?.length}`);
@@ -1062,7 +1169,7 @@ async function main() {
     page.on('framenavigated', onNav);
     const t = Date.now();
     await page.locator('.site-footer [data-account-signout]').click();
-    await page.waitForURL((u) => u.origin === ORIGIN && !u.pathname.startsWith('/.auth/'), { timeout: 30_000 });
+    await page.waitForURL((u) => u.origin === ORIGIN && u.pathname === '/', { timeout: 30_000 }); // sign-out returns to the home page
     r.timings.signOut = Date.now() - t;
     page.off('framenavigated', onNav);
     const elsewhere = [...hosts].filter((h) => h !== new URL(ORIGIN).host);
@@ -1077,6 +1184,208 @@ async function main() {
     r.timings.signInAgain = auth.ms;
     r.notes.push(`Sign-in pages after sign-out: ${hopText(auth.hops)}`);
     check(auth.hops.some((h) => h.mailWaitMs), 'Signing in again after "Sign out" did not ask for an email code');
+  }, page, log);
+
+  await step('sa', 'Site session ended, sign-in service still signed in: name stays, Like works without a reload', async ({ r, check }) => {
+    if (!(await principal(page))) throw new Error('Not signed in; run the sign-in steps first');
+    const first = (state.displayName || NAME).split(' ')[0];
+    const like = page.locator(HERO_LIKE);
+    const liked = async () => (await api(page, `/api/me/likes?keys=${encodeURIComponent(KEY)}`)).data?.liked?.[KEY] === true;
+    const sso = async () => (await context.cookies(ORIGIN)).find((c) => c.name === 'li-sso')?.value ?? '(none)';
+
+    // A returning visitor signed in the usual way. (Right after a sign-up the sign-in service keeps nothing to
+    // reuse, so the site marks that browser session with li-sso=0 and does not try.)
+    r.notes.push(`li-sso before: ${await sso()}`);
+    if ((await sso()) !== '1') {
+      await page.goto(VENUE_URL);
+      await waitSettled(page);
+      await page.locator('.site-footer [data-account-signout]').click();
+      await page.waitForURL((u) => u.origin === ORIGIN && u.pathname === '/', { timeout: 30_000 }); // sign-out returns to the home page
+      const again = await signInFromPanel(page, r, { signup: false });
+      check(again.outcome === 'back', `Signing in again did not return to the page (${again.outcome})`);
+      await page.waitForTimeout(1000);
+      r.notes.push(`li-sso after a normal sign-in: ${await sso()}`);
+      check((await sso()) === '1', 'The site did not note that the sign-in service remembers this browser');
+    }
+
+    // 1. Coming back after the site's session ended (its cookie expires after 8 hours).
+    await dropSiteSession(context);
+    check(!(await principal(page)), 'The site session is still there after deleting its cookies');
+    let nav = trackNav(page);
+    const t = Date.now();
+    await page.goto(VENUE_URL);
+    await waitSettled(page);
+    await page.waitForTimeout(1500);
+    r.timings.comeBack = Date.now() - t;
+    let seen = nav.stop();
+    const flips = await headerFlips(page);
+    r.notes.push(`Coming back: ${seen.text}; header texts on the last page: ${flips.labels.join(' > ')}`);
+    check((await headerLabel(page)) === first, `After coming back the header shows "${await headerLabel(page)}" (expected "${first}")`);
+    check(!flips.flipped, `The header turned back into "Sign in": ${flips.labels.join(' > ')}`);
+    check(Boolean(await principal(page)), 'The site session was not restored');
+    r.shots.push(await shot(page, 'sa-came-back'));
+
+    // 2. Like right away: no reload, no trip to the sign-in pages.
+    const before = await liked();
+    nav = trackNav(page);
+    const resP = page.waitForResponse((x) => x.url().includes('/api/likes') && x.request().method() === 'POST', { timeout: 30_000 }).catch(() => null);
+    await like.click();
+    const res = await resP;
+    await page.waitForTimeout(1000);
+    seen = nav.stop();
+    r.notes.push(`Like after coming back: ${res ? res.status() : 'no POST /api/likes'}; page loads: ${seen.text || 'none'}`);
+    check(res?.status() === 200, `Like did not go through (${res ? res.status() : 'no request'})`);
+    check(seen.navs.length === 0, `The page reloaded or left when Like was clicked: ${seen.text}`);
+    check((await liked()) !== before, 'The like did not change');
+
+    // 3. The session ends while the page is open: Like signs in again by itself and then completes.
+    await page.goto(VENUE_URL);
+    await waitSettled(page);
+    const before3 = await liked();
+    await dropSiteSession(context);
+    nav = trackNav(page);
+    const t3 = Date.now();
+    await like.click();
+    let pressed = '';
+    for (const end = Date.now() + 60_000; Date.now() < end; await sleep(500)) {
+      const onVenue = page.url().startsWith(VENUE_URL);
+      pressed = onVenue ? ((await page.locator(HERO_LIKE).getAttribute('aria-pressed').catch(() => '')) || '') : '';
+      if (onVenue && pressed === String(!before3) && (await principal(page))) break;
+    }
+    r.timings.likeAfterSessionEnded = Date.now() - t3;
+    await page.waitForTimeout(1000);
+    seen = nav.stop();
+    const after3 = await liked();
+    r.notes.push(`Like clicked after the session ended: ${secs(r.timings.likeAfterSessionEnded)}; ${seen.text}; liked ${before3} -> ${after3}`);
+    check(after3 !== before3, 'The like clicked after the session ended never happened');
+    check(page.url().startsWith(VENUE_URL), `Ended on ${page.url()} instead of the venue page`);
+    check(!seen.navs.some((n) => n.path.startsWith('/account/')), `Went through the account page: ${seen.text}`);
+    r.shots.push(await shot(page, 'sa-like-after-session-ended'));
+    // Leave the like as it was before this step.
+    if ((await liked()) !== before) {
+      const back = page.waitForResponse((x) => x.url().includes('/api/likes'), { timeout: 30_000 }).catch(() => null);
+      await page.locator(HERO_LIKE).click();
+      await back;
+    }
+  }, page, log);
+
+  await step('sb', 'Browser restart: still signed in the same day (site cookie kept) and the next day (site cookie gone)', async ({ r, check }) => {
+    if (!(await principal(page))) throw new Error('Not signed in; run the sign-in steps first');
+    const first = (state.displayName || NAME).split(' ')[0];
+    const st = await context.storageState();
+    const persistent = st.cookies.filter((c) => c.expires !== -1);
+    const name = (c) => `${c.domain.replace(/^\./, '')}:${c.name}`;
+    r.notes.push(`Kept after a restart: ${persistent.map(name).join(', ')}`);
+    r.notes.push(`Lost on a restart: ${st.cookies.filter((c) => c.expires === -1).map(name).join(', ') || 'none'}`);
+    const siteCookie = persistent.find((c) => c.name === 'StaticWebAppsAuthCookie');
+    if (siteCookie) r.notes.push(`Site session cookie expires in ${((siteCookie.expires * 1000 - Date.now()) / 3_600_000).toFixed(1)} h`);
+    const browser = await chromium.launch({ headless: !HEADED });
+    const days = await signInServiceDays();
+    try {
+      for (const [variant, cookies] of [
+        ['same day', persistent],
+        ['next day', persistent.filter((c) => !isSiteAuthCookie(c))],
+      ]) {
+        const ctx = await browser.newContext({ storageState: { cookies, origins: st.origins }, viewport: { width: 1280, height: 900 }, locale: 'en-US', timezoneId: 'America/New_York' });
+        await recordHeaderLabels(ctx);
+        const p = await ctx.newPage();
+        const nav = trackNav(p);
+        const t = Date.now();
+        await p.goto(VENUE_URL);
+        let settled = true;
+        await waitSettled(p).catch(() => (settled = false));
+        await p.waitForTimeout(1500);
+        const seen = nav.stop();
+        const label = await headerLabel(p).catch(() => '?');
+        const signedIn = Boolean(await principal(p).catch(() => null));
+        const flips = await headerFlips(p);
+        r.notes.push(`${variant}: ${secs(Date.now() - t)}; header "${label}"; signed in: ${signedIn}; ${seen.text}; header texts: ${flips.labels.join(' > ')}`);
+        r.shots.push(await shot(p, `sb-${variant.replace(' ', '-')}`));
+        check(settled, `${variant}: the page did not finish loading (${p.url()})`);
+        if (variant === 'same day' || days > 0) {
+          check(signedIn && label === first, `${variant}: not signed in after a browser restart (header "${label}")`);
+          check(!flips.flipped, `${variant}: the header turned back into "Sign in": ${flips.labels.join(' > ')}`);
+        } else {
+          // The sign-in service forgets visitors when the browser closes (signInServiceDays 0, External ID's default):
+          // the page must land cleanly, signed out, without a trip to a sign-in form. See docs/deployment.md.
+          r.notes.push('next day: shown as signed out, as expected while signInServiceDays is 0 (owner step in docs/deployment.md)');
+          check(!signedIn && label === 'Sign in', `${variant}: expected signed out, header "${label}"`);
+          check(p.url().startsWith(VENUE_URL), `${variant}: ended on ${p.url()} instead of the venue page`);
+          check(!seen.navs.some((n) => n.host !== new URL(ORIGIN).host || n.path.startsWith('/.auth/')), `${variant}: went to a sign-in page: ${seen.text}`);
+          check((await p.evaluate(() => localStorage.getItem('li-account'))) === null, `${variant}: the saved name was not cleared`);
+        }
+        await ctx.close();
+      }
+    } finally {
+      await browser.close();
+    }
+  }, page, log);
+
+  await step('sc', 'Sign out, then come back: stays signed out (no automatic sign-in)', async ({ r, check }) => {
+    if (!(await principal(page))) throw new Error('Not signed in; run the sign-in steps first');
+    const ownHost = new URL(ORIGIN).host;
+    const comeBack = async (where) => {
+      for (const url of [VENUE_URL, `${BASE}/`, `${BASE}/events/`]) {
+        const nav = trackNav(page);
+        await page.goto(url);
+        await page.waitForLoadState('load');
+        await page.waitForTimeout(2500);
+        const seen = nav.stop();
+        const away = seen.navs.filter((n) => n.host !== ownHost || n.path.startsWith('/.auth/'));
+        check(away.length === 0, `${where}: visiting ${url.replace(BASE, '') || '/'} signed in again by itself: ${seen.text}`);
+        check(!(await principal(page)), `${where}: signed in again after visiting ${url.replace(BASE, '') || '/'}`);
+        check((await headerLabel(page)) === 'Sign in', `${where}: header shows "${await headerLabel(page)}" on ${url.replace(BASE, '') || '/'}`);
+      }
+    };
+    for (const [where, from, button] of [
+      ['Sign out in the footer', VENUE_URL, '.site-footer [data-account-signout]'],
+      ['Sign out on the account page', `${BASE}/account/`, '[data-account] [data-account-signout]'],
+    ]) {
+      if (!(await principal(page))) {
+        const again = await signInFromPanel(page, r, { signup: false });
+        check(again.outcome === 'back', `Signing in again did not return to the page (${again.outcome})`);
+      }
+      await page.goto(from);
+      await page.locator(button).waitFor({ state: 'visible', timeout: 60_000 });
+      const t = Date.now();
+      await page.locator(button).click();
+      await page.waitForURL((u) => u.origin === ORIGIN && u.pathname === '/', { timeout: 30_000 }); // sign-out returns to the home page
+      await page.waitForTimeout(1000);
+      r.timings[where] = Date.now() - t;
+      check(!(await principal(page)), `${where}: still signed in`);
+      check((await page.evaluate(() => localStorage.getItem('li-account'))) === null, `${where}: the saved name is still in this browser`);
+      await comeBack(where);
+    }
+    r.shots.push(await shot(page, 'sc-signed-out'));
+    // Sign in again so later steps (for example 10, delete the account) can run.
+    const again = await signInFromPanel(page, r, { signup: false });
+    check(again.outcome === 'back', `Signing in again did not return to the page (${again.outcome})`);
+  }, page, log);
+
+  await step('sd', 'A fresh private window: "Sign in", and no sign-in requests or redirects', async ({ r, check }) => {
+    const browser = await chromium.launch({ headless: !HEADED });
+    try {
+      const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 }, locale: 'en-US', timezoneId: 'America/New_York' });
+      const p = await ctx.newPage();
+      const nav = trackNav(p);
+      await p.goto(VENUE_URL);
+      await p.waitForLoadState('load');
+      await p.locator('[data-community]').scrollIntoViewIfNeeded();
+      await p.waitForTimeout(4000);
+      check((await headerLabel(p)) === 'Sign in', `Venue page header shows "${await headerLabel(p)}"`);
+      await p.goto(`${BASE}/events/`);
+      await p.waitForLoadState('load');
+      await p.waitForTimeout(2500);
+      check((await headerLabel(p)) === 'Sign in', `Events page header shows "${await headerLabel(p)}"`);
+      const seen = nav.stop();
+      r.notes.push(`Page loads: ${seen.text}; auth requests: ${seen.authReqs.join(', ') || 'none'}`);
+      check(seen.navs.length === 2, `Extra page loads or redirects: ${seen.text}`);
+      check(!seen.authReqs.some((u) => /\/\.auth\/login|ciamlogin\.com|\/api\/me/.test(u)), `Sign-in requests for someone who never signed in: ${seen.authReqs.join(', ')}`);
+      check(seen.authReqs.filter((u) => /\/\.auth\/me/.test(u)).length <= 1, `More than one "who is signed in?" check: ${seen.authReqs.join(', ')}`);
+      r.shots.push(await shot(p, 'sd-fresh-window'));
+    } finally {
+      await browser.close();
+    }
   }, page, log);
 
   await step('cleanup', 'Delete the test account if it exists', async ({ r, check }) => {
