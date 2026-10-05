@@ -1,0 +1,24 @@
+{
+  "title": "Not Just Hustle Wednesdays at Cancun Long Island",
+  "summary": "Live music by Not Just Hustle Wednesdays at Cancun Long Island in Hicksville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "hustle"
+  ],
+  "start": "2026-11-04T18:30",
+  "end": "2026-11-04T23:00",
+  "timezone": "America/New_York",
+  "venueId": "cancun-long-island-hicksville",
+  "town": "Hicksville",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-04|cancun-long-island-hicksville|not-just-hustle-wednesdays|2026-11-04|special",
+  "reviewNotes": "Band or DJ not researched yet: Not Just Hustle Wednesdays."
+}

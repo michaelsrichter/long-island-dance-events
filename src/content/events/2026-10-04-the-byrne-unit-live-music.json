@@ -13,7 +13,7 @@
     "the-byrne-unit"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List, week of October 4, 2026",
@@ -25,5 +25,5 @@
   ],
   "confidence": 0.75,
   "matchKey": "iraslist|2026-10-04|salt-shack-babylon|byrne-unit|2026-10-04|special",
-  "reviewNotes": "Ira's List was not sure of the time (3pm?), so no time is shown."
+  "reviewNotes": "Ira's List was not sure of the time (3pm?), so no time is shown. Not found in the latest iraslist run on 2026-10-04. Check whether it was cancelled or moved."
 }

@@ -7,7 +7,7 @@
   "venueId": "89-north-music-venue-patchogue",
   "town": "Patchogue",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List, week of October 4, 2026",
@@ -16,5 +16,5 @@
   "lastSeen": "2026-10-04",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-10-05|89-north-music-venue-patchogue|dead-monday|2026-10-05|special",
-  "reviewNotes": "Band or DJ not researched yet: Dead Monday."
+  "reviewNotes": "Band or DJ not researched yet: Dead Monday. Not found in the latest iraslist run on 2026-10-04. Check whether it was cancelled or moved."
 }

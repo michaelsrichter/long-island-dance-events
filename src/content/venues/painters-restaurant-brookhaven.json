@@ -1,0 +1,11 @@
+{
+  "name": "Painters' Restaurant",
+  "address": "416 S Country Rd",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Brookhaven",
+  "latitude": 40.783129,
+  "longitude": -72.915847,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

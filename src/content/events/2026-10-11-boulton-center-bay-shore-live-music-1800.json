@@ -1,0 +1,24 @@
+{
+  "title": "So Good! The Neil Diamond Experience Starring Robert Neary at Boulton Center for the Performing Arts",
+  "summary": "Live music by So Good! The Neil Diamond Experience Starring Robert Neary at Boulton Center for the Performing Arts in Bay Shore. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-11T18:00",
+  "end": "2026-10-11T21:00",
+  "timezone": "America/New_York",
+  "venueId": "boulton-center-bay-shore",
+  "town": "Bay Shore",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "tribute"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-11|boulton-center-bay-shore|so-good-the-neil-diamond-experience|2026-10-11|special",
+  "reviewNotes": "Band or DJ not researched yet: So Good! The Neil Diamond Experience Starring Robert Neary."
+}

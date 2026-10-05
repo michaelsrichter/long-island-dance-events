@@ -1,0 +1,11 @@
+{
+  "name": "Prohibition",
+  "address": "109 Front St",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Massapequa Park",
+  "latitude": 40.678037,
+  "longitude": -73.45557,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Rockin 45s at Garden Grill",
+  "summary": "Live music by Rockin 45s at Garden Grill in Smithtown. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-09T19:00",
+  "end": "2026-10-09T21:30",
+  "timezone": "America/New_York",
+  "venueId": "garden-grill-smithtown",
+  "town": "Smithtown",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-09|garden-grill-smithtown|rockin-45s|2026-10-09|special",
+  "reviewNotes": "Band or DJ not researched yet: Rockin 45s. New venue was added automatically. Check it."
+}

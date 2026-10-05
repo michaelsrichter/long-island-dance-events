@@ -3,6 +3,7 @@
   "summary": "Live music by Ann Wilson at Patchogue Theatre for the Performing Arts in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
   "category": "live-music",
   "start": "2026-10-04T19:00",
+  "end": "2026-10-04T22:00",
   "timezone": "America/New_York",
   "venueId": "patchogue-theatre-patchogue",
   "town": "Patchogue",
@@ -13,8 +14,8 @@
   "status": "active",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
-  "sourceName": "Ira's List, week of October 4, 2026",
-  "sourceRef": "sunday list",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
   "firstSeen": "2026-10-03",
   "lastSeen": "2026-10-04",
   "dancingCues": [

@@ -1,0 +1,20 @@
+{
+  "title": "Live music at The Warehouse",
+  "summary": "Live music by live music at The Warehouse in Amityville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-05T19:00",
+  "end": "2026-11-05T23:30",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-05|the-warehouse-amityville|fm|2026-11-05|special"
+}

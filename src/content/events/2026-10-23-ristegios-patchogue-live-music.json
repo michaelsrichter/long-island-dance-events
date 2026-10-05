@@ -1,0 +1,21 @@
+{
+  "title": "Second Chance Band at Ristegio's Restaurant & Lounge",
+  "summary": "Live music by Second Chance Band at Ristegio's Restaurant & Lounge in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-23T20:00",
+  "end": "2026-10-23T23:00",
+  "timezone": "America/New_York",
+  "venueId": "ristegios-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-23|ristegios-patchogue|second-chance-band|2026-10-23|special",
+  "reviewNotes": "Band or DJ not researched yet: Second Chance Band."
+}

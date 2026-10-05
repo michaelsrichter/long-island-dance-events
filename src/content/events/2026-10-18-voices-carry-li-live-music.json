@@ -1,0 +1,27 @@
+{
+  "title": "Voices Carry LI at Seabreeze Cafe",
+  "summary": "Live music by Voices Carry LI at Seabreeze Cafe in Babylon. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-18T15:00",
+  "end": "2026-10-18T16:00",
+  "timezone": "America/New_York",
+  "venueId": "seabreeze-cafe-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "voices-carry-li"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-18|seabreeze-cafe-babylon|voices-carry|2026-10-18|special",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

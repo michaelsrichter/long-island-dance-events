@@ -1,0 +1,11 @@
+{
+  "name": "Garden Grill",
+  "address": "64 N Country Rd",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Smithtown",
+  "latitude": 40.857974,
+  "longitude": -73.186292,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Live music at 89 North Music Venue",
+  "summary": "Live music by live music at 89 North Music Venue in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-29T19:00",
+  "end": "2026-10-29T23:00",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-29|89-north-music-venue-patchogue|sceneless-scene-showcase|2026-10-29|special"
+}

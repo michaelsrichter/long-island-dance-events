@@ -1,0 +1,26 @@
+{
+  "title": "Nitework at Ristegio's Restaurant & Lounge",
+  "summary": "Live music by Nitework at Ristegio's Restaurant & Lounge in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-16T20:00",
+  "end": "2026-10-16T23:00",
+  "timezone": "America/New_York",
+  "venueId": "ristegios-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "nitework"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-16|ristegios-patchogue|nitework|2026-10-16|special"
+}

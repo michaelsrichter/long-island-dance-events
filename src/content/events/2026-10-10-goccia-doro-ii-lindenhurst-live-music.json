@@ -1,0 +1,21 @@
+{
+  "title": "Rockin 45 at Goccia D'Oro II",
+  "summary": "Live music by Rockin 45 at Goccia D'Oro II in Lindenhurst. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-10T19:00",
+  "end": "2026-10-10T22:00",
+  "timezone": "America/New_York",
+  "venueId": "goccia-doro-ii-lindenhurst",
+  "town": "Lindenhurst",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-10|goccia-doro-ii-lindenhurst|rockin-45|2026-10-10|special",
+  "reviewNotes": "Band or DJ not researched yet: Rockin 45. New venue was added automatically. Check it."
+}
