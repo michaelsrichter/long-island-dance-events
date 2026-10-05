@@ -4,7 +4,7 @@
  * 18+ only. The photo is cleaned (no EXIF/GPS, three WebP sizes, original discarded), checked by AI,
  * stored privately, and ALWAYS waits for a human before it is shown.
  */
-require('../telemetry-setup');
+const { serverEvent } = require('../telemetry-setup');
 const { app } = require('@azure/functions');
 const { json, error, sameOrigin, cleanText } = require('../lib/http');
 const { table, container, TABLES, CONTAINERS, revTime, newId } = require('../lib/store');
@@ -93,6 +93,7 @@ app.http('photos', {
     }
     await audit({ actor: 'ai', action: verdict.decision, targetType: 'photo', targetId: rk, key, reason: verdict.reason, scores, after: status });
     if (status === 'pending') await alertAdmins('photo', { log: context?.warn?.bind(context) });
+    await serverEvent('community_photo', { type: key.split(':')[0], result: status === 'pending' ? 'queued' : status });
     return json(status === 'rejected' ? 422 : 200, {
       status,
       message: status === 'rejected' ? moderate.MESSAGES.reject : 'Thanks! A volunteer will look at your photo before it appears (usually within a day or two).',

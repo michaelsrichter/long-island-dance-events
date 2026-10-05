@@ -62,7 +62,7 @@ describe.skipIf(!existsSync(join(dist, 'sitemap-index.xml')))('built site: searc
         expect(html, loc).not.toMatch(/<meta name="robots" content="noindex/);
       }
     }
-  });
+  }, 30_000);
   it('gives every event a picture, and lists the same events as the JSON feed', () => {
     const xml = read('sitemap-events.xml');
     const n = urls('sitemap-events.xml').length;

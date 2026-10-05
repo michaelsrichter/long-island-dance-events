@@ -5,7 +5,7 @@
  *   correction  -> private note to editors; always goes to the moderation queue and stays there
  *                  (never posted anywhere public)
  */
-require('../telemetry-setup');
+const { serverEvent } = require('../telemetry-setup');
 const { app } = require('@azure/functions');
 const { json, error, sameOrigin, readJson, cleanText } = require('../lib/http');
 const { table, TABLES, revTime, newId } = require('../lib/store');
@@ -64,6 +64,7 @@ app.http('comments', {
     if (status === 'published') await rebuild(key);
     await audit({ actor: 'ai', action: verdict.decision, targetType: kind, targetId: rk, key, reason: verdict.reason, scores, after: status });
     if (status === 'pending') await alertAdmins(kind, { log: context?.warn?.bind(context) });
+    await serverEvent('community_note', { type: key.split(':')[0], kind: kind === 'comment' ? 'note' : 'correction', result: status === 'pending' ? 'queued' : status });
     const message = kind === 'correction' && status === 'pending' ? 'Thanks! Our editors will check your correction.' : moderate.MESSAGES[verdict.decision];
     return json(status === 'rejected' ? 422 : 200, { status, message, ...(status === 'published' ? { id: rk } : {}) });
   },

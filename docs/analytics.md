@@ -19,31 +19,45 @@ Events are tracked in two ways:
 
 All accepted events can go to OpenTelemetry. GA4 and Clarity receive events only after consent.
 
-## Custom events
+## Custom events (event dictionary)
+
+Every browser event also carries `page` (the address path), `page_type`, `release`, and on event and directory pages `event_slug` and/or `entity` (for example `venue:the-paramount`, `event:<series id>`, `town:huntington`). Strings are cleaned in the browser (only letters, digits and `- . , : / # ( ) & '` are kept) so the server's checks never drop them.
 
 | Event | When | Properties |
 | --- | --- | --- |
-| `page_view` | Every page (OTel only; GA4 records its own page view) | `page_type`, `release` |
-| `view_event` | Event detail page | `event_slug`, `event_status`, `days_until`, `page_type` |
+| `page_view` | Every page (OTel only; GA4 records its own page view). A `page_type` of `404` means a missing page; `page` is the address that was missing. | `page_type`, `device` (`phone`, `tablet`, `desktop`), `ref` (the other site's name such as `google.com`, or `direct`, or `internal`), `ref_page` (when `internal`: the previous page's type, e.g. `events`, `calendar`, `map`), `utm_source`, `utm_medium`, `utm_campaign`, `entity`, `town`, `category` |
+| `view_event` | Event detail page | `event_slug`, `event_status`, `days_until`, `entity`, `town`, `category` |
 | `select_event` | Opened an event from a card, map, hero or list | `location` |
+| `select_person` | Opened a band, DJ or teacher from a card | `location` |
+| `search` | Typed in a search box (events list or a directory), 1.5 s after typing stops; or arrived with `?q=` in the address | `term` (lowercase; email addresses and phone numbers become `(hidden)`), `results` (how many matches showed; `0` = nothing found), `location` (page type), `method` (`typed`, `link`) |
+| `filter_events` | Event filters changed | `filter`, `value`, `results`, `location` |
+| `view_calendar_month` | Calendar moved to another month | `method` (`previous`, `next`, direct link) |
 | `add_to_calendar` | Google, Outlook, Outlook work/school, per-event `.ics`, feed subscription | `method` (`google`, `outlook`, `office365`, `ics`, `subscribe_feed`), `location` |
-| `share` | Shared an event or a directory page. `method`: `native` (phone share menu), `copy_text`, `copy_link`, `whatsapp`, `facebook`, `x`, `email`, `sms`, `download_image` | `method`, `event_slug` or `entity` (e.g. `venue:the-paramount`), `location` |
+| `share` | Shared an event or a directory page. `method`: `native` (phone share menu), `copy_text`, `copy_link`, `whatsapp`, `facebook`, `x`, `email`, `sms`, `download_image` | `method`, `event_slug` or `entity`, `location` |
 | `share_open` | Share preview opened (picture + text) | `event_slug` or `entity`, `location` |
 | `copy_failed` | Clipboard copy failed | `method`, `location` |
 | `get_directions` | Directions opened | `method` (`google`, `apple`), `location` |
-| `outbound_click` | Website/social/phone/email/reviews link opened | `method`, `location`, `target` |
-| `click_hotline` | Hotline phone link tapped | `location` |
-| `click_email` | Public email link tapped | `location` |
-| `newsletter_click` | Email list link opened | `location` |
-| `filter_events` | Event filters changed | `filter`, `value`, `results` |
-| `view_calendar_month` | Calendar moved to another month | `method` (`previous`, `next`, direct link) |
+| `outbound_click` | Website/social/phone/email/reviews link opened | `method`, `location`, `target` (domain only) |
+| `report_problem` | "Report a problem with this listing" | `location` |
+| `sign_in_start` | Clicked a sign-in link (`/.auth/login/...`) | `location` |
+| `click_hotline`, `click_email`, `newsletter_click` | Contact actions | `location` |
 | `show_more` | Show-more list expanded/collapsed | `method`, `location`, `results` |
 | `theme_change` | Visitor picked light, dark or auto | `method`, `location` |
 | `faq_open` | FAQ question opened | `question` |
 | `empty_state` | Visitor saw an empty upcoming list | `location` |
+| `js_error` | A script on our own pages failed (at most 5 per page; browser add-ons are ignored) | `message` (first 100 characters), `source` (file name), `line` |
 | `consent_update` | Visitor changed analytics choice | `value`, `mode` |
-| `web_vital` | Core Web Vitals | `metric`, `rating`, numeric value |
+| `web_vital` | Core Web Vitals (metrics only, not a custom event) | `metric`, `rating`, numeric value |
 
+### Events sent by the server (community features)
+
+The API records these itself (no user ids, no text): `community_like` (`type`: event, venue, performer..., `value`: `like`/`unlike`), `community_save` (`value`: `save`/`unsave`), `community_note` (`type`, `kind`: `note`/`correction`, `result`: `published`/`queued`/`rejected`), `community_photo` (`type`, `result`), `community_flag` (`type`, `value`: `reported`/`hidden`, `reason`). Sign-ins are the `requests` rows named `roles` (one per sign-in).
+
+### Dashboard
+
+- **Workbook:** "Long Island Dance Events: how people use the site" in resource group `rg-li-dance-events-web` (Azure portal, then **Monitor**, then **Workbooks**, or open Application Insights `appi-swa-li-dance-events-web` and choose **Workbooks**). Source: `infra/monitoring/site-usage.workbook.json`, deployed by `infra/monitoring/monitoring.bicep` (see [deployment.md](deployment.md#monitoring-dashboard-and-alerts)).
+- **Portal dashboard:** "Long Island Dance Events: usage" (`dash-li-dance-events`) links to the workbook and logs.
+- Sections: visitors at a glance (daily and weekly, week-over-week), what people look at (events, venues, bands, styles, towns, pages), searches (and searches that found nothing), filters, from looking to going (event page → calendar, directions, share, organizer links), sharing, community, where visitors come from (including AI assistants), phones and computers, page speed, problems (script errors, missing pages, API health), day-of-week × hour, and the data budget.
 ## Locations
 
 Use consistent `location` values to make reports readable:
@@ -73,7 +87,7 @@ Metric names use `METRICS_PREFIX`, default `site`. Do not use `home` as a prefix
 
 | Metric | Type | Dimensions |
 | --- | --- | --- |
-| `site.web.page_views` | Counter | `page_type`, `release` |
+| `site.web.page_views` | Counter | `page_type`, `release`, `device` |
 | `site.web.event_views` | Counter | `page_type`, `event_status`, `release` |
 | `site.web.interactions` | Counter | `action`, `method`, `location`, `page_type` |
 | `site.web.consent_updates` | Counter | `value`, `mode` |
@@ -144,6 +158,56 @@ customMetrics
 | summarize attempts = sum(valueSum) by result = tostring(customDimensions.result)
 ```
 
+```kusto
+// Searches that found nothing (ideas for listings or wording to add)
+customEvents
+| where timestamp > ago(30d) and name == "search" and toint(customDimensions.results) == 0
+| summarize times = count() by term = tostring(customDimensions.term), where = tostring(customDimensions.location)
+| top 25 by times
+```
+
+```kusto
+// From looking to going: what people do after opening event pages
+let views = toscalar(customEvents | where timestamp > ago(30d) and name == "view_event" | count);
+customEvents
+| where timestamp > ago(30d) and name in ("add_to_calendar", "get_directions", "share", "outbound_click")
+| summarize actions = count() by name
+| extend per_100_event_views = round(100.0 * actions / views, 1)
+```
+
+```kusto
+// Where visits come from, including AI assistants
+customEvents
+| where timestamp > ago(30d) and name == "page_view"
+| extend ref = tostring(customDimensions.ref)
+| extend kind = case(ref in ("direct", "internal"), ref,
+    ref has_any ("chatgpt", "openai", "perplexity", "copilot", "gemini", "claude"), "AI assistant",
+    ref has_any ("google", "bing", "duckduckgo", "yahoo", "ecosia"), "Search engine",
+    ref has_any ("facebook", "instagram", "t.co", "x.com", "whatsapp", "linkedin", "reddit"), "Social",
+    "Other site")
+| summarize visits = count() by kind, ref
+| order by visits desc
+```
+
+```kusto
+// When people visit (New York time): day of week x hour
+customEvents
+| where timestamp > ago(30d) and name == "page_view"
+| extend local = datetime_utc_to_local(timestamp, "America/New_York")
+| summarize views = count() by day = dayofweek(local) / 1d, hour = hourofday(local)
+| evaluate pivot(hour, sum(views))
+| order by day asc
+```
+
+```kusto
+// API health: requests, failures and speed per function
+requests
+| where timestamp > ago(7d)
+| summarize requests = count(), failed = countif(success == false), p95_ms = percentile(duration, 95) by name
+| order by requests desc
+```
+
+The workbook (`infra/monitoring/site-usage.workbook.json`) has about 40 more queries, one per chart.
 ## Setting up GA4 and Clarity
 
 1. Create a GA4 property and Web data stream for the production domain.
@@ -189,5 +253,6 @@ Recommended GA4 key events:
 - Unknown properties are stripped before recording.
 - Script-like values are rejected.
 - Payloads have size and item-count limits.
-- Log Analytics is capped in infrastructure parameters to reduce cost.
+- Log Analytics is capped at 0.1 GB a day (free). An alert (`sqr-li-dance-log-cap-reached`) emails the subscription owner if the cap is ever reached, because data collection then stops until the next day. To stay well under it, the Functions host no longer sends CPU/memory counters, its health-check chatter or an info line for every request (`api/host.json`), and the OpenTelemetry distro has performance counters off (`api/src/telemetry-setup.js`). Requests themselves are kept (`Host.Results`), which is what the API health charts use.
+- Browser events never include names, emails, internet addresses or full referrer addresses. Search terms that look like an email address or phone number are sent as `(hidden)`.
 - Keep analytics documentation synchronized with the public privacy page.

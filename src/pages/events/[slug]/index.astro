@@ -72,7 +72,7 @@ const lessonLine = e.lessonLabel && e.category !== 'class-lesson' ? `Lesson at $
   pageType="event"
   robots={upcomingNow ? undefined : 'noindex, follow'}
   bodyClass="has-action-bar"
-  htmlData={{ 'data-event-slug': e.slug, 'data-event-status': e.status, 'data-days-until': String(daysUntil) }}
+  htmlData={{ 'data-event-slug': e.slug, 'data-event-status': e.status, 'data-days-until': String(daysUntil), 'data-entity': `event:${e.eventId}`, 'data-event-category': e.category, ...(e.location.town ? { 'data-town': e.location.town } : {}) }}
   jsonLd={[eventJsonLd(e, settings, site, new URL(share.image.src, site).toString()), breadcrumbJsonLd(crumbs, site)]}
 >
   <article data-event-detail data-end={String(e.end.getTime())} aria-labelledby="event-title">

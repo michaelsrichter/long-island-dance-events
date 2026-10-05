@@ -207,6 +207,17 @@ Before enabling indexing, verify the deployed host:
 node scripts/smoke.mjs https://<host>
 ```
 
+## Monitoring dashboard and alerts
+
+`infra/monitoring/monitoring.bicep` adds the usage workbook, a portal dashboard, two metric alerts (more than 10 failed API requests or 20 server errors in an hour), an alert when the Log Analytics daily cap is reached, an email action group that notifies the subscription **Owner**, and a monthly budget for the resource group ($15, emails at 80% and 100% spent and when the forecast passes 100%). It does not touch the website. Deploy or update it with:
+
+```powershell
+az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
+  --template-file infra/monitoring/monitoring.bicep
+# Optional: --parameters alertEmails='["someone@example.com"]' budgetAmount=20
+```
+
+Cost: the workbook, dashboard, action group emails and budget are free; the two metric alerts are about $0.10 a month each and the daily-cap log alert (every 6 hours) about $0.50 a month (decision P50).
 ## Custom domain deployment order
 
 1. Deploy to the Azure host first.

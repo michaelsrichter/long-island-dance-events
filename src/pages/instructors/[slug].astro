@@ -41,7 +41,7 @@ const ld = instructorJsonLd(person.id, p, site, {
 });
 const meta = await instructorMeta(person, events, site);
 ---
-<BaseLayout title={p.seoTitle ?? `${p.name}: dance classes on Long Island`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="person" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
+<BaseLayout title={p.seoTitle ?? `${p.name}: dance classes on Long Island`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} htmlData={{ 'data-entity': `instructor:${person.id}` }} pageType="person" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={p.name} lede={lede} crumbs={crumbs}>
     {(photo || p.logo) && <EntityHeroMedia slot="media" name={p.name} photo={photo} logo={p.logo} />}
     <Reactions type="instructor" id={person.id} name={p.name} variant="hero" />
