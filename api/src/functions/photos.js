@@ -15,6 +15,7 @@ const moderate = require('../lib/moderate');
 const { processPhoto, MAX_UPLOAD_BYTES } = require('../lib/images');
 const { photoPaths } = require('../lib/readmodel');
 const { audit } = require('../lib/audit');
+const { alertAdmins } = require('../lib/notify');
 
 const yes = (v) => v === 'yes' || v === 'true' || v === 'on';
 
@@ -22,7 +23,7 @@ app.http('photos', {
   methods: ['POST'],
   authLevel: 'anonymous',
   route: 'photos',
-  handler: async (request) => {
+  handler: async (request, context) => {
     if (!sameOrigin(request)) return error(403, 'origin', 'Not allowed.');
     const len = Number(request.headers.get('content-length') || '0');
     if (len > MAX_UPLOAD_BYTES + 64 * 1024) return error(413, 'too_large', 'That photo is too big. Please use one under 10 MB.');
@@ -91,6 +92,7 @@ app.http('photos', {
       await table(TABLES.queue).upsert({ partitionKey: 'pending', rowKey: `p~${key}~${rk}`, itemType: 'photo', key, itemKey: rk, reason: verdict.reason, ai: scores ? JSON.stringify(scores) : '', at });
     }
     await audit({ actor: 'ai', action: verdict.decision, targetType: 'photo', targetId: rk, key, reason: verdict.reason, scores, after: status });
+    if (status === 'pending') await alertAdmins('photo', { log: context?.warn?.bind(context) });
     return json(status === 'rejected' ? 422 : 200, {
       status,
       message: status === 'rejected' ? moderate.MESSAGES.reject : 'Thanks! A volunteer will look at your photo before it appears (usually within a day or two).',

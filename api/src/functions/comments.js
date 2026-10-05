@@ -15,6 +15,7 @@ const { pageExists } = require('../lib/pages');
 const moderate = require('../lib/moderate');
 const { rebuild } = require('../lib/readmodel');
 const { audit } = require('../lib/audit');
+const { alertAdmins } = require('../lib/notify');
 
 const MAX = { comment: 1000, correction: 2000 };
 
@@ -22,7 +23,7 @@ app.http('comments', {
   methods: ['POST'],
   authLevel: 'anonymous',
   route: 'comments',
-  handler: async (request) => {
+  handler: async (request, context) => {
     if (!sameOrigin(request)) return error(403, 'origin', 'Not allowed.');
     const r = await readJson(request, 8192);
     if (!r.ok) return r.response;
@@ -62,6 +63,7 @@ app.http('comments', {
     }
     if (status === 'published') await rebuild(key);
     await audit({ actor: 'ai', action: verdict.decision, targetType: kind, targetId: rk, key, reason: verdict.reason, scores, after: status });
+    if (status === 'pending') await alertAdmins(kind, { log: context?.warn?.bind(context) });
     const message = kind === 'correction' && status === 'pending' ? 'Thanks! Our editors will check your correction.' : moderate.MESSAGES[verdict.decision];
     return json(status === 'rejected' ? 422 : 200, { status, message, ...(status === 'published' ? { id: rk } : {}) });
   },

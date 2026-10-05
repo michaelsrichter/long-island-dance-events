@@ -91,6 +91,7 @@ Common settings:
 | `CONTENT_SAFETY_ENDPOINT` | for community features | Azure AI Content Safety endpoint. |
 | `CONTENT_SAFETY_KEY` | for community features | Its key. Without it every note waits for a person. |
 | `ADMIN_EMAILS` | for moderation | Comma-separated emails that get the `admin` role at sign-in. |
+| `ADMIN_NOTIFY_URL` | optional | Secret trigger address of the alert Logic App (see "Email alerts for moderators" below). Without it, no alert emails are sent. |
 | `MODERATION_DENY_WORDS` | optional | Comma-separated words that always reject a note. |
 
 ## Visitor sign-in and community features
@@ -103,6 +104,7 @@ Likes, notes, private corrections and photos (decision P21) need four things. Ev
 | Storage account `stlongislanddance` (tables, `pending`/`photos`/`community`/`backups` containers, CORS, lifecycle rules) | same group | `infra/main.bicep` |
 | Azure AI Content Safety `cs-longislanddance` (Free tier) | same group | `infra/main.bicep` |
 | Entra External ID tenant `longislanddance.onmicrosoft.com` (`a72c253f-3125-4592-b3c6-b8e23ed18054`) | `rg-li-dance-identity` | `infra/external-id.bicep`, then `infra/configure-external-id.ps1` |
+| Logic App `logic-li-dance-notify` + Outlook.com connection `outlook-1` (moderator email alerts) | `rg-li-dance-events-web` | `infra/notify.bicep` |
 
 Set up from scratch:
 
@@ -120,6 +122,27 @@ Also save the same Storage connection string as the GitHub secret `COMMUNITY_STO
 The script registers `https://longisland.dance/.auth/login/extid/callback` (and `-ExtraSiteUrls`) as redirect addresses and keeps any already on the app. To test sign-in on a pull-request preview, add that preview's `https://<preview-host>/.auth/login/extid/callback` to the app registration.
 
 "Sign out" ends only the site's session. `staticwebapp.config.json` lists the External ID endpoints itself instead of the discovery document, so Static Web Apps never sends people to External ID's sign-out page (that page asks "Which account do you want to sign out of?" and often lists no account). The user flow asks only for the email address; the site's welcome step asks for the public name.
+
+### Email alerts for moderators
+
+When something new waits in the moderation queue (a private correction, a note or photo for a person to check, a post hidden by reports, or an "It shows me" request), the API (`api/src/lib/notify.js`) posts `{ subject, html }` to a Logic App, which emails the owner through **Outlook.com**. Rules:
+
+- **At most one email every 15 minutes** (in blocks of the clock, for example 2:00–2:15). The first new item in a block sends it; the rest are counted in the next one. A row in the `Limits` table (`_alerts` partition) marks each used block; the daily maintenance job deletes old rows.
+- The email has **counts and a link** to `/moderate/` only: no post text, names or email addresses. The Logic App run history is set to "secure inputs/outputs", so it keeps nothing readable either.
+- It never slows or breaks a visitor's post: the API waits at most 2.5 seconds and ignores errors. If sending fails, the block stays free and the next item tries again.
+- **Daily reminder:** the Community maintenance workflow sends one reminder a day if anything has waited more than 6 hours.
+- Pull-request previews use the same storage, so posts made on a preview are in the real queue and alert too.
+
+Set up (already done for production; the owner's personal subscription):
+
+1. `az deployment group create -g rg-li-dance-events-web -f infra/notify.bicep -p notifyTo=<owner email>`. Today it sends to the owner's Gmail address. For several people, separate addresses with `;`.
+2. Azure portal → API connection **outlook-1** → **Edit API connection** → **Authorize**, sign in with the Outlook.com account that sends the mail (the owner's personal Microsoft account), **Save**. Work or school accounts need the "Office 365 Outlook" connector instead.
+3. Copy the trigger address (Logic App → **Overview** → **Workflow URL**) into the app setting **`ADMIN_NOTIFY_URL`** on every environment and into the GitHub secret **`ADMIN_NOTIFY_URL`** (daily reminder). The address contains a secret signature: never put it in git, an issue or a chat.
+   - On Windows, `az staticwebapp appsettings set` cuts a value at the first `&`, and this address has several. Set it in the portal (**Environment variables**), or read the current settings with the `listAppSettings` REST call and `PUT` them all back to `config/appsettings`. Check the stored value is complete afterwards.
+   - For the GitHub secret, pipe it so it is never shown: `<value> | gh secret set ADMIN_NOTIFY_URL`.
+4. Test: post a private correction on the site, then check the Logic App **Runs history** (both steps green) and the inbox. Mark the test correction **Done** in `/moderate/`.
+
+To change who gets the emails: Logic App → **Logic app designer** → **Parameters** → `notifyTo`, or redeploy step 1 with a new `notifyTo`. To pause alerts, disable the Logic App (posts are not affected). If a redeploy ever shows the connection as "Unauthenticated", repeat step 2.
 
 ### Add Google or Facebook sign-in (owner)
 

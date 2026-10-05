@@ -10,12 +10,20 @@ process.env.CONTENT_SAFETY_ENDPOINT = 'https://cs.example.cognitiveservices.azur
 process.env.CONTENT_SAFETY_KEY = 'test-key';
 process.env.ADMIN_EMAILS = 'boss@example.com';
 process.env.MODERATION_DENY_WORDS = 'forbiddenword';
+process.env.ADMIN_NOTIFY_URL = 'https://notify.example/workflows/x/triggers/manual/paths/invoke?sig=test';
 
 const PAGES = ['venue:huntington-moose-lodge', 'event:tuesday-hustle', 'style:west-coast-swing'];
 const csCalls = [];
 const githubCalls = [];
+const notifyCalls = [];
+let notifyMode = 'ok'; // 'ok' | 'fail' (HTTP 500) | 'hang' (never answers)
 globalThis.fetch = async (url, init = {}) => {
   const u = String(url);
+  if (u.startsWith('https://notify.example/')) {
+    notifyCalls.push(JSON.parse(init.body));
+    if (notifyMode === 'hang') return new Promise((_, reject) => init.signal.addEventListener('abort', () => reject(init.signal.reason)));
+    return new Response(null, { status: notifyMode === 'fail' ? 500 : 202 });
+  }
   if (u.endsWith('/community-pages.json')) return new Response(JSON.stringify({ keys: PAGES }), { status: 200 });
   if (u.startsWith('https://api.github.com/')) {
     githubCalls.push(u);
@@ -47,6 +55,7 @@ const { ageFrom } = require('../src/lib/users');
 const { cleanText, isPageKey } = require('../src/lib/http');
 const { readPrincipal, claim } = require('../src/lib/principal');
 const { processPhoto, sniff } = require('../src/lib/images');
+const notify = require('../src/lib/notify');
 
 const ctx = { warn() {}, log() {} };
 const BASE = 'https://longisland.dance';
@@ -454,4 +463,122 @@ test('rate limits stop floods', async () => {
   let last;
   for (let i = 0; i < 11; i++) last = await call('comments', '/api/comments', { method: 'POST', user: u, body: { key: PAGES[2], text: `Lovely class number ${i}` } });
   assert.equal(last.status, 429);
+});
+
+/* ---------------- admin email alerts ---------------- */
+
+const at = (iso) => () => Date.parse(iso);
+const post = (id, body) => call('comments', '/api/comments', { method: 'POST', user: principal(id), body: { key: PAGES[2], ...body } });
+async function member(id, name) {
+  await signIn(id);
+  await finishProfile(id, { name });
+}
+
+test('alert email: counts and a link only, never names, text or account ids; words are escaped', () => {
+  const counts = notify.countQueue([
+    { itemType: 'correction', reason: 'correction' },
+    { itemType: 'comment', reason: 'rule_link' },
+    { itemType: 'photo', reason: 'photo' },
+    { itemType: 'comment', reason: 'reports:rude' },
+    { itemType: 'photo', reason: 'reports:shows-me' },
+  ]);
+  assert.deepEqual(counts, { notes: 1, photos: 1, corrections: 1, reports: 2, total: 5 });
+  const m = notify.buildMessage('correction', counts, 'https://longisland.dance');
+  assert.equal(m.subject, 'Long Island Dance: 5 items wait for review');
+  assert.match(m.html, /<li>1 private correction<\/li>/);
+  assert.match(m.html, /<li>2 reported posts<\/li>/);
+  assert.match(m.html, /href="https:\/\/longisland\.dance\/moderate\/"/);
+  assert.equal(notify.buildMessage('photo', { notes: 0, photos: 1, corrections: 0, reports: 0, total: 1 }).subject, 'Long Island Dance: 1 item waits for review');
+  assert.equal(notify.stamp(Date.parse('2026-10-05T14:29:59Z')), '202610051415', '15-minute blocks of the clock');
+  assert.ok(!notify.buildMessage('comment', counts, 'https://x.test/"><script>').html.includes('<script>'), 'the link is escaped');
+});
+
+test('alerts: queued posts email the owner at most once per 15 minutes', async () => {
+  await member('alert001aa', 'Alert Tester');
+  notify.clock.now = at('2031-03-05T14:01:00Z');
+  notifyCalls.length = 0;
+  const corr = await post('alert001aa', { kind: 'correction', text: 'Secret detail: the door code is 4417' });
+  assert.equal(corr.status, 200);
+  assert.equal(notifyCalls.length, 1, 'a private correction sends an alert');
+  const mail = JSON.stringify(notifyCalls[0]);
+  assert.match(notifyCalls[0].subject, /wait/);
+  assert.match(notifyCalls[0].html, /private correction/);
+  for (const s of ['4417', 'Secret detail', 'Alert Tester', 'alert001aa', '@']) assert.ok(!mail.includes(s), `the email does not contain "${s}"`);
+
+  const note = await post('alert001aa', { text: 'Tickets at www.example.org' });
+  assert.equal(note.body.status, 'pending');
+  assert.equal(notifyCalls.length, 1, 'a second item in the same 15 minutes sends nothing');
+
+  notify.clock.now = at('2031-03-05T14:15:00Z');
+  await post('alert001aa', { text: 'More tickets: call 631-555-0123' });
+  assert.equal(notifyCalls.length, 2, 'the next 15-minute block sends again');
+  assert.ok(!JSON.stringify(notifyCalls[1]).includes('631-555-0123'), 'the note text is not in the email');
+});
+
+test('alerts: published notes and plain reports send nothing; hiding reports and "shows me" requests do', async () => {
+  await member('alert002aa', 'Reporter Two');
+  await member('alert003aa', 'Reporter Three');
+  await finishProfile('admin001aa', { name: 'Boss' });
+  notify.clock.now = at('2031-03-05T15:00:00Z');
+  notifyCalls.length = 0;
+  const pub = await post('alert001aa', { text: 'Lovely evening of dancing' });
+  assert.equal(pub.body.status, 'published');
+  assert.equal(notifyCalls.length, 0, 'a published note needs nobody');
+
+  const report = (id, itemId, reason, roles) => call('flags', '/api/flags', { method: 'POST', user: principal(id, roles), body: { key: PAGES[2], itemType: 'comment', itemId, reason } });
+  assert.equal((await report('alert002aa', pub.body.id, 'rude')).status, 200);
+  assert.equal(notifyCalls.length, 0, 'one report keeps the post up and sends nothing');
+  assert.match((await report('alert003aa', pub.body.id, 'shows-me')).body.message, /hid/);
+  assert.equal(notifyCalls.length, 1, 'a "shows me" request hides it and sends an alert');
+  assert.match(notifyCalls[0].html, /shows them/);
+
+  notify.clock.now = at('2031-03-05T15:15:00Z');
+  const second = await post('alert001aa', { text: 'Wonderful live band too' });
+  assert.equal((await report('admin001aa', second.body.id, 'other', ['member', 'admin'])).status, 200);
+  assert.equal(notifyCalls.length, 1, 'a moderator hiding something gets no email about it');
+});
+
+test('alerts: a broken or slow alert service never blocks the post and frees the slot for the next try', async () => {
+  await member('alert004aa', 'Alert Four');
+  notify.clock.now = at('2031-03-05T16:00:00Z');
+  notifyCalls.length = 0;
+  try {
+    notifyMode = 'fail';
+    assert.equal((await post('alert004aa', { kind: 'correction', text: 'The class now starts at 8' })).status, 200);
+    assert.equal(notifyCalls.length, 1);
+    assert.ok(!fake.rows('Limits', notify.PARTITION).some((r) => r.rowKey === 'alert~203103051600'), 'failed send frees the block');
+
+    notifyMode = 'hang';
+    const t0 = Date.now();
+    assert.equal((await post('alert004aa', { kind: 'correction', text: 'And it ends at 11' })).status, 200);
+    assert.ok(Date.now() - t0 < 5000, 'waits at most a few seconds');
+
+    notifyMode = 'ok';
+    await post('alert004aa', { kind: 'correction', text: 'Price is $15 now' });
+    assert.equal(notifyCalls.length, 3, 'the next item retries and gets through');
+    assert.ok(fake.rows('Limits', notify.PARTITION).some((r) => r.rowKey === 'alert~203103051600'));
+
+    const saved = process.env.ADMIN_NOTIFY_URL;
+    delete process.env.ADMIN_NOTIFY_URL;
+    notify.clock.now = at('2031-03-05T16:30:00Z');
+    try {
+      assert.equal((await post('alert004aa', { kind: 'correction', text: 'Parking moved too' })).status, 200);
+    } finally {
+      process.env.ADMIN_NOTIFY_URL = saved;
+    }
+    assert.equal(notifyCalls.length, 3, 'no setting, no email');
+  } finally {
+    notifyMode = 'ok';
+  }
+});
+
+test('reminder: one email a day when something has waited for more than six hours', async () => {
+  notifyCalls.length = 0;
+  notify.clock.now = () => Date.now();
+  assert.equal((await notify.remindAdmins()).reason, 'nothing old', 'fresh items need no reminder');
+  notify.clock.now = () => Date.now() + 7 * 3600_000;
+  assert.equal((await notify.remindAdmins()).sent, true);
+  assert.match(notifyCalls[0].html, /Reminder/);
+  assert.equal((await notify.remindAdmins()).reason, 'throttled', 'only one reminder a day');
+  notify.clock.now = () => Date.now();
 });

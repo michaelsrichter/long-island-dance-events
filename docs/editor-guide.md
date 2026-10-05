@@ -169,6 +169,8 @@ Signed-in visitors can like pages, save events to their own private list, leave 
 
 Please check the queue at least every two days. Removal requests ("It shows me") hide the photo at once; reject it within 48 hours. If a photo might show child sexual abuse, do not download or share it: reject it and report it to the [NCMEC CyberTipline](https://report.cybertip.org/).
 
+**Email alerts.** The owner gets an email (from the site's Outlook.com address) when something new waits for a person: a private correction, a note or photo the AI could not approve, a post hidden by reports, or an "It shows me" request. To avoid floods there is **at most one email every 15 minutes**. It says how many items wait and links to the queue. It never contains names or the post text, so always open the queue to see the details. If something has waited for more than 6 hours, one reminder email goes out each morning. To change who gets the emails, see "Email alerts for moderators" in `docs/deployment.md`.
+
 To delete someone's sign-in account (after they deleted their data), open the Entra admin center → tenant **Long Island Dance** → **Users**, and delete the user named in the log entry.
 
 ## Fix a mistake
