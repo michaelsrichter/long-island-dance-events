@@ -321,7 +321,7 @@ document.addEventListener('click', (e) => {
 
 let errorsSent = 0;
 function reportError(message: string, file?: string, line?: number) {
-  if (errorsSent >= 5 || /ResizeObserver loop|Script error\.?$/i.test(message)) return;
+  if (errorsSent >= 5 || /ResizeObserver loop/i.test(message) || /^Script error\.?$/i.test(message)) return;
   // Only our own scripts (browser add-ons and other sites' scripts are not our bugs).
   if (file && !file.startsWith(location.origin)) return;
   errorsSent++;
