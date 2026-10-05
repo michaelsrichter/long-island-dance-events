@@ -226,4 +226,23 @@ describe("Ira's List calendar feed", () => {
     expect(r.candidates).toHaveLength(0);
     expect(r.skipped.map((s) => s.reason)).toEqual(['cancelled by the source']);
   });
+  it('keeps the most recently edited copy of a gig listed twice, whatever order the feed sends', () => {
+    const ev = (uid: string, summary: string, modified: string) => `BEGIN:VEVENT\r\nDTSTART;TZID=America/New_York:20310111T130000\r\nDTEND;TZID=America/New_York:20310111T170000\r\nUID:${uid}\r\nLAST-MODIFIED:${modified}\r\nSUMMARY:${summary}\r\nLOCATION:Example Pub\\, 1 Fictional Ave\\, Farmingdale\\, NY 11735\\, USA\r\nEND:VEVENT\r\n`;
+    const typo = ev('t1', 'Comon Ground-Example Pub', '20300828T012528Z');
+    const fixed = ev('t2', 'Common Ground-Example Pub', '20300912T161134Z');
+    const opts = { sourceId: 'iraslist', sourceUrl: 'https://example.org/', registry: fixtureRegistry(), outsideVenues: [] };
+    for (const order of [typo + fixed, fixed + typo]) {
+      const r = normalizeIraRows(rowsFromIcs(`BEGIN:VCALENDAR\r\nVERSION:2.0\r\n${order}END:VCALENDAR\r\n`, '2031-01-01', feedUrl, 30), opts);
+      expect(r.candidates.map((c) => c.title)).toEqual(['Common Ground at Example Pub']);
+    }
+    expect(cleanAct('Acoustic Groove returns to the Example Pub in Farmingdale!')).toBe('Acoustic Groove');
+  });
+  it('adds new venues before matching gigs, so a gig listed without an address earlier still finds its venue', () => {
+    const ev = (uid: string, day: string, summary: string, location: string) => `BEGIN:VEVENT\r\nDTSTART;TZID=America/New_York:203101${day}T190000\r\nUID:${uid}\r\nSUMMARY:${summary}\r\nLOCATION:${location}\r\nEND:VEVENT\r\n`;
+    const cal = `BEGIN:VCALENDAR\r\nVERSION:2.0\r\n${ev('n1', '12', 'Pretend Rockers-Brand New Taproom', 'Brand New Taproom')}${ev('n2', '13', 'Sample Party Band-Brand New Taproom', 'Brand New Taproom\\, 9 Imaginary Rd\\, Huntington\\, NY 11743\\, USA')}END:VCALENDAR\r\n`;
+    const reg = fixtureRegistry();
+    const r = normalizeIraRows(rowsFromIcs(cal, '2031-01-01', feedUrl, 30), { sourceId: 'iraslist', sourceUrl: 'https://example.org/', registry: reg, outsideVenues: [] });
+    expect(r.candidates.map((c) => `${c.date} ${c.title}`)).toEqual(['2031-01-12 Pretend Rockers at Brand New Taproom', '2031-01-13 Sample Party Band at Brand New Taproom']);
+    expect(r.candidates.every((c) => c.reviewNotes.some((n) => /New venue was added automatically/.test(n)))).toBe(true);
+  });
 });

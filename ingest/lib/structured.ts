@@ -45,6 +45,8 @@ export interface FoundEvent {
   performers?: string[] | undefined;
   organizerName?: string | undefined;
   cancelled?: boolean | undefined;
+  /** When the source last changed this listing (iCal LAST-MODIFIED, e.g. '20260912T161134Z'). */
+  modified?: string | undefined;
   /** Where in the source, e.g. "feed item", "event page". */
   ref?: string | undefined;
   /** Page or feed the event came from (attribution link). */

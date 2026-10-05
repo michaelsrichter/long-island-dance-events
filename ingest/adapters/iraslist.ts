@@ -48,6 +48,8 @@ export interface IraRow {
   locationName?: string | undefined;
   address?: string | undefined;
   locality?: string | undefined;
+  /** From the calendar feed: when Ira's List last edited the listing (iCal LAST-MODIFIED). */
+  modified?: string | undefined;
 }
 
 const ENTITIES: Record<string, string> = { nbsp: ' ', zwj: '', zwnj: '', shy: '', amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', ndash: '–', mdash: '—', rsquo: '’', lsquo: '‘' };
@@ -216,9 +218,13 @@ export function rowsFromIcs(raw: string, today: string, feedUrl: string, days = 
       locationName: f.locationName?.replace(/^[\s\-–—|]+/, '').trim() || undefined,
       address: f.address,
       locality: f.locality,
+      modified: f.modified,
     });
   }
-  return rows.sort((a, b) => (a.start ?? a.date).localeCompare(b.start ?? b.date));
+  // The same gig is sometimes listed twice ("Comon Ground" and "Common Ground"); the dedupe keeps the first one
+  // it meets. Putting the most recently edited copy first keeps the corrected listing, run after run, whatever
+  // order the feed happens to send.
+  return rows.sort((a, b) => (a.start ?? a.date).localeCompare(b.start ?? b.date) || (b.modified ?? '').localeCompare(a.modified ?? '') || a.text.localeCompare(b.text));
 }
 /** Shows that are not live music for dancing (theater, comedy, drag brunch, trivia). */
 const NOT_MUSIC_RE = /\b(the musical|musical\b|comedy|comedian|stand[- ]up|magician|magic show|drag (brunch|show)|trivia|bingo|kara[- ]?ok[ei]{1,2}|karoake|karoke|paint (and|&) sip|book (talk|signing)|picture show|movie night|film screening)\b/i;
@@ -246,6 +252,8 @@ export function cleanAct(s: string): string {
     .replace(/\s+on\s+(?:mon|tues?|wed(?:nes)?|thur?s?|fri|sat(?:ur)?|sun)(?:day)?\b.*$/i, '')
     .replace(/[,\s]+(?:mon|tues?|wed(?:nes)?|thur?s?|fri|sat(?:ur)?|sun)(?:day)?\.?,?\s+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d.*$/i, '')
     .replace(/\s+(?:ticketed event|tickets? (?:on sale|required|available)|sold out)\b.*$/i, '')
+    // "Acoustic Groove returns to the Garden Grill in Smithtown!"
+    .replace(/\s+(?:returns?|is back|comes back)\s+to\s+.*$/i, '')
     .replace(/\s+(?:halloween|christmas|holiday|new year'?s(?: eve)?|thanksgiving)\s+(?:costume contest|party|bash|show|spectacular|spooktacular)\b.*$/i, '')
     .replace(/[\s!.,;:-]+$/, '')
     .trim();
@@ -363,6 +371,44 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
   const dates = rows.map((r) => r.date).sort();
   const fromFeed = rows.some((r) => r.start || r.locationName || r.address);
   const sourceName = fromFeed ? "Ira's List calendar" : dates.length ? `Ira's List, week of ${formatDateLong(dates[0]!).replace(/^\w+, /, '')}` : "Ira's List";
+  // A place name, not a house number ("3490") or an address.
+  const okName = (n: string | undefined) => (n && /[A-Za-z]{3}/.test(n) && !/^\d+\b/.test(n) ? n : undefined);
+  // The calendar feed gives the location: its town tells whether the gig is on Long Island.
+  const placeOf = (row: IraRow) => (row.locality ? lookupPlace(row.locality) : row.address ? findPlaceInText(row.address) : undefined);
+  const findFor = (row: IraRow, feedPlace: ReturnType<typeof placeOf>) => {
+    const locName = okName(cleanVenueName(row.locationName));
+    let venueId = locName || row.address ? findVenue(reg, locName ?? row.venue, row.address, feedPlace?.name) : undefined;
+    venueId ??= (row.venue && reg.matchVenue(row.venue)) || reg.matchVenue(row.text);
+    return { venueId, name: locName ?? okName(cleanVenueName(row.venue)) };
+  };
+  const skippable = (row: IraRow) => CANCELLED_TITLE.test(row.text) || NOT_MUSIC_RE.test(row.text) || Boolean(reg.isOptedOut(row.text)) || outside.has(normalizeText(row.venue));
+  /** Venues added in this run; their gigs get a note asking an editor to check the venue. */
+  const addedHere = new Set<string>();
+  // A venue we have no file for is added only when the feed gives its street address in a Long Island town
+  // (never invented); it gets a review note. Without an address the gig is reported, not published.
+  // Venues are added in a first pass, so a gig listed without an address earlier in the calendar still finds
+  // its venue, and each run gives the same result whatever order the feed sends.
+  for (const row of rows) {
+    if (skippable(row)) continue;
+    const feedPlace = placeOf(row);
+    if (!feedPlace || !hasStreetAddress(row.address)) continue;
+    const { venueId, name } = findFor(row, feedPlace);
+    if (venueId || !name || name.length > 80) continue;
+    const id = idFrom(`${name} ${feedPlace.name}`);
+    if (!reg.venues.has(id)) {
+      reg.venues.set(id, {
+        name,
+        aliases: [],
+        address: row.address!.split(',')[0]!.trim(),
+        town: feedPlace.name,
+        county: feedPlace.county,
+        state: 'NY',
+        reviewNotes: "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+      } as never);
+      reg.created.venues.add(id);
+      addedHere.add(id);
+    }
+  }
   for (const row of rows) {
     const ref = fromFeed ? 'calendar' : `${weekdayOf(row.date)} list`;
     const label = `${row.date} ${row.act} @ ${row.venue || '?'}`;
@@ -383,38 +429,13 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
       outOfArea.set(row.venue, (outOfArea.get(row.venue) ?? 0) + 1);
       continue;
     }
-    // The calendar feed gives the location: a town outside Nassau/Suffolk is out of area.
-    const feedPlace = row.locality ? lookupPlace(row.locality) : row.address ? findPlaceInText(row.address) : undefined;
+    const feedPlace = placeOf(row);
     if (row.locality && !feedPlace) {
       outOfArea.set(row.locality, (outOfArea.get(row.locality) ?? 0) + 1);
       continue;
     }
-    // A place name, not a house number ("3490") or an address.
-    const okName = (n: string | undefined) => (n && /[A-Za-z]{3}/.test(n) && !/^\d+\b/.test(n) ? n : undefined);
-    const locName = okName(cleanVenueName(row.locationName));
-    let venueId = locName || row.address ? findVenue(reg, locName ?? row.venue, row.address, feedPlace?.name) : undefined;
-    venueId ??= (row.venue && reg.matchVenue(row.venue)) || reg.matchVenue(row.text);
-    let newVenue = false;
-    // A venue we have no file for is added only when the feed gives its street address in a Long Island
-    // town (never invented); it gets a review note. Without an address the gig is reported, not published.
-    const name = locName ?? okName(cleanVenueName(row.venue));
-    if (!venueId && name && name.length <= 80 && hasStreetAddress(row.address) && feedPlace) {
-      const id = idFrom(`${name} ${feedPlace.name}`);
-      if (!reg.venues.has(id)) {
-        reg.venues.set(id, {
-          name,
-          aliases: [],
-          address: row.address.split(',')[0]!.trim(),
-          town: feedPlace.name,
-          county: feedPlace.county,
-          state: 'NY',
-          reviewNotes: "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
-        } as never);
-        reg.created.venues.add(id);
-      }
-      venueId = id;
-      newVenue = true;
-    }
+    const { venueId } = findFor(row, feedPlace);
+    const newVenue = Boolean(venueId && addedHere.has(venueId));
     const venue = venueId ? reg.venues.get(venueId) : undefined;
     if (!venue) {
       unVenues.add(row.venue || row.text);
