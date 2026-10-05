@@ -58,7 +58,8 @@ function createFakeAgentMail(inbox) {
     }
     if (rest === '/threads' && method === 'GET') {
       const want = u.searchParams.getAll('labels');
-      const list = [...threads.values()].filter((t) => want.every((l) => labelsOf(t).includes(l))).map(view);
+      // Like the real API: threads with no received email are listed only when the filter names "sent".
+      const list = [...threads.values()].filter((t) => want.every((l) => labelsOf(t).includes(l)) && (want.includes('sent') || labelsOf(t).includes('received'))).map(view);
       return json(200, { count: list.length, threads: list });
     }
     if ((x = /^\/threads\/([^/]+)$/.exec(rest)) && method === 'GET') {
