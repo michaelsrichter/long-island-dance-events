@@ -1366,6 +1366,8 @@ h3.day-heading { font-size: 1rem; }
   .header-account { padding: 0 0.9rem 0 0.7rem; max-width: 12rem; }
   .header-account__label { position: static; width: auto; height: auto; clip: auto; overflow: hidden; text-overflow: ellipsis; }
 }
+/* A browser that was signed in before: hide the page's own "Sign in" text until account-nav.ts shows the name. */
+html[data-has-account]:not([data-account-ready]) [data-account-label] { visibility: hidden; }
 
 /* Loading spinner (stops for people who prefer less motion). */
 .spinner { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--c-ink-soft); font-weight: 600; }

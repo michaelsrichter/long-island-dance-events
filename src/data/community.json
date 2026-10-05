@@ -1,5 +1,6 @@
 {
   "blobBase": "https://stlongislanddance.blob.core.windows.net",
   "loginProvider": "extid",
-  "photosEnabled": true
+  "photosEnabled": true,
+  "signInServiceDays": 0
 }

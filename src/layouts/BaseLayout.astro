@@ -66,7 +66,7 @@ const analytics = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')d.dataset.theme=t}catch(e){}})()</script>
+    <script is:inline>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(localStorage.getItem('li-account'))d.dataset.hasAccount=''}catch(e){}})()</script>
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {pageType !== '404' && <link rel="canonical" href={canonical} />}

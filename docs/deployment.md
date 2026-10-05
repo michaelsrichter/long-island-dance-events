@@ -123,6 +123,32 @@ The script registers `https://longisland.dance/.auth/login/extid/callback` (and 
 
 "Sign out" ends only the site's session. `staticwebapp.config.json` lists the External ID endpoints itself instead of the discovery document, so Static Web Apps never sends people to External ID's sign-out page (that page asks "Which account do you want to sign out of?" and often lists no account). The user flow asks only for the email address; the site's welcome step asks for the public name.
 
+### How long people stay signed in
+
+There are two sessions, and they end at different times:
+
+| Session | Kept in | Ends |
+| --- | --- | --- |
+| The website's own (Static Web Apps) | cookie `StaticWebAppsAuthCookie` on longisland.dance | 8 hours after signing in (Azure's fixed limit; it cannot be changed) |
+| The sign-in service's (External ID) | cookies on longislanddance.ciamlogin.com | when the browser is closed (today), or after many days with the setting below |
+
+When a browser that was signed in before comes back and the website's session has ended, the page signs the visitor back in silently: while the sign-in service still remembers them, a sign-in needs no form (Microsoft answers at once), so the page makes that one quick trip and comes back to the same page, without the welcome step. The header keeps showing their name, and Like, Save and notes work without reloading. A click made while the session had ended (for example a Like on a page left open all day) is remembered and finished after the trip. This is `ensureSession()` in `src/scripts/account-state.ts`. (Static Web Apps cannot pass `prompt=none` to the sign-in service: `loginParameterNames` does not forward it.)
+
+The trip is only made when the sign-in service very likely still remembers the visitor, so nobody is sent to a sign-in form they did not ask for. The site sets its own cookie `li-sso` while signed in; it lasts as long as the sign-in service remembers (until the browser closes, or `signInServiceDays` in `src/data/community.json`). Without it, the visitor is shown as signed out at once, with a short "Your sign-in ended" note. The sign-in service does not remember a brand-new sign-up the way it remembers a sign-in (tested 2026-10-05), so the welcome step sets `li-sso=0` for the rest of that browser session; the next normal sign-in allows the silent trip again. If a sign-in comes back with an error (for example "Cancel"), Static Web Apps answers 401; the `401` response override shows `/signed-out/`, which goes straight back to the page, signed out. "Sign out" forgets the saved name and `li-sso` at once, so the site never signs anyone back in by itself. (Pressing "Sign in" again in the same browser session can still sign the last person in without a code, because the sign-in service remembers them; on a shared computer, close the browser after signing out.)
+
+To test the whole flow with real sign-ins, use `scripts/e2e-signin.mjs` steps `sa` to `sd` (see the top of that file).
+
+### Stay signed in the next day (owner, External ID admin center)
+
+Today the sign-in service forgets visitors when the browser closes, so someone who returns the next day must enter a new email code. External ID decides this with a **Conditional Access** setting, not a user-flow setting, and Conditional Access cannot be used while **security defaults** are on. To keep visitors signed in for 90 days:
+
+1. [Entra admin center](https://entra.microsoft.com) → switch to the **Long Island Dance** directory.
+2. **Entra ID → Conditional Access → Policies → New policy**, name "Admins need MFA": Users: **Directory roles** → Global Administrator (and any other admin role in use); Target resources: **All resources**; Grant: **Require multifactor authentication**; turn it **On**. This replaces the admin protection that security defaults give today.
+3. **Entra ID → Overview → Properties → Manage security defaults** → **Disabled** (reason: "Using Conditional Access"). Do this only after step 2 is saved.
+4. **New policy**, name "Visitors stay signed in": Users: **All users**, exclude your admin account; Target resources: **Select resources** → **Long Island Dance website**; Session: **Sign-in frequency** = 90 days and **Persistent browser session** = **Always persistent**; turn it **On**.
+5. In `src/data/community.json` set `"signInServiceDays": 90` (so the site knows the sign-in service now remembers visitors for that long) and publish.
+6. Check: sign in on the website, close the browser completely, open it the next day (or wait 8 hours): your name is still in the header and Like works. With the harness, step `sb` "next day" passes.
+
 ### Email alerts for moderators
 
 When something new waits in the moderation queue (a private correction, a note or photo for a person to check, a post hidden by reports, or an "It shows me" request), the API (`api/src/lib/notify.js`) posts `{ subject, html }` to a Logic App, which emails the owner through **Outlook.com**. Rules:

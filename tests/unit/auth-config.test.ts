@@ -19,4 +19,10 @@ describe('visitor sign-in configuration', () => {
     expect(oidc.issuer).toBe(`https://${tenant}.ciamlogin.com/${tenant}/v2.0`);
     expect(oidc.certificationUri).toBe(`https://longislanddance.ciamlogin.com/${tenant}/discovery/v2.0/keys`);
   });
+
+  it('a sign-in that comes back with an error lands on our own signed-out page, not a bare 401 error', () => {
+    // For example the visitor pressed Cancel: Static Web Apps answers 401 at /.auth/login/extid/callback.
+    expect(config.responseOverrides['401']).toEqual({ rewrite: '/signed-out/index.html', statusCode: 401 });
+    expect(readFileSync(new URL('../../src/pages/signed-out.astro', import.meta.url), 'utf8')).toContain("import '../scripts/signed-out'");
+  });
 });

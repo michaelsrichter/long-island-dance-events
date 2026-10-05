@@ -39,7 +39,10 @@
     { "route": "/events/upcoming.json", "headers": { "X-Robots-Tag": "noindex", "Cache-Control": "public, max-age=600" } },
     { "route": "/sitemap-state.json", "headers": { "X-Robots-Tag": "noindex", "Cache-Control": "no-cache" } }
   ],
-  "responseOverrides": { "404": { "rewrite": "/404.html", "statusCode": 404 } },
+  "responseOverrides": {
+    "401": { "rewrite": "/signed-out/index.html", "statusCode": 401 },
+    "404": { "rewrite": "/404.html", "statusCode": 404 }
+  },
   "mimeTypes": {
     ".ics": "text/calendar; charset=utf-8",
     ".webmanifest": "application/manifest+json",

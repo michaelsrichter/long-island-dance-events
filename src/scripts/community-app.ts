@@ -1,8 +1,10 @@
 /**
  * Community panel: notes, corrections, photos and reports for one page (likes are in reactions.ts).
  * All user text is inserted with textContent (never innerHTML).
+ * If the site session ended while the page was open, sending a note or report signs the visitor back in
+ * (silently when possible) and sends it on return; a photo has to be chosen again.
  */
-import { loginUrl, rememberAccount } from './account-state';
+import { ensureSession, loginUrl, rememberAccount, signInFor, takeAction, type PendingAction } from './account-state';
 type Comment = { id: string; name: string; text: string; at: string; date?: string };
 type Photo = { id: string; by: string; caption: string; alt: string; w: number; h: number; at: string; src: { s: string; m: string; l: string } };
 type Doc = { likes: number; comments: Comment[]; photos: Photo[] };
@@ -26,16 +28,6 @@ async function api(path: string, init: RequestInit = {}): Promise<{ status: numb
   return { status: res.status, data };
 }
 
-async function signedIn(): Promise<boolean> {
-  try {
-    const res = await fetch('/.auth/me', { credentials: 'same-origin', headers: { Accept: 'application/json' } });
-    if (!res.ok) return false;
-    const body = await res.json();
-    return Boolean(body && body.clientPrincipal);
-  } catch {
-    return false;
-  }
-}
 
 function addText(el: HTMLElement, text: string) {
   text.split('\n').forEach((line, i) => {
@@ -210,15 +202,36 @@ export function init(panel: HTMLElement) {
     }
   }
 
-  function handleError(r: { status: number; data: any }) {
+  /** The panel's own address, so the visitor comes back to the notes after signing in. */
+  const back = () => `${location.pathname}${location.search}#community`;
+
+  function handleError(r: { status: number; data: any }, action: PendingAction | null = null) {
     if (r.status === 401) {
-      me = null;
-      applyMe();
-      say('Please sign in first.');
+      // The site session ended while the page was open: sign in again (silently if possible) and finish on return.
+      say(action ? 'Signing you back in…' : 'Please sign in first.');
+      signInFor(action, back());
     } else if (r.status === 428) {
       profileNeeded.hidden = false;
       say(r.data?.message || 'Please finish your profile first.');
     } else say(r.data?.message || 'Something went wrong. Please try again.');
+  }
+
+  async function sendComment(kind: string, text: string) {
+    const btn = q<HTMLButtonElement>(commentForm, 'button[type=submit]')!;
+    const r = await busy(btn, 'Sending…', () => api('/api/comments', { method: 'POST', body: JSON.stringify({ key, kind, text, ...(date ? { date } : {}) }) }));
+    if (r.status === 200 || r.status === 422) {
+      say(r.data.message);
+      if (r.status === 200) commentForm.reset();
+      if (r.data.status === 'published') await load(true);
+    } else handleError(r, { type: 'comment', key, kind, text });
+  }
+
+  async function sendReport(target: { itemType: 'comment' | 'photo'; itemId: string }, reason: string, note: string) {
+    const r = await api('/api/flags', { method: 'POST', body: JSON.stringify({ key, ...target, reason, note }) });
+    if (r.status === 200) {
+      say(r.data.message || 'Thanks for telling us.');
+      await load(true);
+    } else handleError(r, { type: 'flag', key, ...target, reason, note });
   }
 
   commentForm.addEventListener('submit', async (ev) => {
@@ -229,13 +242,7 @@ export function init(panel: HTMLElement) {
       say('Please write something first.');
       return;
     }
-    const btn = q<HTMLButtonElement>(commentForm, 'button[type=submit]')!;
-    const r = await busy(btn, 'Sending…', () => api('/api/comments', { method: 'POST', body: JSON.stringify({ key, kind: data.get('kind'), text, ...(date ? { date } : {}) }) }));
-    if (r.status === 200 || r.status === 422) {
-      say(r.data.message);
-      if (r.status === 200) commentForm.reset();
-      if (r.data.status === 'published') await load(true);
-    } else handleError(r);
+    await sendComment(String(data.get('kind') || 'comment'), text);
   });
 
   if (photoForm && preview) {
@@ -287,7 +294,7 @@ export function init(panel: HTMLElement) {
           photoForm.reset();
           preview.hidden = true;
         }
-      } else handleError(r);
+      } else handleError(r, { type: 'photo', key });
     });
   }
 
@@ -296,22 +303,37 @@ export function init(panel: HTMLElement) {
     if (!reportTarget) return;
     const data = new FormData(reportForm);
     reportDialog.close();
-    const r = await api('/api/flags', { method: 'POST', body: JSON.stringify({ key, ...reportTarget, reason: data.get('reason'), note: data.get('note') || '' }) });
-    if (r.status === 200) {
-      say(r.data.message || 'Thanks for telling us.');
-      await load(true);
-    } else handleError(r);
+    await sendReport(reportTarget, String(data.get('reason') || 'other'), String(data.get('note') || ''));
   });
   q<HTMLButtonElement>(reportDialog, '[data-report-cancel]')!.addEventListener('click', () => reportDialog.close());
 
+  /** A note, report or photo sent while the site session had ended: finish it now that the visitor is back. */
+  async function finishRemembered() {
+    const a = takeAction(key, ['comment', 'flag', 'photo']);
+    if (!a || !me || me.needsProfile || me.status === 'banned' || me.status === 'under13') return;
+    if (a.type === 'comment' && typeof a.text === 'string') {
+      const kind = a.kind === 'correction' ? 'correction' : 'comment';
+      commentForm.querySelector<HTMLInputElement>(`input[name=kind][value=${kind}]`)!.checked = true;
+      commentForm.querySelector<HTMLTextAreaElement>('textarea[name=text]')!.value = a.text;
+      await sendComment(kind, a.text);
+    } else if (a.type === 'flag' && (a.itemType === 'comment' || a.itemType === 'photo') && typeof a.itemId === 'string') {
+      await sendReport({ itemType: a.itemType, itemId: a.itemId }, String(a.reason || 'other'), String(a.note || ''));
+    } else if (a.type === 'photo') {
+      const details = q<HTMLDetailsElement>(panel, '[data-photo-details]');
+      if (details) details.open = true;
+      say("You're signed in again. Please choose your photo again and press Send.");
+    }
+  }
+
   (async () => {
     await load();
-    if (!(await signedIn())) {
+    if (!(await ensureSession()).signedIn) {
       applyMe();
       return;
     }
     const meRes = await api('/api/me');
     me = meRes.status === 200 && meRes.data?.signedIn ? (meRes.data.user as Me) : null;
     applyMe();
+    await finishRemembered();
   })();
 }
