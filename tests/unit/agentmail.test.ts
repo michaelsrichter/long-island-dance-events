@@ -162,6 +162,34 @@ describe('agentmail adapter', () => {
     expect(inCache(cache)).toEqual([]);
   });
 
+  it('never reads a reply to a review-center email as a newsletter, even from a newsletter sender', async () => {
+    const dir = tempDir();
+    const file = join(dir, 'newsletters.json');
+    writeFileSync(file, JSON.stringify({ newsletters: [{ sourceId: 'sample-pub', newsletterSourceId: 'sample-pub-newsletter', senders: ['@sample-pub.example'] }] }));
+    vi.stubEnv('LIDE_NEWSLETTERS_FILE', file);
+    vi.stubEnv('AGENTMAIL_API_KEY', 'test-key');
+    vi.stubEnv('AGENTMAIL_INBOX', 'inbox@example.test');
+    const html = readFileSync(join(FIX, 'agentmail-newsletter.html'), 'utf8');
+    const downloaded: string[] = [];
+    vi.stubGlobal('fetch', async (url: string) => {
+      if (/\/messages\?/.test(url))
+        return Response.json({
+          messages: [
+            { message_id: '<issue@sample>', thread_id: 't-news', labels: ['received'], from: 'news@sample-pub.example', subject: 'This month at Sample Pub', timestamp: '2026-10-01T14:00:00Z' },
+            { message_id: '<reply@sample>', thread_id: 't-ask', labels: ['received', 'unread'], from: 'news@sample-pub.example', subject: 'Re: Can we list your events?', timestamp: '2026-10-02T14:00:00Z' },
+          ],
+        });
+      if (/\/threads\/t-ask$/.test(url)) return Response.json({ thread_id: 't-ask', labels: ['outreach', 'source-sample-pub', 'sent', 'received'] });
+      if (/\/threads\/t-news$/.test(url)) return Response.json({ thread_id: 't-news', labels: ['received'] });
+      downloaded.push(url);
+      return Response.json({ html });
+    });
+    const docs = await adapter.fetch(context(join(dir, 'cache'), false));
+    expect(docs).toHaveLength(1);
+    expect(docs[0]!.meta.issue).toBe('2026-10-01');
+    expect(downloaded.some((u) => u.includes(encodeURIComponent('<reply@sample>')))).toBe(false);
+  });
+
   it('is quiet (not a failure) when there is no issue to read', async () => {
     const dir = tempDir();
     const file = join(dir, 'newsletters.json');

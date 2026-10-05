@@ -577,5 +577,5 @@ Platform facts we relied on:
 - **Staying signed in** (`src/scripts/account-state.ts`): kept; only `whoAmI()` changes where it asks.
 - **SEO and usage dashboard** (PR #36): all page code is reused. Application Insights stays the same; the dashboard's queries get the new app's name added.
 - **Rolling collector pull request:** keeps running as today until switch day, with shadow mode in phase 3.
-- **Decision log:** this proposal is recorded as P53, "Proposed". If approved, it answers P52's "revisit when": the git-based workflow has become too slow.
+- **Decision log:** this proposal is recorded as P54, "Proposed". If approved, it answers P52's "revisit when": the git-based workflow has become too slow.
 

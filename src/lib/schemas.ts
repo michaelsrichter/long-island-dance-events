@@ -62,7 +62,8 @@ export const SOURCE_TYPES = ['jsonld', 'ical', 'html', 'pdf', 'api'] as const;
 export const SOURCE_STATUSES = ['never', 'ok', 'empty', 'invalid', 'error', 'skipped'] as const;
 export const SOURCE_CADENCES = ['daily', 'twice-weekly', 'weekly', 'monthly', 'seasonal', 'manual'] as const;
 export const SOURCE_CATALOG_STATUSES = ['live', 'in-progress', 'verified', 'recheck-from-ci', 'needs-permission', 'manual-intake', 'seasonal-recheck'] as const;
-export const SOURCE_PERMISSION_STATUSES = ['not-needed', 'needed', 'requested', 'granted', 'denied'] as const;
+/** no-reply = we asked (by email from the review center or by hand) and heard nothing back. */
+export const SOURCE_PERMISSION_STATUSES = ['not-needed', 'needed', 'requested', 'granted', 'denied', 'no-reply'] as const;
 export const STYLE_FAMILIES = ['swing', 'ballroom', 'latin', 'tango', 'country', 'other'] as const;
 
 /**
@@ -478,6 +479,8 @@ export const sourceSchema = z.object({
       feedUrl: url,
     }),
   ),
+  /** The website's public business email for permission requests (only an address they publish). */
+  contactEmail: email,
   /** Plain-language credit shown on the Sources page. */
   attribution: z.string().max(300),
   description: opt(z.string().max(400)),

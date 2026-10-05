@@ -72,5 +72,17 @@ describe('review center content files', () => {
     expect(sample('Held for review: the tour page lists Illinois.', { lockedFields: ['status'] })).toEqual(['held']);
     expect(data.eveningTime('2026-10-16T06:30')).toBe('18:30');
     expect(data.eveningTime('2026-10-16T20:00')).toBe('');
+    expect(data.eveningTime('2026-10-06T08:00', '2026-10-06T17:00'), '8 AM to 5 PM looks like a real daytime event').toBe('');
+    expect(data.eveningTime('2026-10-16T06:30', '2026-10-16T23:00')).toBe('18:30');
+  });
+
+  it('moving the start past the end drops the end time instead of making a 21-hour event', () => {
+    const e = { title: 'Live music at The Coop', summary: 'Live music at a bar.', category: 'live-music', start: '2026-10-06T08:00', end: '2026-10-06T17:00', timezone: 'America/New_York', venueId: [...venueIds][0], sourceId: 's', sourceUrl: 'https://example.org/', firstSeen: '2026-10-01', lastSeen: '2026-10-05', status: 'pending-review' };
+    const r = files.decideListing(e, { action: 'fix', fields: { time: '20:00' } }, { today: '2026-10-05', venueIds, performerIds });
+    expect(r.event.start).toBe('2026-10-06T20:00');
+    expect(r.event.end).toBeUndefined();
+    expect(r.event.lockedFields).toEqual(['status', 'start', 'end']);
+    const late = files.decideListing({ ...e, start: '2026-10-06T06:30', end: '2026-10-06T00:30' }, { action: 'fix', fields: { time: '18:30' } }, { today: '2026-10-05', venueIds, performerIds });
+    expect(late.event.end, 'an after-midnight end stays').toBe('2026-10-06T00:30');
   });
 });

@@ -93,6 +93,22 @@ async function api<T>(path: string, key: string): Promise<T> {
   return (await res.json()) as T;
 }
 
+/** Label on every email the review center sends to a website owner, and so on its whole thread (decision P53). */
+export const OUTREACH_LABEL = 'outreach';
+
+/**
+ * Is this message part of a conversation the review center started (a permission request and the
+ * answer to it)? Such replies may come from the same address as a newsletter, so they are skipped.
+ */
+async function isOutreach(m: { labels?: string[]; thread_id?: string }, inbox: string, key: string, cache: Map<string, boolean>): Promise<boolean> {
+  if (m.labels?.includes(OUTREACH_LABEL)) return true;
+  if (!m.thread_id) return false;
+  if (!cache.has(m.thread_id)) {
+    const t = await api<{ labels?: string[] }>(`/inboxes/${encodeURIComponent(inbox)}/threads/${encodeURIComponent(m.thread_id)}`, key);
+    cache.set(m.thread_id, Boolean(t.labels?.includes(OUTREACH_LABEL)));
+  }
+  return cache.get(m.thread_id)!;
+}
 /**
  * Emails live only for this run, in a temporary folder outside the ingest cache. GitHub Actions saves
  * and restores .cache/ingest (pull requests can restore it too), and an email's footer and
@@ -127,15 +143,18 @@ export const adapter: Adapter = {
     const since = addDays(ctx.today, -WINDOW_DAYS);
     const dir = emailFolder();
     const seen = new Set<string>();
+    const outreachThreads = new Map<string, boolean>();
     const messages: RunMessage[] = [];
     for (const sender of senders) {
       const q = new URLSearchParams({ limit: '30', after: `${since}T00:00:00Z`, from: sender });
-      const list = await api<{ messages: { message_id: string; from: string; subject?: string; timestamp: string }[] }>(
+      const list = await api<{ messages: { message_id: string; thread_id?: string; labels?: string[]; from: string; subject?: string; timestamp: string }[] }>(
         `/inboxes/${encodeURIComponent(inbox)}/messages?${q}`,
         key,
       );
       for (const m of list.messages ?? []) {
         if (!senderMatches(m.from, senders) || NOT_AN_ISSUE.test(m.subject ?? '')) continue;
+        // A reply to an email the review center sent (decision P53) is a conversation, not a newsletter.
+        if (await isOutreach(m, inbox, key, outreachThreads)) continue;
         const id = createHash('sha1').update(m.message_id).digest('hex').slice(0, 20);
         if (seen.has(id)) continue;
         seen.add(id);

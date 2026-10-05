@@ -1,5 +1,6 @@
 /** Sources: what stopped working, new websites found, and switched-off sources grouped by what you can do. */
-import { ago, api, button, cmsUrl, copilotButton, dateTimeLabel, dayLabel, details, el, emptyState, errorText, field, link, list, LIVE, plural, say, settle } from './core';
+import { ago, api, button, cmsUrl, copilotButton, dateTimeLabel, dayLabel, details, el, emptyState, errorText, link, list, LIVE, plural, say, settle } from './core';
+import { composer, conversations, type OutreachSummary } from './compose';
 
 export type Source = {
   id: string;
@@ -31,8 +32,8 @@ export type SourcesData = {
 const GROUPS: { id: string; title: string; help: string; closed?: boolean }[] = [
   { id: 'broken', title: 'Stopped working', help: 'The last check of these sources failed. Often the website changed its layout. Press "Try again now". If it still fails, press "Ask Copilot to fix it", or switch it off.' },
   { id: 'granted', title: 'They said yes: switch it on', help: 'The owner of the website said we may list their events. Switch the source on, or ask Copilot to set it up if they sent a calendar link.' },
-  { id: 'asked', title: 'Waiting for an answer', help: 'You asked these websites for permission. When they answer, press "They said yes" or "They said no".' },
-  { id: 'permission', title: 'Ask for permission', help: 'These websites ask automatic tools like ours to stay away, or their rules say to ask first. We never work around that. A short, friendly email often works. Send the ready-made email, then press "I asked".' },
+  { id: 'asked', title: 'Waiting for an answer', help: 'You asked these websites for permission. Their answers show under each one. When they answer, press "They said yes: switch it on" or "They said no". If there is no answer after 14 days, you can send one short follow-up.' },
+  { id: 'permission', title: 'Ask for permission', help: 'These websites ask programs like ours to stay away, or their rules say to ask first. We never work around that. A short, friendly email often works. Press "Review and send the email…". If you asked another way (like a contact form), press "I asked another way".' },
   { id: 'venues', title: 'Needs venue research', help: 'These list events at places we have no page for yet, so their events are not shown. Ask Copilot to research the venues (address and dance floor). Then switch the source on.' },
   { id: 'schedule', title: 'Add a weekly schedule by hand', help: 'These show a regular schedule in words (like "every Tuesday at 7 PM") with no dates a computer can read. Add it once in the editor as a repeating event, then look at their page now and then.' },
   { id: 'flyers', title: 'Add events from flyers or social posts', help: 'These only post picture flyers or social media posts. We never read text from pictures automatically. When you see a flyer, add the event by hand in the editor.' },
@@ -41,6 +42,7 @@ const GROUPS: { id: string; title: string; help: string; closed?: boolean }[] = 
   { id: 'developer', title: 'Needs a small program change', help: 'We need to change how we read these. Ask Copilot to do it.' },
   { id: 'seasonal', title: 'Check again in spring', help: 'Summer series and seasonal places with nothing coming up now. There is nothing to do until April.', closed: true },
   { id: 'refused', title: 'They said no', help: 'We will not list these.', closed: true },
+  { id: 'noreply', title: 'Asked, no answer', help: 'We asked, but they never answered. You can ask again after a while.', closed: true },
   { id: 'other', title: 'Other switched-off sources', help: 'Set aside for now (for example, not updated lately). The monthly check keeps an eye on them.', closed: true },
 ];
 const ACTION_GROUPS = new Set(['broken', 'granted', 'asked']);
@@ -48,34 +50,30 @@ const ACTION_GROUPS = new Set(['broken', 'granted', 'asked']);
 const CADENCE: Record<string, string> = { daily: 'every morning', 'twice-weekly': 'Mondays and Thursdays', weekly: 'Sundays', monthly: 'Sundays', seasonal: 'in season', manual: 'by hand only' };
 const RESULT: Record<string, string> = { ok: 'worked', empty: 'found nothing', invalid: 'found broken data', error: 'could not be read', skipped: 'skipped', never: 'not checked yet' };
 
-export function sourceTodoCount(d: SourcesData): number {
-  return d.sources.filter((s) => ACTION_GROUPS.has(s.group) && !s.snoozedUntil).length + d.discovery.reduce((n, i) => n + (i.data?.newSites.length || 0), 0);
+/** A source emailed from the review center counts as "asked" even before its file says so. */
+function effectiveGroup(s: Source, o: OutreachSummary | null): string {
+  if (s.group === 'permission' && o?.sent.some((x) => x.key === `source:${s.id}`)) return 'asked';
+  return s.group;
+}
+const newAnswers = (s: Source, o: OutreachSummary | null) => Boolean(o?.threads.some((t) => t.key === `source:${s.id}` && t.unread));
+function followupIsDue(s: Source, o: OutreachSummary | null, now = Date.now()): boolean {
+  const sent = o?.sent.find((x) => x.key === `source:${s.id}`);
+  if (!o || !sent || sent.followups > 0 || effectiveGroup(s, o) !== 'asked') return false;
+  if (o.threads.some((t) => t.key === `source:${s.id}` && t.hasReply)) return false;
+  return now - Date.parse(sent.lastSentAt) >= o.rules.followupAfterDays * 86400000;
 }
 
-function permissionEmail(s: Source) {
-  const subject = 'Can we list your events on Long Island Dance Events?';
-  const body = [
-    'Hello,',
-    '',
-    "I'm writing from Long Island Dance Events (https://longisland.dance). It's a free website that lists dances, dance classes and live music in Nassau and Suffolk.",
-    '',
-    `We'd love to list your public events, with a link back to your page (${s.url}). We only use the basic facts (date, time, place and price), and we write the description in our own words. We never copy your photos or text.`,
-    '',
-    'May we read your event calendar with our automatic tool? It visits slowly, a few times a week, and it\'s called "LongIslandDanceEventsBot". A calendar link (an .ics feed) or an email newsletter works great too.',
-    '',
-    "If you'd rather not be listed, just tell us and we won't list you.",
-    '',
-    'Thank you!',
-    '',
-    'Long Island Dance Events',
-    'https://longisland.dance',
-  ].join('\n');
-  return { subject, body };
+export function sourceTodoCount(d: SourcesData, o: OutreachSummary | null = null): number {
+  const actions = d.sources.filter((s) => !s.snoozedUntil && (['broken', 'granted'].includes(effectiveGroup(s, o)) || newAnswers(s, o) || followupIsDue(s, o))).length;
+  return actions + d.discovery.reduce((n, i) => n + (i.data?.newSites.length || 0), 0);
 }
 
-export function renderSources(root: HTMLElement, d: SourcesData, onCount: (n: number) => void) {
+export function renderSources(root: HTMLElement, d: SourcesData, o: OutreachSummary | null, onCount: (n: number) => void) {
   root.replaceChildren();
-  let open = sourceTodoCount(d);
+  let open = sourceTodoCount(d, o);
+  d = { ...d, sources: d.sources.map((s) => ({ ...s, group: effectiveGroup(s, o) })) };
+  const sentFor = new Map((o?.sent || []).filter((x) => x.key.startsWith('source:')).map((x) => [x.key, x]));
+  const followupDue = (id: string) => followupIsDue(d.sources.find((x) => x.id === id)!, o);
   onCount(open);
   const decided = () => onCount(Math.max(0, --open));
   const failureFor = new Map(d.failures.map((f) => [f.sourceId, f]));
@@ -118,6 +116,11 @@ export function renderSources(root: HTMLElement, d: SourcesData, onCount: (n: nu
     const f = failureFor.get(s.id);
     li.append(list([link(s.url, 'Open their website'), f ? link(f.url, `Problem report #${f.number}`) : null, link(cmsUrl('sources', s.id), 'Edit in the editor', { external: true })], 'review-links'));
 
+    if (!['permission', 'asked', 'noreply'].includes(s.group)) {
+      const conv = conversations(`source:${s.id}`, o);
+      if (conv) li.append(conv);
+    }
+    if (newAnswers(s, o)) li.classList.add('review-card--urgent');
     const actions = el('div', null, 'review-actions');
     const switchOn = (label = 'Switch on', confirmText = `Switch on "${s.name}"? The next check will read it.`) =>
       button(label, 'btn--secondary', async () => {
@@ -140,53 +143,61 @@ export function renderSources(root: HTMLElement, d: SourcesData, onCount: (n: nu
         );
         break;
       case 'permission':
-      case 'asked': {
-        const mail = permissionEmail(s);
-        const box = details(s.group === 'asked' ? 'Ask again: the ready-made email' : 'The ready-made email', 'review-form');
-        const text = el('textarea');
-        text.value = `Subject: ${mail.subject}\n\n${mail.body}`;
-        text.rows = 10;
-        box.body.append(field('Email text (you can change it)', text, 'Find their email address on their website (often under Contact). We never use private addresses.'));
-        const row = el('div', null, 'review-actions');
-        row.append(
-          button('Copy the email', 'btn--secondary', async () => {
-            try {
-              await navigator.clipboard.writeText(text.value);
-              say('Copied. Paste it into a new email.');
-            } catch {
-              text.select();
-              say('Select the text and copy it.');
-            }
-          }),
-          link(`mailto:?subject=${encodeURIComponent(mail.subject)}&body=${encodeURIComponent(mail.body)}`, 'Open in my email app', { external: false, cls: 'btn btn--small btn--secondary' }),
-        );
-        box.body.append(row);
-        li.append(box.box);
-        if (s.group === 'permission') {
+      case 'asked':
+      case 'noreply': {
+        const sent = sentFor.get(`source:${s.id}`);
+        const conv = conversations(`source:${s.id}`, o);
+        if (conv) li.append(conv);
+        const answered = o?.threads.some((t) => t.key === `source:${s.id}` && t.hasReply);
+        if (s.group === 'permission' && !sent) {
+          actions.append(composer({ key: `source:${s.id}`, kind: 'permission', label: 'Review and send the email…', primary: true, saveContact: true, onSent: () => decided() }));
           actions.append(
-            button('I asked', 'btn--primary', async () => {
-              const note = prompt('Who did you ask, and how? (Saved in the history. No private details.)', 'Emailed them from their contact page');
+            button('I asked another way', 'btn--secondary', async () => {
+              const note = prompt('Who did you ask, and how? This is saved in the history, so leave out private details.', 'Asked through their contact form');
               if (note === null) return;
               await commit({ id: s.id, action: 'permission', status: 'requested', note }, li, 'Saved. It moves to "Waiting for an answer".');
             }),
           );
         } else {
+          if (sent) li.append(el('p', `You emailed them on ${dayLabel(sent.lastSentAt.slice(0, 10))}${sent.followups ? ` (plus ${plural(sent.followups, 'follow-up')})` : ''}.`, 'review-hint'));
+          if (followupDue(s.id)) {
+            li.classList.add('review-card--urgent');
+            li.append(el('p', `No answer after ${o!.rules.followupAfterDays} days. Send a short follow-up?`, 'review-state review-state--warn'));
+            actions.append(composer({ key: `source:${s.id}`, kind: 'followup', label: 'Review and send a follow-up…', primary: true }));
+          }
+          const yes = async (enable: boolean) => {
+            const note = prompt('Anything to remember? (This is saved in the history.)', 'They said yes by email');
+            if (note === null) return;
+            const decisions: Record<string, unknown>[] = [{ id: s.id, action: 'permission', status: 'granted', note }];
+            if (enable && !s.enabled) decisions.push({ id: s.id, action: 'enable', note: 'Permission granted' });
+            const r = await api('/api/review/sources', { decisions });
+            if (r.status !== 200) return say(errorText(r));
+            settle(li, enable ? `Saved and switched on. The next check will read it. ${LIVE}` : 'Saved. When it is ready, switch it on under "They said yes: switch it on".');
+            decided();
+          };
           actions.append(
-            button('They said yes', 'btn--primary', async () => {
-              const note = prompt('Anything to remember? For example, the calendar link they sent. (Saved in the history.)', 'They said yes');
-              if (note === null) return;
-              const feed = /https?:\/\/\S+/.exec(note)?.[0];
-              await commit({ id: s.id, action: 'permission', status: 'granted', note, ...(feed ? { feedUrl: feed } : {}) }, li, 'Saved. Now switch it on under "They said yes".');
+            button('They said yes: switch it on', answered ? 'btn--primary' : 'btn--secondary', () => yes(true)),
+            button('They sent a calendar link…', 'btn--secondary', async () => {
+              const feed = prompt('Paste the calendar link they sent (an .ics link or feed address):', 'https://');
+              if (!feed || !/^https?:\/\/\S+\.\S+/.test(feed)) return;
+              await commit({ id: s.id, action: 'permission', status: 'granted', note: 'They sent a calendar link', feedUrl: feed.trim() }, li, 'Saved. Next, ask Copilot to set it up under "They said yes: switch it on".');
             }),
             button('They said no', 'btn--secondary', async () => {
-              if (!confirm(`Save that ${s.name} said no? We won't list them.`)) return;
+              if (!confirm(`Save that ${s.name} said no? We won't list them or ask again.`)) return;
               await commit({ id: s.id, action: 'permission', status: 'denied', note: 'They said no' }, li, "Saved. We won't list them.");
             }),
           );
+          if (s.group !== 'noreply') {
+            actions.append(
+              button('No answer', 'btn--secondary', async () => {
+                if (!confirm('Save that they never answered? You can ask again later.')) return;
+                await commit({ id: s.id, action: 'permission', status: 'no-reply', note: 'No answer' }, li, 'Saved. It moves to "Asked, no answer".');
+              }),
+            );
+          } else actions.append(composer({ key: `source:${s.id}`, kind: 'permission', label: 'Ask again by email…', saveContact: true }));
         }
         break;
-      }
-      case 'granted':
+      }      case 'granted':
         actions.append(switchOn('Switch on'));
         actions.append(copilotButton('Ask Copilot to set it up', () => `Set up the source: ${s.name}`, () => `${s.name} said we may list their events (\`src/content/sources/${s.id}.json\`). Permission note: ${s.permission?.note || 'none'}.\n\nPlease set the source up (use their calendar link if they sent one), test it, switch it on and open a pull request.`));
         break;

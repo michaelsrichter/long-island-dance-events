@@ -4,6 +4,7 @@ import { ago, api, button, dateTimeLabel, dayLabel, el, emptyState, errorText, l
 import { renderListings, type ListingsData } from './listings';
 import { newEventCount, renderCollected, type Collected } from './publish';
 import { renderSources, sourceTodoCount, type SourcesData } from './sources';
+import type { OutreachSummary } from './compose';
 import { messageTodoCount, renderMessages, type MessagesData } from './messages';
 
 type GitHubStatus = { connected: boolean; installed: boolean; canSetUp: boolean; slug?: string; installUrl?: string };
@@ -14,7 +15,7 @@ const TABS = ['todo', 'listings', 'publish', 'sources', 'messages', 'posts', 'lo
 type Tab = (typeof TABS)[number];
 
 const counts: Partial<Record<Tab, number>> = {};
-const loaded: { status?: Status; listings?: ListingsData | Error; collected?: Collected | Error; sources?: SourcesData | Error; messages?: MessagesData | Error } = {};
+const loaded: { status?: Status; listings?: ListingsData | Error; collected?: Collected | Error; sources?: SourcesData | Error; messages?: MessagesData | Error; outreach?: OutreachSummary | null } = {};
 
 function q<T extends HTMLElement>(sel: string): T {
   return root!.querySelector<T>(sel)!;
@@ -175,14 +176,15 @@ function renderTodo() {
   if (s instanceof Error) failed.push('sources');
   else if (!s) pending++;
   else {
-    const n = counts.sources ?? sourceTodoCount(s);
+    const n = counts.sources ?? sourceTodoCount(s, loaded.outreach ?? null);
+    const answers = (loaded.outreach?.threads || []).filter((t) => t.unread && t.key.startsWith('source:')).length;
     const broken = s.sources.filter((x) => x.group === 'broken' && !x.snoozedUntil).length;
     const asked = s.sources.filter((x) => (x.group === 'asked' || x.group === 'granted') && !x.snoozedUntil).length;
     const sites = s.discovery.reduce((k, i) => k + (i.data?.newSites.length || 0), 0);
     const optional = s.sources.filter((x) => ['permission', 'venues', 'schedule', 'recheck'].includes(x.group) && !x.snoozedUntil).length;
     if (n > 0) {
       waiting++;
-      cards.push(todoCard('Sources', String(n), [broken ? `${plural(broken, 'source')} stopped working.` : null, asked ? `${plural(asked, 'permission request')} to follow up.` : null, sites ? `${plural(sites, 'new website')} found.` : null], 'sources', 'Open sources', broken > 0));
+      cards.push(todoCard('Sources', String(n), [answers ? `${plural(answers, 'new answer')} to your permission emails.` : null, broken ? `${plural(broken, 'source')} stopped working.` : null, asked ? `${plural(asked, 'permission request')} to follow up.` : null, sites ? `${plural(sites, 'new website')} found.` : null], 'sources', 'Open sources', broken > 0 || answers > 0));
     } else if (optional) {
       const extra = el('section', null, 'review-card');
       extra.append(el('h3', 'When you have time'), el('p', `${plural(optional, 'switched-off source')} could add more events if someone asks for permission, looks up venues, or adds a schedule. Nothing urgent.`));
@@ -245,14 +247,15 @@ async function loadCollected() {
 
 async function loadSources() {
   const panel = q<HTMLElement>('[data-sources]');
-  const r = await api<SourcesData>('/api/review/sources');
+  const [r, o] = await Promise.all([api<SourcesData>('/api/review/sources'), api<OutreachSummary>('/api/review/outreach')]);
+  loaded.outreach = o.status === 200 && Array.isArray(o.data?.threads) && Array.isArray(o.data?.sent) ? o.data : null;
   if (r.status !== 200) {
     loaded.sources = r.status === 428 ? { today: '', sources: [], failures: [], discovery: [], runs: [] } : new Error(String(r.status));
     failedPanel(panel, r);
     return renderTodo();
   }
   loaded.sources = r.data;
-  renderSources(panel, r.data, (n) => setCount('sources', n));
+  renderSources(panel, r.data, loaded.outreach ?? null, (n) => setCount('sources', n));
 }
 
 async function loadMessages() {
@@ -289,6 +292,11 @@ const ACTIONS: Record<string, string> = {
   'message.close': 'Closed a message',
   'message.snooze': 'Snoozed a message',
   'copilot.ask': 'Asked Copilot',
+  'outreach.permission': 'Emailed a website for permission',
+  'outreach.followup': 'Sent a follow-up email',
+  'outreach.correction': 'Emailed an organizer about a listing',
+  'outreach.test': 'Sent a test email to the site inbox',
+  'outreach.dryrun': 'Tried an email on a test copy (not sent)',
   'github.connect': 'Connected GitHub',
   approve: 'Approved a post',
   reject: 'Rejected a post',

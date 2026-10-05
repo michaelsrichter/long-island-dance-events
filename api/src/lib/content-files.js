@@ -71,8 +71,15 @@ function decideListing(event, decision, { today, venueIds, performerIds }) {
     const f = decision.fields || {};
     if (f.time !== undefined && f.time !== '') {
       if (!TIME.test(f.time)) throw new DecisionError('Use a time like 19:30.');
+      const oldTime = String(e.start).length > 10 ? String(e.start).slice(11, 16) : '';
       e.start = `${String(e.start).slice(0, 10)}T${f.time}`;
       changed.push('start');
+      // An end time that no longer fits (8:00-17:00 moved to start at 20:00) is dropped; the site then shows about 3 hours.
+      const end = /^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2})$/.exec(String(e.end || ''));
+      if (end && end[1] === e.start.slice(0, 10) && end[2] <= f.time && (!oldTime || end[2] > oldTime)) {
+        delete e.end;
+        changed.push('end');
+      }
     }
     if (f.venueId) {
       if (!isId(f.venueId) || !venueIds.has(f.venueId)) throw new DecisionError('Pick a venue from the list.');
@@ -124,7 +131,7 @@ function checkEvent(e) {
   if (!e.venueId && !e.town) throw new DecisionError('Pick a venue, or at least type the town.');
 }
 
-const PERMISSION = ['needed', 'requested', 'granted', 'denied'];
+const PERMISSION = ['needed', 'requested', 'granted', 'denied', 'no-reply'];
 
 /**
  * One owner decision on a source.
@@ -150,7 +157,7 @@ function decideSource(source, decision, { today }) {
     if (!PERMISSION.includes(decision.status)) throw new DecisionError('Unknown permission answer.');
     const p = { ...(s.permission || {}), status: decision.status };
     if (decision.status === 'requested') p.requestedAt = today;
-    if (decision.status === 'granted' || decision.status === 'denied') p.decidedAt = today;
+    if (decision.status === 'granted' || decision.status === 'denied' || decision.status === 'no-reply') p.decidedAt = today;
     if (note) p.note = `${note} (${today})`.slice(0, 300);
     if (decision.feedUrl) {
       try {
@@ -162,11 +169,34 @@ function decideSource(source, decision, { today }) {
       }
     }
     s.permission = p;
-    summary = { requested: 'asked for permission', granted: 'permission granted', denied: 'permission refused', needed: 'permission needed' }[decision.status];
+    summary = { requested: 'asked for permission', granted: 'permission granted', denied: 'permission refused', needed: 'permission needed', 'no-reply': 'asked, no answer' }[decision.status];
   } else {
     throw new DecisionError('Unknown action.');
   }
   return { source: s, summary };
 }
 
-module.exports = { EVENT_ORDER, ENTITY_ORDER, tidy, serialize, orderFor, isId, pathOf, decideListing, decideSource, checkEvent, DecisionError };
+/**
+ * After an email from the review center: the permission becomes "requested" (with the date), and
+ * the note says by what route, naming only the address's domain (the repository is public). The
+ * address itself is saved only when the owner says the website publishes it (`contactEmail`).
+ */
+function recordOutreach(source, { kind, to, today, saveContact }) {
+  const s = JSON.parse(JSON.stringify(source));
+  const p = { ...(s.permission || {}) };
+  const domain = String(to).split('@')[1] || 'their address';
+  if (kind === 'followup') {
+    p.status = p.status === 'granted' || p.status === 'denied' ? p.status : 'requested';
+    p.note = `Follow-up email sent on ${today} from the review center.`;
+  } else {
+    p.status = 'requested';
+    p.requestedAt = today;
+    delete p.decidedAt;
+    p.note = `Asked by email (an address at ${domain}) on ${today} from the review center.`;
+  }
+  s.permission = p;
+  if (saveContact && kind !== 'followup') s.contactEmail = String(to);
+  return { source: s, summary: kind === 'followup' ? 'follow-up email sent' : 'permission request emailed' };
+}
+
+module.exports = { EVENT_ORDER, ENTITY_ORDER, tidy, serialize, orderFor, isId, pathOf, decideListing, decideSource, recordOutreach, checkEvent, DecisionError };
