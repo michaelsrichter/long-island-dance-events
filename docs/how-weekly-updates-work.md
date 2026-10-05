@@ -212,7 +212,7 @@ GitHub secrets (`AGENTMAIL_INBOX`, `AGENTMAIL_API_KEY`), never in the code.
   The Sunday run reads issues from the last 45 days and treats each one like a web page list, with all
   the same rules. The emails are kept only in a temporary folder during the run, never in the saved
   download cache, so the inbox address in their footers cannot leak. Links on the website point to the
-  venue's public page, never to the email.
+  venue's public page, never to the email. Emails the review center sends to website owners (permission requests, decision P53) and their answers share the inbox, but they carry the label `outreach`, and the reader skips every thread with that label.
 - **Switching one on:** after the first real issue arrives, a person checks a few listings against
   the email, then switches the source on. Until then it stays off.
 - The list of sign-ups and their status is in [`catalog/newsletters.json`](../catalog/newsletters.json).

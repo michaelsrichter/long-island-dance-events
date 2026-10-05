@@ -205,21 +205,51 @@ async function headSha() {
 
 /**
  * Every file in some content folders at one commit, with its text (only for `withText` folders).
- * One GraphQL call, so it needs the app.
+ * One small GraphQL call lists the folders (name + blob id); texts are fetched by blob id in batches
+ * of 200 and cached by blob id, so after the first load only changed files are fetched again.
+ * (Asking GraphQL for the whole folder with its texts at once times out at about 800 files.)
  */
 async function readFolders(sha, folders, { withText = folders } = {}) {
   const token = await installationToken();
   if (!token) throw new GitHubError(428, 'Connect the review center to GitHub first (one-time setup on the To do tab).');
-  const parts = folders.map(
-    (f, i) => `f${i}: object(expression: "${sha}:src/content/${f}") { ... on Tree { entries { name ${withText.includes(f) ? 'object { ... on Blob { text } }' : ''} } } }`,
-  );
+  if (!/^[0-9a-f]{40}$/.test(sha)) throw new GitHubError(400, 'Bad commit id');
+  const parts = folders.map((f, i) => `f${i}: object(expression: "${sha}:src/content/${f}") { ... on Tree { entries { name oid } } }`);
   const data = await graphql(`query($owner: String!, $name: String!) { repository(owner: $owner, name: $name) { ${parts.join(' ')} } }`, { owner: OWNER, name: NAME });
   const out = {};
+  const need = [];
   folders.forEach((f, i) => {
     const entries = (data.repository[`f${i}`] && data.repository[`f${i}`].entries) || [];
-    out[f] = entries.filter((e) => e.name.endsWith('.json')).map((e) => ({ id: e.name.slice(0, -5), text: e.object ? e.object.text : undefined }));
+    out[f] = entries.filter((e) => e.name.endsWith('.json')).map((e) => ({ id: e.name.slice(0, -5), oid: e.oid }));
+    if (withText.includes(f)) need.push(...out[f].map((e) => e.oid));
   });
+  const texts = await blobs(need);
+  for (const f of withText) for (const e of out[f] || []) e.text = texts[e.oid];
   return out;
+}
+
+const blobCache = new Map();
+const BLOB_BATCH = 200;
+const BLOB_CACHE_MAX = 6000;
+
+/** File texts by blob id (cached; blobs never change). */
+async function blobs(oids) {
+  const missing = [...new Set(oids)].filter((o) => /^[0-9a-f]{40}$/.test(o) && !blobCache.has(o));
+  const batches = [];
+  for (let i = 0; i < missing.length; i += BLOB_BATCH) batches.push(missing.slice(i, i + BLOB_BATCH));
+  for (let i = 0; i < batches.length; i += 4) {
+    await Promise.all(
+      batches.slice(i, i + 4).map(async (b) => {
+        const parts = b.map((o, j) => `b${j}: object(oid: "${o}") { ... on Blob { text } }`);
+        const data = await graphql(`query($owner: String!, $name: String!) { repository(owner: $owner, name: $name) { ${parts.join(' ')} } }`, { owner: OWNER, name: NAME });
+        b.forEach((o, j) => {
+          const x = data.repository[`b${j}`];
+          if (x && typeof x.text === 'string') blobCache.set(o, x.text);
+        });
+      }),
+    );
+  }
+  if (blobCache.size > BLOB_CACHE_MAX) for (const k of [...blobCache.keys()].slice(0, blobCache.size - BLOB_CACHE_MAX)) blobCache.delete(k);
+  return Object.fromEntries(oids.map((o) => [o, blobCache.get(o)]));
 }
 
 async function readFiles(sha, paths) {
@@ -263,6 +293,21 @@ async function commitFiles(build, { attempts = 3 } = {}) {
 }
 
 /* ---------- one-time setup (GitHub App manifest flow) ---------- */
+
+/**
+ * A few content files from main, with the app if it is connected, otherwise from the public raw
+ * address (the repository is public). Used where reading must work before the one-time setup.
+ */
+async function readMainFiles(paths) {
+  const token = await installationToken();
+  if (token) return readFiles(await headSha(), paths);
+  const out = {};
+  for (const p of paths) {
+    const res = await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${p.split('/').map(encodeURIComponent).join('/')}`, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(15000) });
+    out[p] = res.ok ? await res.text() : null;
+  }
+  return out;
+}
 
 function manifest(origin) {
   return {
@@ -312,6 +357,6 @@ async function finishSetup(state, code) {
 
 module.exports = {
   REPO, BRANCH, OWNER, NAME, GitHubError,
-  gh, graphql, headSha, readFolders, readFiles, commitFiles, status, installationToken,
+  gh, graphql, headSha, readFolders, readFiles, readMainFiles, commitFiles, status, installationToken,
   startSetup, finishSetup, manifest, encrypt, decrypt, appJwt, forget,
 };

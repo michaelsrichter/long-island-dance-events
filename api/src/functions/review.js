@@ -20,6 +20,10 @@
  *   GET  /api/review/messages                    open visitor issues (+ Copilot tasks)
  *   POST /api/review/messages  { number, action: reply|close, body?, reason? }
  *   POST /api/review/copilot   { title, body }    an issue for Copilot (label copilot-task)
+ *   GET  /api/review/outreach                    emails to website owners: conversations and send history
+ *   GET  /api/review/outreach/draft?key=&kind=   a ready-made email (permission, followup, correction)
+ *   POST /api/review/outreach/send { key, kind, to, subject, text, override?, saveContact? }  (AgentMail, production only)
+ *   GET  /api/review/outreach/thread?id=         one conversation, with the answers
  *   GET  /api/review/log?month=YYYY-MM           decisions (review center and moderation)
  *   POST /api/review/github/start                one-time GitHub App setup (manifest flow)
  *   GET  /api/github-setup?code=&state=          GitHub's return address for that setup (no role needed;
@@ -35,6 +39,7 @@ const { publicHost, isAllowedHost } = require('../hosts');
 const github = require('../lib/github');
 const files = require('../lib/content-files');
 const data = require('../lib/review-data');
+const outreach = require('../lib/outreach');
 
 const { REPO, OWNER } = github;
 const INGEST_BRANCH = 'ingest/updates';
@@ -83,6 +88,10 @@ function route(name, methods, path, fn, { write = false } = {}) {
         return await fn(request, a.principal, context);
       } catch (e) {
         if (e instanceof files.DecisionError) return error(400, 'bad_decision', e.message);
+        if (e instanceof outreach.OutreachError) {
+          context.warn(`review ${name}: email ${e.status} ${e.message}`);
+          return error(e.status, 'email', e.status >= 500 || e.status === 429 ? `The email service did not accept that (${e.message}). Nothing was sent. Please try again later.` : e.message);
+        }
         if (e instanceof github.GitHubError) {
           if (e.status === 428) return error(428, 'github_setup', e.message);
           context.warn(`review ${name}: GitHub ${e.status} ${e.message}`);
@@ -375,13 +384,16 @@ route(
       done.length = 0;
       const paths = decisions.map((d) => files.pathOf('sources', d.id));
       const texts = await github.readFiles(base, paths);
+      const current = {};
       const out = {};
       const lines = [];
       for (const d of decisions) {
         const path = files.pathOf('sources', d.id);
         if (!texts[path]) throw new files.DecisionError(`Unknown source ${d.id}.`);
-        const s = JSON.parse(texts[path]);
+        // Several decisions on one source (for example "They said yes" and "Switch on") build on each other.
+        const s = current[path] || JSON.parse(texts[path]);
         const r = files.decideSource(s, { ...d, note: cleanText(d.note, 200) }, { today: t });
+        current[path] = r.source;
         out[path] = `${JSON.stringify(r.source, null, 2)}\n`;
         lines.push(`- ${d.id}: ${r.summary}`);
         done.push({ id: d.id, action: d.action, summary: r.summary, note: cleanText(d.note, 200) });
@@ -567,6 +579,166 @@ route(
   },
   { write: true },
 );
+
+/* ---------- emails to website owners (AgentMail, decision P53) ---------- */
+
+const outreachRow = (key) => key.replace(':', '~');
+const OUTREACH_KINDS = new Set(['permission', 'followup', 'correction', 'test']);
+
+/** What we know about a source for a permission email: its file and a published contact address. */
+async function sourceForEmail(id) {
+  if (!files.isId(id)) return null;
+  const path = files.pathOf('sources', id);
+  const s = (await github.readMainFiles([path]))[path];
+  if (!s) return null;
+  const source = JSON.parse(s);
+  let to = source.contactEmail || '';
+  let from = to ? 'the source' : '';
+  if (!to && source.defaults) {
+    const d = source.defaults;
+    const refs = [d.organizerId && ['organizers', d.organizerId], d.venueId && ['venues', d.venueId], ...(d.performerIds || []).map((p) => ['performers', p])].filter((x) => x && files.isId(x[1]));
+    const texts = await github.readMainFiles(refs.map(([c, i]) => files.pathOf(c, i)));
+    for (const [c, i] of refs) {
+      const t = texts[files.pathOf(c, i)];
+      const e = t && JSON.parse(t).email;
+      if (e && outreach.isEmail(e)) {
+        to = e;
+        from = { organizers: 'the organizer', venues: 'the venue', performers: 'the band or DJ' }[c];
+        break;
+      }
+    }
+  }
+  return { source, to, toFrom: from };
+}
+
+route('reviewOutreach', ['GET'], 'review/outreach', async (request) => {
+  const cfg = outreach.config(publicHost(request));
+  let threads = [];
+  let problem = '';
+  try {
+    threads = await outreach.listThreads(cfg);
+  } catch {
+    problem = 'Could not read the email inbox right now.';
+  }
+  const rows = await table(TABLES.review).list('outreach', { limit: 2000 });
+  return json(200, {
+    canSend: cfg.live,
+    reason: cfg.reason,
+    inbox: cfg.configured ? cfg.inbox : '',
+    problem,
+    rules: { newRequestDays: outreach.NEW_REQUEST_DAYS, followupAfterDays: outreach.FOLLOWUP_AFTER_DAYS },
+    threads,
+    sent: rows.map((r) => ({ key: r.rowKey.replace('~', ':'), lastSentAt: r.lastSentAt, firstSentAt: r.firstSentAt || r.lastSentAt, followups: Number(r.followups || 0), count: Number(r.count || 0), threadId: r.threadId || '' })),
+  });
+});
+
+route('reviewOutreachDraft', ['GET'], 'review/outreach/draft', async (request) => {
+  const p = new URL(request.url).searchParams;
+  const key = p.get('key') || '';
+  const kind = p.get('kind') || 'permission';
+  const cfg = outreach.config(publicHost(request));
+  if (!/^(source|issue):/.test(key) || !outreach.keyLabel(key) || !OUTREACH_KINDS.has(kind) || kind === 'test') return error(400, 'bad_request', 'Bad request.');
+  const state = await table(TABLES.review).get('outreach', outreachRow(key));
+  const rule = outreach.sendRule(kind, state);
+  let draft;
+  let to = '';
+  let toFrom = '';
+  if (key.startsWith('source:')) {
+    const info = await sourceForEmail(key.slice(7));
+    if (!info) return error(404, 'not_found', 'Unknown source.');
+    draft = kind === 'followup' ? outreach.followupDraft(info.source, state && state.lastSentAt) : outreach.permissionDraft(info.source);
+    to = (kind === 'followup' && state && state.to) || info.to;
+    toFrom = kind === 'followup' && state && state.to ? 'your first email' : info.toFrom;
+  } else {
+    const issue = await github.gh('GET', `/repos/${REPO}/issues/${Number(key.slice(6))}`);
+    if (issue.pull_request || !data.isMessage(issue)) return error(404, 'not_found', 'That is not a visitor message.');
+    draft = outreach.correctionDraft(data.messageCard(issue));
+    to = (state && state.to) || '';
+  }
+  return json(200, { key, kind, to, toFrom, ...draft, rule, canSend: cfg.live, reason: cfg.reason, inbox: cfg.configured ? cfg.inbox : '', lastSentAt: (state && state.lastSentAt) || '' });
+});
+
+route(
+  'reviewOutreachSend',
+  ['POST'],
+  'review/outreach/send',
+  async (request, principal) => {
+    const b = await readJson(request, 16 * 1024);
+    if (!b.ok) return b.response;
+    const cfg = outreach.config(publicHost(request));
+    const key = String(b.body.key || '');
+    const kind = String(b.body.kind || '');
+    const to = String(b.body.to || '').trim();
+    const subject = cleanText(b.body.subject, 150);
+    const text = typeof b.body.text === 'string' ? b.body.text.replace(/\r\n?/g, '\n').trim().slice(0, 6000) : '';
+    if (!/^(source|issue):/.test(key) || !outreach.keyLabel(key) || !OUTREACH_KINDS.has(kind)) return error(400, 'bad_request', 'Bad request.');
+    if (key.startsWith('issue:') && kind !== 'correction') return error(400, 'bad_request', 'Bad request.');
+    if (!outreach.isEmail(to)) return error(400, 'bad_email', 'Type one email address, like info@example.com.');
+    if (subject.length < 3 || text.length < 20) return error(400, 'bad_request', 'Write a subject and a message first.');
+    // A test goes only to the site's own inbox (to see the real email without bothering anyone).
+    if (kind === 'test' && (!key.startsWith('source:') || to.toLowerCase() !== String(cfg.inbox).toLowerCase())) return error(400, 'bad_request', 'A test email goes only to the site inbox.');
+    if (key.startsWith('source:') && !(await sourceForEmail(key.slice(7)))) return error(404, 'not_found', 'Unknown source.');
+    const rowKey = kind === 'test' ? `test~${key.slice(7)}` : outreachRow(key);
+    const state = await table(TABLES.review).get('outreach', rowKey);
+    const rule = kind === 'test' ? { ok: true } : outreach.sendRule(kind, state, Date.now(), b.body.override === true);
+    if (!rule.ok) return error(409, 'too_soon', rule.reason);
+    const r = await outreach.send(cfg, { kind, key: kind === 'test' ? `test:${key.slice(7)}` : key, to, subject, text, replyToMessageId: kind === 'followup' ? state.messageId : undefined });
+    if (r.dryRun) {
+      await audit({ actor: actorOf(principal), action: 'outreach.dryrun', targetType: key.split(':')[0], targetId: key.split(':')[1], reason: `${kind}; would send to an address at ${outreach.domainOf(to)} (${r.reason})` });
+      return json(200, r);
+    }
+    const now = new Date().toISOString();
+    await table(TABLES.review).upsert({
+      partitionKey: 'outreach',
+      rowKey,
+      to,
+      kind,
+      firstSentAt: (state && state.firstSentAt) || now,
+      lastSentAt: now,
+      messageId: r.messageId,
+      threadId: r.threadId || (state && state.threadId) || '',
+      count: Number((state && state.count) || 0) + 1,
+      followups: Number((state && state.followups) || 0) + (kind === 'followup' ? 1 : 0),
+      actor: actorOf(principal),
+    });
+    let recorded = false;
+    let commit = null;
+    if (key.startsWith('source:') && (kind === 'permission' || kind === 'followup')) {
+      try {
+        commit = await github.commitFiles(async (base) => {
+          const path = files.pathOf('sources', key.slice(7));
+          const texts = await github.readFiles(base, [path]);
+          if (!texts[path]) return null;
+          const out = files.recordOutreach(JSON.parse(texts[path]), { kind, to, today: today(), saveContact: b.body.saveContact === true });
+          return { files: { [path]: `${JSON.stringify(out.source, null, 2)}\n` }, message: `Review center: ${out.summary} (${key.slice(7)})\n\nSent from the review center (/moderate/).` };
+        });
+        recorded = Boolean(commit);
+        forget('content:');
+      } catch (e) {
+        if (!(e instanceof github.GitHubError)) throw e;
+      }
+    }
+    await audit({ actor: actorOf(principal), action: `outreach.${kind}`, targetType: key.split(':')[0], targetId: key.split(':')[1], reason: `emailed an address at ${outreach.domainOf(to)}; ${subject.slice(0, 80)}${commit ? `; commit ${short(commit.sha)}` : ''}` });
+    await note({ area: 'outreach', action: kind, count: '1' });
+    return json(200, { sent: true, threadId: r.threadId, messageId: r.messageId, recorded, commit });
+  },
+  { write: true },
+);
+
+route('reviewOutreachThread', ['GET'], 'review/outreach/thread', async (request) => {
+  const cfg = outreach.config(publicHost(request));
+  if (!cfg.configured) return error(404, 'not_configured', 'The email inbox is not set up here.');
+  const t = await outreach.getThread(cfg, new URL(request.url).searchParams.get('id') || '');
+  // Opening a conversation marks the answers read (only on the live site).
+  if (cfg.live) {
+    try {
+      await outreach.markRead(cfg, t);
+    } catch {
+      // Still shown as new next time.
+    }
+  }
+  return json(200, t);
+});
 
 /* ---------- log ---------- */
 

@@ -59,7 +59,9 @@ const MESSAGES = {
   copilotTasks: [],
 };
 
-async function mockApi(page: Page, { status = 200, github = { connected: true, installed: true, canSetUp: true } } = {}) {
+const OUTREACH_NONE = { canSend: true, reason: '', inbox: 'site@agentmail.to', problem: '', rules: { newRequestDays: 30, followupAfterDays: 14 }, threads: [], sent: [] };
+
+async function mockApi(page: Page, { status = 200, github = { connected: true, installed: true, canSetUp: true }, outreachSummary = OUTREACH_NONE as unknown } = {}) {
   const posts: { url: string; body: any }[] = [];
   await page.route('**/api/review/**', async (route: Route) => {
     const req = route.request();
@@ -68,6 +70,7 @@ async function mockApi(page: Page, { status = 200, github = { connected: true, i
       const body = req.postDataJSON();
       posts.push({ url: url.pathname, body });
       if (url.pathname === '/api/review/listings') return route.fulfill({ json: { ok: true, commit: { sha: 'c'.repeat(40), url: 'https://github.com/x/commit/c' }, done: body.decisions.map((d: any) => ({ id: d.id, action: d.action, status: 'active' })), skipped: [], liveInMinutes: 10 } });
+      if (url.pathname === '/api/review/outreach/send') return route.fulfill({ json: { sent: true, threadId: 't9', messageId: 'm9', recorded: true } });
       if (url.pathname === '/api/review/github/start') return route.fulfill({ json: { state: 's'.repeat(32), action: 'https://github.com/settings/apps/new?state=' + 's'.repeat(32), manifest: { name: 'Long Island Dance review center', redirect_url: 'https://longisland.dance/api/github-setup' } } });
       return route.fulfill({ json: { ok: true, issue: { number: 901, url: 'https://github.com/x/issues/901' } } });
     }
@@ -78,6 +81,9 @@ async function mockApi(page: Page, { status = 200, github = { connected: true, i
       '/api/review/collected': COLLECTED,
       '/api/review/sources': SOURCES,
       '/api/review/messages': MESSAGES,
+      '/api/review/outreach': outreachSummary,
+      '/api/review/outreach/draft': { key: 'source:club-x', kind: 'permission', to: '', toFrom: '', subject: 'Can we list your events on Long Island Dance Events?', text: 'Hello,\n\nMay we list your public events?\n\n- dates\n- times\n\nThank you!\n\nMike Richter', rule: { ok: true }, canSend: true, reason: '', inbox: 'site@agentmail.to', lastSentAt: '' },
+      '/api/review/outreach/thread': { threadId: 't1', key: 'source:broken-bar', subject: 'Can we list your events?', messages: [{ messageId: 'a', direction: 'sent', from: 'site@agentmail.to', to: 'info@broken.example', at: '2026-09-01T12:00:00Z', text: 'May we list your events?' }, { messageId: 'b', direction: 'received', from: 'Broken Bar <info@broken.example>', to: 'site@agentmail.to', at: '2026-09-02T12:00:00Z', text: 'Yes, go ahead!' }] },
       '/api/review/log': { entries: [{ at: '2026-10-03T12:00:00Z', actor: 'admin:owner@example.com', action: 'listing.publish', targetType: 'event', targetId: 'x', reason: 'publish' }] },
     };
     return route.fulfill({ json: data[url.pathname] ?? {} });
@@ -175,6 +181,39 @@ test.describe('review center', () => {
     await expect(messages.getByText('5 days left to answer')).toBeVisible();
     await messages.getByRole('button', { name: 'Send reply and close' }).click();
     await expect.poll(() => posts.at(-1)?.body).toMatchObject({ number: 5, action: 'close', reason: 'completed' });
+  });
+
+  test('permission email: review, change, confirm, then send through the site inbox', async ({ pinned: page }) => {
+    const posts = await mockApi(page);
+    await page.goto('/moderate/#sources');
+    const sources = page.locator('#sources');
+    await sources.getByText('Ask for permission (1)').click();
+    await sources.getByRole('button', { name: 'Review and send the email…' }).click();
+    const form = sources.locator('form.review-form');
+    await expect(form.getByLabel('Subject')).toHaveValue('Can we list your events on Long Island Dance Events?');
+    await form.getByLabel('To', { exact: true }).fill('events@clubx.example');
+    await form.getByText('See how it will look').click();
+    await expect(form.locator('.review-email-preview li')).toHaveCount(2);
+    page.on('dialog', (d) => {
+      expect(d.message()).toBe('Send this email to events@clubx.example?');
+      return d.accept();
+    });
+    await form.getByRole('button', { name: 'Send…' }).click();
+    await expect(sources.getByText('Sent to events@clubx.example. Their answer will show here.', { exact: false })).toBeVisible();
+    expect(posts.at(-1)).toMatchObject({ url: '/api/review/outreach/send', body: { key: 'source:club-x', kind: 'permission', to: 'events@clubx.example', override: false, saveContact: false } });
+  });
+
+  test('answers to permission emails show under the source, with one-click outcomes', async ({ pinned: page }) => {
+    const summary = { ...OUTREACH_NONE, threads: [{ threadId: 't1', key: 'source:club-x', subject: 'Can we list your events?', updatedAt: '2026-10-02T12:00:00Z', hasReply: true, unread: true, messages: 2 }], sent: [{ key: 'source:club-x', lastSentAt: '2026-09-01T12:00:00Z', firstSentAt: '2026-09-01T12:00:00Z', followups: 0, count: 1, threadId: 't1' }] };
+    const posts = await mockApi(page, { outreachSummary: summary });
+    await page.goto('/moderate/#sources');
+    const sources = page.locator('#sources');
+    await expect(sources.getByRole('heading', { name: 'Waiting for an answer (1)' })).toBeVisible();
+    await sources.getByText('Emails (1): new answer!').click();
+    await expect(sources.getByText('Yes, go ahead!')).toBeVisible();
+    page.on('dialog', (d) => d.accept(d.type() === 'prompt' ? 'They said yes by email' : undefined));
+    await sources.getByRole('button', { name: 'They said yes: switch it on' }).click();
+    await expect.poll(() => posts.at(-1)?.body).toEqual({ decisions: [{ id: 'club-x', action: 'permission', status: 'granted', note: 'They said yes by email' }, { id: 'club-x', action: 'enable', note: 'Permission granted' }] });
   });
 
   test('one-time setup posts the app manifest to GitHub', async ({ pinned: page }) => {
