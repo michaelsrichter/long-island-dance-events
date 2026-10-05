@@ -17,7 +17,7 @@
   ],
   "price": 20,
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "hidden",
   "sourceId": "thedancecalendar",
   "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
   "sourceName": "The Dance Calendar, October 2026",
@@ -26,5 +26,8 @@
   "lastSeen": "2026-10-05",
   "confidence": 1,
   "matchKey": "thedancecalendar|waterfalls-ballroom|waterfalls-ballroom-dancing|saturday|19:00|social-dance|dj-valerie|ballroom+latin-ballroom||2026-10-24|halloween",
-  "reviewNotes": "The organizer's or band's own calendar now lists this (waterfalls-ballroom-dancing-social-saturdays), so that listing is shown instead of this copy."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "The organizer's or band's own calendar now lists this (waterfalls-ballroom-dancing-social-saturdays), so that listing is shown instead of this copy. Hidden in the review center on 2026-10-05: live test, undone right after"
 }
