@@ -487,7 +487,7 @@ test('alert email: counts and a link only, never names, text or account ids; wor
   assert.equal(m.subject, 'Long Island Dance: 5 items wait for review');
   assert.match(m.html, /<li>1 private correction<\/li>/);
   assert.match(m.html, /<li>2 reported posts<\/li>/);
-  assert.match(m.html, /href="https:\/\/longisland\.dance\/moderate\/"/);
+  assert.match(m.html, /href="https:\/\/longisland\.dance\/moderate\/#posts"/);
   assert.equal(notify.buildMessage('photo', { notes: 0, photos: 1, corrections: 0, reports: 0, total: 1 }).subject, 'Long Island Dance: 1 item waits for review');
   assert.equal(notify.stamp(Date.parse('2026-10-05T14:29:59Z')), '202610051415', '15-minute blocks of the clock');
   assert.ok(!notify.buildMessage('comment', counts, 'https://x.test/"><script>').html.includes('<script>'), 'the link is escaped');

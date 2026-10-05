@@ -95,7 +95,7 @@ export function resolveOccurrences(events: RawEvent[], opts: ResolveOptions): Oc
   const out: Occurrence[] = [];
   for (const ev of events) {
     const d = ev.data;
-    if (d.status === 'pending-review' && !opts.includePending) continue;
+    if (d.status === 'hidden' || (d.status === 'pending-review' && !opts.includePending)) continue;
     const tz = d.timezone ?? DEFAULT_TZ;
     const s = parseLocal(d.start);
     const recurring = Boolean(d.recurrence);
@@ -179,4 +179,5 @@ export const STATUS_LABELS: Record<EventStatus, string> = {
   past: 'Past event',
   cancelled: 'Cancelled',
   'pending-review': 'Waiting for review',
+  hidden: 'Hidden by an editor',
 };

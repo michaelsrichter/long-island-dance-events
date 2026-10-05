@@ -29,8 +29,11 @@ export const CATEGORY_HELP: Record<(typeof EVENT_CATEGORIES)[number], string> = 
   festival: 'A big event, often over a full day or weekend.',
 };
 
-/** active = listed; past = ended (kept for history); cancelled = shown as cancelled; pending-review = hidden until checked. */
-export const EVENT_STATUSES = ['active', 'past', 'cancelled', 'pending-review'] as const;
+/**
+ * active = listed; past = ended (kept for history); cancelled = shown as cancelled; pending-review = hidden until checked;
+ * hidden = an editor decided not to list it (a copy, not real, not a dance). Never shown, never deleted, never relisted by the weekly run.
+ */
+export const EVENT_STATUSES = ['active', 'past', 'cancelled', 'pending-review', 'hidden'] as const;
 export const SKILL_LEVELS = ['all-levels', 'beginner', 'intermediate', 'advanced', 'mixed'] as const;
 export const SKILL_LABELS: Record<(typeof SKILL_LEVELS)[number], string> = {
   'all-levels': 'All levels welcome',

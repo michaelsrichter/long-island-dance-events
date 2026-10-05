@@ -66,7 +66,7 @@ function buildMessage(event, counts, site = siteUrl()) {
   ]
     .filter(([n]) => n > 0)
     .map(([n, one, many]) => `<li>${esc(plural(n, one, many))}</li>`);
-  const queue = `${site}/moderate/`;
+  const queue = `${site}/moderate/#posts`;
   const total = counts.total || 1;
   const subject = `Long Island Dance: ${plural(total, 'item waits', 'items wait')} for review`;
   const html = [

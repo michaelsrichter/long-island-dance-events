@@ -37,9 +37,12 @@ async function api(path: string, body?: unknown) {
   const res = await fetch(path, {
     method: body ? 'POST' : 'GET',
     credentials: 'same-origin',
+    redirect: 'manual',
     headers: { Accept: 'application/json', ...(body ? { 'Content-Type': 'application/json' } : {}) },
     body: body ? JSON.stringify(body) : undefined,
   });
+  // Signed out: the route rule may answer with a redirect to the sign-in page instead of a 401.
+  if (res.type === 'opaqueredirect') return { status: 401, data: null };
   let data: any = null;
   try {
     data = await res.json();
@@ -135,6 +138,7 @@ if (root) {
       if (r.status === 200) {
         say(`${kind} ${r.data.status}.`);
         li.remove();
+        window.dispatchEvent(new CustomEvent('review:posts', { detail: list.children.length }));
       } else say(r.data?.message || 'Could not save that decision.');
     };
     const row = el('p', undefined, 'btn-row');
@@ -176,6 +180,7 @@ if (root) {
     tools.hidden = false;
     const items: Item[] = r.data?.items || [];
     list.replaceChildren(...items.map(card));
+    window.dispatchEvent(new CustomEvent('review:posts', { detail: items.length }));
     say(items.length ? `${items.length} waiting.` : 'Nothing is waiting. Nice!');
   }
 

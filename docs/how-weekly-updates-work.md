@@ -14,9 +14,10 @@ costs, and what you (the owner) need to do. Technical details live in
   event calendars we are allowed to read, pull out the facts (date, time, place, band, price, kind
   of dancing), write short listings in our own words, and put all the changes into **one pull
   request** on GitHub. A pull request is a "proposed change" you can look at before it goes live.
-- **What you do:** once a week, on Sunday, GitHub emails you (an @mention) to review that pull
-  request. You look it over and press **Merge**. Merging publishes the new listings to the website
-  within a few minutes.
+- **What you do:** once a week, on Sunday, GitHub emails you (an @mention). Open the **review center**
+  at [longisland.dance/moderate/](https://longisland.dance/moderate/), look over the new events and press
+  **Publish now**, then decide on the few listings the program was unsure about. Publishing puts the new
+  listings on the website within about 10 minutes.
 - **What it costs:** the weekly collecting is **free** (GitHub Actions is free for public
   repositories). The search for new sources costs about **$4.25 a month** (Microsoft Web IQ). The
   website itself costs about **$9 a month** on Azure. The newsletter inbox is **free** (AgentMail
@@ -132,12 +133,13 @@ The Dance Calendar's PDF, which is set to weekly for that reason) shows up withi
     broken is reported, not published.
 13. **Update the pull request.** All changes go into **one** rolling pull request called
     "Collected events: review and merge to publish," with a run report on top: what each source
-    found, what was skipped and why, and what needs a person.
+    found, what was skipped and why, and what needs a person. The review center's **New events** tab
+    shows the same report in plain words, with a **Publish now** button.
 14. **Report problems.** A source that breaks gets a GitHub issue labeled `ingest-failure`. After
     three failures in a row it is switched off in the pull request, with a note.
 15. **Sunday email.** The Sunday run asks you to review the pull request. GitHub sends the email.
-16. **You merge, the site updates.** Merging starts the Azure build, and the new listings are live
-    a few minutes later.
+16. **You publish, the site updates.** Pressing **Publish now** in the review center (or merging the pull
+    request on GitHub) starts the Azure build, and the new listings are live about 10 minutes later.
 
 ## How we get the details of each event
 
@@ -224,7 +226,10 @@ GitHub secrets (`AGENTMAIL_INBOX`, `AGENTMAIL_API_KEY`), never in the code.
    is searched again once a year. It also rechecks every source we already track (does `robots.txt`
    still allow us? are there still upcoming dates?).
 2. **The monthly issue.** It opens a GitHub issue listing websites it has never seen before and any
-   tracked source that changed or broke. **Nothing is switched on automatically.**
+   tracked source that changed or broke. **Nothing is switched on automatically.** The new websites also
+   show in the review center's **Sources** tab (read from a hidden `review-data` block at the end of the
+   issue), with **Worth adding** (a Copilot task) and **Not useful** (saved in `catalog/search-triage.json`
+   as `owner-no`, so it is not suggested again).
 3. **Checking a find.** A person (usually with a Copilot session) opens each promising website and
    asks: does it list **several upcoming** dance or live-music events on Long Island? Is it allowed
    (robots.txt and the site's rules)? Is it more than one event page, and is it kept up to date?
@@ -240,17 +245,21 @@ The October 2026 town-by-town search is described in [source-catalog.md](source-
 
 ## What you do each week
 
-1. **Sunday:** open the email from GitHub, or the pull request named "Collected events: review and
-   merge to publish."
-2. Read the run report at the top: new events, sources that found nothing, venues we need to research.
-3. Spot-check a few new events (does the date and time match the source?). Fix anything wrong in the
-   editor at `/admin/`, or comment on the pull request.
-4. Press **Merge pull request.** The site updates a few minutes later.
-5. **Now and then:** look at `ingest-failure` issues and the monthly "source check" issue, and do the
-   few newsletter sign-ups marked "sign up by hand" in `catalog/newsletters.json` (marked
-   `owner-by-hand`).
+Everything below is in one place: the **review center** at **https://longisland.dance/moderate/**
+(sign in with your editor email). See "Your review center" in [editor-guide.md](editor-guide.md#your-review-center).
 
-Most weeks this takes 10-15 minutes.
+1. **Sunday:** open the email from GitHub, then the review center's **New events** tab. It shows the run
+   report in plain words: new events, sources that found nothing, new venues and bands to check.
+2. If the automatic checks passed, press **Publish now**. The site updates about 10 minutes later.
+3. Open **Held listings** and decide on each one (Publish, Fix, Cancelled or Hide). Each card says why it
+   was held and links the source page. Fixed fields are locked, so the next run keeps your fix.
+4. **Messages** and **Community posts:** answer what waits there.
+5. **Now and then:** the **Sources** tab shows sources that broke (`ingest-failure` issues), new websites
+   from the monthly source check (**Worth adding** asks Copilot to add one, **Not useful** remembers the
+   no), switched-off sources you could help with (a ready-made permission email), and **Check sources now**.
+
+Most weeks this takes 10-15 minutes. You can still do everything on GitHub (merge the pull request,
+edit in `/admin/`) if you prefer.
 
 ## What it costs
 

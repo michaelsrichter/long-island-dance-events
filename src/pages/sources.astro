@@ -10,7 +10,7 @@ import { formatDateShort } from '../lib/time';
 const settings = await getSettings();
 const allSources = (await getCollection('sources')).sort((a, b) => a.data.name.localeCompare(b.data.name));
 const events = await getCollection('events');
-const count = (id: string) => events.filter((e) => e.data.sourceId === id && e.data.status !== 'pending-review').length;
+const count = (id: string) => events.filter((e) => e.data.sourceId === id && e.data.status !== 'pending-review' && e.data.status !== 'hidden').length;
 // Only sources we read now (or that still have listings on the site). The rest are summed up in one line.
 const shown = allSources.filter((s) => s.data.enabled || count(s.id) > 0);
 const offCount = allSources.length - shown.length;

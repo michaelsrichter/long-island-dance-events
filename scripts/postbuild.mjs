@@ -19,12 +19,17 @@ function* htmlFiles(dir) {
   }
 }
 const hashes = new Set();
+const reviewHashes = new Set();
 const styleViolations = [];
 for (const file of htmlFiles(dist)) {
   if (file.includes(join('dist', 'admin'))) continue;
   const html = readFileSync(file, 'utf8');
+  const isReview = file.includes(join('dist', 'moderate'));
   for (const m of html.matchAll(/<script(?![^>]*\bsrc=)(?![^>]*type="application\/ld\+json")[^>]*>([\s\S]*?)<\/script>/g)) {
-    if (m[1].trim()) hashes.add(`'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`);
+    if (!m[1].trim()) continue;
+    const h = `'sha256-${createHash('sha256').update(m[1]).digest('base64')}'`;
+    hashes.add(h);
+    if (isReview) reviewHashes.add(h);
   }
   if (/\sstyle="/.test(html.replace(/<svg[\s\S]*?<\/svg>/g, ''))) styleViolations.push(file.replace(dist, ''));
 }
@@ -43,9 +48,9 @@ const community = JSON.parse(readFileSync(join(root, 'src', 'data', 'community.j
 const communityOrigin = new URL(community.blobBase).origin;
 thirdPartyImg.push(communityOrigin);
 thirdPartyConnect.push(communityOrigin);
-const siteCsp = [
+const siteCspParts = (scriptHashes, formAction) => [
   "default-src 'self'",
-  `script-src 'self' ${[...hashes].join(' ')} ${thirdPartyScripts.join(' ')}`.replace(/\s+/g, ' ').trim(),
+  `script-src 'self' ${[...scriptHashes].join(' ')} ${thirdPartyScripts.join(' ')}`.replace(/\s+/g, ' ').trim(),
   "style-src 'self'",
   `img-src 'self' data: ${thirdPartyImg.join(' ')}`,
   "font-src 'self'",
@@ -54,10 +59,14 @@ const siteCsp = [
   "manifest-src 'self'",
   "object-src 'none'",
   "base-uri 'self'",
-  "form-action 'self'",
+  formAction,
   "frame-ancestors 'none'",
   'upgrade-insecure-requests',
 ].join('; ');
+const siteCsp = siteCspParts(hashes, "form-action 'self'");
+// The review center (/moderate/) uses only its own script hashes, and may send the one-time
+// "create a GitHub App" form to github.com (decision P51).
+const reviewCsp = siteCspParts(reviewHashes, "form-action 'self' https://github.com");
 const adminCsp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-eval'",
@@ -72,7 +81,7 @@ const adminCsp = [
 ].join('; ');
 
 const cfgPath = join(dist, 'staticwebapp.config.json');
-const cfg = readFileSync(cfgPath, 'utf8').replace('__SITE_CSP__', siteCsp).replace('__ADMIN_CSP__', adminCsp);
+const cfg = readFileSync(cfgPath, 'utf8').replace('__SITE_CSP__', siteCsp).replace('__ADMIN_CSP__', adminCsp).replace('__REVIEW_CSP__', reviewCsp);
 JSON.parse(cfg);
 writeFileSync(cfgPath, cfg);
 const size = Buffer.byteLength(cfg);

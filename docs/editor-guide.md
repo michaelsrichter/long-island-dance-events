@@ -9,6 +9,36 @@ This guide is for people who keep the listings correct. You do not need to know 
 - Nothing is ever lost. Any change can be undone (see [Fix a mistake](#fix-a-mistake)).
 - Most events are collected **automatically every week** from public calendars. Your main jobs are to **check things the program was unsure about** and **fix mistakes**.
 
+## Your review center
+
+Everything that needs a person is in one place: **https://longisland.dance/moderate/**. Sign in with your editor email address (one of the addresses in the `ADMIN_EMAILS` setting). You get a one-time code by email. You almost never need to open GitHub.
+
+This table lists each tab of the review center, what it shows, and what you can do there.
+
+| Tab | What it shows | What you can do |
+| --- | --- | --- |
+| **To do** | How many things wait in each tab, the oldest one, and "You're all caught up" when nothing does. | Jump to each tab. One-time GitHub setup (see below). |
+| **Held listings** | Events the weekly check wasn't sure about. They're hidden until you decide. Each card says why in plain words ("No start time", "The start time looks wrong", "No venue", "New band or DJ", "Missing from the source", "Listed twice") and suggests a next step. | **Publish**, **Fix…** (start time, venue, band or DJ, town), **Mark cancelled…** (shown as cancelled), **Hide** (never shown, never deleted), **Snooze a week**, **Undo**, choose several and publish or hide them at once, **Ask Copilot** to look up a band or venue. Links: the source page, the venue and band pages, and the editor. |
+| **New events** | The "Collected events" update (everything the latest check found, waiting for you to publish): how many new and changed events, whether the automatic checks passed, new venues and bands to check, and what each source found. | **Publish now** (only when the checks passed), see every change on GitHub, **Ask Copilot** to look up new venues and bands or to fix failed checks. |
+| **Sources** | Sources that stopped working, new websites the monthly search found, and switched-off sources grouped by what you can do. | **Try again now**, **Switch off…**, **Worth adding** / **Not useful** for new websites, a ready-made permission email with **I asked**, **They said yes**, **They said no**, **Switch on**, **Check sources now**, and **Ask Copilot**. |
+| **Messages** | Messages from the website's forms: fixes, new events, requests to remove a listing (first, with a 7-day countdown), problems and ideas. | Reply with a ready-made answer (you can change it), **Send reply and close**, **Snooze a week**, open the page or the editor. |
+| **Community posts** | Notes and photos waiting for a person (see [Moderate notes and photos](#moderate-notes-and-photos)). | Approve, reject, hide, ban. |
+| **Log** | Every decision, newest first, by month. | |
+
+**How changes reach the website.** Each button saves a small change to the website's files on GitHub (the master copy). The website rebuilds by itself, so changes show on the website **about 10 minutes** later. Every field you fix is added to **Locked fields**, so the weekly check never changes it back. Nothing is ever deleted: **Hide** sets the status to "Hidden by an editor".
+
+**One-time setup.** The first time, the To do tab asks you to **Connect to GitHub**. Be signed in to GitHub as `michaelsrichter`. GitHub shows "Create GitHub App": press the green button. Then choose **Only select repositories** (a repository is a project on GitHub), pick **long-island-dance-events**, and press **Install**. That's all. The helper app can only work on this one website.
+
+**Ask Copilot.** Some jobs need a developer: a new band or venue to look up, a source to fix, a website to add. **Ask Copilot** makes a GitHub issue (a task note, labeled `copilot-task`) with all the details. Open it on GitHub and choose **Assign to Copilot**. Copilot then opens a pull request (a suggested change) for you to check. Open tasks are listed at the bottom of the Messages tab.
+
+### Your weekly 10-minute routine
+
+1. **Sunday:** after the email from GitHub, open the **New events** tab in the review center. If the automatic checks passed, press **Publish now**.
+2. **Held listings:** for each card, open the source page (where we found it). Then press the suggested button (Publish, Fix, Mark cancelled or Hide).
+3. **Messages:** answer anything waiting. Answer requests to remove a listing first (within 7 days).
+4. **Community posts:** approve or reject anything waiting.
+5. **Sources:** look for anything under "Stopped working". Press **Try again now**, or **Ask Copilot to fix it**.
+
 ## What you will see in the editor
 
 | Section | What it holds |
@@ -25,6 +55,8 @@ This guide is for people who keep the listings correct. You do not need to know 
 ## Check events that are waiting for review
 
 Some events are hidden until a person checks them. This happens when the program was unsure, or when a listing disappeared from a calendar it still covers.
+
+The quickest way is the **Held listings** tab of the [review center](#your-review-center). You can also do it in the editor:
 
 1. Open **Events** and choose the **Waiting for review** filter.
 2. Open an event. Read **Notes for editors** at the bottom; it says why.
@@ -131,6 +163,8 @@ You can turn a source off by unticking **Turned on**. The **Last result** fields
 | error | Could not download or read the source. |
 | skipped | The source is turned off, or its robots.txt does not allow it. |
 
+Event statuses: **Listed**, **Past**, **Cancelled** (shown with "Cancelled"), **Waiting for review** (hidden until someone decides) and **Hidden by an editor** (never shown, kept for the record; the weekly run leaves it hidden).
+
 **How often** says when the program reads the source (every day, twice a week, weekly, monthly, only in season, or only by hand). **What it lists** tells the site whether everything in the source is a dance (a dance calendar) or whether each listing needs a dancing score (a live-music list).
 
 New sources need a small program (an "adapter") written by a developer, and the owner's approval. Many calendars can share the general calendar-feed (`ical`) and event-page (`jsonld`) adapters: then you only fill in **Feed address**, **Facts to use when a listing leaves them out** and, if needed, the **Only keep** / **Skip** patterns. See the README.
@@ -145,7 +179,7 @@ New sources need a small program (an "adapter") written by a developer, and the 
 
 ## Corrections from the public
 
-Visitors use the "Report a problem" button on each event, or the forms on the **Sources** page. These open issues on GitHub with a label:
+Visitors use the "Report a problem" button on each event, or the forms on the **Sources** page. These open issues on GitHub with a label. They all show in the **Messages** tab of the [review center](#your-review-center), with ready-made replies:
 
 | Label | What to do |
 | --- | --- |
@@ -157,7 +191,7 @@ Visitors use the "Report a problem" button on each event, or the forms on the **
 
 Signed-in visitors can like pages, save events to their own private list, leave notes, send private corrections and post photos (see the [community rules](https://longisland.dance/community-rules/)). An AI checker reads every note first; anything it is unsure about, every private correction and **every photo** waits for a person.
 
-1. Go to **https://longisland.dance/moderate/** and sign in with your moderator email (the owner adds it to the `ADMIN_EMAILS` app setting). You get a one-time code by email.
+1. Go to **https://longisland.dance/moderate/#posts** (the **Community posts** tab of the review center) and sign in with your moderator email (the owner adds it to the `ADMIN_EMAILS` app setting). You get a one-time code by email.
 2. Each card shows the post, why it is waiting, the AI scores (0 = safe, 2 = unsure, 4 or more = harmful), any reports, and the poster's record.
 3. Choose:
    - **Approve**: it follows the rules. It appears on the page within a minute.
