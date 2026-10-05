@@ -4,5 +4,13 @@
   "county": "Suffolk",
   "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
   "state": "NY",
-  "town": "Greenport"
+  "town": "Greenport",
+  "postalCode": "11944",
+  "phone": "(631) 477-8300",
+  "website": "http://billysbythebayrestaurant.com/",
+  "kind": "restaurant",
+  "factsSource": "Checked October 4, 2026. Source: Bing Places (via Web IQ). Seafood restaurant and tiki bar at Brewer's yacht yard with live music.",
+  "latitude": 41.11054,
+  "longitude": -72.35563,
+  "coordinatesSource": "Bing Places (via Web IQ); the free geocoders did not find this address"
 }

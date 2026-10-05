@@ -279,7 +279,8 @@ export function performerNameOk(name: string): boolean {
 
 const noBand = (s: string) => s.replace(/band$/, '');
 
-const TITLE_JUNK = /\b(happy hour|live music by|grammy|nominated|award|showcase|pop[- ]?up|brunch|special|secret|tickets?|doors|sold out|read more|more info|rsvp|tba|tbd)\b/i;
+// "Doors 7pm" and "Doors open at 6" are not acts; "Magical Mystery Doors" (a Doors tribute) is.
+const TITLE_JUNK = /\b(happy hour|live music by|grammy|nominated|award|showcase|pop[- ]?up|brunch|special|secret|tickets?|doors(?=\s*(?:open|at\b|@|:|\d))|sold out|read more|more info|rsvp|tba|tbd)\b/i;
 const DATE_BITS = /\b\d{1,2}\/\d{0,2}(?!\d)|\b(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*\.?\s+\d/i;
 
 /** "JEFF REID “Me and My Guitar" -> "JEFF REID"; "John vs Paul (Postponed from 9/27)" -> "John vs Paul". */

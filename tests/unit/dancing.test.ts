@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { cleanAct, cuesFor, dateFor, htmlLines, normalizeIraRows, normalizeTime, parseEntry, parseWeeklyList, rowsFromIcs, splitEntry } from '../../ingest/adapters/iraslist';
+import { cleanAct, cuesFor, dateFor, htmlLines, normalizeIraRows, normalizeTime, parseEntry, parseWeeklyList, rowsFromIcs, splitEntry, styleLabel } from '../../ingest/adapters/iraslist';
 import { isPublishedCalendarFeed } from '../../ingest/lib/fetch';
 import { Registry, ROOT } from '../../ingest/lib/registry';
 import { assessDancing, type DancingInput } from '../../src/lib/dancing';
@@ -184,5 +184,32 @@ describe("Ira's List calendar feed", () => {
     expect(wcs.danceStyles).toContain('west-coast-swing');
     expect(r.outOfArea).toEqual([{ town: 'Astoria', count: 1 }]);
     for (const c of r.candidates) expect(() => eventSchema.parse({ ...c, reviewNotes: c.reviewNotes.join(' ') || undefined, start: c.start ? `${c.date}T${c.start}` : c.date, end: undefined, firstSeen: c.date, lastSeen: c.date })).not.toThrow();
+  });
+  it('keeps a band whose name has a dance or "doors" word as the act, and names no style for it', () => {
+    const reg = fixtureRegistry();
+    const opts = { sourceId: 'iraslist', sourceUrl: 'https://example.org/', registry: reg, outsideVenues: [] };
+    const one = (line: string) => normalizeIraRows([{ date: '2031-01-02', ...parseEntry(line)! }], opts).candidates[0]!;
+    const swing = one('Swing 26 Jazz Band - Example Pub');
+    expect(swing.title).toBe('Swing 26 Jazz Band at Example Pub');
+    expect(swing.danceStyles).not.toContain('east-coast-swing');
+    expect(one('The Rhythm Kings - Example Pub')).toMatchObject({ title: 'The Rhythm Kings at Example Pub', danceStyles: [] });
+    expect(one('Magical Mystery Doors - Example Pub').title).toBe('Magical Mystery Doors at Example Pub');
+    // A dance named on its own, or before "with", is still a style.
+    const named = one('Swing Dance with The Flipped Fedoras - Example Pub');
+    expect(named.title).toBe('The Flipped Fedoras at Example Pub');
+    expect(named.danceStyles).toContain('east-coast-swing');
+    expect(one('Salsa Night - Example Pub')).toMatchObject({ title: 'Salsa dance with live music at Example Pub', danceStyles: ['salsa'] });
+    expect(styleLabel(reg, 'Salsa Night w')).toEqual(['salsa']);
+    expect(styleLabel(reg, 'Hustle Wednesdays')).toEqual(['hustle']);
+    // An event's own name keeps its words, and a dance word in it still tags the style.
+    const wcs = one('WCS Unplugged - Example Pub');
+    expect(wcs.title).toBe('WCS Unplugged at Example Pub');
+    expect(wcs.danceStyles).toContain('west-coast-swing');
+    const hustle = one('\u{1F483}\u{1F3FB}\u{1F57A} Not Just Hustle Wednesdays- Example Pub');
+    expect(hustle.title).toBe('Not Just Hustle Wednesdays at Example Pub');
+    expect(hustle.danceStyles).toContain('hustle');
+    expect(one("DJ Friday's - Example Pub").title).toBe('Dance party at Example Pub');
+    expect(one('Spooky Bash ft/ DJ Nobody - Example Pub').title).toBe('Dance party with Spooky Bash and DJ Nobody at Example Pub');
+    expect(styleLabel(reg, 'Smooth Operators')).toEqual([]);
   });
 });

@@ -79,7 +79,7 @@ export function htmlLines(html: string): string[] {
 
 const DAY_RE = /^(MON|TUES?|WED(?:NES|S)?|THU(?:RS?)?|FRI|SAT(?:UR)?|SUN)(?:DAY)?\.?,?\s+(\d{1,2})\s*\/\s*(\d{1,2})\b/i;
 const WEEKDAY_ABBR = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-const EMOJI_RE = /[\p{Extended_Pictographic}\p{Regional_Indicator}\u{FE0F}\u{200D}\u{20E3}]/gu;
+const EMOJI_RE = /[\p{Extended_Pictographic}\p{Regional_Indicator}\p{Emoji_Modifier}\u{FE0F}\u{200D}\u{20E3}]/gu;
 const SPONSOR_RE = /\(\s*Ira[^)]*?Sponsor[^)]*\)/i;
 const TIME_WORD = String.raw`\d{1,2}(?::\d{2})?\s*(?:a|p)\.?m?\.?`;
 const TRAILING_TIME_RE = new RegExp(String.raw`(?:^|\s|-)((?:\d{1,2}(?::\d{2})?\s*(?:(?:a|p)\.?m?\.?)?\s*[-–]\s*${TIME_WORD})|${TIME_WORD}|\d{1,2}\s*[-–]\s*\d{1,2})\s*(\?)?\s*$`, 'i');
@@ -233,7 +233,8 @@ export interface IraNormalizeOptions {
   outsideVenues?: string[] | undefined;
 }
 
-const GENERIC_ACTS = /^(dj|live music|live band|band|tba|tbd|music|entertainment)$/i;
+// "DJ Friday's" is a weekly DJ night, not a DJ's name.
+const GENERIC_ACTS = /^(dj|live music|live band|band|tba|tbd|music|entertainment|dj (?:mon|tues|wednes|thurs|fri|satur|sun)day'?s?)$/i;
 
 /**
  * Act names as the calendar writes them can carry dates and extras: "American Ride: A Tribute to Toby Keith
@@ -249,6 +250,66 @@ export function cleanAct(s: string): string {
     .replace(/[\s!.,;:-]+$/, '')
     .trim();
   return out.length >= 2 ? out : s.trim();
+}
+
+/** Words that turn a style's name into a dance night: "Salsa Night", "Line Dancing", "Hustle Wednesdays", "Salsa Night w/". */
+const DANCE_WORDS = /\b(dance|dances|dancing|night|nights|nite|party|social|lessons?|class(?:es)?|workshop|weekly|(?:mon|tues|wednes|thurs|fri|satur|sun)days?|and|the|w|with)\b/g;
+
+/**
+ * Styles that a piece of act text names on its own ("WCS", "Salsa Night", "Swing Dance"). A band whose name
+ * contains a style word ("Swing 26 Jazz Band", "The Rhythm Kings") names no style: the band is the act.
+ */
+export function styleLabel(reg: Registry, text: string): string[] {
+  const styles = reg.matchStyles(text);
+  if (!styles.length) return [];
+  const aliases = [...reg.styles.values()]
+    .flatMap((s) => [s.name, ...s.aliases])
+    .map(normalizeText)
+    .filter(Boolean)
+    .sort((a, b) => b.length - a.length);
+  let rest = ` ${normalizeText(text)} `;
+  for (const a of aliases) rest = rest.split(` ${a} `).join('  ');
+  return /[a-z0-9]/.test(rest.replace(DANCE_WORDS, ' ')) ? [] : styles;
+}
+
+/** Style words that are also everyday words in band names ("Swing 26 Jazz Band", "The Rhythm Kings", "Smooth Operators"). */
+const LOOSE_STYLE_WORDS = new Set(['swing', 'rhythm', 'smooth', 'standard', 'standards', 'latin', 'blues', 'fusion', 'west coast', 'jive', 'samba', 'mambo', 'bolero', 'lindy', 'waltz', 'kiz']);
+
+/** Styles in a band's or event's own name, counting only words that mean a dance ("WCS Unplugged", "Salsa Kings"). */
+function styleHints(reg: Registry, text: string): string[] {
+  const norm = ` ${normalizeText(text)} `;
+  return reg.matchStyles(text).filter((id) => {
+    const s = reg.styles.get(id);
+    return Boolean(s && [s.name, ...s.aliases].map(normalizeText).some((a) => a && !LOOSE_STYLE_WORDS.has(a) && norm.includes(` ${a} `)));
+  });
+}
+
+/**
+ * Act text -> the styles it names, the act pieces, and styles hinted by an act's own name. "WCS" is a style;
+ * "Swing Dance with The Flipped Fedoras" is a style and an act; "Swing 26 Jazz Band" is only an act;
+ * "WCS Unplugged" is an act (the event's name) that hints at West Coast Swing.
+ */
+function splitStylesAndActs(reg: Registry, actText: string): { named: string[]; parts: string[]; hinted: string[] } {
+  const named: string[] = [];
+  const parts: string[] = [];
+  for (const raw of actText.split(/\s*\/\s*/)) {
+    // "Halloween bash ft/ DJ Rez" splits into "Halloween bash ft" and "DJ Rez".
+    const p = raw.trim().replace(/\s+(?:with|w|featuring|feat\.?|ft\.?|and|&)$/i, '');
+    const whole = styleLabel(reg, p);
+    if (whole.length) {
+      named.push(...whole);
+      continue;
+    }
+    const m = /^(.+?)\s+(?:with|featuring|feat\.?|ft\.?)\s+(.+)$/i.exec(p);
+    const head = m ? styleLabel(reg, m[1]!) : [];
+    if (head.length) {
+      named.push(...head);
+      parts.push(m![2]!);
+      continue;
+    }
+    parts.push(p);
+  }
+  return { named: [...new Set(named)], parts, hinted: [...new Set(parts.flatMap((p) => styleHints(reg, p)))] };
 }
 
 /** Similar names ("Mackenzie Reilly" / "Makenzie Reilly"): Dice coefficient on letter pairs. */
@@ -349,7 +410,8 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
     // "WCS at Johnny McGoreys": drop the venue's name from the act text.
     const venueNames = [venue.name, ...((venue as { aliases?: string[] }).aliases ?? []), row.venue, row.locationName ?? ''].map(compactName).filter((n) => n.length >= 4);
     const actText = cleanAct(row.act).replace(/\s+(?:at|@)\s+(.+)$/i, (m, place: string) => (venueNames.some((n) => compactName(place).startsWith(n.slice(0, 8)) || n.startsWith(compactName(place).slice(0, 8))) ? '' : m));
-    const pieces = actText.split(/\s*\/\s*/).map((p) => tidyTitleAct(p.trim())).filter((p) => p.length >= 2 && !GENERIC_ACTS.test(p) && reg.matchVenue(p) !== venueId && titleActOk(p) && !reg.matchStyles(p).length);
+    const { named: namedStyles, parts, hinted } = splitStylesAndActs(reg, actText);
+    const pieces = parts.map((p) => tidyTitleAct(p.trim())).filter((p) => p.length >= 2 && !GENERIC_ACTS.test(p) && reg.matchVenue(p) !== venueId && titleActOk(p));
     for (const p of pieces) if (!reg.matchPerformers(p).length && !reg.matchOrganizer(p)) unActs.add(p);
     const organizerId = reg.matchOrganizer(row.act);
     const cues = cuesFor(row);
@@ -358,9 +420,9 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
     const category: EventCategory = cues.includes('dance-party') || (cues.includes('dj') && !acts.some((a) => a.type !== 'dj')) || onlyDjs ? 'social-dance' : 'live-music';
     const styles = new Set<string>();
     for (const a of acts) for (const s of a.dancing?.styles ?? []) styles.add(s);
-    // Styles named in the act text only ("WCS", "Hustle Night"), never in the venue's name.
-    const namedStyles = reg.matchStyles(actText);
-    for (const s of namedStyles) styles.add(s);
+    // Styles named in the act text ("WCS", "Hustle Night") or by an event's own name ("WCS Unplugged"),
+    // never by the venue's name or an everyday word in a band's name ("Swing 26 Jazz Band").
+    for (const s of [...namedStyles, ...hinted]) styles.add(s);
     if (category === 'social-dance' && !styles.size) styles.add('freestyle');
     // A time marked "?" is a guess, so we show "time not listed" instead of a time that may be wrong.
     const times = row.start
