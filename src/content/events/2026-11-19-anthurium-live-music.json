@@ -1,0 +1,23 @@
+{
+  "title": "Anthurium at 89 North Music Venue",
+  "summary": "Live music by Anthurium at 89 North Music Venue. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-19",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "anthurium"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "anthurium",
+  "sourceUrl": "https://anthurium.band/shows",
+  "sourceName": "Anthurium - live music calendar",
+  "sourceRef": "events page 2026-11-19",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.6,
+  "matchKey": "anthurium|89-north-music-venue-patchogue||thursday|tba|live-music|anthurium||2026-11-19",
+  "reviewNotes": "No start time found."
+}

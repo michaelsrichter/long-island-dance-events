@@ -1,0 +1,33 @@
+{
+  "title": "Advanced West Coast Swing class at Brumidi Lodge (Sons of Italy)",
+  "summary": "Group class in West Coast Swing for advanced dancers.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "west-coast-swing"
+  ],
+  "start": "2026-10-05T16:45",
+  "end": "2026-10-05T17:45",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=MO;UNTIL=20270201",
+    "exdates": [
+      "2026-10-12"
+    ]
+  },
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "dance-with-lourdes",
+  "skillLevel": "advanced",
+  "status": "active",
+  "sourceId": "diva-lourdes-gcal",
+  "sourceUrl": "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
+  "sourceName": "DiVa Ballroom / Dance with Lourdes Cruz - Long Island Google Calendar",
+  "sourceRef": "pages 2026, 2027",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "diva-lourdes-gcal|brumidi-lodge|dance-with-lourdes|monday|16:45|class-lesson||west-coast-swing|repeat"
+}

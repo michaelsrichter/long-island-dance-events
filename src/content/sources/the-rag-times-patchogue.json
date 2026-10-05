@@ -7,10 +7,18 @@
   "catalogStatus": "verified",
   "description": "Jam-band calendar lists many Long Island bar and music-venue gigs through October.",
   "enabled": true,
+  "exclude": "640 W(?:est)?\\.? Montauk",
   "feedUrl": "https://www.theragtimes.net/events/?ical=1",
   "focus": "music",
+  "lastCounts": {
+    "found": 28,
+    "kept": 3,
+    "needsReview": 0,
+    "outOfArea": 4
+  },
+  "lastScraped": "2026-10-05T06:44:49.105Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Jam-band calendar lists many Long Island bar and music-venue gigs through October. Skipped on purpose: listings at \"Fadeleys (LI)\" give 640 W Montauk Hwy, Lindenhurst, which is a State Assembly office, not the pub. Fadeley's Deli Pub is at 422 W Main St, Patchogue (fadeleys-deli-pub-patchogue) and its nights come from Out on the Town and band calendars. Remove this filter if The Rag Times fixes the address.",
-  "url": "https://www.theragtimes.net/events/",
-  "exclude": "640 W(?:est)?\\.? Montauk"
+  "url": "https://www.theragtimes.net/events/"
 }

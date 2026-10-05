@@ -1,0 +1,28 @@
+{
+  "title": "Oktoberfest show with The Adlers at Plattduetsche Park Restaurant",
+  "summary": "Live music by The Adlers at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-09",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "performerIds": [
+    "the-adlers"
+  ],
+  "price": 8,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://parkrestaurant.com/events/oktoberfest-with-the-adlers/",
+  "status": "active",
+  "sourceId": "plattduetsche-park-restaurant-franklin-square",
+  "sourceUrl": "https://parkrestaurant.com/events/oktoberfest-with-the-adlers/",
+  "sourceName": "Plattduetsche Park Restaurant - live music calendar",
+  "sourceRef": "event data on the page 2026-10-09",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "plattduetsche-park-restaurant-franklin-square|plattduetsche-park-franklin-square||friday|tba|live-music|the-adlers||2026-10-09|oktoberfest",
+  "reviewNotes": "No start time found."
+}

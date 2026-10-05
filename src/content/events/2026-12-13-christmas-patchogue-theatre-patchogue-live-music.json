@@ -1,6 +1,6 @@
 {
-  "title": "Christmas show with Christmas with the New York Tenors at Patchogue Theatre for the Performing Arts",
-  "summary": "Live music by Christmas with the New York Tenors at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "title": "Christmas show with the New York Tenors at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by the New York Tenors at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2026-12-13T15:00",
   "timezone": "America/New_York",
@@ -13,7 +13,7 @@
   "sourceName": "Patchogue Theatre - events",
   "sourceRef": "events page 2026-12-13",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "dancingCues": [
     "afternoon",
     "theater"

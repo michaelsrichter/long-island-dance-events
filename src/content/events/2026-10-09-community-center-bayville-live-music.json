@@ -1,0 +1,21 @@
+{
+  "title": "Live music at Bayville Community Center",
+  "summary": "Live music at Bayville Community Center. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-09T20:00",
+  "end": "2026-10-09T20:00",
+  "timezone": "America/New_York",
+  "venueId": "community-center-bayville",
+  "town": "Bayville",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://bayvilleny.gov/event/the-carrella-quartet-jazz-night-music-selections-fri-oct-9-8pm",
+  "status": "active",
+  "sourceId": "village-of-bayville-community-center-concerts",
+  "sourceUrl": "https://bayvilleny.gov/event/the-carrella-quartet-jazz-night-music-selections-fri-oct-9-8pm",
+  "sourceName": "Village of Bayville Community Center concerts - live music calendar",
+  "sourceRef": "calendar feed 2026-10-09",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.85,
+  "matchKey": "village-of-bayville-community-center-concerts|community-center-bayville||friday|20:00|live-music|||2026-10-09"
+}

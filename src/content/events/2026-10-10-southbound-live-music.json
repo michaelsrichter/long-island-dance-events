@@ -1,0 +1,22 @@
+{
+  "title": "Dance with live music by SouthBound",
+  "summary": "Dance to live music by SouthBound.",
+  "category": "live-music",
+  "start": "2026-10-10",
+  "timezone": "America/New_York",
+  "town": "North Patchogue",
+  "performerIds": [
+    "southbound"
+  ],
+  "skillLevel": "all-levels",
+  "status": "pending-review",
+  "sourceId": "dancing-with-deanna",
+  "sourceUrl": "https://www.dancingwithdeanna.com/events-1",
+  "sourceName": "Dancing With Deanna - line-dance events",
+  "sourceRef": "events page 2026-10-10",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.35,
+  "matchKey": "dancing-with-deanna|north-patchogue||saturday|tba|live-music|southbound||2026-10-10",
+  "reviewNotes": "Venue not found in the listing. No start time found."
+}

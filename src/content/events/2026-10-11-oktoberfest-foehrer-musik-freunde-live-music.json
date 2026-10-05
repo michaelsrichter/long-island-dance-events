@@ -1,0 +1,28 @@
+{
+  "title": "Oktoberfest show with Foehrer Musik Freunde at Plattduetsche Park Restaurant",
+  "summary": "Live music by Foehrer Musik Freunde at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-11",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "performerIds": [
+    "foehrer-musik-freunde"
+  ],
+  "price": 8,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://parkrestaurant.com/events/oktoberfest-with-foehrer-musik-freunde/",
+  "status": "active",
+  "sourceId": "plattduetsche-park-restaurant-franklin-square",
+  "sourceUrl": "https://parkrestaurant.com/events/oktoberfest-with-foehrer-musik-freunde/",
+  "sourceName": "Plattduetsche Park Restaurant - live music calendar",
+  "sourceRef": "event data on the page 2026-10-11",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "plattduetsche-park-restaurant-franklin-square|plattduetsche-park-franklin-square||sunday|tba|live-music|foehrer-musik-freunde||2026-10-11|oktoberfest",
+  "reviewNotes": "No start time found."
+}

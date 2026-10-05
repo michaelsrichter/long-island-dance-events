@@ -1,0 +1,25 @@
+{
+  "title": "Autumn Acoustics in the Garden at Canoe Place Inn & Cottages",
+  "summary": "Live music by Autumn Acoustics in the Garden at Canoe Place Inn & Cottages. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-07T17:00",
+  "end": "2026-10-07T20:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=WE;UNTIL=20261028"
+  },
+  "venueId": "canoe-place-inn-cottages-hampton-bays",
+  "town": "Hampton Bays",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://canoeplace.com/event/autumn-acoustics-in-the-garden/2026-10-07/",
+  "status": "active",
+  "sourceId": "canoe-place-inn-cottages-hampton-bays",
+  "sourceUrl": "https://canoeplace.com/event/autumn-acoustics-in-the-garden/2026-10-07/",
+  "sourceName": "Canoe Place Inn & Cottages - live music calendar",
+  "sourceRef": "calendar feed 2026-10-07",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.85,
+  "matchKey": "canoe-place-inn-cottages-hampton-bays|canoe-place-inn-cottages-hampton-bays||wednesday|17:00|live-music|autumnacousticsinthegarden||repeat",
+  "reviewNotes": "Band or DJ not researched yet: Autumn Acoustics in the Garden."
+}

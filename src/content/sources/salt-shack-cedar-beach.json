@@ -14,11 +14,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 4,
-    "kept": 4,
+    "kept": 3,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T16:11:10.066Z",
+  "lastScraped": "2026-10-05T06:42:13.945Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it during the season. It has current beach-bar events and direct dance wording.",

@@ -1,0 +1,25 @@
+{
+  "title": "Anthurium at Sand City South",
+  "summary": "Live music by Anthurium at Sand City South. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-11T13:00",
+  "timezone": "America/New_York",
+  "venueId": "sand-city-south-lindenhurst",
+  "town": "Lindenhurst",
+  "performerIds": [
+    "anthurium"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "anthurium",
+  "sourceUrl": "https://anthurium.band/shows",
+  "sourceName": "Anthurium - live music calendar",
+  "sourceRef": "events page 2026-10-11",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.8,
+  "matchKey": "anthurium|sand-city-south-lindenhurst||sunday|13:00|live-music|anthurium||2026-10-11"
+}

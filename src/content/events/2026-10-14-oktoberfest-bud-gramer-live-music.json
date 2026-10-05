@@ -1,0 +1,28 @@
+{
+  "title": "Oktoberfest show with Bud Gramer at Plattduetsche Park Restaurant",
+  "summary": "Live music by Bud Gramer at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-14",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "performerIds": [
+    "bud-gramer"
+  ],
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://parkrestaurant.com/oktoberfest/",
+  "status": "active",
+  "sourceId": "plattduetsche-park-restaurant-franklin-square",
+  "sourceUrl": "https://parkrestaurant.com/oktoberfest/",
+  "sourceName": "Plattduetsche Park Restaurant - live music calendar",
+  "sourceRef": "event data on the page 2026-10-14",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "plattduetsche-park-restaurant-franklin-square|plattduetsche-park-franklin-square||wednesday|tba|live-music|bud-gramer||2026-10-14|oktoberfest",
+  "reviewNotes": "No start time found."
+}

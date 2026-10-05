@@ -1,0 +1,24 @@
+{
+  "title": "Halloween show with Groney & Friends at HOG Farm",
+  "summary": "Live music by Groney & Friends at HOG Farm. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-24T19:00",
+  "end": "2026-10-24T22:00",
+  "timezone": "America/New_York",
+  "venueId": "hog-farm-brookhaven",
+  "town": "Brookhaven",
+  "performerIds": [
+    "groney-and-friends"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://thehogfarm.org/events/2026/10/24/hog-halloween-with-food-by-crossroads-que",
+  "status": "active",
+  "sourceId": "hog-farm-brookhaven",
+  "sourceUrl": "https://thehogfarm.org/events/2026/10/24/hog-halloween-with-food-by-crossroads-que",
+  "sourceName": "HOG Farm (Brookhaven) - live music calendar",
+  "sourceRef": "events page 2026-10-24",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "hog-farm-brookhaven|hog-farm-brookhaven||saturday|19:00|live-music|groney-and-friends||2026-10-24|halloween"
+}

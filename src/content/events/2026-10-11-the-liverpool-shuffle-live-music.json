@@ -1,0 +1,24 @@
+{
+  "title": "The Liverpool Shuffle at My Father’s Place at Roslyn Hotel",
+  "summary": "Live music by The Liverpool Shuffle at My Father’s Place at Roslyn Hotel. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-11",
+  "timezone": "America/New_York",
+  "venueId": "my-fathers-place-at-roslyn-hotel-roslyn",
+  "town": "Roslyn",
+  "performerIds": [
+    "the-liverpool-shuffle"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.theliverpoolshuffle.com/calendar/the-liverpool-shuffle-at-my-fathers-place",
+  "status": "active",
+  "sourceId": "the-liverpool-shuffle",
+  "sourceUrl": "https://www.theliverpoolshuffle.com/calendar/the-liverpool-shuffle-at-my-fathers-place",
+  "sourceName": "The Liverpool Shuffle - live music calendar",
+  "sourceRef": "events page 2026-10-11",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.6,
+  "matchKey": "the-liverpool-shuffle|my-fathers-place-at-roslyn-hotel-roslyn||sunday|tba|live-music|the-liverpool-shuffle||2026-10-11",
+  "reviewNotes": "No start time found."
+}

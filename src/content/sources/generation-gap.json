@@ -13,6 +13,14 @@
   "description": "Long Island cover-band shows page lists public bar gigs in Baldwin and Freeport through December.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 10,
+    "kept": 1,
+    "needsReview": 0,
+    "outOfArea": 2
+  },
+  "lastScraped": "2026-10-05T06:37:24.569Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Long Island cover-band shows page lists public bar gigs in Baldwin and Freeport through December.",
   "url": "https://gengapmusic.com/shows"

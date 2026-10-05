@@ -1,0 +1,24 @@
+{
+  "title": "The Logan Whaley Band at The Audrey",
+  "summary": "Live music by The Logan Whaley Band at The Audrey. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-17",
+  "timezone": "America/New_York",
+  "venueId": "the-audrey-oyster-bay",
+  "town": "Oyster Bay",
+  "performerIds": [
+    "the-logan-whaley-band"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://theaudreyob.com/events/logan-whaley-october-17/",
+  "status": "active",
+  "sourceId": "the-audrey-oyster-bay",
+  "sourceUrl": "https://theaudreyob.com/events/logan-whaley-october-17/",
+  "sourceName": "The Audrey (Oyster Bay) - live music calendar",
+  "sourceRef": "event data on the page 2026-10-17",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.7,
+  "matchKey": "the-audrey-oyster-bay|the-audrey-oyster-bay||saturday|tba|live-music|the-logan-whaley-band||2026-10-17",
+  "reviewNotes": "No start time found."
+}

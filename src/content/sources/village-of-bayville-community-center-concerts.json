@@ -6,15 +6,23 @@
   "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "community-center-bayville",
-    "town": "Bayville"
+    "town": "Bayville",
+    "venueId": "community-center-bayville"
   },
   "description": "Village calendar lists several October live music nights at Bayville Community Center.",
   "enabled": true,
   "feedUrl": "https://bayvilleny.gov/events/?ical=1",
   "focus": "music",
+  "include": "concert|music|band|jazz|dance|dj|orchestra|tribute|singer",
+  "lastCounts": {
+    "found": 29,
+    "kept": 2,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:43:24.645Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Village calendar lists several October live music nights at Bayville Community Center.",
-  "url": "https://bayvilleny.gov/events",
-  "include": "concert|music|band|jazz|dance|dj|orchestra|tribute|singer"
+  "url": "https://bayvilleny.gov/events"
 }

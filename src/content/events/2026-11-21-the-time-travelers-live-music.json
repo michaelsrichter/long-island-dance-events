@@ -1,0 +1,25 @@
+{
+  "title": "The Time Travelers at RipTides Cocktails and Grill",
+  "summary": "Live music by The Time Travelers at RipTides Cocktails and Grill. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-21",
+  "timezone": "America/New_York",
+  "venueId": "riptides-lindenhurst",
+  "town": "Lindenhurst",
+  "performerIds": [
+    "the-time-travelers"
+  ],
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.timetravelersli.com/upcoming-shows/riptides-lindenhurst",
+  "status": "active",
+  "sourceId": "the-time-travelers",
+  "sourceUrl": "https://www.timetravelersli.com/upcoming-shows/riptides-lindenhurst",
+  "sourceName": "The Time Travelers - live music calendar",
+  "sourceRef": "events page 2026-11-21",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.6,
+  "matchKey": "the-time-travelers|riptides-lindenhurst||saturday|tba|live-music|the-time-travelers||2026-11-21",
+  "reviewNotes": "No start time found."
+}

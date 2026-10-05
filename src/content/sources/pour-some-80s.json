@@ -15,11 +15,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 24,
-    "kept": 5,
+    "kept": 11,
     "needsReview": 0,
-    "outOfArea": 6
+    "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T16:10:49.370Z",
+  "lastScraped": "2026-10-05T06:41:47.742Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a strong source with many public LI bar gigs and repeat venues.",

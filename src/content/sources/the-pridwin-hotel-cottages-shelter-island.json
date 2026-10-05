@@ -6,14 +6,22 @@
   "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "the-pridwin-shelter-island",
-    "town": "Shelter Island"
+    "town": "Shelter Island",
+    "venueId": "the-pridwin-shelter-island"
   },
   "description": "Shelter Island resort calendar lists weekly live music at The Pridwin with multiple October dates.",
   "enabled": true,
   "focus": "music",
+  "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano",
+  "lastCounts": {
+    "found": 7,
+    "kept": 4,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:43:07.486Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Shelter Island resort calendar lists weekly live music at The Pridwin with multiple October dates.",
-  "url": "https://www.caperesorts.com/pridwin/events-calendar",
-  "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano"
+  "url": "https://www.caperesorts.com/pridwin/events-calendar"
 }

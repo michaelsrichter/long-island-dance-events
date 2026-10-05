@@ -6,14 +6,22 @@
   "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "plattduetsche-park-franklin-square",
-    "town": "Franklin Square"
+    "town": "Franklin Square",
+    "venueId": "plattduetsche-park-franklin-square"
   },
   "description": "Franklin Square venue calendar has frequent Oktoberfest bands, German dancing demonstrations and live bands through December.",
   "enabled": true,
   "focus": "music",
+  "include": "\\blive\\b|music|band|\\bdj\\b|danc|disco|accordion|concert|orchestra|polka",
+  "lastCounts": {
+    "found": 12,
+    "kept": 8,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:41:32.313Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Franklin Square venue calendar has frequent Oktoberfest bands, German dancing demonstrations and live bands through December.",
-  "url": "https://parkrestaurant.com/events/",
-  "include": "\\blive\\b|music|band|\\bdj\\b|danc|disco|accordion|concert|orchestra|polka"
+  "url": "https://parkrestaurant.com/events/"
 }

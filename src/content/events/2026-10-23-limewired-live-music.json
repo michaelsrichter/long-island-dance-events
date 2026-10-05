@@ -11,7 +11,7 @@
   ],
   "priceNotes": "Pay at the door",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "eighty-nine-north",
   "sourceUrl": "https://89northmusic.com/calendar",
   "sourceName": "89 North (Patchogue) - music calendar",
@@ -20,5 +20,5 @@
   "lastSeen": "2026-10-04",
   "confidence": 0.6,
   "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||friday|tba|live-music|limewired+max||2026-10-23",
-  "reviewNotes": "Band or DJ not researched yet: The Max. No start time found."
+  "reviewNotes": "Band or DJ not researched yet: The Max. No start time found. Not found in the latest eighty-nine-north run on 2026-10-05. Check whether it was cancelled or moved."
 }

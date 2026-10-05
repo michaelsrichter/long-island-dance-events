@@ -13,6 +13,14 @@
   "description": "Band shows page lists multiple upcoming 90s party gigs at Suffolk music venues and bars.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 10,
+    "kept": 4,
+    "needsReview": 0,
+    "outOfArea": 1
+  },
+  "lastScraped": "2026-10-05T06:43:02.032Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Band shows page lists multiple upcoming 90s party gigs at Suffolk music venues and bars.",
   "url": "https://wearethemaxny.com/shows"

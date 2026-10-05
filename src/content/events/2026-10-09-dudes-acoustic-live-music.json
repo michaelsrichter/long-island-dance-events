@@ -1,0 +1,27 @@
+{
+  "title": "Dudes Acoustic at Oakdale Brew House",
+  "summary": "Live music by Dudes Acoustic at Oakdale Brew House. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-09T19:00",
+  "end": "2026-10-09T22:00",
+  "timezone": "America/New_York",
+  "venueId": "oakdale-brew-house-oakdale",
+  "town": "Oakdale",
+  "performerIds": [
+    "dudes-acoustic"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.oakdalebrewhouse.com/events/2026/10/9/live-music-by-dudes-acoustic",
+  "status": "active",
+  "sourceId": "oakdale-brew-house",
+  "sourceUrl": "https://www.oakdalebrewhouse.com/events/2026/10/9/live-music-by-dudes-acoustic",
+  "sourceName": "Oakdale Brew House (Oakdale) - live music calendar",
+  "sourceRef": "events page 2026-10-09",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "acoustic"
+  ],
+  "confidence": 0.8,
+  "matchKey": "oakdale-brew-house|oakdale-brew-house-oakdale||friday|19:00|live-music|dudes-acoustic||2026-10-09"
+}

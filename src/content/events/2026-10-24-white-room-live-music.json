@@ -1,0 +1,22 @@
+{
+  "title": "White Room at Bobbique",
+  "summary": "Live music by White Room at Bobbique. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-24T20:30",
+  "timezone": "America/New_York",
+  "venueId": "bobbique-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "white-room"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bobbique-patchogue",
+  "sourceUrl": "https://www.bobbique.com/upcoming-events/",
+  "sourceName": "BOBBIQUE (Patchogue) - live music calendar",
+  "sourceRef": "events page 2026-10-24",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "bobbique-patchogue|bobbique-patchogue||saturday|20:30|live-music|white-room||2026-10-24"
+}

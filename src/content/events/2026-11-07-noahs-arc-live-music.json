@@ -1,0 +1,27 @@
+{
+  "title": "Noah's Arc at HOG Farm",
+  "summary": "Live music by Noah's Arc at HOG Farm. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-07T14:00",
+  "end": "2026-11-07T17:00",
+  "timezone": "America/New_York",
+  "venueId": "hog-farm-brookhaven",
+  "town": "Brookhaven",
+  "performerIds": [
+    "noahs-arc"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://thehogfarm.org/events/2026/11/7/chicken-lunch",
+  "status": "active",
+  "sourceId": "hog-farm-brookhaven",
+  "sourceUrl": "https://thehogfarm.org/events/2026/11/7/chicken-lunch",
+  "sourceName": "HOG Farm (Brookhaven) - live music calendar",
+  "sourceRef": "events page 2026-11-07",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.8,
+  "matchKey": "hog-farm-brookhaven|hog-farm-brookhaven||saturday|14:00|live-music|noahs-arc||2026-11-07"
+}

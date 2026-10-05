@@ -1,0 +1,23 @@
+{
+  "title": "Coverland at Stephen Talkhouse",
+  "summary": "Live music by Coverland at Stephen Talkhouse. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-20",
+  "timezone": "America/New_York",
+  "venueId": "stephen-talkhouse-amagansett",
+  "town": "Amagansett",
+  "performerIds": [
+    "coverland-band"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "coverland-band",
+  "sourceUrl": "https://www.coverlandband.com/",
+  "sourceName": "Coverland Band - live music calendar",
+  "sourceRef": "events page 2026-11-20",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.6,
+  "matchKey": "coverland-band|stephen-talkhouse-amagansett||friday|tba|live-music|coverland-band||2026-11-20",
+  "reviewNotes": "No start time found."
+}

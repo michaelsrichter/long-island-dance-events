@@ -2,11 +2,17 @@
   "title": "Milagro at Lucky Strike Bar & Lounge at Port Jeff Bowl",
   "summary": "Live music by Milagro at Lucky Strike Bar & Lounge at Port Jeff Bowl in Port Jefferson Station. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
   "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
   "start": "2026-10-24T20:00",
   "end": "2026-10-24T23:00",
   "timezone": "America/New_York",
   "venueId": "lucky-strike-bar-lounge-port-jefferson-station",
   "town": "Port Jefferson Station",
+  "performerIds": [
+    "milagro-santana-tribute-band"
+  ],
   "skillLevel": "all-levels",
   "status": "active",
   "sourceId": "iraslist",
@@ -14,8 +20,7 @@
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
-  "confidence": 0.7,
-  "matchKey": "iraslist|2026-10-24|lucky-strike-bar-lounge-port-jefferson-station|milagro|2026-10-24|special",
-  "reviewNotes": "Band or DJ not researched yet: Milagro."
+  "lastSeen": "2026-10-05",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-24|lucky-strike-bar-lounge-port-jefferson-station|milagro|2026-10-24|special"
 }

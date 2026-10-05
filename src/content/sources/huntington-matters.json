@@ -11,12 +11,13 @@
   "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
   "lastCounts": {
     "found": 12,
-    "kept": 2,
+    "kept": 0,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T16:12:00.442Z",
-  "lastStatus": "ok",
+  "lastMessage": "The adapter found 12 listings but none could be used. The source layout may have changed.",
+  "lastScraped": "2026-10-05T06:44:09.178Z",
+  "lastStatus": "empty",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep with keyword filters; occasional dance/music items in a broad calendar.",
   "url": "https://huntingtonmatters.com/events/"

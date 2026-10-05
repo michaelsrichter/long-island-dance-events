@@ -1,0 +1,27 @@
+{
+  "title": "NOIZ at Claudio's",
+  "summary": "Live music by NOIZ at Claudio's. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-11T13:30",
+  "end": "2026-10-11T17:30",
+  "timezone": "America/New_York",
+  "venueId": "claudios-greenport",
+  "town": "Greenport",
+  "performerIds": [
+    "noiz-entertainment"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://noizentertainment.com/schedule/%e2%9a%93%f0%9f%8d%82-fall-on-the-water-with-noiz-at-claudios-%f0%9f%8d%82%e2%9a%93-2/",
+  "status": "active",
+  "sourceId": "noiz-entertainment",
+  "sourceUrl": "https://noizentertainment.com/schedule/%e2%9a%93%f0%9f%8d%82-fall-on-the-water-with-noiz-at-claudios-%f0%9f%8d%82%e2%9a%93-2/",
+  "sourceName": "NOIZ Entertainment - live music calendar",
+  "sourceRef": "calendar feed 2026-10-11",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "noiz-entertainment|claudios-greenport||sunday|13:30|live-music|noiz-entertainment||2026-10-11"
+}

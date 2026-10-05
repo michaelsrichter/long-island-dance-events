@@ -13,6 +13,14 @@
   "description": "Long Island punk band lists upcoming shows including Bay Shore and Lindenhurst dates.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 3,
+    "kept": 1,
+    "needsReview": 0,
+    "outOfArea": 1
+  },
+  "lastScraped": "2026-10-05T06:42:24.708Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Long Island punk band lists upcoming shows including Bay Shore and Lindenhurst dates.",
   "url": "https://sharpviolet.com/"

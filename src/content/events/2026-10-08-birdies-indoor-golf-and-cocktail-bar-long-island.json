@@ -1,0 +1,21 @@
+{
+  "title": "Live music at Birdies Indoor Golf & Cocktail Bar",
+  "summary": "Live music at Birdies Indoor Golf & Cocktail Bar. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-08T19:00",
+  "end": "2026-10-08T22:00",
+  "timezone": "America/New_York",
+  "venueId": "birdies-indoor-golf-and-cocktail-bar-long-island-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.theragtimes.net/event/tom-bauer-trio-at-birdies-li/",
+  "status": "active",
+  "sourceId": "the-rag-times-patchogue",
+  "sourceUrl": "https://www.theragtimes.net/event/tom-bauer-trio-at-birdies-li/",
+  "sourceName": "The Rag Times - live music calendar",
+  "sourceRef": "calendar feed 2026-10-08",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.85,
+  "matchKey": "the-rag-times-patchogue|birdies-indoor-golf-and-cocktail-bar-long-island-patchogue||thursday|19:00|live-music|||2026-10-08"
+}

@@ -1,0 +1,27 @@
+{
+  "title": "West Coast Swing class at Huntington Moose Lodge",
+  "summary": "Group class in West Coast Swing.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "west-coast-swing"
+  ],
+  "start": "2026-10-11T14:00",
+  "end": "2026-10-11T17:00",
+  "timezone": "America/New_York",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "dance-with-lourdes",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "diva-lourdes-gcal",
+  "sourceUrl": "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
+  "sourceName": "DiVa Ballroom / Dance with Lourdes Cruz - Long Island Google Calendar",
+  "sourceRef": "calendar feed 2026-10-11",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "diva-lourdes-gcal|huntington-moose-lodge|dance-with-lourdes|sunday|14:00|class-lesson||west-coast-swing|2026-10-11"
+}

@@ -1,24 +1,32 @@
 {
   "name": "DiVa Ballroom / Dance with Lourdes Cruz - Long Island Google Calendar",
-  "url": "https://divaballroomdancing.com/long-island/",
   "type": "ical",
   "adapter": "ical",
-  "focus": "dance",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from DiVa Ballroom / Dance with Lourdes Cruz. We write our own short summaries and link back to the original page.",
-  "description": "Group dance classes on Long Island by Lourdes Cruz (DiVa Ballroom): ballroom, Latin and West Coast Swing in Deer Park and Greenlawn.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
-  "feedUrl": "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
   "defaults": {
-    "organizerId": "dance-with-lourdes",
-    "category": "class-lesson"
+    "category": "class-lesson",
+    "organizerId": "dance-with-lourdes"
   },
+  "description": "Group dance classes on Long Island by Lourdes Cruz (DiVa Ballroom): ballroom, Latin and West Coast Swing in Deer Park and Greenlawn.",
+  "enabled": true,
+  "exclude": "practice social|residents only|preregister|cardio|fitness|^brumidi\\b|donna's dance|levittown hall|echo park|merrick golf|cumberland ave",
+  "feedUrl": "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
+  "focus": "dance",
+  "lastCounts": {
+    "found": 272,
+    "kept": 70,
+    "needsReview": 0,
+    "outOfArea": 82
+  },
+  "lastScraped": "2026-10-05T06:36:52.538Z",
+  "lastStatus": "ok",
   "permission": {
-    "status": "not-needed",
-    "note": "Public Google Calendar feed. Google documents this address for other apps to subscribe, so robots.txt does not apply to it (decision P40)."
+    "note": "Public Google Calendar feed. Google documents this address for other apps to subscribe, so robots.txt does not apply to it (decision P40).",
+    "status": "not-needed"
   },
+  "rateLimitSeconds": 5,
   "reviewNotes": "Switched on 2026-10-05 after the owner shared the calendar. Read as a class calendar (defaults.category class-lesson). Skipped: Town of Hempstead residents-only classes (Levittown Hall, Echo Park, Merrick Golf Course) and Great Neck Community Education courses (30 Cumberland Ave), which need pre-registration and are not open drop-in; cardio/fitness sessions; the Wednesday practice social (Great Neck Ballroom lists its own); and the Brumidi Lodge dances (the lodge has its own source). Queens (Little Neck) listings are out of area.",
-  "exclude": "practice social|residents only|preregister|cardio|fitness|^brumidi\\b|donna's dance|levittown hall|echo park|merrick golf|cumberland ave"
+  "url": "https://divaballroomdancing.com/long-island/"
 }

@@ -15,11 +15,11 @@
   "sourceName": "Out on the Town - Long Island event calendar",
   "sourceRef": "calendar feed 2026-10-06",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "dancingCues": [
     "afternoon"
   ],
   "confidence": 0.4,
   "matchKey": "out-on-the-town-li|the-coop-nashville-kitchen-farmingdale||tuesday|08:00|live-music|||2026-10-06",
-  "reviewNotes": "New venue was added automatically. Check it. Start time looks wrong (8:00 in the morning). Check the source."
+  "reviewNotes": "Start time looks wrong (8:00 in the morning). Check the source."
 }

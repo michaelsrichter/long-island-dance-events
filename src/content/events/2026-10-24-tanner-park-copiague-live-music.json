@@ -1,0 +1,24 @@
+{
+  "title": "NEW DATE at Tanner Park",
+  "summary": "Live music by NEW DATE at Tanner Park in Copiague. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-24T19:00",
+  "end": "2026-10-24T22:00",
+  "timezone": "America/New_York",
+  "venueId": "tanner-park-copiague",
+  "town": "Copiague",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "festival"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-24|tanner-park-copiague|new-date|2026-10-24|special",
+  "reviewNotes": "Band or DJ not researched yet: NEW DATE."
+}

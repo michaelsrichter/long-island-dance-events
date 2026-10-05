@@ -1,0 +1,25 @@
+{
+  "title": "Last Jam at HOG Farm",
+  "summary": "Live music by Last Jam at HOG Farm. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-13T18:00",
+  "end": "2026-10-13T22:00",
+  "timezone": "America/New_York",
+  "venueId": "hog-farm-brookhaven",
+  "town": "Brookhaven",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://thehogfarm.org/events/2026/10/13/farm-jam-with-food-by-chef-clemente",
+  "status": "active",
+  "sourceId": "hog-farm-brookhaven",
+  "sourceUrl": "https://thehogfarm.org/events/2026/10/13/farm-jam-with-food-by-chef-clemente",
+  "sourceName": "HOG Farm (Brookhaven) - live music calendar",
+  "sourceRef": "events page 2026-10-13",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "jam"
+  ],
+  "confidence": 0.75,
+  "matchKey": "hog-farm-brookhaven|hog-farm-brookhaven||tuesday|18:00|live-music|lastjam||2026-10-13",
+  "reviewNotes": "Band or DJ not researched yet: Last Jam."
+}

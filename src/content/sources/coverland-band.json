@@ -13,6 +13,14 @@
   "description": "Cover band page lists multiple upcoming Nassau and Suffolk gigs through December and emphasizes dance-floor party sets.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 8,
+    "kept": 4,
+    "needsReview": 0,
+    "outOfArea": 1
+  },
+  "lastScraped": "2026-10-05T06:36:30.439Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Cover band page lists multiple upcoming Nassau and Suffolk gigs through December and emphasizes dance-floor party sets.",
   "url": "https://www.coverlandband.com/"

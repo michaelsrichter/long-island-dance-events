@@ -1,0 +1,22 @@
+{
+  "title": "Brass Roots Band at Bobbique",
+  "summary": "Live music by Brass Roots Band at Bobbique. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-09T20:00",
+  "timezone": "America/New_York",
+  "venueId": "bobbique-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "brass-roots-band"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bobbique-patchogue",
+  "sourceUrl": "https://www.bobbique.com/upcoming-events/",
+  "sourceName": "BOBBIQUE (Patchogue) - live music calendar",
+  "sourceRef": "events page 2026-10-09",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "bobbique-patchogue|bobbique-patchogue||friday|20:00|live-music|brass-roots-band||2026-10-09"
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Anthurium at Rocky Point Ale House",
+  "summary": "Live music by Anthurium at Rocky Point Ale House. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-02-25T19:00",
+  "timezone": "America/New_York",
+  "venueId": "rocky-point-ale-house-rocky-point",
+  "town": "Rocky Point",
+  "performerIds": [
+    "anthurium"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "anthurium",
+  "sourceUrl": "https://anthurium.band/shows",
+  "sourceName": "Anthurium - live music calendar",
+  "sourceRef": "events page 2027-02-25",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "anthurium|rocky-point-ale-house-rocky-point||thursday|19:00|live-music|anthurium||2027-02-25"
+}

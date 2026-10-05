@@ -1,0 +1,26 @@
+{
+  "title": "Spotlight at The Paramount",
+  "summary": "Live music by Spotlight at The Paramount. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-16T22:00",
+  "timezone": "America/New_York",
+  "venueId": "paramount-huntington",
+  "town": "Huntington",
+  "performerIds": [
+    "spotlight"
+  ],
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "spotlight-at-the-paramount-huntington",
+  "sourceUrl": "https://www.spotlightny.com/events/",
+  "sourceName": "Spotlight at The Paramount (Huntington) - live music calendar",
+  "sourceRef": "events page 2026-10-16",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.8,
+  "matchKey": "spotlight-at-the-paramount-huntington|paramount-huntington||friday|22:00|live-music|spotlight||2026-10-16"
+}

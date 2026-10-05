@@ -6,12 +6,20 @@
   "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "paramount-huntington",
-    "town": "Huntington"
+    "town": "Huntington",
+    "venueId": "paramount-huntington"
   },
   "description": "Huntington bar and music venue lists featured live music and DJ events for the current weekend.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 2,
+    "kept": 1,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:42:30.116Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Huntington bar and music venue lists featured live music and DJ events for the current weekend.",
   "url": "https://www.spotlightny.com/events/"

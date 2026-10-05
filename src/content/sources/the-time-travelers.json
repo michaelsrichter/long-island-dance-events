@@ -13,6 +13,14 @@
   "description": "Long Island cover band page lists three upcoming bar gigs in Nassau and Suffolk through January.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 10,
+    "kept": 3,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:43:12.798Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Long Island cover band page lists three upcoming bar gigs in Nassau and Suffolk through January.",
   "url": "https://www.timetravelersli.com/upcoming-shows"

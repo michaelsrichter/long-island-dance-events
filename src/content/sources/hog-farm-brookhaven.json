@@ -6,14 +6,22 @@
   "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "hog-farm-brookhaven",
-    "town": "Brookhaven"
+    "town": "Brookhaven",
+    "venueId": "hog-farm-brookhaven"
   },
   "description": "HOG Farm has dated open jam, Halloween music and lunch-with-music events in Brookhaven through November.",
   "enabled": true,
   "focus": "music",
+  "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano",
+  "lastCounts": {
+    "found": 42,
+    "kept": 3,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:37:29.917Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: HOG Farm has dated open jam, Halloween music and lunch-with-music events in Brookhaven through November.",
-  "url": "https://thehogfarm.org/events/",
-  "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano"
+  "url": "https://thehogfarm.org/events/"
 }

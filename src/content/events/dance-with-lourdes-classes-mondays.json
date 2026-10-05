@@ -7,14 +7,8 @@
     "ballroom",
     "latin-ballroom"
   ],
-  "start": "2026-10-05T16:45",
+  "start": "2026-10-12T16:45",
   "timezone": "America/New_York",
-  "recurrence": {
-    "rrule": "FREQ=WEEKLY;BYDAY=MO;UNTIL=20261026",
-    "exdates": [
-      "2026-10-19"
-    ]
-  },
   "venueId": "brumidi-lodge",
   "town": "Deer Park",
   "organizerId": "dance-with-lourdes",
@@ -28,7 +22,7 @@
   "sourceName": "The Dance Calendar, October 2026",
   "sourceRef": "pages 16, 18, 21",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "confidence": 0.95,
   "matchKey": "thedancecalendar|brumidi-lodge|dance-with-lourdes|monday|16:45|class-lesson||ballroom+latin-ballroom+west-coast-swing||repeat"
 }

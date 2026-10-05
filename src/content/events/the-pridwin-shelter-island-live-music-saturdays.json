@@ -1,0 +1,23 @@
+{
+  "title": "Live music at The Pridwin Hotel & Cottages",
+  "summary": "Live music at The Pridwin Hotel & Cottages. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-24T18:00",
+  "end": "2026-10-24T21:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=SA;UNTIL=20261031"
+  },
+  "venueId": "the-pridwin-shelter-island",
+  "town": "Shelter Island",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "the-pridwin-hotel-cottages-shelter-island",
+  "sourceUrl": "https://www.caperesorts.com/pridwin/events-calendar",
+  "sourceName": "The Pridwin Hotel & Cottages - live music calendar",
+  "sourceRef": "events page 2026-10-24",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.75,
+  "matchKey": "the-pridwin-hotel-cottages-shelter-island|the-pridwin-shelter-island||saturday|18:00|live-music|||repeat"
+}

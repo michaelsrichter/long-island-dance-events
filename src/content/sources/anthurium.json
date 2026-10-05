@@ -13,6 +13,14 @@
   "description": "Local band shows page lists multiple Long Island brewery, festival and tavern gigs through November.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 50,
+    "kept": 9,
+    "needsReview": 0,
+    "outOfArea": 4
+  },
+  "lastScraped": "2026-10-05T06:34:04.869Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Local band shows page lists multiple Long Island brewery, festival and tavern gigs through November.",
   "url": "https://anthurium.band/shows"
