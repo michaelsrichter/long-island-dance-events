@@ -5,7 +5,7 @@
   "danceStyles": [
     "freestyle"
   ],
-  "start": "2026-10-04",
+  "start": "2026-10-04T17:00",
   "timezone": "America/New_York",
   "venueId": "salt-shack-babylon",
   "town": "Babylon",
@@ -13,7 +13,8 @@
     "the-byrne-unit"
   ],
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "cancelled",
+  "cancelledNote": "Ira's List's calendar marks this gig as cancelled.",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List, week of October 4, 2026",
@@ -24,6 +25,5 @@
     "afternoon"
   ],
   "confidence": 0.75,
-  "matchKey": "iraslist|2026-10-04|salt-shack-babylon|byrne-unit|2026-10-04|special",
-  "reviewNotes": "Ira's List was not sure of the time (3pm?), so no time is shown. Not found in the latest iraslist run on 2026-10-04. Check whether it was cancelled or moved."
+  "matchKey": "iraslist|2026-10-04|salt-shack-babylon|byrne-unit|2026-10-04|special"
 }
