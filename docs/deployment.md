@@ -93,6 +93,22 @@ Common settings:
 | `ADMIN_EMAILS` | for moderation | Comma-separated emails that get the `admin` role at sign-in. |
 | `ADMIN_NOTIFY_URL` | optional | Secret trigger address of the alert Logic App (see "Email alerts for moderators" below). Without it, no alert emails are sent. |
 | `MODERATION_DENY_WORDS` | optional | Comma-separated words that always reject a note. |
+| `REVIEW_SECRET_KEY` | for the review center | 64 random characters, the same on every environment. Encrypts the review center's GitHub App key in the `ReviewState` table. Set on 2026-10-05; changing it means connecting GitHub again. |
+| `GITHUB_APP_ID`, `GITHUB_APP_PRIVATE_KEY` | optional | Use a GitHub App from settings instead of the one stored by the setup button (key as PEM or base64 PEM). `GITHUB_APP_INSTALLATION_ID` optional. |
+| `REVIEW_REPO`, `REVIEW_BRANCH` | optional | Default `michaelsrichter/long-island-dance-events` and `main`. |
+
+## Review center: GitHub App (owner, once)
+
+The review center (`/moderate/`, decision P51) writes to GitHub as a GitHub App that only the owner can create:
+
+1. Sign in to GitHub as `michaelsrichter`. Open https://longisland.dance/moderate/ and sign in.
+2. On the **To do** tab, press **Connect to GitHub**. GitHub shows "Create GitHub App" with the name **Long Island Dance review center** and its permissions (contents, pull requests, issues, actions: read and write; checks, statuses: read; no webhook). Press **Create GitHub App**.
+3. GitHub sends you back through `/api/github-setup`, which swaps the one-time code for the app's private key (stored encrypted in the `ReviewState` table) and opens the install page. Choose **Only select repositories**, pick **long-island-dance-events**, and press **Install**.
+4. Back on the review center, the setup card is gone and every tab fills in.
+
+The app is free. To remove it: GitHub, Settings, Applications (installed apps), then Developer settings, GitHub Apps. To set it up again, press **Connect to GitHub** again (it replaces the stored key). For a manual setup, put the app's id and private key in `GITHUB_APP_ID` and `GITHUB_APP_PRIVATE_KEY` instead. Pull-request previews share the same Storage account, so they use the same app; decisions made on a preview change the real site.
+
+The `ReviewState` table is in `infra/main.bicep`; on the live account it was created with `az storage table create --name ReviewState --account-name stlongislanddance`. The older `GITHUB_ADMIN_CLIENT_ID`/`_SECRET` settings (a planned GitHub sign-in for `/admin/`) were removed on 2026-10-05; the GitHub OAuth app "Long Island Dance admin sign-in" is unused and can be deleted.
 
 ## Visitor sign-in and community features
 

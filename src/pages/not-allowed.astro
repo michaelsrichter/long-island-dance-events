@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+<BaseLayout title="Editors only" description="This page is for the site's editors." pageType="not-allowed" noindex>
+  <PageHeader title="Editors only" lede="This part of the website is for the people who run it." />
+  <div class="container section stack-l" data-not-allowed>
+    <p>You're signed in, but your account isn't on the editor list, so you can't open this page.</p>
+    <ul>
+      <li>If you help run the website, ask the owner to add your email address to the editor list. Then sign out and sign in again.</li>
+      <li>Signed in with the wrong account? <a href="/.auth/logout?post_logout_redirect_uri=/">Sign out</a>, then sign in with your editor email address.</li>
+    </ul>
+    <p class="btn-row"><a class="btn btn--primary" href="/">Go to the home page</a> <a class="btn btn--secondary" href="/events/">See all events</a></p>
+  </div>
+</BaseLayout>

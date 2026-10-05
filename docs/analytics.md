@@ -53,6 +53,8 @@ Every browser event also carries `page` (the address path), `page_type`, `releas
 
 The API records these itself (no user ids, no text): `community_like` (`type`: event, venue, performer..., `value`: `like`/`unlike`), `community_save` (`value`: `save`/`unsave`), `community_note` (`type`, `kind`: `note`/`correction`, `result`: `published`/`queued`/`rejected`), `community_photo` (`type`, `result`), `community_flag` (`type`, `value`: `reported`/`hidden`, `reason`). Sign-ins are the `requests` rows named `roles` (one per sign-in).
 
+The review center (`/moderate/`, editors only) records `review_decision` for each owner decision: `area` (`listing`, `collected`, `source`, `run`, `candidate`, `message`, `copilot`, `setup`), `action` (for example `publish`, `fix`, `hide`, `cancel`, `undo`, `bulk`, `enable`, `permission`, `reject`, `close`, `connect`) and `count`. The full record (who, what, when, why) is in the private `ModLog` table and the review center's **Log** tab.
+
 ### Dashboard
 
 - **Workbook:** "Long Island Dance Events: how people use the site" in resource group `rg-li-dance-events-web` (Azure portal, then **Monitor**, then **Workbooks**, or open Application Insights `appi-swa-li-dance-events-web` and choose **Workbooks**). Source: `infra/monitoring/site-usage.workbook.json`, deployed by `infra/monitoring/monitoring.bicep` (see [deployment.md](deployment.md#monitoring-dashboard-and-alerts)).

@@ -105,8 +105,19 @@ await check('Community data allows our site (CORS)', async () => {
   assert(r.status === 200, `preflight status ${r.status}`);
   assert(r.headers.get('access-control-allow-origin') === origin || r.headers.get('access-control-allow-origin') === '*', 'origin not allowed');
 });
-await check('Account, moderation and rules pages', async () => {
-  for (const p of ['/account/', '/moderate/', '/community-rules/']) { const r = await get(p); assert(r.status === 200, `${p} status ${r.status}`); }
+await check('Account and rules pages', async () => {
+  for (const p of ['/account/', '/community-rules/']) { const r = await get(p); assert(r.status === 200, `${p} status ${r.status}`); }
+});
+await check('Review center is for editors only', async () => {
+  // Signed-out visitors get the route rule's 401, shown as our "You're signed out" page with a Sign in button.
+  const page = await get('/moderate/');
+  assert(page.status === 401, `/moderate/ status ${page.status}`);
+  assert(!(await page.text()).includes('data-review-app'), '/moderate/ served the review center to a signed-out visitor');
+  for (const p of ['/api/review/status', '/api/review/listings', '/api/moderation/queue']) {
+    const r = await get(p);
+    assert(r.status === 401 || r.status === 403, `${p} status ${r.status}`);
+  }
+  return 'sign-in required';
 });
 
 const width = Math.max(...results.map((r) => r.name.length));

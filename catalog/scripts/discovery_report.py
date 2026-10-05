@@ -126,6 +126,7 @@ def main() -> None:
     ]
 
     logs = [load_log(p) for p in a.search_log if os.path.exists(p)]
+    fresh: list[dict] = []
     if logs:
         log = merge_logs(logs)
         fresh = new_domains(log, catalog, committed)
@@ -146,24 +147,33 @@ def main() -> None:
     feeds = {r["id"].removesuffix("#feed"): r for r in results if r["id"].endswith("#feed")}
     results = [r for r in results if not r["id"].endswith("#feed")]
     robots_changed, no_dates, broken = [], [], []
+    data = {"newSites": [], "robotsChanged": [], "broken": [], "noDates": []}
     for r in results:
         s = by_id.get(r["id"], {})
         page = (r.get("pages") or [{}])[0]
         was, now = s.get("robotsResult"), (feeds.get(r["id"]) or r).get("robots")
         if was in ("allowed", "none") and now == "disallowed":
             robots_changed.append(f"| {s.get('name', r['id'])} | {was} → **disallowed** | Switch off and ask permission |")
+            data["robotsChanged"].append({"id": r["id"], "was": was, "now": now})
         elif was == "disallowed" and now in ("allowed", "none"):
             robots_changed.append(f"| {s.get('name', r['id'])} | disallowed → {now} | Could be switched on |")
+            data["robotsChanged"].append({"id": r["id"], "was": was, "now": now})
         status = page.get("status")
         if status in (0, 401, 403, 404, 410, 429, 500, 502, 503):
             broken.append(f"| {s.get('name', r['id'])} | HTTP {status} | {r['url']} |")
+            data["broken"].append({"id": r["id"], "status": status, "url": r["url"]})
         elif s.get("status") in ("verified", "live") and not (page.get("futureDatesExplicit") or page.get("futureDatesNoYear") or page.get("jsonldFuture")):
             no_dates.append(f"| {s.get('name', r['id'])} | {r['url']} |")
+            data["noDates"].append({"id": r["id"], "url": r["url"]})
     lines += [f"## Tracked sources rechecked ({len(results)})", ""]
     lines += ["### robots.txt changed", ""] + (["| Source | Change | What to do |", "| --- | --- | --- |", *robots_changed] if robots_changed else ["No changes."]) + [""]
     lines += ["### Pages that did not open", ""] + (["| Source | Problem | Address |", "| --- | --- | --- |", *broken] if broken else ["All pages opened."]) + [""]
     lines += ["### Verified sources with no upcoming dates on the main page", "", "These may be seasonal, moved, or only show dates in a browser. Check them by hand.", ""]
     lines += (["| Source | Address |", "| --- | --- |", *no_dates] if no_dates else ["None."]) + [""]
+    # The review center (/moderate/, Sources tab) reads this block to show Worth adding / Not useful buttons.
+    data["newSites"] = [{"domain": e["domain"], "url": e["url"], "title": e["title"][:120], "queries": e["queries"][:3]} for e in fresh[:40]]
+    lines += ["Decide on each new website in the review center: https://longisland.dance/moderate/#sources", ""]
+    lines += [f"<!-- review-data {json.dumps(data, ensure_ascii=False).replace('-->', '--&gt;')} -->", ""]
     with open(a.out, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines))
     print(f"wrote {a.out}")

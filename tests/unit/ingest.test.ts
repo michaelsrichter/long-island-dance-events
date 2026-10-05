@@ -226,6 +226,14 @@ describe('merging runs', () => {
     expect(next.events.get(id)).toMatchObject({ status: 'pending-review', reviewNotes: 'Band is on tour that night.' });
     expect(next.stats).toMatchObject({ updated: 0, unchanged: 1 });
   });
+  it('keeps a listing an editor hid hidden, even when the source lists it again', () => {
+    const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
+    const [id, e] = [...first.events][0]!;
+    const hidden = eventSchema.parse({ ...e, status: 'hidden', reviewNotes: 'Hidden by the owner: a copy of another listing.' });
+    const next = mergeDrafts(new Map([[id, hidden]]), draft({ confidence: 1 }), { sourceId: 's', today: '2026-10-02' });
+    expect(next.events.get(id)).toMatchObject({ status: 'hidden' });
+    expect(next.review).toEqual([]);
+  });
   it('marks ended events past and vanished ones for review, without deleting', () => {
     const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
     const stored = new Map([...first.events].map(([id, e]) => [id, eventSchema.parse(e)]));

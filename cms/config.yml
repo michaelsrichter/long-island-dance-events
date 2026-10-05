@@ -192,6 +192,7 @@ collections:
       - { label: 'Listed', field: status, pattern: 'active' }
       - { label: 'Cancelled', field: status, pattern: 'cancelled' }
       - { label: 'Past', field: status, pattern: 'past' }
+      - { label: 'Hidden by an editor', field: status, pattern: 'hidden' }
     view_groups:
       - { label: 'Source', field: sourceId }
     fields:
@@ -263,6 +264,7 @@ collections:
           - { label: 'Past', value: past }
           - { label: 'Cancelled', value: cancelled }
           - { label: 'Waiting for review (hidden)', value: pending-review }
+          - { label: 'Hidden by an editor (never shown)', value: hidden }
       - { label: 'Cancellation note', name: cancelledNote, widget: string, required: false }
       - { label: 'Source', name: sourceId, widget: relation, collection: sources, value_field: '{{slug}}', search_fields: [name], display_fields: [name] }
       - { label: 'Source link', name: sourceUrl, widget: string, hint: 'The page or file where this listing was found.' }

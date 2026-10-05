@@ -17,6 +17,7 @@ const TABLES = {
   queue: 'ModQueue',
   log: 'ModLog',
   limits: 'Limits',
+  review: 'ReviewState',
 };
 const CONTAINERS = { pending: 'pending', photos: 'photos', community: 'community' };
 

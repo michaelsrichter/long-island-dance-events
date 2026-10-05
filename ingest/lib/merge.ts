@@ -184,7 +184,7 @@ export function mergeDrafts(
 
   const statusFor = (confidence: number, dates: string[], prev?: Stored): EventStatus => {
     if (prev && (prev.lockedFields ?? []).includes('status')) return prev.status as EventStatus;
-    if (prev?.status === 'cancelled') return 'cancelled';
+    if (prev?.status === 'cancelled' || prev?.status === 'hidden') return prev.status;
     if (confidence < threshold) return 'pending-review';
     return dates.every((d) => d < opts.today) ? 'past' : 'active';
   };

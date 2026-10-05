@@ -96,7 +96,9 @@ flowchart LR
 | `/admin/` | Decap CMS. |
 | `/api/auth`, `/api/callback`, `/api/telemetry` | CMS sign-in bridge and first-party telemetry (Azure Functions). |
 | `/.auth/login/extid`, `/.auth/logout`, `/.auth/me` | Visitor sign-in (Static Web Apps + Entra External ID). |
-| `/account/`, `/saved/`, `/community-rules/`, `/moderate/` | Your account (name, age check, download, delete), your saved events (private), community rules, moderation queue (admins). |
+| `/account/`, `/saved/`, `/community-rules/` | Your account (name, age check, download, delete), your saved events (private), community rules. |
+| `/moderate/` | **Review center** (editors only, decision P51): tabs To do, Held listings, New events, Sources, Messages, Community posts (the moderation queue) and Log. Route rule `allowedRoles: ["admin"]`; signed-out visitors see the "You're signed out" page with a Sign in button that comes back here; signed-in non-editors see `/not-allowed/`. Its own CSP (only its script hashes; `form-action` also allows `https://github.com` for the one-time GitHub App setup). |
+| `/api/review/*`, `/api/github-setup` | Review center API (editors only; see below). |
 | `/api/roles`, `/api/me*`, `/api/likes`, `/api/saves`, `/api/comments`, `/api/photos`, `/api/flags`, `/api/moderation/*` | Community API (see below). |
 | `/community-pages.json` | Pages that accept likes, notes and photos (the API checks keys against it). |
 | `/saved-events.json` | Next dates, time and place of every event series, for the Saved events page (built with the site). |
@@ -149,10 +151,37 @@ flowchart LR
 
 Page keys are `<type>:<id>` (`event:<series id>`, `venue:<id>`, `organizer:`, `instructor:`, `performer:`, `style:`). Public files: `community/<type>/<id>.json`, `community/counts/<type>.json`, `photos/<type>/<id>/<photo id>-<size>.webp`.
 
+## Review center (owner decisions)
+
+Decided in P51 (no database: P52). The page at `/moderate/` is static; every section loads live from `/api/review/*`, which reads and writes the GitHub repository as a **GitHub App** installed only on this repository. Git stays the master copy: each decision is one commit on `main`, and the normal deploy publishes it about 10 minutes later.
+
+```mermaid
+flowchart LR
+  O["Owner at /moderate/<br/>(admin role)"] -->|"/api/review/*<br/>same-origin JSON"| FN["Functions<br/>review.js"]
+  FN -->|"app JWT -> installation token<br/>(key encrypted in ReviewState)"| GH["GitHub API"]
+  GH -->|"one commit per decision batch"| MAIN[("main: src/content/**")]
+  GH -->|"merge ingest/updates (Publish now)"| MAIN
+  GH -->|"workflow_dispatch (Check sources now)"| ACT["Collect events workflow"]
+  GH -->|"issues: replies, Copilot tasks"| ISS["Issues"]
+  FN --> LOG[("ModLog, ReviewState")]
+  MAIN --> DEPLOY["Azure deploy (~10 min)"]
+```
+
+| API | What it does |
+| --- | --- |
+| `GET /api/review/status` | GitHub connection (app set up? installed?) and the community queue count. |
+| `GET/POST /api/review/listings` | Held listings (`status: pending-review` on `main`, read with one GraphQL call and cached per commit) with reasons parsed from `reviewNotes`; decisions publish, fix (start time, venue, band or DJ, town), cancel, hide (`status: hidden`) and undo. Changed fields go into `lockedFields`; files keep the `ingest/lib/store.ts` layout (`api/src/lib/content-files.js`, checked by `tests/unit/review-content.test.ts`). |
+| `GET/POST /api/review/collected` | The rolling `ingest/updates` pull request: run report, check runs, mergeable; **Publish now** merges it (merge commit) only when checks passed and the head commit is the one the owner saw. |
+| `GET/POST /api/review/sources`, `POST /api/review/run`, `POST /api/review/candidate` | Sources grouped by next step (`api/src/lib/review-data.js`), `ingest-failure` and `source-discovery` issues, recent runs; switch on/off and permission answers (commits); run the Collect workflow for a cadence or one source; new websites: Copilot task or `owner-no` in `catalog/search-triage.json`. |
+| `GET/POST /api/review/messages` | Open visitor issues (automation labels excluded), reply and close. |
+| `POST /api/review/copilot` | An issue labeled `copilot-task` with the context, for the owner to assign to Copilot. |
+| `POST /api/review/snooze`, `GET /api/review/log` | Snoozes (`ReviewState`), and the shared decision log (`ModLog`). |
+| `POST /api/review/github/start`, `GET /api/github-setup` | One-time setup with GitHub's app-manifest flow: a single-use state (1 hour), the code is swapped for the app's private key, which is stored encrypted (AES-256-GCM, key in `REVIEW_SECRET_KEY`). The app must belong to the repository owner. |
+
 ## Planned (later phases)
 
 - **Duplicates (phase 3):** exact `matchKey` pass, then local embeddings (bge-small, run in CI, no API key). Cosine ≥ 0.9 merges; 0.8-0.9 goes to a human review queue.
-- **Admin (phase 5):** source panel and bug inbox. (The moderation queue and private corrections shipped with the community features below.)
+- **Admin (phase 5):** shipped as the review center (P51): held listings, publishing collected events, sources and visitor messages, next to the moderation queue.
 - **Azure (phase 6):** Bicep for Static Web App, Storage account (Tables for mutable state, Blobs for raw snapshots) and settings.
 - **Scheduled runs (built):** `.github/workflows/ingest-scheduled.yml` runs each source on its `cadence` (daily, Monday + Thursday, Sunday), updates one rolling pull request with the report, requests review from and @mentions the owner on Sundays (the weekly email), and files an issue with a metadata-only snapshot when a source finds nothing or returns invalid data. `report-database.yml` builds the SQLite report database; `source-discovery.yml` searches for new sources monthly (85 Long Island-wide queries plus one twelfth of the town-by-town matrix in `catalog/search-matrix.json`). See [database-plan.md](database-plan.md) and [how-weekly-updates-work.md](how-weekly-updates-work.md).
 
