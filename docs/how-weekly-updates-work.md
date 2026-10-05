@@ -17,7 +17,7 @@ costs, and what you (the owner) need to do. Technical details live in
 - **What you do:** once a week, on Sunday, GitHub emails you (an @mention). Open the **review center**
   at [longisland.dance/moderate/](https://longisland.dance/moderate/), look over the new events and press
   **Publish now**, then decide on the few listings the program was unsure about. Publishing puts the new
-  listings on the website within about 10 minutes.
+  listings on the website within a few minutes (usually about 5).
 - **What it costs:** the weekly collecting is **free** (GitHub Actions is free for public
   repositories). The search for new sources costs about **$4.25 a month** (Microsoft Web IQ). The
   website itself costs about **$9 a month** on Azure. The newsletter inbox is **free** (AgentMail
@@ -139,7 +139,7 @@ The Dance Calendar's PDF, which is set to weekly for that reason) shows up withi
     three failures in a row it is switched off in the pull request, with a note.
 15. **Sunday email.** The Sunday run asks you to review the pull request. GitHub sends the email.
 16. **You publish, the site updates.** Pressing **Publish now** in the review center (or merging the pull
-    request on GitHub) starts the Azure build, and the new listings are live about 10 minutes later.
+    request on GitHub) starts the Azure build, and the new listings are live a few minutes later (usually about 5; share pictures that did not change are reused, decision P55).
 
 ## How we get the details of each event
 
@@ -250,7 +250,7 @@ Everything below is in one place: the **review center** at **https://longisland.
 
 1. **Sunday:** open the email from GitHub, then the review center's **New events** tab. It shows the run
    report in plain words: new events, sources that found nothing, new venues and bands to check.
-2. If the automatic checks passed, press **Publish now**. The site updates about 10 minutes later.
+2. If the automatic checks passed, press **Publish now**. The site updates a few minutes later (usually about 5).
 3. Open **Held listings** and decide on each one (Publish, Fix, Cancelled or Hide). Each card says why it
    was held and links the source page. Fixed fields are locked, so the next run keeps your fix.
 4. **Messages** and **Community posts:** answer what waits there.
