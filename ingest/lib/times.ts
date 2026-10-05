@@ -26,6 +26,8 @@ const T = String.raw`(\d{1,2})(?::([0-5]\d))?`;
 const RANGE_RE = new RegExp(String.raw`\b${T}\s*${MER}?\s*(?:-|–|—|to|until|till)\s*${T}\s*${MER}(?![a-z])`, 'gi');
 const SINGLE_RE = new RegExp(String.raw`\b${T}\s*${MER}(?![a-z])`, 'gi');
 const NOON_RE = /\b(noon|midnight)\b/gi;
+/** Words after "Noon" that make it a time ("Noon To 4 PM", "Noon Til Close", "Noon Sharp"). */
+const TIME_CONNECTOR = /^(?:to|til|till|until|thru|through|and|or|am|pm|a\.m\.|p\.m\.|sharp|start|starts|on|onward|onwards|daily|close)$/i;
 
 const pad = (n: number) => String(n).padStart(2, '0');
 const isPm = (m: string | undefined) => Boolean(m && /^p/i.test(m));
@@ -61,8 +63,10 @@ export function findTimes(text: string): TimeToken[] {
     if (t) tokens.push({ start: t, index: i, length: m[0].length });
   }
   for (const m of text.matchAll(NOON_RE)) {
-    // "Midnight Roma" or "High Noon Saloon": a capitalized word followed by another name word is a name, not a time.
-    if (/^[A-Z]/.test(m[1]!) && /^\s+[A-Z]/.test(text.slice(m.index! + m[0].length, m.index! + m[0].length + 3))) continue;
+    // "Midnight Roma" or "High Noon Saloon": a title-case word followed by another name word is a name,
+    // not a time. "Noon To 4 PM" and "NOON TO 4PM" are times.
+    const next = /^\s+([A-Za-z.]+)/.exec(text.slice(m.index! + m[0].length, m.index! + m[0].length + 12))?.[1] ?? '';
+    if (/^[A-Z][a-z]+$/.test(m[1]!) && /^[A-Z]/.test(next) && !TIME_CONNECTOR.test(next)) continue;
     tokens.push({ start: m[1]!.toLowerCase() === 'noon' ? '12:00' : '00:00', index: m.index!, length: m[0].length });
   }
   return tokens.sort((a, b) => a.index - b.index);

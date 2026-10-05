@@ -15,26 +15,11 @@
 //       issue date in catalog/newsletters.json (--write).
 import { readFileSync, writeFileSync } from 'node:fs';
 import { isAllowed, parseRobots } from '../ingest/lib/fetch.ts';
+import { confirmHostOk, hostOf, onDomain, openChecked, serviceForSender, siteDomain } from './lib/mail-hosts.ts';
 
 const API = 'https://api.agentmail.to/v0';
 const FILE = 'catalog/newsletters.json';
 const UA = 'LongIslandDanceEventsBot/1.0 (+https://github.com/michaelsrichter/long-island-dance-events; newsletter confirmation)';
-// Mail services that send on a site's behalf, with the hosts their confirmation links use.
-const SERVICES = [
-  { name: 'mailchimp', from: /mcsv\.net|mcdlv\.net|mailchimpapp\.net|list-manage\.com|mailchimp/i, links: /list-manage\.com|mailchi\.mp/i },
-  { name: 'constant-contact', from: /ccsend\.com|constantcontact|ctctmail/i, links: /constantcontact\.com|ccsend\.com|rs6\.net|ctctcdn/i },
-  { name: 'klaviyo', from: /klaviyo/i, links: /klaviyo/i },
-  { name: 'mailerlite', from: /mailerlite|mlsend/i, links: /mailerlite|mlsend/i },
-  { name: 'brevo', from: /sendinblue|brevo|sibmail/i, links: /sendinblue|brevo|sibforms|r\.sp1-brevo/i },
-  { name: 'squarespace', from: /squarespace|campaign-preferences/i, links: /squarespace|campaign-preferences/i },
-  { name: 'wix', from: /wix/i, links: /wix\.com|wixsite|wixapps|editorx/i },
-  { name: 'aweber', from: /aweber/i, links: /aweber/i },
-  { name: 'emma', from: /e2ma|myemma/i, links: /e2ma|myemma/i },
-  { name: 'convertkit', from: /convertkit|ck\.page|kit\.com/i, links: /convertkit|ck\.page|kit\.com/i },
-  { name: 'flodesk', from: /flodesk/i, links: /flodesk/i },
-  { name: 'substack', from: /substack/i, links: /substack/i },
-  { name: 'beehiiv', from: /beehiiv/i, links: /beehiiv/i },
-];
 const CONFIRM_SUBJECT = /\b(confirm|verify|verification|activate|opt[- ]?in|complete your (?:subscription|sign ?up)|one more step|please (?:confirm|verify))\b/i;
 const CONFIRM_LINK = /\b(confirm|verify|activate|opt[- ]?in|subscribe|yes,? (?:subscribe|sign me up)|complete)\b/i;
 
@@ -51,14 +36,7 @@ if (!key || !inbox) {
   process.exit(2);
 }
 
-const host = (u) => {
-  try {
-    return new URL(u).hostname.replace(/^www\./, '').toLowerCase();
-  } catch {
-    return '';
-  }
-};
-const base = (h) => h.split('.').slice(-2).join('.');
+const host = (u) => hostOf(u).replace(/^www\./, '');
 const addressOf = (from) => (/<([^>]+)>/.exec(from)?.[1] ?? from).trim().toLowerCase();
 const redact = (s) => String(s ?? '').split(inbox).join('[inbox]');
 
@@ -94,9 +72,9 @@ function matchEntry(msg, body = '') {
   }
   for (const e of entries) {
     const site = host(e.site);
-    if (site && (base(dom) === base(site) || dom.endsWith(`.${base(site)}`))) return e;
+    if (site && dom && onDomain(dom, siteDomain(site))) return e;
   }
-  const svc = SERVICES.find((s) => s.from.test(dom));
+  const svc = serviceForSender(dom);
   if (svc) {
     const text = `${msg.from} ${msg.subject ?? ''} ${body}`.toLowerCase();
     const hits = entries.filter((e) => {
@@ -149,13 +127,11 @@ if (cmd === 'list') {
       continue;
     }
     const dom = addressOf(m.from).split('@')[1] ?? '';
-    const svc = SERVICES.find((s) => s.from.test(dom));
-    const site = base(host(e.site));
+    const svc = serviceForSender(dom);
+    // The site itself, or the mail service that sent the email (or that the sign-up form used), by whole host name.
+    const hostOk = (h) => confirmHostOk(h, { site: host(e.site), service: svc, platform: e.platform });
     const link = linksOf(body).find((l) => {
-      const h = host(l.href);
-      // The site itself, or the mail service that sent the email (or that the sign-up form used).
-      const okHost = (site && base(h) === site) || SERVICES.some((v) => v.links.test(h) && (v === svc || v.name === e.platform));
-      return okHost && (CONFIRM_LINK.test(l.text) || /confirm|verify|optin|opt-in|activate/i.test(l.href)) && !/unsubscribe|preferences|profile|privacy/i.test(l.href + ' ' + l.text);
+      return hostOk(hostOf(l.href)) && (CONFIRM_LINK.test(l.text) || /confirm|verify|optin|opt-in|activate/i.test(l.href)) && !/unsubscribe|preferences|profile|privacy/i.test(l.href + ' ' + l.text);
     });
     if (!link) {
       console.log(`none   ${e.sourceId}: no confirmation link from the site or its mail service`);
@@ -165,16 +141,22 @@ if (cmd === 'list') {
       console.log(`found  ${e.sourceId}: confirmation link on ${host(link.href)}`);
       continue;
     }
-    if (!(await robotsAllows(link.href))) {
-      console.log(`robots ${e.sourceId}: ${host(link.href)} does not let our bot in; confirm by hand`);
+    // Redirects are not followed blindly: every address on the way must pass the same checks.
+    const result = await openChecked(link.href, { hostOk, robotsOk: robotsAllows, headers: { 'user-agent': UA } });
+    if (!result.ok && result.reason === 'robots') {
+      console.log(`robots ${e.sourceId}: ${host(result.url)} does not let our bot in; confirm by hand`);
       e.status = 'owner-by-hand';
-      e.notes = `Confirmation link on ${host(link.href)} is closed to bots by robots.txt; the owner confirms by hand.`;
+      e.notes = `Confirmation link on ${host(result.url)} is closed to bots by robots.txt; the owner confirms by hand.`;
       continue;
     }
-    const res = await fetch(link.href, { headers: { 'user-agent': UA }, redirect: 'follow', signal: AbortSignal.timeout(30000) });
+    if (!result.ok) {
+      console.log(`skip   ${e.sourceId}: the link ${result.reason === 'host' ? `goes on to ${host(result.url)}, which is not the site or its mail service` : 'redirects too many times'}; confirm by hand`);
+      continue;
+    }
+    const res = result.res;
     const text = (await res.text()).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
     const ok = res.ok && /confirm|subscribed|thank|success|you(?:'|’)re (?:in|all set)/i.test(text);
-    console.log(`${ok ? 'opened' : 'check '} ${e.sourceId}: HTTP ${res.status} on ${host(res.url)}${ok ? '' : ' (no clear confirmation; check by hand)'}`);
+    console.log(`${ok ? 'opened' : 'check '} ${e.sourceId}: HTTP ${res.status} on ${host(result.url)}${ok ? '' : ' (no clear confirmation; check by hand)'}`);
     if (ok) {
       e.status = 'confirmed';
       e.confirmedAt = new Date().toISOString().slice(0, 10);

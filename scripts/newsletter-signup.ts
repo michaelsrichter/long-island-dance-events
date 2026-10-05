@@ -4,7 +4,8 @@
  *
  * Rules it follows (and why):
  *  - robots.txt is checked for every page first; a page our bot may not read is left for a person.
- *    Exception, at the owner's request (2026-10-05): with --signup-despite-robots the sign-up is still
+ *    Exception, at the owner's request (2026-10-05, decision P44: "for sites that block bots, still try
+ *    sign up for the newsletter"): with --signup-despite-robots the sign-up is still
  *    tried on such sites. It is one form submission on the owner's behalf, not collecting pages. A hard
  *    block (an access-denied or bot-check page shown to our browser) is never worked around.
  *  - The browser says who it is: its User-Agent ends with "LongIslandDanceEventsBot/1.0".
@@ -26,6 +27,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { chromium, type ElementHandle, type Frame, type Page } from 'playwright';
 import { isAllowed, parseRobots } from '../ingest/lib/fetch';
+import { onDomain } from './lib/mail-hosts';
 
 const BOT = 'LongIslandDanceEventsBot/1.0 (+https://github.com/michaelsrichter/long-island-dance-events; newsletter sign-up)';
 const NAME = { first: 'Long Island', last: 'Dance Events', full: 'Long Island Dance Events' };
@@ -70,8 +72,6 @@ const ESP_HOSTS: [string, string[], RegExp | undefined][] = [
   ['wix', ['wix.com', 'wixstatic.com'], /parastorage/i],
 ];
 const HOST_NAMES = /\b(?:[a-z0-9-]+\.)+[a-z]{2,}\b/gi;
-/** "news.list-manage.com" is on list-manage.com; "toolkit.com" is not on kit.com. */
-const onDomain = (host: string, domain: string) => host === domain || host.endsWith(`.${domain}`);
 const hostsIn = (s: string) => (s.match(HOST_NAMES) ?? []).map((h) => h.toLowerCase());
 
 export const platformOf = (s: string): string | undefined => {

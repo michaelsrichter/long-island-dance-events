@@ -142,6 +142,13 @@ describe('names and venues are checked before anything new is created', () => {
   it('reads "Midnight Roma" as a band, not a midnight start', () => {
     expect(findTimes('Midnight Roma 7-10pm').map((t) => t.start)).not.toContain('00:00');
     expect(findTimes('Dancing until midnight').map((t) => t.start)).toContain('00:00');
+    expect(findTimes('Live at the High Noon Saloon').map((t) => t.start)).toEqual([]);
+  });
+  it('still reads "Noon To 4 PM" as starting at noon, in any letter case', async () => {
+    const { parseTimes } = await import('../../ingest/lib/times');
+    for (const text of ['SAT OCT 10 NOON TO 4PM Harvest Fest', 'Sunday Noon To 4 PM', 'Noon Til 5pm on the lawn', 'Fall Fest, Noon - 4 PM']) {
+      expect(parseTimes(text).start, text).toBe('12:00');
+    }
   });
   it('never uses a weekday with a year or a time as a title', () => {
     expect(meaningfulLine('Fri 2026', TODAY)).toBe(false);

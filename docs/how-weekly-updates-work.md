@@ -119,9 +119,10 @@ The Dance Calendar's PDF, which is set to weekly for that reason) shows up withi
      (or a Copilot session) can add the venue.
 8. **Remove duplicates.** If two sources list the same evening at the same venue, it is added once.
    The venue's, club's or band's own calendar wins over a calendar of everything. This works for
-   repeating classes too: when an organizer's own calendar lists its Monday classes, the copy from
-   The Dance Calendar is hidden and noted for review (nothing is deleted). Two bands that list the
-   same show at the same start time (a double bill) are listed once.
+   repeating classes too: when an organizer's own calendar lists its Monday classes at the same time,
+   the copy from The Dance Calendar is hidden and noted for review (nothing is deleted). If the own
+   calendar lists only some of those dates (say, one workshop), only those dates are taken out of the
+   other copy. Two bands that list the same show at the same start time (a double bill) are listed once.
 9. **Combine repeats.** The same listing every Tuesday becomes one event that repeats "every Tuesday."
 10. **Map pins.** New venues get their map location from their street address (see
     [How venues get a map pin](#how-venues-get-a-map-pin)).
@@ -196,12 +197,20 @@ GitHub secrets (`AGENTMAIL_INBOX`, `AGENTMAIL_API_KEY`), never in the code.
   insists, the name "Long Island Dance Events" and a central Long Island ZIP code). It **never** solves
   a CAPTCHA ("I'm not a robot" box) and never gives a phone number, birthday or home address. Those
   sign-ups go on a short list for you to do by hand.
+- **Sites that ask robots to stay away:** at your request ("for sites that block bots, still try sign
+  up for the newsletter"), the sign-up script may still open the one sign-up page on those sites and
+  fill in the one form (decision P44). It reads nothing else there and never collects events from them.
+  On October 5, 2026 this was tried on 17 sites; none could be signed up this way (12 bot walls,
+  2 CAPTCHAs, 3 with no form), so they are on your by-hand list or marked "none found".
 - **Confirming:** many lists send a "please confirm" email. `scripts/newsletter-inbox.mjs confirm`
-  opens the confirmation link only when it comes from that site or its mail service. Nothing else in
-  an email is ever followed.
+  opens the confirmation link only when it comes from that site or its mail service (the whole host
+  name must match, so `list-manage.com.example.net` is refused). If the link forwards somewhere
+  else, each new address is checked the same way. Nothing else in an email is ever followed.
 - **Reading:** each newsletter that is switched on has its own source file (adapter `agentmail`).
   The Sunday run reads issues from the last 45 days and treats each one like a web page list, with all
-  the same rules. Links on the website point to the venue's public page, never to the email.
+  the same rules. The emails are kept only in a temporary folder during the run, never in the saved
+  download cache, so the inbox address in their footers cannot leak. Links on the website point to the
+  venue's public page, never to the email.
 - **Switching one on:** after the first real issue arrives, a person checks a few listings against
   the email, then switches the source on. Until then it stays off.
 - The list of sign-ups and their status is in [`catalog/newsletters.json`](../catalog/newsletters.json).

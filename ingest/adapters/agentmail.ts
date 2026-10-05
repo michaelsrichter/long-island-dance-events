@@ -6,8 +6,9 @@
  * (its "newsletterSourceId"), the sender addresses its issues come from.
  *
  * fetch():     list messages from those senders received in the last WINDOW_DAYS days through the
- *              AgentMail API, download each new one once, and keep it in the ingest cache
- *              (.cache/ingest/agentmail, never committed). Confirmation and welcome emails are skipped.
+ *              AgentMail API and download them into a temporary folder for this run only (never the
+ *              ingest cache, which GitHub Actions saves and restores, and never committed); the next
+ *              run lists them again. Confirmation and welcome emails are skipped.
  *              The key and inbox come only from the AGENTMAIL_API_KEY and AGENTMAIL_INBOX environment
  *              variables. Without them the source is skipped (not a failure).
  * normalize(): read each email like a dated web page list (the htmllist reader), so every quality
@@ -17,7 +18,8 @@
  *              source's public web page, never the email or its tracking links.
  */
 import { createHash } from 'node:crypto';
-import { mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { addDays } from '../../src/lib/time';
 import { ROOT } from '../lib/registry';
@@ -80,9 +82,7 @@ export function stripEmailChrome(html: string): string {
   return html.slice(0, cut).replace(/<a[^>]*>\s*view (?:this email )?in (?:your )?browser\s*<\/a>/gi, '');
 }
 
-interface CachedMessage {
-  messageId: string;
-  sourceId: string;
+interface RunMessage {
   sent: string;
   file: string;
 }
@@ -93,17 +93,19 @@ async function api<T>(path: string, key: string): Promise<T> {
   return (await res.json()) as T;
 }
 
-function cacheDir(ctx: AdapterContext) {
-  const dir = join(ctx.fetcher.cacheDir, 'agentmail');
-  mkdirSync(dir, { recursive: true });
-  return dir;
-}
-
-function cachedFor(dir: string, sourceId: string, since: string): CachedMessage[] {
-  return readdirSync(dir)
-    .filter((f) => f.endsWith('.json'))
-    .map((f) => JSON.parse(readFileSync(join(dir, f), 'utf8')) as CachedMessage)
-    .filter((m) => m.sourceId === sourceId && m.sent.slice(0, 10) >= since);
+/**
+ * Emails live only for this run, in a temporary folder outside the ingest cache. GitHub Actions saves
+ * and restores .cache/ingest (pull requests can restore it too), and an email's footer and
+ * unsubscribe links would show the inbox address.
+ */
+let runFolder: string | undefined;
+export function emailFolder(): string {
+  if (!runFolder) {
+    const dir = mkdtempSync(join(process.env.RUNNER_TEMP || tmpdir(), 'lide-newsletters-'));
+    runFolder = dir;
+    process.once('exit', () => rmSync(dir, { recursive: true, force: true }));
+  }
+  return runFolder;
 }
 
 export const adapter: Adapter = {
@@ -113,38 +115,42 @@ export const adapter: Adapter = {
     const src = settingsOf(ctx);
     const senders = sendersFor(ctx.source.id);
     if (!senders.length) throw new Error('No sender addresses for this newsletter in catalog/newsletters.json (newsletterSourceId).');
-    const dir = cacheDir(ctx);
-    const since = addDays(ctx.today, -WINDOW_DAYS);
+    // Earlier versions kept emails in the ingest cache; make sure none are left there.
+    rmSync(join(ctx.fetcher.cacheDir, 'agentmail'), { recursive: true, force: true });
     const key = process.env.AGENTMAIL_API_KEY;
     const inbox = process.env.AGENTMAIL_INBOX;
-    if (!ctx.offline && key && inbox) {
-      const known = new Set(readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => f.slice(0, -5)));
-      for (const sender of senders) {
-        const q = new URLSearchParams({ limit: '30', after: `${since}T00:00:00Z`, from: sender });
-        const list = await api<{ messages: { message_id: string; from: string; subject?: string; timestamp: string }[] }>(
-          `/inboxes/${encodeURIComponent(inbox)}/messages?${q}`,
+    if (ctx.offline || !key || !inbox) {
+      ctx.log(`${ctx.source.id}: ${ctx.offline ? 'offline' : 'AGENTMAIL_API_KEY / AGENTMAIL_INBOX not set'}; newsletters are read only online.`);
+      return [];
+    }
+    // Every run lists the last WINDOW_DAYS days again; nothing about the emails is kept between runs.
+    const since = addDays(ctx.today, -WINDOW_DAYS);
+    const dir = emailFolder();
+    const seen = new Set<string>();
+    const messages: RunMessage[] = [];
+    for (const sender of senders) {
+      const q = new URLSearchParams({ limit: '30', after: `${since}T00:00:00Z`, from: sender });
+      const list = await api<{ messages: { message_id: string; from: string; subject?: string; timestamp: string }[] }>(
+        `/inboxes/${encodeURIComponent(inbox)}/messages?${q}`,
+        key,
+      );
+      for (const m of list.messages ?? []) {
+        if (!senderMatches(m.from, senders) || NOT_AN_ISSUE.test(m.subject ?? '')) continue;
+        const id = createHash('sha1').update(m.message_id).digest('hex').slice(0, 20);
+        if (seen.has(id)) continue;
+        seen.add(id);
+        const full = await api<{ html?: string; text?: string; extracted_html?: string; extracted_text?: string }>(
+          `/inboxes/${encodeURIComponent(inbox)}/messages/${encodeURIComponent(m.message_id)}`,
           key,
         );
-        for (const m of list.messages ?? []) {
-          if (!senderMatches(m.from, senders) || NOT_AN_ISSUE.test(m.subject ?? '')) continue;
-          const id = createHash('sha1').update(m.message_id).digest('hex').slice(0, 20);
-          if (known.has(id)) continue;
-          const full = await api<{ html?: string; text?: string; extracted_html?: string; extracted_text?: string }>(
-            `/inboxes/${encodeURIComponent(inbox)}/messages/${encodeURIComponent(m.message_id)}`,
-            key,
-          );
-          const html = full.html ?? full.extracted_html ?? (full.text || full.extracted_text ? textToHtml(full.text ?? full.extracted_text ?? '') : '');
-          if (!html) continue;
-          const file = join(dir, `${id}.html`);
-          writeFileSync(file, html);
-          writeFileSync(join(dir, `${id}.json`), JSON.stringify({ messageId: id, sourceId: ctx.source.id, sent: m.timestamp, file } satisfies CachedMessage));
-          known.add(id);
-        }
+        const html = full.html ?? full.extracted_html ?? (full.text || full.extracted_text ? textToHtml(full.text ?? full.extracted_text ?? '') : '');
+        if (!html) continue;
+        const file = join(dir, `${ctx.source.id}-${id}.html`);
+        writeFileSync(file, html);
+        messages.push({ sent: m.timestamp, file });
       }
-    } else if (!ctx.offline) {
-      ctx.log(`${ctx.source.id}: AGENTMAIL_API_KEY / AGENTMAIL_INBOX not set; reading only emails already in the cache.`);
     }
-    return cachedFor(dir, ctx.source.id, since)
+    return messages
       .sort((a, b) => a.sent.localeCompare(b.sent))
       .map((m) => ({ url: src.url, file: m.file, contentType: 'text/html', meta: { issue: m.sent.slice(0, 10) } }));
   },

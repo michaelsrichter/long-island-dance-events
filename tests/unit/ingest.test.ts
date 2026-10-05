@@ -3,6 +3,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { eventSchema } from '../../src/lib/schemas';
+import { addDays } from '../../src/lib/time';
 import { extractRows, findDjNames, guessVenue, normalizeRows, python, statedCadence } from '../../ingest/adapters/thedancecalendar';
 import { collapse, inferRecurrence } from '../../ingest/lib/collapse';
 import { makeSummary, plainLabel, themeOf } from '../../ingest/lib/describe';
@@ -274,6 +275,35 @@ describe('merging runs', () => {
     const ownOnly = new Map([...own.events].map(([id, e]) => [id, eventSchema.parse(e)]));
     expect(mergeDrafts(ownOnly, mondays(fromPdf), opts).stats).toMatchObject({ new: 0, duplicates: 1 });
     expect(mergeDrafts(ownOnly, mondays({ ...fromPdf, organizerId: 'other-studio' }), opts).stats.new).toBe(1);
+  });
+  it('keeps a 12-week class when the own calendar lists only one workshop that day, and drops only that date', () => {
+    const weeks = Array.from({ length: 12 }, (_, i) => addDays('2026-10-05', i * 7));
+    const cls = (o: Record<string, unknown>, dates: string[]) =>
+      collapse(dates.map((date) => ({ ...cand, date, category: 'class-lesson', venueId: 'example-lodge', organizerId: 'practice-studio', ...o }) as Parameters<typeof collapse>[0][number]));
+    const workshop = mergeDrafts(new Map(), cls({ sourceId: 'org-calendar', seriesKey: 'ws', oneOff: true, start: '19:00' }, ['2026-10-19']), { sourceId: 'org-calendar', today: '2026-10-01' });
+    const stored = new Map([...workshop.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    const opts = { sourceId: 'pdf-calendar', today: '2026-10-01', allInOne: true, isOwnCalendar: (s: string) => s === 'org-calendar' };
+    const r = mergeDrafts(stored, cls({ sourceId: 'pdf-calendar', seriesKey: 'pdf', start: '19:00' }, weeks), opts);
+    expect(r.stats.new).toBe(1);
+    const added = [...r.events.values()].find((e) => e.sourceId === 'pdf-calendar')!;
+    expect(added.status).toBe('active');
+    expect(added.recurrence?.exdates).toEqual(['2026-10-19']);
+    // A 2 PM class and an 8 PM social by the same organizer on the same day are two events.
+    const social = mergeDrafts(new Map(), cls({ sourceId: 'org-calendar', seriesKey: 'soc', category: 'social-dance', start: '20:00' }, weeks), { sourceId: 'org-calendar', today: '2026-10-01' });
+    const socials = new Map([...social.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    expect(mergeDrafts(socials, cls({ sourceId: 'pdf-calendar', seriesKey: 'pdf', category: 'lesson-party', start: '14:00' }, weeks), opts).stats).toMatchObject({ new: 1, duplicates: 0 });
+  });
+  it('trims, not hides, an older series when the own calendar covers only some of its dates', () => {
+    const tuesdays = ['2026-10-06', '2026-10-13', '2026-10-20', '2026-10-27'];
+    const series = (o: Record<string, unknown>, dates: string[]) =>
+      collapse(dates.map((date) => ({ ...cand, date, venueId: 'example-lodge', organizerId: 'practice-studio', ...o }) as Parameters<typeof collapse>[0][number]));
+    const pdf = mergeDrafts(new Map(), series({ sourceId: 'pdf-calendar', seriesKey: 'pdf' }, tuesdays), { sourceId: 'pdf-calendar', today: '2026-10-01' });
+    const own = mergeDrafts(new Map(), series({ sourceId: 'org-calendar', seriesKey: 'own', oneOff: true }, ['2026-10-13']), { sourceId: 'org-calendar', today: '2026-10-01' });
+    const pdfId = [...pdf.events.keys()][0]!;
+    const stored = new Map([...pdf.events, ...[...own.events].map(([id, e]) => [`${id}-own`, e] as const)].map(([id, e]) => [id, eventSchema.parse(e)]));
+    const r = mergeDrafts(stored, series({ sourceId: 'pdf-calendar', seriesKey: 'pdf' }, tuesdays), { sourceId: 'pdf-calendar', today: '2026-10-02', allInOne: true, isOwnCalendar: (s) => s === 'org-calendar' });
+    expect(r.events.get(pdfId)).toMatchObject({ status: 'active' });
+    expect(r.events.get(pdfId)!.recurrence?.exdates).toEqual(['2026-10-13']);
   });
   it("lets a band's own calendar win over an older copy of the same gig from a calendar of everything", () => {
     const gig = { venueId: 'example-lodge', category: 'live-music', danceStyles: [], performerIds: ['the-fictionals'] };

@@ -3,7 +3,7 @@
  * AgentMail API responses are fictional; no network is used. Update the golden file after an
  * intended change with: UPDATE_GOLDEN=1 npx vitest run tests/unit/agentmail.test.ts
  */
-import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -116,13 +116,17 @@ describe('agentmail adapter', () => {
     expect(result.candidates.every((c) => !/example-list\.test/.test(`${c.infoUrl ?? ''} ${c.sourceUrl}`))).toBe(true);
   });
 
-  it('downloads new issues from the inbox once, skips confirmation emails, and reads the cache offline', async () => {
+  it('reads issues from the inbox each run, skips confirmation emails, and never keeps emails in the ingest cache', async () => {
     const dir = tempDir();
     const file = join(dir, 'newsletters.json');
     writeFileSync(file, JSON.stringify({ newsletters: [{ sourceId: 'sample-pub', newsletterSourceId: 'sample-pub-newsletter', senders: ['@sample-pub.example'] }] }));
     vi.stubEnv('LIDE_NEWSLETTERS_FILE', file);
     vi.stubEnv('AGENTMAIL_API_KEY', 'test-key');
     vi.stubEnv('AGENTMAIL_INBOX', 'inbox@example.test');
+    const cache = join(dir, 'ingest-cache');
+    // A cache left by an older version is removed.
+    mkdirSync(join(cache, 'agentmail'), { recursive: true });
+    writeFileSync(join(cache, 'agentmail', 'old.html'), 'sent to inbox@example.test');
     const html = readFileSync(join(FIX, 'agentmail-newsletter.html'), 'utf8');
     const calls: string[] = [];
     vi.stubGlobal('fetch', async (url: string, init: { headers: Record<string, string> }) => {
@@ -137,20 +141,25 @@ describe('agentmail adapter', () => {
             { message_id: '<x@other>', from: 'someone@other.example', subject: 'Hello', timestamp: '2026-10-01T15:00:00Z' },
           ],
         });
-      return Response.json({ html });
+      return Response.json({ html: `${html}<p>This email was sent to inbox@example.test</p>` });
     });
-    const docs = await adapter.fetch(context(dir, false));
+    const docs = await adapter.fetch(context(cache, false));
     expect(docs).toHaveLength(1);
     expect(docs[0]!.meta.issue).toBe('2026-10-01');
     expect(docs[0]!.url).toBe('https://sample-pub.example/');
     expect(calls.filter((c) => /\/messages\/[^?]+$/.test(c))).toHaveLength(1);
     // The API key and inbox are never part of what the run report shows.
     expect(JSON.stringify(docs)).not.toMatch(/test-key|inbox@example/);
-    // Second run: nothing new is downloaded.
-    await adapter.fetch(context(dir, false));
-    expect(calls.filter((c) => /\/messages\/[^?]+$/.test(c))).toHaveLength(1);
-    // Offline: the cached issue is still read.
-    expect(await adapter.fetch(context(dir, true))).toHaveLength(1);
+    // The email is in a temporary folder for this run, not in the cache that GitHub Actions saves.
+    const inCache = (d: string): string[] => (existsSync(d) ? readdirSync(d, { recursive: true }).map(String) : []);
+    expect(inCache(cache)).toEqual([]);
+    expect(docs[0]!.file.startsWith(cache)).toBe(false);
+    expect((await adapter.normalize(docs, context(cache, false))).candidates.length).toBeGreaterThan(0);
+    // The next run lists the inbox again; offline there is nothing to read.
+    await adapter.fetch(context(cache, false));
+    expect(calls.filter((c) => /\/messages\/[^?]+$/.test(c))).toHaveLength(2);
+    expect(await adapter.fetch(context(cache, true))).toEqual([]);
+    expect(inCache(cache)).toEqual([]);
   });
 
   it('is quiet (not a failure) when there is no issue to read', async () => {

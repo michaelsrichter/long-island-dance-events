@@ -87,15 +87,28 @@ export function otherSourceTwin(events: Map<string, EventRecord>, d: Draft, sour
 
 /**
  * The organizer's or band's own calendar wins over a calendar that lists everything (The Dance
- * Calendar, Ira's List): same venue, same kind of event, the same organizer or a shared band, and
- * at least one shared day. Works for repeating series too (a monthly PDF and the organizer's Google
- * Calendar both list the Monday classes). Returns the own calendar's listing.
+ * Calendar, Ira's List). Own-calendar listings match when they are at the same venue, the same kind
+ * of event, by the same organizer or with a shared band, and start at about the same time (within 30
+ * minutes, or two hours for the same band; a listing without a time matches any time). Works for
+ * repeating series too (a monthly PDF and the organizer's Google Calendar both list the Monday
+ * classes). `all` says whether those listings cover all, or nearly all, of the draft's upcoming dates
+ * (one in ten may be missing); otherwise only the `covered` dates are copies.
  */
-export function ownCalendarTwin(events: Map<string, EventRecord>, d: Draft, sourceId: string, isOwnCalendar: (sourceId: string) => boolean): string | undefined {
+export function ownCalendarTwin(
+  events: Map<string, EventRecord>,
+  d: Draft,
+  sourceId: string,
+  isOwnCalendar: (sourceId: string) => boolean,
+  today = '0000-00-00',
+): { of: string; covered: string[]; all: boolean } | undefined {
   const { venueId, organizerId, category } = d.data;
   if (!venueId) return undefined;
   const acts = d.data.performerIds ?? [];
-  const days = new Set(d.dates);
+  const time = minutes(parseLocal(String(d.data.start)).time);
+  const upcoming = d.dates.filter((x) => x >= today);
+  const days = new Set(upcoming.length ? upcoming : d.dates);
+  const covered = new Set<string>();
+  let of: string | undefined;
   for (const [id, e] of events) {
     if (e.sourceId === sourceId || !e.sourceId || !isOwnCalendar(e.sourceId) || e.status !== 'active') continue;
     if (e.venueId !== venueId || !sameFamily(category, e.category)) continue;
@@ -103,9 +116,37 @@ export function ownCalendarTwin(events: Map<string, EventRecord>, d: Draft, sour
     const sameOrganizer = Boolean(organizerId && e.organizerId === organizerId);
     const sameAct = acts.some((p) => (e.performerIds ?? []).includes(p));
     if (!sameOrganizer && !sameAct) continue;
-    if (datesOf(e).some((x) => days.has(x))) return id;
+    // A 2 PM class and an 8 PM social by the same organizer on one day are two events.
+    const eTime = minutes(parseLocal(String(e.start)).time);
+    if (time !== undefined && eTime !== undefined && Math.abs(time - eTime) > (sameAct ? 120 : 30)) continue;
+    const shared = datesOf(e).filter((x) => days.has(x));
+    if (!shared.length) continue;
+    of ??= id;
+    for (const x of shared) covered.add(x);
   }
-  return undefined;
+  if (!of) return undefined;
+  return { of, covered: [...covered].sort(), all: days.size - covered.size <= Math.floor(days.size / 10) };
+}
+
+/** The draft without some of its dates (they are listed by an own calendar). Undefined when none are left. */
+export function withoutDates(d: Draft, drop: Set<string>): Draft | undefined {
+  const dates = d.dates.filter((x) => !drop.has(x));
+  const first = dates[0];
+  if (!first) return undefined;
+  const time = parseLocal(String(d.data.start)).time;
+  const endTime = d.data.end ? parseLocal(String(d.data.end)).time : undefined;
+  const rule = d.data.recurrence?.rrule ? parseRRule(d.data.recurrence.rrule) : undefined;
+  const ords = rule?.freq === 'MONTHLY' ? rule.byday.map((b) => b.ordinal!).filter((o) => o !== undefined) : undefined;
+  return {
+    ...d,
+    dates,
+    data: {
+      ...d.data,
+      start: time ? `${first}T${time}` : first,
+      end: endTime ? `${first}T${endTime}` : undefined,
+      recurrence: dates.length > 1 ? inferRecurrence(dates, ords) : undefined,
+    },
+  };
 }
 
 export function mergeDrafts(
@@ -139,23 +180,29 @@ export function mergeDrafts(
     return dates.every((d) => d < opts.today) ? 'past' : 'active';
   };
 
-  for (const d of drafts) {
-    const id = byKey.get(d.matchKey);
-    const ownTwin = opts.allInOne && opts.isOwnCalendar ? ownCalendarTwin(events, d, opts.sourceId, opts.isOwnCalendar) : undefined;
-    if (ownTwin) {
-      duplicates.push({ id: id ?? d.id, of: ownTwin });
+  for (const original of drafts) {
+    const id = byKey.get(original.matchKey);
+    const own = opts.allInOne && opts.isOwnCalendar ? ownCalendarTwin(events, original, opts.sourceId, opts.isOwnCalendar, opts.today) : undefined;
+    // Only some dates are on the own calendar: keep this listing for its other dates.
+    const dropped = own && !own.all ? new Set(own.covered) : undefined;
+    const trimmed = dropped ? withoutDates(original, dropped) : undefined;
+    if (own && !trimmed) {
+      const ownTwin = own.of;
+      duplicates.push({ id: id ?? original.id, of: ownTwin });
       stats.duplicates!++;
       if (!id) continue;
       // An older copy from this calendar steps aside (hidden for review, never deleted).
       seen.add(id);
       const prev = events.get(id) as Stored;
       if (prev.status === 'active' && !(prev.lockedFields ?? []).includes('status')) {
-        const note = `The organizer's own calendar now lists this (${ownTwin}), so that listing is shown instead of this copy.`;
+        const note = `The organizer's or band's own calendar now lists this (${ownTwin}), so that listing is shown instead of this copy.`;
         events.set(id, { ...prev, lastSeen: opts.today, status: 'pending-review', reviewNotes: [prev.reviewNotes, note].filter(Boolean).join(' ') });
         review.push({ id, reason: note });
       }
       continue;
     }
+    if (trimmed) duplicates.push({ id: `${id ?? original.id} (only ${own!.covered.join(', ')})`, of: own!.of });
+    const d = trimmed ?? original;
     if (!id) {
       const twin = otherSourceTwin(events, d, opts.sourceId);
       if (twin) {
@@ -179,7 +226,7 @@ export function mergeDrafts(
     for (const k of LOCKABLE) if (!locked.has(k)) next[k] = (d.data as Record<string, unknown>)[k];
     let dates = d.dates;
     if (d.data.recurrence && prev.recurrence && !locked.has('recurrence') && !locked.has('start')) {
-      dates = [...new Set([...datesOf(prev), ...d.dates])].sort();
+      dates = [...new Set([...datesOf(prev), ...d.dates])].filter((x) => !dropped?.has(x)).sort();
       const rule = d.data.recurrence.rrule ? parseRRule(d.data.recurrence.rrule) : undefined;
       const ords = rule?.freq === 'MONTHLY' ? rule.byday.map((b) => b.ordinal!).filter((o) => o !== undefined) : undefined;
       next.recurrence = inferRecurrence(dates, ords);
