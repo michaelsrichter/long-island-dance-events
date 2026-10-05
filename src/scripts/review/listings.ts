@@ -243,7 +243,7 @@ function draw(root: HTMLElement, d: ListingsData, pages: Pages, onCount: (n: num
       settled(li, l.id, message, r.data.commit?.sha);
       if (decision.action === 'publish' || decision.action === 'fix') {
         const p = el('p', null, 'review-hint');
-        p.append(link(occurrencePath(l.id, l.start.slice(0, 10)), 'See it on the website (after about 10 minutes)', { external: true }));
+        p.append(link(occurrencePath(l.id, l.start.slice(0, 10)), 'See it on the website (after a few minutes)', { external: true }));
         li.append(p);
       }
       selected.delete(l.id);

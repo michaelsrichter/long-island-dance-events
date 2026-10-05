@@ -127,7 +127,7 @@ test.describe('review center', () => {
     await expect(panel.getByText('The start time looks wrong (6:30 in the morning)')).toBeVisible();
     await expect(panel.getByText('Already over (1): nothing to do')).toBeVisible();
     await panel.getByRole('button', { name: 'Change to 6:30 PM and publish' }).click();
-    await expect(panel.getByText('Fixed and published. Live on the website in about 10 minutes.')).toBeVisible();
+    await expect(panel.getByText('Fixed and published. Live on the website in a few minutes.')).toBeVisible();
     expect(posts.at(-1)).toEqual({ url: '/api/review/listings', body: { decisions: [{ id: '2026-10-16-despyre-live-music', action: 'fix', fields: { time: '18:30' } }] } });
     await expect(page.locator('[data-count="listings"]')).toHaveText('2');
     await panel.getByRole('button', { name: 'Undo' }).click();
@@ -158,7 +158,7 @@ test.describe('review center', () => {
     await expect(panel.getByText('12 new events, 3 changed events, 0 events ended')).toBeVisible();
     page.on('dialog', (d) => d.accept());
     await panel.getByRole('button', { name: 'Publish now' }).click();
-    await expect(panel.getByText('Published. Live on the website in about 10 minutes.')).toBeVisible();
+    await expect(panel.getByText('Published. Live on the website in a few minutes.')).toBeVisible();
     expect(posts.find((p) => p.url === '/api/review/collected')!.body).toEqual({ number: 41, headSha: 'b'.repeat(40) });
   });
 

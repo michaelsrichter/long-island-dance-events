@@ -154,7 +154,7 @@ Page keys are `<type>:<id>` (`event:<series id>`, `venue:<id>`, `organizer:`, `i
 
 ## Review center (owner decisions)
 
-Decided in P51 (no database: P52). The page at `/moderate/` is static; every section loads live from `/api/review/*`, which reads and writes the GitHub repository as a **GitHub App** installed only on this repository. Git stays the master copy: each decision is one commit on `main`, and the normal deploy publishes it about 10 minutes later.
+Decided in P51 (no database: P52). The page at `/moderate/` is static; every section loads live from `/api/review/*`, which reads and writes the GitHub repository as a **GitHub App** installed only on this repository. Git stays the master copy: each decision is one commit on `main`, and the normal deploy publishes it a few minutes later (usually about 5).
 
 ```mermaid
 flowchart LR
@@ -165,7 +165,7 @@ flowchart LR
   GH -->|"workflow_dispatch (Check sources now)"| ACT["Collect events workflow"]
   GH -->|"issues: replies, Copilot tasks"| ISS["Issues"]
   FN --> LOG[("ModLog, ReviewState")]
-  MAIN --> DEPLOY["Azure deploy (~10 min)"]
+  MAIN --> DEPLOY["Azure deploy (~5 min)"]
 ```
 
 | API | What it does |
