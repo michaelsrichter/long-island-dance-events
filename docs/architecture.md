@@ -38,7 +38,7 @@ flowchart TB
   AD --> N --> C --> M --> V --> D
   V --> R
   D --> CI --> SWA
-  CMS[Decap CMS at /admin/] -->|commits / PRs| D
+  CMS[Decap CMS at /admin/] -->|commits on main| D
   SWA --- FN --- ST
   SWA --- EXT
   FN --- CS
@@ -75,6 +75,7 @@ flowchart LR
 
 - `BUILD_NOW` (optional) fixes "today" for repeatable tests. Production builds use the real time.
 - Events that end after the page was built are hidden by a small script (`src/scripts/expire.ts`), so lists stay correct between rebuilds.
+- **Saved share pictures (P55).** Drawing share pictures was most of the build. `src/lib/og.ts` saves each finished picture (and each cropped photo or logo) in `.cache/og/` under a fingerprint of everything that goes into it: the card's facts and photo, the size, the drawing code in `og.ts`, the fonts and the satori and sharp versions. A build with the same fingerprint reuses the file. The deploy and CI workflows keep `.cache/og/` and Astro's resized photos (`node_modules/.astro/assets/`) between runs with `actions/cache`, and drop pictures not used for 14 days. `OG_CACHE_DIR=off` turns it off.
 
 ## Routes
 
@@ -93,7 +94,7 @@ flowchart LR
 | `/venues/`, `/organizers/`, `/instructors/`, `/performers/`, `/styles/` and `/<type>/<id>/` | Directory pages; each lists its upcoming events. |
 | `/sources/` | Credits every source, explains how collection works, corrections, opt-out and takedown. |
 | `/faq/`, `/about/`, `/privacy/` | Plain-language help. |
-| `/admin/` | Decap CMS. |
+| `/admin/` | Decap CMS. Each save is a commit on `main` and goes live with the next deploy (no draft pull request; P55). |
 | `/api/auth`, `/api/callback`, `/api/telemetry` | CMS sign-in bridge and first-party telemetry (Azure Functions). |
 | `/.auth/login/extid`, `/.auth/logout`, `/.auth/me` | Visitor sign-in (Static Web Apps + Entra External ID). |
 | `/account/`, `/saved/`, `/community-rules/` | Your account (name, age check, download, delete), your saved events (private), community rules. |

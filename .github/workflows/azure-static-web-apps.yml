@@ -40,6 +40,16 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
+      # Share pictures and resized photos from earlier builds (decision P55). Restored after npm ci, which
+      # empties node_modules. Only Astro's image folder is kept, not its content data store.
+      - name: Restore saved share pictures and resized photos
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            .cache/og
+            node_modules/.astro/assets
+          key: site-images-${{ github.run_id }}
+          restore-keys: site-images-
       - name: Build site
         run: npm run build
         env:
@@ -56,6 +66,15 @@ jobs:
           INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
       - name: Site size stays well under the Azure limits
         run: npm run test:size
+      - name: Forget share pictures not used for 14 days
+        run: if [ -d .cache/og ]; then find .cache/og -type f -mtime +14 -delete; du -sh .cache/og; fi
+      - name: Save share pictures and resized photos for the next build
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            .cache/og
+            node_modules/.astro/assets
+          key: site-images-${{ github.run_id }}
       - name: Deployment not configured yet
         if: env.HAS_SWA_TOKEN != 'true'
         run: echo "::notice::AZURE_STATIC_WEB_APPS_API_TOKEN is not set, so the deploy was skipped. Run infra/deploy.ps1 (see docs/deployment.md)."
