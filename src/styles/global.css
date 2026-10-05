@@ -1137,6 +1137,10 @@ h3.day-heading { font-size: 1.1rem; }
 /* Event cards: red edge for dances and live music, silver edge for classes */
 .event-list { gap: 0.75rem; }
 .event-card { overflow: hidden; gap: 0.85rem; padding: 0.95rem 1rem 0.95rem 1.15rem; border-radius: 16px; border: 1px solid var(--c-line); background: var(--c-surface); box-shadow: var(--shadow-1); }
+/* Lists can hold hundreds of cards (/events/, the month calendar). The browser skips style and layout for cards
+   that are off screen until they scroll near, so a long list opens fast on a phone. The cards stay in the page,
+   so the list still works without JavaScript and with find-in-page and screen readers. */
+.event-list > .event-card { content-visibility: auto; contain-intrinsic-size: auto 15rem; }
 .event-card::before { content: ''; position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--grad-red); }
 .event-card--class-lesson::before { background: linear-gradient(180deg, #d4d6dc, #8e919a); }
 .event-card--past::before, .event-card--cancelled::before { background: var(--c-line); }
