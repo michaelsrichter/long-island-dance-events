@@ -16,7 +16,7 @@ function reasonsOf(e) {
   let m;
   if ((m = /own calendar now lists this \(([a-z0-9-]+)\)/i.exec(notes))) out.push({ code: 'copy', of: m[1] });
   if ((m = /Not found in the latest (\S+) run on (\d{4}-\d{2}-\d{2})/i.exec(notes))) out.push({ code: 'gone', source: m[1], on: m[2] });
-  if ((m = /Start time looks wrong \(([^)]*)\)/i.exec(notes))) out.push({ code: 'odd-time', said: m[1], suggest: eveningTime(e.start) });
+  if ((m = /Start time looks wrong \(([^)]*)\)/i.exec(notes))) out.push({ code: 'odd-time', said: m[1], suggest: eveningTime(e.start, e.end) });
   if (/No start time found/i.test(notes)) out.push({ code: 'no-time' });
   if (/Venue not found in the listing/i.test(notes) || (!e.venueId && !held)) out.push({ code: 'no-venue' });
   if ((m = /Band or DJ not researched yet: (.+?)\.(?=\s*(?:$|No start time|Not found in the latest|The organizer's|Venue not found|Start time looks wrong|Published|Hidden|Marked|Held))/i.exec(notes))) out.push({ code: 'new-act', name: m[1].trim() });
@@ -24,11 +24,16 @@ function reasonsOf(e) {
   return out;
 }
 
-/** "06:30" in the morning is almost always 6:30 PM: suggest the evening time. */
-function eveningTime(start) {
+/**
+ * "06:30" in the morning is almost always 6:30 PM: suggest the evening time. No suggestion when the
+ * listing also ends later the same day by 8 PM (8 AM to 5 PM looks like a real daytime event).
+ */
+function eveningTime(start, end) {
   const t = /T(\d{2}):(\d{2})/.exec(String(start || ''));
   if (!t) return '';
   const h = Number(t[1]);
+  const e = /^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2})/.exec(String(end || ''));
+  if (e && e[1] === String(start).slice(0, 10) && e[2] > `${t[1]}:${t[2]}` && e[2] <= '20:00') return '';
   return h >= 1 && h <= 11 ? `${String(h + 12).padStart(2, '0')}:${t[2]}` : '';
 }
 

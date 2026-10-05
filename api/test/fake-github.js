@@ -1,8 +1,14 @@
 'use strict';
 /** In-memory stand-in for the parts of the GitHub API the review center uses (REST + GraphQL). */
-const { randomBytes } = require('node:crypto');
+const { createHash, randomBytes } = require('node:crypto');
 
 const sha = () => randomBytes(20).toString('hex');
+const blobs = new Map();
+const oidOf = (text) => {
+  const oid = createHash('sha1').update(String(text)).digest('hex');
+  blobs.set(oid, text);
+  return oid;
+};
 
 function createFakeGitHub(repo, files) {
   const commits = new Map();
@@ -23,6 +29,7 @@ function createFakeGitHub(repo, files) {
     merged: [],
     labels: new Set(),
     installed: true,
+    blobQueries: 0,
     failNextRefUpdate: false,
     manifestCodes: new Map(),
     file(path, at = gh.head) {
@@ -58,10 +65,12 @@ function createFakeGitHub(repo, files) {
         const entries = [...c.files.keys()]
           .filter((p) => p.startsWith(prefix) && !p.slice(prefix.length).includes('/'))
           .sort()
-          .map((p) => ({ name: p.slice(prefix.length), ...(withText ? { object: { text: c.files.get(p) } } : {}) }));
+          .map((p) => ({ name: p.slice(prefix.length), oid: oidOf(c.files.get(p)), ...(withText ? { object: { text: c.files.get(p) } } : {}) }));
         repository[alias] = entries.length ? { entries } : null;
       }
     }
+    for (const m of query.matchAll(/(b\d+): object\(oid: "([0-9a-f]{40})"\)/g)) repository[m[1]] = blobs.has(m[2]) ? { text: blobs.get(m[2]) } : null;
+    gh.blobQueries++;
     return json(200, { data: { repository } });
   }
 

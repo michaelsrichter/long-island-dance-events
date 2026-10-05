@@ -71,8 +71,15 @@ function decideListing(event, decision, { today, venueIds, performerIds }) {
     const f = decision.fields || {};
     if (f.time !== undefined && f.time !== '') {
       if (!TIME.test(f.time)) throw new DecisionError('Use a time like 19:30.');
+      const oldTime = String(e.start).length > 10 ? String(e.start).slice(11, 16) : '';
       e.start = `${String(e.start).slice(0, 10)}T${f.time}`;
       changed.push('start');
+      // An end time that no longer fits (8:00-17:00 moved to start at 20:00) is dropped; the site then shows about 3 hours.
+      const end = /^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2})$/.exec(String(e.end || ''));
+      if (end && end[1] === e.start.slice(0, 10) && end[2] <= f.time && (!oldTime || end[2] > oldTime)) {
+        delete e.end;
+        changed.push('end');
+      }
     }
     if (f.venueId) {
       if (!isId(f.venueId) || !venueIds.has(f.venueId)) throw new DecisionError('Pick a venue from the list.');
