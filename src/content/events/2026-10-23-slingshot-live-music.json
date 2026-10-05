@@ -1,0 +1,26 @@
+{
+  "title": "Slingshot at Amsterdam",
+  "summary": "Live music by Slingshot at Amsterdam in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-23T19:30",
+  "end": "2026-10-23T22:30",
+  "timezone": "America/New_York",
+  "venueId": "amsterdam-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "slingshot"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-23|amsterdam-patchogue|slingshot|2026-10-23|special"
+}

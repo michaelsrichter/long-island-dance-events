@@ -1,0 +1,27 @@
+{
+  "title": "Dance party with DJ Jeff Nec at Dox",
+  "summary": "A dance party with DJ Jeff Nec at Dox in Island Park. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "social-dance",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-09T18:00",
+  "end": "2026-10-09T23:00",
+  "timezone": "America/New_York",
+  "venueId": "dox-island-park",
+  "town": "Island Park",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-04",
+  "lastSeen": "2026-10-04",
+  "dancingCues": [
+    "dj"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-09|dox-island-park|dj-jeff-nec|2026-10-09|special",
+  "reviewNotes": "Band or DJ not researched yet: DJ Jeff Nec."
+}

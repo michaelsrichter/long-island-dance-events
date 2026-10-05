@@ -1,6 +1,6 @@
 {
-  "title": "Live music at The Warehouse",
-  "summary": "Live music by live music at The Warehouse in Amityville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "title": "FM at The Warehouse",
+  "summary": "Live music by FM at The Warehouse in Amityville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
   "category": "live-music",
   "start": "2026-11-05T19:00",
   "end": "2026-11-05T23:30",
@@ -15,6 +15,7 @@
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-10-04",
-  "confidence": 0.75,
-  "matchKey": "iraslist|2026-11-05|the-warehouse-amityville|fm|2026-11-05|special"
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-05|the-warehouse-amityville|fm|2026-11-05|special",
+  "reviewNotes": "Band or DJ not researched yet: FM."
 }

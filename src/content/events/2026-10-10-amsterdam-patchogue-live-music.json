@@ -1,11 +1,11 @@
 {
-  "title": "VHS at Ristegio's Restaurant & Lounge",
-  "summary": "Live music by VHS at Ristegio's Restaurant & Lounge in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "title": "Mean Machine at Amsterdam",
+  "summary": "Live music by Mean Machine at Amsterdam in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
   "category": "live-music",
   "start": "2026-10-10T20:00",
   "end": "2026-10-10T23:00",
   "timezone": "America/New_York",
-  "venueId": "ristegios-patchogue",
+  "venueId": "amsterdam-patchogue",
   "town": "Patchogue",
   "skillLevel": "all-levels",
   "status": "active",
@@ -16,6 +16,6 @@
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-10-04",
   "confidence": 0.7,
-  "matchKey": "iraslist|2026-10-10|ristegios-patchogue|vhs|2026-10-10|special",
-  "reviewNotes": "Band or DJ not researched yet: VHS."
+  "matchKey": "iraslist|2026-10-10|amsterdam-patchogue|mean-machine|2026-10-10|special",
+  "reviewNotes": "Band or DJ not researched yet: Mean Machine."
 }
