@@ -1,0 +1,26 @@
+{
+  "title": "Mach5 Band NY at Memories 2 Bar & Grill",
+  "summary": "Live music by Mach5 Band NY at Memories 2 Bar & Grill in Williston Park. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-16T20:30",
+  "end": "2026-10-16T23:30",
+  "timezone": "America/New_York",
+  "venueId": "memories-2-bar-and-grill-williston-park",
+  "town": "Williston Park",
+  "performerIds": [
+    "mach5-band-ny"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-16|memories-2-bar-and-grill-williston-park|mach-5|2026-10-16|special"
+}
