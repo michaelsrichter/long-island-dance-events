@@ -18,13 +18,14 @@
   "priceNotes": "Members pay less",
   "skillLevel": "all-levels",
   "infoUrl": "https://www.sdli.org",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "thedancecalendar",
   "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
   "sourceName": "The Dance Calendar, October 2026",
   "sourceRef": "pages 16, 18",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "confidence": 1,
-  "matchKey": "thedancecalendar|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|lesson-party||east-coast-swing||repeat"
+  "matchKey": "thedancecalendar|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|lesson-party||east-coast-swing||repeat",
+  "reviewNotes": "The organizer's or band's own calendar now lists this (swing-dance-long-island-lesson-and-dance-tuesdays-2), so that listing is shown instead of this copy."
 }

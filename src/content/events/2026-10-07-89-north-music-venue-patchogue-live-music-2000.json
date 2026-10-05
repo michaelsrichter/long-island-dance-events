@@ -1,0 +1,22 @@
+{
+  "title": "Country Wednesday at 89 North Music Venue",
+  "summary": "Live music by Country Wednesday at 89 North Music Venue. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-07T20:00",
+  "end": "2026-10-07T23:00",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/c0905dde02683ca01bfd85688606a3af6559e5db",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/c0905dde02683ca01bfd85688606a3af6559e5db",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-07",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|89-north-music-venue-patchogue||wednesday|20:00|live-music|countrywednesday||2026-10-07",
+  "reviewNotes": "Band or DJ not researched yet: Country Wednesday."
+}

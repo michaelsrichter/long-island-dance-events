@@ -1,6 +1,6 @@
 {
-  "title": "Classic Stones Live at Patchogue Theatre for the Performing Arts",
-  "summary": "Live music by Classic Stones Live at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "title": "Classic Stones at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by Classic Stones at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
   "category": "live-music",
   "start": "2027-01-23T20:00",
   "timezone": "America/New_York",
@@ -16,7 +16,7 @@
   "sourceName": "Patchogue Theatre - events",
   "sourceRef": "events page 2027-01-23",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "dancingCues": [
     "theater"
   ],

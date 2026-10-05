@@ -15,11 +15,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 6,
-    "kept": 4,
+    "kept": 5,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T16:06:21.154Z",
+  "lastScraped": "2026-10-05T06:36:05.663Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep because it has six clean LI bar-band dates and repeat venues for cross-checking.",

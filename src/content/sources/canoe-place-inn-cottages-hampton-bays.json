@@ -6,16 +6,24 @@
   "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "canoe-place-inn-cottages-hampton-bays",
-    "town": "Hampton Bays"
+    "town": "Hampton Bays",
+    "venueId": "canoe-place-inn-cottages-hampton-bays"
   },
   "description": "Hampton Bays venue calendar includes jazz in the garden, acoustic garden music and ballroom concerts.",
   "enabled": true,
+  "exclude": "holidays in the study|thanksgiving|brunch|yoga|cocktail",
   "feedUrl": "https://canoeplace.com/events/?ical=1",
   "focus": "music",
+  "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano",
+  "lastCounts": {
+    "found": 20,
+    "kept": 7,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:36:24.378Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Hampton Bays venue calendar includes jazz in the garden, acoustic garden music and ballroom concerts.",
-  "url": "https://canoeplace.com/event/",
-  "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano",
-  "exclude": "holidays in the study|thanksgiving|brunch|yoga|cocktail"
+  "url": "https://canoeplace.com/event/"
 }

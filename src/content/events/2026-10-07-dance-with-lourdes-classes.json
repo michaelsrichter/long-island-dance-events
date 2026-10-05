@@ -1,0 +1,26 @@
+{
+  "title": "Salsa class at Knights of Columbus Hall, Lynbrook",
+  "summary": "Group class in Salsa.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "salsa"
+  ],
+  "start": "2026-10-07T19:00",
+  "end": "2026-10-07T20:00",
+  "timezone": "America/New_York",
+  "venueId": "knights-of-columbus-lynbrook",
+  "town": "Lynbrook",
+  "organizerId": "dance-with-lourdes",
+  "price": 65,
+  "priceNotes": "$120 per couple",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "diva-lourdes-gcal",
+  "sourceUrl": "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
+  "sourceName": "DiVa Ballroom / Dance with Lourdes Cruz - Long Island Google Calendar",
+  "sourceRef": "calendar feed 2026-10-07",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.9,
+  "matchKey": "diva-lourdes-gcal|knights-of-columbus-lynbrook|dance-with-lourdes|wednesday|19:00|class-lesson||salsa|2026-10-07"
+}

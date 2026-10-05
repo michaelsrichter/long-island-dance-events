@@ -1,0 +1,22 @@
+{
+  "title": "Anna & Shaina at Amici Restaurant",
+  "summary": "Live music by Anna & Shaina at Amici Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-17T18:30",
+  "end": "2026-10-17T21:30",
+  "timezone": "America/New_York",
+  "venueId": "amici-restaurant-mount-sinai",
+  "town": "Mount Sinai",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://amicirestaurant.org/event/anna-shaina-17/",
+  "status": "active",
+  "sourceId": "amici-restaurant-mount-sinai",
+  "sourceUrl": "https://amicirestaurant.org/event/anna-shaina-17/",
+  "sourceName": "Amici Restaurant (Mount Sinai) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-17",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.85,
+  "matchKey": "amici-restaurant-mount-sinai|amici-restaurant-mount-sinai||saturday|18:30|live-music|annaandshaina||2026-10-17",
+  "reviewNotes": "Band or DJ not researched yet: Anna & Shaina."
+}

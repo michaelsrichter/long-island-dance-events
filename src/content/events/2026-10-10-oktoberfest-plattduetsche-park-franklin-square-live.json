@@ -1,0 +1,26 @@
+{
+  "title": "Oktoberfest show with die Spitzbuam at Plattduetsche Park Restaurant",
+  "summary": "Live music by die Spitzbuam at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-10",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "price": 8,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://parkrestaurant.com/events/oktoberfest-with-die-spitzbuam/",
+  "status": "active",
+  "sourceId": "plattduetsche-park-restaurant-franklin-square",
+  "sourceUrl": "https://parkrestaurant.com/events/oktoberfest-with-die-spitzbuam/",
+  "sourceName": "Plattduetsche Park Restaurant - live music calendar",
+  "sourceRef": "event data on the page 2026-10-10",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "festival",
+    "outdoor"
+  ],
+  "confidence": 0.65,
+  "matchKey": "plattduetsche-park-restaurant-franklin-square|plattduetsche-park-franklin-square||saturday|tba|live-music|oktoberfestwithdiespitzbuam||2026-10-10|oktoberfest",
+  "reviewNotes": "Band or DJ not researched yet: Oktoberfest with die Spitzbuam. No start time found."
+}

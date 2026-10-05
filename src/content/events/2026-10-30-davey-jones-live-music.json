@@ -1,0 +1,24 @@
+{
+  "title": "Davey Jones at Oakdale Brew House",
+  "summary": "Live music by Davey Jones at Oakdale Brew House. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-30T19:00",
+  "end": "2026-10-30T22:00",
+  "timezone": "America/New_York",
+  "venueId": "oakdale-brew-house-oakdale",
+  "town": "Oakdale",
+  "performerIds": [
+    "davey-jones"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.oakdalebrewhouse.com/events/2026/10/30/live-music-by-davey-jones",
+  "status": "active",
+  "sourceId": "oakdale-brew-house",
+  "sourceUrl": "https://www.oakdalebrewhouse.com/events/2026/10/30/live-music-by-davey-jones",
+  "sourceName": "Oakdale Brew House (Oakdale) - live music calendar",
+  "sourceRef": "events page 2026-10-30",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "oakdale-brew-house|oakdale-brew-house-oakdale||friday|19:00|live-music|davey-jones||2026-10-30"
+}

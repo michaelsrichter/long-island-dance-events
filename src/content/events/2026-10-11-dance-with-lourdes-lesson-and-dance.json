@@ -16,7 +16,7 @@
   ],
   "price": 15,
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "thedancecalendar",
   "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
   "sourceName": "The Dance Calendar, October 2026",
@@ -24,5 +24,6 @@
   "firstSeen": "2026-10-03",
   "lastSeen": "2026-10-04",
   "confidence": 1,
-  "matchKey": "thedancecalendar|huntington-moose-lodge|dance-with-lourdes|sunday|14:00|lesson-party||west-coast-swing||2026-10-11"
+  "matchKey": "thedancecalendar|huntington-moose-lodge|dance-with-lourdes|sunday|14:00|lesson-party||west-coast-swing||2026-10-11",
+  "reviewNotes": "Not found in the latest thedancecalendar run on 2026-10-05. Check whether it was cancelled or moved."
 }

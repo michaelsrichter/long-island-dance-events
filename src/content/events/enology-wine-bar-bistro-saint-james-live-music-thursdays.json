@@ -1,0 +1,28 @@
+{
+  "title": "Austin Merullo at Enology Wine Bar & Bistro",
+  "summary": "Live music by Austin Merullo at Enology Wine Bar & Bistro. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-15T18:00",
+  "end": "2026-10-15T20:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-11-19"
+    ]
+  },
+  "venueId": "enology-wine-bar-bistro-saint-james",
+  "town": "St. James",
+  "performerIds": [
+    "austin-merullo"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "enology-wine-bar-bistro-saint-james",
+  "sourceUrl": "https://enologywinebar.com/events/live-music/",
+  "sourceName": "Enology Wine Bar & Bistro - live music calendar",
+  "sourceRef": "events page 2026-10-15",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "enology-wine-bar-bistro-saint-james|enology-wine-bar-bistro-saint-james||thursday|18:00|live-music|austin-merullo||repeat"
+}

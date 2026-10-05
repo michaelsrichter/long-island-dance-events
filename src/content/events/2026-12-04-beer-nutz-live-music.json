@@ -1,0 +1,22 @@
+{
+  "title": "Beer Nutz at Sonny's Canal House",
+  "summary": "Live music by Beer Nutz at Sonny's Canal House. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-04T20:00",
+  "timezone": "America/New_York",
+  "venueId": "sonnys-canal-house-baldwin",
+  "town": "Baldwin",
+  "performerIds": [
+    "beer-nutz"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "beernutz",
+  "sourceUrl": "https://www.beernutzmusic.com/",
+  "sourceName": "Beer Nutz - 2026 gigs",
+  "sourceRef": "events page 2026-12-04",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "beernutz|sonnys-canal-house-baldwin||friday|20:00|live-music|beer-nutz||2026-12-04"
+}

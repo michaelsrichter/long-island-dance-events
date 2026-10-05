@@ -1,0 +1,24 @@
+{
+  "title": "Nick Kerzner at Hotel Moraine",
+  "summary": "Live music by Nick Kerzner at Hotel Moraine. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-17",
+  "timezone": "America/New_York",
+  "venueId": "hotel-moraine-greenport",
+  "town": "Greenport",
+  "performerIds": [
+    "nick-kerzner"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k",
+  "status": "active",
+  "sourceId": "hotel-moraine",
+  "sourceUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k",
+  "sourceName": "Hotel Moraine (Greenport) - events",
+  "sourceRef": "events page 2026-10-17",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.6,
+  "matchKey": "hotel-moraine|hotel-moraine-greenport||saturday|tba|live-music|nick-kerzner||2026-10-17",
+  "reviewNotes": "No start time found."
+}

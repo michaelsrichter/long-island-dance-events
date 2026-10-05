@@ -1,0 +1,24 @@
+{
+  "title": "Liverpool 2 at La Famiglia Pizzeria & Restaurant",
+  "summary": "Live music by Liverpool 2 at La Famiglia Pizzeria & Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-12",
+  "timezone": "America/New_York",
+  "venueId": "la-famiglia-glen-cove",
+  "town": "Glen Cove",
+  "performerIds": [
+    "liverpool-2"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.theliverpoolshuffle.com/calendar/liverpool-2-at-la-famiglia-1",
+  "status": "active",
+  "sourceId": "the-liverpool-shuffle",
+  "sourceUrl": "https://www.theliverpoolshuffle.com/calendar/liverpool-2-at-la-famiglia-1",
+  "sourceName": "The Liverpool Shuffle - live music calendar",
+  "sourceRef": "events page 2026-12-12",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.6,
+  "matchKey": "the-liverpool-shuffle|la-famiglia-glen-cove||saturday|tba|live-music|liverpool-2||2026-12-12",
+  "reviewNotes": "No start time found."
+}

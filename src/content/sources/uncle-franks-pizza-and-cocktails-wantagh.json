@@ -6,12 +6,20 @@
   "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "uncle-franks-pizza-and-cocktails-wantagh",
-    "town": "Wantagh"
+    "town": "Wantagh",
+    "venueId": "uncle-franks-pizza-and-cocktails-wantagh"
   },
   "description": "Wantagh restaurant page lists weekly dated bands and singers from October into December.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 10,
+    "kept": 10,
+    "needsReview": 4,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:43:18.168Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Wantagh restaurant page lists weekly dated bands and singers from October into December.",
   "url": "https://www.unclefranksli.com/music-and-events/"

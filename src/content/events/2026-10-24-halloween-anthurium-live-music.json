@@ -1,0 +1,23 @@
+{
+  "title": "Halloween show with Anthurium at The Village Pub",
+  "summary": "Live music by Anthurium at The Village Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-24",
+  "timezone": "America/New_York",
+  "venueId": "the-village-pub-lindenhurst",
+  "town": "Lindenhurst",
+  "performerIds": [
+    "anthurium"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "anthurium",
+  "sourceUrl": "https://anthurium.band/shows",
+  "sourceName": "Anthurium - live music calendar",
+  "sourceRef": "events page 2026-10-24",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.6,
+  "matchKey": "anthurium|the-village-pub-lindenhurst||saturday|tba|live-music|anthurium||2026-10-24|halloween",
+  "reviewNotes": "No start time found."
+}

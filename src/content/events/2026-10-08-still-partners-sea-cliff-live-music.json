@@ -1,0 +1,21 @@
+{
+  "title": "Live music at Still Partners",
+  "summary": "Live music at Still Partners. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-08T20:30",
+  "end": "2026-10-08T20:30",
+  "timezone": "America/New_York",
+  "venueId": "still-partners-sea-cliff",
+  "town": "Sea Cliff",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.theragtimes.net/event/dave-diamond-friends-at-still-partners-li-2/",
+  "status": "active",
+  "sourceId": "the-rag-times-patchogue",
+  "sourceUrl": "https://www.theragtimes.net/event/dave-diamond-friends-at-still-partners-li-2/",
+  "sourceName": "The Rag Times - live music calendar",
+  "sourceRef": "calendar feed 2026-10-08",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.85,
+  "matchKey": "the-rag-times-patchogue|still-partners-sea-cliff||thursday|20:30|live-music|||2026-10-08"
+}

@@ -5,14 +5,9 @@
   "danceStyles": [
     "east-coast-swing"
   ],
-  "start": "2026-10-06T19:30",
-  "end": "2026-10-06T22:00",
+  "start": "2026-10-27T19:30",
+  "end": "2026-10-27T22:00",
   "timezone": "America/New_York",
-  "recurrence": {
-    "rdates": [
-      "2026-10-27"
-    ]
-  },
   "lessonTime": "19:30",
   "venueId": "huntington-moose-lodge",
   "town": "Greenlawn",
@@ -27,7 +22,7 @@
   "sourceName": "Huntington Arts Council - events calendar, Dance category",
   "sourceRef": "calendar feed 2026-10-06",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "confidence": 0.9,
   "matchKey": "huntington-arts-council-dance|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|lesson-party||east-coast-swing|repeat"
 }

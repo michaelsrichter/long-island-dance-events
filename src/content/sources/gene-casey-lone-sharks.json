@@ -16,11 +16,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 28,
-    "kept": 17,
+    "kept": 18,
     "needsReview": 0,
-    "outOfArea": 3
+    "outOfArea": 2
   },
-  "lastScraped": "2026-10-04T16:07:10.710Z",
+  "lastScraped": "2026-10-05T06:37:19.354Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a filtered band source. Use a venue allowlist so only dance-friendly LI gigs are imported.",

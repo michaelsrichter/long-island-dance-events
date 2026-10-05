@@ -13,6 +13,14 @@
   "description": "North Fork band calendar lists multiple dated brewery, taproom and lodge gigs through October.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 19,
+    "kept": 4,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:43:46.499Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: North Fork band calendar lists multiple dated brewery, taproom and lodge gigs through October.",
   "url": "https://whoarethoseguys.com/calendar"

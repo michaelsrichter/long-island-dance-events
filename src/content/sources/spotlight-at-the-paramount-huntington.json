@@ -6,13 +6,21 @@
   "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "paramount-huntington",
-    "town": "Huntington"
+    "town": "Huntington",
+    "venueId": "paramount-huntington"
   },
   "description": "Huntington bar and music venue lists featured live music and DJ events for the current weekend.",
-  "enabled": true,
+  "enabled": false,
   "focus": "music",
+  "lastCounts": {
+    "found": 2,
+    "kept": 1,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:42:30.116Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
-  "reviewNotes": "Town-by-town search 2026-10-05: Huntington bar and music venue lists featured live music and DJ events for the current weekend.",
+  "reviewNotes": "Town-by-town search 2026-10-05: Huntington bar and music venue lists featured live music and DJ events for the current weekend. Switched off 2026-10-05 in review: its events page gives only the room name (\"Spotlight @ The Paramount\") and a date, with no act, so the collector made a band called \"Spotlight\". Spotlight is the club room at The Paramount. Switch back on once the listing names its acts or the adapter treats the room name as the venue.",
   "url": "https://www.spotlightny.com/events/"
 }

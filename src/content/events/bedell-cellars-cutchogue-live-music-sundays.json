@@ -23,11 +23,10 @@
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
   "sourceRef": "calendar feed 2026-10-25",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "dancingCues": [
     "afternoon"
   ],
   "confidence": 0.9,
-  "matchKey": "gene-casey-lone-sharks|bedell-cellars-cutchogue||sunday|13:00|live-music|gene-casey-and-the-lone-sharks||repeat",
-  "reviewNotes": "New venue was added automatically. Check it."
+  "matchKey": "gene-casey-lone-sharks|bedell-cellars-cutchogue||sunday|13:00|live-music|gene-casey-and-the-lone-sharks||repeat"
 }

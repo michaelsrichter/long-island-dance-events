@@ -1,0 +1,30 @@
+{
+  "title": "Mixed Vibes Band at Daisy's Nashville Lounge (Patchogue)",
+  "summary": "Live music by Mixed Vibes Band at Daisy's Nashville Lounge (Patchogue). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-31",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2027-02-06",
+      "2027-03-06",
+      "2027-04-03"
+    ]
+  },
+  "venueId": "daisys-nashville-lounge-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "mixed-vibes-band"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "mixed-vibes-band",
+  "sourceUrl": "https://bnds.us/fm31j4",
+  "sourceName": "Mixed Vibes Band - live music calendar",
+  "sourceRef": "pages 2026, 2027",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.6,
+  "matchKey": "mixed-vibes-band|daisys-nashville-lounge-patchogue||saturday|tba|live-music|mixed-vibes-band||repeat",
+  "reviewNotes": "No start time found."
+}

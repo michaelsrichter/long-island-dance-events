@@ -1,0 +1,25 @@
+{
+  "title": "Pour Some 80s on Me at Plattduetsche Park Restaurant",
+  "summary": "Live music by Pour Some 80s on Me at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-27T19:00",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "performerIds": [
+    "pour-some-80s-on-me"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "pour-some-80s",
+  "sourceUrl": "https://poursome80sonme.org/",
+  "sourceName": "Pour Some 80s On Me - show calendar",
+  "sourceRef": "events page 2026-11-27",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "outdoor"
+  ],
+  "confidence": 0.8,
+  "matchKey": "pour-some-80s|plattduetsche-park-franklin-square||friday|19:00|live-music|pour-some-80s-on-me||2026-11-27"
+}

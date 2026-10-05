@@ -13,6 +13,14 @@
   "description": "Beatles tribute band calendar lists multiple Long Island restaurant, beach and cruise gigs into 2027.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 35,
+    "kept": 2,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:42:51.811Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Beatles tribute band calendar lists multiple Long Island restaurant, beach and cruise gigs into 2027.",
   "url": "https://www.theliverpoolshuffle.com/calendar/"

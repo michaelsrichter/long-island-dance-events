@@ -15,11 +15,10 @@
   "sourceName": "Out on the Town - Long Island event calendar",
   "sourceRef": "calendar feed 2026-10-06",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "dancingCues": [
     "jam"
   ],
   "confidence": 0.85,
-  "matchKey": "out-on-the-town-li|fadeleys-deli-pub-patchogue||tuesday|18:00|live-music|||2026-10-06",
-  "reviewNotes": "New venue was added automatically. Check it."
+  "matchKey": "out-on-the-town-li|fadeleys-deli-pub-patchogue||tuesday|18:00|live-music|||2026-10-06"
 }

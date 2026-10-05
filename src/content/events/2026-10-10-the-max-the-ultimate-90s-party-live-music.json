@@ -1,0 +1,22 @@
+{
+  "title": "The Max: The Ultimate 90's Party at Painters' Restaurant",
+  "summary": "Live music by The Max: The Ultimate 90's Party at Painters' Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-10T21:00",
+  "timezone": "America/New_York",
+  "venueId": "painters-restaurant-brookhaven",
+  "town": "Brookhaven",
+  "performerIds": [
+    "the-max-the-ultimate-90s-party"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "the-max-the-ultimate-90s-party",
+  "sourceUrl": "https://wearethemaxny.com/shows",
+  "sourceName": "The Max: The Ultimate 90's Party - live music calendar",
+  "sourceRef": "events page 2026-10-10",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "the-max-the-ultimate-90s-party|painters-restaurant-brookhaven||saturday|21:00|live-music|the-max-the-ultimate-90s-party||2026-10-10"
+}

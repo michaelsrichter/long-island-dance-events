@@ -6,12 +6,20 @@
   "cadence": "twice-weekly",
   "catalogStatus": "verified",
   "defaults": {
-    "venueId": "the-audrey-oyster-bay",
-    "town": "Oyster Bay"
+    "town": "Oyster Bay",
+    "venueId": "the-audrey-oyster-bay"
   },
   "description": "Oyster Bay venue lists frequent dated live music and karaoke nights through October.",
   "enabled": true,
   "focus": "music",
+  "lastCounts": {
+    "found": 12,
+    "kept": 9,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-05T06:42:45.925Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Oyster Bay venue lists frequent dated live music and karaoke nights through October.",
   "url": "https://theaudreyob.com/events/"

@@ -1,0 +1,26 @@
+{
+  "title": "Nick & Guy at The Audrey",
+  "summary": "Live music by Nick & Guy at The Audrey. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-10",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-10-24"
+    ]
+  },
+  "venueId": "the-audrey-oyster-bay",
+  "town": "Oyster Bay",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://theaudreyob.com/events/nick-and-guy-october-10/",
+  "status": "active",
+  "sourceId": "the-audrey-oyster-bay",
+  "sourceUrl": "https://theaudreyob.com/events/nick-and-guy-october-10/",
+  "sourceName": "The Audrey (Oyster Bay) - live music calendar",
+  "sourceRef": "event data on the page 2026-10-10",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.65,
+  "matchKey": "the-audrey-oyster-bay|the-audrey-oyster-bay||saturday|tba|live-music|nickandguy||repeat",
+  "reviewNotes": "Band or DJ not researched yet: Nick & Guy. No start time found."
+}

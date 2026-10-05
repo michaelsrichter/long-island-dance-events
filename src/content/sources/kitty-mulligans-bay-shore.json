@@ -13,12 +13,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 9,
-    "kept": 7,
+    "found": 10,
+    "kept": 6,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T16:10:01.730Z",
+  "lastScraped": "2026-10-05T06:40:31.843Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a current Bay Shore pub calendar, useful for band nights even if not strongly dance-labeled.",

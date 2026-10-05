@@ -1,0 +1,25 @@
+{
+  "title": "Ashley McBryde at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by Ashley McBryde at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-07T19:00",
+  "end": "2026-10-07T22:00",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/0502fdf8ba9f96e0b307a89244d672ce1d903884",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/0502fdf8ba9f96e0b307a89244d672ce1d903884",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-07",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|patchogue-theatre-patchogue||wednesday|19:00|live-music|ashleymcbryde||2026-10-07",
+  "reviewNotes": "Band or DJ not researched yet: Ashley McBryde."
+}

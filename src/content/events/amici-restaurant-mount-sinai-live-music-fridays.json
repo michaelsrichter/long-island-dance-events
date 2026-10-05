@@ -1,0 +1,24 @@
+{
+  "title": "Live music at Amici Restaurant",
+  "summary": "Live music at Amici Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-16T18:30",
+  "end": "2026-10-16T21:30",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=FR;UNTIL=20261030"
+  },
+  "venueId": "amici-restaurant-mount-sinai",
+  "town": "Mount Sinai",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://amicirestaurant.org/event/dna-97/",
+  "status": "active",
+  "sourceId": "amici-restaurant-mount-sinai",
+  "sourceUrl": "https://amicirestaurant.org/event/dna-97/",
+  "sourceName": "Amici Restaurant (Mount Sinai) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-16",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.85,
+  "matchKey": "amici-restaurant-mount-sinai|amici-restaurant-mount-sinai||friday|18:30|live-music|||repeat"
+}

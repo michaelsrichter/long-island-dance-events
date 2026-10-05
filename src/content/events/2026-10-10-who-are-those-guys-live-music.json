@@ -1,0 +1,22 @@
+{
+  "title": "Who Are Those Guys at Tucker's Taproom & Smokehouse",
+  "summary": "Live music by Who Are Those Guys at Tucker's Taproom & Smokehouse. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-10T17:00",
+  "timezone": "America/New_York",
+  "venueId": "tuckers-taproom-mattituck",
+  "town": "Mattituck",
+  "performerIds": [
+    "who-are-those-guys"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "who-are-those-guys",
+  "sourceUrl": "https://whoarethoseguys.com/calendar",
+  "sourceName": "Who Are Those Guys - live music calendar",
+  "sourceRef": "events page 2026-10-10",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "who-are-those-guys|tuckers-taproom-mattituck||saturday|17:00|live-music|who-are-those-guys||2026-10-10"
+}

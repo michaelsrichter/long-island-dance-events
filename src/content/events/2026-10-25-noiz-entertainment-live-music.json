@@ -1,0 +1,27 @@
+{
+  "title": "NOIZ at Peconic Bay Vineyards",
+  "summary": "Live music by NOIZ at Peconic Bay Vineyards. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-25T14:00",
+  "end": "2026-10-25T17:00",
+  "timezone": "America/New_York",
+  "venueId": "peconic-bay-vineyards-cutchogue",
+  "town": "Cutchogue",
+  "performerIds": [
+    "noiz-entertainment"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://noizentertainment.com/schedule/%f0%9f%8d%b7%f0%9f%8d%82-noiz-live-at-peconic-bay-vineyards-%f0%9f%8d%82%f0%9f%8e%b6/",
+  "status": "active",
+  "sourceId": "noiz-entertainment",
+  "sourceUrl": "https://noizentertainment.com/schedule/%f0%9f%8d%b7%f0%9f%8d%82-noiz-live-at-peconic-bay-vineyards-%f0%9f%8d%82%f0%9f%8e%b6/",
+  "sourceName": "NOIZ Entertainment - live music calendar",
+  "sourceRef": "calendar feed 2026-10-25",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "noiz-entertainment|peconic-bay-vineyards-cutchogue||sunday|14:00|live-music|noiz-entertainment||2026-10-25"
+}

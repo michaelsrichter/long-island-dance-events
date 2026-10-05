@@ -1,0 +1,22 @@
+{
+  "title": "Frank Latorre & The King Bees at Bobbique",
+  "summary": "Live music by Frank Latorre & The King Bees at Bobbique. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-23T20:00",
+  "timezone": "America/New_York",
+  "venueId": "bobbique-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "frank-latorre-and-the-king-bees"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bobbique-patchogue",
+  "sourceUrl": "https://www.bobbique.com/upcoming-events/",
+  "sourceName": "BOBBIQUE (Patchogue) - live music calendar",
+  "sourceRef": "events page 2026-10-23",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "bobbique-patchogue|bobbique-patchogue||friday|20:00|live-music|frank-latorre-and-the-king-bees||2026-10-23"
+}

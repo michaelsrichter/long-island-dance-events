@@ -1,0 +1,27 @@
+{
+  "title": "Jeff Leblanc at Canoe Place Inn & Cottages",
+  "summary": "Live music by Jeff Leblanc at Canoe Place Inn & Cottages. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-28T18:00",
+  "end": "2026-11-28T21:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=SA;UNTIL=20261212"
+  },
+  "venueId": "canoe-place-inn-cottages-hampton-bays",
+  "town": "Hampton Bays",
+  "performerIds": [
+    "jeff-leblanc"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://canoeplace.com/event/holidays-in-the-study/2026-11-28/",
+  "status": "active",
+  "sourceId": "canoe-place-inn-cottages-hampton-bays",
+  "sourceUrl": "https://canoeplace.com/event/holidays-in-the-study/2026-11-28/",
+  "sourceName": "Canoe Place Inn & Cottages - live music calendar",
+  "sourceRef": "calendar feed 2026-11-28",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.9,
+  "matchKey": "canoe-place-inn-cottages-hampton-bays|canoe-place-inn-cottages-hampton-bays||saturday|18:00|live-music|jeff-leblanc||repeat"
+}

@@ -1,0 +1,22 @@
+{
+  "title": "The Heavy Traffic Band at Stephen Talkhouse",
+  "summary": "Live music by The Heavy Traffic Band at Stephen Talkhouse. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-19T20:00",
+  "timezone": "America/New_York",
+  "venueId": "stephen-talkhouse-amagansett",
+  "town": "Amagansett",
+  "performerIds": [
+    "the-heavy-traffic-band"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "hoodoo-loungers",
+  "sourceUrl": "https://hoodooloungers.com/schedule",
+  "sourceName": "Hoodoo Loungers - live music calendar",
+  "sourceRef": "events page 2026-12-19",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "hoodoo-loungers|stephen-talkhouse-amagansett||saturday|20:00|live-music|the-heavy-traffic-band||2026-12-19"
+}

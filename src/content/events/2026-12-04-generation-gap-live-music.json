@@ -1,0 +1,22 @@
+{
+  "title": "Generation Gap at Montana Brothers",
+  "summary": "Live music by Generation Gap at Montana Brothers. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-04T20:00",
+  "timezone": "America/New_York",
+  "venueId": "montana-bros-freeport",
+  "town": "Freeport",
+  "performerIds": [
+    "generation-gap"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "generation-gap",
+  "sourceUrl": "https://gengapmusic.com/shows",
+  "sourceName": "Generation Gap - live music calendar",
+  "sourceRef": "events page 2026-12-04",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.8,
+  "matchKey": "generation-gap|montana-bros-freeport||friday|20:00|live-music|generation-gap||2026-12-04"
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Who Are Those Guys at Greenport Harbor Brewing Co. (Greenport)",
+  "summary": "Live music by Who Are Those Guys at Greenport Harbor Brewing Co. (Greenport). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-17T16:00",
+  "timezone": "America/New_York",
+  "venueId": "greenport-harbor-brewing-greenport",
+  "town": "Greenport",
+  "performerIds": [
+    "who-are-those-guys"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "who-are-those-guys",
+  "sourceUrl": "https://whoarethoseguys.com/calendar",
+  "sourceName": "Who Are Those Guys - live music calendar",
+  "sourceRef": "events page 2026-10-17",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.8,
+  "matchKey": "who-are-those-guys|greenport-harbor-brewing-greenport||saturday|16:00|live-music|who-are-those-guys||2026-10-17"
+}

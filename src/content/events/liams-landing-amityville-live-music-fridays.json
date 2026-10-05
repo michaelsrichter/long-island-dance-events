@@ -7,7 +7,8 @@
   "timezone": "America/New_York",
   "recurrence": {
     "rdates": [
-      "2026-11-13"
+      "2026-11-13",
+      "2027-01-08"
     ]
   },
   "venueId": "liams-landing-amityville",
@@ -22,10 +23,9 @@
   "sourceId": "gene-casey-lone-sharks",
   "sourceUrl": "https://genecasey.com/event/sharks-night-at-liams-in-amityville-ny/",
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
-  "sourceRef": "calendar feed 2026-10-09",
+  "sourceRef": "pages 2026, 2027",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "confidence": 0.9,
-  "matchKey": "gene-casey-lone-sharks|liams-landing-amityville||friday|20:00|live-music|gene-casey-and-the-lone-sharks||repeat",
-  "reviewNotes": "New venue was added automatically. Check it."
+  "matchKey": "gene-casey-lone-sharks|liams-landing-amityville||friday|20:00|live-music|gene-casey-and-the-lone-sharks||repeat"
 }

@@ -1,0 +1,23 @@
+{
+  "title": "Mixed Vibes Band at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Mixed Vibes Band at Daisy's Nashville Lounge (Miller Place). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-03-14",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "mixed-vibes-band"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "mixed-vibes-band",
+  "sourceUrl": "https://bnds.us/fm31j4",
+  "sourceName": "Mixed Vibes Band - live music calendar",
+  "sourceRef": "events page 2027-03-14",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.6,
+  "matchKey": "mixed-vibes-band|daisys-nashville-lounge-miller-place||sunday|tba|live-music|mixed-vibes-band||2027-03-14",
+  "reviewNotes": "No start time found."
+}

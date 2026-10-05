@@ -1,0 +1,24 @@
+{
+  "title": "The Time Travelers at Beau's Bar",
+  "summary": "Live music by The Time Travelers at Beau's Bar. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-01-23",
+  "timezone": "America/New_York",
+  "venueId": "beaus-bar-greenlawn",
+  "town": "Greenlawn",
+  "performerIds": [
+    "the-time-travelers"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.timetravelersli.com/upcoming-shows/beaus-bar",
+  "status": "active",
+  "sourceId": "the-time-travelers",
+  "sourceUrl": "https://www.timetravelersli.com/upcoming-shows/beaus-bar",
+  "sourceName": "The Time Travelers - live music calendar",
+  "sourceRef": "events page 2027-01-23",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.6,
+  "matchKey": "the-time-travelers|beaus-bar-greenlawn||saturday|tba|live-music|the-time-travelers||2027-01-23",
+  "reviewNotes": "No start time found."
+}
