@@ -1,4 +1,4 @@
-import { test, expect, firstEventUrl } from './fixtures';
+import { test, expect, firstEventUrl, openFilters } from './fixtures';
 
 test.describe('finding something to dance to', () => {
   test('the homepage leads with dances, shows today, quick links with counts, and a search box', async ({ pinned: page }) => {
@@ -180,10 +180,11 @@ test.describe('views', () => {
     if (isMobile) {
       await expect(page.locator('table.cal')).toBeHidden();
       for (const past of await page.locator('.cal-agenda .event-card--past').all()) await expect(past).toBeHidden();
-      await expect(page.locator('.cal-agenda .event-card:not(.event-card--past)').first()).toBeVisible();
+      // Like the list and map, the calendar starts with dances and live music (classes are one tap away).
+      await expect(page.locator('.cal-agenda .event-card:not(.event-card--past):not([hidden])').first()).toBeVisible();
     } else {
       await expect(page.locator('table.cal')).toBeVisible();
-      await expect(page.locator('table.cal .cal__event').first()).toBeVisible();
+      await expect(page.locator('table.cal .cal__event:not([hidden])').first()).toBeVisible();
     }
   });
 
@@ -197,11 +198,12 @@ test.describe('views', () => {
     const dancePlaces = await page.locator('[data-map-place]:not([hidden])').count();
     expect(dancePlaces).toBeGreaterThan(0);
     await expect(page.locator('.leaflet-marker-icon')).toHaveCount(dancePlaces);
+    await openFilters(page);
     await page.locator('label.chip', { hasText: 'Everything' }).click();
-    await expect(page).toHaveURL(/type=all/);
+    await expect(page).toHaveURL(/category=all/);
     await expect(page.locator('.leaflet-marker-icon')).toHaveCount(n);
     await page.locator('label.chip', { hasText: 'Classes' }).click();
-    await expect(page).toHaveURL(/type=class/);
+    await expect(page).toHaveURL(/category=class-lesson/);
     expect(await page.locator('.leaflet-marker-icon').count()).toBeLessThan(n);
   });
 

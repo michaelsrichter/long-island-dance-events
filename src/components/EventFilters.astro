@@ -1,0 +1,169 @@
+---
+/**
+ * Filters for the event list, the month calendar and the map: the same choices and the same names in the
+ * address bar (scripts/event-match.ts), so a filtered view stays filtered when you switch views.
+ * Needs JavaScript; without it every event shows.
+ */
+import { getCollection } from 'astro:content';
+import Icon from './Icon.astro';
+import type { ResolvedEvent } from '../lib/content';
+import { eventFeatures, FEATURE_INFO, FEATURES } from '../lib/event-features';
+import { DANCE_TYPES, DANCE_TYPE_LABELS, SKILL_LABELS } from '../lib/schemas';
+
+interface Props {
+  /** The events this view can show (used to offer only choices that match something). */
+  events: ResolvedEvent[];
+  view: 'list' | 'calendar' | 'map';
+  /** Date choices ("Today", "This weekend"...). The calendar has none: it shows one month. */
+  when?: { value: string; label: string }[];
+  /** Initial result text, e.g. "42 events shown". */
+  countText: string;
+  /** Show the kind-of-dancing choice as chips (the list) instead of in "More filters". */
+  kindChips?: boolean;
+  /** Fold the filters behind a "Filters" button on phones, so the calendar or map comes first (open on wider screens). */
+  collapsible?: boolean;
+}
+const { events, view, when, countText, kindChips = false, collapsible = false } = Astro.props;
+const styles = (await getCollection('styles')).sort((a, b) => a.data.order - b.data.order).filter((s) => events.some((e) => e.styles.some((x) => x.id === s.id)));
+const venues = [...new Map(events.filter((e) => e.venue).map((e) => [e.venue!.id, e.venue!])).values()].sort((a, b) => a.data.name.localeCompare(b.data.name));
+const towns = [...new Set(events.map((e) => e.location.town).filter(Boolean) as string[])].sort();
+const people = [...new Map(events.flatMap((e) => [...e.performers, ...e.instructors]).map((p) => [p.id, p])).values()].sort((a, b) => a.name.localeCompare(b.name));
+const types = [
+  { value: 'dances', label: 'Dances & live music' },
+  ...(events.some((e) => e.category === 'live-music') ? [{ value: 'live-music', label: 'Live music' }] : []),
+  ...(events.some((e) => e.category === 'class-lesson') ? [{ value: 'class-lesson', label: 'Classes' }] : []),
+  { value: 'all', label: 'Everything' },
+];
+const present = new Set(events.flatMap((e) => eventFeatures(e)));
+const features = FEATURES.filter((f) => present.has(f));
+const kinds = DANCE_TYPES.filter((k) => events.some((e) => e.dancing.kinds.includes(k)));
+const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+const id = (name: string) => `f-${name}`;
+---
+{collapsible && (
+  <details class="filters-panel js-only" data-filters-panel>
+    <summary class="filters-panel__toggle"><Icon name="search" />Filters<span class="filters-panel__count" data-filter-count></span></summary>
+  </details>
+)}
+<form class:list={['filters event-filters js-only', collapsible && 'event-filters--collapsible']} data-event-filters data-view={view} aria-label="Filter events">
+  {when && when.length > 0 && (
+    <fieldset>
+      <legend>When</legend>
+      <div class="quick-views">
+        {when.map((q, i) => <label class="chip"><input type="radio" name="when" value={q.value} checked={i === 0} /><span>{q.label}</span></label>)}
+      </div>
+    </fieldset>
+  )}
+  <fieldset>
+    <legend>Type of event</legend>
+    <div class="quick-views">
+      {types.map((t) => <label class="chip"><input type="radio" name="category" value={t.value} checked={t.value === 'dances'} /><span>{t.label}</span></label>)}
+    </div>
+  </fieldset>
+  {features.length > 0 && (
+    <fieldset>
+      <legend>What's there</legend>
+      <div class="quick-views">
+        {features.map((f) => (
+          <label class="chip chip--feature" title={FEATURE_INFO[f].help}>
+            <input type="checkbox" name="has" value={f} />
+            <span><Icon name={FEATURE_INFO[f].icon} />{FEATURE_INFO[f].chip}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  )}
+  {kindChips && kinds.length > 0 && (
+    <fieldset>
+      <legend>Kind of dancing</legend>
+      <div class="quick-views">
+        <label class="chip"><input type="radio" name="dance" value="" checked /><span>Any</span></label>
+        {kinds.map((k) => <label class="chip"><input type="radio" name="dance" value={k} /><span>{DANCE_TYPE_LABELS[k]}</span></label>)}
+      </div>
+    </fieldset>
+  )}
+  <div class="filters__row">
+    <div class="field">
+      <label for={id('style')}>Dance style</label>
+      <select id={id('style')} name="style">
+        <option value="">Any style</option>
+        {styles.map((s) => <option value={s.id}>{s.data.name}</option>)}
+      </select>
+    </div>
+    <div class="field">
+      <label for={id('q')}>Search</label>
+      <input id={id('q')} name="q" type="search" placeholder="Name or town" autocomplete="off" />
+    </div>
+  </div>
+  <details class="filters__more">
+    <summary><Icon name="menu" />More filters</summary>
+    <div class="filters__row">
+      {!kindChips && kinds.length > 0 && (
+        <div class="field">
+          <label for={id('dance')}>Kind of dancing</label>
+          <select id={id('dance')} name="dance">
+            <option value="">Any kind</option>
+            {kinds.map((k) => <option value={k}>{DANCE_TYPE_LABELS[k]}</option>)}
+          </select>
+        </div>
+      )}
+      <div class="field">
+        <label for={id('county')}>County</label>
+        <select id={id('county')} name="county">
+          <option value="">Nassau and Suffolk</option>
+          <option value="Nassau">Nassau</option>
+          <option value="Suffolk">Suffolk</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for={id('town')}>Town</label>
+        <select id={id('town')} name="town">
+          <option value="">Any town</option>
+          {towns.map((t) => <option value={t}>{t}</option>)}
+        </select>
+      </div>
+      <div class="field">
+        <label for={id('day')}>Day of the week</label>
+        <select id={id('day')} name="day">
+          <option value="">Any day</option>
+          {weekdays.map((d) => <option value={d}>{cap(d)}</option>)}
+        </select>
+      </div>
+      <div class="field">
+        <label for={id('price')}>Price</label>
+        <select id={id('price')} name="price">
+          <option value="">Free or paid</option>
+          <option value="free">Free only</option>
+          <option value="paid">Paid</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for={id('level')}>Level</label>
+        <select id={id('level')} name="level">
+          <option value="">Any level</option>
+          {(['beginner', 'intermediate', 'advanced'] as const).map((k) => <option value={k}>{SKILL_LABELS[k]}</option>)}
+        </select>
+      </div>
+      <div class="field">
+        <label for={id('venue')}>Venue</label>
+        <select id={id('venue')} name="venue">
+          <option value="">Any venue</option>
+          {venues.map((v) => <option value={v.id}>{v.data.name}</option>)}
+        </select>
+      </div>
+      <div class="field">
+        <label for={id('person')}>Teacher, band or DJ</label>
+        <select id={id('person')} name="person">
+          <option value="">Anyone</option>
+          {people.map((p) => <option value={p.id}>{p.name}</option>)}
+        </select>
+      </div>
+    </div>
+  </details>
+  <div class="btn-row filters__foot">
+    <p class="result-count" data-result-count aria-live="polite">{countText}</p>
+    <slot />
+    <button type="reset" class="btn btn--secondary btn--small">Clear filters</button>
+  </div>
+</form>

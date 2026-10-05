@@ -1493,3 +1493,37 @@ h3.day-heading { font-size: 1rem; }
 .entity-gallery figure { margin: 0; overflow: hidden; border-radius: 16px; border: 1px solid var(--c-line); background: var(--c-surface); box-shadow: var(--shadow-1); }
 .entity-gallery img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
 .entity-gallery figcaption { padding: 0.55rem 0.8rem; font-size: 0.85rem; color: var(--c-ink-soft); }
+/* ---------- Event feature badges (DJ, Live band, Lesson, Free...) and the shared list / calendar / map filters ----------
+   Icon + text, never color alone. Colors come from the theme tokens, so light and dark mode both pass WCAG AA. */
+.feat-badge { display: inline-flex; align-items: center; gap: 0.3rem; padding: 0.12rem 0.55rem; border-radius: 999px; border: 1px solid transparent; font-size: 0.74rem; font-weight: 700; line-height: 1.5; white-space: nowrap; }
+.feat-badge svg { width: 0.95em; height: 0.95em; flex: none; }
+.feat-badge--small { font-size: 0.68rem; padding: 0.05rem 0.45rem; }
+.feat-badge--dj { background: color-mix(in srgb, var(--c-ink) 8%, var(--c-surface)); color: var(--c-ink); border-color: color-mix(in srgb, var(--c-ink) 22%, transparent); }
+.feat-badge--dj svg { color: var(--c-red-ink); }
+.feat-badge--live { background: color-mix(in srgb, var(--c-red-ink) 12%, var(--c-surface)); color: var(--c-red-ink); }
+.feat-badge--lesson { background: var(--c-sand); color: var(--c-ink); }
+.feat-badge--free { background: var(--c-ok-bg); color: var(--c-ok); }
+.feat-badge--beginner { background: var(--c-warn-bg); color: var(--c-warn); }
+.feat-badge--daytime { background: transparent; color: var(--c-ink-soft); border-color: var(--c-line); }
+.feat-badge--outdoor { background: transparent; color: var(--c-ok); border-color: currentColor; }
+.event-filters .quick-views--wrap { flex-wrap: wrap; overflow: visible; }
+.chip--feature span svg { width: 1rem; height: 1rem; margin-right: 0.35rem; flex: none; }
+.chip--feature input:checked + span svg { display: none; }
+
+/* Month calendar: tiny feature icons in each entry, and "+N more" on crowded days. */
+.cal__feats { display: inline-flex; gap: 2px; margin-left: 0.25rem; vertical-align: -0.15em; }
+.cal__feat { display: inline-grid; place-items: center; width: 1.05rem; height: 1.05rem; border-radius: 4px; background: rgb(255 255 255 / 0.22); }
+.cal__feat svg { width: 0.72rem; height: 0.72rem; }
+.cal__event--class-lesson .cal__feat, .cal__event--past .cal__feat { background: var(--c-sand); }
+.legend-icon { width: 1.5rem; height: 1.5rem; background: var(--c-sand); color: var(--c-ink); border-radius: 6px; }
+.legend-icon svg { width: 0.95rem; height: 0.95rem; }
+.cal__more { display: block; width: 100%; margin-top: 0.25rem; padding: 0.15rem 0.4rem; min-height: 24px; border: 1px dashed var(--c-line); border-radius: 8px; background: transparent; color: var(--c-link); font: inherit; font-size: 0.8rem; font-weight: 700; text-align: left; cursor: pointer; }
+.cal__more:hover { border-color: var(--c-link); text-decoration: underline; }
+td[data-cal-open] { background: color-mix(in srgb, var(--c-red-ink) 4%, transparent); }
+/* Calendar and map: the filters fold into a "Filters" button on phones so the calendar or map comes first. */
+.filters-panel > .filters-panel__toggle { display: inline-flex; align-items: center; gap: 0.5rem; min-height: var(--tap); padding: 0 1.1rem; border-radius: 999px; border: 1px solid var(--c-line); background: var(--c-surface); color: var(--c-ink); font-weight: 700; cursor: pointer; list-style: none; box-shadow: var(--shadow-1); }
+.filters-panel > .filters-panel__toggle::-webkit-details-marker { display: none; }
+.filters-panel > .filters-panel__toggle svg { width: 1.1rem; height: 1.1rem; color: var(--c-red-ink); }
+.filters-panel__count { color: var(--c-red-ink); }
+.filters-panel[open] > .filters-panel__toggle { margin-bottom: 0.75rem; }
+.filters-panel > .event-filters { margin-top: 0; }
