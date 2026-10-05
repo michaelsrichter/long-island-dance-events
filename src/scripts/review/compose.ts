@@ -183,7 +183,10 @@ export function conversations(key: string, o: OutreachSummary | null): HTMLEleme
       if (t.key.startsWith('test:')) parts.push(el('p', 'A test email to our own inbox', 'review-hint'));
       for (const m of r.data.messages as { direction: string; from: string; to: string; at: string; text: string }[]) {
         const li = el('li', null, m.direction === 'received' ? 'review-mail review-mail--in' : 'review-mail');
-        li.append(el('strong', `${m.direction === 'received' ? 'Answer from' : 'We sent to'} ${m.direction === 'received' ? m.from : m.to}`), ` · ${new Date(m.at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}`);
+        li.append(
+          el('strong', `${m.direction === 'received' ? 'Answer from' : 'We sent to'} ${m.direction === 'received' ? m.from : m.to}`),
+          el('span', new Date(m.at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }), 'review-hint'),
+        );
         const quote = el('blockquote', m.text, 'review-quote');
         quote.tabIndex = 0;
         li.append(quote);
