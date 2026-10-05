@@ -52,23 +52,32 @@ export interface SignupResult {
   at: string;
 }
 
-const ESP_HOSTS: [RegExp, string][] = [
-  [/list-manage\.com|mailchi\.mp|eepurl\.com|chimpstatic\.com/i, 'mailchimp'],
-  [/constantcontact|ctctcdn\.com/i, 'constant-contact'],
-  [/klaviyo/i, 'klaviyo'],
-  [/mailerlite/i, 'mailerlite'],
-  [/sibforms\.com|sendinblue|brevo/i, 'brevo'],
-  [/substack\.com/i, 'substack'],
-  [/convertkit|ck\.page|kit\.com/i, 'convertkit'],
-  [/beehiiv/i, 'beehiiv'],
-  [/flodesk/i, 'flodesk'],
-  [/myemma|e2ma\.net/i, 'emma'],
-  [/aweber/i, 'aweber'],
-  [/hsforms|hubspot/i, 'hubspot'],
-  [/squarespace/i, 'squarespace'],
-  [/wix(static)?\.com|parastorage/i, 'wix'],
+/** Mail services: their domains (matched as whole host names) and words that name them in page code. */
+const ESP_HOSTS: [string, string[], RegExp | undefined][] = [
+  ['mailchimp', ['list-manage.com', 'mailchi.mp', 'eepurl.com', 'chimpstatic.com'], undefined],
+  ['constant-contact', ['ctctcdn.com'], /constantcontact/i],
+  ['klaviyo', [], /klaviyo/i],
+  ['mailerlite', [], /mailerlite/i],
+  ['brevo', ['sibforms.com'], /sendinblue|brevo/i],
+  ['substack', ['substack.com'], undefined],
+  ['convertkit', ['ck.page', 'kit.com'], /convertkit/i],
+  ['beehiiv', [], /beehiiv/i],
+  ['flodesk', [], /flodesk/i],
+  ['emma', ['e2ma.net'], /myemma/i],
+  ['aweber', [], /aweber/i],
+  ['hubspot', [], /hsforms|hubspot/i],
+  ['squarespace', [], /squarespace/i],
+  ['wix', ['wix.com', 'wixstatic.com'], /parastorage/i],
 ];
-export const platformOf = (s: string): string | undefined => ESP_HOSTS.find(([re]) => re.test(s))?.[1];
+const HOST_NAMES = /\b(?:[a-z0-9-]+\.)+[a-z]{2,}\b/gi;
+/** "news.list-manage.com" is on list-manage.com; "toolkit.com" is not on kit.com. */
+const onDomain = (host: string, domain: string) => host === domain || host.endsWith(`.${domain}`);
+const hostsIn = (s: string) => (s.match(HOST_NAMES) ?? []).map((h) => h.toLowerCase());
+
+export const platformOf = (s: string): string | undefined => {
+  const hosts = hostsIn(s);
+  return ESP_HOSTS.find(([, domains, words]) => hosts.some((h) => domains.some((d) => onDomain(h, d))) || Boolean(words?.test(s)))?.[0];
+};
 
 /** Words around a newsletter form (and ones that mean it is some other kind of form). */
 export const NEWSLETTER_RE =
@@ -96,7 +105,16 @@ const CONFIRM_RE = /\b(confirm|verify|check your (?:e-?mail|inbox)|almost (?:fin
 const ERROR_RE = /\b(error|invalid|not valid|try again|too many|could not|couldn(?:'|’)t|failed|required field)\b/i;
 const ALREADY_RE = /\b(already (?:subscribed|a (?:subscriber|member)|on (?:our|the) list))\b/i;
 const SIGNUP_LINK_RE = /\b(newsletter|mailing list|e-?mail list|e-?news|subscribe|join (?:our|the) (?:e-?mail |mailing )?list|sign up for (?:our )?(?:e-?mails?|news|updates))\b/i;
-const SOCIAL_RE = /facebook\.com|instagram\.com|twitter\.com|x\.com|youtube\.com|tiktok\.com|linkedin\.com|eventbrite\.com|spotify\.com|apple\.com/i;
+const SOCIAL_DOMAINS = ['facebook.com', 'instagram.com', 'twitter.com', 'x.com', 'youtube.com', 'tiktok.com', 'linkedin.com', 'eventbrite.com', 'spotify.com', 'apple.com'];
+/** A link to social media or a big platform (by its host name, so "dropbox.com" is not "x.com"). */
+export const isSocialLink = (href: string): boolean => {
+  try {
+    const host = new URL(href).hostname.toLowerCase();
+    return SOCIAL_DOMAINS.some((d) => onDomain(host, d));
+  } catch {
+    return false;
+  }
+};
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const SIGNUP_DESPITE_ROBOTS = process.argv.includes('--signup-despite-robots');
@@ -319,7 +337,7 @@ async function signupLinks(page: Page, base: string): Promise<string[]> {
   const host = bare(new URL(base).host);
   const out: string[] = [];
   for (const l of links) {
-    if (!/^https?:/.test(l.href) || SOCIAL_RE.test(l.href)) continue;
+    if (!/^https?:/.test(l.href) || isSocialLink(l.href)) continue;
     let u: URL;
     try {
       u = new URL(l.href);

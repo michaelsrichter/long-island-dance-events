@@ -4,7 +4,7 @@
  * All form descriptions here are fictional.
  */
 import { describe, expect, it } from 'vitest';
-import { judgeForm, newLines, planFields, platformOf } from '../../scripts/newsletter-signup';
+import { isSocialLink, judgeForm, newLines, planFields, platformOf } from '../../scripts/newsletter-signup';
 
 type Field = { index: number; tag: string; type: string; key: string; required: boolean; visible: boolean };
 const field = (index: number, type: string, key: string, required = false, visible = true, tag = 'input'): Field => ({ index, tag, type, key, required, visible });
@@ -61,6 +61,15 @@ describe('helpers', () => {
     expect(platformOf('https://pretend.us5.list-manage.com/subscribe/post')).toBe('mailchimp');
     expect(platformOf('https://lp.constantcontactpages.com/sl/abc')).toBe('constant-contact');
     expect(platformOf('https://pretend-venue.example/')).toBeUndefined();
+    // Whole host names only: a look-alike or a longer name is not the mail service.
+    expect(platformOf('https://pretend.ck.page/join')).toBe('convertkit');
+    expect(platformOf('https://toolkit.com/signup')).toBeUndefined();
+    expect(platformOf('https://list-manage.com.pretend.example/')).toBeUndefined();
+    expect(platformOf('<script src="https://static.parastorage.com/x.js"></script>')).toBe('wix');
+    expect(isSocialLink('https://www.facebook.com/pretend')).toBe(true);
+    expect(isSocialLink('https://x.com/pretend')).toBe(true);
+    expect(isSocialLink('https://dropbox.com/s/flyer.pdf')).toBe(false);
+    expect(isSocialLink('not a link')).toBe(false);
   });
   it('reads only the lines that appeared after submitting', () => {
     expect(newLines('Thank you for a great summer\nEmail', 'Thank you for a great summer\nEmail\nAlmost finished, please check your email')).toBe('Almost finished, please check your email');
