@@ -255,6 +255,24 @@ Most weeks this takes 10-15 minutes.
 | Geocoding (U.S. Census, OpenStreetMap Nominatim) | **$0** |
 | Copilot sessions for research and fixes | your existing GitHub Copilot plan |
 
+## How big the website can get
+
+The website is a folder of ready-made pages that Azure Static Web Apps hosts. Our plan (Standard)
+allows **500 MB and 15,000 files** for the live site, and **2 GB** for the live site plus all
+pull-request previews together.
+
+| Measured October 5, 2026 (all sources collected) | Size | Files |
+| --- | ---: | ---: |
+| Before this change | 237.9 MB | 5,571 |
+| Now (share pictures only for the next 3 weeks) | 190.1 MB | 4,667 |
+
+- The biggest part used to be the **share pictures**: two for every event date up to 120 days ahead.
+  Now they are made only for dates in the next three weeks; the nightly rebuild adds them as dates
+  come closer (decision P46).
+- Event pages grow with the number of events. Each new weekly class adds about 17 dates.
+- If the site ever grows past about 300 MB, the next step is to keep the share pictures in Azure
+  Storage instead of in the website folder.
+
 ## When a source breaks or a site blocks us
 
 - **A source finds nothing or its data is broken:** the run files a GitHub issue labeled
