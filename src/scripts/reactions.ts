@@ -10,21 +10,31 @@ import { cachedAccount, loginUrl, rememberAccount, whoAmI } from './account-stat
 import { toast } from './toast';
 
 const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-react]'));
+/** Button groups by page key (an event can appear more than once on a page). Built once: lists have hundreds of cards. */
+const byKey = new Map<string, HTMLElement[]>();
+for (const g of groups) byKey.set(g.dataset.key!, [...(byKey.get(g.dataset.key!) ?? []), g]);
 const liked = new Set<string>();
 const saved = new Set<string>();
 const counts = new Map<string, number>();
 const busy = new Set<string>();
 /** Pages liked or unliked on this visit: their count came from the API, so a slower public count file must not overwrite it. */
 const changed = new Set<string>();
+/** What each key's buttons show now. The page is rendered as "Like", no count, not liked or saved. */
+const shown = new Map<string, string>();
+const RENDERED = '0|false|false';
 let signedIn = false;
 
 const here = () => location.pathname + location.search;
-const groupsFor = (key: string) => groups.filter((g) => g.dataset.key === key);
+const groupsFor = (key: string) => byKey.get(key) ?? [];
 
 function paint(key: string) {
   const n = counts.get(key) || 0;
   const isLiked = liked.has(key);
   const isSaved = saved.has(key);
+  // Skip cards whose buttons already show this (most cards on a long list: no likes yet).
+  const state = `${n}|${isLiked}|${isSaved}`;
+  if ((shown.get(key) ?? RENDERED) === state) return;
+  shown.set(key, state);
   for (const g of groupsFor(key)) {
     const like = g.querySelector<HTMLButtonElement>('[data-like]');
     if (like) {
@@ -48,7 +58,7 @@ function paint(key: string) {
 }
 
 function paintAll() {
-  for (const key of new Set(groups.map((g) => g.dataset.key!))) paint(key);
+  for (const key of byKey.keys()) paint(key);
 }
 
 function setDisabled(key: string, disabled: boolean) {
