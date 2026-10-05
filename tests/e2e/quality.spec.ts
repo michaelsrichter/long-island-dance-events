@@ -31,6 +31,8 @@ test.describe('accessibility (axe, WCAG 2.2 AA)', () => {
   for (const path of [...PAGES, 'first event page']) {
     for (const scheme of ['light', 'dark'] as const) {
       test(`no serious or critical violations (${scheme}): ${path}`, async ({ pinned: page }) => {
+        // The full event lists hold hundreds of identical cards; scanning them all takes longer.
+        if (path === '/events/' || path === '/events/calendar/') test.setTimeout(180_000);
         await page.emulateMedia({ colorScheme: scheme });
         await page.goto(path === 'first event page' ? await firstEventUrl(page) : path);
         const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).exclude('.leaflet-container').analyze();

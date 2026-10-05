@@ -7,12 +7,16 @@
  *   OTHERS
  *   -Nitework-Cooperage Inn 1-5p
  *
- * fetch():     download the home page politely (robots.txt allows it; cached).
+ * Since October 2026 Ira's List also publishes its listings as a public Google Calendar, which has exact
+ * times and street addresses for weeks ahead. We read its public iCal feed (see isPublishedCalendarFeed in
+ * ingest/lib/fetch.ts) and fall back to the home-page list if the feed cannot be read.
+ *
+ * fetch():     the public calendar feed (feedUrl), else the home page (robots.txt allows it; cached).
  * normalize(): split each line into act, venue and time; match venues and bands we have researched; keep
  *              Nassau/Suffolk venues only. Gigs at venues nobody has researched yet are reported, not
  *              published, so a person can look the venue up first. Theater shows, comedy and drag brunches
  *              are skipped: they are not live music for dancing.
- * The "live calendar" on that page is a third-party widget whose data host blocks robots, so we do not use it.
+ * The "live calendar" widget on the home page loads from a third-party host that blocks robots; we do not use it.
  */
 import type { EventCategory } from '../../src/lib/schemas';
 import { formatDateLong, weekdayOf } from '../../src/lib/time';
@@ -21,6 +25,9 @@ import { normalizeText, slugify } from '../lib/text';
 import { cuesFor } from '../lib/cues';
 import { stripTags } from '../lib/html';
 import { parseTimes } from '../lib/times';
+import { cleanVenueName, compactName, findPlaceInText, findVenue, hasStreetAddress, idFrom, titleActOk, tidyTitleAct } from '../lib/structured';
+import { styleTitle } from '../lib/describe';
+import { foundFromIcs } from './ical';
 import type { Adapter, AdapterContext, Candidate, FetchedDocument, NormalizeResult } from '../lib/types';
 
 export interface IraRow {
@@ -34,6 +41,13 @@ export interface IraRow {
   time?: string | undefined;
   /** Ira's List marked the time with "?". */
   timeUnsure?: boolean | undefined;
+  /** From the calendar feed: start and end as local New York times ('YYYY-MM-DDTHH:mm'). */
+  start?: string | undefined;
+  end?: string | undefined;
+  /** From the calendar feed: the event's location (name, street address, town). */
+  locationName?: string | undefined;
+  address?: string | undefined;
+  locality?: string | undefined;
 }
 
 const ENTITIES: Record<string, string> = { nbsp: ' ', zwj: '', zwnj: '', shy: '', amp: '&', quot: '"', apos: "'", lt: '<', gt: '>', ndash: '–', mdash: '—', rsquo: '’', lsquo: '‘' };
@@ -175,8 +189,39 @@ export function parseWeeklyList(html: string, today: string): IraRow[] {
   return rows;
 }
 
+/** Days ahead read from the calendar feed (the home-page list only covers one week). */
+export const FEED_DAYS = 60;
+
+/** Gigs from Ira's List's public calendar feed: exact times and, for most gigs, the venue's street address. */
+export function rowsFromIcs(raw: string, today: string, feedUrl: string, days = FEED_DAYS): IraRow[] {
+  const rows: IraRow[] = [];
+  const seen = new Set<string>();
+  for (const f of foundFromIcs(raw, feedUrl, today, days)) {
+    if (f.cancelled) continue;
+    const e = parseEntry(f.title);
+    if (!e) continue;
+    const date = f.start.slice(0, 10);
+    const key = `${date}|${normalizeText(e.text)}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const hasTime = f.start.length > 10;
+    rows.push({
+      ...e,
+      date,
+      // The feed's own start time is better than one written in the title.
+      time: hasTime ? undefined : e.time,
+      timeUnsure: hasTime ? undefined : e.timeUnsure,
+      start: hasTime ? f.start : undefined,
+      end: hasTime && f.end && f.end.length > 10 ? f.end : undefined,
+      locationName: f.locationName?.replace(/^[\s\-–—|]+/, '').trim() || undefined,
+      address: f.address,
+      locality: f.locality,
+    });
+  }
+  return rows.sort((a, b) => (a.start ?? a.date).localeCompare(b.start ?? b.date));
+}
 /** Shows that are not live music for dancing (theater, comedy, drag brunch, trivia). */
-const NOT_MUSIC_RE = /\b(the musical|musical\b|comedy|comedian|stand[- ]up|magician|magic show|drag (brunch|show)|trivia|bingo|kara[- ]?ok[ei]{1,2}|karoake|karoke|paint (and|&) sip|book (talk|signing))\b/i;
+const NOT_MUSIC_RE = /\b(the musical|musical\b|comedy|comedian|stand[- ]up|magician|magic show|drag (brunch|show)|trivia|bingo|kara[- ]?ok[ei]{1,2}|karoake|karoke|paint (and|&) sip|book (talk|signing)|picture show|movie night|film screening)\b/i;
 
 export { cuesFor };
 
@@ -190,6 +235,43 @@ export interface IraNormalizeOptions {
 
 const GENERIC_ACTS = /^(dj|live music|live band|band|tba|tbd|music|entertainment)$/i;
 
+/**
+ * Act names as the calendar writes them can carry dates and extras: "American Ride: A Tribute to Toby Keith
+ * on Saturday, Oct. 17th", "Half Step Halloween Costume Contest and Dance Party!", "Disco Unlimited Ticketed Event".
+ * Keep the act's own name.
+ */
+export function cleanAct(s: string): string {
+  const out = s
+    .replace(/\s+on\s+(?:mon|tues?|wed(?:nes)?|thur?s?|fri|sat(?:ur)?|sun)(?:day)?\b.*$/i, '')
+    .replace(/[,\s]+(?:mon|tues?|wed(?:nes)?|thur?s?|fri|sat(?:ur)?|sun)(?:day)?\.?,?\s+(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+\d.*$/i, '')
+    .replace(/\s+(?:ticketed event|tickets? (?:on sale|required|available)|sold out)\b.*$/i, '')
+    .replace(/\s+(?:halloween|christmas|holiday|new year'?s(?: eve)?|thanksgiving)\s+(?:costume contest|party|bash|show|spectacular|spooktacular)\b.*$/i, '')
+    .replace(/[\s!.,;:-]+$/, '')
+    .trim();
+  return out.length >= 2 ? out : s.trim();
+}
+
+/** Similar names ("Mackenzie Reilly" / "Makenzie Reilly"): Dice coefficient on letter pairs. */
+function similar(a: string, b: string): boolean {
+  const x = compactName(a);
+  const y = compactName(b);
+  if (!x || !y) return false;
+  if (x === y || x.includes(y) || y.includes(x)) return true;
+  const pairs = (s: string) => Array.from({ length: s.length - 1 }, (_, i) => s.slice(i, i + 2));
+  const px = pairs(x);
+  const py = pairs(y);
+  let hits = 0;
+  const pool = [...py];
+  for (const p of px) {
+    const i = pool.indexOf(p);
+    if (i >= 0) {
+      hits++;
+      pool.splice(i, 1);
+    }
+  }
+  return (2 * hits) / (px.length + py.length) >= 0.75;
+}
+
 /** Gig rows -> candidates. Unknown venues are not published (see reason "venue not researched"). */
 export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): NormalizeResult & { unresearched: { venues: string[]; acts: string[] } } {
   const reg = opts.registry;
@@ -199,10 +281,13 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
   const unVenues = new Set<string>();
   const unActs = new Set<string>();
   const outside = new Set((opts.outsideVenues ?? []).map(normalizeText));
+  /** Gigs already kept, per date + venue + start time (the calendar sometimes lists one gig twice with a typo). */
+  const placed = new Map<string, string[]>();
   const dates = rows.map((r) => r.date).sort();
-  const sourceName = dates.length ? `Ira's List, week of ${formatDateLong(dates[0]!).replace(/^\w+, /, '')}` : "Ira's List";
+  const fromFeed = rows.some((r) => r.start || r.locationName || r.address);
+  const sourceName = fromFeed ? "Ira's List calendar" : dates.length ? `Ira's List, week of ${formatDateLong(dates[0]!).replace(/^\w+, /, '')}` : "Ira's List";
   for (const row of rows) {
-    const ref = `${weekdayOf(row.date)} list`;
+    const ref = fromFeed ? 'calendar' : `${weekdayOf(row.date)} list`;
     const label = `${row.date} ${row.act} @ ${row.venue || '?'}`;
     if (NOT_MUSIC_RE.test(row.text)) {
       skipped.push({ reason: 'not live music for dancing (theater, comedy or drag show)', ref: label });
@@ -217,7 +302,38 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
       outOfArea.set(row.venue, (outOfArea.get(row.venue) ?? 0) + 1);
       continue;
     }
-    const venueId = (row.venue && reg.matchVenue(row.venue)) || reg.matchVenue(row.text);
+    // The calendar feed gives the location: a town outside Nassau/Suffolk is out of area.
+    const feedPlace = row.locality ? lookupPlace(row.locality) : row.address ? findPlaceInText(row.address) : undefined;
+    if (row.locality && !feedPlace) {
+      outOfArea.set(row.locality, (outOfArea.get(row.locality) ?? 0) + 1);
+      continue;
+    }
+    // A place name, not a house number ("3490") or an address.
+    const okName = (n: string | undefined) => (n && /[A-Za-z]{3}/.test(n) && !/^\d+\b/.test(n) ? n : undefined);
+    const locName = okName(cleanVenueName(row.locationName));
+    let venueId = locName || row.address ? findVenue(reg, locName ?? row.venue, row.address, feedPlace?.name) : undefined;
+    venueId ??= (row.venue && reg.matchVenue(row.venue)) || reg.matchVenue(row.text);
+    let newVenue = false;
+    // A venue we have no file for is added only when the feed gives its street address in a Long Island
+    // town (never invented); it gets a review note. Without an address the gig is reported, not published.
+    const name = locName ?? okName(cleanVenueName(row.venue));
+    if (!venueId && name && name.length <= 80 && hasStreetAddress(row.address) && feedPlace) {
+      const id = idFrom(`${name} ${feedPlace.name}`);
+      if (!reg.venues.has(id)) {
+        reg.venues.set(id, {
+          name,
+          aliases: [],
+          address: row.address.split(',')[0]!.trim(),
+          town: feedPlace.name,
+          county: feedPlace.county,
+          state: 'NY',
+          reviewNotes: "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+        } as never);
+        reg.created.venues.add(id);
+      }
+      venueId = id;
+      newVenue = true;
+    }
     const venue = venueId ? reg.venues.get(venueId) : undefined;
     if (!venue) {
       unVenues.add(row.venue || row.text);
@@ -228,9 +344,12 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
       outOfArea.set(venue.town, (outOfArea.get(venue.town) ?? 0) + 1);
       continue;
     }
-    const performerIds = reg.matchPerformers(row.act).filter((id) => !(venue && reg.performers.get(id)?.name === venue.name));
+    const performerIds = reg.matchPerformers(cleanAct(row.act).replace(/\s+(?:at|@)\s+.+$/i, '')).filter((id) => !(venue && reg.performers.get(id)?.name === venue.name));
     // "89 North - See Venue for Details": the venue's own name is not an act.
-    const pieces = row.act.split(/\s*\/\s*/).map((p) => p.trim()).filter((p) => p.length >= 2 && !GENERIC_ACTS.test(p) && reg.matchVenue(p) !== venueId);
+    // "WCS at Johnny McGoreys": drop the venue's name from the act text.
+    const venueNames = [venue.name, ...((venue as { aliases?: string[] }).aliases ?? []), row.venue, row.locationName ?? ''].map(compactName).filter((n) => n.length >= 4);
+    const actText = cleanAct(row.act).replace(/\s+(?:at|@)\s+(.+)$/i, (m, place: string) => (venueNames.some((n) => compactName(place).startsWith(n.slice(0, 8)) || n.startsWith(compactName(place).slice(0, 8))) ? '' : m));
+    const pieces = actText.split(/\s*\/\s*/).map((p) => tidyTitleAct(p.trim())).filter((p) => p.length >= 2 && !GENERIC_ACTS.test(p) && reg.matchVenue(p) !== venueId && titleActOk(p) && !reg.matchStyles(p).length);
     for (const p of pieces) if (!reg.matchPerformers(p).length && !reg.matchOrganizer(p)) unActs.add(p);
     const organizerId = reg.matchOrganizer(row.act);
     const cues = cuesFor(row);
@@ -239,22 +358,37 @@ export function normalizeIraRows(rows: IraRow[], opts: IraNormalizeOptions): Nor
     const category: EventCategory = cues.includes('dance-party') || (cues.includes('dj') && !acts.some((a) => a.type !== 'dj')) || onlyDjs ? 'social-dance' : 'live-music';
     const styles = new Set<string>();
     for (const a of acts) for (const s of a.dancing?.styles ?? []) styles.add(s);
+    // Styles named in the act text only ("WCS", "Hustle Night"), never in the venue's name.
+    const namedStyles = reg.matchStyles(actText);
+    for (const s of namedStyles) styles.add(s);
     if (category === 'social-dance' && !styles.size) styles.add('freestyle');
     // A time marked "?" is a guess, so we show "time not listed" instead of a time that may be wrong.
-    const times = row.time && !row.timeUnsure ? parseTimes(row.time) : { start: undefined, end: undefined };
+    const times = row.start
+      ? { start: row.start.slice(11, 16), end: row.end ? row.end.slice(11, 16) : undefined }
+      : row.time && !row.timeUnsure ? parseTimes(row.time) : { start: undefined, end: undefined };
     let confidence = 0.75;
     const notes: string[] = [];
     if (!performerIds.length && !organizerId && pieces.length) {
       confidence -= 0.05;
       notes.push(`Band or DJ not researched yet: ${pieces.join(', ')}.`);
     }
+    if (newVenue) notes.push('New venue was added automatically. Check it.');
     if (row.timeUnsure) notes.push(`Ira's List was not sure of the time (${row.time}?), so no time is shown.`);
     const actNames = acts.length ? acts.map((a) => a.name) : pieces.length ? pieces : [];
     const who = actNames.length ? listWords(actNames) : cues.includes('dj') ? 'a DJ' : 'live music';
     const where = venue.name;
-    const title = category === 'social-dance' ? `Dance party${actNames.length ? ` with ${listWords(actNames)}` : ''} at ${where}` : `${actNames.length ? listWords(actNames) : 'Live music'} at ${where}`;
+    const styleName = namedStyles.length ? styleTitle(namedStyles) : '';
+    const actSaysParty = actNames.some((a) => /\b(dance )?party\b/i.test(a));
+    const title = category === 'social-dance' && actSaysParty ? `${listWords(actNames)} at ${where}` : category === 'social-dance' ? `${styleName ? `${styleName} dance party` : 'Dance party'}${actNames.length ? ` with ${listWords(actNames)}` : ''} at ${where}` : actNames.length ? `${listWords(actNames)} at ${where}` : styleName ? `${styleName} dance with live music at ${where}` : `Live music at ${where}`;
     const kind = category === 'social-dance' ? `A dance party${actNames.length ? ` with ${who}` : ''}` : `Live music by ${who}`;
     const summary = `${kind} at ${where} in ${venue.town}. Listed on Ira's List. Times and lineups change, so check with the venue before you go.`;
+    const slot = `${row.date}|${venueId}|${times.start ?? ''}`;
+    const actKey = actNames.join(' ') || row.act;
+    if ((placed.get(slot) ?? []).some((a) => similar(a, actKey))) {
+      skipped.push({ reason: 'listed twice in the calendar', ref: label });
+      continue;
+    }
+    placed.set(slot, [...(placed.get(slot) ?? []), actKey]);
     const key = [opts.sourceId, row.date, venueId, slugify(row.act || 'music', 40)].join('|');
     candidates.push({
       sourceId: opts.sourceId,
@@ -301,17 +435,30 @@ function listWords(xs: string[]): string {
 export const adapter: Adapter = {
   id: 'iraslist',
   async fetch(ctx: AdapterContext): Promise<FetchedDocument[]> {
+    const feedUrl = (ctx.source as { feedUrl?: string }).feedUrl;
+    if (feedUrl) {
+      try {
+        const r = await ctx.fetcher.get(feedUrl, ctx.source.rateLimitSeconds);
+        const { readFileSync } = await import('node:fs');
+        if (/BEGIN:VCALENDAR/i.test(readFileSync(r.file, 'utf8').slice(0, 2000))) return [{ url: feedUrl, file: r.file, contentType: r.contentType, meta: { kind: 'calendar' } }];
+        ctx.log(`${feedUrl} is not a calendar feed; using the home-page list instead.`);
+      } catch (e) {
+        ctx.log(`Calendar feed could not be read (${(e as Error).message}); using the home-page list instead.`);
+      }
+    }
     const r = await ctx.fetcher.get(ctx.source.url, ctx.source.rateLimitSeconds);
     return [{ url: ctx.source.url, file: r.file, contentType: r.contentType, meta: {} }];
   },
   async normalize(docs: FetchedDocument[], ctx: AdapterContext): Promise<NormalizeResult> {
     const { readFileSync } = await import('node:fs');
-    const html = readFileSync(docs[0]!.file, 'utf8');
-    const rows = parseWeeklyList(html, ctx.today);
-    if (!rows.length) throw new Error('No gigs found in the "THIS WEEK" list. The page layout may have changed.');
+    const doc = docs[0]!;
+    const raw = readFileSync(doc.file, 'utf8');
+    const fromFeed = doc.meta.kind === 'calendar';
+    const rows = fromFeed ? rowsFromIcs(raw, ctx.today, doc.url) : parseWeeklyList(raw, ctx.today);
+    if (!rows.length) throw new Error(fromFeed ? 'The calendar feed has no gigs in the next weeks. It may have stopped being updated.' : 'No gigs found in the "THIS WEEK" list. The page layout may have changed.');
     const outside = (await import('../data/outside-venues.json', { with: { type: 'json' } })).default as { iraslist: string[] };
-    const r = normalizeIraRows(rows, { sourceId: ctx.source.id, sourceUrl: ctx.source.url, registry: ctx.registry, outsideVenues: outside.iraslist });
-    ctx.log(`${rows.length} gigs listed; ${r.candidates.length} at researched Nassau/Suffolk venues`);
+    const r = normalizeIraRows(rows, { sourceId: ctx.source.id, sourceUrl: fromFeed ? ctx.source.url : ctx.source.url, registry: ctx.registry, outsideVenues: outside.iraslist });
+    ctx.log(`${rows.length} gigs listed (${fromFeed ? 'calendar feed' : 'home-page list'}); ${r.candidates.length} at Nassau/Suffolk venues`);
     if (r.unresearched.venues.length) ctx.log(`Venues to research: ${r.unresearched.venues.join('; ')}`);
     if (r.unresearched.acts.length) ctx.log(`Bands/DJs to research: ${r.unresearched.acts.join('; ')}`);
     return r;

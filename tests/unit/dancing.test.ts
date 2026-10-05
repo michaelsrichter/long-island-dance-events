@@ -1,7 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { cuesFor, dateFor, htmlLines, normalizeIraRows, normalizeTime, parseEntry, parseWeeklyList, splitEntry } from '../../ingest/adapters/iraslist';
+import { cleanAct, cuesFor, dateFor, htmlLines, normalizeIraRows, normalizeTime, parseEntry, parseWeeklyList, rowsFromIcs, splitEntry } from '../../ingest/adapters/iraslist';
+import { isPublishedCalendarFeed } from '../../ingest/lib/fetch';
 import { Registry, ROOT } from '../../ingest/lib/registry';
 import { assessDancing, type DancingInput } from '../../src/lib/dancing';
 import { eventSchema, performerSchema, styleSchema, venueSchema } from '../../src/lib/schemas';
@@ -137,5 +138,51 @@ describe('dance styles', () => {
     for (const [id, s] of real.styles) expect(['partner', 'line', 'freestyle'], id).toContain(styleSchema.parse(s).danceType);
     expect(real.styles.get('line-dancing')!.danceType).toBe('line');
     expect(real.styles.get('freestyle')!.danceType).toBe('freestyle');
+  });
+});
+
+describe("Ira's List calendar feed", () => {
+  const ics = readFileSync(join(ROOT, 'ingest', 'fixtures', 'iraslist-calendar.ics'), 'utf8');
+  const feedUrl = 'https://calendar.google.com/calendar/ical/fictional-list%40example.com/public/basic.ics';
+
+  it('only public Google Calendar iCal feeds skip the robots.txt check', () => {
+    expect(isPublishedCalendarFeed('https://calendar.google.com/calendar/ical/iraslistli%40gmail.com/public/basic.ics')).toBe(true);
+    expect(isPublishedCalendarFeed('https://calendar.google.com/calendar/ical/abc123%40group.calendar.google.com/public/basic.ics')).toBe(true);
+    expect(isPublishedCalendarFeed('https://calendar.google.com/calendar/ical/iraslistli%40gmail.com/private-abc/basic.ics')).toBe(false);
+    expect(isPublishedCalendarFeed('https://calendar.google.com/calendar/u/0/r?cid=iraslistli@gmail.com')).toBe(false);
+    expect(isPublishedCalendarFeed('https://calendar.google.com/calendar/embed?src=iraslistli%40gmail.com')).toBe(false);
+    expect(isPublishedCalendarFeed('https://calendar.google.com.evil.example/calendar/ical/a%40b.com/public/basic.ics')).toBe(false);
+    expect(isPublishedCalendarFeed('http://calendar.google.com/calendar/ical/a%40b.com/public/basic.ics')).toBe(false);
+  });
+
+  it('cleans act names that carry dates, themes or ticket notes', () => {
+    expect(cleanAct('American Ride: A Tribute to Toby Keith on Saturday, Oct. 17th')).toBe('American Ride: A Tribute to Toby Keith');
+    expect(cleanAct('Half Step Halloween Costume Contest and Dance Party!')).toBe('Half Step');
+    expect(cleanAct('Disco Unlimited Ticketed Event')).toBe('Disco Unlimited');
+    expect(cleanAct('Pretend Rockers, Sat. Jan. 4th')).toBe('Pretend Rockers');
+    expect(cleanAct('Sir Duke')).toBe('Sir Duke');
+  });
+
+  it('reads times and locations from the feed, and builds clean listings', () => {
+    const rows = rowsFromIcs(ics, '2031-01-01', feedUrl, 30);
+    expect(rows[0]).toMatchObject({ date: '2031-01-03', start: '2031-01-03T20:00', end: '2031-01-03T23:00', sponsor: true, act: 'Sample Party Band', locationName: 'Example Pub', address: '1 Fictional Ave', locality: 'Farmingdale' });
+    const reg = fixtureRegistry();
+    const r = normalizeIraRows(rows, { sourceId: 'iraslist', sourceUrl: 'https://example.org/', registry: reg, outsideVenues: [] });
+    const titles = r.candidates.map((c) => `${c.date} ${c.start ?? ''} ${c.title}`);
+    expect(titles).toContain('2031-01-03 20:00 Sample Party Band at Example Pub');
+    expect(r.candidates.filter((c) => c.date === '2031-01-03'), 'the same gig listed twice with a typo is kept once').toHaveLength(1);
+    expect(r.skipped.map((s) => s.reason)).toEqual(expect.arrayContaining(['listed twice in the calendar', 'venue not researched yet', 'not live music for dancing (theater, comedy or drag show)']));
+    // A new venue only with a street address in a Long Island town, named after the place (never a house number).
+    const tavern = r.candidates.find((c) => c.date === '2031-01-04')!;
+    expect(tavern).toMatchObject({ title: 'Pretend Rockers at The Fictional Tavern', town: 'Huntington', start: '19:00' });
+    expect(reg.created.venues.has(tavern.venueId!)).toBe(true);
+    expect(reg.venues.get(tavern.venueId!)).toMatchObject({ name: 'The Fictional Tavern', address: '77 Imaginary Rd', county: 'Suffolk' });
+    expect([...reg.created.venues].some((id) => /^\d/.test(id)), 'no venue named after a house number').toBe(false);
+    // "WCS at Example Pub": the style is named, the venue's name is not an act.
+    const wcs = r.candidates.find((c) => c.date === '2031-01-05')!;
+    expect(wcs).toMatchObject({ title: 'West Coast Swing dance with live music at Example Pub', venueId: 'example-pub' });
+    expect(wcs.danceStyles).toContain('west-coast-swing');
+    expect(r.outOfArea).toEqual([{ town: 'Astoria', count: 1 }]);
+    for (const c of r.candidates) expect(() => eventSchema.parse({ ...c, reviewNotes: c.reviewNotes.join(' ') || undefined, start: c.start ? `${c.date}T${c.start}` : c.date, end: undefined, firstSeen: c.date, lastSeen: c.date })).not.toThrow();
   });
 });
