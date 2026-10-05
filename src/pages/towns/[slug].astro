@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import EventSeriesList from '../../components/EventSeriesList.astro';
+import ShareControls from '../../components/ShareControls.astro';
+import Icon from '../../components/Icon.astro';
+import { getTowns, nearbyTowns, seriesCount, townHref, type Town } from '../../lib/towns';
+import { townMeta } from '../../lib/entity-meta';
+import { townIntro } from '../../lib/page-meta';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/seo';
+import '../../styles/towns.css';
+
+export async function getStaticPaths() {
+  return (await getTowns()).map((t) => ({ params: { slug: t.slug }, props: { town: t } }));
+}
+const { town } = Astro.props as { town: Town };
+const site = Astro.site!;
+const all = await getTowns();
+const meta = townMeta(town, site);
+const series = seriesCount(town.events);
+const nearby = nearbyTowns(town, all);
+const styles = [...new Map(town.events.flatMap((e) => e.styles).map((s) => [s.id, s])).values()].sort((a, b) => a.name.localeCompare(b.name));
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Towns', href: '/towns/' },
+  { name: town.name, href: townHref(town.name) },
+];
+const firsts = town.events.filter((e, i, list) => list.findIndex((x) => x.eventId === e.eventId) === i);
+const counts = new Map(town.venues.map((v) => [v.id, seriesCount(town.events.filter((e) => e.venue?.id === v.id))]));
+---
+<BaseLayout
+  title={`Dancing in ${town.name}, NY: dances, classes and live music`}
+  description={meta.description}
+  image={meta.image.src}
+  imageAlt={meta.image.alt}
+  imageType={meta.image.type}
+  labels={meta.labels}
+  pageType="town"
+  robots={town.events.length === 0 ? 'noindex, follow' : undefined}
+  htmlData={{ 'data-entity': `town:${town.slug}`, 'data-town': town.name }}
+  jsonLd={[breadcrumbJsonLd(crumbs, site), ...(firsts.length ? [itemListJsonLd(`Dance events in ${town.name}`, firsts.map((e) => e.url), site)] : [])]}
+>
+  <PageHeader title={`Dancing in ${town.name}`} lede={townIntro(town, town.events, series)} crumbs={crumbs}>
+    <div class="btn-row mt-5">
+      {town.events.length > 0 && <a class="btn btn--primary" href={`/events/?when=all&town=${encodeURIComponent(town.name)}`}><Icon name="calendar" />See them on the events list</a>}
+      <ShareControls share={meta.share} variant="button" location="town" heading={`Share dancing in ${town.name}`} />
+    </div>
+  </PageHeader>
+  <div class="container section stack-l">
+    <section aria-labelledby="on-h">
+      <h2 id="on-h">Coming up in {town.name}</h2>
+      <p class="muted">Repeating events show their next date.</p>
+      <div class="mt-5"><EventSeriesList events={town.events} empty={`Nothing is listed in ${town.name} right now`} /></div>
+    </section>
+    {town.venues.length > 0 && (
+      <section class="panel" aria-labelledby="v-h">
+        <h2 id="v-h">Places to dance in {town.name}</h2>
+        <ul class="town-places mt-3">
+          {town.venues.map((v) => (
+            <li>
+              <a href={`/venues/${v.id}/`}>{v.data.name}</a>
+              <span class="muted">{v.data.address}{counts.get(v.id) ? ` · ${counts.get(v.id)} coming up` : ''}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+    {styles.length > 0 && (
+      <section aria-labelledby="s-h">
+        <h2 id="s-h">Dance styles in {town.name}</h2>
+        <ul class="style-tags mt-3" aria-label={`Dance styles in ${town.name}`}>
+          {styles.map((s) => <li class="style-tag"><a href={`/styles/${s.id}/`}>{s.name}</a></li>)}
+        </ul>
+      </section>
+    )}
+    {nearby.length > 0 && (
+      <section aria-labelledby="n-h">
+        <h2 id="n-h">Dancing near {town.name}</h2>
+        <ul class="town-grid mt-3">
+          {nearby.map((t) => (
+            <li><a href={townHref(t.name)}><strong>{t.name}</strong><span>{seriesCount(t.events)} coming up · {Math.max(1, Math.round(t.km * 0.621))} mi away</span></a></li>
+          ))}
+        </ul>
+      </section>
+    )}
+    <p><a href="/towns/">All Long Island towns</a></p>
+  </div>
+</BaseLayout>

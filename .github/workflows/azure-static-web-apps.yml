@@ -51,11 +51,17 @@ jobs:
           PUBLIC_ANALYTICS_CONSENT_MODE: ${{ vars.PUBLIC_ANALYTICS_CONSENT_MODE || 'opt-in' }}
           PUBLIC_TELEMETRY_ENDPOINT: ${{ vars.PUBLIC_TELEMETRY_ENDPOINT }}
           PUBLIC_RELEASE: ${{ github.sha }}
+          PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.PUBLIC_GOOGLE_SITE_VERIFICATION }}
+          PUBLIC_BING_SITE_VERIFICATION: ${{ vars.PUBLIC_BING_SITE_VERIFICATION }}
+          INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
       - name: Site size stays well under the Azure limits
         run: npm run test:size
       - name: Deployment not configured yet
         if: env.HAS_SWA_TOKEN != 'true'
         run: echo "::notice::AZURE_STATIC_WEB_APPS_API_TOKEN is not set, so the deploy was skipped. Run infra/deploy.ps1 (see docs/deployment.md)."
+      - name: Save the live site's page fingerprints (to find changed pages for IndexNow)
+        if: env.HAS_SWA_TOKEN == 'true' && github.event_name != 'pull_request'
+        run: curl -fsS --max-time 20 "${{ vars.SITE_URL }}/sitemap-state.json" -o "$RUNNER_TEMP/old-state.json" || echo '{}' > "$RUNNER_TEMP/old-state.json"
       - name: Deploy to Azure Static Web Apps
         id: deploy
         if: env.HAS_SWA_TOKEN == 'true'
@@ -77,6 +83,12 @@ jobs:
         run: |
           sleep 20
           node scripts/smoke.mjs "$SMOKE_URL"
+      - name: Tell search engines about new and changed pages (IndexNow)
+        if: env.HAS_SWA_TOKEN == 'true' && github.event_name != 'pull_request' && vars.INDEXNOW_KEY != '' && vars.ALLOW_INDEXING == 'true'
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
+        run: node scripts/indexnow.mjs --old "$RUNNER_TEMP/old-state.json" --new dist/sitemap-state.json --site "${{ vars.SITE_URL }}"
 
   close_preview:
     name: Close preview environment

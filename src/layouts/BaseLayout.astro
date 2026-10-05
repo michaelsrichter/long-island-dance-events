@@ -22,6 +22,8 @@ interface Props {
   ogType?: 'website' | 'article' | 'event';
   jsonLd?: unknown[];
   noindex?: boolean;
+  /** Robots meta value for indexable builds, e.g. "noindex, follow" for past events (overrides `noindex`). */
+  robots?: string | undefined;
   pageType: string;
   /** Use the full title without the site-name suffix. */
   exactTitle?: boolean;
@@ -29,7 +31,7 @@ interface Props {
   htmlData?: Record<string, string>;
   bodyClass?: string;
 }
-const { title, description, image, imageAlt, imageType = 'image/png', labels = [], ogType = 'website', jsonLd = [], noindex = false, pageType, exactTitle = false, htmlData = {}, bodyClass } = Astro.props;
+const { title, description, image, imageAlt, imageType = 'image/png', labels = [], ogType = 'website', jsonLd = [], noindex = false, robots: robotsOverride, pageType, exactTitle = false, htmlData = {}, bodyClass } = Astro.props;
 const settings = await getSettings();
 const site = Astro.site!;
 const canonical = new URL(Astro.url.pathname, site).toString();
@@ -37,7 +39,9 @@ const fullTitle = exactTitle || title.includes(settings.shortName) || title.incl
 const ogImage = new URL(image ?? (isPageImage(pageType) ? pageImage(pageType).src : '/og/default.png'), site).toString();
 const ogImageAlt = imageAlt ?? (isPageImage(pageType) ? pageImage(pageType).alt : `${settings.siteName}: ${settings.tagline}`);
 const allowIndexing = process.env.ALLOW_INDEXING === 'true';
-const robots = noindex || !allowIndexing ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+const robots = !allowIndexing ? 'noindex, nofollow' : robotsOverride ?? (noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1');
+// Search engine ownership checks (optional; the owner can also verify with a DNS record).
+const verify = { google: import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ?? '', bing: import.meta.env.PUBLIC_BING_SITE_VERIFICATION ?? '' };
 const structured = [organizationJsonLd(settings, site), ...(Astro.url.pathname === '/' ? [websiteJsonLd(settings, site)] : []), ...jsonLd];
 
 const analytics = {
@@ -67,6 +71,8 @@ const analytics = {
     <meta name="description" content={description} />
     {pageType !== '404' && <link rel="canonical" href={canonical} />}
     <meta name="robots" content={robots} />
+    {verify.google && <meta name="google-site-verification" content={verify.google} />}
+    {verify.bing && <meta name="msvalidate.01" content={verify.bing} />}
     <link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />

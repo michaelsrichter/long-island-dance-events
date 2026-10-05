@@ -85,3 +85,14 @@ if (styleViolations.length) {
   console.error(`[postbuild] Inline style attributes found (blocked by CSP):\n  ${styleViolations.slice(0, 20).join('\n  ')}`);
   process.exit(1);
 }
+
+// ---------- IndexNow key file (lets the deploy step announce changed pages to Bing and others) ----------
+const indexNowKey = (process.env.INDEXNOW_KEY || '').trim();
+if (indexNowKey) {
+  if (!/^[a-zA-Z0-9-]{8,128}$/.test(indexNowKey)) {
+    console.error('[postbuild] INDEXNOW_KEY must be 8-128 letters, digits or dashes.');
+    process.exit(1);
+  }
+  writeFileSync(join(dist, `${indexNowKey}.txt`), indexNowKey);
+  console.log('[postbuild] wrote the IndexNow key file');
+}

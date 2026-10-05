@@ -6,12 +6,13 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import type { EntityImageData } from './directory';
 import { entityCard, type SocialCard } from './og';
-import { entityLabels, eventShareBlurb, eventShortText, formatNext, instructorDescription, listNames, organizerDescription, performerDescription, styleDescription, venueDescription, type MetaLabel } from './page-meta';
+import { entityLabels, eventShareBlurb, eventShortText, formatNext, instructorDescription, listNames, organizerDescription, performerDescription, styleDescription, townDescription, venueDescription, type MetaLabel } from './page-meta';
+import { getTowns, type Town } from './towns';
 import { BAND_RATING_LABELS, DANCE_TYPE_LABELS, ORGANIZER_TYPE_LABELS, PERFORMER_TYPE_LABELS, VENUE_FLOOR_LABELS } from './schemas';
 import { buildNow, getAllEvents, hasShareImage, type ResolvedEvent } from './content';
 import { isUpcoming } from './event-core';
 
-export type EntityKind = 'venues' | 'performers' | 'instructors' | 'organizers' | 'styles';
+export type EntityKind = 'venues' | 'performers' | 'instructors' | 'organizers' | 'styles' | 'towns';
 
 export interface ShareImage {
   src: string;
@@ -202,6 +203,26 @@ export function styleMeta(style: CollectionEntry<'styles'>, events: ResolvedEven
   );
 }
 
+export function townMeta(t: Town, site: URL | string): EntityMeta {
+  const withPhoto = t.venues.find((v) => v.data.photos?.length);
+  return build(
+    'towns',
+    t.slug,
+    {
+      name: `Dancing in ${t.name}`,
+      description: townDescription({ name: t.name, county: t.county, venues: t.venues.length }, t.events),
+      kicker: `Town${t.county ? ` · ${t.county} County` : ''}`,
+      extra: t.venues.length ? `${t.venues.length} ${t.venues.length === 1 ? 'place' : 'places'} to dance` : undefined,
+      footer: 'Dances, classes and live music',
+      place: `${t.name}, NY`,
+      events: t.events,
+      extraLabel: t.county ? { label: 'County', data: t.county } : undefined,
+      photo: withPhoto?.data.photos?.[0],
+    },
+    site,
+  );
+}
+
 /** Every directory page with its upcoming events, for the picture endpoints. */
 export async function allEntityMeta(site: URL | string): Promise<{ kind: EntityKind; id: string; meta: EntityMeta }[]> {
   const now = buildNow();
@@ -219,6 +240,7 @@ export async function allEntityMeta(site: URL | string): Promise<{ kind: EntityK
   for (const p of instructors) out.push({ kind: 'instructors', id: p.id, meta: await instructorMeta(p, upcoming.filter((e) => e.instructors.some((x) => x.id === p.id)), site) });
   for (const o of organizers) out.push({ kind: 'organizers', id: o.id, meta: await organizerMeta(o, upcoming.filter((e) => e.organizer?.id === o.id), site) });
   for (const s of styles) out.push({ kind: 'styles', id: s.id, meta: styleMeta(s, upcoming.filter((e) => e.styles.some((x) => x.id === s.id)), site) });
+  for (const t of await getTowns()) out.push({ kind: 'towns', id: t.slug, meta: townMeta(t, site) });
   return out;
 }
 

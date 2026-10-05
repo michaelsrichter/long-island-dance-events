@@ -34,7 +34,10 @@
     { "route": "/moderate/*", "headers": { "Cache-Control": "no-cache", "X-Robots-Tag": "noindex" } },
     { "route": "/saved/*", "headers": { "Cache-Control": "no-cache", "X-Robots-Tag": "noindex" } },
     { "route": "/saved-events.json", "headers": { "Cache-Control": "public, max-age=600" } },
-    { "route": "/community-pages.json", "headers": { "Cache-Control": "public, max-age=600" } }
+    { "route": "/community-pages.json", "headers": { "Cache-Control": "public, max-age=600" } },
+    { "route": "/llms-full.txt", "headers": { "X-Robots-Tag": "noindex" } },
+    { "route": "/events/upcoming.json", "headers": { "X-Robots-Tag": "noindex", "Cache-Control": "public, max-age=600" } },
+    { "route": "/sitemap-state.json", "headers": { "X-Robots-Tag": "noindex", "Cache-Control": "no-cache" } }
   ],
   "responseOverrides": { "404": { "rewrite": "/404.html", "statusCode": 404 } },
   "mimeTypes": {

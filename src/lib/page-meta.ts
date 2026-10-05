@@ -268,3 +268,22 @@ export function styleDescription(s: { name: string; summary: string }, events: M
     nextLine(events, { withPlace: true }),
   ]);
 }
+
+/** Meta description for a town page. */
+export function townDescription(t: { name: string; county?: string | undefined; venues: number }, events: MetaUpcoming[]): string {
+  return fitSentences([
+    events.length ? `${upcomingSummary(events).replace(/^(\d+ events?) coming up/, `$1 coming up in ${t.name}, Long Island`)}` : `Nothing is listed in ${t.name}, Long Island right now`,
+    nextLine(events, { withPlace: true }),
+    t.venues ? `${t.venues} ${t.venues === 1 ? 'place' : 'places'} to dance${t.county ? ` in ${t.county} County` : ''}` : undefined,
+    'Times, prices and directions',
+  ]);
+}
+
+/** The first sentence of a town page: answers "where can I dance in X?" right away. */
+export function townIntro(t: { name: string; county?: string | undefined }, events: MetaUpcoming[], series: number): string {
+  if (!events.length) return `Nothing is listed in ${t.name} right now. Try the nearby towns below, or check back soon: we update the listings every day.`;
+  const n = events[0]!;
+  const where = n.location.name && !n.title.includes(n.location.name) ? ` at ${n.location.name}` : '';
+  const kinds = upcomingSummary(events).replace(/^.*coming up: /, '');
+  return `${events.length} ${events.length === 1 ? 'event is' : 'events are'} coming up in ${t.name}${t.county ? ` (${t.county} County)` : ''}, from ${series} ${series === 1 ? 'listing' : 'different listings'}: ${kinds}. The next one is ${n.title}${where} on ${formatDateLong(n.date).replace(/, \d{4}$/, '')}.`;
+}
