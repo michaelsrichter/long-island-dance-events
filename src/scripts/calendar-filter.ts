@@ -1,14 +1,13 @@
 /**
  * Month calendar filters (components/MonthCalendar.astro): the same choices as the event list and map. Hides
  * entries in the month grid and in the phone agenda. A crowded day shows its first 3 matching events and a
- * "+N more" button. Without JavaScript every event shows.
+ * "+N more" button. Without JavaScript every event shows. The page arrives already in the default state
+ * (components/MonthCalendar.astro), so the first run changes nothing on screen unless the address has filters.
  */
-import { fillFilterForm, filterParams, matchesEvent, ranges, readFilterForm, setupFilterPanel, syncFilterLinks } from './event-match';
+import { CAL_MAX, calMoreLabel, fillFilterForm, filterParams, matchesEvent, ranges, readFilterForm, setupFilterPanel, syncFilterLinks } from './event-match';
 import { track } from './analytics';
 
 const form = document.querySelector<HTMLFormElement>('[data-event-filters][data-view="calendar"]');
-/** Events shown in one calendar square before "+N more". */
-export const CAL_MAX = 3;
 
 if (form) {
   const showActive = setupFilterPanel(form);
@@ -47,18 +46,21 @@ if (form) {
       more.type = 'button';
       more.className = 'cal__more';
       more.setAttribute('data-cal-more', '');
-      more.addEventListener('click', () => {
-        td.toggleAttribute('data-cal-open');
-        layoutCell(td);
-        if (td.hasAttribute('data-cal-open')) track('filter_events', { location: 'calendar', filter: 'more_in_day', value: td.dataset.calDay ?? '' });
-      });
       td.append(more);
     }
-    const day = new Date(`${td.dataset.calDay}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' });
     more.setAttribute('aria-expanded', String(open));
     more.textContent = open ? 'Show fewer' : `+${extra} more`;
-    more.setAttribute('aria-label', open ? `Show fewer events on ${day}` : `Show ${extra} more ${extra === 1 ? 'event' : 'events'} on ${day}`);
+    more.setAttribute('aria-label', calMoreLabel(td.dataset.calDay ?? '', extra, open));
   }
+
+  // One listener for every "+N more" button, including the ones the page arrives with.
+  document.querySelector('table.cal')?.addEventListener('click', (ev) => {
+    const td = (ev.target as Element).closest('[data-cal-more]')?.closest<HTMLElement>('td[data-cal-day]');
+    if (!td) return;
+    td.toggleAttribute('data-cal-open');
+    layoutCell(td);
+    if (td.hasAttribute('data-cal-open')) track('filter_events', { location: 'calendar', filter: 'more_in_day', value: td.dataset.calDay ?? '' });
+  });
 
   function apply(source: 'load' | 'change') {
     const v = { ...readFilterForm(form!), when: '' };
@@ -77,7 +79,8 @@ if (form) {
     for (const td of cells) layoutCell(td);
     const shown = entries.length ? matched.size : cardsShown;
     if (count) count.textContent = `${shown} ${shown === 1 ? 'event' : 'events'} shown in ${monthLabel}`;
-    if (empty) empty.hidden = shown !== 0;
+    if (empty) empty.hidden = shown !== 0 || entries.length + cards.length === 0;
+    if (source === 'load') for (const el of document.querySelectorAll('[data-cal-pending]')) el.removeAttribute('data-cal-pending');
     syncFilterLinks(filterParams({ ...v, when: carriedWhen }));
     showActive(v);
     if (source === 'change') track('filter_events', { location: 'calendar', filter: filterParams(v).toString().slice(0, 100) || 'none', results: shown });

@@ -1,6 +1,9 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { eventFeatures, featureBadges, FEATURE_INFO, FEATURES, type FeatureInput } from '../../src/lib/event-features';
-import { filterParams, matchesEvent, ranges } from '../../src/scripts/event-match';
+import { calMoreLabel, filterParams, matchesEvent, ranges } from '../../src/scripts/event-match';
+import { filterDataset, shownByDefault } from '../../src/lib/event-filter-data';
+import type { ResolvedEvent } from '../../src/lib/content';
 
 const base: FeatureInput = {
   title: 'Swing dance at Example Hall',
@@ -83,5 +86,42 @@ describe('shared list / calendar / map filters', () => {
   it('keeps defaults and empty choices out of the address bar', () => {
     expect(filterParams({ when: 'all', category: 'dances', has: '', style: '' }).toString()).toBe('');
     expect(filterParams({ category: 'all', has: 'dj,free', town: 'Patchogue' }).toString()).toBe('category=all&has=dj%2Cfree&town=Patchogue');
+  });
+});
+
+describe('feature icons (CSS masks)', () => {
+  const css = readFileSync('src/styles/global.css', 'utf8');
+  const icons = readFileSync('src/components/Icon.astro', 'utf8');
+  it.each([...new Set(FEATURES.map((f) => FEATURE_INFO[f].icon))])('.fi--%s draws the same shape as Icon.astro', (name) => {
+    const rule = css.match(new RegExp('\\.fi--' + name + ' \\{ --fi: url\\("data:image/svg\\+xml,([^"]+)"\\)'));
+    expect(rule, `missing .fi--${name} in global.css`).toBeTruthy();
+    const svg = decodeURIComponent(rule?.[1] ?? '');
+    const paths = icons.match(new RegExp('\\n\\s*' + name + ": '([^']+)'"))?.[1]?.replace(/"/g, "'");
+    expect(paths, `no ${name} icon in Icon.astro`).toBeTruthy();
+    expect(svg).toContain(paths);
+    expect(svg).toContain("stroke-width='1.8'");
+  });
+});
+
+describe('calendar default state (rendered by the server, kept by the script)', () => {
+  const resolved = (over: Record<string, unknown> = {}) =>
+    ({
+      ...ev(), date: '2026-10-09', end: new Date('2026-10-10T02:00:00Z'), status: 'scheduled', styles: [], performers: [], instructors: [],
+      location: { town: 'Huntington', county: 'Suffolk' }, weekday: 'friday', price: { free: false, known: true }, organizer: null,
+      dancing: { level: 'likely', kinds: ['partner'] }, ...over,
+    }) as unknown as ResolvedEvent;
+  it('hides classes and listening-only concerts by default, like the browser', () => {
+    expect(shownByDefault(resolved())).toBe(true);
+    expect(shownByDefault(resolved({ category: 'live-music' }))).toBe(true);
+    expect(shownByDefault(resolved({ category: 'class-lesson' }))).toBe(false);
+    expect(shownByDefault(resolved({ category: 'live-music', dancing: { level: 'unlikely', kinds: [] } }))).toBe(false);
+  });
+  it('gives the script the same names element.dataset uses', () => {
+    expect(filterDataset(resolved())).toMatchObject({ date: '2026-10-09', category: 'social-dance', danceKinds: 'partner', startMin: '20:00', dancing: 'likely' });
+  });
+  it('labels "+N more" in words', () => {
+    expect(calMoreLabel('2026-10-09', 1, false)).toBe('Show 1 more event on Friday, October 9');
+    expect(calMoreLabel('2026-10-09', 4, false)).toBe('Show 4 more events on Friday, October 9');
+    expect(calMoreLabel('2026-10-09', 4, true)).toBe('Show fewer events on Friday, October 9');
   });
 });

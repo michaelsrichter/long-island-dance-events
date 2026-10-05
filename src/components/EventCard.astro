@@ -20,12 +20,15 @@ interface Props {
   hideDate?: boolean;
   /** Starts hidden behind a "Show more" button (see scripts/collapse.ts). */
   collapsed?: boolean;
+  /** Hidden until the filters script runs, because the default filters hide it (see MonthCalendar.astro). */
+  offByDefault?: boolean;
 }
-const { event: e, headingLevel = 'h3', past = false, hideDate = false, collapsed = false } = Astro.props;
+const { event: e, headingLevel = 'h3', past = false, hideDate = false, collapsed = false, offByDefault = false } = Astro.props;
 const Heading = headingLevel;
 const filterData = {
   'data-event': '',
   'data-collapsed': collapsed ? '' : undefined,
+  'data-off': offByDefault ? '' : undefined,
   ...eventFilterData(e),
 };
 ---

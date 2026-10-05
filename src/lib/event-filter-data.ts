@@ -4,6 +4,7 @@
  */
 import type { ResolvedEvent } from './content';
 import { eventFeatures } from './event-features';
+import { FILTER_DEFAULTS, matchesEvent, ranges } from '../scripts/event-match';
 
 export function eventFilterData(e: ResolvedEvent): Record<string, string> {
   const people = [...e.performers, ...e.instructors];
@@ -26,4 +27,17 @@ export function eventFilterData(e: ResolvedEvent): Record<string, string> {
     'data-dance-kinds': e.dancing.kinds.join(' '),
     'data-features': eventFeatures(e).join(' '),
   };
+}
+
+/** The attributes as the browser's `element.dataset` sees them ('data-dance-kinds' becomes danceKinds). */
+export function filterDataset(e: ResolvedEvent): Record<string, string> {
+  return Object.fromEntries(Object.entries(eventFilterData(e)).map(([k, v]) => [k.slice(5).replace(/-([a-z])/g, (_, c: string) => c.toUpperCase()), v]));
+}
+
+/**
+ * Shown when no filters are chosen (dances and live music; the calendar ignores dates). Uses the browser's own
+ * matcher, so a page can start in its filtered state and nothing moves when the script runs.
+ */
+export function shownByDefault(e: ResolvedEvent): boolean {
+  return matchesEvent(filterDataset(e), '', { ...FILTER_DEFAULTS, when: '' }, ranges());
 }

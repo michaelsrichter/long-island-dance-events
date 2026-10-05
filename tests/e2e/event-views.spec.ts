@@ -8,7 +8,7 @@ test.describe('feature badges', () => {
     const badges = page.locator(`${visibleCards} .feat-badge`);
     expect(await badges.count()).toBeGreaterThan(0);
     for (const b of (await badges.all()).slice(0, 20)) {
-      await expect(b.locator('svg')).toHaveCount(1);
+      await expect(b.locator('.fi')).toHaveCount(1);
       expect((await b.textContent())!.trim().length).toBeGreaterThan(1);
     }
     // "Live band" on a live-music card only when an act is named (it then tells a band from a singer); a class never says "Lesson" again.
@@ -59,6 +59,8 @@ test.describe('filters on the list, calendar and map', () => {
     const calLink = page.getByRole('navigation', { name: 'Event views' }).getByRole('link', { name: 'Month calendar' });
     await expect(calLink).toHaveAttribute('href', /has=dj/);
     await calLink.click();
+    await expect(page).toHaveURL(/\/events\/calendar\/\?.*has=dj/);
+    await expect(page.locator('[data-cal-pending]')).toHaveCount(0);
     await expect(page.locator('input[name="has"][value="dj"]')).toBeChecked();
     for (const e of await page.locator('[data-cal-event]:not([hidden])').all()) await expect(e).toHaveAttribute('data-features', /\bdj\b/);
   });
@@ -124,5 +126,53 @@ test.describe('filters on the list, calendar and map', () => {
         await noHorizontalScroll(page);
       });
     }
+  });
+});
+
+test.describe('the calendar arrives in its filtered state (nothing jumps)', () => {
+  test('the page and the script agree on what shows by default', async ({ pinned: page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    const html = await (await page.request.get('/events/calendar/')).text();
+    const servedMore = (html.match(/data-cal-more/g) ?? []).length;
+    await page.goto('/events/calendar/');
+    await expect(page.locator('[data-cal-pending]')).toHaveCount(0);
+    // The server marks with data-off exactly what the script then hides.
+    const mismatches = await page.evaluate(() =>
+      [...document.querySelectorAll<HTMLElement>('[data-cal-event], .cal-agenda [data-event]')].filter((e) => e.hidden !== e.hasAttribute('data-off')).length,
+    );
+    expect(mismatches).toBe(0);
+    expect(await page.locator('[data-cal-event][data-off]').count()).toBeGreaterThan(0);
+    expect(await page.locator('[data-cal-more]').count()).toBe(servedMore);
+  });
+
+  for (const width of [412, 1280]) {
+    test(`little layout shift when the filters start, ${width} px`, async ({ pinned: page }) => {
+      await page.setViewportSize({ width, height: 900 });
+      await page.addInitScript(() => {
+        const w = window as unknown as { __cls: number };
+        w.__cls = 0;
+        new PerformanceObserver((list) => {
+          for (const e of list.getEntries() as unknown as { value: number; hadRecentInput: boolean }[]) if (!e.hadRecentInput) w.__cls += e.value;
+        }).observe({ type: 'layout-shift', buffered: true });
+      });
+      await page.goto('/events/calendar/', { waitUntil: 'load' });
+      await expect(page.locator('[data-cal-pending]')).toHaveCount(0);
+      await page.waitForTimeout(300);
+      expect(await page.evaluate(() => (window as unknown as { __cls: number }).__cls)).toBeLessThan(0.05);
+      expect(await page.locator('[data-filters-panel]').getAttribute('open')).toBe(width >= 768 ? '' : null);
+    });
+  }
+
+  test.describe('without JavaScript', () => {
+    test.use({ javaScriptEnabled: false });
+    test('every calendar event shows and there are no "+N more" buttons', async ({ page }) => {
+      await page.setViewportSize({ width: 1280, height: 900 });
+      await page.goto('/events/calendar/');
+      const all = await page.locator('[data-cal-event]').count();
+      expect(all).toBeGreaterThan(0);
+      const hidden = await page.evaluate(() => [...document.querySelectorAll('[data-cal-event], [data-cal-more]')].filter((e) => getComputedStyle(e).display === 'none').map((e) => e.hasAttribute('data-cal-more')));
+      expect(hidden.filter((isMore) => !isMore)).toHaveLength(0);
+      expect(hidden.length).toBe(await page.locator('[data-cal-more]').count());
+    });
   });
 });

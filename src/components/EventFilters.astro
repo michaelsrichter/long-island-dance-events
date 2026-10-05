@@ -40,12 +40,11 @@ const kinds = DANCE_TYPES.filter((k) => events.some((e) => e.dancing.kinds.inclu
 const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 const id = (name: string) => `f-${name}`;
+/** Folded filters are rendered inside their panel, so the page does not jump when the script runs. */
+const Wrap = collapsible ? 'details' : 'div';
 ---
-{collapsible && (
-  <details class="filters-panel js-only" data-filters-panel>
-    <summary class="filters-panel__toggle"><Icon name="search" />Filters<span class="filters-panel__count" data-filter-count></span></summary>
-  </details>
-)}
+<Wrap class={collapsible ? 'filters-panel js-only' : undefined} data-filters-panel={collapsible ? '' : undefined}>
+{collapsible && <summary class="filters-panel__toggle"><Icon name="search" />Filters<span class="filters-panel__count" data-filter-count></span></summary>}
 <form class:list={['filters event-filters js-only', collapsible && 'event-filters--collapsible']} data-event-filters data-view={view} aria-label="Filter events">
   {when && when.length > 0 && (
     <fieldset>
@@ -167,3 +166,5 @@ const id = (name: string) => `f-${name}`;
     <button type="reset" class="btn btn--secondary btn--small">Clear filters</button>
   </div>
 </form>
+</Wrap>
+{collapsible && <script is:inline>matchMedia('(min-width: 48rem)').matches&&document.currentScript.previousElementSibling.setAttribute('open','')</script>}

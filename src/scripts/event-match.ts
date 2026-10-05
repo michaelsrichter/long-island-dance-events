@@ -11,6 +11,15 @@ export type FilterValues = Record<FilterField, string>;
 /** Values left out of the address: all dates, and dances + live music (the default view everywhere). */
 export const FILTER_DEFAULTS: Partial<FilterValues> = { when: 'all', category: 'dances' };
 
+/** Events shown in one month-calendar square before "+N more". */
+export const CAL_MAX = 3;
+
+/** Spoken label of a calendar square's "+N more" / "Show fewer" button (built the same way on the server and in the browser). */
+export function calMoreLabel(day: string, extra: number, open: boolean): string {
+  const d = new Date(`${day}T12:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' });
+  return open ? `Show fewer events on ${d}` : `Show ${extra} more ${extra === 1 ? 'event' : 'events'} on ${d}`;
+}
+
 const nyDate = (d: Date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
 const addDays = (date: string, n: number) => {
   const [y, m, d] = date.split('-').map(Number) as [number, number, number];
@@ -113,14 +122,13 @@ export function activeFilterCount(v: Partial<FilterValues>): number {
 }
 
 /**
- * Calendar and map: the filters sit in a "Filters" panel that is folded on phones (so the calendar or map
- * comes first) and open on wider screens. The form is moved into the panel here; without JavaScript neither shows.
+ * Calendar and map: the filters sit in a "Filters" panel (components/EventFilters.astro) that is folded on phones
+ * (so the calendar or map comes first) and opened on wider screens by a tiny inline script before the first paint.
+ * This keeps the "· 2 on" count on the button up to date. Without JavaScript neither shows.
  */
 export function setupFilterPanel(form: HTMLFormElement): (v: Partial<FilterValues>) => void {
-  const panel = form.previousElementSibling instanceof HTMLDetailsElement && form.previousElementSibling.matches('[data-filters-panel]') ? form.previousElementSibling : null;
+  const panel = form.closest<HTMLDetailsElement>('details[data-filters-panel]');
   if (!panel) return () => {};
-  panel.append(form);
-  if (window.matchMedia('(min-width: 48rem)').matches) panel.open = true;
   const badge = panel.querySelector<HTMLElement>('[data-filter-count]');
   return (v) => {
     const n = activeFilterCount(v);
