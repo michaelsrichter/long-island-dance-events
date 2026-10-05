@@ -1,0 +1,26 @@
+{
+  "title": "That 70's Band at Tiki Joe's at Captree Boat Basin",
+  "summary": "Live music by That 70's Band at Tiki Joe's at Captree Boat Basin in Captree. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-11T17:30",
+  "end": "2026-10-11T20:30",
+  "timezone": "America/New_York",
+  "venueId": "tiki-joes-captree",
+  "town": "Captree",
+  "performerIds": [
+    "that-70s-band"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-10-05",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-11|tiki-joes-captree|that-70s-band|2026-10-11|special"
+}
