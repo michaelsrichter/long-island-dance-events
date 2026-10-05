@@ -82,10 +82,37 @@ export function otherSourceTwin(events: Map<string, EventRecord>, d: Draft, sour
   return undefined;
 }
 
+/**
+ * The organizer's own calendar wins over a calendar that lists everything (The Dance Calendar,
+ * Ira's List): same venue, same organizer, same kind of event, and at least one shared day. Works
+ * for repeating series too (a monthly PDF and the organizer's Google Calendar both list the
+ * Monday classes). Returns the organizer's listing.
+ */
+export function ownCalendarTwin(events: Map<string, EventRecord>, d: Draft, sourceId: string, isOwnCalendar: (sourceId: string) => boolean): string | undefined {
+  const { venueId, organizerId, category } = d.data;
+  if (!venueId || !organizerId) return undefined;
+  const days = new Set(d.dates);
+  for (const [id, e] of events) {
+    if (e.sourceId === sourceId || !e.sourceId || !isOwnCalendar(e.sourceId) || e.status !== 'active') continue;
+    if (e.venueId !== venueId || e.organizerId !== organizerId || !sameFamily(category, e.category)) continue;
+    if (datesOf(e).some((x) => days.has(x))) return id;
+  }
+  return undefined;
+}
+
 export function mergeDrafts(
   existing: Map<string, EventData>,
   drafts: Draft[],
-  opts: { sourceId: string; today: string; coverage?: { from: string; to: string } | undefined; threshold?: number },
+  opts: {
+    sourceId: string;
+    today: string;
+    coverage?: { from: string; to: string } | undefined;
+    threshold?: number;
+    /** This source lists everything in an area (no default venue, organizer or band). */
+    allInOne?: boolean;
+    /** Is that source a venue's, organizer's or band's own calendar? */
+    isOwnCalendar?: (sourceId: string) => boolean;
+  },
 ): MergeResult {
   const threshold = opts.threshold ?? REVIEW_THRESHOLD;
   const events = new Map<string, EventRecord>([...existing].map(([id, e]) => [id, { ...e }]));
@@ -106,6 +133,21 @@ export function mergeDrafts(
 
   for (const d of drafts) {
     const id = byKey.get(d.matchKey);
+    const ownTwin = opts.allInOne && opts.isOwnCalendar ? ownCalendarTwin(events, d, opts.sourceId, opts.isOwnCalendar) : undefined;
+    if (ownTwin) {
+      duplicates.push({ id: id ?? d.id, of: ownTwin });
+      stats.duplicates!++;
+      if (!id) continue;
+      // An older copy from this calendar steps aside (hidden for review, never deleted).
+      seen.add(id);
+      const prev = events.get(id) as Stored;
+      if (prev.status === 'active' && !(prev.lockedFields ?? []).includes('status')) {
+        const note = `The organizer's own calendar now lists this (${ownTwin}), so that listing is shown instead of this copy.`;
+        events.set(id, { ...prev, lastSeen: opts.today, status: 'pending-review', reviewNotes: [prev.reviewNotes, note].filter(Boolean).join(' ') });
+        review.push({ id, reason: note });
+      }
+      continue;
+    }
     if (!id) {
       const twin = otherSourceTwin(events, d, opts.sourceId);
       if (twin) {

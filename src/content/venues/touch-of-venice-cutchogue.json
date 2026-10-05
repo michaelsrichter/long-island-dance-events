@@ -1,0 +1,45 @@
+{
+  "name": "Touch of Venice",
+  "aliases": [
+    "Touch of Venice Italian Restaurant",
+    "Touch of Venice Cutchogue"
+  ],
+  "address": "28350 Main Rd",
+  "town": "Cutchogue",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11935",
+  "phone": "(631) 298-5851",
+  "website": "https://touchofvenice.com/",
+  "facebookUrl": "https://www.facebook.com/touchofvenice",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Touch+of+Venice%2C+28350+Main+Rd%2C+Cutchogue%2C+NY+11935",
+  "kind": "restaurant",
+  "description": "A family-owned Italian restaurant on Main Road in Cutchogue with a full bar, where solo players and small bands perform at the bar on Friday evenings.",
+  "dancing": {
+    "floor": "seated",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Music is played in the bar area of a sit-down restaurant, usually Fridays from 6 to 9 PM, with acts like The Libations and Earthtones. We found no dance floor and no reports of dancing; expect dinner with background live music.",
+    "evidence": [
+      {
+        "url": "https://touchofvenice.com/",
+        "note": "Official site: Friday night live music at the bar, 6-9 PM, with a July to September 2026 lineup; full bar and dinner service."
+      },
+      {
+        "url": "https://northforker.com/directory/touch-of-venice/",
+        "note": "Local directory entry mentions live music every Friday night from 6 to 9 PM and a private party room."
+      },
+      {
+        "url": "https://www.findglocal.com/US/Cutchogue/173286692118/Touch-of-Venice",
+        "note": "Copies of the restaurant's 2026 social posts announce solo and duo acts playing at the bar on Friday nights."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: touchofvenice.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 41.011157,
+  "longitude": -72.484858,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

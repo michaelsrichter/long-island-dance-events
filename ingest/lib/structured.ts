@@ -134,8 +134,8 @@ const FOOD_OR_DRINK = /\b(happy hour|brunch|prix fixe|supper|prime rib|steak nig
 // Never a dance or live-music listing, even when an aggregator's text mentions "music".
 const NEVER_EVENT = /\b(street fair|carnival|craft fair|farmer['’]?s market|flea market|yard sale|car show|vintage pop[- ]?up|pop[- ]?up (?:shop|market)|football|soccer|baseball|hockey|golf outing)\b/i;
 const FESTIVAL = /\b(festival|fest\b|dance weekend|congress|dance camp|marathon)\b/i;
-// "world-class musicians" and "a class act" are not classes.
-const CLASS = /(?<!-)\b(class(?:es)?(?![-\w]|\s+act\b)|lessons?|workshops?|boot ?camp|instruction)\b/i;
+// "world-class musicians", "a class act" and leftover HTML (class="...") are not classes.
+const CLASS = /(?<!-)\b(class(?:es)?(?![-\w]|\s+act\b|\s*=)|lessons?|workshops?|boot ?camp|instruction)\b/i;
 const SOCIAL = /\b(social|dance party|dance night|milonga|practica|open dancing|dancing to|dancing until|dancing (?:from|begins|starts)|dj'?d music|dj music|music (?:&|and) dancing)\b|\d\s*(?:pm)?\s*\/\s*music\b/i;
 const LIVE = /\b(live (?:music|band|entertainment)|band\b|concert|tribute|orchestra|in concert|acoustic|performs|on stage)\b/i;
 
@@ -146,6 +146,11 @@ const LIVE = /\b(live (?:music|band|entertainment)|band\b|concert|tribute|orches
  */
 export const DANCE_TEXT =
   /(?<![-\w])(danc(?:e|es|ing|ers?)|ballroom|milongas?|practicas?|sock hop|hoedown|two[- ]?step|2[- ]step|cotillion|tango|bachata|salsa|merengue|hustle|waltz|fox ?trot|quickstep|cha[- ]?cha|rumba|samba|paso doble|kizomba|zouk|lindy(?: hop)?|jitterbug|polka|swing(?!\s+(?:band|music|orchestra|era|jazz)))(?![-\w])/i;
+/**
+ * Abbreviations that mean a dance only on a dance calendar: "WCS" is West Coast Swing to a dance
+ * teacher, but on bar and band calendars it is often the band Worst Case Scenario.
+ */
+const DANCE_CALENDAR_ABBR = /(?<![-\w])(wcs|ecs)(?![-\w])/i;
 /** Words that say a listing has live music or a DJ. */
 export const MUSIC_TEXT =
   /(?<![-\w])(live (?:music|band|entertainment|performance)|music by|musicians?|concerts?|bands?|dj|djs|dj_\w+|disc jockey|sings?|singers?|songwriters?|acoustic|jazz|blues|rock|tribute|orchestra|symphony|quartet|trio|duo|ensemble|motown|doo[- ]?wop|bluegrass|reggae|hip[- ]?hop|r&b|funk|accordion|guitar|piano|fiddle|mariachi|polka|open jam|jam session|performs?|performing)(?![-\w])/i;
@@ -153,8 +158,8 @@ export const MUSIC_TEXT =
 const ANY_MUSIC = /(?<![-\w])(music|musical)(?![-\w])/i;
 
 /** Does the text name a dance? A class or lesson counts too, except on calendars that list everything (pottery class). */
-export function namesDance(text: string, lessonsCount = true): boolean {
-  return DANCE_TEXT.test(text) || (lessonsCount && CLASS.test(text.replace(/private lessons?/gi, '')));
+export function namesDance(text: string, lessonsCount = true, danceCalendar = false): boolean {
+  return DANCE_TEXT.test(text) || (danceCalendar && DANCE_CALENDAR_ABBR.test(text)) || (lessonsCount && CLASS.test(text.replace(/private lessons?/gi, '')));
 }
 
 /** Does the text name live music, a DJ, or a band or DJ we know? */
@@ -187,8 +192,8 @@ function skillOf(text: string, category: EventCategory): SkillLevel {
   const t = text.toLowerCase();
   const levels = new Set<string>();
   if (/\b(beginners?|newcomers?|novice|basic)\b/.test(t)) levels.add('beginner');
-  if (/\bintermediate\b/.test(t)) levels.add('intermediate');
-  if (/\badvanced\b/.test(t)) levels.add('advanced');
+  if (/\b(intermediate|int)\b/.test(t)) levels.add('intermediate');
+  if (/\b(advanced|adv)\b/.test(t)) levels.add('advanced');
   if (levels.size === 1) return [...levels][0] as SkillLevel;
   return levels.size > 1 ? 'mixed' : 'all-levels';
 }
@@ -214,6 +219,8 @@ export function fixShiftedClock(f: FoundEvent): FoundEvent {
 const ACT_PREFIX = /^(?:live (?:music|band|entertainment)(?: with| by| featuring)?|(?:(?:mon|tues|wednes|thurs|fri|satur|sun)day |happy hour |live |house )?band|featuring|presents?|tonight|appearing|on stage|music by)\s*[:\-–—]?\s*/i;
 const NOT_AN_ACT =
   /\b(closed|private|trivia|bingo|karaoke|comedy|brunch|happy hour$|specials?|menu|tickets?|sold out|doors|free|admission|reservations?|open mic|open jam|jam session|dinner|buffet|cover charge|21\+|all ages|read more|more info|learn more|details|info|view|rsvp|book now|register|register now|just announced|coming soon|starting|start date|end date|date|time|location|venue|price|cost|tba|tbd|to be announced|presents|night|nights|festival|fest|fair|carnival|party|club|noche|social|bash|celebration|parade|market|halloween|(?:mon|tues|wednes|thurs|fri|satur|sun)day)\b/i;
+/** "... & food by Rogue Dinner Co.", "with food from Chef Clemente": the caterer, not the act. */
+const FOOD_BY = /\s*(?:,|&|\+|\band\b|\bwith\b)?\s*\b(?:food|eats|bites|bbq|barbecue|tacos|pizza|catering)\s+(?:by|from)\s+.*$/i;
 const CALENDAR_WORD = /^(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*\.?$|^(?:jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?$|^(?:today|tomorrow|tonight|weekly|daily|book|event|events|show|shows|music|live music|dance|dancing|party|dj|band|night)$/i;
 
 /** Band or DJ name in a venue listing ("Happy Hour Band: Calm Coast 6-10pm" -> "Calm Coast"). */
@@ -222,9 +229,12 @@ export function actName(text: string): string | undefined {
   for (const t of findTimes(s).sort((a, b) => b.index - a.index)) if (/\d/.test(s.slice(t.index, t.index + t.length))) s = s.slice(0, t.index) + s.slice(t.index + t.length); // keep words like "Midnight"
   s = s.replace(/\$\s?\d+(?:\.\d{2})?/g, ' ').replace(/\b\d{1,2}:\d{2}\b/g, ' ');
   s = s.split(/\s+[|@•·]\s+|\s+[-–—]\s+|\s+at\s+(?=[A-Z])/)[0]!;
-  const withAct = /\b(?:with|featuring|feat\.?|ft\.?)\s+([A-Z0-9].*)$/.exec(s);
+  // "HOG Halloween with musical guests Groney & Friends & food by Crossroads Que" -> "Groney & Friends"
+  s = s.replace(FOOD_BY, '');
+  const withAct = /\b(?:with|featuring|feat\.?|ft\.?)\s+(?:(?:musical|special)\s+guests?\s+|(?:live\s+)?music\s+by\s+)?([A-Z0-9].*)$/.exec(s);
   if (withAct) s = withAct[1]!;
   s = s.replace(/^[\s,.;:!"“”]+/, '').replace(ACT_PREFIX, '').replace(/[,.;:!?"“”\s]+$/, '').replace(/^[,.;:!"“”\s]+/, '').replace(/\s+/g, ' ').trim();
+  s = s.replace(/\s+live$/i, ''); // "The Mystic live" -> "The Mystic"
   if (s.length < 3 || s.length > 50 || !/[A-Za-z]{2}/.test(s) || NOT_AN_ACT.test(s) || CALENDAR_WORD.test(s)) return undefined;
   if (s.split(' ').length > 10 || /[!?]/.test(s)) return undefined;
   return s;
@@ -258,7 +268,7 @@ export function displayActOk(name: string): boolean {
 
 const JOINED_ACTS = /[:;|/+@#!?()[\]]|,|\s[-–—]\s|\b(?:vs\.?|versus|w\/|with|featuring|feat\.?|ft\.?|presents|plus|tribute to|the music of|matinee|tour|edition|anniversary|night|party|festival|fest|show|live at)\b/i;
 const EVENT_WORDS =
-  /\b(grammy|nominated|award|winning|edm|pop[- ]?up|supper|prix fixe|showcase|holidays|reunion|pipes|drums and|package|special|series|benefit|fundraiser|closed|private|trivia|bingo|karaoke|comedy|brunch|specials?|menu|tickets?|sold out|doors|free|admission|reservations?|open mic|open jam|jam session|jam|dinner|buffet|cover|read more|more info|details|rsvp|register|coming soon|tba|tbd|to be announced|fair|carnival|club|social|bash|celebration|parade|market|halloween|thanksgiving|christmas|holiday|new year|(?:mon|tues|wednes|thurs|fri|satur|sun)day|january|february|march|april|june|july|august|september|october|november|december)\b/i;
+  /\b(grammy|nominated|award|winning|edm|pop[- ]?up|supper|prix fixe|showcase|holidays|reunion|pipes|drums and|package|special|series|benefit|fundraiser|acoustics|in the garden|concerts?|recital|(?:irish|oktober|october|summer|fall|autumn|spring|winter|beer|wine|music|jazz|blues|rock|apple|food|street|harvest|block|pumpkin)fest|closed|private|trivia|bingo|karaoke|comedy|brunch|specials?|menu|tickets?|sold out|doors|free|admission|reservations?|open mic|open jam|jam session|jam|dinner|buffet|cover|read more|more info|details|rsvp|register|coming soon|tba|tbd|to be announced|fair|carnival|club|social|bash|celebration|parade|market|halloween|thanksgiving|christmas|holiday|new year|(?:mon|tues|wednes|thurs|fri|satur|sun)day|january|february|march|april|june|july|august|september|october|november|december)\b/i;
 
 /**
  * Strict check before adding a band or DJ to the registry. A name that fails (two acts joined,
@@ -331,11 +341,41 @@ export function findPerformer(reg: Registry, name: string): string | undefined {
   if (!n) return undefined;
   for (const [id, p] of reg.performers) if ([p.name, ...p.aliases].some((a) => compactName(a) === n)) return id;
   if (n.length >= 6) for (const [id, p] of reg.performers) if ([p.name, ...p.aliases].some((a) => noBand(compactName(a)) === noBand(n))) return id;
+  // "Classic Stones" in a listing is the band on file as "Classic Stones Live".
+  const noLive = (s: string) => s.replace(/live$/, '');
+  if (noLive(n).length >= 6) for (const [id, p] of reg.performers) if ([p.name, ...p.aliases].some((a) => noLive(compactName(a)) === noLive(n))) return id;
   return undefined;
 }
 
 /** File id from a name: apostrophes dropped first ("Flanagan's Pub" -> "flanagans-pub"). */
 export const idFrom = (s: string, max = 60) => slugify(s.replace(/['’‘`]/g, ''), max);
+
+const ACT_SUFFIX = /\b(?:band|trio|duo|quartet|quintet|orchestra|ensemble|revue|project|experience|\d{1,2})$/i;
+
+/**
+ * A band's own gig list sometimes names a side project instead of the band ("The Heavy Traffic Band
+ * @ Stephen Talkhouse" on the Hoodoo Loungers' page, "LIVERPOOL 2 at La Famiglia" on The Liverpool
+ * Shuffle's). Returns that act's name, or undefined when the listing is the band itself or no act
+ * name is clear ("Fund Raiser for the firemen at Sylvester Manor").
+ */
+export function sideAct(reg: Registry, bandIds: string[], lines: (string | undefined)[]): string | undefined {
+  const names = bandIds.flatMap((id) => {
+    const p = reg.performers.get(id);
+    return p ? [p.name, ...p.aliases] : [id.replace(/-/g, ' ')];
+  });
+  const core = (s: string) => noBand(compactName(s).replace(/live$/, ''));
+  const bands = names.map(core).filter((b) => b.length >= 3);
+  for (const line of lines) {
+    const m = /^(.{2,50}?)\s+(?:@|at)\s+[A-Z0-9]/.exec(line?.trim() ?? '');
+    if (!m) continue;
+    const act = tidyName(m[1]!.trim());
+    const c = core(act);
+    if (!c || bands.some((b) => c.includes(b) || b.includes(c))) return undefined;
+    if (!performerNameOk(act)) return undefined;
+    return findPerformer(reg, act) || ACT_SUFFIX.test(act) ? act : undefined;
+  }
+  return undefined;
+}
 
 /**
  * Match a band/DJ name to the registry. Only when `create` is true and the name passes the strict
@@ -475,7 +515,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     // The listing's own words decide what it is, not the source's settings: a lodge calendar also
     // lists hockey nights and bingo, and a town calendar lists pumpkin picking.
     const own = cleanListingText([f.heading, f.title, f.description].filter(Boolean).join('. '));
-    const ownDance = f.kind === 'dance' || f.pageNamesDance || namesDance(own, !allInOneCalendar);
+    const ownDance = f.kind === 'dance' || f.pageNamesDance || namesDance(own, !allInOneCalendar, sourceFocus === 'dance' && !allInOneCalendar);
     const ownMusic = f.kind === 'music' || namesMusic(own, reg, !allInOneCalendar);
     let focus = sourceFocus;
     if (sourceFocus === 'dance' && !ownDance) {
@@ -557,6 +597,9 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     // Other act names stay in the title only.
     const performerIds = [...defaultPerformers];
     const listedActs: string[] = [];
+    // A band's own page listing a side project: that act plays, not the band.
+    const otherAct = defaultPerformers.length && !defaults.venueId ? sideAct(reg, defaultPerformers, [f.heading, f.title]) : undefined;
+    if (otherAct) performerIds.length = 0;
     // Act text for the title only: tidied, and dropped when it is event wording or an abbreviation.
     const addTitleAct = (text: string, rawText = text) => {
       unresearchedActs.add(text);
@@ -564,7 +607,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       if (titleActOk(t) && titleActOk(tidyTitleAct(rawText))) listedActs.push(t);
     };
     const venueName = venueId ? reg.venues.get(venueId)?.name ?? '' : locName ?? '';
-    const named = f.performers?.length ? f.performers : defaults.venueId && focus === 'music' ? [actName(f.title)].filter((x): x is string => Boolean(x)) : [];
+    const named = otherAct ? [otherAct] : f.performers?.length ? f.performers : defaults.venueId && focus === 'music' ? [actName(f.title)].filter((x): x is string => Boolean(x)) : [];
     for (const raw of named) {
       const name = tidyName(raw);
       if (!displayActOk(name) || compactName(name) === compactName(venueName) || compactName(name) === compactName(f.locationName ?? '')) continue;
@@ -600,7 +643,7 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
       })();
     const djs = performerIds.filter((id) => reg.performers.get(id)?.type === 'dj');
     const liveActs = performerIds.filter((id) => reg.performers.get(id)?.type !== 'dj');
-    let danceStyles = reg.matchStyles(text);
+    let danceStyles = reg.matchStyles(text, { abbreviations: focus === 'dance' });
     if (!danceStyles.length && defaults.danceStyles?.length) danceStyles = defaults.danceStyles.filter((s) => reg.styles.has(s));
     if (!danceStyles.length && organizerId && focus === 'dance') danceStyles = reg.organizers.get(organizerId)?.danceStyles ?? [];
     if (danceStyles.length || performerIds.length) confidence += 0.05;

@@ -1,0 +1,19 @@
+{
+  "name": "Hoodoo Loungers - live music calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from Hoodoo Loungers. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "hoodoo-loungers"
+    ]
+  },
+  "description": "Long Island band schedule explicitly invites people to dance and lists Shelter Island, Sag Harbor, Patchogue, and Amagansett shows.",
+  "enabled": true,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Long Island band schedule explicitly invites people to dance and lists Shelter Island, Sag Harbor, Patchogue, and Amagansett shows.",
+  "url": "https://hoodooloungers.com/schedule"
+}

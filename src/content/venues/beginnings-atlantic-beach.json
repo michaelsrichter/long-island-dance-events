@@ -1,0 +1,46 @@
+{
+  "name": "Beginnings Restaurant",
+  "aliases": [
+    "Beginnings",
+    "Beginnings Bar & Restaurant",
+    "Beginnings Atlantic Beach",
+    "Beginnings Gastropub"
+  ],
+  "address": "1986 Park St",
+  "town": "Atlantic Beach",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11509",
+  "phone": "(516) 239-7483",
+  "website": "https://www.beginningsrestaurant.com/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Beginnings+Restaurant%2C+1986+Park+St%2C+Atlantic+Beach%2C+NY+11509",
+  "kind": "restaurant",
+  "description": "A book-themed gastropub on Park Street in Atlantic Beach with a wall of bookshelves. It is known for themed tasting dinners, trivia and craft nights, and has acoustic live music on some Sunday evenings.",
+  "dancing": {
+    "floor": "seated",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Live music here is occasional: acoustic Sunday Session sets from about 5 to 8 PM, plus some themed nights. Most events are reserved, sit-down dinners. We found no sign of a dance floor or of people dancing.",
+    "evidence": [
+      {
+        "url": "https://www.beginningsrestaurant.com/upcoming-events",
+        "note": "The restaurant's calendar: mostly themed dinners, trivia and DIY nights, with Sunday Session live music by solo or duo acts."
+      },
+      {
+        "url": "https://www.opentable.com/r/beginnings-atlantic-beach",
+        "note": "Reservation page describing a casual-elegant gastropub with a literary theme; good for groups."
+      },
+      {
+        "url": "https://www.chamberofcommerce.com/business-directory/new-york/atlantic-beach/gastropub/2027438830-beginnings",
+        "note": "A diner review mentions coming for a Pearl Jam themed night and suggests booking ahead."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: beginningsrestaurant.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source beginnings-restaurant-atlantic-beach. Music is occasional and most events are seated themed dinners; floor and policy are a guess.",
+  "latitude": 40.589482,
+  "longitude": -73.734481,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

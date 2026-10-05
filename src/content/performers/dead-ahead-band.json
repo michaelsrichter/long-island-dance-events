@@ -1,0 +1,42 @@
+{
+  "name": "Dead Ahead",
+  "type": "band",
+  "aliases": [
+    "The Dead Ahead Band",
+    "Dead Ahead Band"
+  ],
+  "genres": [
+    "jam band",
+    "Grateful Dead covers",
+    "Allman Brothers covers",
+    "blues rock",
+    "Motown"
+  ],
+  "website": "https://deadaheadband.net/",
+  "facebookUrl": "https://www.facebook.com/deadaheadband",
+  "youtubeUrl": "https://www.youtube.com/channel/UCAte2FUEMse3gKbUjroi9tw",
+  "description": "Long Island jam band (based around East Setauket) that stretches out songs by the Grateful Dead, the Allman Brothers, Bob Dylan, Van Morrison and The Band, mixing in blues and Motown. It plays brewery afternoons, pubs and festivals such as Twin Fork Beer Co. in Riverhead, US Brews in Centerport and Fadeley's in Patchogue.",
+  "dancing": {
+    "rating": "mixed",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [
+      "freestyle"
+    ],
+    "notes": "Jam-band shows where fans of the Dead and the Allmans often sway and freestyle, but many gigs are relaxed afternoon brewery sets. A party host described it as a 'jamming' good time; we found no clear report of a packed dance floor.",
+    "evidence": [
+      {
+        "url": "https://deadaheadband.net/",
+        "note": "Band site: improvisational rock and blues, not only Grateful Dead songs; 2026 shows at Fadeley's, US Brews, Twin Fork Beer Co. and Seaside Grill."
+      },
+      {
+        "url": "https://www.thebash.com/jam-band/deadahead",
+        "note": "Booking page for a Long Island 'Dead Ahead' (Commack) with the same Dead/Allman/Gov't Mule songs; a host review calls it a great jam at a beach party."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source dead-ahead. Not the Boston Grateful Dead tribute 'Dead Ahead' (deadahead.live) or the 'Dead Ahead Festival'. The Bash listing gives Commack, NY and seems to be the same band, but we did not confirm."
+}

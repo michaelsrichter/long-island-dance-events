@@ -1,0 +1,47 @@
+{
+  "name": "The Audrey",
+  "aliases": [
+    "The Audrey: Kitchen & Bar",
+    "The Audrey Kitchen & Bar",
+    "The Audrey Oyster Bay",
+    "Audrey OB"
+  ],
+  "address": "30 Audrey Avenue",
+  "town": "Oyster Bay",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11771",
+  "phone": "(631) 358-3522",
+  "website": "https://theaudreyob.com/",
+  "facebookUrl": "https://www.facebook.com/theaudreyob",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Audrey%2C+30+Audrey+Avenue%2C+Oyster+Bay%2C+NY+11771",
+  "kind": "bar",
+  "description": "An all-day restaurant and cocktail bar in the middle of Oyster Bay village. It has free live acoustic music on weekend nights, plus karaoke and trivia, and the bar stays open until 12:30 AM on Fridays and Saturdays.",
+  "dancing": {
+    "floor": "small",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "It is one room with tables and a bar. Music is mostly solo or duo acoustic acts at the bar with no cover, and a reviewer also mentions DJ and karaoke nights. We found nothing about a dance floor, so any dancing is likely limited to a small space near the bar.",
+    "evidence": [
+      {
+        "url": "https://theaudreyob.com/events/live-music/",
+        "note": "The bar's own page: live music through the season plus karaoke nights, no cover, with acts playing at the bar."
+      },
+      {
+        "url": "https://longislandwave.com/news/the-audrey-oyster-bay-kitchen-bar-spotlight-2026/",
+        "note": "Local feature (Aug 2026) describing one room with live acoustic acts on Friday and Saturday nights, karaoke and trivia."
+      },
+      {
+        "url": "https://restaurantedroop.com/restaurants-near-me/the-audrey-kitchen-bar",
+        "note": "Review roundup: an intimate setting with live music, DJ and karaoke nights."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: theaudreyob.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source the-audrey-oyster-bay. Phone has a 631 area code even though the bar is in Nassau; it is the number on the venue's own site. Floor and policy are a guess.",
+  "latitude": 40.872959,
+  "longitude": -73.531259,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

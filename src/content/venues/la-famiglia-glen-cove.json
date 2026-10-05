@@ -1,0 +1,47 @@
+{
+  "name": "La Famiglia Pizzeria & Restaurant",
+  "aliases": [
+    "La Famiglia",
+    "La Famiglia Restaurant",
+    "La Famiglia Glen Cove",
+    "La Famiglia Pizzeria"
+  ],
+  "address": "5 School St",
+  "town": "Glen Cove",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11542",
+  "phone": "(516) 759-7549",
+  "website": "https://www.lafamigliaglencove.com/",
+  "facebookUrl": "https://www.facebook.com/lafamigliaglencove",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=La+Famiglia+Pizzeria+%26+Restaurant%2C+5+School+St%2C+Glen+Cove%2C+NY+11542",
+  "kind": "restaurant",
+  "description": "A family Italian pizzeria and restaurant in downtown Glen Cove, next to the movie theater. It hosts occasional dinner music nights, such as a Beatles and classic rock duo, and reservations are suggested.",
+  "dancing": {
+    "floor": "seated",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Music nights here are dinner shows in a cozy dining room, and listings stress calling ahead for a reservation. We found no mention of a dance floor or of people dancing. In July the town's Downtown Sounds series has also used a small outdoor stage on School Street in front of the restaurant.",
+    "evidence": [
+      {
+        "url": "https://www.theliverpoolshuffle.com/calendar/liverpool-2-at-la-famiglia-1",
+        "note": "Band calendar lists a duo playing Beatles and classic rock at the restaurant, calls it cozy and says reservations are a must."
+      },
+      {
+        "url": "https://glencovedowntown.org/event/la-famiglia-live-music/",
+        "note": "Downtown business group lists a live music dinner night from 6 to 9 PM with a number to call for reservations."
+      },
+      {
+        "url": "https://glencovedowntown.org/downtown-sounds-off-the-square/",
+        "note": "Summer concert page says a second stage was set up on School Street in front of La Famiglia for July 2026 shows."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: lafamigliaglencove.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.864728,
+  "longitude": -73.631736,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

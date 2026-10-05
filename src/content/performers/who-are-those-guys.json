@@ -1,0 +1,45 @@
+{
+  "name": "Who Are Those Guys",
+  "type": "band",
+  "aliases": [
+    "WATG",
+    "Who Are Those Guys Band"
+  ],
+  "genres": [
+    "original rock",
+    "Americana",
+    "blues",
+    "folk",
+    "country rock",
+    "classic rock covers"
+  ],
+  "website": "https://whoarethoseguys.com/",
+  "facebookUrl": "https://www.facebook.com/p/Who-Are-Those-Guys-100039969684145/",
+  "youtubeUrl": "https://www.youtube.com/@WhoAreThoseGuysBand",
+  "description": "Veteran North Fork band based in Mattituck that plays its own rock, blues, folk and country songs plus classic covers, with a sound often compared to Neil Young, The Band and Creedence. It plays about 100 shows a year at East End breweries, wineries, lodges and festivals and has won Dan's Papers 'Best of the Best' many times.",
+  "dancing": {
+    "rating": "mixed",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [],
+    "notes": "Mostly brewery, winery and fundraiser shows on the North Fork, often in the afternoon, with a mix of originals and classic covers. Some people may dance at lodge nights and festivals, but we found no report of dancing at its shows.",
+    "evidence": [
+      {
+        "url": "https://suffolktimes.timesreview.com/2023/04/meet-the-musicians-behind-who-are-those-guys-who-dominate-live-music-on-the-north-fork/",
+        "note": "Suffolk Times profile: Mattituck rock band that plays about 100 shows a year at North Fork wineries, breweries and festivals."
+      },
+      {
+        "url": "https://whoarethoseguys.com/",
+        "note": "Band site: original rock, blues, folk and country plus classic covers; ten-time Dan's Papers 'Best of the Best' winner."
+      },
+      {
+        "url": "https://whoarethoseguys.com/calendar",
+        "note": "Calendar: October 2026 shows at Twin Fork Beer Co., Tucker's Taproom, Riverhead Moose Lodge and Greenport Harbor Brewery."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source who-are-those-guys."
+}

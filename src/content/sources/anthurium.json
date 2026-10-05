@@ -1,0 +1,19 @@
+{
+  "name": "Anthurium - live music calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from Anthurium. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "anthurium"
+    ]
+  },
+  "description": "Local band shows page lists multiple Long Island brewery, festival and tavern gigs through November.",
+  "enabled": true,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Local band shows page lists multiple Long Island brewery, festival and tavern gigs through November.",
+  "url": "https://anthurium.band/shows"
+}

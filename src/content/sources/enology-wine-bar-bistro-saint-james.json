@@ -1,0 +1,18 @@
+{
+  "name": "Enology Wine Bar & Bistro - live music calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from Enology Wine Bar & Bistro. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "enology-wine-bar-bistro-saint-james",
+    "town": "Saint James"
+  },
+  "description": "Saint James wine bar lists weekly Thursday live-music sets from October through December.",
+  "enabled": true,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Saint James wine bar lists weekly Thursday live-music sets from October through December.",
+  "url": "https://enologywinebar.com/events/live-music/"
+}

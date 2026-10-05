@@ -1,0 +1,43 @@
+{
+  "name": "Enology Wine Bar & Bistro",
+  "aliases": [
+    "Enology",
+    "Enology Wine Bar",
+    "Enology Wine Bar & Bistro Saint James",
+    "Enology Saint James"
+  ],
+  "address": "412 N Country Rd",
+  "town": "St. James",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11780",
+  "phone": "(631) 517-0277",
+  "website": "https://enologywinebar.com/",
+  "facebookUrl": "https://www.facebook.com/enologywinebar",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Enology+Wine+Bar+%26+Bistro%2C+412+N+Country+Rd%2C+St.+James%2C+NY+11780",
+  "kind": "bar",
+  "description": "A wine-focused bar and bistro on North Country Road in St. James. Local singers and acoustic players perform early evening sets, usually on Thursdays from 6 to 8 PM.",
+  "dancing": {
+    "floor": "seated",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "The venue describes its music nights as early sets at a conversation-friendly volume, with limited seating and reservations suggested. Plan on sitting and listening; we found no dance floor or dancing.",
+    "evidence": [
+      {
+        "url": "https://enologywinebar.com/events/live-music/",
+        "note": "Venue music page says sets are early and conversation-friendly with limited seating, and lists Thursday 6 to 8 PM sets in October 2026."
+      },
+      {
+        "url": "https://enologywinebar.com/contact/",
+        "note": "Contact page gives the street address, phone and hours: open Tuesday to Saturday evenings, closed Sunday and Monday."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: enologywinebar.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source enology-wine-bar-bistro-saint-james. The website says it is closed for a short break from October 4 to 12, 2026 and reopens October 13.",
+  "latitude": 40.875892,
+  "longitude": -73.170338,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "The Max: The Ultimate 90's Party - live music calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from The Max: The Ultimate 90's Party. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "the-max-the-ultimate-90s-party"
+    ]
+  },
+  "description": "Band shows page lists multiple upcoming 90s party gigs at Suffolk music venues and bars.",
+  "enabled": true,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Band shows page lists multiple upcoming 90s party gigs at Suffolk music venues and bars.",
+  "url": "https://wearethemaxny.com/shows"
+}

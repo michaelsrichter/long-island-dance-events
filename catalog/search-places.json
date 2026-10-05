@@ -1,0 +1,43 @@
+{
+ "about": "Search places for the town-by-town Web IQ discovery (catalog/scripts/build-search-matrix.mjs). Every place in src/data/long-island-places.json is searched once: either under its own name or as a member of a group (tiny adjacent villages share their main hamlet's search). Hub places get every search term; small residential places get the core terms only.",
+ "queryFormat": "{place} NY {term}",
+ "terms": {
+  "dance": ["swing dance", "lindy hop", "salsa dancing", "bachata", "ballroom dancing", "hustle dance", "argentine tango", "west coast swing", "line dancing", "country two step"],
+  "music": ["live music", "cover band", "rock band", "DJ night", "dance party", "live jazz", "blues music"],
+  "core": ["live music", "cover band", "DJ night", "dance party", "line dancing", "salsa dancing", "swing dance", "ballroom dancing"]
+ },
+ "groups": {
+  "Great Neck": ["Great Neck Estates", "Great Neck Gardens", "Great Neck Plaza", "Kensington", "Kings Point", "Russell Gardens", "Saddle Rock", "Saddle Rock Estates", "Thomaston", "University Gardens", "Harbor Hills", "Lake Success"],
+  "Manhasset": ["Plandome", "Plandome Heights", "Plandome Manor", "Munsey Park", "Flower Hill"],
+  "Port Washington": ["Port Washington North", "Baxter Estates", "Manorhaven", "Sands Point"],
+  "Roslyn": ["Roslyn Estates", "Roslyn Harbor"],
+  "Oyster Bay": ["Oyster Bay Cove", "Cove Neck", "Centre Island", "Mill Neck", "Muttontown", "Upper Brookville"],
+  "Locust Valley": ["Lattingtown", "Matinecock", "Old Brookville"],
+  "Glen Head": ["Glenwood Landing"],
+  "Hewlett": ["Hewlett Bay Park", "Hewlett Harbor", "Hewlett Neck", "Woodsburgh"],
+  "Island Park": ["Barnum Island", "Harbor Isle"],
+  "East Rockaway": ["Bay Park"],
+  "Garden City": ["Garden City South", "East Garden City", "Stewart Manor"],
+  "Floral Park": ["South Floral Park", "Bellerose Terrace"],
+  "Malverne": ["Malverne Park Oaks"],
+  "Levittown": ["Island Trees"],
+  "Atlantic Beach": ["East Atlantic Beach"],
+  "Huntington": ["Halesite", "Huntington Bay", "Lloyd Neck"],
+  "Northport": ["Asharoken", "Eatons Neck"],
+  "St. James": ["Head of the Harbor", "Nissequogue"],
+  "Smithtown": ["Village of the Branch"],
+  "Port Jefferson": ["Belle Terre"],
+  "Setauket": ["Poquott", "Old Field"],
+  "Shelter Island": ["Dering Harbor", "Shelter Island Heights"],
+  "Westhampton Beach": ["Quiogue", "West Hampton Dunes"],
+  "Amagansett": ["Napeague"],
+  "East Hampton": ["East Hampton North", "Northwest Harbor"],
+  "Greenport": ["Greenport West"],
+  "Fire Island": ["Saltaire", "Ocean Bay Park", "Davis Park"],
+  "Captree": ["Oak Beach", "Gilgo"],
+  "Shoreham": ["East Shoreham"],
+  "Ridge": ["Upton"]
+ },
+ "small": ["Albertson", "Atlantic Beach", "Baldwin Harbor", "Bellerose", "Brookville", "East Hills", "East Massapequa", "East Norwich", "East Williston", "Garden City Park", "Glen Head", "Herricks", "Inwood", "Lakeview", "Laurel Hollow", "Lawrence", "Lido Beach", "Malverne", "Manhasset Hills", "New Cassel", "North Bellmore", "North Hempstead", "North Hills", "North Lynbrook", "North Massapequa", "North Merrick", "North New Hyde Park", "North Valley Stream", "North Wantagh", "North Woodmere", "Old Westbury", "Plainedge", "Roosevelt", "Roslyn Heights", "Salisbury", "Searingtown", "South Farmingdale", "South Hempstead", "South Valley Stream",
+  "Aquebogue", "Baiting Hollow", "Baywood", "Brightwaters", "Captree", "East Farmingdale", "East Marion", "East Moriches", "East Patchogue", "East Setauket", "Eastport", "Elwood", "Farmingville", "Fishers Island", "Flanders", "Fort Salonga", "Gordon Heights", "Great River", "Holtsville", "Islip Terrace", "Laurel", "Lloyd Harbor", "Manorville", "Mastic", "Middle Island", "Moriches", "New Suffolk", "North Amityville", "North Bay Shore", "North Bellport", "North Great River", "North Haven", "North Lindenhurst", "North Patchogue", "North Sea", "Northampton", "Northville", "Noyack", "Orient", "Remsenburg", "Ridge", "Riverside", "Sagaponack", "Shinnecock Hills", "Shoreham", "Sound Beach", "South Huntington", "Speonk", "Springs", "Terryville", "Tuckahoe", "Wainscott", "West Bay Shore", "West Hills", "Wheatley Heights", "Wyandanch"]
+}

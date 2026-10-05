@@ -1,0 +1,43 @@
+{
+  "name": "Anthurium",
+  "type": "band",
+  "aliases": [
+    "Anthurium Band"
+  ],
+  "genres": [
+    "90s alternative",
+    "2000s alternative",
+    "grunge",
+    "hard rock covers"
+  ],
+  "website": "https://anthurium.band/",
+  "facebookUrl": "https://www.facebook.com/Anthuriumband/",
+  "instagramUrl": "https://www.instagram.com/anthurium_bnd/",
+  "youtubeUrl": "https://www.youtube.com/@anthuriumbandny",
+  "description": "Five-piece Long Island cover band that started in 2025 and plays 1990s and 2000s alternative, grunge and hard rock, from Alanis Morissette to Nirvana and Alice in Chains. It plays bars, street fairs and fundraisers, including 89 North in Patchogue and the Neighborhood Tavern in Farmingdale.",
+  "dancing": {
+    "rating": "mixed",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [],
+    "notes": "A newer alt-rock and grunge cover band. Its daytime street-fair and fundraiser sets are more for listening; night shows in bars may get some freestyle dancing. We found no report of crowds dancing at its shows.",
+    "evidence": [
+      {
+        "url": "https://anthurium.band/about",
+        "note": "Band bio: debuted in 2025, plays 1990s-2000s alternative and hard rock on Long Island."
+      },
+      {
+        "url": "https://anthurium.band/",
+        "note": "Show list: a Lindenhurst fundraiser, the Deer Park food festival, 89 North in Patchogue and the Neighborhood Tavern in Farmingdale."
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=SmaoVPsKElA",
+        "note": "LINL Radio video interview introducing the band as a Long Island cover band."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source anthurium. The band's website links a Facebook address 'facebook.com/thisiswhatilivefor' that we could not open; we used the 'Anthurium Band' page found in search instead. Check that it is the band's main page."
+}

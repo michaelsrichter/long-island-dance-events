@@ -117,6 +117,10 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
       const ctx = { source: { ...source, id }, registry, fetcher, today, offline, log };
       const docs = await mod.adapter.fetch(ctx);
       sr.documents = docs.map((d) => `${d.url}${d.meta.issue ? ` (${d.meta.issue})` : ''}`);
+      if (docs.length === 0 && mod.adapter.quietWhenNoDocuments) {
+        sr.message = 'Nothing new to read this time (for example, no newsletter issue lately).';
+        continue;
+      }
       const result: NormalizeResult = await mod.adapter.normalize(docs, ctx);
       sr.found = result.found;
       sr.kept = result.candidates.length;
@@ -127,7 +131,16 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
         continue;
       }
       const drafts = collapse(result.candidates, new Set(registry.events.keys()));
-      const merged = mergeDrafts(registry.events, drafts, { sourceId: id, today, coverage: result.coverage });
+      const merged = mergeDrafts(registry.events, drafts, {
+        sourceId: id,
+        today,
+        coverage: result.coverage,
+        allInOne: allInOne(source),
+        isOwnCalendar: (sid) => {
+          const s = registry.sources.get(sid);
+          return Boolean(s && !allInOne(s));
+        },
+      });
       for (const cid of merged.changed) {
         try {
           const parsed = eventSchema.parse(merged.events.get(cid));

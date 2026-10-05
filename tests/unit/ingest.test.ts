@@ -195,15 +195,13 @@ describe.skipIf(!hasPython)('fixture PDF to events (golden file)', () => {
 });
 
 describe('merging runs', () => {
-  const draft = (overrides: Record<string, unknown> = {}) =>
-    collapse([
-      {
-        sourceId: 's', sourceUrl: 'https://example.org/a.pdf', sourceName: 'Example, October 2026', sourceRef: 'page 1', date: '2026-10-06', start: '19:30',
-        category: 'social-dance', danceStyles: ['hustle'], town: 'Huntington', performerIds: [], instructorIds: [], skillLevel: 'all-levels',
-        title: 'Hustle social dance', summary: 'An evening of Hustle social dancing.', seriesTitle: 'Hustle social dance', seriesSummary: 'An evening of Hustle social dancing.',
-        confidence: 0.9, reviewNotes: [], seriesKey: 'k', oneOff: false, ...overrides,
-      },
-    ]);
+  const cand = {
+    sourceId: 's', sourceUrl: 'https://example.org/a.pdf', sourceName: 'Example, October 2026', sourceRef: 'page 1', date: '2026-10-06', start: '19:30',
+    category: 'social-dance', danceStyles: ['hustle'], town: 'Huntington', performerIds: [], instructorIds: [], skillLevel: 'all-levels',
+    title: 'Hustle social dance', summary: 'An evening of Hustle social dancing.', seriesTitle: 'Hustle social dance', seriesSummary: 'An evening of Hustle social dancing.',
+    confidence: 0.9, reviewNotes: [], seriesKey: 'k', oneOff: false,
+  };
+  const draft = (overrides: Record<string, unknown> = {}) => collapse([{ ...cand, ...overrides } as Parameters<typeof collapse>[0][number]]);
   it('is idempotent and keeps firstSeen', () => {
     const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
     const stored = new Map([...first.events].map(([id, e]) => [id, eventSchema.parse(e)]));
@@ -255,5 +253,26 @@ describe('merging runs', () => {
     expect(mergeDrafts(stored, draft({ ...other, category: 'live-music' }), { sourceId: 'town-calendar', today: '2026-10-02' }).stats.new).toBe(1);
     // The venue's own source updating its own listing is never a duplicate.
     expect(mergeDrafts(stored, draft(atLodge), { sourceId: 'lodge-calendar', today: '2026-10-02' }).stats).toMatchObject({ unchanged: 1, duplicates: 0 });
+  });
+  it("lets the organizer's own calendar win over a calendar that lists everything, for repeating series too", () => {
+    const mondays = (o: Record<string, unknown>) =>
+      collapse(['2026-10-05', '2026-10-12', '2026-10-19'].map((date) => ({ ...cand, date, category: 'class-lesson', venueId: 'example-lodge', organizerId: 'practice-studio', ...o }) as Parameters<typeof collapse>[0][number]));
+    const fromPdf = { sourceId: 'pdf-calendar', seriesKey: 'pdf', start: '19:00', title: 'Hustle classes', seriesTitle: 'Hustle classes' };
+    const own = mergeDrafts(new Map(), mondays({ sourceId: 'org-calendar', seriesKey: 'own' }), { sourceId: 'org-calendar', today: '2026-10-01' });
+    const pdf = mergeDrafts(new Map(), mondays(fromPdf), { sourceId: 'pdf-calendar', today: '2026-10-01' });
+    const stored = new Map([...own.events, ...[...pdf.events].map(([id, e]) => [`${id}-pdf`, e] as const)].map(([id, e]) => [id, eventSchema.parse(e)]));
+    expect(stored.size).toBe(2);
+    const isOwnCalendar = (sid: string) => sid === 'org-calendar';
+    const opts = { sourceId: 'pdf-calendar', today: '2026-10-02', allInOne: true, isOwnCalendar };
+    // The older copy from the everything-calendar steps aside for review; it is not deleted.
+    const pdfId = `${[...pdf.events.keys()][0]!}-pdf`;
+    const again = mergeDrafts(stored, mondays(fromPdf), opts);
+    expect(again.events.get(pdfId)).toMatchObject({ status: 'pending-review' });
+    expect(again.events.get(pdfId)!.reviewNotes).toMatch(/own calendar/);
+    expect(again.duplicates).toHaveLength(1);
+    // A new copy is not added at all; another organizer's class at the same lodge is.
+    const ownOnly = new Map([...own.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    expect(mergeDrafts(ownOnly, mondays(fromPdf), opts).stats).toMatchObject({ new: 0, duplicates: 1 });
+    expect(mergeDrafts(ownOnly, mondays({ ...fromPdf, organizerId: 'other-studio' }), opts).stats.new).toBe(1);
   });
 });

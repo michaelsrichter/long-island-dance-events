@@ -120,6 +120,9 @@ jobs:
         env:
           CADENCE: ${{ steps.pick.outputs.cadence }}
           SOURCE: ${{ steps.pick.outputs.source }}
+          # Newsletter inbox for the agentmail adapter (decision P44). Without these, newsletter sources are skipped.
+          AGENTMAIL_API_KEY: ${{ secrets.AGENTMAIL_API_KEY }}
+          AGENTMAIL_INBOX: ${{ secrets.AGENTMAIL_INBOX }}
         run: |
           rm -f .cache/ingest/report.md .cache/ingest/report.json
           if [ -n "$SOURCE" ]; then

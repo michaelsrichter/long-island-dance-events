@@ -10,6 +10,14 @@ import os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 cat = json.load(open(os.path.join(ROOT, "catalog", "sources.json"), encoding="utf-8"))
 log = json.load(open(os.path.join(ROOT, "catalog", "search-log.json"), encoding="utf-8"))
+towns_path = os.path.join(ROOT, "catalog", "search-log-towns.json")
+towns_log = json.load(open(towns_path, encoding="utf-8")) if os.path.exists(towns_path) else None
+triage_path = os.path.join(ROOT, "catalog", "search-triage.json")
+triage = json.load(open(triage_path, encoding="utf-8")) if os.path.exists(triage_path) else None
+matrix_path = os.path.join(ROOT, "catalog", "search-matrix.json")
+matrix = json.load(open(matrix_path, encoding="utf-8")) if os.path.exists(matrix_path) else None
+TOWN_ORIGIN = "webiq-towns-2026-10"
+checked = max(s.get("checkedAt") or "" for s in cat)
 
 PRI = {"High": 0, "Medium": 1, "Low": 2, "None": 3}
 STATUS_HELP = [
@@ -65,11 +73,13 @@ w = out.append
 w("# Long Island Dance Events - source catalog")
 w("")
 w("> Generated from [`catalog/sources.json`](../catalog/sources.json) by `python catalog/scripts/catalog_report.py`. "
-  "Checked on **October 3, 2026**. Area: **Nassau and Suffolk counties only**. Site: https://longisland.dance")
+  f"Last checked on **{checked}**. Area: **Nassau and Suffolk counties only**. Site: https://longisland.dance")
 w("")
 w("This is the list of websites that publish upcoming **dance events** and **live music** on Long Island, "
   "what each one covers, and whether we may collect it. It merges the earlier discovery pass "
-  "([`docs/source-proposals.md`](source-proposals.md), 57 sites) with a new search using the Microsoft Web IQ search API.")
+  "([`docs/source-proposals.md`](source-proposals.md), 57 sites), a first search using the Microsoft Web IQ search API, "
+  "and a town-by-town search of every Long Island town, village and hamlet (October 2026). "
+  "How these sources are read every week is explained in [how-weekly-updates-work.md](how-weekly-updates-work.md).")
 w("")
 w("## The short version")
 w("")
@@ -85,8 +95,13 @@ w(f"- Of the {len(active)} sources we keep, **{foc['dance']} are mainly about da
 w("- **Best new finds:** bar and beach-club calendars with event data built in (Daisy's in Miller Place, Mulcahy's in Wantagh), "
   "a country line-dance venue (89 North in Patchogue), the Mayor of Montauk and Webtunes music calendars, and dance-band gig lists "
   "(Pour Some 80s On Me, Radio Active, Decadia, Beernutz, Audawind).")
-w("- **Ask first:** LongIsland.com (events and nightlife), Triple Step Swing, Lourdes Cruz's Google Calendar and others block bots. "
+w("- **Ask first:** LongIsland.com (events and nightlife), Triple Step Swing and others block bots. "
   "We will ask the organizers for permission or for a calendar feed. We never get around a block.")
+if towns_log:
+    town_new = [s for s in cat if s.get("origin") == TOWN_ORIGIN]
+    town_kept = [s for s in town_new if s["status"] in ("live", "verified")]
+    w(f"- **Town-by-town search (October 2026):** {towns_log['totals']['queries']:,} searches across every Long Island place found "
+      f"{len(town_kept)} new usable sources (venues, bands, dance studios and local calendars); see [below](#town-by-town-search-october-2026).")
 w("")
 w("## How we searched")
 w("")
@@ -111,6 +126,64 @@ w("**Screenshots are not a way around a block.** A program that takes screenshot
   "site's rules still apply. Blocked sites are asked for permission. Social-media-only and flyer-only events come in through the hand-entry "
   "(flyer upload) path described in [`docs/database-plan.md`](database-plan.md).")
 w("")
+w("## Town-by-town search (October 2026)")
+w("")
+if towns_log and triage and matrix:
+    tt = towns_log["totals"]
+    mt = matrix["totals"]
+    tr = triage["totals"]
+    w(f"The owner asked us to search **every Long Island town, village and hamlet** with each dance style and kind of live music. "
+      f"We used all {mt['placesCovered']} places in `src/data/long-island-places.json` (19 Census places and well-known hamlets were added). "
+      f"Tiny villages next to each other share one search (the Great Neck villages are searched as \"Great Neck\"), which gives "
+      f"**{mt['searchPlaces']} search places**: {mt['hubPlaces']} towns with a downtown or venues got all 17 search terms, and "
+      f"{mt['smallPlaces']} small residential places got the 8 most useful ones ([`catalog/search-places.json`](../catalog/search-places.json)).")
+    w("")
+    w("- **Dance terms:** swing dance, lindy hop, salsa dancing, bachata, ballroom dancing, hustle dance, argentine tango, west coast swing, line dancing, country two step.")
+    w("- **Music terms:** live music, cover band, rock band, DJ night, dance party, live jazz, blues music.")
+    w(f"- **{tt['queries']:,} searches** such as \"Commack NY line dancing\", 30 results each: {tt['results']:,} results, "
+      f"**{tt['uniqueUrls']:,} different pages on {tt['uniqueDomains']:,} websites**. Titles and links only are kept in "
+      "[`catalog/search-log-towns.json`](../catalog/search-log-towns.json).")
+    w(f"- **Web IQ calls and cost:** {tr['webiqCalls']:,} successful calls in total for this search (including {tr.get('followUpCalls', 0)} follow-up searches), "
+      f"about **${tr['webiqCostUsd']:.2f}** at $12.50 per 1,000 calls.")
+    w("")
+    w("Every website was sorted ([`catalog/scripts/triage_search.py`](../catalog/scripts/triage_search.py)); the likely ones were opened politely "
+      "with `verify_sources.py`, and the ones with upcoming Long Island dates were read and judged one by one. Websites that were not worth a "
+      "full catalog entry are listed with the reason in [`catalog/search-triage.json`](../catalog/search-triage.json), so they are not checked again.")
+    w("")
+    labels = {
+        "platform": "Big platforms, ticket sellers, national directories, maps and reviews",
+        "social": "Social media (hand entry only)",
+        "known": "Already in this catalog or the source list",
+        "out-of-area": "Results point outside Nassau and Suffolk",
+        "low-signal": "No sign of an event list",
+        "blocked": "Blocks our bot (robots.txt or a bot check), no sign of a Long Island event list",
+        "did-not-open": "Page did not open",
+        "few-dates": "One or two dates only (a single event page)",
+        "no-dates": "No upcoming dates on the page",
+        "stale": "Newest date more than a year old",
+        "not-long-island": "Upcoming dates, but not on Long Island or not dance or music",
+        "catalog": "Read and judged: now in this catalog (kept or set aside, with a reason)",
+    }
+    w("| How each website was sorted | Websites |")
+    w("| --- | ---: |")
+    for k, v in labels.items():
+        if tr["byDecision"].get(k):
+            w(f"| {v} | {tr['byDecision'][k]:,} |")
+    w("")
+    town_new = [s for s in cat if s.get("origin") == TOWN_ORIGIN]
+    st = collections.Counter(s["status"] for s in town_new)
+    src_dir = os.path.join(ROOT, "src", "content", "sources")
+    src_on = {f[:-5] for f in os.listdir(src_dir) if f.endswith(".json") and json.load(open(os.path.join(src_dir, f), encoding="utf-8")).get("enabled", True)}
+    kept = [s for s in town_new if s["status"] in ("verified", "live")]
+    on = sum(1 for s in kept if s["id"] in src_on)
+    w(f"**Outcome for the {len(town_new)} websites added to this catalog:** {len(kept)} kept ({on} switched on now; "
+      f"{len(kept) - on} switched off until the venues they list are researched or their pages name venues clearly), "
+      f"{st['needs-permission']} need permission, {st['recheck-from-ci']} need a check from GitHub Actions, {st['seasonal-recheck']} seasonal, "
+      f"{st['set-aside']} set aside (each with its reason in the tables below).")
+    w("")
+else:
+    w("Not run yet.")
+    w("")
 w("## What the status words mean")
 w("")
 w("| Status | Meaning | Sources |")
@@ -215,6 +288,9 @@ w("- Each source we keep also has a file in [`src/content/sources/`](../src/cont
   "It holds the adapter, `focus` (dance or music), `cadence`, feed and default venue or band, and a `permission` note for blocked sources.")
 w("- [`catalog/sources.json`](../catalog/sources.json): one record per source with every field (styles, towns, format, robots.txt, terms, freshness, overlap, evidence links).")
 w("- [`catalog/search-log.json`](../catalog/search-log.json): every Web IQ query, its result count and result links.")
+w("- [`catalog/search-log-towns.json`](../catalog/search-log-towns.json), [`catalog/search-matrix.json`](../catalog/search-matrix.json) and "
+  "[`catalog/search-triage.json`](../catalog/search-triage.json): the town-by-town search, its queries, and how every website it found was sorted.")
+w("- [`catalog/newsletters.json`](../catalog/newsletters.json): newsletter sign-ups for sources (decision P44).")
 w("- [`catalog/search-queries.json`](../catalog/search-queries.json) and [`catalog/scripts/webiq-search.mjs`](../catalog/scripts/webiq-search.mjs): rerun the search (the key comes only from the `WEBIQ_API_KEY` environment variable).")
 w("- [`catalog/scripts/verify_sources.py`](../catalog/scripts/verify_sources.py): the polite checker used for robots.txt, dates and formats.")
 w("")

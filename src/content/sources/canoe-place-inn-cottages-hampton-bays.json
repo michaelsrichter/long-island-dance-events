@@ -1,0 +1,21 @@
+{
+  "name": "Canoe Place Inn & Cottages - live music calendar",
+  "type": "ical",
+  "adapter": "ical",
+  "attribution": "Some listings come from Canoe Place Inn & Cottages. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "venueId": "canoe-place-inn-cottages-hampton-bays",
+    "town": "Hampton Bays"
+  },
+  "description": "Hampton Bays venue calendar includes jazz in the garden, acoustic garden music and ballroom concerts.",
+  "enabled": true,
+  "feedUrl": "https://canoeplace.com/events/?ical=1",
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Hampton Bays venue calendar includes jazz in the garden, acoustic garden music and ballroom concerts.",
+  "url": "https://canoeplace.com/event/",
+  "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano",
+  "exclude": "holidays in the study|thanksgiving|brunch|yoga|cocktail"
+}

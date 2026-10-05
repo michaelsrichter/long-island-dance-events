@@ -1,0 +1,51 @@
+{
+  "name": "Claudio's",
+  "aliases": [
+    "Claudio's Waterfront on Main",
+    "Claudio's Restaurant",
+    "Claudio's Clam Bar",
+    "Claudio's Waterfront",
+    "Claudio's Greenport",
+    "Claudios"
+  ],
+  "address": "111 Main St",
+  "town": "Greenport",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11944",
+  "phone": "(631) 477-0627",
+  "website": "https://claudios.com/",
+  "facebookUrl": "https://www.facebook.com/claudiosgreenport/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Claudio%27s%2C+111+Main+St%2C+Greenport%2C+NY+11944",
+  "kind": "restaurant",
+  "description": "A big waterfront restaurant, bar and marina on Greenport Harbor known for seafood and an open-air deck. Live bands play Friday through Sunday in season, and DJs take over late on Friday and Saturday nights.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "encouraged",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The venue itself advertises late-night DJs and dancing under the harbor lights on Fridays and Saturdays. A visitor review also describes people dancing to the live band at the outdoor wharf bar. Expect a crowded, party-style outdoor space rather than a formal dance floor.",
+    "evidence": [
+      {
+        "url": "https://claudios.com/",
+        "note": "Home page says Friday and Saturday late nights bring DJs, theme parties and dancing under the harbor lights."
+      },
+      {
+        "url": "https://claudios.com/live-music",
+        "note": "Music page says live bands play the waterfront every Friday through Sunday, plus golden-hour sets and late-night DJs."
+      },
+      {
+        "url": "https://www.tripadvisor.co.uk/ShowUserReviews-g47827-d475443-r226433485-Claudio_s_Restaurant-Greenport_North_Fork_Long_Island_New_York.html",
+        "note": "Older visitor review says the live music at the outdoor waterfront bar brought out lots of dancers and singers."
+      }
+    ],
+    "confidence": "high",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: claudios.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 41.102248,
+  "longitude": -72.359094,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,53 @@
+{
+  "name": "The Neighborhood Tavern",
+  "aliases": [
+    "TNT",
+    "TNT The Neighborhood Tavern",
+    "T.N.T - The Neighborhood Tavern",
+    "Neighborhood Tavern Farmingdale",
+    "The Neighborhood Tavern South Farmingdale"
+  ],
+  "address": "182 Merritts Rd, Suite B",
+  "town": "Farmingdale",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11735",
+  "phone": "(516) 586-4311",
+  "website": "https://neighborhoodtavern.wixsite.com/tntfarmingdale",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Neighborhood+Tavern%2C+182+Merritts+Rd%2C+Suite+B%2C+Farmingdale%2C+NY+11735",
+  "kind": "bar",
+  "description": "A small, family-run neighborhood bar on Merritts Road in South Farmingdale, known as TNT, with pool, darts, a jukebox and karaoke nights. Local cover bands play there on some weekend nights.",
+  "dancing": {
+    "floor": "small",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "This is a cozy local bar, not a dance club, so expect little open room. Band nights are pitched as parties, and a Halloween 2026 band night invited people to dance, so some freestyle dancing near the band is likely on busy nights.",
+    "evidence": [
+      {
+        "url": "https://www.restaurantji.com/ny/farmingdale/neighborhood-tavern-/",
+        "note": "Listing describes a small, friendly dive bar with Friday karaoke and calls it an intimate place to see a band."
+      },
+      {
+        "url": "https://allevents.in/farmingdale/halloween-bash-daler-style/200030559694812",
+        "note": "Midnight Bourbon's Oct 31, 2026 Halloween show at TNT, promoted with live country rock, party hits, dancing and no cover."
+      },
+      {
+        "url": "https://allevents.in/farmingdale/tnt-and-the-hit-list-band/200030492240205",
+        "note": "The Hit List Band played TNT on Saturday, Sept 26, 2026 at 8 PM; the listing gives the 182 Merritts Rd, Suite B address."
+      },
+      {
+        "url": "https://neighborhoodtavern.wixsite.com/tntfarmingdale/about-us",
+        "note": "The bar's own older website: family-owned since 1985 (first as The Grog Shop), with a jukebox, sports on TV and pool and dart teams."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Sources: neighborhoodtavern.wixsite.com, restaurantji.com, allevents.in.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.724607,
+  "longitude": -73.458703,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}
