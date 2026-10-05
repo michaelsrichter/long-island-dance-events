@@ -61,8 +61,9 @@ const sameFamily = (a: string | undefined, b: string | undefined) => a === b || 
 /**
  * The same evening listed by another source: a band's calendar, the venue's calendar and Ira's
  * List often name the same gig. Same venue and day, and either a shared band or DJ (within two
- * hours) or the same kind of event within 30 minutes (or no time on one of them), with no
- * different bands named. Only one-day listings are checked; repeating series are left alone.
+ * hours), the same kind of event within 30 minutes (or no time on one of them) with no different
+ * bands named, or two bands at exactly the same start time (a double bill, as when two bands' own
+ * calendars list the same fundraiser). Only one-day listings are checked; repeating series are left alone.
  */
 export function otherSourceTwin(events: Map<string, EventRecord>, d: Draft, sourceId: string): string | undefined {
   if (d.dates.length !== 1 || !d.data.venueId) return undefined;
@@ -77,24 +78,31 @@ export function otherSourceTwin(events: Map<string, EventRecord>, d: Draft, sour
     const gap = time === undefined || eTime === undefined ? 0 : Math.abs(time - eTime);
     const eActs = e.performerIds ?? [];
     const shared = acts.some((p) => eActs.includes(p));
-    if (shared ? gap <= 120 : !(acts.length && eActs.length) && gap <= 30 && sameFamily(d.data.category, e.category)) return id;
+    // Two bands' calendars naming the same start time at the same place: one double bill.
+    const doubleBill = acts.length > 0 && eActs.length > 0 && time !== undefined && eTime !== undefined && gap === 0 && d.data.category === e.category;
+    if (shared ? gap <= 120 : doubleBill || (!(acts.length && eActs.length) && gap <= 30 && sameFamily(d.data.category, e.category))) return id;
   }
   return undefined;
 }
 
 /**
- * The organizer's own calendar wins over a calendar that lists everything (The Dance Calendar,
- * Ira's List): same venue, same organizer, same kind of event, and at least one shared day. Works
- * for repeating series too (a monthly PDF and the organizer's Google Calendar both list the
- * Monday classes). Returns the organizer's listing.
+ * The organizer's or band's own calendar wins over a calendar that lists everything (The Dance
+ * Calendar, Ira's List): same venue, same kind of event, the same organizer or a shared band, and
+ * at least one shared day. Works for repeating series too (a monthly PDF and the organizer's Google
+ * Calendar both list the Monday classes). Returns the own calendar's listing.
  */
 export function ownCalendarTwin(events: Map<string, EventRecord>, d: Draft, sourceId: string, isOwnCalendar: (sourceId: string) => boolean): string | undefined {
   const { venueId, organizerId, category } = d.data;
-  if (!venueId || !organizerId) return undefined;
+  if (!venueId) return undefined;
+  const acts = d.data.performerIds ?? [];
   const days = new Set(d.dates);
   for (const [id, e] of events) {
     if (e.sourceId === sourceId || !e.sourceId || !isOwnCalendar(e.sourceId) || e.status !== 'active') continue;
-    if (e.venueId !== venueId || e.organizerId !== organizerId || !sameFamily(category, e.category)) continue;
+    if (e.venueId !== venueId || !sameFamily(category, e.category)) continue;
+    // The same organizer's classes, or the same band's gig ("Mixed Vibes Band at Daisy's").
+    const sameOrganizer = Boolean(organizerId && e.organizerId === organizerId);
+    const sameAct = acts.some((p) => (e.performerIds ?? []).includes(p));
+    if (!sameOrganizer && !sameAct) continue;
     if (datesOf(e).some((x) => days.has(x))) return id;
   }
   return undefined;

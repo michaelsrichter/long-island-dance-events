@@ -275,4 +275,21 @@ describe('merging runs', () => {
     expect(mergeDrafts(ownOnly, mondays(fromPdf), opts).stats).toMatchObject({ new: 0, duplicates: 1 });
     expect(mergeDrafts(ownOnly, mondays({ ...fromPdf, organizerId: 'other-studio' }), opts).stats.new).toBe(1);
   });
+  it("lets a band's own calendar win over an older copy of the same gig from a calendar of everything", () => {
+    const gig = { venueId: 'example-lodge', category: 'live-music', danceStyles: [], performerIds: ['the-fictionals'] };
+    const ira = mergeDrafts(new Map(), draft({ ...gig, sourceId: 'everything', seriesKey: 'ira', start: '20:00' }), { sourceId: 'everything', today: '2026-10-01' });
+    const band = mergeDrafts(new Map(), draft({ ...gig, sourceId: 'band-page', seriesKey: 'band', start: undefined }), { sourceId: 'band-page', today: '2026-10-01' });
+    const iraId = [...ira.events.keys()][0]!;
+    const stored = new Map([...[...ira.events].map(([id, e]) => [id, e] as const), ...[...band.events].map(([id, e]) => [`${id}-band`, e] as const)].map(([id, e]) => [id, eventSchema.parse(e)]));
+    const again = mergeDrafts(stored, draft({ ...gig, sourceId: 'everything', seriesKey: 'ira', start: '20:00' }), { sourceId: 'everything', today: '2026-10-02', allInOne: true, isOwnCalendar: (s) => s === 'band-page' });
+    expect(again.events.get(iraId)).toMatchObject({ status: 'pending-review' });
+  });
+  it('lists a double bill once when two bands name the same start time at the same place', () => {
+    const show = { venueId: 'example-lodge', category: 'live-music', danceStyles: [], start: '14:00' };
+    const first = mergeDrafts(new Map(), draft({ ...show, sourceId: 'band-a', seriesKey: 'a', performerIds: ['the-fictionals'] }), { sourceId: 'band-a', today: '2026-10-01' });
+    const stored = new Map([...first.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    expect(mergeDrafts(stored, draft({ ...show, sourceId: 'band-b', seriesKey: 'b', performerIds: ['midnight-fiction'] }), { sourceId: 'band-b', today: '2026-10-02' }).stats).toMatchObject({ new: 0, duplicates: 1 });
+    // A different start time is a different show.
+    expect(mergeDrafts(stored, draft({ ...show, start: '16:00', sourceId: 'band-b', seriesKey: 'b', performerIds: ['midnight-fiction'] }), { sourceId: 'band-b', today: '2026-10-02' }).stats.new).toBe(1);
+  });
 });

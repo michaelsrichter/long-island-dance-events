@@ -120,7 +120,8 @@ The Dance Calendar's PDF, which is set to weekly for that reason) shows up withi
 8. **Remove duplicates.** If two sources list the same evening at the same venue, it is added once.
    The venue's, club's or band's own calendar wins over a calendar of everything. This works for
    repeating classes too: when an organizer's own calendar lists its Monday classes, the copy from
-   The Dance Calendar is hidden and noted for review (nothing is deleted).
+   The Dance Calendar is hidden and noted for review (nothing is deleted). Two bands that list the
+   same show at the same start time (a double bill) are listed once.
 9. **Combine repeats.** The same listing every Tuesday becomes one event that repeats "every Tuesday."
 10. **Map pins.** New venues get their map location from their street address (see
     [How venues get a map pin](#how-venues-get-a-map-pin)).
@@ -300,13 +301,14 @@ with `gh run list --workflow ingest-scheduled.yml`).
 | --- | --- | --- |
 | Oct 4, 2026, 2:54 PM | timer (Sunday run) | success |
 | Oct 4, 2026, 3:19 PM | timer (daily run) | success |
-| Oct 3-5, 2026 | 7 runs started by hand (testing new sources) | all success |
+| Oct 4-5, 2026 | 8 runs started by hand (testing new sources and fixes) | all success |
 
 - The workflow was added on October 3, 2026, so October 4 was its first day on the timer. Both timed
   runs that day started about five hours late; GitHub delays timed runs when it is busy, and nothing is lost.
-- The Sunday run opened the collection pull request; [#17](https://github.com/michaelsrichter/long-island-dance-events/pull/17)
-  was merged on October 4, which published that week's events. The next rolling pull request
-  ([#23](https://github.com/michaelsrichter/long-island-dance-events/pull/23)) is open and collects the runs since then.
+- The collection pull requests are being merged, which publishes the events:
+  [#17](https://github.com/michaelsrichter/long-island-dance-events/pull/17) on October 4 and
+  [#23](https://github.com/michaelsrichter/long-island-dance-events/pull/23) on October 5. The next run
+  opens a new rolling pull request.
 - The monthly source search (`source-discovery.yml`) has not run yet. Its first timed run is November 1, 2026.
 <!-- /actions-history -->
 
