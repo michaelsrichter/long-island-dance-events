@@ -4,7 +4,7 @@
  * One report per person per item. Three reports from different people, or one from a moderator,
  * hide the item until a moderator decides.
  */
-require('../telemetry-setup');
+const { serverEvent } = require('../telemetry-setup');
 const { app } = require('@azure/functions');
 const { json, error, sameOrigin, readJson, cleanText, isPageKey } = require('../lib/http');
 const { table, TABLES } = require('../lib/store');
@@ -56,6 +56,7 @@ app.http('flags', {
     await audit({ actor: isAdmin ? `admin:${m.principal.details}` : 'visitor', action: hide ? 'hidden_by_reports' : 'reported', targetType: itemType, targetId: itemId, key, reason, before: 'published', after: hide ? 'hidden' : 'published' });
     // A moderator who hides something themselves does not need an email about it.
     if (hide && !isAdmin) await alertAdmins(reason === 'shows-me' ? 'shows-me' : 'hidden', { log: context?.warn?.bind(context) });
+    await serverEvent('community_flag', { type: itemType, value: hide ? 'hidden' : 'reported', reason });
     return json(200, { ok: true, message: hide ? 'Thanks. We hid it while a volunteer takes a look.' : 'Thanks. A volunteer will take a look.' });
   },
 });

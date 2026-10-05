@@ -5,7 +5,7 @@
  * Stored as a UserItems row "save~<key>", so "download my data" includes it and
  * "delete my account" removes it. Nothing about saves is ever public.
  */
-require('../telemetry-setup');
+const { serverEvent } = require('../telemetry-setup');
 const { app } = require('@azure/functions');
 const { json, error, sameOrigin, readJson } = require('../lib/http');
 const { table, TABLES } = require('../lib/store');
@@ -36,6 +36,7 @@ app.http('saves', {
     const rowKey = `save~${key}`;
     if (save) await items.upsert({ partitionKey: m.principal.userId, rowKey, key, ...(date ? { date } : {}), at: new Date().toISOString() });
     else await items.remove(m.principal.userId, rowKey);
+    await serverEvent('community_save', { type: 'event', value: save ? 'save' : 'unsave' });
     return json(200, { key, saved: save });
   },
 });

@@ -46,7 +46,7 @@ app.http('telemetry', {
       const base = { page_type: it.props.page_type || pageType, release };
       switch (it.name) {
         case 'page_view':
-          instruments.pageViews.add(1, base);
+          instruments.pageViews.add(1, { ...base, device: ['phone', 'tablet', 'desktop'].includes(it.props.device) ? it.props.device : 'unknown' });
           break;
         case 'view_event':
           instruments.eventViews.add(1, { ...base, event_status: it.props.event_status || 'unknown' });

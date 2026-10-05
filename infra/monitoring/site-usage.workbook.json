@@ -1,0 +1,744 @@
+{
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json",
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "# Long Island Dance Events: how people use the site\n\nHow people use https://longisland.dance. The site counts page visits and clicks **without cookies and without knowing who anyone is**, so these numbers count visits, not people. Pick a time range at the top. Times are New York time where noted.",
+        "style": "info"
+      },
+      "name": "intro"
+    },
+    {
+      "type": 9,
+      "content": {
+        "version": "KqlParameterItem/1.0",
+        "parameters": [
+          {
+            "id": "timerange",
+            "version": "KqlParameterItem/1.0",
+            "name": "TimeRange",
+            "type": 4,
+            "isRequired": true,
+            "typeSettings": {
+              "selectableValues": [
+                {
+                  "durationMs": 86400000
+                },
+                {
+                  "durationMs": 604800000
+                },
+                {
+                  "durationMs": 2592000000
+                }
+              ],
+              "allowCustom": false
+            },
+            "value": {
+              "durationMs": 2592000000
+            },
+            "label": "Time range"
+          }
+        ],
+        "style": "pills",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components"
+      },
+      "name": "parameters"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Visitors at a glance\n\nQuick numbers for the time range you picked. A **page view** is one page opening in a browser; one person can make many.",
+        "style": "info"
+      },
+      "name": "section-visitors-at-a-glance"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "let selected = customEvents\n| where timestamp {TimeRange};\nlet current7 = toscalar(customEvents | where timestamp between (ago(7d) .. now()) | where name == \"page_view\" | count);\nlet previous7 = toscalar(customEvents | where timestamp between (ago(14d) .. ago(7d)) | where name == \"page_view\" | count);\nlet changePct = iif(previous7 == 0, real(null), round(100.0 * (current7 - previous7) / previous7, 1));\nunion\n(print Sort = 1, Metric = \"Page views\", Value = todouble(toscalar(selected | where name == \"page_view\" | count)), Note = \"All page loads in the selected time\"),\n(print Sort = 2, Metric = \"Page views in the last 7 days\", Value = todouble(current7), Note = \"Compared with the 7 days before\"),\n(print Sort = 3, Metric = \"Change from the 7 days before\", Value = changePct, Note = iif(isnull(changePct), \"No earlier-week data yet\", strcat(tostring(changePct), \"%\"))),\n(print Sort = 4, Metric = \"Event pages viewed\", Value = todouble(toscalar(selected | where name == \"view_event\" | count)), Note = \"People opened event detail pages\"),\n(print Sort = 5, Metric = \"Searches\", Value = todouble(toscalar(selected | where name == \"search\" | count)), Note = \"Visitor searches\"),\n(print Sort = 6, Metric = \"Shares\", Value = todouble(toscalar(selected | where name == \"share\" | count)), Note = \"Share actions completed\"),\n(print Sort = 7, Metric = \"Add-to-calendar clicks\", Value = todouble(toscalar(selected | where name == \"add_to_calendar\" | count)), Note = \"Calendar adds and feed subscriptions\")\n| order by Sort asc\n| project Metric, Value, Note\n",
+        "size": 1,
+        "title": "Quick counts",
+        "subtitle": "Cookieless first-party counts. No unique visitor IDs are used.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "tiles"
+      },
+      "name": "query-01-quick-counts"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| summarize PageViews = count() by Day = startofday(datetime_utc_to_local(timestamp, \"America/New_York\"))\n| order by Day asc\n",
+        "size": 0,
+        "title": "Page views by day",
+        "subtitle": "Shows how many pages were opened each day in New York time.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "timechart"
+      },
+      "name": "query-02-page-views-by-day"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| summarize PageViews = count() by Week = startofweek(datetime_utc_to_local(timestamp, \"America/New_York\"))\n| order by Week asc\n| serialize\n| extend PreviousWeek = prev(PageViews)\n| extend ChangeFromPreviousWeekPercent = iif(isnull(PreviousWeek) or PreviousWeek == 0, real(null), round(100.0 * (PageViews - PreviousWeek) / PreviousWeek, 1))\n",
+        "size": 0,
+        "title": "Page views by week",
+        "subtitle": "Bars show each week, with the change from the week before.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart"
+      },
+      "name": "query-03-page-views-by-week"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name != \"page_view\"\n| extend Method = tostring(customDimensions.method), Location = tostring(customDimensions.location), PageType = tostring(customDimensions.page_type)\n| extend Method = iif(isempty(Method), \"(none)\", Method), Location = iif(isempty(Location), \"(none)\", Location), PageType = iif(isempty(PageType), \"(none)\", PageType)\n| summarize Count = count() by Event = name, Method, Location, PageType\n| order by Count desc\n",
+        "size": 0,
+        "title": "All tracked visitor actions",
+        "subtitle": "A catch-all view for actions such as FAQ opens, theme changes, show-more clicks, empty states, copy failures, and consent changes.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-04-all-tracked-visitor-actions"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customMetrics\n| where timestamp {TimeRange}\n| where name in (\"site.web.page_views\", \"site.web.event_views\", \"site.web.interactions\", \"site.web.consent_updates\", \"site.cms.auth\")\n| extend Metric = case(\n    name == \"site.web.page_views\", \"Page views metric\",\n    name == \"site.web.event_views\", \"Event views metric\",\n    name == \"site.web.interactions\", \"Interaction metric\",\n    name == \"site.web.consent_updates\", \"Consent choice metric\",\n    name == \"site.cms.auth\", \"CMS sign-in metric\",\n    name)\n| extend Action = tostring(customDimensions.action), Method = tostring(customDimensions.method), Location = tostring(customDimensions.location), PageType = tostring(customDimensions.page_type), Result = tostring(customDimensions.result), Value = tostring(customDimensions.value)\n| summarize Count = sum(valueSum) by Metric, Action, Method, Location, PageType, Result, Value\n| order by Count desc\n",
+        "size": 0,
+        "title": "Counts recorded by the site",
+        "subtitle": "A cross-check from metric rows for page views, event views, interactions, consent choices, and CMS sign-ins.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-05-opentelemetry-counter-metrics"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## What people look at\n\nSee which events, places, performers, styles, towns, and pages get attention.",
+        "style": "info"
+      },
+      "name": "section-what-people-look-at"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"view_event\"\n| extend EventSlug = tostring(customDimensions.event_slug), Entity = tostring(customDimensions.entity)\n| extend EventKey = iif(isempty(Entity), strcat(\"event:\", EventSlug), Entity)\n| extend NameSlug = replace_regex(EventSlug, @\"^\\d{4}-\\d{2}-\\d{2}-\", \"\")\n| extend EventName = iif(isempty(NameSlug), \"Unknown event\", replace_string(NameSlug, \"-\", \" \"))\n| summarize Views = count(), ExampleSlug = any(EventSlug) by EventName, EventKey\n| top 15 by Views desc\n",
+        "size": 0,
+        "title": "Top event series",
+        "subtitle": "Shows the event pages people open most often. The name is simplified from the dated event slug.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-06-top-event-series"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend PageType = tostring(customDimensions.page_type), Entity = tostring(customDimensions.entity), Page = tostring(customDimensions.page)\n| where PageType == \"venue\" or Entity startswith \"venue:\"\n| extend VenueSlug = case(Entity startswith \"venue:\", substring(Entity, 6), Page startswith \"/venues/\", tostring(split(Page, \"/\")[2]), Page)\n| extend Venue = replace_string(VenueSlug, \"-\", \" \")\n| summarize Views = count(), ExamplePage = any(Page) by Venue\n| top 15 by Views desc\n",
+        "size": 0,
+        "title": "Top venues",
+        "subtitle": "Venue pages or venue entities with the most page views.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-07-top-venues"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend PageType = tostring(customDimensions.page_type), Entity = tostring(customDimensions.entity), Page = tostring(customDimensions.page)\n| where PageType in (\"person\", \"organizer\", \"performer\", \"instructor\") or Entity startswith \"performer:\" or Entity startswith \"instructor:\" or Entity startswith \"organizer:\"\n| extend Kind = case(Entity startswith \"instructor:\" or PageType == \"instructor\", \"Teacher\", Entity startswith \"organizer:\" or PageType == \"organizer\", \"Organizer\", \"Band, DJ, or performer\")\n| extend RawName = case(isnotempty(Entity) and Entity contains \":\", tostring(split(Entity, \":\")[1]), Page startswith \"/\", replace_regex(Page, @\"^.*/\", \"\"), \"unknown\")\n| extend Name = replace_string(RawName, \"-\", \" \")\n| summarize Views = count(), ExamplePage = any(Page) by Kind, Name\n| top 15 by Views desc\n",
+        "size": 0,
+        "title": "Top bands, DJs, teachers, and organizers",
+        "subtitle": "Person and organizer pages with the most views.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-08-top-bands-djs-teachers-and-organizers"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend PageType = tostring(customDimensions.page_type), Entity = tostring(customDimensions.entity), Page = tostring(customDimensions.page)\n| where PageType == \"style\" or Entity startswith \"style:\"\n| extend StyleSlug = case(Entity startswith \"style:\", substring(Entity, 6), Page startswith \"/styles/\", tostring(split(Page, \"/\")[2]), Page)\n| extend Style = replace_string(StyleSlug, \"-\", \" \")\n| summarize Views = count(), ExamplePage = any(Page) by Style\n| top 15 by Views desc\n",
+        "size": 0,
+        "title": "Top dance styles",
+        "subtitle": "Dance style pages or style entities with the most views.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-09-top-dance-styles"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "let eventTowns = customEvents\n| where timestamp {TimeRange}\n| where name == \"view_event\"\n| extend Town = tostring(customDimensions.town)\n| where isnotempty(Town)\n| project Town, Source = \"Event pages\";\nlet townPages = customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend PageType = tostring(customDimensions.page_type), Entity = tostring(customDimensions.entity), Page = tostring(customDimensions.page), TownFromProps = tostring(customDimensions.town)\n| where PageType == \"town\" or Entity startswith \"town:\"\n| extend Town = case(isnotempty(TownFromProps), TownFromProps, Entity startswith \"town:\", substring(Entity, 5), Page startswith \"/towns/\", tostring(split(Page, \"/\")[2]), \"\")\n| where isnotempty(Town)\n| project Town, Source = \"Town pages\";\nunion eventTowns, townPages\n| extend Town = replace_string(Town, \"-\", \" \")\n| summarize Views = count() by Town, Source\n| top 15 by Views desc\n",
+        "size": 0,
+        "title": "Top towns",
+        "subtitle": "Towns from event views plus town pages.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-10-top-towns"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend Page = tostring(customDimensions.page), PageType = tostring(customDimensions.page_type)\n| extend Page = iif(isempty(Page), \"(not set)\", Page)\n| summarize Views = count() by Page, PageType\n| top 25 by Views desc\n",
+        "size": 0,
+        "title": "Most-visited pages",
+        "subtitle": "The site paths people opened most often.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-11-most-visited-pages"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## What people search for\n\nUse these tables to spot missing content, confusing labels, and popular filters.",
+        "style": "info"
+      },
+      "name": "section-what-people-search-for"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"search\"\n| extend Term = tostring(customDimensions.term), Results = todouble(customDimensions.results), Location = tostring(customDimensions.location)\n| extend Term = iif(isempty(Term), \"(blank)\", Term)\n| summarize Searches = count(), AverageResults = round(avg(Results), 1) by Term, Location\n| top 25 by Searches desc\n",
+        "size": 0,
+        "title": "Top search terms",
+        "subtitle": "Terms people typed, with the average number of results they saw.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-12-top-search-terms"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"search\"\n| extend Term = tostring(customDimensions.term), Results = todouble(customDimensions.results), Location = tostring(customDimensions.location)\n| where Results == 0\n| extend Term = iif(isempty(Term), \"(blank)\", Term)\n| summarize Searches = count(), LastSeen = max(timestamp) by Term, Location\n| top 25 by Searches desc\n",
+        "size": 0,
+        "title": "Searches that found nothing",
+        "subtitle": "These are good ideas for missing event names, towns, styles, or spelling help.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-13-searches-that-found-nothing"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"filter_events\"\n| mv-expand FilterRaw = split(tostring(customDimensions.filter), \",\") to typeof(string)\n| extend Filter = trim(\" \", tostring(FilterRaw))\n| where isnotempty(Filter)\n| summarize Uses = count() by Filter\n| order by Uses desc\n",
+        "size": 0,
+        "title": "Filters people use",
+        "subtitle": "Counts each filter name, even when several filters were changed together.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart"
+      },
+      "name": "query-14-filters-people-use"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"filter_events\"\n| extend Filter = tostring(customDimensions.filter), Results = todouble(customDimensions.results), Location = tostring(customDimensions.location)\n| mv-expand ValueRaw = split(tostring(customDimensions.value), \",\") to typeof(string)\n| extend Value = trim(\" \", tostring(ValueRaw))\n| where isnotempty(Value)\n| summarize Uses = count(), AverageResults = round(avg(Results), 1) by Value, Filter, Location\n| top 25 by Uses desc\n",
+        "size": 0,
+        "title": "Top filter values",
+        "subtitle": "Values people choose inside filters, such as towns or styles.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-15-top-filter-values"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## From looking to going\n\nThis section shows whether people move from reading event pages to actions like calendars, directions, sharing, and organizer links.",
+        "style": "info"
+      },
+      "name": "section-from-looking-to-going"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "let selected = customEvents\n| where timestamp {TimeRange};\nlet eventViews = toscalar(selected | where name == \"view_event\" | count);\nlet calendarAdds = toscalar(selected | where name == \"add_to_calendar\" | count);\nlet directions = toscalar(selected | where name == \"get_directions\" | count);\nlet shares = toscalar(selected | where name == \"share\" | count);\nlet organizerClicks = toscalar(selected | where name == \"outbound_click\" | where tostring(customDimensions.method) in (\"website\", \"phone\", \"email\") | count);\nunion\n(print StepOrder = 1, Step = \"Event pages viewed\", Count = eventViews),\n(print StepOrder = 2, Step = \"Added to calendar\", Count = calendarAdds),\n(print StepOrder = 3, Step = \"Got directions\", Count = directions),\n(print StepOrder = 4, Step = \"Shared\", Count = shares),\n(print StepOrder = 5, Step = \"Clicked organizer website, phone, or email\", Count = organizerClicks)\n| extend PercentOfEventViews = iif(eventViews == 0, real(null), round(100.0 * Count / eventViews, 1))\n| order by StepOrder asc\n| project Step, Count, PercentOfEventViews\n",
+        "size": 0,
+        "title": "From event page to action",
+        "subtitle": "Shows how often event views turn into actions. Percent is compared with event page views.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart"
+      },
+      "name": "query-16-event-interest-funnel"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"add_to_calendar\"\n| extend Method = tostring(customDimensions.method)\n| extend Method = iif(isempty(Method), \"unknown\", Method)\n| summarize Clicks = count() by Method\n| order by Clicks desc\n",
+        "size": 0,
+        "title": "Add-to-calendar methods",
+        "subtitle": "Which calendar choices people use.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart"
+      },
+      "name": "query-17-add-to-calendar-methods"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "let pageViews = customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend PageType = tostring(customDimensions.page_type)\n| where PageType in (\"events\", \"calendar\", \"map\")\n| summarize Count = count() by Activity = \"Page views\", Experience = PageType;\nlet switches = customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend PageType = tostring(customDimensions.page_type), RefPage = tostring(customDimensions.ref_page)\n| where PageType in (\"events\", \"calendar\", \"map\") and RefPage in (\"events\", \"calendar\", \"map\") and RefPage != PageType\n| summarize Count = count() by Activity = \"Switched from another view\", Experience = strcat(RefPage, \" to \", PageType);\nunion pageViews, switches\n| order by Activity asc, Count desc\n",
+        "size": 0,
+        "title": "List, calendar, and map usage",
+        "subtitle": "Compares the event list, calendar, and map, plus switches between those views.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-18-list-calendar-and-map-usage"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Sharing\n\nSee how often people open sharing tools and which pages or events they share.",
+        "style": "info"
+      },
+      "name": "section-sharing"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"share\"\n| extend Method = tostring(customDimensions.method)\n| extend Method = iif(isempty(Method), \"unknown\", Method)\n| summarize Shares = count() by Method\n| order by Shares desc\n",
+        "size": 0,
+        "title": "Shares by method",
+        "subtitle": "How people share events or pages.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart"
+      },
+      "name": "query-19-shares-by-method"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"share\"\n| summarize Shares = count() by Day = startofday(datetime_utc_to_local(timestamp, \"America/New_York\"))\n| order by Day asc\n",
+        "size": 0,
+        "title": "Shares over time",
+        "subtitle": "Completed share actions by day.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "timechart"
+      },
+      "name": "query-20-shares-over-time"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name in (\"share_open\", \"share\")\n| extend Action = iif(name == \"share_open\", \"Opened share preview\", \"Completed share\")\n| summarize Count = count() by Action\n| order by Count desc\n",
+        "size": 0,
+        "title": "Share previews opened and shares completed",
+        "subtitle": "Preview means someone opened the share panel; completed means they chose a share method.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart"
+      },
+      "name": "query-21-share-previews-opened-and-shares-complet"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"share\"\n| extend EventSlug = tostring(customDimensions.event_slug), Entity = tostring(customDimensions.entity), Page = tostring(customDimensions.page)\n| extend SharedThing = case(isnotempty(EventSlug), replace_string(replace_regex(EventSlug, @\"^\\d{4}-\\d{2}-\\d{2}-\", \"\"), \"-\", \" \"), isnotempty(Entity), replace_string(Entity, \":\", \": \"), isnotempty(Page), Page, \"(not set)\")\n| summarize Shares = count(), Methods = make_set(tostring(customDimensions.method), 10) by SharedThing\n| top 25 by Shares desc\n",
+        "size": 0,
+        "title": "Most-shared events and pages",
+        "subtitle": "Events or pages that people shared most.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-22-most-shared-events-and-pages"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Community\n\nCommunity features include likes, saves, notes, photos, flags, reports, and sign-in checks.",
+        "style": "info"
+      },
+      "name": "section-community"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name startswith \"community_\" or name == \"report_problem\"\n| extend Action = case(\n    name == \"community_like\", strcat(\"Like: \", tostring(customDimensions.value)),\n    name == \"community_save\", strcat(\"Save: \", tostring(customDimensions.value)),\n    name == \"community_note\", strcat(\"Note: \", tostring(customDimensions.result)),\n    name == \"community_photo\", strcat(\"Photo: \", tostring(customDimensions.result)),\n    name == \"community_flag\" or name == \"report_problem\", \"Report or flag\",\n    name)\n| summarize Count = count() by Day = startofday(datetime_utc_to_local(timestamp, \"America/New_York\")), Action\n| order by Day asc\n",
+        "size": 0,
+        "title": "Community actions over time",
+        "subtitle": "Likes, saves, notes, photos, and reports sent by visitors.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "timechart"
+      },
+      "name": "query-23-community-actions-over-time"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "requests\n| where timestamp {TimeRange}\n| where name == \"roles\"\n| summarize SignIns = count(), Failed = countif(tobool(success) == false) by Day = startofday(datetime_utc_to_local(timestamp, \"America/New_York\"))\n| order by Day asc\n",
+        "size": 0,
+        "title": "Sign-ins",
+        "subtitle": "A request named roles means one visitor sign-in check.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "timechart"
+      },
+      "name": "query-24-sign-ins"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "requests\n| where timestamp {TimeRange}\n| where name in (\"likes\", \"saves\", \"comments\", \"photos\", \"flags\")\n| summarize Requests = count(), Failed = countif(tobool(success) == false), P95DurationMs = round(percentile(duration, 95), 1) by Function = name\n| extend FailureRatePercent = iif(Requests == 0, real(null), round(100.0 * Failed / Requests, 1))\n| order by Requests desc\n",
+        "size": 0,
+        "title": "Community requests to the server",
+        "subtitle": "Requests for likes, saves, comments, photos, and flags.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-25-community-api-requests"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Where visitors come from\n\nWhich websites sent people here, and which tagged links they used (links with `utm_source`, for example in a newsletter or Facebook post). **Direct** means typed in, a bookmark, or an app that hides where the visit came from.",
+        "style": "info"
+      },
+      "name": "section-where-visitors-come-from"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend Referrer = tolower(tostring(customDimensions.ref))\n| where isnotempty(Referrer) and Referrer !in (\"internal\", \"direct\")\n| summarize PageViews = count() by Referrer\n| top 25 by PageViews desc\n",
+        "size": 0,
+        "title": "Websites that sent visitors",
+        "subtitle": "Other sites that sent people here. Internal links are hidden.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-26-referrer-domains"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend Source = tostring(customDimensions.utm_source), Medium = tostring(customDimensions.utm_medium), Campaign = tostring(customDimensions.utm_campaign)\n| where isnotempty(Source) or isnotempty(Medium) or isnotempty(Campaign)\n| summarize PageViews = count() by Source, Medium, Campaign\n| order by PageViews desc\n",
+        "size": 0,
+        "title": "Campaign links",
+        "subtitle": "UTM values from links you shared in email, social posts, or ads.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-27-campaign-links"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend Referrer = tolower(tostring(customDimensions.ref))\n| extend Referrer = iif(isempty(Referrer), \"direct\", Referrer)\n| extend SourceGroup = case(\n    Referrer == \"direct\", \"Direct\",\n    Referrer has_any (\"google.\", \"bing.com\", \"duckduckgo.com\", \"yahoo.com\", \"chatgpt.com\", \"perplexity.ai\", \"copilot.microsoft.com\", \"gemini.google.com\", \"claude.ai\"), \"Search and AI\",\n    Referrer has_any (\"facebook.com\", \"instagram.com\", \"t.co\", \"x.com\", \"whatsapp.com\", \"linkedin.com\"), \"Social\",\n    Referrer == \"internal\", \"Internal site links\",\n    \"Other sites\")\n| where SourceGroup != \"Internal site links\"\n| summarize PageViews = count() by SourceGroup\n| order by PageViews desc\n",
+        "size": 0,
+        "title": "Direct, search, social, and other sites",
+        "subtitle": "Groups referrers into plain-language sources.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "piechart"
+      },
+      "name": "query-28-direct-search-social-and-other-sites"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend Referrer = tolower(tostring(customDimensions.ref))\n| where Referrer has_any (\"chatgpt.com\", \"perplexity.ai\", \"copilot.microsoft.com\", \"gemini.google.com\", \"claude.ai\")\n| summarize PageViews = count() by Referrer\n| order by PageViews desc\n",
+        "size": 0,
+        "title": "AI assistants",
+        "subtitle": "Visits referred by AI assistants when the browser sends that referrer.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-29-ai-assistants"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Phones and computers\n\nWhether visits come from phones, tablets or computers. Visits from before October 5, 2026 show as \"unknown\".",
+        "style": "info"
+      },
+      "name": "section-phones-and-computers"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend Device = tostring(customDimensions.device)\n| extend Device = iif(isempty(Device), \"unknown\", Device)\n| summarize PageViews = count() by Device\n| order by PageViews desc\n",
+        "size": 0,
+        "title": "Page views by device",
+        "subtitle": "Phone, tablet, desktop, or unknown when the older event did not include device yet.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "piechart"
+      },
+      "name": "query-30-page-views-by-device"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend Device = tostring(customDimensions.device)\n| extend Device = iif(isempty(Device), \"unknown\", Device)\n| summarize PageViews = count() by Day = startofday(datetime_utc_to_local(timestamp, \"America/New_York\")), Device\n| order by Day asc\n",
+        "size": 0,
+        "title": "Device use over time",
+        "subtitle": "Daily page views split by phone, tablet, desktop, or unknown.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "timechart"
+      },
+      "name": "query-31-device-use-over-time"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## How fast pages load (Core Web Vitals)\n\nHow quickly pages appear and respond on visitors' phones and computers. Each number is the time that **3 out of 4 visits beat** (Google uses the same measure). **LCP**: time until the main content shows (good: under 2,500 ms). **INP**: time until the page reacts to a tap or click (good: under 200 ms). **CLS**: how much things jump around while loading (good: under 100 here, which is Google's 0.1). These are close estimates.",
+        "style": "info"
+      },
+      "name": "section-how-fast-pages-load-(core-web-vitals)"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customMetrics\n| where timestamp {TimeRange}\n| where name in (\"site.web.vitals.lcp\", \"site.web.vitals.inp\", \"site.web.vitals.cls\")\n| extend Metric = case(name endswith \".lcp\", \"LCP load time (ms)\", name endswith \".inp\", \"INP tap/click response (ms)\", \"CLS layout shift (x1000)\")\n| extend AverageValue = iif(valueCount > 0, valueSum / valueCount, value)\n| summarize ApproxThreeOutOfFour = round(percentile(AverageValue, 75), 1) by Day = startofday(datetime_utc_to_local(timestamp, \"America/New_York\")), Metric\n| extend GoodIfAtOrBelow = case(Metric == \"LCP load time (ms)\", 2500.0, Metric == \"INP tap/click response (ms)\", 200.0, Metric == \"CLS layout shift (x1000)\", 100.0, real(null))\n| order by Day asc\n",
+        "size": 0,
+        "title": "How fast pages load each day",
+        "subtitle": "Approximate: 3 out of 4 visits are this fast or faster. Good targets: LCP 2500 ms or less, INP 200 ms or less, CLS 100 or less.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "timechart"
+      },
+      "name": "query-32-how-fast-pages-load-each-day"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customMetrics\n| where timestamp {TimeRange}\n| where name in (\"site.web.vitals.lcp\", \"site.web.vitals.inp\", \"site.web.vitals.cls\")\n| extend Metric = case(name endswith \".lcp\", \"LCP load time (ms)\", name endswith \".inp\", \"INP tap/click response (ms)\", \"CLS layout shift (x1000)\")\n| extend PageType = tostring(customDimensions.page_type), Rating = tostring(customDimensions.rating)\n| extend PageType = iif(isempty(PageType), \"unknown\", PageType)\n| extend AverageValue = iif(valueCount > 0, valueSum / valueCount, value), SampleCount = iif(valueCount > 0, valueCount, 1)\n| summarize ApproxThreeOutOfFour = round(percentile(AverageValue, 75), 1), Good = sumif(SampleCount, Rating == \"good\"), NeedsImprovement = sumif(SampleCount, Rating == \"needs-improvement\"), Poor = sumif(SampleCount, Rating == \"poor\") by Metric, PageType\n| extend Total = Good + NeedsImprovement + Poor\n| extend GoodSharePercent = iif(Total == 0, real(null), round(100.0 * Good / Total, 1))\n| order by Metric asc, ApproxThreeOutOfFour desc\n",
+        "size": 0,
+        "title": "Page speed by page type",
+        "subtitle": "Approximate values from pre-aggregated metric rows. Good share is the percent of samples rated good by the browser library.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-33-page-speed-by-page-type"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Problems\n\nBroken links people followed (missing pages), script errors in browsers, failures in the site's server functions, and visit reports the server refused.",
+        "style": "info"
+      },
+      "name": "section-problems"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"js_error\"\n| extend Message = tostring(customDimensions.message), Source = tostring(customDimensions.source), Line = tostring(customDimensions.line)\n| extend Message = iif(isempty(Message), \"(not set)\", Message), Source = iif(isempty(Source), \"(not set)\", Source)\n| summarize Errors = count(), LastSeen = max(timestamp) by Message, Source, Line\n| top 25 by Errors desc\n",
+        "size": 0,
+        "title": "Script errors in browsers",
+        "subtitle": "Browser errors grouped by short message and script file.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-34-javascript-errors"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| where tostring(customDimensions.page_type) == \"404\"\n| extend MissingPage = tostring(customDimensions.page), Referrer = tostring(customDimensions.ref)\n| extend MissingPage = iif(isempty(MissingPage), \"(not set)\", MissingPage)\n| summarize Hits = count(), LastSeen = max(timestamp), Referrers = make_set(Referrer, 10) by MissingPage\n| top 25 by Hits desc\n",
+        "size": 0,
+        "title": "Missing pages",
+        "subtitle": "404 page views show paths visitors tried that did not exist.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-35-missing-pages"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "requests\n| where timestamp {TimeRange}\n| summarize Requests = count(), Failed = countif(tobool(success) == false), P95DurationMs = round(percentile(duration, 95), 1) by Function = name\n| extend FailureRatePercent = iif(Requests == 0, real(null), round(100.0 * Failed / Requests, 1))\n| order by Failed desc, Requests desc\n",
+        "size": 0,
+        "title": "Server functions: requests, failures and speed",
+        "subtitle": "Request count, failure rate, and slowest 5% cutoff by Azure Function name.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-36-api-health-by-function"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "requests\n| where timestamp {TimeRange}\n| where tobool(success) == false\n| summarize FailedRequests = count() by Day = startofday(datetime_utc_to_local(timestamp, \"America/New_York\")), Function = name\n| order by Day asc\n",
+        "size": 0,
+        "title": "Failed server requests over time",
+        "subtitle": "Daily failed Azure Function requests.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "timechart"
+      },
+      "name": "query-37-failed-api-requests-over-time"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "exceptions\n| where timestamp {TimeRange}\n| extend ProblemType = tostring(type), Message = tostring(outerMessage)\n| extend ProblemType = iif(isempty(ProblemType), \"(not set)\", ProblemType), Message = iif(isempty(Message), \"(not set)\", Message)\n| summarize Exceptions = count(), LastSeen = max(timestamp) by ProblemType, Message\n| top 25 by Exceptions desc\n",
+        "size": 0,
+        "title": "Server errors",
+        "subtitle": "Exceptions recorded by the API.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-38-server-exceptions"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customMetrics\n| where timestamp {TimeRange}\n| where name == \"site.telemetry.rejected\"\n| extend Reason = tostring(customDimensions.reason)\n| extend Reason = iif(isempty(Reason), \"unknown\", Reason)\n| summarize Rejected = sum(valueSum) by Reason\n| order by Rejected desc\n",
+        "size": 0,
+        "title": "Visit reports the server refused",
+        "subtitle": "Telemetry requests rejected by validation or rate limits.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "table"
+      },
+      "name": "query-39-rejected-telemetry"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## When people visit\n\nLocal time is converted to New York time so planning matches the community schedule.",
+        "style": "info"
+      },
+      "name": "section-when-people-visit"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend LocalTime = datetime_utc_to_local(timestamp, \"America/New_York\")\n| extend DayNumber = toint(dayofweek(LocalTime) / 1d), Hour = datetime_part(\"hour\", LocalTime)\n| extend DayOrder = iif(DayNumber == 0, 7, DayNumber)\n| extend Day = case(DayNumber == 1, \"Mon\", DayNumber == 2, \"Tue\", DayNumber == 3, \"Wed\", DayNumber == 4, \"Thu\", DayNumber == 5, \"Fri\", DayNumber == 6, \"Sat\", \"Sun\")\n| summarize Views = count() by DayOrder, Day, Hour\n| evaluate pivot(Hour, sum(Views), DayOrder, Day)\n| order by DayOrder asc\n",
+        "size": 0,
+        "title": "Page views by day and hour",
+        "subtitle": "Heatmap-style table in New York time. Darker cells mean more page views.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "grid"
+      },
+      "name": "query-40-page-views-by-day-and-hour"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "customEvents\n| where timestamp {TimeRange}\n| where name == \"page_view\"\n| extend LocalTime = datetime_utc_to_local(timestamp, \"America/New_York\")\n| extend DayNumber = toint(dayofweek(LocalTime) / 1d)\n| extend DayOrder = iif(DayNumber == 0, 7, DayNumber)\n| extend Day = case(DayNumber == 1, \"Mon\", DayNumber == 2, \"Tue\", DayNumber == 3, \"Wed\", DayNumber == 4, \"Thu\", DayNumber == 5, \"Fri\", DayNumber == 6, \"Sat\", \"Sun\")\n| summarize PageViews = count() by DayOrder, Day\n| order by DayOrder asc\n",
+        "size": 0,
+        "title": "Busiest days of the week",
+        "subtitle": "Page views by weekday in New York time.",
+        "queryType": 0,
+        "resourceType": "microsoft.insights/components",
+        "visualization": "barchart"
+      },
+      "name": "query-41-busiest-days-of-the-week"
+    },
+    {
+      "type": 1,
+      "content": {
+        "json": "## Data budget\n\nHow much monitoring data the site stores each day. The free limit we set is 0.1 GB (100 MB) a day. If it is reached, Azure stops storing new data until the next day, so charts can have gaps; an alert emails the owner if that happens.",
+        "style": "info"
+      },
+      "name": "section-data-budget"
+    },
+    {
+      "type": 3,
+      "content": {
+        "version": "KqlItem/1.0",
+        "query": "Usage\n| where TimeGenerated {TimeRange}\n| where tobool(IsBillable) == true\n| summarize IngestedMB = round(sum(Quantity), 3) by Day = startofday(TimeGenerated), Table = DataType\n| extend DailyCapMB = 102.4\n| extend PercentOfDailyCap = round(100.0 * IngestedMB / DailyCapMB, 1)\n| order by Day asc, IngestedMB desc\n",
+        "size": 0,
+        "title": "Monitoring data used each day (MB)",
+        "subtitle": "Shows how many MB were ingested into Log Analytics and compares each table with the 0.1 GB daily cap.",
+        "queryType": 0,
+        "resourceType": "microsoft.operationalinsights/workspaces",
+        "visualization": "grid",
+        "crossComponentResources": [
+          "/subscriptions/fd38bfe4-1b60-405d-bff9-020f3ff54d88/resourceGroups/rg-li-dance-events-web/providers/Microsoft.OperationalInsights/workspaces/log-swa-li-dance-events-web"
+        ]
+      },
+      "name": "query-42-daily-data-used-by-table"
+    }
+  ],
+  "fallbackResourceIds": [
+    "/subscriptions/fd38bfe4-1b60-405d-bff9-020f3ff54d88/resourceGroups/rg-li-dance-events-web/providers/microsoft.insights/components/appi-swa-li-dance-events-web"
+  ],
+  "fromTemplateId": "long-island-dance-events-site-usage",
+  "isLocked": false,
+  "styleSettings": {}
+}

@@ -22,6 +22,11 @@ const EVENT_NAMES = new Set([
   'empty_state',
   'consent_update',
   'web_vital',
+  'search',
+  'select_person',
+  'report_problem',
+  'sign_in_start',
+  'js_error',
 ]);
 const PROP_KEYS = new Set([
   'method',
@@ -40,6 +45,18 @@ const PROP_KEYS = new Set([
   'mode',
   'target',
   'entity',
+  'device',
+  'ref',
+  'ref_page',
+  'utm_source',
+  'utm_medium',
+  'utm_campaign',
+  'town',
+  'category',
+  'term',
+  'message',
+  'source',
+  'line',
 ]);
 const VITALS = new Set(['LCP', 'INP', 'CLS', 'FCP', 'TTFB']);
 const SAFE = /^[\w\-.,:/ #()&']{0,100}$/;

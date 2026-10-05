@@ -15,6 +15,8 @@ if (conn) {
       azureMonitorExporterOptions: { connectionString: conn },
       samplingRatio: 1,
       enableLiveMetrics: false,
+      // CPU and memory counters every minute were most of the monitoring data and are not used.
+      enablePerformanceCounters: false,
       instrumentationOptions: { http: { enabled: true }, azureSdk: { enabled: false } },
     });
     enabled = true;
@@ -53,6 +55,12 @@ function customEvent(name, attributes) {
   logger.emit({ body: name, attributes: { 'microsoft.custom_event.name': name, ...attributes } });
 }
 
+/** A custom event from the API itself (likes, saves, notes...), sent before the instance can freeze. No user ids. */
+async function serverEvent(name, attributes) {
+  customEvent(name, attributes);
+  await flush(500);
+}
+
 /** Serverless instances may freeze between invocations, so flush after each request (bounded). */
 async function flush(timeoutMs = 1500) {
   if (!enabled) return;
@@ -69,6 +77,7 @@ module.exports = {
   metricsPrefix,
   cleanPrefix,
   customEvent,
+  serverEvent,
   flush,
   get enabled() {
     return enabled;

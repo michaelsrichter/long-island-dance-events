@@ -37,7 +37,7 @@ const [photo, ...morePhotos] = o.photos ?? [];
 const ld = organizerJsonLd(org.id, o, site, { ...(await entityImageUrls(o, site)), links });
 const meta = await organizerMeta(org, events, site);
 ---
-<BaseLayout title={o.seoTitle ?? `${o.name}: dances and classes`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="organizer" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
+<BaseLayout title={o.seoTitle ?? `${o.name}: dances and classes`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} htmlData={{ 'data-entity': `organizer:${org.id}` }} pageType="organizer" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={o.name} lede={o.description ?? `${ORGANIZER_TYPE_LABELS[o.type]}${o.town ? ` in ${o.town}` : ''}.`} crumbs={crumbs}>
     {(photo || o.logo) && <EntityHeroMedia slot="media" name={o.name} photo={photo} logo={o.logo} />}
     <Reactions type="organizer" id={org.id} name={o.name} variant="hero" />

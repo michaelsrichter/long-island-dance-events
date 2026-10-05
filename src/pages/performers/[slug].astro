@@ -38,7 +38,7 @@ const ld = performerJsonLd(person.id, p, site, { ...(await entityImageUrls(p, si
 const hasContact = Boolean(p.phone || p.email || p.bookingUrl || links.length || p.evidence?.length || p.logo || p.photos?.length || p.description);
 const meta = performerMeta(person, events, site);
 ---
-<BaseLayout title={p.seoTitle ?? `${p.name}: where to dance to them on Long Island`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} pageType="person" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
+<BaseLayout title={p.seoTitle ?? `${p.name}: where to dance to them on Long Island`} description={meta.description} image={meta.image.src} imageAlt={meta.image.alt} imageType={meta.image.type} labels={meta.labels} htmlData={{ 'data-entity': `performer:${person.id}` }} pageType="person" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={p.name} lede={lede} crumbs={crumbs}>
     {(photo || p.logo) && <EntityHeroMedia slot="media" name={p.name} photo={photo} logo={p.logo} />}
     {p.description && <p class="page-header__meta">{kindLine}</p>}

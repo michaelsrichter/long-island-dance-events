@@ -15,7 +15,7 @@ highlights:
 ## What we collect
 
 - **If you just browse: nothing personal.** We do not ask for your name or email.
-- **Basic, anonymous counts** may be collected to see which pages are useful, such as how many people opened the events list. This does not include your name, and it does not follow you to other websites.
+- **Basic, anonymous counts** may be collected to see which pages are useful, such as how many people opened the events list. This does not include your name, and it does not follow you to other websites. Along with a count we note: the kind of page, whether you use a phone, tablet or computer, the name of the website that sent you (for example "google.com", never the full address), campaign tags in the link (such as `utm_source=newsletter`), words typed into a search box on this site, and short error messages if a page breaks. We do not use cookies for this and we do not store your internet address.
 - **Analytics cookies** (Google Analytics and Microsoft Clarity) are only used if they are turned on **and** you agree. Until you choose **Allow**, they are not loaded and set no cookies. The note at the end of this page says whether they are turned on right now.
 
 ## Accounts

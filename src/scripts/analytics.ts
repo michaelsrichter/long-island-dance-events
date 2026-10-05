@@ -8,6 +8,7 @@
  *    (or in "opt-out" mode, until the visitor declines). Global Privacy Control is honored.
  */
 import { onCLS, onFCP, onINP, onLCP, onTTFB, type Metric } from 'web-vitals';
+import { pageTypeOf } from '../lib/page-type';
 
 type Props = Record<string, string | number | boolean | undefined>;
 type Consent = 'granted' | 'denied';
@@ -32,6 +33,9 @@ const cfg = {
   release: html.dataset.release ?? 'local',
   pageType: html.dataset.pageType ?? 'page',
   eventSlug: html.dataset.eventSlug ?? '',
+  entity: html.dataset.entity ?? '',
+  town: html.dataset.town ?? '',
+  category: html.dataset.eventCategory ?? '',
 };
 const CONSENT_KEY = 'site-analytics-consent';
 const GA_EVENTS = new Set([
@@ -50,6 +54,10 @@ const GA_EVENTS = new Set([
   'theme_change',
   'faq_open',
   'empty_state',
+  'search',
+  'select_person',
+  'report_problem',
+  'sign_in_start',
 ]);
 
 let gaLoaded = false;
@@ -161,7 +169,8 @@ function clean(props: Props = {}): Props {
   const out: Props = {};
   for (const [k, v] of Object.entries(props)) {
     if (v === undefined || v === '') continue;
-    out[k] = typeof v === 'string' ? v.slice(0, 100) : v;
+    // Only plain characters pass the server's check, so swap anything else for a space.
+    out[k] = typeof v === 'string' ? v.replace(/[^\w\-.,:/ #()&']/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 100) : v;
   }
   return out;
 }
@@ -199,7 +208,7 @@ addEventListener('pagehide', flush);
 /* ---------------- public API ---------------- */
 
 export function track(name: string, props: Props = {}) {
-  const p = clean({ page_type: cfg.pageType, event_slug: cfg.eventSlug || undefined, ...props });
+  const p = clean({ page_type: cfg.pageType, event_slug: cfg.eventSlug || undefined, entity: cfg.entity || undefined, ...props });
   queue({ name, props: p });
   if (consentGranted()) {
     if (gaLoaded && GA_EVENTS.has(name)) window.gtag?.('event', name, p);
@@ -239,8 +248,90 @@ onCLS(sendVital);
 onFCP(sendVital);
 onTTFB(sendVital);
 
-queue({ name: 'page_view', props: { page_type: cfg.pageType } });
-if (cfg.eventSlug) track('view_event', { event_status: html.dataset.eventStatus, days_until: Number(html.dataset.daysUntil ?? '') || undefined });
+/* ---------------- page context (no personal data) ---------------- */
+
+/** "phone", "tablet" or "desktop", from the screen size and whether it is a touch screen. */
+function deviceClass(): string {
+  const touch = matchMedia?.('(pointer: coarse)').matches;
+  const short = Math.min(screen.width, screen.height);
+  return touch && short < 600 ? 'phone' : touch && short < 1100 ? 'tablet' : 'desktop';
+}
+
+/** Where the visit came from: another site's name, "internal" (with the page type) or "direct". Never the full address. */
+function referrer(): { ref: string; ref_page?: string } {
+  try {
+    if (!document.referrer) return { ref: 'direct' };
+    const r = new URL(document.referrer);
+    if (r.host === location.host) return { ref: 'internal', ref_page: pageTypeOf(r.pathname) };
+    return { ref: r.protocol.startsWith('http') ? r.hostname.replace(/^www\./, '') : r.protocol.replace(':', '') };
+  } catch {
+    return { ref: 'unknown' };
+  }
+}
+
+function campaign(): Props {
+  const q = new URLSearchParams(location.search);
+  return { utm_source: q.get('utm_source')?.slice(0, 50), utm_medium: q.get('utm_medium')?.slice(0, 50), utm_campaign: q.get('utm_campaign')?.slice(0, 50) };
+}
+
+const pageContext: Props = { entity: cfg.entity || undefined, town: cfg.town || undefined, category: cfg.category || undefined };
+
+queue({ name: 'page_view', props: { page_type: cfg.pageType, device: deviceClass(), ...referrer(), ...campaign(), ...pageContext } });
+if (cfg.eventSlug) track('view_event', { event_status: html.dataset.eventStatus, days_until: Number(html.dataset.daysUntil ?? '') || undefined, ...pageContext });
+
+/* ---------------- searches (event list and directory search boxes) ---------------- */
+
+let lastTerm = '';
+function visibleResults(): number {
+  return document.querySelectorAll('[data-upcoming-list] [data-event]:not([hidden]), [data-dir-item]:not([hidden])').length;
+}
+function sendSearch(input: HTMLInputElement, method: string) {
+  const term = input.value.trim().toLowerCase().replace(/\s+/g, ' ').slice(0, 60);
+  if (term.length < 2 || term === lastTerm) return;
+  lastTerm = term;
+  // Never send something that looks like an email address or a phone number.
+  const safe = /@|\d{7,}|\d{3}[\s.-]\d{3,4}/.test(term) ? '(hidden)' : term;
+  // Wait a moment so the list has finished filtering before counting what is left.
+  window.setTimeout(() => track('search', { term: safe, results: visibleResults(), location: cfg.pageType, method }), 400);
+}
+let searchTimer: number | undefined;
+document.addEventListener(
+  'input',
+  (e) => {
+    const el = e.target as HTMLInputElement | null;
+    if (!el?.matches?.('input[type="search"][name="q"]')) return;
+    window.clearTimeout(searchTimer);
+    searchTimer = window.setTimeout(() => sendSearch(el, 'typed'), 1500);
+  },
+  true,
+);
+// Searches that arrive in the address (for example from the home page search box).
+const urlSearch = new URLSearchParams(location.search).get('q');
+if (urlSearch) {
+  const box = document.querySelector<HTMLInputElement>('input[type="search"][name="q"]');
+  if (box) window.setTimeout(() => sendSearch(box, 'link'), 1200);
+}
+
+/* ---------------- sign-in clicks and script errors ---------------- */
+
+document.addEventListener('click', (e) => {
+  const a = (e.target as Element | null)?.closest<HTMLAnchorElement>('a[href^="/.auth/login"]');
+  if (a) track('sign_in_start', { location: a.closest<HTMLElement>('[data-track-location]')?.dataset.trackLocation ?? (a.closest('header') ? 'header' : a.closest('footer') ? 'footer' : cfg.pageType) });
+});
+
+let errorsSent = 0;
+function reportError(message: string, file?: string, line?: number) {
+  if (errorsSent >= 5 || /ResizeObserver loop|Script error\.?$/i.test(message)) return;
+  // Only our own scripts (browser add-ons and other sites' scripts are not our bugs).
+  if (file && !file.startsWith(location.origin)) return;
+  errorsSent++;
+  track('js_error', { message: message.slice(0, 100), source: file ? file.split('/').pop()?.split('?')[0] : 'unknown', line });
+}
+addEventListener('error', (e) => reportError(e.message || 'error', e.filename, e.lineno));
+addEventListener('unhandledrejection', (e) => {
+  const r = e.reason as { message?: string } | string | undefined;
+  reportError(`Unhandled: ${typeof r === 'string' ? r : r?.message ?? 'promise rejected'}`);
+});
 
 // Consent banner
 const banner = document.querySelector<HTMLElement>('[data-consent]');

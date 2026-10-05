@@ -2,9 +2,16 @@
   "version": "2.0",
   "logging": {
     "applicationInsights": {
-      "samplingSettings": { "isEnabled": true, "excludedTypes": "Request" }
+      "samplingSettings": { "isEnabled": true, "excludedTypes": "Request" },
+      "enablePerformanceCountersCollection": false
     },
-    "logLevel": { "default": "Warning", "Function": "Information" }
+    "logLevel": {
+      "default": "Warning",
+      "Host.Results": "Information",
+      "Function": "Warning",
+      "Function.roles": "Information",
+      "Microsoft.Azure.WebJobs.Script.Diagnostics.HealthChecks": "None"
+    }
   },
   "extensionBundle": {
     "id": "Microsoft.Azure.Functions.ExtensionBundle",
