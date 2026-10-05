@@ -6,7 +6,7 @@ const { generateKeyPairSync } = require('node:crypto');
 const { createFakeStore } = require('./fake-store');
 const { createFakeGitHub } = require('./fake-github');
 
-process.env.ALLOWED_HOSTS = 'longisland.dance';
+process.env.ALLOWED_HOSTS = 'longisland.dance,preview-37.azurestaticapps.net';
 process.env.REVIEW_SECRET_KEY = 'x'.repeat(48);
 delete process.env.GITHUB_APP_ID;
 delete process.env.GITHUB_APP_PRIVATE_KEY;
@@ -23,6 +23,8 @@ const FILES = {
   'src/content/events/2099-10-20-listed.json': ev({ title: 'Listed already', start: '2099-10-20T20:00', venueId: 'v1', status: 'active', confidence: 1 }),
   'src/content/sources/s1.json': `${JSON.stringify({ name: 'Source One', url: 'https://one.example/', type: 'html', adapter: 'htmllist', cadence: 'weekly', enabled: true, attribution: 'One', lastStatus: 'error', lastMessage: 'HTTP 500' }, null, 2)}\n`,
   'src/content/sources/s2.json': `${JSON.stringify({ name: 'Source Two', url: 'https://two.example/', type: 'html', adapter: 'htmllist', enabled: false, attribution: 'Two', catalogStatus: 'needs-permission', permission: { status: 'needed', note: 'robots.txt says no' }, reviewNotes: 'Blocked.' }, null, 2)}\n`,
+  'src/content/sources/s3.json': `${JSON.stringify({ name: 'Club Three', url: 'https://clubthree.example/events', type: 'html', adapter: 'htmllist', enabled: false, attribution: 'Three', catalogStatus: 'needs-permission', permission: { status: 'needed' }, defaults: { organizerId: 'org3' } }, null, 2)}\n`,
+  'src/content/organizers/org3.json': '{\n  "name": "Club Three",\n  "email": "hello@clubthree.example"\n}\n',
   'src/content/venues/v1.json': '{\n  "name": "Venue One"\n}\n',
   'src/content/venues/v2.json': '{\n  "name": "Venue Two"\n}\n',
   'src/content/performers/p1.json': '{\n  "name": "Despyre"\n}\n',
@@ -40,7 +42,18 @@ const FILES = {
 };
 
 const gh = createFakeGitHub(REPO, FILES);
-globalThis.fetch = gh.fetch;
+const { createFakeAgentMail } = require('./fake-agentmail');
+const mail = createFakeAgentMail('site@agentmail.to');
+globalThis.fetch = async (url, init) => {
+  const u = String(url);
+  if (u.startsWith('https://api.agentmail.to/')) return mail.fetch(u, init);
+  if (u.startsWith('https://raw.githubusercontent.com/')) {
+    const path = decodeURIComponent(u.replace(`https://raw.githubusercontent.com/${REPO}/main/`, ''));
+    const text = gh.file(path);
+    return text === undefined ? new Response('404', { status: 404 }) : new Response(text, { status: 200 });
+  }
+  return gh.fetch(url, init);
+};
 
 const store = require('../src/lib/store');
 const fake = createFakeStore();
@@ -91,6 +104,10 @@ const ROUTES = [
   ['reviewCopilot', 'POST', '/api/review/copilot', { title: 'Research a band', body: 'Please research The Max.' }],
   ['reviewLog', 'GET', '/api/review/log'],
   ['reviewGithubStart', 'POST', '/api/review/github/start', {}],
+  ['reviewOutreach', 'GET', '/api/review/outreach'],
+  ['reviewOutreachDraft', 'GET', '/api/review/outreach/draft?key=source:s3&kind=permission'],
+  ['reviewOutreachSend', 'POST', '/api/review/outreach/send', { key: 'source:s3', kind: 'permission', to: 'info@clubthree.example', subject: 'Hello there', text: 'A message that is long enough to send.' }],
+  ['reviewOutreachThread', 'GET', '/api/review/outreach/thread?id=t1'],
 ];
 
 test('every review route is under /api/review/ and needs the admin role (except GitHub\'s return address)', () => {
@@ -453,4 +470,128 @@ test('a new app stored by another instance ("Start over") is picked up when the 
   s = await github.status();
   assert.equal(s.slug, 'long-island-dance-review-center-2', 'the stored app is read again after the failed lookup');
   gh.installed = true;
+});
+
+/* ---------------- emails to website owners (AgentMail) ---------------- */
+
+const PREVIEW = 'https://preview-37.azurestaticapps.net';
+async function callAt(base, name, path, { method = 'GET', body } = {}) {
+  const headers = { origin: base, 'x-ms-client-principal': ADMIN, 'x-ms-original-url': base + path };
+  if (body !== undefined) headers['content-type'] = 'application/json';
+  const res = await handlers[name](new Request(base + path, { method, headers, body: body === undefined ? undefined : JSON.stringify(body) }), ctx);
+  return { status: res.status, body: res.body ? JSON.parse(res.body) : null };
+}
+const ask = { key: 'source:s3', kind: 'permission', to: 'hello@clubthree.example', subject: 'Can we list your events on Long Island Dance Events?', text: 'Hello,\n\nMay we list your public events?\n\nThank you!\n\nMike Richter' };
+
+test('outreach: drafts use a published contact address and plain words', async () => {
+  const r = await call('reviewOutreachDraft', '/api/review/outreach/draft?key=source:s3&kind=permission', { user: ADMIN });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.equal(r.body.to, 'hello@clubthree.example', "the organizer's published email");
+  assert.equal(r.body.toFrom, 'the organizer');
+  assert.match(r.body.text, /https:\/\/clubthree\.example\/events/);
+  for (const must of [/dates, times, places and prices/, /our own short summary/, /robots\.txt/, /reply "no"/, /Mike Richter/, /https:\/\/longisland\.dance\/sources\//]) assert.match(r.body.text, must);
+  assert.equal((await call('reviewOutreachDraft', '/api/review/outreach/draft?key=source:nope&kind=permission', { user: ADMIN })).status, 404);
+  assert.equal((await call('reviewOutreachDraft', '/api/review/outreach/draft?key=test:s3&kind=permission', { user: ADMIN })).status, 400);
+});
+
+test('outreach: nothing is sent without the key, or from a preview (dry run)', async () => {
+  delete process.env.AGENTMAIL_API_KEY;
+  delete process.env.AGENTMAIL_INBOX;
+  let r = await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: ask });
+  assert.equal(r.status, 200);
+  assert.deepEqual([r.body.dryRun, r.body.reason], [true, 'not-configured']);
+  process.env.AGENTMAIL_API_KEY = 'am_test_key';
+  process.env.AGENTMAIL_INBOX = 'site@agentmail.to';
+  r = await callAt(PREVIEW, 'reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', body: ask });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.deepEqual([r.body.dryRun, r.body.reason, r.body.wouldSend.to], [true, 'preview', 'hello@clubthree.example']);
+  assert.deepEqual(mail.sends, [], 'a preview never sends');
+  assert.equal(fake.rows('ReviewState', 'outreach').length, 0, 'a dry run is not counted as a request');
+});
+
+test('outreach: sends from production with labels, records the request without the address, and limits repeats', async () => {
+  const before = gh.commitCount();
+  let r = await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: ask });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.equal(r.body.sent, true);
+  assert.equal(r.body.recorded, true);
+  const sent = mail.sends.at(-1);
+  assert.deepEqual(sent.to, ['hello@clubthree.example']);
+  assert.deepEqual(sent.labels, ['outreach', 'source-s3', 'kind-permission']);
+  assert.match(sent.html, /<p>Hello,<\/p>/);
+  assert.ok(mail.calls.every((c) => c.auth === 'Bearer am_test_key'));
+  assert.equal(gh.commitCount(), before + 1);
+  const s3 = JSON.parse(gh.file('src/content/sources/s3.json'));
+  assert.equal(s3.permission.status, 'requested');
+  assert.match(s3.permission.note, /^Asked by email \(an address at clubthree\.example\) on \d{4}-\d{2}-\d{2} from the review center\.$/);
+  assert.ok(!gh.file('src/content/sources/s3.json').includes('hello@clubthree.example'), 'the address stays out of the public repository unless the owner says it is published');
+  assert.ok(!gh.commits.get(gh.head).message.includes('hello@'));
+  r = await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: ask });
+  assert.equal(r.status, 409, 'one request per source per 30 days');
+  assert.match(r.body.message, /after 30 days/);
+  r = await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: { ...ask, kind: 'followup' } });
+  assert.equal(r.status, 409, 'a follow-up waits 14 days');
+  const row = fake.rows('ReviewState', 'outreach').find((x) => x.rowKey === 'source~s3');
+  await fake.table('ReviewState').merge({ partitionKey: 'outreach', rowKey: 'source~s3', lastSentAt: new Date(Date.now() - 15 * 86400000).toISOString() });
+  r = await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: { ...ask, kind: 'followup', subject: 'Re: hello', text: 'Hello again, just checking in about my note.' } });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.equal(mail.sends.at(-1).kind, 'reply', 'the follow-up answers the first email, in the same conversation');
+  assert.equal(r.body.threadId, row.threadId);
+  r = await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: { ...ask, kind: 'followup', text: 'Hello again, one more time please.' } });
+  assert.equal(r.status, 409, 'one follow-up only');
+  r = await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: { ...ask, kind: 'followup', text: 'Hello again, one more time please.', override: true } });
+  assert.equal(r.status, 200, 'unless the owner says "Send anyway"');
+  assert.equal((await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: { ...ask, to: 'not an email' } })).status, 400);
+});
+
+test('outreach: answers show in the review center and are marked read when opened', async () => {
+  const row = fake.rows('ReviewState', 'outreach').find((x) => x.rowKey === 'source~s3');
+  mail.receive(row.threadId, 'Club Three <hello@clubthree.example>', 'Yes, go ahead! Our calendar feed is https://clubthree.example/cal.ics');
+  let r = await call('reviewOutreach', '/api/review/outreach', { user: ADMIN });
+  assert.equal(r.status, 200);
+  assert.equal(r.body.canSend, true);
+  const t = r.body.threads.find((x) => x.key === 'source:s3');
+  assert.deepEqual([t.hasReply, t.unread], [true, true]);
+  assert.equal(r.body.sent.find((x) => x.key === 'source:s3').followups, 2);
+  r = await call('reviewOutreachThread', `/api/review/outreach/thread?id=${encodeURIComponent(t.threadId)}`, { user: ADMIN });
+  assert.equal(r.status, 200);
+  assert.deepEqual(r.body.messages.map((x) => x.direction), ['sent', 'sent', 'sent', 'received']);
+  assert.match(r.body.messages.at(-1).text, /cal\.ics/);
+  r = await call('reviewOutreach', '/api/review/outreach', { user: ADMIN });
+  assert.equal(r.body.threads.find((x) => x.key === 'source:s3').unread, false, 'opened, so no longer new');
+  // "They said yes" and "Switch on" in one go: both decisions land in the file.
+  r = await call('reviewSourcesDecide', '/api/review/sources', { method: 'POST', user: ADMIN, body: { decisions: [{ id: 's3', action: 'permission', status: 'granted', note: 'They said yes', feedUrl: 'https://clubthree.example/cal.ics' }, { id: 's3', action: 'enable' }] } });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  const s3 = JSON.parse(gh.file('src/content/sources/s3.json'));
+  assert.deepEqual([s3.permission.status, s3.permission.feedUrl, s3.enabled], ['granted', 'https://clubthree.example/cal.ics', true]);
+  r = await call('reviewSourcesDecide', '/api/review/sources', { method: 'POST', user: ADMIN, body: { decisions: [{ id: 's1', action: 'permission', status: 'no-reply', note: 'No answer after a month' }] } });
+  assert.equal(JSON.parse(gh.file('src/content/sources/s1.json')).permission.status, 'no-reply');
+});
+
+test('outreach: a test email goes only to the site inbox; corrections can go to an organizer', async () => {
+  let r = await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: { ...ask, kind: 'test', to: 'someone@else.example' } });
+  assert.equal(r.status, 400);
+  r = await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: { ...ask, kind: 'test', to: 'site@agentmail.to' } });
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.deepEqual(mail.sends.at(-1).labels, ['outreach', 'test-s3', 'kind-test']);
+  gh.issues.push({ number: 12, state: 'open', title: 'Fix listing: wrong time', labels: [{ name: 'listing-correction' }], html_url: `https://github.com/${REPO}/issues/12`, created_at: new Date().toISOString(), user: { login: 'dancer' }, body: '### Page address\n\nhttps://longisland.dance/events/2099-10-10-no-time/\n\n### What is wrong?\n\nStarts at 8' });
+  r = await call('reviewOutreachDraft', '/api/review/outreach/draft?key=issue:12&kind=correction', { user: ADMIN });
+  assert.equal(r.status, 200);
+  assert.match(r.body.text, /2099-10-10-no-time/);
+  r = await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: { key: 'issue:12', kind: 'correction', to: 'info@org.example', subject: r.body.subject, text: r.body.text } });
+  assert.equal(r.status, 200);
+  assert.deepEqual(mail.sends.at(-1).labels, ['outreach', 'issue-12', 'kind-correction']);
+  assert.equal((await call('reviewOutreachSend', '/api/review/outreach/send', { method: 'POST', user: ADMIN, body: { key: 'issue:12', kind: 'permission', to: 'info@org.example', subject: 'x y z', text: 'A message that is long enough.' } })).status, 400);
+  const log = await call('reviewLog', '/api/review/log', { user: ADMIN });
+  const actions = log.body.entries.map((e) => e.action);
+  for (const a of ['outreach.dryrun', 'outreach.permission', 'outreach.followup', 'outreach.test', 'outreach.correction']) assert.ok(actions.includes(a), a);
+  assert.ok(!JSON.stringify(log.body.entries).includes('hello@clubthree.example'), 'the log names only the domain');
+});
+
+test('outreach: the HTML copy keeps lists inside a paragraph block and links the addresses', () => {
+  const { toHtml } = require('../src/lib/outreach');
+  const html = toHtml("Here's what that means:\n- We use dates.\n- We link back: https://longisland.dance/sources/\nThanks <b>!</b>");
+  assert.match(html, /<p>Here&#39;s what that means:<\/p>|<p>Here's what that means:<\/p>/);
+  assert.match(html, /<ul><li>We use dates\.<\/li><li>We link back: <a href="https:\/\/longisland\.dance\/sources\/">https:\/\/longisland\.dance\/sources\/<\/a><\/li><\/ul>/);
+  assert.match(html, /<p>Thanks &lt;b&gt;!&lt;\/b&gt;<\/p>/, 'text is escaped');
 });

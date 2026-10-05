@@ -97,3 +97,12 @@
   .review-actions .btn { flex: 1 1 100%; }
   .review-bulk { bottom: 0.25rem; }
 }
+.review-compose { display: grid; gap: var(--space-3); flex: 1 1 100%; min-width: 0; }
+.review-compose .review-form { min-width: 0; }
+.review-compose .review-form > * { min-width: 0; overflow-wrap: anywhere; }
+.review-mail { display: grid; gap: 0.35rem; }
+.review-mail--in > strong { color: var(--c-ok); }
+.review-email-preview { max-height: none; overflow: visible; }
+.review-email-preview p { margin: 0 0 0.6rem; }
+.review-email-preview ul { margin: 0 0 0.6rem; padding-left: 1.3rem; }
+.review-conversation > summary.review-state--bad { color: var(--c-bad); }

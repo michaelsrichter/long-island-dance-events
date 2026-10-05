@@ -572,10 +572,12 @@ collections:
               - { label: 'Asked, waiting for an answer', value: requested }
               - { label: 'Allowed', value: granted }
               - { label: 'Said no', value: denied }
+              - { label: 'Asked, no answer', value: no-reply }
           - { label: 'Note', name: note, widget: text, required: false }
           - { label: 'Asked on', name: requestedAt, <<: *date, required: false }
           - { label: 'Answered on', name: decidedAt, <<: *date, required: false }
           - { label: 'Feed they gave us', name: feedUrl, widget: string, required: false }
+      - { label: 'Public contact email (for permission requests)', name: contactEmail, widget: string, required: false, hint: 'Only an address the website publishes, for example on its Contact page.' }
       - { label: 'Credit shown on the Sources page', name: attribution, widget: text }
       - { label: 'Description', name: description, widget: text, required: false }
       - { label: 'Seconds between requests', name: rateLimitSeconds, widget: number, value_type: int, min: 1, max: 60, default: 3 }

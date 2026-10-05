@@ -96,6 +96,8 @@ Common settings:
 | `REVIEW_SECRET_KEY` | for the review center | 64 random characters, the same on every environment. Encrypts the review center's GitHub App key in the `ReviewState` table. Set on 2026-10-05; changing it means connecting GitHub again. |
 | `GITHUB_APP_ID`, `GITHUB_APP_PRIVATE_KEY` | optional | Use a GitHub App from settings instead of the one stored by the setup button (key as PEM or base64 PEM). `GITHUB_APP_INSTALLATION_ID` optional. |
 | `REVIEW_REPO`, `REVIEW_BRANCH` | optional | Default `michaelsrichter/long-island-dance-events` and `main`. |
+| `AGENTMAIL_API_KEY`, `AGENTMAIL_INBOX` | **production only** | The site's AgentMail inbox (the same as the GitHub secrets of the same names, decision P44). The review center sends permission emails from it after the owner confirms (decision P53). Set them on the `default` environment only. Even if a preview copies them, only requests to `OUTREACH_HOST` send. |
+| `OUTREACH_HOST` | optional | The one address that may send email, default `longisland.dance`. Previews and local runs do a dry run instead. |
 
 ## Review center: GitHub App (owner, once)
 
@@ -108,7 +110,20 @@ The review center (`/moderate/`, decision P51) writes to GitHub as a GitHub App 
 
 The app is free. To remove it: GitHub, Settings, Applications (installed apps), then Developer settings, GitHub Apps. To set it up again, press **Connect to GitHub** again (it replaces the stored key). For a manual setup, put the app's id and private key in `GITHUB_APP_ID` and `GITHUB_APP_PRIVATE_KEY` instead. Pull-request previews share the same Storage account, so they use the same app; decisions made on a preview change the real site.
 
-The `ReviewState` table is in `infra/main.bicep`; on the live account it was created with `az storage table create --name ReviewState --account-name stlongislanddance`. The older `GITHUB_ADMIN_CLIENT_ID`/`_SECRET` settings (a planned GitHub sign-in for `/admin/`) were removed on 2026-10-05; the GitHub OAuth app "Long Island Dance admin sign-in" is unused and can be deleted.
+The `ReviewState` table is in `infra/main.bicep`; on the live account it was created with `az storage table create --name ReviewState --account-name stlongislanddance`.
+
+### Permission emails (AgentMail, production only)
+
+The review center emails website owners from the site's AgentMail inbox (decision P53). To set it up again:
+
+```powershell
+$app = 'swa-li-dance-events-web'; $rg = 'rg-li-dance-events-web'
+# Production only. Paste the values from the AgentMail console; never put them in a file or chat.
+az staticwebapp appsettings set -n $app -g $rg --environment-name default --setting-names "AGENTMAIL_API_KEY=<key>" "AGENTMAIL_INBOX=<inbox>@agentmail.to"
+```
+
+- Every email we send has the labels `outreach` and `source-<id>` (or `issue-<n>`, `test-<id>`). The newsletter reader skips every thread with the `outreach` label, so answers are never read as newsletters.
+- The free plan allows 3 inboxes and 100 emails a day, sends from `@agentmail.to`, and adds a "Sent via AgentMail" footer. A custom domain (for example `hello@longisland.dance`) needs the Developer plan (about $20 a month). Then add the domain in the AgentMail console, put the SPF, DKIM, DMARC and MX records it shows into Namecheap (Advanced DNS), verify, and create an inbox on the domain. This is not done yet, because the owner must approve the cost and publishing the address (decisions P13, P53). The older `GITHUB_ADMIN_CLIENT_ID`/`_SECRET` settings (a planned GitHub sign-in for `/admin/`) were removed on 2026-10-05; the GitHub OAuth app "Long Island Dance admin sign-in" is unused and can be deleted.
 
 ## Visitor sign-in and community features
 

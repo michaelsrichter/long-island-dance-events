@@ -1,5 +1,6 @@
 /** Messages from visitors (GitHub issues from the website's forms), with reply-and-close. */
 import { ago, api, button, cmsUrl, dateTimeLabel, details, el, emptyState, errorText, field, link, list, plural, say, settle, sitePages, type Pages } from './core';
+import { composer } from './compose';
 
 export type Message = {
   number: number;
@@ -116,14 +117,23 @@ function draw(root: HTMLElement, d: MessagesData, pages: Pages, onCount: (n: num
       const dl = el('dl', null, 'review-dl');
       for (const [q, a] of sections) dl.append(el('dt', q), el('dd', a));
       li.append(dl);
-    } else if (m.body) li.append(el('blockquote', m.body, 'review-quote'));
+    } else if (m.body) {
+      const quote = el('blockquote', m.body, 'review-quote');
+      quote.tabIndex = 0;
+      li.append(quote);
+    }
     const edit = m.page ? editorLink(m.page, pages) : null;
     li.append(list([m.page ? link(m.page, 'Open the page they mean') : null, edit, link(m.url, 'Open on GitHub')], 'review-links'));
     const help = details('What should I do?', '');
     help.body.append(el('p', k.help));
     li.append(help.box);
 
-    const form = el('form', null, 'review-form');
+    if (m.kind === 'listing-correction') {
+      const tell = details('Tell the organizer too (optional)', 'review-hint');
+      tell.body.append(el('p', "If the organizer's own calendar has the same mistake, a short email helps everyone. You can read and change the email before it goes out.", 'review-hint'));
+      tell.body.append(composer({ key: `issue:${m.number}`, kind: 'correction', label: 'Email the organizer…' }));
+      li.append(tell.box);
+    }    const form = el('form', null, 'review-form');
     const text = el('textarea');
     text.rows = 4;
     text.maxLength = 3000;

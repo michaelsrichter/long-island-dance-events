@@ -294,6 +294,21 @@ async function commitFiles(build, { attempts = 3 } = {}) {
 
 /* ---------- one-time setup (GitHub App manifest flow) ---------- */
 
+/**
+ * A few content files from main, with the app if it is connected, otherwise from the public raw
+ * address (the repository is public). Used where reading must work before the one-time setup.
+ */
+async function readMainFiles(paths) {
+  const token = await installationToken();
+  if (token) return readFiles(await headSha(), paths);
+  const out = {};
+  for (const p of paths) {
+    const res = await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${p.split('/').map(encodeURIComponent).join('/')}`, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(15000) });
+    out[p] = res.ok ? await res.text() : null;
+  }
+  return out;
+}
+
 function manifest(origin) {
   return {
     name: 'Long Island Dance review center',
@@ -342,6 +357,6 @@ async function finishSetup(state, code) {
 
 module.exports = {
   REPO, BRANCH, OWNER, NAME, GitHubError,
-  gh, graphql, headSha, readFolders, readFiles, commitFiles, status, installationToken,
+  gh, graphql, headSha, readFolders, readFiles, readMainFiles, commitFiles, status, installationToken,
   startSetup, finishSetup, manifest, encrypt, decrypt, appJwt, forget,
 };

@@ -105,6 +105,7 @@ function sourceGroup(s) {
   if (perm === 'granted') return 'granted';
   if (perm === 'requested') return 'asked';
   if (perm === 'denied') return 'refused';
+  if (perm === 'no-reply') return 'noreply';
   if (perm === 'needed' || s.catalogStatus === 'needs-permission') return 'permission';
   if (s.catalogStatus === 'seasonal-recheck' || /check again in (april|spring)|once-a-year|recheck in (spring|season)|before summer/i.test(notes)) return 'seasonal';
   if (/venues? we have (not )?researched|unnamed place|venue files?|add a venue|none of its upcoming listings could be used/i.test(notes)) return 'venues';
@@ -128,6 +129,8 @@ function sourceCard(id, s) {
     focus: s.focus || 'dance',
     catalogStatus: s.catalogStatus || '',
     permission: s.permission || null,
+    contactEmail: s.contactEmail || '',
+    defaults: s.defaults || null,
     lastScraped: s.lastScraped || '',
     lastStatus: s.lastStatus || 'never',
     lastMessage: s.lastMessage || '',
