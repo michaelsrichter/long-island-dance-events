@@ -18,3 +18,33 @@ aliases:
   - Strict Tempo
 summary: Classic partner dances that travel around the floor, like the waltz and foxtrot.
 music: Waltzes, big-band standards, ballads
+description: Ballroom here means the smooth partner dances that travel counterclockwise around the floor, like the waltz, foxtrot, quickstep and Viennese waltz. Couples usually dance in a closed hold. The waltz came from German-speaking Europe in the 1700s, and the foxtrot began in the United States in the 1910s.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/Ballroom_dance
+photos:
+  - image: ../../assets/entities/styles/ballroom-1.webp
+    alt: Young adult couples practice the waltz in a closed hold during a ballroom dance class in a gym
+    credit: "Photo: che, CC BY-SA 2.5, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Ballroom_dance_lesson.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/2.5
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Ballroom_dance_lesson.jpg/1280px-Ballroom_dance_lesson.jpg
+    focus: 58% 35%
+  - image: ../../assets/entities/styles/ballroom-2.webp
+    alt: Older couples waltz on a stone plaza in a park while a brass band plays in the foreground
+    credit: "Photo: Vladimir Vyatkin, CC BY 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Old_people_dancing_waltz_(2010-07-24).jpg
+    licenseUrl: https://creativecommons.org/licenses/by/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Old_people_dancing_waltz_%282010-07-24%29.jpg/1280px-Old_people_dancing_waltz_%282010-07-24%29.jpg
+    focus: 55% 35%
+evidence:
+  - url: https://en.wikipedia.org/wiki/Ballroom_dance
+    note: Wikipedia describes ballroom dance as a set of partner dances done both socially and in competition.
+  - url: https://en.wikipedia.org/wiki/Waltz
+    note: "Wikipedia: the waltz is a triple-time dance in closed position from German-speaking Europe in the 18th century."
+  - url: https://en.wikipedia.org/wiki/Foxtrot
+    note: "Wikipedia: the foxtrot is a smooth, traveling dance developed in the 1910s and danced to big band music."
+  - url: https://commons.wikimedia.org/wiki/File:Ballroom_dance_lesson.jpg
+    note: "Commons file page: waltz at a summer dance school (TS Hes, Czech Republic), photo by User:Che, CC BY-SA 2.5."
+  - url: https://commons.wikimedia.org/wiki/File:Old_people_dancing_waltz_(2010-07-24).jpg
+    note: "Commons file page: older people dancing the waltz in Alexander Garden, Moscow; author listed as Vladimir Vyatkin, CC BY 4.0."

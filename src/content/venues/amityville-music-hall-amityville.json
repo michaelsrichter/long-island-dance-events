@@ -11,9 +11,39 @@
   "postalCode": "11701",
   "website": "https://amh.live/",
   "kind": "concert-hall",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://amh.live/ (event data on the venue's own site).",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Sources: amh.live, amityvillechamberofcommerce.org, crescat.io.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Address confirmed on the venue's own site and Google Maps; Amityville is in Suffolk County (Town of Babylon). The site has no contact page, phone or email; the phone is the one on Google Maps. Older directories list (631) 397-0578 and amh198@gmail.com, and the Chamber of Commerce lists theamityvillemusichall@gmail.com with an owner's name and a cell number; since none of these appear on the venue's own site, email is left blank (owner may choose one). No hours are published (shows run on event nights only). This is a concert club for punk/emo/hardcore/indie shows rather than a social-dance venue; the site says nothing about a dance floor. The site shows only event flyers and logos, no venue photos, so no photos were recorded. Twitter link from the site converted to x.com.",
   "latitude": 40.679065,
   "longitude": -73.417396,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/amh.live198",
+  "instagramUrl": "https://www.instagram.com/amh.live198/",
+  "xUrl": "https://x.com/amh_live198",
+  "phone": "(631) 572-8929",
+  "description": "A small concert club on Broadway in downtown Amityville, a short walk from the LIRR station. It books local and touring bands, mostly punk, emo, hardcore and indie rock, and most shows are open to ages 16 and up.",
+  "logo": {
+    "image": "../../assets/entities/venues/amityville-music-hall-amityville-logo.webp",
+    "alt": "Amityville Music Hall logo: the letters AMH in bold black type inside a black oval outline",
+    "credit": "Logo: Amityville Music Hall",
+    "creditUrl": "https://amh.live/",
+    "imageSource": "https://amh.live/wp-content/uploads/2023/01/AMH-logo-oval-black.png"
+  },
+  "evidence": [
+    {
+      "url": "https://amh.live/",
+      "note": "Venue's own site footer gives 198 Broadway, Amityville, NY 11701, links Facebook, Instagram and X (amh.live198 / amh_live198) and lists ticketed shows through October 2026."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=2920196204512709795",
+      "note": "Google Maps lists Amityville Music Hall (event venue) at 198 Broadway, Amityville, NY 11701, phone (631) 572-8929, website amh.live. No hours shown."
+    },
+    {
+      "url": "https://amityvillechamberofcommerce.org/manage-listings/the-amityville-music-hall/",
+      "note": "Amityville Chamber of Commerce member listing confirms the venue at 198 Broadway with website amh.live."
+    },
+    {
+      "url": "https://crescat.io/venues/amityville-music-hall",
+      "note": "Venue directory describes it as a live music club a few minutes' walk from the Amityville LIRR station."
+    }
+  ]
 }

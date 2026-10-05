@@ -1,5 +1,75 @@
 {
   "name": "Radio Active",
   "type": "band",
-  "reviewNotes": "Added automatically from Radio Active - events calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Radio Active - events calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Facebook page found via a page video post (handle radioactivebandny, same as the YouTube handle and email; hashtags match a female-fronted 80s/90s/00s cover band); it is not linked from the band's site. No Instagram found. Not the same as RadioActive (radioactive-band.com, an oldies/country dance band) or the upstate NY RadioActive (@RadioActiveNY on YouTube). The band also plays as 'Radio Active Acoustic Trio' and 'Radio Active PM Duo'. Photos are individual members performing; the site has no full-band photo. Skipped the Newsday crowd image (newspaper cover/text, likely Newsday's copyright).",
+  "website": "https://radioactiveny.com/",
+  "facebookUrl": "https://www.facebook.com/radioactivebandny/",
+  "youtubeUrl": "https://www.youtube.com/@radioactivebandny",
+  "bookingUrl": "https://radioactiveny.com/contact",
+  "email": "radioactivebandny@gmail.com",
+  "phone": "(631) 445-6670",
+  "genres": [
+    "80s rock",
+    "90s rock",
+    "2000s pop rock",
+    "dance hits",
+    "cover band"
+  ],
+  "description": "A Long Island cover band with a female lead singer that plays rock, pop and dance hits from the 1980s, 1990s and 2000s, such as Journey, Bon Jovi, P!nk, No Doubt and Katy Perry. It also plays smaller shows as an acoustic trio or duo.",
+  "logo": {
+    "image": "../../assets/entities/performers/radio-active-logo.webp",
+    "alt": "Radio Active logo: the band name in purple letters above and below a green radiation symbol with a microphone in the middle",
+    "credit": "Logo: Radio Active",
+    "creditUrl": "https://radioactiveny.com/",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/565057/abc5b69f92f57655b0796379b25e75bfcdb16c9b/original/radio-active-symbol-updated-no-background.png/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/radio-active-1.webp",
+      "alt": "Black-and-white photo of Radio Active's lead singer singing into a microphone on stage",
+      "credit": "Photo: Radio Active (website)",
+      "creditUrl": "https://radioactiveny.com/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/565057/107e3ef5cf7b6eaff75f29a3c3c7997935224f5a/original/img-0024.jpeg/!!/b%3AW1sicmVzaXplIiwxMDAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 25%"
+    },
+    {
+      "image": "../../assets/entities/performers/radio-active-2.webp",
+      "alt": "Black-and-white photo of Radio Active's keyboard player smiling while she plays and sings",
+      "credit": "Photo: Radio Active (website)",
+      "creditUrl": "https://radioactiveny.com/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/565057/350113b13cde0cd6d267f0bf77c549ecf47a7ad1/original/img-0022.jpeg/!!/b%3AW1siZXh0cmFjdCIseyJsZWZ0IjowLCJ0b3AiOjYyLCJ3aWR0aCI6MTA3NSwiaGVpZ2h0IjoxMzA0fV0sWyJyZXNpemUiLDEwMDBdLFsibWF4Il0sWyJ3ZSJdXQ%3D%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "45% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/radio-active-3.webp",
+      "alt": "Black-and-white photo of Radio Active's drummer playing a drum kit on stage",
+      "credit": "Photo: Radio Active (website)",
+      "creditUrl": "https://radioactiveny.com/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/565057/c4267bf3b27ae6de41666651e0e0a80d99583366/original/img-0023.png/!!/b%3AW1sicmVzaXplIiwxMDAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png",
+      "focus": "35% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://radioactiveny.com/",
+      "note": "Band's own site calls it a Long Island 80s/90s/00s female-fronted cover band and lists shows at Popei's Coram, The Villager Farmingdale and Daisy's Patchogue, matching our playsAt venues."
+    },
+    {
+      "url": "https://radioactiveny.com/bio",
+      "note": "Bio: playing since 2016 around the tri-state area; 3-hour 80s/90s/2000s cover set (Journey, P!nk, Guns N' Roses, Katy Perry, Bon Jovi, No Doubt); featured in Newsday's Explore LI."
+    },
+    {
+      "url": "https://radioactiveny.com/contact",
+      "note": "Contact page publishes a bookings email and a 631 phone number for bookings and info."
+    },
+    {
+      "url": "https://www.youtube.com/@radioactivebandny",
+      "note": "YouTube channel 'Radio Active Band' describes a female-fronted 80s/90s/00s cover band from Long Island and links radioactiveny.com."
+    },
+    {
+      "url": "https://www.facebook.com/radioactivebandny/videos/here-are-our-upcoming-shows-hope-to-see-you-there-radioactiveband-radioactive-co/934009218536825/",
+      "note": "Shows the Facebook page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: radioactiveny.com, youtube.com, facebook.com."
 }

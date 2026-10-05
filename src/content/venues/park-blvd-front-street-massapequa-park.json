@@ -34,14 +34,34 @@
     "policy": "allowed"
   },
   "description": "The downtown stretch of Park Boulevard by the Massapequa Park train station, closed to traffic for the village's yearly street fair with vendors, food trucks, kids' rides and live music.",
-  "factsSource": "Checked October 3, 2026. Source: oysterbaytoday.com.",
+  "factsSource": "Checked October 4, 2026. Sources: oysterbaytoday.com, facebook.com, masspk.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Park+Boulevard+and+Front+Street%2C+Massapequa+Park%2C+NY+11762",
   "kind": "festival",
   "latitude": 40.6778728,
   "longitude": -73.4544971,
   "phone": "(516) 798-0244",
   "postalCode": "11762",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Best match: Ira's 'Octoberfest Fair' on Oct 4 at 'Mass Park LIRR' looks like the Massapequa Park Street Fair by the station. We could not confirm Redneck Romance or Fivestone on the fair's lineup. Phone is the Village of Massapequa Park office. Rain date Oct 11.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Best match: Ira's 'Octoberfest Fair' on Oct 4 at 'Mass Park LIRR' looks like the Massapequa Park Street Fair by the station. We could not confirm Redneck Romance or Fivestone on the fair's lineup. Phone is the Village of Massapequa Park office. Rain date Oct 11.\n\nDirectory research 2026-10-04: This is a downtown street location used for the village's yearly street fair, not a building, so there are no hours, logo or venue photos. Website and Facebook are the Village of Massapequa Park's (the organizer). Village Hall itself is at 151 Front Street. Email left out: the fair listing gives villclerk@masspk.com, while search results show villclerk@masspkny.gov after the domain change; we could not confirm on the village site because of its bot check. The village seal could be used as a logo, but we could not download it for the same reason. Current description still fits.",
   "state": "NY",
-  "town": "Massapequa Park"
+  "town": "Massapequa Park",
+  "website": "https://masspkny.gov/",
+  "facebookUrl": "https://www.facebook.com/MassapequaParkVillage/",
+  "evidence": [
+    {
+      "url": "https://oysterbaytoday.com/obt-event/massapequa-park-street-fair-2026/",
+      "note": "Town of Oyster Bay events site: Massapequa Park Street Fair presented by the Village of Massapequa Park, Sunday Oct 4, 2026, 10:30 AM-4:30 PM, Park Blvd and Front Street north of Sunrise Highway, rain date Oct 11; contact 516-798-0244."
+    },
+    {
+      "url": "https://www.facebook.com/MassapequaParkVillage/",
+      "note": "Official Facebook page 'Incorporated Village of Massapequa Park' (about 5,000 followers), which posts village news and events."
+    },
+    {
+      "url": "https://www.masspk.com/",
+      "note": "The village's old web address now redirects to masspkny.gov (the new site is behind a Cloudflare bot check, so we could not read it)."
+    },
+    {
+      "url": "https://www.google.com/maps/place/Park+Blvd+%26+Front+St,+Massapequa+Park,+NY+11762/@40.6779563,-73.4560929,17z",
+      "note": "Shows the ZIP code."
+    }
+  ]
 }

@@ -6,12 +6,28 @@ interface Props {
   crumbs?: { name: string; href: string }[];
 }
 const { title, lede, crumbs } = Astro.props;
+// Detail pages for venues, bands, teachers, organizers and styles can pass a photo or logo (slot="media").
+const hasMedia = Astro.slots.has('media');
 ---
-<header class="page-header">
-  <div class="container">
-    {crumbs && <Breadcrumbs items={crumbs} />}
-    <h1>{title}</h1>
-    {lede && <p class="page-header__lede">{lede}</p>}
-    <slot />
-  </div>
-</header>
+{hasMedia ? (
+  <header class="page-header page-header--media">
+    <div class="container page-header__grid">
+      {crumbs && <div class="page-header__crumbs"><Breadcrumbs items={crumbs} /></div>}
+      <div class="page-header__media"><slot name="media" /></div>
+      <div class="page-header__text">
+        <h1>{title}</h1>
+        {lede && <p class="page-header__lede">{lede}</p>}
+        <slot />
+      </div>
+    </div>
+  </header>
+) : (
+  <header class="page-header">
+    <div class="container">
+      {crumbs && <Breadcrumbs items={crumbs} />}
+      <h1>{title}</h1>
+      {lede && <p class="page-header__lede">{lede}</p>}
+      <slot />
+    </div>
+  </header>
+)}

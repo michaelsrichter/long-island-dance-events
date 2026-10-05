@@ -36,6 +36,42 @@
     "classic rock covers",
     "southern rock"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List 'Lily's Babylon' matches the band's listing for Lily Flanagan's, Babylon. Dancing rating is a guess from genre and venue.",
-  "website": "https://www.thelegendarymurphys.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List 'Lily's Babylon' matches the band's listing for Lily Flanagan's, Babylon. Dancing rating is a guess from genre and venue.\n\nDirectory research 2026-10-04: Current website, Facebook, genres and description are all still correct (no new description needed). Booking is by email (TLM@legendarymurphys.com), per the contact page. They also play as a duo (Sandy & Tom Murphy, acoustic rock). The only band photo on the site is a five-photo collage with first-name labels; no single group photo or logo found. No Instagram found.",
+  "website": "https://www.thelegendarymurphys.com/",
+  "youtubeUrl": "https://www.youtube.com/@TheLegendaryMurphys",
+  "bookingUrl": "https://www.thelegendarymurphys.com/contact",
+  "email": "tlm@legendarymurphys.com",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/the-legendary-murphys-1.webp",
+      "alt": "Collage of the five Legendary Murphys members playing guitar, keyboards and drums, each labeled with a first name",
+      "credit": "Photo: The Legendary Murphys (website)",
+      "creditUrl": "https://www.thelegendarymurphys.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5fdb8b59823bff22b570ad56/f83d2f6a-40bd-4038-bfe7-182dc813b8cc/The+Legendary+Murphys+Classic+Rock+Group+Band+Long+Island+New+York+NY.jpg?format=2500w",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thelegendarymurphys.com/shows",
+      "note": "Band's 2026 show list includes Salt Shack (Babylon) Halloween party Sat Oct 10, Lily Flanagan's (Babylon), Napper Tandy's (Smithtown) and Sonny's Canal House (Baldwin Harbor)."
+    },
+    {
+      "url": "https://www.thelegendarymurphys.com/",
+      "note": "Band site: classic rock band playing Long Island and the tri-state area since 2003 with male and female vocals; covers CCR, the Stones, Fleetwood Mac, Allman Brothers and more."
+    },
+    {
+      "url": "https://saltshackny.com/artist/the-legendary-murphys/",
+      "note": "Salt Shack artist page links the band website and Facebook and lists their 2026 dates there."
+    },
+    {
+      "url": "https://www.youtube.com/TheLegendaryMurphys",
+      "note": "YouTube channel \"The Legendary Murphys Band!\": classic and southern rock on Long Island since 2003, with live videos incl. NYE 2026 at The Paramount, Huntington."
+    },
+    {
+      "url": "https://www.thelegendarymurphys.com/contact",
+      "note": "Shows the booking page and email."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thelegendarymurphys.com, saltshackny.com, youtube.com."
 }

@@ -39,6 +39,41 @@
     "soul"
   ],
   "instagramUrl": "https://www.instagram.com/that70sbandny/",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Disco crowds sometimes do partner hustle, but no evidence was found for this band, so only freestyle is listed. Oct 3 gig is the Tobay Beach car show.",
-  "website": "http://that70sbandny.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Disco crowds sometimes do partner hustle, but no evidence was found for this band, so only freestyle is listed. Oct 3 gig is the Tobay Beach car show.\n\nDirectory research 2026-10-04: Current website, Facebook, Instagram, genres and description all confirmed; no description change needed. The site only works over http (https gives an SSL error). Phone and email are the band's own published booking contacts. The site gallery loads with scripts, so only one band photo (the gallery page header) could be taken; other site images are event flyers.",
+  "website": "http://that70sbandny.com/",
+  "bookingUrl": "http://that70sbandny.com/index.php/contact/",
+  "email": "that70sbandlive@gmail.com",
+  "phone": "(631) 553-1221",
+  "logo": {
+    "image": "../../assets/entities/performers/that-70s-band-logo.webp",
+    "alt": "That 70's Band logo: chrome lettering with '70's' inside a mirror-ball circle, on black",
+    "credit": "Logo: That 70's Band",
+    "creditUrl": "http://that70sbandny.com/",
+    "imageSource": "http://that70sbandny.com/wp-content/uploads/2022/04/That-70s-Band-BLACK-small-logo.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/that-70s-band-1.webp",
+      "alt": "That 70's Band's singers, horn players and percussionist performing on an outdoor bandshell stage at night, with the band logo on a speaker banner",
+      "credit": "Photo: That 70's Band (website)",
+      "creditUrl": "http://that70sbandny.com/index.php/galleries-4-columns/",
+      "imageSource": "http://that70sbandny.com/wp-content/uploads/2022/04/cropped-photo-1b.jpg",
+      "focus": "55% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "http://that70sbandny.com/",
+      "note": "Official site: 'NY's leading 70s dance/disco/funk' band, available for events, concerts and weddings; lists (631) 553-1221 and that70sbandlive@gmail.com; upcoming Long Island dates (Oyster Fest, East Northport, Moriches, Riverhead)."
+    },
+    {
+      "url": "http://that70sbandny.com/index.php/contact/",
+      "note": "Contact page has a booking form and points to Facebook messenger at facebook.com/that70sbandlive."
+    },
+    {
+      "url": "https://saltshackny.com/event/that-70s-band-2026-07-19/",
+      "note": "Salt Shack (Babylon) event page links the band's Instagram, that70sbandny."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: that70sbandny.com, saltshackny.com."
 }

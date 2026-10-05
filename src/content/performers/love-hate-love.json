@@ -30,5 +30,20 @@
     "tribute to Alice in Chains",
     "90s grunge"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Facebook page lists Farmingdale, NY as home base."
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Facebook page lists Farmingdale, NY as home base.\n\nDirectory research 2026-10-04: No official website found; the Facebook page is the band's main presence (confirmed by its page title and Long Island show posts in search results; could not open it without logging in). An Instagram handle \"lovehatelovetribute\" was suggested by one search summary but could not be confirmed, so it is not recorded. No logo or photos taken because the only official images are on Facebook (login needed). Current description is still accurate.",
+  "evidence": [
+    {
+      "url": "https://www.spotlightny.com/events/love-hate-love",
+      "note": "Spotlight @ The Paramount (Huntington) event page: Love Hate Love is a Long Island based Alice in Chains tribute covering all eras of the band (Nov 23, 2024 show with Damage Inc.)."
+    },
+    {
+      "url": "https://www.facebook.com/LovehateloveNY/posts/western-suffolk-county-nysaturday-june-24thget-ready-to-have-your-face-melted-in/846053020307036/",
+      "note": "Search-indexed post on the \"Love Hate Love Alice in Chains Tribute band\" Facebook page announcing a western Suffolk County show, matching the current Facebook URL."
+    },
+    {
+      "url": "https://www.facebook.com/LovehateloveNY/reels/",
+      "note": "Shows the Facebook page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: spotlightny.com, facebook.com."
 }

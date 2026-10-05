@@ -30,16 +30,66 @@
   },
   "description": "A small Italian-American bistro and cocktail bar on Merrick Road with brunch on weekends and live local music on Friday and Saturday evenings. Parking is behind the building.",
   "facebookUrl": "https://www.facebook.com/offthebrook/",
-  "factsSource": "Checked October 3, 2026. Source: offthebrook.com.",
+  "factsSource": "Checked October 4, 2026. Source: offthebrook.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Off+The+Brook+1810+Merrick+Rd+Merrick+NY+11566",
   "kind": "restaurant",
   "phone": "(516) 608-6543",
   "postalCode": "11566",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Address confirmed by Ira's List venue page (/off-the-brook): 1810 Merrick Rd, Merrick, parking in rear, phone 516-608-6543. Oceanwalk gig on Oct 3 not checked on the venue's own calendar.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Address confirmed by Ira's List venue page (/off-the-brook): 1810 Merrick Rd, Merrick, parking in rear, phone 516-608-6543. Oceanwalk gig on Oct 3 not checked on the venue's own calendar.\n\nDirectory research 2026-10-04: Live music is Friday and Saturday 7-9 PM per the site (current description says 'evenings', which fits). The email OffTheBrook@Gmail.com comes from the business info block in the site's code (Squarespace structured data, with the same address and phone), not from visible page text; recorded in lower case. The site also links a Bandsintown icon but no Bandsintown URL could be read. No dance floor is mentioned; it is a dining room and bar.",
   "state": "NY",
   "town": "Merrick",
   "website": "https://www.offthebrook.com/",
   "latitude": 40.65351,
   "longitude": -73.556061,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/off_the_brook/",
+  "email": "offthebrook@gmail.com",
+  "hours": "Tue-Thu 3 PM-9 PM; Fri 3 PM-10:30 PM; Sat 11 AM-10:30 PM; Sun 11 AM-8:30 PM; closed Mon",
+  "logo": {
+    "image": "../../assets/entities/venues/off-the-brook-merrick-logo.webp",
+    "alt": "Off the Brook Bistro & Cocktails logo in black serif lettering",
+    "credit": "Logo: Off The Brook",
+    "creditUrl": "https://www.offthebrook.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/5fd9361c730cb7231c9481c8/1608770833950-CSLINY2AAI7W67AA2B9S/Asset+1%402x.png?format=1500w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/off-the-brook-merrick-1.webp",
+      "alt": "The front of Off The Brook at dusk: a white brick storefront with a black Off The Brook Bistro & Cocktails sign, string lights and a bay window",
+      "credit": "Photo: Off The Brook (website)",
+      "creditUrl": "https://www.offthebrook.com/photos",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5fd9361c730cb7231c9481c8/df625d06-e423-4624-808c-edcfbf77ce80/otb-outside-f.jpg?format=1500w",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/venues/off-the-brook-merrick-2.webp",
+      "alt": "The long wooden bar at Off The Brook with hanging wine glasses, string lights, TVs and shelves of bottles",
+      "credit": "Photo: Off The Brook (website)",
+      "creditUrl": "https://www.offthebrook.com/photos",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5fd9361c730cb7231c9481c8/1b3b0492-fd19-4ca6-96d6-cfe62c8bf2d2/otb-bar-1.JPG?format=1500w",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/off-the-brook-merrick-3.webp",
+      "alt": "The dining room with set tables, a pressed-tin ceiling and candle-style chandeliers",
+      "credit": "Photo: Off The Brook (website)",
+      "creditUrl": "https://www.offthebrook.com/photos",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5fd9361c730cb7231c9481c8/36bad5da-e2f5-4567-9e50-98fb57d8c786/1000157523.JPG?format=1500w",
+      "focus": "50% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.offthebrook.com/",
+      "note": "Restaurant's own site: 1810 Merrick Rd, Merrick, NY 11566 (parking in rear), (516)-608-6543, hours, live music Friday and Saturday 7-9 PM, brunch Sat-Sun, and links to Facebook and Instagram."
+    },
+    {
+      "url": "https://www.offthebrook.com/photos",
+      "note": "Photos page shows the storefront, bar and dining room along with food and drink shots."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=Off+The+Brook+1810+Merrick+Rd+Merrick+NY+11566",
+      "note": "Shows the county."
+    }
+  ]
 }

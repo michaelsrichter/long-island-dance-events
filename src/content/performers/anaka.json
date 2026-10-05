@@ -1,5 +1,63 @@
 {
   "name": "Anaka",
   "type": "band",
-  "reviewNotes": "Added automatically from Stereo Garden (Patchogue) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Stereo Garden (Patchogue) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Brooklyn heavy metal band playing a metal show at Stereo Garden; this is a rock concert, not a social-dance act, so the owner may not want to feature it. YouTube: the site links youtube.com/anakamusic; the channel's current handle is @AnAkAmusic (same channel). Spotify artist ID taken from the album page the band's site links to. No separate booking page; the site's contact email is labeled for booking.",
+  "website": "https://www.anaka.net/",
+  "facebookUrl": "https://www.facebook.com/anakametal",
+  "instagramUrl": "https://www.instagram.com/anakametal/",
+  "youtubeUrl": "https://www.youtube.com/@AnAkAmusic",
+  "tiktokUrl": "https://www.tiktok.com/@anakaofficial",
+  "xUrl": "https://x.com/anakamusic",
+  "spotifyUrl": "https://open.spotify.com/artist/4an5agI72KfyAtwnuYnWya",
+  "email": "anaka@anaka.net",
+  "genres": [
+    "heavy metal",
+    "groove metal",
+    "original music"
+  ],
+  "description": "Heavy metal band from Brooklyn, formed in 2000, that plays its own hard-hitting groove metal songs and has released several albums.",
+  "logo": {
+    "image": "../../assets/entities/performers/anaka-logo.webp",
+    "alt": "Anaka logo: the band name in jagged, spiky olive-green metal letters",
+    "credit": "Logo: Anaka",
+    "creditUrl": "https://www.anaka.net/",
+    "imageSource": "https://www.anaka.net/images/anaka.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/anaka-1.webp",
+      "alt": "The five members of Anaka in black clothes, shouting and making fierce faces at the camera in front of a painted wall",
+      "credit": "Photo: Anaka (website)",
+      "creditUrl": "https://www.anaka.net/",
+      "imageSource": "https://www.anaka.net/images/band.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.anaka.net/",
+      "note": "Band site: heavy metal band from Brooklyn; lists members, new album The Oblivion Call, social links, and anaka@anaka.net for contact, booking and press."
+    },
+    {
+      "url": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-c2wl5-ksdrb-6b67d-aaa4w-p55fz-d7586-wtkwb-7w3ze-stm4a-7w83k-2bdfa-y8hl3",
+      "note": "Stereo Garden (Patchogue) event page: ANAKA headlines Friday Oct 23, 2026 with Ten Ton Mojo, Pine Street, Frequency Overload and Ryder."
+    },
+    {
+      "url": "https://www.bandsintown.com/a/7312-anaka",
+      "note": "Bandsintown (verified artist) lists Anaka at Stereo Garden, Patchogue on Oct 23 and Starland Ballroom NJ on Oct 16, which ties the Stereo Garden listing to this band."
+    },
+    {
+      "url": "https://www.metal-archives.com/bands/Anaka/17428",
+      "note": "Metal Archives: Anaka, New York, formed 2000, heavy/groove metal, label Godsend Records."
+    },
+    {
+      "url": "https://www.youtube.com/channel/UC1l33ub0L8MwlSBAajxW_pw",
+      "note": "Shows the YouTube channel."
+    },
+    {
+      "url": "https://open.spotify.com/album/2FWA0SQ5r1bbZtaXcaB9Uc",
+      "note": "Shows the Spotify page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: anaka.net, stereogardenli.com, bandsintown.com, metal-archives.com."
 }

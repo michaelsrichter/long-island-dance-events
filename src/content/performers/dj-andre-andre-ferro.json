@@ -35,5 +35,21 @@
     "alternative",
     "80s-2000s dance hits"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03)."
+  "reviewNotes": "Added from Ira's List research (2026-10-03).\n\nDirectory research 2026-10-04: No personal website, booking page or public social profile found for Andre Ferro as a DJ; his parties are promoted through venue pages, The World Famous LIR (theworldfamouslir.com, where he is MD/Promotions) and Facebook groups. The World Famous LIR site could be linked from the 'LIR Dance Party' alias/organizer rather than from his performer profile. The phone number on The Other Room page is the venue's, not his. Current genres confirmed.",
+  "description": "Long Island DJ who spins '80s new wave, classic alternative and dance hits at 'LIR Dance Parties' (named after the old WLIR radio station), often sharing the night with the band Stereomatic, at places like Cancun in Hicksville, Stage 317 in Farmingdale and The Other Room in Deer Park.",
+  "evidence": [
+    {
+      "url": "https://theworldfamouslir.com/long-island",
+      "note": "The World Famous LIR (online station) lists a weekly New Wave Alternative Dance Party, Saturdays 7-11 PM at Cancun Long Island, and names Andre Ferro as its MD/Promotions."
+    },
+    {
+      "url": "https://www.theotherroomli.com/events/lir-dance-party-at-the-other-room",
+      "note": "The Other Room (Deer Park) event: DJ Andre Ferro spins new wave and alternative dance music all night (2023)."
+    },
+    {
+      "url": "https://www.liblogger.com/events/stereomatic-dj-andre-return-to-stage317-1-02-2026",
+      "note": "Listing for 'Stereomatic & DJ Andre Return to Stage317', Farmingdale, Jan 2, 2026."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: theworldfamouslir.com, theotherroomli.com, liblogger.com."
 }

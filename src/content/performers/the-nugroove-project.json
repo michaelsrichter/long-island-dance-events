@@ -38,7 +38,61 @@
     "mashups",
     "soul"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List does not say which of the three lineups plays Daisy's Patchogue. A linktr.ee/nugroove page lists Instagram/Facebook but the direct URLs were not verified.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List does not say which of the three lineups plays Daisy's Patchogue. A linktr.ee/nugroove page lists Instagram/Facebook but the direct URLs were not verified.\n\nDirectory research 2026-10-04: Social links come from the band's own site: Instagram and TikTok handles are @thenugrooveproject; the Facebook link is a share link that redirects to facebook.com/musicthatvibes (page name not checked without login). YouTube channel @gggonzalez1908 is the manager's channel that the band site links. Booking email and phone are published on the site for bookings, with manager Gary Gonzalez named. The two photos are individual members' promo shots from the 'Meet the Band' page; no full-band live photo on the site. Current description is still accurate.",
   "website": "https://thenugrooveproject.com/home",
-  "youtubeUrl": "https://www.youtube.com/@gggonzalez1908"
+  "youtubeUrl": "https://www.youtube.com/@gggonzalez1908",
+  "facebookUrl": "https://www.facebook.com/musicthatvibes",
+  "instagramUrl": "https://www.instagram.com/thenugrooveproject/",
+  "tiktokUrl": "https://www.tiktok.com/@thenugrooveproject",
+  "bookingUrl": "https://thenugrooveproject.com/contact",
+  "email": "nugroovemix@gmail.com",
+  "phone": "(631) 416-1953",
+  "logo": {
+    "image": "../../assets/entities/performers/the-nugroove-project-logo.webp",
+    "alt": "The NuGroove Project logo: sparkling gold outlines of a six-piece band above the name and the line 'From Vinyl to Viral', on black",
+    "credit": "Logo: The NuGroove Project",
+    "creditUrl": "https://thenugrooveproject.com/the-nugroove-project",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/1204128/43476d44c69aba1ae6c31baec358498ec2119ef7/original/untitled-design.png/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/the-nugroove-project-1.webp",
+      "alt": "NuGroove Project bass player in sunglasses and a colorful patterned shirt holding a red bass on a club stage with a drum kit behind him",
+      "credit": "Photo: The NuGroove Project (website)",
+      "creditUrl": "https://thenugrooveproject.com/meet-the-band",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/1204128/80338d564219d7b23efe6b31ff83106b38bfc65a/original/25b8abd8-bd05-4601-b18d-b9c0e970f5fe.jpeg/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-nugroove-project-2.webp",
+      "alt": "NuGroove Project guitarist in sunglasses smiling while playing a white electric guitar outdoors in the sun",
+      "credit": "Photo: The NuGroove Project (website)",
+      "creditUrl": "https://thenugrooveproject.com/meet-the-band",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/1204128/152ea48bcdad8a17647f94ab15379b1bbc93e053/original/b658e295-4604-4c2e-8f6f-3277f1a1ea49.jpeg/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://thenugrooveproject.com/home",
+      "note": "Band site (East Moriches): three acts under one roof - The NuGroove Project 6-piece show band with mashups across eras, Small Town Gig (3-4 piece) and Stix & Soul (duo); booking email and phone for manager Gary Gonzalez."
+    },
+    {
+      "url": "https://thenugrooveproject.com/the-nugroove-project",
+      "note": "NuGroove Project page links YouTube (@gggonzalez1908), a Facebook share link, Instagram and TikTok (@thenugrooveproject)."
+    },
+    {
+      "url": "https://thenugrooveproject.com/shows",
+      "note": "Shows page: Stix & Soul at Pete's Taverna, Riverhead, Oct 10 (2026)."
+    },
+    {
+      "url": "https://www.facebook.com/share/14FEBxzvSUq/",
+      "note": "The site's Facebook share link redirects to facebook.com/musicthatvibes."
+    },
+    {
+      "url": "https://thenugrooveproject.com/contact",
+      "note": "Shows the booking page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thenugrooveproject.com, facebook.com."
 }

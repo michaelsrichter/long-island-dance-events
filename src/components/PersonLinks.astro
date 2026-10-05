@@ -1,13 +1,14 @@
 ---
 /** A person's or organizer's own website and social pages, website first. */
 import Icon from './Icon.astro';
-import { displayHost, type ExternalLink } from '../lib/links';
+import { displayHost, linkIcon, type ExternalLink } from '../lib/links';
 
 interface Props {
   links: ExternalLink[];
   /** Whose links these are, for screen readers: "Maya Rivera". */
   name: string;
-  variant?: 'chips' | 'buttons';
+  /** chips: small labelled pills; buttons: big buttons (page tops); icons: round icon-only buttons (directory cards). */
+  variant?: 'chips' | 'buttons' | 'icons';
   max?: number;
   /** Analytics location, e.g. "event" or "performer". */
   location?: string;
@@ -15,23 +16,24 @@ interface Props {
 }
 const { links, name, variant = 'chips', max, location, class: className } = Astro.props;
 const shown = typeof max === 'number' ? links.slice(0, max) : links;
-const iconOf = (k: ExternalLink['kind']) => (k === 'website' ? 'link' : k === 'link' ? 'external' : k);
+const iconOf = linkIcon;
+const cls = variant === 'buttons' ? 'btn btn--secondary btn--small' : variant === 'icons' ? 'ext-icon' : 'ext-link';
 ---
 {shown.length > 0 && (
   <ul class:list={['ext-links', `ext-links--${variant}`, className]} aria-label={`${name} online`}>
     {shown.map((l) => (
       <li>
         <a
-          class={variant === 'buttons' ? 'btn btn--secondary btn--small' : 'ext-link'}
+          class={cls}
           href={l.url}
           target="_blank"
           rel="noopener"
-          title={l.kind === 'website' ? displayHost(l.url) : undefined}
+          title={variant === 'icons' ? `${l.label}${l.kind === 'website' ? `: ${displayHost(l.url)}` : ''}` : l.kind === 'website' ? displayHost(l.url) : undefined}
           data-track="outbound_click"
           data-track-method={l.kind}
           data-track-location={location}
           data-track-target={displayHost(l.url)}
-        ><Icon name={iconOf(l.kind)} />{l.label}<span class="visually-hidden"> of {name} (opens in a new tab)</span></a>
+        ><Icon name={iconOf(l.kind)} />{variant === 'icons' ? <span class="visually-hidden">{l.label} of {name} (opens in a new tab)</span> : <>{l.label}<span class="visually-hidden"> of {name} (opens in a new tab)</span></>}</a>
       </li>
     ))}
   </ul>

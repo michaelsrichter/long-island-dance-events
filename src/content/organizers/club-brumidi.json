@@ -16,5 +16,44 @@
   "facebookUrl": "https://www.facebook.com/Brumidilodge",
   "email": "lodge@sonsofitalyli.com",
   "description": "Dance nights at the Sons of Italy lodge in Deer Park, including a weekly Wednesday ballroom and Latin social with DJ and buffet.",
-  "reviewNotes": "Club Brumidi is the lodge's own dance-night name, not a separate group. Wednesday-social table reservations: (516) 991-3208."
+  "reviewNotes": "Club Brumidi is the lodge's own dance-night name, not a separate group. Wednesday-social table reservations: (516) 991-3208.\n\nDirectory research 2026-10-04: Club Brumidi is the lodge's own name for its dance nights, so the website, phone, email and Facebook are the lodge's (same as the brumidi-lodge venue). Logo is the national Order Sons and Daughters of Italy in America emblem that the lodge uses in its site header (290x300). Only one photo used (building front); the lodge gallery is mostly posed member/holiday group photos, several with children, and none clearly show dancing. The Wednesday-social table reservation line (516) 991-3208 is published under a first name on the lodge's event page; not recorded as the main phone. No opening hours published; Instagram not found.",
+  "address": "2075 Deer Park Ave",
+  "postalCode": "11729",
+  "county": "Suffolk",
+  "logo": {
+    "image": "../../assets/entities/organizers/club-brumidi-logo.webp",
+    "alt": "Round Order Sons and Daughters of Italy in America emblem with a white lion over green, white and red stripes",
+    "credit": "Logo: Constantino Brumidi Lodge, Order Sons and Daughters of Italy in America",
+    "creditUrl": "https://sonsofitalyli.com/",
+    "imageSource": "https://sonsofitalyli.com/wp-content/uploads/2025/02/Sons-of-Italy-Logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/organizers/club-brumidi-1.webp",
+      "alt": "Front of the Constantino Brumidi Lodge in Deer Park, with a pink arched sign over the entrance and a flower bed in front",
+      "credit": "Photo: Constantino Brumidi Lodge (website)",
+      "creditUrl": "https://sonsofitalyli.com/",
+      "imageSource": "https://sonsofitalyli.com/wp-content/uploads/2024/03/Son-of-Italy-LI.jpg",
+      "focus": "50% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sonsofitalyli.com/contact-us/",
+      "note": "Lodge contact page: Constantino Brumidi Lodge #2211, 2075 Deer Park Avenue, Deer Park, NY 11729; lodge office 631-940-2006; lodge@sonsofitalyli.com; links the Brumidilodge Facebook page."
+    },
+    {
+      "url": "https://sonsofitalyli.com/event/wednesday-night-dance-social/",
+      "note": "Lodge's own event page: every Wednesday 6-10 PM 'at Club Brumidi', social dance mix with DJ Gene, free lesson on the 1st Wednesday, buffet, $25; full-table reservations (516) 991-3208."
+    },
+    {
+      "url": "https://sonsofitalyli.com/events/",
+      "note": "Events list uses 'Club Brumidi' as the name of the lodge's dance nights (Wednesday social, Friday dances)."
+    },
+    {
+      "url": "https://sonsofitalyli.com/",
+      "note": "Shows the website."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: sonsofitalyli.com."
 }

@@ -35,6 +35,40 @@
     "tribute to Santana",
     "Latin rock"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Other Santana tributes named Moonflower exist (Tampa, FL and Las Vegas). This is the NY metro band led by Nick Sassano, as named on the Bellmore listing. No salsa evidence.",
-  "website": "https://nicksassano.com/moonflower/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Other Santana tributes named Moonflower exist (Tampa, FL and Las Vegas). This is the NY metro band led by Nick Sassano, as named on the Bellmore listing. No salsa evidence.\n\nDirectory research 2026-10-04: Current website, genres and description are still correct. No Facebook or Instagram page for the band could be confirmed (search shows only personal profiles named Nick Sassano). Booking is through the contact form on Nick Sassano's site (no public email or phone). Several concert photos on the site carry a photographer's watermark in the corner and were skipped. The Bellmore Movies event page from Oct 3, 2026 is gone (404), so the show has passed; no newer dates were listed on the site's gig page.",
+  "website": "https://nicksassano.com/moonflower/",
+  "youtubeUrl": "https://www.youtube.com/@moonflowerspiritofsantana2927",
+  "bookingUrl": "https://nicksassano.com/contact/",
+  "logo": {
+    "image": "../../assets/entities/performers/moonflower-spirit-of-santana-logo.webp",
+    "alt": "Moonflower Spirit of Santana logo: the word MOONFLOWER in shiny teal capitals over a dark patterned band",
+    "credit": "Logo: Moonflower~Spirit of Santana",
+    "creditUrl": "https://nicksassano.com/moonflower/",
+    "imageSource": "https://nicksassano.com/wp-content/uploads/2025/11/Cropped-Logo-Name-Only-RESIZED-80-1.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/moonflower-spirit-of-santana-1.webp",
+      "alt": "Moonflower playing on a pub stage with guitar, keyboards, drums and singers while the crowd cheers with raised hands",
+      "credit": "Photo: Moonflower (Nick Sassano website)",
+      "creditUrl": "https://nicksassano.com/moonflower/",
+      "imageSource": "https://nicksassano.com/wp-content/uploads/2022/08/IMG-2002.jpg",
+      "focus": "55% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://nicksassano.com/electronic-press-kit/",
+      "note": "Press kit on guitarist Nick Sassano's site: Moonflower~Spirit of Santana has played the NY metro area since 2021; \"Book Moonflower\" links to his contact page."
+    },
+    {
+      "url": "https://nicksassano.com/moonflower/",
+      "note": "Moonflower page on Nick Sassano's site with ticket link, videos and band photos."
+    },
+    {
+      "url": "https://www.youtube.com/@moonflowerspiritofsantana2927",
+      "note": "YouTube channel \"Moonflower Spirit of Santana\" posted \"Moonflower Santana Tribute coming live to Bellmore October 3, 2026\"; the site embeds its videos."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: nicksassano.com, youtube.com."
 }

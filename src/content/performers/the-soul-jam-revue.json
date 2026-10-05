@@ -36,7 +36,50 @@
     "70s soul"
   ],
   "instagramUrl": "https://www.instagram.com/the_soul_jam_revue/",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Theater setting this weekend; the band also plays outdoor concerts and festivals where dancing is more likely.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Theater setting this weekend; the band also plays outdoor concerts and festivals where dancing is more likely.\n\nDirectory research 2026-10-04: All current links (website, Facebook, Instagram, YouTube) re-verified from the band's own site; current description is accurate, so no new description. Phone is published on the band's site as the band's contact line (named contact Joe Costanzo) next to the booking form. Photo 2 is a cut-out promo shot on a transparent background (needs a backdrop color when displayed). The 'Booking Inquiry' form is on the home page; the contact page is used as the booking link.",
   "website": "https://www.thesouljamrevue.com/",
-  "youtubeUrl": "https://www.youtube.com/channel/UC3gFhD8EmKM9MdVHGFGmG6w"
+  "youtubeUrl": "https://www.youtube.com/channel/UC3gFhD8EmKM9MdVHGFGmG6w",
+  "bookingUrl": "https://www.thesouljamrevue.com/contact",
+  "email": "thesouljamrevue@gmail.com",
+  "phone": "(631) 375-3170",
+  "logo": {
+    "image": "../../assets/entities/performers/the-soul-jam-revue-logo.webp",
+    "alt": "The Soul Jam Revue logo: gold script lettering on a purple badge with a disco ball, a microphone and the words 'a tribute to philly soul'",
+    "credit": "Logo: The Soul Jam Revue",
+    "creditUrl": "https://www.thesouljamrevue.com/",
+    "imageSource": "https://static.wixstatic.com/media/de2ec6_6f087906aaf54680ab50eabe02f31806~mv2.png/v1/fit/w_1290,h_1290,q_90/TSJR%20Logo%20PurpleGold.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/the-soul-jam-revue-1.webp",
+      "alt": "The Soul Jam Revue on stage: three singers in gold jackets up front with horns, guitar, drums and keyboards behind them under blue lights",
+      "credit": "Photo: The Soul Jam Revue (website)",
+      "creditUrl": "https://www.thesouljamrevue.com/",
+      "imageSource": "https://static.wixstatic.com/media/de2ec6_8094df9c43c04a90830e3548c909f1e6~mv2.jpg/v1/fit/w_2000,h_2000,q_85/Soul%20Jam%20Revue%20068_1_edited.jpg",
+      "focus": "55% 50%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-soul-jam-revue-2.webp",
+      "alt": "Group promo photo of the ten members of The Soul Jam Revue in black shirts, the three front singers in gold-patterned jackets",
+      "credit": "Photo: The Soul Jam Revue (website)",
+      "creditUrl": "https://www.thesouljamrevue.com/",
+      "imageSource": "https://static.wixstatic.com/media/de2ec6_1b6ee717f01849efafab9445496ebf2d~mv2.png/v1/fit/w_1200,h_1200,q_90/Soul%20Jam%20Revue%20transparent%20background.png",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.thesouljamrevue.com/",
+      "note": "Band site: tribute to Philly soul, funk and R&B (Spinners, O'Jays, Stylistics and more); links Facebook, Instagram and YouTube; booking form plus a named contact phone."
+    },
+    {
+      "url": "https://www.thesouljamrevue.com/event-details/the-soul-jam-revue-live-at-cm-performing-arts-center-1",
+      "note": "Band's own event page: live at CM Performing Arts Center, 931 Montauk Hwy, Oakdale, Sun Oct 4, 2026, 7 PM."
+    },
+    {
+      "url": "https://www.thesouljamrevue.com/contact",
+      "note": "Contact page gives the band Gmail address and a phone number for band contact Joe Costanzo."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: thesouljamrevue.com."
 }

@@ -38,6 +38,61 @@
     "party rock"
   ],
   "instagramUrl": "https://www.instagram.com/fivestoneband",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List venue 'Mass Park LIRR' seems to be the street fair on Park Blvd by the train station; band's own Oct 4 listing not checked. Not the same as '5 Stone', a classic rock trio.",
-  "website": "https://5stonebandsite.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List venue 'Mass Park LIRR' seems to be the street fair on Park Blvd by the train station; band's own Oct 4 listing not checked. Not the same as '5 Stone', a classic rock trio.\n\nDirectory research 2026-10-04: Current values confirmed against the band's own site. Booking phone/email are the ones the band publishes for bookings (contact person named on the site as the singer). The band's upcoming-shows widget loads by script, so I could not see the Oct 4 Massapequa Park listing directly; past dates on the site include Prohibition at 109 Front St, Massapequa Park, which fits the Ira's List location. Images came from the site's image CDN as WebP. Skipped a Halloween costume photo and a duplicate promo shot. Current description is fine; not changed.",
+  "website": "https://5stonebandsite.com/",
+  "bookingUrl": "https://5stonebandsite.com/contact",
+  "email": "fivestoneband@yahoo.com",
+  "phone": "(516) 655-1314",
+  "logo": {
+    "image": "../../assets/entities/performers/fivestone-logo.webp",
+    "alt": "FiveStone logo: a red heart-shaped outline above the word 5IVESTONE in red and white on black",
+    "credit": "Logo: FiveStone Band",
+    "creditUrl": "https://5stonebandsite.com/",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/36011/fed620cb6bdc2d493b4d8e501e0be8644f665a02/original/screenshot-2024-04-24-at-2-33-23-pm.png/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/fivestone-1.webp",
+      "alt": "The five members of FiveStone, four men and a woman dressed in black, posing close together in front of a silver curtain",
+      "credit": "Photo: FiveStone Band (website)",
+      "creditUrl": "https://5stonebandsite.com/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/36011/2be804d6885ad3827156a4816d3c5a0b38cf3c3d/original/img-2627.jpeg/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/performers/fivestone-2.webp",
+      "alt": "View from behind the drum kit of FiveStone playing an outdoor street-fair stage at night, with a crowd filling the street",
+      "credit": "Photo: FiveStone Band (website)",
+      "creditUrl": "https://5stonebandsite.com/about-us",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/36011/a852d12ec18c37febe311987a484d76839c1a9d3/original/img-4127.jpg/!!/b%3AW1sicmVzaXplIiwxMDAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/performers/fivestone-3.webp",
+      "alt": "FiveStone on a small bar stage: a woman singer, guitarist, bassist and drummer smiling behind their instruments",
+      "credit": "Photo: FiveStone Band (website)",
+      "creditUrl": "https://5stonebandsite.com/pictures",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/36011/fa696f510b5c1224e026594d2e87e5bd22c4355f/original/img-8431.jpeg/!!/b%3AW1sicmVzaXplIiwxMjAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://5stonebandsite.com/about-us",
+      "note": "Band's own site: Long Island-based five-piece cover band (classic rock, 80s and 90s, pop, dance and party rock); also offers a 3-piece acoustic lineup; booking contact listed."
+    },
+    {
+      "url": "https://5stonebandsite.com/shows",
+      "note": "Show list is all Nassau County venues: Memories 2 (Williston Park), Sonny's Canal House (Baldwin), Lazy Lobster (East Rockaway), The Nutty Irishman (Farmingdale), Prohibition (Massapequa Park), Dirty Taco (Port Washington)."
+    },
+    {
+      "url": "https://5stonebandsite.com/contact",
+      "note": "Contact page gives a booking phone and email published by the band."
+    },
+    {
+      "url": "https://5stonebandsite.com/",
+      "note": "Home page links the band's Facebook page and Instagram (@fivestoneband)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: 5stonebandsite.com."
 }

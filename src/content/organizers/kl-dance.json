@@ -11,5 +11,20 @@
     "hustle"
   ],
   "description": "Hustle and ballroom classes by world hustle champions Kelvin and Lori Ann Roche, with Thursday Latin Hustle classes in Bay Shore.",
-  "reviewNotes": "No working website or social page found (kldance.net does not resolve). Phone is from The Dance Calendar directory and the Eastern Suffolk BOCES listing. Town = class location; contact address is Brentwood."
+  "reviewNotes": "No working website or social page found (kldance.net does not resolve). Phone is from The Dance Calendar directory and the Eastern Suffolk BOCES listing. Town = class location; contact address is Brentwood.\n\nDirectory research 2026-10-04: Still no website: kldance.net (listed by BOCES) has no DNS record, so no logo or photos are available from an own site. No business Facebook/Instagram page for KL Dance found; only the couple's personal accounts (e.g. Instagram @loriannroche, Facebook kelvin.roche.71, mentioned on danceislife.love), which were not recorded. BOCES also lists the email kelvinandloriann@hotmail.com and a Brentwood address; not recorded because they are not on the couple's own site or business page (owner may decide to add the email). Town Bay Shore = Thursday Latin Hustle class location from the existing record; we could not confirm the Bay Shore class schedule online.",
+  "evidence": [
+    {
+      "url": "https://www.thedancecalendar.com/find-a-studio",
+      "note": "The Dance Calendar studio directory: 'KL Dance - Lori Ann & Kelvin Roche', teaching ballroom styles including hustle, jive, cha cha, rumba and mambo; 631-332-8883."
+    },
+    {
+      "url": "https://artsined.esboces.org/Programdetail.aspx?id=4988",
+      "note": "Eastern Suffolk BOCES Arts in Education listing for Lori Ann Greenhouse / Kelvin Roche: same phone 631-332-8883, website kldance.net, Brentwood NY contact address."
+    },
+    {
+      "url": "https://www.njhustlecongress.com/staff",
+      "note": "NJ Hustle Congress staff page: Kelvin & Loriann Roche, instructors/judges and 9-time World Hustle Champions, confirming the 'world hustle champions' in our description."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thedancecalendar.com, artsined.esboces.org, njhustlecongress.com."
 }

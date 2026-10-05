@@ -9,5 +9,58 @@
     "Social dance mix",
     "Rock and roll"
   ],
-  "website": "https://www.purplepenguinentertainment.com/"
+  "website": "https://www.purplepenguinentertainment.com/",
+  "bookingUrl": "https://www.purplepenguinentertainment.com/",
+  "email": "scott@djscottmusic.com",
+  "phone": "(631) 357-2881",
+  "description": "Long Island DJ (Purple Penguin Entertainment) who spins ballroom, Latin and social dance mixes along with doo-wop, disco, rock, country and freestyle. He hosts Friday-night social dances at the Knights of Columbus hall in Patchogue and also DJs private parties.",
+  "logo": {
+    "image": "../../assets/entities/performers/dj-scott-logo.webp",
+    "alt": "Purple Penguin Entertainment logo: a cartoon purple penguin in a top hat singing into a microphone",
+    "credit": "Logo: Purple Penguin Entertainment",
+    "creditUrl": "https://www.purplepenguinentertainment.com/",
+    "imageSource": "https://storage.googleapis.com/wzukusers/user-34653286/images/5c41352ca3591VXBXyEj/PURPLE-PENGUIN-REV2-1_d800.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/dj-scott-1.webp",
+      "alt": "DJ Scott smiling behind his laptop and DJ gear, wearing headphones and a tropical shirt",
+      "credit": "Photo: Purple Penguin Entertainment (website)",
+      "creditUrl": "https://www.purplepenguinentertainment.com/about",
+      "imageSource": "https://storage.googleapis.com/production-hostgator-v1-0-9/729/1514729/1S5844vi/3d2113822c914b75a1398f5923ba72d8",
+      "focus": "50% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/dj-scott-2.webp",
+      "alt": "A crowded dance floor of adults dancing under colored party lights, seen from the DJ booth",
+      "credit": "Photo: Purple Penguin Entertainment (website)",
+      "creditUrl": "https://www.purplepenguinentertainment.com/events",
+      "imageSource": "https://storage.googleapis.com/production-hostgator-v1-0-9/729/1514729/1S5844vi/b0dfbdd1807849508cfe11066813b667",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/performers/dj-scott-3.webp",
+      "alt": "Adults dancing on a wooden floor in a banquet hall at a social dance",
+      "credit": "Photo: Purple Penguin Entertainment (website)",
+      "creditUrl": "https://www.purplepenguinentertainment.com/events",
+      "imageSource": "https://storage.googleapis.com/wzukusers/user-34653286/images/5c4132732ca59zocy9rQ/IMG_4686.jpg",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.purplepenguinentertainment.com/events",
+      "note": "DJ Scott's 2026 social dance and ballroom mix calendar: Friday dances 7-11 PM at Knights of Columbus, 38 West 1st Street, Patchogue, $20, matching playsAt."
+    },
+    {
+      "url": "https://www.purplepenguinentertainment.com/about",
+      "note": "About page: says he has played ballroom and social dance music for Long Islanders for over 19 years; covers doo-wop to disco, country, rock, freestyle, ballroom and salsa."
+    },
+    {
+      "url": "https://www.purplepenguinentertainment.com/",
+      "note": "Home page lists DJ Scott, Purple Penguin Entertainment, phone 631-357-2881 and scott@djscottmusic.com for bookings."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: purplepenguinentertainment.com.",
+  "reviewNotes": "Directory research 2026-10-04: Phone and email are the business contact DJ Scott publishes on his own DJ-service site (djscottmusic.com redirects to the same site). The site has no separate contact page, so bookingUrl is the home page. No Facebook, Instagram or YouTube found linked from the site; a LinkedIn \"DJ Scott, LI Segue King\" and a \"Scott\" at Long Island Sound DJ (Bohemia) exist but could not be tied to him, so not recorded. Skipped site photos with celebrities and a teen party photo."
 }

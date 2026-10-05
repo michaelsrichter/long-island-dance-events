@@ -4,11 +4,14 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import EventSeriesList from '../../components/EventSeriesList.astro';
 import PersonLinks from '../../components/PersonLinks.astro';
-import Icon from '../../components/Icon.astro';
+import EntityHeroMedia from '../../components/EntityHeroMedia.astro';
+import EntityContact from '../../components/EntityContact.astro';
+import EntityGallery from '../../components/EntityGallery.astro';
 import { upcomingFor } from '../../lib/content';
 import { linksOf } from '../../lib/links';
+import { entityImageUrls } from '../../lib/entity-images';
 import { ORGANIZER_TYPE_LABELS } from '../../lib/schemas';
-import { breadcrumbJsonLd } from '../../lib/seo';
+import { breadcrumbJsonLd, organizerJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
 import Reactions from '../../components/Reactions.astro';
 
@@ -21,37 +24,48 @@ const events = await upcomingFor((e) => e.organizer?.id === org.id);
 const venues = (await getCollection('venues')).filter((v) => v.id === o.homeVenueId || events.some((e) => e.venue?.id === v.id));
 const styles = (await getCollection('styles')).filter((s) => o.danceStyles.includes(s.id));
 const teachers = (await getCollection('instructors')).filter((i) => i.data.affiliatedOrganizerIds.includes(org.id));
-const telOf = (p: string) => `tel:+1${p.replace(/[^0-9]/g, '').replace(/^1(?=\d{10}$)/, '')}`;
 const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Organizers', href: '/organizers/' },
   { name: o.name, href: `/organizers/${org.id}/` },
 ];
 const site = Astro.site!;
-const ld = { '@context': 'https://schema.org', '@type': 'Organization', name: o.name, url: o.website ?? new URL(`/organizers/${org.id}/`, site).toString(), telephone: o.phone, email: o.email, sameAs: linksOf(o).map((l) => l.url) };
+const links = linksOf(o);
+const [photo, ...morePhotos] = o.photos ?? [];
+const ld = organizerJsonLd(org.id, o, site, { ...(await entityImageUrls(o, site)), links });
 ---
 <BaseLayout title={o.seoTitle ?? `${o.name}: dances and classes`} description={o.seoDescription ?? `${o.description ?? `${ORGANIZER_TYPE_LABELS[o.type]}${o.town ? ` in ${o.town}` : ''}.`} Upcoming events, contact details and links.`.slice(0, 165)} pageType="organizer" jsonLd={[ld, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={o.name} lede={o.description ?? `${ORGANIZER_TYPE_LABELS[o.type]}${o.town ? ` in ${o.town}` : ''}.`} crumbs={crumbs}>
-      <Reactions type="organizer" id={org.id} name={o.name} variant="hero" />
-    <PersonLinks links={linksOf(o)} name={o.name} variant="buttons" location="organizer" class="mt-5" />
+    {(photo || o.logo) && <EntityHeroMedia slot="media" photo={photo} logo={o.logo} />}
+    <Reactions type="organizer" id={org.id} name={o.name} variant="hero" />
+    <PersonLinks links={links} name={o.name} variant="buttons" location="organizer" class="mt-5" />
   </PageHeader>
   <div class="container section stack-l">
     <section aria-labelledby="on-h">
       <h2 id="on-h">Upcoming events</h2>
       <div class="mt-5"><EventSeriesList events={events} empty={`No upcoming events from ${o.name} are listed right now`} /></div>
     </section>
-    <section class="panel" aria-labelledby="c-h">
-      <h2 id="c-h">Contact and details</h2>
-      <dl class="dl">
-        <div><dt>Type</dt><dd>{ORGANIZER_TYPE_LABELS[o.type]}{o.town ? `, ${o.town}` : ''}</dd></div>
-        {o.phone && <div><dt>Phone</dt><dd><a href={telOf(o.phone)} data-track="outbound_click" data-track-method="phone" data-track-location="organizer">{o.phone}</a></dd></div>}
-        {o.email && <div><dt>Email</dt><dd><a href={`mailto:${o.email}`} data-track="outbound_click" data-track-method="email" data-track-location="organizer">{o.email}</a></dd></div>}
-        {venues.length > 0 && <div><dt>Where</dt><dd>{venues.map((v, i) => <>{i > 0 && ', '}<a href={`/venues/${v.id}/`}>{v.data.name}</a> ({v.data.town})</>)}</dd></div>}
-        {styles.length > 0 && <div><dt>Dance styles</dt><dd>{styles.map((s, i) => <>{i > 0 && ', '}<a href={`/styles/${s.id}/`}>{s.data.name}</a></>)}</dd></div>}
-        {teachers.length > 0 && <div><dt>Teachers</dt><dd>{teachers.map((t, i) => <>{i > 0 && ', '}<a href={`/instructors/${t.id}/`}>{t.data.name}</a></>)}</dd></div>}
-      </dl>
-      <p class="muted mt-3"><Icon name="info" /> Is this your group? You can <a href="/sources/#corrections">fix these details or ask us to remove your listings</a>.</p>
-    </section>
+    <EntityContact
+      heading="Contact and details"
+      name={o.name}
+      location="organizer"
+      address={o.address ? { street: o.address, town: o.town, state: 'NY', postalCode: o.postalCode } : undefined}
+      phone={o.phone}
+      email={o.email}
+      hours={o.hours}
+      links={links}
+      evidence={o.evidence}
+      factsSource={o.factsSource}
+      logo={o.logo}
+      photos={o.photos}
+      ownerPrompt="Is this your group? Want to fix these details or stop your listings?"
+    >
+      <div><dt>Type</dt><dd>{ORGANIZER_TYPE_LABELS[o.type]}{o.town ? `, ${o.town}` : ''}</dd></div>
+      {venues.length > 0 && <div><dt>Where</dt><dd>{venues.map((v, i) => <>{i > 0 && ', '}<a href={`/venues/${v.id}/`}>{v.data.name}</a> ({v.data.town})</>)}</dd></div>}
+      {styles.length > 0 && <div><dt>Dance styles</dt><dd>{styles.map((s, i) => <>{i > 0 && ', '}<a href={`/styles/${s.id}/`}>{s.data.name}</a></>)}</dd></div>}
+      {teachers.length > 0 && <div><dt>Teachers</dt><dd>{teachers.map((t, i) => <>{i > 0 && ', '}<a href={`/instructors/${t.id}/`}>{t.data.name}</a></>)}</dd></div>}
+    </EntityContact>
+    <EntityGallery photos={morePhotos} heading={`More photos from ${o.name}`} />
     <CommunityPanel type="organizer" id={org.id} name={o.name} />
   </div>
 </BaseLayout>

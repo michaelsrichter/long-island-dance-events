@@ -41,5 +41,34 @@
     "top 40 hits from all eras",
     "party covers"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). The old band domain slingshotjams.com now shows unrelated adult content, so it is not linked. Facebook dancing posts date from 2022."
+  "reviewNotes": "Added from Ira's List research (2026-10-03). The old band domain slingshotjams.com now shows unrelated adult content, so it is not linked. Facebook dancing posts date from 2022.\n\nDirectory research 2026-10-04: Facebook URL is the same page as current (trailing slash added); Facebook blocks automated checks, so it was matched via its event listings (name 'Slingshot Jams', Patchogue). The YouTube channel ('Slingshot Jams Live', handle @slingshotjamslive2698, last videos 2021) still links the old slingshotjams.com domain, which per our earlier notes now shows unrelated adult content - do not link that domain. The booking phone comes from the band's own Bandsintown bio, which is older text (names 2010s artists), so it may be out of date. No Instagram found; a different 'SlingSHOT' band is in Arizona (linktr.ee/slingshotbandaz) - not this act. No logo or photos: no official site, and the YouTube picture is a generic auto avatar.",
+  "youtubeUrl": "https://www.youtube.com/@slingshotjamslive2698",
+  "tiktokUrl": "https://www.tiktok.com/@slingshotjams",
+  "evidence": [
+    {
+      "url": "https://www.cooperageinn.com/fallfestival",
+      "note": "The Cooperage Inn (Baiting Hollow) Fall Festival schedule lists Slingshot on Sun Sept 20, Sun Oct 4 and Sat Oct 17, 2026."
+    },
+    {
+      "url": "https://allevents.in/org/slingshot-jams/12887967",
+      "note": "Event listings published by the 'Slingshot Jams' Facebook page (Patchogue, ~3,300 likes), which calls itself a diverse dance band on Long Island; shows at Cooperage Inn and Tiki Joe's Smith Point and Cedar Beach."
+    },
+    {
+      "url": "https://www.bandsintown.com/de/a/14384604-slingshot-jams",
+      "note": "The band's Bandsintown bio (Suffolk County) describes a Top 40 cover band playing hits from all eras and gives a phone number for booking."
+    },
+    {
+      "url": "https://www.tiktok.com/@slingshotjams",
+      "note": "TikTok @slingshotjams describes itself as Long Island's top 40 party band with very diverse music."
+    },
+    {
+      "url": "https://www.liblogger.com/events/american-saturday-nights-slingshot-live",
+      "note": "Daisy's Nashville Lounge (Patchogue) booked Slingshot for an American Saturday Night on Mar 7, 2026, playing country and rock favorites."
+    },
+    {
+      "url": "https://www.youtube.com/@slingshotjamslive2698",
+      "note": "Shows the YouTube channel."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: cooperageinn.com, allevents.in, bandsintown.com, tiktok.com."
 }

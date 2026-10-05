@@ -32,7 +32,49 @@
     "classic rock and hard rock covers"
   ],
   "instagramUrl": "https://www.instagram.com/blackicerocks",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Many acts are named Black Ice (e.g., an Oakland deathrock band on Bandsintown). This NYC/LI cover band is confirmed by its own listing of the Oct 3 Trotters show.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Many acts are named Black Ice (e.g., an Oakland deathrock band on Bandsintown). This NYC/LI cover band is confirmed by its own listing of the Oct 3 Trotters show.\n\nDirectory research 2026-10-04: Current links all confirmed from the band's own site. Booking email is published by the band for bookings (TMC management); the phone numbers on the site belong to the venues, so none recorded. Upcoming Long Island show not in our data: Farrell's of Brooklyn, West Islip, Sat Oct 17, 2026, 8 PM (band site + flyer); the Oct 31 Bantry Bay Halloween show is in Long Island City, Queens (not Long Island). Logo is the band's tall logo artwork used as the site's share image. Skipped flyers and crowd shots showing fans. No separate booking page; the home page carries the booking note.",
   "website": "https://blackicerocks.com/",
-  "youtubeUrl": "https://www.youtube.com/channel/UCb7eDKea22aXdIOKEEg58FA"
+  "youtubeUrl": "https://www.youtube.com/channel/UCb7eDKea22aXdIOKEEg58FA",
+  "bookingUrl": "https://blackicerocks.com/",
+  "email": "blackiceband@aol.com",
+  "logo": {
+    "image": "../../assets/entities/performers/black-ice-logo.webp",
+    "alt": "Black Ice logo: a crowned skull over a glowing blue globe above the words BLACK ICE and BlackIceRocks.com, on black",
+    "credit": "Logo: Black Ice",
+    "creditUrl": "https://blackicerocks.com/",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/369073/562afc1d8f7f9514b44cb5acfff70f33082fac2e/original/img-2625-2.jpg/!!/b%3AW1sicmVzaXplIiwxMjAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/black-ice-1.webp",
+      "alt": "Four members of Black Ice posing together in front of a leafy green wall with the band banner behind them",
+      "credit": "Photo: Black Ice (website)",
+      "creditUrl": "https://blackicerocks.com/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/369073/d64db878b919272f271568017b82a1228d8e9c76/original/img-1812.jpg/!!/b%3AW1sicmVzaXplIiwxMjAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/black-ice-2.webp",
+      "alt": "Black Ice playing in a bar: the singer at the mic between a bass player and a guitarist, with Black Ice banners and a mural behind",
+      "credit": "Photo: Black Ice (website)",
+      "creditUrl": "https://blackicerocks.com/",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/369073/02c5211a8d6b564c762245830619fc2f4a32275f/original/img-2406.jpg/!!/b%3AW1sicmVzaXplIiwxMjAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://blackicerocks.com/",
+      "note": "Band's own site: classic hard rock cover band from Queens playing NYC, Queens and Long Island bars; booking inquiries go to TMC management at the email shown; links Instagram, Facebook and YouTube."
+    },
+    {
+      "url": "https://blackicerocks.com/event/6736070/779960871/black-ice-rocks-trotters-bar-grill",
+      "note": "Band's show list: Trotters Bar & Grill, 1050 Hempstead Tpke, Franklin Square (Nassau), Oct 3, 9 PM."
+    },
+    {
+      "url": "https://blackicerocks.com/event/6736083/779960885/black-ice-rocks-farrell-s-of-brooklyn",
+      "note": "Band's show list: Farrell's of Brooklyn, 263 Higbie Ln, West Islip (Suffolk); the band's flyer on the site gives Sat 10/17/2026, music starts 8 PM."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: blackicerocks.com."
 }

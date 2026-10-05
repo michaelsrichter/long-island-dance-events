@@ -32,5 +32,37 @@
     ]
   },
   "description": "Long Island dance band that plays restaurants, bars, library concerts and New Year's Eve parties around Patchogue, including regular nights at Ristegio's.",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). No official website or verified social page found; song list and genres unknown. No evidence of partner dancing found."
+  "reviewNotes": "Added from Ira's List research (2026-10-03). No official website or verified social page found; song list and genres unknown. No evidence of partner dancing found.\n\nDirectory research 2026-10-04: Facebook page found and matched by exact name plus many Long Island venue listings (Ristegio's East Patchogue, Tiki Joe's at Captree, Port Jeff Bowl's Lucky Strike lounge). We could only read its public search preview, not the page itself (login wall). The Facebook group of the same name may be run by the band or a fan; not recorded as the official page. No website, Instagram, YouTube channel, booking contact, logo or photos found. Genres come from the band's Facebook descriptions; dancing there is free-style party dancing, not partner dancing as far as we can tell.",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=100064009720530",
+  "genres": [
+    "dance party",
+    "Motown",
+    "disco",
+    "R&B",
+    "funk",
+    "soul"
+  ],
+  "evidence": [
+    {
+      "url": "https://www.facebook.com/people/The-Music-Express-Dance-Band/100064009720530/",
+      "note": "Facebook page \"The Music Express Dance Band\" (about 2,000 likes) calls itself a dance party band blending dance music from six decades (seen in search preview; page needs login to browse)."
+    },
+    {
+      "url": "https://www.facebook.com/groups/8616545665026185/",
+      "note": "A public Facebook group with the band's name describes a high-energy dance band playing Motown, disco, rock, pop, Top 40, soul and funk."
+    },
+    {
+      "url": "https://allevents.in/east-patchogue/the-music-express-dance-band-is-back-at-ristegios/200028417124657",
+      "note": "Listing for \"The Music Express Dance Band is back at Ristegio's\" in East Patchogue, July 19, 2025."
+    },
+    {
+      "url": "https://www.newhavenhotel.com/events/bay-shore/the-music-express-dance-band-tiki-joes-captree-boat-basin-8606676",
+      "note": "Event listing for the band at Tiki Joe's, Captree Boat Basin, Bay Shore."
+    },
+    {
+      "url": "https://webtunes.com/events/ristegios_2026-04-25_music_express_dance_band",
+      "note": "Webtunes lists the band at Ristegio's on April 25, 2026, 8 PM."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: facebook.com, allevents.in, newhavenhotel.com, webtunes.com."
 }

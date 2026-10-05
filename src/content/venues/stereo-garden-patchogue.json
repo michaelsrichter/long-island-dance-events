@@ -32,16 +32,66 @@
   },
   "description": "A large multi-use music venue and event hall in Patchogue village, built as a 1940s roller rink, with a stage, two bars, multiple levels and a beer garden.",
   "facebookUrl": "https://www.facebook.com/StereoGardenLI/",
-  "factsSource": "Checked October 3, 2026. Source: stereogardenli.com.",
+  "factsSource": "Checked October 4, 2026. Source: stereogardenli.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Stereo+Garden+9+Railroad+Ave+Patchogue+NY+11772",
   "kind": "concert-hall",
-  "phone": "(631) 416-7755",
+  "phone": "(631) 699-8151",
   "postalCode": "11772",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Phone numbers differ: the website shows (631) 416-7755, while Bing lists (631) 699-8151 (the events/brunch contact). Club 30+ is a touring party brand run by an outside promoter, ticketed, 21+.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Phone numbers differ: the website shows (631) 416-7755, while Bing lists (631) 699-8151 (the events/brunch contact). Club 30+ is a touring party brand run by an outside promoter, ticketed, 21+.\n\nDirectory research 2026-10-04: The site shows three phone numbers: (631) 699-8151 as the main PHONE on the contact page (also on Bing; same number given for brunch bookings), (631) 416-7755 in the 'have your next event with us' block (our current value), and (631) 714-4486 in the footer and structured data. We used 699-8151; owner may prefer another. A related page 'Stereo Garden Banquets' (stereogardenbanquets.com, facebook.com/StereoGardenBanquets) exists for catering; not recorded. A good concert photo on the site (_DSC8977) was skipped because the crowd looks young and may include minors. No exterior photo on the site. Age rule: 21+ unless the event says otherwise.",
   "state": "NY",
   "town": "Patchogue",
   "website": "https://www.stereogardenli.com/",
   "latitude": 40.764796,
   "longitude": -73.01714,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/stereogardenli/",
+  "email": "info@stereogardenli.com",
+  "hours": "Thu-Sat 3 PM-2 AM; Sun 12 PM-12 AM; closed Mon-Wed (show times vary)",
+  "logo": {
+    "image": "../../assets/entities/venues/stereo-garden-patchogue-logo.webp",
+    "alt": "Stereo Garden logo: white lettering on a black guitar-pick shape reading Kitchen, Tap, Stage, Stereo Garden, Patchogue N.Y.",
+    "credit": "Logo: Stereo Garden",
+    "creditUrl": "https://www.stereogardenli.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/5a31578832601ece53e1862e/1513266654151-I19QP13U1Q5MCYQN4DJL/stereogarden_bw_logo.png?format=750w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/stereo-garden-patchogue-1.webp",
+      "alt": "Black and white photo of the big Stereo Garden hall: a long bar, chandeliers under arched wooden rafters and a wide open wood floor",
+      "credit": "Photo: Stereo Garden (website)",
+      "creditUrl": "https://www.stereogardenli.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5a31578832601ece53e1862e/1600285991342-9ZPIUYJ56M672X62WJWU/_DSC5957.jpg?format=1500w",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/stereo-garden-patchogue-2.webp",
+      "alt": "Sepia photo of a Stereo Garden bar with a white counter, leather bar stools, round hanging lamps and long tables",
+      "credit": "Photo: Stereo Garden (website)",
+      "creditUrl": "https://www.stereogardenli.com/contact-us-stereo-garden-patchogue",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5a31578832601ece53e1862e/1513463181942-H5FK5EA1OVPU0CUOVRHV/SG1.jpg?format=1500w",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/stereo-garden-patchogue-3.webp",
+      "alt": "Tall pink tufted leather booths in the Stereo Garden lounge, with a large black and white mural of musicians on the wall",
+      "credit": "Photo: Stereo Garden (website)",
+      "creditUrl": "https://www.stereogardenli.com/about-us",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5a31578832601ece53e1862e/1513268912914-UITO73CVY1IWRBXFZMW8/Inside4.jpg?format=1500w",
+      "focus": "60% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.stereogardenli.com/contact-us-stereo-garden-patchogue",
+      "note": "Contact page lists 9 Railroad Avenue, Patchogue, NY 11772, phone (631) 699-8151, info@stereogardenli.com and weekly hours (Thu-Sat 3 PM-2 AM, Sun noon-midnight)."
+    },
+    {
+      "url": "https://www.stereogardenli.com/",
+      "note": "Home page says the building was the Patchogue Roller Rink in the 1940s, has over 20,000 sq ft of open floor, a stage seen from several levels and two bars; 21+ unless an event says otherwise; dress code."
+    },
+    {
+      "url": "https://www.stereogardenli.com/about-us",
+      "note": "About page repeats the multi-purpose venue description and shows the lounge and hall photos."
+    }
+  ]
 }

@@ -1,5 +1,59 @@
 {
   "name": "Electric Dudes",
   "type": "band",
-  "reviewNotes": "Added automatically from Electric Dudes - Long Island music dates. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Electric Dudes - Long Island music dates. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Booking phone and email are published by the band on its own site for bookings (\"call to reserve your date\"); the email is on the band leader's business domain. The upcoming Palmer's (Farmingdale) date on the band calendar is billed as \"Dave & Joe\", the band's acoustic duo, not the full band. The site links two YouTube channels; we chose the \"ELECTRIC DUDES\" channel (@electricdudes567); the other (@TheElectricDudes) is titled with the band leader's personal name. No logo recorded: the header image is a \"Best of LI\" award badge and the other banner uses a stock concert crowd. Several gallery photos were skipped (photographer watermarks, fan photos, too small).",
+  "website": "https://electricdudes.com/",
+  "facebookUrl": "https://www.facebook.com/electricdudes",
+  "instagramUrl": "https://www.instagram.com/electricdudes/",
+  "youtubeUrl": "https://www.youtube.com/@electricdudes567",
+  "xUrl": "https://x.com/electricdudes",
+  "bookingUrl": "https://electricdudes.com/contact-us",
+  "email": "dave@marketingmastersny.com",
+  "phone": "(516) 987-5001",
+  "town": "Farmingdale",
+  "genres": [
+    "party band",
+    "classic rock",
+    "dance hits",
+    "country",
+    "oldies"
+  ],
+  "description": "A Farmingdale-based party band that plays dance, rock, country and oldies hits from the 1960s to the 2000s at Long Island bars, restaurants, weddings and private parties. Two members also play acoustic duo sets as \"Dave & Joe\".",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/electric-dudes-1.webp",
+      "alt": "Electric Dudes guitarist raising his fist while playing a red guitar on an outdoor stage in front of a giant American flag, with the drummer behind him",
+      "credit": "Photo: Electric Dudes (website)",
+      "creditUrl": "https://electricdudes.com/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/cb0f889c-ec42-4318-9cbf-f13321e29484/davr%20at%20Harley%20Ren%2008.jpg/:/rs=w:1600,m",
+      "focus": "35% 40%"
+    },
+    {
+      "image": "../../assets/entities/performers/electric-dudes-2.webp",
+      "alt": "Electric Dudes playing on a small bar stage lit with bright purple, green and red lights",
+      "credit": "Photo: Electric Dudes (website)",
+      "creditUrl": "https://electricdudes.com/gallery",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/cb0f889c-ec42-4318-9cbf-f13321e29484/Dudes%20Repael%20Great%20a-0001.jpg/:/rs=w:1600,m",
+      "focus": "50% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://electricdudes.com/",
+      "note": "Band site calls itself Long Island's party band playing music from the 60s to the 2000s, links Facebook, Instagram, X and YouTube, and says it was voted Best of Long Island 2021."
+    },
+    {
+      "url": "https://electricdudes.com/events",
+      "note": "Events page lists Dave & Joe (acoustic duo from the band) at Palmer's, 123 Fulton St, Farmingdale, Sat 10/17/26 7-10 PM, plus Electric Dudes at Mr Beery's in Bethpage."
+    },
+    {
+      "url": "https://electricdudes.com/contact-us",
+      "note": "Contact page gives a booking phone and email and a Farmingdale, NY 11735 location for the band."
+    },
+    {
+      "url": "https://electricdudes.com/weddings%2Fparties",
+      "note": "Weddings page says the band plays pop, rock, dance, swing, country and oldies, as a duo, trio or full band, and to call or email to reserve a date."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: electricdudes.com."
 }

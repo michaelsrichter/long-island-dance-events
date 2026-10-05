@@ -2,10 +2,64 @@
   "name": "Sylvester Manor",
   "address": "80 North Ferry Road",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Gene Casey & the Lone Sharks - show calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Outdoor concerts are on the grounds (a low portable stage on the lawn in the site's photo); no dance floor is described. The header logo on the site is a white 'knockout' version; the same logo in color (same folder, SM-logo-color-stacked.png) was used instead. The farmstand is at a separate address, 21 Manwaring Road. The site lists a P.O. Box 2029 mailing address as well as the street address.",
   "state": "NY",
   "town": "Shelter Island",
   "latitude": 41.075348,
   "longitude": -72.339718,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.sylvestermanor.org/",
+  "facebookUrl": "https://www.facebook.com/SylvesterManor/",
+  "instagramUrl": "https://www.instagram.com/sylvestermanorshelterisland/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCDawSFhuyJYnCuGqbROzamA",
+  "xUrl": "https://x.com/sylvestermanor",
+  "email": "info@sylvestermanor.org",
+  "phone": "(631) 749-0626",
+  "hours": "Trails and grounds: daily, sunrise to sunset, March-October",
+  "postalCode": "11964",
+  "description": "A 236-acre historic farm and nonprofit on Shelter Island with walking trails, an 1810 windmill and a working farm. It holds outdoor concerts and other cultural events on its grounds.",
+  "logo": {
+    "image": "../../assets/entities/venues/sylvester-manor-shelter-island-logo.webp",
+    "alt": "Sylvester Manor logo: a blue windmill above plowed fields over the words Sylvester Manor",
+    "credit": "Logo: Sylvester Manor",
+    "creditUrl": "https://www.sylvestermanor.org/",
+    "imageSource": "https://www.sylvestermanor.org/wp-content/uploads/2023/05/SM-logo-color-stacked.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/sylvester-manor-shelter-island-1.webp",
+      "alt": "Two musicians with a guitar and harmonica playing on a low outdoor stage on the Manor's shady lawn",
+      "credit": "Photo: Sylvester Manor (website)",
+      "creditUrl": "https://www.sylvestermanor.org/concerts-cultural-events/",
+      "imageSource": "https://www.sylvestermanor.org/wp-content/uploads/2023/11/concerts-events-1-e1699976573955.jpg",
+      "focus": "40% 40%"
+    },
+    {
+      "image": "../../assets/entities/venues/sylvester-manor-shelter-island-2.webp",
+      "alt": "Visitors standing outside the open door of the shingled 1810 windmill at Sylvester Manor",
+      "credit": "Photo: Sylvester Manor (website)",
+      "creditUrl": "https://www.sylvestermanor.org/plan-your-trip/",
+      "imageSource": "https://www.sylvestermanor.org/wp-content/uploads/2023/09/D34655B4-6987-4B7E-B34A-686A556AF550.jpg",
+      "focus": "50% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.sylvestermanor.org/",
+      "note": "Nonprofit's own site footer: Post Office Box 2029, 80 North Ferry Road, Shelter Island, NY 11964, info@sylvestermanor.org, 631.749.0626, with Facebook, Twitter, YouTube and Instagram links."
+    },
+    {
+      "url": "https://www.sylvestermanor.org/plan-your-trip/",
+      "note": "Trails and grounds are open March-October, seven days a week, sunrise to sunset."
+    },
+    {
+      "url": "https://www.sylvestermanor.org/event/fall-concert/",
+      "note": "Fall Concert on Sat Oct 10, 2026, 2-5 PM: Gene Casey & the Lone Sharks plus The Hoodoo Loungers, a fundraiser for the Shelter Island Fire Department."
+    },
+    {
+      "url": "https://www.sylvestermanor.org/history-and-heritage/",
+      "note": "Shows the county."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: sylvestermanor.org."
 }

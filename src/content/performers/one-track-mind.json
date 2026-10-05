@@ -33,6 +33,53 @@
     "covers of classic hits with a modern twist"
   ],
   "instagramUrl": "https://www.instagram.com/onetrackmindbandli",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the 2026 hip-hop act 'One Track Mind' on Apple Music or the Illinois classic-rock band of the same name.",
-  "website": "https://onetrackmindband.net/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the 2026 hip-hop act 'One Track Mind' on Apple Music or the Illinois classic-rock band of the same name.\n\nDirectory research 2026-10-04: Current description is still accurate, so not replaced. The booking page also lists cell numbers for four band members by first name; these were left out (personal numbers) in favor of the band email and booking form. No logo file on the site (the band logo appears only on the drum head; the og:image is a promo photo), so logo left empty. Photos are from the band's own gallery and recent (2026). Venue name on the band site is \"Tres Palm Restaurant\".",
+  "website": "https://onetrackmindband.net/",
+  "bookingUrl": "https://onetrackmindband.net/bookings",
+  "email": "otmbandli@gmail.com",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/one-track-mind-1.webp",
+      "alt": "One Track Mind playing on a small stage in a warmly lit bar, with two guitarists, a singer, a keyboard player and a drummer",
+      "credit": "Photo: One Track Mind (website)",
+      "creditUrl": "https://onetrackmindband.net/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/d8661945-9ee6-4030-a8f3-f4c5f02f1bc7/Facetune_26-09-2026-18-42-41.jpg/:/rs=w:1400,m",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/performers/one-track-mind-2.webp",
+      "alt": "One Track Mind performing outdoors in front of a brewery, the singer raising his arm while two guitarists play",
+      "credit": "Photo: One Track Mind (website)",
+      "creditUrl": "https://onetrackmindband.net/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/d8661945-9ee6-4030-a8f3-f4c5f02f1bc7/IMG_9373.jpeg/:/rs=w:1400,m",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/one-track-mind-3.webp",
+      "alt": "A crowd dancing on an outdoor deck at sunset while One Track Mind plays on a stage frame in the background",
+      "credit": "Photo: One Track Mind (website)",
+      "creditUrl": "https://onetrackmindband.net/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/d8661945-9ee6-4030-a8f3-f4c5f02f1bc7/Facetune_14-06-2026-23-25-17.jpg/:/rs=w:1400,m",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://onetrackmindband.net/",
+      "note": "Official site: reworks familiar classic songs with a modern twist for the dance floor; links Facebook and Instagram; lists Long Island venues such as Greenport Harbor Brewery, Lily's Babylon and Great South Bay Brewery."
+    },
+    {
+      "url": "https://onetrackmindband.net/upcoming-gigs",
+      "note": "Gig list includes Tres Palm Restaurant Oyster Fest, 16 East Ct., Babylon, Oct 4 2026, plus Deer Park, Peconic, Ronkonkoma, West Islip and Huntington dates."
+    },
+    {
+      "url": "https://onetrackmindband.net/bookings",
+      "note": "Booking page with contact form, otmbandli@gmail.com and phone numbers for four band members."
+    },
+    {
+      "url": "https://onetrackmindband.net/about",
+      "note": "Members: Phil Felice (vocals, guitar, keys), Frank Held (bass), Wayne Trefcer (drums), plus Tony; each with 40+ years playing Long Island and tri-state clubs."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: onetrackmindband.net."
 }

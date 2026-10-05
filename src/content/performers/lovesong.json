@@ -1,5 +1,70 @@
 {
   "name": "Lovesong",
   "type": "band",
-  "reviewNotes": "Added automatically from 89 North (Patchogue) - music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from 89 North (Patchogue) - music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Not the same as 'LOVESONG - The Cure Tribute' (Rusty Wilmot, booked by Switch Entertainment, tours the South/Midwest). The band's own tour flyer on its site lists Long Island dates at 89 North, Stage 317 (Farmingdale), Live On The Porch, Mulcahy's, Napper Tandy's Smithtown and The Silk Factory. Logo is white on a transparent background (needs a dark backdrop). Booking email is a Gmail address the band publishes on its own contact page for bookings. No Spotify or Bandcamp (covers act).",
+  "website": "https://www.lovesonglive.com/",
+  "facebookUrl": "https://www.facebook.com/LovesongTheBand",
+  "instagramUrl": "https://www.instagram.com/lovesongtheband/",
+  "youtubeUrl": "https://www.youtube.com/@LovesongTheBand",
+  "tiktokUrl": "https://www.tiktok.com/@lovesongtheband",
+  "bookingUrl": "https://www.lovesonglive.com/contact",
+  "email": "lovesongthebandlive@gmail.com",
+  "genres": [
+    "80s new wave",
+    "tribute band",
+    "synth-pop"
+  ],
+  "description": "Long Island tribute band that plays 1980s new wave hits by Duran Duran, INXS, The Cure, Tears for Fears, Depeche Mode, Erasure and New Order, with a big light and video show.",
+  "logo": {
+    "image": "../../assets/entities/performers/lovesong-logo.webp",
+    "alt": "Lovesong logo: a stack of white bars shaped like a heart next to the word LOVESONG",
+    "credit": "Logo: Lovesong",
+    "creditUrl": "https://www.lovesonglive.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/639e818fbfd55b352b4f4065/5a5268ca-efda-4459-abe5-1a4950ff61ea/lovesong-logo-header1.png?format=1500w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/lovesong-1.webp",
+      "alt": "Lovesong's guitarists, bassist and keyboard player in dark jackets on a club stage lit with neon tubes, with a packed crowd in front",
+      "credit": "Photo: Lovesong (website)",
+      "creditUrl": "https://www.lovesonglive.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/639e818fbfd55b352b4f4065/9aec689b-5574-4127-93a8-6d872a58990b/LS_89N_012525_24.JPG?format=1500w",
+      "focus": "60% 40%"
+    },
+    {
+      "image": "../../assets/entities/performers/lovesong-2.webp",
+      "alt": "The full Lovesong band playing under a lit Lovesong sign, framed by slanted white light bars, seen over the heads of the audience",
+      "credit": "Photo: Lovesong (website)",
+      "creditUrl": "https://www.lovesonglive.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/639e818fbfd55b352b4f4065/cc9f1e18-7ee4-4498-9b45-1662e3b067ed/LS_89N_012525_39.JPG?format=1500w",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/performers/lovesong-3.webp",
+      "alt": "Lovesong on stage in bright pink light with a big video screen behind them while a crowd dances on the floor",
+      "credit": "Photo: Lovesong (website)",
+      "creditUrl": "https://www.lovesonglive.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/639e818fbfd55b352b4f4065/a525e8a6-92e9-4a44-9d94-bb794fb8f7be/gallery-00001.jpg?format=1500w",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.lovesonglive.com/",
+      "note": "Band site: '80s new wave tribute (Duran Duran, INXS, The Cure, Tears for Fears, Depeche Mode, Erasure, New Order) with lights and visuals; links to Facebook, YouTube, Instagram and TikTok."
+    },
+    {
+      "url": "https://www.lovesonglive.com/contact",
+      "note": "Contact page gives a Gmail address with a 'Lovesong Booking Info' subject line for bookings, plus a stage plot."
+    },
+    {
+      "url": "https://liveontheporch.com/events/",
+      "note": "Live On The Porch (Smithtown) lists 'Lovesong - An '80s New Wave Experience' on Dec 4, 2026, naming the same bands."
+    },
+    {
+      "url": "https://theboatyardny.com/artist/lovesong/",
+      "note": "The Boat Yard at Tobay Beach (Massapequa) lists several 2026 Lovesong shows; webtunes notes a show filmed at 89 North in Patchogue on 12/12/2025."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: lovesonglive.com, liveontheporch.com, theboatyardny.com."
 }

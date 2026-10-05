@@ -38,15 +38,64 @@
   },
   "description": "A seasonal beach bar and grill right on the sand at Cedar Beach on Ocean Parkway, with a stage for bands, DJs, picnic tables and an upstairs deck.",
   "facebookUrl": "https://www.facebook.com/saltshackny/",
-  "factsSource": "Checked October 3, 2026. Source: saltshackny.com.",
+  "factsSource": "Checked October 4, 2026. Sources: saltshackny.com, businessyab.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Salt+Shack+100+Ocean+Pkwy+Babylon+NY+11702",
   "kind": "bar",
   "latitude": 40.6301007,
   "longitude": -73.3409542,
   "phone": "(631) 422-7222",
   "postalCode": "11702",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Official site says the season is May-September, but it still lists October events. Ira listed Byrne Unit at '3p?' while the venue calendar says 5 pm on Oct 4. Some listings give 1 or 200 Ocean Pkwy; the official site says 100 Ocean Pkwy. Cedar Beach parking may cost non-residents a fee. Ira's List has a venue page (/salt-shack-2021).",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Official site says the season is May-September, but it still lists October events. Ira listed Byrne Unit at '3p?' while the venue calendar says 5 pm on Oct 4. Some listings give 1 or 200 Ocean Pkwy; the official site says 100 Ocean Pkwy. Cedar Beach parking may cost non-residents a fee. Ira's List has a venue page (/salt-shack-2021).\n\nDirectory research 2026-10-04: Hours on the site say it is closed Mon-Thu for the rest of the 2026 season; a weather banner also said it would close early on the day checked. Bing lists the address as 200 Ocean Pkwy; the venue's own site says 100 Ocean Pkwy, which is kept. Two emails appear only as hidden contact-form recipients (one a named staff member), so no public email was recorded; there is a separate catering line (631) 317-9313 on an older listing, not on the current site. Several photos on the site's Specials/Contact pages are generic stock images, so they were skipped. The Town of Babylon charges a parking fee before 4 PM.",
   "state": "NY",
   "town": "Babylon",
-  "website": "https://saltshackny.com/"
+  "website": "https://saltshackny.com/",
+  "instagramUrl": "https://www.instagram.com/saltshackny/",
+  "hours": "Fri 4 PM-11 PM; Sat 11 AM-11 PM; Sun 11 AM-9 PM; closed Mon-Thu for the rest of the 2026 season (open May-September)",
+  "logo": {
+    "image": "../../assets/entities/venues/salt-shack-babylon-logo.webp",
+    "alt": "Salt Shack Seaside Grill logo in light blue rough lettering with a surfboard between the two words",
+    "credit": "Logo: Salt Shack",
+    "creditUrl": "https://saltshackny.com/",
+    "imageSource": "https://saltshackny.com/_astro/logo-blue.Ckq2Gw2n_ZPjKNr.webp"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/salt-shack-babylon-1.webp",
+      "alt": "Aerial view of the Salt Shack on Cedar Beach: a teal beach bar with a blue roof, upper deck and palm trees over rows of tables on the sand, with the bay behind",
+      "credit": "Photo: Salt Shack (website)",
+      "creditUrl": "https://saltshackny.com/",
+      "imageSource": "https://saltshackny.com/images/hero-poster.webp",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/salt-shack-babylon-2.webp",
+      "alt": "Tables and chairs set out on the sand under palm trees and string lights, in front of the teal Salt Shack building and its covered upper deck",
+      "credit": "Photo: Salt Shack (website)",
+      "creditUrl": "https://saltshackny.com/catering/",
+      "imageSource": "https://saltshackny.com/images/catering-beach.webp",
+      "focus": "55% 65%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://saltshackny.com/contact/",
+      "note": "Venue's own Find Us page: 100 Ocean Pkwy, Babylon, NY 11702, (631) 422-7222, current hours, free parking after 4 PM, and links to its Facebook and Instagram."
+    },
+    {
+      "url": "https://saltshackny.com/",
+      "note": "Home page says it is on Cedar Beach, open May-September, with live bands and DJs most days; it still lists October 2026 band dates."
+    },
+    {
+      "url": "https://saltshackny.com/events/",
+      "note": "Event calendar lists upcoming bands (The Byrne Unit Oct 4 at 5 PM, Decadia, The Legendary Murphys, Kung Fu Betty)."
+    },
+    {
+      "url": "https://saltshackny.com/catering/",
+      "note": "Shows the booking page."
+    },
+    {
+      "url": "https://businessyab.com/explore/united_states/new_york/suffolk_county/babylon/ocean_parkway/100/salt_shack_40066",
+      "note": "Shows the county."
+    }
+  ]
 }

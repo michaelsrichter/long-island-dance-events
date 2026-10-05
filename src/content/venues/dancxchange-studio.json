@@ -8,15 +8,34 @@
   "town": "Melville",
   "county": "Suffolk",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: donnadesimone.us, google.com.",
+  "factsSource": "Checked October 4, 2026. Sources: donnadesimone.us, thedancecalendar.com.",
   "postalCode": "11747",
   "phone": "(516) 375-8498",
   "website": "https://www.donnadesimone.us/",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=290+Broad+Hollow+Rd%2C+Melville%2C+NY+11747",
   "accessibilityNotes": "Inside the Bank of America professional building; studio is downstairs at the atrium level. Front doors lock automatically at 8:00 pm, so arrive before 8.",
-  "description": "Lower level, Suite LL150E. The studio says its front doors lock at 8 PM.",
-  "reviewNotes": "No Google Maps place listing for the studio itself; link is an address search. Phone is Donna DeSimone's published cell.",
+  "description": "Donna DeSimone's dance studio on the lower level (Suite LL150E) of the Bank of America office building at Route 110 and the LIE in Melville. It holds hustle, West Coast swing, ballroom and country two-step classes and a monthly practice party. The front doors lock at 8 PM.",
+  "reviewNotes": "No Google Maps place listing for the studio itself; link is an address search. Phone is Donna DeSimone's published cell.\n\nDirectory research 2026-10-04: Phone is Donna DeSimone's cell, which she publishes on her own studio site for lessons. No Google Maps place listing for the studio (search returns other studios). Her site points students to a Facebook group 'Dancing with Donna De' (a group, not a business page) and we found no business Facebook/Instagram page, so none recorded. Site photos show Donna dancing at other ballrooms (e.g. Star Ballroom), not this studio, so no venue photos recorded. Proposed a real description because the current one only holds directions.",
   "latitude": 40.783743,
   "longitude": -73.418758,
-  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)",
+  "email": "dancxchange@yahoo.com",
+  "hours": "Group classes Mon-Thu evenings (about 6:30 PM-9:15 PM); private lessons by appointment; building front doors lock at 8 PM",
+  "logo": {
+    "image": "../../assets/entities/venues/dancxchange-studio-logo.webp",
+    "alt": "The DancXchange Dance Studio logo: a pink and blue silhouette of a dancing couple over bold black lettering",
+    "credit": "Logo: The DancXchange Dance Studio",
+    "creditUrl": "https://www.donnadesimone.us/",
+    "imageSource": "https://img1.wsimg.com/isteam/ip/ba87ba8b-c9d6-4856-af0b-622b0e4b71a1/DanceExchange%20Logo_Dance%20Studio-JPEG.jpg/:/rs=w:1200,m"
+  },
+  "evidence": [
+    {
+      "url": "https://www.donnadesimone.us/",
+      "note": "Owner's site: The DancXchange, LLC, 290 Broad Hollow Rd, Melville NY 11747, Bank of America Building, Suite LL150E (atrium/lower level); Donna DeSimone (516) 375-8498, dancxchange@yahoo.com; weekly class schedule and 2nd-Wednesday…"
+    },
+    {
+      "url": "https://www.thedancecalendar.com/find-an-instructor",
+      "note": "The Dance Calendar instructor directory lists Donna DeSimone with the same cell, email and donnadesimone.us website."
+    }
+  ]
 }

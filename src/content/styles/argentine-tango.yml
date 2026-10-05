@@ -11,3 +11,38 @@ aliases:
   - Vals Criollo
 summary: A slow, close partner dance from Buenos Aires. The couple walks and improvises together.
 music: Tango, vals and milonga
+description: Argentine tango is a close, walking partner dance where couples share an embrace and improvise together as they move counterclockwise around the floor. It began in the working-class neighborhoods of Buenos Aires in the late 1800s. A social tango dance is called a milonga, and dancers move to tango, vals (waltz) and milonga music.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/Argentine_tango
+photos:
+  - image: ../../assets/entities/styles/argentine-tango-1.webp
+    alt: Couples dance Argentine tango in a close embrace on a black-and-white checkered floor at an evening milonga in a restaurant hall
+    credit: "Photo: Mfrerich, CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:La_Milonga_de_New_Orleans.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/La_Milonga_de_New_Orleans.jpg/1280px-La_Milonga_de_New_Orleans.jpg
+    focus: 50% 35%
+  - image: ../../assets/entities/styles/argentine-tango-2.webp
+    alt: Couples dance tango on the marble floor of an old Buenos Aires ballroom with columns and chandeliers
+    credit: "Photo: Jorge Láscar, CC BY 2.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Couples_dancing_tango_-_Milonga_at_the_Confiteria_Ideal_(4728933003).jpg
+    licenseUrl: https://creativecommons.org/licenses/by/2.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Couples_dancing_tango_-_Milonga_at_the_Confiteria_Ideal_%284728933003%29.jpg/1280px-Couples_dancing_tango_-_Milonga_at_the_Confiteria_Ideal_%284728933003%29.jpg
+    focus: 50% 60%
+  - image: ../../assets/entities/styles/argentine-tango-3.webp
+    alt: Couples in close embrace dance tango across a wide wooden floor in a dim club with pink lights
+    credit: "Photo: Photosbal, CC BY-SA 3.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Tango-au-NixNox-Paris.JPG
+    licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Tango-au-NixNox-Paris.JPG/1280px-Tango-au-NixNox-Paris.JPG
+    focus: 50% 35%
+evidence:
+  - url: https://en.wikipedia.org/wiki/Argentine_tango
+    note: "Wikipedia: Argentine tango is a social dance and music genre that originated in the late 19th century in the suburbs of Buenos Aires."
+  - url: https://commons.wikimedia.org/wiki/File:La_Milonga_de_New_Orleans.jpg
+    note: "Commons file page: La Milonga de New Orleans at Galvez Restaurant, French Quarter; own work by Mfrerich, CC BY-SA 4.0."
+  - url: https://commons.wikimedia.org/wiki/File:Couples_dancing_tango_-_Milonga_at_the_Confiteria_Ideal_(4728933003).jpg
+    note: "Commons file page: couples dancing tango at a milonga at Confitería Ideal, Buenos Aires, by Jorge Láscar (Flickr), CC BY 2.0."
+  - url: https://commons.wikimedia.org/wiki/File:Tango-au-NixNox-Paris.JPG
+    note: "Commons file page: end of a milonga on the NixNox boat in Paris; own work by Photosbal, CC BY-SA 3.0."

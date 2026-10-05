@@ -11,5 +11,45 @@
   "affiliatedOrganizerIds": [
     "dancxchange"
   ],
-  "website": "https://www.donnadesimone.us/"
+  "website": "https://www.donnadesimone.us/",
+  "email": "dancxchange@yahoo.com",
+  "phone": "(516) 375-8498",
+  "description": "Donna DeSimone teaches hustle, West Coast Swing, ballroom and country two-step at her own studio, The DancXchange, in Melville, with group classes on weeknights and private lessons by appointment. She also runs and DJs the monthly DancXchange Club Night dance at the Moose Lodge in Greenlawn.",
+  "logo": {
+    "image": "../../assets/entities/instructors/donna-desimone-logo.webp",
+    "alt": "The DancXchange Club Night logo: bold black lettering under two dancing figures shaded in blue and pink",
+    "credit": "Logo: The DancXchange",
+    "creditUrl": "https://donnadesimone.us/",
+    "imageSource": "https://img1.wsimg.com/isteam/ip/ba87ba8b-c9d6-4856-af0b-622b0e4b71a1/DanceExchange%20Logo_Club%20Night-JPEG.jpg/:/rs=w:1000"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/instructors/donna-desimone-1.webp",
+      "alt": "Donna DeSimone in a sparkly black dress throws her arms up while performing with a kneeling dance partner as an audience watches",
+      "credit": "Photo: Donna DeSimone (website)",
+      "creditUrl": "https://donnadesimone.us/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/ba87ba8b-c9d6-4856-af0b-622b0e4b71a1/Donna%20%26%20James%201.jpg/:/rs=w:1300",
+      "focus": "70% 30%"
+    },
+    {
+      "image": "../../assets/entities/instructors/donna-desimone-2.webp",
+      "alt": "Donna DeSimone speaks into a microphone at a DJ table on stage, next to a fellow DJ, in front of a brick wall",
+      "credit": "Photo: Donna DeSimone (website)",
+      "creditUrl": "https://donnadesimone.us/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/ba87ba8b-c9d6-4856-af0b-622b0e4b71a1/Donna%20%26%20Paul%20DJ%20pic%207-30-21.jpg/:/rs=w:1300",
+      "focus": "55% 20%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://donnadesimone.us/",
+      "note": "Her own site (The DancXchange, LLC) lists cell (516) 375-8498 and dancxchange@yahoo.com for lessons, the Melville studio at 290 Broad Hollow Rd (suite LL150E), and weekly hustle, West Coast Swing, foxtrot and country two-step classes."
+    },
+    {
+      "url": "https://www.thedancecalendar.com/find-an-instructor",
+      "note": "The Dance Calendar instructor listing for Donna DeSimone (hustle and West Coast Swing) gives the same cell, email and website."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: donnadesimone.us, thedancecalendar.com.",
+  "reviewNotes": "Directory research 2026-10-04: Website, phone and email confirmed on her own site (www redirects to donnadesimone.us). The phone and email are the ones she publishes for lessons; they match the dancxchange organizer. Her students' Facebook group \"Dancing with Donna De\" is mentioned without a link and is a group, so no Facebook recorded. Logo is The DancXchange Club Night logo from her site (her own branded studio and dance) - it may fit the dancxchange organizer better. Photo 1 is an older scanned performance photo (a little soft); photo 2 shows her DJing at one of her dances. Country two-step could be added to her styles (her site lists a country two-step lesson)."
 }

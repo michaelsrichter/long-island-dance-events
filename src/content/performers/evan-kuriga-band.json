@@ -1,5 +1,32 @@
 {
   "name": "Evan Kuriga Band",
   "type": "band",
-  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Same act as the solo 'Evan Kuriga' listings at The Villager (the Villager's second listedOn URL is a solo night); the 'Band' is his full-band lineup. No official website found. The YouTube channel is Evan's personal artist channel (last uploads several years old). Its About links point to facebook.com/Evan-kuriga and instagram.com/Evan-Kuriga, but those handles look malformed (Instagram does not allow hyphens), so they were not recorded. No band logo or own-site photos found. An AllMusic credit for an 'Evan Kuriga' on metal releases (Eternity Fallen, Wicked Maraya) may be the same person but is unconfirmed.",
+  "youtubeUrl": "https://www.youtube.com/@evankuriga1404",
+  "genres": [
+    "pop",
+    "rock",
+    "R&B",
+    "soul"
+  ],
+  "description": "Band led by Long Island singer and guitarist Evan Kuriga. Mostly covers of pop, rock, soul and R&B songs by artists like the Beatles, Michael Jackson and Stevie Wonder, plus a few of his own songs.",
+  "evidence": [
+    {
+      "url": "https://www.thevillagerfarmingdale.com/livemusic/live-music-evan-kuriga-band",
+      "note": "The Villager (Farmingdale) lists 'Live Music: Evan Kuriga Band' on Friday Oct 9, 2026, 6-9 PM; it also lists solo 'Evan Kuriga' nights."
+    },
+    {
+      "url": "https://www.rockawave.com/articles/from-american-idol-to-rockaway-beach/",
+      "note": "2023 newspaper profile: Evan Kuriga is a Long Island-born singer/guitarist who plays mostly covers (Beatles, Michael Jackson, Stevie Wonder, pop, blues, R&B) and some originals, about 20 gigs a month."
+    },
+    {
+      "url": "https://www.youtube.com/@evankuriga1404/videos",
+      "note": "YouTube channel 'Evan Kuriga' describes a singer/songwriter from Long Island, New York, with cover videos (older uploads)."
+    },
+    {
+      "url": "https://parkrestaurant.com/events/evan-kuriga-live/",
+      "note": "Plattduetsche Park (Franklin Square) listed 'Evan Kuriga live' as its opening band in June 2026."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thevillagerfarmingdale.com, rockawave.com, youtube.com, parkrestaurant.com."
 }

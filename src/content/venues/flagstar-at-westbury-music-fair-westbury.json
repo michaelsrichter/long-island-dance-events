@@ -30,16 +30,59 @@
   },
   "description": "A large theater-in-the-round with a rotating stage and up to about 2,800 seats, run by Live Nation. It hosts big-name concerts and comedy.",
   "facebookUrl": "https://www.facebook.com/WestburyMusicFair/",
-  "factsSource": "Checked October 3, 2026. Source: flagstaratwestburymusicfair.com.",
+  "factsSource": "Checked October 4, 2026. Source: flagstaratwestburymusicfair.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Flagstar+at+Westbury+Music+Fair%2C+960+Brush+Hollow+Rd%2C+Westbury%2C+NY+11590",
   "kind": "theater",
   "phone": "(516) 247-5200",
   "postalCode": "11590",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). westburymusicfair.org is a third-party ticket site, not the official venue site. That site calls the Oct 3 show 'Louder Than Love'; the official site calls it 'For The Love Of Freestyle'.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). westburymusicfair.org is a third-party ticket site, not the official venue site. That site calls the Oct 3 show 'Louder Than Love'; the official site calls it 'For The Love Of Freestyle'.\n\nDirectory research 2026-10-04: Run by Live Nation; the email is a Live Nation venue info address. The logo is white on a transparent background (needs a dark background). The best inside photo (round seating around the center stage) carries a small photographer credit in the corner ('Mark Schoen, 2013'), so we skipped it under the no-watermark rule; owner may decide to use it with credit: https://assets.livenationcdn.com/uploads/6c6b00a2-58ad-43e6-92b4-87ad310275e3.jpg (on /private-events). Seated theater; no dance floor. Existing description still fits; kept. westburymusicfair.org is a third-party ticket site (as already noted).",
   "state": "NY",
   "town": "Westbury",
   "website": "https://www.flagstaratwestburymusicfair.com/",
   "latitude": 40.768879,
   "longitude": -73.56599,
-  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)",
+  "instagramUrl": "https://www.instagram.com/westburymusicfair/",
+  "xUrl": "https://x.com/MusicAtWestbury",
+  "email": "infotaw@livenation.com",
+  "hours": "Box office Wed-Sat 12 PM-5 PM; closed Sun-Tue (open on show days)",
+  "logo": {
+    "image": "../../assets/entities/venues/flagstar-at-westbury-music-fair-westbury-logo.webp",
+    "alt": "Flagstar at Westbury Music Fair logo: a star mark and the words flagstar at Westbury Music Fair in white",
+    "credit": "Logo: Flagstar at Westbury Music Fair",
+    "creditUrl": "https://www.flagstaratwestburymusicfair.com/",
+    "imageSource": "https://assets.livenationcdn.com/uploads/c84919ad-343c-48fe-89df-04043148037e.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/flagstar-at-westbury-music-fair-westbury-1.webp",
+      "alt": "The front entrance of Flagstar at Westbury Music Fair with the venue name on a long black sign above glass doors",
+      "credit": "Photo: Flagstar at Westbury Music Fair (website)",
+      "creditUrl": "https://www.flagstaratwestburymusicfair.com/visit",
+      "imageSource": "https://assets.livenationcdn.com/uploads/87c3854c-fd9f-43c5-bdb6-43ad6a45f643.jpg",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/flagstar-at-westbury-music-fair-westbury-2.webp",
+      "alt": "The empty main lobby at Westbury Music Fair with pink-lit bars on both sides and photos of past performers on the far wall",
+      "credit": "Photo: Flagstar at Westbury Music Fair (website)",
+      "creditUrl": "https://www.flagstaratwestburymusicfair.com/private-events",
+      "imageSource": "https://assets.livenationcdn.com/uploads/ee68e7e5-0be1-4e57-8ae9-ab595c007a7a.jpg",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.flagstaratwestburymusicfair.com/",
+      "note": "Official venue site footer: 960 Brush Hollow Road, Westbury, NY 11590, 516.247.5200, infotaw@livenation.com; links Facebook, X and Instagram."
+    },
+    {
+      "url": "https://www.flagstaratwestburymusicfair.com/visit",
+      "note": "Visit page: box office at the front of the venue, open Wednesday-Saturday noon-5 PM, closed Sunday-Tuesday."
+    },
+    {
+      "url": "https://www.flagstaratwestburymusicfair.com/history",
+      "note": "History page: opened in 1956 in a tent; enclosed theater-in-the-round with a rotating stage since 1966."
+    }
+  ]
 }

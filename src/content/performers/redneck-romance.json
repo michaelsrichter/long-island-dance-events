@@ -21,5 +21,28 @@
     "rating": "unknown"
   },
   "description": "Massapequa Park-area cover band that plays local pubs, taverns, park picnics and street fairs on the South Shore of Nassau and western Suffolk.",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Genre not verified; the name hints at country, but no evidence was found. A Facebook page (Redneck36) shows up in search but was not confirmed as theirs."
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Genre not verified; the name hints at country, but no evidence was found. A Facebook page (Redneck36) shows up in search but was not confirmed as theirs.\n\nDirectory research 2026-10-04: Clearly a real, active Long Island bar band (Massapequa Park, Massapequa, Amityville, Patchogue), but no website, confirmed Facebook/Instagram, booking page or official photos were found. Genre is still not verified: no source states what they play (a search-engine AI summary called them 'country rock' but cited nothing that says so), so genres are left empty. A fan's 2016 YouTube clip shows them at Front Street Pub (now Prohibition) in Massapequa Park, not an official channel. The 'Redneck36' Facebook page mentioned before was not confirmed. Also spelled 'Red Neck Romance' by The Oar House. Current description is still accurate; they also play Patchogue and Amityville.",
+  "evidence": [
+    {
+      "url": "https://www.liblogger.com/events/redneck-romance-8-22-2026",
+      "note": "Bacaro Italian Tavern (1020 Park Blvd, Massapequa Park) hosted Redneck Romance on Aug 22, 2026, one of several Bacaro dates."
+    },
+    {
+      "url": "https://allevents.in/massapequa/groovin-the-massapicnic-with-redneck-romance/200029699420218",
+      "note": "Played the 'Groovin The Massapicnic' afternoon in Marjorie Post Park, Massapequa, on Aug 29, 2026."
+    },
+    {
+      "url": "https://webtunes.com/events/28185e0e-f6ce-4076-8afd-cabd04c02e8f",
+      "note": "Played outside at the Octoberfest street fair by Prohibition, 109 Front St, Massapequa Park (Oct 5, 2025)."
+    },
+    {
+      "url": "https://theoar.com/event/red-neck-romance/",
+      "note": "The Oar House in Patchogue listed 'Red Neck Romance' on July 11, 6:30-10:30 PM - same act, spelled as two words."
+    },
+    {
+      "url": "https://www.toomeystavernamityville.com/event-details-registration/redneck-romance-11",
+      "note": "Toomey's Tavern in Amityville booked Redneck Romance (May 26, 2024)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: liblogger.com, allevents.in, webtunes.com, theoar.com."
 }

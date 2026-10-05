@@ -7,3 +7,29 @@ aliases:
   - Sensual Bachata
 summary: A close partner dance from the Dominican Republic with a small hip pop on count four.
 music: Bachata and Latin pop
+description: Bachata is a partner dance from the Dominican Republic, danced to bachata music. The basic step moves side to side over eight counts, with a small hip pop on counts 4 and 8. It began in the 1960s as a close-embrace dance and today ranges from traditional Dominican footwork to the slower, flowing sensual style.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/Bachata_(dance)
+photos:
+  - image: ../../assets/entities/styles/bachata-1.webp
+    alt: A man in a red shirt dips his partner in a red jumpsuit during a bachata move in a bright dance studio with mirrors
+    credit: "Photo: Salsauom, CC0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Bachata_dip.jpg
+    licenseUrl: https://creativecommons.org/publicdomain/zero/1.0/
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/a/a9/Bachata_dip.jpg
+    focus: 55% 50%
+  - image: ../../assets/entities/styles/bachata-2.webp
+    alt: An instructor in a cap leads a group bachata class through a footwork pattern in a hotel ballroom
+    credit: "Photo: Rosiestep, CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Kris_%26_Lara_at_California_Dance_Festival_2025.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Kris_%26_Lara_at_California_Dance_Festival_2025.jpg/1280px-Kris_%26_Lara_at_California_Dance_Festival_2025.jpg
+    focus: 45% 40%
+evidence:
+  - url: https://en.wikipedia.org/wiki/Bachata_(dance)
+    note: "Wikipedia: bachata is a social dance from the Dominican Republic with an eight-count side-to-side basic and a hip movement on counts 4 and 8; the original 1960s dance was done in closed position."
+  - url: https://commons.wikimedia.org/wiki/File:Bachata_dip.jpg
+    note: "Commons file page: 'example of a bachata dip', own work by Salsauom, CC0."
+  - url: https://commons.wikimedia.org/wiki/File:Kris_%26_Lara_at_California_Dance_Festival_2025.jpg
+    note: "Commons file page: a class called Bachata Basic Breakdown at the California Dance Festival 2025, Sacramento; own work by Rosiestep, CC BY-SA 4.0."

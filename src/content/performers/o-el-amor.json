@@ -1,5 +1,37 @@
 {
   "name": "O El Amor",
   "type": "band",
-  "reviewNotes": "Added automatically from 89 North (Patchogue) - music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from 89 North (Patchogue) - music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: The website the venues link to (oelamor.com) no longer works: it now shows an unrelated Chinese domain-parking page, so it is not recorded and venues may want to drop that link. Instagram is taken from the Boat Yard venue page (name and show history match). No booking page, YouTube, logo or photos from an official site found (Facebook/Instagram images need a login). Do not confuse with 'Magic of Amore' (a different Long Island act).",
+  "facebookUrl": "https://www.facebook.com/OElAmorband/",
+  "instagramUrl": "https://www.instagram.com/oelamor/",
+  "genres": [
+    "80s covers",
+    "love songs",
+    "party band",
+    "one-hit wonders"
+  ],
+  "description": "Long Island party cover band whose members wear wild masks on stage and play upbeat versions of 1970s and '80s love songs and one-hit wonders, with a lot of stage antics. A new female lead singer joined in early 2026.",
+  "evidence": [
+    {
+      "url": "https://89northmusic.com/calendar",
+      "note": "89 North (Patchogue) calendar lists O El Amor on Fri Oct 30, 2026."
+    },
+    {
+      "url": "https://www.giotopiahub.com/post/o-el-amor-a-new-voice-takes-the-stage",
+      "note": "Long Island music blog (Jan 2026): masked 'rock & romance' band covering '80s love songs; longtime singer Disco Goya left and new singer Rubia Loca debuted at 89 North; also plays Painter's and The Warehouse LI."
+    },
+    {
+      "url": "https://theboatyardny.com/event/o-el-amor-2026-08-01/",
+      "note": "The Boat Yard (Tobay Beach) event page describes the masked Long Island cover band and links its Instagram (instagram.com/oelamor) and old website oelamor.com."
+    },
+    {
+      "url": "https://www.facebook.com/OElAmorband/posts/set-your-heart-ablaze-with-the-masked-lovers-at-stage-317march-10-%EF%B8%8F-doors-900pm-/1930264457312022/",
+      "note": "Public post from the band's Facebook page announcing a show at Stage 317 in Farmingdale (March 2023)."
+    },
+    {
+      "url": "https://saltshackny.com/artist/o-el-amor/",
+      "note": "Shows the kind of music."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: 89northmusic.com, giotopiahub.com, theboatyardny.com, facebook.com."
 }

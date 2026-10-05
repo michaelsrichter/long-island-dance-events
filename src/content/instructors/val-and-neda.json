@@ -10,5 +10,59 @@
   "affiliatedOrganizerIds": [
     "the-studio-by-hill-street"
   ],
-  "reviewNotes": "Likely the NYC pro Latin couple at valneda.com, but no source links them to The Studio, so no website/socials recorded."
+  "reviewNotes": "Likely the NYC pro Latin couple at valneda.com, but no source links them to The Studio, so no website/socials recorded.\n\nDirectory research 2026-10-04: Identity is medium, not high: the studio's posts name only \"Val & Neda\" and never link to valneda.com. The match rests on the exact name, both being pro Latin/ballroom teachers in the New York area, and the Eventbrite lineup headshots (small black-and-white crops) looking like the couple on valneda.com. Please confirm with the studio (info@thestudiobyhillstreet.com) before publishing the links and photos; if it is a different couple, drop website, socials, booking link and photos. Their site has only a contact form (no email or phone). The description uses only facts from the studio's own posts. Their YouTube link on the site points to /videos; the channel root is recorded.",
+  "website": "https://www.valneda.com/",
+  "instagramUrl": "https://www.instagram.com/valneda_dance/",
+  "youtubeUrl": "https://www.youtube.com/@valnedadance",
+  "bookingUrl": "https://www.valneda.com/contact",
+  "description": "Val & Neda are a professional Latin dance couple who teach Latin and ballroom group classes for adults and children at The Studio by Hill Street in Southampton. They also host some of the studio's dance parties, such as its 2026 Halloween Latin and ballroom night.",
+  "photos": [
+    {
+      "image": "../../assets/entities/instructors/val-and-neda-1.webp",
+      "alt": "Val and Neda dance hand in hand on a waterfront lawn with the Manhattan skyline behind them",
+      "credit": "Photo: Val & Neda (website)",
+      "creditUrl": "https://www.valneda.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/63ff9ce7c2e22b5a5bb8ba52/e8ce5fc9-fafe-4d1f-9f67-a4d624feb7d5/IMG_0722.jpg?format=1500w",
+      "focus": "50% 30%"
+    },
+    {
+      "image": "../../assets/entities/instructors/val-and-neda-2.webp",
+      "alt": "Val, in a white dance shirt, holds Neda as she sweeps out a long black pleated skirt against a dark background",
+      "credit": "Photo: Val & Neda (website)",
+      "creditUrl": "https://www.valneda.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/63ff9ce7c2e22b5a5bb8ba52/35e9947c-b062-46b7-afae-72c930d8228f/val+1112.jpg?format=1500w",
+      "focus": "50% 25%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://hamptons.com/events/the-studio-ballroom-latin-dance-academy-launch-kids-adults/",
+      "note": "The Studio by Hill Street's March 2026 open house listing (33 Hill St, Southampton) says to meet its world-class instructors Val & Neda, with kids and adult ballroom and Latin programs."
+    },
+    {
+      "url": "https://patch.com/new-york/southampton/calendar/event/20260915/d0ac0226-8de3-4fbf-8293-ca1897950255/kids-ballroom-latin-dance-classes-begin-this-fall-in-southampton",
+      "note": "Studio's fall 2026 Patch post: kids ballroom and Latin classes on Tuesdays and Thursdays taught by award-winning instructors Val & Neda."
+    },
+    {
+      "url": "https://www.eventbrite.com/e/latin-and-ballroom-halloween-dance-party-in-southampton-ny-tickets-2002476423889",
+      "note": "Oct 29, 2026 Halloween Latin & ballroom party at The Studio by Hill Street \"with Val & Neda\"; the lineup headshots look like the couple pictured on valneda.com."
+    },
+    {
+      "url": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+      "note": "The Dance Calendar, October 2026: adult classes at The Studio, 33 Hill Street - Val & Neda teaching 7 PM Latin and 8 PM ballroom."
+    },
+    {
+      "url": "https://www.valneda.com/about",
+      "note": "valneda.com: \"Val & Neda\" (Valentyn Isaiev and Neda Andriekute), a professional Latin American dance couple in the New York area offering group and private lessons; links to Instagram @valneda_dance and YouTube @valnedadance."
+    },
+    {
+      "url": "https://www.valneda.com/",
+      "note": "Shows the website, Instagram page and YouTube channel."
+    },
+    {
+      "url": "https://www.valneda.com/contact",
+      "note": "Shows the booking page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: hamptons.com, patch.com, eventbrite.com, thedancecalendar.com."
 }

@@ -8,3 +8,40 @@ aliases:
   - West Coast
 summary: A smooth swing dance done in a straight line. It fits pop, R&B and blues songs.
 music: Pop, R&B, blues, country
+description: West Coast Swing is a smooth, stretchy partner dance done in a narrow lane, or slot, on the floor, with lots of room for both partners to improvise. It grew out of the Lindy Hop in California in the 1940s and 1950s. Today people dance it to pop, R&B, blues and country songs.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/West_Coast_Swing
+photos:
+  - image: ../../assets/entities/styles/west-coast-swing-1.webp
+    alt: Many couples dance West Coast Swing on a large wooden ballroom floor lit in red and teal, with holiday lights on the pillars
+    credit: "Photo: Sdkb, CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Hollywood_Ballroom_Friday_West_Coast_Swing_night_in_December_2023.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Hollywood_Ballroom_Friday_West_Coast_Swing_night_in_December_2023.jpg/1280px-Hollywood_Ballroom_Friday_West_Coast_Swing_night_in_December_2023.jpg
+    focus: 50% 45%
+  - image: ../../assets/entities/styles/west-coast-swing-2.webp
+    alt: A couple dances a West Coast Swing demonstration on a shiny floor while a large crowd sits around them watching
+    credit: "Photo: GoToVan, CC BY 2.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Friday_Night_Dancing,_July_15th,_2016_(27721542973).jpg
+    licenseUrl: https://creativecommons.org/licenses/by/2.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Friday_Night_Dancing%2C_July_15th%2C_2016_%2827721542973%29.jpg/1280px-Friday_Night_Dancing%2C_July_15th%2C_2016_%2827721542973%29.jpg
+    focus: 42% 40%
+  - image: ../../assets/entities/styles/west-coast-swing-3.webp
+    alt: Couples dance West Coast Swing at a social dance in a low-lit community hall; in front, a man turns his partner under his arm
+    credit: "Photo: Sdkb, CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:West_Coast_Swing_dance_in_Somerville,_Massachusetts.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/West_Coast_Swing_dance_in_Somerville%2C_Massachusetts.jpg/1280px-West_Coast_Swing_dance_in_Somerville%2C_Massachusetts.jpg
+    focus: 55% 45%
+evidence:
+  - url: https://en.wikipedia.org/wiki/West_Coast_Swing
+    note: "Wikipedia: WCS has roots in Lindy Hop, is danced in a slot, emphasizes improvisation, and developed in California (Arthur Murray lessons in 1948)."
+  - url: https://commons.wikimedia.org/wiki/File:Hollywood_Ballroom_Friday_West_Coast_Swing_night_in_December_2023.jpg
+    note: "Commons file page: Friday West Coast Swing night at the Hollywood Ballroom, Silver Spring, MD, Dec 2023, own work by Sdkb, CC BY-SA 4.0."
+  - url: https://commons.wikimedia.org/wiki/File:Friday_Night_Dancing,_July_15th,_2016_(27721542973).jpg
+    note: "Commons file page: 'Friday Night Dancing, July 15th, 2016' by GoToVan (Flickr), CC BY 2.0, taken at Robson Square, Vancouver."
+  - url: https://dailyhive.com/vancouver/free-dance-lessons-robson-square-2016
+    note: Daily Hive's 2016 Robson Square summer dance schedule lists July 15 as West Coast Swing night, confirming the style in the GoToVan photo.
+  - url: https://commons.wikimedia.org/wiki/File:West_Coast_Swing_dance_in_Somerville,_Massachusetts.jpg
+    note: "Commons file page: a West Coast Swing dance in Somerville, MA, Dec 2022, own work by Sdkb, CC BY-SA 4.0."

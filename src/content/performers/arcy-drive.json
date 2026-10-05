@@ -1,5 +1,72 @@
 {
   "name": "Arcy Drive",
   "type": "band",
-  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Northport (Suffolk) indie rock band touring nationally and in Europe; the Mulcahy's date is a ticketed concert, not a dance night - the owner may want to check whether it fits the dance site. Booking goes through agents named on the contact page (personal agent emails not recorded; bookingUrl points to the contact page). Facebook and X links come from the record label page, not the band site; the X account may be inactive. The label page also lists an older Instagram handle (instagram.com/arcy_drive); the band site uses instagram.com/arcydrive. No logo image found (site header is text).",
+  "website": "https://www.arcydrive.com/",
+  "facebookUrl": "https://www.facebook.com/arcydrive/",
+  "instagramUrl": "https://www.instagram.com/arcydrive/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCVoTmRW8Ul7xw0ST3F6s-DA",
+  "tiktokUrl": "https://www.tiktok.com/@arcydrive",
+  "xUrl": "https://x.com/Arcy_Drive",
+  "spotifyUrl": "https://open.spotify.com/artist/7o1TBmx7Ube5h2Czlam84O",
+  "bookingUrl": "https://www.arcydrive.com/contact",
+  "email": "arcydrive@gmail.com",
+  "genres": [
+    "indie rock",
+    "original rock"
+  ],
+  "description": "Indie rock band from Northport, Long Island, formed by four childhood friends. They write and play their own songs (they call their sound \"attic rock\") and now tour across the U.S. and Europe. Their shows are rock concerts rather than dance nights.",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/arcy-drive-1.webp",
+      "alt": "Black-and-white press photo of the four members of Arcy Drive crowded together, one in sunglasses and one in a knit hat",
+      "credit": "Photo: Arcy Drive (website)",
+      "creditUrl": "https://www.arcydrive.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/633397b81bc6d3567c67124a/5364f9b7-9f00-4752-b91a-60ab7df3c3a7/AD+-+APPROVED+PRESS+IMAGE+-+April+2026.jpg?format=2500w",
+      "focus": "50% 40%"
+    },
+    {
+      "image": "../../assets/entities/performers/arcy-drive-2.webp",
+      "alt": "The four members of Arcy Drive goofing around on a white couch against a blue wall, one holding an electric guitar",
+      "credit": "Photo: Grand Jury Music (Arcy Drive's record label)",
+      "creditUrl": "https://grandjurymusic.com/artist/arcy-drive/",
+      "imageSource": "https://grandjurymusic.com/wp-content/uploads/2023/07/Screen-Shot-2023-07-19-at-8.21.12-PM.png",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/performers/arcy-drive-3.webp",
+      "alt": "The four members of Arcy Drive sitting barefoot on a checkered couch under an old dance-night poster, one holding a bass",
+      "credit": "Photo: Grand Jury Music (Arcy Drive's record label)",
+      "creditUrl": "https://grandjurymusic.com/artist/arcy-drive/",
+      "imageSource": "https://grandjurymusic.com/wp-content/uploads/2023/09/Press-Photo-1-Spotify-Apple-DSP-Profile-Image.jpeg",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.arcydrive.com/",
+      "note": "Official site links Instagram, TikTok, Spotify and YouTube and shows a \"Mulcahy's Halloween Show, October 29\" poster."
+    },
+    {
+      "url": "https://mulcahyslongisland.com/event/arcy-drive/",
+      "note": "Mulcahy's (Wantagh) lists Arcy Drive on Thursday Oct 29, 2026, doors 7 PM, show 8 PM, all ages."
+    },
+    {
+      "url": "https://www.soundwavemusicmedia.net/stories-1/all-stories/2299703_arcy-drive",
+      "note": "Article describes Arcy Drive as an indie rock band from Northport, New York, made up of four childhood friends."
+    },
+    {
+      "url": "https://grandjurymusic.com/artist/arcy-drive/",
+      "note": "Record label page links the band's Facebook (facebook.com/arcydrive), X (Arcy_Drive) and an older Instagram handle (arcy_drive)."
+    },
+    {
+      "url": "https://www.arcydrive.com/contact",
+      "note": "Contact page lists booking agents and a general band email, arcydrive@gmail.com."
+    },
+    {
+      "url": "https://www.oculate.uk/gettoknow/arcydrive",
+      "note": "Shows the kind of music."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: arcydrive.com, mulcahyslongisland.com, soundwavemusicmedia.net, grandjurymusic.com."
 }

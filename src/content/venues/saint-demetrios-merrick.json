@@ -12,9 +12,51 @@
   "postalCode": "11566",
   "website": "https://saint-demetrios.com/",
   "kind": "other",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://saint-demetrios.com/dance.",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Source: saint-demetrios.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: The dance itself is in the new Cassis Center's 'SNF' Gymnasium on the church grounds (same street address). The site header logo shows three seals together (Ecumenical Patriarchate, the parish, and the Greek Orthodox Archdiocese); the parish seal is the middle one, so crop if a single logo is needed. The home page photo of the church is better but carries a photographer's watermark (Joe Pellicone), so we used a plain gallery photo instead. Cultural center images on the site are architectural renderings, not photos; skipped. The current dinner dance is Thu Oct 15 at 7 PM ($75 adult); check this matches our event date.",
   "latitude": 40.658914,
   "longitude": -73.54704,
-  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)",
+  "facebookUrl": "https://www.facebook.com/saint.demetrios.church",
+  "instagramUrl": "https://www.instagram.com/saintdemetrios/",
+  "youtubeUrl": "https://www.youtube.com/SaintDemetriosChurch",
+  "email": "church@saint-demetrios.com",
+  "phone": "(516) 379-1368",
+  "hours": "Office Mon-Fri 10 AM-4:30 PM; Sunday service 9 AM",
+  "description": "A Greek Orthodox church in Merrick. Its new Constantine and Carol Cassis Center, next to the church, has a gymnasium and community rooms used for parish events such as a yearly dinner dance with live music.",
+  "logo": {
+    "image": "../../assets/entities/venues/saint-demetrios-merrick-logo.webp",
+    "alt": "Three round church seals side by side; the middle blue seal shows Saint Demetrios and the words Saint Demetrios Merrick N.Y.",
+    "credit": "Logo: Saint Demetrios Greek Orthodox Church",
+    "creditUrl": "https://saint-demetrios.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/5e768c88f8967531b07eacfc/1585085048383-Q1GFESCNQFEJQ8WAZ20U/3-Logos-Head.png?format=1500w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/saint-demetrios-merrick-1.webp",
+      "alt": "Saint Demetrios church lit up at night: a brick bell tower, a dome and a long porch of arches above a lawn and flower beds",
+      "credit": "Photo: Saint Demetrios Greek Orthodox Church (website)",
+      "creditUrl": "https://saint-demetrios.com/gallery",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5e768c88f8967531b07eacfc/1613184302207-74JX8XSP8PEISDG1S8CC/IMG_3403.JPG?format=1500w",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://saint-demetrios.com/contact",
+      "note": "Church contact page: 2421 Hewlett Avenue, Merrick, NY 11566; mailing address 24 Kenny Avenue; church@saint-demetrios.com; (516) 379-1368; office hours Mon-Fri 10 AM-4:30 PM."
+    },
+    {
+      "url": "https://saint-demetrios.com/dance",
+      "note": "Dinner Dance page: Thursday, October 15 at 7 PM in the Saint Demetrios 'SNF' Gymnasium, with food, live music and a raffle; prepaid tickets required, RSVP by October 10."
+    },
+    {
+      "url": "https://saint-demetrios.com/church/cultural-center",
+      "note": "Describes the Constantine and Carol Cassis Center next to the church (opening fall 2025) with the Stavros Niarchos Foundation gymnasium and other rooms."
+    },
+    {
+      "url": "https://saint-demetrios.com/",
+      "note": "Shows the website, Facebook page, Instagram page and YouTube channel."
+    }
+  ]
 }

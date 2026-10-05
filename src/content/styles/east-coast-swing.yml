@@ -11,3 +11,37 @@ aliases:
   - Swing Dancing
 summary: A simple, bouncy swing dance. It is often the first partner dance people learn.
 music: Swing, rock and roll, oldies
+description: East Coast Swing is a bouncy swing dance with a six-count basic step made of triple steps and a rock step. Dance studios such as Arthur Murray created it in the 1940s as a simpler, easier-to-teach version of the Lindy Hop. It fits fast swing, rock and roll and rockabilly music.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/East_Coast_Swing
+photos:
+  - image: ../../assets/entities/styles/east-coast-swing-1.webp
+    alt: A man in a black cowboy hat and a woman in a sparkly dress and boots dance East Coast Swing on a wooden floor, arms spread wide
+    credit: "Photo: Gridiron Steamroller, CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Jack_Armstrong_%26_Faith_Wailes,_East_Coast_Swing,_2023,_EC5.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/e/e7/Jack_Armstrong_%26_Faith_Wailes%2C_East_Coast_Swing%2C_2023%2C_EC5.jpg
+    focus: 50% 30%
+  - image: ../../assets/entities/styles/east-coast-swing-2.webp
+    alt: Couples swing dance in a dim, red-lit lounge while a small jazz band plays on stage
+    credit: "Photo: mike connor, CC BY 2.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Swing_Dancers_Allways_Lounge_New_Orleans.jpg
+    licenseUrl: https://creativecommons.org/licenses/by/2.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Swing_Dancers_Allways_Lounge_New_Orleans.jpg/1280px-Swing_Dancers_Allways_Lounge_New_Orleans.jpg
+    focus: 65% 40%
+  - image: ../../assets/entities/styles/east-coast-swing-3.webp
+    alt: Black-and-white photo of couples jitterbugging on a crowded New York dance floor as onlookers watch and a photographer films
+    credit: "Photo: Alan Fisher (New York World-Telegram and the Sun), Public domain, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Jitterbug_dancers_NYWTS.jpg
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Jitterbug_dancers_NYWTS.jpg/1280px-Jitterbug_dancers_NYWTS.jpg
+    focus: 55% 50%
+evidence:
+  - url: https://en.wikipedia.org/wiki/East_Coast_Swing
+    note: "Wikipedia: ECS was created by dance studios including Arthur Murray in the 1940s, based on the Lindy Hop; it has a 6-count basic step and suits big band, rock and roll and rockabilly."
+  - url: https://commons.wikimedia.org/wiki/File:Jack_Armstrong_%26_Faith_Wailes,_East_Coast_Swing,_2023,_EC5.jpg
+    note: "Commons file page: East Coast Swing at the 2023 UCWDC Country Dance World Championships, Phoenix; own work by Gridiron Steamroller, CC BY-SA 4.0."
+  - url: https://commons.wikimedia.org/wiki/File:Swing_Dancers_Allways_Lounge_New_Orleans.jpg
+    note: "Commons file page: swing dancers at the Allways Lounge, New Orleans, by mike connor (Flickr), CC BY 2.0."
+  - url: https://commons.wikimedia.org/wiki/File:Jitterbug_dancers_NYWTS.jpg
+    note: "Commons file page: jitterbug dancers, photo by Alan Fisher for the New York World-Telegram and the Sun (Library of Congress), public domain."

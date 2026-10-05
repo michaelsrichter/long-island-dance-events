@@ -31,5 +31,30 @@
     "tribute to Metallica",
     "heavy metal"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). A different national Metallica tribute also uses 'Damage Inc' (damageinc.us, formed 2004). The Long Island band fits the 89 North gig."
+  "reviewNotes": "Added from Ira's List research (2026-10-03). A different national Metallica tribute also uses 'Damage Inc' (damageinc.us, formed 2004). The Long Island band fits the 89 North gig.\n\nDirectory research 2026-10-04: No band website found (damageincny.com does not resolve). Facebook: the band's own logo image names the page 'damageincnewyork' (matches current); the booking agency instead links a newer profile (facebook.com/profile.php?id=61573638397674) - the owner may want to check which one is active. Booking is through the agency G&R Events NY (form on its artist page). The logo is the band's profile picture from YouTube; it uses Metallica-style lettering and skull artwork, so the owner may prefer not to show it. No official band photos found outside social media; the agency page only has a screenshot.",
+  "instagramUrl": "https://www.instagram.com/damageincny/",
+  "youtubeUrl": "https://www.youtube.com/@damageinc-newyork",
+  "bookingUrl": "https://gnreventsny.com/artist/damage-inc/",
+  "logo": {
+    "image": "../../assets/entities/performers/damage-inc-ny-logo.webp",
+    "alt": "Damage Inc logo: spiky white lettering over a skull with crossed spiked clubs on a red metal plate background, with the words Metallica Tribute below",
+    "credit": "Logo: Damage Inc. NY (YouTube channel)",
+    "creditUrl": "https://www.youtube.com/@damageinc-newyork",
+    "imageSource": "https://yt3.googleusercontent.com/iamU3XB6JYFHxnTN7jb5d5PBbgMyWQzCF5UxorRP8DduuGBoRGtNt1FbAO2MuwcNaeXoif7zIFE=s900-c-k-c0x00ffffff-no-rj"
+  },
+  "evidence": [
+    {
+      "url": "https://gnreventsny.com/artist/damage-inc/",
+      "note": "Booking agency G&R Events NY: Damage Inc. NY is a Metallica tribute formed in 2013 and based on Long Island; plays The Space at Westbury, Patchogue Theatre, 89 North, Mulcahy's and more; has a booking inquiry form."
+    },
+    {
+      "url": "https://www.youtube.com/@damageinc-newyork",
+      "note": "YouTube 'Damage Inc. NY Metallica Tribute' calls itself a New York-based Metallica tribute and links instagram.com/damageincny; its profile picture shows the Facebook handle damageincnewyork."
+    },
+    {
+      "url": "https://www.damageinc.us/",
+      "note": "The other 'Damage, Inc.' is a Southern California (Orange County) Metallica tribute - a different band."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: gnreventsny.com, youtube.com, damageinc.us."
 }

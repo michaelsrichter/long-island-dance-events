@@ -32,15 +32,30 @@
   },
   "description": "The larger of Greenport Harbor's two North Fork locations: a big brewery taproom and restaurant on Main Road with a stage, a large lawn and weekend live music.",
   "facebookUrl": "https://www.facebook.com/greenportbrew",
-  "factsSource": "Checked October 3, 2026. Source: greenportharborbrewing.com.",
+  "factsSource": "Checked October 4, 2026. Sources: greenportharborbrewing.com, northforkauthentic.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Greenport+Harbor+Brewing+Co.+%28Peconic%29%2C+42155+Main+Rd%2C+Peconic%2C+NY+11958",
   "kind": "brewery",
   "latitude": 41.0414585,
   "longitude": -72.4546489,
   "phone": "(631) 477-1100",
   "postalCode": "11958",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Greenport Harbor Brewing has two sites: Peconic (42155 Main Rd) and Greenport village (234 Carpenter St). The Oct 4 Fall Fest is at Peconic. The Fall Fest is run by an outside company (We Are Live) and needs a ticket.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Greenport Harbor Brewing has two sites: Peconic (42155 Main Rd) and Greenport village (234 Carpenter St). The Oct 4 Fall Fest is at Peconic. The Fall Fest is run by an outside company (We Are Live) and needs a ticket.\n\nDirectory research 2026-10-04: Our work network blocks brewery and winery websites, and Facebook shows a login wall for alcohol brands, so we could not open greenportharborbrewing.com or the Facebook page directly. Address, phone and website are confirmed on Google Maps (listed as 'Greenport Harbor Brewery and Restaurant'). Facebook and Instagram handles (greenportbrew) come from our earlier check of the brewery site and from search results; not re-opened today. No logo or photos (site blocked for us; we did not use Google or Facebook photos). Hours left out: search results quote Mon-Thu 12-8 PM, Fri-Sat 12-9 PM, Sun 12-8 PM, but we could not confirm them on the site. Second location (Greenport village, 234 Carpenter St) is separate. Current description still fits.",
   "state": "NY",
   "town": "Peconic",
-  "website": "https://greenportharborbrewing.com/"
+  "website": "https://greenportharborbrewing.com/",
+  "instagramUrl": "https://www.instagram.com/greenportbrew/",
+  "evidence": [
+    {
+      "url": "https://www.google.com/maps?cid=11982171324040803253",
+      "note": "Google Maps listing 'Greenport Harbor Brewery and Restaurant' (brewery) at 42155 Main Rd, Peconic, NY 11958, phone (631) 477-1100, website greenportharborbrewing.com."
+    },
+    {
+      "url": "https://greenportharborbrewing.com/upcoming-events",
+      "note": "Per search summaries of the brewery's events page: regular live music in October 2026 (e.g. One Track Mind Band, Nancy Atlas Band) and Instagram @greenportbrew."
+    },
+    {
+      "url": "https://www.northforkauthentic.com/marketplace/greenport-harbor-brewing",
+      "note": "North Fork business directory links the brewery's Facebook page facebook.com/greenportbrew."
+    }
+  ]
 }

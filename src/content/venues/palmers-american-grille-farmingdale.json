@@ -30,16 +30,58 @@
   },
   "description": "An upscale American grill in Farmingdale serving steaks, pasta and seafood, with a bar and lounge that has live music on weekend evenings and a private party room.",
   "facebookUrl": "https://www.facebook.com/palmersamericangrille/",
-  "factsSource": "Checked October 3, 2026. Source: tripadvisor.ca.",
+  "factsSource": "Checked October 4, 2026. Source: palmersamericangrille.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Palmer%27s+American+Grille+123+Fulton+St+Farmingdale+NY+11735",
   "kind": "restaurant",
   "phone": "(516) 420-0609",
   "postalCode": "11735",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Two businesses named Palmers came up: 'Palmers Restaurant & Tavern' (palmers-restaurant.com) is in Andover and has closed, so it is not this one. Palmer's American Grille's own events page lists 'Live Music Mike Lefty' on Sat Oct 3, which matches Ira's 'Lefty'. Most listings give 123 Fulton St; the restaurant's homepage says 123 Hempstead Tpke (Fulton Street is the local name of Hempstead Turnpike/Route 24 in Farmingdale).",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Two businesses named Palmers came up: 'Palmers Restaurant & Tavern' (palmers-restaurant.com) is in Andover and has closed, so it is not this one. Palmer's American Grille's own events page lists 'Live Music Mike Lefty' on Sat Oct 3, which matches Ira's 'Lefty'. Most listings give 123 Fulton St; the restaurant's homepage says 123 Hempstead Tpke (Fulton Street is the local name of Hempstead Turnpike/Route 24 in Farmingdale).\n\nDirectory research 2026-10-04: Address: the restaurant's site says 123 Hempstead Tpke and Google says 123 Fulton St; they are the same road (Route 24 is called Fulton Street in Farmingdale village), so we wrote '123 Fulton St (Hempstead Tpke)'. The site links Facebook by page ID (facebook.com/147709604535); the current slug URL facebook.com/palmersamericangrille/ is probably the same page but we could not open Facebook to confirm. The site's events page shows no further live music dates right now. No bar/lounge or stage photo on the site.",
   "state": "NY",
   "town": "Farmingdale",
   "website": "https://palmersamericangrille.com/",
   "latitude": 40.731037,
   "longitude": -73.455339,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/palmersamericangrille/",
+  "email": "palmersfultonstreet@gmail.com",
+  "hours": "Tue-Sat 11:30 AM-10 PM; Sun-Mon 12 PM-9 PM",
+  "logo": {
+    "image": "../../assets/entities/venues/palmers-american-grille-farmingdale-logo.webp",
+    "alt": "Palmer's American Grille logo in gold script lettering",
+    "credit": "Logo: Palmer's American Grille",
+    "creditUrl": "https://palmersamericangrille.com/",
+    "imageSource": "https://static.spotapps.co/website_images/ab_websites/133023_website/logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/palmers-american-grille-farmingdale-1.webp",
+      "alt": "The front of Palmer's American Grille: a white and gray building with a balustrade roofline, a 'Lunch - Dinner - Catering' sign and a parking lot",
+      "credit": "Photo: Palmer's American Grille (website)",
+      "creditUrl": "https://palmersamericangrille.com/",
+      "imageSource": "https://static.spotapps.co/website_images/ab_websites/133023_website/video_poster_v2.jpg",
+      "focus": "55% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/palmers-american-grille-farmingdale-2.webp",
+      "alt": "Palmer's dining room with white tablecloths, wooden chairs, a wood floor and warm wall lights",
+      "credit": "Photo: Palmer's American Grille (website)",
+      "creditUrl": "https://palmersamericangrille.com/",
+      "imageSource": "https://static.spotapps.co/spots/ea/fdac785e214830982545ec8fd8b489/full",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://palmersamericangrille.com/",
+      "note": "Restaurant's own site: 123 Hempstead Tpke, Farmingdale, NY 11735; (516) 420-0609; palmersfultonstreet@gmail.com; hours Tue-Sat 11:30 AM-10 PM, Sun-Mon 12-9 PM; links Facebook and Instagram; describes bar seating and live music."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=17776322331197758661",
+      "note": "Google Maps: Palmer's American Grille, 123 Fulton St, Farmingdale, NY 11735, phone (516) 420-0609, website palmersamericangrille.com."
+    },
+    {
+      "url": "https://palmersamericangrille.com/farmingdale-farmingdale-palmer-s-american-grille-events",
+      "note": "Events page currently lists a murder mystery dinner (Oct 8) and holiday events; no upcoming live music listed after Oct 3."
+    }
+  ]
 }

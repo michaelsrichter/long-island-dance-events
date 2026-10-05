@@ -10,9 +10,53 @@
   "postalCode": "11944",
   "website": "https://www.hotelmoraine.com/",
   "kind": "other",
-  "factsSource": "Checked October 3, 2026. Address from the venue's own site: https://www.hotelmoraine.com/events.",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.",
+  "factsSource": "Checked October 4, 2026. Source: hotelmoraine.com.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Hotel, so no opening hours (check-in 4 PM, check-out 11 AM per Google). Music here is a solo acoustic happy hour, not a dance band; we found no dance floor. The site sometimes shows 'Closed for a Private Event' days. Photos chosen show the property; the site has no photo of the music area.",
   "latitude": 41.099478,
   "longitude": -72.38961,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=100087222241860",
+  "instagramUrl": "https://www.instagram.com/hotelmoraine/",
+  "email": "info@hotelmoraine.com",
+  "phone": "(631) 477-1776",
+  "description": "A family-owned resort hotel on a bluff over Long Island Sound on County Road 48 in Greenport. On many Saturdays it holds a 5-7 PM happy hour with a live acoustic musician, plus yoga and other public events.",
+  "logo": {
+    "image": "../../assets/entities/venues/hotel-moraine-greenport-logo.webp",
+    "alt": "Hotel Moraine logo: a rounded stone-like emblem beside the words Hotel Moraine in dark gray",
+    "credit": "Logo: Hotel Moraine",
+    "creditUrl": "https://www.hotelmoraine.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/622c44408fab371f7f3877e0/7cb01696-d644-4af1-b632-77f4e60ab045/HM_Logo_Stacked_Master_Blk.png?format=1500w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/hotel-moraine-greenport-1.webp",
+      "alt": "Aerial view at dusk of Hotel Moraine's white buildings and lawn on a wooded bluff above the waves of Long Island Sound",
+      "credit": "Photo: Hotel Moraine (website)",
+      "creditUrl": "https://www.hotelmoraine.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/622c44408fab371f7f3877e0/74d77e01-b98b-41ef-8461-b0ae3d2a9a4b/IMG_5310+%283%29.jpg?format=1500w",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/hotel-moraine-greenport-2.webp",
+      "alt": "The hotel's long outdoor pool with lounge chairs and umbrellas, looking out to the Sound",
+      "credit": "Photo: Hotel Moraine (website)",
+      "creditUrl": "https://www.hotelmoraine.com/",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/622c44408fab371f7f3877e0/d616d814-6120-4dde-970b-aeed29048c40/Pool_DHY_8358+%281%29.jpg?format=1500w",
+      "focus": "50% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.hotelmoraine.com/",
+      "note": "Hotel's own site footer: 62005 County Rd. 48, Greenport, NY 11944; 631-477-1776; info@hotelmoraine.com; links Instagram hotelmoraine and a Facebook page (id 100087222241860)."
+    },
+    {
+      "url": "https://www.hotelmoraine.com/events",
+      "note": "Events calendar: Saturday happy hours 5-7 PM with live music (e.g. Como Brothers Oct 3, Jeff LeBlanc Oct 10, Nick Kerzner Oct 17, 2026), yoga and art events; some days closed for private events."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=13383234298052218721",
+      "note": "Google Maps: Hotel Moraine, 62005 County Rd 48, Greenport, NY 11944, phone (631) 477-1776."
+    }
+  ]
 }

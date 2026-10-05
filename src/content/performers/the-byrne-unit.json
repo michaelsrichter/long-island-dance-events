@@ -39,6 +39,60 @@
     "Motown and funk",
     "Top 40"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Dance claims come from the band's own marketing; no crowd video watched.",
-  "website": "https://thebyrneunit.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Dance claims come from the band's own marketing; no crowd video watched.\n\nDirectory research 2026-10-04: Website footer links a generic Instagram 'popular' search page and bare tiktok.com / x.com placeholders, so no Instagram, TikTok or X is recorded. The only published email is a member's Yahoo address that the band's own contact page gives for bookings ('Email: Dave'); recorded because the band publishes it for bookings, but the owner may prefer to show only the contact page. Facebook URL now has a trailing slash (same page as current). Current description and genres still fit; site FAQ says rock, country, rap and pop from the 1960s to present (Motown/funk in current genres was not re-confirmed on the site).",
+  "website": "https://thebyrneunit.com/",
+  "bookingUrl": "https://thebyrneunit.com/contact",
+  "email": "davebust1@yahoo.com",
+  "logo": {
+    "image": "../../assets/entities/performers/the-byrne-unit-logo.webp",
+    "alt": "The Byrne Unit logo: the band name in distressed white letters over an electric guitar wrapped in orange, purple and blue flames on black",
+    "credit": "Logo: The Byrne Unit",
+    "creditUrl": "https://thebyrneunit.com/",
+    "imageSource": "https://assets.zyrosite.com/AE0rRPKKRGcyWZGx/530524655_1328495435948933_7162050868775446065_n-A1a5RPbaraIKZ38x.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/the-byrne-unit-1.webp",
+      "alt": "The Byrne Unit's five members playing guitars and drums on a club stage lit in blue and red, with the band's banner on the left",
+      "credit": "Photo: The Byrne Unit (website)",
+      "creditUrl": "https://thebyrneunit.com/",
+      "imageSource": "https://assets.zyrosite.com/AE0rRPKKRGcyWZGx/486421201_1204582635006881_7831397274160105989_n-Yg2yNj3PenTMyLbw.jpg",
+      "focus": "60% 55%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-byrne-unit-2.webp",
+      "alt": "The Byrne Unit singing and playing guitar in front of a brick wall with a pink neon Prohibition sign in Massapequa",
+      "credit": "Photo: The Byrne Unit (website)",
+      "creditUrl": "https://thebyrneunit.com/",
+      "imageSource": "https://assets.zyrosite.com/AE0rRPKKRGcyWZGx/484981952_1200691968729281_3080731619823475829_n-ALpPReqG6btqyxEB.jpg",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-byrne-unit-3.webp",
+      "alt": "The Byrne Unit playing on a covered outdoor waterfront stage on a summer evening",
+      "credit": "Photo: The Byrne Unit (website)",
+      "creditUrl": "https://thebyrneunit.com/",
+      "imageSource": "https://assets.zyrosite.com/AE0rRPKKRGcyWZGx/487977160_1214334524031692_8325410943862395328_n-AQEZlxk6yxc9r2EZ.jpg",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://thebyrneunit.com/about",
+      "note": "About page: a five-piece cover band from Amityville covering rock, country, rap and pop from the 1960s to now; played Salt Shack, Toomey's, Lily Flanagan's Babylon and Massapequa Park After Dark."
+    },
+    {
+      "url": "https://thebyrneunit.com/contact",
+      "note": "Contact page titled 'Book The Byrne Unit' has an inquiry form, links the Facebook page and lists an email for Dave as the booking contact."
+    },
+    {
+      "url": "https://www.lilyflanaganspub.com/musicevents/2026/10/16/happy-hour-band-the-byrne-unit",
+      "note": "Lily Flanagan's (Babylon) calendar lists The Byrne Unit for a happy-hour show on Oct 16, 2026, matching our listing."
+    },
+    {
+      "url": "https://thebyrneunit.com/",
+      "note": "Shows the website."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thebyrneunit.com, lilyflanaganspub.com."
 }

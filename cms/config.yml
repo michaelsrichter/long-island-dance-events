@@ -62,6 +62,8 @@ x-socials: &socials
   - { label: 'Facebook page', name: facebookUrl, widget: string, required: false }
   - { label: 'Instagram page', name: instagramUrl, widget: string, required: false }
   - { label: 'YouTube channel', name: youtubeUrl, widget: string, required: false }
+  - { label: 'TikTok page', name: tiktokUrl, widget: string, required: false }
+  - { label: 'X (Twitter) page', name: xUrl, widget: string, required: false }
   - label: 'More links'
     name: moreLinks
     widget: list
@@ -69,6 +71,60 @@ x-socials: &socials
     fields:
       - { label: 'Label', name: label, widget: string }
       - { label: 'Web address', name: url, widget: string }
+
+# One photo or logo: the file plus the words that go with it. The file is saved next to the other
+# images of this kind (src/assets/entities/<kind>/) and resized for phones when the site is built.
+x-photo-fields: &photo-fields
+  # Uploaded photos are resized to 1600 pixels wide and saved as JPG without camera data (location, date, camera).
+  - { label: 'Photo', name: image, widget: image, choose_url: false, media_processing: { enabled: true, format: { enabled: true, default: jpeg }, quality: 82, strip_metadata: true, width: 1600 }, hint: 'JPG, PNG or WebP, at least 600 pixels wide. It is resized and saved as a JPG when you upload it; the site makes smaller copies for phones.' }
+  - { label: 'Alt text', name: alt, widget: string, hint: 'Describe the photo in plain words for people who cannot see it, for example "The brick front of the hall with a red awning".' }
+  - { label: 'Credit', name: credit, widget: string, required: false, hint: 'Shown under the photo, for example "Photo: The Nutty Irishman (website)" or "Photo: Jane Doe, CC BY-SA 4.0, via Wikimedia Commons".' }
+  - { label: 'Credit link', name: creditUrl, widget: string, required: false, hint: 'The page where you found the photo.' }
+  - { label: 'License link (Creative Commons photos only)', name: licenseUrl, widget: string, required: false }
+  - { label: 'Original file address (not shown)', name: imageSource, widget: string, required: false, hint: 'Web address of the original image file, for our records.' }
+  - { label: 'Caption', name: caption, widget: string, required: false }
+  - { label: 'Focus point', name: focus, widget: string, required: false, pattern: ['^\d{1,3}% \d{1,3}%$', 'Two percentages, for example 50% 30%'], hint: 'What to keep in view when the photo is cropped to a wide box: across, then down from the top-left. "50% 30%" keeps the upper middle.' }
+
+x-photos: &photos
+  label: 'Photos'
+  name: photos
+  widget: list
+  required: false
+  collapsed: true
+  max: 6
+  summary: '{{fields.alt}}'
+  hint: 'Up to 6. The first photo shows on the card in the list and at the top of the page. Only use photos the owner put on their own website or page, or openly licensed ones. Never photos of children or photos other people posted in reviews.'
+  fields: *photo-fields
+
+x-logo: &logo
+  label: 'Logo'
+  name: logo
+  widget: object
+  required: false
+  collapsed: true
+  hint: 'Their own logo, from their website. If you add one, also fill in the alt text (for example "The Nutty Irishman logo").'
+  fields:
+    - { label: 'Logo file', name: image, widget: image, required: false, choose_url: false, hint: 'PNG, SVG or JPG. A square-ish logo at least 200 pixels wide works best.' }
+    - { label: 'Alt text', name: alt, widget: string, required: false, hint: 'Needed when there is a logo. Usually "<name> logo".' }
+    - { label: 'Credit', name: credit, widget: string, required: false, hint: 'For example "Logo: The Nutty Irishman".' }
+    - { label: 'Credit link', name: creditUrl, widget: string, required: false, hint: 'The page where you found the logo.' }
+    - { label: 'Original file address (not shown)', name: imageSource, widget: string, required: false }
+
+x-entity-sources: &entity-sources
+  - label: 'Sources for these details'
+    name: evidence
+    widget: list
+    required: false
+    collapsed: true
+    summary: '{{fields.url}}'
+    hint: 'Web pages that show the address, phone, links or photos. Every fact needs a source.'
+    fields:
+      - { label: 'Web page', name: url, widget: string }
+      - { label: 'What it shows (our own words)', name: note, widget: string, hint: 'Under 240 characters.' }
+  - { label: 'Checked on (shown on the page)', name: factsSource, widget: string, required: false, hint: 'For example "Checked October 4, 2026. Sources: their website and Facebook page."' }
+
+x-hours: &hours
+  { label: 'Opening hours', name: hours, widget: string, required: false, hint: 'Short and plain, for example "Tue-Sun 4 PM-midnight; closed Mon". Leave empty if they do not publish hours.' }
 
 x-seo: &seo
   - { label: 'Search title (optional)', name: seoTitle, widget: string, required: false, hint: 'Under 70 characters.' }
@@ -249,6 +305,8 @@ collections:
     slug: '{{slug}}-{{fields.town}}'
     summary: '{{name}}, {{town}}'
     sortable_fields: [name, town]
+    media_folder: '/src/assets/entities/venues'
+    public_folder: '../../assets/entities/venues'
     fields:
       - { label: 'Name', name: name, widget: string }
       - *aliases
@@ -257,17 +315,19 @@ collections:
       - { label: 'County', name: county, widget: select, options: [Nassau, Suffolk] }
       - { label: 'State', name: state, widget: string, default: 'NY' }
       - { label: 'ZIP code', name: postalCode, widget: string, required: false }
-      - { label: 'Phone', name: phone, widget: string, required: false }
-      - { label: 'Website', name: website, widget: string, required: false }
+      - { label: 'Phone', name: phone, widget: string, required: false, hint: 'The business phone, for example (631) 476-3707.' }
+      - { label: 'Public email', name: email, widget: string, required: false, hint: 'Only an email the venue publishes for the public.' }
+      - *socials
+      - *hours
       - { label: 'Latitude', name: latitude, widget: number, value_type: float, required: false, hint: 'Filled in automatically. Leave empty and the weekly job will look it up.' }
       - { label: 'Longitude', name: longitude, widget: number, value_type: float, required: false }
       - { label: 'Where the map position came from', name: coordinatesSource, widget: string, required: false }
       - { label: 'Google Maps link (photos and reviews)', name: googleMapsUrl, widget: string, required: false }
-      - { label: 'Facebook page', name: facebookUrl, widget: string, required: false }
       - { label: 'Parking', name: parkingNotes, widget: text, required: false }
       - { label: 'Accessibility', name: accessibilityNotes, widget: text, required: false }
-      - { label: 'Where these facts came from', name: factsSource, widget: string, required: false }
       - { label: 'Good to know', name: description, widget: text, required: false }
+      - *logo
+      - *photos
       - label: 'Kind of place'
         name: kind
         widget: select
@@ -296,6 +356,7 @@ collections:
           - *evidence
           - *research-confidence
           - { label: 'Checked on', name: checked, <<: *date, required: false }
+      - *entity-sources
       - *seo
       - *review
 
@@ -310,6 +371,8 @@ collections:
     identifier_field: name
     summary: '{{name}} ({{type}})'
     sortable_fields: [name]
+    media_folder: '/src/assets/entities/organizers'
+    public_folder: '../../assets/entities/organizers'
     fields:
       - { label: 'Name', name: name, widget: string }
       - label: 'Type'
@@ -327,13 +390,20 @@ collections:
           - { label: 'Other', value: other }
       - *aliases
       - *socials
-      - { label: 'Public email', name: email, widget: string, required: false }
-      - { label: 'Public phone', name: phone, widget: string, required: false }
+      - { label: 'Public email', name: email, widget: string, required: false, hint: 'Only an email they publish for the public. Never a private address.' }
+      - { label: 'Public phone', name: phone, widget: string, required: false, hint: 'Only a business number they publish.' }
+      - { label: 'Street address (their own studio)', name: address, widget: string, required: false, hint: 'Leave empty if they meet at a venue; choose the usual venue below instead. Never a home address.' }
       - { label: 'Town', name: town, widget: string, required: false }
+      - { label: 'ZIP code', name: postalCode, widget: string, required: false }
+      - { label: 'County', name: county, widget: select, options: [Nassau, Suffolk], required: false }
+      - *hours
       - { label: 'Usual venue', name: homeVenueId, widget: relation, collection: venues, value_field: '{{slug}}', search_fields: [name, town], display_fields: ['{{name}}, {{town}}'], required: false }
       - { label: 'Dance styles', name: danceStyles, <<: *style-relation }
       - { label: 'Description (our own words)', name: description, widget: text, required: false }
+      - *logo
+      - *photos
       - { label: 'Opted out (do not list their events)', name: optOut, widget: boolean, default: false }
+      - *entity-sources
       - *seo
       - *review
 
@@ -346,13 +416,22 @@ collections:
     create: true
     identifier_field: name
     sortable_fields: [name]
+    media_folder: '/src/assets/entities/instructors'
+    public_folder: '../../assets/entities/instructors'
     fields:
       - { label: 'Name', name: name, widget: string }
       - *aliases
       - { label: 'Dance styles taught', name: styles, <<: *style-relation }
       - { label: 'Teaches with', name: affiliatedOrganizerIds, widget: relation, collection: organizers, value_field: '{{slug}}', search_fields: [name], display_fields: [name], multiple: true, required: false }
+      - { label: 'Home town', name: town, widget: string, required: false, hint: 'Town only. Never a street address.' }
       - *socials
+      - { label: 'Lessons or booking page', name: bookingUrl, widget: string, required: false }
+      - { label: 'Lessons email', name: email, widget: string, required: false, hint: 'Only if the teacher publishes it for lessons. Never a private email.' }
+      - { label: 'Lessons phone', name: phone, widget: string, required: false, hint: 'Only if the teacher publishes it for lessons. Never a private number.' }
       - { label: 'Description (our own words)', name: description, widget: text, required: false }
+      - { <<: *logo, hint: 'Only if the teacher runs their own school or brand. If you add one, also fill in the alt text.' }
+      - *photos
+      - *entity-sources
       - *seo
       - *review
 
@@ -365,6 +444,8 @@ collections:
     create: true
     identifier_field: name
     sortable_fields: [name]
+    media_folder: '/src/assets/entities/performers'
+    public_folder: '../../assets/entities/performers'
     fields:
       - { label: 'Name', name: name, widget: string }
       - label: 'Type'
@@ -376,8 +457,16 @@ collections:
           - { label: 'Singer or solo act', value: solo }
       - *aliases
       - { label: 'Music genres', name: genres, widget: list, required: false }
+      - { label: 'Home town', name: town, widget: string, required: false, hint: 'Where they are based, for example "Massapequa". Town only.' }
       - *socials
+      - { label: 'Spotify', name: spotifyUrl, widget: string, required: false }
+      - { label: 'Bandcamp', name: bandcampUrl, widget: string, required: false }
+      - { label: 'Booking page', name: bookingUrl, widget: string, required: false, hint: 'Their own booking or contact page.' }
+      - { label: 'Booking email', name: email, widget: string, required: false, hint: 'Only if they publish it for bookings.' }
+      - { label: 'Booking phone', name: phone, widget: string, required: false, hint: 'Only if they publish it for bookings.' }
       - { label: 'Description (our own words)', name: description, widget: text, required: false }
+      - *logo
+      - *photos
       - label: 'Dancing at their shows'
         name: dancing
         widget: object
@@ -401,6 +490,7 @@ collections:
           - *evidence
           - *research-confidence
           - { label: 'Checked on', name: checked, <<: *date, required: false }
+      - *entity-sources
       - *seo
       - *review
 
@@ -511,6 +601,8 @@ collections:
     create: true
     identifier_field: name
     sortable_fields: [order, name]
+    media_folder: '/src/assets/entities/styles'
+    public_folder: '../../assets/entities/styles'
     fields:
       - { label: 'Name', name: name, widget: string }
       - { label: 'Family', name: family, widget: select, options: [swing, ballroom, latin, tango, country, other] }
@@ -527,6 +619,16 @@ collections:
       - { label: 'Short explanation', name: summary, widget: text, hint: 'One or two plain sentences, under 240 characters.' }
       - { label: 'More detail', name: description, widget: text, required: false }
       - { label: 'Music', name: music, widget: string, required: false }
+      - { <<: *photos, hint: 'Up to 6 photos of adults dancing this style. Openly licensed photos (for example from Wikimedia Commons) need the author and license in the credit.' }
+      - label: 'Learn more links'
+        name: moreLinks
+        widget: list
+        required: false
+        hint: 'For example a Wikipedia article about the dance.'
+        fields:
+          - { label: 'Label', name: label, widget: string }
+          - { label: 'Web address', name: url, widget: string }
+      - { <<: *evidence, label: 'Sources for these details' }
 
   - name: faqs
     label: Frequently Asked Questions
@@ -590,6 +692,8 @@ collections:
           - { label: 'Caption', name: caption, widget: string, required: false }
           - { label: 'Credit', name: credit, widget: string, required: false }
           - { label: 'Credit link', name: creditUrl, widget: string, required: false }
+          - { label: 'License link (Creative Commons photos only)', name: licenseUrl, widget: string, required: false }
+          - { label: 'Original file address (not shown)', name: imageSource, widget: string, required: false }
           - { label: 'Focus point', name: focus, widget: string, required: false, pattern: ['^\d{1,3}% \d{1,3}%$', 'Two percentages, for example 50% 30%'] }
           - { label: 'Short silent video', name: video, widget: string, required: false }
       - { label: 'Where the photos came from', name: source, widget: string, required: false }

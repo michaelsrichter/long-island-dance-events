@@ -32,14 +32,36 @@
     "policy": "allowed"
   },
   "description": "The village center of Malverne around Church Street, the gazebo and the train station lot on Hempstead Avenue, where the Chamber of Commerce holds its yearly fall festival and car show.",
-  "factsSource": "Checked October 3, 2026. Source: liherald.com.",
+  "factsSource": "Checked October 4, 2026. Sources: liherald.com, malvernechamberofcommerce.com, malvernevillage.gov.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Church+Street+and+Hempstead+Avenue%2C+Malverne%2C+NY+11565",
   "kind": "festival",
   "postalCode": "11565",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Event, not a fixed venue: mapped to the Church Street / Malverne LIRR station area (station is at Hempstead Ave & Utterby Rd, beside Church St). Organizer: Malverne Chamber of Commerce. Yearly event, so this venue may only be used once a year.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Event, not a fixed venue: mapped to the Church Street / Malverne LIRR station area (station is at Hempstead Ave & Utterby Rd, beside Church St). Organizer: Malverne Chamber of Commerce. Yearly event, so this venue may only be used once a year.\n\nDirectory research 2026-10-04: This is an outdoor street-festival location, not a building, so there is no phone, email or hours. Website and logo are the Village of Malverne's (the public streets belong to the village); the yearly Fall Festival there is run by the Malverne Chamber of Commerce (https://malvernechamberofcommerce.com/, Facebook https://www.facebook.com/Malverne-Chamber-of-Commerce-1218800944856118/), which may be better as the event organizer. Village social pages (facebook.com/IncorporatedVillageofMalverne, instagram.com/incorporatedvillageofmalverne) were not recorded because they are the village's, not this place's. No photos of the downtown area were found on the village or chamber sites. The LI Herald confirms Church Street (music) and Hempstead Avenue (cars); the commuter lot by the LIRR station is also used per event listings. ZIP 11565 matches Malverne Village Hall at 99 Church Street on the village site.",
   "state": "NY",
   "town": "Malverne",
   "latitude": 40.674942,
   "longitude": -73.669503,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.malvernevillage.gov/",
+  "logo": {
+    "image": "../../assets/entities/venues/downtown-malverne-church-street-malverne-logo.webp",
+    "alt": "Village of Malverne crest: a red and blue shield with the word MALVERNE, oak leaves and acorns on top and the motto Oaks From Acorns",
+    "credit": "Logo: Incorporated Village of Malverne",
+    "creditUrl": "https://www.malvernevillage.gov/",
+    "imageSource": "https://static.wixstatic.com/media/28ec47_15f19c0ba05c4a17a17269e8b202bdeb~mv2.png/v1/fill/w_600,h_836,al_c/VOM%20Logo.png"
+  },
+  "evidence": [
+    {
+      "url": "https://www.liherald.com/malverne/stories/malverne-fall-festival-car-show-october-3,225410",
+      "note": "LI Herald: the Malverne Fall Festival on Oct 3, 2026 had classic cars along Hempstead Avenue and music on Church Street, including the 10-piece band Vinyl Revival 2-4 PM plus DJs."
+    },
+    {
+      "url": "https://malvernechamberofcommerce.com/",
+      "note": "Malverne Chamber of Commerce site: the chamber runs the Fall Festival, Art Walk and other downtown events, and links its Facebook page."
+    },
+    {
+      "url": "https://www.malvernevillage.gov/",
+      "note": "Official site of the Incorporated Village of Malverne, which shows the village crest and links the village Facebook and Instagram pages."
+    }
+  ]
 }

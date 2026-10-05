@@ -2,10 +2,61 @@
   "name": "Salsa Sensation Latin Dance Studio",
   "address": "3000 Hempstead Tpke",
   "county": "Nassau",
-  "reviewNotes": "Added automatically from sabaki.dance (Latin dance aggregator) - city pages. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from sabaki.dance (Latin dance aggregator) - city pages. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Name and address confirmed (Google adds unit #116). No logo image on the site (the header is text only), so logo is null. The site's schema lists a different TikTok handle (@salsasensation) than the footer link (@salsa.sensation.studio); we used the footer link. Photos are party setups from the studio rental page but show the dance floor and room clearly.",
   "state": "NY",
   "town": "Levittown",
   "latitude": 40.724599,
   "longitude": -73.525212,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.salsasensation.com/",
+  "facebookUrl": "https://www.facebook.com/SalsaSensationLDS/",
+  "instagramUrl": "https://www.instagram.com/salsasensation.dance.studio/",
+  "youtubeUrl": "https://www.youtube.com/c/SalsaSensationLatinDanceStudio",
+  "tiktokUrl": "https://www.tiktok.com/@salsa.sensation.studio",
+  "email": "info@salsasensation.com",
+  "phone": "(516) 731-4400",
+  "hours": "Studio 5:30 PM-10 PM (class nights); phone Mon-Sat 10 AM-10 PM; closed Sun",
+  "postalCode": "11756",
+  "description": "A Latin dance school on Hempstead Turnpike in Levittown that teaches salsa and bachata, with month-long beginner courses (no partner needed) and occasional salsa and bachata practice socials. The studio is also rented for parties, and there is free parking behind the building.",
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/salsa-sensation-latin-dance-studio-levittown-1.webp",
+      "alt": "The studio's wide wooden dance floor with a long party table along one wall and a 'Salsa Sensation' sign",
+      "credit": "Photo: Salsa Sensation Latin Dance Studio (website)",
+      "creditUrl": "https://www.salsasensation.com/studiorental",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5fc7d500093319362e3e15c5/1607024917213-G1KEI7DCPJI9TT88NBXN/10945900_787501534650091_5589566824434669317_o.jpg?format=1500w",
+      "focus": "40% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/salsa-sensation-latin-dance-studio-levittown-2.webp",
+      "alt": "Studio set up for a party with teal and white tables under the black 'Salsa Sensation Latin Dance Studio' sign",
+      "credit": "Photo: Salsa Sensation Latin Dance Studio (website)",
+      "creditUrl": "https://www.salsasensation.com/studiorental",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5fc7d500093319362e3e15c5/131ee54b-02a2-4702-b8ae-902680fa58bb/14939463_1158867484180159_3306794972340668442_o.jpg?format=1500w",
+      "focus": "60% 40%"
+    },
+    {
+      "image": "../../assets/entities/venues/salsa-sensation-latin-dance-studio-levittown-3.webp",
+      "alt": "The studio room with purple lighting, mirrors and tables with blue and orange cloths on a light wood floor",
+      "credit": "Photo: Salsa Sensation Latin Dance Studio (website)",
+      "creditUrl": "https://www.salsasensation.com/studiorental",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5fc7d500093319362e3e15c5/7e7ffa84-b8b9-4cc9-9cf8-3e1c96218bd0/39167195_1852202161513351_8240565794476392448_n.jpg?format=1500w",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.salsasensation.com/",
+      "note": "Studio's own site: 3,000 Hempstead Turnpike, Levittown NY 11756; (516) 731-4400; info@salsasensation.com; hours 5:30-10 PM, phone 10 AM-10 PM Mon-Sat; beginner salsa and bachata classes and a salsa/bachata social practice; free parking in…"
+    },
+    {
+      "url": "https://www.google.com/maps?cid=16040038725587697337",
+      "note": "Google Maps: Salsa Sensation Latin Dance Studio (dance school), 3000 Hempstead Tpke #116, Levittown, NY 11756, phone (516) 731-4400, closed Sunday."
+    },
+    {
+      "url": "https://www.salsasensation.com/studiorental",
+      "note": "Studio rental page shows the room with a large wooden dance floor set up for parties."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: salsasensation.com."
 }

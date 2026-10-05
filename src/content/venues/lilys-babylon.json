@@ -32,17 +32,67 @@
     "policy": "allowed"
   },
   "description": "A large Irish-American pub and restaurant on Deer Park Avenue in Babylon Village, formerly called Lily Flanagan's. It has happy-hour bands on Fridays and Saturdays and turns into a late-night club.",
-  "facebookUrl": "https://www.facebook.com/232718040167311/",
-  "factsSource": "Checked October 3, 2026. Source: lilyflanaganspub.com.",
+  "facebookUrl": "https://www.facebook.com/LilysBabylon/",
+  "factsSource": "Checked October 4, 2026. Source: lilyflanaganspub.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Lily%27s+Babylon%2C+345+Deer+Park+Ave%2C+Babylon%2C+NY+11702",
   "kind": "bar",
   "phone": "(631) 539-0816",
   "postalCode": "11702",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). The 6 PM band and the 10 PM 18+ club night are different crowds. We did not find photos showing a dedicated dance floor.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). The 6 PM band and the 10 PM 18+ club night are different crowds. We did not find photos showing a dedicated dance floor.\n\nDirectory research 2026-10-04: Facebook: the site links facebook.com/LilysBabylon/ (we use that vanity URL); the numeric page id 232718040167311 in our data is what Bing lists and is most likely the same page, but we could not open Facebook to confirm. Hours: the site footer/structured data say Wed-Thu 3-11 PM, Fri 3 PM-2 AM, Sat 12 PM-2 AM, Sun 12-10 PM; a separate text block on the same page says bar hours Fri-Sat 12 PM-2 AM and Sun 12-9 PM (kitchen closes earlier). Bing shows later closing times. The logo is white on a transparent background, so it needs a dark background to show. Existing description still fits; kept.",
   "state": "NY",
   "town": "Babylon",
   "website": "https://www.lilyflanaganspub.com/",
   "latitude": 40.701645,
   "longitude": -73.322078,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/lilysbabylon/",
+  "email": "info@lilyflanaganspub.com",
+  "hours": "Wed-Thu 3 PM-11 PM; Fri 3 PM-2 AM; Sat 12 PM-2 AM; Sun 12 PM-10 PM; closed Mon-Tue",
+  "logo": {
+    "image": "../../assets/entities/venues/lilys-babylon-logo.webp",
+    "alt": "Lily's Babylon logo: the word lily's with Babylon, NY inside a circle",
+    "credit": "Logo: Lily's Babylon",
+    "creditUrl": "https://www.lilyflanaganspub.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/5bbd880a92441b19e9eae902/3a5163fa-36ab-488a-9acf-176991183c8b/Lily%27s-Logo+%283%29.png?format=1000w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/lilys-babylon-1.webp",
+      "alt": "The front of Lily's with a black Lily's Bar & Restaurant sign, string lights, plants and a fenced patio with umbrella tables",
+      "credit": "Photo: Lily's Babylon (website)",
+      "creditUrl": "https://www.lilyflanaganspub.com/musicevents",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5bbd880a92441b19e9eae902/1734539419358-5WVYVMJMET8A21RB1QQA/DSC02396.jpg?format=1500w",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/venues/lilys-babylon-2.webp",
+      "alt": "The main bar room at Lily's with high-top tables on a wood floor, a Brooklyn Bridge mural, stage lights and a disco ball",
+      "credit": "Photo: Lily's Babylon (website)",
+      "creditUrl": "https://www.lilyflanaganspub.com/catering",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5bbd880a92441b19e9eae902/94c0c0cd-b898-413f-8c63-292263ceabee/IMG_4410.jpeg?format=1500w",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/lilys-babylon-3.webp",
+      "alt": "A dining room at Lily's with dark wood tables and chairs on a shiny wood floor and a buffet set up at the back",
+      "credit": "Photo: Lily's Babylon (website)",
+      "creditUrl": "https://www.lilyflanaganspub.com/catering",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5bbd880a92441b19e9eae902/a4a00228-3850-4a8b-8f3d-33bbdd50ef10/IMG_0318.jpeg?format=1500w",
+      "focus": "50% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.lilyflanaganspub.com/",
+      "note": "Site footer and structured data name the business Lily's Babylon at 345 Deer Park Avenue, Babylon, NY 11702, phone 631-539-0816, email info@lilyflanaganspub.com, with weekly hours, and link Facebook (LilysBabylon) and Instagram…"
+    },
+    {
+      "url": "https://www.lilyflanaganspub.com/musicevents",
+      "note": "Events page lists happy-hour bands on Fridays (about 6-10 PM) and Saturday bands through December 2026."
+    },
+    {
+      "url": "https://www.lilyflanaganspub.com/catering",
+      "note": "Catering page shows the bar room and private rooms used for parties."
+    }
+  ]
 }

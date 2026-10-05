@@ -1,5 +1,29 @@
 {
   "name": "John Genua",
   "type": "band",
-  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Daisy's (Miller Place) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Medium confidence: the NY-area guitarist/singer \"johngenuamusic\" plays in a country band, which fits Daisy's Nashville Lounge (a country bar), but no page directly ties his own profile to the Daisy's dates. He is a solo performer, not a band (our type says band). The Daisy's event john-genua-6 is listed under Daisy's Patchogue, not Miller Place - please check the venue on our event. Email is the one he publishes on his own music link page. No website other than Linktree; no Facebook page found; his Linktree embeds YouTube demo videos but the channel link could not be read. No usable photos (Linktree avatar is small).",
+  "website": "https://linktr.ee/johngenuamusic",
+  "instagramUrl": "https://www.instagram.com/johngenuamusic/",
+  "email": "genua.john@gmail.com",
+  "genres": [
+    "country",
+    "classic rock",
+    "acoustic covers"
+  ],
+  "description": "New York-area guitarist and singer who plays acoustic and electric sets of well-known country and rock classics. He also plays in the country and rock band The Rustlers and the Desert Sky Acoustic Duo, and plays Sunday afternoon sets at Daisy's Nashville Lounge.",
+  "evidence": [
+    {
+      "url": "https://daisysli.com/event/john-genua-6/",
+      "note": "Daisy's Nashville Lounge lists John Genua live Sunday Oct 11, 2026, 2-5 PM, filed under its Patchogue events."
+    },
+    {
+      "url": "https://linktr.ee/johngenuamusic",
+      "note": "His own link page: \"NY area guitarist, vocalist and performer\", with his email, Instagram, demo videos and The Rustlers band link."
+    },
+    {
+      "url": "https://www.therustlersband.com/meet-the-band",
+      "note": "The Rustlers (country and rock 'n roll band) lists John Genua on acoustic/electric guitar and vocals; has played Opry City Stage on Broadway."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: daisysli.com, linktr.ee, therustlersband.com."
 }

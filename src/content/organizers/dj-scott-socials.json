@@ -16,5 +16,53 @@
   "website": "https://www.purplepenguinentertainment.com/",
   "email": "scott@djscottmusic.com",
   "description": "Social dance nights with a ballroom-to-rock music mix by DJ Scott at the Knights of Columbus hall in Patchogue.",
-  "reviewNotes": "The Dance Calendar lists different phone numbers (631.277.7774 / 631.513.1055); only DJ Scott's own-site number is recorded."
+  "reviewNotes": "The Dance Calendar lists different phone numbers (631.277.7774 / 631.513.1055); only DJ Scott's own-site number is recorded.\n\nDirectory research 2026-10-04: Phone and email are the booking contacts DJ Scott publishes on his own site. Town = where his social dances are held (Knights of Columbus, Patchogue); no own studio, so no street address. The site's 2026 calendar runs only to Oct 16, 2026 ('check back for updates'). No Facebook/Instagram/YouTube found for this DJ (a 'Scott' at Long Island Sound DJ and DanceJock are different DJs). Photos: the dance-floor and empty-hall pictures are from his events page and appear to be the Patchogue K of C hall, but the site does not caption them. Stock (Unsplash) images and celebrity selfies on the site were skipped.",
+  "logo": {
+    "image": "../../assets/entities/organizers/dj-scott-socials-logo.webp",
+    "alt": "Purple Penguin Entertainment logo: a cartoon purple penguin in a top hat singing into a microphone",
+    "credit": "Logo: Purple Penguin Entertainment",
+    "creditUrl": "https://www.purplepenguinentertainment.com/",
+    "imageSource": "https://storage.googleapis.com/wzukusers/user-34653286/images/5c41352ca3591VXBXyEj/PURPLE-PENGUIN-REV2-1_d800.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/organizers/dj-scott-socials-1.webp",
+      "alt": "A crowded dance floor at a social dance, seen from the DJ booth under a mirror ball and colored lights",
+      "credit": "Photo: Purple Penguin Entertainment (website)",
+      "creditUrl": "https://www.purplepenguinentertainment.com/events",
+      "imageSource": "https://storage.googleapis.com/production-hostgator-v1-0-9/729/1514729/1S5844vi/b0dfbdd1807849508cfe11066813b667",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/organizers/dj-scott-socials-2.webp",
+      "alt": "DJ Scott in a tropical print shirt and headphones smiling behind his DJ setup, with palm leaves around the booth",
+      "credit": "Photo: Purple Penguin Entertainment (website)",
+      "creditUrl": "https://www.purplepenguinentertainment.com/about",
+      "imageSource": "https://storage.googleapis.com/production-hostgator-v1-0-9/729/1514729/1S5844vi/3d2113822c914b75a1398f5923ba72d8",
+      "focus": "50% 30%"
+    },
+    {
+      "image": "../../assets/entities/organizers/dj-scott-socials-3.webp",
+      "alt": "A banquet hall set up for a dance, with a wooden dance floor surrounded by tables with red and blue tablecloths",
+      "credit": "Photo: Purple Penguin Entertainment (website)",
+      "creditUrl": "https://www.purplepenguinentertainment.com/events",
+      "imageSource": "https://storage.googleapis.com/production-hostgator-v1-0-9/729/1514729/1S5844vi/57d00bd16c0040bd848efb695518b8ed",
+      "focus": "50% 60%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.purplepenguinentertainment.com/",
+      "note": "DJ Scott's own site (Purple Penguin Entertainment; djscottmusic.com redirects here) lists 631-357-2881 and scott@djscottmusic.com."
+    },
+    {
+      "url": "https://www.purplepenguinentertainment.com/events",
+      "note": "Events page: 'DJ Scott's Summer/Early Fall 2026 Social Dance/Ballroom Mix Calendar' with $20 social dances, 7-11 PM, at the Knights of Columbus, 38 West 1st Street, Patchogue, through Oct 16, 2026."
+    },
+    {
+      "url": "https://www.purplepenguinentertainment.com/about",
+      "note": "About page: DJ playing ballroom and social dance music for Long Islanders for over 19 years, plus doo-wop, disco, country, rock and salsa."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: purplepenguinentertainment.com."
 }

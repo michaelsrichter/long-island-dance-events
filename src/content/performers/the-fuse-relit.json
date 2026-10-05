@@ -1,5 +1,49 @@
 {
   "name": "The Fuse Relit",
   "type": "band",
-  "reviewNotes": "Added automatically from Kitty Mulligan's Irish Pub (Bay Shore) - events. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Kitty Mulligan's Irish Pub (Bay Shore) - events. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: The band has no site of its own; its page sits on the IDOLized (Billy Idol tribute) site, which the same six musicians share, so the website/booking/phone are shared with IDOLized. Phone is published there for bookings. No Facebook/Instagram/YouTube links were found on that site or confirmed in search. Do not confuse with other bands called 'The Fuse' (UK band, others on Bandsintown/Songkick). Member names appear on the Eleanor's listing but are not recorded. Other images on the page are show flyers, so only one photo was taken.",
+  "website": "https://www.idolized.rocks/the-fuse",
+  "bookingUrl": "https://www.idolized.rocks/contact",
+  "phone": "(631) 897-1164",
+  "genres": [
+    "80s and 90s hits",
+    "dance rock covers"
+  ],
+  "description": "A Long Island rock cover band that brings back the local band The Fuse with two of its original members. The six-piece plays high-energy, danceable hits from the '80s and '90s; the same musicians also perform as IDOLized, a Billy Idol tribute.",
+  "logo": {
+    "image": "../../assets/entities/performers/the-fuse-relit-logo.webp",
+    "alt": "The Fuse Relit logo: the words The Fuse in bold white letters with Relit in script, inside a black circle with a white ring",
+    "credit": "Logo: The Fuse Relit",
+    "creditUrl": "https://www.idolized.rocks/the-fuse",
+    "imageSource": "https://static.wixstatic.com/media/e7d3c8_cdee9b8b81d246669ce85f6ff45e36bb~mv2.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/the-fuse-relit-1.webp",
+      "alt": "The six members of The Fuse Relit posing on a club stage in front of their round logo banner",
+      "credit": "Photo: The Fuse Relit (website)",
+      "creditUrl": "https://www.idolized.rocks/the-fuse",
+      "imageSource": "https://static.wixstatic.com/media/e7d3c8_9d630333adca4afe90ef150e21040e11~mv2.png",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+      "note": "Kitty Mulligan's (Bay Shore) lists 'Live Music: The Fuse Relit!' for a Halloween party on Sat Oct 31, 7:30-10:30 PM, matching our listing."
+    },
+    {
+      "url": "https://www.idolized.rocks/the-fuse",
+      "note": "The IDOLized band site has a page for The Fuse: the same musicians play non-stop '80s and '90s dance hits; it quotes a review naming The Fuse Relit and shows its logo and a show flyer listing Kitty Mulligan's dates."
+    },
+    {
+      "url": "https://www.idolized.rocks/contact",
+      "note": "Contact page: 'For bookings & all other inquiries - Call/Text' a 631 number, plus a message form."
+    },
+    {
+      "url": "https://eleanorslounge.com/events/the-fuse-relit/",
+      "note": "Eleanor's Lounge (Bohemia) bills The Fuse Relit as 'Long Island Legends - The New Fuse', high-energy danceable rock, with original members plus four new players."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: kittymulligans.com, idolized.rocks, eleanorslounge.com."
 }

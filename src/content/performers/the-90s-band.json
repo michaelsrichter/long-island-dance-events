@@ -1,5 +1,69 @@
 {
   "name": "The 90's Band",
   "type": "band",
-  "reviewNotes": "Added automatically from Live On The Porch (Smithtown) - show calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Live On The Porch (Smithtown) - show calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Booking is by the form on the home page and booking@the90sband.com (info@the90sband.com also shown). The Spotify link on the site is only an embedded playlist of songs they cover, not an artist page, so not recorded. Twitter link on the site is twitter.com/the90sband (recorded as x.com). Photos on the site date from 2019, so the lineup may have changed (site lists Phil, Bianca, Luke, Joe, Dan). Not the same as \"That '90s Band\" or \"You've Got 90s\" (other NYC-area 90s acts).",
+  "website": "https://the90sband.com/",
+  "facebookUrl": "https://www.facebook.com/the90sbandny/",
+  "instagramUrl": "https://www.instagram.com/the90sband/",
+  "youtubeUrl": "https://www.youtube.com/@the90sband",
+  "xUrl": "https://x.com/the90sband",
+  "bookingUrl": "https://the90sband.com/",
+  "email": "booking@the90sband.com",
+  "genres": [
+    "90s tribute",
+    "90s rock and pop covers"
+  ],
+  "description": "A five-piece Long Island tribute band that plays hit songs from the 1990s live. They play bars, beach clubs, town summer concerts and music venues across Nassau and Suffolk.",
+  "logo": {
+    "image": "../../assets/entities/performers/the-90s-band-logo.webp",
+    "alt": "The 90's Band logo in bright green bubble letters with a pink outline",
+    "credit": "Logo: The 90's Band",
+    "creditUrl": "https://the90sband.com/",
+    "imageSource": "https://the90sband.com/wp-content/uploads/2019/01/90s-band-logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/the-90s-band-1.webp",
+      "alt": "The five members of The 90's Band posing with guitars in front of brightly colored school lockers",
+      "credit": "Photo: The 90's Band (website)",
+      "creditUrl": "https://the90sband.com/",
+      "imageSource": "https://the90sband.com/wp-content/uploads/2019/05/the-90s-band.jpg",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-90s-band-2.webp",
+      "alt": "The 90's Band's guitarist singing and playing on a stage lit with purple lights",
+      "credit": "Photo: The 90's Band (website)",
+      "creditUrl": "https://the90sband.com/",
+      "imageSource": "https://the90sband.com/wp-content/uploads/2019/04/the-90s-band-1-1.jpg",
+      "focus": "40% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/the-90s-band-3.webp",
+      "alt": "Black-and-white photo of The 90's Band performing, with the singer and an acoustic guitarist at the front of the stage",
+      "credit": "Photo: The 90's Band (website)",
+      "creditUrl": "https://the90sband.com/",
+      "imageSource": "https://the90sband.com/wp-content/uploads/2019/04/the-90s-band-9.jpg",
+      "focus": "45% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://the90sband.com/",
+      "note": "Official site: New York 90s tribute band, booking form and booking@the90sband.com, links to Facebook, Instagram and Twitter; on the 2027 Best of Long Island ballot."
+    },
+    {
+      "url": "https://liveontheporch.com/events/",
+      "note": "Live On The Porch (Smithtown) lists The 90's Band, \"The '90s Like You Remember Them\", Oct 24 and later dates."
+    },
+    {
+      "url": "https://www.bandsintown.com/a/11976684-the-90's-band",
+      "note": "Bandsintown artist page lists Long Island shows at Salt Shack (Babylon), Flynn's Fire Island, Plattduetsche Park and Live on The Porch."
+    },
+    {
+      "url": "https://www.youtube.com/@the90sband/featured",
+      "note": "YouTube channel uses the same tagline as the website and has live videos from Dublin Deck."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: the90sband.com, liveontheporch.com, bandsintown.com, youtube.com."
 }

@@ -1,5 +1,63 @@
 {
   "name": "Strangelove",
   "type": "band",
-  "reviewNotes": "Added automatically from Stereo Garden (Patchogue) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Stereo Garden (Patchogue) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Touring tribute band from Los Angeles, not a local act; the Patchogue date is a ticketed concert. Full name: \"Strangelove - The Depeche Mode Experience\". The site also gives a booking phone written in a disguised form (part spelled out) next to a person's name; not recorded, the email covers booking. The X link on the site is twitter.com/depechetribute. The logo is white text on a transparent background, so it needs a dark backdrop.",
+  "website": "https://www.depechetribute.com/",
+  "facebookUrl": "https://www.facebook.com/strangelovetribute/",
+  "instagramUrl": "https://www.instagram.com/strangelovetribute/",
+  "youtubeUrl": "https://www.youtube.com/@Strangelove",
+  "tiktokUrl": "https://www.tiktok.com/@strangelovetribute",
+  "xUrl": "https://x.com/depechetribute",
+  "bookingUrl": "https://www.depechetribute.com/",
+  "email": "info@depechetribute.com",
+  "genres": [
+    "tribute to Depeche Mode",
+    "synth-pop",
+    "new wave"
+  ],
+  "description": "A Los Angeles tribute band that recreates a full Depeche Mode concert, with the synth-pop and new wave hits, costumes and stage visuals. It tours worldwide and stops on Long Island at Stereo Garden in Patchogue.",
+  "logo": {
+    "image": "../../assets/entities/performers/strangelove-logo.webp",
+    "alt": "Strangelove - The Depeche Mode Experience logo in white letters",
+    "credit": "Logo: Strangelove",
+    "creditUrl": "https://www.depechetribute.com/",
+    "imageSource": "https://static.wixstatic.com/media/0caa45_697e17cc520d4c7d834299ceedddf81a~mv2.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/strangelove-1.webp",
+      "alt": "Black-and-white promo photo of the four members of Strangelove in leather jackets",
+      "credit": "Photo: Strangelove (website)",
+      "creditUrl": "https://www.depechetribute.com/",
+      "imageSource": "https://static.wixstatic.com/media/0caa45_e790c9a71f9346cfa76e4d9ecc882b48~mv2.png/v1/fill/w_1600,h_1007,al_c/0caa45_e790c9a71f9346cfa76e4d9ecc882b48~mv2.png",
+      "focus": "50% 35%"
+    },
+    {
+      "image": "../../assets/entities/performers/strangelove-2.webp",
+      "alt": "Black-and-white photo of the Strangelove singer in a white shirt gripping a microphone stand",
+      "credit": "Photo: Strangelove (website)",
+      "creditUrl": "https://www.depechetribute.com/",
+      "imageSource": "https://static.wixstatic.com/media/0caa45_a56813d7633d4d3ca0654623c029350d~mv2.jpeg/v1/fill/w_1600,h_881,al_c/0caa45_a56813d7633d4d3ca0654623c029350d~mv2.jpeg",
+      "focus": "45% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-gc72p-etxsf-m7mgf-ce7dc",
+      "note": "Stereo Garden in Patchogue lists \"Strangelove: The Depeche Mode Tribute\" on Friday, November 6, 2026, doors 7 PM, $35."
+    },
+    {
+      "url": "https://www.songkick.com/artists/10060566-strangelove-the-depeche-mode-experience/calendar",
+      "note": "Songkick tour calendar for Strangelove - The Depeche Mode Experience includes Fri 06 Nov at Stereo Garden, Patchogue, NY."
+    },
+    {
+      "url": "https://www.depechetribute.com/",
+      "note": "Official site of the Los Angeles-based tribute; links Facebook, Instagram, X, YouTube and TikTok and lists a booking/general email."
+    },
+    {
+      "url": "https://www.youtube.com/@Strangelove",
+      "note": "YouTube channel calls itself the home base for Strangelove - The Depeche Mode Experience."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: stereogardenli.com, songkick.com, depechetribute.com, youtube.com."
 }

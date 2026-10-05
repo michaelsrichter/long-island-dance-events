@@ -1,5 +1,63 @@
 {
   "name": "Hella Doubt",
   "type": "band",
-  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Do not confuse with \"Hella Doubtful\", a different No Doubt tribute from the San Francisco Bay Area (helladoubtful.com). Booking phone and email are those of their booking agency (Karduna Talent Associates) as published on the band site. Several live photos on the band site carry a photographer watermark (\"ChrisNova\") and were skipped. Photo 2 is the band's official promo image and includes the band's own logo in the bottom-right corner. The Mulcahy's page misspells the name once as \"Hell Doubt\".",
+  "website": "https://helladoubt.com/",
+  "facebookUrl": "https://www.facebook.com/HellaDoubt",
+  "instagramUrl": "https://www.instagram.com/helladoubt_tribute/",
+  "youtubeUrl": "https://www.youtube.com/@HellaDoubt-g3m",
+  "bookingUrl": "https://www.gigsalad.com/hella_doubt_centereach",
+  "email": "mk678@msn.com",
+  "phone": "(347) 262-2430",
+  "genres": [
+    "No Doubt tribute",
+    "ska",
+    "pop punk",
+    "90s rock"
+  ],
+  "description": "Long Island tribute band to No Doubt and Gwen Stefani. The five-piece plays No Doubt's 1990s ska, punk, rocksteady and reggae hits plus some Gwen Stefani solo songs, at bars, breweries and music halls.",
+  "logo": {
+    "image": "../../assets/entities/performers/hella-doubt-logo.webp",
+    "alt": "Hella Doubt logo: a woman's black silhouette beside the band name on a blue circle, with Doubt in red tilted letter tiles",
+    "credit": "Logo: Hella Doubt",
+    "creditUrl": "https://helladoubt.com/",
+    "imageSource": "https://img1.wsimg.com/isteam/ip/cda08661-bd0a-4c11-983b-04ca63afbd58/blob-42ca9dc.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/hella-doubt-1.webp",
+      "alt": "The five members of Hella Doubt posing in checkered and plaid outfits in front of an 89 North Music Venue backdrop",
+      "credit": "Photo: Hella Doubt (website)",
+      "creditUrl": "https://helladoubt.com/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/cda08661-bd0a-4c11-983b-04ca63afbd58/HD3.png/:/rs=w:1600",
+      "focus": "50% 25%"
+    },
+    {
+      "image": "../../assets/entities/performers/hella-doubt-2.webp",
+      "alt": "Hella Doubt promo photo: the singer in a white top and red tie in front, with the guitarist, bassist and other members on a dark stage",
+      "credit": "Photo: Hella Doubt (website)",
+      "creditUrl": "https://helladoubt.com/",
+      "imageSource": "https://img1.wsimg.com/isteam/ip/cda08661-bd0a-4c11-983b-04ca63afbd58/Hella%20Doubt%20Promo%20Final.jpg/:/rs=w:1600",
+      "focus": "45% 25%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mulcahyslongisland.com/event/the-warped-tour-band-with-hella-doubt/",
+      "note": "Mulcahy's (Wantagh) lists Hella Doubt as the opening set (No Doubt / Gwen Stefani tribute) for The Warped Tour Band on Friday Nov 27, 2026."
+    },
+    {
+      "url": "https://helladoubt.com/upcoming-events",
+      "note": "Band's own events page lists The Warehouse (Amityville), Blue Point Brewery (Patchogue) and Mulcahy's of Wantagh on Nov 27."
+    },
+    {
+      "url": "https://helladoubt.com/",
+      "note": "Band site: \"New York's premier No Doubt / Gwen Stefani tribute band\"; lists members, Facebook, Instagram and booking phone and email (Karduna Talent Associates)."
+    },
+    {
+      "url": "https://www.gigsalad.com/hella_doubt_centereach",
+      "note": "GigSalad booking profile for Hella Doubt, tribute band based in Centereach, NY."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mulcahyslongisland.com, helladoubt.com, gigsalad.com."
 }

@@ -7,3 +7,29 @@ aliases:
   - Meringue
 summary: An easy Dominican partner dance. You march in place to the beat.
 music: Merengue
+description: Merengue is the national dance of the Dominican Republic and one of the easiest partner dances to learn. Partners hold each other closely and step in place or walk to a steady one-two beat, with relaxed hip motion and simple turns. It started as a rural dance and later moved into ballrooms and dance clubs.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/Merengue_(dance)
+photos:
+  - image: ../../assets/entities/styles/merengue-1.webp
+    alt: A smiling couple dances merengue cheek to cheek outdoors in the sun, the man in a yellow T-shirt and the woman in sunglasses
+    credit: "Photo: Garry Knight, CC BY-SA 2.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Merengue_dancing.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Merengue_dancing.jpg/1280px-Merengue_dancing.jpg
+    focus: 50% 30%
+  - image: ../../assets/entities/styles/merengue-2.webp
+    alt: Dancers in red, white and blue Dominican folk costumes perform merengue in a street parade as a crowd watches
+    credit: "Photo: Rafa Esteve, CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Fallas2018_-_Cavalcada_Patrimoni_10_-_Merengue_Rep%C3%BAblica_Dominicana.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Fallas2018_-_Cavalcada_Patrimoni_10_-_Merengue_Rep%C3%BAblica_Dominicana.jpg/1280px-Fallas2018_-_Cavalcada_Patrimoni_10_-_Merengue_Rep%C3%BAblica_Dominicana.jpg
+    focus: 30% 40%
+evidence:
+  - url: https://en.wikipedia.org/wiki/Merengue_(dance)
+    note: "Wikipedia: merengue is the national dance of the Dominican Republic, a danced walk that is easy for beginners; it began as a rural dance and later became a ballroom dance."
+  - url: https://commons.wikimedia.org/wiki/File:Merengue_dancing.jpg
+    note: "Commons file page: a couple dancing to the band Merengada at London's South Bank, by Garry Knight (Flickr), CC BY-SA 2.0."
+  - url: https://commons.wikimedia.org/wiki/File:Fallas2018_-_Cavalcada_Patrimoni_10_-_Merengue_Rep%C3%BAblica_Dominicana.jpg
+    note: "Commons file page: Dominican Republic merengue group in the Fallas 2018 heritage parade, Valencia; own work by Rafa Esteve, CC BY-SA 4.0."

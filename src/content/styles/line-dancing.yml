@@ -11,3 +11,29 @@ aliases:
   - Country Line Dancing
 summary: Everyone dances the same steps in rows. No partner is needed.
 music: Country, pop, oldies
+description: Line dancing is a group dance where everyone does the same steps at the same time, standing in rows that usually face the same way. No partner is needed. Each dance is a short pattern that repeats and is often tied to one song. It is a favorite at country bars, but many line dances are done to pop and oldies too.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/Line_dance
+photos:
+  - image: ../../assets/entities/styles/line-dancing-1.webp
+    alt: Rows of adults in cowboy hats, plaid shirts and jeans do a country line dance together on a sunny street
+    credit: "Photo: StettnerV, CC BY-SA 3.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Linedance_Magyarorsz%C3%A1gon.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/a/a9/Linedance_Magyarorsz%C3%A1gon.jpg
+    focus: 50% 40%
+  - image: ../../assets/entities/styles/line-dancing-2.webp
+    alt: Older adults line dance in rows on a town square with flags and bunting, next to a brick church
+    credit: "Photo: Richardkiwi, CC BY-SA 3.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Linedance_Katwijk_aan_Zee,_wijkvereniging_NNO,_Andreasplein,_30_april_2010.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/3.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Linedance_Katwijk_aan_Zee%2C_wijkvereniging_NNO%2C_Andreasplein%2C_30_april_2010.jpg/1280px-Linedance_Katwijk_aan_Zee%2C_wijkvereniging_NNO%2C_Andreasplein%2C_30_april_2010.jpg
+    focus: 50% 65%
+evidence:
+  - url: https://en.wikipedia.org/wiki/Line_dance
+    note: "Wikipedia: a line dance is a choreographed dance where a group repeats a sequence of steps in rows, usually facing the same way, without touching; each dance is often tied to a specific song."
+  - url: https://commons.wikimedia.org/wiki/File:Linedance_Magyarorsz%C3%A1gon.jpg
+    note: "Commons file page: line dancing in Rácalmás, Hungary, own work by StettnerV, CC BY-SA 3.0."
+  - url: https://commons.wikimedia.org/wiki/File:Linedance_Katwijk_aan_Zee,_wijkvereniging_NNO,_Andreasplein,_30_april_2010.jpg
+    note: "Commons file page: line dance on Queen's Day 2010 in Katwijk aan Zee, Netherlands, own work by Richardkiwi, CC BY-SA 3.0."

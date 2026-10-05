@@ -1,5 +1,55 @@
 {
   "name": "Mike DelGuidice and the Cans Band",
   "type": "band",
-  "reviewNotes": "Added automatically from Live On The Porch (Smithtown) - show calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Live On The Porch (Smithtown) - show calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: The 'Cans Band' has no website or social pages of its own that I could find; the venue links Mike DelGuidice's official site, so the links recorded here are Mike's own official pages (from mikedelguidice.com). The booking phone/email belong to his management company, Miracle Concerts, as published on his bookings page. There is a separate 'mike-delguidice' performer in the inventory (Mulcahy's); the owner may want to link or merge them. Logo is Mike's white wordmark (transparent PNG; needs a dark background). Photo shows Mike alone and has 'MIKE DELGUIDICE' printed along the bottom; the 50% 25% focus keeps the text mostly out of a 16:9 crop. Skipped two other site photos because they carry photographer watermarks. Note: Live On The Porch is Mike DelGuidice's own venue.",
+  "website": "https://mikedelguidice.com/",
+  "facebookUrl": "https://www.facebook.com/mikedelguidiceofficial/",
+  "instagramUrl": "https://www.instagram.com/mike_delguidice/",
+  "youtubeUrl": "https://www.youtube.com/user/deljuicy0309",
+  "xUrl": "https://x.com/mikedelguidice1",
+  "spotifyUrl": "https://open.spotify.com/artist/08aCzumYmIvyhEOGPpdsGS",
+  "bookingUrl": "https://mikedelguidice.com/bookings/",
+  "email": "miracleconcerts@gmail.com",
+  "phone": "(203) 208-3166",
+  "genres": [
+    "classic rock",
+    "yacht rock"
+  ],
+  "description": "A classic rock and yacht rock cover show where Long Island singer Mike DelGuidice (of Billy Joel's touring band) plays drums with the Cans Band. The set list covers the Beatles, Eagles, Pink Floyd, U2, Journey, Christopher Cross and more.",
+  "logo": {
+    "image": "../../assets/entities/performers/mike-delguidice-and-the-cans-band-logo.webp",
+    "alt": "The words MIKE DELGUIDICE in white capital letters",
+    "credit": "Logo: Mike DelGuidice",
+    "creditUrl": "https://mikedelguidice.com/",
+    "imageSource": "https://mikedelguidice.com/wp-content/uploads/2019/05/mike-d.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/mike-delguidice-and-the-cans-band-1.webp",
+      "alt": "Mike DelGuidice in a white shirt with a harmonica holder, kneeling on a dark stage in front of a drum kit",
+      "credit": "Photo: Mike DelGuidice (website)",
+      "creditUrl": "https://mikedelguidice.com/",
+      "imageSource": "https://mikedelguidice.com/wp-content/uploads/2022/03/mike-delguidice.jpg",
+      "focus": "50% 25%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://liveontheporch.com/events/",
+      "note": "Live On The Porch (Smithtown) lists 'Mike DelGuidice and the Cans Band' (Epic Classic Rock) on Oct 14 and Nov 19, 2026, 8 PM, says Mike plays drums with the Cans Band, and links mikedelguidice.com as the artist website."
+    },
+    {
+      "url": "https://www.miracleconcerts.com/mike-delguidice-from-the-cans-band",
+      "note": "Mike's management (Miracle Concerts) has a page for this act: Mike on drums in a full classic rock show, with a song list from the Rolling Stones and Beatles to U2, Journey and Christopher Cross."
+    },
+    {
+      "url": "https://mikedelguidice.com/",
+      "note": "Official site: Long Island singer-songwriter and Billy Joel band member; links his Instagram, Facebook, X, YouTube and Spotify; Live On The Porch is his own venue."
+    },
+    {
+      "url": "https://mikedelguidice.com/bookings/",
+      "note": "Booking page names Miracle Concerts as the booking contact with a public phone and email for bookings."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: liveontheporch.com, miracleconcerts.com, mikedelguidice.com."
 }

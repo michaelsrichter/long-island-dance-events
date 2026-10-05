@@ -39,7 +39,58 @@
     "rocksteady"
   ],
   "instagramUrl": "https://www.instagram.com/nysjensemble",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). The band's own shows page is out of date, so the Brasserie by Chef Aless (Massapequa) date could not be confirmed there; name match is strong. A restaurant gig may be a smaller lineup.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). The band's own shows page is out of date, so the Brasserie by Chef Aless (Massapequa) date could not be confirmed there; name match is strong. A restaurant gig may be a smaller lineup.\n\nDirectory research 2026-10-04: All current links confirmed from the official site. Booking email is the band's published booking agent address (Fred Reiter); management/press email nysjeofficial@gmail.com is an alternative. Current description and genres (ska, jazz, rocksteady) look right, so no change proposed; 'rocksteady' was not explicitly stated on the site. Their shows page still lists only 2025 dates, so the Long Island (Massapequa) gig could not be confirmed there. Instagram URL given without the share/tracking parameters the site uses.",
   "website": "https://www.newyorkskajazzensemble.com/",
-  "youtubeUrl": "https://www.youtube.com/@nysjeofficial2464"
+  "youtubeUrl": "https://www.youtube.com/@nysjeofficial2464",
+  "spotifyUrl": "https://open.spotify.com/artist/0ADVX4vKQN1saCsOdl67Fj",
+  "bookingUrl": "https://www.newyorkskajazzensemble.com/contact",
+  "email": "rsfreddie@earthlink.net",
+  "logo": {
+    "image": "../../assets/entities/performers/new-york-ska-jazz-ensemble-logo.webp",
+    "alt": "New York Ska-Jazz Ensemble logo: the band name in a red-outlined diamond with black-and-white checkerboard corners",
+    "credit": "Logo: New York Ska-Jazz Ensemble",
+    "creditUrl": "https://www.newyorkskajazzensemble.com/",
+    "imageSource": "https://static.wixstatic.com/media/54d064_8704f9eef32542388b054b05d764a016~mv2.png/v1/fit/w_1200,h_1200/54d064_8704f9eef32542388b054b05d764a016~mv2.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/new-york-ska-jazz-ensemble-1.webp",
+      "alt": "The band playing on a big outdoor festival stage at night, seen from behind the drummer, facing a large crowd",
+      "credit": "Photo: New York Ska-Jazz Ensemble (website)",
+      "creditUrl": "https://www.newyorkskajazzensemble.com/gallery",
+      "imageSource": "https://static.wixstatic.com/media/54d064_0fe5a8d57a734c55a994e67805efe2fc~mv2.jpg/v1/fit/w_1600,h_1600,q_85/54d064_0fe5a8d57a734c55a994e67805efe2fc~mv2.jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/performers/new-york-ska-jazz-ensemble-2.webp",
+      "alt": "A saxophonist in a white shirt and checkered tie playing on stage next to a guitarist under green stage lights",
+      "credit": "Photo: New York Ska-Jazz Ensemble (website)",
+      "creditUrl": "https://www.newyorkskajazzensemble.com/gallery",
+      "imageSource": "https://static.wixstatic.com/media/54d064_f8d23948f7ae4ce4a6a10a595712d522~mv2.jpg/v1/fit/w_1600,h_1600,q_85/54d064_f8d23948f7ae4ce4a6a10a595712d522~mv2.jpg",
+      "focus": "60% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/new-york-ska-jazz-ensemble-3.webp",
+      "alt": "The band's trumpet player in a beret and glasses playing into a microphone under green and blue stage lights",
+      "credit": "Photo: New York Ska-Jazz Ensemble (website)",
+      "creditUrl": "https://www.newyorkskajazzensemble.com/gallery",
+      "imageSource": "https://static.wixstatic.com/media/54d064_6c69ac0039e74bf89584d05cd548e2b0~mv2.jpg/v1/fit/w_1600,h_1600,q_85/54d064_6c69ac0039e74bf89584d05cd548e2b0~mv2.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.newyorkskajazzensemble.com/",
+      "note": "Official site: NYSJE, the New York band that started the ska-jazz style in 1994; links Spotify, YouTube @nysjeofficial2464, Facebook nysje and Instagram nysjensemble."
+    },
+    {
+      "url": "https://www.newyorkskajazzensemble.com/contact",
+      "note": "Contact page lists a booking contact (Fred Reiter, rsfreddie@earthlink.net) and management/press (nysjeofficial@gmail.com)."
+    },
+    {
+      "url": "https://www.newyorkskajazzensemble.com/shows",
+      "note": "Shows page is out of date: latest dates listed are Sept 2025 (Iridium NYC; Supernova Ska Festival, Hampton VA)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: newyorkskajazzensemble.com."
 }

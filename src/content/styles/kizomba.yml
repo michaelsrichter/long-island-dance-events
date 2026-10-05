@@ -11,3 +11,38 @@ aliases:
   - Tarraxinha
 summary: A slow, smooth partner dance from Angola, danced close together.
 music: Kizomba and Afro-Latin music
+description: Kizomba is a slow, smooth partner dance from Angola, done in a close embrace with soft knees and small, grounded steps. It grew in the late 1970s and 1980s, when Angolan semba steps were adapted to the slower kizomba music. The name means "party" in the Kimbundu language. Urban kiz is a newer, more modern style.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/Kizomba
+photos:
+  - image: ../../assets/entities/styles/kizomba-1.webp
+    alt: A couple dances kizomba in a close embrace on a dim social dance floor
+    credit: "Photo: Debarshi Ray, CC BY-SA 2.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Kizomba_dancers_by_Debarshi_Ray_06.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Kizomba_dancers_by_Debarshi_Ray_06.jpg/1280px-Kizomba_dancers_by_Debarshi_Ray_06.jpg
+    focus: 60% 40%
+  - image: ../../assets/entities/styles/kizomba-2.webp
+    alt: A man in a maroon sweater and a smiling woman in a blue lace dress dance kizomba in a gallery room with lit wall niches
+    credit: "Photo: Obe Images, CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:20161221-IMG_0015.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/20161221-IMG_0015.jpg/1280px-20161221-IMG_0015.jpg
+    focus: 60% 30%
+  - image: ../../assets/entities/styles/kizomba-3.webp
+    alt: A dance couple performs a slow kizomba move on a dark stage, the man standing close behind the woman
+    credit: "Photo: MusicalNieuws, CC BY 2.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Dance_Showcase_2015_-_Veronique_Hamelers_and_Ka-Hing_Fung_04.jpg
+    licenseUrl: https://creativecommons.org/licenses/by/2.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Dance_Showcase_2015_-_Veronique_Hamelers_and_Ka-Hing_Fung_04.jpg/1280px-Dance_Showcase_2015_-_Veronique_Hamelers_and_Ka-Hing_Fung_04.jpg
+    focus: 60% 35%
+evidence:
+  - url: https://en.wikipedia.org/wiki/Kizomba
+    note: "Wikipedia: kizomba is a social dance and music genre from Angola (late 1970s-early 1980s); the name means 'party' in Kimbundu; Angolans adapted semba steps to kizomba beats."
+  - url: https://commons.wikimedia.org/wiki/File:Kizomba_dancers_by_Debarshi_Ray_06.jpg
+    note: "Commons file page: 'Kizomba dancers', by Debarshi Ray (Flickr), CC BY-SA 2.0."
+  - url: https://commons.wikimedia.org/wiki/File:20161221-IMG_0015.jpg
+    note: "Commons file page: 'Kizomba dance in Ghana', Wiki Loves Africa 2016; own work by Obe Images, CC BY-SA 4.0."
+  - url: https://commons.wikimedia.org/wiki/File:Dance_Showcase_2015_-_Veronique_Hamelers_and_Ka-Hing_Fung_04.jpg
+    note: "Commons file page: 'Kizomba Dream' showcase by Veronique Hamelers and Ka-Hing Fung, Parktheater Eindhoven, 2015; by MusicalNieuws (Flickr), CC BY 2.0."

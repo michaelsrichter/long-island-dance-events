@@ -27,6 +27,59 @@
     "classic rock",
     "hard rock"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Show time: iloveny lists 7 PM; an older BroadwayWorld article said 8 PM. Check the theater site.",
-  "website": "https://annwilson.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Show time: iloveny lists 7 PM; an older BroadwayWorld article said 8 PM. Check the theater site.\n\nDirectory research 2026-10-04: National touring artist (not Long Island based); the Long Island link is the Oct 4, 2026 Patchogue Theatre show, which the theater bills as 'Ann Wilson: The Voice of Heart & Tripsitter', Sun Oct 4, 7:00 PM - so the 7 PM time is correct. Current description still fits. No public booking page, email or phone on her site. The logo was served by Shopify's CDN as AVIF (despite the .png URL), so I converted it locally to a lossless PNG with sharp; same image, no edits. Photos are WebP as served. Photo 3 is a tall (portrait) shot; the focus keeps her face in a wide crop.",
+  "website": "https://annwilson.com/",
+  "facebookUrl": "https://www.facebook.com/annwilsonheart/",
+  "instagramUrl": "https://www.instagram.com/annwilson/",
+  "youtubeUrl": "https://www.youtube.com/c/Theannwilsonthing1",
+  "xUrl": "https://x.com/AnnWilson",
+  "spotifyUrl": "https://open.spotify.com/artist/4lPDIYPFDs5gpcToUczJDs",
+  "logo": {
+    "image": "../../assets/entities/performers/ann-wilson-logo.webp",
+    "alt": "Ann Wilson written in dark blue swirly script letters",
+    "credit": "Logo: Ann Wilson",
+    "creditUrl": "https://annwilson.com/",
+    "imageSource": "https://annwilson.com/cdn/shop/files/ann-wilson-logo_304777c4-5c72-41cd-8b50-98d7592e9dc3.png?v=1754930767&width=1200"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/ann-wilson-1.webp",
+      "alt": "Ann Wilson with long dark hair and a black velvet jacket, holding a glowing orange glass ball against a purple background",
+      "credit": "Photo: Ann Wilson (website)",
+      "creditUrl": "https://annwilson.com/pages/home",
+      "imageSource": "https://annwilson.com/cdn/shop/files/hero-purple.jpg?v=1764614348&width=3000",
+      "focus": "50% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/ann-wilson-2.webp",
+      "alt": "Ann Wilson singing into a microphone on a stand in front of a red curtain",
+      "credit": "Photo: Ann Wilson (website)",
+      "creditUrl": "https://annwilson.com/pages/bio",
+      "imageSource": "https://annwilson.com/cdn/shop/files/Photo_Aug_13_2025_2_32_41_PM.jpg?v=1760981946&width=1500",
+      "focus": "35% 40%"
+    },
+    {
+      "image": "../../assets/entities/performers/ann-wilson-3.webp",
+      "alt": "Ann Wilson singing on stage in blue light, wearing a fur scarf and black gloves",
+      "credit": "Photo: Ann Wilson (website)",
+      "creditUrl": "https://annwilson.com/pages/bio",
+      "imageSource": "https://cdn.shopify.com/s/files/1/0690/3424/6297/files/196A2060.jpg?v=1760982486&width=1200",
+      "focus": "55% 25%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.patchoguetheatre.org/events/",
+      "note": "Patchogue Theatre lists 'Ann Wilson: The Voice of Heart & Tripsitter' on Sunday, Oct 4, 2026 at 7:00 PM, which settles the show-time question (7 PM, not 8 PM)."
+    },
+    {
+      "url": "https://annwilson.com/pages/bio",
+      "note": "Official bio: founder and lead singer-songwriter of Heart (Barracuda, Crazy On You, Magic Man), Rock and Roll Hall of Fame member; page has official live photos."
+    },
+    {
+      "url": "https://annwilson.com/pages/home",
+      "note": "Official site links her Facebook, Instagram, YouTube, X and Spotify pages."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: patchoguetheatre.org, annwilson.com."
 }

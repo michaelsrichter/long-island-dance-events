@@ -4,7 +4,7 @@
   "town": "Great Neck",
   "county": "Nassau",
   "state": "NY",
-  "factsSource": "Checked October 3, 2026. Sources: divaballroomdancing.com, gnballroom.com, google.com.",
+  "factsSource": "Checked October 4, 2026. Source: gnballroom.com.",
   "postalCode": "11021",
   "phone": "(929) 712-5960",
   "website": "https://www.gnballroom.com/",
@@ -13,5 +13,36 @@
   "accessibilityNotes": "Google Maps lists a wheelchair-accessible entrance and parking lot.",
   "latitude": 40.787659,
   "longitude": -73.72863,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=61556218261633",
+  "instagramUrl": "https://www.instagram.com/gn.ballroom/",
+  "email": "gnballroom@gmail.com",
+  "hours": "Mon-Fri 11 AM-9:30 PM; Sat-Sun 9 AM-6 PM",
+  "description": "A ballroom and Latin dance studio on Middle Neck Road in Great Neck village. It gives private and group lessons for singles, couples and wedding couples, and rents its dance floor for parties.",
+  "logo": {
+    "image": "../../assets/entities/venues/great-neck-ballroom-logo.webp",
+    "alt": "Great Neck Ballroom Dance Studio round logo: a navy line drawing of a leaping dancer inside the words 'Great Neck Ballroom Dance Studio'",
+    "credit": "Logo: Great Neck Ballroom",
+    "creditUrl": "https://www.gnballroom.com/",
+    "imageSource": "https://static.wixstatic.com/media/a9e33a_51b5b3e9a8374d91bcbd8597a3087ec4~mv2.jpg"
+  },
+  "evidence": [
+    {
+      "url": "https://www.gnballroom.com/blank-2",
+      "note": "Studio's contact page: 34 Middle Neck Road, Great Neck, NY 11021; call or text 929-712-5960; gnballroom@gmail.com; hours Mon-Fri 11 am-9:30 pm, Sat-Sun 9 am-6 pm."
+    },
+    {
+      "url": "https://www.gnballroom.com/",
+      "note": "Home page links Facebook (Great Neck Ballroom, id 61556218261633) and Instagram gn.ballroom; offers singles and couples lessons; schema lists the same address and phone."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=6981634857878174245",
+      "note": "Google Maps: Great Neck Ballroom Dance Studio (dance school), 34 Middle Neck Rd, Great Neck, NY 11021, phone (929) 712-5960, website gnballroom.com."
+    },
+    {
+      "url": "https://www.gnballroom.com/blank-1",
+      "note": "Shows the facts in the description."
+    }
+  ],
+  "reviewNotes": "Directory research 2026-10-04: Google calls it 'Great Neck Ballroom Dance Studio'. Instagram handle is inconsistent: the site's icon links instagram.com/gn.ballroom, the contact text says 'IG: gnballroom' and a flyer shows @greatneckballroom; we used the linked one (could not open Instagram to check). The site's images are flyers, an AI-made banner and stock art, so no photos recorded. A rentals flyer on the home page advertises the studio for private parties (bar options, sound system, dance floor)."
 }

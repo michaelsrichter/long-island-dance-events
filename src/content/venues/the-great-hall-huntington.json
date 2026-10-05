@@ -2,10 +2,50 @@
   "name": "The Great Hall",
   "address": "12 Prospect St",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Dance Manhattan - Long Island swing dances list. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Dance Manhattan - Long Island swing dances list. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: 'The Great Hall' is the parish hall of St. John's Episcopal Church (SJH), 12 Prospect St, Huntington. Suggest renaming to 'The Great Hall at St. John's Episcopal Church' so people can find it. Website, logo, socials and contact are the church's. No published hours for the hall. The only photo is the church exterior (no photo of the hall itself on the site); it is a wide banner (1000x369). Concert/dance contact on the arts listing is the music director's line, not recorded.",
   "state": "NY",
   "town": "Huntington",
   "latitude": 40.870356,
   "longitude": -73.429648,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://stjohnshuntington.org/",
+  "facebookUrl": "https://www.facebook.com/SaintJohnsHuntington",
+  "instagramUrl": "https://www.instagram.com/saintjohnshuntington/",
+  "youtubeUrl": "https://www.youtube.com/@saintjohnshuntington",
+  "email": "office@stjohnshuntington.org",
+  "phone": "(631) 427-1752",
+  "postalCode": "11743",
+  "description": "The parish hall of St. John's Episcopal Church, at the corner of Main Street and Prospect Street in Huntington village. Besides church events, it hosts some community concerts and swing dance nights with live bands and a beginner lesson.",
+  "logo": {
+    "image": "../../assets/entities/venues/the-great-hall-huntington-logo.webp",
+    "alt": "St. John's Episcopal Church logo: a red gate with a cross on top next to the words St. John's Episcopal Church",
+    "credit": "Logo: St. John's Episcopal Church, Huntington",
+    "creditUrl": "https://stjohnshuntington.org/",
+    "imageSource": "https://stjohnshuntington.org/wp-content/uploads/2026/04/Simplified-Horizontal-Logo.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/the-great-hall-huntington-1.webp",
+      "alt": "The gray stone tower and arched red windows of St. John's Episcopal Church in Huntington, framed by autumn trees",
+      "credit": "Photo: St. John's Episcopal Church, Huntington (website)",
+      "creditUrl": "https://stjohnshuntington.org/",
+      "imageSource": "https://stjohnshuntington.org/wp-content/uploads/2026/04/church-image-2.jpg",
+      "focus": "55% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://stjohnshuntington.org/",
+      "note": "Church site footer: St. John's Episcopal Church, 12 Prospect Street, Huntington, NY 11743, office@stjohnshuntington.org, (631) 427-1752; it mentions meeting in the Great Hall; links Facebook, Instagram and YouTube."
+    },
+    {
+      "url": "https://www.huntingtonarts.org/event/swing-into-spring-a-night-of-swing-music-dancing/",
+      "note": "Huntington Arts Council listing: St. John's Jazz Connections 'Swing into Spring' with live swing by The Revisionists and dancing in The Great Hall, St. John's Church, with an optional lesson by Courtney and Chris Thaler."
+    },
+    {
+      "url": "https://stjohnshuntington.org/calendar-events/",
+      "note": "Church events page mentions concerts at SJH and the Harvest Fair bake sale in the Great Hall, at the corner of Main and Prospect."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: stjohnshuntington.org, huntingtonarts.org."
 }

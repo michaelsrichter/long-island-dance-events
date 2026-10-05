@@ -32,16 +32,40 @@
     "policy": "encouraged"
   },
   "description": "A cocktail lounge and restaurant on Long Beach Road in Oceanside that opened in 2026. It turns into a 21-and-over nightspot with DJs after 9 PM.",
-  "factsSource": "Checked October 3, 2026. Source: lushesrestaurantanbar.com.",
+  "factsSource": "Checked October 4, 2026. Source: lushesrestaurantanbar.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Lushes+Restaurant+%26+Bar%2C+3116+Long+Beach+Rd%2C+Oceanside%2C+NY+11572",
   "kind": "bar",
   "phone": "(516) 699-3433",
   "postalCode": "11572",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'LIR Dance Party with Andre' on Oct 3 matches the venue's Saturday DJ parties (we found an Oct 17 listing). No Facebook page found. Size of the dance area not confirmed.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'LIR Dance Party with Andre' on Oct 3 matches the venue's Saturday DJ parties (we found an Oct 17 listing). No Facebook page found. Size of the dance area not confirmed.\n\nDirectory research 2026-10-04: Facebook and Instagram were found in the site's own schema data (earlier research found no Facebook page). The site is behind a Cloudflare check, so it was read in a browser. Hours come from the schema data; Monday is not listed (probably closed). The home page text mentions lunch, but the published hours start at 5 PM. No email published. No usable photos: the site's large images are generic stock-style drink and toast shots, not the venue. Current description is still accurate; it could add that Fridays are freestyle/80s/90s/disco dance nights.",
   "state": "NY",
   "town": "Oceanside",
   "website": "https://www.lushesrestaurantanbar.com/",
   "latitude": 40.63602,
   "longitude": -73.640448,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "facebookUrl": "https://www.facebook.com/p/Lushes-Restaurant-N-Bar-61584155279138/",
+  "instagramUrl": "https://www.instagram.com/lushes.restaurant/",
+  "hours": "Sun, Tue-Wed 5 PM-midnight; Thu 5 PM-1 AM; Fri-Sat 5 PM-3 AM; Monday not listed. 21+ after 9 PM",
+  "logo": {
+    "image": "../../assets/entities/venues/lushes-restaurant-bar-oceanside-logo.webp",
+    "alt": "Lushes Restaurant & Bar logo: the word Lushes in pink-to-blue script above Restaurant & Bar",
+    "credit": "Logo: Lushes Restaurant & Bar",
+    "creditUrl": "https://www.lushesrestaurantanbar.com/",
+    "imageSource": "https://popmenucloud.com/nqsadkvr/77b7c3cb-e11b-4ba5-8812-7d822b4c4f51.png"
+  },
+  "evidence": [
+    {
+      "url": "https://www.lushesrestaurantanbar.com/",
+      "note": "Venue site (viewed in a browser): schema data gives 3116 Long Beach Road, Oceanside NY 11572, +1 516-699-3433, hours and links to its Facebook and Instagram; banner says 21+ only after 9 PM."
+    },
+    {
+      "url": "https://www.lushesrestaurantanbar.com/events",
+      "note": "Events page lists 'Freestyle Fridays' every Friday (Aug-Dec 2026) with a DJ spinning freestyle, 80s, 90s, disco and dance classics, plus daily happy hour 5-8 PM."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=Lushes+Restaurant+%26+Bar%2C+3116+Long+Beach+Rd%2C+Oceanside%2C+NY+11572",
+      "note": "Shows the county."
+    }
+  ]
 }

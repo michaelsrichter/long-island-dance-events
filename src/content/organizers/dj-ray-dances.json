@@ -14,5 +14,16 @@
     "latin-ballroom"
   ],
   "description": "Oldies dance nights with DJ Ray at the Massapequa Elks Lodge.",
-  "reviewNotes": "Only source is The Dance Calendar (directory + listing); no website or social page found."
+  "reviewNotes": "Only source is The Dance Calendar (directory + listing); no website or social page found.\n\nDirectory research 2026-10-04: Still no website or social page found for DJ Ray; the only sources are The Dance Calendar directory and third-party event listings, so identity is medium (we cannot tell whether he is the same 'DJ Ray' who plays some LICMA western dances at Brumidi Lodge, or the 'Ray's Singles Dance: Oldies Night' on events.longisland.com, which we could not open). Phone (516) 385-1720 is from The Dance Calendar listing; find.dance prints 516-386-1720, likely a typo, and adds elks2162@gmail.com, which is the Elks lodge's email (not DJ Ray's), so it was not recorded. No own venue: town = Massapequa Elks Lodge location.",
+  "evidence": [
+    {
+      "url": "https://www.thedancecalendar.com/find-venues-events",
+      "note": "The Dance Calendar venue directory: 'Dance to the Sounds of DJ Ray Oldies Nights', Massapequa Elks Lodge, 2162 Veterans Blvd, Massapequa, NY 11758, 516.385.1720."
+    },
+    {
+      "url": "https://www.find.dance/events/67d63869-703e-4ffb-9f26-d62dd0f1b26e",
+      "note": "find.dance listing 'Sounds Of DJ Ray', recurring social dance at B.P.O. Elks Lodge #2162 in Massapequa, $25, with the lodge's email; phone printed as 516-386-1720 (one digit different)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: thedancecalendar.com, find.dance."
 }

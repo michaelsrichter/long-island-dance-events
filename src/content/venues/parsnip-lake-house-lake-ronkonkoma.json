@@ -34,16 +34,35 @@
   },
   "description": "A small, casual neighborhood bar on Lake Ronkonkoma with a back deck over the water. It hosts bands, DJs and karaoke most nights.",
   "facebookUrl": "https://www.facebook.com/Parsnip-Lake-House-108847530981437",
-  "factsSource": "Checked October 3, 2026. Source: theparsniplakehouse.com.",
+  "factsSource": "Checked October 4, 2026. Sources: theparsniplakehouse.com, restaurantji.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Parsnip+Lake+House+432+Smithtown+Blvd+Lake+Ronkonkoma+NY+11779",
   "kind": "bar",
   "phone": "(631) 285-2632",
   "postalCode": "11779",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira wrote 'Parsnips'; the business calls itself 'Parsnip Lake House' (older listings: 'Parsnip Pub'). The Voices Carry gig on Oct 3 was not found on the venue's site (its show list was empty). Facebook link comes from a Bing business listing.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira wrote 'Parsnips'; the business calls itself 'Parsnip Lake House' (older listings: 'Parsnip Pub'). The Voices Carry gig on Oct 3 was not found on the venue's site (its show list was empty). Facebook link comes from a Bing business listing.\n\nDirectory research 2026-10-04: The website is a barely edited Wix template (page title 'My Site 4', footer (c) 2023, empty show list, and its Instagram/X/YouTube icons point to Wix's own accounts), so it may not be kept up to date. The Facebook page is the one the site links; its URL uses the old numeric format. Instagram @parsniplakehouse was suggested by a search summary but could not be verified (Instagram needs a login), so not recorded. No hours on the site; third-party listings say roughly noon-2 AM daily, unverified. Flyers on the site show open mic night every Monday 7 PM (house band) and karaoke every Tuesday 7 PM. No logo or usable photos: the only images are text flyers, staff portraits and a tiny blurry video still. Site says free on-site parking is limited, with gas-station parking at night.",
   "state": "NY",
   "town": "Lake Ronkonkoma",
   "website": "https://www.theparsniplakehouse.com/",
   "latitude": 40.833263,
   "longitude": -73.123656,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "email": "parsniplakehouse@gmail.com",
+  "evidence": [
+    {
+      "url": "https://www.theparsniplakehouse.com/",
+      "note": "Bar's own site ('Meet Me at the Lake'): 432 Smithtown Blvd, Lake Ronkonkoma NY 11779, Parsniplakehouse@gmail.com, 631-285-2632; weekly open mic and karaoke flyers; free but limited parking on site; links the Facebook page."
+    },
+    {
+      "url": "https://www.theparsniplakehouse.com/live-music",
+      "note": "Live music page shows 'No events at the moment' (checked Oct 4, 2026)."
+    },
+    {
+      "url": "https://www.restaurantji.com/ny/lake-ronkonkoma/parsnip-pub-/",
+      "note": "Third-party listing for Parsnip Lake House (older name Parsnip Pub) at the same address and phone, describing live music and a lake view."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=Parsnip+Lake+House+432+Smithtown+Blvd+Lake+Ronkonkoma+NY+11779",
+      "note": "Shows the county."
+    }
+  ]
 }

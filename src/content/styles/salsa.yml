@@ -11,3 +11,38 @@ aliases:
   - Mambo
 summary: A fast, fun partner dance from the Caribbean and New York, with lots of turns.
 music: Salsa and Latin jazz
+description: Salsa is a lively partner dance with quick footwork and many spins and turns, where the leader guides the follower through turn patterns. It grew out of Cuban dances like son, mambo and cha-cha, and took shape in New York in the 1960s and 1970s along with salsa music. Styles include New York (On2), Los Angeles (On1) and Cuban.
+moreLinks:
+  - label: Wikipedia
+    url: https://en.wikipedia.org/wiki/Salsa_(dance)
+photos:
+  - image: ../../assets/entities/styles/salsa-1.webp
+    alt: Two couples dance salsa outdoors on a brick path at a summer festival, one man turning his partner under his arm
+    credit: "Photo: Mack Male, CC BY-SA 2.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Fiestaval_(4829921240).jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/2.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Fiestaval_%284829921240%29.jpg/1280px-Fiestaval_%284829921240%29.jpg
+    focus: 60% 50%
+  - image: ../../assets/entities/styles/salsa-2.webp
+    alt: A man and a woman in matching black jackets practice a salsa turn, hands joined above their heads, at a dance festival class
+    credit: "Photo: Rosiestep, CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Nav_Chaudhari_%26_Katherine_Chaudhari_at_California_Dance_Festival_2025_05.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Nav_Chaudhari_%26_Katherine_Chaudhari_at_California_Dance_Festival_2025_05.jpg/1280px-Nav_Chaudhari_%26_Katherine_Chaudhari_at_California_Dance_Festival_2025_05.jpg
+    focus: 50% 40%
+  - image: ../../assets/entities/styles/salsa-3.webp
+    alt: Couples dance salsa at night on a town square under the trees during a summer music festival
+    credit: "Photo: Unuaiga, CC BY-SA 4.0, via Wikimedia Commons"
+    creditUrl: https://commons.wikimedia.org/wiki/File:Danseurs_de_Salsa_-_F%C3%AAte_de_la_musique_%C3%A0_Auch_02.jpg
+    licenseUrl: https://creativecommons.org/licenses/by-sa/4.0
+    imageSource: https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Danseurs_de_Salsa_-_F%C3%AAte_de_la_musique_%C3%A0_Auch_02.jpg/1280px-Danseurs_de_Salsa_-_F%C3%AAte_de_la_musique_%C3%A0_Auch_02.jpg
+    focus: 45% 50%
+evidence:
+  - url: https://en.wikipedia.org/wiki/Salsa_(dance)
+    note: "Wikipedia: salsa developed from Afro-Cuban dances (son, danzón, mambo, cha-cha-chá); the term was popularized in New York in the 1960s-70s; New York, LA and Cuban styles are described."
+  - url: https://commons.wikimedia.org/wiki/File:Fiestaval_(4829921240).jpg
+    note: "Commons file page: Fiestaval 2010, Edmonton, by Mack Male (Flickr), CC BY-SA 2.0; filed in Category:Salsa (dance)."
+  - url: https://commons.wikimedia.org/wiki/File:Nav_Chaudhari_%26_Katherine_Chaudhari_at_California_Dance_Festival_2025_05.jpg
+    note: "Commons file page: instructors at a session called Salsa, California Dance Festival 2025, Sacramento; own work by Rosiestep, CC BY-SA 4.0."
+  - url: https://commons.wikimedia.org/wiki/File:Danseurs_de_Salsa_-_F%C3%AAte_de_la_musique_%C3%A0_Auch_02.jpg
+    note: "Commons file page: salsa dancers at the 2017 Fête de la musique in Auch, France; own work by Unuaiga, CC BY-SA 4.0."

@@ -40,6 +40,62 @@
     "Top 40",
     "disco"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). A different 'Mach 5' rock band is in Austin, TX (mach5atx.com). Tiki Joe's Captree gig not confirmed on the band site. Social links not found on the site.",
-  "website": "https://www.mach5nyband.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). A different 'Mach 5' rock band is in Austin, TX (mach5atx.com). Tiki Joe's Captree gig not confirmed on the band site. Social links not found on the site.\n\nDirectory research 2026-10-04: Phone and email are the founder Sonny's, but the band's own site publishes them specifically for booking ('call Sonny to book us'), so they are recorded; the owner may prefer to show only the contact page. The 'logo' file is a PNG served by Wix for the home-page banner image (the URL ends in .jpg but the host returned PNG). The site mentions a YouTube channel but does not link it, and no Instagram was found. Gallery images 'concert crowd' and 'dark stage' on the home page look like stock photos and were skipped. The Tiki Joe's Captree gig from Ira's List still could not be confirmed on the band's site or in search.",
+  "website": "https://www.mach5nyband.com/",
+  "facebookUrl": "https://www.facebook.com/mach5bandny/",
+  "bookingUrl": "https://www.mach5nyband.com/contact-us",
+  "email": "sonnym1961@gmail.com",
+  "phone": "(646) 338-9096",
+  "logo": {
+    "image": "../../assets/entities/performers/mach5-band-ny-logo.webp",
+    "alt": "Mach5 logo: a red number 5 in a flaming circle between two crossed checkered racing flags, with the words L.I.'s Hottest Cover Band and the band's genres",
+    "credit": "Logo: Mach5 Band NY",
+    "creditUrl": "https://www.mach5nyband.com/",
+    "imageSource": "https://static.wixstatic.com/media/90a441_37cd7e5216d441c6aacf13394fa28ac2~mv2.jpg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/mach5-band-ny-1.webp",
+      "alt": "Mach5's five members on a small stage in front of a brick wall: guitarist, drummer with a checkered Mach5 drum, singer, bassist and keyboard player",
+      "credit": "Photo: Mach5 Band NY (website)",
+      "creditUrl": "https://www.mach5nyband.com/mach5-band-ny-gallery",
+      "imageSource": "https://static.wixstatic.com/media/90a441_62b05a81c37946cf91e3442e63079ca0~mv2.jpg",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/performers/mach5-band-ny-2.webp",
+      "alt": "Mach5 playing under blue lights at the Lake House in Lake Ronkonkoma, with a guitarist, drummer and singer",
+      "credit": "Photo: Mach5 Band NY (website)",
+      "creditUrl": "https://www.mach5nyband.com/mach5-band-ny-gallery",
+      "imageSource": "https://static.wixstatic.com/media/90a441_4a87a6b057924520a746f930eae2f1c6~mv2.jpg",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/performers/mach5-band-ny-3.webp",
+      "alt": "Mach5 performing outdoors under a canopy at sunset, a guitarist and a woman singing with a drummer behind them",
+      "credit": "Photo: Mach5 Band NY (website)",
+      "creditUrl": "https://www.mach5nyband.com/mach5-band-ny-gallery",
+      "imageSource": "https://static.wixstatic.com/media/90a441_41419a41f0a6459dabbdc634c840b626~mv2.jpg",
+      "focus": "55% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.mach5nyband.com/what-we-offer",
+      "note": "Band site: formed in 2017, plays as a trio up to a six-piece around Long Island; genres classic rock, country, Motown, oldies, R&B, Top 40 and some disco."
+    },
+    {
+      "url": "https://www.mach5nyband.com/contact-us",
+      "note": "Contact page says to call Sonny to book the band, gives a phone and email, an inquiry form, and links facebook.com/mach5bandny."
+    },
+    {
+      "url": "https://mach5atx.com/bio/",
+      "note": "A different rock band called Mach 5 is based in Austin, Texas - not this act."
+    },
+    {
+      "url": "https://www.mach5nyband.com/",
+      "note": "Shows the website and phone number."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mach5nyband.com, mach5atx.com."
 }

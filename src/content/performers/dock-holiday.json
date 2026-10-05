@@ -36,7 +36,53 @@
     "funk, country, pop, rock and soul covers"
   ],
   "instagramUrl": "https://www.instagram.com/dock_holiday_the_band",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List says North Hempstead Beach Park; the band calls it the Town of North Hempstead Fall Festival.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's List says North Hempstead Beach Park; the band calls it the Town of North Hempstead Fall Festival.\n\nDirectory research 2026-10-04: Booking email and phone are published by the band on its own site for bookings (\"For booking please send Email\", \"Immediate Inquires Call\"); the phone belongs to a band member. Current description and links are still accurate; the band site says it is from Northport. No logo recorded: the site's logo images are \"Now Booking\" promo graphics with lots of text (candidate: https://images.zoogletools.com/s:bzglfiles/u/595847/e40d3fb51cd7ed94f2184aac2799e78d7668ee9f/original/dh-logo-2026-low-res.jpg). Band-group promo shots on the site have large title text, so we used three clean member performance photos from the EPK instead.",
   "website": "https://dockholiday.org/",
-  "youtubeUrl": "https://www.youtube.com/channel/UCk9rfcwDnZg-C9GBCP3LAhg"
+  "youtubeUrl": "https://www.youtube.com/channel/UCk9rfcwDnZg-C9GBCP3LAhg",
+  "xUrl": "https://x.com/DOCKHoliday5",
+  "bookingUrl": "https://dockholiday.org/hire-dock-holiday",
+  "email": "dockholidayband@gmail.com",
+  "phone": "(631) 521-9877",
+  "town": "Northport",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/dock-holiday-1.webp",
+      "alt": "Dock Holiday saxophone player soloing on stage under warm lights",
+      "credit": "Photo: Dock Holiday (website)",
+      "creditUrl": "https://dockholiday.org/dock-holiday-electronic-press-kit-epk",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/595847/e039bfba76fd5c7080a2361b4639b195d95a2038/original/dock-holiday-038-3.jpg",
+      "focus": "55% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/dock-holiday-2.webp",
+      "alt": "Dock Holiday bass player in a black shirt playing in front of the drum kit",
+      "credit": "Photo: Dock Holiday (website)",
+      "creditUrl": "https://dockholiday.org/dock-holiday-electronic-press-kit-epk",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/595847/d55a31b445d0ec4ad5fe60c65ce37cb77339e1e3/original/dock-holiday-008-3.jpg",
+      "focus": "45% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/dock-holiday-3.webp",
+      "alt": "Dock Holiday guitarist in a leopard-print shirt and sunglasses playing a red guitar on a sunny waterfront deck",
+      "credit": "Photo: Dock Holiday (website)",
+      "creditUrl": "https://dockholiday.org/dock-holiday-electronic-press-kit-epk",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/595847/a4add5e1c31d104b09cb75455a447a1b13c14b3f/original/345048115-264565976075462-2844111503439716466-n.jpg",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://dockholiday.org/",
+      "note": "Band site describes a six-piece funk, country, pop, rock and soul cover band from Northport, Long Island; lists shows at Comsewogue Library and Daisy's Nashville Lounge and gives a phone for inquiries."
+    },
+    {
+      "url": "https://dockholiday.org/hire-dock-holiday",
+      "note": "Hire page has a booking form and says to email the band's booking address."
+    },
+    {
+      "url": "https://dockholiday.org/dock-holiday-electronic-press-kit-epk",
+      "note": "Electronic press kit with promo photos of band members performing."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: dockholiday.org."
 }

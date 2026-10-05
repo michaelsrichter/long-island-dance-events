@@ -1,5 +1,27 @@
 {
   "name": "BIG Hearted BOY",
   "type": "band",
-  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Medium confidence: the venues give no links, so the Bandcamp page (location \"New York\") was matched by the unusual name plus a 2026 Long Island show at Amityville Music Hall. No official website, Facebook or Instagram found. The YouTube channel found is an auto-generated \"Topic\" channel, so not recorded. No logo or band photos found (Bandcamp only has album art). Our listing capitalizes the name as \"BIG Hearted BOY\"; Bandcamp and AMH write \"Big Hearted Boy\".",
+  "bandcampUrl": "https://bigheartedboy.bandcamp.com/",
+  "genres": [
+    "indie rock",
+    "pop punk",
+    "acoustic"
+  ],
+  "description": "A New York indie and pop-punk project with short, catchy acoustic-leaning rock songs. It has played Long Island rooms such as Amityville Music Hall and Bartini in Babylon.",
+  "evidence": [
+    {
+      "url": "https://www.bartinibabylon.com/event-calendar",
+      "note": "Bartini Bar & Lounge in Babylon lists \"BIG HEARTED BOY @ 8pm\" on Friday, December 4 (no links given)."
+    },
+    {
+      "url": "https://amh.live/events/page/6/",
+      "note": "Amityville Music Hall listed Big Hearted Boy on an all-ages bill with local bands on Sunday, August 16, 2026."
+    },
+    {
+      "url": "https://bigheartedboy.bandcamp.com/album/feel-everything",
+      "note": "Bandcamp page for Big Hearted Boy, location New York, with a 9-song album released June 2026 tagged acoustic, indie rock and pop punk."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: bartinibabylon.com, amh.live, bigheartedboy.bandcamp.com."
 }

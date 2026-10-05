@@ -33,16 +33,77 @@
   },
   "description": "A restored 1920s theater in Huntington village that is now a 1,500-capacity concert hall for touring bands, tribute acts and comedy, with balcony seats and a large main floor.",
   "facebookUrl": "https://www.facebook.com/theparamountny/",
-  "factsSource": "Checked October 3, 2026. Source: paramountny.com.",
+  "factsSource": "Checked October 4, 2026. Sources: paramountny.com, youtube.com, donyc.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Paramount+370+New+York+Ave+Huntington+NY+11743",
   "kind": "concert-hall",
   "phone": "(631) 673-7300",
   "postalCode": "11743",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Both Ira gigs confirmed on the official calendar. The same building has a separate downstairs bar, Spotlight at The Paramount (spotlightny.com), which has its own DJ dance nights; do not confuse the two rooms. Whether each show is standing or seated varies.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Both Ira gigs confirmed on the official calendar. The same building has a separate downstairs bar, Spotlight at The Paramount (spotlightny.com), which has its own DJ dance nights; do not confuse the two rooms. Whether each show is standing or seated varies.\n\nDirectory research 2026-10-04: Full name is now 'The Paramount in Concert with Northwell' (older logos show a TD Bank sponsorship). Current description is broadly right; capacity is about 1,555 (sources say 1,550-1,573), so '1,500-capacity' is close enough but could be updated to 'about 1,500'. No general opening hours apart from the box office; show times vary. Booking is through Live Nation via the hitusup@ email, so bookingUrl left empty. Spotlight at The Paramount and Ella's (next door) are separate rooms on the same site. YouTube channel is not linked from the site but matches by name, address and content.",
   "state": "NY",
   "town": "Huntington",
   "website": "https://www.paramountny.com/",
   "latitude": 40.86962,
   "longitude": -73.425975,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/theparamountny/",
+  "youtubeUrl": "https://www.youtube.com/@Paramountny370",
+  "tiktokUrl": "https://www.tiktok.com/@theparamountny",
+  "xUrl": "https://x.com/TheParamountNY",
+  "email": "hitusup@paramountny.com",
+  "hours": "Box office Tue-Sun 12 PM-6 PM (until 9 PM on show days); show times vary",
+  "logo": {
+    "image": "../../assets/entities/venues/paramount-huntington-logo.webp",
+    "alt": "The Paramount logo: the words The Paramount in large distressed white letters, with 'in concert with Northwell' underneath",
+    "credit": "Logo: The Paramount",
+    "creditUrl": "https://www.paramountny.com/",
+    "imageSource": "https://static.wixstatic.com/media/7e9579_9255d9ef646e4f1194c8a36f7e4d61ea~mv2.png/v1/fit/w_1200,h_1200,q_85/x.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/paramount-huntington-1.webp",
+      "alt": "The orange brick front of The Paramount on New York Avenue, with its marquee, a large video screen above the entrance and outdoor tables",
+      "credit": "Photo: The Paramount (website)",
+      "creditUrl": "https://www.paramountny.com/",
+      "imageSource": "https://static.wixstatic.com/media/7e9579_6127b9ee02fc417ab1843cdfd119df0b~mv2.jpg/v1/fit/w_1200,h_1200,q_85/x.jpg",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/paramount-huntington-2.webp",
+      "alt": "Wide view of The Paramount's empty main floor, a large open standing area surrounded by bars, railings and balcony seating",
+      "credit": "Photo: The Paramount (website)",
+      "creditUrl": "https://www.paramountny.com/",
+      "imageSource": "https://static.wixstatic.com/media/7e9579_9220205a005f45f89770a72578be25af~mv2.jpg/v1/fit/w_1200,h_1200,q_85/x.jpg",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/venues/paramount-huntington-3.webp",
+      "alt": "A packed main floor watching a Billy Joel tribute band on The Paramount's stage under bright stage lights",
+      "credit": "Photo: The Paramount (website)",
+      "creditUrl": "https://www.paramountny.com/",
+      "imageSource": "https://static.wixstatic.com/media/7e9579_e3c5b09f282740f2a93ac19ed20bf7b1~mv2.jpg/v1/fit/w_1200,h_1200,q_85/x.jpg",
+      "focus": "40% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.paramountny.com/",
+      "note": "Venue site gives 370 New York Avenue, Huntington NY 11743, (631) 673-7300 and hitusup@paramountny.com, and links Instagram, Facebook, X and TikTok."
+    },
+    {
+      "url": "https://www.paramountny.com/info",
+      "note": "Info page: box office Tue-Sun 12-6 PM with extended hours to 9 PM on show days; booking requests go to hitusup@paramountny.com (forwarded to Live Nation); elevator to the main floor; Spotlight and Ella's are next door."
+    },
+    {
+      "url": "https://www.youtube.com/@Paramountny370",
+      "note": "YouTube channel 'The Paramount in Concert with Northwell' describes the Huntington venue opened in 2011 and booked by Live Nation."
+    },
+    {
+      "url": "https://donyc.com/venues/the-paramount",
+      "note": "Listing says the venue opened September 30, 2011 with about 1,555 capacity and hosts concerts, comedy and boxing."
+    },
+    {
+      "url": "https://www.google.com/maps/search/?api=1&query=The+Paramount+370+New+York+Ave+Huntington+NY+11743",
+      "note": "Shows the county."
+    }
+  ]
 }

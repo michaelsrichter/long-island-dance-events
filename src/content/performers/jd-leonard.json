@@ -1,5 +1,73 @@
 {
   "name": "JD Leonard",
   "type": "band",
-  "reviewNotes": "Added automatically from Live On The Porch (Smithtown) - show calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Live On The Porch (Smithtown) - show calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Booking email and phone are for his booking agent (Miracle Concerts, Connecticut area code), published on his own contact page for bookings. Spotify artist ID taken from the album his site links to (artist name shown as 'J.D. Leonard'). Skipped two good photos from his site because they carry a 'Marianne P. Stone Photography' watermark, and skipped album-cover art with text. Did not use the header photo on his Photos/About pages (a man with an archtop guitar) because I could not confirm it shows JD. Site also links SoundCloud (soundcloud.com/jdleonardmusic).",
+  "website": "https://jdleonardmusic.com/",
+  "facebookUrl": "https://www.facebook.com/jdleonardmusicgroup/",
+  "instagramUrl": "https://www.instagram.com/jdleonardmusic/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCTeTfoDhOYS713YQKR7P7YA",
+  "xUrl": "https://x.com/jdleonard81",
+  "spotifyUrl": "https://open.spotify.com/artist/7c5bFs0U5BjJfHUG1iks16",
+  "bookingUrl": "https://jdleonardmusic.com/contact",
+  "email": "miracleconcerts@gmail.com",
+  "phone": "(203) 208-3166",
+  "genres": [
+    "country rock",
+    "country",
+    "singer-songwriter",
+    "Garth Brooks tribute"
+  ],
+  "description": "Long Island-based country-rock singer, songwriter and guitarist who plays his own songs plus country covers, and also fronts a Garth Brooks tribute and a 'Decades of Country' show.",
+  "logo": {
+    "image": "../../assets/entities/performers/jd-leonard-logo.webp",
+    "alt": "JD Leonard logo: brushed-silver JD initials inside a circle above the name JD LEONARD",
+    "credit": "Logo: JD Leonard",
+    "creditUrl": "https://jdleonardmusic.com/",
+    "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/295818/2e7afaa4ed57538be4516b5e79fe2aadf8c700f4/original/jdl-circle-final.png/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/jd-leonard-1.webp",
+      "alt": "Black-and-white photo of JD Leonard in a wide-brim hat, smiling as he strums an acoustic guitar on stage",
+      "credit": "Photo: JD Leonard (website)",
+      "creditUrl": "https://jdleonardmusic.com/about",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/295818/6f73f0cf897f9b6b2eecae5e3db7ce150df55556/original/att-8wa-lqlk3acvfmwsysh31em4irnzrdq6rwbfcdbe6ga.jpeg/!!/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "60% 30%"
+    },
+    {
+      "image": "../../assets/entities/performers/jd-leonard-2.webp",
+      "alt": "JD Leonard laughing on a brick-lined street at night, holding an acoustic guitar with a small American flag on the headstock",
+      "credit": "Photo: JD Leonard (website)",
+      "creditUrl": "https://jdleonardmusic.com/press",
+      "imageSource": "https://images.zoogletools.com/s:bzglfiles/u/295818/780b6a12044f7d49d2a4e6bcfdebf257e7942f21/original/img-4616-facetune-17-05-2018-06-58-54.jpg/!!/b%3AW1sicmVzaXplIiwxODAwXSxbIm1heCJdLFsid2UiXV0%3D/meta%3AeyJzcmNCdWNrZXQiOiJiemdsZmlsZXMifQ%3D%3D.jpg",
+      "focus": "50% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://jdleonardmusic.com/",
+      "note": "Own site describes him as a country/rock songwriter artist from Long Island, NY; links Facebook, Instagram, X, YouTube and Spotify; shows include Live On The Porch (Smithtown) and the Boulton Center (Bay Shore)."
+    },
+    {
+      "url": "https://jdleonardmusic.com/contact",
+      "note": "Contact page: booking inquiries go to his agent, Miracle Concerts, with a phone number and Gmail address."
+    },
+    {
+      "url": "https://liveontheporch.com/events/",
+      "note": "Live On The Porch (Smithtown) lists JD Leonard, Oct 9, 2026, 'Original / Cover Show', and links to jdleonardmusic.com."
+    },
+    {
+      "url": "https://open.spotify.com/artist/7c5bFs0U5BjJfHUG1iks16",
+      "note": "Spotify artist 'J.D. Leonard', reached from the album link on his website."
+    },
+    {
+      "url": "https://open.spotify.com/album/5SxXqoiOz0NGjV46X0ZIg7",
+      "note": "Shows the Spotify page."
+    },
+    {
+      "url": "https://jdleonardmusic.com/about",
+      "note": "Shows the facts in the description."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: jdleonardmusic.com, liveontheporch.com, open.spotify.com."
 }

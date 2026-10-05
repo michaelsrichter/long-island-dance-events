@@ -1,0 +1,55 @@
+---
+/**
+ * Search and filters for a directory list (venues, bands and DJs, teachers, organizers).
+ * Cards carry data-search, data-upcoming and data-f-<name> attributes (components/PersonCard.astro);
+ * sections that group cards carry data-dir-group so empty groups hide. Needs JavaScript; without it
+ * the full list shows.
+ */
+interface Props {
+  /** Plural and singular names for the count, e.g. "venues" / "venue". */
+  noun: string;
+  one: string;
+  total: number;
+  searchPlaceholder?: string;
+  /** Town drop-down (venues). */
+  towns?: string[] | undefined;
+  /** Kind chips, e.g. Bands / DJs. The first chip ("All") is added automatically. */
+  kinds?: { value: string; label: string }[] | undefined;
+  kindLegend?: string;
+}
+const { noun, one, total, searchPlaceholder = 'Name or town', towns, kinds, kindLegend = 'Show' } = Astro.props;
+---
+<form class="filters dir-filters js-only" data-dir-filters data-noun={noun} data-one={one} aria-label={`Find ${noun}`}>
+  <div class="filters__row">
+    <div class="field">
+      <label for="d-q">Search</label>
+      <input id="d-q" name="q" type="search" placeholder={searchPlaceholder} autocomplete="off" enterkeyhint="search" />
+    </div>
+    {towns && towns.length > 1 && (
+      <div class="field">
+        <label for="d-town">Town</label>
+        <select id="d-town" name="town">
+          <option value="">Any town</option>
+          {towns.map((t) => <option value={t}>{t}</option>)}
+        </select>
+      </div>
+    )}
+  </div>
+  {kinds && kinds.length > 1 && (
+    <fieldset>
+      <legend>{kindLegend}</legend>
+      <div class="quick-views">
+        <label class="chip"><input type="radio" name="kind" value="" checked /><span>All</span></label>
+        {kinds.map((k) => <label class="chip"><input type="radio" name="kind" value={k.value} /><span>{k.label}</span></label>)}
+      </div>
+    </fieldset>
+  )}
+  <div class="dir-filters__bottom">
+    <label class="dir-toggle"><input type="checkbox" name="upcoming" value="1" /><span>Only ones with events coming up</span></label>
+    <p class="result-count" data-dir-count role="status" aria-live="polite">{total} {total === 1 ? one : noun}</p>
+  </div>
+</form>
+<p class="notice-line js-only" data-dir-empty hidden>No {noun} match these filters. <button type="button" class="link-btn" data-dir-reset>Show all {noun}</button></p>
+<script>
+  import '../scripts/directory-filter';
+</script>

@@ -2,10 +2,41 @@
   "name": "Sannino Vineyard",
   "address": "15975 County Road 48",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from Out on the Town - Long Island event calendar. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from Out on the Town - Long Island event calendar. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Our work network blocks winery websites, so we used the winery's official online store (sanninovineyard.orderport.net), which carries the same footer details, plus Google Maps. Instagram: the store links instagram.com/sanninovineyard, while search results name @sannino_vineyard (the TikTok handle); we recorded the one the winery links, please double-check. Search summaries also mention Friday evening music (8-10 PM, $10 cover) that we could not confirm. Hours note: service ends 30 minutes before closing. No venue photos: the store only has product and tasting close-ups, and the main site is blocked for us. Additional emails on the store: events@ and innkeeper@sanninovineyard.com.",
   "state": "NY",
   "town": "Cutchogue",
   "latitude": 41.017234,
   "longitude": -72.508608,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.sanninovineyard.com/",
+  "facebookUrl": "https://www.facebook.com/sanninovineyard/",
+  "instagramUrl": "https://www.instagram.com/sanninovineyard/",
+  "tiktokUrl": "https://www.tiktok.com/@sannino_vineyard",
+  "email": "info@sanninovineyard.com",
+  "phone": "(631) 734-8282",
+  "hours": "Mon-Thu 12-6 PM; Fri 12-7 PM; Sat 11 AM-7 PM; Sun 11 AM-6 PM",
+  "postalCode": "11935",
+  "description": "A family-run winery and tasting house on County Road 48 in Cutchogue on the North Fork, with a small bed and breakfast. It has live music on Sunday afternoons and holds jazz nights.",
+  "logo": {
+    "image": "../../assets/entities/venues/sannino-vineyard-cutchogue-logo.webp",
+    "alt": "Sannino Vineyard logo: the word SANNINO in thin black capital letters over VINEYARD",
+    "credit": "Logo: Sannino Vineyard",
+    "creditUrl": "https://sanninovineyard.orderport.net/wines/Current-Releases",
+    "imageSource": "https://orderport-webstore.b-cdn.net/SanninoVineyards/Images/logo.webp"
+  },
+  "evidence": [
+    {
+      "url": "https://sanninovineyard.orderport.net/wines/Current-Releases",
+      "note": "The winery's official online store: 631-734-8282, 15975 County Road 48, Cutchogue NY 11935, info@ email, daily tasting hours, links to Instagram, Facebook and TikTok, and menu items for 'Jazz Nights at Sannino Vineyard' and a bed and…"
+    },
+    {
+      "url": "https://www.google.com/maps?cid=10176727551722298753",
+      "note": "Google Maps listing 'Sannino Vineyard' at 15975 County Rd 48, Cutchogue, NY 11935, phone (631) 734-8282, website sanninovineyard.com."
+    },
+    {
+      "url": "https://northforker.com/events/join-us-for-live-music-sundays-at-the-sannino-vineyard-tasting-house-2/",
+      "note": "Event listing title (from search): 'Live Music Sundays at the Sannino Vineyard Tasting House'."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: sanninovineyard.orderport.net, northforker.com."
 }

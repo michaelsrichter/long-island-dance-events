@@ -62,6 +62,158 @@ export function placeJsonLd(e: Pick<ResolvedEvent, 'location' | 'venue'>, site: 
   });
 }
 
+/** Directory pages: logo, photos and links that JSON-LD can describe. Images are absolute URLs. */
+export interface EntityLdExtras {
+  logo?: string | undefined;
+  images?: string[];
+  links?: { url: string }[];
+}
+
+const postalAddress = (a: { street?: string | undefined; town?: string | undefined; state?: string | undefined; postalCode?: string | undefined }) =>
+  a.street || a.town ? clean({ '@type': 'PostalAddress', streetAddress: a.street, addressLocality: a.town, addressRegion: a.state ?? 'NY', postalCode: a.postalCode, addressCountry: 'US' }) : undefined;
+const sameAsOf = (links: { url: string }[] | undefined) => (links?.length ? [...new Set(links.map((l) => l.url))] : undefined);
+
+/** schema.org type for a kind of venue (falls back to Place). */
+const VENUE_LD_TYPES: Record<string, string> = {
+  bar: 'BarOrPub',
+  restaurant: 'Restaurant',
+  nightclub: 'NightClub',
+  brewery: 'Brewery',
+  winery: 'Winery',
+  distillery: 'Distillery',
+  theater: 'PerformingArtsTheater',
+  'concert-hall': 'MusicVenue',
+  park: 'Park',
+  beach: 'Beach',
+  library: 'Library',
+  'lodge-hall': 'EventVenue',
+  'dance-studio': 'LocalBusiness',
+  school: 'School',
+  'marina-club': 'LocalBusiness',
+};
+const ORG_LIKE = new Set(['BarOrPub', 'Restaurant', 'NightClub', 'Brewery', 'Winery', 'Distillery', 'Library', 'LocalBusiness', 'School']);
+
+export function venueJsonLd(
+  id: string,
+  v: {
+    name: string;
+    address: string;
+    town: string;
+    state?: string | undefined;
+    postalCode?: string | undefined;
+    phone?: string | undefined;
+    email?: string | undefined;
+    hours?: string | undefined;
+    website?: string | undefined;
+    kind?: string | undefined;
+    description?: string | undefined;
+    latitude?: number | undefined;
+    longitude?: number | undefined;
+    googleMapsUrl?: string | undefined;
+  },
+  site: URL | string,
+  x: EntityLdExtras = {},
+): Json {
+  const type = (v.kind && VENUE_LD_TYPES[v.kind]) || 'Place';
+  return clean({
+    '@context': 'https://schema.org',
+    '@type': type,
+    '@id': abs(`/venues/${id}/#place`, site),
+    name: v.name,
+    description: v.description,
+    url: abs(`/venues/${id}/`, site),
+    telephone: v.phone,
+    // Only businesses and schools (Organization types) can have an email in schema.org.
+    email: ORG_LIKE.has(type) ? v.email : undefined,
+    address: postalAddress({ street: v.address, town: v.town, state: v.state, postalCode: v.postalCode }),
+    geo: v.latitude !== undefined && v.longitude !== undefined ? { '@type': 'GeoCoordinates', latitude: v.latitude, longitude: v.longitude } : undefined,
+    hasMap: v.googleMapsUrl,
+    logo: x.logo,
+    image: x.images?.length ? x.images : x.logo ? [x.logo] : undefined,
+    sameAs: sameAsOf(x.links),
+  });
+}
+
+export function performerJsonLd(
+  id: string,
+  p: { name: string; type: string; genres?: string[]; description?: string | undefined; email?: string | undefined; phone?: string | undefined; town?: string | undefined },
+  site: URL | string,
+  x: EntityLdExtras = {},
+): Json {
+  const group = p.type === 'band';
+  return clean({
+    '@context': 'https://schema.org',
+    '@type': group ? 'MusicGroup' : 'Person',
+    '@id': abs(`/performers/${id}/#${group ? 'group' : 'person'}`, site),
+    name: p.name,
+    url: abs(`/performers/${id}/`, site),
+    description: p.description,
+    genre: group ? p.genres : undefined,
+    jobTitle: group ? undefined : p.type === 'dj' ? 'DJ' : 'Musician',
+    telephone: p.phone,
+    email: p.email,
+    homeLocation: !group && p.town ? { '@type': 'Place', name: `${p.town}, NY` } : undefined,
+    foundingLocation: group && p.town ? { '@type': 'Place', name: `${p.town}, NY` } : undefined,
+    logo: group ? x.logo : undefined,
+    image: x.images?.length ? x.images : x.logo ? [x.logo] : undefined,
+    sameAs: sameAsOf(x.links),
+  });
+}
+
+export function instructorJsonLd(
+  id: string,
+  p: { name: string; description?: string | undefined; email?: string | undefined; phone?: string | undefined },
+  site: URL | string,
+  x: EntityLdExtras & { styles?: string[]; organizations?: { name: string; url: string }[] } = {},
+): Json {
+  return clean({
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': abs(`/instructors/${id}/#person`, site),
+    name: p.name,
+    url: abs(`/instructors/${id}/`, site),
+    jobTitle: 'Dance teacher',
+    description: p.description,
+    knowsAbout: x.styles,
+    worksFor: x.organizations?.map((o) => ({ '@type': 'Organization', name: o.name, url: o.url })),
+    telephone: p.phone,
+    email: p.email,
+    image: x.images,
+    sameAs: sameAsOf(x.links),
+  });
+}
+
+export function organizerJsonLd(
+  id: string,
+  o: {
+    name: string;
+    website?: string | undefined;
+    description?: string | undefined;
+    email?: string | undefined;
+    phone?: string | undefined;
+    address?: string | undefined;
+    town?: string | undefined;
+    postalCode?: string | undefined;
+  },
+  site: URL | string,
+  x: EntityLdExtras = {},
+): Json {
+  return clean({
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': abs(`/organizers/${id}/#organization`, site),
+    name: o.name,
+    url: o.website ?? abs(`/organizers/${id}/`, site),
+    description: o.description,
+    telephone: o.phone,
+    email: o.email,
+    address: o.address ? postalAddress({ street: o.address, town: o.town, postalCode: o.postalCode }) : undefined,
+    logo: x.logo,
+    image: x.images?.length ? x.images : undefined,
+    sameAs: sameAsOf(x.links),
+  });
+}
+
 /** Event JSON-LD with only the facts we have. Every listing names its organizer and links to its source. */
 export function eventJsonLd(e: ResolvedEvent, _s: Settings, site: URL | string, imageUrl?: string): Json {
   const url = abs(e.url, site);

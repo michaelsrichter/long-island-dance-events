@@ -1,25 +1,67 @@
 ---
+/**
+ * One card in a directory list (venues, bands and DJs, teachers, organizers, dance styles).
+ * The picture sits on top and the name gets the full card width, so names never break mid-word.
+ * Without a photo or logo, a band with the initials keeps every card the same shape.
+ * The whole card links to the page (stretched link on the name); outside links and the Like button
+ * sit above that link.
+ */
 import Icon from './Icon.astro';
 import PersonLinks from './PersonLinks.astro';
+import Reactions from './Reactions.astro';
+import EntityImage from './EntityImage.astro';
 import type { ExternalLink } from '../lib/links';
+import type { PageType } from '../lib/community';
+import { initialsOf, upcomingLabel, type EntityImageData } from '../lib/directory';
 interface Props {
   name: string;
   href: string;
-  /** Short label above the name, e.g. "DJ" or "Teacher". */
+  /** Short label above the name, e.g. "DJ", "Teacher" or the town. */
   kicker: string;
   icon?: 'people' | 'music' | 'pin' | 'star';
   links?: ExternalLink[];
   upcomingCount?: number;
   note?: string | undefined;
+  /** Show a Like button with its count (signed-in visitors can like). */
+  like?: { type: PageType; id: string } | undefined;
+  photo?: EntityImageData | undefined;
+  logo?: EntityImageData | undefined;
+  /** Words the directory search matches (name, other names, town...). */
+  search?: string | undefined;
+  /** Values the directory filters read, e.g. { town: 'Patchogue', kind: 'dj' }. */
+  filters?: Record<string, string | undefined> | undefined;
+  /** Load the picture right away (first cards on the page). */
+  eager?: boolean;
 }
-const { name, href, kicker, icon = 'people', links = [], upcomingCount = 0, note } = Astro.props;
+const { name, href, kicker, icon = 'people', links = [], upcomingCount = 0, note, like, photo, logo, search, filters = {}, eager = false } = Astro.props;
+const data = Object.fromEntries(Object.entries(filters).filter(([, v]) => v !== undefined).map(([k, v]) => [`data-f-${k}`, v]));
+const sizes = '(min-width: 64rem) 22rem, (min-width: 38rem) 46vw, calc(100vw - 2rem)';
+const loading = eager ? 'eager' : 'lazy';
 ---
-<li class="card person-card">
-  <span class="avatar avatar--placeholder" aria-hidden="true"><Icon name={icon} /></span>
-  <div>
-    <p class="card__kicker">{kicker}{upcomingCount > 0 ? ` · ${upcomingCount} coming up` : ''}</p>
-    <h3><a href={href}>{name}</a></h3>
-    {note && <p class="muted">{note}</p>}
-    <PersonLinks links={links} name={name} max={3} location="directory" />
+<li class="card person-card" data-dir-item data-search={search ?? name.toLowerCase()} data-upcoming={upcomingCount > 0 ? '1' : '0'} {...data}>
+  {photo ? (
+    <div class="person-card__media">
+      <EntityImage src={photo.image} alt="" focus={photo.focus} sizes={sizes} loading={loading} />
+      {logo && <span class="person-card__badge"><EntityImage kind="logo" src={logo.image} alt="" sizes="3rem" loading={loading} /></span>}
+    </div>
+  ) : logo ? (
+    <div class="person-card__media person-card__media--logo">
+      <EntityImage kind="logo" src={logo.image} alt="" sizes="10rem" loading={loading} />
+    </div>
+  ) : (
+    <div class="person-card__media person-card__media--blank" aria-hidden="true">
+      <span class="person-card__initials">{initialsOf(name)}</span>
+      <Icon name={icon} class="person-card__icon" />
+    </div>
+  )}
+  <div class="person-card__body">
+    <p class="card__kicker person-card__kicker">{kicker}</p>
+    <h3 class="person-card__name"><a href={href}>{name}</a></h3>
+    {note && <p class="person-card__note">{note}</p>}
+    <PersonLinks links={links} name={name} max={5} location="directory" variant="icons" />
+    <div class="person-card__foot">
+      <span class:list={['person-card__count', upcomingCount === 0 && 'person-card__count--none']}>{upcomingLabel(upcomingCount)}</span>
+      {like && <Reactions type={like.type} id={like.id} name={name} />}
+    </div>
   </div>
 </li>

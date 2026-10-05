@@ -34,16 +34,64 @@
   },
   "description": "The bar and lounge inside the Port Jeff Bowl bowling center. It has live cover bands most Saturdays and a weekly line dancing night.",
   "facebookUrl": "https://www.facebook.com/luckystrikebarlounge/",
-  "factsSource": "Checked October 3, 2026. Source: portjeffbowl.com.",
+  "factsSource": "Checked October 4, 2026. Source: portjeffbowl.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Lucky+Strike+Bar+%26+Lounge+at+Port+Jeff+Bowl%2C+31+Chereb+Ln%2C+Port+Jefferson+Station%2C+NY+11776",
   "kind": "bar",
   "phone": "(631) 473-3300",
   "postalCode": "11776",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Lucky Strike bowling chain location in Sayville. Size of the dance area not confirmed. Monday line dancing is run by an outside teacher ('Dancing in Line with Helen').",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Lucky Strike bowling chain location in Sayville. Size of the dance area not confirmed. Monday line dancing is run by an outside teacher ('Dancing in Line with Helen').\n\nDirectory research 2026-10-04: The site's schedule confirms bands on most Saturdays (plus a few Fridays and the night before Thanksgiving) and line dancing every Monday, so the current description still fits; some shows have a $10 cover. Hours listed are for the whole Port Jeff Bowl center; the lounge's own hours are not published separately. Logo is the Port Jeff Bowl logo (the lounge has no separate logo file on the site, only its sign). Email and phone are Port Jeff Bowl's. Port Jeff Bowl also has its own pages (facebook.com/portjeffbowl, instagram.com/portjeffbowl). Google Maps calls it 'Lucky Strike Bar & Grill @ Port Jeff Bowl'. Not the Lucky Strike bowling chain. Photo files were served as WebP by the site's image CDN.",
   "state": "NY",
   "town": "Port Jefferson Station",
   "website": "https://www.portjeffbowl.com/lucky-strike-lounge",
   "latitude": 40.930781,
   "longitude": -73.054246,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/luckystrikebarlounge/",
+  "youtubeUrl": "https://www.youtube.com/channel/UCZ6bwPjKcbUqQ8VeIMVKZ3Q",
+  "tiktokUrl": "https://www.tiktok.com/@luckystrikebarlounge",
+  "email": "mail@portjeffbowl.com",
+  "hours": "Port Jeff Bowl hours: Mon-Tue 12-11 PM; Wed 11 AM-11 PM; Thu 10 AM-11 PM; Fri 12 PM-12 AM; Sat 10 AM-12 AM; Sun 9 AM-10:30 PM",
+  "logo": {
+    "image": "../../assets/entities/venues/lucky-strike-bar-lounge-port-jefferson-station-logo.webp",
+    "alt": "Port Jeff Bowl logo: red script 'Port Jeff' over the word BOWL in navy circles on a teal diamond, with 'circa 1960'",
+    "credit": "Logo: Port Jeff Bowl",
+    "creditUrl": "https://www.portjeffbowl.com/lucky-strike-lounge",
+    "imageSource": "https://irp.cdn-website.com/0208c6a7/dms3rep/multi/PJ-Bowl-Head-Logo.svg"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/lucky-strike-bar-lounge-port-jefferson-station-1.webp",
+      "alt": "The Lucky Strike Bar & Lounge entrance on a red, white and blue striped wall with two round Lucky Strike signs",
+      "credit": "Photo: Port Jeff Bowl (website)",
+      "creditUrl": "https://www.portjeffbowl.com/lucky-strike-lounge",
+      "imageSource": "https://irp.cdn-website.com/0208c6a7/dms3rep/multi/opt/20220909_105334-08277dbc-2880w.jpg",
+      "focus": "40% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/lucky-strike-bar-lounge-port-jefferson-station-2.webp",
+      "alt": "A rock band with a singer, guitarist, bassist and drummer playing on the lounge's wood floor under colored lights",
+      "credit": "Photo: Port Jeff Bowl (website)",
+      "creditUrl": "https://www.portjeffbowl.com/lucky-strike-lounge",
+      "imageSource": "https://irp.cdn-website.com/0208c6a7/dms3rep/multi/opt/20230929_200942-1920w.jpg",
+      "focus": "55% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/lucky-strike-bar-lounge-port-jefferson-station-3.webp",
+      "alt": "The lounge with a pool table, wood-panel walls, high-top tables and a bar along the side",
+      "credit": "Photo: Port Jeff Bowl (website)",
+      "creditUrl": "https://www.portjeffbowl.com/lucky-strike-lounge",
+      "imageSource": "https://irp.cdn-website.com/0208c6a7/dms3rep/multi/opt/20231006_173654-3b87c994-1920w.jpg",
+      "focus": "50% 55%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.portjeffbowl.com/lucky-strike-lounge",
+      "note": "Port Jeff Bowl's Lucky Strike page: live music schedule from 7:30 PM (bands on most Saturdays and a few Fridays through Dec 12, 2026), 'Line dancing every Monday', address 31 Chereb Lane, Port Jeff Station NY 11776, phone, email and the…"
+    },
+    {
+      "url": "https://www.google.com/maps?cid=14298608910328169499",
+      "note": "Google Maps lists 'Lucky Strike Bar & Grill @ Port Jeff Bowl' (bar) at 31 Chereb Ln, Port Jefferson Station, NY 11776, phone (631) 473-3300."
+    }
+  ]
 }

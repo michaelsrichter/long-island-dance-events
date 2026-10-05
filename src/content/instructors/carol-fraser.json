@@ -6,5 +6,45 @@
   "affiliatedOrganizerIds": [
     "swing-dance-long-island"
   ],
-  "reviewNotes": "Her former Long Island Swing Syndicate site (liswingsyndicate.com) is now a parked domain; no current website recorded."
+  "reviewNotes": "Her former Long Island Swing Syndicate site (liswingsyndicate.com) is now a parked domain; no current website recorded.\n\nDirectory research 2026-10-04: New finding: since LISS closed (end of 2025), Carol runs Triple Step Swing (triplestepswing.com). The site itself does not print her name; the link comes from the group's Meetup page (owned by Triple Step Swing) quoting LISS's handover note. Website, socials and email are Triple Step Swing's (her own branded school), so a logo is included. No photo used: the site's photos are unnamed (one has a photographer watermark, one looks like stock), so I could not confirm any shows Carol. Lindy Hop could be added to her styles (Triple Step Swing focuses on Lindy Hop); the owner may also want an organizer entry for Triple Step Swing. An old allbiz listing gives a Syosset phone for LISS (closed) - not recorded.",
+  "website": "https://triplestepswing.com/",
+  "facebookUrl": "https://www.facebook.com/people/Triple-Step-Swing/61587427315908/",
+  "instagramUrl": "https://www.instagram.com/triplestepswing/",
+  "bookingUrl": "https://triplestepswing.com/contact-us",
+  "email": "hello@triplestepswing.com",
+  "description": "Carol Fraser is a longtime swing dance teacher who runs Triple Step Swing, a Long Island group offering Lindy Hop and swing classes, private lessons and social dances; recent class series met in Syosset. She also usually teaches the 4th-Tuesday swing lesson at Swing Dance Long Island's dances at the Huntington Moose Lodge in Greenlawn.",
+  "logo": {
+    "image": "../../assets/entities/instructors/carol-fraser-logo.webp",
+    "alt": "Triple Step Swing logo: the letters TSS in tilted pink block letters with an orange outline",
+    "credit": "Logo: Triple Step Swing",
+    "creditUrl": "https://triplestepswing.com/",
+    "imageSource": "https://triplestepswing.com/_assets/media/48c78b78fe22c63aff6fc2a1e977efc1.png"
+  },
+  "evidence": [
+    {
+      "url": "https://www.meetup.com/triplestepswing-longisland/",
+      "note": "Meetup group (Hicksville area) carries the Long Island Swing Syndicate's closing note: LISS closed at the end of 2025 and Carol Fraser and her new organization Triple Step Swing took over; it points to triplestepswing.com."
+    },
+    {
+      "url": "https://triplestepswing.com/contact-us",
+      "note": "Triple Step Swing's contact page lists Long Island, NY, hello@triplestepswing.com, and links to its Instagram, Facebook and Meetup group."
+    },
+    {
+      "url": "https://www.facebook.com/people/Triple-Step-Swing/61587427315908/",
+      "note": "Facebook page \"Triple Step Swing\" (dance studio/school) with the same email and website; it posted a 3-week summer swing lesson series in Syosset, NY."
+    },
+    {
+      "url": "http://www.sdli.org/index.php/sdli/events",
+      "note": "Swing Dance Long Island lists an Oct 27, 2026 swing lesson with Carol Fraser plus Halloween costume dance at its Tuesday dances."
+    },
+    {
+      "url": "https://www.huntingtonarts.org/event/dj-dancing-with-swing-dance-long-island-2/2026-09-22/",
+      "note": "Huntington Arts Council listing for SDLI at the Huntington Moose Lodge says Carol Fraser usually teaches a more advanced swing lesson on the 4th Tuesday."
+    },
+    {
+      "url": "https://www.dancemanhattan.com/instructors/carol_fraser",
+      "note": "Older bio (Dance Manhattan, closed 2014): swing and balboa teacher and competition champion who later led the Long Island Swing Syndicate in Syosset."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: meetup.com, triplestepswing.com, facebook.com, sdli.org."
 }

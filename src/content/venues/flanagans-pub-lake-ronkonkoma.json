@@ -31,18 +31,67 @@
     "notes": "The main bar room is big enough that people dance when a party band plays. The Oct 4 Oktoberfest is outdoors in the back parking lot, with a band starting at 2 PM.",
     "policy": "allowed"
   },
-  "description": "A family-run Irish pub and restaurant on Hawkins Avenue with a big bar room, dining rooms and a back patio. It has live bands on weekend nights.",
+  "description": "A family-run Irish-American pub and restaurant on Hawkins Avenue in Lake Ronkonkoma, with a long bar, a dining room, a private catering room and front and back patios. It has live music on Friday nights.",
   "facebookUrl": "https://www.facebook.com/flanaganspubny/",
-  "factsSource": "Checked October 3, 2026. Source: flanaganspubny.com.",
+  "factsSource": "Checked October 4, 2026. Source: flanaganspubny.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Flanagan%27s+Pub%2C+451+Hawkins+Ave%2C+Lake+Ronkonkoma%2C+NY+11779",
   "kind": "bar",
   "phone": "(631) 588-9843",
   "postalCode": "11779",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'Flanagans Octoberfest' = the Oktoberfest at Flanagan's Pub in Lake Ronkonkoma (Limewired confirms on its own site). Not Lily Flanagan's in Babylon (now Lily's Babylon) or Father Flanagan's in Levittown.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Ira's 'Flanagans Octoberfest' = the Oktoberfest at Flanagan's Pub in Lake Ronkonkoma (Limewired confirms on its own site). Not Lily Flanagan's in Babylon (now Lily's Babylon) or Father Flanagan's in Levittown.\n\nDirectory research 2026-10-04: No public email on the site (only a contact form). The home page says live music on Fridays; our old description said weekend nights, so a corrected description is offered. The Oktoberfest event is not on the venue site right now (it comes from our existing note citing Limewired's site), so it is left out of the description. Not the same as Lily Flanagan's (now Lily's Babylon) or Father Flanagan's.",
   "state": "NY",
   "town": "Lake Ronkonkoma",
   "website": "https://www.flanaganspubny.com/",
   "latitude": 40.825054,
   "longitude": -73.107448,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/flanaganspubny/",
+  "hours": "Mon-Sun 11:30 AM-4 AM",
+  "logo": {
+    "image": "../../assets/entities/venues/flanagans-pub-lake-ronkonkoma-logo.webp",
+    "alt": "Flanagan's Pub logo: green script lettering with a gold Irish harp",
+    "credit": "Logo: Flanagan's Pub",
+    "creditUrl": "https://www.flanaganspubny.com/",
+    "imageSource": "https://images.squarespace-cdn.com/content/v1/5e4ae199a899cd09425dc306/1581969740481-GUFOUHGYWATNO4M7VGG1/edit.png?format=1000w"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/flanagans-pub-lake-ronkonkoma-1.webp",
+      "alt": "The front of Flanagan's Pub: a black sign with gold letters, two American flags, an awning reading Lunch, Dinner, Private Catering Room and flower boxes",
+      "credit": "Photo: Flanagan's Pub (website)",
+      "creditUrl": "https://www.flanaganspubny.com/contactus",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5e4ae199a899cd09425dc306/1585592390284-P8G1JSTU1Q3D1EFX6TRA/DSC06001.jpg?format=1500w",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/venues/flanagans-pub-lake-ronkonkoma-2.webp",
+      "alt": "The long wooden bar at Flanagan's with padded stools, beer taps and TVs above",
+      "credit": "Photo: Flanagan's Pub (website)",
+      "creditUrl": "https://www.flanaganspubny.com/events",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5e4ae199a899cd09425dc306/1585670363159-4X0HJ1C9F9OHT4WVDM5Q/DSC04170.jpg?format=1500w",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/flanagans-pub-lake-ronkonkoma-3.webp",
+      "alt": "Another view of Flanagan's bar with rows of bottles, wood shelves full of signs and a curved bar top",
+      "credit": "Photo: Flanagan's Pub (website)",
+      "creditUrl": "https://www.flanaganspubny.com/gallery",
+      "imageSource": "https://images.squarespace-cdn.com/content/v1/5e4ae199a899cd09425dc306/1585681760119-HD12M6KLSK1YVTNKGIPD/DSC04202.jpg?format=1500w",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.flanaganspubny.com/contactus",
+      "note": "Pub site contact page: 451 Hawkins Ave, Lake Ronkonkoma, NY 11779, (631) 588-9843, open Monday through Sunday 11:30 AM to 4 AM; family owned, in the restaurant business since 1987."
+    },
+    {
+      "url": "https://www.flanaganspubny.com/",
+      "note": "Home page mentions live music on Fridays, a family-friendly dining room and a catering facility; links Facebook (flanaganspubny) and Instagram (flanaganspubny)."
+    },
+    {
+      "url": "https://www.flanaganspubny.com/private-events",
+      "note": "Private events page shows a catering room, back patio and front patio."
+    }
+  ]
 }

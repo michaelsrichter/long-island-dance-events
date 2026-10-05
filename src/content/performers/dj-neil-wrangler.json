@@ -5,5 +5,25 @@
     "Country",
     "Line dance"
   ],
-  "website": "https://dj-neil.com/"
+  "website": "https://dj-neil.com/",
+  "facebookUrl": "https://www.facebook.com/CountryDJNeil/",
+  "instagramUrl": "https://www.instagram.com/djneilwrangler/",
+  "bookingUrl": "https://dj-neil.com/contact",
+  "description": "Long Island country DJ who plays country hits and line dance songs at weekly and monthly line dance nights in Nassau and Suffolk, often with a beginner lesson from instructor Sandy.",
+  "evidence": [
+    {
+      "url": "https://dj-neil.com/",
+      "note": "Official site, 'Long Island's Country DJ', lists his line dance nights (Nutty Country Tuesdays, Port Washington Polish Hall, Lindenhurst Moose Lodge, Station Yards Ronkonkoma) and links Facebook CountryDJNeil and Instagram djneilwrangler."
+    },
+    {
+      "url": "https://dj-neil.com/contact",
+      "note": "Contact page has a booking form ('Looking to book a party')."
+    },
+    {
+      "url": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+      "note": "The Dance Calendar lists DJ Neil Wrangler at Brumidi Lodge (Sons of Italy) in Deer Park."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: dj-neil.com, thedancecalendar.com.",
+  "reviewNotes": "Directory research 2026-10-04: Website, Facebook and Instagram confirmed from his own site; booking is by web form only (no public email/phone). The site has no stand-alone logo file: the steer-skull 'DJ NEIL' logo only appears inside flyers, so no logo recorded. The only usable photo is the site's header banner: the right half is a clear photo of Neil at the DJ booth, but the left half has the logo and the words 'Join the Country Party'; crop toward the right (focus 75%) or drop it if text is not acceptable. Other site images are event flyers (skipped)."
 }

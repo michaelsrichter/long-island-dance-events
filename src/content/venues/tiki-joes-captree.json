@@ -26,14 +26,48 @@
   },
   "description": "A waterfront seafood restaurant and snack concession at the Captree State Park boat basin, with indoor and outdoor seating, bay views and weekend bands.",
   "facebookUrl": "https://www.facebook.com/tikijoescaptree/",
-  "factsSource": "Checked October 3, 2026. Source: tikijoes.com.",
+  "factsSource": "Checked October 4, 2026. Source: tikijoes.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Tiki+Joe%27s+at+Captree+Boat+Basin+3500+Ocean+Pkwy",
   "kind": "restaurant",
   "latitude": 40.638981,
   "longitude": -73.2599777,
   "phone": "(631) 333-1063",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Tiki Joe's has more than one location (for example at Cedar Beach); Ira specified Captree. Postal city/ZIP varies by listing (Babylon 11702, Bay Shore 11706, or 11757), so ZIP is left out. It is inside Captree State Park, where a state parking fee may apply. Mach 5 on Oct 4 not checked on the music schedule page. Ira's List has a /tiki-joes-venues page.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Tiki Joe's has more than one location (for example at Cedar Beach); Ira specified Captree. Postal city/ZIP varies by listing (Babylon 11702, Bay Shore 11706, or 11757), so ZIP is left out. It is inside Captree State Park, where a state parking fee may apply. Mach 5 on Oct 4 not checked on the music schedule page. Ira's List has a /tiki-joes-venues page.\n\nDirectory research 2026-10-04: Mach 5 Band on Sun Oct 4 is confirmed on the venue's music schedule (5:30-8:30 PM). Google gives the postal address as 3500 Ocean Pkwy, Bay Shore, NY 11706, so we used ZIP 11706 (other listings use Babylon 11702). The email is the operator's (Top Flight Hospitality / JB Restaurants), shown in the page footer. No opening hours are published (concession 'open daily'; music 5:30-8:30 PM, weather permitting). The Tiki Joe's site uses a travel theme that still shows placeholder text (a Miami address and fake phone numbers) and stock photos (sailboat, beach); we ignored those. Several venue photos carry a 'JoVon Photography' watermark, so only one un-watermarked photo was kept.",
   "state": "NY",
   "town": "Captree",
-  "website": "https://tikijoes.com/tiki-joes-captree-boat-basin/"
+  "website": "https://tikijoes.com/tiki-joes-captree-boat-basin/",
+  "instagramUrl": "https://www.instagram.com/tikijoescaptree/",
+  "email": "info@jbrestaurants.net",
+  "postalCode": "11706",
+  "logo": {
+    "image": "../../assets/entities/venues/tiki-joes-captree-logo.webp",
+    "alt": "Tiki Joe's logo: a cartoon shark relaxing in a beach chair with a parrot, under the words 'Too Busy Relaxing' and 'Tiki Joe's, Est. 2018'",
+    "credit": "Logo: Tiki Joe's",
+    "creditUrl": "https://tikijoes.com/tiki-joes-captree-boat-basin/",
+    "imageSource": "https://tikijoes.com/wp-content/uploads/2025/04/2026-Tiki-Logo-White-Background.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/tiki-joes-captree-1.webp",
+      "alt": "A bride and groom pose at a long wooden bar with string lights and shelves of bottles",
+      "credit": "Photo: Tiki Joe's (website)",
+      "creditUrl": "https://tikijoes.com/tiki-joes-captree-boat-basin/",
+      "imageSource": "https://tikijoes.com/wp-content/uploads/2020/10/KenHildPhoto_0089-scaled-1-1024x683.jpg",
+      "focus": "60% 45%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://tikijoes.com/tiki-joes-captree-boat-basin/",
+      "note": "Tiki Joe's own Captree page: waterfront seafood spot at the Captree boat basin, concession open daily, Captain's Table restaurant for indoor and outdoor dining, phone (631) 333-1063; links Facebook and Instagram tikijoescaptree; operator…"
+    },
+    {
+      "url": "https://tikijoes.com/tiki-joes-captree-music-schedule/",
+      "note": "Captree music schedule poster: live music 5:30-8:30 PM; Guitar Legends Fri Oct 2, Killer Joe Sat Oct 3, Mach 5 Band Sun Oct 4, 2026; all music weather permitting."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=14144789446643689237",
+      "note": "Google Maps: Tiki Joe's at Captree Boat Basin (restaurant), 3500 Ocean Pkwy, Bay Shore, NY 11706, located in Captree Boat Basin; phone (631) 333-1063."
+    }
+  ]
 }

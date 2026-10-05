@@ -72,6 +72,42 @@ Only add events in **Nassau or Suffolk** counties.
 - **Other names used in listings** helps matching (for example "DJ Neil" and "DJ Neil Wrangler").
 - **Opt out**: if an organizer asks us to stop listing their events, open the organizer and turn on **Opted out (do not list their events)**. The weekly run then skips their events. Set any of their current events to **Cancelled** with the note "Removed at the organizer's request".
 
+## Logos, photos and contact details (venues, organizers, teachers, bands, DJs and dance styles)
+
+Every card in the lists shows a picture on top: the first photo, or the logo, or (if there is neither) a dark band with the first letters of the name. Adding a picture makes the card and the page much more inviting.
+
+**Add a logo**
+
+1. Open the venue, organizer, band or teacher and expand **Logo**.
+2. Under **Logo file**, choose **Upload** and pick the file. PNG or SVG with a see-through background is best; a square-ish logo at least 200 pixels wide works well. Logos show on a white box, so use the version made for white backgrounds.
+3. Fill in **Alt text**: usually "<name> logo". This is required when there is a logo.
+4. Fill in **Credit** ("Logo: The Nutty Irishman") and **Credit link** (the page where you found it).
+
+**Add photos**
+
+1. Expand **Photos** and click **Add photos**. You can add up to 6. The first one is used on the card and at the top of the page; the rest appear under "More photos".
+2. **Photo**: upload a JPG, PNG or WebP at least 600 pixels wide. The editor resizes it to 1600 pixels wide and saves it as a JPG (removing hidden camera data such as location); the site then makes small copies for phones.
+3. **Alt text** (required): say what the photo shows in plain words, for example "The brick front of the hall with a red awning" or "Couples swing dancing under string lights". Do not start with "Image of".
+4. **Credit** and **Credit link**: who took it or whose website it came from, for example "Photo: The Nutty Irishman (website)". For Creative Commons photos write the author and license ("Photo: Jane Doe, CC BY-SA 4.0, via Wikimedia Commons") and fill in **License link**.
+5. **Focus point** (optional): photos are cropped to a wide box. If heads get cut off, type where the important part is, as two percentages across and down from the top-left. "50% 30%" keeps the upper middle. Then check the preview.
+
+Credits show under each photo and in the **Pictures** line at the bottom of the details box. Owners who want a picture changed or removed can use the [corrections process](https://longisland.dance/sources/#corrections); remove it the same day.
+
+**What not to post**
+
+- Photos other people posted in reviews or check-ins (Google Maps, Yelp, TripAdvisor, Facebook). Link to them with **Google Maps link (photos and reviews)** instead.
+- Photos from private groups, or anything you had to sign in to see.
+- Photos where you can recognize children.
+- Pictures from a site that says not to reuse them, watermarked stock photos, or flyers that are mostly text.
+- Use logos and photos from the place's or act's **own** website or official page. The owner of this site has said we can use those unless a site says we may not.
+
+**Contact details**
+
+- **Phone** and **Email**: only public business details (the ones they publish for customers or bookings). Never a person's private cell number, private email or home address. Teachers, DJs and singers are people: add only what they publish for lessons or bookings.
+- **Opening hours**: short and plain, for example "Tue-Sun 4 PM-midnight; closed Mon".
+- **Booking page** (bands, DJs) and **Lessons or booking page** (teachers): their own page for booking or lessons.
+- Add the pages that show these facts under **Sources for these details**, and update **Checked on (shown on the page)**, for example "Checked October 4, 2026. Sources: their website and Facebook page."
+
 ## Can you dance there? (the dancing score)
 
 Listings from dance calendars are always dance events. Live-music listings (bands and DJs at bars, restaurants, parks and theaters) get a **dancing score** from 0 to 10, worked out from:

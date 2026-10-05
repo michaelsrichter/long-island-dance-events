@@ -3,7 +3,14 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import EventSeriesList from '../../components/EventSeriesList.astro';
+import EntityHeroMedia from '../../components/EntityHeroMedia.astro';
+import EntityGallery from '../../components/EntityGallery.astro';
+import PersonLinks from '../../components/PersonLinks.astro';
+import Icon from '../../components/Icon.astro';
 import { upcomingFor } from '../../lib/content';
+import { linksOf } from '../../lib/links';
+import { entityImageUrls } from '../../lib/entity-images';
+import { DANCE_TYPE_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
 import CommunityPanel from '../../components/CommunityPanel.astro';
 import Reactions from '../../components/Reactions.astro';
@@ -22,14 +29,40 @@ const crumbs = [
   { name: 'Dance styles', href: '/styles/' },
   { name: s.name, href: `/styles/${style.id}/` },
 ];
+const site = Astro.site!;
+const [photo, ...morePhotos] = s.photos ?? [];
+const learn = linksOf({ moreLinks: s.moreLinks });
+const { images } = await entityImageUrls(s, site);
+const styleLd = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTerm',
+  '@id': new URL(`/styles/${style.id}/#style`, site).toString(),
+  name: s.name,
+  description: s.description ?? s.summary,
+  url: new URL(`/styles/${style.id}/`, site).toString(),
+  inDefinedTermSet: new URL('/styles/', site).toString(),
+  ...(images.length ? { image: images } : {}),
+  ...(learn.length ? { sameAs: learn.map((l) => l.url) } : {}),
+};
+const credits = (s.photos ?? []).filter((p) => p.credit);
 ---
-<BaseLayout title={`${s.name} on Long Island: where to dance and take classes`} description={`${s.summary} Find ${s.name} dances and classes in Nassau and Suffolk.`.slice(0, 165)} pageType="style" jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!)]}>
+<BaseLayout title={`${s.name} on Long Island: where to dance and take classes`} description={`${s.summary} Find ${s.name} dances and classes in Nassau and Suffolk.`.slice(0, 165)} pageType="style" jsonLd={[styleLd, breadcrumbJsonLd(crumbs, site)]}>
   <PageHeader title={s.name} lede={s.summary} crumbs={crumbs}>
-      <Reactions type="style" id={style.id} name={s.name} variant="hero" />
+    {photo && <EntityHeroMedia slot="media" photo={photo} />}
+    <p class="page-header__meta">{DANCE_TYPE_LABELS[s.danceType]}{s.music && <> · Music: {s.music}</>}</p>
+    <Reactions type="style" id={style.id} name={s.name} variant="hero" />
     <p class="btn-row mt-5"><a class="btn btn--secondary" href={`/events/?style=${style.id}`}>Filter all events by {s.name}</a></p>
   </PageHeader>
   <div class="container section stack-l">
-    {s.music && <p><span class="fact-label">Music you will hear:</span> {s.music}</p>}
+    {(s.description || learn.length > 0) && (
+      <section class="panel" aria-labelledby="about-h">
+        <h2 id="about-h">About {s.name}</h2>
+        {s.description && <p>{s.description}</p>}
+        {s.music && <p class="mt-3"><span class="fact-label">Music you will hear:</span> {s.music}</p>}
+        {learn.length > 0 && <div class="mt-4"><PersonLinks links={learn} name={s.name} location="style" /></div>}
+      </section>
+    )}
+    {!s.description && learn.length === 0 && s.music && <p><span class="fact-label">Music you will hear:</span> {s.music}</p>}
     <section aria-labelledby="d-h">
       <h2 id="d-h">Dances and live music</h2>
       <div class="mt-5"><EventSeriesList events={dances} empty={`No ${s.name} dances are listed right now`} /></div>
@@ -43,6 +76,22 @@ const crumbs = [
         <h2 id="t-h">Teachers</h2>
         <p>{teachers.map((t, i) => <>{i > 0 && ', '}<a href={`/instructors/${t.id}/`}>{t.data.name}</a></>)}</p>
       </section>
+    )}
+    <EntityGallery photos={morePhotos} heading={`More ${s.name} photos`} />
+    {credits.length > 0 && (
+      <p class="entity-credits">
+        <Icon name="camera" />
+        <span>
+          Photos are examples of the dance, not from Long Island events:{' '}
+          {credits.map((c, i) => (
+            <>
+              {i > 0 && ' · '}
+              {c.creditUrl ? <a href={c.creditUrl} target="_blank" rel="noopener nofollow">{c.credit}<span class="visually-hidden"> (opens in a new tab)</span></a> : c.credit}
+              {c.licenseUrl && <> (<a href={c.licenseUrl} target="_blank" rel="noopener license">license</a>)</>}
+            </>
+          ))}{'.'}
+        </span>
+      </p>
     )}
     <CommunityPanel type="style" id={style.id} name={s.name} />
   </div>

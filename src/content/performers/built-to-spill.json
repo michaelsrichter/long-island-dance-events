@@ -1,5 +1,72 @@
 {
   "name": "Built to Spill",
   "type": "band",
-  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Mulcahy's (Wantagh) - concerts and dance parties. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: National touring band from Boise, Idaho (not Long Island based); Long Island link is the Nov 6, 2026 Mulcahy's (Wantagh) show. Social links come from the band's own site (rendered with JavaScript). Spotify verified by page title; the Bandcamp page is run through their labels (Sub Pop / Ernest Jenning), listed as the band's Bandcamp. Photos are official press photos from the Sub Pop artist page (not from the band's site, which has only merch images); photographers credited as named in the files. No official YouTube channel or booking contact found on the band's site.",
+  "website": "https://www.builttospill.com/",
+  "facebookUrl": "https://www.facebook.com/builttospill/",
+  "instagramUrl": "https://www.instagram.com/builttospill/",
+  "xUrl": "https://x.com/built_2_spill",
+  "spotifyUrl": "https://open.spotify.com/artist/3kbBWco9PZ5eSQsNScwG6U",
+  "bandcampUrl": "https://built-to-spill.bandcamp.com/",
+  "genres": [
+    "indie rock",
+    "alternative rock"
+  ],
+  "description": "An indie rock band from Boise, Idaho, started in 1992 and led by singer and guitarist Doug Martsch. Known for long songs built on layered, winding guitar parts.",
+  "logo": {
+    "image": "../../assets/entities/performers/built-to-spill-logo.webp",
+    "alt": "The words Built to Spill in dark gray letters on a pale yellow background",
+    "credit": "Logo: Built to Spill",
+    "creditUrl": "https://www.builttospill.com/home",
+    "imageSource": "https://www.builttospill.com/assets/BTS_logo_color_yellow.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/built-to-spill-1.webp",
+      "alt": "The three members of Built to Spill laughing in front of a wall of white jasmine flowers",
+      "credit": "Photo: Lilah Edward and Melanie Radford, Built to Spill press photo via Sub Pop Records",
+      "creditUrl": "https://www.subpop.com/artists/built_to_spill",
+      "imageSource": "https://subpop-img.s3.amazonaws.com/asset/artist_images/attachments/000/010/590/max_960/builttospill-2025-promo-02-lilahedwardandmelanieradford-2100x1575-300.jpg?1743467448",
+      "focus": "50% 70%"
+    },
+    {
+      "image": "../../assets/entities/performers/built-to-spill-2.webp",
+      "alt": "Built to Spill's three members standing in front of a flowering hedge",
+      "credit": "Photo: Lilah Edward and Melanie Radford, Built to Spill press photo via Sub Pop Records",
+      "creditUrl": "https://www.subpop.com/artists/built_to_spill",
+      "imageSource": "https://subpop-img.s3.amazonaws.com/asset/artist_images/attachments/000/010/592/max_960/builttospill-2025-promo-01-lilahedwardandmelanieradford-2100x1575-300.jpg?1743467495",
+      "focus": "50% 45%"
+    },
+    {
+      "image": "../../assets/entities/performers/built-to-spill-3.webp",
+      "alt": "Four members of Built to Spill crowded close together against a gray wall, a bearded man in a blue shirt in front",
+      "credit": "Photo: Alex Hecht, Built to Spill press photo via Sub Pop Records",
+      "creditUrl": "https://www.subpop.com/artists/built_to_spill",
+      "imageSource": "https://subpop-img.s3.amazonaws.com/asset/artist_images/attachments/000/010/422/max_960/builttospill-2024-promo-01-alexhecht-2556x1500-300.jpg?1726161374",
+      "focus": "50% 35%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mulcahyslongisland.com/event/built-to-spill/",
+      "note": "Mulcahy's in Wantagh lists Built to Spill, 'legendary indie rock pioneers', on Nov 6 (2026), doors 7 PM, show 8 PM, 18+."
+    },
+    {
+      "url": "https://www.builttospill.com/home",
+      "note": "Official band site; its menu links Instagram, Twitter (X) and Facebook; tour list includes fall 2026 New York-area dates (Brooklyn)."
+    },
+    {
+      "url": "https://www.subpop.com/artists/built_to_spill",
+      "note": "Their record label Sub Pop's artist page, with official press photos credited to the photographers in the file names."
+    },
+    {
+      "url": "https://built-to-spill.bandcamp.com/",
+      "note": "Bandcamp page for Built To Spill's Sub Pop releases (label-run artist page)."
+    },
+    {
+      "url": "https://open.spotify.com/artist/3kbBWco9PZ5eSQsNScwG6U",
+      "note": "Shows the Spotify page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: mulcahyslongisland.com, builttospill.com, subpop.com, built-to-spill.bandcamp.com."
 }

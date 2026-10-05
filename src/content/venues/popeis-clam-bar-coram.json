@@ -28,17 +28,68 @@
     "policy": "unknown"
   },
   "description": "A casual seafood, steak and burger restaurant on Middle Country Road in Coram with a busy bar, an outdoor tiki patio and live bands on weekends.",
-  "facebookUrl": "https://www.facebook.com/Popeis-Clam-Bar-740007936025253",
-  "factsSource": "Checked October 3, 2026. Source: popeisclambaronline.com.",
+  "facebookUrl": "https://www.facebook.com/740007936025253",
+  "factsSource": "Checked October 4, 2026. Source: popeisclambaronline.com.",
   "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Popei%27s+Clam+Bar+451+Middle+Country+Rd+Coram+NY+11727",
   "kind": "restaurant",
   "phone": "(631) 696-4029",
   "postalCode": "11727",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Popei's has other locations (for example Deer Park, popeis.com); Ira specified Coram. The Daplorabulls gig was not confirmed on the venue's calendar. The Facebook link comes from a Bing listing tied to the Coram address.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Popei's has other locations (for example Deer Park, popeis.com); Ira specified Coram. The Daplorabulls gig was not confirmed on the venue's calendar. The Facebook link comes from a Bing listing tied to the Coram address.\n\nDirectory research 2026-10-04: Confirmed the Coram location (popeisclambaronline.com); the other Popei's (e.g. popeis.com in Deer Park) is a different restaurant. The Daplorabulls Oct 3 gig noted as unconfirmed earlier IS on the venue's calendar (Sat Oct 3, 9 PM). Facebook URL normalized from the site's link (facebook.com/pages/Popeis-Clam-Bar/740007936025253) to the page ID form; it is the same page as the current value. The site sits behind a Cloudflare bot check, so it was read with a regular browser. Photos are still frames from the venue's own promo video on its home page (Cloudflare Stream thumbnails, 1280x720). Current description kept (the tiki bar is backed by Google's summary; bands play Fri-Sat nights). No dance floor is described.",
   "state": "NY",
   "town": "Coram",
   "website": "https://www.popeisclambaronline.com/",
   "latitude": 40.869715,
   "longitude": -73.006667,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "instagramUrl": "https://www.instagram.com/popeiscoram/",
+  "xUrl": "https://x.com/popeiscoram",
+  "email": "info@popeisclambaronline.com",
+  "hours": "Mon-Thu 11 AM-11 PM; Fri-Sat 11 AM-12 AM; Sun 12 PM-10 PM",
+  "logo": {
+    "image": "../../assets/entities/venues/popeis-clam-bar-coram-logo.webp",
+    "alt": "Popei's logo: the name in bold red capital letters between two curved red lines (transparent background)",
+    "credit": "Logo: Popei's Clam Bar",
+    "creditUrl": "https://www.popeisclambaronline.com/",
+    "imageSource": "https://popmenucloud.com/cdn-cgi/image/width=800,height=800,fit=scale-down,format=png/jtfpqdub/27e3483e-86ad-47bd-9205-edf85e370e8f.png"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/popeis-clam-bar-coram-1.webp",
+      "alt": "The outside of Popei's Clam Bar: a low white clapboard building with porthole windows and flower beds beside the parking lot",
+      "credit": "Photo: Popei's Clam Bar (website video)",
+      "creditUrl": "https://www.popeisclambaronline.com/",
+      "imageSource": "https://videodelivery.net/4cf3857c74b5e379d91cbbc825d45ead/thumbnails/thumbnail.jpg?time=1s&height=720",
+      "focus": "40% 55%"
+    },
+    {
+      "image": "../../assets/entities/venues/popeis-clam-bar-coram-2.webp",
+      "alt": "Popei's dining room with wooden tables and booths, ceiling fans and model sharks hanging from the ceiling",
+      "credit": "Photo: Popei's Clam Bar (website video)",
+      "creditUrl": "https://www.popeisclambaronline.com/",
+      "imageSource": "https://videodelivery.net/4cf3857c74b5e379d91cbbc825d45ead/thumbnails/thumbnail.jpg?time=4s&height=720",
+      "focus": "50% 50%"
+    },
+    {
+      "image": "../../assets/entities/venues/popeis-clam-bar-coram-3.webp",
+      "alt": "The long bar at Popei's with a wooden counter, TV screens above and shelves of bottles",
+      "credit": "Photo: Popei's Clam Bar (website video)",
+      "creditUrl": "https://www.popeisclambaronline.com/",
+      "imageSource": "https://videodelivery.net/4cf3857c74b5e379d91cbbc825d45ead/thumbnails/thumbnail.jpg?time=8s&height=720",
+      "focus": "50% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.popeisclambaronline.com/",
+      "note": "Restaurant's own site: 451 Middle Country Rd., Coram, NY 11727, (631) 696-4029, info@popeisclambaronline.com, weekly hours, and links to Facebook, Instagram @popeiscoram and Twitter/X."
+    },
+    {
+      "url": "https://www.popeisclambaronline.com/events",
+      "note": "Events calendar lists bands most Friday and Saturday nights at 8:30-9 PM in October 2026 (including Daplorabulls on Oct 3), plus trivia and music bingo."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=4982485175235248570",
+      "note": "Google Maps: Popei's Clam Bar, seafood restaurant at 451 Middle Country Rd, Coram, NY 11727, (631) 696-4029; summary mentions a tiki bar and live music."
+    }
+  ]
 }

@@ -36,6 +36,49 @@
   "genres": [
     "high-energy rock and party covers"
   ],
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Dance claims come from the band's own marketing; no crowd video watched.",
-  "website": "https://www.missmayhemrocks.com/"
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Dance claims come from the band's own marketing; no crowd video watched.\n\nDirectory research 2026-10-04: Phone is the number the band's own site gives for bookings ('Call / Text us'). Booking URL is the site home page, which has the contact form. No logo recorded: the site's flame logo image carries faint 'Adobe Stock' watermarks (it is a stock-image preview), so it was skipped. Gallery photos showing identifiable audience members or member close-ups were skipped. No Instagram or YouTube found (the site embeds a video but links no channel). Facebook URL is the same as current (trailing slash added). Current description still fits.",
+  "website": "https://www.missmayhemrocks.com/",
+  "bookingUrl": "https://www.missmayhemrocks.com/",
+  "phone": "(631) 355-5570",
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/miss-mayhem-1.webp",
+      "alt": "Miss Mayhem playing on the stage at The Warehouse under purple light, with three guitarists, a drummer and the singer",
+      "credit": "Photo: Miss Mayhem (website)",
+      "creditUrl": "https://www.missmayhemrocks.com/",
+      "imageSource": "https://static.wixstatic.com/media/3d8ed2_ae8f8b45fb5b457d8d56573e5b7e3161~mv2.jpg",
+      "focus": "50% 55%"
+    },
+    {
+      "image": "../../assets/entities/performers/miss-mayhem-2.webp",
+      "alt": "Miss Mayhem performing on a large outdoor festival stage in daylight",
+      "credit": "Photo: Miss Mayhem (website)",
+      "creditUrl": "https://www.missmayhemrocks.com/photos",
+      "imageSource": "https://static.wixstatic.com/media/3d8ed2_2354a0fa8aff469d96d84ca090c1d01b~mv2.jpg",
+      "focus": "50% 60%"
+    },
+    {
+      "image": "../../assets/entities/performers/miss-mayhem-3.webp",
+      "alt": "Miss Mayhem's singer and two guitarists rocking out in a bar with colored lights on the floor",
+      "credit": "Photo: Miss Mayhem (website)",
+      "creditUrl": "https://www.missmayhemrocks.com/photos",
+      "imageSource": "https://static.wixstatic.com/media/3d8ed2_4726b09b8a1e4b10b00a1c51a805061b~mv2.jpg",
+      "focus": "50% 40%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.missmayhemrocks.com/",
+      "note": "Band site calls Miss Mayhem 'Long Island's Hi-Energy Party Band' playing fun rock and roll; links its Facebook page and gives a call/text number and form for booking."
+    },
+    {
+      "url": "https://www.missmayhemrocks.com/blank-1",
+      "note": "About page lists a five-piece: singer, two guitars, bass and drums."
+    },
+    {
+      "url": "https://allevents.in/bohemia/miss-mayhem-live-at-eleanors/200030364888115",
+      "note": "Event listing for Miss Mayhem live at Eleanor's Lounge, Bohemia, on Sat Oct 3, 2026."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: missmayhemrocks.com, allevents.in."
 }

@@ -1,5 +1,57 @@
 {
   "name": "Come Together",
   "type": "band",
-  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from The Villager (Farmingdale) - live music calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Facebook and Instagram come from the QR-code image on the band's own home page (the Facebook QR decodes to facebook.com/qr?id=61565240183124); the site has no text links to them. Booking is via the site's contact form (no public email or phone). The site also has a group promo photo by the water (band-water-jo.png) but it is only 588 px wide, so it was not used. Not the Melbourne Beatles tribute 'Come Together - The Music of The Beatles'.",
+  "website": "https://cometogetherband.weebly.com/",
+  "facebookUrl": "https://www.facebook.com/profile.php?id=61565240183124",
+  "instagramUrl": "https://www.instagram.com/come_together_band_li/",
+  "bookingUrl": "https://cometogetherband.weebly.com/contact.html",
+  "genres": [
+    "60s rock",
+    "70s rock",
+    "classic rock",
+    "oldies",
+    "cover band"
+  ],
+  "description": "A five-piece Long Island cover band that plays sing-along hits from the 1960s and 1970s, such as songs by The Beatles, The Rolling Stones and The Kinks, and takes song requests from the crowd.",
+  "logo": {
+    "image": "../../assets/entities/performers/come-together-logo.webp",
+    "alt": "Come Together! logo: five cartoon dancers in colorful clothes above the band name in big red letters",
+    "credit": "Logo: Come Together",
+    "creditUrl": "https://cometogetherband.weebly.com/",
+    "imageSource": "https://cometogetherband.weebly.com/uploads/1/5/0/5/150595226/published/logo-4.png?1725370784"
+  },
+  "photos": [
+    {
+      "image": "../../assets/entities/performers/come-together-1.webp",
+      "alt": "Five side-by-side photos of Come Together's members playing guitar, bass, vocals and drums in front of a brick wall at a bar",
+      "credit": "Photo: Come Together (website)",
+      "creditUrl": "https://cometogetherband.weebly.com/",
+      "imageSource": "https://cometogetherband.weebly.com/uploads/1/5/0/5/150595226/ct-band-separate_orig.jpg",
+      "focus": "50% 30%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cometogetherband.weebly.com/",
+      "note": "Band site says it is a Long Island band playing hits of the 60s, 70s and beyond (Beatles, Rolling Stones, Kinks, King Harvest) and lists Fri 10/16/26 6:00 at The Villager, Farmingdale, matching our listing."
+    },
+    {
+      "url": "https://www.thevillagerfarmingdale.com/livemusic/live-music-come-together",
+      "note": "The Villager Farmingdale lists 'Live Music: Come Together' on Friday Oct 16, 2026, 6-9 PM."
+    },
+    {
+      "url": "https://ilovebabylon.com/event/come-together-at-toomeys-tavern-amityville/",
+      "note": "Event listing describes Come Together as a Long Island band playing the music of the 60s and 70s (Toomey's Tavern, Amityville)."
+    },
+    {
+      "url": "https://cometogetherband.weebly.com/uploads/1/5/0/5/150595226/ct-qr-codes-in-fb_orig.jpg",
+      "note": "Image on the band's site: 'You can find us on Instagram & Facebook' with handle COME_TOGETHER_BAND_LI; the Facebook QR code decodes to page id 61565240183124."
+    },
+    {
+      "url": "https://cometogetherband.weebly.com/contact.html",
+      "note": "Shows the booking page."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: cometogetherband.weebly.com, thevillagerfarmingdale.com, ilovebabylon.com."
 }

@@ -2,10 +2,50 @@
   "name": "Toomey’s Tavern",
   "address": "251 S Ketcham Ave",
   "county": "Suffolk",
-  "reviewNotes": "Added automatically from I Love Babylon events. Check the name and address; research the dance floor.",
+  "reviewNotes": "Added automatically from I Love Babylon events. Check the name and address; research the dance floor.\n\nDirectory research 2026-10-04: Full name on the site is 'Toomey's Tavern On The Crik'. Phone is from Google Maps (the website shows none). No email published (inquiries via a form). No logo on the site (only a generic favicon); Facebook/Instagram profile images need a login. Outdoor waterfront venue: live music is seasonal (spring to mid-October) and we found no mention of a dance floor. In fall the calendar shows Friday slots as 'TBD'.",
   "state": "NY",
   "town": "Amityville",
   "latitude": 40.662728,
   "longitude": -73.423521,
-  "coordinatesSource": "U.S. Census Bureau Geocoder"
+  "coordinatesSource": "U.S. Census Bureau Geocoder",
+  "website": "https://www.toomeystavernamityville.com/",
+  "facebookUrl": "https://www.facebook.com/ToomeysTavernOnTheCrik/",
+  "instagramUrl": "https://www.instagram.com/toomeystavernonthecrik/",
+  "phone": "(631) 264-0564",
+  "hours": "Sun-Thu 12 PM-12 AM; Fri-Sat 12 PM-1 AM",
+  "postalCode": "11701",
+  "description": "A waterfront bar and restaurant on the canal off South Ketcham Avenue in Amityville, with a large outdoor patio and tiki bar beside the boat docks. Local cover bands play on weekend afternoons from spring through early fall.",
+  "photos": [
+    {
+      "image": "../../assets/entities/venues/toomeys-tavern-amityville-1.webp",
+      "alt": "The front of Toomey's Tavern with a palm plant, string lights and neon beer signs under a pink and orange sunset sky",
+      "credit": "Photo: Toomey's Tavern (website)",
+      "creditUrl": "https://www.toomeystavernamityville.com/",
+      "imageSource": "https://static.wixstatic.com/media/aa0c84_c4d8a31fdc26407eb04b097c2beebb15~mv2.jpg",
+      "focus": "50% 75%"
+    },
+    {
+      "image": "../../assets/entities/venues/toomeys-tavern-amityville-2.webp",
+      "alt": "Aerial view of Toomey's outdoor patio with colorful umbrellas, picnic tables, a thatched tiki bar and boats docked alongside",
+      "credit": "Photo: Toomey's Tavern (website)",
+      "creditUrl": "https://www.toomeystavernamityville.com/",
+      "imageSource": "https://static.wixstatic.com/media/aa0c84_18c86a2809b4415991fc6b798bfdd283~mv2.jpeg",
+      "focus": "45% 50%"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.toomeystavernamityville.com/",
+      "note": "Bar's own site: 'Toomey's Tavern On The Crik', 251 S. Ketcham Ave, Amityville NY 11701; family-run since 1954, reachable by car or boat; open Sun-Thu 12 PM-12 AM and Fri-Sat 12 PM-1 AM; links to its Facebook and Instagram."
+    },
+    {
+      "url": "https://www.toomeystavernamityville.com/live-music-calendar",
+      "note": "Live music calendar lists bands on Saturday and Sunday afternoons (about 3:30-7:30 PM) through Oct 11, 2026, e.g. Redneck Romance, Victims of Rock, Music Express."
+    },
+    {
+      "url": "https://www.google.com/maps?cid=17921672117941453654",
+      "note": "Google Maps listing 'Toomey's Tavern' (bar) at 251 S Ketcham Ave, Amityville, NY 11701, phone (631) 264-0564."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Source: toomeystavernamityville.com."
 }

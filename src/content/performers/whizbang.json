@@ -1,5 +1,23 @@
 {
   "name": "Whizbang",
   "type": "band",
-  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page."
+  "reviewNotes": "Added automatically from Bartini Bar & Lounge (Babylon) - event calendar. Check the name and add a website or social page.\n\nDirectory research 2026-10-04: Medium confidence: matched by the same \"WHIZBANG!\" styling, a New York handle and a Long Island (Lindenhurst) gig on the Instagram profile; the account is small (3 posts) and we could not open it without login. No website, Facebook or YouTube found. Not Whizbang Inc (a music licensing company) or the Whizbang marketing agency. No logo or photos (Instagram images need login).",
+  "instagramUrl": "https://www.instagram.com/whizbang.ny/",
+  "genres": [
+    "funk",
+    "blues",
+    "fusion"
+  ],
+  "description": "A New York band that plays funk, blues and jazz-rock fusion, with gigs at Long Island bars such as Bartini in Babylon and The Village Pub in Lindenhurst.",
+  "evidence": [
+    {
+      "url": "https://www.bartinibabylon.com/event-calendar",
+      "note": "Bartini Bar & Lounge in Babylon lists \"WHIZBANG!\" (with an exclamation mark) at 8:30 PM on Wednesday, November 25."
+    },
+    {
+      "url": "https://www.instagram.com/whizbang.ny/",
+      "note": "Instagram account \"WHIZBANG!\" (@whizbang.ny) describes NYC funk/blues/fusion and announced a show at The Village Pub in Lindenhurst, NY on 7/17/26 (seen in the search result preview)."
+    }
+  ],
+  "factsSource": "Checked October 4, 2026. Sources: bartinibabylon.com, instagram.com."
 }
