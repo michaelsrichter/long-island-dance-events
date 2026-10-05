@@ -1,6 +1,6 @@
 {
-  "title": "Live music at Garden Grill",
-  "summary": "Live music by live music at Garden Grill in Smithtown. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "title": "Acoustic Groove at Garden Grill",
+  "summary": "Live music by Acoustic Groove at Garden Grill in Smithtown. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
   "category": "live-music",
   "start": "2026-10-09T18:30",
   "end": "2026-10-09T21:30",
@@ -18,6 +18,7 @@
   "dancingCues": [
     "acoustic"
   ],
-  "confidence": 0.75,
-  "matchKey": "iraslist|2026-10-09|garden-grill-smithtown|acoustic-groove-returns-to-the-garden|2026-10-09|special"
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-09|garden-grill-smithtown|acoustic-groove-returns-to-the-garden|2026-10-09|special",
+  "reviewNotes": "Band or DJ not researched yet: Acoustic Groove."
 }

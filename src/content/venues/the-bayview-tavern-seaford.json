@@ -1,0 +1,11 @@
+{
+  "name": "The Bayview Tavern",
+  "address": "3595 Bayview St",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Seaford",
+  "latitude": 40.658345,
+  "longitude": -73.497688,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

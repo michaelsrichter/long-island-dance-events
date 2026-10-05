@@ -1,0 +1,11 @@
+{
+  "name": "Bacaro Italian Tavern",
+  "address": "1020 Park Blvd",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Massapequa Park",
+  "latitude": 40.678995,
+  "longitude": -73.455854,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}
