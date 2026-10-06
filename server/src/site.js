@@ -42,6 +42,7 @@ const MAX_IMAGE_SIDE = 2400;
 const quality = (v, fallback) => (Number.isInteger(Number(v)) && Number(v) >= 1 && Number(v) <= 11 ? Number(v) : fallback);
 const PAGE_BROTLI = quality(process.env.PAGE_BROTLI_QUALITY, 5);
 const FILE_BROTLI = 9;
+const BIG_TEXT_FILE = 512 * 1024;
 
 /** What the old host sends when nothing else is set: browsers may reuse the answer for 30 seconds. */
 const DEFAULT_CACHE = 'public, must-revalidate, max-age=30';
@@ -189,7 +190,8 @@ async function staticFile(pathname) {
       const type = MIME[extname(full).toLowerCase()] || 'application/octet-stream';
       const stored = { status: 200, body, etag: etagOf(body), headers: headersFor(pathname, type, body) };
       if (COMPRESSIBLE.test(type) && body.length <= MAX_TEXT_IN_MEMORY) {
-        file = await compressed(stored, FILE_BROTLI);
+        // Level 9 for ordinary files; a big one (the 5 MB editor script) takes far too long at 9 on one core.
+        file = await compressed(stored, body.length > BIG_TEXT_FILE ? PAGE_BROTLI : FILE_BROTLI);
         if (file.variants) file.body = null;
       } else {
         file = { ...stored, body: null, path: full, size: body.length };
