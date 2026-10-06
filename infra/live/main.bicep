@@ -51,6 +51,9 @@ param instanceMemoryMB int = 512
 @description('GitHub repository allowed to deploy (main branch) and to call the sync endpoints.')
 param githubRepository string = 'michaelsrichter/long-island-dance-events'
 
+@description('Exact subject of GitHub\'s token for runs on main. This repository uses GitHub\'s format with the account and repository ids (owner@id/repo@id), which stays the same if either is renamed.')
+param githubMainSubject string = 'repo:michaelsrichter@1242059/long-island-dance-events@1402631995:ref:refs/heads/main'
+
 param tags object = {
   project: 'long-island-dance-events'
   phase: 'live-database'
@@ -268,7 +271,7 @@ resource deployFederation 'Microsoft.ManagedIdentity/userAssignedIdentities/fede
   name: 'github-main'
   properties: {
     issuer: 'https://token.actions.githubusercontent.com'
-    subject: 'repo:${githubRepository}:ref:refs/heads/main'
+    subject: githubMainSubject
     audiences: ['api://AzureADTokenExchange']
   }
 }
