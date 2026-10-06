@@ -3,8 +3,10 @@ name: Server
 # The live server (server/, decision P58): one Node program on Azure App Service that makes the pages and
 # answers /api. docs/proposals/postgres-live-site.md.
 #   test:  server tests against a real PostgreSQL.
-#   site:  builds the static site and the server site from the same commit, starts the server and checks that
-#          every file of the static site comes back identical (scripts/live/parity.mjs).
+#   site:  builds the static site and the server site from the same commit, loads the same records into a real
+#          PostgreSQL, starts the server (pages made from the database, decision P59) and checks that every
+#          file of the static site comes back identical (scripts/live/parity.mjs); then changes one record in
+#          the database and checks that its page shows the change within seconds (scripts/live/change-check.mjs).
 #   deploy (main only): the checked package goes to the App Service app, then the database sync runs.
 # Until the repository variable AZURE_CLIENT_ID is set (infra/live/main.bicep output), nothing is deployed.
 on:
@@ -81,13 +83,24 @@ jobs:
           DATABASE_URL: postgres://postgres:test@localhost:5432/lidance_test
           SERVER_TEST_RESET: '1'
           PAYLOAD_FILE: ${{ runner.temp }}/payload.json.gz
-      - name: Azure template compiles
-        run: az bicep build --file infra/live/main.bicep --stdout > /dev/null
+      - name: Azure templates compile
+        run: |
+          az bicep build --file infra/live/main.bicep --stdout > /dev/null
+          az bicep build --file infra/live/custom-domain.bicep --stdout > /dev/null
 
   site:
     name: Server site matches the static site
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: lidance_live
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 20
     env:
       # The same settings as the static site's build (azure-static-web-apps.yml). Search engines are let in or
       # kept out by the server's own ALLOW_INDEXING setting when the page is made, not by the build.
@@ -127,11 +140,28 @@ jobs:
         run: npm run build
       - name: Build the server site (photos keep their static-site addresses)
         run: npm run build:server -- --static-images dist
-      - name: Start the server and compare every file with the static site
+      - name: Load the same records into PostgreSQL (as the nightly sync does on Azure)
+        env:
+          DATABASE_URL: postgres://postgres:test@localhost:5432/lidance_live
+        run: |
+          npx tsx scripts/db/build-payload.ts --out "$RUNNER_TEMP/payload.json.gz"
+          node scripts/live/load-db.mjs "$RUNNER_TEMP/payload.json.gz"
+      - name: Start the server (pages from the database) and compare every file with the static site
+        env:
+          DATABASE_URL: postgres://postgres:test@localhost:5432/lidance_live
         run: |
           PORT=8080 IMAGE_CACHE_DIR="$RUNNER_TEMP/images" node server/src/main.js > "$RUNNER_TEMP/server.log" 2>&1 &
-          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/api/live > /dev/null 2>&1 && break; sleep 1; done
+          for i in $(seq 1 60); do
+            v=$(curl -fsS http://127.0.0.1:8080/api/health 2>/dev/null | jq -r '.pages.dataVersion // empty')
+            if [ -n "$v" ] && [ "$v" != "build" ]; then echo "Pages come from the database (data version $v)"; break; fi
+            sleep 1
+          done
+          if [ -z "$v" ] || [ "$v" = "build" ]; then echo "::error::The server did not load the records from the database"; exit 1; fi
           node scripts/live/parity.mjs --static dist --base http://127.0.0.1:8080 --show 20
+      - name: A change in the database shows on its page within seconds
+        env:
+          DATABASE_URL: postgres://postgres:test@localhost:5432/lidance_live
+        run: node scripts/live/change-check.mjs --base http://127.0.0.1:8080 --limit 10
       - name: Server log
         if: always()
         run: tail -n 50 "$RUNNER_TEMP/server.log" || true

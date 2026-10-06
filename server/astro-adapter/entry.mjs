@@ -4,6 +4,8 @@
  */
 import { createApp } from 'astro/app/entrypoint';
 import { installStaticImageNames } from './static-images.mjs';
+// The records from PostgreSQL (decision P59); server/src/live-data.js calls it whenever the data changes.
+export { loadLiveRecords } from '../../src/lib/live-store.ts';
 
 // Remembered lists are made again when the data changes or a new day starts (src/lib/freshness.ts).
 globalThis.__liLive = true;

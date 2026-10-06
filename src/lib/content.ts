@@ -1,5 +1,5 @@
 /** Astro-side content access: loads collections and resolves event occurrences with their linked entities. */
-import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { getCollection, getEntry, type CollectionEntry } from './collections';
 import { cadenceOf, isUpcoming, partition, priceOf, priceText, resolveOccurrences, type Occurrence, type PriceInfo } from './event-core';
 import type { CalendarEvent } from './calendar';
 import { CATEGORY_LABELS, SKILL_LABELS, type County, type EventCategory } from './schemas';

@@ -1,6 +1,6 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { pageProps } from '../../../lib/page-props';
-import { getCollection } from 'astro:content';
+import { getCollection } from '../../../lib/collections';
 import { getEventGroups, getSettings } from '../../../lib/content';
 import { PAGE_IMAGE_IDS, PAGE_TITLES, type PageImageId } from '../../../lib/entity-meta';
 import { renderSocialPng, siteHost, type SocialCard } from '../../../lib/og';

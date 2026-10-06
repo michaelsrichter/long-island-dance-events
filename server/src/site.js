@@ -50,7 +50,8 @@ const MIME = {
 };
 
 let entry;
-async function astro() {
+/** The site build's server entry (server/astro-adapter/entry.mjs), loaded once. */
+export async function astro() {
   entry ??= import(pathToFileURL(join(SITE_DIR, 'server', 'entry.mjs')).href)
     .then(async (m) => {
       await m.init?.({ clientDir: pathToFileURL(CLIENT_DIR + sep) });

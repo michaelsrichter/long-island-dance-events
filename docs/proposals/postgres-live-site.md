@@ -1,6 +1,6 @@
 # Proposal: a live database, so changes show up in seconds
 
-> **Status: approved by the owner on October 5, 2026 (decision P54), with his answers in [section 16](#16-open-questions).** Phase 0 ([section 12](#12-phase-0-quick-wins-we-can-ship-right-after-approval), 0a and 0b) shipped on October 5 (decision P55). Phase 1 (the database) shipped on October 5 (decisions P56 and P57). Phase 2 started on October 5 on **App Service B1** (decision P58, see the box below).
+> **Status: approved by the owner on October 5, 2026 (decision P54), with his answers in [section 16](#16-open-questions).** Phase 0 ([section 12](#12-phase-0-quick-wins-we-can-ship-right-after-approval), 0a and 0b) shipped on October 5 (decision P55). Phase 1 (the database) shipped on October 5 (decisions P56 and P57). Phase 2 started on October 5 on **App Service B1** (decision P58, see the box below). On October 6 the server started making its pages from the database records (decision P59): a change shows in about 2 seconds, and the test address **https://new.longisland.dance** is up (not listed by search engines).
 > Prices are Azure list prices for East US 2, checked October 5, 2026 (see [Prices we checked](#18-prices-we-checked)). **Region (P57):** everything moves to **Central US** (Iowa). It is the only US region where this Visual Studio subscription may create PostgreSQL that also has everything else the site uses (Static Web Apps, Functions, Content Safety, Logic Apps, monitoring). East US and East US 2 do not allow PostgreSQL or Azure SQL for this subscription. The database costs a little more there: about $18.18 a month instead of $16.09. **No private network** (owner's choice; this data is not sensitive): the database has a public address, but only Azure services may connect, only with Microsoft Entra sign-in and only encrypted.
 > **Host (P58, October 5):** the owner asked whether App Service would be better for search engines and AI assistants. It is: one small server that is **always on** (no cold starts, a full processor core), so every page answers equally fast. Pages are now made by **App Service B1** (Linux, Central US, about $13.14 a month) instead of Azure Functions, and **Static Web Apps goes away** at the switch (App Service serves the files too). **No CDN for now:** Azure Front Door costs at least $35 a month, and Azure's cheaper classic CDN stopped taking new customers on August 15, 2025. A free option stays open (photos and scripts from a free Static Web Apps address, `ASSETS_PREFIX`). New total after the switch: **about $33 a month** ([costs](#13-costs-before-and-after)). Where this page still says Functions, read App Service.
 > Related: [database-plan.md](../database-plan.md), [architecture.md](../architecture.md), decisions P46, P47, P48, P51 and P52 in [decision-log.md](../decision-log.md).
@@ -169,11 +169,11 @@ sequenceDiagram
   F->>S: Changed addresses (sent in batches every few minutes)
 ```
 
-The server asks the database "has anything changed?" at most every 2 seconds. This is one tiny question, about a thousandth of a second. When the answer is yes, it reloads the changed records and clears its cache. It needs no always-open connection. A new day on Long Island also clears the cache, so "upcoming" and repeating dates move on by themselves (`src/lib/freshness.ts`).
+**Built (P59):** the server asks the database "has anything changed?" every 2 seconds. This is one tiny question, about a thousandth of a second. When the answer is yes, it reads the records again (only changed ones are checked again: about 5 thousandths of a second for one change) and clears its cache. It needs no always-open connection. Measured: a changed venue name showed on its page **2.1 seconds** after the database change. A new day on Long Island also clears the cache, so "upcoming" and repeating dates move on by themselves (`src/lib/freshness.ts`).
 
 ### 4.3 If the database is down
 
-Pages keep working. Each copy already holds all listings in memory, so visitors don't notice a short database outage (for example Azure's monthly maintenance). Only saving waits; the review center says "Saving is paused, try again in a minute." If a copy starts while the database is down, it loads the latest nightly export from Blob Storage instead.
+Pages keep working. The server already holds all listings in memory, so visitors don't notice a short database outage (for example Azure's monthly maintenance). Only saving waits; the review center says "Saving is paused, try again in a minute." If the server starts while the database is down, it uses the listings it was built with (the git copy from its last deploy) until the database answers (P59).
 
 ### 4.4 What happens to Static Web Apps
 
@@ -313,7 +313,7 @@ Everything from P46, P47 and P48 stays. The page code is the same; only *when* p
 | Event, Place and ItemList structured data (JSON-LD) | Built ahead of time | Same code |
 | Share pictures | Own picture only for dates in the next 21 days (P46); one per series after that (P47) | **Every date gets its own picture**, drawn the first time someone asks and saved in Blob Storage; the address changes when the facts change, so link previews refresh |
 | File limit | 15,000 files (CI stops at 12,000) | **No limit**: nothing is pre-built |
-| Sitemaps (6 kinds, with last-changed dates) | Dates kept between builds through `/sitemap-state.json` | Dates come straight from the database's change times, which is more exact |
+| Sitemaps (6 kinds, with last-changed dates) | Dates kept between builds through `/sitemap-state.json` | The same rule (a page's date changes when the facts on it change), with the dates kept in the database (`sitemap_state`, P59) |
 | 81 town pages, `llms.txt`, `llms-full.txt`, `/events/upcoming.json`, RSS, calendar files | Built ahead of time | Same code, made on request and cached |
 | `robots.txt` and AI crawler rules | Same | Same; `new.longisland.dance` says "don't index" until the switch |
 | IndexNow | After each deploy | **Within minutes of each change** (batched) |
@@ -421,7 +421,7 @@ flowchart LR
 
 ### 11.2 The parity check: new site vs old site
 
-A new script (`scripts/parity.mjs`) compares the two sites page by page. It runs every day in GitHub Actions during phases 2 to 4.
+A script (`scripts/live/parity.mjs`) compares the two sites page by page. **Built (P58, P59):** it runs on every change in GitHub Actions, with the server reading a real database loaded from the same commit; it also ran against `new.longisland.dance` on October 6 (5,630 of 5,630 files identical).
 
 - **Same data, same clock.** The old site is built from a given export with a fixed "now" (`BUILD_NOW`). The new site reads a database loaded from the same export, with the same fixed "now" (a test-only setting that production ignores).
 - **Every address:** every file in the old build, every sitemap entry, and the known redirects (`www`, trailing slashes, the Azure addresses).

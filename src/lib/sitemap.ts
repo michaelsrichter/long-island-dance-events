@@ -5,9 +5,10 @@
  * Each build reads the live site's /sitemap-state.json: when a page's fingerprint is unchanged it
  * keeps its old date; when it changed (or is new) it gets today's date. The same file tells the
  * IndexNow step (scripts/indexnow.mjs) which pages to announce to Bing and others.
+ * The live server keeps the same dates in PostgreSQL instead (server/src/sitemap-state.js).
  */
 import { createHash } from 'node:crypto';
-import { getCollection } from 'astro:content';
+import { getCollection } from './collections';
 import { buildNow, getAllEvents, type ResolvedEvent } from './content';
 import { isUpcoming } from './event-core';
 import { dateInZone } from './time';
@@ -45,7 +46,16 @@ const strip = (d: Record<string, unknown>) => {
 /** Each repeating listing once, with its next date (what directory pages show). */
 const nextDates = (events: ResolvedEvent[]) => [...new Map(events.map((e) => [e.eventId, e.date])).entries()];
 
+/** On the live server (decision P59) the dates are kept in PostgreSQL (server/src/sitemap-state.js). */
+interface LiveSitemapState {
+  load(): Promise<SitemapState>;
+  save(state: SitemapState): Promise<void>;
+}
+const liveState = () => (globalThis as { __liSitemapState?: LiveSitemapState }).__liSitemapState;
+
 async function previousState(): Promise<SitemapState> {
+  const live = liveState();
+  if (live) return live.load();
   const site = process.env.SITE_URL;
   if (!site || process.env.SITEMAP_STATE === 'off') return {};
   try {
@@ -129,7 +139,9 @@ async function build(site: URL | string): Promise<SitemapEntry[]> {
   // Towns with nothing coming up are not listed (their pages ask search engines not to index them).
   for (const t of towns) if (t.events.length) add('towns', townHref(t.name), [t.name, nextDates(t.events), t.venues.map((v) => v.id)], [entityImagePath('towns', t.slug)]);
 
-  return out.map((e) => ({ ...e, lastmod: prev[e.loc]?.[0] === e.hash ? prev[e.loc]![1] : today }));
+  const entries = out.map((e) => ({ ...e, lastmod: prev[e.loc]?.[0] === e.hash ? prev[e.loc]![1] : today }));
+  await liveState()?.save(Object.fromEntries(entries.map((e) => [e.loc, [e.hash, e.lastmod]])));
+  return entries;
 }
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

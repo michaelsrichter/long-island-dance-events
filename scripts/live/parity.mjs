@@ -5,12 +5,18 @@
  *
  *   node scripts/live/parity.mjs --static dist --base http://127.0.0.1:8080 [--host longisland.dance] [--only events/] [--show 10]
  *
- * Known harmless differences are ignored: times of the build or the request, calendar stamps, and the random
- * id of the logo gradient. Exit code 1 when anything else differs.
+ * Known harmless differences are ignored: times of the build or the request, calendar stamps, the random id
+ * of the logo gradient and the release id (the commit a page was built from). Pictures whose bytes differ
+ * (for example made on another operating system) are compared by their pixels: same size, and at most
+ * 0.5% of the pixels visibly different. Exit code 1 when anything else differs.
  */
 import { readdirSync, readFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
 import { join, relative } from 'node:path';
 import { parseArgs } from 'node:util';
+
+// The picture library comes with the server (server/package.json).
+const sharp = createRequire(new URL('../../server/package.json', import.meta.url))('sharp');
 
 const { values: opt } = parseArgs({
   options: {
@@ -41,7 +47,22 @@ export function normalize(text) {
   return text
     .replace(/\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?(Z|[+-]\d\d:\d\d)/g, '<time>')
     .replace(/DTSTAMP:\d{8}T\d{6}Z/g, 'DTSTAMP:<time>')
-    .replace(/logo-g-[a-z0-9]+/g, 'logo-g-<id>');
+    .replace(/logo-g-[a-z0-9]+/g, 'logo-g-<id>')
+    .replace(/data-release="[^"]*"/g, 'data-release="<release>"');
+}
+
+const PICTURE = /\.(png|jpe?g|webp|avif|gif)$/i;
+
+/** Same picture? Compares decoded pixels; a channel counts as different when it is off by more than 24 of 255. */
+export async function samePicture(a, b) {
+  const [x, y] = await Promise.all([a, b].map((buf) => sharp(buf).ensureAlpha().raw().toBuffer({ resolveWithObject: true })));
+  if (x.info.width !== y.info.width || x.info.height !== y.info.height) return { same: false, why: `size ${x.info.width}x${x.info.height} vs ${y.info.width}x${y.info.height}` };
+  let off = 0;
+  for (let i = 0; i < x.data.length; i += 4) {
+    if (Math.abs(x.data[i] - y.data[i]) > 24 || Math.abs(x.data[i + 1] - y.data[i + 1]) > 24 || Math.abs(x.data[i + 2] - y.data[i + 2]) > 24) off++;
+  }
+  const share = off / (x.info.width * x.info.height);
+  return { same: share <= 0.005, why: `${(share * 100).toFixed(2)}% of pixels differ` };
 }
 
 function urlFor(file) {
@@ -68,7 +89,7 @@ async function main() {
     .map((f) => relative(root, f).replaceAll('\\', '/'))
     .filter((f) => !SKIP.some((re) => re.test(f)) && f.startsWith(opt.only))
     .sort();
-  const results = { same: 0, differ: [], missing: [], failed: [] };
+  const results = { same: 0, pixelSame: 0, differ: [], missing: [], failed: [] };
   const queue = [...files];
   const started = performance.now();
   const times = [];
@@ -99,6 +120,16 @@ async function main() {
         results.same++;
         continue;
       }
+      if (PICTURE.test(f)) {
+        const p = await samePicture(local, body).catch((err) => ({ same: false, why: err.message }));
+        if (p.same) {
+          results.same++;
+          results.pixelSame++;
+          continue;
+        }
+        results.differ.push({ f, url, sizes: [local.length, body.length], why: p.why });
+        continue;
+      }
       results.differ.push({
         f,
         url,
@@ -112,7 +143,7 @@ async function main() {
   const pct = (p) => (times.length ? times[Math.min(times.length - 1, Math.floor((p / 100) * times.length))].toFixed(0) : '-');
   const show = Number(opt.show);
   const byExt = (list) => list.reduce((m, x) => ((m[x.f.split('.').pop()] = (m[x.f.split('.').pop()] || 0) + 1), m), {});
-  console.log(`[parity] ${files.length} files: ${results.same} identical, ${results.differ.length} different, ${results.missing.length} missing, ${results.failed.length} failed`);
+  console.log(`[parity] ${files.length} files: ${results.same} identical${results.pixelSame ? ` (${results.pixelSame} pictures by their pixels)` : ''}, ${results.differ.length} different, ${results.missing.length} missing, ${results.failed.length} failed`);
   console.log(`[parity] answer times: median ${pct(50)} ms, 95% ${pct(95)} ms, slowest ${pct(100)} ms; total ${((performance.now() - started) / 1000).toFixed(1)} s`);
   if (results.missing.length) {
     console.log('[parity] missing by type', byExt(results.missing));
@@ -121,7 +152,7 @@ async function main() {
   if (results.differ.length) {
     console.log('[parity] different by type', byExt(results.differ));
     for (const d of results.differ.slice(0, show)) {
-      console.log(`  ${d.url} (${d.sizes.join(' vs ')} bytes)`);
+      console.log(`  ${d.url} (${d.sizes.join(' vs ')} bytes)${d.why ? `: ${d.why}` : ''}`);
       if (d.static !== undefined) {
         console.log(`    static: ${JSON.stringify(d.static)}`);
         console.log(`    server: ${JSON.stringify(d.server)}`);
