@@ -34,6 +34,16 @@ function encodingFor(acceptEncoding) {
   return null;
 }
 
+/** Sends the body; a visitor who leaves before the end (closed tab, timeout) is normal, not an error. */
+async function stream(res, ...steps) {
+  try {
+    await pipeline(...steps, res);
+  } catch (err) {
+    if (err?.code === 'ERR_STREAM_PREMATURE_CLOSE' || res.destroyed) return;
+    throw err;
+  }
+}
+
 export async function sendResponse(req, res, response, { startedAt } = {}) {
   res.statusCode = response.status;
   const cookies = typeof response.headers.getSetCookie === 'function' ? response.headers.getSetCookie() : [];
@@ -48,7 +58,7 @@ export async function sendResponse(req, res, response, { startedAt } = {}) {
   const enc = !response.headers.has('content-encoding') && COMPRESSIBLE.test(type) ? encodingFor(req.headers['accept-encoding']) : null;
   const body = Readable.fromWeb(response.body);
   if (!enc) {
-    await pipeline(body, res);
+    await stream(res, body);
     return;
   }
   res.removeHeader('content-length');
@@ -56,5 +66,5 @@ export async function sendResponse(req, res, response, { startedAt } = {}) {
   const vary = res.getHeader('vary');
   res.setHeader('Vary', vary ? `${vary}, Accept-Encoding` : 'Accept-Encoding');
   const z = enc === 'br' ? createBrotliCompress({ params: { [constants.BROTLI_PARAM_QUALITY]: 5 } }) : createGzip({ level: 6 });
-  await pipeline(body, z, res);
+  await stream(res, body, z);
 }
