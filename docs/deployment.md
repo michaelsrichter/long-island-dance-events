@@ -290,7 +290,14 @@ Decisions P56, P57 and P58; the plan is [proposals/postgres-live-site.md](propos
 | `app-li-dance-events` + plan `plan-li-dance-events` | App Service, Linux B1 (1 core, 1.75 GB), Node 24 LTS, always on, health check `/api/live` (P58). Code in `server/`. Test address: https://app-li-dance-events.azurewebsites.net (tells search engines not to list it). | $13.14 |
 | `id-github-deploy-li-dance-events` | The identity GitHub Actions uses to deploy the app, from `main` only (federated credential, no secret; subject `repo:michaelsrichter@1242059/long-island-dance-events@1402631995:ref:refs/heads/main`, the format with GitHub's account and repository ids that this repository's tokens use). It may only change this one app. | $0 |
 
-Phase 1 ran on a small Azure Functions app (`func-li-dance-events`, plan `asp-li-dance-events`, storage `stlidancefunc`). It is deleted once the App Service app runs the sync (P58).
+Phase 1 ran on a small Azure Functions app (`func-li-dance-events`, plan `asp-li-dance-events`, storage `stlidancefunc`). It was deleted on October 6, after the App Service app had run the sync (P58). Its database role still owned the tables (it created them), so only it could change their design, and Azure would not remove it ("objects depend on it"). Migration `server/migrations/002_app_service_owner.sql` makes the App Service app the owner the first time it starts; then the old role is removed:
+
+```powershell
+az postgres flexible-server microsoft-entra-admin delete -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
+  --server-name psql-li-dance-events --object-id 1efa5668-7948-47fb-a1ab-5f549a24244e --yes
+```
+
+If the server log ever shows `[migrate] WARNING: could not take over the objects of func-li-dance-events`, Azure refused the handover: add your own account as a database administrator for a moment, let your address through the firewall, run `REASSIGN OWNED BY "func-li-dance-events" TO "app-li-dance-events";` in the `lidance` database, then remove both again.
 
 Template: `infra/live/main.bicep` (safe to run again):
 

@@ -32,6 +32,23 @@ const server = http.createServer(async (req, res) => {
 server.keepAliveTimeout = 230_000;
 server.headersTimeout = 235_000;
 
+/** The busiest pages; kept prepared so visitors don't wait for them (pages are remembered for 15 minutes). */
+const BUSIEST = ['/', '/events/'];
+const host = process.env.CANONICAL_HOST || 'longisland.dance';
+
+async function prepare(log) {
+  for (const path of BUSIEST) {
+    const started = performance.now();
+    try {
+      const res = await route(new Request(`https://${host}${path}`), {});
+      await res.arrayBuffer();
+      if (log) console.log(`[server] prepared ${path} (${res.status}, ${Math.round(performance.now() - started)} ms)`);
+    } catch (err) {
+      console.warn(`[server] could not prepare ${path}: ${err.message}`);
+    }
+  }
+}
+
 /** After a start: open the database connection and prepare the busiest pages, so the first visitors don't wait. */
 async function warmUp() {
   if (process.env.PGHOST || process.env.DATABASE_URL) {
@@ -42,22 +59,14 @@ async function warmUp() {
         (err) => console.warn(`[server] database not reachable yet: ${err.message}`),
       );
   }
-  const host = process.env.CANONICAL_HOST || 'longisland.dance';
-  for (const path of ['/', '/events/']) {
-    const started = performance.now();
-    try {
-      const res = await route(new Request(`https://${host}${path}`), {});
-      await res.arrayBuffer();
-      console.log(`[server] prepared ${path} (${res.status}, ${Math.round(performance.now() - started)} ms)`);
-    } catch (err) {
-      console.warn(`[server] could not prepare ${path}: ${err.message}`);
-    }
-  }
+  await prepare(true);
 }
 
 server.listen(port, () => {
   console.log(`[server] version ${appVersion().commit} listening on ${port}`);
   warmUp();
+  // Again every 10 minutes: also covers a new day starting on Long Island.
+  setInterval(() => prepare(false), 10 * 60_000).unref();
 });
 
 function stop(signal) {

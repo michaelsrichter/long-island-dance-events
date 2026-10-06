@@ -203,9 +203,9 @@ The owner chose **App Service** over Functions (P58): one small Linux server (1 
 Pass criteria (on the test address, then `new.longisland.dance`):
 
 - Every page, file, sitemap and share picture is the same as on today's site. **Met on October 5: all 5,618 files identical.**
-- A remembered page answers in under 0.05 seconds at the server; a fresh event page in under 1 second; a fresh share picture in under 2 seconds.
-- With 20 visitors at once for 5 minutes, no errors.
-- A code update happens without any failed request.
+- A remembered page answers in under 0.05 seconds at the server; a fresh event page in under 1 second; a fresh share picture in under 2 seconds. **Met on October 6 (test address):** remembered pages 5 to 30 thousandths of a second, a fresh event page about 0.06 seconds, a fresh share picture 1.4 seconds (they now ship ready-made).
+- With 20 visitors at once for 5 minutes, no errors. **Met on October 6:** 20 visitors non-stop, each opening a random one of 3,050 addresses (most never opened before): 2,986 answers, no errors. Half were answered within 1.6 seconds, because almost every page had to be made for the first time on one processor core. Real visitors mostly open the same popular pages, which come from memory.
+- A code update happens without any failed request. **Met on October 6, with a catch:** during a restart no request failed, but Azure needs about 4 minutes to start the new copy on the same processor core, so answers are slower meanwhile (one took 12.6 seconds). A bigger plan or a second copy would remove this; not worth it now.
 
 Things to know:
 
