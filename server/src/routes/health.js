@@ -40,6 +40,8 @@ export async function health(request) {
       prepared: { ...pageCacheStatus(), ...prepareStatus() },
       indexNow: indexNowStatus(),
       monitoring: telemetryOn(),
+      // The "now" every page of the current data and day was made with (src/lib/freshness.ts, P62).
+      pagesNow: globalThis.__liPagesNow ?? null,
       // The server's own memory in MB (the B1 plan has about 1.9 GB for everything on the machine).
       memory: Object.fromEntries(Object.entries(process.memoryUsage()).map(([k, v]) => [k, Math.round(v / 1048576)])),
       // What the pages show right now (the server checks the database every 2 seconds).
