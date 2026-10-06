@@ -195,7 +195,7 @@ Our code compresses pages and files (Brotli or gzip), because App Service doesn'
 The owner chose **App Service** over Functions (P58): one small Linux server (1 processor core, 1.75 GB of memory) that is **always on**, so no visitor ever waits for it to start. One Node program (`server/`) does everything:
 
 - **Pages:** the same Astro pages, built a second time for the server (`npm run build:server`). A small connector (`server/astro-adapter/`) hands each request to Astro. Pages need no changes; dynamic pages find their data with `src/lib/page-props.ts`.
-- **Files and photos:** scripts, styles, fonts and photos come from the same server. Resized photos keep **exactly the same addresses** as today, so search engines keep their image history.
+- **Files and photos:** scripts, styles, fonts and photos come from the same server. Resized photos keep **exactly the same addresses** as today, so search engines keep their image history. Resized photos and share pictures made by the static build of the same commit ship with each deploy (a share picture takes about 1.4 seconds of the server's one core); once listings come from the database, changed share pictures are drawn on request and kept.
 - **The old host's rules:** the same security headers, cache times, redirects (`www` and missing slashes) and "please sign in" pages as `staticwebapp.config.json` (`server/src/rules.js`).
 - **Speed:** finished pages are kept in memory (`server/src/site.js`), and pages are compressed.
 - **Safety check on every change:** GitHub builds the static site and the server site from the same commit, starts the server and checks that **every file is identical** (`scripts/live/parity.mjs`). Only then does it deploy.

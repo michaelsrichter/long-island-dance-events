@@ -307,7 +307,7 @@ If the deploy identity is ever recreated, copy its new client id (`deployClientI
 
 ```powershell
 npm run build                                   # the static site (also makes the resized photos)
-npm run build:server -- --static-images dist    # the server site, in server/site
+npm run build:server -- --static-images dist    # the server site in server/site, with the photos and share pictures
 npm ci --prefix server
 $env:PORT='8080'; $env:SITE_URL='https://longisland.dance'; $env:ALLOW_INDEXING='true'; node server/src/main.js
 # in another window: every file of the static site must come back identical
