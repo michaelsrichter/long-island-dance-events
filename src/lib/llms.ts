@@ -1,5 +1,5 @@
 /** Plain-text guides for AI assistants (llms.txt) and the shared text for each event. Facts only. */
-import { getCollection } from 'astro:content';
+import { getCollection } from './collections';
 import { getEventGroups, getSettings, type ResolvedEvent } from './content';
 import { dancingLine, listNames, priceWord, shortTime } from './page-meta';
 import { getTowns, seriesCount, townHref } from './towns';

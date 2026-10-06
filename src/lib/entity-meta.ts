@@ -3,7 +3,7 @@
  * teachers, organizers, dance styles) and list pages. Used by the pages and by the picture endpoints,
  * so a page and its picture always say the same thing.
  */
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from './collections';
 import type { EntityImageData } from './directory';
 import { entityCard, type SocialCard } from './og';
 import { entityLabels, eventShareBlurb, eventShortText, formatNext, instructorDescription, listNames, organizerDescription, performerDescription, styleDescription, townDescription, venueDescription, type MetaLabel } from './page-meta';

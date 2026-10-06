@@ -3,7 +3,7 @@ import ContentPage from '../layouts/ContentPage.astro';
 import Photo from '../components/Photo.astro';
 import { photos } from '../lib/photos';
 import { getEventGroups } from '../lib/content';
-import { getCollection } from 'astro:content';
+import { getCollection } from '../lib/collections';
 
 const { upcoming } = await getEventGroups();
 const [venues, organizers, sources] = await Promise.all([getCollection('venues'), getCollection('organizers'), getCollection('sources')]);

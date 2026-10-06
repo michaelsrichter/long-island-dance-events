@@ -1,5 +1,5 @@
 /** Town pages ("Dancing in Huntington"): every Long Island place with a venue or an upcoming event. */
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from './collections';
 import placesData from '../data/long-island-places.json';
 import { buildNow, getAllEvents, type ResolvedEvent } from './content';
 import { isUpcoming } from './event-core';

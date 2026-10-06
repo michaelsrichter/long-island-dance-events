@@ -280,14 +280,14 @@ Cost: the workbook, dashboard, action group emails and budget are free; the two 
 
 ## Live database and server (phases 1 and 2)
 
-Decisions P56, P57 and P58; the plan is [proposals/postgres-live-site.md](proposals/postgres-live-site.md). Git is still the master copy: the live PostgreSQL database is a faithful copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. The App Service server makes the same pages as today's site at a **test address**; nothing on longisland.dance uses it yet.
+Decisions P56 to P59; the plan is [proposals/postgres-live-site.md](proposals/postgres-live-site.md). Git is still the master copy: the live PostgreSQL database is a faithful copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. The App Service server makes the same pages as today's site **from the database records** (it checks for changes every 2 seconds, P59) at the test address **https://new.longisland.dance**; nothing on longisland.dance uses it yet.
 
 **Region: Central US (P57).** This Visual Studio subscription may not create PostgreSQL or Azure SQL in East US or East US 2. Central US is the only US region that allows PostgreSQL and also has App Service, Content Safety, Logic Apps and monitoring, so everything moves there (see "Moving the rest to Central US" below). **No private network:** the database has a public address, but its firewall lets in only Azure services, it accepts only Microsoft Entra sign-in (no passwords) and only encrypted connections.
 
 | Resource (rg-li-dance-events-web, Central US) | What it is | Cost a month |
 | --- | --- | ---: |
 | `psql-li-dance-events` | PostgreSQL 17, Burstable B1ms, 32 GB, 7-day point-in-time restore. Firewall: Azure services only. Microsoft Entra sign-in only; the web app is its administrator. | $18.18 |
-| `app-li-dance-events` + plan `plan-li-dance-events` | App Service, Linux B1 (1 core, 1.75 GB), Node 24 LTS, always on, health check `/api/live` (P58). Code in `server/`. Test address: https://app-li-dance-events.azurewebsites.net (tells search engines not to list it). | $13.14 |
+| `app-li-dance-events` + plan `plan-li-dance-events` | App Service, Linux B1 (1 core, 1.75 GB), Node 24 LTS, always on, health check `/api/live` (P58). Code in `server/`. Test addresses: https://new.longisland.dance (free managed certificate, P59) and https://app-li-dance-events.azurewebsites.net; both tell search engines not to list them. | $13.14 |
 | `id-github-deploy-li-dance-events` | The identity GitHub Actions uses to deploy the app, from `main` only (federated credential, no secret; subject `repo:michaelsrichter@1242059/long-island-dance-events@1402631995:ref:refs/heads/main`, the format with GitHub's account and repository ids that this repository's tokens use). It may only change this one app. | $0 |
 
 Phase 1 ran on a small Azure Functions app (`func-li-dance-events`, plan `asp-li-dance-events`, storage `stlidancefunc`). It was deleted on October 6, after the App Service app had run the sync (P58). Its database role still owned the tables (it created them), so only it could change their design, and Azure would not remove it ("objects depend on it"). Migration `server/migrations/002_app_service_owner.sql` makes the App Service app the owner the first time it starts; then the old role is removed:
@@ -310,16 +310,35 @@ If the deploy identity is ever recreated, copy its new client id (`deployClientI
 
 **App settings that matter** (all set by the template): `SITE_URL=https://longisland.dance` (the pages' own address, whatever name the server is reached by), `CANONICAL_HOST=longisland.dance` (any other host name gets `X-Robots-Tag: noindex, nofollow`), `ALLOW_INDEXING=false` until switch day (pages say "noindex" and `robots.txt` disallows everything; deploy with `allowIndexing=true` on switch day), `IMAGE_CACHE_DIR=/home/data/image-cache` (resized photos kept between restarts).
 
-**Run the server on your computer:**
+**Web addresses (host names).** `main.bicep` does not declare them, so running it again never touches them. Each name gets its own small deployment, once its DNS records exist (CNAME `<name>` → `app-li-dance-events.azurewebsites.net`, TXT `asuid.<name>` → the app's `customDomainVerificationId`):
+
+```powershell
+az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
+  --name domain-new --template-file infra/live/custom-domain.bicep --parameters hostName=new.longisland.dance
+```
+
+It binds the name, makes a free App Service managed certificate (renewed by Azure) and turns on HTTPS. To repair a binding later without a moment without HTTPS, add `thumbprint=<the certificate's thumbprint>` (output of the first run). `new.longisland.dance` was set up this way on October 6 (certificate thumbprint `BB37118EB7F44110A996A57978EDEE4063F1F17C`, valid to 2027-04-06).
+
+**Pages from the database (P59).** Every 2 seconds the server reads `site_state.data_version`; when it changed, it reads every record again (only changed ones are checked again) and the next visitor sees the change. `/api/health` shows `pages.dataVersion` (what the pages show) next to `dataVersion` (the database's), and lists any record it had to leave out. Sitemap "last changed" dates are kept in the `sitemap_state` table (filled once from the live site's `/sitemap-state.json`).
+
+**Run the server on your computer** (with a local PostgreSQL; the pages then come from it):
 
 ```powershell
 npm run build                                   # the static site (also makes the resized photos)
 npm run build:server -- --static-images dist    # the server site in server/site, with the photos and share pictures
 npm ci --prefix server
+npx tsx scripts/db/build-payload.ts --out payload.json.gz
+$env:DATABASE_URL='postgres://postgres@127.0.0.1:5432/lidance_live'   # an empty test database
+node scripts/live/load-db.mjs payload.json.gz
 $env:PORT='8080'; $env:SITE_URL='https://longisland.dance'; $env:ALLOW_INDEXING='true'; node server/src/main.js
 # in another window: every file of the static site must come back identical
 node scripts/live/parity.mjs --static dist --base http://127.0.0.1:8080
+# and a change in the database must show on its page within seconds (test databases only)
+node scripts/live/change-check.mjs --base http://127.0.0.1:8080
 ```
+
+Without `DATABASE_URL` the server uses the records it was built with. To compare the test address with the static site: build the deployed commit with the same settings as the server (`ALLOW_INDEXING=false`, the `PUBLIC_*` variables), then `node scripts/live/parity.mjs --static dist --base https://new.longisland.dance --host new.longisland.dance --concurrency 6`.
+
 ### Moving the rest to Central US
 
 | Today in East US 2 | When it moves | How |

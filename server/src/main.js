@@ -5,7 +5,9 @@
 import http from 'node:http';
 import { route } from './app.js';
 import { clientAddress, sendResponse, toRequest } from './lib/node-http.js';
-import { closePool, getPool } from './lib/db.js';
+import { closePool } from './lib/db.js';
+import { startLiveData } from './live-data.js';
+import { installSitemapState } from './sitemap-state.js';
 import { appVersion } from './lib/http.js';
 
 const port = Number(process.env.PORT || 8080);
@@ -49,17 +51,16 @@ async function prepare(log) {
   }
 }
 
-/** After a start: open the database connection and prepare the busiest pages, so the first visitors don't wait. */
+/**
+ * After a start: load the records from the database (then every 2 seconds, check for changes), and prepare
+ * the busiest pages so the first visitors don't wait. If the database is slow to answer, the pages are
+ * prepared from the records the site was built with, and again once the database answers.
+ */
 async function warmUp() {
-  if (process.env.PGHOST || process.env.DATABASE_URL) {
-    await getPool()
-      .query('SELECT 1')
-      .then(
-        () => console.log('[server] database connection ready'),
-        (err) => console.warn(`[server] database not reachable yet: ${err.message}`),
-      );
-  }
-  await prepare(true);
+  installSitemapState();
+  const { first } = startLiveData({ onLoaded: () => prepare(false) });
+  const loaded = await Promise.race([first, new Promise((r) => setTimeout(() => r(false), 30_000).unref())]);
+  if (!loaded) await prepare(true);
 }
 
 server.listen(port, () => {
