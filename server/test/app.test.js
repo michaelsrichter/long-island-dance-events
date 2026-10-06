@@ -82,7 +82,15 @@ const { clientAddress, sendResponse, toRequest } = await import('../src/lib/node
 let server;
 let base;
 before(async () => {
-  server = http.createServer(async (req, res) => sendResponse(req, res, await route(toRequest(req), { clientAddress: clientAddress(req) }), { startedAt: performance.now() }));
+  // The same handling as server/src/main.js.
+  server = http.createServer(async (req, res) => {
+    try {
+      await sendResponse(req, res, await route(toRequest(req), { clientAddress: clientAddress(req) }), { startedAt: performance.now() });
+    } catch (err) {
+      if (!res.headersSent) res.writeHead(500).end(String(err));
+      else res.destroy();
+    }
+  });
   await new Promise((r) => server.listen(0, '127.0.0.1', r));
   base = `http://127.0.0.1:${server.address().port}`;
 });
@@ -122,7 +130,10 @@ test('unknown /api addresses are 404 and wrong methods 405, never the website', 
 test('sync endpoints refuse callers without a GitHub token (before touching the database)', async () => {
   const r = await fetch(`${base}/api/sync/import`, { method: 'POST', body: '{}' });
   assert.equal(r.status, 401);
-  assert.equal((await fetch(`${base}/api/sync/export`)).status, 401);
+  await r.arrayBuffer();
+  const e = await fetch(`${base}/api/sync/export`);
+  assert.equal(e.status, 401);
+  await e.arrayBuffer();
 });
 
 test('files: the old host rules decide cache times and headers', async () => {
@@ -270,7 +281,53 @@ test('pages that set cookies are sent with every cookie and never remembered', a
   assert.equal(globalThis.renders - before, 2);
 });
 
+test('a visitor who leaves halfway is normal: sending ends quietly, the server keeps answering', async () => {
+  // A reply made slowly, piece by piece, so the visitor really leaves in the middle.
+  let timer;
+  const slow = () =>
+    new Response(
+      new ReadableStream({
+        start(controller) {
+          let n = 0;
+          timer = setInterval(() => {
+            if (n++ < 40) controller.enqueue(new TextEncoder().encode('x'.repeat(64 * 1024)));
+            else {
+              clearInterval(timer);
+              controller.close();
+            }
+          }, 20);
+        },
+        cancel() {
+          clearInterval(timer);
+        },
+      }),
+      { headers: { 'content-type': 'application/octet-stream' } },
+    );
+  const outcome = [];
+  const s = http.createServer((req, res) => {
+    sendResponse(req, res, slow()).then(
+      () => outcome.push('ok'),
+      (err) => outcome.push(err.code ?? err.message),
+    );
+  });
+  await new Promise((r) => s.listen(0, '127.0.0.1', r));
+  await new Promise((resolve, reject) => {
+    const req = http.get(`http://127.0.0.1:${s.address().port}/`, (res) => {
+      res.once('data', () => {
+        req.destroy();
+        resolve();
+      });
+    });
+    req.on('error', (err) => (err.code === 'ECONNRESET' ? resolve() : reject(err)));
+  });
+  for (let i = 0; i < 50 && !outcome.length; i++) await new Promise((r) => setTimeout(r, 20));
+  s.closeAllConnections();
+  await new Promise((r) => s.close(r));
+  assert.deepEqual(outcome, ['ok'], 'not reported as a server error');
+  assert.equal((await get('/api/live')).status, 200);
+});
 test('the website only answers GET and HEAD', async () => {
   const r = await fetch(`${base}/`, { method: 'POST', body: 'x', headers: SITE });
   assert.equal(r.status, 405);
+  await r.arrayBuffer();
 });
