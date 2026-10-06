@@ -5,7 +5,7 @@
 import http from 'node:http';
 import { route } from './app.js';
 import { clientAddress, sendResponse, toRequest } from './lib/node-http.js';
-import { closePool } from './lib/db.js';
+import { closePool, getPool } from './lib/db.js';
 import { appVersion } from './lib/http.js';
 
 const port = Number(process.env.PORT || 8080);
@@ -32,7 +32,33 @@ const server = http.createServer(async (req, res) => {
 server.keepAliveTimeout = 230_000;
 server.headersTimeout = 235_000;
 
-server.listen(port, () => console.log(`[server] version ${appVersion().commit} listening on ${port}`));
+/** After a start: open the database connection and prepare the busiest pages, so the first visitors don't wait. */
+async function warmUp() {
+  if (process.env.PGHOST || process.env.DATABASE_URL) {
+    await getPool()
+      .query('SELECT 1')
+      .then(
+        () => console.log('[server] database connection ready'),
+        (err) => console.warn(`[server] database not reachable yet: ${err.message}`),
+      );
+  }
+  const host = process.env.CANONICAL_HOST || 'longisland.dance';
+  for (const path of ['/', '/events/']) {
+    const started = performance.now();
+    try {
+      const res = await route(new Request(`https://${host}${path}`), {});
+      await res.arrayBuffer();
+      console.log(`[server] prepared ${path} (${res.status}, ${Math.round(performance.now() - started)} ms)`);
+    } catch (err) {
+      console.warn(`[server] could not prepare ${path}: ${err.message}`);
+    }
+  }
+}
+
+server.listen(port, () => {
+  console.log(`[server] version ${appVersion().commit} listening on ${port}`);
+  warmUp();
+});
 
 function stop(signal) {
   console.log(`[server] ${signal}: finishing open requests`);
