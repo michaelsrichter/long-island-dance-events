@@ -1,4 +1,6 @@
 ---
+import type { InferGetStaticPropsType } from 'astro';
+import { pageProps } from '../../lib/page-props';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
@@ -21,7 +23,9 @@ import { venueMeta } from '../../lib/entity-meta';
 export async function getStaticPaths() {
   return (await getCollection('venues')).map((v) => ({ params: { slug: v.id }, props: { venue: v } }));
 }
-const { venue } = Astro.props;
+const routeProps = await pageProps<InferGetStaticPropsType<typeof getStaticPaths>>(Astro, getStaticPaths);
+if (!routeProps) return Astro.rewrite('/404');
+const { venue } = routeProps;
 const v = venue.data;
 const events = await upcomingFor((e) => e.venue?.id === venue.id);
 const full = [v.name, v.address, `${v.town}, ${v.state} ${v.postalCode ?? ''}`.trim()].join(', ');

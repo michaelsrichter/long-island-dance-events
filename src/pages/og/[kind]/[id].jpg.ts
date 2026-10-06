@@ -1,4 +1,5 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
+import { pageProps } from '../../../lib/page-props';
 import { allEntityMeta, type EntityMeta } from '../../../lib/entity-meta';
 import { logoPlate, photoPanel, renderSocialJpeg } from '../../../lib/og';
 
@@ -10,7 +11,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const fsPath = (img: unknown): string | undefined => (img as { fsPath?: string } | undefined)?.fsPath;
 
-export const GET: APIRoute = async ({ props }) => {
+export const GET: APIRoute = async (ctx) => {
+  const props = await pageProps(ctx, getStaticPaths);
+  if (!props) return new Response('Not found', { status: 404 });
   const meta = props.meta as EntityMeta;
   const photoPath = fsPath(meta.photo?.image);
   const logoPath = fsPath(meta.logo?.image);

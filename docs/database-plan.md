@@ -5,7 +5,7 @@
 > Companion files: [`catalog/schema.sql`](../catalog/schema.sql) (the database design), [`catalog/queries.sql`](../catalog/queries.sql) (sample reports),
 > [`catalog/scripts/build-sqlite.ts`](../catalog/scripts/build-sqlite.ts) (builds the database), [`docs/source-catalog.md`](source-catalog.md) (the sources).
 >
-> **Update, October 5, 2026:** the owner approved moving the site to a live PostgreSQL database, so edits show up in seconds without republishing: [proposals/postgres-live-site.md](proposals/postgres-live-site.md) (decision P54). Phase 1 (decision P56) keeps a copy of the content in that database, refreshed every night ([deployment.md](deployment.md#live-database-phase-1)); git stays the master copy until the switch, so the rest of this page still describes how things work.
+> **Update, October 5, 2026:** the owner approved moving the site to a live PostgreSQL database, so edits show up in seconds without republishing: [proposals/postgres-live-site.md](proposals/postgres-live-site.md) (decision P54). Phase 1 (decision P56) keeps a copy of the content in that database, refreshed every night ([deployment.md](deployment.md#live-database-and-server-phases-1-and-2)); git stays the master copy until the switch, so the rest of this page still describes how things work.
 
 ## The short version
 

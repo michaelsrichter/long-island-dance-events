@@ -4,6 +4,7 @@ import placesData from '../data/long-island-places.json';
 import { buildNow, getAllEvents, type ResolvedEvent } from './content';
 import { isUpcoming } from './event-core';
 import { distanceKm, townSlug } from './places';
+import { remember } from './freshness';
 
 export { distanceKm, townHref, townSlug } from './places';
 
@@ -20,42 +21,41 @@ export interface Town {
 
 const COUNTY = new Map((placesData.places as { name: string; county: 'Nassau' | 'Suffolk' }[]).map((p) => [p.name.toLowerCase(), p.county]));
 
-let cache: Promise<Town[]> | undefined;
-
 export function getTowns(): Promise<Town[]> {
-  cache ??= (async () => {
-    const now = buildNow();
-    const [venues, all] = await Promise.all([getCollection('venues'), getAllEvents()]);
-    const upcoming = all.filter((e) => isUpcoming(e, now));
-    const towns = new Map<string, Town>();
-    const get = (name: string) => {
-      const slug = townSlug(name);
-      let t = towns.get(slug);
-      if (!t) {
-        t = { slug, name, county: COUNTY.get(name.toLowerCase()), events: [], venues: [] };
-        towns.set(slug, t);
-      }
-      return t;
-    };
-    for (const v of venues) {
-      const t = get(v.data.town);
-      t.venues.push(v);
-      t.county ??= v.data.county;
-    }
-    for (const e of all) if (e.location.town) get(e.location.town);
-    for (const e of upcoming) if (e.location.town) get(e.location.town).events.push(e);
-    for (const t of towns.values()) {
-      const pts = t.venues.filter((v) => v.data.latitude !== undefined && v.data.longitude !== undefined);
-      if (pts.length) {
-        t.lat = pts.reduce((a, v) => a + v.data.latitude!, 0) / pts.length;
-        t.lng = pts.reduce((a, v) => a + v.data.longitude!, 0) / pts.length;
-      }
-      t.venues.sort((a, b) => a.data.name.localeCompare(b.data.name));
-    }
-    return [...towns.values()].sort((a, b) => a.name.localeCompare(b.name));
-  })();
-  return cache;
+  return towns();
 }
+
+const towns = remember(async () => {
+  const now = buildNow();
+  const [venues, all] = await Promise.all([getCollection('venues'), getAllEvents()]);
+  const upcoming = all.filter((e) => isUpcoming(e, now));
+  const towns = new Map<string, Town>();
+  const get = (name: string) => {
+    const slug = townSlug(name);
+    let t = towns.get(slug);
+    if (!t) {
+      t = { slug, name, county: COUNTY.get(name.toLowerCase()), events: [], venues: [] };
+      towns.set(slug, t);
+    }
+    return t;
+  };
+  for (const v of venues) {
+    const t = get(v.data.town);
+    t.venues.push(v);
+    t.county ??= v.data.county;
+  }
+  for (const e of all) if (e.location.town) get(e.location.town);
+  for (const e of upcoming) if (e.location.town) get(e.location.town).events.push(e);
+  for (const t of towns.values()) {
+    const pts = t.venues.filter((v) => v.data.latitude !== undefined && v.data.longitude !== undefined);
+    if (pts.length) {
+      t.lat = pts.reduce((a, v) => a + v.data.latitude!, 0) / pts.length;
+      t.lng = pts.reduce((a, v) => a + v.data.longitude!, 0) / pts.length;
+    }
+    t.venues.sort((a, b) => a.data.name.localeCompare(b.data.name));
+  }
+  return [...towns.values()].sort((a, b) => a.name.localeCompare(b.name));
+});
 
 /** The closest towns that have something coming up. */
 export function nearbyTowns(town: Town, all: Town[], n = 6): (Town & { km: number })[] {

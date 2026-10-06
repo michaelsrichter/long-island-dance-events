@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "node scripts/build-cms-config.mjs && astro dev",
     "build": "astro build && node scripts/postbuild.mjs",
+    "build:server": "node scripts/live/build-server.mjs",
     "prebuild": "node scripts/build-cms-config.mjs",
     "preview": "astro preview --port 4321",
     "check": "astro check",

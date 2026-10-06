@@ -1,4 +1,5 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
+import { pageProps } from '../../../lib/page-props';
 import { getCollection } from 'astro:content';
 import { getEventGroups, getSettings } from '../../../lib/content';
 import { PAGE_IMAGE_IDS, PAGE_TITLES, type PageImageId } from '../../../lib/entity-meta';
@@ -9,7 +10,9 @@ export const getStaticPaths: GetStaticPaths = () => PAGE_IMAGE_IDS.map((id) => (
 
 const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
 
-export const GET: APIRoute = async ({ params }) => {
+export const GET: APIRoute = async (ctx) => {
+  if (!(await pageProps(ctx, getStaticPaths))) return new Response('Not found', { status: 404 });
+  const { params } = ctx;
   const id = params.id as PageImageId;
   const [s, g, venues, performers, instructors, organizers, styles, sources] = await Promise.all([
     getSettings(),

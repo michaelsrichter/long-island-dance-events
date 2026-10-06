@@ -1,7 +1,8 @@
 # Proposal: a live database, so changes show up in seconds
 
-> **Status: approved by the owner on October 5, 2026 (decision P54), with his answers in [section 16](#16-open-questions).** Phase 0 ([section 12](#12-phase-0-quick-wins-we-can-ship-right-after-approval), 0a and 0b) shipped on October 5 (decision P55). Phase 1 (the database) started on October 5 (decision P56).
+> **Status: approved by the owner on October 5, 2026 (decision P54), with his answers in [section 16](#16-open-questions).** Phase 0 ([section 12](#12-phase-0-quick-wins-we-can-ship-right-after-approval), 0a and 0b) shipped on October 5 (decision P55). Phase 1 (the database) shipped on October 5 (decisions P56 and P57). Phase 2 started on October 5 on **App Service B1** (decision P58, see the box below).
 > Prices are Azure list prices for East US 2, checked October 5, 2026 (see [Prices we checked](#18-prices-we-checked)). **Region (P57):** everything moves to **Central US** (Iowa). It is the only US region where this Visual Studio subscription may create PostgreSQL that also has everything else the site uses (Static Web Apps, Functions, Content Safety, Logic Apps, monitoring). East US and East US 2 do not allow PostgreSQL or Azure SQL for this subscription. The database costs a little more there: about $18.18 a month instead of $16.09. **No private network** (owner's choice; this data is not sensitive): the database has a public address, but only Azure services may connect, only with Microsoft Entra sign-in and only encrypted.
+> **Host (P58, October 5):** the owner asked whether App Service would be better for search engines and AI assistants. It is: one small server that is **always on** (no cold starts, a full processor core), so every page answers equally fast. Pages are now made by **App Service B1** (Linux, Central US, about $13.14 a month) instead of Azure Functions, and **Static Web Apps goes away** at the switch (App Service serves the files too). **No CDN for now:** Azure Front Door costs at least $35 a month, and Azure's cheaper classic CDN stopped taking new customers on August 15, 2025. A free option stays open (photos and scripts from a free Static Web Apps address, `ASSETS_PREFIX`). New total after the switch: **about $33 a month** ([costs](#13-costs-before-and-after)). Where this page still says Functions, read App Service.
 > Related: [database-plan.md](../database-plan.md), [architecture.md](../architecture.md), decisions P46, P47, P48, P51 and P52 in [decision-log.md](../decision-log.md).
 
 ## The short version
@@ -10,9 +11,9 @@
 - **The honest part.** A database alone does not remove the wait. If pages are still made ahead of time, a change in the database still needs a rebuild. Changes show up **in seconds** only if each page is made **when a visitor asks for it**, straight from the database, and then kept in a short-term memory (a *cache*) until something changes.
 - **What we recommend (option A).** Keep everything that works and change three things:
   1. Listings, venues, bands and DJs, teachers, organizers, dance styles, sources and help pages move into a small **PostgreSQL database** in Azure (Flexible Server, Burstable B1ms, already approved in P52).
-  2. Pages are made on request by **Azure Functions** (Flex Consumption plan, with one copy always running), using the same Astro page code we have today. If a test of Functions fails, the same code runs on a small **App Service** server instead.
+  2. Pages are made on request by a small, always-on **App Service** server (Linux B1, decision P58), using the same Astro page code we have today. (The first plan used Azure Functions; the owner chose App Service for steady speed.)
   3. The **review center** (`/moderate/`) becomes the one place to edit everything. Press Save and the site shows the change a few seconds later. No pull requests, no rebuilds.
-- **Cost:** about **$9.80 a month today**, about **$25 a month after**. While the old and new sites both run (phases 1 to 4), about $28 to $33. The owner chose no "safety month": the old site is deleted once the switch-day checks pass. See [costs](#13-costs-before-and-after).
+- **Cost:** about **$9.80 a month today**, about **$33 a month after** (App Service, P58). While the old and new sites both run (phases 2 to 4), about $41 to $42. The owner chose no "safety month": the old site is deleted once the switch-day checks pass. See [costs](#13-costs-before-and-after).
 - **Search engines and AI assistants:** every web address stays the same, with the same tags, sitemaps, structured data and share pictures. Two limits go away: every event date gets its own share picture (not only the next 21 days), and there is no more 15,000-file limit.
 - **Sign-in:** the same Microsoft sign-in (Entra External ID). Most people won't notice the move; at worst someone types an email code once more. Likes, notes, photos and saved events are kept.
 - **Safety:** we build the new site next to the old one at `new.longisland.dance`, compare every page automatically until they match, and only then switch. The old site is deleted once the switch-day checks pass (owner's choice); it could be rebuilt from its template and the nightly export if ever needed.
@@ -83,7 +84,7 @@ What "in seconds" means in practice:
 ## 3. Ways to do it (options compared)
 
 - **A. Pages made on request by Azure Functions + PostgreSQL (recommended).** One Function App (Flex Consumption plan, one always-ready copy with 512 MB of memory) makes every page and also runs today's `/api` code. It answers at `longisland.dance` directly. Static Web Apps retires after the safety month.
-- **A2. The same, on App Service B1 (the backup host).** The same Astro code on a small server that is always on (1 processor core, 1.75 GB of memory). We switch to A2 only if Functions fails the test at the start of phase 2 (see [4.6](#46-the-functions-test-and-the-backup-host)).
+- **A2. The same, on App Service B1 (the backup host).** The same Astro code on a small server that is always on (1 processor core, 1.75 GB of memory). We switch to A2 only if Functions fails the test at the start of phase 2 (see [4.6](#46-the-server-app-service-b1-p58)).
 - **B. Keep pre-built pages + PostgreSQL + automatic rebuilds + a "live patch".** The database is the master copy. Every change starts a rebuild a few minutes later. Until it finishes, a small script in each page asks the database "what changed since this page was built?" and patches what it shows (cancelled, new time, new venue).
 - **C. Pages made on request by Azure Container Apps + PostgreSQL.** Like A, but the code runs in a container. The collector could also run in Azure as a Container Apps job. (Container Apps *express* can't use our own domain name, so it would be the standard kind.)
 
@@ -110,6 +111,8 @@ What "in seconds" means in practice:
 
 **Why A:** it is the cheapest way to get changes live in seconds. It keeps all the SEO work. The `/api` code is already Azure Functions code, so it moves over almost unchanged. Updates happen without downtime. And if the Functions test fails, the same site runs on App Service (A2) for about $7 a month more.
 
+**Update (P58):** the owner chose **A2, App Service B1**, before the Functions test: steady speed for search engines and AI assistants matters more to him than about $8 a month. Everything else in option A stays the same.
+
 ## 4. The recommended design (option A) in detail
 
 ```mermaid
@@ -117,7 +120,7 @@ flowchart TB
   V["Visitors, Google, Bing,<br/>AI assistants"] -->|"https://longisland.dance"| FA
   O["Owner in the review center<br/>/moderate/"] --> FA
   subgraph Azure["Azure (your subscription, Central US)"]
-    subgraph FA["Function App (Flex Consumption), 1 to 3 copies"]
+    subgraph FA["App Service B1, Linux, always on (P58)<br/>one Node program: server/"]
       SIGN["Built-in sign-in<br/>/.auth/login/extid"]
       PAGES["Astro pages made on request<br/>+ page cache"]
       API["Today's /api code<br/>community, review center"]
@@ -141,9 +144,9 @@ flowchart TB
 ### 4.1 How a visitor gets a page
 
 1. A browser asks for, say, `/events/2026-10-17-swing-night-huntington/`.
-2. The Function App checks its **page cache**. If the page was made since the last change, it is sent at once.
+2. The server checks its **page cache**. If the page was made since the last change, it is sent at once.
 3. If not, Astro makes the page from the **in-memory copy** of all listings. The copy is small: about 1,400 records, a few megabytes. Making a page takes a few hundredths of a second. The result goes into the cache.
-4. Browsers are told to check back each time (`Cache-Control: no-cache` with an `ETag`). If nothing changed, the server answers "not changed" with almost no data, so nobody ever sees an old page.
+4. Browsers may reuse a page for 30 seconds, the same as on today's site (`Cache-Control: public, must-revalidate, max-age=30`). After that they check back with an `ETag`; if nothing changed, the server answers "not changed" with almost no data.
 5. Files whose names change with every code update (CSS, JavaScript, fonts) are kept by browsers for a year. Share pictures have a fingerprint of their facts in the address, so a new picture gets a new address when the facts change.
 
 ### 4.2 How a change goes live
@@ -151,7 +154,7 @@ flowchart TB
 ```mermaid
 sequenceDiagram
   participant O as Owner (review center)
-  participant F as Function App
+  participant F as App Service server
   participant DB as PostgreSQL
   participant V as Next visitor
   participant S as Bing / IndexNow
@@ -166,7 +169,7 @@ sequenceDiagram
   F->>S: Changed addresses (sent in batches every few minutes)
 ```
 
-Every copy of the Function App asks the database "has anything changed?" at most every 2 seconds. This is one tiny question, about a thousandth of a second. When the answer is yes, the copy reloads the changed records and clears its cache. This works the same on Functions and on App Service, and it needs no always-open connection.
+The server asks the database "has anything changed?" at most every 2 seconds. This is one tiny question, about a thousandth of a second. When the answer is yes, it reloads the changed records and clears its cache. It needs no always-open connection. A new day on Long Island also clears the cache, so "upcoming" and repeating dates move on by themselves (`src/lib/freshness.ts`).
 
 ### 4.3 If the database is down
 
@@ -185,27 +188,30 @@ It keeps serving the site until the switch, unchanged. On switch day, once the c
 | Time to first byte for Long Island visitors, 3 out of 4 visits | under 0.3 seconds |
 | Lighthouse scores (`lighthouserc.json`) | the same limits as today, checked against `new.longisland.dance` before the switch |
 
-Our code compresses pages and files (Brotli or gzip), because Functions doesn't do it for us. Pages, CSS and JavaScript stay exactly as they are today, so loading speed in the browser doesn't change.
+Our code compresses pages and files (Brotli or gzip), because App Service doesn't do it for us. Pages, CSS and JavaScript stay exactly as they are today, so loading speed in the browser doesn't change.
 
-### 4.6 The Functions test and the backup host
+### 4.6 The server: App Service B1 (P58)
 
-Astro has no official connector for Azure Functions. We write a small one, about a hundred lines, that hands each request to Astro's standard `App.render()` and returns the answer. To be safe, **phase 2 starts with a test** before anything else is built on it.
+The owner chose **App Service** over Functions (P58): one small Linux server (1 processor core, 1.75 GB of memory) that is **always on**, so no visitor ever waits for it to start. One Node program (`server/`) does everything:
 
-Pass criteria for the test (on `new.longisland.dance`, with a copy of real data):
+- **Pages:** the same Astro pages, built a second time for the server (`npm run build:server`). A small connector (`server/astro-adapter/`) hands each request to Astro. Pages need no changes; dynamic pages find their data with `src/lib/page-props.ts`.
+- **Files and photos:** scripts, styles, fonts and photos come from the same server. Resized photos keep **exactly the same addresses** as today, so search engines keep their image history.
+- **The old host's rules:** the same security headers, cache times, redirects (`www` and missing slashes) and "please sign in" pages as `staticwebapp.config.json` (`server/src/rules.js`).
+- **Speed:** finished pages are kept in memory (`server/src/site.js`), and pages are compressed.
+- **Safety check on every change:** GitHub builds the static site and the server site from the same commit, starts the server and checks that **every file is identical** (`scripts/live/parity.mjs`). Only then does it deploy.
 
-- The home page, the events list, an event page, a venue page, a share picture, `sitemap-events.xml` and sign-in all work, with the same HTML as today.
-- A cached page answers in under 0.05 seconds at the server; a fresh event page in under 1 second; a fresh share picture in under 2 seconds.
-- With 20 visitors at once for 5 minutes, no errors and no more than 3 copies.
+Pass criteria (on the test address, then `new.longisland.dance`):
+
+- Every page, file, sitemap and share picture is the same as on today's site. **Met on October 5: all 5,618 files identical.**
+- A remembered page answers in under 0.05 seconds at the server; a fresh event page in under 1 second; a fresh share picture in under 2 seconds.
+- With 20 visitors at once for 5 minutes, no errors.
 - A code update happens without any failed request.
-- After 30 minutes with no visitors, the always-ready copy still answers without a cold start.
 
-If any of these fails and can't be fixed simply, we use **App Service B1** (option A2): the same Astro code with the official Node adapter, and a small adapter for the `/api` code. About $7 a month more.
+Things to know:
 
-Things to know about Functions:
-
-- The Function App serves pages from the root (`routePrefix: ""`). Azure keeps two root paths for itself, `/admin` and `/runtime`. `/admin/` is the Decap editor, which retires anyway; old links to it would show an error page.
-- At most 3 copies run at once (one always-ready, up to 2 more when busy). That protects the database, which allows 35 connections. Each copy uses at most 5.
-- The Function App gets its own **managed identity**, so it reaches PostgreSQL and Storage without any keys. (Today's Static Web Apps Functions can't do that; it is why P38 had to use a storage key.)
+- The server signs in to PostgreSQL with its own **managed identity**, so there are no keys. (Today's Static Web Apps Functions can't do that; it is why P38 had to use a storage key.)
+- It uses at most 5 of the database's 35 connections.
+- Until the switch, the test address tells search engines not to list it (`X-Robots-Tag: noindex`), so Google never sees two copies of the site.
 
 ## 5. Sign-in for visitors and moderators
 
@@ -213,7 +219,7 @@ Things to know about Functions:
 
 **What changes, and why nobody loses anything:**
 
-| Today (Static Web Apps) | After (Function App) |
+| Today (Static Web Apps) | After (App Service) |
 | --- | --- |
 | After each sign-in, Static Web Apps asks `/api/roles` for the person's roles. | Built-in sign-in has no such step, so our code works out the roles on each request with the same rules as `api/src/functions/roles.js`: `admin` if the email is in `ADMIN_EMAILS`, `member` unless banned or under 13. The answer is remembered for a minute. |
 | `/moderate/*`, `/api/review/*` and `/api/moderation/*` are protected by route rules. | Our code protects the same paths and shows the same "You're signed out" and `/not-allowed/` pages. |
@@ -255,7 +261,7 @@ The collector keeps running on **GitHub Actions**. That is free and already has 
 sequenceDiagram
   participant W as Collector (GitHub Actions)
   participant GH as GitHub
-  participant F as Function App
+  participant F as App Service server
   participant DB as PostgreSQL
   W->>GH: Ask for a signed token (OIDC)
   GH-->>W: Token: "ingest-scheduled.yml on main of<br/>michaelsrichter/long-island-dance-events"
@@ -292,7 +298,7 @@ sequenceDiagram
 Only two things change:
 
 1. People are matched by their Microsoft account id, as explained in [section 5](#5-sign-in-for-visitors-and-moderators).
-2. The community `/api` code moves into the new Function App. It is already Azure Functions code, so it moves almost unchanged, and it can now use the managed identity instead of a storage key.
+2. The community `/api` code moves into the App Service server. It is written as Azure Functions code today, so it gets a small adapter (the same one the phase 1 sync code got) and otherwise stays unchanged. It can now use the managed identity instead of a storage key.
 
 **Later (optional, phase 6):** move it into PostgreSQL when you want reports like "most-liked venues this year", or want like counts in the page itself instead of loaded afterwards.
 
@@ -380,13 +386,13 @@ erDiagram
 | `source_runs` | Each collector run per source: found, kept, errors, report |
 | `review_state` | Snoozes and review-center settings (today in the `ReviewState` table) |
 | `page_fingerprints` | A fingerprint of each page's facts and when it last changed, for sitemaps and IndexNow |
-| `site_state` | The data version number that every copy of the Function App checks |
+| `site_state` | The data version number that the server checks |
 
 - **Search:** PostgreSQL full-text search for the review center's search box, and `pg_trgm` ("similar spelling") to match venue and band names. That helps the collector avoid duplicates. The site's event filters keep working in the browser, as today.
 - **"Near me":** not needed in the database yet. With 161 venues, the browser can sort by distance itself. If we ever want it in SQL, the small `earthdistance` add-on is enough; PostGIS would be more than we need.
 - **Size:** a few megabytes. The smallest storage size (32 GB) leaves room for many years.
 - **Security:** the database's firewall lets in only Azure services, never the open internet. It accepts only Microsoft Entra sign-in (no database passwords), and only encrypted connections. The Function App's managed identity is the only writer. There is no private network: the owner chose simplicity, because this data is public listings (P57).
-- **Changing the database design later:** changes are plain SQL files in the repository. A new version of the Function App applies them when it starts, one copy at a time.
+- **Changing the database design later:** changes are plain SQL files in the repository. A new version of the server applies them when it starts, one copy at a time.
 - **Reports for you:** the SQLite report keeps working from the nightly export. A Reports tab in the review center can come later.
 
 ## 11. Moving over safely
@@ -407,7 +413,7 @@ flowchart LR
 | --- | --- | --- | --- | --- |
 | **0. Quick wins** | Section 12: direct publishing in `/admin/`, faster deploys | Changes appear sooner | Deploy times in GitHub | Revert the commit |
 | **1. Database and import** | PostgreSQL (only Azure services may connect, Entra sign-in), the Function App shell, the database design, an import script (files → database) and an export script (database → files). While git is still the master copy, the database is refilled from git every night. | Nothing | The export equals today's files byte for byte; restore drill passes | Delete the new Azure resources |
-| **2. New site on the side** | Starts with the Functions test ([4.6](#46-the-functions-test-and-the-backup-host)). Then: pages made on request from the database, page cache and version check, share pictures saved in Blob, sitemaps and IndexNow from the database, security headers, the `/api` code moved in, built-in sign-in with the user lookup, `/api/session`. | Nothing (`new.longisland.dance` says "don't index") | Parity check clean 3 runs in a row ([11.2](#112-the-parity-check-new-site-vs-old-site)); accessibility (axe) and Lighthouse pass; sign-in test passes; visual check in light and dark mode, phone and desktop, and at 320 px | Delete the test site |
+| **2. New site on the side** | Starts with the server and its page-by-page check ([4.6](#46-the-server-app-service-b1-p58); done October 5). Then: pages made on request from the database, page cache and version check, share pictures saved in Blob, sitemaps and IndexNow from the database, security headers, the `/api` code moved in, built-in sign-in with the user lookup, `/api/session`. | Nothing (`new.longisland.dance` says "don't index") | Parity check clean 3 runs in a row ([11.2](#112-the-parity-check-new-site-vs-old-site)); accessibility (axe) and Lighthouse pass; sign-in test passes; visual check in light and dark mode, phone and desktop, and at 320 px | Delete the test site |
 | **3. Editing and collector** | Review center: Edit, New, History and Undo for every kind; held listings and sources saved in the database. The collector runs in **shadow mode**: each run makes the pull request as today *and* sends the same changes to the test database, and we compare. You try editing on the test site. | Nothing | Shadow results match the pull requests; you are happy with the editor | Keep using today's tools |
 | **4. Switch day** | [11.3](#113-switch-day-including-namecheap) | Possibly one more sign-in | Smoke test, sign-in test, editing test, parity check on the live address | [11.4](#114-rollback) |
 | **5. Tidy up** | After one quiet month and your OK: delete Static Web Apps, Decap (`/admin/`, `cms/`, `api/src/functions/oauth.js`), the rolling pull request scripts and the git-commit code for content decisions. Update the docs and the budget alert. | Nothing | Costs match section 13 | Static Web Apps can be rebuilt from Bicep and the nightly export |
@@ -426,8 +432,8 @@ A new script (`scripts/parity.mjs`) compares the two sites page by page. It runs
 
 **Before the day (no effect on the live site):**
 
-1. Namecheap: `new` CNAME → the Function App's `azurewebsites.net` address, plus TXT `asuid.new` (during phase 2).
-2. Namecheap: TXT `asuid` and `asuid.www` with the Function App's verification code. This lets Azure accept `longisland.dance` before it points there.
+1. Namecheap: `new` CNAME → the App Service app's `azurewebsites.net` address, plus TXT `asuid.new` (during phase 2).
+2. Namecheap: TXT `asuid` and `asuid.www` with the App Service app's verification code. This lets Azure accept `longisland.dance` before it points there.
 3. Certificate: Azure's free certificate can only be made *after* the name points to the new app, which could mean a short certificate warning. To avoid that, we make a free Let's Encrypt certificate in advance (it needs one more TXT record at Namecheap), install it on the Function App, and switch to Azure's free certificate afterwards. If you prefer, we skip this and switch at a quiet hour instead.
 4. Namecheap: lower the TTL (how long others remember the record) of `@` and `www` to 5 minutes, a day ahead.
 
@@ -435,7 +441,7 @@ A new script (`scripts/parity.mjs`) compares the two sites page by page. It runs
 
 1. Publish the last collector pull request; pause the collector schedule and `/admin/`.
 2. Final import from `main` into the live database; run the parity check one last time.
-3. Namecheap: replace the ALIAS record for `@` with an **A record** pointing at the Function App's IP address (Azure's certificate check for a bare domain asks for an A record), and point the `www` CNAME at the Function App's `azurewebsites.net` address.
+3. Namecheap: replace the ALIAS record for `@` with an **A record** pointing at the App Service app's IP address (Azure's certificate check for a bare domain asks for an A record), and point the `www` CNAME at the App Service app's `azurewebsites.net` address.
 4. Check both names show the right certificate; run `scripts/smoke.mjs https://longisland.dance`, the sign-in test and one edit in the review center.
 5. Switch the collector to talk to the site and restart its schedule. Send all addresses to IndexNow once.
 6. Visual check of the live site (light and dark, phone and desktop, 320 px). Watch the dashboard for a day.
@@ -466,23 +472,23 @@ These need no database and no new Azure resources. They help right away, whateve
 
 Azure list prices checked October 5, 2026: Central US for the database (everything runs there, P57); the other items cost the same in both regions. One month = 730 hours.
 
-| Item | Today | After (option A) | How we got the number |
+| Item | Today | After (App Service, P58) | How we got the number |
 | --- | ---: | ---: | --- |
 | Static Web Apps Standard | $9.00 | $0 (deleted after switch day) | $9 per app per month |
-| Function App: one always-ready copy (512 MB) | — | $5.26 | 0.5 GB × 2,628,000 seconds × $0.000004 |
-| Function App: requests and busy time | — | about $0.20 | Estimate; extra copies get 100,000 GB-seconds and 250,000 requests free each month |
+| App Service plan, Linux B1 (1 core, 1.75 GB, always on) | — | $13.14 | $0.018 per hour (Central US) |
 | PostgreSQL B1ms (1 core, 2 GB memory) | — | $14.02 | $0.01921 per hour (Central US) |
 | PostgreSQL storage, 32 GB | — | $4.16 | $0.13 per GB per month (Central US) |
 | PostgreSQL backups (7 days) | — | $0 | Free up to the server's size |
 | Storage (community data, photos, share pictures, exports) | about $0.10 | about $0.20 | A few GB plus operations |
 | Alerts (P50), plus one database alert | about $0.70 | about $0.80 | About $0.10 per metric alert, $0.50 for the log alert |
 | AI Content Safety (free tier), External ID (free under 50,000 monthly users), Logic App, Application Insights (under the free 5 GB) | $0 | $0 | Unchanged |
-| **Total per month** | **about $9.80** | **about $25** | |
-| **Total per year** | about $118 | about $296 | |
+| **Total per month** | **about $9.80** | **about $33** | |
+| **Total per year** | about $118 | about $390 | |
 
-- **While both sites run (phases 1 to 4):** Static Web Apps ($9) plus the database ($18.18) and the app: almost nothing in phase 1 (no always-ready copy yet), $5.26 more from phase 2. About **$28 a month** in phase 1 and **$33 a month** in phases 2 to 4.
-- **Other options:** A2 on App Service B1, about $32 a month (the server is $12.41 instead of about $5.46). B, about $28. C, about $27 to $53.
-- **If pages ever feel slow:** a bigger always-ready copy (2 GB, one full processor core) costs $21.02 instead of $5.26, bringing the total to about $41.
+- **While both sites run (phases 2 to 4):** Static Web Apps ($9) plus the database ($18.18) and the App Service server ($13.14): about **$41 a month**. (Phase 1 used a small Functions app that cost almost nothing; it is deleted once the App Service server runs.)
+- **Other options:** the first plan, Azure Functions with one always-ready copy, about $25 a month (P54). B, about $28. C, about $27 to $53.
+- **If pages ever feel slow:** App Service B2 (2 cores, 3.5 GB) costs $25.55 instead of $13.14, bringing the total to about $45.
+- **CDN (not used, P58):** Azure Front Door Standard costs $35 a month plus about $0.08 per GB, about $37 to $44 in all. Azure's classic CDN stopped taking new customers on August 15, 2025. Free options if ever needed: scripts, styles and photos from a free Static Web Apps address (`ASSETS_PREFIX`), or Cloudflare's free plan (needs the domain's name servers moved to Cloudflare).
 - **Not included (unchanged):** Web IQ source search (about $4.25 a month), the domain name, GitHub (free) and AgentMail (free).
 - **Budget alert:** raised from $15 to **$40** a month in phase 1 (`infra/monitoring/monitoring.bicep`).
 
@@ -490,7 +496,7 @@ Azure list prices checked October 5, 2026: Central US for the database (everythi
 
 | Risk | How likely | What we do about it |
 | --- | --- | --- |
-| Functions is too slow or flaky with our own Astro connector | Medium | Test it first ([4.6](#46-the-functions-test-and-the-backup-host)); the backup host (App Service B1) runs the same code |
+| Our own Astro connector shows something different from today's site | Low | Every change is checked file by file against the static site before it deploys ([4.6](#46-the-server-app-service-b1-p58)); on October 5 all 5,618 files matched |
 | Search rankings dip because pages changed | Low with checks | Parity check before the switch; IndexNow; watch Bing and Google webmaster tools after |
 | People lose likes, notes or saved events when sign-in moves | Low | Lookup by Microsoft account id; the sign-in test; the script lists anyone it can't match (expected: nobody) |
 | Mistakes when moving the data | Low | Round-trip test; restore drill; history; point-in-time restore; nightly export |
@@ -502,7 +508,7 @@ Azure list prices checked October 5, 2026: Central US for the database (everythi
 | Certificate warning on switch day | Low | Certificate made in advance ([11.3](#113-switch-day-including-namecheap)) |
 | The Azure subscription's credit or spending limit runs out, and Azure stops the resources | Unknown | You check the subscription type and limit ([open questions](#16-open-questions)); budget alert at $40 |
 | Clashing with work in progress (review center, sign-in, rolling collector PR) | Medium | Phases build on that work ([19](#19-how-this-fits-with-work-in-progress)); phase 3 starts after the review center work is merged |
-| Functions details: `/admin` and `/runtime` are reserved, the `TZ` setting isn't supported, a copy must start within 30 seconds | Low | `/admin/` retires anyway; our code already uses `America/New_York` everywhere (`src/lib/time.ts`); listings load after start |
+| One server means a short pause when Azure restarts it for updates (a few seconds, about once a month) | Low | Health check on `/api/live`; pages are remembered again within seconds; B2 or a second copy can be added later if ever needed |
 
 ## 15. What you (the owner) need to do
 
@@ -541,13 +547,13 @@ Sizes are relative (small, medium, large), with no dates. Each phase ends with s
 | --- | --- | --- | --- |
 | 0 | Small (1 pull request) | CMS setting, build cache, picture fingerprints | Workflows, picture code |
 | 1 | Medium | Bicep for PostgreSQL and Function App; database design; import and export scripts; round-trip test; budget | `catalog/schema.sql` ideas, Zod schemas, `ingest/lib/store.ts` file layout |
-| 2 | **Large** (the biggest) | Functions test and Astro connector; data layer; page cache and version check; share pictures in Blob; sitemaps and IndexNow; headers; `/api` move; sign-in and user lookup; parity script | All page code, `src/lib/*`, `/api` code and tests, smoke and sign-in tests |
+| 2 | **Large** (the biggest) | Server and Astro connector (done); data layer; page cache and version check; share pictures in Blob; sitemaps and IndexNow; headers; `/api` move; sign-in and user lookup; parity script | All page code, `src/lib/*`, `/api` code and tests, smoke and sign-in tests |
 | 3 | **Large** | Editor forms, History and Undo, saving to the database, collector API and shadow mode | Review center screens and decision code, `cms/config.yml` field lists, `ingest/lib/merge.ts` |
 | 4 | Small | Switch-day checklist | `scripts/smoke.mjs`, `scripts/e2e-signin.mjs` |
 | 5 | Small to medium | Removals and doc updates | — |
 | 6 | Medium (optional) | Community data in PostgreSQL, reports, search | Community API code |
 
-The biggest unknown is the Functions connector. That is why phase 2 starts with the test.
+The biggest unknown was the Astro connector. It is done and checked: all 5,618 files of the static site come back identical from the server (October 5).
 
 ## 18. Prices we checked
 
@@ -559,7 +565,7 @@ All on October 5, 2026, East US 2 unless noted. "API" means the [Azure Retail Pr
 | PostgreSQL storage / extra backup storage | $0.115 / $0.095 per GB per month | API |
 | PostgreSQL free backup storage, retention 7 to 35 days | up to the server's provisioned size | [Backup and restore](https://learn.microsoft.com/azure/postgresql/backup-restore/concepts-backup-restore) |
 | Functions Flex Consumption | always-ready baseline $0.000004 per GB-second; always-ready busy time $0.000016 per GB-second; on-demand $0.000026 per GB-second after 100,000 free; $0.40 per million requests after 250,000 free | API, `Functions`, Flex Consumption |
-| App Service Linux B1 / B2 | $0.017 / $0.034 per hour | API, `Azure App Service`, Basic Plan - Linux |
+| App Service Linux B1 / B2 | $0.017 / $0.034 per hour (East US 2); $0.018 / $0.035 per hour (Central US, used) | API, `Azure App Service`, Basic Plan - Linux |
 | Static Web Apps Standard | $9 per app per month | API, `Static Web Apps` |
 | Azure Front Door Standard | $35 per month base fee | API, `Azure Front Door Service` |
 | Container Apps (consumption) | $0.000024 per vCPU-second busy, $0.000003 idle, $0.000003 per GiB-second; 180,000 vCPU-seconds and 360,000 GiB-seconds free | API and [Container Apps billing](https://learn.microsoft.com/azure/container-apps/billing) |
