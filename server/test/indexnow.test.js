@@ -4,7 +4,7 @@ import { test, afterEach } from 'node:test';
 import assert from 'node:assert/strict';
 import { announce, enabled, flush, indexNowStatus } from '../src/indexnow.js';
 
-const KEY = 'abcdef0123456789';
+const KEY = 'abcdef0123456789'; // gitleaks:allow (made-up test value)
 const set = (allow) => {
   process.env.ALLOW_INDEXING = allow ? 'true' : 'false';
   process.env.INDEXNOW_KEY = KEY;
