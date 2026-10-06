@@ -1,0 +1,125 @@
+name: Server
+
+# The live server (server/): tests against a real PostgreSQL, then deploys to the Azure Functions app
+# (Flex Consumption) on pushes to main. Decision P56, docs/proposals/postgres-live-site.md.
+# Until the repository variable AZURE_CLIENT_ID is set (infra/live/main.bicep output), only the tests run.
+# SERVER_URL is set only once the database exists; until then the nightly sync just checks the snapshot.
+on:
+  pull_request:
+    paths:
+      - 'server/**'
+      - 'scripts/db/**'
+      - 'src/lib/**'
+      - 'src/content/**'
+      - 'src/data/long-island-places.json'
+      - 'infra/live/**'
+      - '.github/workflows/server.yml'
+      - '.github/workflows/database-sync.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'server/**'
+      - 'scripts/db/**'
+      - 'infra/live/**'
+      - '.github/workflows/server.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: server-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test:
+    name: Server tests (real PostgreSQL)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: lidance_test
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            server/package-lock.json
+      - name: Lockfiles use the public npm registry
+        run: node scripts/normalize-lockfile.mjs --check
+      - run: npm ci
+      - run: npm ci --prefix server
+      - name: Snapshot of the content (every record checked with the site's schemas)
+        run: npx tsx scripts/db/build-payload.ts --out "$RUNNER_TEMP/payload.json.gz"
+      - name: Server tests (sign-in tokens, design, sync, history, export, restore drill, full round trip)
+        run: npm test --prefix server
+        env:
+          DATABASE_URL: postgres://postgres:test@localhost:5432/lidance_test
+          SERVER_TEST_RESET: '1'
+          PAYLOAD_FILE: ${{ runner.temp }}/payload.json.gz
+      - name: Azure template compiles
+        run: az bicep build --file infra/live/main.bicep --stdout > /dev/null
+
+  deploy:
+    name: Deploy to Azure Functions
+    needs: test
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.AZURE_CLIENT_ID != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      id-token: write
+      actions: write
+    env:
+      # The app's own address; the domain switch comes in a later phase.
+      SERVER_URL: https://${{ vars.SERVER_APP_NAME }}.azurewebsites.net
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: server/package-lock.json
+      - name: Install production packages only
+        run: npm ci --omit=dev --prefix server
+      - name: Record the commit being deployed
+        run: echo "{\"commit\":\"$GITHUB_SHA\",\"deployedAt\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > server/version.json
+      - name: Sign in to Azure (GitHub OIDC, no secret)
+        uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+      - name: Deploy
+        uses: Azure/functions-action@c5060b3b8bb1ebbcb531abd00c822ecbaa8ea656 # v1.5.7
+        with:
+          app-name: ${{ vars.SERVER_APP_NAME }}
+          package: server
+          sku: flexconsumption
+          respect-funcignore: true
+      - name: Wait until the new version answers
+        # 200 = up with its database; 503 = up, database not reachable yet (it is created separately).
+        run: |
+          for i in $(seq 1 36); do
+            if curl -sS --max-time 60 "$SERVER_URL/api/health" -o health.json && [ "$(jq -r .version health.json 2>/dev/null)" = "$GITHUB_SHA" ]; then
+              jq . health.json
+              if [ "$(jq -r .ok health.json)" != "true" ]; then echo "::warning::The new version runs, but its database is not reachable yet."; fi
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::The server did not answer with version $GITHUB_SHA"; cat health.json 2>/dev/null; exit 1
+      - name: Sync the database now (applies any new design change)
+        if: vars.SERVER_URL != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run database-sync.yml --ref main --repo "$GITHUB_REPOSITORY"

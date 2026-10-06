@@ -22,7 +22,7 @@ param workbookId string = '8f7764a3-b7d6-4f9f-8889-e64e164a41fd'
 
 @description('Monthly resource-group budget in USD.')
 @minValue(1)
-param budgetAmount int = 15
+param budgetAmount int = 40
 
 @description('Budget start date in yyyy-MM-dd format. Azure requires this to be the first day of a month.')
 param budgetStartDate string = '2026-10-01'

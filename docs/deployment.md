@@ -268,15 +268,80 @@ node scripts/smoke.mjs https://<host>
 
 ## Monitoring dashboard and alerts
 
-`infra/monitoring/monitoring.bicep` adds the usage workbook, a portal dashboard, two metric alerts (more than 10 failed API requests or 20 server errors in an hour), an alert when the Log Analytics daily cap is reached, an email action group that notifies the subscription **Owner**, and a monthly budget for the resource group ($15, emails at 80% and 100% spent and when the forecast passes 100%). It does not touch the website. Deploy or update it with:
+`infra/monitoring/monitoring.bicep` adds the usage workbook, a portal dashboard, two metric alerts (more than 10 failed API requests or 20 server errors in an hour), an alert when the Log Analytics daily cap is reached, an email action group that notifies the subscription **Owner**, and a monthly budget for the resource group ($40 since the live database, P56; was $15; emails at 80% and 100% spent and when the forecast passes 100%). It does not touch the website. Deploy or update it with:
 
 ```powershell
 az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
   --template-file infra/monitoring/monitoring.bicep
-# Optional: --parameters alertEmails='["someone@example.com"]' budgetAmount=20
+# Optional: --parameters alertEmails='["someone@example.com"]' budgetAmount=50
 ```
 
 Cost: the workbook, dashboard, action group emails and budget are free; the two metric alerts are about $0.10 a month each and the daily-cap log alert (every 6 hours) about $0.50 a month (decision P50).
+
+## Live database (phase 1)
+
+Decision P56; the plan is [proposals/postgres-live-site.md](proposals/postgres-live-site.md). In phase 1, git is still the master copy: the live PostgreSQL database is a faithful copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. Nothing on longisland.dance uses it yet. Everything is in **East US 2**, with the rest of the site (owner: one East Coast region).
+
+| Resource (rg-li-dance-events-web) | What it is | Cost a month |
+| --- | --- | ---: |
+| `psql-li-dance-events` | PostgreSQL 17, Burstable B1ms, 32 GB, 7-day point-in-time restore. Private network only, Microsoft Entra sign-in only (no passwords). **Waits for region access (step 1).** | $16.09 |
+| `func-li-dance-events` + plan `asp-li-dance-events` | Azure Functions, Flex Consumption, Node 24, at most 3 copies, none kept running yet. Code in `server/`. https://func-li-dance-events.azurewebsites.net/api/health | about $0 in phase 1 |
+| `stlidancefunc` | The app's own storage (code packages). No keys: only the app's identity can use it. | pennies |
+| `vnet-li-dance-events`, private DNS zone `li-dance-events.private.postgres.database.azure.com` | The private network the app and the database share. | $0.50 |
+| `id-github-deploy-li-dance-events` | The identity GitHub Actions uses to deploy the app, from `main` only (federated credential, no secret). It may only change this one app. | $0 |
+
+Template: `infra/live/main.bicep` (safe to run again).
+
+### Step 1 (owner, once): ask Azure for PostgreSQL in East US 2
+
+Visual Studio subscriptions may not create PostgreSQL servers in East US or East US 2 until Azure says yes. Azure's support API needs a paid support plan, so this one request is made in the portal (free, about 2 minutes). Azure answers by email in 24 to 48 hours.
+
+1. Go to https://portal.azure.com, signed in as `richtercloud@outlook.com`.
+2. Search for **Help + support**, then **Create a support request**.
+3. **Issue type:** Service and subscription limits (quotas). **Subscription:** Richter Cloud 150Credit. **Quota type:** Azure Database for PostgreSQL flexible server. Select **Next**.
+4. Under **Request details**, select **Enter details**: choose **Region access** (if offered), **Location: East US 2**, and **vCores: 4** (the server uses 1; 4 leaves room to grow).
+5. If there is a description box, paste:
+   > Please enable provisioning of Azure Database for PostgreSQL Flexible Server in East US 2 for subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 (Visual Studio). One server: Burstable Standard_B1ms, 32 GB, PostgreSQL 17, private access, no high availability, resource group rg-li-dance-events-web. Error: "Subscriptions are restricted from provisioning in this region." Our community website (longisland.dance) already runs in East US 2 and almost all visitors are on Long Island, New York, so the database must be in the same East Coast region.
+6. **Severity:** C (minimal impact). **Contact:** email. Select **Create**.
+
+If Azure says no: the fallback is a pay-as-you-go subscription (owner's answer to question 6 of the proposal).
+
+### Step 2 (developer, after the yes): create the database and switch on the sync
+
+```powershell
+az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
+  --name live-database --template-file infra/live/main.bicep
+gh variable set SERVER_URL --repo michaelsrichter/long-island-dance-events --body https://func-li-dance-events.azurewebsites.net
+gh workflow run database-sync.yml --repo michaelsrichter/long-island-dance-events --ref main
+```
+
+The first sync applies the database design (`server/migrations/`) and copies everything in; the run page shows a table of what was added and "Database round trip: identical". `/api/health` then shows `"database": "ok"` and the counts.
+
+### GitHub variables (not secrets; set once)
+
+| Variable | Value |
+| --- | --- |
+| `AZURE_CLIENT_ID` | `deployClientId` output of the template (the deploy identity) |
+| `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID` | `tenantId` and `subscriptionId` outputs |
+| `SERVER_APP_NAME` | `func-li-dance-events` |
+| `SERVER_URL` | `https://func-li-dance-events.azurewebsites.net`, set only once the database exists (step 2) |
+
+### What runs
+
+- **Server** (`.github/workflows/server.yml`): on pull requests that touch `server/`, `scripts/db/`, `src/lib/` or the content, the server tests run against a real PostgreSQL 17 in GitHub's runner, including the full round trip with the real content and the restore drill. On `main` it then deploys `server/` to the app and waits until `/api/health` reports the new commit.
+- **Database sync** (`.github/workflows/database-sync.yml`): every night at about 3:45 AM New York time, after every content change on `main`, and on demand. It builds a snapshot of `src/content/**` (every record checked with the site's own schemas, `scripts/db/build-payload.ts`), sends it to `/api/sync/import` (the database is made to match; every change goes into `history`), reads everything back from `/api/sync/export` and compares it with git, byte for byte (`scripts/db/compare-export.ts`). Any difference fails the run. Only this workflow file on `main` may call these endpoints: the app checks GitHub's signed token (repository, branch, workflow file), so there is no password to leak.
+- **Restore drill:** every Sunday (and on demand with **Run workflow → drill**) the app copies every record into empty tables, exports the copy and checks it is identical, then throws the copy away.
+
+### Restore
+
+- **Any minute in the last 7 days (point-in-time restore):** Azure makes a new server from the backups:
+  ```powershell
+  az postgres flexible-server restore -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
+    --source-server psql-li-dance-events --name psql-li-dance-events-drill --restore-time "2026-10-07T03:00:00Z"
+  ```
+  It lands in the same private network. To compare it with the live one, run **Database sync → Run workflow** with `drill_server` = `psql-li-dance-events-drill` (if the app cannot sign in to the copy, add it as Microsoft Entra administrator of the copy: `az postgres flexible-server microsoft-entra-admin create --server-name psql-li-dance-events-drill -g rg-li-dance-events-web --object-id <app principal id> --display-name func-li-dance-events --type ServicePrincipal`). Delete the copy afterwards; it costs as much as the live server while it exists.
+- **In phase 1 git is the master copy,** so a lost database is simply filled again by the next sync.
+
 ## Custom domain deployment order
 
 1. Deploy to the Azure host first.

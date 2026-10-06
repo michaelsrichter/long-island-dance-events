@@ -270,6 +270,7 @@ edit in `/admin/`) if you prefer.
 | Microsoft Web IQ (the one-time October 2026 town-by-town search: 3,068 calls) | about **$38.35** once |
 | AgentMail newsletter inbox (free plan: 3 inboxes, 3,000 emails a month) | **$0** |
 | Azure Static Web Apps Standard, Storage, sign-in | about **$9 a month** (see [database-plan.md](database-plan.md#10-cost-table)) |
+| Live database (PostgreSQL, from the day Azure allows it in East US 2; decision P56) | about **$16.60 a month** more; about $23 in total once the old site is retired ([proposal](proposals/postgres-live-site.md#13-costs-before-and-after)) |
 | Geocoding (U.S. Census, OpenStreetMap Nominatim) | **$0** |
 | Copilot sessions for research and fixes | your existing GitHub Copilot plan |
 
