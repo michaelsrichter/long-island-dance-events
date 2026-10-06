@@ -7,9 +7,8 @@
  *   Island; browsers check again after 30 seconds, like on the old host;
  * - resized photos (/_image/): made once, kept on disk (IMAGE_CACHE_DIR) and cached by browsers for a year.
  */
-import { createHash } from 'node:crypto';
-import { mkdir, readFile, rename, stat, writeFile } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
+import { createHash, randomBytes } from 'node:crypto';
+import { mkdir, open, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, extname, join, normalize, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadRules } from './rules.js';
@@ -18,7 +17,8 @@ const SITE_DIR = process.env.SITE_DIR || fileURLToPath(new URL('../site/', impor
 const CLIENT_DIR = join(SITE_DIR, 'client');
 const rules = loadRules(join(SITE_DIR, 'server', 'site-rules.json'));
 const CANONICAL = (process.env.CANONICAL_HOST || 'longisland.dance').toLowerCase();
-const IMAGE_CACHE_DIR = process.env.IMAGE_CACHE_DIR || join(tmpdir(), 'li-image-cache');
+// On App Service: /home/data/image-cache (kept between restarts). Locally: server/.image-cache (not in git).
+const IMAGE_CACHE_DIR = process.env.IMAGE_CACHE_DIR || fileURLToPath(new URL('../.image-cache/', import.meta.url));
 const PAGE_TTL_MS = Number(process.env.PAGE_CACHE_SECONDS || 900) * 1000;
 const PAGE_CACHE_BYTES = Number(process.env.PAGE_CACHE_MB || 128) * 1024 * 1024;
 const MAX_CACHED_PAGE = 8 * 1024 * 1024;
@@ -112,15 +112,19 @@ async function staticFile(pathname) {
   if (!full.startsWith(CLIENT_DIR + sep)) return null;
   if (fileCache.has(full)) return fileCache.get(full);
   let file = null;
+  let handle;
   try {
-    const s = await stat(full);
-    if (s.isFile()) {
-      const body = await readFile(full);
+    // One open file for both the check and the read.
+    handle = await open(full, 'r');
+    if ((await handle.stat()).isFile()) {
+      const body = await handle.readFile();
       const type = MIME[extname(full).toLowerCase()] || 'application/octet-stream';
       file = { status: 200, body, etag: etagOf(body), headers: headersFor(pathname, type, body) };
     }
   } catch {
     /* not a file */
+  } finally {
+    await handle?.close();
   }
   // The folder never changes while the server runs, so answers (also "no such file") can be remembered.
   if (fileCache.size < 20_000 && (!file || file.body.length < 1024 * 1024)) fileCache.set(full, file);
@@ -224,10 +228,11 @@ async function image(request, url) {
       const body = Buffer.from(await res.arrayBuffer());
       const type = res.headers.get('content-type') || 'application/octet-stream';
       try {
-        await mkdir(dirname(file), { recursive: true });
-        await writeFile(`${file}.tmp`, body);
-        await writeFile(`${file}.type`, type);
-        await rename(`${file}.tmp`, file);
+        await mkdir(dirname(file), { recursive: true, mode: 0o700 });
+        const tmp = `${file}.${randomBytes(6).toString('hex')}.tmp`;
+        await writeFile(tmp, body, { flag: 'wx', mode: 0o600 });
+        await writeFile(`${file}.type`, type, { mode: 0o600 });
+        await rename(tmp, file);
       } catch (err) {
         console.warn(`[site] could not keep a resized photo: ${err.message}`);
       }

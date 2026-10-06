@@ -9,6 +9,8 @@ import { closePool } from './lib/db.js';
 import { appVersion } from './lib/http.js';
 
 const port = Number(process.env.PORT || 8080);
+/** For logs: no line breaks or other control characters from a visitor, and not too long. */
+const safe = (s) => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').slice(0, 300);
 
 const server = http.createServer(async (req, res) => {
   const startedAt = performance.now();
@@ -16,7 +18,7 @@ const server = http.createServer(async (req, res) => {
     const response = await route(toRequest(req), { clientAddress: clientAddress(req) });
     await sendResponse(req, res, response, { startedAt });
   } catch (err) {
-    console.error(`[server] ${req.method} ${req.url}: ${err.stack || err.message}`);
+    console.error(`[server] ${safe(req.method)} ${safe(req.url)}: ${err.stack || err.message}`);
     if (!res.headersSent) {
       res.statusCode = 500;
       res.setHeader('Content-Type', 'text/plain; charset=utf-8');
