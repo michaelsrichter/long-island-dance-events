@@ -22,6 +22,11 @@ export async function migrationFiles() {
 
 /** Apply every migration that has not run yet. Returns the versions applied now. */
 export async function migrate(client) {
+  // Messages from the SQL files (RAISE NOTICE / WARNING) go to the server log; routine "..., skipping" notes don't.
+  const notice = (n) => {
+    if (!/, skipping$/.test(n.message)) console.log(`[migrate] ${n.severity || 'NOTICE'}: ${n.message}`);
+  };
+  client.on('notice', notice);
   await client.query('SELECT pg_advisory_lock($1)', [LOCK_ID]);
   try {
     await client.query(
@@ -48,6 +53,7 @@ export async function migrate(client) {
     return applied;
   } finally {
     await client.query('SELECT pg_advisory_unlock($1)', [LOCK_ID]).catch(() => {});
+    client.off('notice', notice);
   }
 }
 
