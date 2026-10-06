@@ -6,7 +6,7 @@ import { CATEGORY_LABELS, SKILL_LABELS, type County, type EventCategory } from '
 import { addDays, dateInZone, formatDateLong, formatTime, weekdayOf, DEFAULT_TZ } from './time';
 import { linksOf, type ExternalLink } from './links';
 import { assessDancing, isDanceLevel, type DancingAssessment } from './dancing';
-import { remember } from './freshness';
+import { pagesNow, remember } from './freshness';
 
 export type Venue = CollectionEntry<'venues'>;
 export type Performer = CollectionEntry<'performers'>;
@@ -16,10 +16,9 @@ export type Style = CollectionEntry<'styles'>;
 export type Source = CollectionEntry<'sources'>;
 export type Settings = CollectionEntry<'settings'>['data'];
 
-/** BUILD_NOW pins "now" for repeatable tests and screenshots. */
+/** BUILD_NOW pins "now" for repeatable tests and screenshots; the live server uses one "now" per data and day. */
 export function buildNow(): Date {
-  const fixed = process.env.BUILD_NOW;
-  return fixed ? new Date(fixed) : new Date();
+  return pagesNow();
 }
 
 export interface PersonRef {

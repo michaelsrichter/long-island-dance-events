@@ -425,7 +425,7 @@ flowchart LR
 
 A script (`scripts/live/parity.mjs`) compares the two sites page by page. **Built (P58, P59):** it runs on every change in GitHub Actions, with the server reading a real database loaded from the same commit; it also ran against `new.longisland.dance` on October 6 (5,630 of 5,630 files identical), and runs there every morning (`.github/workflows/parity.yml`).
 
-- **Same data, same clock.** The old site is built from a given export with a fixed "now" (`BUILD_NOW`). The new site reads a database loaded from the same export, with the same fixed "now" (a test-only setting that production ignores).
+- **Same data, same clock.** The old site is built from a given export with a fixed "now" (`BUILD_NOW`). The new site reads a database loaded from the same export, with the same fixed "now" (a test-only setting that production ignores). The daily run against `new.longisland.dance` builds the old site with the "now" the server's pages were made with (`/api/health` → `pagesNow`, P63).
 - **Every address:** every file in the old build, every sitemap entry, and the known redirects (`www`, trailing slashes, the Azure addresses).
 - **What is compared:** status codes and redirects; file types; the HTML after removing things that may differ (code file fingerprints, CSP hashes, the release id); every tag in `<head>`; the JSON-LD as data; sitemap addresses and dates; RSS, calendar files, JSON and `llms` files; pictures by size, plus a pixel comparison of a sample.
 - **Rule:** every difference is either fixed or written down as intended (for example "dates after 21 days now get their own share picture"). We switch only after **3 clean runs in a row**.
