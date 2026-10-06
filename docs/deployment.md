@@ -280,43 +280,36 @@ Cost: the workbook, dashboard, action group emails and budget are free; the two 
 
 ## Live database (phase 1)
 
-Decision P56; the plan is [proposals/postgres-live-site.md](proposals/postgres-live-site.md). In phase 1, git is still the master copy: the live PostgreSQL database is a faithful copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. Nothing on longisland.dance uses it yet. Everything is in **East US 2**, with the rest of the site (owner: one East Coast region).
+Decisions P56 and P57; the plan is [proposals/postgres-live-site.md](proposals/postgres-live-site.md). In phase 1, git is still the master copy: the live PostgreSQL database is a faithful copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. Nothing on longisland.dance uses it yet.
 
-| Resource (rg-li-dance-events-web) | What it is | Cost a month |
+**Region: Central US (P57).** This Visual Studio subscription may not create PostgreSQL or Azure SQL in East US or East US 2. Central US is the only US region that allows PostgreSQL and also has Static Web Apps, Flex Consumption, Content Safety, Logic Apps and monitoring, so everything moves there (see "Moving the rest to Central US" below). **No private network:** the database has a public address, but its firewall lets in only Azure services, it accepts only Microsoft Entra sign-in (no passwords) and only encrypted connections.
+
+| Resource (rg-li-dance-events-web, Central US) | What it is | Cost a month |
 | --- | --- | ---: |
-| `psql-li-dance-events` | PostgreSQL 17, Burstable B1ms, 32 GB, 7-day point-in-time restore. Private network only, Microsoft Entra sign-in only (no passwords). **Waits for region access (step 1).** | $16.09 |
+| `psql-li-dance-events` | PostgreSQL 17, Burstable B1ms, 32 GB, 7-day point-in-time restore. Firewall: Azure services only. Microsoft Entra sign-in only; the app is its administrator. | $18.18 |
 | `func-li-dance-events` + plan `asp-li-dance-events` | Azure Functions, Flex Consumption, Node 24, at most 3 copies, none kept running yet. Code in `server/`. https://func-li-dance-events.azurewebsites.net/api/health | about $0 in phase 1 |
 | `stlidancefunc` | The app's own storage (code packages). No keys: only the app's identity can use it. | pennies |
-| `vnet-li-dance-events`, private DNS zone `li-dance-events.private.postgres.database.azure.com` | The private network the app and the database share. | $0.50 |
 | `id-github-deploy-li-dance-events` | The identity GitHub Actions uses to deploy the app, from `main` only (federated credential, no secret; subject `repo:michaelsrichter@1242059/long-island-dance-events@1402631995:ref:refs/heads/main`, the format with GitHub's account and repository ids that this repository's tokens use). It may only change this one app. | $0 |
 
-Template: `infra/live/main.bicep` (safe to run again).
-
-### Step 1 (owner, once): ask Azure for PostgreSQL in East US 2
-
-Visual Studio subscriptions may not create PostgreSQL servers in East US or East US 2 until Azure says yes. Azure's support API needs a paid support plan, so this one request is made in the portal (free, about 2 minutes). Azure answers by email in 24 to 48 hours.
-
-1. Go to https://portal.azure.com, signed in as `richtercloud@outlook.com`.
-2. Search for **Help + support**, then **Create a support request**.
-3. **Issue type:** Service and subscription limits (quotas). **Subscription:** Richter Cloud 150Credit. **Quota type:** Azure Database for PostgreSQL flexible server. Select **Next**.
-4. Under **Request details**, select **Enter details**: choose **Region access** (if offered), **Location: East US 2**, and **vCores: 4** (the server uses 1; 4 leaves room to grow).
-5. If there is a description box, paste:
-   > Please enable provisioning of Azure Database for PostgreSQL Flexible Server in East US 2 for subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 (Visual Studio). One server: Burstable Standard_B1ms, 32 GB, PostgreSQL 17, private access, no high availability, resource group rg-li-dance-events-web. Error: "Subscriptions are restricted from provisioning in this region." Our community website (longisland.dance) already runs in East US 2 and almost all visitors are on Long Island, New York, so the database must be in the same East Coast region.
-6. **Severity:** C (minimal impact). **Contact:** email. Select **Create**.
-
-If Azure says no: the fallback is a pay-as-you-go subscription (owner's answer to question 6 of the proposal).
-
-### Step 2 (developer, after the yes): create the database and switch on the sync
+Template: `infra/live/main.bicep` (safe to run again):
 
 ```powershell
 az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
   --name live-database --template-file infra/live/main.bicep
-gh variable set SERVER_URL --repo michaelsrichter/long-island-dance-events --body https://func-li-dance-events.azurewebsites.net
-gh workflow run database-sync.yml --repo michaelsrichter/long-island-dance-events --ref main
 ```
 
-The first sync applies the database design (`server/migrations/`) and copies everything in; the run page shows a table of what was added and "Database round trip: identical". `/api/health` then shows `"database": "ok"` and the counts.
+If the deploy identity is ever recreated, copy its new client id (`deployClientId` output) into the `AZURE_CLIENT_ID` variable. Once the app answers, `SERVER_URL` is set and the sync runs by itself; to run it now: `gh workflow run database-sync.yml --repo michaelsrichter/long-island-dance-events --ref main`. The first sync applies the database design (`server/migrations/`) and copies everything in. The run page shows a table of what was added and "Database round trip: identical", and `/api/health` then shows `"database": "ok"` and the counts.
 
+### Moving the rest to Central US
+
+| Today in East US 2 | When it moves | How |
+| --- | --- | --- |
+| Static Web App `swa-li-dance-events-web` | **It does not move; it is deleted on switch day.** Its pages come from Azure's worldwide edge, so its region hardly matters, and moving it now would mean checking the custom domains at Namecheap twice. | Switch day (phase 4): the domain points at the Central US app. |
+| Storage `stlongislanddance` (likes, notes, photos, review state) | Phase 2, when the `/api` code moves into the Central US app | New account in Central US; copy tables and blobs; update `COMMUNITY_STORAGE` and the public photo address in `src/data/community.json`; delete the old one. |
+| Content Safety `cs-longislanddance` (free tier) | Phase 2 | Only one free tier per subscription: delete the old one, then create the new one in Central US. |
+| Logic App `logic-li-dance-notify` (owner emails) | Phase 2 | Redeploy `infra/notify.bicep` in Central US; the owner signs in to Outlook once to authorize the new connection. |
+| Application Insights, Log Analytics, alerts, dashboard, budget | Phase 2 | Redeploy `infra/main.bicep` parts and `infra/monitoring/monitoring.bicep` in Central US (old usage history stays readable in the old workspace for 30 days). |
+| External ID (visitor sign-in) | Never needs to | It is a separate directory, not tied to a region. |
 ### GitHub variables (not secrets; set once)
 
 | Variable | Value |
@@ -339,7 +332,12 @@ The first sync applies the database design (`server/migrations/`) and copies eve
   az postgres flexible-server restore -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
     --source-server psql-li-dance-events --name psql-li-dance-events-drill --restore-time "2026-10-07T03:00:00Z"
   ```
-  It lands in the same private network. To compare it with the live one, run **Database sync → Run workflow** with `drill_server` = `psql-li-dance-events-drill` (if the app cannot sign in to the copy, add it as Microsoft Entra administrator of the copy: `az postgres flexible-server microsoft-entra-admin create --server-name psql-li-dance-events-drill -g rg-li-dance-events-web --object-id <app principal id> --display-name func-li-dance-events --type ServicePrincipal`). Delete the copy afterwards; it costs as much as the live server while it exists.
+  Azure does not copy firewall rules to a restored server, so first let Azure services in:
+  ```powershell
+  az postgres flexible-server firewall-rule create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
+    --name psql-li-dance-events-drill --rule-name AllowAllAzureServicesAndResourcesWithinAzureIps --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+  ```
+  To compare it with the live one, run **Database sync → Run workflow** with `drill_server` = `psql-li-dance-events-drill` (if the app cannot sign in to the copy, add it as Microsoft Entra administrator of the copy: `az postgres flexible-server microsoft-entra-admin create --server-name psql-li-dance-events-drill -g rg-li-dance-events-web --object-id <app principal id> --display-name func-li-dance-events --type ServicePrincipal`). Delete the copy afterwards; it costs as much as the live server while it exists.
 - **In phase 1 git is the master copy,** so a lost database is simply filled again by the next sync.
 
 ## Custom domain deployment order

@@ -190,11 +190,9 @@ flowchart LR
     B["build-payload.ts<br/>every record checked<br/>with the site's schemas"] --> S["snapshot<br/>(gzip JSON)"]
     C["compare-export.ts<br/>byte for byte with git"]
   end
-  subgraph Azure["Azure, East US 2"]
-    subgraph NET["Private network"]
-      F["Function App func-li-dance-events<br/>(Flex Consumption, server/)"]
-      P[("PostgreSQL psql-li-dance-events<br/>B1ms, Entra sign-in only")]
-    end
+  subgraph Azure["Azure, Central US"]
+    F["Function App func-li-dance-events<br/>(Flex Consumption, server/)"]
+    P[("PostgreSQL psql-li-dance-events<br/>B1ms, Entra sign-in only,<br/>firewall: Azure services only")]
   end
   S -->|"POST /api/sync/import<br/>GitHub OIDC token"| F
   F -->|"managed identity"| P
@@ -208,7 +206,7 @@ flowchart LR
 | Server | `server/` (Azure Functions v4, ES modules) | `GET /api/health` (public: versions and counts), `POST /api/sync/import`, `GET /api/sync/export`, `POST /api/sync/drill` (GitHub OIDC: only `database-sync.yml` on `main`). Design changes are applied once, under an advisory lock, on first use. |
 | Snapshot and check | `scripts/db/` | `build-payload.ts` (records, event dates 120 days ahead with `src/lib/event-core.ts`, places), `compare-export.ts`. |
 | Tests | `server/test/`, `tests/unit/db-payload.test.ts` | Real PostgreSQL 17 in CI (`server.yml`): design, sync, history, refusal to empty a table, export, drill, and the full round trip with the real content. |
-| Infrastructure | `infra/live/main.bicep` | Everything in East US 2. PostgreSQL waits for Azure's region access for this subscription (`deployDatabase=false` until then). |
+| Infrastructure | `infra/live/main.bicep` | Central US (P57): the only US region where this subscription may create PostgreSQL that also has everything else the site uses. No private network: the database firewall admits only Azure services, with Entra sign-in only. The rest of the site moves to Central US in phase 2; the Static Web App is deleted on switch day ([deployment.md](deployment.md#moving-the-rest-to-central-us)). |
 
 ## Planned (later phases)
 
