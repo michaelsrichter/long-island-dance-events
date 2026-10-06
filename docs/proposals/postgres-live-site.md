@@ -144,7 +144,7 @@ flowchart TB
 ### 4.1 How a visitor gets a page
 
 1. A browser asks for, say, `/events/2026-10-17-swing-night-huntington/`.
-2. The server checks its **page cache**. If the page was made since the last change, it is sent at once.
+2. The server checks its **page cache**. If the page was made since the last change, it is sent at once. **Built (P61):** after each change the server prepares every page in its sitemaps in the background and keeps them compressed, so visitors and search engines almost never wait for a page to be made.
 3. If not, Astro makes the page from the **in-memory copy** of all listings. The copy is small: about 1,400 records, a few megabytes. Making a page takes a few hundredths of a second. The result goes into the cache.
 4. Browsers may reuse a page for 30 seconds, the same as on today's site (`Cache-Control: public, must-revalidate, max-age=30`). After that they check back with an `ETag`; if nothing changed, the server answers "not changed" with almost no data.
 5. Files whose names change with every code update (CSS, JavaScript, fonts) are kept by browsers for a year. Share pictures have a fingerprint of their facts in the address, so a new picture gets a new address when the facts change.

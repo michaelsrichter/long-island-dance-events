@@ -46,7 +46,7 @@ writeFileSync(
   join(dir, 'server', 'entry.mjs'),
   `globalThis.renders = 0;
 globalThis.imageRenders = 0;
-const PAGES = new Set(['/', '/events/', '/who/', '/cookies/', '/signed-out/', '/events/upcoming.json']);
+const PAGES = new Set(['/', '/events/', '/who/', '/cookies/', '/signed-out/', '/events/upcoming.json', '/sitemap-index.xml', '/sitemap-pages.xml', '/big/']);
 export function matches(request) { return PAGES.has(new URL(request.url).pathname); }
 export async function handle(request, { clientAddress } = {}) {
   const url = new URL(request.url);
@@ -61,6 +61,9 @@ export async function handle(request, { clientAddress } = {}) {
   if (url.pathname === '/events/') return new Response('<!doctype html><p>events ' + globalThis.renders + '</p>', { headers: { 'content-type': 'text/html' } });
   if (url.pathname === '/signed-out/') return new Response('<!doctype html><p>Please sign in</p>', { headers: { 'content-type': 'text/html' } });
   if (url.pathname === '/events/upcoming.json') return new Response('{"events":[]}', { headers: { 'content-type': 'application/json' } });
+  if (url.pathname === '/sitemap-index.xml') return new Response('<sitemapindex><sitemap><loc>https://longisland.dance/sitemap-pages.xml</loc></sitemap></sitemapindex>', { headers: { 'content-type': 'application/xml' } });
+  if (url.pathname === '/sitemap-pages.xml') return new Response('<urlset><url><loc>https://longisland.dance/big/</loc><image:image><image:loc>https://longisland.dance/x.png</image:loc></image:image></url></urlset>', { headers: { 'content-type': 'application/xml' } });
+  if (url.pathname === '/big/') return new Response('<!doctype html><p>' + 'big page '.repeat(5000) + '</p>', { headers: { 'content-type': 'text/html' } });
   if (url.pathname === '/who/') return new Response(JSON.stringify({ clientAddress, url: request.url }), { headers: { 'content-type': 'application/json' } });
   const h = new Headers({ 'content-type': 'text/plain' });
   h.append('set-cookie', 'a=1; Path=/');
@@ -75,7 +78,8 @@ export async function notFound() {
 process.env.SITE_DIR = dir;
 process.env.IMAGE_CACHE_DIR = imageCache;
 const { route } = await import('../src/app.js');
-const { clearPageCache } = await import('../src/site.js');
+const { clearPageCache, isPrepared } = await import('../src/site.js');
+const { prepareAll, prepareStatus } = await import('../src/prepare.js');
 const { inlineScriptHashes } = await import('../src/rules.js');
 const { clientAddress, sendResponse, toRequest } = await import('../src/lib/node-http.js');
 
@@ -326,6 +330,45 @@ test('a visitor who leaves halfway is normal: sending ends quietly, the server k
   assert.deepEqual(outcome, ['ok'], 'not reported as a server error');
   assert.equal((await get('/api/live')).status, 200);
 });
+test('prepared pages are kept compressed: each form has its own tag, and every visitor gets the whole page', async () => {
+  clearPageCache();
+  const before = globalThis.renders;
+  const br = await get('/big/', { ...SITE, 'Accept-Encoding': 'br' });
+  const gz = await get('/big/', { ...SITE, 'Accept-Encoding': 'gzip' });
+  const plain = await get('/big/');
+  assert.equal(globalThis.renders - before, 1, 'made once');
+  assert.equal(br.headers['content-encoding'], 'br');
+  assert.equal(gz.headers['content-encoding'], 'gzip');
+  assert.equal(plain.headers['content-encoding'], undefined);
+  assert.equal(brotliDecompressSync(br.body).toString(), plain.body.toString());
+  assert.equal(gunzipSync(gz.body).toString(), plain.body.toString());
+  assert.ok(br.body.length < plain.body.length / 10);
+  assert.equal(Number(plain.headers['content-length']), plain.body.length);
+  assert.notEqual(br.headers.etag, gz.headers.etag);
+  assert.equal(br.headers.vary, 'Accept-Encoding');
+  // A browser that has any form of this version gets "not modified".
+  assert.equal((await get('/big/', { ...SITE, 'Accept-Encoding': 'gzip', 'If-None-Match': br.headers.etag })).status, 304);
+  assert.equal((await get('/big/', { ...SITE, 'If-None-Match': gz.headers.etag })).status, 304);
+});
+
+test('every page in the sitemaps is prepared before anyone asks', async () => {
+  clearPageCache();
+  assert.equal(isPrepared('/big/'), false);
+  await prepareAll('test');
+  assert.equal(isPrepared('/big/'), true, 'from the sitemap');
+  assert.equal(isPrepared('/'), true, 'the busiest pages first');
+  const s = prepareStatus();
+  assert.equal(s.running, false);
+  assert.ok(s.prepared >= 3);
+  const before = globalThis.renders;
+  await get('/big/', { ...SITE, 'Accept-Encoding': 'br' });
+  assert.equal(globalThis.renders - before, 0, 'answered from memory');
+  const renders = globalThis.renders;
+  await prepareAll('again');
+  assert.equal(globalThis.renders - renders, 0, 'nothing is made again while nothing changed');
+  assert.ok(prepareStatus().skipped >= 3);
+});
+
 test('the website only answers GET and HEAD', async () => {
   const r = await fetch(`${base}/`, { method: 'POST', body: 'x', headers: SITE });
   assert.equal(r.status, 405);

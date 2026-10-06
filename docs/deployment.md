@@ -330,6 +330,8 @@ To copy the secrets from the Static Web App again (for example after changing on
 
 **Each new web address needs its sign-in return address** in the External ID app registration (owner, in [entra.microsoft.com](https://entra.microsoft.com): longislanddance directory → App registrations → Long Island Dance website → Authentication → Web → Add URI): `https://<address>/.auth/login/extid/callback`. For `new.longisland.dance` this was requested on October 6. `longisland.dance` is already there.
 
+**Every page prepared (P61).** After each data change, at start and at the start of each day on Long Island, the server prepares every page in its sitemaps in the background (about a minute locally, a few minutes on B1) and keeps them compressed in memory (about 30 MB). `/api/health` → `prepared` shows how many pages are ready and how the last round went. Settings: `PAGE_CACHE_MB` (default 128), `PAGE_CACHE_SECONDS` (default a day), `PREPARE_PAUSE_MS` (pause between pages, default 25).
+
 **Pages from the database (P59).** Every 2 seconds the server reads `site_state.data_version`; when it changed, it reads every record again (only changed ones are checked again) and the next visitor sees the change. `/api/health` shows `pages.dataVersion` (what the pages show) next to `dataVersion` (the database's), and lists any record it had to leave out. Sitemap "last changed" dates are kept in the `sitemap_state` table (filled once from the live site's `/sitemap-state.json`).
 
 **Run the server on your computer** (with a local PostgreSQL; the pages then come from it):

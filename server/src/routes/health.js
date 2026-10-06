@@ -9,6 +9,8 @@ import { KINDS } from '../lib/kinds.js';
 import { appVersion, json } from '../lib/http.js';
 import { liveDataStatus } from '../live-data.js';
 import { builtInSignIn } from '../identity.js';
+import { prepareStatus } from '../prepare.js';
+import { pageCacheStatus } from '../site.js';
 
 export async function live(request) {
   return json(request, 200, { ok: true, version: appVersion().commit });
@@ -32,6 +34,8 @@ export async function health(request) {
       migrations,
       dataVersion: Number(state.data_version),
       signIn: builtInSignIn() ? 'built-in' : 'off',
+      // Pages ready in memory, and the last "prepare every page" round (server/src/prepare.js).
+      prepared: { ...pageCacheStatus(), ...prepareStatus() },
       // What the pages show right now (the server checks the database every 2 seconds).
       pages: (({ version, loadedAt, records, problems, lastError }) => ({ dataVersion: version === null ? 'build' : Number(version), loadedAt, records, problems, lastError }))(liveDataStatus()),
       lastSync: { commit: state.last_sync_commit, at: state.last_sync_at },
