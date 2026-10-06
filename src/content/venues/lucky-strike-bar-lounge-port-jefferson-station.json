@@ -35,11 +35,11 @@
   "description": "The bar and lounge inside the Port Jeff Bowl bowling center. It has live cover bands most Saturdays and a weekly line dancing night.",
   "facebookUrl": "https://www.facebook.com/luckystrikebarlounge/",
   "factsSource": "Checked October 4, 2026. Source: portjeffbowl.com.",
-  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Lucky+Strike+Bar+%26+Lounge+at+Port+Jeff+Bowl%2C+31+Chereb+Ln%2C+Port+Jefferson+Station%2C+NY+11776",
+  "googleMapsUrl": "https://www.google.com/maps?cid=14298608910328169499",
   "kind": "bar",
   "phone": "(631) 473-3300",
   "postalCode": "11776",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Lucky Strike bowling chain location in Sayville. Size of the dance area not confirmed. Monday line dancing is run by an outside teacher ('Dancing in Line with Helen').\n\nDirectory research 2026-10-04: The site's schedule confirms bands on most Saturdays (plus a few Fridays and the night before Thanksgiving) and line dancing every Monday, so the current description still fits; some shows have a $10 cover. Hours listed are for the whole Port Jeff Bowl center; the lounge's own hours are not published separately. Logo is the Port Jeff Bowl logo (the lounge has no separate logo file on the site, only its sign). Email and phone are Port Jeff Bowl's. Port Jeff Bowl also has its own pages (facebook.com/portjeffbowl, instagram.com/portjeffbowl). Google Maps calls it 'Lucky Strike Bar & Grill @ Port Jeff Bowl'. Not the Lucky Strike bowling chain. Photo files were served as WebP by the site's image CDN.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Not the Lucky Strike bowling chain location in Sayville. Size of the dance area not confirmed. Monday line dancing is run by an outside teacher ('Dancing in Line with Helen').\n\nDirectory research 2026-10-04: The site's schedule confirms bands on most Saturdays (plus a few Fridays and the night before Thanksgiving) and line dancing every Monday, so the current description still fits; some shows have a $10 cover. Hours listed are for the whole Port Jeff Bowl center; the lounge's own hours are not published separately. Logo is the Port Jeff Bowl logo (the lounge has no separate logo file on the site, only its sign). Email and phone are Port Jeff Bowl's. Port Jeff Bowl also has its own pages (facebook.com/portjeffbowl, instagram.com/portjeffbowl). Google Maps calls it 'Lucky Strike Bar & Grill @ Port Jeff Bowl'. Not the Lucky Strike bowling chain. Photo files were served as WebP by the site's image CDN.\n\nParking and access research 2026-10-06 (issue #40): parking and the detailed accessibility facts come from a copy of Google's listing, not the venue itself. The All Revved Up NY Halloween show on Oct 31, 2026 is listed by the band at 7 PM; the lounge says bands start at 7:30 PM.",
   "state": "NY",
   "town": "Port Jefferson Station",
   "website": "https://www.portjeffbowl.com/lucky-strike-lounge",
@@ -92,6 +92,16 @@
     {
       "url": "https://www.google.com/maps?cid=14298608910328169499",
       "note": "Google Maps lists 'Lucky Strike Bar & Grill @ Port Jeff Bowl' (bar) at 31 Chereb Ln, Port Jefferson Station, NY 11776, phone (631) 473-3300."
+    },
+    {
+      "url": "https://www.portjeffbowl.com/about",
+      "note": "About page: the lounge is inside Port Jeff Bowl (32 lanes), next to the food court, and the center is handicap accessible."
+    },
+    {
+      "url": "https://www.postcard.inc/places/lucky-strike-bar-and-grill-port-jeff-bowl-port-jefferson-station-qQO2X_jFPK9",
+      "note": "Copy of the Google listing data for the bar: free parking lot, free street parking, and a wheelchair-accessible entrance, restroom and seating."
     }
-  ]
+  ],
+  "parkingNotes": "Port Jeff Bowl has its own free parking lot, and there is free street parking nearby (from Google's listing).",
+  "accessibilityNotes": "Port Jeff Bowl says the center is handicap accessible. Google's listing shows a wheelchair-accessible entrance, parking, restroom and seating."
 }

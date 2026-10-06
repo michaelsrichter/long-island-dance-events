@@ -187,10 +187,10 @@ function draw(root: HTMLElement, d: MessagesData, pages: Pages, onCount: (n: num
   }
   if (d.copilotTasks.length) {
     const box = details(`Tasks you gave Copilot (${d.copilotTasks.length} open)`, 'review-details panel');
-    box.body.append(el('p', 'To start one: open it on GitHub and choose "Assign to Copilot". Copilot then opens a pull request (a suggested change) for you to check.', 'review-hint'));
+    box.body.append(el('p', 'Copilot does not start these by itself. To get one done, start a Copilot session and give it the task\'s link. Copilot then opens a pull request (a suggested change) for you to check. "Assign to Copilot" on GitHub can also start one, but if Copilot replies with an error, assign it again.', 'review-hint'));
     box.body.append(list(d.copilotTasks.map((t) => {
       const s = el('span');
-      s.append(link(t.url, `#${t.number}: ${t.title}`), t.assigned ? ' (Copilot is on it)' : ' (not started)');
+      s.append(link(t.url, `#${t.number}: ${t.title}`), t.assigned ? ' (assigned to Copilot: check it for a pull request or an error)' : ' (waiting for a Copilot session)');
       return s;
     }), 'review-log'));
     root.append(box.box);

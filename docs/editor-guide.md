@@ -41,7 +41,7 @@ This table lists each tab of the review center, what it shows, and what you can 
 
 Test copies of the website (pull-request previews) never send email: they show what would have been sent. Under a "Fix for a listing" message you can also email the organizer about the mistake, in the same way.
 
-**Ask Copilot.** Some jobs need a developer: a new band or venue to look up, a source to fix, a website to add. **Ask Copilot** makes a GitHub issue (a task note, labeled `copilot-task`) with all the details. Open it on GitHub and choose **Assign to Copilot**. Copilot then opens a pull request (a suggested change) for you to check. Open tasks are listed at the bottom of the Messages tab.
+**Ask Copilot.** Some jobs need a developer: a new band or venue to look up, a source to fix, a website to add. **Ask Copilot** makes a GitHub issue (a task note, labeled `copilot-task`) with all the details. **Copilot does not start it by itself.** To get it done, start a Copilot session and give it the task's link; Copilot then opens a pull request (a suggested change) for you to check. Choosing **Assign to Copilot** on the issue can also start it, but if Copilot replies with an error (this happened on October 5, 2026: "The service is temporarily unavailable"), nothing more happens until you assign it again or start a session. Open tasks are listed at the bottom of the Messages tab, marked "waiting for a Copilot session" or "assigned to Copilot".
 
 ### Your weekly 10-minute routine
 

@@ -174,6 +174,14 @@ describe('names and venues are checked before anything new is created', () => {
     expect(r.skipped).toEqual([{ reason: 'venue not researched yet', ref: 'listing 2026-10-20 New Place (Babylon)' }]);
     expect([...ctx.registry.created.venues]).toEqual([]);
   });
+  it('finds a researched venue named after the town and time, but only in that town', async () => {
+    const ctx = context({ focus: 'music', defaults: { performerIds: ['dj-sample'] } });
+    const { toCandidates } = await import('../../ingest/lib/structured');
+    const gig = (description: string, start: string) => ({ title: description.split(' · ')[0]!, description, start, locationName: description.split(',')[0], pageUrl: 'https://example.test/e' });
+    const r = toCandidates([gig('Babylon, NY · 8:00 PM · Sample Pub · BUY TICKETS', '2026-10-20T20:00'), gig('Huntington, NY · 8:00 PM · Sample Pub', '2026-10-21T20:00')], ctx, { structured: false });
+    expect(r.candidates.map((c) => [c.date, c.venueId])).toEqual([['2026-10-20', 'sample-pub']]);
+    expect(r.skipped).toEqual([{ reason: 'venue not researched yet', ref: 'listing 2026-10-21 venue not named (Huntington)' }]);
+  });
   it('does not call "world-class musicians" a dance class', async () => {
     const ctx = context({ adapter: 'ical', type: 'ical', focus: 'music', defaults: { venueId: 'sample-pub' } });
     const { toCandidates } = await import('../../ingest/lib/structured');

@@ -1,0 +1,25 @@
+{
+  "title": "All Revved Up NY at CM Performing Arts Center",
+  "summary": "Live music by All Revved Up NY at CM Performing Arts Center. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-15T19:30",
+  "timezone": "America/New_York",
+  "venueId": "cm-performing-arts-center-oakdale",
+  "town": "Oakdale",
+  "performerIds": [
+    "all-revved-up-ny"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "all-revved-up",
+  "sourceUrl": "https://allrevvedupnyband.com/shows-meat-loaf-tribute",
+  "sourceName": "All Revved Up NY - Meat Loaf tribute shows",
+  "sourceRef": "events page 2026-10-15",
+  "firstSeen": "2026-10-06",
+  "lastSeen": "2026-10-06",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.8,
+  "matchKey": "all-revved-up|cm-performing-arts-center-oakdale||thursday|19:30|live-music|all-revved-up-ny||2026-10-15"
+}

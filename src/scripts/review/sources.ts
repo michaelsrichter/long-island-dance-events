@@ -36,6 +36,7 @@ const GROUPS: { id: string; title: string; help: string; closed?: boolean }[] = 
   { id: 'permission', title: 'Ask for permission', help: 'These websites ask programs like ours to stay away, or their rules say to ask first. We never work around that. A short, friendly email often works. Press "Review and send the email…". If you asked another way (like a contact form), press "I asked another way".' },
   { id: 'venues', title: 'Needs venue research', help: 'These list events at places we have no page for yet, so their events are not shown. Ask Copilot to research the venues (address and dance floor). Then switch the source on.' },
   { id: 'schedule', title: 'Add a weekly schedule by hand', help: 'These show a regular schedule in words (like "every Tuesday at 7 PM") with no dates a computer can read. Add it once in the editor as a repeating event, then look at their page now and then.' },
+  { id: 'byhand', title: 'Added by hand: check their page', help: 'We already added these weekly schedules by hand as repeating events. The notes say when to look at their page again. Then fix any changed times in the editor.', closed: true },
   { id: 'flyers', title: 'Add events from flyers or social posts', help: 'These only post picture flyers or social media posts. We never read text from pictures automatically. When you see a flyer, add the event by hand in the editor.' },
   { id: 'newsletter', title: 'Newsletters waiting for a first issue', help: 'We signed up for these newsletters. When a real issue arrives, check a few of its events, then switch the source on.' },
   { id: 'recheck', title: 'Try a test run', help: "Our office network could not open these websites, but GitHub's computers might. Press \"Try it now\". If the test finds events, switch the source on." },
@@ -215,6 +216,9 @@ export function renderSources(root: HTMLElement, d: SourcesData, o: OutreachSumm
       case 'flyers':
         actions.append(link(cmsUrl('events'), 'Add an event in the editor', { cls: 'btn btn--small btn--primary' }));
         if (s.group === 'schedule') actions.append(copilotButton('Ask Copilot to add the schedule', () => `Add the weekly schedule of ${s.name} as repeating events`, () => `${s.name} (${s.url}) shows a regular schedule in words, with no dates we can read automatically (\`src/content/sources/${s.id}.json\`).\n\nNotes: ${s.notes}\n\nPlease read their page and add each regular event once as a repeating event in src/content/events/ (in our own words, with the venue, styles and price, and "status" in lockedFields). Open a pull request.`));
+        break;
+      case 'byhand':
+        actions.append(link(cmsUrl('events'), 'Open events in the editor', { cls: 'btn btn--small btn--secondary' }));
         break;
       case 'newsletter':
         actions.append(switchOn('Switch on (a real issue arrived)', 'Did a real newsletter issue arrive, and do a few of its events look right? If yes, press OK to switch it on.'));

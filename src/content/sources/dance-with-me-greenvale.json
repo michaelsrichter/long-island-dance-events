@@ -14,5 +14,5 @@
     "venueId": "dance-with-me-greenvale",
     "town": "Greenvale"
   },
-  "reviewNotes": "Switched off 2026-10-04: the page shows a weekly class timetable without dates, and the only date on it is when a new-student offer expires, so the reader found nothing to list. Turn it back on if the studio adds a dated events list or a calendar feed. Catalog check 2026-10-03: current public class schedule for a Long Island dance studio."
+  "reviewNotes": "Covered by hand on 2026-10-06 (issue #42): its 4 weekly group classes (Wednesday International Latin, Thursday beginner and intermediate sensual bachata, Friday intermediate salsa) are repeating events in src/content/events/dance-with-me-greenvale-*.json, running through October 31. Check the page again by 2026-10-28 and every month after: move the end date forward for classes that are still listed, and add new ones by hand. Switched off 2026-10-04: the page shows a weekly class timetable without dates, and the only date on it is when a new-student offer expires, so the reader found nothing to list. Turn it back on if the studio adds a dated events list or a calendar feed. Catalog check 2026-10-03: current public class schedule for a Long Island dance studio."
 }

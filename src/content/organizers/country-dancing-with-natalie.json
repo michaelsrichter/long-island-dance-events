@@ -1,0 +1,30 @@
+{
+  "name": "Country Dancing with Natalie",
+  "type": "instructor",
+  "aliases": [
+    "Country Dancing With Natalie",
+    "Line Dancing with Natalie"
+  ],
+  "danceStyles": [
+    "line-dancing"
+  ],
+  "description": "Natalie Boyle's country line dancing lessons on Long Island. Her website lists her weekly classes at halls, libraries and bars, a weekly roundup of places to hear country music and dance, and beginner line dance video courses. She also teaches private lessons and parties.",
+  "evidence": [
+    {
+      "url": "https://www.countrydancingwithnatalie.com/lessons.html",
+      "note": "Lessons page: Natalie Boyle teaches country line dancing to the songs local bands and DJs play, all levels welcome; lists her class places and offers private lessons and parties."
+    },
+    {
+      "url": "https://www.countrydancingwithnatalie.com/events.html",
+      "note": "Events page: a weekly roundup of Long Island country nights, with her own classes marked \"with Natalie\"; (631) 601-5109 is the number to call to sign up for a class."
+    },
+    {
+      "url": "https://www.countrydancingwithnatalie.com/courses.html",
+      "note": "Courses page sells two beginner line dance video courses."
+    }
+  ],
+  "factsSource": "Checked October 6, 2026. Source: countrydancingwithnatalie.com.",
+  "phone": "(631) 601-5109",
+  "reviewNotes": "Added 2026-10-06 (issue #41). The phone is the sign-up number on her Events page; Yellow Pages lists it for Country Dancing With Natalie (Rocky Point), so it is her business line. Her site's social icons are blank placeholders and the footer email is a template address, so no social links or email are recorded. A YouTube channel \"Natalie Boyle Dancing\" looks like hers but her site does not link to it. The contact page is a form only.",
+  "website": "https://www.countrydancingwithnatalie.com/"
+}
