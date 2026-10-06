@@ -5,6 +5,7 @@ node_modules/
 dist/
 dist-server/
 server/site/
+server/api/
 server/.image-cache/
 .astro/
 

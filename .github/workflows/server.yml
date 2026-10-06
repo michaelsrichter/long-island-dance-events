@@ -13,6 +13,8 @@ on:
   pull_request:
     paths:
       - 'server/**'
+      - 'api/src/**'
+      - 'api/package-lock.json'
       - 'src/**'
       - 'public/**'
       - 'astro.config.mjs'
@@ -29,6 +31,8 @@ on:
     branches: [main]
     paths:
       - 'server/**'
+      - 'api/src/**'
+      - 'api/package-lock.json'
       - 'src/**'
       - 'public/**'
       - 'astro.config.mjs'
@@ -71,10 +75,13 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             server/package-lock.json
+            api/package-lock.json
       - name: Lockfiles use the public npm registry
         run: node scripts/normalize-lockfile.mjs --check
       - run: npm ci
       - run: npm ci --prefix server
+      # The community /api code runs inside the server (decision P60); its tests use the in-memory store.
+      - run: npm ci --prefix api
       - name: Snapshot of the content (every record checked with the site's schemas)
         run: npx tsx scripts/db/build-payload.ts --out "$RUNNER_TEMP/payload.json.gz"
       - name: Server tests (pages and files, sign-in tokens, design, sync, history, export, restore drill, round trip)
@@ -123,8 +130,10 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             server/package-lock.json
+            api/package-lock.json
       - run: npm ci
       - run: npm ci --omit=dev --prefix server
+      - run: npm ci --omit=dev --prefix api
       - name: One "now" for both builds and the comparison (an event may end while this job runs)
         run: echo "BUILD_NOW=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
       # The static site's saved share pictures and resized photos (decision P55); only read here.
@@ -195,9 +204,17 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-          cache-dependency-path: server/package-lock.json
+          cache-dependency-path: |
+            server/package-lock.json
+            api/package-lock.json
       - name: Install production packages only (Linux builds of the photo library)
-        run: npm ci --omit=dev --prefix server
+        run: |
+          npm ci --omit=dev --prefix server
+          npm ci --omit=dev --prefix api
+      - name: The community /api code goes inside the server package (decision P60)
+        run: |
+          mkdir -p server/api
+          cp -r api/src api/package.json api/node_modules server/api/
       - name: The checked site
         uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:

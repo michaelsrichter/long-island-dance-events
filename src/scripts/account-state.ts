@@ -116,16 +116,27 @@ export function logoutUrl(): string {
 }
 
 let who: Promise<Session> | null = null;
-/** Ask Static Web Apps who is signed in (fast; no Function call). Asked once per page. */
+/**
+ * Who is signed in, asked once per page. Static Web Apps answers /.auth/me itself (fast; no Function call).
+ * On the live server (App Service, decision P60) /.auth/me has another format, so the server's
+ * /api/session answers instead.
+ */
 export function whoAmI(): Promise<Session> {
   who ??= (async () => {
+    const out: Session = { signedIn: false, admin: false, name: '' };
     try {
       const res = await fetch('/.auth/me', { credentials: 'same-origin', headers: { Accept: 'application/json' } });
-      if (!res.ok) return { signedIn: false, admin: false, name: '' };
-      const p = (await res.json())?.clientPrincipal;
-      return p ? { signedIn: true, admin: Array.isArray(p.userRoles) && p.userRoles.includes('admin'), name: String(p.userDetails || '') } : { signedIn: false, admin: false, name: '' };
+      const body: unknown = res.ok ? await res.json().catch(() => null) : null;
+      if (body && typeof body === 'object' && 'clientPrincipal' in body) {
+        const p = (body as { clientPrincipal?: { userRoles?: unknown; userDetails?: unknown } | null }).clientPrincipal;
+        return p ? { signedIn: true, admin: Array.isArray(p.userRoles) && p.userRoles.includes('admin'), name: String(p.userDetails || '') } : out;
+      }
+      const s = await fetch('/api/session', { credentials: 'same-origin', headers: { Accept: 'application/json' } });
+      if (!s.ok) return out;
+      const j = (await s.json()) as Partial<Session>;
+      return { signedIn: Boolean(j.signedIn), admin: Boolean(j.admin), name: String(j.name || '') };
     } catch {
-      return { signedIn: false, admin: false, name: '' };
+      return out;
     }
   })();
   return who;

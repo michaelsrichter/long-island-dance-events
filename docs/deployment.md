@@ -319,6 +319,17 @@ az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b6
 
 It binds the name, makes a free App Service managed certificate (renewed by Azure) and turns on HTTPS. To repair a binding later without a moment without HTTPS, add `thumbprint=<the certificate's thumbprint>` (output of the first run). `new.longisland.dance` was set up this way on October 6 (certificate thumbprint `BB37118EB7F44110A996A57978EDEE4063F1F17C`, valid to 2027-04-06).
 
+**Sign-in and the community /api code (P60).** The app uses App Service's built-in sign-in with the same External ID provider (`extid`) as Static Web Apps; sign-ins last 14 days. The server matches each person to the user id Static Web Apps gave them (table `IdpLinks` in the community storage), so likes, notes and photos carry over. `/api/health` shows `"signIn": "built-in"`. Settings:
+
+| Where | What |
+| --- | --- |
+| `infra/live/main.bicep` | Sign-in (`authsettingsV2`), `ALLOWED_HOSTS`, community storage, Content Safety and the owner-email Logic App (read from the existing resources), Key Vault `kv-li-dance-events` |
+| Key Vault (Key Vault references in the app settings) | `extid-client-secret`, `admin-emails`, `agentmail-api-key`, `agentmail-inbox`, `github-oauth-client-id`, `github-oauth-client-secret`, `review-secret-key` |
+
+To copy the secrets from the Static Web App again (for example after changing one there): `./infra/live/copy-secrets.ps1`. It never prints a value, refreshes the app's Key Vault references and restarts the app; every line should end in `Resolved`. To change one only on App Service: `az keyvault secret set --vault-name kv-li-dance-events --name <name> --file <file>`, then the same refresh (see the script).
+
+**Each new web address needs its sign-in return address** in the External ID app registration (owner, in [entra.microsoft.com](https://entra.microsoft.com): longislanddance directory → App registrations → Long Island Dance website → Authentication → Web → Add URI): `https://<address>/.auth/login/extid/callback`. For `new.longisland.dance` this was requested on October 6. `longisland.dance` is already there.
+
 **Pages from the database (P59).** Every 2 seconds the server reads `site_state.data_version`; when it changed, it reads every record again (only changed ones are checked again) and the next visitor sees the change. `/api/health` shows `pages.dataVersion` (what the pages show) next to `dataVersion` (the database's), and lists any record it had to leave out. Sitemap "last changed" dates are kept in the `sitemap_state` table (filled once from the live site's `/sitemap-state.json`).
 
 **Run the server on your computer** (with a local PostgreSQL; the pages then come from it):

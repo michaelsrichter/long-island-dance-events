@@ -215,6 +215,8 @@ Things to know:
 
 ## 5. Sign-in for visitors and moderators
 
+**Built (P60, October 6):** built-in sign-in on the App Service app with the same `extid` provider, 14-day sessions, people matched to their old user ids, the community `/api` code running unchanged inside the server, and `/api/session`. The secrets live in a Key Vault. Waiting on one owner step: adding the test address's sign-in return address in External ID.
+
 **What stays the same:** the same External ID tenant (`longislanddance.ciamlogin.com`), the same app registration, the same email-code sign-in and branded pages, the same sign-in addresses (`/.auth/login/extid`, `/.auth/logout`) and the same return address (`/.auth/login/extid/callback`). The Function App uses Azure's **built-in sign-in** (the same feature App Service and Container Apps have), set up with a custom OpenID Connect provider named `extid`. `infra/configure-external-id.ps1` adds the return address for `new.longisland.dance` while we test.
 
 **What changes, and why nobody loses anything:**

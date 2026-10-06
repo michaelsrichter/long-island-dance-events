@@ -16,6 +16,8 @@ import { loadRules } from './rules.js';
 const SITE_DIR = process.env.SITE_DIR || fileURLToPath(new URL('../site/', import.meta.url));
 const CLIENT_DIR = join(SITE_DIR, 'client');
 const rules = loadRules(join(SITE_DIR, 'server', 'site-rules.json'));
+/** The old host's rule for an address (staticwebapp.config.json), e.g. who may open it. */
+export const routeRule = (pathname) => rules.route(pathname);
 const CANONICAL = (process.env.CANONICAL_HOST || 'longisland.dance').toLowerCase();
 // On App Service: /home/data/image-cache (kept between restarts). Locally: server/.image-cache (not in git).
 const IMAGE_CACHE_DIR = process.env.IMAGE_CACHE_DIR || fileURLToPath(new URL('../.image-cache/', import.meta.url));
@@ -249,7 +251,7 @@ async function image(request, url) {
 // ---------- the website ----------
 
 /**
- * `roles`: the visitor's roles; until sign-in moves to this server (a later Phase 2 step), everyone is
+ * `roles`: the visitor's roles (server/src/identity.js; anonymous when nobody is signed in). Formerly everyone was
  * anonymous, so addresses for moderators answer "please sign in" (401) like the old host does.
  */
 export async function site(request, { clientAddress, roles = ['anonymous'] } = {}) {
