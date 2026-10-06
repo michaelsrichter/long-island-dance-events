@@ -318,7 +318,7 @@ Everything from P46, P47 and P48 stays. The page code is the same; only *when* p
 | Sitemaps (6 kinds, with last-changed dates) | Dates kept between builds through `/sitemap-state.json` | The same rule (a page's date changes when the facts on it change), with the dates kept in the database (`sitemap_state`, P59) |
 | 81 town pages, `llms.txt`, `llms-full.txt`, `/events/upcoming.json`, RSS, calendar files | Built ahead of time | Same code, made on request and cached |
 | `robots.txt` and AI crawler rules | Same | Same; `new.longisland.dance` says "don't index" until the switch |
-| IndexNow | After each deploy | **Within minutes of each change** (batched) |
+| IndexNow | After each deploy | **Within minutes of each change** (batched; built, P61: on from switch day) |
 | Past dates `noindex` | Yes | Yes |
 | Hiding ended events in the browser (`src/scripts/expire.ts`) | Needed between rebuilds | Not needed any more (kept, harmless) |
 | Security headers (CSP with script hashes, HSTS...) | Added after the build (`scripts/postbuild.mjs` → `staticwebapp.config.json`) | Astro's built-in CSP (`security.csp`) adds the hashes; our code sends the other headers from today's list |

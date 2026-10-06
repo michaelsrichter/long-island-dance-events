@@ -10,6 +10,7 @@ import { appVersion, json } from '../lib/http.js';
 import { liveDataStatus } from '../live-data.js';
 import { builtInSignIn } from '../identity.js';
 import { prepareStatus } from '../prepare.js';
+import { indexNowStatus } from '../indexnow.js';
 import { pageCacheStatus } from '../site.js';
 
 export async function live(request) {
@@ -36,6 +37,7 @@ export async function health(request) {
       signIn: builtInSignIn() ? 'built-in' : 'off',
       // Pages ready in memory, and the last "prepare every page" round (server/src/prepare.js).
       prepared: { ...pageCacheStatus(), ...prepareStatus() },
+      indexNow: indexNowStatus(),
       // What the pages show right now (the server checks the database every 2 seconds).
       pages: (({ version, loadedAt, records, problems, lastError }) => ({ dataVersion: version === null ? 'build' : Number(version), loadedAt, records, problems, lastError }))(liveDataStatus()),
       lastSync: { commit: state.last_sync_commit, at: state.last_sync_at },
