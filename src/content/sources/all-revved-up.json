@@ -1,19 +1,27 @@
 {
   "name": "All Revved Up NY - Meat Loaf tribute shows",
-  "url": "https://allrevvedupnyband.com/shows-meat-loaf-tribute",
   "type": "html",
   "adapter": "htmllist",
-  "focus": "music",
-  "cadence": "weekly",
-  "enabled": true,
   "attribution": "Some listings come from All Revved Up NY. We write our own short summaries and link back to the original page.",
-  "description": "Live music listings in Oakdale and Port Jefferson Station: Meat Loaf tribute, classic rock tribute.",
-  "rateLimitSeconds": 5,
+  "cadence": "weekly",
   "catalogStatus": "verified",
   "defaults": {
     "performerIds": [
       "all-revved-up-ny"
     ]
   },
-  "reviewNotes": "Switched back on 2026-10-06 (issue #40), read on Sundays. Its two Long Island venues (CM Performing Arts Center in Oakdale and Lucky Strike Bar & Lounge in Port Jefferson Station) already had researched venue files; the real problem was that its show list gives the town first and the venue on a later line, so the reader saw only the town. The reader now uses a researched venue named on a later line, in the same town. A new Long Island venue on its list will show up in the run report as a venue to research. Catalog check 2026-10-03: Keep at low priority for live-music cross-checking; it is mostly a listening tribute act (theater dates), but bar and party dates draw dancers."
+  "description": "Live music listings in Oakdale and Port Jefferson Station: Meat Loaf tribute, classic rock tribute.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 6,
+    "kept": 2,
+    "needsReview": 0,
+    "outOfArea": 1
+  },
+  "lastScraped": "2026-10-06T16:39:33.530Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Switched back on 2026-10-06 (issue #40), read on Sundays. Its two Long Island venues (CM Performing Arts Center in Oakdale and Lucky Strike Bar & Lounge in Port Jefferson Station) already had researched venue files; the real problem was that its show list gives the town first and the venue on a later line, so the reader saw only the town. The reader now uses a researched venue named on a later line, in the same town. A new Long Island venue on its list will show up in the run report as a venue to research. Catalog check 2026-10-03: Keep at low priority for live-music cross-checking; it is mostly a listening tribute act (theater dates), but bar and party dates draw dancers.",
+  "url": "https://allrevvedupnyband.com/shows-meat-loaf-tribute"
 }
