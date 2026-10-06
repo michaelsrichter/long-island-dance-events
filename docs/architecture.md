@@ -180,6 +180,36 @@ flowchart LR
 | `POST /api/review/snooze`, `GET /api/review/log` | Snoozes (`ReviewState`), and the shared decision log (`ModLog`). |
 | `POST /api/review/github/start`, `GET /api/github-setup` | One-time setup with GitHub's app-manifest flow: a single-use state (1 hour), the code is swapped for the app's private key, which is stored encrypted (AES-256-GCM, key in `REVIEW_SECRET_KEY`). The app must belong to the repository owner. |
 
+## Live database (phase 1 of the move, P54 and P56)
+
+The owner approved moving the site to a live PostgreSQL database ([proposals/postgres-live-site.md](proposals/postgres-live-site.md)). In phase 1 git is still the master copy, and nothing on longisland.dance reads the database yet: it holds an exact copy of `src/content/**`, refreshed every night and after every content change, and the copy is checked byte for byte each time. Setup and restore: [deployment.md](deployment.md#live-database-phase-1).
+
+```mermaid
+flowchart LR
+  subgraph GH["GitHub Actions (database-sync.yml, on main)"]
+    B["build-payload.ts<br/>every record checked<br/>with the site's schemas"] --> S["snapshot<br/>(gzip JSON)"]
+    C["compare-export.ts<br/>byte for byte with git"]
+  end
+  subgraph Azure["Azure, East US 2"]
+    subgraph NET["Private network"]
+      F["Function App func-li-dance-events<br/>(Flex Consumption, server/)"]
+      P[("PostgreSQL psql-li-dance-events<br/>B1ms, Entra sign-in only")]
+    end
+  end
+  S -->|"POST /api/sync/import<br/>GitHub OIDC token"| F
+  F -->|"managed identity"| P
+  F -->|"GET /api/sync/export"| C
+  F -.->|"Sundays: restore drill"| P
+```
+
+| Piece | Where | Notes |
+| --- | --- | --- |
+| Design | `server/migrations/001_initial.sql` | One table per kind of record with the exact file text (`raw`) and the parsed record (`doc jsonb`), generated columns, full-text search and `pg_trgm`; `event_dates`, `places`, `history` (append-only, enforced by a trigger), state tables for later phases, report views. |
+| Server | `server/` (Azure Functions v4, ES modules) | `GET /api/health` (public: versions and counts), `POST /api/sync/import`, `GET /api/sync/export`, `POST /api/sync/drill` (GitHub OIDC: only `database-sync.yml` on `main`). Design changes are applied once, under an advisory lock, on first use. |
+| Snapshot and check | `scripts/db/` | `build-payload.ts` (records, event dates 120 days ahead with `src/lib/event-core.ts`, places), `compare-export.ts`. |
+| Tests | `server/test/`, `tests/unit/db-payload.test.ts` | Real PostgreSQL 17 in CI (`server.yml`): design, sync, history, refusal to empty a table, export, drill, and the full round trip with the real content. |
+| Infrastructure | `infra/live/main.bicep` | Everything in East US 2. PostgreSQL waits for Azure's region access for this subscription (`deployDatabase=false` until then). |
+
 ## Planned (later phases)
 
 - **Duplicates (phase 3):** exact `matchKey` pass, then local embeddings (bge-small, run in CI, no API key). Cosine ≥ 0.9 merges; 0.8-0.9 goes to a human review queue.

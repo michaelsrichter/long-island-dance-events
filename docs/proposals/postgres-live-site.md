@@ -1,7 +1,7 @@
 # Proposal: a live database, so changes show up in seconds
 
-> **Status: proposal, waiting for the owner's approval.** Written October 5, 2026. Nothing on the live site or in Azure has changed, except Phase 0 ([section 12](#12-phase-0-quick-wins-we-can-ship-right-after-approval), 0a and 0b), which shipped on October 5, 2026 (decision P55).
-> Prices are Azure list prices for East US 2, checked October 5, 2026 (see [Prices we checked](#18-prices-we-checked)).
+> **Status: approved by the owner on October 5, 2026 (decision P54), with his answers in [section 16](#16-open-questions).** Phase 0 ([section 12](#12-phase-0-quick-wins-we-can-ship-right-after-approval), 0a and 0b) shipped on October 5 (decision P55). Phase 1 (the database) started on October 5 (decision P56).
+> Prices are Azure list prices for East US 2, checked October 5, 2026 (see [Prices we checked](#18-prices-we-checked)). **Region (P56):** everything stays together in East US 2, on the East Coast near Long Island (owner's requirement). This Visual Studio subscription first needs Azure's permission ("region access") to create a PostgreSQL server there; the owner files that request in the Azure portal ([deployment.md](../deployment.md#live-database-phase-1)).
 > Related: [database-plan.md](../database-plan.md), [architecture.md](../architecture.md), decisions P46, P47, P48, P51 and P52 in [decision-log.md](../decision-log.md).
 
 ## The short version
@@ -12,10 +12,10 @@
   1. Listings, venues, bands and DJs, teachers, organizers, dance styles, sources and help pages move into a small **PostgreSQL database** in Azure (Flexible Server, Burstable B1ms, already approved in P52).
   2. Pages are made on request by **Azure Functions** (Flex Consumption plan, with one copy always running), using the same Astro page code we have today. If a test of Functions fails, the same code runs on a small **App Service** server instead.
   3. The **review center** (`/moderate/`) becomes the one place to edit everything. Press Save and the site shows the change a few seconds later. No pull requests, no rebuilds.
-- **Cost:** about **$9.80 a month today**, about **$23 a month after** (plus $9 for one "safety month" while the old site stays ready as a backup). See [costs](#13-costs-before-and-after).
+- **Cost:** about **$9.80 a month today**, about **$23 a month after**. While the old and new sites both run (phases 1 to 4), about $25 to $31. The owner chose no "safety month": the old site is deleted once the switch-day checks pass. See [costs](#13-costs-before-and-after).
 - **Search engines and AI assistants:** every web address stays the same, with the same tags, sitemaps, structured data and share pictures. Two limits go away: every event date gets its own share picture (not only the next 21 days), and there is no more 15,000-file limit.
 - **Sign-in:** the same Microsoft sign-in (Entra External ID). Most people won't notice the move; at worst someone types an email code once more. Likes, notes, photos and saved events are kept.
-- **Safety:** we build the new site next to the old one at `new.longisland.dance`, compare every page automatically until they match, and only then switch. The old site stays ready as a backup for one month.
+- **Safety:** we build the new site next to the old one at `new.longisland.dance`, compare every page automatically until they match, and only then switch. The old site is deleted once the switch-day checks pass (owner's choice); it could be rebuilt from its template and the nightly export if ever needed.
 - **Right away (Phase 0):** two small changes can ship as soon as you say yes, before any database work: saving in `/admin/` publishes directly (no draft pull request), and deploys get faster (from about 9 to about 4 or 5 minutes) because share pictures are reused between builds.
 
 ## Words we use
@@ -98,7 +98,7 @@ What "in seconds" means in practice:
 | Being found (SEO) | Same addresses and tags | Same | Same, but slower to update | Same |
 | Staying up | Azure swaps in new versions without downtime; another copy starts if one fails | A short restart (seconds) on every code update; no spare copy | Very good (static files) | Good |
 | Sign-in | Azure's built-in sign-in on the Function App; same Microsoft sign-in | Same as A | Unchanged | Same as A |
-| What happens to Static Web Apps | Retired after the safety month | Retired | Stays | Retired |
+| What happens to Static Web Apps | Retired after switch day | Retired | Stays | Retired |
 
 **Ruled out:**
 
@@ -176,7 +176,7 @@ Pages keep working. Each copy already holds all listings in memory, so visitors 
 
 ### 4.4 What happens to Static Web Apps
 
-It stays online, unchanged, for one **safety month** after the switch. The nightly export keeps its files current to within a day. If something goes badly wrong, we point the domain back at it ([rollback](#114-rollback)). After the month, and with your OK, we delete it and save $9 a month.
+It keeps serving the site until the switch, unchanged. On switch day, once the checks pass, we delete it and save $9 a month (the owner chose no "safety month"). If it were ever needed again, its template (`infra/main.bicep`) and the nightly export to git rebuild it in under an hour ([rollback](#114-rollback)).
 
 ### 4.5 Speed
 
@@ -401,7 +401,7 @@ flowchart LR
   P1 --> P2["Phase 2<br/>New site at<br/>new.longisland.dance"]
   P2 --> P3["Phase 3<br/>Editing + collector<br/>on the new site"]
   P3 --> P4["Phase 4<br/>Switch day"]
-  P4 --> P5["Phase 5<br/>Tidy up after<br/>the safety month"]
+  P4 --> P5["Phase 5<br/>Tidy up after<br/>switch day"]
   P5 -.-> P6["Phase 6 (optional)<br/>Community data,<br/>reports"]
 ```
 
@@ -445,12 +445,12 @@ A new script (`scripts/parity.mjs`) compares the two sites page by page. It runs
 ### 11.4 Rollback
 
 - **Phases 0 to 3:** nothing on the live site depends on the new parts. Phase 0 is undone with a revert.
-- **Switch day and the safety month:**
-  1. Press **Export now** in the review center. The latest data goes to git, and the old site rebuilds with every edit made since the switch (about 9 minutes).
+- **Switch day, until the old site is deleted:**
+  1. Press **Export now** in the review center. The latest data goes to git, and the old site rebuilds with every edit made since the switch (about 5 minutes).
   2. Namecheap: put back the ALIAS for `@` and the CNAME for `www` → `gentle-glacier-01b92ea0f.3.azurestaticapps.net`. Static Web Apps still has both names, because we keep its TXT records.
   3. Switch the collector back to pull-request mode (one setting).
   4. People sign in once more on the old site. Likes from accounts created after the switch would show again only after we switch back.
-- **After the safety month:** a bad code update is undone by putting back the previous package (Azure keeps it). Bad data is undone with Undo in History, or with point-in-time restore.
+- **After the old site is deleted:** a bad code update is undone by putting back the previous package (Azure keeps it). Bad data is undone with Undo in History, or with point-in-time restore. In an emergency, the old site can be rebuilt from `infra/main.bicep` and the nightly export (under an hour, then DNS as above).
 
 ## 12. Phase 0: quick wins we can ship right after approval
 
@@ -466,11 +466,11 @@ These need no database and no new Azure resources. They help right away, whateve
 
 ## 13. Costs before and after
 
-Azure list prices for East US 2, checked October 5, 2026. One month = 730 hours.
+Azure list prices for East US 2, where everything runs, checked October 5, 2026. One month = 730 hours.
 
 | Item | Today | After (option A) | How we got the number |
 | --- | ---: | ---: | --- |
-| Static Web Apps Standard | $9.00 | $0 ($9.00 in the safety month) | $9 per app per month |
+| Static Web Apps Standard | $9.00 | $0 (deleted after switch day) | $9 per app per month |
 | Function App: one always-ready copy (512 MB) | — | $5.26 | 0.5 GB × 2,628,000 seconds × $0.000004 |
 | Function App: requests and busy time | — | about $0.20 | Estimate; extra copies get 100,000 GB-seconds and 250,000 requests free each month |
 | PostgreSQL B1ms (1 core, 2 GB memory) | — | $12.41 | $0.017 per hour |
@@ -480,9 +480,10 @@ Azure list prices for East US 2, checked October 5, 2026. One month = 730 hours.
 | Storage (community data, photos, share pictures, exports) | about $0.10 | about $0.20 | A few GB plus operations |
 | Alerts (P50), plus one database alert | about $0.70 | about $0.80 | About $0.10 per metric alert, $0.50 for the log alert |
 | AI Content Safety (free tier), External ID (free under 50,000 monthly users), Logic App, Application Insights (under the free 5 GB) | $0 | $0 | Unchanged |
-| **Total per month** | **about $9.80** | **about $23** (about $32 in the safety month) | |
+| **Total per month** | **about $9.80** | **about $23** | |
 | **Total per year** | about $118 | about $277 | |
 
+- **While both sites run (phases 1 to 4):** Static Web Apps ($9) plus the database ($16.09), about $0.50 for the private DNS zone, and the app: almost nothing in phase 1 (no always-ready copy yet), $5.26 more from phase 2. About **$25.60 a month** in phase 1 and **$31 a month** in phases 2 to 4.
 - **Other options:** A2 on App Service B1, about $30 a month (the server is $12.41 instead of about $5.46). B, about $26. C, about $25 to $51.
 - **If pages ever feel slow:** a bigger always-ready copy (2 GB, one full processor core) costs $21.02 instead of $5.26, bringing the total to about $39.
 - **Not included (unchanged):** Web IQ source search (about $4.25 a month), the domain name, GitHub (free) and AgentMail (free).
@@ -508,27 +509,32 @@ Azure list prices for East US 2, checked October 5, 2026. One month = 730 hours.
 
 ## 15. What you (the owner) need to do
 
-1. **Read this and decide:** approve option A (or pick another) and answer the [open questions](#16-open-questions).
-2. **Azure subscription:** confirm it can carry about $23 a month (about $32 in the safety month), and check the subscription type ([question 6](#16-open-questions)).
-3. **Sign in when a setup script asks** for an Azure or External ID administrator (a few times, mostly in phases 1 and 2).
-4. **Namecheap:** add records when we ask. We give the exact values each time, as in [dns-cutover.md](../dns-cutover.md):
+1. **Read this and decide:** done on October 5, 2026 ("GO!"; answers in [section 16](#16-open-questions)).
+2. **Azure subscription:** keep "Richter Cloud 150Credit" for now (owner's answer); move to pay-as-you-go when needed.
+3. **Ask Azure for PostgreSQL in East US 2** (once, about 2 minutes in the Azure portal; the steps and text to paste are in [deployment.md](../deployment.md#live-database-phase-1)). Azure answers in 24 to 48 hours.
+4. **Sign in when a setup script asks** for an Azure or External ID administrator (a few times, mostly in phases 1 and 2).
+5. **Namecheap:** add records when we ask. We give the exact values each time, as in [dns-cutover.md](../dns-cutover.md):
    - phase 2: the `new` CNAME and `asuid.new` TXT;
    - before switch day: TXT `asuid` and `asuid.www`, one TXT for the certificate made in advance, and a lower TTL;
    - on switch day: the A record for `@` and the CNAME for `www`.
-5. **Try the editor** on `new.longisland.dance` in phase 3, then say "go" and pick a quiet time for switch day.
-6. **After the switch:** sign in once if asked, and keep doing the weekly routine in the review center (it gets shorter).
-7. **After the safety month:** OK deleting the old Static Web App, and delete the GitHub OAuth app that Decap used. It belongs to you, so only you can delete it.
+6. **Try the editor** on `new.longisland.dance` in phase 3, then say "go" and pick a quiet time for switch day.
+7. **After the switch:** sign in once if asked, and keep doing the weekly routine in the review center (it gets shorter).
+8. **After switch day:** OK deleting the old Static Web App, and delete the GitHub OAuth app that Decap used. It belongs to you, so only you can delete it.
 
 ## 16. Open questions
 
-1. **New events from the collector:** "Publish straight away", with uncertain ones held (recommended), or "Wait for me"?
-2. **How long people stay signed in:** we suggest 14 days for everyone, with moderators asked to sign in again after 12 hours. Different numbers?
-3. **Certificate on switch day:** made in advance (recommended, no warning), or switch at a quiet hour and accept a possible short warning?
-4. **Safety month:** keep the old site ready for one month (recommended), shorter or longer?
-5. **Phase 0c:** publish the collector's pull request automatically now, or wait for phase 3?
-6. **Subscription type:** is "Richter Cloud 150Credit" a monthly-credit subscription (for example a Visual Studio benefit)? Those usually have a spending limit that **turns resources off** when the credit runs out. Their terms are also meant for development and testing, not live sites. If so, consider moving the live site to a pay-as-you-go subscription (the site already runs there, P37).
-7. **A second always-ready copy** (+$5.26 a month) so a replaced copy never means a cold start? Not needed at first; we decide after watching it.
-8. **More editors soon?** Add their emails to `ADMIN_EMAILS`. History shows who changed what.
+The owner answered all of them on October 5, 2026 (decision P54).
+
+| # | Question | Answer |
+| --- | --- | --- |
+| 1 | New events from the collector: "Publish straight away" (uncertain ones held) or "Wait for me"? | **Publish straight away**, uncertain ones still held. |
+| 2 | How long people stay signed in? | **14 days for everyone**, moderators included. |
+| 3 | Certificate on switch day: made in advance, or accept a possible short warning? | **Made in advance.** |
+| 4 | Keep the old site ready for a "safety month" after the switch? | **Not necessary.** It is deleted once the switch-day checks pass. |
+| 5 | Publish the collector's pull request automatically now (0c)? | **No; prioritize the database.** |
+| 6 | Which subscription pays? | **"Richter Cloud 150Credit" for now**; move to pay-as-you-go when necessary. It is a Visual Studio subscription with a spending limit, so the budget alert ($40) warns well before the $150 credit runs out. It also may not create PostgreSQL in East US or East US 2 without Azure's permission; the owner asked to keep everything together on the East Coast, so he requests "region access" for East US 2 (free, 24 to 48 hours). If Azure says no, the fallback is a pay-as-you-go subscription. |
+| 7 | A second always-ready copy (+$5.26 a month)? | **No.** |
+| 8 | More editors soon? | **No.** |
 
 ## 17. Effort
 

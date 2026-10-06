@@ -26,7 +26,7 @@ export function toPublicUrl(url) {
   return m ? PUBLIC + m[1] : undefined;
 }
 
-const files = ['package-lock.json', join('api', 'package-lock.json')].map((f) => join(root, f)).filter(existsSync);
+const files = ['package-lock.json', join('api', 'package-lock.json'), join('server', 'package-lock.json')].map((f) => join(root, f)).filter(existsSync);
 const check = process.argv.includes('--check');
 let problems = 0;
 for (const file of files) {

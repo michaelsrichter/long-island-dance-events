@@ -43,3 +43,7 @@ __pycache__/
 # SQLite report database built by catalog/scripts/build-sqlite.ts (rebuilt every run; never commit)
 data/*.sqlite
 data/*-report.md
+
+# Written by the server deploy workflow (the deployed commit); never committed
+server/version.json
+server/local.settings.json
