@@ -13,8 +13,8 @@
  * - resized photos (/_image/): made once, kept on disk (IMAGE_CACHE_DIR) and cached by browsers for a year.
  */
 import { createHash, randomBytes } from 'node:crypto';
-import { createReadStream } from 'node:fs';
-import { mkdir, open, readFile, rename, writeFile } from 'node:fs/promises';
+import { createReadStream, existsSync } from 'node:fs';
+import { mkdir, open, readdir, readFile, rename, stat, unlink, writeFile } from 'node:fs/promises';
 import { Readable } from 'node:stream';
 import { promisify } from 'node:util';
 import { brotliCompress, brotliDecompressSync, constants as zlibConstants, gzipSync } from 'node:zlib';
@@ -30,6 +30,10 @@ export const routeRule = (pathname) => rules.route(pathname);
 const CANONICAL = (process.env.CANONICAL_HOST || 'longisland.dance').toLowerCase();
 // On App Service: /home/data/image-cache (kept between restarts). Locally: server/.image-cache (not in git).
 const IMAGE_CACHE_DIR = process.env.IMAGE_CACHE_DIR || fileURLToPath(new URL('../.image-cache/', import.meta.url));
+// Share pictures (src/lib/og.ts, P64): drawn ones are saved next to the resized photos (/home/data/og-cache);
+// the static build's pictures of the same commit come with the package (og-seed, scripts/live/build-server.mjs).
+process.env.OG_CACHE_DIR ||= join(IMAGE_CACHE_DIR, '..', 'og-cache');
+if (!process.env.OG_SEED_DIR && existsSync(join(SITE_DIR, 'og-seed'))) process.env.OG_SEED_DIR = join(SITE_DIR, 'og-seed');
 const PAGE_TTL_MS = Number(process.env.PAGE_CACHE_SECONDS || 86_400) * 1000;
 const PAGE_CACHE_BYTES = Number(process.env.PAGE_CACHE_MB || 128) * 1024 * 1024;
 const MAX_CACHED_PAGE = 8 * 1024 * 1024;
@@ -231,6 +235,8 @@ export function isPrepared(pathname) {
 
 function remember(key, stored) {
   if (stored.status !== 200 || stored.body.length > MAX_CACHED_PAGE || stored.noStore) return stored;
+  // Pictures (share pictures) are not kept in memory: the page reads its saved copy from disk (src/lib/og.ts).
+  if (!COMPRESSIBLE.test(stored.headers.get('Content-Type') || '')) return stored;
   // Text pages are kept compressed only (about a tenth of the size); the rare visitor without Brotli gets
   // a copy made on the spot.
   const kept = stored.variants ? { ...stored, body: null, cacheKey: key } : { ...stored, cacheKey: key };
@@ -297,6 +303,23 @@ async function override(status, request, url, clientAddress) {
 }
 
 // ---------- resized photos ----------
+
+/** Deletes saved share pictures nobody asked for in `days` days (a picture gets a fresh date each time it is used). */
+export async function pruneSavedPictures(days = 30) {
+  const dir = process.env.OG_CACHE_DIR;
+  if (!dir || dir === 'off') return 0;
+  const cutoff = Date.now() - days * 86_400_000;
+  let removed = 0;
+  const walk = async (d) => {
+    for (const e of await readdir(d, { withFileTypes: true }).catch(() => [])) {
+      const p = join(d, e.name);
+      if (e.isDirectory()) await walk(p);
+      else if ((await stat(p).catch(() => null))?.mtimeMs < cutoff) removed += await unlink(p).then(() => 1, () => 0);
+    }
+  };
+  await walk(dir);
+  return removed;
+}
 
 const imagesInFlight = new Map();
 async function image(request, url) {

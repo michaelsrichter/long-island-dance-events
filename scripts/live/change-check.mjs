@@ -5,9 +5,11 @@
  *   DATABASE_URL=postgres://... node scripts/live/change-check.mjs --base http://127.0.0.1:8080 [--venue <id>] [--limit 10]
  *
  * Changes one venue's name in the database (as an editor would), raises the data version, and measures how
- * long until the venue's page shows the new name. Then puts the old name back and checks again. Use it only
- * on a test database: for a few seconds the venue has "(live check)" in its name.
+ * long until the venue's page shows the new name, and checks that its share picture is drawn again (P64). Then
+ * puts the old name back and checks the page and the picture again. Use it only on a test database: for a few
+ * seconds the venue has "(live check)" in its name.
  */
+import { createHash } from 'node:crypto';
 import { parseArgs } from 'node:util';
 import { closePool, getPool } from '../../server/src/lib/db.js';
 
@@ -74,16 +76,40 @@ const before = JSON.parse(row.raw);
 const name = String(before.name);
 
 const marked = `${name} (live check)`;
+// Its share picture (P64): drawn again with the new name, and the saved one again once the old name is back.
+const ogImage = (html) => (html.match(/<meta[^>]*property="og:image"[^>]*content="([^"]+)"/) ?? html.match(/<meta[^>]*content="([^"]+)"[^>]*property="og:image"/))?.[1];
+const pictureUrl = ogImage(await page(path));
+async function picture() {
+  if (!pictureUrl) return null;
+  const res = await fetch(opt.base + new URL(pictureUrl).pathname, { headers: { 'x-forwarded-host': opt.host, 'x-forwarded-proto': 'https' } });
+  return res.status === 200 ? createHash('sha256').update(Buffer.from(await res.arrayBuffer())).digest('hex') : null;
+}
+const pictureBefore = await picture();
 let failed = false;
 try {
   await setVenue(row.id, JSON.stringify({ ...before, name: marked }, null, 2) + '\n');
   const shown = await waitFor(path, (html) => html.includes(marked));
   console.log(shown === null ? `[change-check] FAILED: ${path} did not show the new name within ${opt.limit} s` : `[change-check] new name on ${path} after ${(shown / 1000).toFixed(1)} s`);
   failed = shown === null;
+  if (pictureBefore) {
+    const t = Date.now();
+    const changed = await picture();
+    const ok = Boolean(changed) && changed !== pictureBefore;
+    console.log(ok ? `[change-check] share picture drawn again with the new name in ${((Date.now() - t) / 1000).toFixed(1)} s` : `[change-check] FAILED: the share picture ${pictureUrl} did not change`);
+    failed ||= !ok;
+  } else {
+    console.log(`[change-check] FAILED: no share picture for ${path}`);
+    failed = true;
+  }
 } finally {
   await setVenue(row.id, row.raw);
 }
 const back = await waitFor(path, (html) => html.includes(`${name}<`) && !html.includes(marked));
 console.log(back === null ? `[change-check] FAILED: the old name did not come back` : `[change-check] old name back after ${(back / 1000).toFixed(1)} s`);
+if (pictureBefore) {
+  const again = await picture();
+  console.log(again === pictureBefore ? '[change-check] share picture back to the saved one' : '[change-check] FAILED: the share picture did not come back');
+  failed ||= again !== pictureBefore;
+}
 await closePool();
 process.exit(failed || back === null ? 1 : 0);

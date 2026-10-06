@@ -1,10 +1,13 @@
 /** Build-time social images (Open Graph 1200x630 and square 1080x1080) rendered with satori + sharp. */
 import { createHash } from 'node:crypto';
-import { mkdirSync, readFileSync, renameSync, utimesSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, renameSync, utimesSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import satori from 'satori';
 import sharp from 'sharp';
+
+/** This file's own text, put into the live server's build (astro.config.mjs), which has no src/ folder. */
+declare const __OG_SOURCE__: string | undefined;
 
 const require = createRequire(import.meta.url);
 const font = (pkg: string, file: string) => readFileSync(require.resolve(`${pkg}/files/${file}`));
@@ -25,6 +28,10 @@ function getFonts() {
  * code, the fonts and the satori and sharp versions. A later build with the same fingerprint reuses the file.
  * The deploy workflow keeps the folder between runs and drops pictures not used for 14 days (a reused picture
  * gets a fresh date). OG_CACHE_DIR picks the folder (default .cache/og); OG_CACHE_DIR=off turns it off.
+ *
+ * On the live server (decision P64) the folder is /home/data/og-cache (kept between restarts and deploys), and
+ * OG_SEED_DIR is a read-only folder in the package with the pictures of the static build of the same commit,
+ * so a picture is drawn there only when its card changed.
  */
 const SOURCE = join(process.cwd(), 'src', 'lib', 'og.ts');
 const sha = (...parts: (string | Buffer)[]) => {
@@ -48,7 +55,7 @@ function packageVersion(name: string): string {
   }
   return '';
 }
-type Store = { dir: string; design: string; hits: number; drawn: number };
+type Store = { dir: string; seed?: string; design: string; hits: number; drawn: number; used: Set<string> };
 let store: Store | null | undefined;
 function getStore(): Store | null {
   if (store !== undefined) return store;
@@ -57,14 +64,22 @@ function getStore(): Store | null {
   let code: Buffer;
   try {
     // Without the drawing code we cannot tell when the design changed, so nothing is saved.
-    code = readFileSync(SOURCE);
+    code = typeof __OG_SOURCE__ === 'string' ? Buffer.from(__OG_SOURCE__, 'utf8') : readFileSync(SOURCE);
   } catch {
     return (store = null);
   }
   const design = sha(code, ...getFonts().map((f) => f.data), packageVersion('satori'), JSON.stringify(sharp.versions));
-  const s: Store = { dir: setting || join(process.cwd(), '.cache', 'og'), design, hits: 0, drawn: 0 };
+  const s: Store = { dir: setting || join(process.cwd(), '.cache', 'og'), seed: process.env.OG_SEED_DIR || undefined, design, hits: 0, drawn: 0, used: new Set() };
   process.once('exit', () => {
     if (s.hits || s.drawn) console.log(`[og] share pictures: ${s.hits} reused, ${s.drawn} drawn (saved in ${s.dir})`);
+    // Which saved pictures this build used: the live server's package takes exactly these (scripts/live/build-server.mjs).
+    if (s.used.size && !(globalThis as { __liLive?: boolean }).__liLive) {
+      try {
+        writeFileSync(join(s.dir, 'last-build.txt'), [...s.used].sort().join('\n') + '\n');
+      } catch {
+        /* only used to make the server's package smaller */
+      }
+    }
   });
   return (store = s);
 }
@@ -75,12 +90,22 @@ export function ogCacheStats(): { enabled: boolean; dir?: string; hits: number; 
   return s ? { enabled: true, dir: s.dir, hits: s.hits, drawn: s.drawn } : { enabled: false, hits: 0, drawn: 0 };
 }
 
+/** On the live server pictures are drawn one at a time, so a burst of requests cannot fill the small server's memory. */
+let drawing: Promise<unknown> = Promise.resolve();
+function oneAtATime<T>(draw: () => Promise<T>): Promise<T> {
+  const run = drawing.then(draw, draw);
+  drawing = run.catch(() => undefined);
+  return run;
+}
+
 /** The saved copy of a picture with this fingerprint, or draw it once and save it. */
 async function saved(kind: string, parts: (string | Buffer)[], draw: () => Promise<Buffer>): Promise<Buffer> {
   const s = getStore();
-  if (!s) return draw();
+  const live = Boolean((globalThis as { __liLive?: boolean }).__liLive);
+  if (!s) return live ? oneAtATime(draw) : draw();
   const key = sha(s.design, kind, ...parts);
   const file = join(s.dir, key.slice(0, 2), `${key}.${kind}`);
+  if (!live) s.used.add(`${key.slice(0, 2)}/${key}.${kind}`);
   try {
     const buf = readFileSync(file);
     s.hits++;
@@ -94,17 +119,39 @@ async function saved(kind: string, parts: (string | Buffer)[], draw: () => Promi
   } catch {
     /* not saved yet */
   }
-  const buf = await draw();
-  s.drawn++;
-  try {
-    mkdirSync(dirname(file), { recursive: true });
-    const tmp = `${file}.${process.pid}.tmp`;
-    writeFileSync(tmp, buf);
-    renameSync(tmp, file);
-  } catch {
-    /* saving is only a speed-up */
+  if (s.seed) {
+    try {
+      const buf = readFileSync(join(s.seed, key.slice(0, 2), `${key}.${kind}`));
+      s.hits++;
+      return buf;
+    } catch {
+      /* not in the package either */
+    }
   }
-  return buf;
+  const make = async (): Promise<Buffer> => {
+    if (live) {
+      try {
+        // Asked for twice at once: the first request has just drawn and saved it.
+        const buf = readFileSync(file);
+        s.hits++;
+        return buf;
+      } catch {
+        /* still not saved */
+      }
+    }
+    const buf = await draw();
+    s.drawn++;
+    try {
+      mkdirSync(dirname(file), { recursive: true });
+      const tmp = `${file}.${process.pid}.tmp`;
+      writeFileSync(tmp, buf);
+      renameSync(tmp, file);
+    } catch {
+      /* saving is only a speed-up */
+    }
+    return buf;
+  };
+  return live ? oneAtATime(make) : make();
 }
 
 /** Fingerprint of a photo or logo file, so a new photo under the same name is drawn again. */
@@ -115,6 +162,23 @@ const fileFingerprint = (path: string): string => {
     return `missing:${path}`;
   }
 };
+
+/**
+ * The original file of an imported photo or logo. The build gives the path where it found it (`fsPath`); the
+ * live server runs elsewhere, so it uses the build's byte-identical copy in its client folder (`src`,
+ * /_astro/...; `__liClientDir` is set by server/astro-adapter/entry.mjs).
+ */
+export function originalFile(img: unknown): string | undefined {
+  const o = img as { fsPath?: string; src?: string } | undefined;
+  if (!o) return undefined;
+  if (o.fsPath && existsSync(o.fsPath)) return o.fsPath;
+  const dir = (globalThis as { __liClientDir?: string }).__liClientDir;
+  if (dir && typeof o.src === 'string' && o.src.startsWith('/_astro/')) {
+    const copy = join(dir, decodeURIComponent(o.src.split('?')[0] ?? ''));
+    if (copy.startsWith(join(dir, '_astro')) && existsSync(copy)) return copy;
+  }
+  return o.fsPath;
+}
 
 type Node = { type: string; props: Record<string, unknown> & { children?: unknown } };
 const h = (type: string, style: Record<string, unknown>, children?: unknown): Node => ({ type, props: { style, children } });
