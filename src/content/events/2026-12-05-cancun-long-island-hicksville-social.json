@@ -1,0 +1,27 @@
+{
+  "title": "DJ MDW and Kings & Queens Gatsby Party at Cancun Long Island",
+  "summary": "A dance party with DJ MDW and Kings & Queens Gatsby Party at Cancun Long Island in Hicksville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "social-dance",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-12-05T20:00",
+  "end": "2026-12-05T22:00",
+  "timezone": "America/New_York",
+  "venueId": "cancun-long-island-hicksville",
+  "town": "Hicksville",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-06",
+  "lastSeen": "2026-10-06",
+  "dancingCues": [
+    "dj"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-05|cancun-long-island-hicksville|dj-mdw-kings-and-queens-gatsby-party|2026-12-05|special",
+  "reviewNotes": "Band or DJ not researched yet: DJ MDW, Kings & Queens Gatsby Party."
+}
