@@ -8,6 +8,7 @@ import { ensureMigrated } from '../lib/migrate.js';
 import { KINDS } from '../lib/kinds.js';
 import { appVersion, json } from '../lib/http.js';
 import { liveDataStatus } from '../live-data.js';
+import { builtInSignIn } from '../identity.js';
 
 export async function live(request) {
   return json(request, 200, { ok: true, version: appVersion().commit });
@@ -30,6 +31,7 @@ export async function health(request) {
       database: 'ok',
       migrations,
       dataVersion: Number(state.data_version),
+      signIn: builtInSignIn() ? 'built-in' : 'off',
       // What the pages show right now (the server checks the database every 2 seconds).
       pages: (({ version, loadedAt, records, problems, lastError }) => ({ dataVersion: version === null ? 'build' : Number(version), loadedAt, records, problems, lastError }))(liveDataStatus()),
       lastSync: { commit: state.last_sync_commit, at: state.last_sync_at },
