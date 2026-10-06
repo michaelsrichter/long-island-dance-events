@@ -109,7 +109,9 @@ The Dance Calendar's PDF, which is set to weekly for that reason) shows up withi
    "The Fictionals at Sample Pub" and "Live music by The Fictionals at Sample Pub." We never copy a
    site's description.
 6. **Match names to our files.** "Mulcahy's" is matched to our Mulcahy's venue file, "DJ Sample" to
-   our DJ file, and so on (by name, other names, or street address).
+   our DJ file, and so on (by name, other names, or street address). When a band's show list gives
+   the town first and the venue on a later line ("Oakdale, NY · 7:30 PM · CM Performing Arts
+   Center"), a venue file named in the listing is used, but only one in that same town.
 7. **Skip what does not belong:**
    - anything outside Nassau and Suffolk counties (checked against our list of 303 Long Island towns,
      villages and hamlets);
