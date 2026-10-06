@@ -350,6 +350,8 @@ node scripts/live/parity.mjs --static dist --base http://127.0.0.1:8080
 node scripts/live/change-check.mjs --base http://127.0.0.1:8080
 ```
 
+**Every morning** the workflow `parity.yml` (Parity: new site vs static site) builds the static site from exactly what the test address runs (its code commit and the content of its last sync, both read from `/api/health`) and compares every file. Switch day needs three clean runs in a row (plan section 11.2).
+
 Without `DATABASE_URL` the server uses the records it was built with. To compare the test address with the static site: build the deployed commit with the same settings as the server (`ALLOW_INDEXING=false`, the `PUBLIC_*` variables), then `node scripts/live/parity.mjs --static dist --base https://new.longisland.dance --host new.longisland.dance --concurrency 6`.
 
 ### Moving the rest to Central US

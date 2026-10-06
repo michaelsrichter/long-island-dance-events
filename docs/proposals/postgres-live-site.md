@@ -423,7 +423,7 @@ flowchart LR
 
 ### 11.2 The parity check: new site vs old site
 
-A script (`scripts/live/parity.mjs`) compares the two sites page by page. **Built (P58, P59):** it runs on every change in GitHub Actions, with the server reading a real database loaded from the same commit; it also ran against `new.longisland.dance` on October 6 (5,630 of 5,630 files identical).
+A script (`scripts/live/parity.mjs`) compares the two sites page by page. **Built (P58, P59):** it runs on every change in GitHub Actions, with the server reading a real database loaded from the same commit; it also ran against `new.longisland.dance` on October 6 (5,630 of 5,630 files identical), and runs there every morning (`.github/workflows/parity.yml`).
 
 - **Same data, same clock.** The old site is built from a given export with a fixed "now" (`BUILD_NOW`). The new site reads a database loaded from the same export, with the same fixed "now" (a test-only setting that production ignores).
 - **Every address:** every file in the old build, every sitemap entry, and the known redirects (`www`, trailing slashes, the Azure addresses).
