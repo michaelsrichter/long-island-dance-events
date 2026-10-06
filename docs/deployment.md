@@ -335,7 +335,7 @@ If the deploy identity is ever recreated, copy its new client id (`deployClientI
   Azure does not copy firewall rules to a restored server, so first let Azure services in:
   ```powershell
   az postgres flexible-server firewall-rule create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
-    --name psql-li-dance-events-drill --rule-name AllowAllAzureServicesAndResourcesWithinAzureIps --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+    --server-name psql-li-dance-events-drill --name AllowAllAzureServicesAndResourcesWithinAzureIps --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
   ```
   To compare it with the live one, run **Database sync → Run workflow** with `drill_server` = `psql-li-dance-events-drill` (if the app cannot sign in to the copy, add it as Microsoft Entra administrator of the copy: `az postgres flexible-server microsoft-entra-admin create --server-name psql-li-dance-events-drill -g rg-li-dance-events-web --object-id <app principal id> --display-name func-li-dance-events --type ServicePrincipal`). Delete the copy afterwards; it costs as much as the live server while it exists.
 - **In phase 1 git is the master copy,** so a lost database is simply filled again by the next sync.
