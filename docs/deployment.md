@@ -338,6 +338,7 @@ If the deploy identity is ever recreated, copy its new client id (`deployClientI
     --server-name psql-li-dance-events-drill --name AllowAllAzureServicesAndResourcesWithinAzureIps --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
   ```
   To compare it with the live one, run **Database sync → Run workflow** with `drill_server` = `psql-li-dance-events-drill` (if the app cannot sign in to the copy, add it as Microsoft Entra administrator of the copy: `az postgres flexible-server microsoft-entra-admin create --server-name psql-li-dance-events-drill -g rg-li-dance-events-web --object-id <app principal id> --display-name func-li-dance-events --type ServicePrincipal`). Delete the copy afterwards; it costs as much as the live server while it exists.
+- **Tested on October 6, 2026:** a copy restored to 01:30 UTC matched the live database in all 11 kinds of records (run 37399821081); the app signed in to the copy with its own identity (Azure keeps the Microsoft Entra administrators, but not the firewall rules). The copies were deleted afterwards.
 - **In phase 1 git is the master copy,** so a lost database is simply filled again by the next sync.
 
 ## Custom domain deployment order
