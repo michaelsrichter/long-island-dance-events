@@ -10,9 +10,12 @@
   "state": "NY",
   "postalCode": "11548",
   "website": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+  "googleMapsUrl": "https://www.google.com/maps?cid=5838347057113585390",
+  "parkingNotes": "Free parking lot at the studio for students. The Greenvale train station (LIRR Oyster Bay Branch) is about a 2-minute walk, the studio says.",
+  "accessibilityNotes": "The studio does not publish accessibility details. A business directory lists it as wheelchair accessible, but there are no details on the entrance or restrooms. Call (516) 774-2577 to check before you go.",
   "kind": "dance-studio",
   "factsSource": "Checked October 4, 2026. Source: dancewithmeusa.com.",
-  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). The dance floor has not been researched yet.\n\nDirectory research 2026-10-04: Address and phone confirmed on the studio's page and Google Maps; Greenvale (11548) is in Nassau County. The Facebook (DanceWithMeUSA) and Instagram (@dancewithme) links in the studio's contact box are the national chain's accounts, not Long Island-only pages; the chain also has YouTube (youtube.com/user/DanceWIthMeOfficial) and X (@DanceWithMeUSA). The studio page also shows widgets for another branch (Instagram @dwmwoodlands, Yelp for The Woodlands, TX) - template leftovers, ignored. The logo is the chain's crest (SVG, scales to any size). No photos recorded: the dance photos on the page are chain-wide marketing images (file names mention Atlanta and Boca), and we could not confirm any of them shows the Greenvale studio. No public email; hours not published on the page (Google shows closed Sunday, opening 11:30 AM Tuesday). Has a dance floor (it is a dance studio) and holds social dance parties.",
+  "reviewNotes": "Added for its own event calendar in src/content/sources (PR #8). Dance floor researched 2026-10-06 (see dancing).\n\nDirectory research 2026-10-04: Address and phone confirmed on the studio's page and Google Maps; Greenvale (11548) is in Nassau County. The Facebook (DanceWithMeUSA) and Instagram (@dancewithme) links in the studio's contact box are the national chain's accounts, not Long Island-only pages; the chain also has YouTube (youtube.com/user/DanceWIthMeOfficial) and X (@DanceWithMeUSA). The studio page also shows widgets for another branch (Instagram @dwmwoodlands, Yelp for The Woodlands, TX) - template leftovers, ignored. The logo is the chain's crest (SVG, scales to any size). No photos recorded: the dance photos on the page are chain-wide marketing images (file names mention Atlanta and Boca), and we could not confirm any of them shows the Greenvale studio. No public email; hours not published on the page (Google shows closed Sunday, opening 11:30 AM Tuesday). Has a dance floor (it is a dance studio) and holds social dance parties.\n\nResearch 2026-10-06 (issue #42): parking and the train station walk are from the studio FAQ; wheelchair access only from a business directory, so check it. The studio seems to be in its own small building shared with a hair salon, not in Wheatley Plaza. Prices on the chain-wide price page name no location, so they are not used. No dated social dance parties are published.",
   "latitude": 40.810615,
   "longitude": -73.628463,
   "coordinatesSource": "U.S. Census Bureau Geocoder",
@@ -35,6 +38,30 @@
     {
       "url": "https://www.google.com/maps?cid=5838347057113585390",
       "note": "Google Maps: Dance With Me Long Island, dance school, 27 Glen Cove Rd, Greenvale, NY 11548, (516) 774-2577; closed Sunday, opens 11:30 AM Tuesday."
+    },
+    {
+      "url": "https://www.superpages.com/greenvale-ny/bpp/dance-with-me-long-island-12387893",
+      "note": "Business directory lists the studio as wheelchair accessible with free parking. It shows an older phone number and different hours; use the studio's own."
     }
-  ]
+  ],
+  "dancing": {
+    "floor": "dance-floor",
+    "policy": "encouraged",
+    "kinds": [
+      "partner"
+    ],
+    "notes": "A ballroom dance studio: it says lessons happen on a real ballroom floor under chandeliers and skylights. It teaches ballroom, Latin, salsa, bachata and hustle and holds social dance parties. The floor size and the number of rooms are not published.",
+    "evidence": [
+      {
+        "url": "https://dancewithmeusa.com/long-island-dance-studio/wedding-dance-lessons/",
+        "note": "The Long Island studio's wedding page says lessons are on a real ballroom floor under chandeliers and skylights at the Glen Cove Road studio."
+      },
+      {
+        "url": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+        "note": "Studio page: weekly group classes (Latin, sensual bachata, salsa) and social dance parties for all levels; no partner or experience needed."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-06"
+  }
 }

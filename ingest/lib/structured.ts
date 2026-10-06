@@ -546,6 +546,12 @@ export function toCandidates(found: FoundEvent[], ctx: AdapterContext, opts: ToC
     }
     if (locName || f.address) venueId = findVenue(reg, locName, f.address, place?.name);
     if (!venueId && defaultVenue && (!ownPlace || ownPlace.name === townOfVenue(reg, defaultVenue)?.name)) venueId = defaultVenue;
+    // Town first, venue on a later line ("Oakdale, NY · 7:30 PM · CM Performing Arts Center"): a
+    // researched venue named in the listing's own words, and only one in that same town.
+    if (!venueId && !locName && ownPlace) {
+      const named = reg.matchVenue(own, ownPlace.name);
+      if (named && normalizeText(reg.venues.get(named)!.town) === normalizeText(ownPlace.name)) venueId = named;
+    }
     // One feed for two locations ("Saved by the Band takes over Daisy's Patchogue" in the Daisy's
     // Miller Place feed): a sister location named in the listing wins over the default.
     if (venueId && venueId === defaultVenue) {

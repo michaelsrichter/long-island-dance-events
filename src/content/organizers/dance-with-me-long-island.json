@@ -1,0 +1,44 @@
+{
+  "name": "Dance With Me Long Island",
+  "type": "studio",
+  "aliases": [
+    "Dance With Me Greenvale",
+    "Dance With Me Studio Long Island"
+  ],
+  "address": "27 Glen Cove Rd",
+  "county": "Nassau",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom",
+    "salsa",
+    "bachata",
+    "hustle"
+  ],
+  "description": "The Long Island studio of the Dance With Me chain, on Glen Cove Road in Greenvale. It teaches adults ballroom and Latin dancing in private lessons and weekly group classes, including salsa and sensual bachata, and holds social dance parties. No partner or experience needed.",
+  "evidence": [
+    {
+      "url": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+      "note": "Studio page, checked Oct 6, 2026: 27 Glen Cove Road, Greenvale, NY 11548, 516-774-2577; private and group lessons for adults; weekly group classes on Wednesday, Thursday and Friday evenings."
+    },
+    {
+      "url": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+      "note": "Studio FAQ: it teaches ballroom styles plus salsa, bachata, hustle, swing, merengue and cha-cha; group classes rotate partners; new students start with a $49 intro offer."
+    }
+  ],
+  "facebookUrl": "https://www.facebook.com/DanceWithMeUSA",
+  "factsSource": "Checked October 6, 2026. Source: dancewithmeusa.com.",
+  "homeVenueId": "dance-with-me-greenvale",
+  "instagramUrl": "https://www.instagram.com/dancewithme/",
+  "logo": {
+    "alt": "Dance With Me logo: a gold crest with two lions, a crown and the letters DWM above the words dance studios",
+    "credit": "Logo: Dance With Me",
+    "creditUrl": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+    "image": "../../assets/entities/organizers/dance-with-me-long-island-logo.webp",
+    "imageSource": "https://dancewithmeusa.com/wp-content/themes/dwm_theme/dist/images/studio-single-new/logo.svg"
+  },
+  "phone": "(516) 774-2577",
+  "postalCode": "11548",
+  "reviewNotes": "Added 2026-10-06 for its weekly group classes (issue #42). The Facebook and Instagram links are the national chain's accounts, linked from the studio page (same as the venue file). Group classes do not name a teacher, so no teachers are linked.",
+  "town": "Greenvale",
+  "website": "https://dancewithmeusa.com/studio/long-island-dance-studio/"
+}

@@ -519,7 +519,7 @@ route('reviewMessages', ['GET'], 'review/messages', async () => {
   const now = Date.now();
   return json(200, {
     messages: issues.filter(data.isMessage).map((i) => ({ ...data.messageCard(i, now), snoozedUntil: snooze[String(i.number)] || '' })),
-    copilotTasks: tasks.filter((i) => !i.pull_request).map((i) => ({ number: i.number, title: i.title, url: i.html_url, createdAt: i.created_at, assigned: (i.assignees || []).length > 0 })),
+    copilotTasks: tasks.filter((i) => !i.pull_request).map((i) => ({ number: i.number, title: i.title, url: i.html_url, createdAt: i.created_at, assigned: (i.assignees || []).some((a) => /^copilot/i.test(a.login || '')) })),
   });
 });
 
@@ -557,7 +557,7 @@ async function copilotIssue(title, text) {
   const issue = await github.gh('POST', `/repos/${REPO}/issues`, {
     title: title.slice(0, 200),
     labels: ['copilot-task'],
-    body: `${text}\n\n---\n_Made in the review center (/moderate/). To have Copilot do this: open this issue on GitHub and choose **Assign to Copilot**, or start a Copilot session and paste this link._`,
+    body: `${text}\n\n---\n_Made in the review center (/moderate/). Copilot does not start this by itself. To get it done, start a Copilot session and give it this link; Copilot then opens a pull request for you to check. Choosing **Assign to Copilot** on GitHub can also start it, but if Copilot replies with an error, nothing more happens until you assign it again._`,
   });
   return { number: issue.number, url: issue.html_url };
 }
