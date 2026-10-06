@@ -288,7 +288,7 @@ Decision P56; the plan is [proposals/postgres-live-site.md](proposals/postgres-l
 | `func-li-dance-events` + plan `asp-li-dance-events` | Azure Functions, Flex Consumption, Node 24, at most 3 copies, none kept running yet. Code in `server/`. https://func-li-dance-events.azurewebsites.net/api/health | about $0 in phase 1 |
 | `stlidancefunc` | The app's own storage (code packages). No keys: only the app's identity can use it. | pennies |
 | `vnet-li-dance-events`, private DNS zone `li-dance-events.private.postgres.database.azure.com` | The private network the app and the database share. | $0.50 |
-| `id-github-deploy-li-dance-events` | The identity GitHub Actions uses to deploy the app, from `main` only (federated credential, no secret). It may only change this one app. | $0 |
+| `id-github-deploy-li-dance-events` | The identity GitHub Actions uses to deploy the app, from `main` only (federated credential, no secret; subject `repo:michaelsrichter@1242059/long-island-dance-events@1402631995:ref:refs/heads/main`, the format with GitHub's account and repository ids that this repository's tokens use). It may only change this one app. | $0 |
 
 Template: `infra/live/main.bicep` (safe to run again).
 
