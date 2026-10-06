@@ -11,23 +11,17 @@
  * Where the /api code is: server/api/ in the deployed package (the deploy workflow copies it there), or
  * api/ next to server/ in the repository. Without it, the community addresses answer 404.
  */
-import { existsSync, readdirSync } from 'node:fs';
+import { readdirSync } from 'node:fs';
 import { createRequire, registerHooks } from 'node:module';
 import { randomUUID } from 'node:crypto';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createIdentity, principalHeader, tableLinks } from './identity.js';
+import { apiDir } from './lib/api-dir.js';
 
 const SHIM = pathToFileURL(fileURLToPath(new URL('./functions-shim.cjs', import.meta.url))).href;
 
-export function apiDir() {
-  if (process.env.API_DIR) return process.env.API_DIR;
-  for (const rel of ['../api/', '../../api/']) {
-    const dir = fileURLToPath(new URL(rel, import.meta.url));
-    if (existsSync(join(dir, 'src', 'functions'))) return dir;
-  }
-  return null;
-}
+export { apiDir };
 
 /** Addresses the live server answers itself, or that only made sense on Static Web Apps. */
 const NOT_HERE = new Set(['roles']);

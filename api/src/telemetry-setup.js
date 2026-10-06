@@ -17,7 +17,16 @@ if (conn) {
       enableLiveMetrics: false,
       // CPU and memory counters every minute were most of the monitoring data and are not used.
       enablePerformanceCounters: false,
-      instrumentationOptions: { http: { enabled: true }, azureSdk: { enabled: false } },
+      // Only web calls are recorded; the live server's database check every 2 seconds would flood the data.
+      instrumentationOptions: {
+        http: { enabled: true },
+        azureSdk: { enabled: false },
+        postgreSql: { enabled: false },
+        mySql: { enabled: false },
+        mongoDb: { enabled: false },
+        redis: { enabled: false },
+        redis4: { enabled: false },
+      },
     });
     enabled = true;
   } catch (err) {

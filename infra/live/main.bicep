@@ -155,7 +155,9 @@ resource app 'Microsoft.Web/sites@2024-04-01' = {
     clientAffinityEnabled: false
     siteConfig: {
       linuxFxVersion: 'NODE|24-lts'
-      appCommandLine: 'node src/main.js'
+      // P62: a small, tidy memory (the B1 machine has about 1.9 GB for everything, App Service's own helpers
+      // included): young objects are cleared often, and the server never grows past about 256 MB of objects.
+      appCommandLine: 'node --max-semi-space-size=4 --max-old-space-size=256 src/main.js'
       alwaysOn: true
       healthCheckPath: '/api/live'
       minTlsVersion: '1.2'
@@ -165,8 +167,9 @@ resource app 'Microsoft.Web/sites@2024-04-01' = {
         { name: 'WEBSITE_RUN_FROM_PACKAGE', value: '1' }
         { name: 'SCM_DO_BUILD_DURING_DEPLOYMENT', value: 'false' }
         { name: 'NODE_ENV', value: 'production' }
+        // Monitoring starts inside the server (server/src/telemetry.js, P62); App Service's separate monitoring
+        // agent (ApplicationInsightsAgent_EXTENSION_VERSION) would be a second copy in memory, so it is off.
         { name: 'APPLICATIONINSIGHTS_CONNECTION_STRING', value: appInsights.properties.ConnectionString }
-        { name: 'ApplicationInsightsAgent_EXTENSION_VERSION', value: '~3' }
         { name: 'PGHOST', value: '${postgresName}.postgres.database.azure.com' }
         { name: 'PGDATABASE', value: databaseName }
         { name: 'PGUSER', value: appName }

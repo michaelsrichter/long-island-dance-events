@@ -19,6 +19,8 @@ writeFileSync(join(dir, 'client', 'robots.txt'), 'User-agent: *\n');
 writeFileSync(join(dir, 'client', 'feed.ics'), 'BEGIN:VCALENDAR\n');
 writeFileSync(join(dir, 'client', 'admin', 'index.html'), '<!doctype html><title>Admin</title>');
 writeFileSync(join(dir, 'client', '_astro', 'app.abc123.js'), 'console.log(1);\n'.repeat(200));
+const PICTURE = Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), Buffer.alloc(5000, 7)]);
+writeFileSync(join(dir, 'client', 'share.png'), PICTURE);
 writeFileSync(join(dir, 'secret.txt'), 'outside the client folder');
 const THEME = 'document.documentElement.dataset.js = "1";';
 writeFileSync(
@@ -167,6 +169,35 @@ test('files outside the client folder are never served', async () => {
     assert.equal(r.status, 404, p);
     assert.doesNotMatch(r.body.toString(), /outside the client folder/, p);
   }
+});
+
+test('pictures are sent from disk, whole, with a size and a tag (P62)', async () => {
+  for (let i = 0; i < 2; i++) {
+    const r = await get('/share.png', { ...SITE, 'Accept-Encoding': 'br, gzip' });
+    assert.equal(r.status, 200);
+    assert.equal(r.headers['content-type'], 'image/png');
+    assert.equal(r.headers['content-encoding'], undefined);
+    assert.equal(Number(r.headers['content-length']), PICTURE.length);
+    assert.ok(r.body.equals(PICTURE));
+    assert.equal((await get('/share.png', { ...SITE, 'If-None-Match': r.headers.etag })).status, 304);
+  }
+  const head = await get('/share.png', SITE, 'HEAD');
+  assert.equal(head.status, 200);
+  assert.equal(Number(head.headers['content-length']), PICTURE.length);
+  assert.equal(head.body.length, 0);
+});
+
+test('text files are kept as Brotli; gzip and plain copies are made for those who need them (P62)', async () => {
+  const plain = await get('/_astro/app.abc123.js');
+  const br = await get('/_astro/app.abc123.js', { ...SITE, 'Accept-Encoding': 'br' });
+  const gz = await get('/_astro/app.abc123.js', { ...SITE, 'Accept-Encoding': 'gzip' });
+  const gzAgain = await get('/_astro/app.abc123.js', { ...SITE, 'Accept-Encoding': 'gzip' });
+  assert.equal(plain.body.toString(), 'console.log(1);\n'.repeat(200));
+  assert.equal(br.headers['content-encoding'], 'br');
+  assert.equal(brotliDecompressSync(br.body).toString(), plain.body.toString());
+  assert.equal(gz.headers['content-encoding'], 'gzip');
+  assert.equal(gunzipSync(gz.body).toString(), plain.body.toString());
+  assert.ok(gzAgain.body.equals(gz.body));
 });
 
 test('pages: compressed, security policy with the page script hashes, old-host cache time', async () => {

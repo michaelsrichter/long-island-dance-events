@@ -2,6 +2,7 @@
  * The live server (decision P58): one Node process on Azure App Service that serves the website (Astro pages
  * made on request, and static files) and the /api endpoints. App Service sets PORT.
  */
+import './telemetry.js';
 import http from 'node:http';
 import { route } from './app.js';
 import { clientAddress, sendResponse, toRequest } from './lib/node-http.js';
@@ -39,13 +40,13 @@ const nyDay = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_Yo
 
 /**
  * After a start: load the records from the database (then every 2 seconds, check for changes), and prepare
- * every page so nobody waits for one to be made (prepare.js). If the database is slow to answer, the pages
- * are prepared from the records the site was built with, and again once the database answers.
+ * every page so nobody waits for one to be made (prepare.js). If the database has not answered after two
+ * minutes, the pages are prepared from the records the site was built with, and again once it answers.
  */
 async function warmUp() {
   installSitemapState();
   const { first } = startLiveData({ onLoaded: () => prepareAll('new data') });
-  const loaded = await Promise.race([first, new Promise((r) => setTimeout(() => r(false), 30_000).unref())]);
+  const loaded = await Promise.race([first, new Promise((r) => setTimeout(() => r(false), 120_000).unref())]);
   if (!loaded) await prepareAll('start');
 }
 
