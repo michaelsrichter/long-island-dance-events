@@ -278,28 +278,41 @@ az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b6
 
 Cost: the workbook, dashboard, action group emails and budget are free; the two metric alerts are about $0.10 a month each and the daily-cap log alert (every 6 hours) about $0.50 a month (decision P50).
 
-## Live database (phase 1)
+## Live database and server (phases 1 and 2)
 
-Decisions P56 and P57; the plan is [proposals/postgres-live-site.md](proposals/postgres-live-site.md). In phase 1, git is still the master copy: the live PostgreSQL database is a faithful copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. Nothing on longisland.dance uses it yet.
+Decisions P56, P57 and P58; the plan is [proposals/postgres-live-site.md](proposals/postgres-live-site.md). Git is still the master copy: the live PostgreSQL database is a faithful copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. The App Service server makes the same pages as today's site at a **test address**; nothing on longisland.dance uses it yet.
 
-**Region: Central US (P57).** This Visual Studio subscription may not create PostgreSQL or Azure SQL in East US or East US 2. Central US is the only US region that allows PostgreSQL and also has Static Web Apps, Flex Consumption, Content Safety, Logic Apps and monitoring, so everything moves there (see "Moving the rest to Central US" below). **No private network:** the database has a public address, but its firewall lets in only Azure services, it accepts only Microsoft Entra sign-in (no passwords) and only encrypted connections.
+**Region: Central US (P57).** This Visual Studio subscription may not create PostgreSQL or Azure SQL in East US or East US 2. Central US is the only US region that allows PostgreSQL and also has App Service, Content Safety, Logic Apps and monitoring, so everything moves there (see "Moving the rest to Central US" below). **No private network:** the database has a public address, but its firewall lets in only Azure services, it accepts only Microsoft Entra sign-in (no passwords) and only encrypted connections.
 
 | Resource (rg-li-dance-events-web, Central US) | What it is | Cost a month |
 | --- | --- | ---: |
-| `psql-li-dance-events` | PostgreSQL 17, Burstable B1ms, 32 GB, 7-day point-in-time restore. Firewall: Azure services only. Microsoft Entra sign-in only; the app is its administrator. | $18.18 |
-| `func-li-dance-events` + plan `asp-li-dance-events` | Azure Functions, Flex Consumption, Node 24, at most 3 copies, none kept running yet. Code in `server/`. https://func-li-dance-events.azurewebsites.net/api/health | about $0 in phase 1 |
-| `stlidancefunc` | The app's own storage (code packages). No keys: only the app's identity can use it. | pennies |
+| `psql-li-dance-events` | PostgreSQL 17, Burstable B1ms, 32 GB, 7-day point-in-time restore. Firewall: Azure services only. Microsoft Entra sign-in only; the web app is its administrator. | $18.18 |
+| `app-li-dance-events` + plan `plan-li-dance-events` | App Service, Linux B1 (1 core, 1.75 GB), Node 24 LTS, always on, health check `/api/live` (P58). Code in `server/`. Test address: https://app-li-dance-events.azurewebsites.net (tells search engines not to list it). | $13.14 |
 | `id-github-deploy-li-dance-events` | The identity GitHub Actions uses to deploy the app, from `main` only (federated credential, no secret; subject `repo:michaelsrichter@1242059/long-island-dance-events@1402631995:ref:refs/heads/main`, the format with GitHub's account and repository ids that this repository's tokens use). It may only change this one app. | $0 |
+
+Phase 1 ran on a small Azure Functions app (`func-li-dance-events`, plan `asp-li-dance-events`, storage `stlidancefunc`). It is deleted once the App Service app runs the sync (P58).
 
 Template: `infra/live/main.bicep` (safe to run again):
 
 ```powershell
 az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
-  --name live-database --template-file infra/live/main.bicep
+  --name live-app-service --template-file infra/live/main.bicep
 ```
 
-If the deploy identity is ever recreated, copy its new client id (`deployClientId` output) into the `AZURE_CLIENT_ID` variable. Once the app answers, `SERVER_URL` is set and the sync runs by itself; to run it now: `gh workflow run database-sync.yml --repo michaelsrichter/long-island-dance-events --ref main`. The first sync applies the database design (`server/migrations/`) and copies everything in. The run page shows a table of what was added and "Database round trip: identical", and `/api/health` then shows `"database": "ok"` and the counts.
+If the deploy identity is ever recreated, copy its new client id (`deployClientId` output) into the `AZURE_CLIENT_ID` variable. To run the sync now: `gh workflow run database-sync.yml --repo michaelsrichter/long-island-dance-events --ref main`. The first sync applies the database design (`server/migrations/`) and copies everything in. The run page shows a table of what was added and "Database round trip: identical", and `/api/health` then shows `"database": "ok"` and the counts.
 
+**App settings that matter** (all set by the template): `SITE_URL=https://longisland.dance` (the pages' own address, whatever name the server is reached by), `CANONICAL_HOST=longisland.dance` (any other host name gets `X-Robots-Tag: noindex, nofollow`), `ALLOW_INDEXING=false` until switch day (pages say "noindex" and `robots.txt` disallows everything; deploy with `allowIndexing=true` on switch day), `IMAGE_CACHE_DIR=/home/data/image-cache` (resized photos kept between restarts).
+
+**Run the server on your computer:**
+
+```powershell
+npm run build                                   # the static site (also makes the resized photos)
+npm run build:server -- --static-images dist    # the server site in server/site, with the photos and share pictures
+npm ci --prefix server
+$env:PORT='8080'; $env:SITE_URL='https://longisland.dance'; $env:ALLOW_INDEXING='true'; node server/src/main.js
+# in another window: every file of the static site must come back identical
+node scripts/live/parity.mjs --static dist --base http://127.0.0.1:8080
+```
 ### Moving the rest to Central US
 
 | Today in East US 2 | When it moves | How |
@@ -316,12 +329,12 @@ If the deploy identity is ever recreated, copy its new client id (`deployClientI
 | --- | --- |
 | `AZURE_CLIENT_ID` | `deployClientId` output of the template (the deploy identity) |
 | `AZURE_TENANT_ID`, `AZURE_SUBSCRIPTION_ID` | `tenantId` and `subscriptionId` outputs |
-| `SERVER_APP_NAME` | `func-li-dance-events` |
-| `SERVER_URL` | `https://func-li-dance-events.azurewebsites.net`, set only once the database exists (step 2) |
+| `SERVER_APP_NAME` | `app-li-dance-events` |
+| `SERVER_URL` | `https://app-li-dance-events.azurewebsites.net` (becomes `https://longisland.dance` on switch day) |
 
 ### What runs
 
-- **Server** (`.github/workflows/server.yml`): on pull requests that touch `server/`, `scripts/db/`, `src/lib/` or the content, the server tests run against a real PostgreSQL 17 in GitHub's runner, including the full round trip with the real content and the restore drill. On `main` it then deploys `server/` to the app and waits until `/api/health` reports the new commit.
+- **Server** (`.github/workflows/server.yml`): on pull requests that touch the site, `server/` or the content, (1) the server tests run against a real PostgreSQL 17 in GitHub's runner, including the full round trip with the real content and the restore drill; (2) the static site and the server site are built from the same commit, the server is started, and every file of the static site must come back identical (`scripts/live/parity.mjs`). On `main` it then deploys the checked package to the App Service app, waits until `/api/health` reports the new commit, checks a few pages, and starts the database sync.
 - **Database sync** (`.github/workflows/database-sync.yml`): every night at about 3:45 AM New York time, after every content change on `main`, and on demand. It builds a snapshot of `src/content/**` (every record checked with the site's own schemas, `scripts/db/build-payload.ts`), sends it to `/api/sync/import` (the database is made to match; every change goes into `history`), reads everything back from `/api/sync/export` and compares it with git, byte for byte (`scripts/db/compare-export.ts`). Any difference fails the run. Only this workflow file on `main` may call these endpoints: the app checks GitHub's signed token (repository, branch, workflow file), so there is no password to leak.
 - **Restore drill:** every Sunday (and on demand with **Run workflow → drill**) the app copies every record into empty tables, exports the copy and checks it is identical, then throws the copy away.
 
@@ -337,7 +350,7 @@ If the deploy identity is ever recreated, copy its new client id (`deployClientI
   az postgres flexible-server firewall-rule create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
     --server-name psql-li-dance-events-drill --name AllowAllAzureServicesAndResourcesWithinAzureIps --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
   ```
-  To compare it with the live one, run **Database sync → Run workflow** with `drill_server` = `psql-li-dance-events-drill` (if the app cannot sign in to the copy, add it as Microsoft Entra administrator of the copy: `az postgres flexible-server microsoft-entra-admin create --server-name psql-li-dance-events-drill -g rg-li-dance-events-web --object-id <app principal id> --display-name func-li-dance-events --type ServicePrincipal`). Delete the copy afterwards; it costs as much as the live server while it exists.
+  To compare it with the live one, run **Database sync → Run workflow** with `drill_server` = `psql-li-dance-events-drill` (if the app cannot sign in to the copy, add it as Microsoft Entra administrator of the copy: `az postgres flexible-server microsoft-entra-admin create --server-name psql-li-dance-events-drill -g rg-li-dance-events-web --object-id <app principal id> --display-name app-li-dance-events --type ServicePrincipal`). Delete the copy afterwards; it costs as much as the live server while it exists.
 - **Tested on October 6, 2026:** a copy restored to 01:30 UTC matched the live database in all 11 kinds of records (run 37399821081); the app signed in to the copy with its own identity (Azure keeps the Microsoft Entra administrators, but not the firewall rules). The copies were deleted afterwards.
 - **In phase 1 git is the master copy,** so a lost database is simply filled again by the next sync.
 

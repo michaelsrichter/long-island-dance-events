@@ -1,13 +1,13 @@
-// The live site's database and server (Phase 1 of docs/proposals/postgres-live-site.md, decisions P56 and P57).
+// The live site's database and server (docs/proposals/postgres-live-site.md; decisions P56, P57 and P58).
 //
 //   PostgreSQL Flexible Server, Burstable B1ms, 32 GB, 7-day point-in-time restore. Public address, but only
 //   Azure services may connect (firewall), only with Microsoft Entra sign-in (no passwords), only encrypted.
 //   No private network: the owner chose simplicity for this non-sensitive data (P57).
-//   An Azure Functions app (Flex Consumption, Node 24) that signs in to the database with its own managed
-//   identity. Phase 1 runs only the nightly sync and health check; phase 2 adds the pages.
+//   App Service, Linux B1 (one always-on server, P58): one Node program (server/) that makes the pages and
+//   answers /api. It signs in to the database with its own managed identity.
 //   A managed identity that GitHub Actions (main branch only) uses to deploy the app. No secrets anywhere.
 //   Region: Central US, the only US region where this Visual Studio subscription may create PostgreSQL and
-//   that also has Static Web Apps, Flex Consumption, Content Safety, Logic Apps and monitoring (P57).
+//   that also has App Service, Content Safety, Logic Apps and monitoring (P57).
 //
 // Deploy (about 10 minutes the first time; safe to run again):
 //   az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
@@ -20,14 +20,15 @@ param location string = 'centralus'
 @description('Short name used in resource names.')
 param namePrefix string = 'li-dance-events'
 
-@description('Function App name (its address is https://<name>.azurewebsites.net).')
-param appName string = 'func-li-dance-events'
+@description('Web app name (its test address is https://<name>.azurewebsites.net).')
+param appName string = 'app-${namePrefix}'
+
+@description('App Service plan size (P58): B1 = 1 core, 1.75 GB, about $13 a month in Central US.')
+@allowed(['B1', 'B2', 'B3'])
+param planSku string = 'B1'
 
 @description('PostgreSQL server name (<name>.postgres.database.azure.com).')
 param postgresName string = 'psql-li-dance-events'
-
-@description('Storage account for the Function App itself (code packages and host data).')
-param storageName string = 'stlidancefunc'
 
 @description('Existing Application Insights component that also receives the website telemetry.')
 param appInsightsName string = 'appi-swa-li-dance-events-web'
@@ -35,16 +36,8 @@ param appInsightsName string = 'appi-swa-li-dance-events-web'
 @description('PostgreSQL major version.')
 param postgresVersion string = '17'
 
-@description('Copies of the app kept running even when nobody visits ($5.26 a month each at 512 MB). 0 until phase 2 serves pages.')
-@minValue(0)
-param alwaysReady int = 0
-
-@description('Most copies that may run at once (each uses up to 5 of the database\'s 35 connections).')
-@minValue(1)
-param maximumInstanceCount int = 3
-
-@allowed([512, 2048, 4096])
-param instanceMemoryMB int = 512
+@description('Let search engines list the pages. Stays false until the switch to longisland.dance (phase 2 cutover).')
+param allowIndexing bool = false
 
 @description('GitHub repository allowed to deploy (main branch) and to call the sync endpoints.')
 param githubRepository string = 'michaelsrichter/long-island-dance-events'
@@ -54,12 +47,11 @@ param githubMainSubject string = 'repo:michaelsrichter@1242059/long-island-dance
 
 param tags object = {
   project: 'long-island-dance-events'
-  phase: 'live-database'
+  phase: 'live-site'
 }
 
 var databaseName = 'lidance'
 var roles = {
-  storageBlobDataOwner: 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b'
   websiteContributor: 'de139f84-1756-47ae-9be6-808fbbe84772'
 }
 
@@ -108,43 +100,18 @@ resource extensions 'Microsoft.DBforPostgreSQL/flexibleServers/configurations@20
   dependsOn: [database]
 }
 
-// ---------- Function App ----------
+// ---------- Web app (App Service, P58) ----------
 
 resource appInsights 'Microsoft.Insights/components@2020-02-02' existing = {
   name: appInsightsName
 }
 
-resource storage 'Microsoft.Storage/storageAccounts@2023-05-01' = {
-  name: storageName
-  location: location
-  tags: tags
-  sku: { name: 'Standard_LRS' }
-  kind: 'StorageV2'
-  properties: {
-    allowBlobPublicAccess: false
-    allowSharedKeyAccess: false
-    defaultToOAuthAuthentication: true
-    minimumTlsVersion: 'TLS1_2'
-    supportsHttpsTrafficOnly: true
-  }
-}
-
-resource blobService 'Microsoft.Storage/storageAccounts/blobServices@2023-05-01' = {
-  parent: storage
-  name: 'default'
-}
-
-resource deployments 'Microsoft.Storage/storageAccounts/blobServices/containers@2023-05-01' = {
-  parent: blobService
-  name: 'deployments'
-}
-
 resource plan 'Microsoft.Web/serverfarms@2024-04-01' = {
-  name: 'asp-${namePrefix}'
+  name: 'plan-${namePrefix}'
   location: location
   tags: tags
-  kind: 'functionapp'
-  sku: { tier: 'FlexConsumption', name: 'FC1' }
+  kind: 'linux'
+  sku: { name: planSku, tier: 'Basic', capacity: 1 }
   properties: { reserved: true }
 }
 
@@ -152,18 +119,27 @@ resource app 'Microsoft.Web/sites@2024-04-01' = {
   name: appName
   location: location
   tags: tags
-  kind: 'functionapp,linux'
+  kind: 'app,linux'
   identity: { type: 'SystemAssigned' }
   properties: {
     serverFarmId: plan.id
     httpsOnly: true
+    // No "ARRAffinity" cookie: every visitor gets the same pages, and pages stay cacheable.
+    clientAffinityEnabled: false
     siteConfig: {
+      linuxFxVersion: 'NODE|24-lts'
+      appCommandLine: 'node src/main.js'
+      alwaysOn: true
+      healthCheckPath: '/api/live'
       minTlsVersion: '1.2'
       ftpsState: 'Disabled'
       http20Enabled: true
       appSettings: [
-        { name: 'AzureWebJobsStorage__accountName', value: storage.name }
+        { name: 'WEBSITE_RUN_FROM_PACKAGE', value: '1' }
+        { name: 'SCM_DO_BUILD_DURING_DEPLOYMENT', value: 'false' }
+        { name: 'NODE_ENV', value: 'production' }
         { name: 'APPLICATIONINSIGHTS_CONNECTION_STRING', value: appInsights.properties.ConnectionString }
+        { name: 'ApplicationInsightsAgent_EXTENSION_VERSION', value: '~3' }
         { name: 'PGHOST', value: '${postgresName}.postgres.database.azure.com' }
         { name: 'PGDATABASE', value: databaseName }
         { name: 'PGUSER', value: appName }
@@ -171,34 +147,25 @@ resource app 'Microsoft.Web/sites@2024-04-01' = {
         { name: 'OIDC_REPOSITORY', value: githubRepository }
         { name: 'OIDC_ALLOWED_WORKFLOWS', value: '${githubRepository}/.github/workflows/database-sync.yml' }
         { name: 'DRILL_SERVER_PREFIX', value: postgresName }
+        // The pages' own address (links, share pictures, sitemaps), whatever name the server is reached by.
+        { name: 'SITE_URL', value: 'https://longisland.dance' }
+        { name: 'CANONICAL_HOST', value: 'longisland.dance' }
+        { name: 'ALLOW_INDEXING', value: allowIndexing ? 'true' : 'false' }
+        // Resized photos are kept here between restarts and deploys (App Service keeps /home).
+        { name: 'IMAGE_CACHE_DIR', value: '/home/data/image-cache' }
       ]
     }
-    functionAppConfig: {
-      deployment: {
-        storage: {
-          type: 'blobContainer'
-          value: '${storage.properties.primaryEndpoints.blob}deployments'
-          authentication: { type: 'SystemAssignedIdentity' }
-        }
-      }
-      scaleAndConcurrency: {
-        maximumInstanceCount: maximumInstanceCount
-        instanceMemoryMB: instanceMemoryMB
-        alwaysReady: alwaysReady > 0 ? [{ name: 'http', instanceCount: alwaysReady }] : []
-      }
-      runtime: { name: 'node', version: '24' }
-    }
   }
-  dependsOn: [deployments]
 }
 
-resource appStorageRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
-  scope: storage
-  name: guid(storage.id, app.id, roles.storageBlobDataOwner)
+resource appLogs 'Microsoft.Web/sites/config@2024-04-01' = {
+  parent: app
+  name: 'logs'
   properties: {
-    principalId: app.identity.principalId
-    principalType: 'ServicePrincipal'
-    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roles.storageBlobDataOwner)
+    applicationLogs: { fileSystem: { level: 'Information' } }
+    httpLogs: { fileSystem: { enabled: true, retentionInDays: 3, retentionInMb: 35 } }
+    detailedErrorMessages: { enabled: false }
+    failedRequestsTracing: { enabled: false }
   }
 }
 

@@ -1,16 +1,14 @@
-/** Small helpers for HTTP answers: JSON (gzip when the caller accepts it) and gzip request bodies. */
-import { gunzipSync, gzipSync } from 'node:zlib';
+/** Small helpers for HTTP answers (standard Request/Response): JSON, gzip request bodies, the deployed version. */
+import { gunzipSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
 
 const MAX_BODY = 64 * 1024 * 1024;
 
-export function json(request, status, body) {
-  const text = JSON.stringify(body);
-  const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' };
-  if (text.length > 2048 && /\bgzip\b/.test(request?.headers?.get('accept-encoding') || '')) {
-    return { status, headers: { ...headers, 'Content-Encoding': 'gzip', Vary: 'Accept-Encoding' }, body: gzipSync(text) };
-  }
-  return { status, headers, body: text };
+export function json(_request, status, body, headers = {}) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', ...headers },
+  });
 }
 
 /** The request body as parsed JSON; accepts gzip (Content-Encoding: gzip). */

@@ -1,7 +1,7 @@
 /**
  * Connection to PostgreSQL.
  *
- * In Azure the Function App signs in with its managed identity (Microsoft Entra; the server accepts no
+ * In Azure the web app signs in with its managed identity (Microsoft Entra; the server accepts no
  * passwords): PGHOST, PGDATABASE and PGUSER (the app's name) come from app settings, and a fresh access
  * token is fetched whenever a new connection opens. Tests and local runs set DATABASE_URL instead.
  */

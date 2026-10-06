@@ -1,17 +1,25 @@
 name: Server
 
-# The live server (server/): tests against a real PostgreSQL, then deploys to the Azure Functions app
-# (Flex Consumption) on pushes to main. Decision P56, docs/proposals/postgres-live-site.md.
-# Until the repository variable AZURE_CLIENT_ID is set (infra/live/main.bicep output), only the tests run.
-# SERVER_URL is set only once the database exists; until then the nightly sync just checks the snapshot.
+# The live server (server/, decision P58): one Node program on Azure App Service that makes the pages and
+# answers /api. docs/proposals/postgres-live-site.md.
+#   test:  server tests against a real PostgreSQL.
+#   site:  builds the static site and the server site from the same commit, starts the server and checks that
+#          every file of the static site comes back identical (scripts/live/parity.mjs).
+#   deploy (main only): the checked package goes to the App Service app, then the database sync runs.
+# Until the repository variable AZURE_CLIENT_ID is set (infra/live/main.bicep output), nothing is deployed.
 on:
   pull_request:
     paths:
       - 'server/**'
+      - 'src/**'
+      - 'public/**'
+      - 'astro.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
       - 'scripts/db/**'
-      - 'src/lib/**'
-      - 'src/content/**'
-      - 'src/data/long-island-places.json'
+      - 'scripts/lib/**'
+      - 'scripts/live/**'
+      - 'scripts/postbuild.mjs'
       - 'infra/live/**'
       - '.github/workflows/server.yml'
       - '.github/workflows/database-sync.yml'
@@ -19,7 +27,14 @@ on:
     branches: [main]
     paths:
       - 'server/**'
+      - 'src/**'
+      - 'public/**'
+      - 'astro.config.mjs'
+      - 'package-lock.json'
       - 'scripts/db/**'
+      - 'scripts/lib/**'
+      - 'scripts/live/**'
+      - 'scripts/postbuild.mjs'
       - 'infra/live/**'
       - '.github/workflows/server.yml'
   workflow_dispatch:
@@ -60,7 +75,7 @@ jobs:
       - run: npm ci --prefix server
       - name: Snapshot of the content (every record checked with the site's schemas)
         run: npx tsx scripts/db/build-payload.ts --out "$RUNNER_TEMP/payload.json.gz"
-      - name: Server tests (sign-in tokens, design, sync, history, export, restore drill, full round trip)
+      - name: Server tests (pages and files, sign-in tokens, design, sync, history, export, restore drill, round trip)
         run: npm test --prefix server
         env:
           DATABASE_URL: postgres://postgres:test@localhost:5432/lidance_test
@@ -69,9 +84,69 @@ jobs:
       - name: Azure template compiles
         run: az bicep build --file infra/live/main.bicep --stdout > /dev/null
 
+  site:
+    name: Server site matches the static site
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # The same settings as the static site's build (azure-static-web-apps.yml). Search engines are let in or
+      # kept out by the server's own ALLOW_INDEXING setting when the page is made, not by the build.
+      SITE_URL: ${{ vars.SITE_URL || 'https://longisland.dance' }}
+      ALLOW_INDEXING: 'true'
+      PUBLIC_GA4_ID: ${{ vars.PUBLIC_GA4_ID }}
+      PUBLIC_CLARITY_ID: ${{ vars.PUBLIC_CLARITY_ID }}
+      PUBLIC_ANALYTICS_CONSENT_MODE: ${{ vars.PUBLIC_ANALYTICS_CONSENT_MODE || 'opt-in' }}
+      PUBLIC_TELEMETRY_ENDPOINT: ${{ vars.PUBLIC_TELEMETRY_ENDPOINT }}
+      PUBLIC_RELEASE: ${{ github.sha }}
+      PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.PUBLIC_GOOGLE_SITE_VERIFICATION }}
+      PUBLIC_BING_SITE_VERIFICATION: ${{ vars.PUBLIC_BING_SITE_VERIFICATION }}
+      INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            server/package-lock.json
+      - run: npm ci
+      - run: npm ci --omit=dev --prefix server
+      - name: One "now" for both builds and the comparison (an event may end while this job runs)
+        run: echo "BUILD_NOW=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
+      # The static site's saved share pictures and resized photos (decision P55); only read here.
+      - name: Restore saved share pictures and resized photos
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            .cache/og
+            node_modules/.astro/assets
+          key: site-images-${{ github.run_id }}
+          restore-keys: site-images-
+      - name: Build the static site (for the comparison and its resized photos)
+        run: npm run build
+      - name: Build the server site (photos keep their static-site addresses)
+        run: npm run build:server -- --static-images dist
+      - name: Start the server and compare every file with the static site
+        run: |
+          PORT=8080 IMAGE_CACHE_DIR="$RUNNER_TEMP/images" node server/src/main.js > "$RUNNER_TEMP/server.log" 2>&1 &
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8080/api/live > /dev/null 2>&1 && break; sleep 1; done
+          node scripts/live/parity.mjs --static dist --base http://127.0.0.1:8080 --show 20
+      - name: Server log
+        if: always()
+        run: tail -n 50 "$RUNNER_TEMP/server.log" || true
+      - name: Keep the checked site for the deploy
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: server-site
+          path: server/site/
+          retention-days: 7
+          if-no-files-found: error
+
   deploy:
-    name: Deploy to Azure Functions
-    needs: test
+    name: Deploy to Azure App Service
+    needs: [test, site]
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && vars.AZURE_CLIENT_ID != ''
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -79,9 +154,11 @@ jobs:
       contents: read
       id-token: write
       actions: write
+    concurrency:
+      group: server-deploy
+      cancel-in-progress: false
     env:
-      # The app's own address; the domain switch comes in a later phase.
-      SERVER_URL: https://${{ vars.SERVER_APP_NAME }}.azurewebsites.net
+      SERVER_URL: ${{ vars.SERVER_URL || format('https://{0}.azurewebsites.net', vars.SERVER_APP_NAME) }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -89,10 +166,20 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: server/package-lock.json
-      - name: Install production packages only
+      - name: Install production packages only (Linux builds of the photo library)
         run: npm ci --omit=dev --prefix server
+      - name: The checked site
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          name: server-site
+          path: server/site
       - name: Record the commit being deployed
         run: echo "{\"commit\":\"$GITHUB_SHA\",\"deployedAt\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"}" > server/version.json
+      - name: Package
+        run: |
+          rm -rf server/test
+          (cd server && zip -qr "$RUNNER_TEMP/server.zip" . -x 'astro-adapter/*')
+          ls -lh "$RUNNER_TEMP/server.zip"
       - name: Sign in to Azure (GitHub OIDC, no secret)
         uses: azure/login@a641126d1b8aa4d1fa005f4f92df94a3a4c4c906 # v3.1.0
         with:
@@ -100,24 +187,31 @@ jobs:
           tenant-id: ${{ vars.AZURE_TENANT_ID }}
           subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
       - name: Deploy
-        uses: Azure/functions-action@c5060b3b8bb1ebbcb531abd00c822ecbaa8ea656 # v1.5.7
+        uses: Azure/webapps-deploy@02a81bead70021f5284939794bcec79c271ab383 # v3.0.8
         with:
           app-name: ${{ vars.SERVER_APP_NAME }}
-          package: server
-          sku: flexconsumption
-          respect-funcignore: true
+          package: ${{ runner.temp }}/server.zip
+          type: zip
+          clean: true
       - name: Wait until the new version answers
-        # 200 = up with its database; 503 = up, database not reachable yet (it is created separately).
+        # 200 = up with its database; 503 = up, database not reachable.
         run: |
           for i in $(seq 1 36); do
             if curl -sS --max-time 60 "$SERVER_URL/api/health" -o health.json && [ "$(jq -r .version health.json 2>/dev/null)" = "$GITHUB_SHA" ]; then
               jq . health.json
-              if [ "$(jq -r .ok health.json)" != "true" ]; then echo "::warning::The new version runs, but its database is not reachable yet."; fi
+              if [ "$(jq -r .ok health.json)" != "true" ]; then echo "::warning::The new version runs, but its database is not reachable."; fi
               exit 0
             fi
             sleep 10
           done
           echo "::error::The server did not answer with version $GITHUB_SHA"; cat health.json 2>/dev/null; exit 1
+      - name: Pages answer
+        run: |
+          for p in / /events/ /venues/ /sitemap-index.xml /robots.txt /events/upcoming.json; do
+            code=$(curl -sS -o /dev/null -w '%{http_code} %{time_total}s' --max-time 60 "$SERVER_URL$p")
+            echo "$code $p"
+            case "$code" in 200*) ;; *) echo "::error::$p answered $code"; exit 1 ;; esac
+          done
       - name: Sync the database now (applies any new design change)
         if: vars.SERVER_URL != ''
         env:

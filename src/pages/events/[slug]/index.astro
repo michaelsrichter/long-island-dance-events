@@ -1,4 +1,6 @@
 ---
+import type { InferGetStaticPropsType } from 'astro';
+import { pageProps } from '../../../lib/page-props';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../../components/Breadcrumbs.astro';
 import TicketDate from '../../../components/TicketDate.astro';
@@ -28,7 +30,9 @@ export async function getStaticPaths() {
   return all.map((event) => ({ params: { slug: event.slug }, props: { slug: event.slug } }));
 }
 
-const { slug } = Astro.props as { slug: string };
+const routeProps = await pageProps<InferGetStaticPropsType<typeof getStaticPaths>>(Astro, getStaticPaths);
+if (!routeProps) return Astro.rewrite('/404');
+const { slug } = routeProps as { slug: string };
 const all = await getAllEvents();
 const now = buildNow();
 const e = all.find((x) => x.slug === slug) as ResolvedEvent;

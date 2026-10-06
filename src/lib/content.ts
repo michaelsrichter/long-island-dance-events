@@ -6,6 +6,7 @@ import { CATEGORY_LABELS, SKILL_LABELS, type County, type EventCategory } from '
 import { addDays, dateInZone, formatDateLong, formatTime, weekdayOf, DEFAULT_TZ } from './time';
 import { linksOf, type ExternalLink } from './links';
 import { assessDancing, isDanceLevel, type DancingAssessment } from './dancing';
+import { remember } from './freshness';
 
 export type Venue = CollectionEntry<'venues'>;
 export type Performer = CollectionEntry<'performers'>;
@@ -72,7 +73,6 @@ export interface ResolvedEvent extends Occurrence {
   dancing: DancingAssessment;
 }
 
-let cache: Promise<ResolvedEvent[]> | undefined;
 
 export function directions(q: string) {
   const enc = encodeURIComponent(q);
@@ -113,101 +113,102 @@ function timeLabelOf(o: Occurrence): string | undefined {
   return o.data.end ? `${start} to ${formatTime(o.endLocal.slice(11))}` : start;
 }
 
-export async function getAllEvents(): Promise<ResolvedEvent[]> {
-  cache ??= (async () => {
-    const [events, refs] = await Promise.all([getCollection('events'), lookup()]);
-    const occurrences = resolveOccurrences(
-      events.map((e) => ({ id: e.id, data: e.data })),
-      { now: buildNow() },
-    );
-    return occurrences.map((o): ResolvedEvent => {
-      const d = o.data;
-      const where = `Event "${o.eventId}"`;
-      const venue = d.venueId ? refs.venues.get(d.venueId) : undefined;
-      if (d.venueId && !venue) throw new Error(`${where} refers to unknown venue "${d.venueId}".`);
-      const organizer = d.organizerId ? refs.organizers.get(d.organizerId) : undefined;
-      if (d.organizerId && !organizer) throw new Error(`${where} refers to unknown organizer "${d.organizerId}".`);
-      const source = refs.sources.get(d.sourceId);
-      if (!source) throw new Error(`${where} refers to unknown source "${d.sourceId}".`);
-      const performers = d.performerIds.map((id) => {
-        const p = refs.performers.get(id);
-        if (!p) throw new Error(`${where} refers to unknown performer "${id}".`);
-        return performerRef(p);
-      });
-      const instructors = d.instructorIds.map((id) => {
-        const p = refs.instructors.get(id);
-        if (!p) throw new Error(`${where} refers to unknown instructor "${id}".`);
-        return instructorRef(p);
-      });
-      const styles = d.danceStyles.map((id) => {
-        const s = refs.styles.get(id);
-        if (!s) throw new Error(`${where} uses unknown dance style "${id}".`);
-        return { id, name: s.data.name, order: s.data.order, danceType: s.data.danceType };
-      });
-      const v = venue?.data;
-      const loc = {
-        name: v?.name,
-        address: v?.address,
-        town: v?.town ?? d.town,
-        county: v?.county,
-        state: v?.state ?? 'NY',
-        postalCode: v?.postalCode,
-        latitude: v?.latitude,
-        longitude: v?.longitude,
-      };
-      const full = [loc.name, loc.address, [loc.town, [loc.state, loc.postalCode].filter(Boolean).join(' ')].filter(Boolean).join(', ')].filter(Boolean).join(', ');
-      const dir = loc.address ? directions(full) : undefined;
-      const price = priceOf(d);
-      const od = organizer?.data;
-      const dancing = assessDancing({
-        category: d.category,
-        sourceFocus: source.data.focus,
-        sourceName: source.data.name,
-        styles: styles.map(({ id, name, danceType }) => ({ id, name, danceType })),
-        cues: d.dancingCues,
-        venue: v ? { name: v.name, kind: v.kind, dancing: v.dancing } : undefined,
-        performers: d.performerIds.map((id) => {
-          const p = refs.performers.get(id)!.data;
-          return { name: p.name, type: p.type, dancing: p.dancing };
-        }),
-        override: d.dancing,
-      });
-      return {
-        ...o,
-        url: `/events/${o.slug}/`,
-        category: d.category,
-        categoryLabel: CATEGORY_LABELS[d.category],
-        venue,
-        organizer,
-        source,
-        location: { ...loc, directionsUrl: dir?.google, appleMapsUrl: dir?.apple, full },
-        performers,
-        djs: performers.filter((p) => p.kind === 'dj'),
-        liveActs: performers.filter((p) => p.kind !== 'dj'),
-        instructors,
-        styles: styles.sort((a, b) => a.order - b.order).map(({ id, name }) => ({ id, name })),
-        price,
-        priceLine: priceText(price),
-        skillLabel: SKILL_LABELS[d.skillLevel],
-        weekday: weekdayOf(o.date),
-        dateLabel: formatDateLong(o.date),
-        timeLabel: timeLabelOf(o),
-        lessonLabel: d.lessonTime ? formatTime(d.lessonTime) : undefined,
-        contact: {
-          name: od?.name,
-          phone: d.contactPhone ?? od?.phone,
-          email: d.contactEmail ?? od?.email,
-          website: od?.website,
-          links: od ? linksOf(od) : [],
-        },
-        moreInfoUrl: d.ticketUrl ?? d.infoUrl ?? od?.website,
-        cadence: o.cadence ?? cadenceOf(d),
-        dancing,
-      };
-    });
-  })();
-  return cache;
+export function getAllEvents(): Promise<ResolvedEvent[]> {
+  return allEvents();
 }
+
+const allEvents = remember(async () => {
+  const [events, refs] = await Promise.all([getCollection('events'), lookup()]);
+  const occurrences = resolveOccurrences(
+    events.map((e) => ({ id: e.id, data: e.data })),
+    { now: buildNow() },
+  );
+  return occurrences.map((o): ResolvedEvent => {
+    const d = o.data;
+    const where = `Event "${o.eventId}"`;
+    const venue = d.venueId ? refs.venues.get(d.venueId) : undefined;
+    if (d.venueId && !venue) throw new Error(`${where} refers to unknown venue "${d.venueId}".`);
+    const organizer = d.organizerId ? refs.organizers.get(d.organizerId) : undefined;
+    if (d.organizerId && !organizer) throw new Error(`${where} refers to unknown organizer "${d.organizerId}".`);
+    const source = refs.sources.get(d.sourceId);
+    if (!source) throw new Error(`${where} refers to unknown source "${d.sourceId}".`);
+    const performers = d.performerIds.map((id) => {
+      const p = refs.performers.get(id);
+      if (!p) throw new Error(`${where} refers to unknown performer "${id}".`);
+      return performerRef(p);
+    });
+    const instructors = d.instructorIds.map((id) => {
+      const p = refs.instructors.get(id);
+      if (!p) throw new Error(`${where} refers to unknown instructor "${id}".`);
+      return instructorRef(p);
+    });
+    const styles = d.danceStyles.map((id) => {
+      const s = refs.styles.get(id);
+      if (!s) throw new Error(`${where} uses unknown dance style "${id}".`);
+      return { id, name: s.data.name, order: s.data.order, danceType: s.data.danceType };
+    });
+    const v = venue?.data;
+    const loc = {
+      name: v?.name,
+      address: v?.address,
+      town: v?.town ?? d.town,
+      county: v?.county,
+      state: v?.state ?? 'NY',
+      postalCode: v?.postalCode,
+      latitude: v?.latitude,
+      longitude: v?.longitude,
+    };
+    const full = [loc.name, loc.address, [loc.town, [loc.state, loc.postalCode].filter(Boolean).join(' ')].filter(Boolean).join(', ')].filter(Boolean).join(', ');
+    const dir = loc.address ? directions(full) : undefined;
+    const price = priceOf(d);
+    const od = organizer?.data;
+    const dancing = assessDancing({
+      category: d.category,
+      sourceFocus: source.data.focus,
+      sourceName: source.data.name,
+      styles: styles.map(({ id, name, danceType }) => ({ id, name, danceType })),
+      cues: d.dancingCues,
+      venue: v ? { name: v.name, kind: v.kind, dancing: v.dancing } : undefined,
+      performers: d.performerIds.map((id) => {
+        const p = refs.performers.get(id)!.data;
+        return { name: p.name, type: p.type, dancing: p.dancing };
+      }),
+      override: d.dancing,
+    });
+    return {
+      ...o,
+      url: `/events/${o.slug}/`,
+      category: d.category,
+      categoryLabel: CATEGORY_LABELS[d.category],
+      venue,
+      organizer,
+      source,
+      location: { ...loc, directionsUrl: dir?.google, appleMapsUrl: dir?.apple, full },
+      performers,
+      djs: performers.filter((p) => p.kind === 'dj'),
+      liveActs: performers.filter((p) => p.kind !== 'dj'),
+      instructors,
+      styles: styles.sort((a, b) => a.order - b.order).map(({ id, name }) => ({ id, name })),
+      price,
+      priceLine: priceText(price),
+      skillLabel: SKILL_LABELS[d.skillLevel],
+      weekday: weekdayOf(o.date),
+      dateLabel: formatDateLong(o.date),
+      timeLabel: timeLabelOf(o),
+      lessonLabel: d.lessonTime ? formatTime(d.lessonTime) : undefined,
+      contact: {
+        name: od?.name,
+        phone: d.contactPhone ?? od?.phone,
+        email: d.contactEmail ?? od?.email,
+        website: od?.website,
+        links: od ? linksOf(od) : [],
+      },
+      moreInfoUrl: d.ticketUrl ?? d.infoUrl ?? od?.website,
+      cadence: o.cadence ?? cadenceOf(d),
+      dancing,
+    };
+  });
+});
 
 export interface DayGroup {
   date: string;

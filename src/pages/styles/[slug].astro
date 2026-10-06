@@ -1,4 +1,6 @@
 ---
+import type { InferGetStaticPropsType } from 'astro';
+import { pageProps } from '../../lib/page-props';
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
@@ -20,7 +22,9 @@ import { styleMeta } from '../../lib/entity-meta';
 export async function getStaticPaths() {
   return (await getCollection('styles')).map((s) => ({ params: { slug: s.id }, props: { style: s } }));
 }
-const { style } = Astro.props;
+const routeProps = await pageProps<InferGetStaticPropsType<typeof getStaticPaths>>(Astro, getStaticPaths);
+if (!routeProps) return Astro.rewrite('/404');
+const { style } = routeProps;
 const s = style.data;
 const events = await upcomingFor((e) => e.styles.some((x) => x.id === style.id));
 const classes = events.filter((e) => e.category === 'class-lesson');

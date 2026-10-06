@@ -14,6 +14,7 @@ import { dateInZone } from './time';
 import { eventShareImage, entityImagePath, PAGE_IMAGE_IDS, pageImage } from './entity-meta';
 import { entityImageUrls } from './entity-images';
 import { getTowns, townHref } from './towns';
+import { remember } from './freshness';
 
 export const SITEMAP_GROUPS = ['pages', 'events', 'venues', 'people', 'styles', 'towns'] as const;
 export type SitemapGroup = (typeof SITEMAP_GROUPS)[number];
@@ -58,11 +59,12 @@ async function previousState(): Promise<SitemapState> {
   }
 }
 
-let cache: Promise<SitemapEntry[]> | undefined;
+let site_: URL | string = '';
+const entries = remember(() => build(site_));
 
 export function sitemapEntries(site: URL | string): Promise<SitemapEntry[]> {
-  cache ??= build(site);
-  return cache;
+  site_ = site;
+  return entries();
 }
 
 async function build(site: URL | string): Promise<SitemapEntry[]> {

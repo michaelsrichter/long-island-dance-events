@@ -1,4 +1,6 @@
 ---
+import type { InferGetStaticPropsType } from 'astro';
+import { pageProps } from '../../lib/page-props';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import EventSeriesList from '../../components/EventSeriesList.astro';
@@ -13,7 +15,9 @@ import '../../styles/towns.css';
 export async function getStaticPaths() {
   return (await getTowns()).map((t) => ({ params: { slug: t.slug }, props: { town: t } }));
 }
-const { town } = Astro.props as { town: Town };
+const routeProps = await pageProps<InferGetStaticPropsType<typeof getStaticPaths>>(Astro, getStaticPaths);
+if (!routeProps) return Astro.rewrite('/404');
+const { town } = routeProps as { town: Town };
 const site = Astro.site!;
 const all = await getTowns();
 const meta = townMeta(town, site);
