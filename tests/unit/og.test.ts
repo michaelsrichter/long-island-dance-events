@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from 'vitest';
 import sharp from 'sharp';
-import { mkdtempSync, readdirSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 // Saved pictures go to a fresh folder for this test file (never the project's .cache/og).
 process.env.OG_CACHE_DIR = mkdtempSync(join(tmpdir(), 'og-cache-'));
-const { ogCacheStats, photoPanel, renderSocialJpeg, renderSocialPng } = await import('../../src/lib/og');
+const { ogCacheStats, originalFile, photoPanel, renderSocialJpeg, renderSocialPng } = await import('../../src/lib/og');
 
 describe('social images', () => {
   it('renders real glyphs (fonts decode correctly)', async () => {
@@ -101,4 +101,84 @@ describe('saved share pictures (faster builds)', () => {
       process.env.OG_CACHE_DIR = saved;
     }
   }, 30_000);
+});
+
+describe('share pictures on the live server (P64)', () => {
+  it("uses the package's pictures (OG_SEED_DIR) before drawing, and never writes into them", async () => {
+    const seed = mkdtempSync(join(tmpdir(), 'og-seed-'));
+    const store = mkdtempSync(join(tmpdir(), 'og-store-'));
+    const card = { title: 'Seeded Swing', lines: ['From the static build'] };
+    // The static build draws and saves it...
+    const first = mkdtempSync(join(tmpdir(), 'og-build-'));
+    vi.resetModules();
+    process.env.OG_CACHE_DIR = first;
+    const build = await import('../../src/lib/og');
+    const drawn = await build.renderSocialPng(card, 'og');
+    for (const sub of readdirSync(first)) {
+      mkdirSync(join(seed, sub), { recursive: true });
+      for (const f of readdirSync(join(first, sub))) copyFileSync(join(first, sub, f), join(seed, sub, f));
+    }
+    // ...and the server finds it in its package instead of drawing it again.
+    vi.resetModules();
+    process.env.OG_CACHE_DIR = store;
+    process.env.OG_SEED_DIR = seed;
+    try {
+      const server = await import('../../src/lib/og');
+      const again = await server.renderSocialPng(card, 'og');
+      expect(again.equals(drawn)).toBe(true);
+      expect(server.ogCacheStats()).toMatchObject({ hits: 1, drawn: 0 });
+      expect(readdirSync(store)).toEqual([]);
+      await server.renderSocialPng({ ...card, title: 'Changed on the live site' }, 'og');
+      expect(server.ogCacheStats().drawn).toBe(1);
+      expect(readdirSync(store).length).toBe(1);
+    } finally {
+      delete process.env.OG_SEED_DIR;
+    }
+  }, 60_000);
+
+  it('the static build lists the saved pictures it used (last-build.txt), for the server package', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'og-used-'));
+    const script = `process.env.OG_CACHE_DIR = ${JSON.stringify(dir)};
+      const og = await import(${JSON.stringify(new URL('../../src/lib/og.ts', import.meta.url).href)});
+      await og.renderSocialPng({ title: 'Listed', lines: ['once'] }, 'og');`;
+    const { execFileSync } = await import('node:child_process');
+    execFileSync(process.execPath, ['--import', 'tsx', '--input-type=module', '-e', script], { stdio: 'pipe' });
+    const list = readFileSync(join(dir, 'last-build.txt'), 'utf8').trim().split('\n');
+    expect(list).toHaveLength(1);
+    expect(list[0]).toMatch(/^[0-9a-f]{2}\/[0-9a-f]{64}\.png$/);
+    expect(existsSync(join(dir, list[0] ?? ''))).toBe(true);
+  }, 60_000);
+
+  it('on the live server, draws one picture at a time and a picture asked for twice at once only once', async () => {
+    vi.resetModules();
+    process.env.OG_CACHE_DIR = mkdtempSync(join(tmpdir(), 'og-live-'));
+    const g = globalThis as { __liLive?: boolean };
+    g.__liLive = true;
+    try {
+      const server = await import('../../src/lib/og');
+      const card = { title: 'Asked for twice', lines: ['at the same moment'] };
+      const [a, b] = await Promise.all([server.renderSocialPng(card, 'og'), server.renderSocialPng({ ...card }, 'og')]);
+      expect(a.equals(b)).toBe(true);
+      expect(server.ogCacheStats()).toMatchObject({ drawn: 1, hits: 1 });
+    } finally {
+      delete g.__liLive;
+    }
+  }, 60_000);
+
+  it("finds an original photo in the client folder when the build's path is not on this computer", () => {
+    const client = mkdtempSync(join(tmpdir(), 'og-client-'));
+    mkdirSync(join(client, '_astro'));
+    writeFileSync(join(client, '_astro', 'venue.AbC123.jpg'), 'jpg');
+    const g = globalThis as { __liClientDir?: string };
+    g.__liClientDir = client;
+    try {
+      const here = join(client, '_astro', 'venue.AbC123.jpg');
+      expect(originalFile({ fsPath: here, src: '/_astro/other.jpg' })).toBe(here);
+      expect(originalFile({ fsPath: '/home/runner/work/site/src/assets/venue.jpg', src: '/_astro/venue.AbC123.jpg' })).toBe(here);
+      expect(originalFile({ fsPath: '/gone/venue.jpg', src: '/_astro/../../secret.jpg' })).toBe('/gone/venue.jpg');
+      expect(originalFile(undefined)).toBeUndefined();
+    } finally {
+      delete g.__liClientDir;
+    }
+  });
 });

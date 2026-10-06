@@ -9,6 +9,7 @@ import { clientAddress, sendResponse, toRequest } from './lib/node-http.js';
 import { closePool } from './lib/db.js';
 import { startLiveData } from './live-data.js';
 import { prepareAll } from './prepare.js';
+import { pruneSavedPictures } from './site.js';
 import { installSitemapState } from './sitemap-state.js';
 import { appVersion } from './lib/http.js';
 
@@ -53,12 +54,14 @@ async function warmUp() {
 server.listen(port, () => {
   console.log(`[server] version ${appVersion().commit} listening on ${port}`);
   warmUp();
-  // A new day on Long Island changes "upcoming" and "today" everywhere: prepare every page again.
+  // A new day on Long Island changes "upcoming" and "today" everywhere: prepare every page again, and drop share
+  // pictures nobody asked for in 30 days.
   let day = nyDay();
   setInterval(() => {
     if (nyDay() !== day) {
       day = nyDay();
       prepareAll('new day');
+      pruneSavedPictures(30).then((n) => n && console.log(`[site] ${n} unused share pictures removed`));
     }
   }, 60_000).unref();
 });

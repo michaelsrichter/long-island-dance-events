@@ -4,7 +4,7 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
 import { createHash } from 'node:crypto';
-import { mkdtempSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readdirSync, rmSync, utimesSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { brotliDecompressSync, gunzipSync } from 'node:zlib';
@@ -48,7 +48,7 @@ writeFileSync(
   join(dir, 'server', 'entry.mjs'),
   `globalThis.renders = 0;
 globalThis.imageRenders = 0;
-const PAGES = new Set(['/', '/events/', '/who/', '/cookies/', '/signed-out/', '/events/upcoming.json', '/sitemap-index.xml', '/sitemap-pages.xml', '/big/']);
+const PAGES = new Set(['/', '/events/', '/who/', '/cookies/', '/signed-out/', '/events/upcoming.json', '/sitemap-index.xml', '/sitemap-pages.xml', '/big/', '/og/page/home.png']);
 export function matches(request) { return PAGES.has(new URL(request.url).pathname); }
 export async function handle(request, { clientAddress } = {}) {
   const url = new URL(request.url);
@@ -65,6 +65,7 @@ export async function handle(request, { clientAddress } = {}) {
   if (url.pathname === '/events/upcoming.json') return new Response('{"events":[]}', { headers: { 'content-type': 'application/json' } });
   if (url.pathname === '/sitemap-index.xml') return new Response('<sitemapindex><sitemap><loc>https://longisland.dance/sitemap-pages.xml</loc></sitemap></sitemapindex>', { headers: { 'content-type': 'application/xml' } });
   if (url.pathname === '/sitemap-pages.xml') return new Response('<urlset><url><loc>https://longisland.dance/big/</loc><image:image><image:loc>https://longisland.dance/x.png</image:loc></image:image></url></urlset>', { headers: { 'content-type': 'application/xml' } });
+  if (url.pathname === '/og/page/home.png') return new Response('PNG' + globalThis.renders, { headers: { 'content-type': 'image/png' } });
   if (url.pathname === '/big/') return new Response('<!doctype html><p>' + 'big page '.repeat(5000) + '</p>', { headers: { 'content-type': 'text/html' } });
   if (url.pathname === '/who/') return new Response(JSON.stringify({ clientAddress, url: request.url }), { headers: { 'content-type': 'application/json' } });
   const h = new Headers({ 'content-type': 'text/plain' });
@@ -79,8 +80,9 @@ export async function notFound() {
 );
 process.env.SITE_DIR = dir;
 process.env.IMAGE_CACHE_DIR = imageCache;
+process.env.OG_CACHE_DIR = join(dir, 'og-cache');
 const { route } = await import('../src/app.js');
-const { clearPageCache, isPrepared } = await import('../src/site.js');
+const { clearPageCache, isPrepared, pruneSavedPictures } = await import('../src/site.js');
 const { prepareAll, prepareStatus } = await import('../src/prepare.js');
 const { inlineScriptHashes } = await import('../src/rules.js');
 const { clientAddress, sendResponse, toRequest } = await import('../src/lib/node-http.js');
@@ -398,6 +400,27 @@ test('every page in the sitemaps is prepared before anyone asks', async () => {
   await prepareAll('again');
   assert.equal(globalThis.renders - renders, 0, 'nothing is made again while nothing changed');
   assert.ok(prepareStatus().skipped >= 3);
+});
+
+test('share pictures are made each time from their saved copy, never kept in page memory (P64)', async () => {
+  const before = globalThis.renders;
+  const a = await get('/og/page/home.png');
+  const b = await get('/og/page/home.png');
+  assert.equal(a.status, 200);
+  assert.equal(a.headers['content-type'], 'image/png');
+  assert.equal(globalThis.renders - before, 2);
+  assert.notEqual(a.body.toString(), b.body.toString());
+});
+
+test('saved share pictures nobody asked for in 30 days are removed (P64)', async () => {
+  const sub = join(process.env.OG_CACHE_DIR, 'ab');
+  mkdirSync(sub, { recursive: true });
+  writeFileSync(join(sub, 'old.png'), 'old');
+  writeFileSync(join(sub, 'new.png'), 'new');
+  const longAgo = new Date(Date.now() - 40 * 86_400_000);
+  utimesSync(join(sub, 'old.png'), longAgo, longAgo);
+  assert.equal(await pruneSavedPictures(30), 1);
+  assert.deepEqual(readdirSync(sub), ['new.png']);
 });
 
 test('the website only answers GET and HEAD', async () => {
