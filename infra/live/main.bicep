@@ -194,6 +194,8 @@ resource app 'Microsoft.Web/sites@2024-04-01' = {
         { name: 'GITHUB_OAUTH_CLIENT_ID', value: secret(keyVaultName, 'github-oauth-client-id') }
         { name: 'GITHUB_OAUTH_CLIENT_SECRET', value: secret(keyVaultName, 'github-oauth-client-secret') }
         { name: 'REVIEW_SECRET_KEY', value: secret(keyVaultName, 'review-secret-key') }
+        // IndexNow (P61): used only once ALLOW_INDEXING is true; the same key as the GitHub variable INDEXNOW_KEY.
+        { name: 'INDEXNOW_KEY', value: secret(keyVaultName, 'indexnow-key') }
       ]
     }
   }

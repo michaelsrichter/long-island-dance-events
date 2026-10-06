@@ -1,0 +1,92 @@
+name: Parity (new site vs static site)
+
+# Every morning during phases 2 to 4 (plan section 11.2): build the static site from main with the live
+# server's settings, then fetch every file from the test address and require it to be the same
+# (scripts/live/parity.mjs; pictures by pixels). Switch day needs three clean runs in a row.
+# The run is skipped (with a note) when the server or its database isn't on main's commit yet.
+on:
+  schedule:
+    - cron: '0 11 * * *' # 7 AM New York (summer): after the nightly sync and the static site's nightly build
+  workflow_dispatch:
+    inputs:
+      base:
+        description: Site to compare (default https://new.longisland.dance)
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: parity
+  cancel-in-progress: false
+
+jobs:
+  parity:
+    name: Every file of the new site equals the static site
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      BASE: ${{ inputs.base || 'https://new.longisland.dance' }}
+      # The same settings the server site is built with (server.yml), and the server's own ALLOW_INDEXING (false
+      # until switch day: pages say noindex).
+      SITE_URL: ${{ vars.SITE_URL || 'https://longisland.dance' }}
+      ALLOW_INDEXING: 'false'
+      PUBLIC_GA4_ID: ${{ vars.PUBLIC_GA4_ID }}
+      PUBLIC_CLARITY_ID: ${{ vars.PUBLIC_CLARITY_ID }}
+      PUBLIC_ANALYTICS_CONSENT_MODE: ${{ vars.PUBLIC_ANALYTICS_CONSENT_MODE || 'opt-in' }}
+      PUBLIC_TELEMETRY_ENDPOINT: ${{ vars.PUBLIC_TELEMETRY_ENDPOINT }}
+      PUBLIC_RELEASE: ${{ github.sha }}
+      PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.PUBLIC_GOOGLE_SITE_VERIFICATION }}
+      PUBLIC_BING_SITE_VERIFICATION: ${{ vars.PUBLIC_BING_SITE_VERIFICATION }}
+      INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: The server's code and the content of its records
+        id: ready
+        run: |
+          curl -fsS --max-time 60 "$BASE/api/health" -o health.json || { echo "::warning::$BASE/api/health did not answer"; echo "go=false" >> "$GITHUB_OUTPUT"; exit 0; }
+          jq '{version, dataVersion, pages: .pages.dataVersion, lastSync: .lastSync.commit}' health.json
+          code=$(jq -r .version health.json); data=$(jq -r .lastSync.commit health.json)
+          if ! git cat-file -e "$code^{commit}" 2>/dev/null || ! git cat-file -e "$data^{commit}" 2>/dev/null; then
+            echo "::warning::Commit ${code:0:7} or ${data:0:7} is not on this repository's history; skipped."
+            echo "go=false" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          git checkout -q --detach "$code"
+          git checkout -q "$data" -- src/content
+          echo "Code from ${code:0:7}, content from ${data:0:7}" >> "$GITHUB_STEP_SUMMARY"
+          echo "go=true" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        if: steps.ready.outputs.go == 'true'
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            server/package-lock.json
+      - if: steps.ready.outputs.go == 'true'
+        run: |
+          npm ci
+          npm ci --omit=dev --prefix server
+      - name: Restore saved share pictures and resized photos
+        if: steps.ready.outputs.go == 'true'
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            .cache/og
+            node_modules/.astro/assets
+          key: site-images-${{ github.run_id }}
+          restore-keys: site-images-
+      - name: Build the static site
+        if: steps.ready.outputs.go == 'true'
+        run: npm run build
+      - name: Compare every file
+        if: steps.ready.outputs.go == 'true'
+        shell: bash
+        run: |
+          set -o pipefail
+          host=$(node -p "new URL(process.env.BASE).host")
+          node scripts/live/parity.mjs --static dist --base "$BASE" --host "$host" --concurrency 6 --show 30 | tee parity.txt
+          echo '### Parity: new site vs static site' >> "$GITHUB_STEP_SUMMARY"
+          head -n 2 parity.txt >> "$GITHUB_STEP_SUMMARY"

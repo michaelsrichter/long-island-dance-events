@@ -56,7 +56,8 @@ export async function checkLiveData({ onLoaded } = {}) {
     const result = await site.loadLiveRecords(collections, version);
     Object.assign(state, { version, loadedAt: new Date().toISOString(), records: result.records, problems: result.problems, ms: result.ms, lastError: null });
     console.log(`[live] data version ${version}: ${result.records} records (${result.parsed} read again) in ${result.ms} ms${result.problems.length ? `, ${result.problems.length} problems` : ''}`);
-    await onLoaded?.();
+    // Preparing the pages runs on its own (it takes minutes); the 2-second check goes on meanwhile.
+    Promise.resolve(onLoaded?.()).catch((err) => console.warn(`[live] after loading: ${err.message}`));
     return true;
   } catch (err) {
     state.lastError = err.message;

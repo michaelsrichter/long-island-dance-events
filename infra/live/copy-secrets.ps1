@@ -33,6 +33,9 @@ $map = [ordered]@{
 }
 
 $settings = (az staticwebapp appsettings list -n $StaticWebAppName -g $ResourceGroup --subscription $Subscription -o json | ConvertFrom-Json).properties
+# The IndexNow key is a GitHub variable (also served publicly as /<key>.txt), not a Static Web App setting.
+$indexNow = (gh variable get INDEXNOW_KEY --repo michaelsrichter/long-island-dance-events 2>$null)
+if ($indexNow) { $settings | Add-Member -NotePropertyName INDEXNOW_KEY -NotePropertyValue $indexNow.Trim() -Force; $map['INDEXNOW_KEY'] = 'indexnow-key' }
 $tmp = New-TemporaryFile
 try {
   foreach ($name in $map.Keys) {

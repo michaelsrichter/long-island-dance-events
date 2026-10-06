@@ -3,12 +3,16 @@
  * pages (server/site/server/entry.mjs, built with ASTRO_TARGET=server). It follows the old host's rules
  * (rules.js) and remembers finished pages, so most visits are answered from memory:
  *
- * - pages: kept for PAGE_CACHE_SECONDS (15 minutes) or until the data changes or a new day starts on Long
- *   Island; browsers check again after 30 seconds, like on the old host;
+ * - pages: kept until the data changes or a new day starts on Long Island (at most PAGE_CACHE_SECONDS, a day),
+ *   already compressed (Brotli and gzip), so a visit costs no work; server/src/prepare.js fills the memory
+ *   with every page in the sitemaps after each change. Browsers check again after 30 seconds, like on the
+ *   old host;
  * - resized photos (/_image/): made once, kept on disk (IMAGE_CACHE_DIR) and cached by browsers for a year.
  */
 import { createHash, randomBytes } from 'node:crypto';
 import { mkdir, open, readFile, rename, writeFile } from 'node:fs/promises';
+import { promisify } from 'node:util';
+import { brotliCompress, constants as zlibConstants, gunzipSync, gzip } from 'node:zlib';
 import { dirname, extname, join, normalize, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadRules } from './rules.js';
@@ -21,7 +25,7 @@ export const routeRule = (pathname) => rules.route(pathname);
 const CANONICAL = (process.env.CANONICAL_HOST || 'longisland.dance').toLowerCase();
 // On App Service: /home/data/image-cache (kept between restarts). Locally: server/.image-cache (not in git).
 const IMAGE_CACHE_DIR = process.env.IMAGE_CACHE_DIR || fileURLToPath(new URL('../.image-cache/', import.meta.url));
-const PAGE_TTL_MS = Number(process.env.PAGE_CACHE_SECONDS || 900) * 1000;
+const PAGE_TTL_MS = Number(process.env.PAGE_CACHE_SECONDS || 86_400) * 1000;
 const PAGE_CACHE_BYTES = Number(process.env.PAGE_CACHE_MB || 128) * 1024 * 1024;
 const MAX_CACHED_PAGE = 8 * 1024 * 1024;
 const MAX_IMAGE_SIDE = 2400;
@@ -86,18 +90,51 @@ function headersFor(pathname, type, body, own = []) {
   return h;
 }
 
-/** Sends a stored answer; "not modified" when the browser already has it. */
+const COMPRESSIBLE = /^(text\/|application\/(json|xml|javascript|manifest\+json|rss\+xml|ld\+json)|image\/svg\+xml)/i;
+const brotli = promisify(brotliCompress);
+const gzipAsync = promisify(gzip);
+
+/** Brotli and gzip copies of a text answer, made once (in the background thread pool). */
+async function compressed(stored) {
+  if (stored.body.length < 1024 || !COMPRESSIBLE.test(stored.headers.get('Content-Type') || '')) return stored;
+  const [br, gz] = await Promise.all([
+    brotli(stored.body, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 9, [zlibConstants.BROTLI_PARAM_SIZE_HINT]: stored.body.length } }),
+    gzipAsync(stored.body, { level: 9 }),
+  ]);
+  return { ...stored, variants: { br, gzip: gz } };
+}
+
+function encodingFor(request, stored) {
+  if (!stored.variants) return null;
+  const a = request.headers.get('accept-encoding') || '';
+  if (/\bbr\b/.test(a)) return 'br';
+  if (/\bgzip\b/.test(a)) return 'gzip';
+  return null;
+}
+
+/** Sends a stored answer (compressed when the browser can take it); "not modified" when it already has it. */
 function reply(request, stored, { status = stored.status, host } = {}) {
   const headers = new Headers(stored.headers);
-  headers.set('ETag', stored.etag);
+  const enc = encodingFor(request, stored);
+  // Each form of the answer has its own tag; any of them means the browser has this version.
+  const etag = enc ? stored.etag.replace(/"$/, `-${enc === 'br' ? 'br' : 'gz'}"`) : stored.etag;
+  headers.set('ETag', etag);
+  if (stored.variants) headers.set('Vary', 'Accept-Encoding');
   if (host !== CANONICAL) headers.set('X-Robots-Tag', 'noindex, nofollow');
-  if (status === 200 && request.headers.get('if-none-match') === stored.etag) {
-    const keep = new Headers({ ETag: stored.etag, 'Cache-Control': headers.get('Cache-Control') });
+  const sent = (request.headers.get('if-none-match') || '').split(',').map((s) => s.trim().replace(/^W\//, '').replace(/-(br|gz)"$/, '"'));
+  if (status === 200 && sent.includes(stored.etag)) {
+    const keep = new Headers({ ETag: etag, 'Cache-Control': headers.get('Cache-Control') });
+    if (stored.variants) keep.set('Vary', 'Accept-Encoding');
     if (host !== CANONICAL) keep.set('X-Robots-Tag', 'noindex, nofollow');
     return new Response(null, { status: 304, headers: keep });
   }
-  headers.set('Content-Length', String(stored.body.length));
-  return new Response(request.method === 'HEAD' ? null : stored.body, { status, headers });
+  let body = stored.body;
+  if (enc) {
+    body = stored.variants[enc];
+    headers.set('Content-Encoding', enc);
+  } else if (!body) body = gunzipSync(stored.variants.gzip);
+  headers.set('Content-Length', String(body.length));
+  return new Response(request.method === 'HEAD' ? null : body, { status, headers });
 }
 
 // ---------- files from the client folder ----------
@@ -122,7 +159,7 @@ async function staticFile(pathname) {
     if ((await handle.stat()).isFile()) {
       const body = await handle.readFile();
       const type = MIME[extname(full).toLowerCase()] || 'application/octet-stream';
-      file = { status: 200, body, etag: etagOf(body), headers: headersFor(pathname, type, body) };
+      file = await compressed({ status: 200, body, etag: etagOf(body), headers: headersFor(pathname, type, body) });
     }
   } catch {
     /* not a file */
@@ -138,7 +175,9 @@ async function staticFile(pathname) {
 
 const pageCache = new Map();
 let pageCacheBytes = 0;
+let pageCacheKey = '';
 const inFlight = new Map();
+const sizeOf = (s) => (s.body?.length ?? 0) + (s.variants ? s.variants.br.length + s.variants.gzip.length : 0);
 
 /** Forget every finished page (after the data changes). */
 export function clearPageCache() {
@@ -146,17 +185,30 @@ export function clearPageCache() {
   pageCacheBytes = 0;
 }
 
+/** How many pages are ready in memory, and their size (for /api/health). */
+export const pageCacheStatus = () => ({ pages: pageCache.size, mb: Math.round((pageCacheBytes / 1024 / 1024) * 10) / 10 });
+
+/** Is this address already prepared for the current data and day? (server/src/prepare.js skips it then) */
+export function isPrepared(pathname) {
+  const hit = pageCache.get(`${freshness()}|${pathname}`);
+  return Boolean(hit && hit.expires > Date.now());
+}
+
 function remember(key, stored) {
-  if (stored.status !== 200 || stored.body.length > MAX_CACHED_PAGE || stored.noStore) return;
+  if (stored.status !== 200 || stored.body.length > MAX_CACHED_PAGE || stored.noStore) return stored;
+  // Text pages are kept compressed only (about a tenth of the size); the rare visitor without gzip gets
+  // a copy unpacked on the spot.
+  const kept = stored.variants ? { ...stored, body: null } : stored;
   const old = pageCache.get(key);
-  if (old) pageCacheBytes -= old.body.length;
-  pageCache.set(key, stored);
-  pageCacheBytes += stored.body.length;
+  if (old) pageCacheBytes -= sizeOf(old);
+  pageCache.set(key, kept);
+  pageCacheBytes += sizeOf(kept);
   for (const [k, v] of pageCache) {
     if (pageCacheBytes <= PAGE_CACHE_BYTES) break;
     pageCache.delete(k);
-    pageCacheBytes -= v.body.length;
+    pageCacheBytes -= sizeOf(v);
   }
+  return kept;
 }
 
 /** Renders an address with Astro and stores the whole answer (pages are small; this allows ETags and caching). */
@@ -178,7 +230,13 @@ async function render(url, request, clientAddress, pathname = url.pathname) {
 }
 
 async function page(request, url, clientAddress) {
-  const key = `${freshness()}|${url.pathname}`;
+  const fresh = freshness();
+  // New data or a new day: the old pages are no use any more, so free their memory at once.
+  if (fresh !== pageCacheKey) {
+    clearPageCache();
+    pageCacheKey = fresh;
+  }
+  const key = `${fresh}|${url.pathname}`;
   const hit = pageCache.get(key);
   if (hit && hit.expires > Date.now()) {
     pageCache.delete(key);
@@ -187,10 +245,8 @@ async function page(request, url, clientAddress) {
   }
   if (inFlight.has(key)) return inFlight.get(key);
   const p = render(url, request, clientAddress)
-    .then((stored) => {
-      remember(key, stored);
-      return stored;
-    })
+    .then(compressed)
+    .then((stored) => remember(key, stored))
     .finally(() => inFlight.delete(key));
   inFlight.set(key, p);
   return p;

@@ -7,6 +7,7 @@ import { route } from './app.js';
 import { clientAddress, sendResponse, toRequest } from './lib/node-http.js';
 import { closePool } from './lib/db.js';
 import { startLiveData } from './live-data.js';
+import { prepareAll } from './prepare.js';
 import { installSitemapState } from './sitemap-state.js';
 import { appVersion } from './lib/http.js';
 
@@ -34,40 +35,31 @@ const server = http.createServer(async (req, res) => {
 server.keepAliveTimeout = 230_000;
 server.headersTimeout = 235_000;
 
-/** The busiest pages; kept prepared so visitors don't wait for them (pages are remembered for 15 minutes). */
-const BUSIEST = ['/', '/events/'];
-const host = process.env.CANONICAL_HOST || 'longisland.dance';
-
-async function prepare(log) {
-  for (const path of BUSIEST) {
-    const started = performance.now();
-    try {
-      const res = await route(new Request(`https://${host}${path}`), {});
-      await res.arrayBuffer();
-      if (log) console.log(`[server] prepared ${path} (${res.status}, ${Math.round(performance.now() - started)} ms)`);
-    } catch (err) {
-      console.warn(`[server] could not prepare ${path}: ${err.message}`);
-    }
-  }
-}
+const nyDay = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date());
 
 /**
  * After a start: load the records from the database (then every 2 seconds, check for changes), and prepare
- * the busiest pages so the first visitors don't wait. If the database is slow to answer, the pages are
- * prepared from the records the site was built with, and again once the database answers.
+ * every page so nobody waits for one to be made (prepare.js). If the database is slow to answer, the pages
+ * are prepared from the records the site was built with, and again once the database answers.
  */
 async function warmUp() {
   installSitemapState();
-  const { first } = startLiveData({ onLoaded: () => prepare(false) });
+  const { first } = startLiveData({ onLoaded: () => prepareAll('new data') });
   const loaded = await Promise.race([first, new Promise((r) => setTimeout(() => r(false), 30_000).unref())]);
-  if (!loaded) await prepare(true);
+  if (!loaded) await prepareAll('start');
 }
 
 server.listen(port, () => {
   console.log(`[server] version ${appVersion().commit} listening on ${port}`);
   warmUp();
-  // Again every 10 minutes: also covers a new day starting on Long Island.
-  setInterval(() => prepare(false), 10 * 60_000).unref();
+  // A new day on Long Island changes "upcoming" and "today" everywhere: prepare every page again.
+  let day = nyDay();
+  setInterval(() => {
+    if (nyDay() !== day) {
+      day = nyDay();
+      prepareAll('new day');
+    }
+  }, 60_000).unref();
 });
 
 function stop(signal) {

@@ -7,8 +7,11 @@
  */
 import { getPool } from './lib/db.js';
 import { ensureMigrated } from './lib/migrate.js';
+import { announce } from './indexnow.js';
 
 let last = null;
+/** The dates just came from the old site's file (the table was empty): don't announce them as changes. */
+let seeded = false;
 
 function seedUrl() {
   if (process.env.SITEMAP_SEED_URL) return process.env.SITEMAP_SEED_URL;
@@ -37,7 +40,8 @@ export async function load() {
   try {
     await ensureMigrated();
     const rows = (await getPool().query('SELECT loc, hash, lastmod FROM sitemap_state')).rows;
-    last = rows.length ? Object.fromEntries(rows.map((r) => [r.loc, [r.hash, r.lastmod]])) : await seed();
+    seeded = !rows.length;
+    last = seeded ? await seed() : Object.fromEntries(rows.map((r) => [r.loc, [r.hash, r.lastmod]]));
     return last;
   } catch (err) {
     // Database unreachable: the dates from the last time (in memory), or none.
@@ -58,12 +62,16 @@ export async function save(state) {
       `INSERT INTO sitemap_state (loc, hash, lastmod)
        SELECT * FROM unnest($1::text[], $2::text[], $3::text[])
        ON CONFLICT (loc) DO UPDATE SET hash = EXCLUDED.hash, lastmod = EXCLUDED.lastmod, changed_at = now()
-       WHERE sitemap_state.hash IS DISTINCT FROM EXCLUDED.hash OR sitemap_state.lastmod IS DISTINCT FROM EXCLUDED.lastmod`,
+       WHERE sitemap_state.hash IS DISTINCT FROM EXCLUDED.hash OR sitemap_state.lastmod IS DISTINCT FROM EXCLUDED.lastmod
+       RETURNING loc`,
       [locs, locs.map((l) => state[l][0]), locs.map((l) => state[l][1])],
     );
     const gone = await client.query('DELETE FROM sitemap_state WHERE NOT (loc = ANY($1::text[]))', [locs]);
     await client.query('COMMIT');
     if (changed.rowCount || gone.rowCount) console.log(`[sitemap] ${changed.rowCount} addresses new or changed, ${gone.rowCount} no longer listed`);
+    // Not the very first fill (copied from the old site): those addresses aren't news.
+    if (!seeded) announce(changed.rows.map((r) => r.loc));
+    seeded = false;
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {});
     console.warn(`[sitemap] could not save the dates: ${err.message}`);

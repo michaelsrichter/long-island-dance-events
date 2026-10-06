@@ -144,7 +144,7 @@ flowchart TB
 ### 4.1 How a visitor gets a page
 
 1. A browser asks for, say, `/events/2026-10-17-swing-night-huntington/`.
-2. The server checks its **page cache**. If the page was made since the last change, it is sent at once.
+2. The server checks its **page cache**. If the page was made since the last change, it is sent at once. **Built (P61):** after each change the server prepares every page in its sitemaps in the background and keeps them compressed, so visitors and search engines almost never wait for a page to be made.
 3. If not, Astro makes the page from the **in-memory copy** of all listings. The copy is small: about 1,400 records, a few megabytes. Making a page takes a few hundredths of a second. The result goes into the cache.
 4. Browsers may reuse a page for 30 seconds, the same as on today's site (`Cache-Control: public, must-revalidate, max-age=30`). After that they check back with an `ETag`; if nothing changed, the server answers "not changed" with almost no data.
 5. Files whose names change with every code update (CSS, JavaScript, fonts) are kept by browsers for a year. Share pictures have a fingerprint of their facts in the address, so a new picture gets a new address when the facts change.
@@ -318,7 +318,7 @@ Everything from P46, P47 and P48 stays. The page code is the same; only *when* p
 | Sitemaps (6 kinds, with last-changed dates) | Dates kept between builds through `/sitemap-state.json` | The same rule (a page's date changes when the facts on it change), with the dates kept in the database (`sitemap_state`, P59) |
 | 81 town pages, `llms.txt`, `llms-full.txt`, `/events/upcoming.json`, RSS, calendar files | Built ahead of time | Same code, made on request and cached |
 | `robots.txt` and AI crawler rules | Same | Same; `new.longisland.dance` says "don't index" until the switch |
-| IndexNow | After each deploy | **Within minutes of each change** (batched) |
+| IndexNow | After each deploy | **Within minutes of each change** (batched; built, P61: on from switch day) |
 | Past dates `noindex` | Yes | Yes |
 | Hiding ended events in the browser (`src/scripts/expire.ts`) | Needed between rebuilds | Not needed any more (kept, harmless) |
 | Security headers (CSP with script hashes, HSTS...) | Added after the build (`scripts/postbuild.mjs` → `staticwebapp.config.json`) | Astro's built-in CSP (`security.csp`) adds the hashes; our code sends the other headers from today's list |
@@ -423,7 +423,7 @@ flowchart LR
 
 ### 11.2 The parity check: new site vs old site
 
-A script (`scripts/live/parity.mjs`) compares the two sites page by page. **Built (P58, P59):** it runs on every change in GitHub Actions, with the server reading a real database loaded from the same commit; it also ran against `new.longisland.dance` on October 6 (5,630 of 5,630 files identical).
+A script (`scripts/live/parity.mjs`) compares the two sites page by page. **Built (P58, P59):** it runs on every change in GitHub Actions, with the server reading a real database loaded from the same commit; it also ran against `new.longisland.dance` on October 6 (5,630 of 5,630 files identical), and runs there every morning (`.github/workflows/parity.yml`).
 
 - **Same data, same clock.** The old site is built from a given export with a fixed "now" (`BUILD_NOW`). The new site reads a database loaded from the same export, with the same fixed "now" (a test-only setting that production ignores).
 - **Every address:** every file in the old build, every sitemap entry, and the known redirects (`www`, trailing slashes, the Azure addresses).
