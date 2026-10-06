@@ -1,23 +1,21 @@
-// The live site's database and server (Phase 1 of docs/proposals/postgres-live-site.md, decision P56).
+// The live site's database and server (Phase 1 of docs/proposals/postgres-live-site.md, decisions P56 and P57).
 //
-//   PostgreSQL Flexible Server, Burstable B1ms, 32 GB, 7-day point-in-time restore, in a private network
-//   (no public address; Microsoft Entra sign-in only, no passwords).
-//   An Azure Functions app (Flex Consumption, Node 24) in the same private network, signing in to the
-//   database with its own managed identity. Phase 1 runs only the nightly sync and health check;
-//   phase 2 adds the pages.
+//   PostgreSQL Flexible Server, Burstable B1ms, 32 GB, 7-day point-in-time restore. Public address, but only
+//   Azure services may connect (firewall), only with Microsoft Entra sign-in (no passwords), only encrypted.
+//   No private network: the owner chose simplicity for this non-sensitive data (P57).
+//   An Azure Functions app (Flex Consumption, Node 24) that signs in to the database with its own managed
+//   identity. Phase 1 runs only the nightly sync and health check; phase 2 adds the pages.
 //   A managed identity that GitHub Actions (main branch only) uses to deploy the app. No secrets anywhere.
-//   Everything in East US 2 with the rest of the site (owner: one East Coast region).
+//   Region: Central US, the only US region where this Visual Studio subscription may create PostgreSQL and
+//   that also has Static Web Apps, Flex Consumption, Content Safety, Logic Apps and monitoring (P57).
 //
-// Deploy (about 15 minutes the first time; safe to run again):
+// Deploy (about 10 minutes the first time; safe to run again):
 //   az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
 //     --template-file infra/live/main.bicep
 targetScope = 'resourceGroup'
 
-@description('Azure region: the same as the rest of the site, on the East Coast near Long Island (owner\'s requirement). This Visual Studio subscription needs Azure\'s permission ("region access") to create PostgreSQL here; see docs/deployment.md, Live database.')
-param location string = 'eastus2'
-
-@description('Create the PostgreSQL server. False until Azure grants region access for PostgreSQL in this region; everything else can be deployed and tested before that.')
-param deployDatabase bool = true
+@description('Azure region for everything (P57): Central US.')
+param location string = 'centralus'
 
 @description('Short name used in resource names.')
 param namePrefix string = 'li-dance-events'
@@ -25,7 +23,7 @@ param namePrefix string = 'li-dance-events'
 @description('Function App name (its address is https://<name>.azurewebsites.net).')
 param appName string = 'func-li-dance-events'
 
-@description('PostgreSQL server name (<name>.postgres.database.azure.com, reachable only inside the private network).')
+@description('PostgreSQL server name (<name>.postgres.database.azure.com).')
 param postgresName string = 'psql-li-dance-events'
 
 @description('Storage account for the Function App itself (code packages and host data).')
@@ -60,58 +58,14 @@ param tags object = {
 }
 
 var databaseName = 'lidance'
-var dnsZoneName = '${namePrefix}.private.postgres.database.azure.com'
 var roles = {
   storageBlobDataOwner: 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b'
   websiteContributor: 'de139f84-1756-47ae-9be6-808fbbe84772'
 }
 
-// ---------- Private network ----------
-
-resource vnet 'Microsoft.Network/virtualNetworks@2024-05-01' = {
-  name: 'vnet-${namePrefix}'
-  location: location
-  tags: tags
-  properties: {
-    addressSpace: { addressPrefixes: ['10.70.0.0/16'] }
-    subnets: [
-      {
-        name: 'snet-app'
-        properties: {
-          addressPrefix: '10.70.1.0/24'
-          delegations: [{ name: 'flex', properties: { serviceName: 'Microsoft.App/environments' } }]
-        }
-      }
-      {
-        name: 'snet-postgres'
-        properties: {
-          addressPrefix: '10.70.2.0/24'
-          delegations: [{ name: 'postgres', properties: { serviceName: 'Microsoft.DBforPostgreSQL/flexibleServers' } }]
-        }
-      }
-    ]
-  }
-}
-
-resource dnsZone 'Microsoft.Network/privateDnsZones@2024-06-01' = {
-  name: dnsZoneName
-  location: 'global'
-  tags: tags
-}
-
-resource dnsLink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2024-06-01' = {
-  parent: dnsZone
-  name: 'vnet-${namePrefix}'
-  location: 'global'
-  properties: {
-    registrationEnabled: false
-    virtualNetwork: { id: vnet.id }
-  }
-}
-
 // ---------- PostgreSQL ----------
 
-resource postgres 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = if (deployDatabase) {
+resource postgres 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = {
   name: postgresName
   location: location
   tags: tags
@@ -121,30 +75,33 @@ resource postgres 'Microsoft.DBforPostgreSQL/flexibleServers@2024-08-01' = if (d
     storage: { storageSizeGB: 32, autoGrow: 'Disabled' }
     backup: { backupRetentionDays: 7, geoRedundantBackup: 'Disabled' }
     highAvailability: { mode: 'Disabled' }
-    network: {
-      delegatedSubnetResourceId: '${vnet.id}/subnets/snet-postgres'
-      privateDnsZoneArmResourceId: dnsZone.id
-      publicNetworkAccess: 'Disabled'
-    }
+    network: { publicNetworkAccess: 'Enabled' }
     authConfig: {
       activeDirectoryAuth: 'Enabled'
       passwordAuth: 'Disabled'
       tenantId: subscription().tenantId
     }
-    // Azure's monthly updates: Tuesday 08:00 UTC (4 AM in New York in summer, 3 AM in winter).
+    // Azure's monthly updates: Tuesday 08:00 UTC (3 AM in Iowa in summer, 2 AM in winter).
     maintenanceWindow: { customWindow: 'Enabled', dayOfWeek: 2, startHour: 8, startMinute: 0 }
   }
-  dependsOn: [dnsLink]
 }
 
-// Changes to one server must not run at the same time, so each waits for the one before.
-resource database 'Microsoft.DBforPostgreSQL/flexibleServers/databases@2024-08-01' = if (deployDatabase) {
+// Only Azure services (such as the app) may reach the server; nobody on the internet. Changes to one server
+// must not run at the same time, so each waits for the one before.
+resource azureOnly 'Microsoft.DBforPostgreSQL/flexibleServers/firewallRules@2024-08-01' = {
+  parent: postgres
+  name: 'AllowAllAzureServicesAndResourcesWithinAzureIps'
+  properties: { startIpAddress: '0.0.0.0', endIpAddress: '0.0.0.0' }
+}
+
+resource database 'Microsoft.DBforPostgreSQL/flexibleServers/databases@2024-08-01' = {
   parent: postgres
   name: databaseName
   properties: { charset: 'UTF8', collation: 'en_US.utf8' }
+  dependsOn: [azureOnly]
 }
 
-resource extensions 'Microsoft.DBforPostgreSQL/flexibleServers/configurations@2024-08-01' = if (deployDatabase) {
+resource extensions 'Microsoft.DBforPostgreSQL/flexibleServers/configurations@2024-08-01' = {
   parent: postgres
   name: 'azure.extensions'
   properties: { value: 'PG_TRGM', source: 'user-override' }
@@ -200,7 +157,6 @@ resource app 'Microsoft.Web/sites@2024-04-01' = {
   properties: {
     serverFarmId: plan.id
     httpsOnly: true
-    virtualNetworkSubnetId: '${vnet.id}/subnets/snet-app'
     siteConfig: {
       minTlsVersion: '1.2'
       ftpsState: 'Disabled'
@@ -247,10 +203,10 @@ resource appStorageRole 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
 }
 
 // The app is the database's administrator (it applies the design changes in server/migrations/).
-module postgresAdmin 'postgres-admin.bicep' = if (deployDatabase) {
+module postgresAdmin 'postgres-admin.bicep' = {
   name: 'postgres-admin-${appName}'
   params: {
-    postgresName: postgresName
+    postgresName: postgres.name
     principalId: app.identity.principalId
     principalName: app.name
   }
@@ -261,8 +217,7 @@ module postgresAdmin 'postgres-admin.bicep' = if (deployDatabase) {
 
 resource deployIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-01-31' = {
   name: 'id-github-deploy-${namePrefix}'
-  // An identity works in every region; it was first created next to the rest of the site.
-  location: resourceGroup().location
+  location: location
   tags: tags
 }
 

@@ -1,7 +1,7 @@
 # Proposal: a live database, so changes show up in seconds
 
 > **Status: approved by the owner on October 5, 2026 (decision P54), with his answers in [section 16](#16-open-questions).** Phase 0 ([section 12](#12-phase-0-quick-wins-we-can-ship-right-after-approval), 0a and 0b) shipped on October 5 (decision P55). Phase 1 (the database) started on October 5 (decision P56).
-> Prices are Azure list prices for East US 2, checked October 5, 2026 (see [Prices we checked](#18-prices-we-checked)). **Region (P56):** everything stays together in East US 2, on the East Coast near Long Island (owner's requirement). This Visual Studio subscription first needs Azure's permission ("region access") to create a PostgreSQL server there; the owner files that request in the Azure portal ([deployment.md](../deployment.md#live-database-phase-1)).
+> Prices are Azure list prices for East US 2, checked October 5, 2026 (see [Prices we checked](#18-prices-we-checked)). **Region (P57):** everything moves to **Central US** (Iowa). It is the only US region where this Visual Studio subscription may create PostgreSQL that also has everything else the site uses (Static Web Apps, Functions, Content Safety, Logic Apps, monitoring). East US and East US 2 do not allow PostgreSQL or Azure SQL for this subscription. The database costs a little more there: about $18.18 a month instead of $16.09. **No private network** (owner's choice; this data is not sensitive): the database has a public address, but only Azure services may connect, only with Microsoft Entra sign-in and only encrypted.
 > Related: [database-plan.md](../database-plan.md), [architecture.md](../architecture.md), decisions P46, P47, P48, P51 and P52 in [decision-log.md](../decision-log.md).
 
 ## The short version
@@ -12,7 +12,7 @@
   1. Listings, venues, bands and DJs, teachers, organizers, dance styles, sources and help pages move into a small **PostgreSQL database** in Azure (Flexible Server, Burstable B1ms, already approved in P52).
   2. Pages are made on request by **Azure Functions** (Flex Consumption plan, with one copy always running), using the same Astro page code we have today. If a test of Functions fails, the same code runs on a small **App Service** server instead.
   3. The **review center** (`/moderate/`) becomes the one place to edit everything. Press Save and the site shows the change a few seconds later. No pull requests, no rebuilds.
-- **Cost:** about **$9.80 a month today**, about **$23 a month after**. While the old and new sites both run (phases 1 to 4), about $25 to $31. The owner chose no "safety month": the old site is deleted once the switch-day checks pass. See [costs](#13-costs-before-and-after).
+- **Cost:** about **$9.80 a month today**, about **$25 a month after**. While the old and new sites both run (phases 1 to 4), about $28 to $33. The owner chose no "safety month": the old site is deleted once the switch-day checks pass. See [costs](#13-costs-before-and-after).
 - **Search engines and AI assistants:** every web address stays the same, with the same tags, sitemaps, structured data and share pictures. Two limits go away: every event date gets its own share picture (not only the next 21 days), and there is no more 15,000-file limit.
 - **Sign-in:** the same Microsoft sign-in (Entra External ID). Most people won't notice the move; at worst someone types an email code once more. Likes, notes, photos and saved events are kept.
 - **Safety:** we build the new site next to the old one at `new.longisland.dance`, compare every page automatically until they match, and only then switch. The old site is deleted once the switch-day checks pass (owner's choice); it could be rebuilt from its template and the nightly export if ever needed.
@@ -31,7 +31,7 @@
 | **Cold start** | The few seconds a copy needs to start when none was running. |
 | **Pull request (PR)** | A proposed change on GitHub that someone must approve ("merge") before it counts. |
 | **Deploy** | Building the site and putting the new version online. |
-| **Private network** | A closed network inside Azure. Things in it can talk to each other; the internet cannot reach in. |
+| **Firewall** | A list of who may connect. The database accepts only Azure services (such as our app), never the open internet. |
 | **Managed identity** | Azure gives our app its own identity, so it can sign in to the database and storage without any password. |
 | **Point-in-time restore** | Azure can rewind the database to any minute of the last 7 days. |
 | **JSON** | The text format our records are stored in today (`src/content/**`). |
@@ -89,7 +89,7 @@ What "in seconds" means in practice:
 
 | | **A. Functions (recommended)** | A2. App Service B1 | B. Static + rebuild + live patch | C. Container Apps |
 | --- | --- | --- | --- | --- |
-| Total Azure cost per month | **about $23** | about $30 | about $26 | about $25 to $51 (depends on traffic) |
+| Total Azure cost per month | **about $25** | about $32 | about $28 | about $27 to $53 (depends on traffic) |
 | Work to build | Large | Large | Large (two ways to show a page) | Large, plus containers |
 | Risk | Medium: we write a small connector between Astro and Functions | Lower: Astro's official Node adapter | Medium: easy to show different things in different places | Medium: more Azure parts to look after |
 | When people see an edit | **Seconds** | Seconds | Seconds for patched details; the full page only after a rebuild (several minutes) | Seconds |
@@ -116,23 +116,21 @@ What "in seconds" means in practice:
 flowchart TB
   V["Visitors, Google, Bing,<br/>AI assistants"] -->|"https://longisland.dance"| FA
   O["Owner in the review center<br/>/moderate/"] --> FA
-  subgraph Azure["Azure (your subscription, East US 2)"]
+  subgraph Azure["Azure (your subscription, Central US)"]
     subgraph FA["Function App (Flex Consumption), 1 to 3 copies"]
       SIGN["Built-in sign-in<br/>/.auth/login/extid"]
       PAGES["Astro pages made on request<br/>+ page cache"]
       API["Today's /api code<br/>community, review center"]
       MEM[("In-memory copy<br/>of all listings")]
     end
-    subgraph NET["Private network"]
-      PG[("PostgreSQL<br/>Flexible Server B1ms<br/>listings + history")]
-    end
+    PG[("PostgreSQL<br/>Flexible Server B1ms<br/>listings + history")]
     ST[("Storage account<br/>Tables: community data<br/>Blobs: photos, share pictures,<br/>nightly exports")]
     EXT["Entra External ID<br/>email code sign-in"]
     CS["AI Content Safety"]
     LA["Logic App<br/>owner emails"]
   end
   GH["GitHub Actions<br/>weekly collector"] -->|"signed GitHub token"| API
-  FA -->|"private network"| PG
+  FA -->|"Entra sign-in, encrypted"| PG
   FA --> ST
   SIGN --- EXT
   API --> CS
@@ -387,7 +385,7 @@ erDiagram
 - **Search:** PostgreSQL full-text search for the review center's search box, and `pg_trgm` ("similar spelling") to match venue and band names. That helps the collector avoid duplicates. The site's event filters keep working in the browser, as today.
 - **"Near me":** not needed in the database yet. With 161 venues, the browser can sort by distance itself. If we ever want it in SQL, the small `earthdistance` add-on is enough; PostGIS would be more than we need.
 - **Size:** a few megabytes. The smallest storage size (32 GB) leaves room for many years.
-- **Security:** the database has **no public address**. It lives in a private network that only the Function App can reach. It accepts only Microsoft Entra sign-in (no database passwords), and only over encrypted connections. The Function App's managed identity is the only writer.
+- **Security:** the database's firewall lets in only Azure services, never the open internet. It accepts only Microsoft Entra sign-in (no database passwords), and only encrypted connections. The Function App's managed identity is the only writer. There is no private network: the owner chose simplicity, because this data is public listings (P57).
 - **Changing the database design later:** changes are plain SQL files in the repository. A new version of the Function App applies them when it starts, one copy at a time.
 - **Reports for you:** the SQLite report keeps working from the nightly export. A Reports tab in the review center can come later.
 
@@ -408,7 +406,7 @@ flowchart LR
 | Phase | What we build | What visitors notice | How we know it worked | How to undo |
 | --- | --- | --- | --- | --- |
 | **0. Quick wins** | Section 12: direct publishing in `/admin/`, faster deploys | Changes appear sooner | Deploy times in GitHub | Revert the commit |
-| **1. Database and import** | PostgreSQL in a private network, the Function App shell, the database design, an import script (files → database) and an export script (database → files). While git is still the master copy, the database is refilled from git every night. | Nothing | The export equals today's files byte for byte; restore drill passes | Delete the new Azure resources |
+| **1. Database and import** | PostgreSQL (only Azure services may connect, Entra sign-in), the Function App shell, the database design, an import script (files → database) and an export script (database → files). While git is still the master copy, the database is refilled from git every night. | Nothing | The export equals today's files byte for byte; restore drill passes | Delete the new Azure resources |
 | **2. New site on the side** | Starts with the Functions test ([4.6](#46-the-functions-test-and-the-backup-host)). Then: pages made on request from the database, page cache and version check, share pictures saved in Blob, sitemaps and IndexNow from the database, security headers, the `/api` code moved in, built-in sign-in with the user lookup, `/api/session`. | Nothing (`new.longisland.dance` says "don't index") | Parity check clean 3 runs in a row ([11.2](#112-the-parity-check-new-site-vs-old-site)); accessibility (axe) and Lighthouse pass; sign-in test passes; visual check in light and dark mode, phone and desktop, and at 320 px | Delete the test site |
 | **3. Editing and collector** | Review center: Edit, New, History and Undo for every kind; held listings and sources saved in the database. The collector runs in **shadow mode**: each run makes the pull request as today *and* sends the same changes to the test database, and we compare. You try editing on the test site. | Nothing | Shadow results match the pull requests; you are happy with the editor | Keep using today's tools |
 | **4. Switch day** | [11.3](#113-switch-day-including-namecheap) | Possibly one more sign-in | Smoke test, sign-in test, editing test, parity check on the live address | [11.4](#114-rollback) |
@@ -466,28 +464,27 @@ These need no database and no new Azure resources. They help right away, whateve
 
 ## 13. Costs before and after
 
-Azure list prices for East US 2, where everything runs, checked October 5, 2026. One month = 730 hours.
+Azure list prices checked October 5, 2026: Central US for the database (everything runs there, P57); the other items cost the same in both regions. One month = 730 hours.
 
 | Item | Today | After (option A) | How we got the number |
 | --- | ---: | ---: | --- |
 | Static Web Apps Standard | $9.00 | $0 (deleted after switch day) | $9 per app per month |
 | Function App: one always-ready copy (512 MB) | — | $5.26 | 0.5 GB × 2,628,000 seconds × $0.000004 |
 | Function App: requests and busy time | — | about $0.20 | Estimate; extra copies get 100,000 GB-seconds and 250,000 requests free each month |
-| PostgreSQL B1ms (1 core, 2 GB memory) | — | $12.41 | $0.017 per hour |
-| PostgreSQL storage, 32 GB | — | $3.68 | $0.115 per GB per month |
+| PostgreSQL B1ms (1 core, 2 GB memory) | — | $14.02 | $0.01921 per hour (Central US) |
+| PostgreSQL storage, 32 GB | — | $4.16 | $0.13 per GB per month (Central US) |
 | PostgreSQL backups (7 days) | — | $0 | Free up to the server's size |
-| Private network and private DNS zone | — | about $0.50 | The network itself is free; $0.50 per DNS zone |
 | Storage (community data, photos, share pictures, exports) | about $0.10 | about $0.20 | A few GB plus operations |
 | Alerts (P50), plus one database alert | about $0.70 | about $0.80 | About $0.10 per metric alert, $0.50 for the log alert |
 | AI Content Safety (free tier), External ID (free under 50,000 monthly users), Logic App, Application Insights (under the free 5 GB) | $0 | $0 | Unchanged |
-| **Total per month** | **about $9.80** | **about $23** | |
-| **Total per year** | about $118 | about $277 | |
+| **Total per month** | **about $9.80** | **about $25** | |
+| **Total per year** | about $118 | about $296 | |
 
-- **While both sites run (phases 1 to 4):** Static Web Apps ($9) plus the database ($16.09), about $0.50 for the private DNS zone, and the app: almost nothing in phase 1 (no always-ready copy yet), $5.26 more from phase 2. About **$25.60 a month** in phase 1 and **$31 a month** in phases 2 to 4.
-- **Other options:** A2 on App Service B1, about $30 a month (the server is $12.41 instead of about $5.46). B, about $26. C, about $25 to $51.
-- **If pages ever feel slow:** a bigger always-ready copy (2 GB, one full processor core) costs $21.02 instead of $5.26, bringing the total to about $39.
+- **While both sites run (phases 1 to 4):** Static Web Apps ($9) plus the database ($18.18) and the app: almost nothing in phase 1 (no always-ready copy yet), $5.26 more from phase 2. About **$28 a month** in phase 1 and **$33 a month** in phases 2 to 4.
+- **Other options:** A2 on App Service B1, about $32 a month (the server is $12.41 instead of about $5.46). B, about $28. C, about $27 to $53.
+- **If pages ever feel slow:** a bigger always-ready copy (2 GB, one full processor core) costs $21.02 instead of $5.26, bringing the total to about $41.
 - **Not included (unchanged):** Web IQ source search (about $4.25 a month), the domain name, GitHub (free) and AgentMail (free).
-- **Budget alert:** it is set to $15 a month today (`infra/monitoring/monitoring.bicep`). We raise it to **$40** in phase 1.
+- **Budget alert:** raised from $15 to **$40** a month in phase 1 (`infra/monitoring/monitoring.bicep`).
 
 ## 14. Risks and how we handle them
 
@@ -511,7 +508,7 @@ Azure list prices for East US 2, where everything runs, checked October 5, 2026.
 
 1. **Read this and decide:** done on October 5, 2026 ("GO!"; answers in [section 16](#16-open-questions)).
 2. **Azure subscription:** keep "Richter Cloud 150Credit" for now (owner's answer); move to pay-as-you-go when needed.
-3. **Ask Azure for PostgreSQL in East US 2** (once, about 2 minutes in the Azure portal; the steps and text to paste are in [deployment.md](../deployment.md#live-database-phase-1)). Azure answers in 24 to 48 hours.
+3. **Region:** done. Central US (P57); no request to Azure needed.
 4. **Sign in when a setup script asks** for an Azure or External ID administrator (a few times, mostly in phases 1 and 2).
 5. **Namecheap:** add records when we ask. We give the exact values each time, as in [dns-cutover.md](../dns-cutover.md):
    - phase 2: the `new` CNAME and `asuid.new` TXT;
@@ -532,7 +529,7 @@ The owner answered all of them on October 5, 2026 (decision P54).
 | 3 | Certificate on switch day: made in advance, or accept a possible short warning? | **Made in advance.** |
 | 4 | Keep the old site ready for a "safety month" after the switch? | **Not necessary.** It is deleted once the switch-day checks pass. |
 | 5 | Publish the collector's pull request automatically now (0c)? | **No; prioritize the database.** |
-| 6 | Which subscription pays? | **"Richter Cloud 150Credit" for now**; move to pay-as-you-go when necessary. It is a Visual Studio subscription with a spending limit, so the budget alert ($40) warns well before the $150 credit runs out. It also may not create PostgreSQL in East US or East US 2 without Azure's permission; the owner asked to keep everything together on the East Coast, so he requests "region access" for East US 2 (free, 24 to 48 hours). If Azure says no, the fallback is a pay-as-you-go subscription. |
+| 6 | Which subscription pays? | **"Richter Cloud 150Credit" for now**; move to pay-as-you-go when necessary. It is a Visual Studio subscription with a spending limit, so the budget alert ($40) warns well before the $150 credit runs out. It also may not create PostgreSQL or Azure SQL in East US or East US 2. Asking Azure for an exception was not worth it for a credit-funded subscription, so everything moves to Central US, the one US region that allows PostgreSQL and has everything else (owner, October 5; P57). |
 | 7 | A second always-ready copy (+$5.26 a month)? | **No.** |
 | 8 | More editors soon? | **No.** |
 
@@ -543,7 +540,7 @@ Sizes are relative (small, medium, large), with no dates. Each phase ends with s
 | Phase | Size | Main pieces | Reused from today |
 | --- | --- | --- | --- |
 | 0 | Small (1 pull request) | CMS setting, build cache, picture fingerprints | Workflows, picture code |
-| 1 | Medium | Bicep for PostgreSQL, private network and Function App; database design; import and export scripts; round-trip test; budget | `catalog/schema.sql` ideas, Zod schemas, `ingest/lib/store.ts` file layout |
+| 1 | Medium | Bicep for PostgreSQL and Function App; database design; import and export scripts; round-trip test; budget | `catalog/schema.sql` ideas, Zod schemas, `ingest/lib/store.ts` file layout |
 | 2 | **Large** (the biggest) | Functions test and Astro connector; data layer; page cache and version check; share pictures in Blob; sitemaps and IndexNow; headers; `/api` move; sign-in and user lookup; parity script | All page code, `src/lib/*`, `/api` code and tests, smoke and sign-in tests |
 | 3 | **Large** | Editor forms, History and Undo, saving to the database, collector API and shadow mode | Review center screens and decision code, `cms/config.yml` field lists, `ingest/lib/merge.ts` |
 | 4 | Small | Switch-day checklist | `scripts/smoke.mjs`, `scripts/e2e-signin.mjs` |
@@ -566,7 +563,7 @@ All on October 5, 2026, East US 2 unless noted. "API" means the [Azure Retail Pr
 | Static Web Apps Standard | $9 per app per month | API, `Static Web Apps` |
 | Azure Front Door Standard | $35 per month base fee | API, `Azure Front Door Service` |
 | Container Apps (consumption) | $0.000024 per vCPU-second busy, $0.000003 idle, $0.000003 per GiB-second; 180,000 vCPU-seconds and 360,000 GiB-seconds free | API and [Container Apps billing](https://learn.microsoft.com/azure/container-apps/billing) |
-| Private DNS zone | $0.50 per zone per month | API, `Azure DNS` |
+| PostgreSQL B1ms / storage in Central US | $0.01921 per hour / $0.13 per GB per month | API, `Azure Database for PostgreSQL` |
 
 Platform facts we relied on:
 
