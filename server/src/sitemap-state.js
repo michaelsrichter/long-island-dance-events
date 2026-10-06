@@ -17,8 +17,10 @@ function seedUrl() {
 
 async function seed() {
   const url = seedUrl();
-  if (!url || /example\.org/.test(url)) return {};
+  if (!url) return {};
   try {
+    // The placeholder address of a build without SITE_URL has no dates to give.
+    if (new URL(url).hostname === 'example.org') return {};
     const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
     if (!res.ok) return {};
     const body = await res.json();
