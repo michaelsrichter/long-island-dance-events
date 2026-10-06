@@ -4,15 +4,20 @@
  * (rules.js) and remembers finished pages, so most visits are answered from memory:
  *
  * - pages: kept until the data changes or a new day starts on Long Island (at most PAGE_CACHE_SECONDS, a day),
- *   already compressed (Brotli and gzip), so a visit costs no work; server/src/prepare.js fills the memory
+ *   already compressed (Brotli), so a visit costs no work; server/src/prepare.js fills the memory
  *   with every page in the sitemaps after each change. Browsers check again after 30 seconds, like on the
  *   old host;
+ * - files: small text files (scripts, styles) kept in memory, compressed; pictures and fonts are read from
+ *   disk each time (decision P62: the small B1 server has little memory to spare, and the system keeps
+ *   busy files in its own cache anyway);
  * - resized photos (/_image/): made once, kept on disk (IMAGE_CACHE_DIR) and cached by browsers for a year.
  */
 import { createHash, randomBytes } from 'node:crypto';
+import { createReadStream } from 'node:fs';
 import { mkdir, open, readFile, rename, writeFile } from 'node:fs/promises';
+import { Readable } from 'node:stream';
 import { promisify } from 'node:util';
-import { brotliCompress, constants as zlibConstants, gunzipSync, gzip } from 'node:zlib';
+import { brotliCompress, brotliDecompressSync, constants as zlibConstants, gzipSync } from 'node:zlib';
 import { dirname, extname, join, normalize, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadRules } from './rules.js';
@@ -29,6 +34,10 @@ const PAGE_TTL_MS = Number(process.env.PAGE_CACHE_SECONDS || 86_400) * 1000;
 const PAGE_CACHE_BYTES = Number(process.env.PAGE_CACHE_MB || 128) * 1024 * 1024;
 const MAX_CACHED_PAGE = 8 * 1024 * 1024;
 const MAX_IMAGE_SIDE = 2400;
+/** Brotli level for pages (made again after every change, so quick) and for files (made once per start). */
+const quality = (v, fallback) => (Number.isInteger(Number(v)) && Number(v) >= 1 && Number(v) <= 11 ? Number(v) : fallback);
+const PAGE_BROTLI = quality(process.env.PAGE_BROTLI_QUALITY, 5);
+const FILE_BROTLI = 9;
 
 /** What the old host sends when nothing else is set: browsers may reuse the answer for 30 seconds. */
 const DEFAULT_CACHE = 'public, must-revalidate, max-age=30';
@@ -92,16 +101,27 @@ function headersFor(pathname, type, body, own = []) {
 
 const COMPRESSIBLE = /^(text\/|application\/(json|xml|javascript|manifest\+json|rss\+xml|ld\+json)|image\/svg\+xml)/i;
 const brotli = promisify(brotliCompress);
-const gzipAsync = promisify(gzip);
 
-/** Brotli and gzip copies of a text answer, made once (in the background thread pool). */
-async function compressed(stored) {
+/**
+ * A Brotli copy of a text answer, made once (in the background thread pool). Nearly every browser and search
+ * engine takes Brotli; a gzip copy is made only when someone asks for one (bodyFor).
+ */
+async function compressed(stored, level = PAGE_BROTLI) {
   if (stored.body.length < 1024 || !COMPRESSIBLE.test(stored.headers.get('Content-Type') || '')) return stored;
-  const [br, gz] = await Promise.all([
-    brotli(stored.body, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 9, [zlibConstants.BROTLI_PARAM_SIZE_HINT]: stored.body.length } }),
-    gzipAsync(stored.body, { level: 9 }),
-  ]);
-  return { ...stored, variants: { br, gzip: gz } };
+  const br = await brotli(stored.body, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: level, [zlibConstants.BROTLI_PARAM_SIZE_HINT]: stored.body.length } });
+  return { ...stored, variants: { br } };
+}
+
+/** The answer's body in the form the browser takes (`enc` from encodingFor). */
+function bodyFor(stored, enc) {
+  if (enc === 'br') return stored.variants.br;
+  const plain = stored.body ?? brotliDecompressSync(stored.variants.br);
+  if (enc !== 'gzip') return plain;
+  if (!stored.variants.gzip) {
+    stored.variants.gzip = gzipSync(plain, { level: 6 });
+    grew(stored, stored.variants.gzip.length);
+  }
+  return stored.variants.gzip;
 }
 
 function encodingFor(request, stored) {
@@ -128,11 +148,13 @@ function reply(request, stored, { status = stored.status, host } = {}) {
     if (host !== CANONICAL) keep.set('X-Robots-Tag', 'noindex, nofollow');
     return new Response(null, { status: 304, headers: keep });
   }
-  let body = stored.body;
-  if (enc) {
-    body = stored.variants[enc];
-    headers.set('Content-Encoding', enc);
-  } else if (!body) body = gunzipSync(stored.variants.gzip);
+  if (stored.path) {
+    // A picture or font: sent straight from disk.
+    headers.set('Content-Length', String(stored.size));
+    return new Response(request.method === 'HEAD' ? null : Readable.toWeb(createReadStream(stored.path)), { status, headers });
+  }
+  const body = bodyFor(stored, enc);
+  if (enc) headers.set('Content-Encoding', enc);
   headers.set('Content-Length', String(body.length));
   return new Response(request.method === 'HEAD' ? null : body, { status, headers });
 }
@@ -140,6 +162,8 @@ function reply(request, stored, { status = stored.status, host } = {}) {
 // ---------- files from the client folder ----------
 
 const fileCache = new Map();
+/** Text files up to this size are kept in memory (compressed); everything else is read from disk when sent. */
+const MAX_TEXT_IN_MEMORY = 8 * 1024 * 1024;
 async function staticFile(pathname) {
   let decoded;
   try {
@@ -159,7 +183,13 @@ async function staticFile(pathname) {
     if ((await handle.stat()).isFile()) {
       const body = await handle.readFile();
       const type = MIME[extname(full).toLowerCase()] || 'application/octet-stream';
-      file = await compressed({ status: 200, body, etag: etagOf(body), headers: headersFor(pathname, type, body) });
+      const stored = { status: 200, body, etag: etagOf(body), headers: headersFor(pathname, type, body) };
+      if (COMPRESSIBLE.test(type) && body.length <= MAX_TEXT_IN_MEMORY) {
+        file = await compressed(stored, FILE_BROTLI);
+        if (file.variants) file.body = null;
+      } else {
+        file = { ...stored, body: null, path: full, size: body.length };
+      }
     }
   } catch {
     /* not a file */
@@ -167,7 +197,7 @@ async function staticFile(pathname) {
     await handle?.close();
   }
   // The folder never changes while the server runs, so answers (also "no such file") can be remembered.
-  if (fileCache.size < 20_000 && (!file || file.body.length < 1024 * 1024)) fileCache.set(full, file);
+  if (fileCache.size < 20_000) fileCache.set(full, file);
   return file;
 }
 
@@ -177,7 +207,12 @@ const pageCache = new Map();
 let pageCacheBytes = 0;
 let pageCacheKey = '';
 const inFlight = new Map();
-const sizeOf = (s) => (s.body?.length ?? 0) + (s.variants ? s.variants.br.length + s.variants.gzip.length : 0);
+const sizeOf = (s) => (s.body?.length ?? 0) + (s.variants ? s.variants.br.length + (s.variants.gzip?.length ?? 0) : 0);
+
+/** A kept page got a gzip copy (bodyFor): count it. */
+function grew(stored, bytes) {
+  if (stored.cacheKey && pageCache.get(stored.cacheKey) === stored) pageCacheBytes += bytes;
+}
 
 /** Forget every finished page (after the data changes). */
 export function clearPageCache() {
@@ -196,9 +231,9 @@ export function isPrepared(pathname) {
 
 function remember(key, stored) {
   if (stored.status !== 200 || stored.body.length > MAX_CACHED_PAGE || stored.noStore) return stored;
-  // Text pages are kept compressed only (about a tenth of the size); the rare visitor without gzip gets
-  // a copy unpacked on the spot.
-  const kept = stored.variants ? { ...stored, body: null } : stored;
+  // Text pages are kept compressed only (about a tenth of the size); the rare visitor without Brotli gets
+  // a copy made on the spot.
+  const kept = stored.variants ? { ...stored, body: null, cacheKey: key } : { ...stored, cacheKey: key };
   const old = pageCache.get(key);
   if (old) pageCacheBytes -= sizeOf(old);
   pageCache.set(key, kept);
