@@ -14,7 +14,7 @@
   ],
   "priceNotes": "Pay at the door",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "eighty-nine-north",
   "sourceUrl": "https://89northmusic.com/calendar",
   "sourceName": "89 North (Patchogue) - music calendar",
@@ -23,5 +23,5 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.6,
   "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||wednesday|tba|class-lesson|casey-wayne-and-the-rodeo|line-dancing|2026-10-28",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Not found in the latest eighty-nine-north run on 2026-10-08. Check whether it was cancelled or moved."
 }

@@ -1,0 +1,24 @@
+{
+  "title": "Live music at Riverhead Ciderhouse",
+  "summary": "Live music at Riverhead Ciderhouse. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-08T12:00",
+  "end": "2026-10-08T20:00",
+  "timezone": "America/New_York",
+  "venueId": "riverhead-ciderhouse-calverton",
+  "town": "Calverton",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/riverhead-ciderhouse/2026-10-08/",
+  "status": "active",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/riverhead-ciderhouse/2026-10-08/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-08",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|riverhead-ciderhouse-calverton||thursday|12:00|live-music|||2026-10-08"
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Oktoberfest live music at Mulcahy's",
+  "summary": "Live music at Mulcahy's. The dancing score on this page says whether people usually dance. Food is included, and there is an open bar.",
+  "category": "live-music",
+  "start": "2026-10-18T13:00",
+  "end": "2026-10-18T17:00",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/seaford-9-11-memorial-oktoberfest/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/seaford-9-11-memorial-oktoberfest/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2026-10-18",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "dancingCues": [
+    "afternoon",
+    "festival"
+  ],
+  "confidence": 0.85,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||sunday|13:00|live-music|||2026-10-18|oktoberfest"
+}

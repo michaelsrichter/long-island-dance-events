@@ -9,7 +9,7 @@
   "town": "Patchogue",
   "skillLevel": "all-levels",
   "infoUrl": "https://daisysli.com/event/thursday-june-4-lisa-polizzi-jam/2026-10-08/",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "daisys-miller-place",
   "sourceUrl": "https://daisysli.com/event/thursday-june-4-lisa-polizzi-jam/2026-10-08/",
   "sourceName": "Daisy's (Miller Place) - live music calendar",
@@ -21,5 +21,5 @@
   ],
   "confidence": 0.85,
   "matchKey": "daisys-miller-place|daisys-nashville-lounge-patchogue||thursday|19:00|live-music|lisapolizzijam||2026-10-08",
-  "reviewNotes": "Band or DJ not researched yet: Lisa Polizzi Jam."
+  "reviewNotes": "Band or DJ not researched yet: Lisa Polizzi Jam. Not found in the latest daisys-miller-place run on 2026-10-08. Check whether it was cancelled or moved."
 }

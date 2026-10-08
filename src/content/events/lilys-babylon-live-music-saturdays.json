@@ -17,7 +17,7 @@
   ],
   "skillLevel": "all-levels",
   "infoUrl": "https://www.lilyflanaganspub.com/musicevents/2026/10/10/happy-hour-band-calm-coast",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "lily-flanagans-babylon",
   "sourceUrl": "https://www.lilyflanaganspub.com/musicevents/2026/10/10/happy-hour-band-calm-coast",
   "sourceName": "Lily Flanagan's Pub (Babylon) - music calendar",
@@ -25,5 +25,6 @@
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-10-05",
   "confidence": 0.8,
-  "matchKey": "lily-flanagans-babylon|lilys-babylon||saturday|18:00|live-music|calm-coast||repeat"
+  "matchKey": "lily-flanagans-babylon|lilys-babylon||saturday|18:00|live-music|calm-coast||repeat",
+  "reviewNotes": "Not found in the latest lily-flanagans-babylon run on 2026-10-08. Check whether it was cancelled or moved."
 }

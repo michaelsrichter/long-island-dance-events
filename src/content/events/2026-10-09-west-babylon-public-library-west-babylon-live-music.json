@@ -1,0 +1,29 @@
+{
+  "title": "Live music at West Babylon Public Library",
+  "summary": "Live music at West Babylon Public Library. The dancing score on this page says whether people usually dance. Dance styles: Latin.",
+  "category": "live-music",
+  "danceStyles": [
+    "latin-ballroom"
+  ],
+  "start": "2026-10-09T10:15",
+  "end": "2026-10-09T11:15",
+  "timezone": "America/New_York",
+  "venueId": "west-babylon-public-library-west-babylon",
+  "town": "West Babylon",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://ilovebabylon.com/event/zumba-october-2/",
+  "status": "active",
+  "sourceId": "i-love-babylon",
+  "sourceUrl": "https://ilovebabylon.com/event/zumba-october-2/",
+  "sourceName": "I Love Babylon events",
+  "sourceRef": "calendar feed 2026-10-09",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "dancingCues": [
+    "afternoon",
+    "library"
+  ],
+  "confidence": 0.9,
+  "matchKey": "i-love-babylon|west-babylon-public-library-west-babylon||friday|10:15|live-music||latin-ballroom|2026-10-09",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

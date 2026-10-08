@@ -1,0 +1,24 @@
+{
+  "title": "Casey Wayne at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Casey Wayne at Daisy's Nashville Lounge (Miller Place). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-16T19:00",
+  "end": "2026-10-16T23:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "casey-wayne"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/casey-wayne-2/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/casey-wayne-2/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-16",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "confidence": 0.9,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||friday|19:00|live-music|casey-wayne||2026-10-16"
+}

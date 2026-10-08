@@ -1,0 +1,24 @@
+{
+  "title": "Struggle Jennings at Mulcahy's",
+  "summary": "Live music by Struggle Jennings at Mulcahy's. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-08T20:00",
+  "end": "2026-10-08T23:00",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "performerIds": [
+    "struggle-jennings"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/b0e168ecc232e18e7585bd90b3ff5ade9de1530d",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/b0e168ecc232e18e7585bd90b3ff5ade9de1530d",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-08",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "confidence": 0.9,
+  "matchKey": "webtunes-li|mulcahys-wantagh||thursday|20:00|live-music|struggle-jennings||2026-10-08"
+}

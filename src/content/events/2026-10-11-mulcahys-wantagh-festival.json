@@ -9,7 +9,7 @@
   "town": "Wantagh",
   "skillLevel": "all-levels",
   "infoUrl": "https://mulcahyslongisland.com/event/fall-fest-block-party/",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "mulcahys-wantagh",
   "sourceUrl": "https://mulcahyslongisland.com/event/fall-fest-block-party/",
   "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
@@ -20,5 +20,6 @@
     "festival"
   ],
   "confidence": 0.85,
-  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||sunday|17:00|festival|||2026-10-11"
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||sunday|17:00|festival|||2026-10-11",
+  "reviewNotes": "Not found in the latest mulcahys-wantagh run on 2026-10-08. Check whether it was cancelled or moved."
 }

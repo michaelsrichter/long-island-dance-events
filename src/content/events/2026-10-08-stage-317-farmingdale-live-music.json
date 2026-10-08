@@ -1,0 +1,24 @@
+{
+  "title": "Live music at Stage 317!",
+  "summary": "Live music at Stage 317!. The dancing score on this page says whether people usually dance. Food is included.",
+  "category": "live-music",
+  "start": "2026-10-08T18:00",
+  "end": "2026-10-08T21:00",
+  "timezone": "America/New_York",
+  "venueId": "stage-317-farmingdale",
+  "town": "Farmingdale",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/an-intimate-evening-of-acoustic-with-paris-ray-2/",
+  "status": "active",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/an-intimate-evening-of-acoustic-with-paris-ray-2/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-08",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "dancingCues": [
+    "acoustic"
+  ],
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|stage-317-farmingdale||thursday|18:00|live-music|||2026-10-08"
+}

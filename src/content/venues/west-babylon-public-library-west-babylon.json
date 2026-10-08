@@ -1,0 +1,11 @@
+{
+  "name": "West Babylon Public Library",
+  "address": "211 Route 109",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from I Love Babylon events. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "West Babylon",
+  "latitude": 40.709055,
+  "longitude": -73.354045,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

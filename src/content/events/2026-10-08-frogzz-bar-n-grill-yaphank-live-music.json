@@ -1,0 +1,24 @@
+{
+  "title": "Live music at Frogzz Bar 'N' Grill",
+  "summary": "Live music at Frogzz Bar 'N' Grill. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-08T19:00",
+  "end": "2026-10-08T22:00",
+  "timezone": "America/New_York",
+  "venueId": "frogzz-bar-n-grill-yaphank",
+  "town": "Yaphank",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/%f0%9f%8e%b6-thursday-night-with-lisa-polizzi-open-jam-at-frogzz-bar-n-grill/2026-10-08/",
+  "status": "active",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/%f0%9f%8e%b6-thursday-night-with-lisa-polizzi-open-jam-at-frogzz-bar-n-grill/2026-10-08/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-08",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "dancingCues": [
+    "jam"
+  ],
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|frogzz-bar-n-grill-yaphank||thursday|19:00|live-music|||2026-10-08"
+}
