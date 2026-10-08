@@ -14,7 +14,7 @@
     "the-daplorabulls"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -22,5 +22,6 @@
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-10-06",
   "confidence": 0.75,
-  "matchKey": "iraslist|2026-10-30|eleanors-lounge-bohemia|feel-good-fridays-with-the-daplorabulls|2026-10-30|special"
+  "matchKey": "iraslist|2026-10-30|eleanors-lounge-bohemia|feel-good-fridays-with-the-daplorabulls|2026-10-30|special",
+  "reviewNotes": "Not found in the latest iraslist run on 2026-10-08. Check whether it was cancelled or moved."
 }

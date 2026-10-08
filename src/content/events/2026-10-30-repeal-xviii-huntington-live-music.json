@@ -8,7 +8,7 @@
   "venueId": "repeal-xviii-huntington",
   "town": "Huntington",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-10-06",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-10-30|repeal-xviii-huntington|halloween-with-the-spinoffs|2026-10-30|special",
-  "reviewNotes": "Band or DJ not researched yet: Halloween with The SpinOffs."
+  "reviewNotes": "Band or DJ not researched yet: Halloween with The SpinOffs. Not found in the latest iraslist run on 2026-10-08. Check whether it was cancelled or moved."
 }

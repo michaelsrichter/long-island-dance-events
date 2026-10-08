@@ -1,0 +1,26 @@
+{
+  "title": "The Daplorabulls at Eleanor's Lounge",
+  "summary": "Live music by The Daplorabulls at Eleanor's Lounge in Bohemia. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-30T20:00",
+  "end": "2026-10-30T23:00",
+  "timezone": "America/New_York",
+  "venueId": "eleanors-lounge-bohemia",
+  "town": "Bohemia",
+  "performerIds": [
+    "the-daplorabulls"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-30|eleanors-lounge-bohemia|the-daplorabulls|2026-10-30|special"
+}

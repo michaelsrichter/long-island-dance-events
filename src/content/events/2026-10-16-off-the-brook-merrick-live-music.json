@@ -8,7 +8,7 @@
   "venueId": "off-the-brook-merrick",
   "town": "Merrick",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-10-06",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-10-16|off-the-brook-merrick|mackenzie-reilly|2026-10-16|special",
-  "reviewNotes": "Band or DJ not researched yet: Mackenzie Reilly."
+  "reviewNotes": "Band or DJ not researched yet: Mackenzie Reilly. Not found in the latest iraslist run on 2026-10-08. Check whether it was cancelled or moved."
 }
