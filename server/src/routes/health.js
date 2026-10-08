@@ -7,6 +7,12 @@ import { getPool } from '../lib/db.js';
 import { ensureMigrated } from '../lib/migrate.js';
 import { KINDS } from '../lib/kinds.js';
 import { appVersion, json } from '../lib/http.js';
+import { liveDataStatus } from '../live-data.js';
+import { builtInSignIn } from '../identity.js';
+import { prepareStatus } from '../prepare.js';
+import { indexNowStatus } from '../indexnow.js';
+import { pageCacheStatus } from '../site.js';
+import { telemetryOn } from '../telemetry.js';
 
 export async function live(request) {
   return json(request, 200, { ok: true, version: appVersion().commit });
@@ -29,6 +35,17 @@ export async function health(request) {
       database: 'ok',
       migrations,
       dataVersion: Number(state.data_version),
+      signIn: builtInSignIn() ? 'built-in' : 'off',
+      // Pages ready in memory, and the last "prepare every page" round (server/src/prepare.js).
+      prepared: { ...pageCacheStatus(), ...prepareStatus() },
+      indexNow: indexNowStatus(),
+      monitoring: telemetryOn(),
+      // The "now" every page of the current data and day was made with (src/lib/freshness.ts, P62).
+      pagesNow: globalThis.__liPagesNow ?? null,
+      // The server's own memory in MB (the B1 plan has about 1.9 GB for everything on the machine).
+      memory: Object.fromEntries(Object.entries(process.memoryUsage()).map(([k, v]) => [k, Math.round(v / 1048576)])),
+      // What the pages show right now (the server checks the database every 2 seconds).
+      pages: (({ version, loadedAt, records, problems, lastError }) => ({ dataVersion: version === null ? 'build' : Number(version), loadedAt, records, problems, lastError }))(liveDataStatus()),
       lastSync: { commit: state.last_sync_commit, at: state.last_sync_at },
       counts,
     });

@@ -280,14 +280,14 @@ Cost: the workbook, dashboard, action group emails and budget are free; the two 
 
 ## Live database and server (phases 1 and 2)
 
-Decisions P56, P57 and P58; the plan is [proposals/postgres-live-site.md](proposals/postgres-live-site.md). Git is still the master copy: the live PostgreSQL database is a faithful copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. The App Service server makes the same pages as today's site at a **test address**; nothing on longisland.dance uses it yet.
+Decisions P56 to P59; the plan is [proposals/postgres-live-site.md](proposals/postgres-live-site.md). Git is still the master copy: the live PostgreSQL database is a faithful copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. The App Service server makes the same pages as today's site **from the database records** (it checks for changes every 2 seconds, P59) at the test address **https://new.longisland.dance**; nothing on longisland.dance uses it yet.
 
 **Region: Central US (P57).** This Visual Studio subscription may not create PostgreSQL or Azure SQL in East US or East US 2. Central US is the only US region that allows PostgreSQL and also has App Service, Content Safety, Logic Apps and monitoring, so everything moves there (see "Moving the rest to Central US" below). **No private network:** the database has a public address, but its firewall lets in only Azure services, it accepts only Microsoft Entra sign-in (no passwords) and only encrypted connections.
 
 | Resource (rg-li-dance-events-web, Central US) | What it is | Cost a month |
 | --- | --- | ---: |
 | `psql-li-dance-events` | PostgreSQL 17, Burstable B1ms, 32 GB, 7-day point-in-time restore. Firewall: Azure services only. Microsoft Entra sign-in only; the web app is its administrator. | $18.18 |
-| `app-li-dance-events` + plan `plan-li-dance-events` | App Service, Linux B1 (1 core, 1.75 GB), Node 24 LTS, always on, health check `/api/live` (P58). Code in `server/`. Test address: https://app-li-dance-events.azurewebsites.net (tells search engines not to list it). | $13.14 |
+| `app-li-dance-events` + plan `plan-li-dance-events` | App Service, Linux B1 (1 core, 1.75 GB), Node 24 LTS, always on, health check `/api/live` (P58). Code in `server/`. Test addresses: https://new.longisland.dance (free managed certificate, P59) and https://app-li-dance-events.azurewebsites.net; both tell search engines not to list them. | $13.14 |
 | `id-github-deploy-li-dance-events` | The identity GitHub Actions uses to deploy the app, from `main` only (federated credential, no secret; subject `repo:michaelsrichter@1242059/long-island-dance-events@1402631995:ref:refs/heads/main`, the format with GitHub's account and repository ids that this repository's tokens use). It may only change this one app. | $0 |
 
 Phase 1 ran on a small Azure Functions app (`func-li-dance-events`, plan `asp-li-dance-events`, storage `stlidancefunc`). It was deleted on October 6, after the App Service app had run the sync (P58). Its database role still owned the tables (it created them), so only it could change their design, and Azure would not remove it ("objects depend on it"). Migration `server/migrations/002_app_service_owner.sql` makes the App Service app the owner the first time it starts; then the old role is removed:
@@ -310,16 +310,54 @@ If the deploy identity is ever recreated, copy its new client id (`deployClientI
 
 **App settings that matter** (all set by the template): `SITE_URL=https://longisland.dance` (the pages' own address, whatever name the server is reached by), `CANONICAL_HOST=longisland.dance` (any other host name gets `X-Robots-Tag: noindex, nofollow`), `ALLOW_INDEXING=false` until switch day (pages say "noindex" and `robots.txt` disallows everything; deploy with `allowIndexing=true` on switch day), `IMAGE_CACHE_DIR=/home/data/image-cache` (resized photos kept between restarts).
 
-**Run the server on your computer:**
+**Web addresses (host names).** `main.bicep` does not declare them, so running it again never touches them. Each name gets its own small deployment, once its DNS records exist (CNAME `<name>` → `app-li-dance-events.azurewebsites.net`, TXT `asuid.<name>` → the app's `customDomainVerificationId`):
+
+```powershell
+az deployment group create -g rg-li-dance-events-web --subscription fd38bfe4-1b60-405d-bff9-020f3ff54d88 `
+  --name domain-new --template-file infra/live/custom-domain.bicep --parameters hostName=new.longisland.dance
+```
+
+It binds the name, makes a free App Service managed certificate (renewed by Azure) and turns on HTTPS. To repair a binding later without a moment without HTTPS, add `thumbprint=<the certificate's thumbprint>` (output of the first run). `new.longisland.dance` was set up this way on October 6 (certificate thumbprint `BB37118EB7F44110A996A57978EDEE4063F1F17C`, valid to 2027-04-06).
+
+**Sign-in and the community /api code (P60).** The app uses App Service's built-in sign-in with the same External ID provider (`extid`) as Static Web Apps; sign-ins last 14 days. The server matches each person to the user id Static Web Apps gave them (table `IdpLinks` in the community storage), so likes, notes and photos carry over. `/api/health` shows `"signIn": "built-in"`. Settings:
+
+| Where | What |
+| --- | --- |
+| `infra/live/main.bicep` | Sign-in (`authsettingsV2`), `ALLOWED_HOSTS`, community storage, Content Safety and the owner-email Logic App (read from the existing resources), Key Vault `kv-li-dance-events` |
+| Key Vault (Key Vault references in the app settings) | `extid-client-secret`, `admin-emails`, `agentmail-api-key`, `agentmail-inbox`, `github-oauth-client-id`, `github-oauth-client-secret`, `review-secret-key`, `indexnow-key` |
+
+To copy the secrets from the Static Web App again (for example after changing one there): `./infra/live/copy-secrets.ps1`. It never prints a value, refreshes the app's Key Vault references and restarts the app; every line should end in `Resolved`. To change one only on App Service: `az keyvault secret set --vault-name kv-li-dance-events --name <name> --file <file>`, then the same refresh (see the script).
+
+**Each new web address needs its sign-in return address** in the External ID app registration (owner, in [entra.microsoft.com](https://entra.microsoft.com): longislanddance directory → App registrations → Long Island Dance website → Authentication → Web → Add URI): `https://<address>/.auth/login/extid/callback`. For `new.longisland.dance` this was requested on October 6. `longisland.dance` is already there.
+
+**Every page prepared (P61).** After each data change, at start and at the start of each day on Long Island, the server prepares every page in its sitemaps in the background and keeps them compressed in memory (about 15 MB). `/api/health` → `prepared` shows how many pages are ready and how the last round went. Settings: `PAGE_CACHE_MB` (default 128), `PAGE_CACHE_SECONDS` (default a day), `PREPARE_PACE` (after each page, rest this many times as long as the page took; default 3, so about a quarter of the processor), `PREPARE_PAUSE_MS` (shortest rest, default 25), `PAGE_BROTLI_QUALITY` (1–11, default 5). **IndexNow:** once `ALLOW_INDEXING` is true (switch day), the server sends changed addresses to IndexNow in batches every 5 minutes (`/api/health` → `indexNow`). Its key is the Key Vault secret `indexnow-key`; `copy-secrets.ps1` copies it from the GitHub variable `INDEXNOW_KEY`.
+
+**Light enough for B1 (P62).** The B1 machine has about 1.9 GB of memory, and App Service's own helpers (sign-in, managed identity, Kudu, monitoring) use most of it, so the server keeps its share small: it starts with `node --max-semi-space-size=4 --max-old-space-size=256` (`appCommandLine` in the template), keeps pages and text files as Brotli only (pages at level 5, files at 9, or 5 for files over 512 KB such as the 5 MB `/admin/` script, which took 42 s at level 9 on the busy server; a gzip copy is made the first time someone asks for one), and sends pictures and fonts straight from disk instead of keeping them in memory. `/api/health` → `memory` shows the server's memory in MB (`rss` is the total; about 250 MB is normal). Monitoring starts inside the server (`server/src/telemetry.js`, `/api/health` → `monitoring`), so App Service's separate monitoring agent (`ApplicationInsightsAgent_EXTENSION_VERSION`) stays off; Application Insights keeps up to 5 visits a second (its default).
+
+**Share pictures on the server (P64).** Share pictures are made by the pages, so an edit shows on them too. Each picture is saved once under a fingerprint of everything on its card in `/home/data/og-cache` (next to `IMAGE_CACHE_DIR`; `OG_CACHE_DIR` overrides it), and pictures nobody asked for in 30 days are removed each night. The package brings the static build's pictures of the same commit as a read-only seed (`server/site/og-seed`, made by `npm run build:server -- --static-images dist` from the list `.cache/og/last-build.txt` that the static build writes), so after a deploy the server draws only the cards that changed since. It draws one picture at a time (about 1.4 s each on B1) and never keeps pictures in memory. The build log line `[build-server] share pictures: … ready …; 0 of the build's … not found there` shows the seed is complete; a `WARNING` there means the site and server use different satori, sharp or font versions, and the server would draw every picture again. `scripts/live/change-check.mjs` (run before every deploy) checks that a renamed venue gets a new share picture and gets the saved one back.
+
+**Pages from the database (P59).** Every 2 seconds the server reads `site_state.data_version`; when it changed, it reads every record again (only changed ones are checked again) and the next visitor sees the change. `/api/health` shows `pages.dataVersion` (what the pages show) next to `dataVersion` (the database's), and lists any record it had to leave out. Sitemap "last changed" dates are kept in the `sitemap_state` table (filled once from the live site's `/sitemap-state.json`). Every page of the same data and day is made with one "now", the moment that period began (`/api/health` → `pagesNow`, P63); the daily parity run (`parity.yml`) builds the static site with it.
+
+**Run the server on your computer** (with a local PostgreSQL; the pages then come from it):
 
 ```powershell
 npm run build                                   # the static site (also makes the resized photos)
-npm run build:server -- --static-images dist    # the server site in server/site, with the photos and share pictures
+npm run build:server -- --static-images dist    # the server site in server/site, with the photos and the share-picture seed (P64)
 npm ci --prefix server
+npx tsx scripts/db/build-payload.ts --out payload.json.gz
+$env:DATABASE_URL='postgres://postgres@127.0.0.1:5432/lidance_live'   # an empty test database
+node scripts/live/load-db.mjs payload.json.gz
 $env:PORT='8080'; $env:SITE_URL='https://longisland.dance'; $env:ALLOW_INDEXING='true'; node server/src/main.js
 # in another window: every file of the static site must come back identical
 node scripts/live/parity.mjs --static dist --base http://127.0.0.1:8080
+# and a change in the database must show on its page within seconds (test databases only)
+node scripts/live/change-check.mjs --base http://127.0.0.1:8080
 ```
+
+**Every morning** the workflow `parity.yml` (Parity: new site vs static site) builds the static site from exactly what the test address runs (its code commit and the content of its last sync, both read from `/api/health`) and compares every file. Switch day needs three clean runs in a row (plan section 11.2).
+
+Without `DATABASE_URL` the server uses the records it was built with. To compare the test address with the static site: build the deployed commit with the same settings as the server (`ALLOW_INDEXING=false`, the `PUBLIC_*` variables), then `node scripts/live/parity.mjs --static dist --base https://new.longisland.dance --host new.longisland.dance --concurrency 6`.
+
 ### Moving the rest to Central US
 
 | Today in East US 2 | When it moves | How |

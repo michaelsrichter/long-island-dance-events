@@ -4,7 +4,7 @@ import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
 import { createHash } from 'node:crypto';
-import { mkdtempSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readdirSync, rmSync, utimesSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { brotliDecompressSync, gunzipSync } from 'node:zlib';
@@ -19,6 +19,8 @@ writeFileSync(join(dir, 'client', 'robots.txt'), 'User-agent: *\n');
 writeFileSync(join(dir, 'client', 'feed.ics'), 'BEGIN:VCALENDAR\n');
 writeFileSync(join(dir, 'client', 'admin', 'index.html'), '<!doctype html><title>Admin</title>');
 writeFileSync(join(dir, 'client', '_astro', 'app.abc123.js'), 'console.log(1);\n'.repeat(200));
+const PICTURE = Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), Buffer.alloc(5000, 7)]);
+writeFileSync(join(dir, 'client', 'share.png'), PICTURE);
 writeFileSync(join(dir, 'secret.txt'), 'outside the client folder');
 const THEME = 'document.documentElement.dataset.js = "1";';
 writeFileSync(
@@ -46,7 +48,7 @@ writeFileSync(
   join(dir, 'server', 'entry.mjs'),
   `globalThis.renders = 0;
 globalThis.imageRenders = 0;
-const PAGES = new Set(['/', '/events/', '/who/', '/cookies/', '/signed-out/', '/events/upcoming.json']);
+const PAGES = new Set(['/', '/events/', '/who/', '/cookies/', '/signed-out/', '/events/upcoming.json', '/sitemap-index.xml', '/sitemap-pages.xml', '/big/', '/og/page/home.png']);
 export function matches(request) { return PAGES.has(new URL(request.url).pathname); }
 export async function handle(request, { clientAddress } = {}) {
   const url = new URL(request.url);
@@ -61,6 +63,10 @@ export async function handle(request, { clientAddress } = {}) {
   if (url.pathname === '/events/') return new Response('<!doctype html><p>events ' + globalThis.renders + '</p>', { headers: { 'content-type': 'text/html' } });
   if (url.pathname === '/signed-out/') return new Response('<!doctype html><p>Please sign in</p>', { headers: { 'content-type': 'text/html' } });
   if (url.pathname === '/events/upcoming.json') return new Response('{"events":[]}', { headers: { 'content-type': 'application/json' } });
+  if (url.pathname === '/sitemap-index.xml') return new Response('<sitemapindex><sitemap><loc>https://longisland.dance/sitemap-pages.xml</loc></sitemap></sitemapindex>', { headers: { 'content-type': 'application/xml' } });
+  if (url.pathname === '/sitemap-pages.xml') return new Response('<urlset><url><loc>https://longisland.dance/big/</loc><image:image><image:loc>https://longisland.dance/x.png</image:loc></image:image></url></urlset>', { headers: { 'content-type': 'application/xml' } });
+  if (url.pathname === '/og/page/home.png') return new Response('PNG' + globalThis.renders, { headers: { 'content-type': 'image/png' } });
+  if (url.pathname === '/big/') return new Response('<!doctype html><p>' + 'big page '.repeat(5000) + '</p>', { headers: { 'content-type': 'text/html' } });
   if (url.pathname === '/who/') return new Response(JSON.stringify({ clientAddress, url: request.url }), { headers: { 'content-type': 'application/json' } });
   const h = new Headers({ 'content-type': 'text/plain' });
   h.append('set-cookie', 'a=1; Path=/');
@@ -74,8 +80,10 @@ export async function notFound() {
 );
 process.env.SITE_DIR = dir;
 process.env.IMAGE_CACHE_DIR = imageCache;
+process.env.OG_CACHE_DIR = join(dir, 'og-cache');
 const { route } = await import('../src/app.js');
-const { clearPageCache } = await import('../src/site.js');
+const { clearPageCache, isPrepared, pruneSavedPictures } = await import('../src/site.js');
+const { prepareAll, prepareStatus } = await import('../src/prepare.js');
 const { inlineScriptHashes } = await import('../src/rules.js');
 const { clientAddress, sendResponse, toRequest } = await import('../src/lib/node-http.js');
 
@@ -163,6 +171,35 @@ test('files outside the client folder are never served', async () => {
     assert.equal(r.status, 404, p);
     assert.doesNotMatch(r.body.toString(), /outside the client folder/, p);
   }
+});
+
+test('pictures are sent from disk, whole, with a size and a tag (P62)', async () => {
+  for (let i = 0; i < 2; i++) {
+    const r = await get('/share.png', { ...SITE, 'Accept-Encoding': 'br, gzip' });
+    assert.equal(r.status, 200);
+    assert.equal(r.headers['content-type'], 'image/png');
+    assert.equal(r.headers['content-encoding'], undefined);
+    assert.equal(Number(r.headers['content-length']), PICTURE.length);
+    assert.ok(r.body.equals(PICTURE));
+    assert.equal((await get('/share.png', { ...SITE, 'If-None-Match': r.headers.etag })).status, 304);
+  }
+  const head = await get('/share.png', SITE, 'HEAD');
+  assert.equal(head.status, 200);
+  assert.equal(Number(head.headers['content-length']), PICTURE.length);
+  assert.equal(head.body.length, 0);
+});
+
+test('text files are kept as Brotli; gzip and plain copies are made for those who need them (P62)', async () => {
+  const plain = await get('/_astro/app.abc123.js');
+  const br = await get('/_astro/app.abc123.js', { ...SITE, 'Accept-Encoding': 'br' });
+  const gz = await get('/_astro/app.abc123.js', { ...SITE, 'Accept-Encoding': 'gzip' });
+  const gzAgain = await get('/_astro/app.abc123.js', { ...SITE, 'Accept-Encoding': 'gzip' });
+  assert.equal(plain.body.toString(), 'console.log(1);\n'.repeat(200));
+  assert.equal(br.headers['content-encoding'], 'br');
+  assert.equal(brotliDecompressSync(br.body).toString(), plain.body.toString());
+  assert.equal(gz.headers['content-encoding'], 'gzip');
+  assert.equal(gunzipSync(gz.body).toString(), plain.body.toString());
+  assert.ok(gzAgain.body.equals(gz.body));
 });
 
 test('pages: compressed, security policy with the page script hashes, old-host cache time', async () => {
@@ -326,6 +363,66 @@ test('a visitor who leaves halfway is normal: sending ends quietly, the server k
   assert.deepEqual(outcome, ['ok'], 'not reported as a server error');
   assert.equal((await get('/api/live')).status, 200);
 });
+test('prepared pages are kept compressed: each form has its own tag, and every visitor gets the whole page', async () => {
+  clearPageCache();
+  const before = globalThis.renders;
+  const br = await get('/big/', { ...SITE, 'Accept-Encoding': 'br' });
+  const gz = await get('/big/', { ...SITE, 'Accept-Encoding': 'gzip' });
+  const plain = await get('/big/');
+  assert.equal(globalThis.renders - before, 1, 'made once');
+  assert.equal(br.headers['content-encoding'], 'br');
+  assert.equal(gz.headers['content-encoding'], 'gzip');
+  assert.equal(plain.headers['content-encoding'], undefined);
+  assert.equal(brotliDecompressSync(br.body).toString(), plain.body.toString());
+  assert.equal(gunzipSync(gz.body).toString(), plain.body.toString());
+  assert.ok(br.body.length < plain.body.length / 10);
+  assert.equal(Number(plain.headers['content-length']), plain.body.length);
+  assert.notEqual(br.headers.etag, gz.headers.etag);
+  assert.equal(br.headers.vary, 'Accept-Encoding');
+  // A browser that has any form of this version gets "not modified".
+  assert.equal((await get('/big/', { ...SITE, 'Accept-Encoding': 'gzip', 'If-None-Match': br.headers.etag })).status, 304);
+  assert.equal((await get('/big/', { ...SITE, 'If-None-Match': gz.headers.etag })).status, 304);
+});
+
+test('every page in the sitemaps is prepared before anyone asks', async () => {
+  clearPageCache();
+  assert.equal(isPrepared('/big/'), false);
+  await prepareAll('test');
+  assert.equal(isPrepared('/big/'), true, 'from the sitemap');
+  assert.equal(isPrepared('/'), true, 'the busiest pages first');
+  const s = prepareStatus();
+  assert.equal(s.running, false);
+  assert.ok(s.prepared >= 3);
+  const before = globalThis.renders;
+  await get('/big/', { ...SITE, 'Accept-Encoding': 'br' });
+  assert.equal(globalThis.renders - before, 0, 'answered from memory');
+  const renders = globalThis.renders;
+  await prepareAll('again');
+  assert.equal(globalThis.renders - renders, 0, 'nothing is made again while nothing changed');
+  assert.ok(prepareStatus().skipped >= 3);
+});
+
+test('share pictures are made each time from their saved copy, never kept in page memory (P64)', async () => {
+  const before = globalThis.renders;
+  const a = await get('/og/page/home.png');
+  const b = await get('/og/page/home.png');
+  assert.equal(a.status, 200);
+  assert.equal(a.headers['content-type'], 'image/png');
+  assert.equal(globalThis.renders - before, 2);
+  assert.notEqual(a.body.toString(), b.body.toString());
+});
+
+test('saved share pictures nobody asked for in 30 days are removed (P64)', async () => {
+  const sub = join(process.env.OG_CACHE_DIR, 'ab');
+  mkdirSync(sub, { recursive: true });
+  writeFileSync(join(sub, 'old.png'), 'old');
+  writeFileSync(join(sub, 'new.png'), 'new');
+  const longAgo = new Date(Date.now() - 40 * 86_400_000);
+  utimesSync(join(sub, 'old.png'), longAgo, longAgo);
+  assert.equal(await pruneSavedPictures(30), 1);
+  assert.deepEqual(readdirSync(sub), ['new.png']);
+});
+
 test('the website only answers GET and HEAD', async () => {
   const r = await fetch(`${base}/`, { method: 'POST', body: 'x', headers: SITE });
   assert.equal(r.status, 405);

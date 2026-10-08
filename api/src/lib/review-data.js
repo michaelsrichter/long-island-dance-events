@@ -110,6 +110,7 @@ function sourceGroup(s) {
   if (s.catalogStatus === 'seasonal-recheck' || /check again in (april|spring)|once-a-year|recheck in (spring|season)|before summer/i.test(notes)) return 'seasonal';
   if (/venues? we have (not )?researched|unnamed place|venue files?|add a venue|none of its upcoming listings could be used/i.test(notes)) return 'venues';
   if (s.catalogStatus === 'manual-intake' || /flyer|social posts/i.test(notes)) return 'flyers';
+  if (/covered by hand/i.test(notes)) return 'byhand';
   if (/written in words|timetable|undated|without dates|no dates|weekly schedule|weekly dances/i.test(notes)) return 'schedule';
   if (/ask (the|for|them|its)\b[^.]*(\.ics|ical|calendar link|feed|permission)/i.test(notes)) return 'permission';
   if (/needs a reader|adapter|cannot match|cannot pair|list reader|room name/i.test(notes)) return 'developer';

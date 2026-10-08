@@ -3,12 +3,21 @@
  * pages (server/site/server/entry.mjs, built with ASTRO_TARGET=server). It follows the old host's rules
  * (rules.js) and remembers finished pages, so most visits are answered from memory:
  *
- * - pages: kept for PAGE_CACHE_SECONDS (15 minutes) or until the data changes or a new day starts on Long
- *   Island; browsers check again after 30 seconds, like on the old host;
+ * - pages: kept until the data changes or a new day starts on Long Island (at most PAGE_CACHE_SECONDS, a day),
+ *   already compressed (Brotli), so a visit costs no work; server/src/prepare.js fills the memory
+ *   with every page in the sitemaps after each change. Browsers check again after 30 seconds, like on the
+ *   old host;
+ * - files: small text files (scripts, styles) kept in memory, compressed; pictures and fonts are read from
+ *   disk each time (decision P62: the small B1 server has little memory to spare, and the system keeps
+ *   busy files in its own cache anyway);
  * - resized photos (/_image/): made once, kept on disk (IMAGE_CACHE_DIR) and cached by browsers for a year.
  */
 import { createHash, randomBytes } from 'node:crypto';
-import { mkdir, open, readFile, rename, writeFile } from 'node:fs/promises';
+import { createReadStream, existsSync } from 'node:fs';
+import { mkdir, open, readdir, readFile, rename, stat, unlink, writeFile } from 'node:fs/promises';
+import { Readable } from 'node:stream';
+import { promisify } from 'node:util';
+import { brotliCompress, brotliDecompressSync, constants as zlibConstants, gzipSync } from 'node:zlib';
 import { dirname, extname, join, normalize, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { loadRules } from './rules.js';
@@ -16,13 +25,24 @@ import { loadRules } from './rules.js';
 const SITE_DIR = process.env.SITE_DIR || fileURLToPath(new URL('../site/', import.meta.url));
 const CLIENT_DIR = join(SITE_DIR, 'client');
 const rules = loadRules(join(SITE_DIR, 'server', 'site-rules.json'));
+/** The old host's rule for an address (staticwebapp.config.json), e.g. who may open it. */
+export const routeRule = (pathname) => rules.route(pathname);
 const CANONICAL = (process.env.CANONICAL_HOST || 'longisland.dance').toLowerCase();
 // On App Service: /home/data/image-cache (kept between restarts). Locally: server/.image-cache (not in git).
 const IMAGE_CACHE_DIR = process.env.IMAGE_CACHE_DIR || fileURLToPath(new URL('../.image-cache/', import.meta.url));
-const PAGE_TTL_MS = Number(process.env.PAGE_CACHE_SECONDS || 900) * 1000;
+// Share pictures (src/lib/og.ts, P64): drawn ones are saved next to the resized photos (/home/data/og-cache);
+// the static build's pictures of the same commit come with the package (og-seed, scripts/live/build-server.mjs).
+process.env.OG_CACHE_DIR ||= join(IMAGE_CACHE_DIR, '..', 'og-cache');
+if (!process.env.OG_SEED_DIR && existsSync(join(SITE_DIR, 'og-seed'))) process.env.OG_SEED_DIR = join(SITE_DIR, 'og-seed');
+const PAGE_TTL_MS = Number(process.env.PAGE_CACHE_SECONDS || 86_400) * 1000;
 const PAGE_CACHE_BYTES = Number(process.env.PAGE_CACHE_MB || 128) * 1024 * 1024;
 const MAX_CACHED_PAGE = 8 * 1024 * 1024;
 const MAX_IMAGE_SIDE = 2400;
+/** Brotli level for pages (made again after every change, so quick) and for files (made once per start). */
+const quality = (v, fallback) => (Number.isInteger(Number(v)) && Number(v) >= 1 && Number(v) <= 11 ? Number(v) : fallback);
+const PAGE_BROTLI = quality(process.env.PAGE_BROTLI_QUALITY, 5);
+const FILE_BROTLI = 9;
+const BIG_TEXT_FILE = 512 * 1024;
 
 /** What the old host sends when nothing else is set: browsers may reuse the answer for 30 seconds. */
 const DEFAULT_CACHE = 'public, must-revalidate, max-age=30';
@@ -50,7 +70,8 @@ const MIME = {
 };
 
 let entry;
-async function astro() {
+/** The site build's server entry (server/astro-adapter/entry.mjs), loaded once. */
+export async function astro() {
   entry ??= import(pathToFileURL(join(SITE_DIR, 'server', 'entry.mjs')).href)
     .then(async (m) => {
       await m.init?.({ clientDir: pathToFileURL(CLIENT_DIR + sep) });
@@ -83,23 +104,71 @@ function headersFor(pathname, type, body, own = []) {
   return h;
 }
 
-/** Sends a stored answer; "not modified" when the browser already has it. */
+const COMPRESSIBLE = /^(text\/|application\/(json|xml|javascript|manifest\+json|rss\+xml|ld\+json)|image\/svg\+xml)/i;
+const brotli = promisify(brotliCompress);
+
+/**
+ * A Brotli copy of a text answer, made once (in the background thread pool). Nearly every browser and search
+ * engine takes Brotli; a gzip copy is made only when someone asks for one (bodyFor).
+ */
+async function compressed(stored, level = PAGE_BROTLI) {
+  if (stored.body.length < 1024 || !COMPRESSIBLE.test(stored.headers.get('Content-Type') || '')) return stored;
+  const br = await brotli(stored.body, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: level, [zlibConstants.BROTLI_PARAM_SIZE_HINT]: stored.body.length } });
+  return { ...stored, variants: { br } };
+}
+
+/** The answer's body in the form the browser takes (`enc` from encodingFor). */
+function bodyFor(stored, enc) {
+  if (enc === 'br') return stored.variants.br;
+  const plain = stored.body ?? brotliDecompressSync(stored.variants.br);
+  if (enc !== 'gzip') return plain;
+  if (!stored.variants.gzip) {
+    stored.variants.gzip = gzipSync(plain, { level: 6 });
+    grew(stored, stored.variants.gzip.length);
+  }
+  return stored.variants.gzip;
+}
+
+function encodingFor(request, stored) {
+  if (!stored.variants) return null;
+  const a = request.headers.get('accept-encoding') || '';
+  if (/\bbr\b/.test(a)) return 'br';
+  if (/\bgzip\b/.test(a)) return 'gzip';
+  return null;
+}
+
+/** Sends a stored answer (compressed when the browser can take it); "not modified" when it already has it. */
 function reply(request, stored, { status = stored.status, host } = {}) {
   const headers = new Headers(stored.headers);
-  headers.set('ETag', stored.etag);
+  const enc = encodingFor(request, stored);
+  // Each form of the answer has its own tag; any of them means the browser has this version.
+  const etag = enc ? stored.etag.replace(/"$/, `-${enc === 'br' ? 'br' : 'gz'}"`) : stored.etag;
+  headers.set('ETag', etag);
+  if (stored.variants) headers.set('Vary', 'Accept-Encoding');
   if (host !== CANONICAL) headers.set('X-Robots-Tag', 'noindex, nofollow');
-  if (status === 200 && request.headers.get('if-none-match') === stored.etag) {
-    const keep = new Headers({ ETag: stored.etag, 'Cache-Control': headers.get('Cache-Control') });
+  const sent = (request.headers.get('if-none-match') || '').split(',').map((s) => s.trim().replace(/^W\//, '').replace(/-(br|gz)"$/, '"'));
+  if (status === 200 && sent.includes(stored.etag)) {
+    const keep = new Headers({ ETag: etag, 'Cache-Control': headers.get('Cache-Control') });
+    if (stored.variants) keep.set('Vary', 'Accept-Encoding');
     if (host !== CANONICAL) keep.set('X-Robots-Tag', 'noindex, nofollow');
     return new Response(null, { status: 304, headers: keep });
   }
-  headers.set('Content-Length', String(stored.body.length));
-  return new Response(request.method === 'HEAD' ? null : stored.body, { status, headers });
+  if (stored.path) {
+    // A picture or font: sent straight from disk.
+    headers.set('Content-Length', String(stored.size));
+    return new Response(request.method === 'HEAD' ? null : Readable.toWeb(createReadStream(stored.path)), { status, headers });
+  }
+  const body = bodyFor(stored, enc);
+  if (enc) headers.set('Content-Encoding', enc);
+  headers.set('Content-Length', String(body.length));
+  return new Response(request.method === 'HEAD' ? null : body, { status, headers });
 }
 
 // ---------- files from the client folder ----------
 
 const fileCache = new Map();
+/** Text files up to this size are kept in memory (compressed); everything else is read from disk when sent. */
+const MAX_TEXT_IN_MEMORY = 8 * 1024 * 1024;
 async function staticFile(pathname) {
   let decoded;
   try {
@@ -119,7 +188,14 @@ async function staticFile(pathname) {
     if ((await handle.stat()).isFile()) {
       const body = await handle.readFile();
       const type = MIME[extname(full).toLowerCase()] || 'application/octet-stream';
-      file = { status: 200, body, etag: etagOf(body), headers: headersFor(pathname, type, body) };
+      const stored = { status: 200, body, etag: etagOf(body), headers: headersFor(pathname, type, body) };
+      if (COMPRESSIBLE.test(type) && body.length <= MAX_TEXT_IN_MEMORY) {
+        // Level 9 for ordinary files; a big one (the 5 MB editor script) takes far too long at 9 on one core.
+        file = await compressed(stored, body.length > BIG_TEXT_FILE ? PAGE_BROTLI : FILE_BROTLI);
+        if (file.variants) file.body = null;
+      } else {
+        file = { ...stored, body: null, path: full, size: body.length };
+      }
     }
   } catch {
     /* not a file */
@@ -127,7 +203,7 @@ async function staticFile(pathname) {
     await handle?.close();
   }
   // The folder never changes while the server runs, so answers (also "no such file") can be remembered.
-  if (fileCache.size < 20_000 && (!file || file.body.length < 1024 * 1024)) fileCache.set(full, file);
+  if (fileCache.size < 20_000) fileCache.set(full, file);
   return file;
 }
 
@@ -135,7 +211,14 @@ async function staticFile(pathname) {
 
 const pageCache = new Map();
 let pageCacheBytes = 0;
+let pageCacheKey = '';
 const inFlight = new Map();
+const sizeOf = (s) => (s.body?.length ?? 0) + (s.variants ? s.variants.br.length + (s.variants.gzip?.length ?? 0) : 0);
+
+/** A kept page got a gzip copy (bodyFor): count it. */
+function grew(stored, bytes) {
+  if (stored.cacheKey && pageCache.get(stored.cacheKey) === stored) pageCacheBytes += bytes;
+}
 
 /** Forget every finished page (after the data changes). */
 export function clearPageCache() {
@@ -143,17 +226,32 @@ export function clearPageCache() {
   pageCacheBytes = 0;
 }
 
+/** How many pages are ready in memory, and their size (for /api/health). */
+export const pageCacheStatus = () => ({ pages: pageCache.size, mb: Math.round((pageCacheBytes / 1024 / 1024) * 10) / 10 });
+
+/** Is this address already prepared for the current data and day? (server/src/prepare.js skips it then) */
+export function isPrepared(pathname) {
+  const hit = pageCache.get(`${freshness()}|${pathname}`);
+  return Boolean(hit && hit.expires > Date.now());
+}
+
 function remember(key, stored) {
-  if (stored.status !== 200 || stored.body.length > MAX_CACHED_PAGE || stored.noStore) return;
+  if (stored.status !== 200 || stored.body.length > MAX_CACHED_PAGE || stored.noStore) return stored;
+  // Pictures (share pictures) are not kept in memory: the page reads its saved copy from disk (src/lib/og.ts).
+  if (!COMPRESSIBLE.test(stored.headers.get('Content-Type') || '')) return stored;
+  // Text pages are kept compressed only (about a tenth of the size); the rare visitor without Brotli gets
+  // a copy made on the spot.
+  const kept = stored.variants ? { ...stored, body: null, cacheKey: key } : { ...stored, cacheKey: key };
   const old = pageCache.get(key);
-  if (old) pageCacheBytes -= old.body.length;
-  pageCache.set(key, stored);
-  pageCacheBytes += stored.body.length;
+  if (old) pageCacheBytes -= sizeOf(old);
+  pageCache.set(key, kept);
+  pageCacheBytes += sizeOf(kept);
   for (const [k, v] of pageCache) {
     if (pageCacheBytes <= PAGE_CACHE_BYTES) break;
     pageCache.delete(k);
-    pageCacheBytes -= v.body.length;
+    pageCacheBytes -= sizeOf(v);
   }
+  return kept;
 }
 
 /** Renders an address with Astro and stores the whole answer (pages are small; this allows ETags and caching). */
@@ -175,7 +273,13 @@ async function render(url, request, clientAddress, pathname = url.pathname) {
 }
 
 async function page(request, url, clientAddress) {
-  const key = `${freshness()}|${url.pathname}`;
+  const fresh = freshness();
+  // New data or a new day: the old pages are no use any more, so free their memory at once.
+  if (fresh !== pageCacheKey) {
+    clearPageCache();
+    pageCacheKey = fresh;
+  }
+  const key = `${fresh}|${url.pathname}`;
   const hit = pageCache.get(key);
   if (hit && hit.expires > Date.now()) {
     pageCache.delete(key);
@@ -184,10 +288,8 @@ async function page(request, url, clientAddress) {
   }
   if (inFlight.has(key)) return inFlight.get(key);
   const p = render(url, request, clientAddress)
-    .then((stored) => {
-      remember(key, stored);
-      return stored;
-    })
+    .then(compressed)
+    .then((stored) => remember(key, stored))
     .finally(() => inFlight.delete(key));
   inFlight.set(key, p);
   return p;
@@ -203,6 +305,23 @@ async function override(status, request, url, clientAddress) {
 }
 
 // ---------- resized photos ----------
+
+/** Deletes saved share pictures nobody asked for in `days` days (a picture gets a fresh date each time it is used). */
+export async function pruneSavedPictures(days = 30) {
+  const dir = process.env.OG_CACHE_DIR;
+  if (!dir || dir === 'off') return 0;
+  const cutoff = Date.now() - days * 86_400_000;
+  let removed = 0;
+  const walk = async (d) => {
+    for (const e of await readdir(d, { withFileTypes: true }).catch(() => [])) {
+      const p = join(d, e.name);
+      if (e.isDirectory()) await walk(p);
+      else if ((await stat(p).catch(() => null))?.mtimeMs < cutoff) removed += await unlink(p).then(() => 1, () => 0);
+    }
+  };
+  await walk(dir);
+  return removed;
+}
 
 const imagesInFlight = new Map();
 async function image(request, url) {
@@ -248,7 +367,7 @@ async function image(request, url) {
 // ---------- the website ----------
 
 /**
- * `roles`: the visitor's roles; until sign-in moves to this server (a later Phase 2 step), everyone is
+ * `roles`: the visitor's roles (server/src/identity.js; anonymous when nobody is signed in). Formerly everyone was
  * anonymous, so addresses for moderators answer "please sign in" (401) like the old host does.
  */
 export async function site(request, { clientAddress, roles = ['anonymous'] } = {}) {

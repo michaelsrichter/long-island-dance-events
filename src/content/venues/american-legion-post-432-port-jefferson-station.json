@@ -1,0 +1,58 @@
+{
+  "name": "American Legion Wilson Ritch Post 432",
+  "aliases": [
+    "American Legion Port Jefferson Station",
+    "Wilson Ritch Post 432",
+    "American Legion Post 432",
+    "American Legion Hallock Ave"
+  ],
+  "address": "1450 Hallock Ave",
+  "town": "Port Jefferson Station",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11776",
+  "phone": "(631) 473-9774",
+  "website": "https://www.americanlegionwilsonritchpost432.org/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=American+Legion+Wilson+Ritch+Post+432%2C+1450+Hallock+Ave%2C+Port+Jefferson+Station%2C+NY+11776",
+  "kind": "lodge-hall",
+  "description": "The American Legion veterans' post in Port Jefferson Station, first chartered in 1919. Its hall holds up to 70 people, has a bar and a small kitchen, and is rented out for parties and community groups, including a weekly line dancing class.",
+  "dancing": {
+    "floor": "unknown",
+    "policy": "allowed",
+    "kinds": [
+      "line"
+    ],
+    "notes": "Natalie Boyle teaches a weekly line dancing class in the hall. The post describes a rentable hall for up to 70 people but says nothing about the floor, so we do not know its size or surface yet.",
+    "evidence": [
+      {
+        "url": "https://www.countrydancingwithnatalie.com/events.html",
+        "note": "Natalie's Events page (week of Oct 5, 2026) lists her line dancing class at the American Legion in Port Jefferson Station on Tuesdays, 7-8:45 PM."
+      },
+      {
+        "url": "https://www.americanlegionwilsonritchpost432.org/site/resourcerentals",
+        "note": "The post's rental page: the hall fits groups up to 70 and has a TV, a full bar and a warming kitchen. Nothing about the floor."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-06"
+  },
+  "evidence": [
+    {
+      "url": "https://www.americanlegionwilsonritchpost432.org/post-location",
+      "note": "The post's location page: Wilson Ritch Post 432, 1450 Hallock Avenue, Port Jefferson Station, NY 11776, phone 631-473-9774."
+    },
+    {
+      "url": "https://www.americanlegionwilsonritchpost432.org/rental-info",
+      "note": "The public can rent the hall for up to 70 people, for 5-hour events starting at 2 PM or later, with a lounge serving drinks."
+    },
+    {
+      "url": "https://www.americanlegionwilsonritchpost432.org/",
+      "note": "Home page: the post was chartered in 1919, and its Auxiliary meets on the 2nd Tuesday of each month at 7 PM."
+    }
+  ],
+  "factsSource": "Checked October 6, 2026. Source: americanlegionwilsonritchpost432.org.",
+  "reviewNotes": "Added 2026-10-06 for Natalie Boyle's weekly line dancing class (issue #41). Natalie writes \"Hallock Rd\"; the post's own address is 1450 Hallock Ave, and no other Legion post is on Hallock Road. Parking, accessibility and opening hours are not published by the post. The social icons on its site go to the national American Legion accounts, so none are recorded. The post's online calendar was empty for September to November 2026.",
+  "latitude": 40.933016,
+  "longitude": -73.0365,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

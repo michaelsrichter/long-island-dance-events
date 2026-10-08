@@ -1,0 +1,45 @@
+{
+  "title": "Intermediate sensual bachata class at Dance With Me in Greenvale",
+  "summary": "A weekly intermediate group class in sensual bachata at the Dance With Me studio in Greenvale, with longer combinations and smoother flow for dancers who know the basics. It starts right after the beginner class.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "bachata"
+  ],
+  "start": "2026-10-08T19:40",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rrule": "FREQ=WEEKLY;BYDAY=TH;UNTIL=20261031"
+  },
+  "cadence": "Thursdays",
+  "venueId": "dance-with-me-greenvale",
+  "town": "Greenvale",
+  "organizerId": "dance-with-me-long-island",
+  "priceNotes": "Call the studio for class prices. New students can start with a $49 intro offer (through Oct 31).",
+  "skillLevel": "intermediate",
+  "ageGroup": "adults",
+  "infoUrl": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+  "contactPhone": "(516) 774-2577",
+  "status": "active",
+  "sourceId": "dance-with-me-greenvale",
+  "sourceUrl": "https://dancewithmeusa.com/studio/long-island-dance-studio/",
+  "sourceName": "Dance With Me Long Island, group class schedule (October 2026)",
+  "sourceRef": "Group class schedule, Thursday 7:40 PM",
+  "firstSeen": "2026-10-06",
+  "lastSeen": "2026-10-06",
+  "confidence": 1,
+  "lockedFields": [
+    "title",
+    "summary",
+    "category",
+    "danceStyles",
+    "start",
+    "recurrence",
+    "cadence",
+    "venueId",
+    "organizerId",
+    "priceNotes",
+    "skillLevel",
+    "status"
+  ],
+  "reviewNotes": "Added by hand on 2026-10-06 from the studio's October 2026 class timetable (issue #42). The timetable changes now and then (in May 2026 it had different classes), so the series ends on October 31. In the last week of each month, open the studio page: if the class is still listed at the same time, move UNTIL in the repeat rule to the end of the next month; if not, let it end."
+}

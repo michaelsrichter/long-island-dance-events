@@ -162,11 +162,11 @@ export function sitePages(): Promise<Pages> {
 export const cmsUrl = (collection: string, id?: string) => (id ? `/admin/#/collections/${collection}/entries/${id}` : `/admin/#/collections/${collection}/new`);
 export const REPO_URL = 'https://github.com/michaelsrichter/long-island-dance-events';
 
-/** "Ask Copilot": makes a GitHub issue with the context, labeled copilot-task. Returns its address. */
+/** "Ask Copilot": makes a GitHub issue with the context, labeled copilot-task. Returns its address. Copilot does not start it by itself. */
 export async function askCopilot(title: string, body: string): Promise<string | null> {
   const r = await api('/api/review/copilot', { title, body });
   if (r.status === 200) {
-    say('Done. Copilot has a new task. Open it on GitHub and choose "Assign to Copilot".');
+    say('Saved as a task for Copilot. Copilot does not start by itself: start a Copilot session and give it the link.');
     return r.data.issue.url as string;
   }
   say(errorText(r));
@@ -177,8 +177,9 @@ export async function askCopilot(title: string, body: string): Promise<string | 
 export function copilotButton(label: string, title: () => string, body: () => string): HTMLButtonElement {
   const b = button(label, 'btn--secondary', async () => {
     const url = await askCopilot(title(), body());
-    if (url) b.replaceWith(link(url, 'Copilot task made: open it on GitHub'));
+    if (url) b.replaceWith(link(url, 'Copilot task saved: open it'));
   });
+  b.title = 'Saves a task note on GitHub. A Copilot session does the work when you start one and give it the link.';
   return b;
 }
 

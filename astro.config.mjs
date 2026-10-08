@@ -1,4 +1,5 @@
 // @ts-check
+import { readFileSync } from 'node:fs';
 import { defineConfig } from 'astro/config';
 import liveServer from './server/astro-adapter/index.mjs';
 
@@ -33,7 +34,13 @@ export default defineConfig({
     build: { assetsInlineLimit: 0 },
     // The live server bundles its code, except sharp (native image library) and satori (share-picture layout,
     // which loads its own WebAssembly file); both are installed with the server (server/package.json).
-    ...(serverTarget ? { ssr: { noExternal: true, external: ['sharp', 'satori'] } } : {}),
+    // It has no src/ folder, so the share-picture code gets its own text for its design fingerprint (P64).
+    ...(serverTarget
+      ? {
+          ssr: { noExternal: true, external: ['sharp', 'satori'] },
+          define: { __OG_SOURCE__: JSON.stringify(readFileSync(new URL('./src/lib/og.ts', import.meta.url), 'utf8')) },
+        }
+      : {}),
   },
   prefetch: false,
   // Built-in sharp service plus precise focus-point crops (position: "35% 40%").

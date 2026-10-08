@@ -362,6 +362,10 @@ test('collected events: report summary, and Publish now only when checks passed 
 });
 
 test('sources: grouped by next step; permission answers and switching on are commits; runs start the workflow', async () => {
+  const { sourceGroup } = require('../src/lib/review-data');
+  const notes = 'Weekly schedule written in words with no dates.';
+  assert.equal(sourceGroup({ enabled: false, reviewNotes: notes }), 'schedule');
+  assert.equal(sourceGroup({ enabled: false, reviewNotes: `Covered by hand on 2026-10-06; check again by 2026-11-01. ${notes}` }), 'byhand', 'a schedule already added by hand is not offered again');
   let r = await call('reviewSources', '/api/review/sources', { user: ADMIN });
   assert.equal(r.status, 200);
   const by = Object.fromEntries(r.body.sources.map((s) => [s.id, s]));
@@ -413,7 +417,8 @@ test('monthly source check: "not useful" is remembered in search-triage.json; "w
   assert.equal(r.status, 200);
   const task = gh.issues.find((i) => i.title === 'Check a possible new source: mike.example');
   assert.deepEqual(task.labels.map((l) => l.name), ['copilot-task']);
-  assert.match(task.body, /Assign to Copilot/);
+  assert.match(task.body, /does not start this by itself/);
+  assert.match(task.body, /Copilot session/);
   r = await call('reviewSources', '/api/review/sources', { user: ADMIN });
   assert.deepEqual(r.body.discovery[0].data.newSites, [], 'decided websites are not shown again');
 });

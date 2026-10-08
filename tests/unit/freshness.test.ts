@@ -1,12 +1,14 @@
-import { afterEach, describe, expect, it } from 'vitest';
-import { freshnessKey, remember } from '../../src/lib/freshness';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { freshnessKey, pagesNow, remember } from '../../src/lib/freshness';
 
-const g = globalThis as { __liLive?: boolean; __liDataVersion?: string | number };
+const g = globalThis as { __liLive?: boolean; __liDataVersion?: string | number; __liPagesNow?: string };
 
 afterEach(() => {
   delete g.__liLive;
   delete g.__liDataVersion;
+  delete g.__liPagesNow;
   delete process.env.BUILD_NOW;
+  vi.useRealTimers();
 });
 
 describe('freshness (live server caches, decision P58)', () => {
@@ -44,5 +46,31 @@ describe('freshness (live server caches, decision P58)', () => {
     });
     await expect(get()).rejects.toThrow('database busy');
     expect(await get()).toBe('ok');
+  });
+  it('gives every page of the same data and day one "now": when that period began (P62)', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-10-06T20:22:00Z')); // 4:22 PM in New York
+    g.__liLive = true;
+    g.__liDataVersion = 3;
+    const first = pagesNow();
+    expect(first.toISOString()).toBe('2026-10-06T20:22:00.000Z');
+    expect(g.__liPagesNow).toBe('2026-10-06T20:22:00.000Z');
+    vi.setSystemTime(new Date('2026-10-07T01:00:00Z')); // 9 PM, same day in New York
+    expect(pagesNow().toISOString()).toBe(first.toISOString());
+    g.__liDataVersion = 4; // an edit: a new period
+    expect(pagesNow().toISOString()).toBe('2026-10-07T01:00:00.000Z');
+    vi.setSystemTime(new Date('2026-10-07T04:00:30Z')); // just after midnight in New York
+    expect(pagesNow().toISOString()).toBe('2026-10-07T04:00:30.000Z');
+    process.env.BUILD_NOW = '2026-10-05T12:00:00Z'; // tests and parity builds pin it
+    expect(pagesNow().toISOString()).toBe('2026-10-05T12:00:00.000Z');
+  });
+
+  it('the static build keeps using the clock (or BUILD_NOW)', () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2026-10-06T12:00:00Z'));
+    expect(pagesNow().toISOString()).toBe('2026-10-06T12:00:00.000Z');
+    vi.setSystemTime(new Date('2026-10-06T12:00:05Z'));
+    expect(pagesNow().toISOString()).toBe('2026-10-06T12:00:05.000Z');
+    expect(g.__liPagesNow).toBeUndefined();
   });
 });

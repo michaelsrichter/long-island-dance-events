@@ -175,14 +175,14 @@ flowchart LR
 | `GET/POST /api/review/collected` | The rolling `ingest/updates` pull request: run report, check runs, mergeable; **Publish now** merges it (merge commit) only when checks passed and the head commit is the one the owner saw. |
 | `GET/POST /api/review/sources`, `POST /api/review/run`, `POST /api/review/candidate` | Sources grouped by next step (`api/src/lib/review-data.js`), `ingest-failure` and `source-discovery` issues, recent runs; switch on/off and permission answers (commits); run the Collect workflow for a cadence or one source; new websites: Copilot task or `owner-no` in `catalog/search-triage.json`. |
 | `GET/POST /api/review/messages` | Open visitor issues (automation labels excluded), reply and close. |
-| `POST /api/review/copilot` | An issue labeled `copilot-task` with the context, for the owner to assign to Copilot. |
+| `POST /api/review/copilot` | An issue labeled `copilot-task` with the context. Copilot does not start it by itself: a person starts a Copilot session with the link (or assigns it to Copilot and checks for an error reply). |
 | `GET /api/review/outreach`, `GET /api/review/outreach/draft`, `POST /api/review/outreach/send`, `GET /api/review/outreach/thread` | Emails to website owners through the site's AgentMail inbox (P53): ready-made drafts, review-then-send (production only; previews dry-run), 30-day and 14-day limits, conversations labeled `outreach` + `source-<id>`, and the source's `permission` updated by a commit. |
 | `POST /api/review/snooze`, `GET /api/review/log` | Snoozes (`ReviewState`), and the shared decision log (`ModLog`). |
 | `POST /api/review/github/start`, `GET /api/github-setup` | One-time setup with GitHub's app-manifest flow: a single-use state (1 hour), the code is swapped for the app's private key, which is stored encrypted (AES-256-GCM, key in `REVIEW_SECRET_KEY`). The app must belong to the repository owner. |
 
-## Live database and server (phases 1 and 2 of the move, P54, P56 to P58)
+## Live database and server (phases 1 and 2 of the move, P54, P56 to P60)
 
-The owner approved moving the site to a live PostgreSQL database ([proposals/postgres-live-site.md](proposals/postgres-live-site.md)). Git is still the master copy: the database holds an exact copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. An always-on **App Service** server (P58) makes the same pages as today's site at a test address; longisland.dance still comes from Static Web Apps until switch day. Setup and restore: [deployment.md](deployment.md#live-database-and-server-phases-1-and-2).
+The owner approved moving the site to a live PostgreSQL database ([proposals/postgres-live-site.md](proposals/postgres-live-site.md)). Git is still the master copy: the database holds an exact copy of `src/content/**`, refreshed every night and after every content change, and checked byte for byte each time. An always-on **App Service** server (P58) makes the same pages as today's site **from the database records** (P59: it checks for changes every 2 seconds, so a change shows in about 2 seconds) at the test address https://new.longisland.dance; longisland.dance still comes from Static Web Apps until switch day. Setup and restore: [deployment.md](deployment.md#live-database-and-server-phases-1-and-2).
 
 ```mermaid
 flowchart LR
@@ -195,6 +195,7 @@ flowchart LR
     subgraph APP["App Service B1 app-li-dance-events (Linux, always on)"]
       M["server/src/main.js"]
       SITE["Astro pages made on request<br/>+ page memory, old-host rules"]
+      LIVE["live-data.js: every 2 s<br/>data version changed? read records"]
       API["/api/health, /api/sync/*"]
     end
     P[("PostgreSQL psql-li-dance-events<br/>B1ms, Entra sign-in only,<br/>firewall: Azure services only")]
@@ -207,17 +208,22 @@ flowchart LR
   API -->|"managed identity"| P
   API -->|"GET /api/sync/export"| C
   API -.->|"Sundays: restore drill"| P
+  LIVE -->|"managed identity"| P
+  LIVE --> SITE
 ```
 
 | Piece | Where | Notes |
 | --- | --- | --- |
 | Design | `server/migrations/001_initial.sql` | One table per kind of record with the exact file text (`raw`) and the parsed record (`doc jsonb`), generated columns, full-text search and `pg_trgm`; `event_dates`, `places`, `history` (append-only, enforced by a trigger), state tables for later phases, report views. |
 | Server | `server/` (plain Node, ES modules) | `src/main.js` (HTTP, compression), `src/app.js` (which code answers which address), `src/routes/` (`GET /api/live`, `GET /api/health`, `POST /api/sync/import`, `GET /api/sync/export`, `POST /api/sync/drill`; the sync endpoints accept only GitHub OIDC tokens from `database-sync.yml` on `main`), `src/site.js` (files, pages, page memory, resized photos), `src/rules.js` (the rules of `staticwebapp.config.json`). Design changes are applied once, under an advisory lock, on first use. |
-| Pages on the server | `astro.config.mjs` (`ASTRO_TARGET=server`), `server/astro-adapter/`, `src/lib/page-props.ts`, `src/lib/freshness.ts`, `scripts/live/build-server.mjs` | The same pages, built a second time for the server. Dynamic pages find their props by calling their own `getStaticPaths()` (remembered until the data changes or a new day starts on Long Island). Photos keep their `/_astro/` addresses: the server gives Astro the build's photo-naming hook, and the static build's resized photos and share pictures are deployed with it. |
-| Same as the static site | `scripts/live/parity.mjs`, `server.yml` | Every file of the static site must come back identical from the server before a deploy (5,618 of 5,618 on 2026-10-05). |
+| Records on the server (P59) | `src/lib/collections.ts` (what pages import instead of `astro:content`), `src/lib/collection-schemas.ts` (one list of schemas), `src/lib/live-store.ts` (server build only), `server/src/live-data.js`, `server/src/sitemap-state.js` | Static build: Astro's own functions. Server: every record's file text from PostgreSQL, read with Astro's readers and the same schemas and pictures, sorted like Astro's data store; a bad record keeps its last good version. Sitemap dates in `sitemap_state`. |
+| Speed (P61, P62) | `server/src/prepare.js`, `server/src/site.js`, `server/src/telemetry.js` | Every sitemap page prepared in the background after each change (using about a quarter of the processor), kept as Brotli until the data or the day changes; pictures sent from disk; a small, capped memory for the 1.9 GB B1 machine; monitoring started inside the server instead of App Service's separate agent. |
+| Pages on the server | `astro.config.mjs` (`ASTRO_TARGET=server`), `server/astro-adapter/`, `src/lib/page-props.ts`, `src/lib/freshness.ts`, `scripts/live/build-server.mjs` | The same pages, built a second time for the server. Dynamic pages find their props by calling their own `getStaticPaths()` (remembered until the data changes or a new day starts on Long Island). Photos keep their `/_astro/` addresses: the server gives Astro the build's photo-naming hook, and the static build's resized photos are deployed with it. Share pictures (P64) are made by the pages, so a live edit shows on them too: each is saved once under a fingerprint of its card in `/home/data/og-cache` (unused ones removed after 30 days), the static build's pictures of the same commit come with the package as a read-only seed (`server/site/og-seed`), the server draws one at a time, and pictures are never kept in its memory. |
+| Sign-in and community `/api` (P60) | `server/src/identity.js`, `server/src/api-adapter.js`, `server/src/functions-shim.cjs`, `infra/live/main.bicep` (`authsettingsV2`, Key Vault), `infra/live/copy-secrets.ps1` | App Service built-in sign-in with the `extid` provider (14-day sessions); the server maps each account to its Static Web Apps user id and roles, then runs `api/src/functions/*.js` unchanged with Static Web Apps' principal header. `/api/session` for `whoAmI()`. |
+| Same as the static site | `scripts/live/parity.mjs`, `scripts/live/load-db.mjs`, `scripts/live/change-check.mjs`, `server.yml` | Before every deploy, the server reads a real PostgreSQL loaded from the same commit; every file of the static site must come back identical (5,629 of 5,629 on 2026-10-06; pictures made on another system are compared by pixels), and a changed venue name must show on its page within 10 seconds (2.1 s). |
 | Snapshot and check | `scripts/db/` | `build-payload.ts` (records, event dates 120 days ahead with `src/lib/event-core.ts`, places), `compare-export.ts`. |
 | Tests | `server/test/`, `tests/unit/db-payload.test.ts`, `tests/unit/freshness.test.ts` | Real PostgreSQL 17 in CI (`server.yml`): design, sync, history, refusal to empty a table, export, drill, the full round trip with the real content; the server's headers, redirects, page memory, photo cache and path safety. |
-| Infrastructure | `infra/live/main.bicep` | Central US (P57). App Service B1 (P58), no CDN. No private network: the database firewall admits only Azure services, with Entra sign-in only. The rest of the site moves to Central US in phase 2; the Static Web App is deleted on switch day ([deployment.md](deployment.md#moving-the-rest-to-central-us)). |
+| Infrastructure | `infra/live/main.bicep`, `infra/live/custom-domain.bicep` | Central US (P57). App Service B1 (P58), no CDN. Host names with free managed certificates, one deployment per name (new.longisland.dance, P59). No private network: the database firewall admits only Azure services, with Entra sign-in only. The rest of the site moves to Central US in phase 2; the Static Web App is deleted on switch day ([deployment.md](deployment.md#moving-the-rest-to-central-us)). |
 ## Planned (later phases)
 
 - **Duplicates (phase 3):** exact `matchKey` pass, then local embeddings (bge-small, run in CI, no API key). Cosine ≥ 0.9 merges; 0.8-0.9 goes to a human review queue.

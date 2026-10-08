@@ -9,7 +9,7 @@
     "node": ">=22"
   },
   "scripts": {
-    "start": "node src/main.js",
+    "start": "node --max-semi-space-size=4 --max-old-space-size=256 src/main.js",
     "test": "node --test \"test/*.test.js\""
   },
   "dependencies": {

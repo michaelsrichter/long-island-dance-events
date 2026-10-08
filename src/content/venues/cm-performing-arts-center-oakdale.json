@@ -3,7 +3,8 @@
   "aliases": [
     "CM Performing Arts Oakdale",
     "CMPAC",
-    "CM Performing Arts"
+    "CM Performing Arts",
+    "Noel S. Ruiz Theatre"
   ],
   "address": "931 Montauk Hwy",
   "county": "Suffolk",
@@ -31,11 +32,11 @@
   "description": "A nonprofit community theater of about 330 seats on Montauk Highway in Oakdale. It stages musicals and also hosts tribute concerts, comedy and candlelight shows.",
   "facebookUrl": "https://www.facebook.com/cmpac",
   "factsSource": "Checked October 4, 2026. Source: cmpac.com.",
-  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=CM+Performing+Arts+Center%2C+931+Montauk+Hwy%2C+Oakdale%2C+NY+11769",
+  "googleMapsUrl": "https://www.google.com/maps?cid=9757586675276737293",
   "kind": "theater",
   "phone": "(631) 218-2810",
   "postalCode": "11769",
-  "reviewNotes": "Added from Ira's List research (2026-10-03). Same place as Ira's 'CMPAC'. The Oct 4 show is The Soul Jam Revue, a Philly soul tribute concert.\n\nDirectory research 2026-10-04: Current description still accurate. The theater is in the Lighthouse Commons shopping center. Logo file is the version made for dark backgrounds (white and gold letters on transparent). Photo 3 is a smaller rental room shown on the venue rentals page.",
+  "reviewNotes": "Added from Ira's List research (2026-10-03). Same place as Ira's 'CMPAC'. The Oct 4 show is The Soul Jam Revue, a Philly soul tribute concert.\n\nDirectory research 2026-10-04: Current description still accurate. The theater is in the Lighthouse Commons shopping center. Logo file is the version made for dark backgrounds (white and gold letters on transparent). Photo 3 is a smaller rental room shown on the venue rentals page.\n\nParking and access research 2026-10-06 (issue #40): parking and accessibility added from the theater's own visit and accessibility pages. The main stage is the Noel S. Ruiz Theatre (311 seats plus cabaret tables, rental page); the All Revved Up NY show on Oct 15, 2026 is there.",
   "state": "NY",
   "town": "Oakdale",
   "website": "https://www.cmpac.com/",
@@ -93,6 +94,16 @@
     {
       "url": "https://www.google.com/maps?cid=9757586675276737293",
       "note": "Google Maps: CM Performing Arts Center (performing arts theater) at 931 Montauk Hwy, Oakdale, NY 11769, in Lighthouse Commons; phone (631) 218-2810."
+    },
+    {
+      "url": "https://www.cmpac.com/your-visit/",
+      "note": "Visit page: plenty of parking in Lighthouse Commons; use marked spaces and follow store signs. The lobby opens 1 hour before shows."
+    },
+    {
+      "url": "https://www.cmpac.com/accessibility/",
+      "note": "Accessibility page: ADA design, accessible entrances and exits, an accessible stall in each restroom, wheelchair and companion seats, 7 van-accessible spaces."
     }
-  ]
+  ],
+  "parkingNotes": "Free parking in the large lot of the Lighthouse Commons shopping center, where the theater is. Use marked spaces, not the fire lane, and watch for signs that save spots in front of some stores.",
+  "accessibilityNotes": "The theater says it is built to ADA rules: all entrances and exits are accessible, there are 7 van-accessible parking spaces near the street-level main doors, each restroom has an accessible stall, and there is wheelchair seating with a companion seat and no steps to reach it."
 }

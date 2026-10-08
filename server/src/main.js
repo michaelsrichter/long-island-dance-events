@@ -2,10 +2,15 @@
  * The live server (decision P58): one Node process on Azure App Service that serves the website (Astro pages
  * made on request, and static files) and the /api endpoints. App Service sets PORT.
  */
+import './telemetry.js';
 import http from 'node:http';
 import { route } from './app.js';
 import { clientAddress, sendResponse, toRequest } from './lib/node-http.js';
-import { closePool, getPool } from './lib/db.js';
+import { closePool } from './lib/db.js';
+import { startLiveData } from './live-data.js';
+import { prepareAll } from './prepare.js';
+import { pruneSavedPictures } from './site.js';
+import { installSitemapState } from './sitemap-state.js';
 import { appVersion } from './lib/http.js';
 
 const port = Number(process.env.PORT || 8080);
@@ -32,41 +37,33 @@ const server = http.createServer(async (req, res) => {
 server.keepAliveTimeout = 230_000;
 server.headersTimeout = 235_000;
 
-/** The busiest pages; kept prepared so visitors don't wait for them (pages are remembered for 15 minutes). */
-const BUSIEST = ['/', '/events/'];
-const host = process.env.CANONICAL_HOST || 'longisland.dance';
+const nyDay = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(new Date());
 
-async function prepare(log) {
-  for (const path of BUSIEST) {
-    const started = performance.now();
-    try {
-      const res = await route(new Request(`https://${host}${path}`), {});
-      await res.arrayBuffer();
-      if (log) console.log(`[server] prepared ${path} (${res.status}, ${Math.round(performance.now() - started)} ms)`);
-    } catch (err) {
-      console.warn(`[server] could not prepare ${path}: ${err.message}`);
-    }
-  }
-}
-
-/** After a start: open the database connection and prepare the busiest pages, so the first visitors don't wait. */
+/**
+ * After a start: load the records from the database (then every 2 seconds, check for changes), and prepare
+ * every page so nobody waits for one to be made (prepare.js). If the database has not answered after two
+ * minutes, the pages are prepared from the records the site was built with, and again once it answers.
+ */
 async function warmUp() {
-  if (process.env.PGHOST || process.env.DATABASE_URL) {
-    await getPool()
-      .query('SELECT 1')
-      .then(
-        () => console.log('[server] database connection ready'),
-        (err) => console.warn(`[server] database not reachable yet: ${err.message}`),
-      );
-  }
-  await prepare(true);
+  installSitemapState();
+  const { first } = startLiveData({ onLoaded: () => prepareAll('new data') });
+  const loaded = await Promise.race([first, new Promise((r) => setTimeout(() => r(false), 120_000).unref())]);
+  if (!loaded) await prepareAll('start');
 }
 
 server.listen(port, () => {
   console.log(`[server] version ${appVersion().commit} listening on ${port}`);
   warmUp();
-  // Again every 10 minutes: also covers a new day starting on Long Island.
-  setInterval(() => prepare(false), 10 * 60_000).unref();
+  // A new day on Long Island changes "upcoming" and "today" everywhere: prepare every page again, and drop share
+  // pictures nobody asked for in 30 days.
+  let day = nyDay();
+  setInterval(() => {
+    if (nyDay() !== day) {
+      day = nyDay();
+      prepareAll('new day');
+      pruneSavedPictures(30).then((n) => n && console.log(`[site] ${n} unused share pictures removed`));
+    }
+  }, 60_000).unref();
 });
 
 function stop(signal) {

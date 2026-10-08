@@ -56,14 +56,14 @@ describe('database', { skip }, () => {
   after(async () => closePool());
 
   test('the design is applied once, and again does nothing', async () => {
-    assert.deepEqual(await ensureMigrated(), ['001_initial', '002_app_service_owner']);
+    assert.deepEqual(await ensureMigrated(), ['001_initial', '002_app_service_owner', '003_sitemap_state']);
     const c = await getPool().connect();
     try {
       assert.deepEqual(await migrate(c), []);
     } finally {
       c.release();
     }
-    assert.equal((await q('SELECT count(*)::int AS n FROM schema_migrations'))[0].n, 2);
+    assert.equal((await q('SELECT count(*)::int AS n FROM schema_migrations'))[0].n, 3);
   });
 
   test('a first sync adds every record, its dates, the places and history', async () => {

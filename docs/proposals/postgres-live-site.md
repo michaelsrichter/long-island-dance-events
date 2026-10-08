@@ -1,6 +1,6 @@
 # Proposal: a live database, so changes show up in seconds
 
-> **Status: approved by the owner on October 5, 2026 (decision P54), with his answers in [section 16](#16-open-questions).** Phase 0 ([section 12](#12-phase-0-quick-wins-we-can-ship-right-after-approval), 0a and 0b) shipped on October 5 (decision P55). Phase 1 (the database) shipped on October 5 (decisions P56 and P57). Phase 2 started on October 5 on **App Service B1** (decision P58, see the box below).
+> **Status: approved by the owner on October 5, 2026 (decision P54), with his answers in [section 16](#16-open-questions).** Phase 0 ([section 12](#12-phase-0-quick-wins-we-can-ship-right-after-approval), 0a and 0b) shipped on October 5 (decision P55). Phase 1 (the database) shipped on October 5 (decisions P56 and P57). Phase 2 started on October 5 on **App Service B1** (decision P58, see the box below). On October 6 the server started making its pages from the database records (decision P59): a change shows in about 2 seconds, and the test address **https://new.longisland.dance** is up (not listed by search engines).
 > Prices are Azure list prices for East US 2, checked October 5, 2026 (see [Prices we checked](#18-prices-we-checked)). **Region (P57):** everything moves to **Central US** (Iowa). It is the only US region where this Visual Studio subscription may create PostgreSQL that also has everything else the site uses (Static Web Apps, Functions, Content Safety, Logic Apps, monitoring). East US and East US 2 do not allow PostgreSQL or Azure SQL for this subscription. The database costs a little more there: about $18.18 a month instead of $16.09. **No private network** (owner's choice; this data is not sensitive): the database has a public address, but only Azure services may connect, only with Microsoft Entra sign-in and only encrypted.
 > **Host (P58, October 5):** the owner asked whether App Service would be better for search engines and AI assistants. It is: one small server that is **always on** (no cold starts, a full processor core), so every page answers equally fast. Pages are now made by **App Service B1** (Linux, Central US, about $13.14 a month) instead of Azure Functions, and **Static Web Apps goes away** at the switch (App Service serves the files too). **No CDN for now:** Azure Front Door costs at least $35 a month, and Azure's cheaper classic CDN stopped taking new customers on August 15, 2025. A free option stays open (photos and scripts from a free Static Web Apps address, `ASSETS_PREFIX`). New total after the switch: **about $33 a month** ([costs](#13-costs-before-and-after)). Where this page still says Functions, read App Service.
 > Related: [database-plan.md](../database-plan.md), [architecture.md](../architecture.md), decisions P46, P47, P48, P51 and P52 in [decision-log.md](../decision-log.md).
@@ -144,7 +144,7 @@ flowchart TB
 ### 4.1 How a visitor gets a page
 
 1. A browser asks for, say, `/events/2026-10-17-swing-night-huntington/`.
-2. The server checks its **page cache**. If the page was made since the last change, it is sent at once.
+2. The server checks its **page cache**. If the page was made since the last change, it is sent at once. **Built (P61):** after each change the server prepares every page in its sitemaps in the background and keeps them compressed, so visitors and search engines almost never wait for a page to be made.
 3. If not, Astro makes the page from the **in-memory copy** of all listings. The copy is small: about 1,400 records, a few megabytes. Making a page takes a few hundredths of a second. The result goes into the cache.
 4. Browsers may reuse a page for 30 seconds, the same as on today's site (`Cache-Control: public, must-revalidate, max-age=30`). After that they check back with an `ETag`; if nothing changed, the server answers "not changed" with almost no data.
 5. Files whose names change with every code update (CSS, JavaScript, fonts) are kept by browsers for a year. Share pictures have a fingerprint of their facts in the address, so a new picture gets a new address when the facts change.
@@ -169,11 +169,11 @@ sequenceDiagram
   F->>S: Changed addresses (sent in batches every few minutes)
 ```
 
-The server asks the database "has anything changed?" at most every 2 seconds. This is one tiny question, about a thousandth of a second. When the answer is yes, it reloads the changed records and clears its cache. It needs no always-open connection. A new day on Long Island also clears the cache, so "upcoming" and repeating dates move on by themselves (`src/lib/freshness.ts`).
+**Built (P59):** the server asks the database "has anything changed?" every 2 seconds. This is one tiny question, about a thousandth of a second. When the answer is yes, it reads the records again (only changed ones are checked again: about 5 thousandths of a second for one change) and clears its cache. It needs no always-open connection. Measured: a changed venue name showed on its page **2.1 seconds** after the database change. A new day on Long Island also clears the cache, so "upcoming" and repeating dates move on by themselves (`src/lib/freshness.ts`).
 
 ### 4.3 If the database is down
 
-Pages keep working. Each copy already holds all listings in memory, so visitors don't notice a short database outage (for example Azure's monthly maintenance). Only saving waits; the review center says "Saving is paused, try again in a minute." If a copy starts while the database is down, it loads the latest nightly export from Blob Storage instead.
+Pages keep working. The server already holds all listings in memory, so visitors don't notice a short database outage (for example Azure's monthly maintenance). Only saving waits; the review center says "Saving is paused, try again in a minute." If the server starts while the database is down, it uses the listings it was built with (the git copy from its last deploy) until the database answers (P59).
 
 ### 4.4 What happens to Static Web Apps
 
@@ -214,6 +214,8 @@ Things to know:
 - Until the switch, the test address tells search engines not to list it (`X-Robots-Tag: noindex`), so Google never sees two copies of the site.
 
 ## 5. Sign-in for visitors and moderators
+
+**Built (P60, October 6):** built-in sign-in on the App Service app with the same `extid` provider, 14-day sessions, people matched to their old user ids, the community `/api` code running unchanged inside the server, and `/api/session`. The secrets live in a Key Vault. Waiting on one owner step: adding the test address's sign-in return address in External ID.
 
 **What stays the same:** the same External ID tenant (`longislanddance.ciamlogin.com`), the same app registration, the same email-code sign-in and branded pages, the same sign-in addresses (`/.auth/login/extid`, `/.auth/logout`) and the same return address (`/.auth/login/extid/callback`). The Function App uses Azure's **built-in sign-in** (the same feature App Service and Container Apps have), set up with a custom OpenID Connect provider named `extid`. `infra/configure-external-id.ps1` adds the return address for `new.longisland.dance` while we test.
 
@@ -313,10 +315,10 @@ Everything from P46, P47 and P48 stays. The page code is the same; only *when* p
 | Event, Place and ItemList structured data (JSON-LD) | Built ahead of time | Same code |
 | Share pictures | Own picture only for dates in the next 21 days (P46); one per series after that (P47) | **Every date gets its own picture**, drawn the first time someone asks and saved in Blob Storage; the address changes when the facts change, so link previews refresh |
 | File limit | 15,000 files (CI stops at 12,000) | **No limit**: nothing is pre-built |
-| Sitemaps (6 kinds, with last-changed dates) | Dates kept between builds through `/sitemap-state.json` | Dates come straight from the database's change times, which is more exact |
+| Sitemaps (6 kinds, with last-changed dates) | Dates kept between builds through `/sitemap-state.json` | The same rule (a page's date changes when the facts on it change), with the dates kept in the database (`sitemap_state`, P59) |
 | 81 town pages, `llms.txt`, `llms-full.txt`, `/events/upcoming.json`, RSS, calendar files | Built ahead of time | Same code, made on request and cached |
 | `robots.txt` and AI crawler rules | Same | Same; `new.longisland.dance` says "don't index" until the switch |
-| IndexNow | After each deploy | **Within minutes of each change** (batched) |
+| IndexNow | After each deploy | **Within minutes of each change** (batched; built, P61: on from switch day) |
 | Past dates `noindex` | Yes | Yes |
 | Hiding ended events in the browser (`src/scripts/expire.ts`) | Needed between rebuilds | Not needed any more (kept, harmless) |
 | Security headers (CSP with script hashes, HSTS...) | Added after the build (`scripts/postbuild.mjs` → `staticwebapp.config.json`) | Astro's built-in CSP (`security.csp`) adds the hashes; our code sends the other headers from today's list |
@@ -413,7 +415,7 @@ flowchart LR
 | --- | --- | --- | --- | --- |
 | **0. Quick wins** | Section 12: direct publishing in `/admin/`, faster deploys | Changes appear sooner | Deploy times in GitHub | Revert the commit |
 | **1. Database and import** | PostgreSQL (only Azure services may connect, Entra sign-in), the Function App shell, the database design, an import script (files → database) and an export script (database → files). While git is still the master copy, the database is refilled from git every night. | Nothing | The export equals today's files byte for byte; restore drill passes | Delete the new Azure resources |
-| **2. New site on the side** | Starts with the server and its page-by-page check ([4.6](#46-the-server-app-service-b1-p58); done October 5). Then: pages made on request from the database, page cache and version check, share pictures saved in Blob, sitemaps and IndexNow from the database, security headers, the `/api` code moved in, built-in sign-in with the user lookup, `/api/session`. | Nothing (`new.longisland.dance` says "don't index") | Parity check clean 3 runs in a row ([11.2](#112-the-parity-check-new-site-vs-old-site)); accessibility (axe) and Lighthouse pass; sign-in test passes; visual check in light and dark mode, phone and desktop, and at 320 px | Delete the test site |
+| **2. New site on the side** | Starts with the server and its page-by-page check ([4.6](#46-the-server-app-service-b1-p58); done October 5). Then: pages made on request from the database, page cache and version check, share pictures saved on the server's disk (P64; done October 6), sitemaps and IndexNow from the database, security headers, the `/api` code moved in, built-in sign-in with the user lookup, `/api/session`. | Nothing (`new.longisland.dance` says "don't index") | Parity check clean 3 runs in a row ([11.2](#112-the-parity-check-new-site-vs-old-site)); accessibility (axe) and Lighthouse pass; sign-in test passes; visual check in light and dark mode, phone and desktop, and at 320 px | Delete the test site |
 | **3. Editing and collector** | Review center: Edit, New, History and Undo for every kind; held listings and sources saved in the database. The collector runs in **shadow mode**: each run makes the pull request as today *and* sends the same changes to the test database, and we compare. You try editing on the test site. | Nothing | Shadow results match the pull requests; you are happy with the editor | Keep using today's tools |
 | **4. Switch day** | [11.3](#113-switch-day-including-namecheap) | Possibly one more sign-in | Smoke test, sign-in test, editing test, parity check on the live address | [11.4](#114-rollback) |
 | **5. Tidy up** | After one quiet month and your OK: delete Static Web Apps, Decap (`/admin/`, `cms/`, `api/src/functions/oauth.js`), the rolling pull request scripts and the git-commit code for content decisions. Update the docs and the budget alert. | Nothing | Costs match section 13 | Static Web Apps can be rebuilt from Bicep and the nightly export |
@@ -421,9 +423,9 @@ flowchart LR
 
 ### 11.2 The parity check: new site vs old site
 
-A new script (`scripts/parity.mjs`) compares the two sites page by page. It runs every day in GitHub Actions during phases 2 to 4.
+A script (`scripts/live/parity.mjs`) compares the two sites page by page. **Built (P58, P59):** it runs on every change in GitHub Actions, with the server reading a real database loaded from the same commit; it also ran against `new.longisland.dance` on October 6 (5,630 of 5,630 files identical), and runs there every morning (`.github/workflows/parity.yml`).
 
-- **Same data, same clock.** The old site is built from a given export with a fixed "now" (`BUILD_NOW`). The new site reads a database loaded from the same export, with the same fixed "now" (a test-only setting that production ignores).
+- **Same data, same clock.** The old site is built from a given export with a fixed "now" (`BUILD_NOW`). The new site reads a database loaded from the same export, with the same fixed "now" (a test-only setting that production ignores). The daily run against `new.longisland.dance` builds the old site with the "now" the server's pages were made with (`/api/health` → `pagesNow`, P63).
 - **Every address:** every file in the old build, every sitemap entry, and the known redirects (`www`, trailing slashes, the Azure addresses).
 - **What is compared:** status codes and redirects; file types; the HTML after removing things that may differ (code file fingerprints, CSP hashes, the release id); every tag in `<head>`; the JSON-LD as data; sitemap addresses and dates; RSS, calendar files, JSON and `llms` files; pictures by size, plus a pixel comparison of a sample.
 - **Rule:** every difference is either fixed or written down as intended (for example "dates after 21 days now get their own share picture"). We switch only after **3 clean runs in a row**.
@@ -547,7 +549,7 @@ Sizes are relative (small, medium, large), with no dates. Each phase ends with s
 | --- | --- | --- | --- |
 | 0 | Small (1 pull request) | CMS setting, build cache, picture fingerprints | Workflows, picture code |
 | 1 | Medium | Bicep for PostgreSQL and Function App; database design; import and export scripts; round-trip test; budget | `catalog/schema.sql` ideas, Zod schemas, `ingest/lib/store.ts` file layout |
-| 2 | **Large** (the biggest) | Server and Astro connector (done); data layer; page cache and version check; share pictures in Blob; sitemaps and IndexNow; headers; `/api` move; sign-in and user lookup; parity script | All page code, `src/lib/*`, `/api` code and tests, smoke and sign-in tests |
+| 2 | **Large** (the biggest) | Server and Astro connector (done); data layer; page cache and version check; share pictures saved on the server (P64); sitemaps and IndexNow; headers; `/api` move; sign-in and user lookup; parity script | All page code, `src/lib/*`, `/api` code and tests, smoke and sign-in tests |
 | 3 | **Large** | Editor forms, History and Undo, saving to the database, collector API and shadow mode | Review center screens and decision code, `cms/config.yml` field lists, `ingest/lib/merge.ts` |
 | 4 | Small | Switch-day checklist | `scripts/smoke.mjs`, `scripts/e2e-signin.mjs` |
 | 5 | Small to medium | Removals and doc updates | — |
