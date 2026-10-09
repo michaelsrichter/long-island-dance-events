@@ -1,0 +1,21 @@
+{
+  "title": "Paumanok Stompers at Brasserie by Chef Aless",
+  "summary": "Live music by Paumanok Stompers at Brasserie by Chef Aless in Massapequa. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-17T19:00",
+  "end": "2026-10-17T23:00",
+  "timezone": "America/New_York",
+  "venueId": "brasserie-by-chef-aless-massapequa",
+  "town": "Massapequa",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-09",
+  "lastSeen": "2026-10-09",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-17|brasserie-by-chef-aless-massapequa|paumanok-stompers|2026-10-17|special",
+  "reviewNotes": "Band or DJ not researched yet: Paumanok Stompers."
+}
