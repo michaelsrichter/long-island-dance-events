@@ -5,9 +5,7 @@
   "start": "2026-10-09",
   "timezone": "America/New_York",
   "recurrence": {
-    "rdates": [
-      "2026-11-13"
-    ]
+    "rrule": "FREQ=MONTHLY;BYDAY=2FR;UNTIL=20261211"
   },
   "venueId": "89-north-music-venue-patchogue",
   "town": "Patchogue",
@@ -22,7 +20,7 @@
   "sourceName": "89 North (Patchogue) - music calendar",
   "sourceRef": "events page 2026-10-09",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-08",
   "confidence": 0.6,
   "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||friday|tba|live-music|lovesong||repeat",
   "reviewNotes": "No start time found."

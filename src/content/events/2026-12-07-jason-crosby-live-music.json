@@ -1,0 +1,23 @@
+{
+  "title": "Jason Crosby at 89 North Music Venue",
+  "summary": "Live music by Jason Crosby at 89 North Music Venue. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-07",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "jason-crosby"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "eighty-nine-north",
+  "sourceUrl": "https://89northmusic.com/calendar",
+  "sourceName": "89 North (Patchogue) - music calendar",
+  "sourceRef": "events page 2026-12-07",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "confidence": 0.6,
+  "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||monday|tba|live-music|jason-crosby||2026-12-07",
+  "reviewNotes": "No start time found."
+}

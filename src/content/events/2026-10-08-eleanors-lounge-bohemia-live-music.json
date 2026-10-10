@@ -1,0 +1,24 @@
+{
+  "title": "Live music at Eleanor's Lounge",
+  "summary": "Live music at Eleanor's Lounge. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-08T20:00",
+  "end": "2026-10-08T23:00",
+  "timezone": "America/New_York",
+  "venueId": "eleanors-lounge-bohemia",
+  "town": "Bohemia",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/%f0%9f%8e%89-karaoke-dance-party-%f0%9f%8e%89/2026-10-08/",
+  "status": "past",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/%f0%9f%8e%89-karaoke-dance-party-%f0%9f%8e%89/2026-10-08/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-08",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "dancingCues": [
+    "dance-party"
+  ],
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|eleanors-lounge-bohemia||thursday|20:00|live-music|||2026-10-08"
+}

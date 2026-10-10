@@ -1,0 +1,25 @@
+{
+  "title": "Famous Food Festival at Tanger Outlets Deer Park",
+  "summary": "Live music by Famous Food Festival at Tanger Outlets Deer Park in Deer Park. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-09T12:00",
+  "end": "2026-10-09T20:00",
+  "timezone": "America/New_York",
+  "venueId": "tanger-outlets-deer-park-deer-park",
+  "town": "Deer Park",
+  "skillLevel": "all-levels",
+  "status": "past",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-09",
+  "dancingCues": [
+    "festival",
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-09|tanger-outlets-deer-park-deer-park|famous-food-festival|2026-10-09|special",
+  "reviewNotes": "Band or DJ not researched yet: Famous Food Festival."
+}

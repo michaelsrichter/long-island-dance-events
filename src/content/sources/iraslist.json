@@ -12,10 +12,10 @@
   "lastCounts": {
     "found": 570,
     "kept": 421,
-    "needsReview": 0,
-    "outOfArea": 0
+    "needsReview": 1,
+    "outOfArea": 1
   },
-  "lastScraped": "2026-10-05T19:22:22.642Z",
+  "lastScraped": "2026-10-10T15:51:53.395Z",
   "lastStatus": "ok",
   "permission": {
     "note": "Ira's List publishes this calendar publicly. Google documents the public iCal address as the way for other apps to subscribe (support.google.com/calendar/answer/37083). We read only that feed, once per run, with caching.",

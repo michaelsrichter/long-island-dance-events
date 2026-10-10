@@ -1,0 +1,28 @@
+{
+  "title": "Line Dancing class at 89 North Music Venue",
+  "summary": "Group class in Line Dancing.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "line-dancing"
+  ],
+  "start": "2026-10-28",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "casey-wayne",
+    "casey-wayne-and-the-rodeo"
+  ],
+  "priceNotes": "Pay at the door",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "eighty-nine-north",
+  "sourceUrl": "https://89northmusic.com/calendar",
+  "sourceName": "89 North (Patchogue) - music calendar",
+  "sourceRef": "events page 2026-10-28",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "confidence": 0.6,
+  "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||wednesday|tba|class-lesson|casey-wayne+casey-wayne-and-the-rodeo+rodeo|line-dancing|2026-10-28",
+  "reviewNotes": "Band or DJ not researched yet: The Rodeo. No start time found."
+}

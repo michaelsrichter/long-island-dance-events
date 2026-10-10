@@ -1,0 +1,25 @@
+{
+  "title": "Leslie Jones at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by Leslie Jones at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-08T20:00",
+  "end": "2026-10-08T23:00",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/9473139e9ea17c3f6b55edda304801bd9477fa8a",
+  "status": "past",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/9473139e9ea17c3f6b55edda304801bd9477fa8a",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-08",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|patchogue-theatre-patchogue||thursday|20:00|live-music|lesliejones||2026-10-08",
+  "reviewNotes": "Band or DJ not researched yet: Leslie Jones."
+}

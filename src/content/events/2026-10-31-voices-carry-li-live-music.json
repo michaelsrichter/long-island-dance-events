@@ -1,6 +1,6 @@
 {
-  "title": "Voices Carry LI at Lucky Strike Bar & Lounge at Port Jeff Bowl",
-  "summary": "Live music by Voices Carry LI at Lucky Strike Bar & Lounge at Port Jeff Bowl in Port Jefferson Station. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "title": "Voices Carry LI and All Revved Up NY at Lucky Strike Bar & Lounge at Port Jeff Bowl",
+  "summary": "Live music by Voices Carry LI and All Revved Up NY at Lucky Strike Bar & Lounge at Port Jeff Bowl in Port Jefferson Station. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
   "category": "live-music",
   "danceStyles": [
     "freestyle"
@@ -11,7 +11,8 @@
   "venueId": "lucky-strike-bar-lounge-port-jefferson-station",
   "town": "Port Jefferson Station",
   "performerIds": [
-    "voices-carry-li"
+    "voices-carry-li",
+    "all-revved-up-ny"
   ],
   "skillLevel": "all-levels",
   "status": "active",
@@ -20,7 +21,7 @@
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-10",
   "confidence": 0.75,
   "matchKey": "iraslist|2026-10-31|lucky-strike-bar-lounge-port-jefferson-station|voices-carry-all-revved-up|2026-10-31|special"
 }

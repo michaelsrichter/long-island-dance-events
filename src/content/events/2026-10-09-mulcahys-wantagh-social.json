@@ -11,13 +11,13 @@
   "venueId": "mulcahys-wantagh",
   "town": "Wantagh",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "past",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-09",
   "dancingCues": [
     "dance-party"
   ],

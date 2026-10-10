@@ -7,13 +7,13 @@
   "venueId": "salt-shack-babylon",
   "town": "Babylon",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "past",
   "sourceId": "salt-shack-cedar-beach",
   "sourceUrl": "https://saltshackny.com/",
   "sourceName": "Salt Shack at Cedar Beach (Babylon) - beach music calendar",
   "sourceRef": "events page 2026-10-09",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-08",
   "confidence": 0.75,
   "matchKey": "salt-shack-cedar-beach|salt-shack-babylon||friday|19:00|live-music|||2026-10-09"
 }

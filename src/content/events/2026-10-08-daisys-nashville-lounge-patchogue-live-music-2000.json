@@ -1,0 +1,22 @@
+{
+  "title": "Live music at Daisy's Nashville Lounge (Patchogue)",
+  "summary": "Live music at Daisy's Nashville Lounge (Patchogue). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-08T20:00",
+  "end": "2026-10-08T22:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/live-music-every-thursday-night/2026-10-08/",
+  "status": "past",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/live-music-every-thursday-night/2026-10-08/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-08",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|daisys-nashville-lounge-patchogue||thursday|20:00|live-music|||2026-10-08",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

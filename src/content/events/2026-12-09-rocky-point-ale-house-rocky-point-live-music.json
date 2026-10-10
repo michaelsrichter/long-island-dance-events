@@ -1,0 +1,24 @@
+{
+  "title": "Jam at Rocky Point Ale House",
+  "summary": "Live music by Jam at Rocky Point Ale House in Rocky Point. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-12-09T19:00",
+  "end": "2026-12-09T23:55",
+  "timezone": "America/New_York",
+  "venueId": "rocky-point-ale-house-rocky-point",
+  "town": "Rocky Point",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-10",
+  "lastSeen": "2026-10-10",
+  "dancingCues": [
+    "jam"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-09|rocky-point-ale-house-rocky-point|posp-rocky-point-ale-house-open-mic-jam|2026-12-09|special",
+  "reviewNotes": "Band or DJ not researched yet: Jam."
+}

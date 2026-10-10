@@ -1,0 +1,11 @@
+{
+  "name": "Wantagh Inn",
+  "address": "3264 Railroad Ave",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Wantagh",
+  "latitude": 40.672814,
+  "longitude": -73.508689,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

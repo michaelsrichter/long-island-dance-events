@@ -8,17 +8,17 @@
   "venueId": "mulcahys-wantagh",
   "town": "Wantagh",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-06",
   "dancingCues": [
     "festival"
   ],
   "confidence": 0.7,
   "matchKey": "iraslist|2026-10-11|mulcahys-wantagh|fall-festival-matt-wahl-plunge|2026-10-11|special",
-  "reviewNotes": "Band or DJ not researched yet: Fall Festival Matt Wahl, Plunge."
+  "reviewNotes": "Band or DJ not researched yet: Fall Festival Matt Wahl, Plunge. Not found in the latest iraslist run on 2026-10-08. Check whether it was cancelled or moved."
 }

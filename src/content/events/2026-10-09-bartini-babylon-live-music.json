@@ -7,7 +7,7 @@
   "venueId": "bartini-babylon",
   "town": "Babylon",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "bartini-babylon",
   "sourceUrl": "https://www.bartinibabylon.com/event-calendar",
   "sourceName": "Bartini Bar & Lounge (Babylon) - event calendar",
@@ -16,5 +16,5 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.75,
   "matchKey": "bartini-babylon|bartini-babylon||friday|20:00|live-music|cashfromchaosspeedrackginandidiotbox||2026-10-09",
-  "reviewNotes": "Band or DJ not researched yet: CASH FROM CHAOS, SPEED RACK GIN, and IDIOT BOX."
+  "reviewNotes": "Band or DJ not researched yet: CASH FROM CHAOS, SPEED RACK GIN, and IDIOT BOX. Not found in the latest bartini-babylon run on 2026-10-08. Check whether it was cancelled or moved."
 }

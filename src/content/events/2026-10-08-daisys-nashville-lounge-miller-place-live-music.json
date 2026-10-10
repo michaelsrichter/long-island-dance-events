@@ -11,7 +11,7 @@
   "priceMax": 12,
   "skillLevel": "all-levels",
   "infoUrl": "https://daisysli.com/event/thursdays-with-two-social/2026-10-08/",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "daisys-miller-place",
   "sourceUrl": "https://daisysli.com/event/thursdays-with-two-social/2026-10-08/",
   "sourceName": "Daisy's (Miller Place) - live music calendar",
@@ -19,5 +19,6 @@
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-10-05",
   "confidence": 0.85,
-  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||thursday|21:00|live-music|||2026-10-08"
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||thursday|21:00|live-music|||2026-10-08",
+  "reviewNotes": "Not found in the latest daisys-miller-place run on 2026-10-08. Check whether it was cancelled or moved."
 }

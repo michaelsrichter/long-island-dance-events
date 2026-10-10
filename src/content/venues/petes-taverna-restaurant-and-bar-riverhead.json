@@ -1,0 +1,11 @@
+{
+  "name": "Pete’s Taverna Restaurant and Bar",
+  "address": "3225 Sound Ave",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Riverhead",
+  "latitude": 40.965262,
+  "longitude": -72.708606,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

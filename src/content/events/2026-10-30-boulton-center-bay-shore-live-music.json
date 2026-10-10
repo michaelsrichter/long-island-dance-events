@@ -1,0 +1,21 @@
+{
+  "title": "The Artimus Pyle Band at Boulton Center for the Performing Arts",
+  "summary": "Live music by The Artimus Pyle Band at Boulton Center for the Performing Arts in Bay Shore. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-30T20:00",
+  "end": "2026-10-30T23:00",
+  "timezone": "America/New_York",
+  "venueId": "boulton-center-bay-shore",
+  "town": "Bay Shore",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-10",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-30|boulton-center-bay-shore|the-artimus-pyle-band|2026-10-30|special",
+  "reviewNotes": "Band or DJ not researched yet: The Artimus Pyle Band."
+}

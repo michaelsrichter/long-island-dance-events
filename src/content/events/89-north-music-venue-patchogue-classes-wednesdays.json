@@ -13,7 +13,8 @@
       "2026-11-04",
       "2026-11-11",
       "2026-11-18",
-      "2026-12-02"
+      "2026-12-02",
+      "2026-12-09"
     ]
   },
   "venueId": "89-north-music-venue-patchogue",
@@ -24,9 +25,9 @@
   "sourceId": "eighty-nine-north",
   "sourceUrl": "https://89northmusic.com/calendar",
   "sourceName": "89 North (Patchogue) - music calendar",
-  "sourceRef": "events page 2026-10-07",
+  "sourceRef": "events page 2026-10-21",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-08",
   "confidence": 0.6,
   "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||wednesday|tba|class-lesson||line-dancing|repeat",
   "reviewNotes": "No start time found."

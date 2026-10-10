@@ -1,0 +1,28 @@
+{
+  "title": "Festival at Tanger Outlets Deer Park",
+  "summary": "A larger event with live music at Tanger Outlets Deer Park.",
+  "category": "festival",
+  "start": "2026-10-09T13:00",
+  "end": "2026-10-09T20:00",
+  "timezone": "America/New_York",
+  "venueId": "tanger-outlets-deer-park-deer-park",
+  "town": "Deer Park",
+  "price": 8,
+  "priceMax": 52,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://ilovebabylon.com/event/famous-food-festival-columbus-day-weekend/",
+  "status": "past",
+  "sourceId": "i-love-babylon",
+  "sourceUrl": "https://ilovebabylon.com/event/famous-food-festival-columbus-day-weekend/",
+  "sourceName": "I Love Babylon events",
+  "sourceRef": "calendar feed 2026-10-09",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "dancingCues": [
+    "afternoon",
+    "festival",
+    "outdoor"
+  ],
+  "confidence": 0.85,
+  "matchKey": "i-love-babylon|tanger-outlets-deer-park-deer-park||friday|13:00|festival|||2026-10-09"
+}

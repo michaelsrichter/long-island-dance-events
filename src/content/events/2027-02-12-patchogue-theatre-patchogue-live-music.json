@@ -1,0 +1,22 @@
+{
+  "title": "Live music at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-02-12T20:00",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "patchogue-theatre",
+  "sourceUrl": "https://www.patchoguetheatre.org/events/",
+  "sourceName": "Patchogue Theatre - events",
+  "sourceRef": "events page 2027-02-12",
+  "firstSeen": "2026-10-08",
+  "lastSeen": "2026-10-08",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.75,
+  "matchKey": "patchogue-theatre|patchogue-theatre-patchogue||friday|20:00|live-music|||2027-02-12"
+}
