@@ -11,7 +11,7 @@
   "town": "Greenport",
   "skillLevel": "all-levels",
   "infoUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-9kgf4-392yt-2kagb-ccnn9-ynzkg",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "hotel-moraine",
   "sourceUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-9kgf4-392yt-2kagb-ccnn9-ynzkg",
   "sourceName": "Hotel Moraine (Greenport) - events",
@@ -20,5 +20,8 @@
   "lastSeen": "2026-10-04",
   "confidence": 0.55,
   "matchKey": "hotel-moraine|hotel-moraine-greenport||saturday|tba|live-music|||repeat",
-  "reviewNotes": "No start time found."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "No start time found. Published in the review center on 2026-10-11."
 }

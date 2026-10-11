@@ -8,7 +8,7 @@
   "venueId": "daisys-nashville-lounge-patchogue",
   "town": "Patchogue",
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -17,5 +17,8 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-10-31|daisys-nashville-lounge-patchogue|mixed-vibes|2026-10-31|special",
-  "reviewNotes": "Band or DJ not researched yet: Mixed Vibes. The organizer's or band's own calendar now lists this (daisys-nashville-lounge-patchogue-live-music-saturdays), so that listing is shown instead of this copy."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "Band or DJ not researched yet: Mixed Vibes. The organizer's or band's own calendar now lists this (daisys-nashville-lounge-patchogue-live-music-saturdays), so that listing is shown instead of this copy. Published in the review center on 2026-10-11."
 }

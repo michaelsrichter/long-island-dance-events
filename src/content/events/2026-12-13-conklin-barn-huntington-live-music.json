@@ -7,7 +7,7 @@
   "venueId": "conklin-barn-huntington",
   "town": "Huntington",
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "jazz-at-the-barn",
   "sourceUrl": "https://jazzatthebarn.com/",
   "sourceName": "Jazz at the Barn (Huntington) - upcoming shows",
@@ -16,5 +16,8 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.55,
   "matchKey": "jazz-at-the-barn|conklin-barn-huntington||sunday|tba|live-music|||2026-12-13",
-  "reviewNotes": "No start time found."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "No start time found. Published in the review center on 2026-10-11."
 }

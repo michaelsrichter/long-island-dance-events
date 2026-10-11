@@ -7,7 +7,7 @@
   "venueId": "live-on-the-porch-smithtown",
   "town": "Smithtown",
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "live-on-the-porch",
   "sourceUrl": "https://liveontheporch.com/events/",
   "sourceName": "Live On The Porch (Smithtown) - show calendar",
@@ -16,5 +16,8 @@
   "lastSeen": "2026-10-04",
   "confidence": 0.85,
   "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||wednesday|19:30|live-music|||2026-12-23|christmas",
-  "reviewNotes": "Not found in the latest live-on-the-porch run on 2026-10-05. Check whether it was cancelled or moved."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "Not found in the latest live-on-the-porch run on 2026-10-05. Check whether it was cancelled or moved. Published in the review center on 2026-10-11."
 }

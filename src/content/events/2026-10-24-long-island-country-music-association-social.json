@@ -14,7 +14,7 @@
   "price": 15,
   "priceMax": 20,
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "licma",
   "sourceUrl": "https://licma.org/",
   "sourceName": "Long Island Country Music Association (LICMA) - dances",
@@ -23,5 +23,8 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.55,
   "matchKey": "licma|deer-park|long-island-country-music-association|saturday|19:00|social-dance||country-two-step+line-dancing|2026-10-24",
-  "reviewNotes": "Venue not found in the listing."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "Venue not found in the listing. Published in the review center on 2026-10-11."
 }

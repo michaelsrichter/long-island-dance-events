@@ -8,7 +8,7 @@
   "town": "Patchogue",
   "priceNotes": "Pay at the door",
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "eighty-nine-north",
   "sourceUrl": "https://89northmusic.com/calendar",
   "sourceName": "89 North (Patchogue) - music calendar",
@@ -17,5 +17,8 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.55,
   "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||thursday|tba|live-music|||2026-11-12",
-  "reviewNotes": "No start time found."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "No start time found. Published in the review center on 2026-10-11."
 }

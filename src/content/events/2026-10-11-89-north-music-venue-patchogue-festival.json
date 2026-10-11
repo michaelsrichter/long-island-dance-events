@@ -7,7 +7,7 @@
   "venueId": "89-north-music-venue-patchogue",
   "town": "Patchogue",
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "eighty-nine-north",
   "sourceUrl": "https://89northmusic.com/calendar",
   "sourceName": "89 North (Patchogue) - music calendar",
@@ -19,5 +19,8 @@
   ],
   "confidence": 0.55,
   "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||sunday|tba|festival|||2026-10-11",
-  "reviewNotes": "No start time found."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "No start time found. Published in the review center on 2026-10-11."
 }

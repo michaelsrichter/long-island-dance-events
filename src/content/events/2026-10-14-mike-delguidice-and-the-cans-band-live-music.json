@@ -11,7 +11,7 @@
   ],
   "price": 46,
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "live-on-the-porch",
   "sourceUrl": "https://liveontheporch.com/events/",
   "sourceName": "Live On The Porch (Smithtown) - show calendar",
@@ -20,5 +20,8 @@
   "lastSeen": "2026-10-04",
   "confidence": 0.9,
   "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||wednesday|20:00|live-music|mike-delguidice-and-the-cans-band||2026-10-14",
-  "reviewNotes": "Not found in the latest live-on-the-porch run on 2026-10-05. Check whether it was cancelled or moved."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "Not found in the latest live-on-the-porch run on 2026-10-05. Check whether it was cancelled or moved. Published in the review center on 2026-10-11."
 }

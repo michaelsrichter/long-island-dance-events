@@ -11,7 +11,7 @@
   "town": "Syosset",
   "price": 10,
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "dancemanhattan-li-swing",
   "sourceUrl": "http://dancemanhattan.com/calendar/event/113",
   "sourceName": "Dance Manhattan - Long Island swing dances list",
@@ -20,5 +20,8 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.55,
   "matchKey": "dancemanhattan-li-swing|syosset||friday|20:00|social-dance||east-coast-swing|2026-11-13",
-  "reviewNotes": "Venue not found in the listing."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "Venue not found in the listing. Published in the review center on 2026-10-11."
 }

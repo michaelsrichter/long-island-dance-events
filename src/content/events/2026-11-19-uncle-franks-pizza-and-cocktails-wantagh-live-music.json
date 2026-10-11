@@ -7,7 +7,7 @@
   "venueId": "uncle-franks-pizza-and-cocktails-wantagh",
   "town": "Wantagh",
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "uncle-franks-pizza-and-cocktails-wantagh",
   "sourceUrl": "https://www.unclefranksli.com/music-and-events/",
   "sourceName": "Uncle Frank's Pizza and Cocktails (Wantagh) - live music calendar",
@@ -16,5 +16,8 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.55,
   "matchKey": "uncle-franks-pizza-and-cocktails-wantagh|uncle-franks-pizza-and-cocktails-wantagh||thursday|tba|live-music|evanandjames||2026-11-19",
-  "reviewNotes": "Band or DJ not researched yet: Evan & James. No start time found."
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "Band or DJ not researched yet: Evan & James. No start time found. Published in the review center on 2026-10-11."
 }
