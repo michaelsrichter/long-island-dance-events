@@ -1,0 +1,27 @@
+{
+  "title": "Ben Bankas at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by Ben Bankas at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-12T20:00",
+  "end": "2026-10-12T23:00",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "ben-bankas"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/5c21717453450a189f35aca78e39e93c6dc01198",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/5c21717453450a189f35aca78e39e93c6dc01198",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-12",
+  "firstSeen": "2026-10-12",
+  "lastSeen": "2026-10-12",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.9,
+  "matchKey": "webtunes-li|patchogue-theatre-patchogue||monday|20:00|live-music|ben-bankas||2026-10-12"
+}

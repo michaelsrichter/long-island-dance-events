@@ -1,0 +1,27 @@
+{
+  "title": "Festival at Tanger Outlets Deer Park",
+  "summary": "A larger event with live music at Tanger Outlets Deer Park.",
+  "category": "festival",
+  "start": "2026-10-12T11:00",
+  "end": "2026-10-12T20:00",
+  "timezone": "America/New_York",
+  "venueId": "tanger-outlets-deer-park-deer-park",
+  "town": "Deer Park",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/famous-food-festival-2026-columbus-day-weekend-at-tanger-outlets-deer-park-ny/2026-10-12/",
+  "status": "active",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/famous-food-festival-2026-columbus-day-weekend-at-tanger-outlets-deer-park-ny/2026-10-12/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-12",
+  "firstSeen": "2026-10-12",
+  "lastSeen": "2026-10-12",
+  "dancingCues": [
+    "afternoon",
+    "festival",
+    "outdoor"
+  ],
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|tanger-outlets-deer-park-deer-park||monday|11:00|festival|||2026-10-12",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

@@ -11,13 +11,13 @@
   "focus": "music",
   "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
   "lastCounts": {
-    "found": 30,
+    "found": 29,
     "kept": 0,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastMessage": "The adapter found 30 listings but none could be used. The source layout may have changed.",
-  "lastScraped": "2026-10-05T06:44:14.976Z",
+  "lastMessage": "The adapter found 29 listings but none could be used. The source layout may have changed.",
+  "lastScraped": "2026-10-12T20:02:14.418Z",
   "lastStatus": "empty",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep with filters; feed is easy but only a subset is relevant.",

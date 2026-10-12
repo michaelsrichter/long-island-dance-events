@@ -1,0 +1,25 @@
+{
+  "title": "Live music at PORT WASHINGTON PUBLIC LIBRARY",
+  "summary": "Live music at PORT WASHINGTON PUBLIC LIBRARY. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-13T19:30",
+  "end": "2026-10-13T21:00",
+  "timezone": "America/New_York",
+  "venueId": "port-washington-public-library-port-washington",
+  "town": "Port Washington",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/soundswap-rapid-transit-performs-classic-covers-and-original-music-2/",
+  "status": "active",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/soundswap-rapid-transit-performs-classic-covers-and-original-music-2/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-13",
+  "firstSeen": "2026-10-12",
+  "lastSeen": "2026-10-12",
+  "dancingCues": [
+    "library"
+  ],
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|port-washington-public-library-port-washington||tuesday|19:30|live-music|||2026-10-13",
+  "reviewNotes": "New venue was added automatically. Check it."
+}
