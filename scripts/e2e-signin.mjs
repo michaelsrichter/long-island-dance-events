@@ -497,7 +497,7 @@ async function step(id, title, fn, page, watchLog) {
   }
   r.timings.total = Date.now() - t0;
   // Later steps need a signed-in, finished profile; a soft check (like the spinner) does not block them.
-  if ((id === '2' || id === '3') && r.issues.some((i) => /^Exception|site reports signed out|did not get the welcome/.test(i))) blocked = `step ${id} (sign-in) failed`;
+  if ((id === '2' || id === '3') && r.issues.some((i) => /^(?:Exception|The site reports signed out|After sign-up we did not get the welcome)/.test(i))) blocked = `step ${id} (sign-in) failed`;
   const seen = drain(watchLog);
   const unexpected = [...seen.pageErrors, ...seen.console.filter((c) => !/Failed to load resource: the server responded with a status of 40[134]/.test(c))];
   if (unexpected.length) r.notes.push(`Console: ${unexpected.join(' | ')}`);
