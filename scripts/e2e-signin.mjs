@@ -2,7 +2,8 @@
 /**
  * End-to-end test of visitor sign-in (Entra External ID, email one-time code) and the
  * "Dancers' notes and photos" panel against a deployed site, usually a PR preview.
- * A real AgentMail inbox receives the one-time code.
+ * A real AgentMail inbox receives the one-time code. Works on Static Web Apps and App Service: identity
+ * comes from SWA's /.auth/me clientPrincipal or App Service's /api/session, never its raw identity claims.
  *
  *   $env:AGENTMAIL_API_KEY = '<key>'          # keep it in the environment; never commit it
  *   node scripts/e2e-signin.mjs --base https://<preview>.azurestaticapps.net --email someone@agentmail.to
@@ -44,6 +45,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { chromium } from '@playwright/test';
 import sharp from 'sharp';
+import { nonModeratorPage, readIdentity } from './lib/signin-checks.mjs';
 
 const args = parseArgs(process.argv.slice(2));
 const API_KEY = process.env.AGENTMAIL_API_KEY;
@@ -249,7 +251,7 @@ async function waitPanelReady(page) {
     return like && !like.disabled && ((out && !out.hidden) !== (inn && !inn.hidden));
   }, HERO_LIKE, { timeout: 60_000 });
   // Signed-in visitors: wait until /api/me and /api/me/likes have answered and the member area shows.
-  if (await principal(page)) await page.locator('#community [data-signed-in]').waitFor({ state: 'visible', timeout: 60_000 });
+  if (await identity(page)) await page.locator('#community [data-signed-in]').waitFor({ state: 'visible', timeout: 60_000 });
 }
 
 async function headerLabel(page) {
@@ -268,9 +270,8 @@ async function api(page, p, init) {
   return { status: res.status(), data };
 }
 
-async function principal(page) {
-  const r = await api(page, '/.auth/me');
-  return r.data?.clientPrincipal || null;
+async function identity(page) {
+  return readIdentity((path) => api(page, path));
 }
 
 function loginUrl(next) {
@@ -496,7 +497,7 @@ async function step(id, title, fn, page, watchLog) {
   }
   r.timings.total = Date.now() - t0;
   // Later steps need a signed-in, finished profile; a soft check (like the spinner) does not block them.
-  if ((id === '2' || id === '3') && r.issues.some((i) => /^Exception|clientPrincipal|did not get the welcome/.test(i))) blocked = `step ${id} (sign-in) failed`;
+  if ((id === '2' || id === '3') && r.issues.some((i) => /^Exception|site reports signed out|did not get the welcome/.test(i))) blocked = `step ${id} (sign-in) failed`;
   const seen = drain(watchLog);
   const unexpected = [...seen.pageErrors, ...seen.console.filter((c) => !/Failed to load resource: the server responded with a status of 40[134]/.test(c))];
   if (unexpected.length) r.notes.push(`Console: ${unexpected.join(' | ')}`);
@@ -519,7 +520,7 @@ const hopText = (hops) => hops.map((h) => `[${secs(h.at)}] ${h.action || '-'} ::
 
 /* ---------------- session helpers (steps sa-sd) ---------------- */
 
-/** The site's own sign-in cookies (Static Web Apps). The sign-in service's cookies are on ciamlogin.com. */
+/** The site's own sign-in cookies (SWA or App Service). The sign-in service's cookies are on ciamlogin.com. */
 const isSiteAuthCookie = (c) => /^(StaticWebAppsAuth|AppServiceAuthSession)/.test(c.name);
 
 /** End only the site's session, as if its cookie expired; the sign-in service session stays. */
@@ -544,7 +545,7 @@ function trackNav(page) {
       const p = new URL(u);
       navs.push({ at: Date.now() - t0, host: p.host, path: p.pathname, url: u });
     }
-    if (/\/\.auth\/|ciamlogin\.com|\/api\/me\b/.test(u)) authReqs.push(`${req.method()} ${u.replace(/\?.*$/, '')}`);
+    if (/\/\.auth\/|ciamlogin\.com|\/api\/(?:me|session)\b/.test(u)) authReqs.push(`${req.method()} ${u.replace(/\?.*$/, '')}`);
   };
   page.on('request', onReq);
   return {
@@ -750,9 +751,9 @@ async function main() {
     r.notes.push(`Account page: spinner seen ${res.spinner}; ${secs(r.timings.accountPage)} from arriving to the form`);
     if (r.timings.accountPage > 3000) r.notes.push(`Slow: the account page took ${secs(r.timings.accountPage)} to show the welcome form`);
     check(res.outcome === 'welcome', `After sign-up we did not get the welcome step (outcome: ${res.outcome})`);
-    const p = await principal(page);
-    check(Boolean(p), '/.auth/me has no clientPrincipal after sign-in');
-    if (p) r.notes.push(`Roles: ${p.userRoles.join(', ')}; provider ${p.identityProvider}`);
+    const p = await identity(page);
+    check(Boolean(p), 'The site reports signed out after sign-in');
+    if (p) r.notes.push(`Identity verified by ${p.source}; moderator: ${p.admin}`);
   }, page, log);
 
   await step('3', 'Welcome step on /account/ and return to the venue', async ({ r, check }) => {
@@ -928,19 +929,18 @@ async function main() {
   }, page, log);
 
   await step('8', '/moderate/ as a signed-in non-moderator', async ({ r, check }) => {
-    await page.goto(`${BASE}/moderate/`);
-    await page.locator('[data-mod-loading]').waitFor({ state: 'hidden', timeout: 60_000 });
-    const notMod = page.locator('[data-mod-notmod]');
-    check(await notMod.isVisible(), 'The "not a moderator" message is not shown');
-    r.notes.push(`Message: "${(await notMod.textContent())?.trim()}"`);
+    const p = await identity(page);
+    if (!p || p.admin) throw new Error('This check requires a signed-in non-moderator test account.');
+    const denied = await nonModeratorPage(page, `${BASE}/moderate/`);
+    r.notes.push(`Page: HTTP ${denied.status}; message: "${denied.message}"`);
     const q = await api(page, '/api/moderation/queue');
     check(q.status === 403, `/api/moderation/queue returned ${q.status} (expected 403)`);
     r.shots.push(await shot(page, 'moderate-not-moderator', { full: true }));
   }, page, log);
 
   await step('9', 'Moderate as admin: approve photo and phone note, mark correction done, report own note', async ({ r, check }) => {
-    let p = await principal(page);
-    if (!p?.userRoles?.includes('admin')) {
+    let p = await identity(page);
+    if (!p?.admin) {
       r.notes.push('Not admin yet: signing out and in again so the roles are refreshed');
       const out = await signOut(page);
       r.timings.signOut = out.ms;
@@ -951,10 +951,10 @@ async function main() {
       r.timings.reSignIn = auth.ms;
       r.notes.push(`Sign-in pages: ${hopText(auth.hops)}`);
       await page.waitForURL((u) => u.pathname.startsWith('/moderate/'), { timeout: 60_000 });
-      p = await principal(page);
+      p = await identity(page);
     }
-    check(p?.userRoles?.includes('admin'), `Roles after sign-in: ${p?.userRoles?.join(', ')}. Add the email to ADMIN_EMAILS first.`);
-    if (!p?.userRoles?.includes('admin')) return;
+    check(p?.admin, `Moderator permission after sign-in (${p?.source ?? 'signed out'}): ${p?.admin ?? false}. Add the email to ADMIN_EMAILS first.`);
+    if (!p?.admin) return;
     await page.goto(`${BASE}/moderate/`);
     const t = Date.now();
     await page.locator('[data-mod-tools]').waitFor({ state: 'visible', timeout: 60_000 });
@@ -1047,8 +1047,8 @@ async function main() {
       check(res.status() === 200, `POST /api/flags ${res.status()}`);
       r.shots.push(await shotEl(page.locator('#community'), 'reported'));
     } else check(false, `Own note "${CLEAN_NOTE}" not on the page, so it could not be reported`);
-    const p = await principal(page);
-    if (p?.userRoles?.includes('admin')) {
+    const p = await identity(page);
+    if (p?.admin) {
       await page.goto(`${BASE}/moderate/`);
       await page.locator('[data-mod-tools]').waitFor({ state: 'visible', timeout: 60_000 });
       const card = page.locator('[data-mod-list] > li', { hasText: CLEAN_NOTE });
@@ -1110,12 +1110,12 @@ async function main() {
       check(out.hops.length === 0, `Sign-out after delete went through External ID pages: ${hopText(out.hops)}`);
       r.notes.push(`Sign-out pages after delete: ${hopText(out.hops)}`);
       r.timings.deleteToSignedOut = Date.now() - t2;
-      check(!(await principal(page)), 'Still signed in after deleting the account');
+      check(!(await identity(page)), 'Still signed in after deleting the account');
       check((await headerLabel(page)) === 'Sign in', `Header after delete: "${await headerLabel(page)}"`);
       r.shots.push(await shot(page, 'after-delete-landing'));
     } catch (e) {
       check(false, `Sign-out after delete did not finish: ${e.message}`);
-      r.notes.push(`Site session still active after delete: ${Boolean(await principal(page))}`);
+      r.notes.push(`Site session still active after delete: ${Boolean(await identity(page))}`);
     }
     console.log('  waiting 65 s for the 60-second cache…');
     await sleep(65_000);
@@ -1124,7 +1124,7 @@ async function main() {
     await waitPanelReady(page);
     const seenBack = back.stop();
     check(!seenBack.navs.some((n) => n.host !== new URL(ORIGIN).host || n.path.startsWith('/.auth/')), `Coming back after deleting the account signed in again by itself: ${seenBack.text}`);
-    check(!(await principal(page)), 'Signed in again after deleting the account');
+    check(!(await identity(page)), 'Signed in again after deleting the account');
     check((await page.evaluate(() => localStorage.getItem('li-account'))) === null, 'The saved name is still in this browser after deleting the account');
     const { doc } = await readModel(page);
     const leftovers = [...(doc?.comments || []).filter((c) => [NAME, RENAMED].includes(c.name)), ...(doc?.photos || []).filter((p) => [NAME, RENAMED].includes(p.by))];
@@ -1143,8 +1143,8 @@ async function main() {
     r.shots.push(await shot(page, 'welcome-again', { full: true }));
     await fillWelcome(page, r, check, { photoRules: false });
     state.deleted = false;
-    const p = await principal(page);
-    if (p?.userRoles?.includes('admin')) {
+    const p = await identity(page);
+    if (p?.admin) {
       await page.goto(`${BASE}/moderate/`);
       await page.locator('[data-mod-tools]').waitFor({ state: 'visible', timeout: 60_000 });
       const left = page.locator('[data-mod-list] > li').filter({ hasText: /test note|Test correction|Green test card/ });
@@ -1159,7 +1159,7 @@ async function main() {
 
   await step('13', 'Sign out (e.g. after a browser restart): straight back to the site; signing in again asks for a code', async ({ r, check }) => {
     // Run in a new command after the sign-in steps (for example "--steps 1-3", then "--steps 13"), so the browser restarted.
-    if (!(await principal(page))) throw new Error('Not signed in; run the sign-in steps first');
+    if (!(await identity(page))) throw new Error('Not signed in; run the sign-in steps first');
     await page.goto(VENUE_URL);
     await page.locator('.site-footer [data-account-signout]').waitFor({ state: 'visible', timeout: 30_000 });
     const hosts = new Set();
@@ -1174,7 +1174,7 @@ async function main() {
     page.off('framenavigated', onNav);
     const elsewhere = [...hosts].filter((h) => h !== new URL(ORIGIN).host);
     check(elsewhere.length === 0, `Sign-out went through other sites: ${elsewhere.join(', ')}`);
-    check(!(await principal(page)), 'Still signed in after "Sign out"');
+    check(!(await identity(page)), 'Still signed in after "Sign out"');
     await page.waitForTimeout(1500);
     check((await headerLabel(page)) === 'Sign in', `Header after sign-out: "${await headerLabel(page)}"`);
     r.shots.push(await shot(page, 'after-sign-out'));
@@ -1187,7 +1187,7 @@ async function main() {
   }, page, log);
 
   await step('sa', 'Site session ended, sign-in service still signed in: name stays, Like works without a reload', async ({ r, check }) => {
-    if (!(await principal(page))) throw new Error('Not signed in; run the sign-in steps first');
+    if (!(await identity(page))) throw new Error('Not signed in; run the sign-in steps first');
     const first = (state.displayName || NAME).split(' ')[0];
     const like = page.locator(HERO_LIKE);
     const liked = async () => (await api(page, `/api/me/likes?keys=${encodeURIComponent(KEY)}`)).data?.liked?.[KEY] === true;
@@ -1210,7 +1210,7 @@ async function main() {
 
     // 1. Coming back after the site's session ended (its cookie expires after 8 hours).
     await dropSiteSession(context);
-    check(!(await principal(page)), 'The site session is still there after deleting its cookies');
+    check(!(await identity(page)), 'The site session is still there after deleting its cookies');
     let nav = trackNav(page);
     const t = Date.now();
     await page.goto(VENUE_URL);
@@ -1222,7 +1222,7 @@ async function main() {
     r.notes.push(`Coming back: ${seen.text}; header texts on the last page: ${flips.labels.join(' > ')}`);
     check((await headerLabel(page)) === first, `After coming back the header shows "${await headerLabel(page)}" (expected "${first}")`);
     check(!flips.flipped, `The header turned back into "Sign in": ${flips.labels.join(' > ')}`);
-    check(Boolean(await principal(page)), 'The site session was not restored');
+    check(Boolean(await identity(page)), 'The site session was not restored');
     r.shots.push(await shot(page, 'sa-came-back'));
 
     // 2. Like right away: no reload, no trip to the sign-in pages.
@@ -1250,7 +1250,7 @@ async function main() {
     for (const end = Date.now() + 60_000; Date.now() < end; await sleep(500)) {
       const onVenue = page.url().startsWith(VENUE_URL);
       pressed = onVenue ? ((await page.locator(HERO_LIKE).getAttribute('aria-pressed').catch(() => '')) || '') : '';
-      if (onVenue && pressed === String(!before3) && (await principal(page))) break;
+      if (onVenue && pressed === String(!before3) && (await identity(page))) break;
     }
     r.timings.likeAfterSessionEnded = Date.now() - t3;
     await page.waitForTimeout(1000);
@@ -1270,14 +1270,14 @@ async function main() {
   }, page, log);
 
   await step('sb', 'Browser restart: still signed in the same day (site cookie kept) and the next day (site cookie gone)', async ({ r, check }) => {
-    if (!(await principal(page))) throw new Error('Not signed in; run the sign-in steps first');
+    if (!(await identity(page))) throw new Error('Not signed in; run the sign-in steps first');
     const first = (state.displayName || NAME).split(' ')[0];
     const st = await context.storageState();
     const persistent = st.cookies.filter((c) => c.expires !== -1);
     const name = (c) => `${c.domain.replace(/^\./, '')}:${c.name}`;
     r.notes.push(`Kept after a restart: ${persistent.map(name).join(', ')}`);
     r.notes.push(`Lost on a restart: ${st.cookies.filter((c) => c.expires === -1).map(name).join(', ') || 'none'}`);
-    const siteCookie = persistent.find((c) => c.name === 'StaticWebAppsAuthCookie');
+    const siteCookie = persistent.find(isSiteAuthCookie);
     if (siteCookie) r.notes.push(`Site session cookie expires in ${((siteCookie.expires * 1000 - Date.now()) / 3_600_000).toFixed(1)} h`);
     const browser = await chromium.launch({ headless: !HEADED });
     const days = await signInServiceDays();
@@ -1297,7 +1297,7 @@ async function main() {
         await p.waitForTimeout(1500);
         const seen = nav.stop();
         const label = await headerLabel(p).catch(() => '?');
-        const signedIn = Boolean(await principal(p).catch(() => null));
+        const signedIn = Boolean(await identity(p));
         const flips = await headerFlips(p);
         r.notes.push(`${variant}: ${secs(Date.now() - t)}; header "${label}"; signed in: ${signedIn}; ${seen.text}; header texts: ${flips.labels.join(' > ')}`);
         r.shots.push(await shot(p, `sb-${variant.replace(' ', '-')}`));
@@ -1322,7 +1322,7 @@ async function main() {
   }, page, log);
 
   await step('sc', 'Sign out, then come back: stays signed out (no automatic sign-in)', async ({ r, check }) => {
-    if (!(await principal(page))) throw new Error('Not signed in; run the sign-in steps first');
+    if (!(await identity(page))) throw new Error('Not signed in; run the sign-in steps first');
     const ownHost = new URL(ORIGIN).host;
     const comeBack = async (where) => {
       for (const url of [VENUE_URL, `${BASE}/`, `${BASE}/events/`]) {
@@ -1333,7 +1333,7 @@ async function main() {
         const seen = nav.stop();
         const away = seen.navs.filter((n) => n.host !== ownHost || n.path.startsWith('/.auth/'));
         check(away.length === 0, `${where}: visiting ${url.replace(BASE, '') || '/'} signed in again by itself: ${seen.text}`);
-        check(!(await principal(page)), `${where}: signed in again after visiting ${url.replace(BASE, '') || '/'}`);
+        check(!(await identity(page)), `${where}: signed in again after visiting ${url.replace(BASE, '') || '/'}`);
         check((await headerLabel(page)) === 'Sign in', `${where}: header shows "${await headerLabel(page)}" on ${url.replace(BASE, '') || '/'}`);
       }
     };
@@ -1341,7 +1341,7 @@ async function main() {
       ['Sign out in the footer', VENUE_URL, '.site-footer [data-account-signout]'],
       ['Sign out on the account page', `${BASE}/account/`, '[data-account] [data-account-signout]'],
     ]) {
-      if (!(await principal(page))) {
+      if (!(await identity(page))) {
         const again = await signInFromPanel(page, r, { signup: false });
         check(again.outcome === 'back', `Signing in again did not return to the page (${again.outcome})`);
       }
@@ -1352,7 +1352,7 @@ async function main() {
       await page.waitForURL((u) => u.origin === ORIGIN && u.pathname === '/', { timeout: 30_000 }); // sign-out returns to the home page
       await page.waitForTimeout(1000);
       r.timings[where] = Date.now() - t;
-      check(!(await principal(page)), `${where}: still signed in`);
+      check(!(await identity(page)), `${where}: still signed in`);
       check((await page.evaluate(() => localStorage.getItem('li-account'))) === null, `${where}: the saved name is still in this browser`);
       await comeBack(where);
     }
@@ -1382,6 +1382,7 @@ async function main() {
       check(seen.navs.length === 2, `Extra page loads or redirects: ${seen.text}`);
       check(!seen.authReqs.some((u) => /\/\.auth\/login|ciamlogin\.com|\/api\/me/.test(u)), `Sign-in requests for someone who never signed in: ${seen.authReqs.join(', ')}`);
       check(seen.authReqs.filter((u) => /\/\.auth\/me/.test(u)).length <= 1, `More than one "who is signed in?" check: ${seen.authReqs.join(', ')}`);
+      check(seen.authReqs.filter((u) => /\/api\/session\b/.test(u)).length <= 1, `More than one App Service session check: ${seen.authReqs.join(', ')}`);
       r.shots.push(await shot(p, 'sd-fresh-window'));
     } finally {
       await browser.close();
@@ -1389,7 +1390,7 @@ async function main() {
   }, page, log);
 
   await step('cleanup', 'Delete the test account if it exists', async ({ r, check }) => {
-    if (!(await principal(page))) {
+    if (!(await identity(page))) {
       r.notes.push('Not signed in; nothing to delete from this browser');
       return;
     }
@@ -1414,7 +1415,7 @@ async function main() {
       check(del.status === 200, `Delete returned ${del.status}`);
       await signOut(page);
     }
-    check(!(await principal(page)), 'Still signed in');
+    check(!(await identity(page)), 'Still signed in');
     state.deleted = true;
   }, page, log);
 
