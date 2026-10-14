@@ -1,0 +1,11 @@
+{
+  "name": "The White Whale",
+  "address": "3580 Bayview St",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Seaford",
+  "latitude": 40.658215,
+  "longitude": -73.498301,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}
