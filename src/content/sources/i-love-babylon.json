@@ -12,13 +12,12 @@
   "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
   "lastCounts": {
     "found": 29,
-    "kept": 0,
+    "kept": 1,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastMessage": "The adapter found 29 listings but none could be used. The source layout may have changed.",
-  "lastScraped": "2026-10-12T20:02:14.418Z",
-  "lastStatus": "empty",
+  "lastScraped": "2026-10-15T15:22:24.213Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep with filters; feed is easy but only a subset is relevant.",
   "url": "https://ilovebabylon.com/events/"

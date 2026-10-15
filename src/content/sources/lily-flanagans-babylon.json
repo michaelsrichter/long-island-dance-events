@@ -15,10 +15,10 @@
   "lastCounts": {
     "found": 41,
     "kept": 11,
-    "needsReview": 1,
+    "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-12T20:01:27.772Z",
+  "lastScraped": "2026-10-15T15:21:39.613Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a clean, dated pub-band calendar with iCal links, even though the dance signal is indirect.",

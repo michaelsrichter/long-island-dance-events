@@ -1,0 +1,21 @@
+{
+  "title": "Holiday dance class at Mulcahy's",
+  "summary": "Group class.",
+  "category": "class-lesson",
+  "start": "2026-12-01T17:00",
+  "end": "2026-12-01T20:00",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/babes-in-business-long-island-presents-holiday-market-at-mulcahys/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/babes-in-business-long-island-presents-holiday-market-at-mulcahys/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2026-12-01",
+  "firstSeen": "2026-10-15",
+  "lastSeen": "2026-10-15",
+  "confidence": 0.85,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||tuesday|17:00|class-lesson|||2026-12-01|holiday"
+}

@@ -8,7 +8,7 @@
   "town": "Amityville",
   "price": 31.99,
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",
@@ -16,5 +16,6 @@
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-10-12",
   "confidence": 0.75,
-  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||friday|18:30|live-music|||2026-10-23"
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||friday|18:30|live-music|||2026-10-23",
+  "reviewNotes": "Not found in the latest amityville-music-hall run on 2026-10-15. Check whether it was cancelled or moved."
 }

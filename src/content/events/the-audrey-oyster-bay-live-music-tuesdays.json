@@ -16,7 +16,7 @@
   ],
   "skillLevel": "all-levels",
   "infoUrl": "https://theaudreyob.com/events/gino-dabbicco-october-13/",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "the-audrey-oyster-bay",
   "sourceUrl": "https://theaudreyob.com/events/gino-dabbicco-october-13/",
   "sourceName": "The Audrey (Oyster Bay) - live music calendar",
@@ -25,5 +25,5 @@
   "lastSeen": "2026-10-12",
   "confidence": 0.7,
   "matchKey": "the-audrey-oyster-bay|the-audrey-oyster-bay||tuesday|tba|live-music|gino-dabbicco||repeat",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Not found in the latest the-audrey-oyster-bay run on 2026-10-15. Check whether it was cancelled or moved."
 }
