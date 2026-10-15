@@ -8,7 +8,7 @@
   "venueId": "tanner-park-copiague",
   "town": "Copiague",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -20,5 +20,5 @@
   ],
   "confidence": 0.7,
   "matchKey": "iraslist|2026-10-24|tanner-park-copiague|new-date|2026-10-24|special",
-  "reviewNotes": "Band or DJ not researched yet: NEW DATE."
+  "reviewNotes": "Band or DJ not researched yet: NEW DATE. Not found in the latest iraslist run on 2026-10-15. Check whether it was cancelled or moved."
 }

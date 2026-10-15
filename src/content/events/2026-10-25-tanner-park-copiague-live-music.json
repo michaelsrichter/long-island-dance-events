@@ -1,0 +1,25 @@
+{
+  "title": "EASY STREET at Tanner Park",
+  "summary": "Live music by EASY STREET at Tanner Park in Copiague. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-25T17:00",
+  "end": "2026-10-25T20:00",
+  "timezone": "America/New_York",
+  "venueId": "tanner-park-copiague",
+  "town": "Copiague",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-15",
+  "lastSeen": "2026-10-15",
+  "dancingCues": [
+    "festival",
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-25|tanner-park-copiague|easy-street|2026-10-25|special",
+  "reviewNotes": "Band or DJ not researched yet: EASY STREET."
+}

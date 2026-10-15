@@ -1,0 +1,21 @@
+{
+  "title": "Rock Island Sound at Repeal XVIII",
+  "summary": "Live music by Rock Island Sound at Repeal XVIII in Huntington. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-23T20:00",
+  "end": "2026-10-23T23:00",
+  "timezone": "America/New_York",
+  "venueId": "repeal-xviii-huntington",
+  "town": "Huntington",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-15",
+  "lastSeen": "2026-10-15",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-23|repeal-xviii-huntington|rock-island-sound|2026-10-23|special",
+  "reviewNotes": "Band or DJ not researched yet: Rock Island Sound."
+}

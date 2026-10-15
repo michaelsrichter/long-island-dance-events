@@ -1,0 +1,11 @@
+{
+  "name": "The Patch | Bar and Grill",
+  "address": "31 Baker Pl",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Patchogue",
+  "latitude": 40.757868,
+  "longitude": -73.021213,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}
