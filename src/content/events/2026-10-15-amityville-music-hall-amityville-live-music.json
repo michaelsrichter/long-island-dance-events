@@ -8,7 +8,7 @@
   "town": "Amityville",
   "price": 15,
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "past",
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",

@@ -14,7 +14,7 @@
     "the-daplorabulls"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -25,5 +25,6 @@
     "outdoor"
   ],
   "confidence": 0.75,
-  "matchKey": "iraslist|2026-10-17|popeis-clam-bar-coram|the-daplorabulls|2026-10-17|special"
+  "matchKey": "iraslist|2026-10-17|popeis-clam-bar-coram|the-daplorabulls|2026-10-17|special",
+  "reviewNotes": "Not found in the latest iraslist run on 2026-10-16. Check whether it was cancelled or moved."
 }
