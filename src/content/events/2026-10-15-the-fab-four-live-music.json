@@ -1,0 +1,28 @@
+{
+  "title": "The Fab Four at Flagstar at Westbury Music Fair",
+  "summary": "Live music by The Fab Four at Flagstar at Westbury Music Fair. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-15T20:00",
+  "end": "2026-10-15T23:00",
+  "timezone": "America/New_York",
+  "venueId": "flagstar-at-westbury-music-fair-westbury",
+  "town": "Westbury",
+  "performerIds": [
+    "the-fab-four"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/85e6907403ea4d51311e68eca9a29b8e507975ab",
+  "status": "past",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/85e6907403ea4d51311e68eca9a29b8e507975ab",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-15",
+  "firstSeen": "2026-10-15",
+  "lastSeen": "2026-10-15",
+  "dancingCues": [
+    "festival",
+    "theater"
+  ],
+  "confidence": 0.9,
+  "matchKey": "webtunes-li|flagstar-at-westbury-music-fair-westbury||thursday|20:00|live-music|the-fab-four||2026-10-15"
+}

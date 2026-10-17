@@ -1,0 +1,24 @@
+{
+  "title": "He Said She Said at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by He Said She Said at Daisy's Nashville Lounge (Miller Place). The dancing score on this page says whether people usually dance. Food is included.",
+  "category": "live-music",
+  "start": "2026-10-17T19:00",
+  "end": "2026-10-17T23:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "he-said-she-said"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/he-said-she-said-3/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/he-said-she-said-3/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-17",
+  "firstSeen": "2026-10-12",
+  "lastSeen": "2026-10-15",
+  "confidence": 0.9,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||saturday|19:00|live-music|he-said-she-said||2026-10-17"
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Shrek Rave at Amityville Music Hall",
+  "summary": "Live music by Shrek Rave at Amityville Music Hall. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-29",
+  "timezone": "America/New_York",
+  "venueId": "amityville-music-hall-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "shrek-rave"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "amityville-music-hall",
+  "sourceUrl": "https://amh.live/",
+  "sourceName": "Amityville Music Hall - show list",
+  "sourceRef": "events page 2026-10-29",
+  "firstSeen": "2026-10-15",
+  "lastSeen": "2026-10-15",
+  "confidence": 0.6,
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||thursday|tba|live-music|shrek-rave||2026-10-29",
+  "reviewNotes": "No start time found."
+}

@@ -11,17 +11,17 @@
   "venueId": "cancun-long-island-hicksville",
   "town": "Hicksville",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-14",
   "dancingCues": [
     "dj"
   ],
   "confidence": 0.7,
   "matchKey": "iraslist|2026-10-24|cancun-long-island-hicksville|halloween-monster-bash-ft-dj-rez|2026-10-24|special",
-  "reviewNotes": "Band or DJ not researched yet: Halloween monster bash, DJ REZ."
+  "reviewNotes": "Band or DJ not researched yet: Halloween monster bash, DJ REZ. Not found in the latest iraslist run on 2026-10-15. Check whether it was cancelled or moved."
 }
