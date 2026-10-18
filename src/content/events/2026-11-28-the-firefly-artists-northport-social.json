@@ -1,0 +1,22 @@
+{
+  "title": "Social dance at The Firefly Artists",
+  "summary": "An evening of social dancing.",
+  "category": "social-dance",
+  "start": "2026-11-28T18:30",
+  "end": "2026-11-28T19:30",
+  "timezone": "America/New_York",
+  "venueId": "the-firefly-artists-northport",
+  "town": "Northport",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.huntingtonarts.org/event/the-firefly-artists-present-21st-annual-northport-leg-lamp-lighting/",
+  "status": "active",
+  "sourceId": "huntington-arts-council-dance",
+  "sourceUrl": "https://www.huntingtonarts.org/event/the-firefly-artists-present-21st-annual-northport-leg-lamp-lighting/",
+  "sourceName": "Huntington Arts Council - events calendar, Dance category",
+  "sourceRef": "calendar feed 2026-11-28",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.85,
+  "matchKey": "huntington-arts-council-dance|the-firefly-artists-northport||saturday|18:30|social-dance|||2026-11-28",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

@@ -28,7 +28,9 @@
       "2027-03-12",
       "2027-03-19",
       "2027-03-26",
-      "2027-04-02"
+      "2027-04-02",
+      "2027-04-09",
+      "2027-04-16"
     ]
   },
   "venueId": "rooted-north-tasting-room-cutchogue",
@@ -40,7 +42,7 @@
   "sourceName": "Rooted North Vineyards - live music calendar",
   "sourceRef": "pages 2026, 2027",
   "firstSeen": "2026-10-05",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-18",
   "confidence": 0.75,
   "matchKey": "rooted-north-vineyards-cutchogue|rooted-north-tasting-room-cutchogue||friday|17:00|live-music|||repeat"
 }

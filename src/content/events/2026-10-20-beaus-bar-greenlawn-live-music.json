@@ -1,0 +1,21 @@
+{
+  "title": "Live music at Beau's Bar",
+  "summary": "Live music at Beau's Bar. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-20T19:00",
+  "end": "2026-10-20T23:00",
+  "timezone": "America/New_York",
+  "venueId": "beaus-bar-greenlawn",
+  "town": "Greenlawn",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.theragtimes.net/event/johnny-mac-band-at-beaus-bar-li-4/",
+  "status": "active",
+  "sourceId": "the-rag-times-patchogue",
+  "sourceUrl": "https://www.theragtimes.net/event/johnny-mac-band-at-beaus-bar-li-4/",
+  "sourceName": "The Rag Times - live music calendar",
+  "sourceRef": "calendar feed 2026-10-20",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.85,
+  "matchKey": "the-rag-times-patchogue|beaus-bar-greenlawn||tuesday|19:00|live-music|||2026-10-20"
+}

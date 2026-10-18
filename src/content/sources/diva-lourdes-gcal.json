@@ -15,12 +15,12 @@
   "feedUrl": "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
   "focus": "dance",
   "lastCounts": {
-    "found": 272,
-    "kept": 70,
+    "found": 257,
+    "kept": 64,
     "needsReview": 0,
-    "outOfArea": 82
+    "outOfArea": 94
   },
-  "lastScraped": "2026-10-05T06:36:52.538Z",
+  "lastScraped": "2026-10-18T13:28:27.225Z",
   "lastStatus": "ok",
   "permission": {
     "note": "Public Google Calendar feed. Google documents this address for other apps to subscribe, so robots.txt does not apply to it (decision P40).",

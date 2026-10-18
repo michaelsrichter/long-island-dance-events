@@ -16,16 +16,15 @@
   "performerIds": [
     "gene-casey-and-the-lone-sharks"
   ],
-  "isFree": true,
   "skillLevel": "all-levels",
-  "infoUrl": "https://genecasey.com/event/sharks-night-at-liams-in-amityville-ny/",
+  "infoUrl": "https://genecasey.com/event/liams-landing-in-amityville-sharks-night/",
   "status": "active",
   "sourceId": "gene-casey-lone-sharks",
-  "sourceUrl": "https://genecasey.com/event/sharks-night-at-liams-in-amityville-ny/",
+  "sourceUrl": "https://genecasey.com/event/liams-landing-in-amityville-sharks-night/",
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
   "sourceRef": "pages 2026, 2027",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-18",
   "confidence": 0.9,
   "matchKey": "gene-casey-lone-sharks|liams-landing-amityville||friday|20:00|live-music|gene-casey-and-the-lone-sharks||repeat"
 }

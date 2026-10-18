@@ -1,0 +1,28 @@
+{
+  "title": "East Coast Swing social dance with a lesson at Huntington Moose Lodge",
+  "summary": "A group lesson at 7:30 PM, then open social dancing. Dance styles: East Coast Swing.",
+  "category": "lesson-party",
+  "danceStyles": [
+    "east-coast-swing"
+  ],
+  "start": "2026-10-20T19:30",
+  "end": "2026-10-20T22:30",
+  "timezone": "America/New_York",
+  "lessonTime": "19:30",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "price": 15,
+  "priceMax": 20,
+  "priceNotes": "Members pay less",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "dancemanhattan-li-swing",
+  "sourceUrl": "http://dancemanhattan.com/calendar/event/113",
+  "sourceName": "Dance Manhattan - Long Island swing dances list",
+  "sourceRef": "events page 2026-10-20",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.8,
+  "matchKey": "dancemanhattan-li-swing|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|lesson-party||east-coast-swing|2026-10-20"
+}

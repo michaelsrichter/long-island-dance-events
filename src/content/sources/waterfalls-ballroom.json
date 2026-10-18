@@ -16,11 +16,11 @@
   "include": "danc|ballroom|latin|swing|social",
   "lastCounts": {
     "found": 2,
-    "kept": 2,
-    "needsReview": 0,
+    "kept": 1,
+    "needsReview": 1,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:43:36.287Z",
+  "lastScraped": "2026-10-18T13:34:09.773Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a low-volume confirmation source; reliable but mostly duplicate.",

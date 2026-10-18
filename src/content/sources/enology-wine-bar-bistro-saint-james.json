@@ -14,11 +14,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 9,
-    "kept": 9,
-    "needsReview": 0,
+    "kept": 8,
+    "needsReview": 1,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:37:14.078Z",
+  "lastScraped": "2026-10-18T13:28:37.696Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Saint James wine bar lists weekly Thursday live-music sets from October through December.",

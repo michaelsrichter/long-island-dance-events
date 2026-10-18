@@ -1,0 +1,29 @@
+{
+  "title": "Ahmad Ali at Hotel Moraine",
+  "summary": "Live music by Ahmad Ali at Hotel Moraine. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-14",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-12-26"
+    ]
+  },
+  "venueId": "hotel-moraine-greenport",
+  "town": "Greenport",
+  "performerIds": [
+    "ahmad-ali"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-p9hy6-7ysl3-hz6fr",
+  "status": "active",
+  "sourceId": "hotel-moraine",
+  "sourceUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-p9hy6-7ysl3-hz6fr",
+  "sourceName": "Hotel Moraine (Greenport) - events",
+  "sourceRef": "events page 2026-11-14",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.6,
+  "matchKey": "hotel-moraine|hotel-moraine-greenport||saturday|tba|live-music|ahmad-ali||repeat",
+  "reviewNotes": "No start time found."
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Nina Et cetera at Hotel Moraine",
+  "summary": "Live music by Nina Et cetera at Hotel Moraine. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-05",
+  "timezone": "America/New_York",
+  "venueId": "hotel-moraine-greenport",
+  "town": "Greenport",
+  "performerIds": [
+    "nina-et-cetera"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-p9hy6-7ysl3-x24hp-drryt-jyrt8",
+  "status": "active",
+  "sourceId": "hotel-moraine",
+  "sourceUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-p9hy6-7ysl3-x24hp-drryt-jyrt8",
+  "sourceName": "Hotel Moraine (Greenport) - events",
+  "sourceRef": "events page 2026-12-05",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.6,
+  "matchKey": "hotel-moraine|hotel-moraine-greenport||saturday|tba|live-music|nina-et-cetera||2026-12-05",
+  "reviewNotes": "No start time found."
+}

@@ -16,12 +16,12 @@
   "focus": "music",
   "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano",
   "lastCounts": {
-    "found": 20,
-    "kept": 7,
+    "found": 18,
+    "kept": 5,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:36:24.378Z",
+  "lastScraped": "2026-10-18T13:28:04.457Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Hampton Bays venue calendar includes jazz in the garden, acoustic garden music and ballroom concerts.",

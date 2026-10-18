@@ -1,0 +1,27 @@
+{
+  "title": "Ballroom and Latin dance with live music at Brumidi Lodge (Sons of Italy)",
+  "summary": "Dance to live music. Dance styles: Ballroom and Latin. Food is included, and there is an open bar.",
+  "category": "live-music",
+  "danceStyles": [
+    "ballroom",
+    "latin-ballroom"
+  ],
+  "start": "2026-12-31T20:00",
+  "end": "2026-12-31T01:00",
+  "timezone": "America/New_York",
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "club-brumidi",
+  "price": 150,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://sonsofitalyli.com/event/new-years-eve-party/",
+  "status": "active",
+  "sourceId": "brumidi-lodge-deer-park",
+  "sourceUrl": "https://sonsofitalyli.com/event/new-years-eve-party/",
+  "sourceName": "Club Brumidi at Brumidi Lodge (Deer Park) - events",
+  "sourceRef": "event page 2026-12-31",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.8,
+  "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|thursday|20:00|live-music||ballroom+latin-ballroom|2026-12-31"
+}

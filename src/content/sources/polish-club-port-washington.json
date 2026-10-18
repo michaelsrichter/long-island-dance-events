@@ -13,12 +13,12 @@
   "enabled": true,
   "focus": "dance",
   "lastCounts": {
-    "found": 5,
+    "found": 4,
     "kept": 2,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:41:37.533Z",
+  "lastScraped": "2026-10-18T13:32:38.410Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as low priority. It has a few Nassau dance nights among many civic events.",

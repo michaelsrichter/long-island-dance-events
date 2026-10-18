@@ -14,12 +14,12 @@
   "focus": "music",
   "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano",
   "lastCounts": {
-    "found": 42,
-    "kept": 3,
+    "found": 39,
+    "kept": 2,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:37:29.917Z",
+  "lastScraped": "2026-10-18T13:28:54.733Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: HOG Farm has dated open jam, Halloween music and lunch-with-music events in Brookhaven through November.",
