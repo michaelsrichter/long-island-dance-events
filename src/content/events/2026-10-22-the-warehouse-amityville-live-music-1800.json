@@ -1,0 +1,21 @@
+{
+  "title": "Live music at The Warehouse",
+  "summary": "Live music at The Warehouse. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-22T18:00",
+  "end": "2026-10-22T21:00",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/898ce90e9218d23ce83fe7d36518286872fbf9b4",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/898ce90e9218d23ce83fe7d36518286872fbf9b4",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-22",
+  "firstSeen": "2026-10-19",
+  "lastSeen": "2026-10-19",
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|the-warehouse-amityville||thursday|18:00|live-music|||2026-10-22"
+}

@@ -1,0 +1,23 @@
+{
+  "title": "Shattered at Kitty Mulligan's Irish Pub",
+  "summary": "Live music by Shattered at Kitty Mulligan's Irish Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-30T19:30",
+  "end": "2026-10-30T22:30",
+  "timezone": "America/New_York",
+  "venueId": "kitty-mulligans-bay-shore",
+  "town": "Bay Shore",
+  "performerIds": [
+    "shattered"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "kitty-mulligans-bay-shore",
+  "sourceUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+  "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
+  "sourceRef": "events page 2026-10-30",
+  "firstSeen": "2026-10-19",
+  "lastSeen": "2026-10-19",
+  "confidence": 0.8,
+  "matchKey": "kitty-mulligans-bay-shore|kitty-mulligans-bay-shore||friday|19:30|live-music|shattered||2026-10-30"
+}

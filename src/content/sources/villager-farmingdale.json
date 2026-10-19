@@ -13,12 +13,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 40,
-    "kept": 9,
+    "found": 37,
+    "kept": 6,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-15T15:22:18.367Z",
+  "lastScraped": "2026-10-19T17:12:23.507Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many current dated band nights in an easy format.",

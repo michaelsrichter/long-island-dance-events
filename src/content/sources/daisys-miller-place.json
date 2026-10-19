@@ -15,11 +15,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 30,
-    "kept": 15,
-    "needsReview": 2,
+    "kept": 12,
+    "needsReview": 3,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-15T15:21:17.462Z",
+  "lastScraped": "2026-10-19T17:11:14.864Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many current Long Island events, a feed, and clear dance-floor wording.",

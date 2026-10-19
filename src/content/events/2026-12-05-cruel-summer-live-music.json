@@ -1,0 +1,25 @@
+{
+  "title": "Cruel Summer at Amityville Music Hall",
+  "summary": "Live music by Cruel Summer at Amityville Music Hall. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-05",
+  "timezone": "America/New_York",
+  "venueId": "amityville-music-hall-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "cruel-summer"
+  ],
+  "price": 25,
+  "priceMax": 30,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "amityville-music-hall",
+  "sourceUrl": "https://amh.live/",
+  "sourceName": "Amityville Music Hall - show list",
+  "sourceRef": "events page 2026-12-05",
+  "firstSeen": "2026-10-19",
+  "lastSeen": "2026-10-19",
+  "confidence": 0.6,
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||saturday|tba|live-music|cruel-summer||2026-12-05",
+  "reviewNotes": "No start time found."
+}

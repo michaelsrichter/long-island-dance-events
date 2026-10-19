@@ -13,12 +13,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 38,
-    "kept": 8,
+    "found": 36,
+    "kept": 6,
     "needsReview": 1,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-15T15:22:07.732Z",
+  "lastScraped": "2026-10-19T17:12:12.654Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many future events and several are clearly dance parties, not just concerts.",

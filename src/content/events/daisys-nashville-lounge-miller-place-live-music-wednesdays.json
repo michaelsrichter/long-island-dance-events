@@ -5,22 +5,22 @@
   "start": "2026-10-07",
   "timezone": "America/New_York",
   "recurrence": {
-    "rrule": "FREQ=WEEKLY;BYDAY=WE;UNTIL=20261021"
+    "rrule": "FREQ=WEEKLY;BYDAY=WE;UNTIL=20261028"
   },
   "venueId": "daisys-nashville-lounge-miller-place",
   "town": "Miller Place",
   "price": 1,
   "priceMax": 3,
   "skillLevel": "all-levels",
-  "infoUrl": "https://daisysli.com/event/wing-wednesday-miller-place/2026-10-14/",
-  "status": "pending-review",
+  "infoUrl": "https://daisysli.com/event/wing-wednesday-miller-place/2026-10-21/",
+  "status": "active",
   "sourceId": "daisys-miller-place",
-  "sourceUrl": "https://daisysli.com/event/wing-wednesday-miller-place/2026-10-14/",
+  "sourceUrl": "https://daisysli.com/event/wing-wednesday-miller-place/2026-10-21/",
   "sourceName": "Daisy's (Miller Place) - live music calendar",
-  "sourceRef": "calendar feed 2026-10-14",
+  "sourceRef": "calendar feed 2026-10-21",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-12",
+  "lastSeen": "2026-10-19",
   "confidence": 0.65,
   "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||wednesday|tba|live-music|||repeat",
-  "reviewNotes": "No start time found. Not found in the latest daisys-miller-place run on 2026-10-15. Check whether it was cancelled or moved."
+  "reviewNotes": "No start time found."
 }

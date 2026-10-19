@@ -1,0 +1,24 @@
+{
+  "title": "Live music at Mulcahy's",
+  "summary": "Live music at Mulcahy's. The dancing score on this page says whether people usually dance. Food is included.",
+  "category": "live-music",
+  "start": "2026-10-23T16:00",
+  "end": "2026-10-23T19:00",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/happy-hour-4/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/happy-hour-4/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2026-10-23",
+  "firstSeen": "2026-10-19",
+  "lastSeen": "2026-10-19",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|16:00|live-music|||2026-10-23"
+}

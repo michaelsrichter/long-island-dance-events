@@ -15,15 +15,15 @@
   "performerIds": [
     "plan-your-visit"
   ],
-  "price": 34.99,
+  "price": 21,
   "skillLevel": "all-levels",
   "status": "active",
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",
-  "sourceRef": "events page 2026-10-16",
+  "sourceRef": "events page 2026-10-30",
   "firstSeen": "2026-10-15",
-  "lastSeen": "2026-10-15",
+  "lastSeen": "2026-10-19",
   "confidence": 0.8,
   "matchKey": "amityville-music-hall|amityville-music-hall-amityville||friday|19:00|live-music|plan-your-visit||repeat"
 }

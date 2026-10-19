@@ -1,0 +1,29 @@
+{
+  "title": "Plan Your Visit at Amityville Music Hall",
+  "summary": "Live music by Plan Your Visit at Amityville Music Hall. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-07T18:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-12-05",
+      "2026-12-12"
+    ]
+  },
+  "venueId": "amityville-music-hall-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "plan-your-visit"
+  ],
+  "price": 32.99,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "amityville-music-hall",
+  "sourceUrl": "https://amh.live/",
+  "sourceName": "Amityville Music Hall - show list",
+  "sourceRef": "events page 2026-11-07",
+  "firstSeen": "2026-10-19",
+  "lastSeen": "2026-10-19",
+  "confidence": 0.8,
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||saturday|18:00|live-music|plan-your-visit||repeat"
+}

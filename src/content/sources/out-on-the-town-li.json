@@ -12,11 +12,11 @@
   "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
   "lastCounts": {
     "found": 30,
-    "kept": 14,
-    "needsReview": 0,
+    "kept": 9,
+    "needsReview": 1,
     "outOfArea": 1
   },
-  "lastScraped": "2026-10-15T15:22:30.622Z",
+  "lastScraped": "2026-10-19T17:12:35.010Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a low-priority nightlife backup; it needs keyword filtering and human review.",
