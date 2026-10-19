@@ -11,11 +11,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 531,
-    "kept": 391,
-    "needsReview": 1,
+    "kept": 398,
+    "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-18T13:59:14.845Z",
+  "lastScraped": "2026-10-19T16:58:59.871Z",
   "lastStatus": "ok",
   "permission": {
     "note": "Ira's List publishes this calendar publicly. Google documents the public iCal address as the way for other apps to subscribe (support.google.com/calendar/answer/37083). We read only that feed, once per run, with caching.",
