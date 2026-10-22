@@ -14,12 +14,12 @@
   "feedUrl": "https://mulcahyslongisland.com/events/?ical=1",
   "focus": "music",
   "lastCounts": {
-    "found": 28,
-    "kept": 25,
-    "needsReview": 1,
+    "found": 30,
+    "kept": 27,
+    "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-19T17:11:49.374Z",
+  "lastScraped": "2026-10-22T15:41:50.989Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a high-volume Long Island venue with structured future events and clear dance-party listings.",

@@ -1,0 +1,22 @@
+{
+  "title": "The Johnny Mac Band at Bobbique",
+  "summary": "Live music by The Johnny Mac Band at Bobbique. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-06T20:00",
+  "timezone": "America/New_York",
+  "venueId": "bobbique-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "the-johnny-mac-band"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bobbique-patchogue",
+  "sourceUrl": "https://www.bobbique.com/upcoming-events/",
+  "sourceName": "BOBBIQUE (Patchogue) - live music calendar",
+  "sourceRef": "events page 2026-11-06",
+  "firstSeen": "2026-10-22",
+  "lastSeen": "2026-10-22",
+  "confidence": 0.8,
+  "matchKey": "bobbique-patchogue|bobbique-patchogue||friday|20:00|live-music|the-johnny-mac-band||2026-11-06"
+}

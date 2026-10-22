@@ -5,7 +5,11 @@
   "start": "2026-10-15T18:00",
   "timezone": "America/New_York",
   "recurrence": {
-    "rrule": "FREQ=WEEKLY;BYDAY=TH;UNTIL=20261022"
+    "rdates": [
+      "2026-10-22",
+      "2026-11-19",
+      "2026-12-10"
+    ]
   },
   "venueId": "amityville-music-hall-amityville",
   "town": "Amityville",
@@ -14,14 +18,13 @@
   ],
   "price": 22.99,
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "active",
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",
-  "sourceRef": "events page 2026-10-15",
+  "sourceRef": "events page 2026-10-22",
   "firstSeen": "2026-10-15",
-  "lastSeen": "2026-10-15",
+  "lastSeen": "2026-10-22",
   "confidence": 0.8,
-  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||thursday|18:00|live-music|plan-your-visit||repeat",
-  "reviewNotes": "Not found in the latest amityville-music-hall run on 2026-10-19. Check whether it was cancelled or moved."
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||thursday|18:00|live-music|plan-your-visit||repeat"
 }

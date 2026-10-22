@@ -10,7 +10,7 @@
     "santa-rave"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",
@@ -19,5 +19,5 @@
   "lastSeen": "2026-10-19",
   "confidence": 0.6,
   "matchKey": "amityville-music-hall|amityville-music-hall-amityville||saturday|tba|live-music|santa-rave||2026-12-12",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Not found in the latest amityville-music-hall run on 2026-10-22. Check whether it was cancelled or moved."
 }

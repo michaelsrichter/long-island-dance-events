@@ -5,7 +5,7 @@
   "start": "2026-10-07T19:30",
   "timezone": "America/New_York",
   "recurrence": {
-    "rrule": "FREQ=WEEKLY;BYDAY=WE;UNTIL=20261028"
+    "rrule": "FREQ=WEEKLY;BYDAY=WE;UNTIL=20261118"
   },
   "venueId": "bobbique-patchogue",
   "town": "Patchogue",
@@ -14,9 +14,9 @@
   "sourceId": "bobbique-patchogue",
   "sourceUrl": "https://www.bobbique.com/upcoming-events/",
   "sourceName": "BOBBIQUE (Patchogue) - live music calendar",
-  "sourceRef": "events page 2026-10-21",
+  "sourceRef": "events page 2026-10-28",
   "firstSeen": "2026-10-05",
-  "lastSeen": "2026-10-19",
+  "lastSeen": "2026-10-22",
   "dancingCues": [
     "jam"
   ],

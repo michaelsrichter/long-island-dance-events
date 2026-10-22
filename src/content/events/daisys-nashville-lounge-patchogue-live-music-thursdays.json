@@ -6,23 +6,23 @@
   "end": "2026-10-15T22:00",
   "timezone": "America/New_York",
   "recurrence": {
-    "rrule": "FREQ=WEEKLY;BYDAY=TH;UNTIL=20261022"
+    "rrule": "FREQ=WEEKLY;BYDAY=TH;UNTIL=20261029"
   },
   "venueId": "daisys-nashville-lounge-patchogue",
   "town": "Patchogue",
   "skillLevel": "all-levels",
-  "infoUrl": "https://daisysli.com/event/thursday-june-4-lisa-polizzi-jam/2026-10-15/",
-  "status": "pending-review",
+  "infoUrl": "https://daisysli.com/event/thursday-june-4-lisa-polizzi-jam/2026-10-22/",
+  "status": "active",
   "sourceId": "daisys-miller-place",
-  "sourceUrl": "https://daisysli.com/event/thursday-june-4-lisa-polizzi-jam/2026-10-15/",
+  "sourceUrl": "https://daisysli.com/event/thursday-june-4-lisa-polizzi-jam/2026-10-22/",
   "sourceName": "Daisy's (Miller Place) - live music calendar",
-  "sourceRef": "calendar feed 2026-10-15",
+  "sourceRef": "calendar feed 2026-10-22",
   "firstSeen": "2026-10-15",
-  "lastSeen": "2026-10-15",
+  "lastSeen": "2026-10-22",
   "dancingCues": [
     "jam"
   ],
   "confidence": 0.85,
   "matchKey": "daisys-miller-place|daisys-nashville-lounge-patchogue||thursday|19:00|live-music|lisapolizzijam||repeat",
-  "reviewNotes": "Band or DJ not researched yet: Lisa Polizzi Jam. Not found in the latest daisys-miller-place run on 2026-10-19. Check whether it was cancelled or moved."
+  "reviewNotes": "Band or DJ not researched yet: Lisa Polizzi Jam."
 }

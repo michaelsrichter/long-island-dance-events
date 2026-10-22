@@ -13,12 +13,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 6,
-    "kept": 6,
+    "found": 12,
+    "kept": 12,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-19T17:11:09.610Z",
+  "lastScraped": "2026-10-22T15:41:17.618Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Patchogue barbecue venue calendar lists live bands and jams most Wednesdays, Fridays, and Saturdays through October.",

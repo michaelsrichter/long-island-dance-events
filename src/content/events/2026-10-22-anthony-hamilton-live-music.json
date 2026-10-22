@@ -1,0 +1,28 @@
+{
+  "title": "Anthony Hamilton at Flagstar at Westbury Music Fair",
+  "summary": "Live music by Anthony Hamilton at Flagstar at Westbury Music Fair. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-22T20:00",
+  "end": "2026-10-22T23:00",
+  "timezone": "America/New_York",
+  "venueId": "flagstar-at-westbury-music-fair-westbury",
+  "town": "Westbury",
+  "performerIds": [
+    "anthony-hamilton"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/21cd70499bed5a087a4d747dc9e8ec1ed5f044ed",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/21cd70499bed5a087a4d747dc9e8ec1ed5f044ed",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-22",
+  "firstSeen": "2026-10-22",
+  "lastSeen": "2026-10-22",
+  "dancingCues": [
+    "festival",
+    "theater"
+  ],
+  "confidence": 0.9,
+  "matchKey": "webtunes-li|flagstar-at-westbury-music-fair-westbury||thursday|20:00|live-music|anthony-hamilton||2026-10-22"
+}
