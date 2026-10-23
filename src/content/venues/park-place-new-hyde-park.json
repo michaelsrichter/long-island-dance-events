@@ -1,0 +1,11 @@
+{
+  "name": "Park Place",
+  "address": "1218 Jericho Tpke",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "New Hyde Park",
+  "latitude": 40.732972,
+  "longitude": -73.683114,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

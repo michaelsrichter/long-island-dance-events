@@ -1,0 +1,27 @@
+{
+  "title": "FiveStone at Dirty Taco + Tequila Port Washington",
+  "summary": "Live music by FiveStone at Dirty Taco + Tequila Port Washington in Port Washington. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-10-23T19:00",
+  "end": "2026-10-23T22:00",
+  "timezone": "America/New_York",
+  "venueId": "dirty-taco-tequila-port-washington-port-washington",
+  "town": "Port Washington",
+  "performerIds": [
+    "fivestone"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-23",
+  "lastSeen": "2026-10-23",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-23|dirty-taco-tequila-port-washington-port-washington|fivestone|2026-10-23|special",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

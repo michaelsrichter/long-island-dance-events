@@ -1,0 +1,21 @@
+{
+  "title": "Tucker Stevens at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Tucker Stevens at Daisy's Nashville Lounge (Miller Place) in Miller Place. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-23T20:00",
+  "end": "2026-10-23T23:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-23",
+  "lastSeen": "2026-10-23",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-23|daisys-nashville-lounge-miller-place|tucker-stevens|2026-10-23|special",
+  "reviewNotes": "Band or DJ not researched yet: Tucker Stevens."
+}

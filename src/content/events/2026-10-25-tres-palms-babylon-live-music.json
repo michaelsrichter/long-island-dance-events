@@ -1,0 +1,21 @@
+{
+  "title": "Paulie B at Tres Palms",
+  "summary": "Live music by Paulie B at Tres Palms in Babylon. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-25T16:00",
+  "end": "2026-10-25T19:00",
+  "timezone": "America/New_York",
+  "venueId": "tres-palms-babylon",
+  "town": "Babylon",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-23",
+  "lastSeen": "2026-10-23",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-25|tres-palms-babylon|paulie-b|2026-10-25|special",
+  "reviewNotes": "Band or DJ not researched yet: Paulie B."
+}
