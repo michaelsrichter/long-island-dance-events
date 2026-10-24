@@ -1,0 +1,27 @@
+{
+  "title": "Rodehauss Music at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Rodehauss Music at Daisy's Nashville Lounge (Miller Place). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-25T13:00",
+  "end": "2026-10-25T17:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "rodehauss-music"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/rodehauss-music/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/rodehauss-music/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-25",
+  "firstSeen": "2026-10-19",
+  "lastSeen": "2026-10-22",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||sunday|13:00|live-music|rodehauss-music||2026-10-25"
+}

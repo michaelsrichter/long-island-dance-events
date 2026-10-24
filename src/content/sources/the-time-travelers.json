@@ -15,11 +15,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 10,
-    "kept": 3,
-    "needsReview": 0,
+    "kept": 2,
+    "needsReview": 1,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:43:12.798Z",
+  "lastScraped": "2026-10-18T13:33:53.047Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Long Island cover band page lists three upcoming bar gigs in Nassau and Suffolk through January.",

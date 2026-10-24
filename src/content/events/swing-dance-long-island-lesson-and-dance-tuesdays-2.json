@@ -14,7 +14,7 @@
   "town": "Greenlawn",
   "organizerId": "swing-dance-long-island",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "sdli-events",
   "sourceUrl": "https://www.sdli.org/index.php/sdli/events/",
   "sourceName": "Swing Dance Long Island (SDLI) - upcoming events",
@@ -23,5 +23,5 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.6,
   "matchKey": "sdli-events|huntington-moose-lodge|swing-dance-long-island|tuesday|tba|lesson-party||east-coast-swing|repeat",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Not found in the latest sdli-events run on 2026-10-18. Check whether it was cancelled or moved."
 }

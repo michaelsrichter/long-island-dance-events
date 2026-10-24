@@ -1,0 +1,21 @@
+{
+  "title": "Eddie Trap at Popei's Clam Bar",
+  "summary": "Live music by Eddie Trap at Popei's Clam Bar in Coram. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-24T20:30",
+  "end": "2026-10-24T23:30",
+  "timezone": "America/New_York",
+  "venueId": "popeis-clam-bar-coram",
+  "town": "Coram",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-23",
+  "lastSeen": "2026-10-24",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-24|popeis-clam-bar-coram|eddie-trap|2026-10-24|special",
+  "reviewNotes": "Band or DJ not researched yet: Eddie Trap."
+}

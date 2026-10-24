@@ -1,0 +1,21 @@
+{
+  "title": "Live music at Kitty Mulligan's Irish Pub",
+  "summary": "Live music at Kitty Mulligan's Irish Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-23T20:00",
+  "end": "2026-10-23T23:00",
+  "timezone": "America/New_York",
+  "venueId": "kitty-mulligans-bay-shore",
+  "town": "Bay Shore",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "status": "past",
+  "sourceId": "kitty-mulligans-bay-shore",
+  "sourceUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+  "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
+  "sourceRef": "events page 2026-10-23",
+  "firstSeen": "2026-10-19",
+  "lastSeen": "2026-10-22",
+  "confidence": 0.75,
+  "matchKey": "kitty-mulligans-bay-shore|kitty-mulligans-bay-shore||friday|20:00|live-music|||2026-10-23"
+}

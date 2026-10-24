@@ -13,7 +13,7 @@
   "town": "Oyster Bay",
   "skillLevel": "all-levels",
   "infoUrl": "https://theaudreyob.com/events/nick-and-guy-october-10/",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "the-audrey-oyster-bay",
   "sourceUrl": "https://theaudreyob.com/events/nick-and-guy-october-10/",
   "sourceName": "The Audrey (Oyster Bay) - live music calendar",
@@ -22,5 +22,5 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.65,
   "matchKey": "the-audrey-oyster-bay|the-audrey-oyster-bay||saturday|tba|live-music|nickandguy||repeat",
-  "reviewNotes": "Band or DJ not researched yet: Nick & Guy. No start time found."
+  "reviewNotes": "Band or DJ not researched yet: Nick & Guy. No start time found. Not found in the latest the-audrey-oyster-bay run on 2026-10-12. Check whether it was cancelled or moved."
 }

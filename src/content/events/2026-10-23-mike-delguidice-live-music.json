@@ -11,13 +11,13 @@
   ],
   "price": 45,
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "past",
   "sourceId": "live-on-the-porch",
   "sourceUrl": "https://liveontheporch.com/events/",
   "sourceName": "Live On The Porch (Smithtown) - show calendar",
   "sourceRef": "event data on the page 2026-10-23",
   "firstSeen": "2026-10-05",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-18",
   "confidence": 0.9,
   "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||friday|20:00|live-music|mike-delguidice||2026-10-23"
 }

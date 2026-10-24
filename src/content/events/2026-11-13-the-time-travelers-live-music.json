@@ -1,0 +1,24 @@
+{
+  "title": "The Time Travelers at Shaker's Pub",
+  "summary": "Live music by The Time Travelers at Shaker's Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-13",
+  "timezone": "America/New_York",
+  "venueId": "shakers-pub-oakdale",
+  "town": "Oakdale",
+  "performerIds": [
+    "the-time-travelers"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.timetravelersli.com/upcoming-shows/riptides-lindenhurst",
+  "status": "active",
+  "sourceId": "the-time-travelers",
+  "sourceUrl": "https://www.timetravelersli.com/upcoming-shows/riptides-lindenhurst",
+  "sourceName": "The Time Travelers - live music calendar",
+  "sourceRef": "events page 2026-11-13",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.6,
+  "matchKey": "the-time-travelers|shakers-pub-oakdale||friday|tba|live-music|the-time-travelers||2026-11-13",
+  "reviewNotes": "New venue was added automatically. Check it. No start time found."
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Julia King at Hotel Moraine",
+  "summary": "Live music by Julia King at Hotel Moraine. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-24",
+  "timezone": "America/New_York",
+  "venueId": "hotel-moraine-greenport",
+  "town": "Greenport",
+  "performerIds": [
+    "julia-king"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-yzxym",
+  "status": "active",
+  "sourceId": "hotel-moraine",
+  "sourceUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-yzxym",
+  "sourceName": "Hotel Moraine (Greenport) - events",
+  "sourceRef": "events page 2026-10-24",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.6,
+  "matchKey": "hotel-moraine|hotel-moraine-greenport||saturday|tba|live-music|julia-king||2026-10-24",
+  "reviewNotes": "No start time found."
+}

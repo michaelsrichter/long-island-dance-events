@@ -13,13 +13,14 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 44,
-    "kept": 14,
+    "found": 0,
+    "kept": 0,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:40:43.040Z",
-  "lastStatus": "ok",
+  "lastMessage": "HTTP 404 for https://www.lilyflanaganspub.com/musicevents",
+  "lastScraped": "2026-10-22T15:41:44.919Z",
+  "lastStatus": "error",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a clean, dated pub-band calendar with iCal links, even though the dance signal is indirect.",
   "url": "https://www.lilyflanaganspub.com/musicevents"

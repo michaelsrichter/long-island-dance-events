@@ -1,0 +1,23 @@
+{
+  "title": "Alfredo Merat at The Pridwin Hotel & Cottages",
+  "summary": "Live music by Alfredo Merat at The Pridwin Hotel & Cottages. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-23",
+  "timezone": "America/New_York",
+  "venueId": "the-pridwin-shelter-island",
+  "town": "Shelter Island",
+  "performerIds": [
+    "alfredo-merat"
+  ],
+  "skillLevel": "all-levels",
+  "status": "past",
+  "sourceId": "the-pridwin-hotel-cottages-shelter-island",
+  "sourceUrl": "https://www.caperesorts.com/pridwin/events-calendar",
+  "sourceName": "The Pridwin Hotel & Cottages - live music calendar",
+  "sourceRef": "events page 2026-10-23",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.6,
+  "matchKey": "the-pridwin-hotel-cottages-shelter-island|the-pridwin-shelter-island||friday|tba|live-music|alfredo-merat||2026-10-23",
+  "reviewNotes": "No start time found."
+}

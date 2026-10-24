@@ -1,0 +1,23 @@
+{
+  "title": "Sweet Pill at Amityville Music Hall",
+  "summary": "Live music by Sweet Pill at Amityville Music Hall. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-17",
+  "timezone": "America/New_York",
+  "venueId": "amityville-music-hall-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "sweet-pill"
+  ],
+  "skillLevel": "all-levels",
+  "status": "past",
+  "sourceId": "amityville-music-hall",
+  "sourceUrl": "https://amh.live/",
+  "sourceName": "Amityville Music Hall - show list",
+  "sourceRef": "events page 2026-10-17",
+  "firstSeen": "2026-10-15",
+  "lastSeen": "2026-10-15",
+  "confidence": 0.6,
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||saturday|tba|live-music|sweet-pill||2026-10-17",
+  "reviewNotes": "No start time found."
+}

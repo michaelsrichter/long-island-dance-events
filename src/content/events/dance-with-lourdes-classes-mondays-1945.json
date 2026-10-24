@@ -9,7 +9,7 @@
   "end": "2026-10-05T20:45",
   "timezone": "America/New_York",
   "recurrence": {
-    "rrule": "FREQ=WEEKLY;BYDAY=MO;UNTIL=20270201",
+    "rrule": "FREQ=WEEKLY;BYDAY=MO;UNTIL=20270215",
     "exdates": [
       "2026-10-12"
     ]
@@ -24,7 +24,7 @@
   "sourceName": "DiVa Ballroom / Dance with Lourdes Cruz - Long Island Google Calendar",
   "sourceRef": "pages 2026, 2027",
   "firstSeen": "2026-10-05",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-18",
   "confidence": 0.9,
   "matchKey": "diva-lourdes-gcal|brumidi-lodge|dance-with-lourdes|monday|19:45|class-lesson||latin-ballroom|repeat"
 }

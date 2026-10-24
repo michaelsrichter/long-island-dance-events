@@ -1,0 +1,24 @@
+{
+  "title": "Taylor Lane at Hotel Moraine",
+  "summary": "Live music by Taylor Lane at Hotel Moraine. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-01-16",
+  "timezone": "America/New_York",
+  "venueId": "hotel-moraine-greenport",
+  "town": "Greenport",
+  "performerIds": [
+    "taylor-lane"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-p9hy6-7ysl3-hz6fr-p9sxg-yym44",
+  "status": "active",
+  "sourceId": "hotel-moraine",
+  "sourceUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-p9hy6-7ysl3-hz6fr-p9sxg-yym44",
+  "sourceName": "Hotel Moraine (Greenport) - events",
+  "sourceRef": "events page 2027-01-16",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.6,
+  "matchKey": "hotel-moraine|hotel-moraine-greenport||saturday|tba|live-music|taylor-lane||2027-01-16",
+  "reviewNotes": "No start time found."
+}

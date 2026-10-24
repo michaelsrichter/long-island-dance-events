@@ -14,12 +14,13 @@
   "focus": "music",
   "lastCounts": {
     "found": 2,
-    "kept": 1,
+    "kept": 0,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:37:03.576Z",
-  "lastStatus": "ok",
+  "lastMessage": "The adapter found 2 listings but none could be used. The source layout may have changed.",
+  "lastScraped": "2026-10-22T15:41:34.255Z",
+  "lastStatus": "empty",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it as a local bar-music source. It looks dance-friendly but needs HTML scraping and filtering.",
   "url": "https://eleanorslounge.com/"

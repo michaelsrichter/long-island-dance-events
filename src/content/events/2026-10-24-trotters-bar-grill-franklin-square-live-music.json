@@ -8,17 +8,17 @@
   "venueId": "trotters-bar-grill-franklin-square",
   "town": "Franklin Square",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-14",
   "dancingCues": [
     "acoustic"
   ],
   "confidence": 0.7,
   "matchKey": "iraslist|2026-10-24|trotters-bar-grill-franklin-square|roadkill-duo|2026-10-24|special",
-  "reviewNotes": "Band or DJ not researched yet: Roadkill Duo."
+  "reviewNotes": "Band or DJ not researched yet: Roadkill Duo. Not found in the latest iraslist run on 2026-10-15. Check whether it was cancelled or moved."
 }

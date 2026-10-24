@@ -1,0 +1,26 @@
+{
+  "title": "Brad Penuel Duo at The Pridwin Hotel & Cottages",
+  "summary": "Live music by Brad Penuel Duo at The Pridwin Hotel & Cottages. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-31",
+  "timezone": "America/New_York",
+  "venueId": "the-pridwin-shelter-island",
+  "town": "Shelter Island",
+  "performerIds": [
+    "brad-penuel-duo"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "the-pridwin-hotel-cottages-shelter-island",
+  "sourceUrl": "https://www.caperesorts.com/pridwin/events-calendar",
+  "sourceName": "The Pridwin Hotel & Cottages - live music calendar",
+  "sourceRef": "events page 2026-10-31",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "dancingCues": [
+    "acoustic"
+  ],
+  "confidence": 0.6,
+  "matchKey": "the-pridwin-hotel-cottages-shelter-island|the-pridwin-shelter-island||saturday|tba|live-music|brad-penuel-duo||2026-10-31",
+  "reviewNotes": "No start time found."
+}

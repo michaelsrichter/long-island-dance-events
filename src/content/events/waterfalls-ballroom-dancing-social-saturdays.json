@@ -17,7 +17,7 @@
   "town": "Lake Ronkonkoma",
   "organizerId": "waterfalls-ballroom-dancing",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "waterfalls-ballroom",
   "sourceUrl": "https://waterfallsapartments.com/event-calendar/",
   "sourceName": "The Waterfalls (Lake Ronkonkoma) - community event calendar",
@@ -25,5 +25,6 @@
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-10-05",
   "confidence": 0.8,
-  "matchKey": "waterfalls-ballroom|waterfalls-ballroom|waterfalls-ballroom-dancing|saturday|19:00|social-dance||ballroom|repeat"
+  "matchKey": "waterfalls-ballroom|waterfalls-ballroom|waterfalls-ballroom-dancing|saturday|19:00|social-dance||ballroom|repeat",
+  "reviewNotes": "Not found in the latest waterfalls-ballroom run on 2026-10-18. Check whether it was cancelled or moved."
 }

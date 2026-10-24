@@ -11,7 +11,7 @@
   "venueId": "the-pridwin-shelter-island",
   "town": "Shelter Island",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "the-pridwin-hotel-cottages-shelter-island",
   "sourceUrl": "https://www.caperesorts.com/pridwin/events-calendar",
   "sourceName": "The Pridwin Hotel & Cottages - live music calendar",
@@ -19,5 +19,6 @@
   "firstSeen": "2026-10-05",
   "lastSeen": "2026-10-05",
   "confidence": 0.75,
-  "matchKey": "the-pridwin-hotel-cottages-shelter-island|the-pridwin-shelter-island||friday|18:00|live-music|||repeat"
+  "matchKey": "the-pridwin-hotel-cottages-shelter-island|the-pridwin-shelter-island||friday|18:00|live-music|||repeat",
+  "reviewNotes": "Not found in the latest the-pridwin-hotel-cottages-shelter-island run on 2026-10-18. Check whether it was cancelled or moved."
 }

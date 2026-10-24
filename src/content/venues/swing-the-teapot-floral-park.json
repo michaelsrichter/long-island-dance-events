@@ -1,0 +1,11 @@
+{
+  "name": "Swing the Teapot",
+  "address": "6 Verbena Ave",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Floral Park",
+  "latitude": 40.724546,
+  "longitude": -73.704802,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

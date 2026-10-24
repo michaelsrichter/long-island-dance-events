@@ -14,12 +14,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 10,
-    "kept": 2,
+    "found": 8,
+    "kept": 1,
     "needsReview": 0,
     "outOfArea": 3
   },
-  "lastScraped": "2026-10-05T06:37:40.244Z",
+  "lastScraped": "2026-10-18T13:29:04.990Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Long Island band schedule explicitly invites people to dance and lists Shelter Island, Sag Harbor, Patchogue, and Amagansett shows.",

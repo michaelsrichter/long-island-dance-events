@@ -1,0 +1,30 @@
+{
+  "title": "The Soul Jam Revue at Half Hollow Hills Community Library (Dix Hills)",
+  "summary": "Live music by The Soul Jam Revue at Half Hollow Hills Community Library (Dix Hills) in Dix Hills. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-11-08T14:00",
+  "end": "2026-11-08T17:00",
+  "timezone": "America/New_York",
+  "venueId": "half-hollow-hills-library-dix-hills",
+  "town": "Dix Hills",
+  "performerIds": [
+    "the-soul-jam-revue"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-23",
+  "lastSeen": "2026-10-24",
+  "dancingCues": [
+    "jam",
+    "library"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-08|half-hollow-hills-library-dix-hills|the-soul-jam-revue-returning-to-half|2026-11-08|special"
+}

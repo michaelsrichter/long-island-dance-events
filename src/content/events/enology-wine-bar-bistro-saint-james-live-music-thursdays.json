@@ -16,7 +16,7 @@
     "austin-merullo"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "enology-wine-bar-bistro-saint-james",
   "sourceUrl": "https://enologywinebar.com/events/live-music/",
   "sourceName": "Enology Wine Bar & Bistro - live music calendar",
@@ -24,5 +24,6 @@
   "firstSeen": "2026-10-05",
   "lastSeen": "2026-10-05",
   "confidence": 0.8,
-  "matchKey": "enology-wine-bar-bistro-saint-james|enology-wine-bar-bistro-saint-james||thursday|18:00|live-music|austin-merullo||repeat"
+  "matchKey": "enology-wine-bar-bistro-saint-james|enology-wine-bar-bistro-saint-james||thursday|18:00|live-music|austin-merullo||repeat",
+  "reviewNotes": "Not found in the latest enology-wine-bar-bistro-saint-james run on 2026-10-18. Check whether it was cancelled or moved."
 }

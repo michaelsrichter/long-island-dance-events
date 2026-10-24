@@ -1,0 +1,26 @@
+{
+  "title": "The Legendary Murphys at Sonny's Canal House",
+  "summary": "Live music by The Legendary Murphys at Sonny's Canal House in Baldwin. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-11-14T20:00",
+  "end": "2026-11-14T23:00",
+  "timezone": "America/New_York",
+  "venueId": "sonnys-canal-house-baldwin",
+  "town": "Baldwin",
+  "performerIds": [
+    "the-legendary-murphys"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-23",
+  "lastSeen": "2026-10-24",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-14|sonnys-canal-house-baldwin|legendary-murphys-band|2026-11-14|special"
+}

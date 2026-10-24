@@ -1,0 +1,11 @@
+{
+  "name": "My Pappa Gallo",
+  "address": "273 Sunrise Hwy",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Out on the Town - Long Island event calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Rockville Centre",
+  "latitude": 40.65745,
+  "longitude": -73.644127,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

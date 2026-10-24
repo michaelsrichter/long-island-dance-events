@@ -1,0 +1,28 @@
+{
+  "title": "Line Dancing class at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Group class in Line Dancing.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "line-dancing"
+  ],
+  "start": "2026-10-25T16:00",
+  "end": "2026-10-25T20:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/line-dance-sunday-at-daisys-miller-place/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/line-dance-sunday-at-daisys-miller-place/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-25",
+  "firstSeen": "2026-10-19",
+  "lastSeen": "2026-10-22",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||sunday|16:00|class-lesson||line-dancing|2026-10-25"
+}

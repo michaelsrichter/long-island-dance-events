@@ -1,0 +1,21 @@
+{
+  "title": "Peat Moss at Plattduetsche Park Restaurant",
+  "summary": "Live music by Peat Moss at Plattduetsche Park Restaurant in Franklin Square. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-06T19:00",
+  "end": "2026-11-06T23:00",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-12",
+  "lastSeen": "2026-10-24",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-06|plattduetsche-park-franklin-square|peat-moss|2026-11-06|special",
+  "reviewNotes": "Band or DJ not researched yet: Peat Moss."
+}

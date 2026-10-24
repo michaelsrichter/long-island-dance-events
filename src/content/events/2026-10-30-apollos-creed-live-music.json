@@ -10,13 +10,14 @@
     "apollos-creed"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "bartini-babylon",
   "sourceUrl": "https://www.bartinibabylon.com/event-calendar",
   "sourceName": "Bartini Bar & Lounge (Babylon) - event calendar",
   "sourceRef": "events page 2026-10-30",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-12",
   "confidence": 0.8,
-  "matchKey": "bartini-babylon|bartini-babylon||friday|20:00|live-music|apollos-creed||2026-10-30"
+  "matchKey": "bartini-babylon|bartini-babylon||friday|20:00|live-music|apollos-creed||2026-10-30",
+  "reviewNotes": "Not found in the latest bartini-babylon run on 2026-10-15. Check whether it was cancelled or moved."
 }

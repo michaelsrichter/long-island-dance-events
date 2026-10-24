@@ -1,0 +1,21 @@
+{
+  "title": "Concussion Protocol and No Exit at Lilah’s Bar and Grill",
+  "summary": "Live music by Concussion Protocol and No Exit at Lilah’s Bar and Grill in East Rockaway. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-31T20:00",
+  "end": "2026-10-31T23:30",
+  "timezone": "America/New_York",
+  "venueId": "lilahs-bar-and-grill-east-rockaway",
+  "town": "East Rockaway",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-14",
+  "lastSeen": "2026-10-24",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-31|lilahs-bar-and-grill-east-rockaway|concussion-protocol-no-exit|2026-10-31|special",
+  "reviewNotes": "Band or DJ not researched yet: Concussion Protocol, No Exit."
+}

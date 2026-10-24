@@ -1,0 +1,21 @@
+{
+  "title": "Nostalgix at Claudio's",
+  "summary": "Live music by Nostalgix at Claudio's in Greenport. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-18T13:30",
+  "end": "2026-10-18T17:30",
+  "timezone": "America/New_York",
+  "venueId": "claudios-greenport",
+  "town": "Greenport",
+  "skillLevel": "all-levels",
+  "status": "past",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-15",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-18|claudios-greenport|nostalgix|2026-10-18|special",
+  "reviewNotes": "Band or DJ not researched yet: Nostalgix."
+}

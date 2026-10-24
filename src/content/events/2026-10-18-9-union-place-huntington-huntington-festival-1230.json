@@ -1,0 +1,26 @@
+{
+  "title": "Dance festival at 9 Union Place, Huntington",
+  "summary": "A larger dance event.",
+  "category": "festival",
+  "start": "2026-10-18T12:30",
+  "end": "2026-10-18T20:00",
+  "timezone": "America/New_York",
+  "venueId": "9-union-place-huntington-huntington",
+  "town": "Huntington",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/first-annual-huntington-italian-festival-free/?occurrence=2026-10-18",
+  "status": "past",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/first-annual-huntington-italian-festival-free/?occurrence=2026-10-18",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-10-18",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "dancingCues": [
+    "afternoon",
+    "festival"
+  ],
+  "confidence": 0.85,
+  "matchKey": "huntington-matters|9-union-place-huntington-huntington||sunday|12:30|festival|||2026-10-18"
+}

@@ -11,10 +11,10 @@
   "lastCounts": {
     "found": 185,
     "kept": 112,
-    "needsReview": 4,
+    "needsReview": 2,
     "outOfArea": 73
   },
-  "lastScraped": "2026-10-05T06:45:05.051Z",
+  "lastScraped": "2026-10-18T13:35:22.835Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "url": "https://www.thedancecalendar.com/dance-calendar"

@@ -1,0 +1,25 @@
+{
+  "title": "Cover2Cover Duo at Park Place",
+  "summary": "Live music by Cover2Cover Duo at Park Place in New Hyde Park. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-23T20:00",
+  "end": "2026-10-23T23:00",
+  "timezone": "America/New_York",
+  "venueId": "park-place-new-hyde-park",
+  "town": "New Hyde Park",
+  "skillLevel": "all-levels",
+  "status": "past",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-23",
+  "lastSeen": "2026-10-23",
+  "dancingCues": [
+    "acoustic",
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-23|park-place-new-hyde-park|cover2cover-duo|2026-10-23|special",
+  "reviewNotes": "Band or DJ not researched yet: Cover2Cover Duo. New venue was added automatically. Check it."
+}

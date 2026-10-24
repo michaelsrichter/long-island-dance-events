@@ -1,0 +1,23 @@
+{
+  "title": "Live music at Popei’s Clam Bar",
+  "summary": "Live music at Popei’s Clam Bar. The dancing score on this page says whether people usually dance. Food is included.",
+  "category": "live-music",
+  "start": "2026-10-15T19:00",
+  "end": "2026-10-15T22:00",
+  "timezone": "America/New_York",
+  "venueId": "popeis-clam-bar-bethpage",
+  "town": "Bethpage",
+  "price": 75,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/%f0%9f%94%a5-on-sale-now-and-tickets-are-going-fast-%f0%9f%94%a5/",
+  "status": "past",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/%f0%9f%94%a5-on-sale-now-and-tickets-are-going-fast-%f0%9f%94%a5/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-10-15",
+  "firstSeen": "2026-10-15",
+  "lastSeen": "2026-10-15",
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|popeis-clam-bar-bethpage||thursday|19:00|live-music|||2026-10-15",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

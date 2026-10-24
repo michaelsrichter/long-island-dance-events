@@ -1,0 +1,26 @@
+{
+  "title": "Blues Society Fundraiser at Kitty Mulligan's Irish Pub",
+  "summary": "Live music by Blues Society Fundraiser at Kitty Mulligan's Irish Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-25T15:00",
+  "end": "2026-10-25T18:00",
+  "timezone": "America/New_York",
+  "venueId": "kitty-mulligans-bay-shore",
+  "town": "Bay Shore",
+  "price": 8,
+  "priceMax": 10,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "kitty-mulligans-bay-shore",
+  "sourceUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+  "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
+  "sourceRef": "events page 2026-10-25",
+  "firstSeen": "2026-10-22",
+  "lastSeen": "2026-10-22",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.75,
+  "matchKey": "kitty-mulligans-bay-shore|kitty-mulligans-bay-shore||sunday|15:00|live-music|bluessocietyfundraiser||2026-10-25",
+  "reviewNotes": "Band or DJ not researched yet: Blues Society Fundraiser."
+}

@@ -7,14 +7,14 @@
   "venueId": "bartini-babylon",
   "town": "Babylon",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "bartini-babylon",
   "sourceUrl": "https://www.bartinibabylon.com/event-calendar",
   "sourceName": "Bartini Bar & Lounge (Babylon) - event calendar",
   "sourceRef": "events page 2026-10-24",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-12",
   "confidence": 0.75,
   "matchKey": "bartini-babylon|bartini-babylon||saturday|20:30|live-music|jeffreid||2026-10-24",
-  "reviewNotes": "Band or DJ not researched yet: JEFF REID."
+  "reviewNotes": "Band or DJ not researched yet: JEFF REID. Not found in the latest bartini-babylon run on 2026-10-15. Check whether it was cancelled or moved."
 }

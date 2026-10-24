@@ -11,17 +11,18 @@
   "venueId": "mulcahys-wantagh",
   "town": "Wantagh",
   "skillLevel": "all-levels",
-  "infoUrl": "https://mulcahyslongisland.com/event/happy-hour-2/",
-  "status": "active",
+  "infoUrl": "https://mulcahyslongisland.com/event/happy-hour-3/",
+  "status": "pending-review",
   "sourceId": "mulcahys-wantagh",
-  "sourceUrl": "https://mulcahyslongisland.com/event/happy-hour-2/",
+  "sourceUrl": "https://mulcahyslongisland.com/event/happy-hour-3/",
   "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
-  "sourceRef": "calendar feed 2026-10-09",
+  "sourceRef": "calendar feed 2026-10-16",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-15",
   "dancingCues": [
     "afternoon"
   ],
   "confidence": 0.85,
-  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|16:00|live-music|||repeat"
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|16:00|live-music|||repeat",
+  "reviewNotes": "Not found in the latest mulcahys-wantagh run on 2026-10-19. Check whether it was cancelled or moved."
 }

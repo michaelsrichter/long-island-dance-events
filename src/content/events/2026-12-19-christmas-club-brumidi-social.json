@@ -13,7 +13,7 @@
   "organizerId": "club-brumidi",
   "skillLevel": "all-levels",
   "infoUrl": "https://sonsofitalyli.com/event/christmas-party-dinner-dance/",
-  "status": "active",
+  "status": "pending-review",
   "sourceId": "brumidi-lodge-deer-park",
   "sourceUrl": "https://sonsofitalyli.com/event/christmas-party-dinner-dance/",
   "sourceName": "Club Brumidi at Brumidi Lodge (Deer Park) - events",
@@ -22,5 +22,5 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.6,
   "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|saturday|tba|social-dance||ballroom+latin-ballroom|2026-12-19|christmas",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Not found in the latest brumidi-lodge-deer-park run on 2026-10-18. Check whether it was cancelled or moved."
 }

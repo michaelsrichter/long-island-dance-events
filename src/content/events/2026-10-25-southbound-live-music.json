@@ -1,0 +1,31 @@
+{
+  "title": "SouthBound at Tanner Park",
+  "summary": "Live music by SouthBound at Tanner Park in Copiague. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle",
+    "line-dancing"
+  ],
+  "start": "2026-10-25T14:00",
+  "end": "2026-10-25T16:00",
+  "timezone": "America/New_York",
+  "venueId": "tanner-park-copiague",
+  "town": "Copiague",
+  "performerIds": [
+    "southbound"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-23",
+  "lastSeen": "2026-10-24",
+  "dancingCues": [
+    "festival",
+    "outdoor"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-25|tanner-park-copiague|southbound|2026-10-25|special"
+}

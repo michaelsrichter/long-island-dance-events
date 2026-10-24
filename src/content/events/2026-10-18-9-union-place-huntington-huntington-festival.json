@@ -1,0 +1,25 @@
+{
+  "title": "Dance festival at 9 Union Place, Huntington",
+  "summary": "A larger dance event.",
+  "category": "festival",
+  "start": "2026-10-18T08:00",
+  "timezone": "America/New_York",
+  "venueId": "9-union-place-huntington-huntington",
+  "town": "Huntington",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/new-date-sorrentino-way-street-dedication-honoring-andrea-luisa-sorrentino-free/?occurrence=2026-10-18",
+  "status": "pending-review",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/new-date-sorrentino-way-street-dedication-honoring-andrea-luisa-sorrentino-free/?occurrence=2026-10-18",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-10-18",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.4,
+  "matchKey": "huntington-matters|9-union-place-huntington-huntington||sunday|08:00|festival|||2026-10-18",
+  "reviewNotes": "New venue was added automatically. Check it. Start time looks wrong (8:00 in the morning). Check the source."
+}

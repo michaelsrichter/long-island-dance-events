@@ -10,13 +10,13 @@
     "who-are-those-guys"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "past",
   "sourceId": "who-are-those-guys",
   "sourceUrl": "https://whoarethoseguys.com/calendar",
   "sourceName": "Who Are Those Guys - live music calendar",
   "sourceRef": "events page 2026-10-18",
   "firstSeen": "2026-10-05",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-18",
   "dancingCues": [
     "afternoon"
   ],

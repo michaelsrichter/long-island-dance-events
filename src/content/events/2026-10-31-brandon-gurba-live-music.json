@@ -1,0 +1,24 @@
+{
+  "title": "Brandon Gurba at Hotel Moraine",
+  "summary": "Live music by Brandon Gurba at Hotel Moraine. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-31",
+  "timezone": "America/New_York",
+  "venueId": "hotel-moraine-greenport",
+  "town": "Greenport",
+  "performerIds": [
+    "brandon-gurba"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-p9hy6",
+  "status": "active",
+  "sourceId": "hotel-moraine",
+  "sourceUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-p9hy6",
+  "sourceName": "Hotel Moraine (Greenport) - events",
+  "sourceRef": "events page 2026-10-31",
+  "firstSeen": "2026-10-18",
+  "lastSeen": "2026-10-18",
+  "confidence": 0.6,
+  "matchKey": "hotel-moraine|hotel-moraine-greenport||saturday|tba|live-music|brandon-gurba||2026-10-31",
+  "reviewNotes": "No start time found."
+}
