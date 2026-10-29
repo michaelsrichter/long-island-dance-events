@@ -8,7 +8,7 @@
   "town": "Patchogue",
   "priceNotes": "Pay at the door",
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "hidden",
   "sourceId": "eighty-nine-north",
   "sourceUrl": "https://89northmusic.com/calendar",
   "sourceName": "89 North (Patchogue) - music calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.55,
   "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||saturday|tba|live-music|completelyunchainedandsuperdupercooper||2026-10-10",
-  "reviewNotes": "Band or DJ not researched yet: Completely Unchained & Super Duper Cooper. No start time found."
+  "reviewNotes": "Band or DJ not researched yet: Completely Unchained & Super Duper Cooper. No start time found. Hidden automatically on 2026-10-28 because the event had ended and its details were still uncertain."
 }

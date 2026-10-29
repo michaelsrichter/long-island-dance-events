@@ -9,7 +9,7 @@
     "southbound"
   ],
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "hidden",
   "sourceId": "dancing-with-deanna",
   "sourceUrl": "https://www.dancingwithdeanna.com/events-1",
   "sourceName": "Dancing With Deanna - line-dance events",
@@ -18,5 +18,5 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.35,
   "matchKey": "dancing-with-deanna|north-patchogue||saturday|tba|live-music|southbound||2026-10-10",
-  "reviewNotes": "Venue not found in the listing. No start time found."
+  "reviewNotes": "Venue not found in the listing. No start time found. Hidden automatically on 2026-10-28 because the event had ended without a confirmed venue or start time."
 }

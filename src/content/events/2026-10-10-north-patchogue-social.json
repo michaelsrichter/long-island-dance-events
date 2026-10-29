@@ -6,7 +6,7 @@
   "timezone": "America/New_York",
   "town": "North Patchogue",
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "hidden",
   "sourceId": "dancing-with-deanna",
   "sourceUrl": "https://www.dancingwithdeanna.com/events-1",
   "sourceName": "Dancing With Deanna - line-dance events",
@@ -15,5 +15,5 @@
   "lastSeen": "2026-10-04",
   "confidence": 0.3,
   "matchKey": "dancing-with-deanna|north-patchogue||saturday|tba|social-dance|||2026-10-10",
-  "reviewNotes": "Venue not found in the listing. No start time found."
+  "reviewNotes": "Venue not found in the listing. No start time found. Hidden automatically on 2026-10-28 because the event had ended without a confirmed venue or start time."
 }

@@ -11,7 +11,7 @@ const crumbs = [
 const tabs = [
   { id: 'todo', label: 'To do' },
   { id: 'listings', label: 'Held listings' },
-  { id: 'publish', label: 'New events' },
+  { id: 'publish', label: 'Event updates' },
   { id: 'sources', label: 'Sources' },
   { id: 'messages', label: 'Messages' },
   { id: 'posts', label: 'Community posts' },
@@ -19,7 +19,7 @@ const tabs = [
 ];
 ---
 <BaseLayout title="Review center" description="Everything the site owner needs to check, in one place." pageType="moderate" noindex>
-  <PageHeader title="Review center" lede="Everything that needs you, in one place. Most weeks this takes about 10 minutes." crumbs={crumbs} />
+  <PageHeader title="Review center" lede="Safety, legal and exceptional corrections that still need a person, plus update logs." crumbs={crumbs} />
   <div class="container section review" data-review>
     <p class="spinner" data-review-loading role="status">Loading…</p>
     <p class="alert alert--info" data-review-signin hidden>This page is for the site owner and editors. <a href={loginHref(Astro.site!, '/moderate/')} data-review-signin-link>Sign in</a> with your editor email address.</p>
@@ -38,13 +38,12 @@ const tabs = [
         <div data-setup></div>
         <div class="review-grid" data-todo><p class="spinner" role="status">Checking what needs you…</p></div>
         <details class="review-details panel">
-          <summary>Your weekly 10-minute routine</summary>
+          <summary>What still needs a person</summary>
           <ol class="review-steps">
-            <li><strong>New events:</strong> after the Sunday email, open <a href="#publish">New events</a>. If the automatic checks passed, press <strong>Publish now</strong>.</li>
-            <li><strong>Held listings:</strong> open <a href="#listings">Held listings</a>. For each one, open the source page (where we found it). Then press the suggested button (Publish, Fix, Mark cancelled or Hide).</li>
             <li><strong>Messages:</strong> answer anything in <a href="#messages">Messages</a>. Answer requests to remove a listing first (within 7 days).</li>
             <li><strong>Community posts:</strong> approve or reject anything in <a href="#posts">Community posts</a>.</li>
             <li><strong>Sources:</strong> look at <a href="#sources">Sources</a> for anything that stopped working. Press <strong>Try again now</strong>, or <strong>Ask Copilot to fix it</strong>. If a website owner answered your email, it says <strong>new answer!</strong> under "Waiting for an answer". Read it, then press the button that matches what they said.</li>
+            <li><strong>Exceptional event corrections:</strong> use <a href="#listings">Held listings</a> only when an editor deliberately held an event. Routine uncertainty is hidden automatically.</li>
           </ol>
           <p class="review-hint">Changes show on the website a few minutes (usually about 5) after you press a button. Every decision is saved in the <a href="#log">Log</a>.</p>
         </details>
@@ -52,13 +51,13 @@ const tabs = [
 
       <section class="review-panel" id="listings" data-panel="listings" aria-labelledby="listings-h" hidden>
         <h2 id="listings-h" tabindex="-1">Held listings</h2>
-        <p class="review-intro">The weekly check found these listings but wasn't sure about them, so they're hidden from the website. For each one, check the source page (the website we got it from). Then publish it, fix it, mark it cancelled, or hide it. Changes show on the website in a few minutes.</p>
+        <p class="review-intro">These are exceptional listings an editor deliberately held. Routine uncertainty, missing source coverage and duplicate copies are hidden automatically and do not appear here. You can still publish, fix, cancel or hide a manually held listing.</p>
         <div class="review-panel" data-listings><p class="spinner" role="status">Loading held listings…</p></div>
       </section>
 
       <section class="review-panel" id="publish" data-panel="publish" aria-labelledby="publish-h" hidden>
-        <h2 id="publish-h" tabindex="-1">New events to publish</h2>
-        <p class="review-intro">Every day the website checks some of the calendars it follows (each calendar on its own schedule). New and changed events wait here until you publish them. When the automatic checks pass, press Publish now. The events show on the website in a few minutes.</p>
+        <h2 id="publish-h" tabindex="-1">Event update log</h2>
+        <p class="review-intro">Every day the website checks calendars on their own schedules. New and changed events publish automatically after CI passes for the exact update. Uncertain listings stay hidden. This tab shows progress and history; manual publishing remains only as an exceptional fallback.</p>
         <div class="review-panel" data-publish><p class="spinner" role="status">Loading…</p></div>
       </section>
 

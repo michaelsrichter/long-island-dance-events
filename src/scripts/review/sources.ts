@@ -89,7 +89,7 @@ export function renderSources(root: HTMLElement, d: SourcesData, o: OutreachSumm
   const run = async (body: Record<string, string>, b: HTMLButtonElement, what: string) => {
     const r = await api('/api/review/run', body);
     if (r.status !== 200) return say(errorText(r));
-    b.replaceWith(el('p', `Started: ${what}. It takes 5 to 30 minutes. New events then wait under "New events".`, 'review-state review-state--ok'));
+    b.replaceWith(el('p', `Started: ${what}. It takes 5 to 30 minutes, then publishes automatically if all checks pass.`, 'review-state review-state--ok'));
     say(`Started: ${what}.`);
   };
 
@@ -250,7 +250,7 @@ export function renderSources(root: HTMLElement, d: SourcesData, o: OutreachSumm
   /* ---- run collection now ---- */
   const runBox = el('section', null, 'review-card');
   runBox.append(el('h3', 'Check sources now'));
-  runBox.append(el('p', 'Checks run by themselves every day. Use these buttons only if you want new events sooner. They then wait under "New events".', 'review-hint'));
+  runBox.append(el('p', 'Checks run by themselves every day. Use these buttons only if you want new events sooner. Successful event-only updates publish automatically.', 'review-hint'));
   const runRow = el('div', null, 'review-actions');
   runRow.append(
     button('Check the daily sources', 'btn--secondary', (b) => run({ cadence: 'daily' }, b, 'the daily sources')),

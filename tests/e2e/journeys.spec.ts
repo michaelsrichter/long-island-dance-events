@@ -1,4 +1,30 @@
+import { readFileSync } from 'node:fs';
 import { test, expect, firstEventUrl } from './fixtures';
+
+const placeData = JSON.parse(readFileSync(new URL('../../src/data/long-island-places.json', import.meta.url), 'utf8')) as {
+  aliases: Record<string, string>;
+  places: { name: string; county: string }[];
+};
+const countyByTown = new Map(placeData.places.map((place) => [place.name, place.county]));
+for (const [alias, canonical] of Object.entries(placeData.aliases)) {
+  const county = countyByTown.get(canonical);
+  if (county) countyByTown.set(alias, county);
+}
+
+async function expectOnlyLongIslandLocations(page: import('@playwright/test').Page) {
+  const locations = await page.locator('[data-upcoming-list] [data-event]').evaluateAll((els) =>
+    els.map((e) => {
+      const data = (e as HTMLElement).dataset;
+      return { county: data.county || '', town: data.town || '' };
+    }),
+  );
+  expect(
+    locations.filter(({ county, town }) => {
+      const townCounty = countyByTown.get(town);
+      return !townCounty || (county !== '' && county !== townCounty);
+    }),
+  ).toEqual([]);
+}
 
 test.describe('finding something to dance to', () => {
   test('the homepage leads with dances, shows today, quick links with counts, and a search box', async ({ pinned: page }) => {
@@ -74,9 +100,20 @@ test.describe('finding something to dance to', () => {
 
   test('only Nassau and Suffolk events are listed', async ({ pinned: page }) => {
     await page.goto('/events/');
-    const counties = await page.locator('[data-upcoming-list] [data-event]').evaluateAll((els) => [...new Set(els.map((e) => (e as HTMLElement).dataset.county))]);
-    expect(counties.filter((c) => c && !['Nassau', 'Suffolk'].includes(c))).toEqual([]);
-    await expect(page.locator('[data-upcoming-list]')).not.toContainText(/Queens|Brooklyn|Little Neck/);
+    await expectOnlyLongIslandLocations(page);
+  });
+
+  test('a Nassau or Suffolk event may say Queens in its title or performer name', async ({ pinned: page }) => {
+    await page.goto('/events/');
+    const card = page.locator('[data-upcoming-list] [data-event][data-county="Nassau"], [data-upcoming-list] [data-event][data-county="Suffolk"]').first();
+    await expect(card).toBeAttached();
+    await card.evaluate((element) => {
+      const regressionText = document.createElement('span');
+      regressionText.textContent = 'Kings & Queens Gatsby Party';
+      element.append(regressionText);
+    });
+    await expect(card).toContainText('Queens');
+    await expectOnlyLongIslandLocations(page);
   });
 });
 

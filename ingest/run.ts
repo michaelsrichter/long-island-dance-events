@@ -30,6 +30,7 @@ export interface SourceReport {
   kept: number;
   outOfArea: { town: string; count: number }[];
   merge?: MergeStats | undefined;
+  hidden: { id: string; reason: string }[];
   review: { id: string; reason: string }[];
   invalid: { id: string; error: string }[];
   /** New listings not added because another source already lists the same evening. */
@@ -42,7 +43,7 @@ export interface RunReport {
   dryRun: boolean;
   sources: SourceReport[];
   created: { venues: string[]; performers: string[]; instructors: string[]; organizers: string[] };
-  totals: { activeEvents: number; needsReview: number; changedFiles: number };
+  totals: { activeEvents: number; needsReview: number; hidden: number; changedFiles: number };
 }
 
 function args(argv: string[]) {
@@ -58,13 +59,13 @@ function args(argv: string[]) {
 
 export function reportMarkdown(r: RunReport): string {
   const lines = [`# Weekly event update: ${r.today}`, '', r.dryRun ? '_Dry run: no files were written._\n' : ''];
-  lines.push('| Source | Result | Listings found | Kept (Long Island) | New | Updated | Unchanged | Ended | Missing | Needs review |');
+  lines.push('| Source | Result | Listings found | Kept (Long Island) | New | Updated | Unchanged | Ended | Missing | Hidden automatically |');
   lines.push('| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |');
   for (const s of r.sources) {
     const m = s.merge;
-    lines.push(`| ${s.name} | ${s.status === 'ok' ? 'OK' : `**${s.status.toUpperCase()}**`} | ${s.found} | ${s.kept} | ${m?.new ?? 0} | ${m?.updated ?? 0} | ${m?.unchanged ?? 0} | ${m?.expired ?? 0} | ${m?.missing ?? 0} | ${s.review.length} |`);
+    lines.push(`| ${s.name} | ${s.status === 'ok' ? 'OK' : `**${s.status.toUpperCase()}**`} | ${s.found} | ${s.kept} | ${m?.new ?? 0} | ${m?.updated ?? 0} | ${m?.unchanged ?? 0} | ${m?.expired ?? 0} | ${m?.missing ?? 0} | ${s.hidden.length} |`);
   }
-  lines.push('', 'What the columns mean: **Listings found** = everything in the source. **Kept** = listings in Nassau or Suffolk. **New** = events we had not seen before. **Updated** = events whose details changed. **Ended** = events whose last date has passed. **Missing** = listings that disappeared from the source, so a person should check them. **Needs review** = hidden from the public site until someone checks them.', '');
+  lines.push('', 'What the columns mean: **Listings found** = everything in the source. **Kept** = listings in Nassau or Suffolk. **New** = events we had not seen before. **Updated** = events whose details changed. **Ended** = events whose last date has passed. **Missing** = listings that disappeared from current source coverage. **Hidden automatically** = uncertain, missing, or superseded listings kept in the history but not shown on the public site.', '');
   for (const s of r.sources) {
     if (s.message) lines.push(`- **${s.name}:** ${s.message}`);
     if (s.outOfArea.length) lines.push(`- ${s.name}: skipped ${s.outOfArea.reduce((n, o) => n + o.count, 0)} listings outside Long Island (${s.outOfArea.map((o) => `${o.town} ${o.count}`).join(', ')}).`);
@@ -73,16 +74,22 @@ export function reportMarkdown(r: RunReport): string {
   }
   const created = Object.entries(r.created).filter(([, v]) => v.length);
   if (created.length) {
-    lines.push('', '## New records added automatically (please check)', '');
+    lines.push('', '## New records added automatically (optional research)', '');
     for (const [k, v] of created) lines.push(`- ${k}: ${v.map((x) => `\`${x}\``).join(', ')}`);
+  }
+  const hidden = r.sources.flatMap((s) => s.hidden);
+  if (hidden.length) {
+    lines.push('', `## Hidden automatically (${hidden.length})`, '');
+    for (const x of hidden.slice(0, 40)) lines.push(`- \`${x.id}\`: ${x.reason}`);
+    if (hidden.length > 40) lines.push(`- …and ${hidden.length - 40} more`);
   }
   const review = r.sources.flatMap((s) => s.review);
   if (review.length) {
-    lines.push('', `## Waiting for review (${review.length})`, '');
+    lines.push('', `## Manually held by an editor (${review.length})`, '');
     for (const x of review.slice(0, 40)) lines.push(`- \`${x.id}\`: ${x.reason}`);
     if (review.length > 40) lines.push(`- …and ${review.length - 40} more`);
   }
-  lines.push('', `Totals: ${r.totals.activeEvents} listed events, ${r.totals.needsReview} waiting for review, ${r.totals.changedFiles} files changed.`);
+  lines.push('', `Totals: ${r.totals.activeEvents} listed events, ${r.totals.hidden} hidden automatically this run, ${r.totals.needsReview} manually held, ${r.totals.changedFiles} files changed.`);
   return lines.filter((l, i, a) => !(l === '' && a[i - 1] === '')).join('\n') + '\n';
 }
 
@@ -94,7 +101,7 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
   const log = (m: string) => console.log(`[ingest] ${m}`);
   const registry = Registry.load();
   const fetcher = new PoliteFetcher(join(ROOT, '.cache', 'ingest'), { offline, log });
-  const report: RunReport = { startedAt: new Date().toISOString(), today, dryRun, sources: [], created: { venues: [], performers: [], instructors: [], organizers: [] }, totals: { activeEvents: 0, needsReview: 0, changedFiles: 0 } };
+  const report: RunReport = { startedAt: new Date().toISOString(), today, dryRun, sources: [], created: { venues: [], performers: [], instructors: [], organizers: [] }, totals: { activeEvents: 0, needsReview: 0, hidden: 0, changedFiles: 0 } };
   const changed = new Set<string>();
   const only = typeof a.source === 'string' ? a.source : undefined;
   const cadences = typeof a.cadence === 'string' ? new Set(a.cadence.split(',').map((c) => c.trim()).filter(Boolean)) : undefined;
@@ -106,7 +113,7 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
   for (const [id, source] of ordered) {
     if (only && id !== only) continue;
     if (cadences && !only && !cadences.has(source.cadence)) continue;
-    const sr: SourceReport = { id, name: source.name, status: 'skipped', documents: [], found: 0, kept: 0, outOfArea: [], review: [], invalid: [] };
+    const sr: SourceReport = { id, name: source.name, status: 'skipped', documents: [], found: 0, kept: 0, outOfArea: [], hidden: [], review: [], invalid: [] };
     report.sources.push(sr);
     if (!source.enabled && !only) {
       sr.message = 'Turned off in the source settings.';
@@ -151,6 +158,7 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
         }
       }
       sr.merge = merged.stats;
+      sr.hidden = merged.hidden;
       sr.review = merged.review;
       sr.duplicates = merged.duplicates;
       sr.status = sr.invalid.length > Math.max(3, drafts.length / 10) ? 'invalid' : 'ok';
@@ -175,6 +183,7 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
   for (const [kind, ids] of Object.entries(registry.created) as [keyof RunReport['created'], Set<string>][]) report.created[kind] = [...ids].sort();
   report.totals.activeEvents = [...registry.events.values()].filter((e) => e.status === 'active').length;
   report.totals.needsReview = [...registry.events.values()].filter((e) => e.status === 'pending-review').length;
+  report.totals.hidden = report.sources.reduce((count, source) => count + source.hidden.length, 0);
 
   if (!dryRun) {
     let n = 0;

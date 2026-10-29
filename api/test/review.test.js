@@ -20,6 +20,7 @@ const FILES = {
   'src/content/events/2099-10-11-copy.json': ev({ title: 'Copy of a dance', start: '2099-10-11T19:00', venueId: 'v1', status: 'pending-review', confidence: 1, reviewNotes: "The organizer's or band's own calendar now lists this (own-series), so that listing is shown instead of this copy." }),
   'src/content/events/2099-10-12-no-venue.json': ev({ title: 'Social dance', start: '2099-10-12T20:00', town: 'Syosset', status: 'pending-review', reviewNotes: 'Venue not found in the listing.' }),
   'src/content/events/2026-09-01-old.json': ev({ title: 'Old held one', start: '2026-09-01T20:00', venueId: 'v1', status: 'pending-review', reviewNotes: 'No start time found.' }),
+  'src/content/events/2099-10-13-machine-hidden.json': ev({ title: 'Machine-hidden listing', start: '2099-10-13T20:00', venueId: 'v1', status: 'hidden', reviewNotes: 'Hidden automatically because its confidence score (0.40) is below the 0.60 publishing threshold.' }),
   'src/content/events/2099-10-20-listed.json': ev({ title: 'Listed already', start: '2099-10-20T20:00', venueId: 'v1', status: 'active', confidence: 1 }),
   'src/content/sources/s1.json': `${JSON.stringify({ name: 'Source One', url: 'https://one.example/', type: 'html', adapter: 'htmllist', cadence: 'weekly', enabled: true, attribution: 'One', lastStatus: 'error', lastMessage: 'HTTP 500' }, null, 2)}\n`,
   'src/content/sources/s2.json': `${JSON.stringify({ name: 'Source Two', url: 'https://two.example/', type: 'html', adapter: 'htmllist', enabled: false, attribution: 'Two', catalogStatus: 'needs-permission', permission: { status: 'needed', note: 'robots.txt says no' }, reviewNotes: 'Blocked.' }, null, 2)}\n`,
@@ -203,6 +204,7 @@ test('held listings: reasons in plain codes, suggested step, ended ones flagged'
   assert.equal(r.status, 200);
   const by = Object.fromEntries(r.body.listings.map((l) => [l.id, l]));
   assert.deepEqual(Object.keys(by).sort(), ['2026-09-01-old', '2099-10-10-no-time', '2099-10-11-copy', '2099-10-12-no-venue', '2099-10-16-odd']);
+  assert.equal(by['2099-10-13-machine-hidden'], undefined, 'machine-hidden uncertainty never enters the owner queue');
   assert.deepEqual(by['2099-10-10-no-time'].reasons.map((x) => x.code), ['no-time', 'new-act']);
   assert.equal(by['2099-10-10-no-time'].reasons[1].name, 'The Max');
   assert.deepEqual(by['2099-10-16-odd'].reasons[0], { code: 'odd-time', said: '6:30 in the morning', suggest: '18:30' });
@@ -299,12 +301,12 @@ test('snooze hides a card for a while and can be undone', async () => {
   assert.equal((await call('reviewSnooze', '/api/review/snooze', { method: 'POST', user: ADMIN, body: { kind: 'nope', id: 'x' } })).status, 400);
 });
 
-test('collected events: report summary, and Publish now only when checks passed and nothing changed', async () => {
+test('collected events: automatic-publish report summary, with a guarded manual fallback', async () => {
   const head = 'b'.repeat(40);
   gh.pulls.push({
     number: 41,
     state: 'open',
-    title: 'Collected events: review and merge to publish',
+    title: 'Collected events: publish automatically after checks',
     html_url: `https://github.com/${REPO}/pull/41`,
     head: { ref: 'ingest/updates', sha: head },
     mergeable: true,
@@ -315,23 +317,23 @@ test('collected events: report summary, and Publish now only when checks passed 
     updated_at: '2026-10-05T10:00:00Z',
     body: [
       'Latest run: **weekly,monthly** on 2026-10-05.',
-      '| Source | Result | Listings found | Kept (Long Island) | New | Updated | Unchanged | Ended | Missing | Needs review |',
+      '| Source | Result | Listings found | Kept (Long Island) | New | Updated | Unchanged | Ended | Missing | Hidden automatically |',
       '| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |',
       '| Ira\'s List | OK | 120 | 100 | 12 | 3 | 85 | 0 | 1 | 2 |',
       '| Broken Bar | **ERROR** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |',
       '',
       '- **Broken Bar:** HTTP 500',
       '',
-      '## New records added automatically (please check)',
+      '## New records added automatically (optional research)',
       '',
       '- venues: `new-bar-babylon`',
       '- performers: `the-max`, `dead-monday`',
       '',
-      '## Waiting for review (2)',
+      '## Hidden automatically (2)',
       '',
       '- `x`: No start time found.',
       '',
-      'Totals: 650 listed events, 45 waiting for review, 52 files changed.',
+      'Totals: 650 listed events, 2 hidden automatically this run, 0 manually held, 52 files changed.',
     ].join('\n'),
   });
   gh.checkRuns[head] = [{ name: 'Type check, tests, build, links', status: 'in_progress', conclusion: null }];
@@ -342,7 +344,8 @@ test('collected events: report summary, and Publish now only when checks passed 
   assert.equal(rep.latest, 'weekly,monthly on 2026-10-05');
   assert.deepEqual(rep.sources.map((s) => [s.name, s.result, s.new]), [["Ira's List", 'OK', 12], ['Broken Bar', 'ERROR', 0]]);
   assert.deepEqual(rep.created, [{ kind: 'venues', id: 'new-bar-babylon' }, { kind: 'performers', id: 'the-max' }, { kind: 'performers', id: 'dead-monday' }]);
-  assert.equal(rep.waiting, 2);
+  assert.equal(rep.hidden, 2);
+  assert.equal(rep.sources[0].hidden, 2);
   assert.match(rep.totals, /^650 listed events/);
   assert.deepEqual(rep.notes, [{ source: 'Broken Bar', message: 'HTTP 500' }]);
 

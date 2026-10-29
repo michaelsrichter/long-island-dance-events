@@ -146,7 +146,7 @@ function sourceCard(id, s) {
 /** Facts from the run report in the pull request's description (ingest/run.ts reportMarkdown). */
 function parseReport(body) {
   const text = String(body || '');
-  const out = { latest: '', totals: '', sources: [], created: [], waiting: 0, notes: [] };
+  const out = { latest: '', totals: '', sources: [], created: [], hidden: 0, notes: [] };
   const latest = /Latest run: \*\*([^*]+)\*\* on (\d{4}-\d{2}-\d{2})/.exec(text);
   if (latest) out.latest = `${latest[1]} on ${latest[2]}`;
   const totals = /Totals: ([^\n]+)/.exec(text);
@@ -155,17 +155,17 @@ function parseReport(body) {
     const cells = line.split('|').slice(1, -1).map((c) => c.trim());
     if (cells.length === 10 && !/^-+:?$/.test(cells[2]) && cells[0] !== 'Source') {
       const n = (i) => Number(cells[i]) || 0;
-      out.sources.push({ name: cells[0], result: cells[1].replace(/\*/g, ''), found: n(2), kept: n(3), new: n(4), updated: n(5), unchanged: n(6), ended: n(7), missing: n(8), review: n(9) });
+      out.sources.push({ name: cells[0], result: cells[1].replace(/\*/g, ''), found: n(2), kept: n(3), new: n(4), updated: n(5), unchanged: n(6), ended: n(7), missing: n(8), hidden: n(9) });
     }
   }
-  const created = /## New records added automatically \(please check\)\n+([\s\S]*?)(?:\n## |\nTotals:|$)/.exec(text);
+  const created = /## New records added automatically \((?:optional research|please check)\)\n+([\s\S]*?)(?:\n## |\nTotals:|$)/.exec(text);
   if (created) {
     for (const m of created[1].matchAll(/^- (\w+): (.+)$/gm)) {
       for (const id of m[2].matchAll(/`([a-z0-9-]+)`/g)) out.created.push({ kind: m[1], id: id[1] });
     }
   }
-  const waiting = /## Waiting for review \((\d+)\)/.exec(text);
-  if (waiting) out.waiting = Number(waiting[1]);
+  const hidden = /## (?:Hidden automatically|Waiting for review) \((\d+)\)/.exec(text);
+  if (hidden) out.hidden = Number(hidden[1]);
   for (const m of text.matchAll(/^- \*\*([^*]+):\*\* (.+)$/gm)) out.notes.push({ source: m[1], message: m[2].slice(0, 300) });
   return out;
 }

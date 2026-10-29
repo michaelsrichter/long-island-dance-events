@@ -21,9 +21,11 @@ flowchart LR
     B -->|fetch politely| C[(Cache, not committed)]
     C --> D[Normalize: dates, times, prices,<br/>styles, venues, people]
     D --> E[Combine dates into<br/>repeating events]
-    E --> F[Merge with existing files<br/>mark past / needs review]
+    E --> F[Merge with existing files<br/>mark past / hide uncertainty]
     F --> G[Validate with Zod]
-    G --> H[Data files in git<br/>src/content/**]
+    G --> PR[Rolling event pull request]
+    PR --> CI[CI checks exact commit]
+    CI -->|pass| H[Auto-merge to main<br/>src/content/**]
   end
   H --> I[Astro static build] --> J[Azure Static Web Apps]
   K[Editors: Decap CMS at /admin/] --> H
@@ -35,7 +37,7 @@ flowchart LR
 - **Our own words:** titles and summaries are generated from facts (date, time, place, price, style, people). Original text is never republished. Every event records `sourceId` and `sourceUrl`, and the [Sources page](src/pages/sources.astro) credits each source and explains corrections, opt-outs and takedowns.
 - **Scope:** only Nassau and Suffolk counties. Towns are checked against `src/data/long-island-places.json` (303 places). Listings in Queens, Brooklyn and elsewhere are skipped and counted in the run report.
 
-**What runs every week, where, and what you need to do:** see [docs/how-weekly-updates-work.md](docs/how-weekly-updates-work.md) (plain language, with a diagram and the schedule).
+**What runs every week and where:** see [docs/how-weekly-updates-work.md](docs/how-weekly-updates-work.md) (plain language, with a diagram and the schedule). Routine event updates need no owner approval.
 
 ## Where the listings come from
 
@@ -91,16 +93,17 @@ What a run does:
 2. Reads the listings. For PDFs, `ingest/pdf/extract_calendar.py` uses font sizes and bold text to find day headings, sections and towns.
 3. Skips anything outside Nassau and Suffolk.
 4. Checks each listing's own words. On a dance calendar a listing must name a dance (or a class or lesson); on a calendar of everything in a town it must name a dance, live music or a band or DJ. A deadline ("RSVP by Oct 10"), the end of a date range, a "no class on" day, a post date, or a weekday that does not match the date never becomes a listing. A listing that says it happens off Long Island ("5th Avenue Manhattan") is skipped.
-5. Matches venues, organizers, teachers, bands/DJs and dance styles against the existing files (by name and aliases). Unknown venues and DJs are created with a review note.
+5. Matches venues, organizers, teachers, bands/DJs and dance styles against the existing files (by name and aliases). Unknown venues and DJs are created with an editor note for optional later research.
 6. Combines dates of the same listing into one repeating event with a rule such as "every Tuesday" or "1st and 3rd Friday of the month".
-7. Merges with existing files. It keeps `firstSeen`, respects `lockedFields` (fields an editor fixed by hand), marks ended events as `past`, and never deletes anything. Listings that vanish from a month the source still covers, or that the program is unsure about (confidence below 0.6), become `pending-review` and are hidden until someone checks them. A new listing for an evening another source already lists (same venue and day, same band or the same kind of event at about the same time) is not added twice; venues', clubs' and bands' own calendars run first, so their version is the one kept.
+7. Merges with existing files. It keeps `firstSeen`, respects `lockedFields` (fields an editor fixed by hand), marks ended events as `past`, and never deletes anything. Listings that vanish from current source coverage, fall below the 0.6 confidence threshold, or are superseded by an organizer's or band's own calendar become `hidden` automatically with an honest note. They can become `active` again when reliable data returns, unless an editor locked `status`. A new listing for an evening another source already lists (same venue and day, same band or the same kind of event at about the same time) is not added twice; venues', clubs' and bands' own calendars run first, so their version is the one kept.
 8. Validates every file with the Zod schemas, writes sorted JSON, and prints a run report.
 
 ### Scheduled runs (GitHub Actions)
 
 | Workflow | When | What it does |
 | --- | --- | --- |
-| `ingest-scheduled.yml` | Daily (`cadence: daily`), Monday and Thursday (`twice-weekly`), Sunday (`weekly`, `monthly`) | Collects, validates, builds the report database, and updates **one** rolling pull request (`ingest/updates`). The Sunday run requests review from and @mentions the owner, which is the weekly email. A source that finds nothing or breaks gets an issue labeled `ingest-failure` with a snapshot (sizes, hashes, page type; never the page text); after 3 failures in a row it is switched off in the pull request. |
+| `ingest-scheduled.yml` | Daily (`cadence: daily`), Monday and Thursday (`twice-weekly`), Sunday (`weekly`, `monthly`) | Collects, validates, builds the report database, and updates **one** rolling pull request (`ingest/updates`). It dispatches `CI` for the exact branch commit. A source that finds nothing or breaks gets an issue labeled `ingest-failure` with a snapshot (sizes, hashes, page type; never the page text); after 3 failures in a row it is switched off in the pull request. |
+| `ingest-auto-merge.yml` | After a successful manually dispatched `CI` run for `ingest/updates` | Uses the trusted workflow from `main` to verify the exact CI SHA, repository-owned head, open non-draft PR, clean merge state, `main` base, and that every changed file is under `src/content/`. It then creates a normal merge commit and keeps the rolling branch. |
 | `report-database.yml` | Every change to `src/content/**` on `main`, and monthly | Builds `data/li-dance.sqlite` (see [docs/database-plan.md](docs/database-plan.md)) and saves it, with the sample reports, as a download on the run page. |
 | `source-discovery.yml` | 1st of each month | Searches for new sources with Microsoft Web IQ (needs the repository secret `WEBIQ_API_KEY`): 85 Long Island-wide queries plus one twelfth of the town-by-town queries (`catalog/search-matrix.json`, every town again once a year). Rechecks every tracked source politely, and opens an issue with the results. Nothing is switched on automatically. |
 

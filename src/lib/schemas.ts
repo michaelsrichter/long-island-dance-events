@@ -30,8 +30,8 @@ export const CATEGORY_HELP: Record<(typeof EVENT_CATEGORIES)[number], string> = 
 };
 
 /**
- * active = listed; past = ended (kept for history); cancelled = shown as cancelled; pending-review = hidden until checked;
- * hidden = an editor decided not to list it (a copy, not real, not a dance). Never shown, never deleted, never relisted by the weekly run.
+ * active = listed; past = ended (kept for history); cancelled = shown as cancelled; pending-review = explicitly held by an editor;
+ * hidden = not listed because automation was uncertain or an editor decided to hide it. Never shown or deleted. An unlocked machine-hidden listing can be relisted when reliable data returns.
  */
 export const EVENT_STATUSES = ['active', 'past', 'cancelled', 'pending-review', 'hidden'] as const;
 export const SKILL_LEVELS = ['all-levels', 'beginner', 'intermediate', 'advanced', 'mixed'] as const;
@@ -269,7 +269,7 @@ export const eventSchema = z
     lastSeen: dateField,
     status: z.enum(EVENT_STATUSES).default('active'),
     cancelledNote: opt(z.string().max(200)),
-    /** 0-1: how sure the ingest was about this record. Low scores go to pending-review. */
+    /** 0-1: how sure the ingest was about this record. Low scores are hidden automatically. */
     confidence: z.coerce.number().min(0).max(1).default(1),
     /** Optional cached vector for "find similar" and dedup. Normally kept outside the content files. */
     embedding: optList(z.number()),

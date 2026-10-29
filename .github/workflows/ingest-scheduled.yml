@@ -1,10 +1,10 @@
 name: Collect events (scheduled)
 
 # Reads every switched-on source in src/content/sources/ on its own schedule, then opens (or
-# updates) ONE rolling pull request with the changes and the run report. The Sunday run asks
-# @michaelsrichter to review, which is the weekly email (decision P14). Sources that return no
-# events or broken data get a GitHub issue with a snapshot of what was downloaded (sizes, hashes,
-# page type; never the page text).
+# updates) ONE rolling pull request with the changes and the run report. After the exact branch SHA
+# passes the trusted CI workflow, a default-branch workflow merges it automatically. Sources that
+# return no events or broken data get a GitHub issue with a snapshot of what was downloaded (sizes,
+# hashes, page type; never the page text).
 #
 #   daily         every morning        sources with "cadence": "daily" (weekly bar-band lists)
 #   twice-weekly  Monday and Thursday  busy bar, venue and aggregator calendars
@@ -44,7 +44,6 @@ concurrency:
 
 env:
   BRANCH: ingest/updates
-  REVIEWER: michaelsrichter
 
 jobs:
   collect:
@@ -84,12 +83,6 @@ jobs:
           esac
           echo "cadence=$cadence" >> "$GITHUB_OUTPUT"
           echo "source=$INPUT_SOURCE" >> "$GITHUB_OUTPUT"
-          # Only the Sunday run (or a manual weekly run) asks for review, so the owner gets one email a week.
-          if [ "$SCHEDULE" = '30 9 * * 0' ] || { [ -z "$SCHEDULE" ] && [[ "$cadence" == *weekly* ]] && [[ "$cadence" != twice-weekly ]]; }; then
-            echo "notify=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "notify=false" >> "$GITHUB_OUTPUT"
-          fi
           echo "Collecting: ${INPUT_SOURCE:-$cadence}" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Continue the open collection branch (or start a new one from main)
@@ -162,7 +155,6 @@ jobs:
       - name: Open or update the collection pull request
         env:
           GH_TOKEN: ${{ github.token }}
-          NOTIFY: ${{ steps.pick.outputs.notify }}
           RESET: ${{ steps.branch.outputs.reset }}
           CADENCE: ${{ steps.pick.outputs.source || steps.pick.outputs.cadence }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

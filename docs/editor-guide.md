@@ -9,7 +9,7 @@ This guide is for people who keep the listings correct. You do not need to know 
 - **Check before you save.** The preview on the right shows how the entry will look. If you saved something wrong, change it back and save again.
 - Several quick saves are fine: the website catches up with all of them in the next rebuild.
 - Nothing is ever lost. Any change can be undone (see [Fix a mistake](#fix-a-mistake)).
-- Most events are collected **automatically every week** from public calendars. Your main jobs are to **check things the program was unsure about** and **fix mistakes**.
+- Most events are collected and published **automatically** from public calendars. Uncertain listings stay hidden. Your main jobs are safety and legal decisions, source permissions and failures, visitor messages, community photos and notes, and exceptional corrections.
 
 ## Your review center
 
@@ -20,14 +20,14 @@ This table lists each tab of the review center, what it shows, and what you can 
 | Tab | What it shows | What you can do |
 | --- | --- | --- |
 | **To do** | How many things wait in each tab, the oldest one, and "You're all caught up" when nothing does. | Jump to each tab. One-time GitHub setup (see below). |
-| **Held listings** | Events the weekly check wasn't sure about. They're hidden until you decide. Each card says why in plain words ("No start time", "The start time looks wrong", "No venue", "New band or DJ", "Missing from the source", "Listed twice") and suggests a next step. | **Publish**, **Fix…** (start time, venue, band or DJ, town), **Mark cancelled…** (shown as cancelled), **Hide** (never shown, never deleted), **Snooze a week**, **Undo**, choose several and publish or hide them at once, **Ask Copilot** to look up a band or venue. Links: the source page, the venue and band pages, and the editor. |
-| **New events** | The "Collected events" update (everything the latest check found, waiting for you to publish): how many new and changed events, whether the automatic checks passed, new venues and bands to check, and what each source found. | **Publish now** (only when the checks passed), see every change on GitHub, **Ask Copilot** to look up new venues and bands or to fix failed checks. |
+| **Held listings** | Exceptional events an editor deliberately held by locking their status. Routine uncertainty does not appear here. | **Publish**, **Fix…** (start time, venue, band or DJ, town), **Mark cancelled…**, **Hide**, **Snooze**, **Undo**, or **Ask Copilot**. |
+| **Event updates** | The rolling "Collected events" update: progress, checks, automatic hiding, new records and source results. Successful event-only updates publish automatically. | View the log and GitHub changes, use the manual publish fallback only for exceptional recovery, or ask Copilot to research optional details or fix failed checks. |
 | **Sources** | Sources that stopped working, new websites the monthly search found, and switched-off sources grouped by what you can do. | **Try again now**, **Switch off…**, **Worth adding** / **Not useful** for new websites, **Review and send the email…** to ask for permission (sent from the site's address after you confirm), answers shown under each source, **They said yes: switch it on**, **They said no**, **No answer**, a follow-up after 14 days, **Switch on**, **Check sources now**, and **Ask Copilot**. |
 | **Messages** | Messages from the website's forms: fixes, new events, requests to remove a listing (first, with a 7-day countdown), problems and ideas. | Reply with a ready-made answer (you can change it), **Send reply and close**, **Snooze a week**, open the page or the editor. |
 | **Community posts** | Notes and photos waiting for a person (see [Moderate notes and photos](#moderate-notes-and-photos)). | Approve, reject, hide, ban. |
 | **Log** | Every decision, newest first, by month. | |
 
-**How changes reach the website.** Each button saves a small change to the website's files on GitHub (the master copy). The website rebuilds by itself, so changes show on the website **a few minutes** later (usually about 5). Every field you fix is added to **Locked fields**, so the weekly check never changes it back. Nothing is ever deleted: **Hide** sets the status to "Hidden by an editor".
+**How changes reach the website.** Each button saves a small change to the website's files on GitHub (the master copy). The website rebuilds by itself, so changes show on the website **a few minutes** later (usually about 5). Every field you fix is added to **Locked fields**, so the collector never changes it back. Nothing is ever deleted: **Hide** keeps the record with status "Hidden".
 
 **One-time setup.** The first time, the To do tab asks you to **Connect to GitHub**. Be signed in to GitHub as `michaelsrichter`. GitHub shows "Create GitHub App": press the green button. Then choose **Only select repositories** (a repository is a project on GitHub), pick **long-island-dance-events**, and press **Install**. That's all. The helper app can only work on this one website.
 
@@ -43,13 +43,13 @@ Test copies of the website (pull-request previews) never send email: they show w
 
 **Ask Copilot.** Some jobs need a developer: a new band or venue to look up, a source to fix, a website to add. **Ask Copilot** makes a GitHub issue (a task note, labeled `copilot-task`) with all the details. **Copilot does not start it by itself.** To get it done, start a Copilot session and give it the task's link; Copilot then opens a pull request (a suggested change) for you to check. Choosing **Assign to Copilot** on the issue can also start it, but if Copilot replies with an error (this happened on October 5, 2026: "The service is temporarily unavailable"), nothing more happens until you assign it again or start a session. Open tasks are listed at the bottom of the Messages tab, marked "waiting for a Copilot session" or "assigned to Copilot".
 
-### Your weekly 10-minute routine
+### What still needs a person
 
-1. **Sunday:** after the email from GitHub, open the **New events** tab in the review center. If the automatic checks passed, press **Publish now**.
-2. **Held listings:** for each card, open the source page (where we found it). Then press the suggested button (Publish, Fix, Mark cancelled or Hide).
-3. **Messages:** answer anything waiting. Answer requests to remove a listing first (within 7 days).
-4. **Community posts:** approve or reject anything waiting.
-5. **Sources:** look for anything under "Stopped working". Press **Try again now**, or **Ask Copilot to fix it**. If a website owner answered your email, it says **new answer!** under "Waiting for an answer". Read it, then press the button that matches what they said.
+1. **Messages:** answer anything waiting. Answer requests to remove a listing first (within 7 days).
+2. **Community posts and photos:** approve or reject anything waiting.
+3. **Sources:** handle stopped sources, permission choices and replies from website owners.
+4. **Held listings:** use this only for an exceptional event an editor deliberately held.
+5. **Event updates:** read the log only when you want to inspect what happened or when checks failed.
 
 ## What you will see in the editor
 
@@ -64,13 +64,15 @@ Test copies of the website (pull-request previews) never send email: they show w
 | Dance styles | The style list (Swing, Hustle, Salsa...) and other names for each style. |
 | Frequently Asked Questions, Pages, Photos, Site settings | Help text and site-wide settings. |
 
-## Check events that are waiting for review
+## Exceptional manually held events
 
-Some events are hidden until a person checks them. This happens when the program was unsure, or when a listing disappeared from a calendar it still covers.
+Machine uncertainty does not wait for a person. A low-confidence, missing or superseded listing is
+hidden automatically with a note, and can become listed again if reliable data returns. The steps
+below are only for an event an editor deliberately put on hold.
 
 The quickest way is the **Held listings** tab of the [review center](#your-review-center). You can also do it in the editor:
 
-1. Open **Events** and choose the **Waiting for review** filter.
+1. Open **Events** and choose the **Held by an editor** filter.
 2. Open an event. Read **Notes for editors** at the bottom; it says why.
 3. Check the facts on the organizer's own website or the original listing (the **Source link** field).
 4. Fix anything wrong. Then set **Status** to **Listed** (or **Cancelled** if it is not happening).
@@ -175,7 +177,7 @@ You can turn a source off by unticking **Turned on**. The **Last result** fields
 | error | Could not download or read the source. |
 | skipped | The source is turned off, or its robots.txt does not allow it. |
 
-Event statuses: **Listed**, **Past**, **Cancelled** (shown with "Cancelled"), **Waiting for review** (hidden until someone decides) and **Hidden by an editor** (never shown, kept for the record; the weekly run leaves it hidden).
+Event statuses: **Listed**, **Past**, **Cancelled** (shown with "Cancelled"), **Held by an editor** (an exceptional manual hold) and **Hidden** (never shown, kept for the record). Automation may reactivate an unlocked hidden listing when reliable data returns. A hidden or cancelled status with `status` in **Locked fields** stays exactly as the editor set it.
 
 **How often** says when the program reads the source (every day, twice a week, weekly, monthly, only in season, or only by hand). **What it lists** tells the site whether everything in the source is a dance (a dance calendar) or whether each listing needs a dancing score (a live-music list).
 

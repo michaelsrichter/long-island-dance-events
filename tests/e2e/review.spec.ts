@@ -36,7 +36,7 @@ const COLLECTED = {
   open: {
     number: 41, url: 'https://github.com/x/y/pull/41', title: 'Collected events', createdAt: '2026-10-02T10:00:00Z', updatedAt: '2026-10-03T10:00:00Z', headSha: 'b'.repeat(40),
     mergeable: true, mergeableState: 'clean', commits: 3, changedFiles: 40, checks: 'passed', checkRuns: [{ name: 'CI', status: 'completed', conclusion: 'success', url: 'https://github.com/x' }],
-    report: { latest: 'weekly,monthly on 2026-10-03', totals: '650 listed events, 4 waiting for review, 40 files changed.', sources: [{ name: "Ira's List", result: 'OK', found: 100, kept: 90, new: 12, updated: 3, unchanged: 75, ended: 0, missing: 1, review: 2 }], created: [{ kind: 'venues', id: 'new-bar-babylon' }], waiting: 2, notes: [] },
+    report: { latest: 'weekly,monthly on 2026-10-03', totals: '650 listed events, 2 hidden automatically this run, 0 manually held, 40 files changed.', sources: [{ name: "Ira's List", result: 'OK', found: 100, kept: 90, new: 12, updated: 3, unchanged: 75, ended: 0, missing: 1, hidden: 2 }], created: [{ kind: 'venues', id: 'new-bar-babylon' }], hidden: 2, notes: [] },
     filesUrl: 'https://github.com/x/y/pull/41/files', branchUrl: 'https://github.com/x/y/tree/ingest/updates',
   },
   last: null,
@@ -110,8 +110,8 @@ test.describe('review center', () => {
     await mockApi(page);
     await page.goto('/moderate/');
     const todo = page.locator('[data-todo]');
-    await expect(todo.getByRole('heading', { name: 'New events to publish' })).toBeVisible();
-    await expect(todo.getByRole('heading', { name: 'Held listings' })).toBeVisible();
+    await expect(todo.getByRole('heading', { name: 'Event update needs attention' })).toHaveCount(0);
+    await expect(todo.getByRole('heading', { name: 'Manually held listings' })).toBeVisible();
     await expect(todo.getByRole('heading', { name: 'Messages from visitors' })).toBeVisible();
     await expect(todo.getByRole('heading', { name: 'Community posts' })).toBeVisible();
     await expect(page.locator('[data-count="listings"]')).toHaveText('3', { timeout: 10_000 });
@@ -150,14 +150,16 @@ test.describe('review center', () => {
     await expect.poll(() => posts.at(-1)?.body).toEqual({ decisions: [{ id: '2026-11-13-syosset-social', action: 'fix', fields: { venueId: 'huntington-moose-lodge' }, note: '' }] });
   });
 
-  test('new events: Publish now sends the exact update the owner saw', async ({ pinned: page }) => {
+  test('event updates publish automatically but keep an exact-SHA manual fallback', async ({ pinned: page }) => {
     const posts = await mockApi(page);
     await page.goto('/moderate/#publish');
     const panel = page.locator('#publish');
     await expect(panel.getByText('Checks passed.')).toBeVisible();
     await expect(panel.getByText('12 new events, 3 changed events, 0 events ended')).toBeVisible();
     page.on('dialog', (d) => d.accept());
-    await panel.getByRole('button', { name: 'Publish now' }).click();
+    await expect(panel.getByText(/Automatic publishing is next; no action is needed/)).toBeVisible();
+    await expect(panel.getByText(/2 uncertain listings.*stayed hidden automatically/)).toBeVisible();
+    await panel.getByRole('button', { name: 'Publish manually now' }).click();
     await expect(panel.getByText('Published. Live on the website in a few minutes.')).toBeVisible();
     expect(posts.find((p) => p.url === '/api/review/collected')!.body).toEqual({ number: 41, headSha: 'b'.repeat(40) });
   });

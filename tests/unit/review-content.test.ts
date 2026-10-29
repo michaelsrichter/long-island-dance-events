@@ -57,12 +57,13 @@ describe('review center content files', () => {
     }
   });
 
-  it('understands every review note the weekly run writes', () => {
+  it('keeps review reason parsing compatible with current and historical notes', () => {
     const src = ['ingest/lib/merge.ts', 'ingest/lib/structured.ts', 'ingest/adapters/thedancecalendar.ts', 'ingest/adapters/iraslist.ts'].map((f) => readFileSync(join(process.cwd(), f), 'utf8')).join('\n');
-    for (const phrase of ['own calendar now lists this (', 'Not found in the latest ', 'Start time looks wrong (', 'No start time found.', 'Venue not found in the listing.', 'Band or DJ not researched yet: ']) {
+    for (const phrase of ["Hidden automatically because the organizer's or band's own calendar now lists this (", 'Hidden automatically because it was not found in the latest ', 'Hidden automatically because its confidence score (', 'Start time looks wrong (', 'No start time found.', 'Venue not found in the listing.', 'Band or DJ not researched yet: ']) {
       expect(src, phrase).toContain(phrase);
     }
     const sample = (notes: string, extra = {}) => data.reasonsOf({ start: '2026-10-16T06:30', venueId: 'v', reviewNotes: notes, ...extra }).map((r: { code: string }) => r.code);
+    expect(sample('Hidden automatically because it was not found in the latest iraslist run on 2026-10-04; it may have been cancelled or moved.')).toEqual(['gone']);
     expect(sample("The organizer's or band's own calendar now lists this (abc-saturdays), so that listing is shown instead of this copy.")).toEqual(['copy']);
     expect(sample('Not found in the latest iraslist run on 2026-10-04. Check whether it was cancelled or moved.')).toEqual(['gone']);
     expect(sample('Start time looks wrong (6:30 in the morning). Check the source.')).toEqual(['odd-time']);
