@@ -13,6 +13,7 @@ import { parsePrices } from '../../ingest/lib/prices';
 import { lookupPlace, Registry, ROOT } from '../../ingest/lib/registry';
 import { cleanListingText, extractPhones, extractUrls, slugify } from '../../ingest/lib/text';
 import { findLessonTime, parseSchedule, parseTimes } from '../../ingest/lib/times';
+import { reportMarkdown } from '../../ingest/run';
 
 const real = Registry.load();
 /** Registry with the real style taxonomy and small fictional venues and organizers. */
@@ -229,23 +230,44 @@ describe('merging runs', () => {
   it('keeps a listing an editor hid hidden, even when the source lists it again', () => {
     const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
     const [id, e] = [...first.events][0]!;
-    const hidden = eventSchema.parse({ ...e, status: 'hidden', reviewNotes: 'Hidden by the owner: a copy of another listing.' });
+    const hidden = eventSchema.parse({ ...e, status: 'hidden', lockedFields: ['status'], reviewNotes: 'Hidden by the owner: a copy of another listing.' });
     const next = mergeDrafts(new Map([[id, hidden]]), draft({ confidence: 1 }), { sourceId: 's', today: '2026-10-02' });
     expect(next.events.get(id)).toMatchObject({ status: 'hidden' });
     expect(next.review).toEqual([]);
   });
-  it('marks ended events past and vanished ones for review, without deleting', () => {
+  it('keeps editor-cancelled listings cancelled when status is locked', () => {
+    const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
+    const [id, e] = [...first.events][0]!;
+    const cancelled = eventSchema.parse({ ...e, status: 'cancelled', lockedFields: ['status'], cancelledNote: 'Cancelled by the organizer.' });
+    const next = mergeDrafts(new Map([[id, cancelled]]), draft({ confidence: 1 }), { sourceId: 's', today: '2026-10-02' });
+    expect(next.events.get(id)).toMatchObject({ status: 'cancelled', cancelledNote: 'Cancelled by the organizer.' });
+  });
+  it('reactivates an unlocked machine-hidden listing when reliable data returns', () => {
+    const first = mergeDrafts(new Map(), draft({ confidence: 0.4 }), { sourceId: 's', today: '2026-10-01' });
+    const [id, e] = [...first.events][0]!;
+    expect(e.status).toBe('hidden');
+    const next = mergeDrafts(new Map([[id, eventSchema.parse(e)]]), draft({ confidence: 0.95 }), { sourceId: 's', today: '2026-10-02' });
+    expect(next.events.get(id)).toMatchObject({ status: 'active', confidence: 0.95 });
+    expect(next.events.get(id)!.reviewNotes).toBeUndefined();
+  });
+  it('marks ended events past and hides vanished ones, without deleting', () => {
     const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
     const stored = new Map([...first.events].map(([id, e]) => [id, eventSchema.parse(e)]));
     const later = mergeDrafts(stored, [], { sourceId: 's', today: '2026-10-08' });
     expect([...later.events.values()][0]!.status).toBe('past');
     const missing = mergeDrafts(stored, [], { sourceId: 's', today: '2026-10-02', coverage: { from: '2026-10-01', to: '2026-10-31' } });
-    expect([...missing.events.values()][0]!.status).toBe('pending-review');
+    expect([...missing.events.values()][0]).toMatchObject({ status: 'hidden' });
+    expect([...missing.events.values()][0]!.reviewNotes).toMatch(/Hidden automatically because it was not found/);
+    expect(missing.hidden).toHaveLength(1);
+    expect(missing.review).toEqual([]);
     expect(missing.events.size).toBe(1);
   });
-  it('sends low-confidence listings to review', () => {
+  it('hides low-confidence listings with an honest note and no review task', () => {
     const r = mergeDrafts(new Map(), draft({ confidence: 0.4 }), { sourceId: 's', today: '2026-10-01' });
-    expect([...r.events.values()][0]!.status).toBe('pending-review');
+    expect([...r.events.values()][0]).toMatchObject({ status: 'hidden' });
+    expect([...r.events.values()][0]!.reviewNotes).toMatch(/confidence score \(0\.40\).*0\.60 publishing threshold/);
+    expect(r.hidden).toHaveLength(1);
+    expect(r.review).toEqual([]);
   });
   it('does not add the same evening twice when another source already lists it', () => {
     const atLodge = { venueId: 'example-lodge', sourceId: 'lodge-calendar', seriesKey: 'lodge' };
@@ -273,11 +295,13 @@ describe('merging runs', () => {
     expect(stored.size).toBe(2);
     const isOwnCalendar = (sid: string) => sid === 'org-calendar';
     const opts = { sourceId: 'pdf-calendar', today: '2026-10-02', allInOne: true, isOwnCalendar };
-    // The older copy from the everything-calendar steps aside for review; it is not deleted.
+    // The older copy from the everything-calendar steps aside automatically; it is not deleted.
     const pdfId = `${[...pdf.events.keys()][0]!}-pdf`;
     const again = mergeDrafts(stored, mondays(fromPdf), opts);
-    expect(again.events.get(pdfId)).toMatchObject({ status: 'pending-review' });
+    expect(again.events.get(pdfId)).toMatchObject({ status: 'hidden' });
     expect(again.events.get(pdfId)!.reviewNotes).toMatch(/own calendar/);
+    expect(again.hidden).toHaveLength(1);
+    expect(again.review).toEqual([]);
     expect(again.duplicates).toHaveLength(1);
     // A new copy is not added at all; another organizer's class at the same lodge is.
     const ownOnly = new Map([...own.events].map(([id, e]) => [id, eventSchema.parse(e)]));
@@ -333,7 +357,8 @@ describe('merging runs', () => {
     const iraId = [...ira.events.keys()][0]!;
     const stored = new Map([...[...ira.events].map(([id, e]) => [id, e] as const), ...[...band.events].map(([id, e]) => [`${id}-band`, e] as const)].map(([id, e]) => [id, eventSchema.parse(e)]));
     const again = mergeDrafts(stored, draft({ ...gig, sourceId: 'everything', seriesKey: 'ira', start: '20:00' }), { sourceId: 'everything', today: '2026-10-02', allInOne: true, isOwnCalendar: (s) => s === 'band-page' });
-    expect(again.events.get(iraId)).toMatchObject({ status: 'pending-review' });
+    expect(again.events.get(iraId)).toMatchObject({ status: 'hidden' });
+    expect(again.hidden).toHaveLength(1);
   });
   it('lists a double bill once when two bands name the same start time at the same place', () => {
     const show = { venueId: 'example-lodge', category: 'live-music', danceStyles: [], start: '14:00' };
@@ -342,5 +367,33 @@ describe('merging runs', () => {
     expect(mergeDrafts(stored, draft({ ...show, sourceId: 'band-b', seriesKey: 'b', performerIds: ['midnight-fiction'] }), { sourceId: 'band-b', today: '2026-10-02' }).stats).toMatchObject({ new: 0, duplicates: 1 });
     // A different start time is a different show.
     expect(mergeDrafts(stored, draft({ ...show, start: '16:00', sourceId: 'band-b', seriesKey: 'b', performerIds: ['midnight-fiction'] }), { sourceId: 'band-b', today: '2026-10-02' }).stats.new).toBe(1);
+  });
+});
+
+describe('ingest report', () => {
+  it('reports automatic hiding without creating a routine owner-review instruction', () => {
+    const report = reportMarkdown({
+      startedAt: '2026-10-28T12:00:00Z',
+      today: '2026-10-28',
+      dryRun: false,
+      sources: [{
+        id: 's',
+        name: 'Example',
+        status: 'ok',
+        documents: [],
+        found: 2,
+        kept: 2,
+        outOfArea: [],
+        merge: { new: 1, updated: 0, unchanged: 1, needsReview: 0, hidden: 1, expired: 0, missing: 1, duplicates: 0 },
+        hidden: [{ id: 'event-one', reason: 'Hidden automatically because it was not found.' }],
+        review: [],
+        invalid: [],
+      }],
+      created: { venues: [], performers: [], instructors: [], organizers: [] },
+      totals: { activeEvents: 10, needsReview: 0, hidden: 1, changedFiles: 1 },
+    });
+    expect(report).toContain('Hidden automatically');
+    expect(report).toContain('0 manually held');
+    expect(report).not.toMatch(/Waiting for review|please check|person should check/i);
   });
 });

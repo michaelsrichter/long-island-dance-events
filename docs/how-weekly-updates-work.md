@@ -13,11 +13,13 @@ costs, and what you (the owner) need to do. Technical details live in
 - **What they do:** every morning (and more on Mondays, Thursdays and Sundays) they visit the
   event calendars we are allowed to read, pull out the facts (date, time, place, band, price, kind
   of dancing), write short listings in our own words, and put all the changes into **one pull
-  request** on GitHub. A pull request is a "proposed change" you can look at before it goes live.
-- **What you do:** once a week, on Sunday, GitHub emails you (an @mention). Open the **review center**
-  at [longisland.dance/moderate/](https://longisland.dance/moderate/), look over the new events and press
-  **Publish now**, then decide on the few listings the program was unsure about. Publishing puts the new
-  listings on the website within a few minutes (usually about 5).
+  request** on GitHub. A pull request is a recorded set of proposed changes. The exact commit is
+  checked by CI and merged automatically when every safety guard passes.
+- **What you do:** nothing for routine event publishing. Uncertain, missing and duplicate listings
+  stay hidden automatically instead of becoming approval tasks. The **review center** at
+  [longisland.dance/moderate/](https://longisland.dance/moderate/) is still where you handle visitor
+  messages, takedown requests, community photos and notes, permission choices, source failures and
+  exceptional event corrections.
 - **What it costs:** the weekly collecting is **free** (GitHub Actions is free for public
   repositories). The search for new sources costs about **$4.25 a month** (Microsoft Web IQ). The
   website itself costs about **$9 a month** on Azure. The newsletter inbox is **free** (AgentMail
@@ -38,14 +40,15 @@ flowchart TD
     R1 --> R2["Pull out facts, write our own words,\nmatch venues and bands, skip non-dance\nand off-island items, remove duplicates"]
     R2 --> R3["Map pins for new venues\n(Census geocoder, then OpenStreetMap)"]
     R3 --> R4["Check every file\n(npm run check)"]
-    R4 --> PR["One rolling pull request\n'Collected events: review and merge'"]
+    R4 --> PR["One rolling pull request\n'Collected events: auto-publish after checks'"]
+    PR --> CI["CI checks this exact commit"]
+    CI -->|"passes every guard"| M["main branch"]
     R4 --> IS["Issue for any source that broke"]
     D --> DI["Monthly issue: new websites found,\nsources that changed or broke"]
   end
   N["Newsletter inbox (AgentMail)"] --> R1
-  PR -->|"Sunday: GitHub emails you"| O(("You"))
   DI --> O
-  O -->|"Merge"| M["main branch"]
+  IS --> O(("You"))
   M --> AZ["Azure Static Web Apps builds\nand publishes longisland.dance"]
   O -.->|"new source or broken adapter"| CP["Copilot session (on demand)\nresearch, fixes, new venues"]
   CP -.->|"pull request"| M
@@ -61,7 +64,7 @@ first runs started about five hours late). That is normal and does not lose anyt
 | --- | --- | --- |
 | Every morning, about 6:15 AM | Collect events (`ingest-scheduled.yml`) | Reads the sources marked **daily** (weekly bar-band lists that change all the time). |
 | Monday and Thursday, about 6:45 AM | Collect events | Reads the **twice-weekly** sources: busy bar, venue and music calendars. |
-| Sunday, about 5:30 AM | Collect events | Reads the **weekly** and **monthly** sources: dance clubs, studios, bands, libraries, town calendars, newsletters and The Dance Calendar's monthly PDF. Then GitHub **emails you** to review. |
+| Sunday, about 5:30 AM | Collect events | Reads the **weekly** and **monthly** sources: dance clubs, studios, bands, libraries, town calendars, newsletters and The Dance Calendar's monthly PDF. Successful event-only changes publish automatically. |
 | Every night, about 5:15 AM | Azure Static Web Apps (`azure-static-web-apps.yml`) | Rebuilds the site so "This week" and "Today" stay correct. |
 | Every morning, about 6:30 AM | Community maintenance | Backups and cleanup for likes, notes and photos. |
 | Monday, 8 AM | External link check | Reports broken outside links (does not block anything). |
@@ -123,7 +126,7 @@ The Dance Calendar's PDF, which is set to weekly for that reason) shows up withi
 8. **Remove duplicates.** If two sources list the same evening at the same venue, it is added once.
    The venue's, club's or band's own calendar wins over a calendar of everything. This works for
    repeating classes too: when an organizer's own calendar lists its Monday classes at the same time,
-   the copy from The Dance Calendar is hidden and noted for review (nothing is deleted). If the own
+   the copy from The Dance Calendar is hidden automatically with an explanation (nothing is deleted). If the own
    calendar lists only some of those dates (say, one workshop), only those dates are taken out of the
    other copy. Two bands that list the same show at the same start time (a double bill) are listed once.
 9. **Combine repeats.** The same listing every Tuesday becomes one event that repeats "every Tuesday."
@@ -134,20 +137,24 @@ The Dance Calendar's PDF, which is set to weekly for that reason) shows up withi
 12. **Check everything.** Every file is checked against strict rules (`npm run check`). Anything
     broken is reported, not published.
 13. **Update the pull request.** All changes go into **one** rolling pull request called
-    "Collected events: review and merge to publish," with a run report on top: what each source
-    found, what was skipped and why, and what needs a person. The review center's **New events** tab
-    shows the same report in plain words, with a **Publish now** button.
+    "Collected events: publish automatically after checks," with a run report on top: what each
+    source found, what was skipped and why, and which uncertain listings were hidden automatically.
+    The review center's **Event updates** tab shows the same report and keeps a manual fallback for
+    exceptional recovery.
 14. **Report problems.** A source that breaks gets a GitHub issue labeled `ingest-failure`. After
     three failures in a row it is switched off in the pull request, with a note.
-15. **Sunday email.** The Sunday run asks you to review the pull request. GitHub sends the email.
-16. **You publish, the site updates.** Pressing **Publish now** in the review center (or merging the pull
-    request on GitHub) starts the Azure build, and the new listings are live a few minutes later (usually about 5; share pictures that did not change are reused, decision P55).
+15. **CI checks the exact commit.** The collection run starts the trusted `CI` workflow with
+    `workflow_dispatch`. Type checks, tests, builds, links, accessibility and other checks must pass.
+16. **The trusted workflow publishes.** A `workflow_run` workflow stored on `main` checks that the
+    successful CI SHA is still the open pull request's SHA, the PR is repository-owned, clean,
+    non-draft and based on `main`, and every changed file is under `src/content/`. It creates a normal
+    merge commit and keeps `ingest/updates`. The site updates a few minutes later.
 
 ## How we get the details of each event
 
 | Detail | Where it comes from |
 | --- | --- |
-| Date and time | The calendar feed or event data first; otherwise the date and time written in the listing ("Fri, Oct 16 ... 9 PM"). If a feed's time is off by exactly 4 or 5 hours from the written time (a common website setting mistake), the written time wins. A start between 1 and 8 AM sends the listing to review. |
+| Date and time | The calendar feed or event data first; otherwise the date and time written in the listing ("Fri, Oct 16 ... 9 PM"). If a feed's time is off by exactly 4 or 5 hours from the written time (a common website setting mistake), the written time wins. An uncertain early-morning start lowers confidence, so the listing stays hidden automatically. |
 | Lesson before the dance | Words like "lesson at 7" or "beginner class 7:30, dancing 8:30-11". |
 | Price | "$15", "$15/$20 members", "free". |
 | Band, DJ or teacher | The names in the listing, matched to our files. A new name is only added when it looks like a real name (no dates, no "Happy Hour with..."). |
@@ -245,23 +252,23 @@ GitHub secrets (`AGENTMAIL_INBOX`, `AGENTMAIL_API_KEY`), never in the code.
 
 The October 2026 town-by-town search is described in [source-catalog.md](source-catalog.md#town-by-town-search-october-2026).
 
-## What you do each week
+## What you still do
 
 Everything below is in one place: the **review center** at **https://longisland.dance/moderate/**
 (sign in with your editor email). See "Your review center" in [editor-guide.md](editor-guide.md#your-review-center).
 
-1. **Sunday:** open the email from GitHub, then the review center's **New events** tab. It shows the run
-   report in plain words: new events, sources that found nothing, new venues and bands to check.
-2. If the automatic checks passed, press **Publish now**. The site updates a few minutes later (usually about 5).
-3. Open **Held listings** and decide on each one (Publish, Fix, Cancelled or Hide). Each card says why it
-   was held and links the source page. Fixed fields are locked, so the next run keeps your fix.
-4. **Messages** and **Community posts:** answer what waits there.
-5. **Now and then:** the **Sources** tab shows sources that broke (`ingest-failure` issues), new websites
+1. **Messages and takedowns:** answer what waits there. Removal requests stay manual and come first.
+2. **Community posts and photos:** approve or reject anything that needs a person.
+3. **Sources and permission:** handle broken sources, robots/permission choices and replies from
+   website owners. Source failures never get approved automatically.
+4. **Exceptional corrections:** an editor can still hold, publish, fix, cancel or hide an event by
+   hand. A locked status stays as the editor set it.
+5. **Now and then:** the **Sources** tab also shows new websites
    from the monthly source check (**Worth adding** asks Copilot to add one, **Not useful** remembers the
    no), switched-off sources you could help with (a ready-made permission email), and **Check sources now**.
 
-Most weeks this takes 10-15 minutes. You can still do everything on GitHub (merge the pull request,
-edit in `/admin/`) if you prefer.
+Routine event publishing creates no owner task. You can still inspect the update log, use the manual
+fallback, or edit an event in `/admin/`.
 
 ## What it costs
 

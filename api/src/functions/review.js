@@ -8,11 +8,11 @@
  * (git stays the master copy); the site rebuilds in a few minutes.
  *
  *   GET  /api/review/status                      GitHub connection, community queue count
- *   GET  /api/review/listings                    held listings (status pending-review on main)
+ *   GET  /api/review/listings                    exceptional editor-held listings (pending-review)
  *   POST /api/review/listings  { decisions: [{ id, action: publish|fix|cancel|hide|undo, fields?, note?, commit? }] }
  *   POST /api/review/snooze    { kind, id, days | undo }
  *   GET  /api/review/collected                   the rolling ingest/updates pull request
- *   POST /api/review/collected { number, headSha }   merge it ("Publish now")
+ *   POST /api/review/collected { number, headSha }   exact-SHA manual merge fallback
  *   GET  /api/review/sources                     sources by next step, failures, monthly checks, runs
  *   POST /api/review/sources   { decisions: [{ id, action: enable|disable|permission, status?, note?, feedUrl? }] }
  *   POST /api/review/run       { cadence? , source? }   start "Collect events" now

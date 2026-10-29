@@ -7,7 +7,7 @@
   "venueId": "amityville-music-hall-amityville",
   "town": "Amityville",
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "hidden",
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",
@@ -16,5 +16,5 @@
   "lastSeen": "2026-10-04",
   "confidence": 0.55,
   "matchKey": "amityville-music-hall|amityville-music-hall-amityville||sunday|tba|live-music|||2026-10-04",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Hidden automatically on 2026-10-28 because the event had ended and its start time was still uncertain."
 }

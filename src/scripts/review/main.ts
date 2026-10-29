@@ -133,11 +133,11 @@ function renderTodo() {
   const c = loaded.collected;
   if (c instanceof Error) failed.push('new events');
   else if (!c) pending++;
-  else if (c.open) {
+  else if (c.open && (c.open.checks === 'failed' || c.open.mergeable === false)) {
     waiting++;
     const n = newEventCount(c);
-    const checks = c.open.checks === 'passed' ? 'Checks passed: ready to publish.' : c.open.checks === 'failed' ? 'Checks found a problem.' : 'Checks are still running.';
-    cards.push(todoCard('New events to publish', String(n), [`${plural(n, 'new event')} and other changes from the latest check.`, checks, `Updated ${ago(c.open.updatedAt)}.`], 'publish', c.open.checks === 'passed' ? 'Review and publish' : 'See details', c.open.checks === 'failed'));
+    const problem = c.open.mergeable === false ? 'The update conflicts with a newer change.' : 'The automatic checks found a problem.';
+    cards.push(todoCard('Event update needs attention', String(n), [`${plural(n, 'new event')} and other changes from the latest check.`, problem, `Updated ${ago(c.open.updatedAt)}.`], 'publish', 'See the failure', true));
   }
 
   const l = loaded.listings;
@@ -149,7 +149,7 @@ function renderTodo() {
     if (n > 0) {
       waiting++;
       const oldest = open.map((x) => x.firstSeen).sort()[0];
-      cards.push(todoCard('Held listings', String(n), ['Hidden until you check them.', oldest ? `Oldest waiting since ${dayLabel(oldest)}.` : null], 'listings', 'Start checking'));
+      cards.push(todoCard('Manually held listings', String(n), ['An editor explicitly held these for a decision.', oldest ? `Oldest waiting since ${dayLabel(oldest)}.` : null], 'listings', 'Start checking'));
     }
   }
 

@@ -178,6 +178,6 @@ export const STATUS_LABELS: Record<EventStatus, string> = {
   active: 'Listed',
   past: 'Past event',
   cancelled: 'Cancelled',
-  'pending-review': 'Waiting for review',
-  hidden: 'Hidden by an editor',
+  'pending-review': 'Held by an editor',
+  hidden: 'Hidden',
 };

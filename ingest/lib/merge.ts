@@ -3,8 +3,8 @@
  *  - the same listing (same matchKey) updates its file instead of creating a new one;
  *  - firstSeen never changes; lastSeen becomes today;
  *  - fields listed in lockedFields (fixed by an editor) are never overwritten;
- *  - nothing is deleted: ended events become "past"; listings that vanished from a source that still
- *    covers their dates go to "pending-review" so a person can check whether they were cancelled.
+ *  - nothing is deleted: ended events become "past"; uncertain, missing and superseded listings are
+ *    hidden automatically, and can become active again when reliable source data returns.
  */
 import type { EventData, EventStatus } from '../../src/lib/schemas';
 
@@ -21,6 +21,7 @@ export interface MergeStats {
   updated: number;
   unchanged: number;
   needsReview: number;
+  hidden: number;
   expired: number;
   missing: number;
   /** New listings not added because another source already lists the same event. */
@@ -32,8 +33,10 @@ export interface MergeResult {
   /** Ids whose file content changed. */
   changed: Set<string>;
   stats: MergeStats;
-  /** Ids now waiting for review, with the reason. */
+  /** Ids still waiting because an editor explicitly locked status at pending-review. */
   review: { id: string; reason: string }[];
+  /** Ids hidden automatically in this run, with the reason. */
+  hidden: { id: string; reason: string }[];
   /** New listings skipped as the same event another source already lists (id it would have had, and the existing id). */
   duplicates: { id: string; of: string }[];
 }
@@ -53,6 +56,11 @@ function datesOf(e: Pick<EventRecord, 'start' | 'recurrence'>): string[] {
 }
 
 const comparable = (e: EventRecord) => JSON.stringify({ ...e, lastSeen: undefined });
+const addNote = (notes: unknown, note: string) => {
+  const current = String(notes ?? '').trim();
+  if (!current) return note;
+  return current.includes(note) ? current : `${current} ${note}`;
+};
 
 const minutes = (hhmm: string | null | undefined) => (hhmm ? Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5)) : undefined);
 const DANCE_FAMILY = new Set(['social-dance', 'lesson-party']);
@@ -177,17 +185,19 @@ export function mergeDrafts(
   const before = new Map([...events].map(([id, e]) => [id, comparable(e)]));
   const byKey = new Map<string, string>();
   for (const [id, e] of existing) if (e.matchKey && e.sourceId === opts.sourceId) byKey.set(e.matchKey, id);
-  const stats: MergeStats = { new: 0, updated: 0, unchanged: 0, needsReview: 0, expired: 0, missing: 0, duplicates: 0 };
+  const stats: MergeStats = { new: 0, updated: 0, unchanged: 0, needsReview: 0, hidden: 0, expired: 0, missing: 0, duplicates: 0 };
   const review: MergeResult['review'] = [];
+  const hidden: MergeResult['hidden'] = [];
   const duplicates: MergeResult['duplicates'] = [];
   const seen = new Set<string>();
 
   const statusFor = (confidence: number, dates: string[], prev?: Stored): EventStatus => {
     if (prev && (prev.lockedFields ?? []).includes('status')) return prev.status as EventStatus;
-    if (prev?.status === 'cancelled' || prev?.status === 'hidden') return prev.status;
-    if (confidence < threshold) return 'pending-review';
+    if (confidence < threshold) return 'hidden';
     return dates.every((d) => d < opts.today) ? 'past' : 'active';
   };
+  const lowConfidenceNote = (confidence: number) =>
+    `Hidden automatically because its confidence score (${confidence.toFixed(2)}) is below the ${threshold.toFixed(2)} publishing threshold.`;
 
   for (const original of drafts) {
     const id = byKey.get(original.matchKey);
@@ -200,13 +210,13 @@ export function mergeDrafts(
       duplicates.push({ id: id ?? original.id, of: ownTwin });
       stats.duplicates!++;
       if (!id) continue;
-      // An older copy from this calendar steps aside (hidden for review, never deleted).
+      // An older copy from this calendar steps aside automatically, but stays in the history.
       seen.add(id);
       const prev = events.get(id) as Stored;
-      if (prev.status === 'active' && !(prev.lockedFields ?? []).includes('status')) {
-        const note = `The organizer's or band's own calendar now lists this (${ownTwin}), so that listing is shown instead of this copy.`;
-        events.set(id, { ...prev, lastSeen: opts.today, status: 'pending-review', reviewNotes: [prev.reviewNotes, note].filter(Boolean).join(' ') });
-        review.push({ id, reason: note });
+      if (!(prev.lockedFields ?? []).includes('status')) {
+        const note = `Hidden automatically because the organizer's or band's own calendar now lists this (${ownTwin}), so that listing is shown instead of this copy.`;
+        events.set(id, { ...prev, lastSeen: opts.today, status: 'hidden', reviewNotes: addNote(prev.reviewNotes, note) });
+        hidden.push({ id, reason: note });
       }
       continue;
     }
@@ -219,11 +229,20 @@ export function mergeDrafts(
         stats.duplicates!++;
         continue;
       }
-      const status = statusFor(d.data.confidence ?? 1, d.dates);
-      events.set(d.id, { ...d.data, matchKey: d.matchKey, firstSeen: opts.today, lastSeen: opts.today, status });
+      const confidence = d.data.confidence ?? 1;
+      const status = statusFor(confidence, d.dates);
+      const note = status === 'hidden' ? lowConfidenceNote(confidence) : undefined;
+      events.set(d.id, {
+        ...d.data,
+        matchKey: d.matchKey,
+        firstSeen: opts.today,
+        lastSeen: opts.today,
+        status,
+        reviewNotes: note ? addNote(d.data.reviewNotes, note) : d.data.reviewNotes,
+      });
       seen.add(d.id);
       stats.new++;
-      if (status === 'pending-review') review.push({ id: d.id, reason: String(d.data.reviewNotes ?? 'Low confidence') });
+      if (note) hidden.push({ id: d.id, reason: note });
       continue;
     }
     seen.add(id);
@@ -245,7 +264,13 @@ export function mergeDrafts(
       next.end = endTime ? `${dates[0]}T${endTime}` : undefined;
     }
     next.lastSeen = opts.today;
-    next.status = statusFor(Number(next.confidence ?? 1), dates, prev);
+    const confidence = Number(next.confidence ?? 1);
+    next.status = statusFor(confidence, dates, prev);
+    if (!locked.has('status') && next.status === 'hidden' && confidence < threshold) {
+      const note = lowConfidenceNote(confidence);
+      next.reviewNotes = addNote(next.reviewNotes, note);
+      hidden.push({ id, reason: note });
+    }
     if (next.status === 'pending-review') review.push({ id, reason: String(next.reviewNotes ?? 'Low confidence') });
     events.set(id, next as EventRecord);
   }
@@ -254,19 +279,25 @@ export function mergeDrafts(
     if (seen.has(id)) continue;
     const dates = datesOf(e);
     const last = dates.at(-1) ?? parseLocal(String(e.start)).date;
+    if (e.status === 'pending-review' && !(e.lockedFields ?? []).includes('status') && last < opts.today) {
+      const note = 'Hidden automatically because the listing ended before its uncertain details could be confirmed.';
+      events.set(id, { ...e, status: 'hidden', reviewNotes: addNote(e.reviewNotes, note) });
+      hidden.push({ id, reason: note });
+      continue;
+    }
     if (e.status === 'active' && last < opts.today) {
       events.set(id, { ...e, status: 'past' });
       stats.expired++;
       continue;
     }
     const cov = opts.coverage;
-    if (e.sourceId === opts.sourceId && cov && e.status === 'active' && !(e.lockedFields ?? []).includes('status')) {
+    if (e.sourceId === opts.sourceId && cov && (e.status === 'active' || e.status === 'pending-review') && !(e.lockedFields ?? []).includes('status')) {
       const from = opts.today > cov.from ? opts.today : cov.from;
       if (dates.some((x) => x >= from && x <= cov.to)) {
-        const note = `Not found in the latest ${opts.sourceId} run on ${opts.today}. Check whether it was cancelled or moved.`;
-        events.set(id, { ...e, status: 'pending-review', reviewNotes: [e.reviewNotes, note].filter(Boolean).join(' ') });
+        const note = `Hidden automatically because it was not found in the latest ${opts.sourceId} run on ${opts.today}; it may have been cancelled or moved.`;
+        events.set(id, { ...e, status: 'hidden', reviewNotes: addNote(e.reviewNotes, note) });
         stats.missing++;
-        review.push({ id, reason: note });
+        hidden.push({ id, reason: note });
       }
     }
   }
@@ -287,5 +318,6 @@ export function mergeDrafts(
     }
   }
   stats.needsReview = [...events.values()].filter((e) => e.status === 'pending-review').length;
-  return { events, changed, stats, review, duplicates };
+  stats.hidden = hidden.length;
+  return { events, changed, stats, review, hidden, duplicates };
 }

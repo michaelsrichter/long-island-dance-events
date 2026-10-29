@@ -133,7 +133,7 @@ describe('Decap CMS configuration', () => {
     for (const c of config.collections) if (c.sortable_fields !== undefined) expect(Array.isArray(c.sortable_fields), `${c.name}.sortable_fields`).toBe(true);
     const events = config.collections.find((c: any) => c.name === 'events');
     expect(events.sortable_fields).toContain('start');
-    expect(events.view_filters.map((f: any) => f.label)).toContain('Waiting for review');
+    expect(events.view_filters.map((f: any) => f.label)).toContain('Held by an editor');
   });
   it('requires alt text alongside every image field', () => {
     for (const c of config.collections) {
