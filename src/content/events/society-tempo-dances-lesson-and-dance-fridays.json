@@ -10,7 +10,9 @@
   "timezone": "America/New_York",
   "recurrence": {
     "rdates": [
-      "2026-10-23"
+      "2026-10-23",
+      "2026-11-06",
+      "2026-11-13"
     ]
   },
   "venueId": "merrick-golf-course",
@@ -23,9 +25,9 @@
   "sourceId": "thedancecalendar",
   "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
   "sourceName": "The Dance Calendar, October 2026",
-  "sourceRef": "pages 17, 21",
+  "sourceRef": "pages 16, 17, 18, 21",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-29",
   "confidence": 1,
   "matchKey": "thedancecalendar|merrick-golf-course|society-tempo-dances|friday|12:30|lesson-party||ballroom||repeat"
 }

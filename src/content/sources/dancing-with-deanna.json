@@ -9,13 +9,14 @@
   "enabled": true,
   "focus": "dance",
   "lastCounts": {
-    "found": 10,
-    "kept": 1,
-    "needsReview": 1,
-    "outOfArea": 3
+    "found": 7,
+    "kept": 0,
+    "needsReview": 0,
+    "outOfArea": 1
   },
-  "lastScraped": "2026-10-05T06:43:57.108Z",
-  "lastStatus": "ok",
+  "lastMessage": "The adapter found 7 listings but none could be used. The source layout may have changed.",
+  "lastScraped": "2026-10-29T23:04:13.870Z",
+  "lastStatus": "empty",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it because it has several Long Island public line-dance events and current dated listings.",
   "url": "https://www.dancingwithdeanna.com/events-1"

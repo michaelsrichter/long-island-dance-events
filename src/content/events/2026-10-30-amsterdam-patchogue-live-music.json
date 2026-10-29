@@ -14,13 +14,14 @@
     "mixed-vibes-band"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-29",
   "confidence": 0.75,
-  "matchKey": "iraslist|2026-10-30|amsterdam-patchogue|mixed-vibes|2026-10-30|special"
+  "matchKey": "iraslist|2026-10-30|amsterdam-patchogue|mixed-vibes|2026-10-30|special",
+  "reviewNotes": "Hidden automatically because the organizer's or band's own calendar now lists this (amsterdam-patchogue-live-music-fridays), so that listing is shown instead of this copy."
 }

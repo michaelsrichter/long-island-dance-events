@@ -1,0 +1,22 @@
+{
+  "title": "Live music at Walt Whitman High School",
+  "summary": "Live music at Walt Whitman High School. The dancing score on this page says whether people usually dance. Snacks are included.",
+  "category": "live-music",
+  "start": "2026-10-29T19:00",
+  "timezone": "America/New_York",
+  "venueId": "walt-whitman-high-school-west-hills",
+  "town": "West Hills",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/walt-whitman-marching-band-send-off-to-syracuse-show/?occurrence=2026-10-29",
+  "status": "active",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/walt-whitman-marching-band-send-off-to-syracuse-show/?occurrence=2026-10-29",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-10-29",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.85,
+  "matchKey": "huntington-matters|walt-whitman-high-school-west-hills||thursday|19:00|live-music|||2026-10-29",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

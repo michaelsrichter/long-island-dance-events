@@ -1,0 +1,25 @@
+{
+  "title": "Live music at Blackstone Steakhouse",
+  "summary": "Live music at Blackstone Steakhouse. The dancing score on this page says whether people usually dance. Dance styles: Ballroom.",
+  "category": "live-music",
+  "danceStyles": [
+    "ballroom"
+  ],
+  "start": "2026-10-29T19:30",
+  "end": "2026-10-29T22:30",
+  "timezone": "America/New_York",
+  "venueId": "blackstone-steakhouse-melville",
+  "town": "Melville",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/second-chance-jazz-band-thursday-night-jazz-free/?occurrence=2026-10-29",
+  "status": "active",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/second-chance-jazz-band-thursday-night-jazz-free/?occurrence=2026-10-29",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-10-29",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.9,
+  "matchKey": "huntington-matters|blackstone-steakhouse-melville||thursday|19:30|live-music||ballroom|2026-10-29"
+}

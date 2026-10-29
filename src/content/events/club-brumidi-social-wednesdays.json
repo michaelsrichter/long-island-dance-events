@@ -10,7 +10,7 @@
   "end": "2026-10-07T22:00",
   "timezone": "America/New_York",
   "recurrence": {
-    "rrule": "FREQ=WEEKLY;BYDAY=WE;UNTIL=20261028"
+    "rrule": "FREQ=WEEKLY;BYDAY=WE;UNTIL=20261125"
   },
   "venueId": "brumidi-lodge",
   "town": "Deer Park",
@@ -25,9 +25,9 @@
   "sourceId": "thedancecalendar",
   "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
   "sourceName": "The Dance Calendar, October 2026",
-  "sourceRef": "pages 16, 19, 20, 22",
+  "sourceRef": "pages 16, 18, 19, 20, 21, 22",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-29",
   "confidence": 1,
   "matchKey": "thedancecalendar|brumidi-lodge|club-brumidi|wednesday|18:00|social-dance|dj-gene-and-joanne|ballroom+latin-ballroom||repeat"
 }

@@ -7,7 +7,10 @@
   "timezone": "America/New_York",
   "recurrence": {
     "rdates": [
-      "2026-11-12"
+      "2026-11-12",
+      "2027-01-14",
+      "2027-02-18",
+      "2027-03-25"
     ]
   },
   "venueId": "enology-wine-bar-bistro-saint-james",
@@ -20,9 +23,9 @@
   "sourceId": "enology-wine-bar-bistro-saint-james",
   "sourceUrl": "https://enologywinebar.com/events/live-music/",
   "sourceName": "Enology Wine Bar & Bistro - live music calendar",
-  "sourceRef": "events page 2026-10-29",
+  "sourceRef": "pages 2026, 2027",
   "firstSeen": "2026-10-05",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-29",
   "confidence": 0.8,
   "matchKey": "enology-wine-bar-bistro-saint-james|enology-wine-bar-bistro-saint-james||thursday|18:00|live-music|emy-mcb||repeat"
 }

@@ -8,7 +8,7 @@
   "venueId": "nutty-irishman-farmingdale",
   "town": "Farmingdale",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-11-07|nutty-irishman-farmingdale|tiger-rose|2026-11-07|special",
-  "reviewNotes": "Band or DJ not researched yet: Tiger Rose."
+  "reviewNotes": "Band or DJ not researched yet: Tiger Rose. Hidden automatically because it was not found in the latest iraslist run on 2026-10-29; it may have been cancelled or moved."
 }

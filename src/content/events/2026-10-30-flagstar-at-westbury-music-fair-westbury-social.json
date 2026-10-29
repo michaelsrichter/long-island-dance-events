@@ -10,6 +10,9 @@
   "timezone": "America/New_York",
   "venueId": "flagstar-at-westbury-music-fair-westbury",
   "town": "Westbury",
+  "performerIds": [
+    "disco-unlimited"
+  ],
   "skillLevel": "all-levels",
   "status": "active",
   "sourceId": "iraslist",
@@ -17,12 +20,11 @@
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-29",
   "dancingCues": [
     "dance-party",
     "theater"
   ],
-  "confidence": 0.7,
-  "matchKey": "iraslist|2026-10-30|flagstar-at-westbury-music-fair-westbury|disco-unlimited|2026-10-30|special",
-  "reviewNotes": "Band or DJ not researched yet: Disco Unlimited."
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-10-30|flagstar-at-westbury-music-fair-westbury|disco-unlimited|2026-10-30|special"
 }

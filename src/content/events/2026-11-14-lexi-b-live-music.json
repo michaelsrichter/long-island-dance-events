@@ -1,0 +1,24 @@
+{
+  "title": "Lexi B at Amici Restaurant",
+  "summary": "Live music by Lexi B at Amici Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-14T18:30",
+  "end": "2026-11-14T21:30",
+  "timezone": "America/New_York",
+  "venueId": "amici-restaurant-mount-sinai",
+  "town": "Mount Sinai",
+  "performerIds": [
+    "lexi-b"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://amicirestaurant.org/event/lexi-b-6/",
+  "status": "active",
+  "sourceId": "amici-restaurant-mount-sinai",
+  "sourceUrl": "https://amicirestaurant.org/event/lexi-b-6/",
+  "sourceName": "Amici Restaurant (Mount Sinai) - live music calendar",
+  "sourceRef": "calendar feed 2026-11-14",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.9,
+  "matchKey": "amici-restaurant-mount-sinai|amici-restaurant-mount-sinai||saturday|18:30|live-music|lexi-b||2026-11-14"
+}

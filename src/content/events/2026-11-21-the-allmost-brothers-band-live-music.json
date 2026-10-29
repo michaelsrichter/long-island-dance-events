@@ -1,0 +1,28 @@
+{
+  "title": "The Allmost Brothers Band at Plattduetsche Park Restaurant",
+  "summary": "Live music by The Allmost Brothers Band at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-21",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "performerIds": [
+    "the-allmost-brothers-band"
+  ],
+  "price": 8,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://parkrestaurant.com/events/the-allmost-brothers-band-live-2/",
+  "status": "active",
+  "sourceId": "plattduetsche-park-restaurant-franklin-square",
+  "sourceUrl": "https://parkrestaurant.com/events/the-allmost-brothers-band-live-2/",
+  "sourceName": "Plattduetsche Park Restaurant - live music calendar",
+  "sourceRef": "event data on the page 2026-11-21",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "plattduetsche-park-restaurant-franklin-square|plattduetsche-park-franklin-square||saturday|tba|live-music|the-allmost-brothers-band||2026-11-21",
+  "reviewNotes": "No start time found."
+}

@@ -1,0 +1,28 @@
+{
+  "title": "Mixed Vibes Band at Amsterdam",
+  "summary": "Live music by Mixed Vibes Band at Amsterdam. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-30",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2027-03-19"
+    ]
+  },
+  "venueId": "amsterdam-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "mixed-vibes-band"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "mixed-vibes-band",
+  "sourceUrl": "https://bnds.us/fm31j4",
+  "sourceName": "Mixed Vibes Band - live music calendar",
+  "sourceRef": "pages 2026, 2027",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.6,
+  "matchKey": "mixed-vibes-band|amsterdam-patchogue||friday|tba|live-music|mixed-vibes-band||repeat",
+  "reviewNotes": "No start time found."
+}

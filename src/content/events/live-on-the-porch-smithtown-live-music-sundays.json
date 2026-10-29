@@ -13,7 +13,7 @@
   "town": "Smithtown",
   "price": 63,
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "live-on-the-porch",
   "sourceUrl": "https://liveontheporch.com/events/",
   "sourceName": "Live On The Porch (Smithtown) - show calendar",
@@ -25,5 +25,5 @@
   ],
   "confidence": 0.85,
   "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||sunday|14:00|live-music|johnvspaulmatinee||repeat",
-  "reviewNotes": "Band or DJ not researched yet: John vs Paul — Matinee."
+  "reviewNotes": "Band or DJ not researched yet: John vs Paul — Matinee. Hidden automatically because it was not found in the latest live-on-the-porch run on 2026-10-29; it may have been cancelled or moved."
 }

@@ -1,0 +1,27 @@
+{
+  "title": "Dance Party Explosion at Ristegio's Restaurant & Lounge",
+  "summary": "A dance party with Dance Party Explosion at Ristegio's Restaurant & Lounge in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "social-dance",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-11-20T20:00",
+  "end": "2026-11-20T23:00",
+  "timezone": "America/New_York",
+  "venueId": "ristegios-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "dance-party"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-20|ristegios-patchogue|dance-party-explosion|2026-11-20|special",
+  "reviewNotes": "Band or DJ not researched yet: Dance Party Explosion."
+}

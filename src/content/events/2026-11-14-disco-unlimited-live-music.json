@@ -1,0 +1,29 @@
+{
+  "title": "Disco Unlimited at Plattduetsche Park Restaurant",
+  "summary": "Live music by Disco Unlimited at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance. Food is included, and there is an open bar.",
+  "category": "live-music",
+  "start": "2026-11-14",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "performerIds": [
+    "disco-unlimited"
+  ],
+  "price": 97,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://parkrestaurant.com/events/dinner-dance-with-disco-unlimited/",
+  "status": "active",
+  "sourceId": "plattduetsche-park-restaurant-franklin-square",
+  "sourceUrl": "https://parkrestaurant.com/events/dinner-dance-with-disco-unlimited/",
+  "sourceName": "Plattduetsche Park Restaurant - live music calendar",
+  "sourceRef": "event data on the page 2026-11-14",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "dance-party",
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "plattduetsche-park-restaurant-franklin-square|plattduetsche-park-franklin-square||saturday|tba|live-music|disco-unlimited||2026-11-14",
+  "reviewNotes": "No start time found."
+}

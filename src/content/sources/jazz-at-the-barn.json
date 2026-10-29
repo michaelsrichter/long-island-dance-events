@@ -14,11 +14,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 3,
-    "kept": 2,
-    "needsReview": 2,
+    "kept": 1,
+    "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:37:51.383Z",
+  "lastScraped": "2026-10-29T22:58:04.108Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep only as low priority. It is current but is a listening-room jazz source.",

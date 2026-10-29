@@ -14,12 +14,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 15,
-    "kept": 3,
+    "found": 14,
+    "kept": 2,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:36:41.769Z",
+  "lastScraped": "2026-10-29T22:56:52.491Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep because the schedule is clean JSON-LD and the band has an explicit dance-floor signal.",

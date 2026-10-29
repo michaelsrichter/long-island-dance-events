@@ -1,0 +1,28 @@
+{
+  "title": "East Coast at Plattduetsche Park Restaurant",
+  "summary": "Live music by East Coast at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-13",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "performerIds": [
+    "east-coast"
+  ],
+  "price": 8,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://parkrestaurant.com/events/east-coast-live-3/",
+  "status": "active",
+  "sourceId": "plattduetsche-park-restaurant-franklin-square",
+  "sourceUrl": "https://parkrestaurant.com/events/east-coast-live-3/",
+  "sourceName": "Plattduetsche Park Restaurant - live music calendar",
+  "sourceRef": "event data on the page 2026-11-13",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "plattduetsche-park-restaurant-franklin-square|plattduetsche-park-franklin-square||friday|tba|live-music|east-coast||2026-11-13",
+  "reviewNotes": "No start time found."
+}

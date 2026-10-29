@@ -1,0 +1,24 @@
+{
+  "title": "Matt Bennett at Mulcahy's",
+  "summary": "Live music by Matt Bennett at Mulcahy's. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-24T20:00",
+  "end": "2026-11-24T23:30",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "performerIds": [
+    "matt-bennett"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/party-101-with-matt-bennett/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/party-101-with-matt-bennett/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2026-11-24",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.9,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||tuesday|20:00|live-music|matt-bennett||2026-11-24"
+}

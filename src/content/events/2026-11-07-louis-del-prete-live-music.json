@@ -1,0 +1,29 @@
+{
+  "title": "Dance with live music by Louis Del Prete at 375 Dance Studio",
+  "summary": "Dance to live music by Louis Del Prete. A group lesson starts at 7:30 PM. Snacks are included.",
+  "category": "live-music",
+  "start": "2026-11-07T19:30",
+  "end": "2026-11-07T23:00",
+  "timezone": "America/New_York",
+  "lessonTime": "19:30",
+  "venueId": "375-dance-studio-carle-place",
+  "town": "Carle Place",
+  "performerIds": [
+    "louis-del-prete"
+  ],
+  "price": 25,
+  "priceNotes": "Free lesson included",
+  "skillLevel": "all-levels",
+  "contactPhone": "(516) 500-9375",
+  "contactEmail": "info@375dancestudio.com",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_b4a4dbcacff14843992f6a1b46fa6f07.pdf",
+  "sourceName": "The Dance Calendar, November 2026",
+  "sourceRef": "page 17",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.65,
+  "matchKey": "thedancecalendar|375-dance-studio-carle-place||saturday|19:30|live-music|louis-del-prete|||2026-11-07",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

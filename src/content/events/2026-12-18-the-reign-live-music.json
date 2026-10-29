@@ -1,0 +1,22 @@
+{
+  "title": "The Reign at Bartini Bar & Lounge",
+  "summary": "Live music by The Reign at Bartini Bar & Lounge. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-18T20:30",
+  "timezone": "America/New_York",
+  "venueId": "bartini-babylon",
+  "town": "Babylon",
+  "performerIds": [
+    "the-reign"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bartini-babylon",
+  "sourceUrl": "https://www.bartinibabylon.com/event-calendar",
+  "sourceName": "Bartini Bar & Lounge (Babylon) - event calendar",
+  "sourceRef": "events page 2026-12-18",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.8,
+  "matchKey": "bartini-babylon|bartini-babylon||friday|20:30|live-music|the-reign||2026-12-18"
+}

@@ -1,0 +1,19 @@
+{
+  "title": "Live music at Bobbique",
+  "summary": "Live music at Bobbique. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-21T20:30",
+  "timezone": "America/New_York",
+  "venueId": "bobbique-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bobbique-patchogue",
+  "sourceUrl": "https://www.bobbique.com/upcoming-events/",
+  "sourceName": "BOBBIQUE (Patchogue) - live music calendar",
+  "sourceRef": "events page 2026-11-21",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.75,
+  "matchKey": "bobbique-patchogue|bobbique-patchogue||saturday|20:30|live-music|||2026-11-21"
+}

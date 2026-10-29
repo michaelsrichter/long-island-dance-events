@@ -1,0 +1,28 @@
+{
+  "title": "O El Amor at Plattduetsche Park Restaurant",
+  "summary": "Live music by O El Amor at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-07",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "performerIds": [
+    "o-el-amor"
+  ],
+  "price": 8,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://parkrestaurant.com/events/o-el-amor-live-2/",
+  "status": "active",
+  "sourceId": "plattduetsche-park-restaurant-franklin-square",
+  "sourceUrl": "https://parkrestaurant.com/events/o-el-amor-live-2/",
+  "sourceName": "Plattduetsche Park Restaurant - live music calendar",
+  "sourceRef": "event data on the page 2026-11-07",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "plattduetsche-park-restaurant-franklin-square|plattduetsche-park-franklin-square||saturday|tba|live-music|o-el-amor||2026-11-07",
+  "reviewNotes": "No start time found."
+}

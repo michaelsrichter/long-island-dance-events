@@ -16,13 +16,14 @@
     "lourdes-cruz"
   ],
   "skillLevel": "mixed",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "thedancecalendar",
   "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
   "sourceName": "The Dance Calendar, October 2026",
   "sourceRef": "pages 16, 18, 21",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-29",
   "confidence": 0.95,
-  "matchKey": "thedancecalendar|brumidi-lodge|dance-with-lourdes|monday|16:45|class-lesson||ballroom+latin-ballroom+west-coast-swing||repeat"
+  "matchKey": "thedancecalendar|brumidi-lodge|dance-with-lourdes|monday|16:45|class-lesson||ballroom+latin-ballroom+west-coast-swing||repeat",
+  "reviewNotes": "Hidden automatically because the organizer's or band's own calendar now lists this (dance-with-lourdes-classes-mondays-1645), so that listing is shown instead of this copy."
 }

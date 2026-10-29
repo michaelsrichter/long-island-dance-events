@@ -1,0 +1,33 @@
+{
+  "title": "Beginner East Coast Swing class at Huntington Moose Lodge",
+  "summary": "Group class in East Coast Swing for beginners. You do not need a partner.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "east-coast-swing"
+  ],
+  "start": "2026-12-15T19:30",
+  "end": "2026-12-15T22:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-12-29"
+    ]
+  },
+  "lessonTime": "19:30",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "price": 15,
+  "priceMax": 20,
+  "skillLevel": "beginner",
+  "infoUrl": "https://www.huntingtonarts.org/event/swing-dance-long-island-presents-the-mess-around-band/",
+  "status": "active",
+  "sourceId": "huntington-arts-council-dance",
+  "sourceUrl": "https://www.huntingtonarts.org/event/swing-dance-long-island-presents-the-mess-around-band/",
+  "sourceName": "Huntington Arts Council - events calendar, Dance category",
+  "sourceRef": "calendar feed 2026-12-15",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.9,
+  "matchKey": "huntington-arts-council-dance|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|class-lesson||east-coast-swing|repeat"
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Acoustic Tuesday's at Frogzz Bar 'N' Grill",
+  "summary": "Live music by Acoustic Tuesday's at Frogzz Bar 'N' Grill in Yaphank. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-03T18:00",
+  "end": "2026-11-03T21:00",
+  "timezone": "America/New_York",
+  "venueId": "frogzz-bar-n-grill-yaphank",
+  "town": "Yaphank",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "acoustic"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-03|frogzz-bar-n-grill-yaphank|acoustic-tuesdays|2026-11-03|special",
+  "reviewNotes": "Band or DJ not researched yet: Acoustic Tuesday's."
+}

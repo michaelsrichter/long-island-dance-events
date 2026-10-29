@@ -1,0 +1,23 @@
+{
+  "title": "Casey Wayne & The Rodeo at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Casey Wayne & The Rodeo at Daisy's Nashville Lounge (Miller Place) in Miller Place. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-07T20:00",
+  "end": "2026-11-07T23:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "casey-wayne-and-the-rodeo"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-07|daisys-nashville-lounge-miller-place|casey-wayne-and-the-rodeo|2026-11-07|special"
+}

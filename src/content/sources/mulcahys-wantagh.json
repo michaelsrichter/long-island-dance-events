@@ -15,11 +15,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 30,
-    "kept": 27,
+    "kept": 25,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:41:05.092Z",
+  "lastScraped": "2026-10-29T23:01:20.847Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a high-volume Long Island venue with structured future events and clear dance-party listings.",

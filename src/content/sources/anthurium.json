@@ -14,12 +14,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 50,
-    "kept": 9,
+    "found": 46,
+    "kept": 8,
     "needsReview": 0,
-    "outOfArea": 4
+    "outOfArea": 5
   },
-  "lastScraped": "2026-10-05T06:34:04.869Z",
+  "lastScraped": "2026-10-29T22:54:12.736Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Local band shows page lists multiple Long Island brewery, festival and tavern gigs through November.",

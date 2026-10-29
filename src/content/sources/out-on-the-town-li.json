@@ -11,13 +11,14 @@
   "focus": "music",
   "include": "danc|music|concert|band|swing|ballroom|line|salsa|tango|jazz|blues|country|dj|latin|polka|rock|motown|doo.?wop|party",
   "lastCounts": {
-    "found": 30,
-    "kept": 9,
-    "needsReview": 1,
-    "outOfArea": 1
+    "found": 0,
+    "kept": 0,
+    "needsReview": 0,
+    "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:44:23.982Z",
-  "lastStatus": "ok",
+  "lastMessage": "robots.txt does not allow https://outonthetownli.com/events/?ical=1",
+  "lastScraped": "2026-10-29T23:04:38.711Z",
+  "lastStatus": "error",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a low-priority nightlife backup; it needs keyword filtering and human review.",
   "url": "https://outonthetownli.com/"

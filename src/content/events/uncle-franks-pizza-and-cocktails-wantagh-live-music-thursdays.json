@@ -6,7 +6,8 @@
   "timezone": "America/New_York",
   "recurrence": {
     "rdates": [
-      "2026-11-12"
+      "2026-11-12",
+      "2026-12-10"
     ]
   },
   "venueId": "uncle-franks-pizza-and-cocktails-wantagh",
@@ -19,9 +20,9 @@
   "sourceId": "uncle-franks-pizza-and-cocktails-wantagh",
   "sourceUrl": "https://www.unclefranksli.com/music-and-events/",
   "sourceName": "Uncle Frank's Pizza and Cocktails (Wantagh) - live music calendar",
-  "sourceRef": "events page 2026-10-15",
+  "sourceRef": "events page 2026-11-12",
   "firstSeen": "2026-10-05",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-29",
   "confidence": 0.6,
   "matchKey": "uncle-franks-pizza-and-cocktails-wantagh|uncle-franks-pizza-and-cocktails-wantagh||thursday|tba|live-music|south-bay-trio||repeat",
   "reviewNotes": "No start time found."
