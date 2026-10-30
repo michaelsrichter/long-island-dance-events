@@ -1,0 +1,21 @@
+{
+  "title": "Legendar Murphy's at Shandon Court",
+  "summary": "Live music by Legendar Murphy's at Shandon Court in East Islip. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-01T18:00",
+  "end": "2026-11-01T21:00",
+  "timezone": "America/New_York",
+  "venueId": "shandon-court-east-islip",
+  "town": "East Islip",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-30",
+  "lastSeen": "2026-10-30",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-01|shandon-court-east-islip|legendar-murphys|2026-11-01|special",
+  "reviewNotes": "Band or DJ not researched yet: Legendar Murphy's. New venue was added automatically. Check it."
+}

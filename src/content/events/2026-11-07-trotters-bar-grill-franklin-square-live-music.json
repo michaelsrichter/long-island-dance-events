@@ -8,7 +8,7 @@
   "venueId": "trotters-bar-grill-franklin-square",
   "town": "Franklin Square",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -16,5 +16,6 @@
   "firstSeen": "2026-10-29",
   "lastSeen": "2026-10-29",
   "confidence": 0.75,
-  "matchKey": "iraslist|2026-11-07|trotters-bar-grill-franklin-square|tba|2026-11-07|special"
+  "matchKey": "iraslist|2026-11-07|trotters-bar-grill-franklin-square|tba|2026-11-07|special",
+  "reviewNotes": "Hidden automatically because it was not found in the latest iraslist run on 2026-10-30; it may have been cancelled or moved."
 }

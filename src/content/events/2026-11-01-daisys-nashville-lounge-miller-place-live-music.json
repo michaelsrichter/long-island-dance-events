@@ -1,0 +1,24 @@
+{
+  "title": "Gen X Duo at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Gen X Duo at Daisy's Nashville Lounge (Miller Place) in Miller Place. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-01T13:00",
+  "end": "2026-11-01T16:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-30",
+  "lastSeen": "2026-10-30",
+  "dancingCues": [
+    "acoustic"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-01|daisys-nashville-lounge-miller-place|gen-x-duo|2026-11-01|special",
+  "reviewNotes": "Band or DJ not researched yet: Gen X Duo."
+}
