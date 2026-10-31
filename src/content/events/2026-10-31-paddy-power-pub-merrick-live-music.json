@@ -1,0 +1,21 @@
+{
+  "title": "Crossfade Nights at Paddy Power Pub",
+  "summary": "Live music by Crossfade Nights at Paddy Power Pub in Merrick. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-10-31T20:30",
+  "end": "2026-10-31T22:30",
+  "timezone": "America/New_York",
+  "venueId": "paddy-power-pub-merrick",
+  "town": "Merrick",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-31",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-10-31|paddy-power-pub-merrick|crossfade-nights|2026-10-31|special",
+  "reviewNotes": "Band or DJ not researched yet: Crossfade Nights."
+}

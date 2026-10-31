@@ -1,0 +1,24 @@
+{
+  "title": "Three Dog Night at Flagstar at Westbury Music Fair",
+  "summary": "Live music by Three Dog Night at Flagstar at Westbury Music Fair in Westbury. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-19T20:00",
+  "end": "2026-11-19T22:00",
+  "timezone": "America/New_York",
+  "venueId": "flagstar-at-westbury-music-fair-westbury",
+  "town": "Westbury",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-30",
+  "lastSeen": "2026-10-31",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-19|flagstar-at-westbury-music-fair-westbury|three-dog-night|2026-11-19|special",
+  "reviewNotes": "Band or DJ not researched yet: Three Dog Night."
+}

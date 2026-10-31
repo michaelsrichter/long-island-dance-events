@@ -1,0 +1,38 @@
+{
+  "title": "East Coast Swing dance with live music by East Coast at Huntington Moose Lodge",
+  "summary": "Dance to live music by East Coast. Dance styles: East Coast Swing. A group lesson starts at 7:30 PM.",
+  "category": "live-music",
+  "danceStyles": [
+    "east-coast-swing"
+  ],
+  "start": "2026-10-06T19:30",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-10-13",
+      "2026-11-03",
+      "2026-11-10",
+      "2026-11-24"
+    ]
+  },
+  "lessonTime": "19:30",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "performerIds": [
+    "east-coast"
+  ],
+  "price": 15,
+  "priceNotes": "Members pay less",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.sdli.org",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
+  "sourceName": "The Dance Calendar, October 2026",
+  "sourceRef": "pages 15, 16, 17, 18, 21",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 1,
+  "matchKey": "thedancecalendar|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|live-music|east-coast|east-coast-swing||repeat"
+}

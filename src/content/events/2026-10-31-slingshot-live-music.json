@@ -14,7 +14,7 @@
     "slingshot"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -22,5 +22,6 @@
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-10-05",
   "confidence": 0.75,
-  "matchKey": "iraslist|2026-10-31|daisys-nashville-lounge-miller-place|slingshot|2026-10-31|special"
+  "matchKey": "iraslist|2026-10-31|daisys-nashville-lounge-miller-place|slingshot|2026-10-31|special",
+  "reviewNotes": "Hidden automatically because it was not found in the latest iraslist run on 2026-10-29; it may have been cancelled or moved."
 }

@@ -1,0 +1,28 @@
+{
+  "title": "Beginner West Coast Swing class at Huntington Moose Lodge",
+  "summary": "Group class in West Coast Swing for beginners with Lourdes Cruz.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "west-coast-swing"
+  ],
+  "start": "2026-11-22T14:00",
+  "end": "2026-11-22T17:00",
+  "timezone": "America/New_York",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "instructorIds": [
+    "lourdes-cruz"
+  ],
+  "price": 15,
+  "skillLevel": "beginner",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_b4a4dbcacff14843992f6a1b46fa6f07.pdf",
+  "sourceName": "The Dance Calendar, November 2026",
+  "sourceRef": "page 21",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 1,
+  "matchKey": "thedancecalendar|huntington-moose-lodge|swing-dance-long-island|sunday|14:00|class-lesson||west-coast-swing||2026-11-22"
+}

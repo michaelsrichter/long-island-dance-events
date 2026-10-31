@@ -1,0 +1,11 @@
+{
+  "name": "The Dawg Pound Bar & Grill",
+  "address": "162 Gardiners Ave",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Levittown",
+  "latitude": 40.724408,
+  "longitude": -73.514894,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

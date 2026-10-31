@@ -1,0 +1,11 @@
+{
+  "name": "Lilah’s Bar and Grill",
+  "address": "33 Main St",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "East Rockaway",
+  "latitude": 40.640023,
+  "longitude": -73.661935,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

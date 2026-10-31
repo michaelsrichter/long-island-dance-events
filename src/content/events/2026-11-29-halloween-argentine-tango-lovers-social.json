@@ -1,0 +1,29 @@
+{
+  "title": "Halloween Argentine Tango social dance with DJ Omar H at Mirelle's",
+  "summary": "An evening of Argentine Tango social dancing with music by DJ Omar H. Call ahead to confirm.",
+  "category": "social-dance",
+  "danceStyles": [
+    "argentine-tango"
+  ],
+  "start": "2026-11-29",
+  "timezone": "America/New_York",
+  "venueId": "mirelles",
+  "town": "Westbury",
+  "organizerId": "argentine-tango-lovers",
+  "performerIds": [
+    "dj-omar-h"
+  ],
+  "price": 35,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.argentinetangolovers.org",
+  "status": "active",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_b4a4dbcacff14843992f6a1b46fa6f07.pdf",
+  "sourceName": "The Dance Calendar, November 2026",
+  "sourceRef": "page 22",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.65,
+  "matchKey": "thedancecalendar|mirelles|argentine-tango-lovers|sunday|tba|social-dance|dj-omar-h|argentine-tango||2026-11-29|halloween",
+  "reviewNotes": "No start time found."
+}

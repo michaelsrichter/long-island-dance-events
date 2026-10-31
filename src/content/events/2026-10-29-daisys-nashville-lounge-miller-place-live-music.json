@@ -1,0 +1,22 @@
+{
+  "title": "Stix & Soul at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Stix & Soul at Daisy's Nashville Lounge (Miller Place). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-29T18:00",
+  "end": "2026-10-29T23:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/smashville-thursday-stix-and-soul/",
+  "status": "past",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/smashville-thursday-stix-and-soul/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-10-29",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.85,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||thursday|18:00|live-music|stixandsoul||2026-10-29",
+  "reviewNotes": "Band or DJ not researched yet: Stix & Soul."
+}

@@ -1,0 +1,21 @@
+{
+  "title": "Cornerstone Music at Trotters Bar & Grill",
+  "summary": "Live music by Cornerstone Music at Trotters Bar & Grill in Franklin Square. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-25T20:00",
+  "end": "2026-11-25T23:00",
+  "timezone": "America/New_York",
+  "venueId": "trotters-bar-grill-franklin-square",
+  "town": "Franklin Square",
+  "skillLevel": "all-levels",
+  "status": "hidden",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-10-30",
+  "lastSeen": "2026-10-30",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-25|trotters-bar-grill-franklin-square|cornerstone-music|2026-11-25|special",
+  "reviewNotes": "Band or DJ not researched yet: Cornerstone Music. Hidden automatically because it was not found in the latest iraslist run on 2026-10-31; it may have been cancelled or moved."
+}

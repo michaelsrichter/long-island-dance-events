@@ -13,12 +13,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 12,
-    "kept": 12,
+    "found": 70,
+    "kept": 39,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:33:54.644Z",
+  "lastScraped": "2026-10-29T22:54:02.102Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep only if the site wants broader live music. It is a concert source, not a social-dance source.",

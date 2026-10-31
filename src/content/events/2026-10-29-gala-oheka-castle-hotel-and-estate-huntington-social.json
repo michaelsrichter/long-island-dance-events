@@ -1,0 +1,23 @@
+{
+  "title": "Gala Social dance at Oheka Castle Hotel & Estate",
+  "summary": "An evening of social dancing. Food is included, and there is an open bar.",
+  "category": "social-dance",
+  "start": "2026-10-29T18:00",
+  "end": "2026-10-29T23:00",
+  "timezone": "America/New_York",
+  "venueId": "oheka-castle-hotel-and-estate-huntington",
+  "town": "Huntington",
+  "price": 200,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/little-shelters-17th-annual-masquerade-gala/?occurrence=2026-10-29",
+  "status": "past",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/little-shelters-17th-annual-masquerade-gala/?occurrence=2026-10-29",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-10-29",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.85,
+  "matchKey": "huntington-matters|oheka-castle-hotel-and-estate-huntington||thursday|18:00|social-dance|||2026-10-29|gala",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

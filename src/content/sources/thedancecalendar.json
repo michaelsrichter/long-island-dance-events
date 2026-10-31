@@ -9,12 +9,12 @@
   "enabled": true,
   "focus": "dance",
   "lastCounts": {
-    "found": 185,
-    "kept": 112,
-    "needsReview": 4,
-    "outOfArea": 73
+    "found": 337,
+    "kept": 199,
+    "needsReview": 0,
+    "outOfArea": 138
   },
-  "lastScraped": "2026-10-05T06:45:05.051Z",
+  "lastScraped": "2026-10-29T23:05:19.243Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "url": "https://www.thedancecalendar.com/dance-calendar"

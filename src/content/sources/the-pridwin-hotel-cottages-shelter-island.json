@@ -14,13 +14,14 @@
   "focus": "music",
   "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano",
   "lastCounts": {
-    "found": 7,
-    "kept": 4,
+    "found": 9,
+    "kept": 0,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:43:07.486Z",
-  "lastStatus": "ok",
+  "lastMessage": "The adapter found 9 listings but none could be used. The source layout may have changed.",
+  "lastScraped": "2026-10-29T23:03:25.320Z",
+  "lastStatus": "empty",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Shelter Island resort calendar lists weekly live music at The Pridwin with multiple October dates.",
   "url": "https://www.caperesorts.com/pridwin/events-calendar"

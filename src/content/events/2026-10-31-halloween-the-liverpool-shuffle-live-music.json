@@ -1,0 +1,24 @@
+{
+  "title": "Halloween show with The Liverpool Shuffle at Garden Grill",
+  "summary": "Live music by The Liverpool Shuffle at Garden Grill. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-31",
+  "timezone": "America/New_York",
+  "venueId": "garden-grill-smithtown",
+  "town": "Smithtown",
+  "performerIds": [
+    "the-liverpool-shuffle"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.theliverpoolshuffle.com/calendar/rubber-soul-halloween-at-the-garden-grill",
+  "status": "active",
+  "sourceId": "the-liverpool-shuffle",
+  "sourceUrl": "https://www.theliverpoolshuffle.com/calendar/rubber-soul-halloween-at-the-garden-grill",
+  "sourceName": "The Liverpool Shuffle - live music calendar",
+  "sourceRef": "events page 2026-10-31",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.6,
+  "matchKey": "the-liverpool-shuffle|garden-grill-smithtown||saturday|tba|live-music|the-liverpool-shuffle||2026-10-31|halloween",
+  "reviewNotes": "No start time found."
+}

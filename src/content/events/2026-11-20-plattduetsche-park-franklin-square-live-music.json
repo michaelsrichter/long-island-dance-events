@@ -1,0 +1,25 @@
+{
+  "title": "VHS Cover Band at Plattduetsche Park Restaurant",
+  "summary": "Live music by VHS Cover Band at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-20",
+  "timezone": "America/New_York",
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "price": 8,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://parkrestaurant.com/events/vhs-cover-band-live-2/",
+  "status": "active",
+  "sourceId": "plattduetsche-park-restaurant-franklin-square",
+  "sourceUrl": "https://parkrestaurant.com/events/vhs-cover-band-live-2/",
+  "sourceName": "Plattduetsche Park Restaurant - live music calendar",
+  "sourceRef": "event data on the page 2026-11-20",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "outdoor"
+  ],
+  "confidence": 0.65,
+  "matchKey": "plattduetsche-park-restaurant-franklin-square|plattduetsche-park-franklin-square||friday|tba|live-music|vhscoverband||2026-11-20",
+  "reviewNotes": "Band or DJ not researched yet: VHS Cover Band. No start time found."
+}

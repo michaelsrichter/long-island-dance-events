@@ -1,0 +1,25 @@
+{
+  "title": "Candlebox at The Paramount",
+  "summary": "Live music by Candlebox at The Paramount. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-29T20:00",
+  "end": "2026-10-29T23:00",
+  "timezone": "America/New_York",
+  "venueId": "paramount-huntington",
+  "town": "Huntington",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/f9bc83f7a579e4f285dce8d3f98ad57cfa202eb8",
+  "status": "past",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/f9bc83f7a579e4f285dce8d3f98ad57cfa202eb8",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-29",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|paramount-huntington||thursday|20:00|live-music|candlebox||2026-10-29",
+  "reviewNotes": "Band or DJ not researched yet: Candlebox."
+}

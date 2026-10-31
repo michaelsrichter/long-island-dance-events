@@ -15,12 +15,13 @@
   "focus": "music",
   "lastCounts": {
     "found": 6,
-    "kept": 2,
+    "kept": 0,
     "needsReview": 0,
     "outOfArea": 1
   },
-  "lastScraped": "2026-10-06T16:39:33.530Z",
-  "lastStatus": "ok",
+  "lastMessage": "The adapter found 6 listings but none could be used. The source layout may have changed.",
+  "lastScraped": "2026-10-29T22:53:34.952Z",
+  "lastStatus": "empty",
   "rateLimitSeconds": 5,
   "reviewNotes": "Switched back on 2026-10-06 (issue #40), read on Sundays. Its two Long Island venues (CM Performing Arts Center in Oakdale and Lucky Strike Bar & Lounge in Port Jefferson Station) already had researched venue files; the real problem was that its show list gives the town first and the venue on a later line, so the reader saw only the town. The reader now uses a researched venue named on a later line, in the same town. A new Long Island venue on its list will show up in the run report as a venue to research. Catalog check 2026-10-03: Keep at low priority for live-music cross-checking; it is mostly a listening tribute act (theater dates), but bar and party dates draw dancers.",
   "url": "https://allrevvedupnyband.com/shows-meat-loaf-tribute"

@@ -1,0 +1,11 @@
+{
+  "name": "375 Dance Studio",
+  "address": "375 Westbury Avenue",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from The Dance Calendar, November 2026 (page 17). Check the name and address, then geocode.",
+  "state": "NY",
+  "town": "Carle Place",
+  "latitude": 40.750136,
+  "longitude": -73.609517,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

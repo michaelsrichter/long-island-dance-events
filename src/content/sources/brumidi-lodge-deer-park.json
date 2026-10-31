@@ -15,12 +15,12 @@
   "feedUrl": "https://sonsofitalyli.com/wp-json/wp/v2/event",
   "focus": "dance",
   "lastCounts": {
-    "found": 15,
-    "kept": 7,
+    "found": 12,
+    "kept": 8,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:36:19.075Z",
+  "lastScraped": "2026-10-29T22:56:28.121Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. Club Brumidi lists weekly socials, classes, live-music dances, and closures in plain text.",

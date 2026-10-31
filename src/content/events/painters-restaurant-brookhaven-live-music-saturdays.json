@@ -15,7 +15,7 @@
     "pour-some-80s-on-me"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "pour-some-80s",
   "sourceUrl": "https://poursome80sonme.org/",
   "sourceName": "Pour Some 80s On Me - show calendar",
@@ -23,5 +23,6 @@
   "firstSeen": "2026-10-05",
   "lastSeen": "2026-10-05",
   "confidence": 0.8,
-  "matchKey": "pour-some-80s|painters-restaurant-brookhaven||saturday|21:00|live-music|pour-some-80s-on-me||repeat"
+  "matchKey": "pour-some-80s|painters-restaurant-brookhaven||saturday|21:00|live-music|pour-some-80s-on-me||repeat",
+  "reviewNotes": "Hidden automatically because it was not found in the latest pour-some-80s run on 2026-10-29; it may have been cancelled or moved."
 }

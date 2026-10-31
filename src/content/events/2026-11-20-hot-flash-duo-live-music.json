@@ -1,0 +1,27 @@
+{
+  "title": "Hot Flash Duo at Amici Restaurant",
+  "summary": "Live music by Hot Flash Duo at Amici Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-20T18:30",
+  "end": "2026-11-20T21:30",
+  "timezone": "America/New_York",
+  "venueId": "amici-restaurant-mount-sinai",
+  "town": "Mount Sinai",
+  "performerIds": [
+    "hot-flash-duo"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://amicirestaurant.org/event/hot-flash-duo-9/",
+  "status": "active",
+  "sourceId": "amici-restaurant-mount-sinai",
+  "sourceUrl": "https://amicirestaurant.org/event/hot-flash-duo-9/",
+  "sourceName": "Amici Restaurant (Mount Sinai) - live music calendar",
+  "sourceRef": "calendar feed 2026-11-20",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "acoustic"
+  ],
+  "confidence": 0.9,
+  "matchKey": "amici-restaurant-mount-sinai|amici-restaurant-mount-sinai||friday|18:30|live-music|hot-flash-duo||2026-11-20"
+}

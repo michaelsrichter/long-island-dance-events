@@ -13,13 +13,14 @@
   "enabled": true,
   "focus": "dance",
   "lastCounts": {
-    "found": 1,
-    "kept": 1,
+    "found": 0,
+    "kept": 0,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:42:08.861Z",
-  "lastStatus": "ok",
+  "lastMessage": "HTTP 404 for https://saint-demetrios.com/dance",
+  "lastScraped": "2026-10-29T23:02:30.756Z",
+  "lastStatus": "error",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it because it is a future Long Island dinner dance with live music and ticket details.",
   "url": "https://saint-demetrios.com/dance"

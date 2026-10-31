@@ -1,0 +1,22 @@
+{
+  "title": "St. Patrick's show with Radio Active at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Radio Active at Daisy's Nashville Lounge (Miller Place). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-03-20T20:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "radio-active"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "radio-active",
+  "sourceUrl": "https://radioactiveny.com/",
+  "sourceName": "Radio Active - events calendar",
+  "sourceRef": "events page 2027-03-20",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.8,
+  "matchKey": "radio-active|daisys-nashville-lounge-miller-place||saturday|20:00|live-music|radio-active||2027-03-20|st-patricks"
+}

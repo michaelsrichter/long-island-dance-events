@@ -11,7 +11,7 @@
     "mark-hubbard"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "enology-wine-bar-bistro-saint-james",
   "sourceUrl": "https://enologywinebar.com/events/live-music/",
   "sourceName": "Enology Wine Bar & Bistro - live music calendar",
@@ -19,5 +19,6 @@
   "firstSeen": "2026-10-05",
   "lastSeen": "2026-10-05",
   "confidence": 0.8,
-  "matchKey": "enology-wine-bar-bistro-saint-james|enology-wine-bar-bistro-saint-james||thursday|18:00|live-music|mark-hubbard||2026-12-10"
+  "matchKey": "enology-wine-bar-bistro-saint-james|enology-wine-bar-bistro-saint-james||thursday|18:00|live-music|mark-hubbard||2026-12-10",
+  "reviewNotes": "Hidden automatically because it was not found in the latest enology-wine-bar-bistro-saint-james run on 2026-10-29; it may have been cancelled or moved."
 }

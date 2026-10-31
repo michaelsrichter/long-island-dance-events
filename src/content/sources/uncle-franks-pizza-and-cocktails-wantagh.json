@@ -13,12 +13,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 10,
-    "kept": 10,
-    "needsReview": 4,
+    "found": 8,
+    "kept": 8,
+    "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-05T06:43:18.168Z",
+  "lastScraped": "2026-10-29T23:03:35.822Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Wantagh restaurant page lists weekly dated bands and singers from October into December.",

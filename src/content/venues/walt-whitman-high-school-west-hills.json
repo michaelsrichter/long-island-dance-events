@@ -1,0 +1,11 @@
+{
+  "name": "Walt Whitman High School",
+  "address": "301 West Hills Road",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Huntington Matters events. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "West Hills",
+  "latitude": 40.826964,
+  "longitude": -73.424374,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}
