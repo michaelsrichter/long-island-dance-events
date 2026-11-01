@@ -1,0 +1,11 @@
+{
+  "name": "Great South Bay Brewery",
+  "address": "25 Drexel Dr",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Bay Shore",
+  "latitude": 40.760548,
+  "longitude": -73.2627,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}
