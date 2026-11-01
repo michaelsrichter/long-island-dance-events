@@ -18,12 +18,11 @@
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
   "sourceRef": "calendar feed 2027-02-14",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-10-29",
+  "lastSeen": "2026-11-01",
   "dancingCues": [
     "afternoon",
     "library"
   ],
   "confidence": 0.9,
-  "matchKey": "gene-casey-lone-sharks|cutchogue-new-suffolk-library-cutchogue||sunday|14:00|live-music|gene-casey-and-the-lone-sharks||2027-02-14",
-  "reviewNotes": "New venue was added automatically. Check it."
+  "matchKey": "gene-casey-lone-sharks|cutchogue-new-suffolk-library-cutchogue||sunday|14:00|live-music|gene-casey-and-the-lone-sharks||2027-02-14"
 }

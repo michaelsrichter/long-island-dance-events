@@ -14,12 +14,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 17,
-    "kept": 13,
+    "found": 15,
+    "kept": 11,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-29T23:01:14.782Z",
+  "lastScraped": "2026-11-01T16:20:04.838Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Bandsintown page lists Mixed Vibes Band gigs at Suffolk venues from late October through November.",

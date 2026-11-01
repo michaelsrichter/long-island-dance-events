@@ -21,12 +21,11 @@
   "sourceName": "Huntington Arts Council - events calendar, Dance category",
   "sourceRef": "calendar feed 2026-11-03",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-10-29",
+  "lastSeen": "2026-11-01",
   "dancingCues": [
     "afternoon",
     "library"
   ],
   "confidence": 0.9,
-  "matchKey": "huntington-arts-council-dance|cold-spring-harbor-library-cold-spring-harbor||tuesday|10:00|class-lesson||east-coast-swing+latin-ballroom+line-dancing|2026-11-03",
-  "reviewNotes": "New venue was added automatically. Check it."
+  "matchKey": "huntington-arts-council-dance|cold-spring-harbor-library-cold-spring-harbor||tuesday|10:00|class-lesson||east-coast-swing+latin-ballroom+line-dancing|2026-11-03"
 }

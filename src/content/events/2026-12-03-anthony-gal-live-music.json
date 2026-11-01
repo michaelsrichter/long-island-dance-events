@@ -10,7 +10,7 @@
     "anthony-gal"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "uncle-franks-pizza-and-cocktails-wantagh",
   "sourceUrl": "https://www.unclefranksli.com/music-and-events/",
   "sourceName": "Uncle Frank's Pizza and Cocktails (Wantagh) - live music calendar",
@@ -19,5 +19,5 @@
   "lastSeen": "2026-10-29",
   "confidence": 0.6,
   "matchKey": "uncle-franks-pizza-and-cocktails-wantagh|uncle-franks-pizza-and-cocktails-wantagh||thursday|tba|live-music|anthony-gal||2026-12-03",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Hidden automatically because it was not found in the latest uncle-franks-pizza-and-cocktails-wantagh run on 2026-11-01; it may have been cancelled or moved."
 }

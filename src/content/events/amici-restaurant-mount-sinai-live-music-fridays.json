@@ -12,7 +12,7 @@
   "town": "Mount Sinai",
   "skillLevel": "all-levels",
   "infoUrl": "https://amicirestaurant.org/event/dna-98/",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "amici-restaurant-mount-sinai",
   "sourceUrl": "https://amicirestaurant.org/event/dna-98/",
   "sourceName": "Amici Restaurant (Mount Sinai) - live music calendar",
@@ -20,5 +20,6 @@
   "firstSeen": "2026-10-05",
   "lastSeen": "2026-10-29",
   "confidence": 0.85,
-  "matchKey": "amici-restaurant-mount-sinai|amici-restaurant-mount-sinai||friday|18:30|live-music|||repeat"
+  "matchKey": "amici-restaurant-mount-sinai|amici-restaurant-mount-sinai||friday|18:30|live-music|||repeat",
+  "reviewNotes": "Hidden automatically because it was not found in the latest amici-restaurant-mount-sinai run on 2026-11-01; it may have been cancelled or moved."
 }

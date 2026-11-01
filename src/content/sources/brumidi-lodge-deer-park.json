@@ -16,11 +16,11 @@
   "focus": "dance",
   "lastCounts": {
     "found": 12,
-    "kept": 8,
+    "kept": 7,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-29T22:56:28.121Z",
+  "lastScraped": "2026-11-01T16:15:48.915Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. Club Brumidi lists weekly socials, classes, live-music dances, and closures in plain text.",

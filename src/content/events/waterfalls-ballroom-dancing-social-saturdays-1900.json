@@ -23,13 +23,14 @@
   ],
   "price": 20,
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "thedancecalendar",
   "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_b4a4dbcacff14843992f6a1b46fa6f07.pdf",
   "sourceName": "The Dance Calendar, November 2026",
   "sourceRef": "pages 18, 22",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-10-29",
+  "lastSeen": "2026-11-01",
   "confidence": 1,
-  "matchKey": "thedancecalendar|waterfalls-ballroom|waterfalls-ballroom-dancing|saturday|19:00|social-dance|dj-valerie|ballroom+latin-ballroom||repeat"
+  "matchKey": "thedancecalendar|waterfalls-ballroom|waterfalls-ballroom-dancing|saturday|19:00|social-dance|dj-valerie|ballroom+latin-ballroom||repeat",
+  "reviewNotes": "Hidden automatically because the organizer's or band's own calendar now lists this (waterfalls-ballroom-dancing-social-saturdays), so that listing is shown instead of this copy."
 }

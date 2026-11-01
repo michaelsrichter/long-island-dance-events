@@ -1,0 +1,24 @@
+{
+  "title": "Mike Tramp of White Lion — Acoustic Songs & Stories at Live On The Porch",
+  "summary": "Live music by Mike Tramp of White Lion — Acoustic Songs & Stories at Live On The Porch. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-02-13T20:00",
+  "timezone": "America/New_York",
+  "venueId": "live-on-the-porch-smithtown",
+  "town": "Smithtown",
+  "price": 35,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "live-on-the-porch",
+  "sourceUrl": "https://liveontheporch.com/events/",
+  "sourceName": "Live On The Porch (Smithtown) - show calendar",
+  "sourceRef": "event data on the page 2027-02-13",
+  "firstSeen": "2026-11-01",
+  "lastSeen": "2026-11-01",
+  "dancingCues": [
+    "acoustic"
+  ],
+  "confidence": 0.85,
+  "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||saturday|20:00|live-music|miketrampofwhitelionacousticsongsandstories||2027-02-13",
+  "reviewNotes": "Band or DJ not researched yet: Mike Tramp of White Lion — Acoustic Songs & Stories."
+}

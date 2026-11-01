@@ -16,13 +16,12 @@
   "include": "danc|ballroom|latin|swing|social",
   "lastCounts": {
     "found": 2,
-    "kept": 0,
+    "kept": 2,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastMessage": "The adapter found 2 listings but none could be used. The source layout may have changed.",
-  "lastScraped": "2026-10-29T23:03:52.833Z",
-  "lastStatus": "empty",
+  "lastScraped": "2026-11-01T16:21:58.647Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a low-volume confirmation source; reliable but mostly duplicate.",
   "url": "https://waterfallsapartments.com/event-calendar/"
