@@ -10,12 +10,12 @@
   "feedUrl": "https://www.huntingtonarts.org/events/category/dance/?ical=1",
   "focus": "dance",
   "lastCounts": {
-    "found": 3,
-    "kept": 3,
+    "found": 7,
+    "kept": 7,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-04T16:11:55.251Z",
+  "lastScraped": "2026-11-01T16:22:26.745Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep only as a fallback. The feed is clean but mostly duplicates SDLI.",

@@ -52,6 +52,25 @@ test('accepts outbound link clicks with the destination site', () => {
   assert.deepEqual(r.batch.items[0].props, { method: 'website', location: 'card', target: 'triplestepswing.com' });
 });
 
+test('accepts visit context, searches and script errors, without personal data', () => {
+  const r = validate(
+    JSON.stringify({
+      v: 1,
+      items: [
+        { name: 'page_view', props: { page_type: 'town', device: 'phone', ref: 'google.com', utm_source: 'facebook', entity: 'town:huntington', town: 'Huntington', referrer: 'https://google.com/search?q=me' } },
+        { name: 'search', props: { term: 'west coast swing', results: 0, location: 'events', method: 'typed' } },
+        { name: 'js_error', props: { message: 'TypeError: x is undefined', source: 'share.js', line: 12 } },
+        { name: 'sign_in_start', props: { location: 'header' } },
+      ],
+    }),
+  );
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.batch.items[0].props, { page_type: 'town', device: 'phone', ref: 'google.com', utm_source: 'facebook', entity: 'town:huntington', town: 'Huntington' });
+  assert.deepEqual(r.batch.items[1].props, { term: 'west coast swing', results: 0, location: 'events', method: 'typed' });
+  assert.equal(r.batch.items[2].props.source, 'share.js');
+  assert.equal(r.batch.items.length, 4);
+});
+
 test('rejects malformed, oversized and empty payloads', () => {
   assert.equal(validate('').ok, false);
   assert.equal(validate('{nope').reason, 'bad_json');

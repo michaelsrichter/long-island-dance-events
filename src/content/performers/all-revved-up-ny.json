@@ -1,0 +1,70 @@
+{
+  "name": "All Revved Up NY",
+  "type": "band",
+  "aliases": [
+    "All Revved Up",
+    "All Revved Up - The Ultimate Meat Loaf Tribute",
+    "All Revved Up: The Ultimate Meatloaf Tribute",
+    "All Revved Up NY Meatloaf Tribute Band"
+  ],
+  "genres": [
+    "tribute to Meat Loaf",
+    "classic rock"
+  ],
+  "website": "https://allrevvedupnyband.com/",
+  "facebookUrl": "https://www.facebook.com/AllRevvedUpNyMeatloafTributeBand/",
+  "instagramUrl": "https://www.instagram.com/allrevvedupnymeatloaftribute/",
+  "youtubeUrl": "https://www.youtube.com/@allrevvedupnyband",
+  "bookingUrl": "https://allrevvedupnyband.com/contact-meat-loaf-tribute",
+  "description": "A Long Island tribute band, started in 2013, that plays Meat Loaf's big rock songs as a stage show, with a full band of about eight players, costume changes, props and choreography. Singer John Doboe plays the Meat Loaf part. A smaller two-person show is also offered.",
+  "dancing": {
+    "rating": "mixed",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [
+      "freestyle"
+    ],
+    "notes": "Mostly a theater-style concert that people watch and sing along to, often in seated theaters. At bars, cookouts and festivals hosts bill it as a sing-and-dance party, and the Oct 31, 2026 date is a Halloween costume party at a bar. Expect freestyle rock dancing at those dates, not partner or line dancing.",
+    "evidence": [
+      {
+        "url": "https://allrevvedupnyband.com/about-meat-loaf-tribute",
+        "note": "The band describes a full stage show with choreography, props, sets and costume changes, made for an audience to watch."
+      },
+      {
+        "url": "https://allrevvedupnyband.com/performed-meat-loaf-tribute",
+        "note": "Most past venues listed are theaters and performing arts centers, plus some bars, casinos and festivals."
+      },
+      {
+        "url": "https://stayhappening.com/e/celebrate-the-music-of-meatloaf-with-all-revved-up-friday-night-bbq-E118SAWPWVNE9",
+        "note": "A golf course billed its June 26, 2026 BBQ night with this band as a chance to sing and dance to Meat Loaf songs."
+      },
+      {
+        "url": "https://allrevvedupnyband.com/shows-meat-loaf-tribute",
+        "note": "The Oct 31, 2026 bar date is a Halloween costume party; the Oct 15 date is at a seated theater."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-06"
+  },
+  "evidence": [
+    {
+      "url": "https://allrevvedupnyband.com/about-meat-loaf-tribute",
+      "note": "Calls itself Long Island's Meat Loaf tribute, started in 2013, a multi-piece band led by John Doboe."
+    },
+    {
+      "url": "https://allrevvedupnyband.com/shows-meat-loaf-tribute",
+      "note": "Show list: Oct 15, 2026, 7:30 PM, CM Performing Arts Center, Oakdale; Oct 31, 2026, 7 PM, Lucky Strike Bar & Lounge, Port Jefferson Station."
+    },
+    {
+      "url": "https://allrevvedupnyband.com/",
+      "note": "The band site links to its Facebook, Instagram and YouTube (@allrevvedupnyband)."
+    },
+    {
+      "url": "https://www.cmpac.com/shows/allrevvedup/",
+      "note": "The theater's show page describes an 8-piece band with choreography, props and costume changes, led by John Doboe."
+    }
+  ],
+  "factsSource": "Checked October 6, 2026. Source: allrevvedupnyband.com.",
+  "reviewNotes": "Added 2026-10-06 (issue #40). No home town is published (only \"Long Island\"). Booking contacts on the site are personal Yahoo and Gmail addresses and phone numbers, so only the contact page is linked. Band size differs by source (8-piece, or a singer plus seven players). Not the UK act \"All Revved Up - The Ultimate Meatloaf Experience\". The catalog said \"mostly a listening tribute act\": true for theater dates, not for bar and party dates, so it is rated mixed."
+}

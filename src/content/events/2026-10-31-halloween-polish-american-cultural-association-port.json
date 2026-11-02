@@ -7,13 +7,13 @@
   "venueId": "polish-american-cultural-association-port-washington",
   "town": "Port Washington",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "past",
   "sourceId": "polish-club-port-washington",
   "sourceUrl": "https://portwashingtonpolishclub.com/upcoming-events",
   "sourceName": "Polish American Cultural Association (Port Washington) - upcoming events",
   "sourceRef": "events page 2026-10-31",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-29",
   "dancingCues": [
     "dj"
   ],

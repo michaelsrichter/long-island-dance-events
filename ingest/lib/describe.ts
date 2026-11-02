@@ -95,7 +95,31 @@ export function plainLabel(label: string): string {
 
 const LEVEL_WORD: Record<string, string> = { beginner: 'Beginner', intermediate: 'Intermediate', advanced: 'Advanced' };
 
-export function makeTitle(d: DescribeInput): string {
+const actKey = (s: string) => s.toLowerCase().replace(/['’`]/g, '').replace(/^the\s+/, '').replace(/[^a-z0-9]+/g, '');
+
+/**
+ * Act names as shown: no trailing "live", no theme repeated in front ("Oktoberfest with die
+ * Spitzbuam" on an Oktoberfest night), and one name when a source writes an act twice ("The ’90s Band"
+ * and "The 90's Band") or once in full ("Chelsea" and "Chelsea Takami": the longer one is kept).
+ */
+export function displayActs(acts: string[], theme?: string): string[] {
+  const esc = (t: string) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const out: string[] = [];
+  for (const raw of acts) {
+    let a = raw.replace(/\s+live!?$/i, '').trim();
+    if (theme) a = a.replace(new RegExp(`^${esc(theme)}\\s+(?:with|featuring|feat\\.?)\\s+`, 'i'), '').trim();
+    if (!a) a = raw;
+    const k = actKey(a);
+    if (!k) continue;
+    const i = out.findIndex((o) => actKey(o).startsWith(k) || k.startsWith(actKey(o)));
+    if (i < 0) out.push(a);
+    else if (k.length > actKey(out[i]!).length) out[i] = a;
+  }
+  return out;
+}
+
+export function makeTitle(input: DescribeInput): string {
+  const d = { ...input, liveActs: displayActs(input.liveActs, input.theme) };
   const styles = styleTitle(d.styles);
   const lessonStyles = styleTitle(d.lessonStyles ?? []);
   const theme = d.theme ? `${d.theme} ` : '';
@@ -130,7 +154,8 @@ export function makeTitle(d: DescribeInput): string {
   return withPlace.length <= 110 ? withPlace : what.slice(0, 110);
 }
 
-export function makeSummary(d: DescribeInput): string {
+export function makeSummary(input: DescribeInput): string {
+  const d = { ...input, liveActs: displayActs(input.liveActs, input.theme) };
   const styles = styleTitle(d.styles);
   const lessonStyles = styleTitle(d.lessonStyles ?? []);
   const parts: string[] = [];

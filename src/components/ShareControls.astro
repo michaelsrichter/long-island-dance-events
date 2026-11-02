@@ -1,93 +1,102 @@
 ---
+/**
+ * Share an event or a directory page: a preview of the picture and text people will see, Copy text,
+ * Copy link, the phone's share menu, and prefilled WhatsApp, Facebook, X, email and text-message links.
+ */
 import Icon from './Icon.astro';
-import { detailText, shareLinks, type ShareInput } from '../lib/share';
+import { shareLinks } from '../lib/share';
+import type { PageShare } from '../lib/entity-meta';
+import '../styles/share.css';
 interface Props {
-  share: ShareInput;
-  details: { lesson?: string | undefined; admission?: string | undefined; beginners?: boolean };
-  slug: string;
-  socialImage?: string | undefined;
-  /** "inline" renders every option as a visible button; "button" renders one Share button. */
+  share: PageShare;
+  /** "inline" shows the preview and every option; "button" shows one Share button that opens them in a dialog. */
   variant?: 'inline' | 'button';
   buttonClass?: string;
   location?: string;
+  /** Dialog heading, e.g. "Share this event". */
+  heading?: string;
+  /** Where the Share button goes without JavaScript (the inline options on the same page). */
+  noJsHref?: string | undefined;
 }
-const { share, details, slug, socialImage, variant = 'inline', buttonClass = 'btn btn--secondary', location = 'event' } = Astro.props;
+const { share, variant = 'inline', buttonClass = 'btn btn--secondary', location = 'event', heading = 'Share this event', noJsHref } = Astro.props;
 const links = shareLinks(share);
-const details_ = detailText({ ...share, ...details });
-const dialogId = `share-${slug}-${location}`;
-type ShareIcon = 'link' | 'copy' | 'facebook' | 'mail' | 'sms' | 'download';
-type ShareOption =
-  | { kind: 'copy-link' | 'copy-details'; label: string; icon: ShareIcon; method: string }
-  | { kind: 'link' | 'download'; label: string; icon: ShareIcon; href: string; method: string; external?: boolean };
-const options: ShareOption[] = [
-  { kind: 'copy-link', label: 'Copy link', icon: 'link', method: 'copy_link' },
-  { kind: 'copy-details', label: 'Copy event details', icon: 'copy', method: 'copy_details' },
-  { kind: 'link', label: 'Facebook', icon: 'facebook', href: links.facebook, method: 'facebook', external: true },
-  { kind: 'link', label: 'Email', icon: 'mail', href: links.email, method: 'email' },
-  { kind: 'link', label: 'Text message', icon: 'sms', href: links.sms, method: 'sms' },
-  ...(socialImage ? [{ kind: 'download' as const, label: 'Download image for Instagram', icon: 'download' as const, href: socialImage, method: 'download_image' }] : []),
+const id = `share-${share.key.replace(/[^a-z0-9-]/gi, '-')}-${location}`;
+type ShareIcon = 'whatsapp' | 'facebook' | 'xsocial' | 'mail' | 'sms' | 'download';
+const outlinks: { label: string; icon: ShareIcon; href: string; method: string; external?: boolean; download?: string }[] = [
+  { label: 'WhatsApp', icon: 'whatsapp', href: links.whatsapp, method: 'whatsapp', external: true },
+  { label: 'Facebook', icon: 'facebook', href: links.facebook, method: 'facebook', external: true },
+  { label: 'X (Twitter)', icon: 'xsocial', href: links.x, method: 'x', external: true },
+  { label: 'Email', icon: 'mail', href: links.email, method: 'email' },
+  { label: 'Text message', icon: 'sms', href: links.sms, method: 'sms' },
+  ...(share.download ? [{ label: 'Download picture for Instagram', icon: 'download' as const, href: share.download.href, method: 'download_image', download: share.download.filename }] : []),
 ];
 ---
-<div class="share" data-share data-share-title={share.title} data-share-text={links.text} data-share-url={share.url} data-share-details={details_} data-share-slug={slug} data-track-location={location}>
+<div class="share" data-share data-share-title={share.title} data-share-url={share.url} data-share-blurb={share.blurb} data-share-key={share.key} data-track-location={location}>
   {variant === 'button' && (
     <>
-      <button type="button" class:list={[buttonClass, 'js-only']} data-share-open={dialogId}>
+      <button type="button" class:list={[buttonClass, 'js-only']} data-share-open={id} aria-haspopup="dialog">
         <Icon name="share" />
         Share
       </button>
-      <a class:list={[buttonClass, 'no-js-only']} href={`${new URL(share.url).pathname}#share`}>
-        <Icon name="share" />
-        Share
-      </a>
-      <dialog class="share-dialog" id={dialogId} aria-labelledby={`${dialogId}-title`}>
+      {noJsHref && (
+        <a class:list={[buttonClass, 'no-js-only']} href={noJsHref}>
+          <Icon name="share" />
+          Share
+        </a>
+      )}
+      <dialog class="share-dialog" id={id} aria-labelledby={`${id}-title`} data-track-location={location}>
         <div class="share-dialog__inner">
           <div class="share-dialog__head">
-            <h2 id={`${dialogId}-title`} class="h3">Share this event</h2>
+            <h2 id={`${id}-title`} class="h3">{heading}</h2>
             <button type="button" class="icon-btn" data-dialog-close aria-label="Close">
               <Icon name="x" />
             </button>
           </div>
-          <p class="muted">{share.title}</p>
-          <div class="share-dialog__list">
-            {options.map((o) =>
-              o.kind === 'link' || o.kind === 'download' ? (
-                <a class="btn btn--secondary" href={o.href} data-track="share" data-track-method={o.method} {...('external' in o && o.external ? { target: '_blank', rel: 'noopener' } : {})} {...(o.kind === 'download' ? { download: `${slug}.png` } : {})}>
-                  <Icon name={o.icon} />
-                  {o.label}
-                </a>
-              ) : (
-                <button type="button" class="btn btn--secondary" data-share-action={o.kind}>
-                  <Icon name={o.icon} />
-                  {o.label}
-                </button>
-              ),
-            )}
+          <figure class="share-card">
+            <img src={share.image.src} alt={share.image.alt} width={share.image.width} height={share.image.height} loading="lazy" decoding="async" />
+            <figcaption>
+              <span class="share-card__label">What you'll share</span>
+              <span class="share-card__text">{share.blurb}</span>
+            </figcaption>
+          </figure>
+          <div class="share-options">
+            <button type="button" class="btn btn--primary" data-share-native hidden><Icon name="share" />Share with an app</button>
+            <button type="button" class="btn btn--secondary" data-share-action="copy-text"><Icon name="copy" />Copy text</button>
+            <button type="button" class="btn btn--secondary" data-share-action="copy-link"><Icon name="link" />Copy link</button>
+            {outlinks.map((o) => (
+              <a class="btn btn--secondary" href={o.href} data-track="share" data-track-method={o.method} {...(o.external ? { target: '_blank', rel: 'noopener' } : {})} {...(o.download ? { download: o.download } : {})}>
+                <Icon name={o.icon} />
+                {o.label}
+                {o.external && <span class="visually-hidden"> (opens in a new tab)</span>}
+              </a>
+            ))}
           </div>
         </div>
       </dialog>
     </>
   )}
   {variant === 'inline' && (
-    <div class="action-group">
-      <button type="button" class="btn btn--primary btn--small" data-share-native hidden>
-        <Icon name="share" />
-        Share…
-      </button>
-      {options.map((o) =>
-        o.kind === 'link' || o.kind === 'download' ? (
-          <a class="btn btn--secondary btn--small" href={o.href} data-track="share" data-track-method={o.method} {...('external' in o && o.external ? { target: '_blank', rel: 'noopener' } : {})} {...(o.kind === 'download' ? { download: `${slug}.png` } : {})}>
+    <>
+      <figure class="share-card share-card--inline">
+        <img src={share.image.src} alt={share.image.alt} width={share.image.width} height={share.image.height} loading="lazy" decoding="async" />
+        <figcaption>
+          <span class="share-card__label">What you'll share</span>
+          <span class="share-card__text">{share.blurb}</span>
+        </figcaption>
+      </figure>
+      <div class="action-group mt-3">
+        <button type="button" class="btn btn--primary btn--small" data-share-native hidden><Icon name="share" />Share…</button>
+        <button type="button" class="btn btn--secondary btn--small js-only" data-share-action="copy-text"><Icon name="copy" />Copy text</button>
+        <button type="button" class="btn btn--secondary btn--small js-only" data-share-action="copy-link"><Icon name="link" />Copy link</button>
+        {outlinks.map((o) => (
+          <a class="btn btn--secondary btn--small" href={o.href} data-track="share" data-track-method={o.method} {...(o.external ? { target: '_blank', rel: 'noopener' } : {})} {...(o.download ? { download: o.download } : {})}>
             <Icon name={o.icon} />
             {o.label}
-            {'external' in o && o.external && <span class="visually-hidden"> (opens in a new tab)</span>}
+            {o.external && <span class="visually-hidden"> (opens in a new tab)</span>}
           </a>
-        ) : (
-          <button type="button" class="btn btn--secondary btn--small js-only" data-share-action={o.kind}>
-            <Icon name={o.icon} />
-            {o.label}
-          </button>
-        ),
-      )}
-    </div>
+        ))}
+      </div>
+    </>
   )}
 </div>
 <script>

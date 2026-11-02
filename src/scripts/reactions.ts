@@ -2,11 +2,13 @@
  * Like and Save buttons (components/Reactions.astro) on event cards and at the top of detail pages.
  * - Like counts come from small public files in Blob Storage (no Function call).
  * - Which pages you liked or saved is asked once per page, and only if this browser has signed in before.
+ * - A visitor whose site session ended is signed back in silently first (account-state.ts); a click made
+ *   while signed out is remembered and finished after signing in, without another click.
  * - One like per person per page: the API keeps one row per person, so a second like changes nothing.
  * All text is set with textContent.
  */
 import { COMMUNITY, readModelUrl } from '../lib/community';
-import { cachedAccount, loginUrl, rememberAccount, whoAmI } from './account-state';
+import { cachedAccount, ensureSession, signInFor, takeAction, type PendingAction } from './account-state';
 import { toast } from './toast';
 
 const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-react]'));
@@ -113,11 +115,8 @@ async function loadCounts() {
 /** What this person liked and saved (only when this browser has signed in before). */
 async function loadMine() {
   if (!cachedAccount()) return;
-  const me = await whoAmI();
-  if (!me.signedIn) {
-    rememberAccount(null);
-    return;
-  }
+  const me = await ensureSession();
+  if (!me.signedIn) return;
   signedIn = true;
   const wantSaves = groups.some((g) => g.querySelector('[data-save]'));
   const [likes, saves] = await Promise.all([
@@ -129,29 +128,34 @@ async function loadMine() {
   paintAll();
 }
 
-function handleError(r: { status: number; data: any }) {
+type Kind = 'like' | 'save';
+
+/** Ask the visitor to sign in (silently when this browser was signed in before) and finish the click afterwards. */
+function needSignIn(kind: Kind, key: string, want: boolean, date?: string) {
+  const action: PendingAction = { type: kind, key, want, ...(date ? { date } : {}) };
+  signInFor(action, here());
+}
+
+function handleError(r: { status: number; data: any }, kind: Kind, key: string, want: boolean, date?: string) {
   if (r.status === 401) {
-    rememberAccount(null);
-    location.href = loginUrl(here());
+    signedIn = false;
+    needSignIn(kind, key, want, date);
   } else if (r.status === 428) {
     location.href = `/account/?next=${encodeURIComponent(here())}`;
   } else toast(r.data?.message || 'Something went wrong. Please try again.');
 }
 
-async function onClick(btn: HTMLButtonElement) {
-  const group = btn.closest<HTMLElement>('[data-react]');
-  if (!group) return;
-  const key = group.dataset.key!;
+/** Like or unlike, save or unsave (`want` is the state to end in). */
+async function act(kind: Kind, key: string, want: boolean, date?: string) {
   if (!signedIn) {
-    location.href = loginUrl(here());
+    needSignIn(kind, key, want, date);
     return;
   }
   if (busy.has(key)) return;
   busy.add(key);
   setDisabled(key, true);
   try {
-    if (btn.hasAttribute('data-like')) {
-      const want = !liked.has(key);
+    if (kind === 'like') {
       const r = await getJson('/api/likes', { method: 'POST', credentials: 'same-origin', headers: { Accept: 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({ key, like: want }) });
       if (r.status === 200) {
         if (r.data.liked) liked.add(key);
@@ -160,21 +164,41 @@ async function onClick(btn: HTMLButtonElement) {
         changed.add(key);
         paint(key);
         toast(r.data.liked ? 'Liked! Thanks.' : 'Like removed.');
-      } else handleError(r);
-    } else if (btn.hasAttribute('data-save')) {
-      const want = !saved.has(key);
-      const date = group.dataset.date;
+      } else handleError(r, kind, key, want, date);
+    } else {
       const r = await getJson('/api/saves', { method: 'POST', credentials: 'same-origin', headers: { Accept: 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({ key, save: want, ...(date ? { date } : {}) }) });
       if (r.status === 200) {
         if (r.data.saved) saved.add(key);
         else saved.delete(key);
         paint(key);
         toast(r.data.saved ? 'Saved! See it on your Saved events page.' : 'Removed from your saved events.');
-      } else handleError(r);
+      } else handleError(r, kind, key, want, date);
     }
   } finally {
     busy.delete(key);
     setDisabled(key, false);
+  }
+}
+
+async function onClick(btn: HTMLButtonElement) {
+  const group = btn.closest<HTMLElement>('[data-react]');
+  if (!group) return;
+  const key = group.dataset.key!;
+  if (btn.hasAttribute('data-like')) await act('like', key, !liked.has(key));
+  else if (btn.hasAttribute('data-save')) await act('save', key, !saved.has(key), group.dataset.date);
+}
+
+/** A Like or Save clicked before signing in (or before the site session was restored): finish it now. */
+async function finishRemembered() {
+  for (const key of byKey.keys()) {
+    const a = takeAction(key, ['like', 'save']);
+    if (!a) continue;
+    const kind = a.type as Kind;
+    const want = a.want !== false;
+    // Already in the wanted state (for example liked on another device): nothing to do.
+    if ((kind === 'like' ? liked.has(key) : saved.has(key)) === want) return;
+    await act(kind, key, want, typeof a.date === 'string' ? a.date : undefined);
+    return;
   }
 }
 
@@ -188,7 +212,9 @@ if (groups.length) {
     }
   });
   void loadCounts();
-  loadMine().finally(() => {
-    for (const g of groups) for (const b of g.querySelectorAll<HTMLButtonElement>('button')) b.disabled = false;
-  });
+  loadMine()
+    .finally(() => {
+      for (const g of groups) for (const b of g.querySelectorAll<HTMLButtonElement>('button')) b.disabled = false;
+    })
+    .then(() => (signedIn ? finishRemembered() : undefined));
 }

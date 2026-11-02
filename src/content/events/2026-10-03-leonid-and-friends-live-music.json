@@ -10,7 +10,7 @@
     "leonid-and-friends"
   ],
   "skillLevel": "all-levels",
-  "status": "pending-review",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List, week of October 3, 2026",
@@ -26,5 +26,5 @@
   "lockedFields": [
     "status"
   ],
-  "reviewNotes": "Held for review: the band's tour page and Live Nation list Skokie, Illinois for October 3, 2026, and the Boulton Center's own calendar shows a different show that night (research 2026-10-03). Confirm with the venue before publishing."
+  "reviewNotes": "Held for review: the band's tour page and Live Nation list Skokie, Illinois for October 3, 2026, and the Boulton Center's own calendar shows a different show that night (research 2026-10-03). Confirm with the venue before publishing. Hidden on 2026-10-28 because the event ended while those conflicting details remained unresolved."
 }

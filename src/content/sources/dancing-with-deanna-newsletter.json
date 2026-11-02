@@ -1,0 +1,14 @@
+{
+  "name": "Dancing With Deanna - newsletter",
+  "type": "api",
+  "adapter": "agentmail",
+  "attribution": "Some listings come from the Dancing With Deanna newsletter. We write our own short summaries and link back to the organizer's website.",
+  "cadence": "weekly",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "description": "Deanna's email updates about dances and classes, read from the site's newsletter inbox.",
+  "enabled": false,
+  "focus": "dance",
+  "reviewNotes": "Newsletter source (decision P44), 2026-10-05: subscribed and confirmed. Off until a real issue arrives and passes a spot check.",
+  "url": "https://www.dancingwithdeanna.com/events-1"
+}

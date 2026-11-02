@@ -6,6 +6,8 @@
 //   2. Delete rejected notes and photos older than 90 days (the decision stays in the ModLog).
 //   3. Delete moderation-log months older than 2 years.
 //   4. Delete rate-limit counters older than 2 days.
+//   5. If something has waited in the moderation queue for more than 6 hours, email one reminder a day
+//      (needs ADMIN_NOTIFY_URL, the alert Logic App's address; see api/src/lib/notify.js).
 //
 // Needs COMMUNITY_STORAGE (the Storage connection string). Uses the SDKs installed in api/ (npm ci --prefix api).
 //   node scripts/community-maintenance.mjs [--dry-run]
@@ -99,4 +101,14 @@ for await (const e of limits.listEntities()) {
   }
 }
 
-console.log(`${dryRun ? '[dry run] ' : ''}created ${counts.seeded} empty page files; backed up ${counts.backedUp} rows to backups/${stamp}/; removed ${counts.rejectedRemoved} old rejected posts, ${counts.logRemoved} old log rows, ${counts.limitsRemoved} old rate-limit rows.`);
+// 5. Daily reminder about posts that are still waiting (at most one a day; same alert as the API uses)
+let reminder = 'off';
+if (process.env.ADMIN_NOTIFY_URL) {
+  if (dryRun) reminder = 'skipped (dry run)';
+  else {
+    const r = await require('./src/lib/notify').remindAdmins();
+    reminder = r.sent ? 'sent' : r.reason;
+  }
+}
+
+console.log(`${dryRun ? '[dry run] ' : ''}created ${counts.seeded} empty page files; backed up ${counts.backedUp} rows to backups/${stamp}/; removed ${counts.rejectedRemoved} old rejected posts, ${counts.logRemoved} old log rows, ${counts.limitsRemoved} old rate-limit rows; reminder email: ${reminder}.`);

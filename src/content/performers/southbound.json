@@ -1,0 +1,50 @@
+{
+  "name": "SouthBound",
+  "type": "band",
+  "aliases": [
+    "Southbound",
+    "SouthBound LI",
+    "Southbound Long Island"
+  ],
+  "genres": [
+    "country",
+    "southern rock",
+    "classic rock"
+  ],
+  "website": "https://www.southbound.li/",
+  "facebookUrl": "https://www.facebook.com/p/SouthBound-LI-100057060446365/",
+  "description": "Four-piece Long Island country band that mixes new and old country hits with southern and classic rock, using pedal steel, banjo, fiddle and mandolin. For over 20 years it has played festivals, firehouse country dances, vineyards and bars, and it also plays country weddings with an optional line-dance teacher.",
+  "dancing": {
+    "rating": "dance-band",
+    "kinds": [
+      "line",
+      "freestyle"
+    ],
+    "styles": [
+      "line-dancing",
+      "freestyle"
+    ],
+    "notes": "A country dance band: its set list is full of line-dance standards like Boot Scootin' Boogie, Copperhead Road and Cotton Eye Joe, it headlines country dances, and it offers a line-dance teacher for weddings. Expect line dancing plus freestyle to the rock songs.",
+    "evidence": [
+      {
+        "url": "https://www.southbound.li/meet-the-band.html",
+        "note": "Band page: says its shows make large crowds want to dance and sing along; lists festivals, vineyards and country music fairs played."
+      },
+      {
+        "url": "https://www.southbound.li/country-weddings.html",
+        "note": "Wedding page: danceable country and rock, with an optional country line-dance teacher."
+      },
+      {
+        "url": "https://www.southbound.li/song-list.html",
+        "note": "Song list with many line-dance favorites such as Boot Scootin' Boogie, Copperhead Road and Cotton Eye Joe."
+      },
+      {
+        "url": "https://www.facebook.com/p/SouthBound-LI-100057060446365/",
+        "note": "Band's Facebook page promoting its Oct 10 country dance at the North Patchogue Fire Department."
+      }
+    ],
+    "confidence": "high",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source southbound-band. Not the same as 'Southbound NY' (southboundny.com, facebook.com/southboundbandny), a different rock-and-country band with a 518 (upstate) phone number. The alias 'Southbound' may match both; check the venue before linking."
+}

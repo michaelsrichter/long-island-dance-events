@@ -1,0 +1,47 @@
+{
+  "name": "Tucker's Taproom & Smokehouse",
+  "aliases": [
+    "Tucker's Taproom",
+    "Tuckers Taproom",
+    "Tuckers Taproom & Smokehouse",
+    "Tucker's Smokehouse"
+  ],
+  "address": "9095 Sound Ave",
+  "town": "Mattituck",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11952",
+  "phone": "(631) 298-7077",
+  "website": "https://tuckerstaproom.com/",
+  "facebookUrl": "https://www.facebook.com/people/Tuckers-Taproom/61570587253221/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Tucker's+Taproom+%26+Smokehouse%2C+9095+Sound+Ave%2C+Mattituck%2C+NY+11952",
+  "kind": "restaurant",
+  "description": "A barbecue restaurant and taproom on the North Fork with indoor seating, a dog-friendly outdoor beer garden and live music on Friday, Saturday and Sunday.",
+  "dancing": {
+    "floor": "unknown",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Bands and solo players perform, often outside in the beer garden. Some nights feature country-rock bands, and one listing invited guests to wear cowboy hats and boots. We found no reports of a dance floor or of people dancing.",
+    "evidence": [
+      {
+        "url": "https://local.yahoo.com/info-239618276-tuckers-taproom-smokehouse-mattituck/",
+        "note": "Business listing says there is an indoor room and an outdoor beer garden, with live music every Friday, Saturday and Sunday."
+      },
+      {
+        "url": "https://northforker.com/events/country-rock-bbq-audawind-at-tuckers-taproom-smokehouse/",
+        "note": "Event listing: country-rock band Audawind on Friday, July 24, 2026, 5-8 PM; cowboy hats and boots encouraged."
+      },
+      {
+        "url": "https://www.mapquest.com/us/new-york/tuckers-taproom-smokehouse-789179845",
+        "note": "Review excerpts mention live music outside during dinner; nothing about dancing."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: tuckerstaproom.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.988067,
+  "longitude": -72.543978,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

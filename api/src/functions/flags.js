@@ -4,7 +4,7 @@
  * One report per person per item. Three reports from different people, or one from a moderator,
  * hide the item until a moderator decides.
  */
-require('../telemetry-setup');
+const { serverEvent } = require('../telemetry-setup');
 const { app } = require('@azure/functions');
 const { json, error, sameOrigin, readJson, cleanText, isPageKey } = require('../lib/http');
 const { table, TABLES } = require('../lib/store');
@@ -13,6 +13,7 @@ const { allow } = require('../lib/limits');
 const { rebuild } = require('../lib/readmodel');
 const { unpublishPhoto } = require('../lib/photo-files');
 const { audit } = require('../lib/audit');
+const { alertAdmins } = require('../lib/notify');
 
 const HIDE_AFTER = 3;
 const REASONS = new Set(['rude', 'spam', 'private', 'not-mine', 'shows-me', 'child', 'other']);
@@ -21,7 +22,7 @@ app.http('flags', {
   methods: ['POST'],
   authLevel: 'anonymous',
   route: 'flags',
-  handler: async (request) => {
+  handler: async (request, context) => {
     if (!sameOrigin(request)) return error(403, 'origin', 'Not allowed.');
     const r = await readJson(request, 2048);
     if (!r.ok) return r.response;
@@ -53,6 +54,9 @@ app.http('flags', {
     await table(TABLES.queue).upsert({ partitionKey: 'pending', rowKey: `${prefix}~${key}~${itemId}`, itemType, key, itemKey: itemId, reason: `reports:${reason}`, ai: item.ai || '', at: new Date().toISOString() });
     if (hide) await rebuild(key);
     await audit({ actor: isAdmin ? `admin:${m.principal.details}` : 'visitor', action: hide ? 'hidden_by_reports' : 'reported', targetType: itemType, targetId: itemId, key, reason, before: 'published', after: hide ? 'hidden' : 'published' });
+    // A moderator who hides something themselves does not need an email about it.
+    if (hide && !isAdmin) await alertAdmins(reason === 'shows-me' ? 'shows-me' : 'hidden', { log: context?.warn?.bind(context) });
+    await serverEvent('community_flag', { type: itemType, value: hide ? 'hidden' : 'reported', reason });
     return json(200, { ok: true, message: hide ? 'Thanks. We hid it while a volunteer takes a look.' : 'Thanks. A volunteer will take a look.' });
   },
 });

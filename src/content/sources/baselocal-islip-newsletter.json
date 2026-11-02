@@ -1,0 +1,18 @@
+{
+  "name": "BaseLocal Islip - newsletter",
+  "type": "api",
+  "adapter": "agentmail",
+  "attribution": "Some listings come from the BaseLocal Islip newsletter. We write our own short summaries and link back to the organizer's website.",
+  "cadence": "weekly",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "needs-permission",
+  "description": "A weekly email about things to do in Islip, including live music.",
+  "enabled": false,
+  "focus": "music",
+  "permission": {
+    "status": "needed",
+    "note": "BaseLocal's terms ask for consent before its listings are reused (same as its website source). Subscribed by hand; switch on only after BaseLocal agrees."
+  },
+  "reviewNotes": "Newsletter source (decision P44), 2026-10-05: subscribed by hand; first issue received. Kept off for permission.",
+  "url": "https://baselocal.com/ny/islip/"
+}

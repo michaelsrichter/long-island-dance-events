@@ -7,7 +7,12 @@ import config from '../data/community.json';
 
 export type PageType = 'event' | 'venue' | 'organizer' | 'instructor' | 'performer' | 'style';
 
-export const COMMUNITY = config as { blobBase: string; loginProvider: string; photosEnabled: boolean };
+/**
+ * signInServiceDays: how long the sign-in service remembers a visitor after the browser closes. 0 = until the
+ * browser closes (External ID's default). Set it to 90 after turning on Conditional Access
+ * "Persistent browser session: Always persistent" (docs/deployment.md), so returning the next day works too.
+ */
+export const COMMUNITY = config as { blobBase: string; loginProvider: string; photosEnabled: boolean; signInServiceDays: number };
 
 export function pageKey(type: PageType, id: string): string {
   return `${type}:${id}`;

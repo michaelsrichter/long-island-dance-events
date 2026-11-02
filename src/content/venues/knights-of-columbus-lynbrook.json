@@ -1,0 +1,50 @@
+{
+  "name": "Knights of Columbus Hall, Lynbrook",
+  "aliases": [
+    "Knights of Columbus, Lynbrook",
+    "Knights of Columbus Hall 78 Hempstead Ave",
+    "Knights of Columbus Lynbrook",
+    "Lynbrook Knights of Columbus Council 2228",
+    "St. Mary's / Maris Stella Knights of Columbus"
+  ],
+  "address": "78 Hempstead Ave",
+  "town": "Lynbrook",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11563",
+  "phone": "(516) 887-2228",
+  "website": "https://lynbrookkofc.com/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Knights+of+Columbus+Hall%2C+78+Hempstead+Ave%2C+Lynbrook%2C+NY+11563",
+  "kind": "lodge-hall",
+  "description": "The meeting and party hall of the Lynbrook Knights of Columbus (Council 2228), a Catholic service group. The hall holds 50 to 200 guests and hosts fundraiser parties with bands, holiday dances, bingo and line dance classes.",
+  "dancing": {
+    "floor": "dance-floor",
+    "policy": "encouraged",
+    "kinds": [
+      "line",
+      "freestyle"
+    ],
+    "notes": "The hall advertises a large dance floor. Its calendar includes four-week line dance classes with a professional teacher, a line dance social fundraiser, a Christmas party with music and dancing, and band nights. Many events need tickets bought in advance.",
+    "evidence": [
+      {
+        "url": "https://lynbrookkofc.com/catering",
+        "note": "Official hall rental page: room for 50 to 200 guests and a large dance floor."
+      },
+      {
+        "url": "https://lynbrookkofc.com/upcoming-events",
+        "note": "Official calendar: line dance lessons in fall 2026 and early 2027, a March 2027 line dance social, a December party with dancing, and a Risky Business night on Nov 7."
+      },
+      {
+        "url": "https://lynbrookkofc.com/contact-us",
+        "note": "Official contact page with the 78 Hempstead Avenue address and the hall phone number."
+      }
+    ],
+    "confidence": "high",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: lynbrookkofc.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.659879,
+  "longitude": -73.670559,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

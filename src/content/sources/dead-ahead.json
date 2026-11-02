@@ -1,6 +1,6 @@
 {
   "name": "Dead Ahead Band - tour dates",
-  "url": "https://deadaheadband.com/",
+  "url": "https://www.deadaheadband.net/",
   "type": "html",
   "adapter": "htmllist",
   "focus": "music",
@@ -15,5 +15,5 @@
       "dead-ahead-band"
     ]
   },
-  "reviewNotes": "Switched off on 2026-10-03: the tour-dates page shows only month totals; the dated list loads in a web browser (JavaScript). Ask the band for a calendar link. Catalog check 2026-10-03: Keep because it has three Suffolk public gigs at the same brewery and easy dates."
+  "reviewNotes": "Town-by-town search 2026-10-05: the band also runs deadaheadband.net, whose tour page lists dated gigs as plain text, but each gig shows the venue only as a heading, which the list reader cannot match to a venue yet (upcoming: Twin Fork Beer Co., Riverhead). Kept off until the band offers a calendar link or the reader learns this layout."
 }

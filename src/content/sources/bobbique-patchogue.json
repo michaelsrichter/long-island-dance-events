@@ -1,0 +1,26 @@
+{
+  "name": "BOBBIQUE (Patchogue) - live music calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from BOBBIQUE (Patchogue). We write our own short summaries and link back to the original page.",
+  "cadence": "twice-weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "town": "Patchogue",
+    "venueId": "bobbique-patchogue"
+  },
+  "description": "Patchogue barbecue venue calendar lists live bands and jams most Wednesdays, Fridays, and Saturdays through October.",
+  "enabled": true,
+  "focus": "music",
+  "lastCounts": {
+    "found": 12,
+    "kept": 12,
+    "needsReview": 0,
+    "outOfArea": 0
+  },
+  "lastScraped": "2026-10-29T22:56:22.044Z",
+  "lastStatus": "ok",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Patchogue barbecue venue calendar lists live bands and jams most Wednesdays, Fridays, and Saturdays through October.",
+  "url": "https://www.bobbique.com/upcoming-events/"
+}

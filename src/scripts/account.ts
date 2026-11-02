@@ -4,7 +4,7 @@
  *  - later: straight back to <page>
  *  - without ?next: the profile, moderator link, download and delete
  */
-import { loginUrl, rememberAccount } from './account-state';
+import { cachedAccount, ensureSession, loginUrl, markSignedOut, noteNewAccount, rememberAccount } from './account-state';
 
 export {};
 
@@ -63,6 +63,7 @@ if (root) {
     photoRow.hidden = Boolean(u.canPostPhotos) || (Boolean(u.ageConfirmed) && !u.adult);
     rulesFields.hidden = rulesRow.hidden && photoRow.hidden;
     if (u.needsProfile) {
+      noteNewAccount();
       heading.textContent = 'Welcome! One more step';
       intro.textContent = 'Choose the name other dancers will see, tell us when you were born, and agree to the community rules. You only do this once.';
       save.textContent = next ? 'Save and continue' : 'Save';
@@ -78,7 +79,9 @@ if (root) {
   }
 
   (async () => {
-    const r = await api('/api/me');
+    let r = await api('/api/me');
+    // A returning visitor whose site session ended is signed back in silently first (no welcome step).
+    if ((r.status !== 200 || !r.data?.signedIn) && cachedAccount() && (await ensureSession()).signedIn) r = await api('/api/me');
     show('[data-loading]', false);
     if (r.status !== 200 || !r.data?.signedIn) {
       rememberAccount(null);
@@ -145,7 +148,7 @@ if (root) {
     const r = await api('/api/me/delete', { method: 'POST', body: JSON.stringify({ confirm }) });
     say(r.data?.message || (r.status === 200 ? 'Deleted.' : 'Something went wrong.'));
     if (r.status === 200) {
-      rememberAccount(null);
+      markSignedOut();
       setTimeout(() => (location.href = root.querySelector<HTMLAnchorElement>('[data-account-signout]')!.href), 1500);
     }
   });

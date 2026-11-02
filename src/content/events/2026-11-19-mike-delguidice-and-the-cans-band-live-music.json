@@ -18,5 +18,9 @@
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-10-04",
   "confidence": 0.9,
-  "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||thursday|20:00|live-music|mike-delguidice-and-the-cans-band||2026-11-19"
+  "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||thursday|20:00|live-music|mike-delguidice-and-the-cans-band||2026-11-19",
+  "lockedFields": [
+    "status"
+  ],
+  "reviewNotes": "Not found in the latest live-on-the-porch run on 2026-10-05. Check whether it was cancelled or moved. Published in the review center on 2026-10-11."
 }

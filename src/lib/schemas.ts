@@ -29,8 +29,11 @@ export const CATEGORY_HELP: Record<(typeof EVENT_CATEGORIES)[number], string> = 
   festival: 'A big event, often over a full day or weekend.',
 };
 
-/** active = listed; past = ended (kept for history); cancelled = shown as cancelled; pending-review = hidden until checked. */
-export const EVENT_STATUSES = ['active', 'past', 'cancelled', 'pending-review'] as const;
+/**
+ * active = listed; past = ended (kept for history); cancelled = shown as cancelled; pending-review = explicitly held by an editor;
+ * hidden = not listed because automation was uncertain or an editor decided to hide it. Never shown or deleted. An unlocked machine-hidden listing can be relisted when reliable data returns.
+ */
+export const EVENT_STATUSES = ['active', 'past', 'cancelled', 'pending-review', 'hidden'] as const;
 export const SKILL_LEVELS = ['all-levels', 'beginner', 'intermediate', 'advanced', 'mixed'] as const;
 export const SKILL_LABELS: Record<(typeof SKILL_LEVELS)[number], string> = {
   'all-levels': 'All levels welcome',
@@ -59,7 +62,8 @@ export const SOURCE_TYPES = ['jsonld', 'ical', 'html', 'pdf', 'api'] as const;
 export const SOURCE_STATUSES = ['never', 'ok', 'empty', 'invalid', 'error', 'skipped'] as const;
 export const SOURCE_CADENCES = ['daily', 'twice-weekly', 'weekly', 'monthly', 'seasonal', 'manual'] as const;
 export const SOURCE_CATALOG_STATUSES = ['live', 'in-progress', 'verified', 'recheck-from-ci', 'needs-permission', 'manual-intake', 'seasonal-recheck'] as const;
-export const SOURCE_PERMISSION_STATUSES = ['not-needed', 'needed', 'requested', 'granted', 'denied'] as const;
+/** no-reply = we asked (by email from the review center or by hand) and heard nothing back. */
+export const SOURCE_PERMISSION_STATUSES = ['not-needed', 'needed', 'requested', 'granted', 'denied', 'no-reply'] as const;
 export const STYLE_FAMILIES = ['swing', 'ballroom', 'latin', 'tango', 'country', 'other'] as const;
 
 /**
@@ -265,7 +269,7 @@ export const eventSchema = z
     lastSeen: dateField,
     status: z.enum(EVENT_STATUSES).default('active'),
     cancelledNote: opt(z.string().max(200)),
-    /** 0-1: how sure the ingest was about this record. Low scores go to pending-review. */
+    /** 0-1: how sure the ingest was about this record. Low scores are hidden automatically. */
     confidence: z.coerce.number().min(0).max(1).default(1),
     /** Optional cached vector for "find similar" and dedup. Normally kept outside the content files. */
     embedding: optList(z.number()),
@@ -475,6 +479,8 @@ export const sourceSchema = z.object({
       feedUrl: url,
     }),
   ),
+  /** The website's public business email for permission requests (only an address they publish). */
+  contactEmail: email,
   /** Plain-language credit shown on the Sources page. */
   attribution: z.string().max(300),
   description: opt(z.string().max(400)),

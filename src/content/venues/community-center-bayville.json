@@ -1,0 +1,52 @@
+{
+  "name": "Bayville Community Center",
+  "aliases": [
+    "Village of Bayville Community Center",
+    "Bayville Arts Center",
+    "Bayville Village Arts Center",
+    "Bayville Community Arts Center"
+  ],
+  "address": "88 Bayville Avenue",
+  "town": "Bayville",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11709",
+  "phone": "(516) 628-1439",
+  "website": "https://bayvilleny.gov/venue/community-center",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Bayville+Community+Center%2C+88+Bayville+Avenue%2C+Bayville%2C+NY+11709",
+  "kind": "other",
+  "description": "The Village of Bayville's community center and home of the Bayville Village Arts Council, which puts on free concerts here. Shows range from jazz and acoustic acts to rock, blues and funk bands.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Concerts happen in the main hall, which the arts council says has a night-club feel during shows. A listing for a funk and soul concert invited people to dance the night away, and some shows let you bring your own drinks and snacks. The floor is carpeted, not a hard dance floor. Jazz nights are more of a listening crowd.",
+    "evidence": [
+      {
+        "url": "https://oysterbaytoday.com/obt-event/bayou-in-bayville/",
+        "note": "Arts council concert listing at the center: a New Orleans funk and soul band, bring your own drinks and snacks and dance the night away."
+      },
+      {
+        "url": "https://www.longislandpress.com/2025/07/25/bayville-arts-council/",
+        "note": "News story: the council runs about 75 free events a year, mostly at the center, which has a night-club feel during shows; the floor is carpeted."
+      },
+      {
+        "url": "https://bayvilleny.gov/venue/community-center",
+        "note": "Village venue page listing fall 2026 concerts: jazz nights, an acoustic and full-band show, and a rock band."
+      },
+      {
+        "url": "https://bayvilleny.gov/event/bvac-grand-reopening-of-community-center",
+        "note": "Village notice that the refurbished center was set up for live rock, jazz, country and other performances."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: bayvilleny.gov.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source village-of-bayville-community-center-concerts. Phone is the Village of Bayville office. Concerts are free and run by the Bayville Village Arts Council; summer concerts often move to the village beaches.",
+  "latitude": 40.910829,
+  "longitude": -73.572427,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

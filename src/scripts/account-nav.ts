@@ -2,8 +2,11 @@
  * Header and footer account links: "Sign in" for visitors, the person's name (linking to their
  * profile) once signed in, plus "Sign out" and, for moderators, "Moderation queue".
  * Only calls /.auth/me when this browser has signed in before, so most visitors cause no request.
+ * A returning visitor whose site session ended is signed back in silently (see account-state.ts),
+ * so the name stays in the header and Like, Save and notes work without a page reload.
  */
-import { cachedAccount, firstName, loginUrl, logoutUrl, rememberAccount, whoAmI, type CachedAccount } from './account-state';
+import { cachedAccount, ensureSession, firstName, loginUrl, logoutUrl, markSignedOut, rememberAccount, takeSignedOutNotice, type CachedAccount } from './account-state';
+import { toast } from './toast';
 
 function render(account: CachedAccount | null) {
   for (const a of document.querySelectorAll<HTMLAnchorElement>('[data-account-link]')) {
@@ -21,16 +24,34 @@ function render(account: CachedAccount | null) {
   for (const el of document.querySelectorAll<HTMLElement>('[data-account-when="in"]')) el.hidden = !account;
   for (const el of document.querySelectorAll<HTMLElement>('[data-account-when="admin"]')) el.hidden = !account?.admin;
   for (const a of document.querySelectorAll<HTMLAnchorElement>('[data-account-signout]')) a.href = logoutUrl();
+  // The page's own "Sign in" text stays hidden until now when this browser has a saved name (BaseLayout).
+  document.documentElement.dataset.accountReady = '';
 }
 
 render(cachedAccount());
 window.addEventListener('li-account', (e) => render((e as CustomEvent<CachedAccount | null>).detail));
 
-// The saved name is cleared only when /.auth/me says the session is really gone (not when "Sign out" is clicked).
+// "Sign out" (header, footer, panel or account page): forget the saved name right away, so coming back
+// never signs the visitor in again by itself.
+document.addEventListener(
+  'click',
+  (e) => {
+    if ((e.target as Element | null)?.closest?.('[data-account-signout]')) markSignedOut();
+  },
+  true,
+);
+
+const showNotice = () => {
+  const notice = takeSignedOutNotice();
+  if (notice) window.setTimeout(() => toast(notice), 400);
+};
+
 const cached = cachedAccount();
 if (cached) {
-  whoAmI().then((me) => {
-    if (!me.signedIn) rememberAccount(null);
-    else if (me.admin !== cached.admin) rememberAccount({ ...cached, admin: me.admin });
+  ensureSession().then((me) => {
+    if (me.signedIn && me.admin !== cached.admin) rememberAccount({ ...cached, admin: me.admin });
+    showNotice();
   });
 }
+// Also when the sign-in ended on the way here (after a sign-in that came back with an error).
+showNotice();

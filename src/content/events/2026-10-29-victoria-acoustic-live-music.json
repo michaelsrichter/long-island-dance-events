@@ -1,0 +1,27 @@
+{
+  "title": "Victoria Acoustic at Kitty Mulligan's Irish Pub",
+  "summary": "Live music by Victoria Acoustic at Kitty Mulligan's Irish Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-29T19:30",
+  "end": "2026-10-29T22:00",
+  "timezone": "America/New_York",
+  "venueId": "kitty-mulligans-bay-shore",
+  "town": "Bay Shore",
+  "performerIds": [
+    "victoria-acoustic"
+  ],
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "status": "past",
+  "sourceId": "kitty-mulligans-bay-shore",
+  "sourceUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+  "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
+  "sourceRef": "events page 2026-10-29",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "acoustic"
+  ],
+  "confidence": 0.8,
+  "matchKey": "kitty-mulligans-bay-shore|kitty-mulligans-bay-shore||thursday|19:30|live-music|victoria-acoustic||2026-10-29"
+}

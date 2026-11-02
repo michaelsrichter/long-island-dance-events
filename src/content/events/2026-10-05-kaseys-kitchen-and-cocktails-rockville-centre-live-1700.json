@@ -10,13 +10,13 @@
   "price": 5,
   "skillLevel": "all-levels",
   "infoUrl": "https://outonthetownli.com/event/%f0%9f%8e%89-ladies-night-every-thursday-at-kaseys-%f0%9f%8e%89-%f0%9f%8e%b6-vibes-by-dj_mdw/2026-10-05/",
-  "status": "active",
+  "status": "past",
   "sourceId": "out-on-the-town-li",
   "sourceUrl": "https://outonthetownli.com/event/%f0%9f%8e%89-ladies-night-every-thursday-at-kaseys-%f0%9f%8e%89-%f0%9f%8e%b6-vibes-by-dj_mdw/2026-10-05/",
   "sourceName": "Out on the Town - Long Island event calendar",
   "sourceRef": "calendar feed 2026-10-05",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "confidence": 0.85,
   "matchKey": "out-on-the-town-li|kaseys-kitchen-and-cocktails-rockville-centre||monday|17:00|live-music|||2026-10-05"
 }

@@ -1,0 +1,11 @@
+{
+  "name": "Go West!",
+  "address": "4105 Sunrise Hwy",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Bohemia",
+  "latitude": 40.749819,
+  "longitude": -73.134088,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

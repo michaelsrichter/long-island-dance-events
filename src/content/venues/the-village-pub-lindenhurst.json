@@ -1,0 +1,46 @@
+{
+  "name": "The Village Pub",
+  "aliases": [
+    "Village Pub",
+    "Village Pub Lindenhurst",
+    "The Village Pub Lindenhurst"
+  ],
+  "address": "174 N Wellwood Ave",
+  "town": "Lindenhurst",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11757",
+  "phone": "(631) 592-4260",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Village+Pub%2C+174+N+Wellwood+Ave%2C+Lindenhurst%2C+NY+11757",
+  "kind": "bar",
+  "description": "A rock-and-roll neighborhood bar on North Wellwood Avenue in Lindenhurst with a stage, pool, darts and bingo nights. Local cover and original bands play on Friday and Saturday nights.",
+  "dancing": {
+    "floor": "unknown",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "This is a bar with a band stage that holds roughly 125 people, not a dance hall. One bar directory lists dancing as something offered, and reviews praise the bands, but we found no photos or posts about a dance floor. Expect some freestyle dancing in front of the band on busy nights.",
+    "evidence": [
+      {
+        "url": "https://www.indieonthemove.com/venues/village-pub-lindenhurst-new-york",
+        "note": "Music venue directory: live bands on Friday and Saturday nights, about 125 capacity, 21 and over; a reviewer mentions a good stage setup."
+      },
+      {
+        "url": "https://p2bars.com/bars-near-me/village-pub-on-north-wellwood-avenue/",
+        "note": "Bar directory lists dancing among the offerings, and reviews praise the bands; the bar does not have its own website."
+      },
+      {
+        "url": "https://www.lindenhurstchamber.org/shop-lindy/the-village-pub",
+        "note": "Lindenhurst Chamber of Commerce listing with the address and live music, pool and dart leagues and bingo night."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Sources: lindenhurstchamber.org, indieonthemove.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.688353,
+  "longitude": -73.374908,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

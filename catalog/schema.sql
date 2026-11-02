@@ -325,7 +325,7 @@ CREATE TABLE IF NOT EXISTS events (
   age_group             TEXT CHECK (age_group IN ('adults', 'kids', 'teens', 'all-ages')),
   ticket_url            TEXT,
   info_url              TEXT,
-  status                TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'past', 'cancelled', 'pending-review')),
+  status                TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'past', 'cancelled', 'pending-review', 'hidden')),
   cancelled_note        TEXT,
   -- How sure we are that people will dance (0 = seated concert, 1 = a dance). Computed from venue
   -- room_to_dance, performer danceability, category and source signals; the inputs are kept in

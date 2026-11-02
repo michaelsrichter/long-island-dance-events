@@ -13,17 +13,16 @@
   "price": 40,
   "skillLevel": "all-levels",
   "infoUrl": "https://genecasey.com/event/gene-lone-sharks-hoodoo-loungers-shelter-island/",
-  "status": "active",
+  "status": "past",
   "sourceId": "gene-casey-lone-sharks",
   "sourceUrl": "https://genecasey.com/event/gene-lone-sharks-hoodoo-loungers-shelter-island/",
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
   "sourceRef": "calendar feed 2026-10-10",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "dancingCues": [
     "afternoon"
   ],
   "confidence": 0.9,
-  "matchKey": "gene-casey-lone-sharks|sylvester-manor-shelter-island||saturday|14:00|live-music|gene-casey-and-the-lone-sharks||2026-10-10",
-  "reviewNotes": "New venue was added automatically. Check it."
+  "matchKey": "gene-casey-lone-sharks|sylvester-manor-shelter-island||saturday|14:00|live-music|gene-casey-and-the-lone-sharks||2026-10-10"
 }

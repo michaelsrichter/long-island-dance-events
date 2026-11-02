@@ -222,7 +222,7 @@ for (const [id, e] of events) {
     str(e.recurrence?.rrule), str(e.cadence), str(e.lessonTime), venueId, town, organizerIds.has(e.organizerId) ? e.organizerId : null,
     num(e.price), num(e.priceMax), bool(e.isFree), str(e.priceNotes), pick(e.skillLevel, ['all-levels', 'beginner', 'intermediate', 'advanced', 'mixed'] as const),
     pick(e.ageGroup, ['adults', 'kids', 'teens', 'all-ages'] as const), str(e.ticketUrl), str(e.infoUrl),
-    pick(e.status, ['active', 'past', 'cancelled', 'pending-review'] as const) ?? 'active', str(e.cancelledNote),
+    pick(e.status, ['active', 'past', 'cancelled', 'pending-review', 'hidden'] as const) ?? 'active', str(e.cancelledNote),
     likelihood !== null && likelihood >= 0 && likelihood <= 1 ? likelihood : null,
     dancing && typeof dancing === 'object' ? JSON.stringify(dancing) : e.dancingCues ? JSON.stringify({ cues: e.dancingCues }) : null,
     num(e.confidence), str(e.matchKey), str(e.sourceId), str(e.sourceUrl), str(e.sourceRef), e.firstSeen, e.lastSeen,

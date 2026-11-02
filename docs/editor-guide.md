@@ -5,9 +5,51 @@ This guide is for people who keep the listings correct. You do not need to know 
 ## How editing works
 
 - Go to **`/admin/`** on the website and sign in with GitHub.
-- Every save becomes a change in the project's history on GitHub (a "commit"). The website rebuilds by itself in a few minutes.
+- **Save publishes.** When you press **Save**, the change goes straight to the website: it is saved in the project's history on GitHub (a "commit") and the website rebuilds by itself. It shows up **a few minutes later** (usually about 5). There is no draft, no "Workflow" tab and no separate **Publish** button.
+- **Check before you save.** The preview on the right shows how the entry will look. If you saved something wrong, change it back and save again.
+- Several quick saves are fine: the website catches up with all of them in the next rebuild.
 - Nothing is ever lost. Any change can be undone (see [Fix a mistake](#fix-a-mistake)).
-- Most events are collected **automatically every week** from public calendars. Your main jobs are to **check things the program was unsure about** and **fix mistakes**.
+- Most events are collected and published **automatically** from public calendars. Uncertain listings stay hidden. Your main jobs are safety and legal decisions, source permissions and failures, visitor messages, community photos and notes, and exceptional corrections.
+
+## Your review center
+
+Everything that needs a person is in one place: **https://longisland.dance/moderate/**. Sign in with your editor email address (one of the addresses in the `ADMIN_EMAILS` setting). You get a one-time code by email. You almost never need to open GitHub.
+
+This table lists each tab of the review center, what it shows, and what you can do there.
+
+| Tab | What it shows | What you can do |
+| --- | --- | --- |
+| **To do** | How many things wait in each tab, the oldest one, and "You're all caught up" when nothing does. | Jump to each tab. One-time GitHub setup (see below). |
+| **Held listings** | Exceptional events an editor deliberately held by locking their status. Routine uncertainty does not appear here. | **Publish**, **Fix…** (start time, venue, band or DJ, town), **Mark cancelled…**, **Hide**, **Snooze**, **Undo**, or **Ask Copilot**. |
+| **Event updates** | The rolling "Collected events" update: progress, checks, automatic hiding, new records and source results. Successful event-only updates publish automatically. | View the log and GitHub changes, use the manual publish fallback only for exceptional recovery, or ask Copilot to research optional details or fix failed checks. |
+| **Sources** | Sources that stopped working, new websites the monthly search found, and switched-off sources grouped by what you can do. | **Try again now**, **Switch off…**, **Worth adding** / **Not useful** for new websites, **Review and send the email…** to ask for permission (sent from the site's address after you confirm), answers shown under each source, **They said yes: switch it on**, **They said no**, **No answer**, a follow-up after 14 days, **Switch on**, **Check sources now**, and **Ask Copilot**. |
+| **Messages** | Messages from the website's forms: fixes, new events, requests to remove a listing (first, with a 7-day countdown), problems and ideas. | Reply with a ready-made answer (you can change it), **Send reply and close**, **Snooze a week**, open the page or the editor. |
+| **Community posts** | Notes and photos waiting for a person (see [Moderate notes and photos](#moderate-notes-and-photos)). | Approve, reject, hide, ban. |
+| **Log** | Every decision, newest first, by month. | |
+
+**How changes reach the website.** Each button saves a small change to the website's files on GitHub (the master copy). The website rebuilds by itself, so changes show on the website **a few minutes** later (usually about 5). Every field you fix is added to **Locked fields**, so the collector never changes it back. Nothing is ever deleted: **Hide** keeps the record with status "Hidden".
+
+**One-time setup.** The first time, the To do tab asks you to **Connect to GitHub**. Be signed in to GitHub as `michaelsrichter`. GitHub shows "Create GitHub App": press the green button. Then choose **Only select repositories** (a repository is a project on GitHub), pick **long-island-dance-events**, and press **Install**. That's all. The helper app can only work on this one website.
+
+**Emailing a website for permission.** Some websites ask programs like ours to stay away, or their rules say to ask first. You can email them from the review center. In **Sources**, open "Ask for permission":
+
+1. Press **Review and send the email…**. A ready-made, friendly email opens. It says who we are and that we use only dates, times, places and prices. It also says that we write our own short summary and link back, that we follow their robots.txt file (their rules for programs like ours), and how to say no.
+2. Make sure the **To** address is right. If we already know a published address (from the organizer, venue or band page), it is filled in. If not, find it on their website (usually the Contact page) and type it. Never use a private address. To save it for next time, check the box "This address is published on their website".
+3. Change anything you like. Press **See how it will look**, then **Send…**, and confirm. The email comes from the website's own address as "Long Island Dance Events". It is signed "Mike Richter"; another editor should change the name at the bottom before sending.
+4. The source moves to **Waiting for an answer**. Their answer shows under the source ("Emails (1): new answer!"), and the To do tab counts new answers. Then press **They said yes: switch it on**, **They sent a calendar link…**, **They said no** or **No answer**.
+5. If there is no answer after 14 days, the card offers one follow-up: **Review and send a follow-up…**. The review center sends at most one new request per website every 30 days, unless you check **Send anyway**.
+
+Test copies of the website (pull-request previews) never send email: they show what would have been sent. Under a "Fix for a listing" message you can also email the organizer about the mistake, in the same way.
+
+**Ask Copilot.** Some jobs need a developer: a new band or venue to look up, a source to fix, a website to add. **Ask Copilot** makes a GitHub issue (a task note, labeled `copilot-task`) with all the details. **Copilot does not start it by itself.** To get it done, start a Copilot session and give it the task's link; Copilot then opens a pull request (a suggested change) for you to check. Choosing **Assign to Copilot** on the issue can also start it, but if Copilot replies with an error (this happened on October 5, 2026: "The service is temporarily unavailable"), nothing more happens until you assign it again or start a session. Open tasks are listed at the bottom of the Messages tab, marked "waiting for a Copilot session" or "assigned to Copilot".
+
+### What still needs a person
+
+1. **Messages:** answer anything waiting. Answer requests to remove a listing first (within 7 days).
+2. **Community posts and photos:** approve or reject anything waiting.
+3. **Sources:** handle stopped sources, permission choices and replies from website owners.
+4. **Held listings:** use this only for an exceptional event an editor deliberately held.
+5. **Event updates:** read the log only when you want to inspect what happened or when checks failed.
 
 ## What you will see in the editor
 
@@ -22,11 +64,15 @@ This guide is for people who keep the listings correct. You do not need to know 
 | Dance styles | The style list (Swing, Hustle, Salsa...) and other names for each style. |
 | Frequently Asked Questions, Pages, Photos, Site settings | Help text and site-wide settings. |
 
-## Check events that are waiting for review
+## Exceptional manually held events
 
-Some events are hidden until a person checks them. This happens when the program was unsure, or when a listing disappeared from a calendar it still covers.
+Machine uncertainty does not wait for a person. A low-confidence, missing or superseded listing is
+hidden automatically with a note, and can become listed again if reliable data returns. The steps
+below are only for an event an editor deliberately put on hold.
 
-1. Open **Events** and choose the **Waiting for review** filter.
+The quickest way is the **Held listings** tab of the [review center](#your-review-center). You can also do it in the editor:
+
+1. Open **Events** and choose the **Held by an editor** filter.
 2. Open an event. Read **Notes for editors** at the bottom; it says why.
 3. Check the facts on the organizer's own website or the original listing (the **Source link** field).
 4. Fix anything wrong. Then set **Status** to **Listed** (or **Cancelled** if it is not happening).
@@ -146,6 +192,8 @@ You can turn a source off by unticking **Turned on**. The **Last result** fields
 | error | Could not download or read the source. |
 | skipped | The source is turned off, or its robots.txt does not allow it. |
 
+Event statuses: **Listed**, **Past**, **Cancelled** (shown with "Cancelled"), **Held by an editor** (an exceptional manual hold) and **Hidden** (never shown, kept for the record). Automation may reactivate an unlocked hidden listing when reliable data returns. A hidden or cancelled status with `status` in **Locked fields** stays exactly as the editor set it.
+
 **How often** says when the program reads the source (every day, twice a week, weekly, monthly, only in season, or only by hand). **What it lists** tells the site whether everything in the source is a dance (a dance calendar) or whether each listing needs a dancing score (a live-music list).
 
 New sources need a small program (an "adapter") written by a developer, and the owner's approval. Many calendars can share the general calendar-feed (`ical`) and event-page (`jsonld`) adapters: then you only fill in **Feed address**, **Facts to use when a listing leaves them out** and, if needed, the **Only keep** / **Skip** patterns. See the README.
@@ -160,7 +208,7 @@ New sources need a small program (an "adapter") written by a developer, and the 
 
 ## Corrections from the public
 
-Visitors use the "Report a problem" button on each event, or the forms on the **Sources** page. These open issues on GitHub with a label:
+Visitors use the "Report a problem" button on each event, or the forms on the **Sources** page. These open issues on GitHub with a label. They all show in the **Messages** tab of the [review center](#your-review-center), with ready-made replies:
 
 | Label | What to do |
 | --- | --- |
@@ -172,7 +220,7 @@ Visitors use the "Report a problem" button on each event, or the forms on the **
 
 Signed-in visitors can like pages, save events to their own private list, leave notes, send private corrections and post photos (see the [community rules](https://longisland.dance/community-rules/)). An AI checker reads every note first; anything it is unsure about, every private correction and **every photo** waits for a person.
 
-1. Go to **https://longisland.dance/moderate/** and sign in with your moderator email (the owner adds it to the `ADMIN_EMAILS` app setting). You get a one-time code by email.
+1. Go to **https://longisland.dance/moderate/#posts** (the **Community posts** tab of the review center) and sign in with your moderator email (the owner adds it to the `ADMIN_EMAILS` app setting). You get a one-time code by email.
 2. Each card shows the post, why it is waiting, the AI scores (0 = safe, 2 = unsure, 4 or more = harmful), any reports, and the poster's record.
 3. Choose:
    - **Approve**: it follows the rules. It appears on the page within a minute.
@@ -184,16 +232,18 @@ Signed-in visitors can like pages, save events to their own private list, leave 
 
 Please check the queue at least every two days. Removal requests ("It shows me") hide the photo at once; reject it within 48 hours. If a photo might show child sexual abuse, do not download or share it: reject it and report it to the [NCMEC CyberTipline](https://report.cybertip.org/).
 
+**Email alerts.** The owner gets an email (from the site's Outlook.com address) when something new waits for a person: a private correction, a note or photo the AI could not approve, a post hidden by reports, or an "It shows me" request. To avoid floods there is **at most one email every 15 minutes**. It says how many items wait and links to the queue. It never contains names or the post text, so always open the queue to see the details. If something has waited for more than 6 hours, one reminder email goes out each morning. To change who gets the emails, see "Email alerts for moderators" in `docs/deployment.md`.
+
 To delete someone's sign-in account (after they deleted their data), open the Entra admin center → tenant **Long Island Dance** → **Users**, and delete the user named in the log entry.
 
 ## Fix a mistake
 
 | Problem | What to do |
 | --- | --- |
-| I saved something wrong | Open the entry, change it back, save. |
+| I saved something wrong | Open the entry, change it back, save. It is fixed on the website after the next rebuild (a few minutes). |
 | I deleted an entry by mistake | Ask a developer to restore it from the GitHub history (nothing is lost). |
 | The weekly run keeps changing my fix | Add the field to **Locked fields**. |
-| The site did not update | Wait 5 minutes. If it still did not change, check the "Actions" tab on GitHub for a red X and ask a developer. |
+| The site did not update | Wait 10 minutes. If it still did not change, check the "Actions" tab on GitHub for a red X and ask a developer. |
 
 ## Sign-in setup (for the site owner)
 

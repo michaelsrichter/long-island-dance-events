@@ -1,0 +1,19 @@
+{
+  "name": "The Clubhouse (East Hampton) - events calendar",
+  "type": "ical",
+  "adapter": "ical",
+  "attribution": "Some listings come from The Clubhouse Hamptons. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "seasonal-recheck",
+  "defaults": {
+    "venueId": "the-clubhouse-hamptons-east-hampton",
+    "town": "East Hampton"
+  },
+  "description": "East Hampton bowling and entertainment venue that has listed line-dancing nights in the past; right now it lists karaoke, bowling and sports nights only.",
+  "enabled": false,
+  "focus": "dance",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Switched off 2026-10-05 after the test collection: the calendar now lists only karaoke, bowling, gaming and football nights (no dances or live music). Earlier line-dancing nights are past. Recheck monthly and switch on when line dancing returns.",
+  "url": "https://clubhousehamptons.com/events/",
+  "feedUrl": "https://clubhousehamptons.com/events/?ical=1"
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Live music at Beau's Bar",
+  "summary": "Live music at Beau's Bar. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-30T19:00",
+  "end": "2026-10-30T23:00",
+  "timezone": "America/New_York",
+  "venueId": "beaus-bar-greenlawn",
+  "town": "Greenlawn",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.theragtimes.net/event/say-it-aint-so-weezer-tribute-at-beaus-bar-li/",
+  "status": "past",
+  "sourceId": "the-rag-times-patchogue",
+  "sourceUrl": "https://www.theragtimes.net/event/say-it-aint-so-weezer-tribute-at-beaus-bar-li/",
+  "sourceName": "The Rag Times - live music calendar",
+  "sourceRef": "calendar feed 2026-10-30",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "dancingCues": [
+    "tribute"
+  ],
+  "confidence": 0.85,
+  "matchKey": "the-rag-times-patchogue|beaus-bar-greenlawn||friday|19:00|live-music|||2026-10-30"
+}

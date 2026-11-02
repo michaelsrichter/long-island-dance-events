@@ -7,15 +7,23 @@ import Footer from '../components/Footer.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import { getSettings } from '../lib/content';
 import { jsonLdString, organizationJsonLd, websiteJsonLd } from '../lib/seo';
+import { PAGE_IMAGE_IDS, pageImage, type PageImageId } from '../lib/entity-meta';
+const isPageImage = (t: string): t is PageImageId => (PAGE_IMAGE_IDS as readonly string[]).includes(t);
 
 interface Props {
   title: string;
   description: string;
   image?: string | undefined;
   imageAlt?: string | undefined;
+  /** MIME type of `image` (share pictures for directory pages are JPEG). */
+  imageType?: 'image/png' | 'image/jpeg';
+  /** Up to two "label: value" pairs shown under link previews in Slack, Discord and X. */
+  labels?: { label: string; data: string }[];
   ogType?: 'website' | 'article' | 'event';
   jsonLd?: unknown[];
   noindex?: boolean;
+  /** Robots meta value for indexable builds, e.g. "noindex, follow" for past events (overrides `noindex`). */
+  robots?: string | undefined;
   pageType: string;
   /** Use the full title without the site-name suffix. */
   exactTitle?: boolean;
@@ -23,14 +31,17 @@ interface Props {
   htmlData?: Record<string, string>;
   bodyClass?: string;
 }
-const { title, description, image, imageAlt, ogType = 'website', jsonLd = [], noindex = false, pageType, exactTitle = false, htmlData = {}, bodyClass } = Astro.props;
+const { title, description, image, imageAlt, imageType = 'image/png', labels = [], ogType = 'website', jsonLd = [], noindex = false, robots: robotsOverride, pageType, exactTitle = false, htmlData = {}, bodyClass } = Astro.props;
 const settings = await getSettings();
 const site = Astro.site!;
 const canonical = new URL(Astro.url.pathname, site).toString();
 const fullTitle = exactTitle || title.includes(settings.shortName) || title.includes(settings.siteName) ? title : `${title} | ${settings.siteName}`;
-const ogImage = new URL(image ?? '/og/default.png', site).toString();
+const ogImage = new URL(image ?? (isPageImage(pageType) ? pageImage(pageType).src : '/og/default.png'), site).toString();
+const ogImageAlt = imageAlt ?? (isPageImage(pageType) ? pageImage(pageType).alt : `${settings.siteName}: ${settings.tagline}`);
 const allowIndexing = process.env.ALLOW_INDEXING === 'true';
-const robots = noindex || !allowIndexing ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+const robots = !allowIndexing ? 'noindex, nofollow' : robotsOverride ?? (noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1');
+// Search engine ownership checks (optional; the owner can also verify with a DNS record).
+const verify = { google: import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ?? '', bing: import.meta.env.PUBLIC_BING_SITE_VERIFICATION ?? '' };
 const structured = [organizationJsonLd(settings, site), ...(Astro.url.pathname === '/' ? [websiteJsonLd(settings, site)] : []), ...jsonLd];
 
 const analytics = {
@@ -55,11 +66,13 @@ const analytics = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')d.dataset.theme=t}catch(e){}})()</script>
+    <script is:inline>(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('site-theme');if(t==='light'||t==='dark')d.dataset.theme=t;if(localStorage.getItem('li-account'))d.dataset.hasAccount=''}catch(e){}})()</script>
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     {pageType !== '404' && <link rel="canonical" href={canonical} />}
     <meta name="robots" content={robots} />
+    {verify.google && <meta name="google-site-verification" content={verify.google} />}
+    {verify.bing && <meta name="msvalidate.01" content={verify.bing} />}
     <link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin="anonymous" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -75,13 +88,21 @@ const analytics = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content={image ? imageType : 'image/png'} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={imageAlt ?? `${settings.siteName}: ${settings.tagline}`} />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+    {labels.slice(0, 2).map((l, i) => (
+      <>
+        <meta name={`twitter:label${i + 1}`} content={l.label} />
+        <meta name={`twitter:data${i + 1}`} content={l.data} />
+      </>
+    ))}
     <meta name="generator" content={Astro.generator} />
     {structured.map((data) => <script type="application/ld+json" set:html={jsonLdString(data)} />)}
   </head>

@@ -1,0 +1,42 @@
+{
+  "name": "The Liverpool Shuffle",
+  "type": "band",
+  "aliases": [
+    "Liverpool Shuffle"
+  ],
+  "genres": [
+    "Beatles tribute",
+    "60s rock"
+  ],
+  "website": "https://www.theliverpoolshuffle.com/",
+  "facebookUrl": "https://www.facebook.com/theliverpoolshuffle/",
+  "instagramUrl": "https://www.instagram.com/liverpoolshuffle1/",
+  "description": "Long Island Beatles tribute band, first formed in 2003, that tries to play the Beatles' songs just like the records, with themed shows such as Sgt. Pepper in costume, Beatles at the Movies and a John Lennon show. It plays theaters, dinner shows, beach and park concert series and festivals, and was named a 2026 'Legends of Long Island Music' honoree.",
+  "dancing": {
+    "rating": "mixed",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [
+      "freestyle"
+    ],
+    "notes": "Mostly concert-style shows: theaters, dinner shows and summer park concerts where people bring chairs. Hosts say crowds get on their feet for the hits, so expect some freestyle dancing at outdoor shows, but it is not a dance-floor band.",
+    "evidence": [
+      {
+        "url": "https://www.theliverpoolshuffle.com/what-theyre-saying",
+        "note": "Comments from concert hosts; one says the nearly two-hour show had the crowd on its feet asking for more."
+      },
+      {
+        "url": "https://www.theliverpoolshuffle.com/about",
+        "note": "About page: list of venues (My Father's Place, Jones Beach Bandshell, town concert series) and the different show formats."
+      },
+      {
+        "url": "https://www.theliverpoolshuffle.com/calendar",
+        "note": "Calendar: a Lennon birthday dinner show at My Father's Place and a Mattituck beach concert where fans bring chairs and blankets."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source the-liverpool-shuffle. Members also play smaller spin-off shows billed as 'Liverpool 2' (duo) and 'Rubber Soul' (trio); those are separate listings. Not related to the 'Liverpool Shuffle' line dance."
+}

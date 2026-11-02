@@ -1,0 +1,44 @@
+{
+  "name": "Tanner Park",
+  "aliases": [
+    "Tanner Park Copiague",
+    "Tanner Park, Copiague"
+  ],
+  "address": "400 Baylawn Ave",
+  "town": "Copiague",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11726",
+  "phone": "(631) 893-2100",
+  "website": "https://www.townofbabylonny.gov/Facilities/Facility/Details/Tanner-Park-58",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Tanner+Park%2C+400+Baylawn+Ave%2C+Copiague%2C+NY+11726",
+  "kind": "park",
+  "description": "A Town of Babylon waterfront park on the Great South Bay. In summer the town runs a free evening concert series here with tribute and cover bands, and the park also hosts festivals such as a bluegrass festival and a pow wow.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Concerts are outdoors, and the town tells people to bring lawn chairs or blankets, so most of the crowd sits. Some shows are billed as dance bands (for example an 80s dance band) and there is open grass, but we found no reports describing people dancing.",
+    "evidence": [
+      {
+        "url": "https://www.townofbabylonny.gov/Calendar.aspx?EID=3304",
+        "note": "Town calendar lists a free 7 PM summer concert at Tanner Park in July 2026 and tells guests to bring lawn chairs or blankets."
+      },
+      {
+        "url": "https://www.townofbabylonny.gov/calendar.aspx?EID=3008",
+        "note": "Town calendar billed a 2025 Tanner Park concert by an 80s dance band."
+      },
+      {
+        "url": "https://www.iloveny.com/thebeat/post/long-island-bluegrass-roots-music-festival-returns-to-tanner-park-on-august-15/",
+        "note": "State tourism post about the 24th bluegrass and roots music festival at Tanner Park on August 15, 2026."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: townofbabylonny.gov.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.664752,
+  "longitude": -73.394028,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

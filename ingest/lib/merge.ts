@@ -3,8 +3,8 @@
  *  - the same listing (same matchKey) updates its file instead of creating a new one;
  *  - firstSeen never changes; lastSeen becomes today;
  *  - fields listed in lockedFields (fixed by an editor) are never overwritten;
- *  - nothing is deleted: ended events become "past"; listings that vanished from a source that still
- *    covers their dates go to "pending-review" so a person can check whether they were cancelled.
+ *  - nothing is deleted: ended events become "past"; uncertain, missing and superseded listings are
+ *    hidden automatically, and can become active again when reliable source data returns.
  */
 import type { EventData, EventStatus } from '../../src/lib/schemas';
 
@@ -21,6 +21,7 @@ export interface MergeStats {
   updated: number;
   unchanged: number;
   needsReview: number;
+  hidden: number;
   expired: number;
   missing: number;
   /** New listings not added because another source already lists the same event. */
@@ -32,8 +33,10 @@ export interface MergeResult {
   /** Ids whose file content changed. */
   changed: Set<string>;
   stats: MergeStats;
-  /** Ids now waiting for review, with the reason. */
+  /** Ids still waiting because an editor explicitly locked status at pending-review. */
   review: { id: string; reason: string }[];
+  /** Ids hidden automatically in this run, with the reason. */
+  hidden: { id: string; reason: string }[];
   /** New listings skipped as the same event another source already lists (id it would have had, and the existing id). */
   duplicates: { id: string; of: string }[];
 }
@@ -53,16 +56,24 @@ function datesOf(e: Pick<EventRecord, 'start' | 'recurrence'>): string[] {
 }
 
 const comparable = (e: EventRecord) => JSON.stringify({ ...e, lastSeen: undefined });
+const addNote = (notes: unknown, note: string) => {
+  const current = String(notes ?? '').trim();
+  if (!current) return note;
+  return current.includes(note) ? current : `${current} ${note}`;
+};
 
 const minutes = (hhmm: string | null | undefined) => (hhmm ? Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5)) : undefined);
 const DANCE_FAMILY = new Set(['social-dance', 'lesson-party']);
+/** Dances and classes (not concerts): used when two calendars name the same style at the same minute. */
+const DANCE_KINDS = new Set(['social-dance', 'lesson-party', 'class-lesson']);
 const sameFamily = (a: string | undefined, b: string | undefined) => a === b || (DANCE_FAMILY.has(String(a)) && DANCE_FAMILY.has(String(b)));
 
 /**
  * The same evening listed by another source: a band's calendar, the venue's calendar and Ira's
  * List often name the same gig. Same venue and day, and either a shared band or DJ (within two
- * hours) or the same kind of event within 30 minutes (or no time on one of them), with no
- * different bands named. Only one-day listings are checked; repeating series are left alone.
+ * hours), the same kind of event within 30 minutes (or no time on one of them) with no different
+ * bands named, or two bands at exactly the same start time (a double bill, as when two bands' own
+ * calendars list the same fundraiser). Only one-day listings are checked; repeating series are left alone.
  */
 export function otherSourceTwin(events: Map<string, EventRecord>, d: Draft, sourceId: string): string | undefined {
   if (d.dates.length !== 1 || !d.data.venueId) return undefined;
@@ -77,35 +88,140 @@ export function otherSourceTwin(events: Map<string, EventRecord>, d: Draft, sour
     const gap = time === undefined || eTime === undefined ? 0 : Math.abs(time - eTime);
     const eActs = e.performerIds ?? [];
     const shared = acts.some((p) => eActs.includes(p));
-    if (shared ? gap <= 120 : !(acts.length && eActs.length) && gap <= 30 && sameFamily(d.data.category, e.category)) return id;
+    // Two bands' calendars naming the same start time at the same place: one double bill.
+    const doubleBill = acts.length > 0 && eActs.length > 0 && time !== undefined && eTime !== undefined && gap === 0 && d.data.category === e.category;
+    if (shared ? gap <= 120 : doubleBill || (!(acts.length && eActs.length) && gap <= 30 && sameFamily(d.data.category, e.category))) return id;
   }
   return undefined;
+}
+
+/**
+ * The organizer's or band's own calendar wins over a calendar that lists everything (The Dance
+ * Calendar, Ira's List). Own-calendar listings match when they are at the same venue, the same kind
+ * of event, by the same organizer or with a shared band, and start at about the same time (within 30
+ * minutes, or two hours for the same band; a listing without a time matches any time). A dance or
+ * class in the same style at the exact same start time also matches, whoever the other calendar says
+ * runs it. Works for
+ * repeating series too (a monthly PDF and the organizer's Google Calendar both list the Monday
+ * classes). `all` says whether those listings cover all, or nearly all, of the draft's upcoming dates
+ * (one in ten may be missing); otherwise only the `covered` dates are copies.
+ */
+export function ownCalendarTwin(
+  events: Map<string, EventRecord>,
+  d: Draft,
+  sourceId: string,
+  isOwnCalendar: (sourceId: string) => boolean,
+  today = '0000-00-00',
+): { of: string; covered: string[]; all: boolean } | undefined {
+  const { venueId, organizerId, category } = d.data;
+  if (!venueId) return undefined;
+  const acts = d.data.performerIds ?? [];
+  const time = minutes(parseLocal(String(d.data.start)).time);
+  const upcoming = d.dates.filter((x) => x >= today);
+  const days = new Set(upcoming.length ? upcoming : d.dates);
+  const covered = new Set<string>();
+  let of: string | undefined;
+  for (const [id, e] of events) {
+    if (e.sourceId === sourceId || !e.sourceId || !isOwnCalendar(e.sourceId) || e.status !== 'active') continue;
+    if (e.venueId !== venueId) continue;
+    const eTime = minutes(parseLocal(String(e.start)).time);
+    // The same dance style at the same place and the exact same start time is the same afternoon, even
+    // when the calendar of everything names the wrong organizer or calls a "lesson and practice" a class.
+    const sameSlot =
+      time !== undefined && eTime === time && DANCE_KINDS.has(String(category)) && DANCE_KINDS.has(String(e.category)) && (d.data.danceStyles ?? []).some((s) => (e.danceStyles ?? []).includes(s));
+    if (!sameSlot && !sameFamily(category, e.category)) continue;
+    // The same organizer's classes, or the same band's gig ("Mixed Vibes Band at Daisy's").
+    const sameOrganizer = Boolean(organizerId && e.organizerId === organizerId);
+    const sameAct = acts.some((p) => (e.performerIds ?? []).includes(p));
+    if (!sameOrganizer && !sameAct && !sameSlot) continue;
+    // A 2 PM class and an 8 PM social by the same organizer on one day are two events.
+    if (time !== undefined && eTime !== undefined && Math.abs(time - eTime) > (sameAct ? 120 : 30)) continue;
+    const shared = datesOf(e).filter((x) => days.has(x));
+    if (!shared.length) continue;
+    of ??= id;
+    for (const x of shared) covered.add(x);
+  }
+  if (!of) return undefined;
+  return { of, covered: [...covered].sort(), all: days.size - covered.size <= Math.floor(days.size / 10) };
+}
+
+/** The draft without some of its dates (they are listed by an own calendar). Undefined when none are left. */
+export function withoutDates(d: Draft, drop: Set<string>): Draft | undefined {
+  const dates = d.dates.filter((x) => !drop.has(x));
+  const first = dates[0];
+  if (!first) return undefined;
+  const time = parseLocal(String(d.data.start)).time;
+  const endTime = d.data.end ? parseLocal(String(d.data.end)).time : undefined;
+  const rule = d.data.recurrence?.rrule ? parseRRule(d.data.recurrence.rrule) : undefined;
+  const ords = rule?.freq === 'MONTHLY' ? rule.byday.map((b) => b.ordinal!).filter((o) => o !== undefined) : undefined;
+  return {
+    ...d,
+    dates,
+    data: {
+      ...d.data,
+      start: time ? `${first}T${time}` : first,
+      end: endTime ? `${first}T${endTime}` : undefined,
+      recurrence: dates.length > 1 ? inferRecurrence(dates, ords) : undefined,
+    },
+  };
 }
 
 export function mergeDrafts(
   existing: Map<string, EventData>,
   drafts: Draft[],
-  opts: { sourceId: string; today: string; coverage?: { from: string; to: string } | undefined; threshold?: number },
+  opts: {
+    sourceId: string;
+    today: string;
+    coverage?: { from: string; to: string } | undefined;
+    threshold?: number;
+    /** This source lists everything in an area (no default venue, organizer or band). */
+    allInOne?: boolean;
+    /** Is that source a venue's, organizer's or band's own calendar? */
+    isOwnCalendar?: (sourceId: string) => boolean;
+  },
 ): MergeResult {
   const threshold = opts.threshold ?? REVIEW_THRESHOLD;
   const events = new Map<string, EventRecord>([...existing].map(([id, e]) => [id, { ...e }]));
   const before = new Map([...events].map(([id, e]) => [id, comparable(e)]));
   const byKey = new Map<string, string>();
   for (const [id, e] of existing) if (e.matchKey && e.sourceId === opts.sourceId) byKey.set(e.matchKey, id);
-  const stats: MergeStats = { new: 0, updated: 0, unchanged: 0, needsReview: 0, expired: 0, missing: 0, duplicates: 0 };
+  const stats: MergeStats = { new: 0, updated: 0, unchanged: 0, needsReview: 0, hidden: 0, expired: 0, missing: 0, duplicates: 0 };
   const review: MergeResult['review'] = [];
+  const hidden: MergeResult['hidden'] = [];
   const duplicates: MergeResult['duplicates'] = [];
   const seen = new Set<string>();
 
   const statusFor = (confidence: number, dates: string[], prev?: Stored): EventStatus => {
     if (prev && (prev.lockedFields ?? []).includes('status')) return prev.status as EventStatus;
-    if (prev?.status === 'cancelled') return 'cancelled';
-    if (confidence < threshold) return 'pending-review';
+    if (confidence < threshold) return 'hidden';
     return dates.every((d) => d < opts.today) ? 'past' : 'active';
   };
+  const lowConfidenceNote = (confidence: number) =>
+    `Hidden automatically because its confidence score (${confidence.toFixed(2)}) is below the ${threshold.toFixed(2)} publishing threshold.`;
 
-  for (const d of drafts) {
-    const id = byKey.get(d.matchKey);
+  for (const original of drafts) {
+    const id = byKey.get(original.matchKey);
+    const own = opts.allInOne && opts.isOwnCalendar ? ownCalendarTwin(events, original, opts.sourceId, opts.isOwnCalendar, opts.today) : undefined;
+    // Only some dates are on the own calendar: keep this listing for its other dates.
+    const dropped = own && !own.all ? new Set(own.covered) : undefined;
+    const trimmed = dropped ? withoutDates(original, dropped) : undefined;
+    if (own && !trimmed) {
+      const ownTwin = own.of;
+      duplicates.push({ id: id ?? original.id, of: ownTwin });
+      stats.duplicates!++;
+      if (!id) continue;
+      // An older copy from this calendar steps aside automatically, but stays in the history.
+      seen.add(id);
+      const prev = events.get(id) as Stored;
+      if (!(prev.lockedFields ?? []).includes('status')) {
+        const note = `Hidden automatically because the organizer's or band's own calendar now lists this (${ownTwin}), so that listing is shown instead of this copy.`;
+        events.set(id, { ...prev, lastSeen: opts.today, status: 'hidden', reviewNotes: addNote(prev.reviewNotes, note) });
+        hidden.push({ id, reason: note });
+      }
+      continue;
+    }
+    if (trimmed) duplicates.push({ id: `${id ?? original.id} (only ${own!.covered.join(', ')})`, of: own!.of });
+    const d = trimmed ?? original;
     if (!id) {
       const twin = otherSourceTwin(events, d, opts.sourceId);
       if (twin) {
@@ -113,11 +229,20 @@ export function mergeDrafts(
         stats.duplicates!++;
         continue;
       }
-      const status = statusFor(d.data.confidence ?? 1, d.dates);
-      events.set(d.id, { ...d.data, matchKey: d.matchKey, firstSeen: opts.today, lastSeen: opts.today, status });
+      const confidence = d.data.confidence ?? 1;
+      const status = statusFor(confidence, d.dates);
+      const note = status === 'hidden' ? lowConfidenceNote(confidence) : undefined;
+      events.set(d.id, {
+        ...d.data,
+        matchKey: d.matchKey,
+        firstSeen: opts.today,
+        lastSeen: opts.today,
+        status,
+        reviewNotes: note ? addNote(d.data.reviewNotes, note) : d.data.reviewNotes,
+      });
       seen.add(d.id);
       stats.new++;
-      if (status === 'pending-review') review.push({ id: d.id, reason: String(d.data.reviewNotes ?? 'Low confidence') });
+      if (note) hidden.push({ id: d.id, reason: note });
       continue;
     }
     seen.add(id);
@@ -129,7 +254,7 @@ export function mergeDrafts(
     for (const k of LOCKABLE) if (!locked.has(k)) next[k] = (d.data as Record<string, unknown>)[k];
     let dates = d.dates;
     if (d.data.recurrence && prev.recurrence && !locked.has('recurrence') && !locked.has('start')) {
-      dates = [...new Set([...datesOf(prev), ...d.dates])].sort();
+      dates = [...new Set([...datesOf(prev), ...d.dates])].filter((x) => !dropped?.has(x)).sort();
       const rule = d.data.recurrence.rrule ? parseRRule(d.data.recurrence.rrule) : undefined;
       const ords = rule?.freq === 'MONTHLY' ? rule.byday.map((b) => b.ordinal!).filter((o) => o !== undefined) : undefined;
       next.recurrence = inferRecurrence(dates, ords);
@@ -139,7 +264,13 @@ export function mergeDrafts(
       next.end = endTime ? `${dates[0]}T${endTime}` : undefined;
     }
     next.lastSeen = opts.today;
-    next.status = statusFor(Number(next.confidence ?? 1), dates, prev);
+    const confidence = Number(next.confidence ?? 1);
+    next.status = statusFor(confidence, dates, prev);
+    if (!locked.has('status') && next.status === 'hidden' && confidence < threshold) {
+      const note = lowConfidenceNote(confidence);
+      next.reviewNotes = addNote(next.reviewNotes, note);
+      hidden.push({ id, reason: note });
+    }
     if (next.status === 'pending-review') review.push({ id, reason: String(next.reviewNotes ?? 'Low confidence') });
     events.set(id, next as EventRecord);
   }
@@ -148,19 +279,25 @@ export function mergeDrafts(
     if (seen.has(id)) continue;
     const dates = datesOf(e);
     const last = dates.at(-1) ?? parseLocal(String(e.start)).date;
+    if (e.status === 'pending-review' && !(e.lockedFields ?? []).includes('status') && last < opts.today) {
+      const note = 'Hidden automatically because the listing ended before its uncertain details could be confirmed.';
+      events.set(id, { ...e, status: 'hidden', reviewNotes: addNote(e.reviewNotes, note) });
+      hidden.push({ id, reason: note });
+      continue;
+    }
     if (e.status === 'active' && last < opts.today) {
       events.set(id, { ...e, status: 'past' });
       stats.expired++;
       continue;
     }
     const cov = opts.coverage;
-    if (e.sourceId === opts.sourceId && cov && e.status === 'active' && !(e.lockedFields ?? []).includes('status')) {
+    if (e.sourceId === opts.sourceId && cov && (e.status === 'active' || e.status === 'pending-review') && !(e.lockedFields ?? []).includes('status')) {
       const from = opts.today > cov.from ? opts.today : cov.from;
       if (dates.some((x) => x >= from && x <= cov.to)) {
-        const note = `Not found in the latest ${opts.sourceId} run on ${opts.today}. Check whether it was cancelled or moved.`;
-        events.set(id, { ...e, status: 'pending-review', reviewNotes: [e.reviewNotes, note].filter(Boolean).join(' ') });
+        const note = `Hidden automatically because it was not found in the latest ${opts.sourceId} run on ${opts.today}; it may have been cancelled or moved.`;
+        events.set(id, { ...e, status: 'hidden', reviewNotes: addNote(e.reviewNotes, note) });
         stats.missing++;
-        review.push({ id, reason: note });
+        hidden.push({ id, reason: note });
       }
     }
   }
@@ -181,5 +318,6 @@ export function mergeDrafts(
     }
   }
   stats.needsReview = [...events.values()].filter((e) => e.status === 'pending-review').length;
-  return { events, changed, stats, review, duplicates };
+  stats.hidden = hidden.length;
+  return { events, changed, stats, review, hidden, duplicates };
 }

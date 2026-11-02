@@ -1,0 +1,3 @@
+# Findings that are not secrets, one exact fingerprint each (commit:file:rule:line).
+# A made-up IndexNow key in a test (server/test/indexnow.test.js; marked gitleaks:allow from the next commit on).
+bee7a49e4cd8224c4da15f143aefb8f96d8a1d06:server/test/indexnow.test.js:generic-api-key:7

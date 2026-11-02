@@ -14,7 +14,10 @@
   "end": "2026-10-02T00:00",
   "timezone": "America/New_York",
   "recurrence": {
-    "rrule": "FREQ=WEEKLY;BYDAY=FR;UNTIL=20261023"
+    "rrule": "FREQ=WEEKLY;BYDAY=FR;UNTIL=20261127",
+    "exdates": [
+      "2026-10-30"
+    ]
   },
   "venueId": "massapequa-elks-lodge",
   "town": "Massapequa",
@@ -25,11 +28,11 @@
   "skillLevel": "all-levels",
   "status": "active",
   "sourceId": "thedancecalendar",
-  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_8605e4f1e2f5427d9e8113d8e21f4c0c.pdf",
-  "sourceName": "The Dance Calendar, October 2026",
-  "sourceRef": "pages 15, 17, 19, 21",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_b4a4dbcacff14843992f6a1b46fa6f07.pdf",
+  "sourceName": "The Dance Calendar, November 2026",
+  "sourceRef": "pages 16, 18, 20, 22",
   "firstSeen": "2026-10-03",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-11-01",
   "confidence": 0.95,
   "matchKey": "thedancecalendar|massapequa-elks-lodge|dj-ray-dances|friday|20:00|social-dance|dj-ray|country-two-step+east-coast-swing+hustle+latin-ballroom+line-dancing+west-coast-swing||repeat"
 }

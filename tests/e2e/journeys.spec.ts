@@ -1,4 +1,30 @@
+import { readFileSync } from 'node:fs';
 import { test, expect, firstEventUrl, openFilters } from './fixtures';
+
+const placeData = JSON.parse(readFileSync(new URL('../../src/data/long-island-places.json', import.meta.url), 'utf8')) as {
+  aliases: Record<string, string>;
+  places: { name: string; county: string }[];
+};
+const countyByTown = new Map(placeData.places.map((place) => [place.name, place.county]));
+for (const [alias, canonical] of Object.entries(placeData.aliases)) {
+  const county = countyByTown.get(canonical);
+  if (county) countyByTown.set(alias, county);
+}
+
+async function expectOnlyLongIslandLocations(page: import('@playwright/test').Page) {
+  const locations = await page.locator('[data-upcoming-list] [data-event]').evaluateAll((els) =>
+    els.map((e) => {
+      const data = (e as HTMLElement).dataset;
+      return { county: data.county || '', town: data.town || '' };
+    }),
+  );
+  expect(
+    locations.filter(({ county, town }) => {
+      const townCounty = countyByTown.get(town);
+      return !townCounty || (county !== '' && county !== townCounty);
+    }),
+  ).toEqual([]);
+}
 
 test.describe('finding something to dance to', () => {
   test('the homepage leads with dances, shows today, quick links with counts, and a search box', async ({ pinned: page }) => {
@@ -74,9 +100,20 @@ test.describe('finding something to dance to', () => {
 
   test('only Nassau and Suffolk events are listed', async ({ pinned: page }) => {
     await page.goto('/events/');
-    const counties = await page.locator('[data-upcoming-list] [data-event]').evaluateAll((els) => [...new Set(els.map((e) => (e as HTMLElement).dataset.county))]);
-    expect(counties.filter((c) => c && !['Nassau', 'Suffolk'].includes(c))).toEqual([]);
-    await expect(page.locator('[data-upcoming-list]')).not.toContainText(/Queens|Brooklyn|Little Neck/);
+    await expectOnlyLongIslandLocations(page);
+  });
+
+  test('a Nassau or Suffolk event may say Queens in its title or performer name', async ({ pinned: page }) => {
+    await page.goto('/events/');
+    const card = page.locator('[data-upcoming-list] [data-event][data-county="Nassau"], [data-upcoming-list] [data-event][data-county="Suffolk"]').first();
+    await expect(card).toBeAttached();
+    await card.evaluate((element) => {
+      const regressionText = document.createElement('span');
+      regressionText.textContent = 'Kings & Queens Gatsby Party';
+      element.append(regressionText);
+    });
+    await expect(card).toContainText('Queens');
+    await expectOnlyLongIslandLocations(page);
   });
 });
 
@@ -117,6 +154,26 @@ test.describe('an event page', () => {
     await expect(page.locator('[data-toast]')).toHaveText('Link copied.');
     expect(await page.evaluate(() => (window as any).__copied.at(-1))).toBe(canonical);
     await expect(share.getByRole('link', { name: /Facebook/ })).toHaveAttribute('href', /^https:\/\/www\.facebook\.com\/sharer\//);
+    await share.getByRole('button', { name: 'Copy text' }).click();
+    await expect(page.locator('[data-toast]')).toHaveText('Text copied. Paste it anywhere.');
+    const text = (await page.evaluate(() => (window as any).__copied.at(-1))) as string;
+    expect(text.split('\n')[1]).toMatch(/^📅 \w+day, \w+ \d{1,2}/);
+    expect(text.trim().endsWith(canonical!)).toBe(true);
+    const whatsapp = await share.getByRole('link', { name: /WhatsApp/ }).getAttribute('href');
+    expect(decodeURIComponent(whatsapp!.replace('https://wa.me/?text=', ''))).toBe(text);
+  });
+
+  test('directory pages can be shared with a preview of the picture and text', async ({ pinned: page }) => {
+    await page.addInitScript(() => Object.defineProperty(navigator, 'share', { value: undefined, configurable: true }));
+    await page.goto('/venues/');
+    await page.locator('a[href^="/venues/"][href$="/"]:not([href="/venues/"])').first().click();
+    await page.locator('.page-header [data-share-open]').click();
+    const dialog = page.getByRole('dialog', { name: 'Share this venue' });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator('.share-card img')).toHaveAttribute('src', /^\/og\/venues\/.+\.jpg$/);
+    await expect(dialog.locator('.share-card__text')).toContainText((await page.locator('link[rel="canonical"]').getAttribute('href'))!);
+    await page.keyboard.press('Escape');
+    await expect(dialog).toBeHidden();
   });
 
   test('links to its venue, which lists what is on there', async ({ pinned: page }) => {

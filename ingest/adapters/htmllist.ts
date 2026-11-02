@@ -212,7 +212,7 @@ function venueName(text: string): string | undefined {
 }
 
 const JUNK_LINE =
-  /^(?:read more|view event|view details|event details|details(?: to come)?|more info|learn more|book(?: now)?|buy tickets?|tickets?|get tickets|rsvp|register|\(map\)|map|google calendar|ics|add to calendar|to|starting on|(?:monthly|weekly) on\b.*|call for reservations.*|free parking.*|no cover|sold out|\d+ events? (?:on|found)\b.*|no events?\b.*|(?:mon|tue|tues|wed|thu|thur|thurs|fri|sat|sun)[a-z]*\.?|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?|[^A-Za-z]*)$/i;
+  /^(?:read more|view event|view details|event details|details(?: to come)?|more info|learn more|book(?: now)?|buy tickets?|tickets?|get tickets|rsvp|register|\(map\)|map|google calendar|ics|add to calendar|to|starting on|(?:monthly|weekly) on\b.*|call for reservations.*|free parking.*|no cover|sold out|\d+ events? (?:on|found)\b.*|no events?\b.*|(?:mon|tue|tues|wed|thu|thur|thurs|fri|sat|sun)[a-z]*\.?|(?:mon|tue|tues|wed|thu|thur|thurs|fri|sat|sun)[a-z]*\.?,?\s+(?:20\d\d|\d{1,2}(?::\d\d)?\s*[ap]\.?m\.?)|(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?|[^A-Za-z]*)$/i;
 
 /** A line that can name an event (not just a time, a date, a button label or punctuation). */
 export function meaningfulLine(line: string, today: string): boolean {
@@ -378,9 +378,40 @@ export function wordpressEvents(raw: string, today: string): FoundEvent[] {
   return out;
 }
 
+/**
+ * Card grids (class "card"): each card holds one gig, often with the date last ("Claudio's
+ * Waterfront / Greenport, NY / Sat, Oct 10th 2026"). Each card is read on its own, so a date never
+ * takes the next card's venue. Used only when at least three cards each name exactly one date.
+ */
+export function cardEvents(html: string, pageUrl: string, today: string, mode: 'venue' | 'band' | 'list'): FoundEvent[] | undefined {
+  const starts = [...html.matchAll(/<(?:div|article|li|section)\b[^>]*\bclass="(?:[^"]*\s)?card(?:\s[^"]*)?"[^>]*>/g)];
+  if (starts.length < 3) return undefined;
+  const cards = starts
+    .map((m, i) => htmlToLines(html.slice(m.index!, Math.min(starts[i + 1]?.index ?? html.length, m.index! + 3000))))
+    .map((lines) => ({ lines, hits: lines.flatMap((l, n) => findDates(l, today).map((h) => ({ ...h, n }))) }))
+    .filter((c) => c.hits.length);
+  if (cards.length < 3 || cards.some((c) => c.hits.length !== 1)) return undefined;
+  const out: FoundEvent[] = [];
+  for (const { lines, hits } of cards) {
+    const h = hits[0]!;
+    const dateLine = lines[h.n]!;
+    if (NOT_AN_EVENT_DATE.test(dateLine.slice(0, h.index))) continue;
+    const rest = lines.map((l, n) => (n === h.n ? `${l.slice(0, h.index)} ${l.slice(h.index + h.length)}`.replace(/^[\s,:|•·–—-]+|[\s,:|•·–—-]+$/g, '').trim() : l)).filter(Boolean);
+    const title = rest.find((l) => meaningfulLine(l, today));
+    if (!title) continue;
+    const text = rest.join(' · ').replace(/\s+/g, ' ').trim();
+    const f: FoundEvent = { title: title.slice(0, 140), description: text.slice(0, 600), start: h.date, ref: 'events page', pageUrl };
+    if (mode === 'band') f.locationName = venueName(text);
+    out.push(f);
+  }
+  return out;
+}
+
 export function foundFromHtml(html: string, pageUrl: string, today: string, mode: 'venue' | 'band' | 'list'): FoundEvent[] {
   if (/<article class="eventlist-event/.test(html)) return squarespaceEvents(html, pageUrl);
   if (/class="event-calendar-card/.test(html)) return spotappsEvents(html, pageUrl);
+  const cards = cardEvents(html, pageUrl, today, mode);
+  if (cards) return cards;
   const danceOnly = pageNamesDance(html) || undefined;
   const lines = htmlToLines(html);
   const sections = sectionEvents(lines, pageUrl, today);

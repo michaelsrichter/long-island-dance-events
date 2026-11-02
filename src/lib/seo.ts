@@ -48,6 +48,17 @@ export function breadcrumbJsonLd(items: { name: string; href: string }[], site: 
   };
 }
 
+/** A list of pages on this site (events at a venue, towns, ...), at most `max` items. */
+export function itemListJsonLd(name: string, hrefs: string[], site: URL | string, max = 30): Json {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name,
+    numberOfItems: Math.min(hrefs.length, max),
+    itemListElement: hrefs.slice(0, max).map((href, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(href, site) })),
+  };
+}
+
 export function placeJsonLd(e: Pick<ResolvedEvent, 'location' | 'venue'>, site: URL | string): Json | undefined {
   const l = e.location;
   if (!l.name && !l.address && !l.town) return undefined;
@@ -220,7 +231,9 @@ export function eventJsonLd(e: ResolvedEvent, _s: Settings, site: URL | string, 
   const offers =
     e.price.known && !e.price.free && e.data.price !== undefined
       ? [clean({ '@type': 'Offer', price: e.data.price.toFixed(2), priceCurrency: 'USD', availability: 'https://schema.org/InStock', url: e.data.ticketUrl ?? url })]
-      : [];
+      : e.price.free
+        ? [{ '@type': 'Offer', price: '0', priceCurrency: 'USD', availability: 'https://schema.org/InStock', url }]
+        : [];
   const sameAs = (p: { links?: { url: string }[] }) => (p.links?.length ? p.links.map((l) => l.url) : undefined);
   const performers = [
     ...e.liveActs.map((p) => ({ '@type': p.kind === 'band' ? 'MusicGroup' : 'Person', name: p.name, url: abs(p.href, site), sameAs: sameAs(p) })),

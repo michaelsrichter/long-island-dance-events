@@ -77,12 +77,13 @@ describe('Decap CMS configuration', () => {
   const names = new Set(config.collections.map((c: any) => c.name));
   const fieldsOf = (name: string) => new Set(config.collections.find((c: any) => c.name === name).fields.map((f: any) => f.name));
   const shapeOf = (schema: any): string[] => Object.keys(schema.shape ?? schema.def?.in?.shape ?? schema.in?.shape ?? schema._def?.schema?.shape ?? {});
-  it('points at this repository and uses the editorial workflow', () => {
+  it('points at this repository and publishes each save directly (no draft pull request)', () => {
     expect(config.backend.name).toBe('github');
     expect(config.backend.repo).toBe('michaelsrichter/long-island-dance-events');
     // Least access: the repository is public, so sign-in must not ask for every private repository.
     expect(config.backend.auth_scope).toBe('public_repo');
-    expect(config.publish_mode).toBe('editorial_workflow');
+    // Phase 0 of docs/proposals/postgres-live-site.md (decision P55): Save goes live with the next deploy.
+    expect(config.publish_mode).toBe('simple');
     expect(existsSync(join(root, config.media_folder))).toBe(true);
   });
   it('has every entity collection, stored as JSON, and their folders exist', () => {
@@ -132,7 +133,7 @@ describe('Decap CMS configuration', () => {
     for (const c of config.collections) if (c.sortable_fields !== undefined) expect(Array.isArray(c.sortable_fields), `${c.name}.sortable_fields`).toBe(true);
     const events = config.collections.find((c: any) => c.name === 'events');
     expect(events.sortable_fields).toContain('start');
-    expect(events.view_filters.map((f: any) => f.label)).toContain('Waiting for review');
+    expect(events.view_filters.map((f: any) => f.label)).toContain('Held by an editor');
   });
   it('requires alt text alongside every image field', () => {
     for (const c of config.collections) {

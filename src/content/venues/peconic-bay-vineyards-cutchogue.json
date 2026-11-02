@@ -1,0 +1,46 @@
+{
+  "name": "Peconic Bay Vineyards",
+  "aliases": [
+    "Peconic Bay Vineyards by Krissie Wines",
+    "Peconic Bay Winery",
+    "Peconic Bay Vineyard"
+  ],
+  "address": "31320 Main Rd",
+  "town": "Cutchogue",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11935",
+  "phone": "(631) 735-9192",
+  "website": "https://www.peconicbayvineyards.com/",
+  "facebookUrl": "https://www.facebook.com/peconicbayvineyards",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Peconic+Bay+Vineyards%2C+31320+Main+Rd%2C+Cutchogue%2C+NY+11935",
+  "kind": "winery",
+  "description": "A North Fork winery on Main Road with a tasting room, garden seating and an oyster bar. Its summer band series brings live music on Friday, Saturday and Sunday from late spring into the fall.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "allowed",
+    "kinds": [],
+    "notes": "Bands play outdoors while guests sit at garden tables and lounges, many booked ahead. A 2010 video shows a packed crowd dancing to a Latin band here, but that was under earlier owners. We found no recent reports either way, so ask before you plan to dance.",
+    "evidence": [
+      {
+        "url": "https://www.peconicbayvineyards.com/",
+        "note": "Winery home page lists live music every Friday, Saturday and Sunday and a May to October summer music series."
+      },
+      {
+        "url": "https://www.exploretock.com/peconicbayvineyards/",
+        "note": "Reservation page says live music runs every Friday, Saturday and Sunday through November 1 and offers garden lounge tables."
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=qW2SOmAZUJE",
+        "note": "2010 video of guests dancing to the Latin band Mambo Loco at the vineyard; the uploader says everyone was dancing by the third set."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: peconicbayvineyards.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 41.018573,
+  "longitude": -72.480521,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

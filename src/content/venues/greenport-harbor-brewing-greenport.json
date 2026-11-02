@@ -1,0 +1,48 @@
+{
+  "name": "Greenport Harbor Brewing Co. (Greenport)",
+  "aliases": [
+    "Greenport Brewery",
+    "Greenport Harbor Brewery",
+    "Greenport Harbor Brewing Greenport",
+    "Greenport Harbor Brewing Co. Carpenter Street",
+    "Original GHBC"
+  ],
+  "address": "234 Carpenter St",
+  "town": "Greenport",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11944",
+  "phone": "(631) 477-1100",
+  "website": "https://greenportharborbrewing.com/",
+  "facebookUrl": "https://www.facebook.com/greenportbrew",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Greenport+Harbor+Brewing+Co.%2C+234+Carpenter+St%2C+Greenport%2C+NY+11944",
+  "kind": "brewery",
+  "description": "Greenport Harbor's original brewery and tasting room, in an old firehouse in Greenport village. It has a cozy upstairs bar, a small stage for live music and seasonal events such as the fall Oyster Fest.",
+  "dancing": {
+    "floor": "small",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "The upstairs tasting room is cozy and the stage is small, so there is probably little open room to dance inside. The brewery's bigger stage is at its Peconic location. Outdoor events like Oyster Fest have bands, but we found no reports of dancing here.",
+    "evidence": [
+      {
+        "url": "https://jollypint.com/breweries-in-new-york/greenport/greenport-harbor-brewing-company",
+        "note": "Brewery guide lists 234 Carpenter St and says reviewers mention a cozy upstairs bar and a small stage for live music in the old firehouse."
+      },
+      {
+        "url": "https://greenportharborbrewing.com/",
+        "note": "Official site lists the Greenport tasting room at 234 Carpenter Street with its hours, separate from the Peconic site."
+      },
+      {
+        "url": "https://www.petitenorthfork.com/events/13th-annual-oyster-festival",
+        "note": "Oyster Fest on Sunday, Oct 11 (12-6 PM) at the original brewery on Carpenter St, with a live band from 1-5 PM, vendors and a shucking contest."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: greenportharborbrewing.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 41.102746,
+  "longitude": -72.358378,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

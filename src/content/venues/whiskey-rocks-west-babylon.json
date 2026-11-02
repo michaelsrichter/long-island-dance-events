@@ -1,0 +1,11 @@
+{
+  "name": "Whiskey Rocks",
+  "address": "419 Great East Neck Rd",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "West Babylon",
+  "latitude": 40.700726,
+  "longitude": -73.342502,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

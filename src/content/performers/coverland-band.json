@@ -1,0 +1,48 @@
+{
+  "name": "Coverland",
+  "type": "band",
+  "aliases": [
+    "Coverland Band",
+    "Coverland Weddings"
+  ],
+  "genres": [
+    "top 40 covers",
+    "pop",
+    "rock",
+    "Motown",
+    "disco",
+    "80s",
+    "90s"
+  ],
+  "website": "https://www.coverlandband.com/",
+  "facebookUrl": "https://www.facebook.com/coverlandbandrocks/",
+  "instagramUrl": "https://www.instagram.com/coverlandtheband/",
+  "description": "Party and wedding cover band based in Farmingdale that plays non-stop sets of hits from the 1960s to today, including pop, rock, disco, Motown and 90s songs, from a list of about 380 songs. It plays weddings and private events across the Northeast and public shows at places like the Garden Social in East Meadow and the Stephen Talkhouse in Amagansett.",
+  "dancing": {
+    "rating": "dance-band",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [
+      "freestyle"
+    ],
+    "notes": "A wedding and party band that plays continuous sets to keep people dancing. Couples' reviews say guests stayed on the dance floor all night, and its booking page talks about packed dance floors. Public bar and beer-garden shows should get freestyle dancing too.",
+    "evidence": [
+      {
+        "url": "https://www.zola.com/wedding-vendors/wedding-bands-djs/coverland-weddings",
+        "note": "Wedding site listing (Farmingdale) with 5-star reviews saying the band kept guests on the dance floor all night."
+      },
+      {
+        "url": "https://www.thebash.com/cover-band/coverland",
+        "note": "Booking page: tagged as a dance band and says it is known for packed dance floors at weddings, parties and clubs."
+      },
+      {
+        "url": "https://www.coverlandband.com/",
+        "note": "Band site: upcoming Long Island shows, a couple's wedding testimonial and a searchable song list of about 380 songs."
+      }
+    ],
+    "confidence": "high",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source coverland-band."
+}

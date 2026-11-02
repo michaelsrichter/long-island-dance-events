@@ -1,0 +1,1147 @@
+{
+ "about": "Newsletter sign-ups for event sources (decision P44). The project newsletter inbox (an AgentMail inbox; its address and key are GitHub secrets, never in this repository) is signed up with scripts/newsletter-signup.ts. Issues are read by ingest/adapters/agentmail.ts for sources with a newsletterSourceId. Status: confirmed, submitted (waiting for the first email), pending-confirmation, owner-by-hand (a CAPTCHA or robots.txt stops our bot; the owner signs up by hand), needs-personal-info, none-found, failed.",
+ "newsletters": [
+  {
+   "sourceId": "amici-restaurant-mount-sinai",
+   "name": "Amici Restaurant",
+   "site": "https://amicirestaurant.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "amityville-music-hall",
+   "name": "Amityville Music Hall",
+   "site": "https://amh.live/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: not a newsletter form)."
+  },
+  {
+   "sourceId": "anthurium",
+   "name": "Anthurium",
+   "site": "https://anthurium.band/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "ballroom-factory-patchogue",
+   "name": "Ballroom Factory Dance Studio",
+   "site": "https://ballroomfactory.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "ballroom-legacy-sea-cliff",
+   "name": "Ballroom Legacy Dance Studio",
+   "site": "https://www.ballroomlegacy.us/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: contact form (has a message box); not a newsletter form)."
+  },
+  {
+   "sourceId": "barefoot-adventures",
+   "name": "Barefoot Adventures",
+   "site": "https://www.barefootadventures.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "bartini-babylon",
+   "name": "Bartini Bar & Lounge",
+   "site": "https://www.bartinibabylon.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "baselocal-islip",
+   "name": "BaseLocal",
+   "site": "https://baselocal.com/",
+   "status": "confirmed",
+   "checkedAt": "2026-10-04",
+   "senders": [
+    "baselocal-islipny@mail.beehiiv.com"
+   ],
+   "notes": "Signed up by hand; issues arrive in the inbox.",
+   "firstIssueAt": "2026-10-05",
+   "confirmedAt": "2026-10-05",
+   "newsletterSourceId": "baselocal-islip-newsletter"
+  },
+  {
+   "sourceId": "beernutz",
+   "name": "Beer Nutz",
+   "site": "https://www.beernutzmusic.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: contact form (has a message box))."
+  },
+  {
+   "sourceId": "beginnings-restaurant-atlantic-beach",
+   "name": "Beginnings Restaurant",
+   "site": "http://www.beginningsrestaurant.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "bistro-72",
+   "name": "Bistro 72",
+   "site": "https://bistro-72.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (page did not open (TimeoutError: page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating ))."
+  },
+  {
+   "sourceId": "blackstone-steakhouse-melville",
+   "name": "Blackstone Steakhouse",
+   "site": "https://www.blackstonesteakhouse.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "bobbique-patchogue",
+   "name": "BOBBIQUE",
+   "site": "https://www.bobbique.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "brumidi-lodge-deer-park",
+   "name": "Club Brumidi at Brumidi Lodge",
+   "site": "https://sonsofitalyli.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (page did not open (Error: page.goto: Download is starting\nCall log:\n\u001b[2m  - navigating to \"https://))."
+  },
+  {
+   "sourceId": "canoe-place-inn-cottages-hampton-bays",
+   "name": "Canoe Place Inn & Cottages",
+   "site": "https://canoeplace.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: not a newsletter form; no visible email box)."
+  },
+  {
+   "sourceId": "coverland-band",
+   "name": "Coverland Band",
+   "site": "https://www.coverlandband.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "daisys-miller-place",
+   "name": "Daisy's",
+   "site": "https://daisysli.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: not a newsletter form)."
+  },
+  {
+   "sourceId": "dance-party-explosion",
+   "name": "Dance Party Explosion",
+   "site": "https://dpe-li.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: not a newsletter form)."
+  },
+  {
+   "sourceId": "dance-with-us-li",
+   "name": "Dance With Us Long Island courses",
+   "site": "https://dancewithus.net/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: contact form (has a message box))."
+  },
+  {
+   "sourceId": "dancecalendar-info",
+   "name": "dancecalendar.info",
+   "site": "https://www.dancecalendar.info/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "dancemanhattan-li-swing",
+   "name": "Dance Manhattan",
+   "site": "http://dancemanhattan.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "dancing-with-deanna",
+   "name": "Dancing With Deanna",
+   "site": "https://www.dancingwithdeanna.com/",
+   "platform": "squarespace",
+   "status": "confirmed",
+   "checkedAt": "2026-10-05",
+   "signedUpAt": "2026-10-05",
+   "senders": [
+    "deanna@dancingwithdeanna.com"
+   ],
+   "notes": "Signed up and confirmed.",
+   "confirmedAt": "2026-10-05",
+   "newsletterSourceId": "dancing-with-deanna-newsletter"
+  },
+  {
+   "sourceId": "dayshift-li",
+   "name": "DayShift Long Island daytime dance party",
+   "site": "https://www.locomotivelive.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "dead-ahead",
+   "name": "Dead Ahead Band",
+   "site": "https://www.deadaheadband.net/",
+   "status": "submitted",
+   "checkedAt": "2026-10-05",
+   "signedUpAt": "2026-10-05",
+   "senders": [],
+   "notes": "Submitted; no clear thank-you message. Watch the inbox."
+  },
+  {
+   "sourceId": "decadia",
+   "name": "Decadia",
+   "site": "https://www.decadialive.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "diva-lourdes-gcal",
+   "name": "DiVa Ballroom / Dance with Lourdes Cruz",
+   "site": "https://divaballroomdancing.com/",
+   "status": "confirmed",
+   "checkedAt": "2026-10-04",
+   "senders": [
+    "lourdes@divaballroomdancing.com"
+   ],
+   "notes": "Signed up by hand; issues arrive in the inbox.",
+   "confirmedAt": "2026-10-05",
+   "newsletterSourceId": "diva-lourdes-newsletter"
+  },
+  {
+   "sourceId": "dock-holiday",
+   "name": "Dock Holiday",
+   "site": "https://dockholiday.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "east-end-jazz-southampton",
+   "name": "East End Jazz",
+   "site": "https://www.eastendjazz.org/",
+   "platform": "wix",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "A CAPTCHA appeared after submitting; stopped. A person must sign up by hand."
+  },
+  {
+   "sourceId": "eastendbeacon",
+   "name": "eastendbeacon",
+   "site": "https://www.eastendbeacon.com/",
+   "platform": "beehiiv",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "A CAPTCHA appeared after submitting; stopped. A person must sign up by hand."
+  },
+  {
+   "sourceId": "eastendgetaway",
+   "name": "eastendgetaway",
+   "site": "https://www.eastendgetaway.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "eighty-nine-north",
+   "name": "89 North",
+   "site": "https://89northmusic.com/",
+   "signupPage": "https://89northmusic.com/join-our-mailing-list/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "eleanors-lounge",
+   "name": "Eleanor's Lounge",
+   "site": "https://eleanorslounge.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "electric-dudes",
+   "name": "Electric Dudes",
+   "site": "https://electricdudes.com/",
+   "signupPage": "https://lp.constantcontactpages.com/sl/xuL8X5U/DUDESIGNUP",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "enology-wine-bar-bistro-saint-james",
+   "name": "Enology Wine Bar & Bistro",
+   "site": "https://enologywinebar.com/",
+   "status": "pending-confirmation",
+   "checkedAt": "2026-10-05",
+   "signedUpAt": "2026-10-05",
+   "senders": [],
+   "notes": "Submitted; the site thanked us and may send a confirmation email."
+  },
+  {
+   "sourceId": "fire-island-news-events-oakdale",
+   "name": "Fire Island News Events",
+   "site": "https://events.fireislandnews.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "floralparkny",
+   "name": "floralparkny",
+   "site": "https://www.floralparkny.gov/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (page did not open (Error: page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.floralparkny.gov/\nCa))."
+  },
+  {
+   "sourceId": "gene-casey-lone-sharks",
+   "name": "Gene Casey & the Lone Sharks",
+   "site": "https://genecasey.com/",
+   "status": "submitted",
+   "checkedAt": "2026-10-05",
+   "signedUpAt": "2026-10-05",
+   "senders": [],
+   "notes": "Submitted; no clear thank-you message. Watch the inbox."
+  },
+  {
+   "sourceId": "generation-gap",
+   "name": "Generation Gap",
+   "site": "https://gengapmusic.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "hamptons-com-events-calendar-east-hampton",
+   "name": "Hamptons.com Events Calendar",
+   "site": "https://hamptons.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "hog-farm-brookhaven",
+   "name": "HOG Farm",
+   "site": "https://thehogfarm.org/",
+   "platform": "squarespace",
+   "status": "confirmed",
+   "checkedAt": "2026-10-05",
+   "signedUpAt": "2026-10-05",
+   "senders": [],
+   "notes": "Submitted; the site thanked us and may send a confirmation email.",
+   "confirmedAt": "2026-10-05"
+  },
+  {
+   "sourceId": "hoodoo-loungers",
+   "name": "Hoodoo Loungers",
+   "site": "https://hoodooloungers.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "hotel-indigo-east-end",
+   "name": "Hotel Indigo East End",
+   "site": "https://indigoeastend.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "hotel-moraine",
+   "name": "Hotel Moraine",
+   "site": "https://www.hotelmoraine.com/",
+   "platform": "mailchimp",
+   "status": "submitted",
+   "checkedAt": "2026-10-05",
+   "signedUpAt": "2026-10-05",
+   "senders": [],
+   "notes": "Submitted; no clear thank-you message. Watch the inbox."
+  },
+  {
+   "sourceId": "huntington-arts-council-dance",
+   "name": "Huntington Arts Council",
+   "site": "https://www.huntingtonarts.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "huntington-matters",
+   "name": "Huntington Matters events",
+   "site": "https://huntingtonmatters.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: contact form (has a message box))."
+  },
+  {
+   "sourceId": "i-love-babylon",
+   "name": "I Love Babylon events",
+   "site": "https://ilovebabylon.com/",
+   "signupPage": "https://ilovebabylon.com/subscribe",
+   "platform": "aweber",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "iraslist",
+   "name": "Ira's List",
+   "site": "https://www.iraslistli.com/",
+   "platform": "wix",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "islip-arts",
+   "name": "Islip Arts Council",
+   "site": "https://isliparts.org/",
+   "signupPage": "https://lp.constantcontactpages.com/sl/ZWjjvLd",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "jazz-at-the-barn",
+   "name": "Jazz at the Barn",
+   "site": "https://jazzatthebarn.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-04",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: no visible email box)."
+  },
+  {
+   "sourceId": "jlr-dance-unlimited",
+   "name": "JLR Dance Unlimited",
+   "site": "https://www.jlrdanceunlimited.com/",
+   "platform": "wix",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "A CAPTCHA appeared after submitting; stopped. A person must sign up by hand."
+  },
+  {
+   "sourceId": "john-j-byrne-community-center-uniondale",
+   "name": "John J. Byrne Community Center",
+   "site": "https://byrncenter.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "kitty-mulligans-bay-shore",
+   "name": "Kitty Mulligan's Irish Pub",
+   "site": "https://www.kittymulligans.com/",
+   "status": "submitted",
+   "checkedAt": "2026-10-05",
+   "signedUpAt": "2026-10-05",
+   "senders": [],
+   "notes": "Submitted; no clear thank-you message. Watch the inbox."
+  },
+  {
+   "sourceId": "liac-freeport",
+   "name": "Long Island Arts Council at Freeport",
+   "site": "https://www.liacf.org/",
+   "platform": "wix",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "A CAPTCHA appeared after submitting; stopped. A person must sign up by hand."
+  },
+  {
+   "sourceId": "licma",
+   "name": "Long Island Country Music Association",
+   "site": "https://licma.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "lily-flanagans-babylon",
+   "name": "Lily Flanagan's Pub",
+   "site": "https://www.lilyflanaganspub.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "live-on-the-porch",
+   "name": "Live On The Porch",
+   "site": "https://liveontheporch.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "long-beach-concerts",
+   "name": "City of Long Beach concerts",
+   "site": "https://www.longbeachny.gov/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "long-island-blues-society-farmingdale",
+   "name": "Long Island Blues Society",
+   "site": "https://www.libsny.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "longisland-com-events",
+   "name": "LongIsland.com Events calendar",
+   "site": "https://events.longisland.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "longisland-com-nightlife",
+   "name": "LongIsland.com Nightlife Events",
+   "site": "https://nightlife.longisland.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "mezza-luna",
+   "name": "Mezza Luna",
+   "site": "https://www.mezzalunafinedining.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "milagro-santana-tribute-band",
+   "name": "Milagro Santana Tribute Band",
+   "site": "https://www.milagrolive.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "mixed-vibes-band",
+   "name": "Mixed Vibes Band",
+   "site": "https://bnds.us/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "mtsproductions",
+   "name": "mtsproductions",
+   "site": "https://www.mtsproductions.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "mulcahys-wantagh",
+   "name": "Mulcahy's",
+   "site": "https://mulcahyslongisland.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: not a newsletter form)."
+  },
+  {
+   "sourceId": "nassau-reads",
+   "name": "Nassau Reads upcoming events",
+   "site": "https://nassaureads.com/",
+   "signupPage": "https://nassaureads.com/libraryaware/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "noiz-entertainment",
+   "name": "NOIZ Entertainment",
+   "site": "https://noizentertainment.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: contact form (has a message box))."
+  },
+  {
+   "sourceId": "oakdale-brew-house",
+   "name": "Oakdale Brew House",
+   "site": "https://www.oakdalebrewhouse.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "out-on-the-town-li",
+   "name": "Out on the Town",
+   "site": "https://outonthetownli.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "pat-farrell-music",
+   "name": "Pat Farrell Music",
+   "site": "https://patfarrellmusic.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "patchogue-theatre",
+   "name": "Patchogue Theatre",
+   "site": "https://www.patchoguetheatre.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "patchoguelivelocal",
+   "name": "patchoguelivelocal",
+   "site": "https://www.patchoguelivelocal.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "peconic-landing-greenport",
+   "name": "Peconic Landing",
+   "site": "https://peconiclanding.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: no visible email box; not a newsletter form)."
+  },
+  {
+   "sourceId": "piano-man-pat",
+   "name": "Piano Man Pat",
+   "site": "https://www.pianomanpat.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "plattduetsche-park-restaurant-franklin-square",
+   "name": "Plattduetsche Park Restaurant",
+   "site": "https://parkrestaurant.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "polish-club-port-washington",
+   "name": "Polish American Cultural Association",
+   "site": "https://portwashingtonpolishclub.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "popeisclambaronline",
+   "name": "popeisclambaronline",
+   "site": "https://www.popeisclambaronline.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "pour-some-80s",
+   "name": "Pour Some 80s On Me",
+   "site": "https://poursome80sonme.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "press195",
+   "name": "press195",
+   "site": "https://www.press195.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "radio-active",
+   "name": "Radio Active",
+   "site": "https://radioactiveny.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "rooted-north-vineyards-cutchogue",
+   "name": "Rooted North Vineyards",
+   "site": "https://rootednorthvineyards.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "sabaki-dance",
+   "name": "sabaki.dance",
+   "site": "https://sabaki.dance/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "saint-demetrios-merrick",
+   "name": "Saint Demetrios",
+   "site": "https://saint-demetrios.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "salt-shack-cedar-beach",
+   "name": "Salt Shack at Cedar Beach",
+   "site": "https://saltshackny.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "sdli-events",
+   "name": "Swing Dance Long Island",
+   "site": "http://www.sdli.org/",
+   "status": "confirmed",
+   "checkedAt": "2026-10-05",
+   "senders": [
+    "info@sdli.org"
+   ],
+   "notes": "Signed up by hand; issues arrive in the inbox.",
+   "confirmedAt": "2026-10-05",
+   "newsletterSourceId": "sdli-newsletter"
+  },
+  {
+   "sourceId": "seasonal-arts-festivals",
+   "name": "Huntington Summer Arts Festival; Islip Arts Council",
+   "site": "https://www.huntingtonsummerartsfestival.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "sharp-violet",
+   "name": "Sharp Violet",
+   "site": "https://sharpviolet.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: contact form (has a message box))."
+  },
+  {
+   "sourceId": "societelle",
+   "name": "Societelle",
+   "site": "https://www.societelle.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "southbound-band",
+   "name": "Southbound",
+   "site": "https://southbound.li/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "spotlight-at-the-paramount-huntington",
+   "name": "Spotlight at The Paramount",
+   "site": "https://www.spotlightny.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "stationyardsli",
+   "name": "stationyardsli",
+   "site": "https://www.stationyardsli.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "stereo-garden-patchogue",
+   "name": "Stereo Garden",
+   "site": "https://www.stereogardenli.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "sympatico-jazz",
+   "name": "Sympatico Jazz",
+   "site": "https://sympaticojazz.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "temple-israel-long-beach",
+   "name": "Temple Israel Long Beach",
+   "site": "https://www.tilb.org/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "the-acchords",
+   "name": "The Fabulous Acchords",
+   "site": "https://theacchords.com/",
+   "status": "submitted",
+   "checkedAt": "2026-10-05",
+   "signedUpAt": "2026-10-05",
+   "senders": [],
+   "notes": "Submitted; no clear thank-you message. Watch the inbox."
+  },
+  {
+   "sourceId": "the-audrey-oyster-bay",
+   "name": "The Audrey",
+   "site": "https://theaudreyob.com/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "the-boulton-center-bay-shore",
+   "name": "The Boulton Center",
+   "site": "https://www.boultoncenter.org/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: not a newsletter form)."
+  },
+  {
+   "sourceId": "the-clubhouse-hamptons-east-hampton",
+   "name": "The Clubhouse",
+   "site": "https://clubhousehamptons.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: not a newsletter form)."
+  },
+  {
+   "sourceId": "the-liverpool-shuffle",
+   "name": "The Liverpool Shuffle",
+   "site": "https://www.theliverpoolshuffle.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "the-max-the-ultimate-90s-party",
+   "name": "The Max: The Ultimate 90's Party",
+   "site": "https://wearethemaxny.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "the-mystic-music",
+   "name": "The Mystic Music",
+   "site": "https://themysticmusic.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: not a newsletter form)."
+  },
+  {
+   "sourceId": "the-paramount",
+   "name": "The Paramount",
+   "site": "https://www.paramountny.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "the-pridwin-hotel-cottages-shelter-island",
+   "name": "The Pridwin Hotel & Cottages",
+   "site": "https://www.caperesorts.com/",
+   "signupPage": "https://sistersnacking.substack.com/p/the-perfect-long-weekend-in-shelter",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "the-project",
+   "name": "The Project",
+   "site": "https://www.theprojectbandny.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "the-rag-times-patchogue",
+   "name": "The Rag Times",
+   "site": "https://www.theragtimes.net/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "the-realm-band",
+   "name": "The Realm Band",
+   "site": "http://www.therealmband.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "the-suffolk-riverhead",
+   "name": "The Suffolk",
+   "site": "https://thesuffolk.org/",
+   "platform": "constant-contact",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "the-time-travelers",
+   "name": "The Time Travelers",
+   "site": "https://www.timetravelersli.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "thedancecalendar",
+   "name": "The Dance Calendar",
+   "site": "https://www.thedancecalendar.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: not a newsletter form; contact form (has a message box))."
+  },
+  {
+   "sourceId": "thenydancersstudio",
+   "name": "thenydancersstudio",
+   "site": "https://www.thenydancersstudio.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "threevillagelocal",
+   "name": "threevillagelocal",
+   "site": "https://www.threevillagelocal.com/",
+   "signupPage": "https://www.threevillagelocal.com/newsletter",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The sign-up form is protected by a CAPTCHA; a person must sign up by hand."
+  },
+  {
+   "sourceId": "town-of-hempstead-dance-classes",
+   "name": "Town of Hempstead adult classes",
+   "site": "https://hempsteadny.gov/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "tribe-band-ny",
+   "name": "Tribe Band NY",
+   "site": "https://www.tribebandny.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "triple-step-swing",
+   "name": "Triple Step Swing",
+   "site": "https://triplestepswing.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "uncle-franks-pizza-and-cocktails-wantagh",
+   "name": "Uncle Frank's Pizza and Cocktails",
+   "site": "https://www.unclefranksli.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: no visible email box)."
+  },
+  {
+   "sourceId": "village-of-bayville-community-center-concerts",
+   "name": "Village of Bayville Community Center concerts",
+   "site": "https://bayvilleny.gov/",
+   "signupPage": "https://www.constantcontact.com/legal/service-provider",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "villager-farmingdale",
+   "name": "The Villager",
+   "site": "https://www.thevillagerfarmingdale.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "visitmontauk",
+   "name": "visitmontauk",
+   "site": "https://www.visitmontauk.org/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "robots.txt asks bots to stay away; the sign-up was tried at the owner's request (one form, no pages collected). The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  },
+  {
+   "sourceId": "waterfalls-ballroom",
+   "name": "The Waterfalls",
+   "site": "https://waterfallsapartments.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (email boxes found, but: contact form (has a message box))."
+  },
+  {
+   "sourceId": "webtunes-li",
+   "name": "Webtunes",
+   "site": "https://webtunes.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "who-are-those-guys",
+   "name": "Who Are Those Guys",
+   "site": "https://whoarethoseguys.com/",
+   "status": "none-found",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "No newsletter sign-up found (no email sign-up box on the page)."
+  },
+  {
+   "sourceId": "willistonparkny",
+   "name": "willistonparkny",
+   "site": "https://www.willistonparkny.gov/",
+   "status": "owner-by-hand",
+   "checkedAt": "2026-10-05",
+   "senders": [],
+   "notes": "The site shows an access-denied or bot-check page to our browser (403); sign up by hand."
+  }
+ ]
+}

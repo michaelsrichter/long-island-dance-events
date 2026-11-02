@@ -1,0 +1,48 @@
+{
+  "name": "Rooted North Vineyards Tasting Room",
+  "aliases": [
+    "Rooted North",
+    "Rooted North Vineyards",
+    "Rooted North Tasting Room",
+    "Suhru & Lieb Vineyards",
+    "Lieb Cellars"
+  ],
+  "address": "13050 Oregon Rd",
+  "town": "Cutchogue",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11935",
+  "phone": "(631) 734-1100",
+  "website": "https://rootednorthvineyards.com/",
+  "facebookUrl": "https://www.facebook.com/rootednorthvineyards/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Rooted+North+Vineyards+Tasting+Room%2C+13050+Oregon+Rd%2C+Cutchogue%2C+NY+11935",
+  "kind": "winery",
+  "description": "The tasting room of Rooted North Vineyards (the new name for Suhru & Lieb) on Oregon Road in Cutchogue. Local singers and acoustic players perform on Friday evenings from 5 to 7 PM while guests sip wine at their tables.",
+  "dancing": {
+    "floor": "seated",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "This is a seated wine tasting room with 90-minute table reservations, plus a patio and lawn in season. Friday music is a relaxed solo or acoustic set meant for listening. We found no sign of dancing.",
+    "evidence": [
+      {
+        "url": "https://rootednorthvineyards.com/events/",
+        "note": "Venue calendar lists a Friday music series from 5 to 7 PM with a different local solo performer each week into late fall 2026."
+      },
+      {
+        "url": "https://rootednorthvineyards.com/visit/",
+        "note": "Visit page describes an indoor tasting room, a private library room and a patio, with reservations for 90-minute seatings."
+      },
+      {
+        "url": "https://rootednorthvineyards.com/why-we-rebranded/",
+        "note": "September 2026 blog post explains that Suhru & Lieb became Rooted North and still welcomes guests at the same Oregon Road location."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: rootednorthvineyards.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source rooted-north-vineyards-cutchogue. The winery renamed itself from Suhru & Lieb Vineyards in September 2026; older listings may use the old name.",
+  "latitude": 41.036786,
+  "longitude": -72.504301,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

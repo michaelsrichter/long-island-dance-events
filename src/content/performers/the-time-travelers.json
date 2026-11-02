@@ -1,0 +1,50 @@
+{
+  "name": "The Time Travelers",
+  "type": "band",
+  "aliases": [
+    "Time Travelers",
+    "The Time Travelers of Long Island",
+    "Time Travelers LI"
+  ],
+  "genres": [
+    "classic rock covers",
+    "oldies",
+    "pop",
+    "1950s to today covers"
+  ],
+  "website": "https://www.timetravelersli.com/",
+  "facebookUrl": "https://www.facebook.com/Thetimetravelerslongisland/",
+  "instagramUrl": "https://www.instagram.com/timetravelersli/",
+  "description": "Long Island cover band (its Facebook page lists Amityville) that plays songs from the 1950s up to today's hits and sometimes adds guest players on harmonica, sax or cello. It plays bars such as the Village Pub in North Massapequa, RipTides in Lindenhurst and Beau's Bar in Greenlawn.",
+  "dancing": {
+    "rating": "party",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [
+      "freestyle"
+    ],
+    "notes": "The band says its shows are built to get people singing and dancing, with set lists that mix decades so every age group hears something it knows. We found no outside review describing the crowds, so this is based on the band's own words and its bar bookings.",
+    "evidence": [
+      {
+        "url": "https://www.timetravelersli.com/",
+        "note": "Home page: cover band playing music from the 1950s to today, focused on crowd interaction and getting people to sing and dance."
+      },
+      {
+        "url": "https://www.timetravelersli.com/meet-the-band",
+        "note": "Band page: the singer adds bongos and tambourine to keep fans dancing, and set lists mix new hits with older ones."
+      },
+      {
+        "url": "https://www.timetravelersli.com/upcoming-shows",
+        "note": "Upcoming shows at the Village Pub (N. Massapequa), RipTides (Lindenhurst, no cover) and Beau's Bar (Greenlawn)."
+      },
+      {
+        "url": "https://www.facebook.com/Thetimetravelerslongisland/",
+        "note": "Band's Facebook page, listed as a musician/band in Amityville, NY."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source the-time-travelers. Not the same act as the 'Time Travelers' bands at timetravelersshow.com or timetravelersband.com."
+}

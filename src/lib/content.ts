@@ -1,12 +1,12 @@
 /** Astro-side content access: loads collections and resolves event occurrences with their linked entities. */
-import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+import { getCollection, getEntry, type CollectionEntry } from './collections';
 import { cadenceOf, isUpcoming, partition, priceOf, priceText, resolveOccurrences, type Occurrence, type PriceInfo } from './event-core';
 import type { CalendarEvent } from './calendar';
 import { CATEGORY_LABELS, SKILL_LABELS, type County, type EventCategory } from './schemas';
 import { addDays, dateInZone, formatDateLong, formatTime, weekdayOf, DEFAULT_TZ } from './time';
-import type { ShareInput } from './share';
 import { linksOf, type ExternalLink } from './links';
 import { assessDancing, isDanceLevel, type DancingAssessment } from './dancing';
+import { pagesNow, remember } from './freshness';
 
 export type Venue = CollectionEntry<'venues'>;
 export type Performer = CollectionEntry<'performers'>;
@@ -16,10 +16,9 @@ export type Style = CollectionEntry<'styles'>;
 export type Source = CollectionEntry<'sources'>;
 export type Settings = CollectionEntry<'settings'>['data'];
 
-/** BUILD_NOW pins "now" for repeatable tests and screenshots. */
+/** BUILD_NOW pins "now" for repeatable tests and screenshots; the live server uses one "now" per data and day. */
 export function buildNow(): Date {
-  const fixed = process.env.BUILD_NOW;
-  return fixed ? new Date(fixed) : new Date();
+  return pagesNow();
 }
 
 export interface PersonRef {
@@ -73,7 +72,6 @@ export interface ResolvedEvent extends Occurrence {
   dancing: DancingAssessment;
 }
 
-let cache: Promise<ResolvedEvent[]> | undefined;
 
 export function directions(q: string) {
   const enc = encodeURIComponent(q);
@@ -114,101 +112,102 @@ function timeLabelOf(o: Occurrence): string | undefined {
   return o.data.end ? `${start} to ${formatTime(o.endLocal.slice(11))}` : start;
 }
 
-export async function getAllEvents(): Promise<ResolvedEvent[]> {
-  cache ??= (async () => {
-    const [events, refs] = await Promise.all([getCollection('events'), lookup()]);
-    const occurrences = resolveOccurrences(
-      events.map((e) => ({ id: e.id, data: e.data })),
-      { now: buildNow() },
-    );
-    return occurrences.map((o): ResolvedEvent => {
-      const d = o.data;
-      const where = `Event "${o.eventId}"`;
-      const venue = d.venueId ? refs.venues.get(d.venueId) : undefined;
-      if (d.venueId && !venue) throw new Error(`${where} refers to unknown venue "${d.venueId}".`);
-      const organizer = d.organizerId ? refs.organizers.get(d.organizerId) : undefined;
-      if (d.organizerId && !organizer) throw new Error(`${where} refers to unknown organizer "${d.organizerId}".`);
-      const source = refs.sources.get(d.sourceId);
-      if (!source) throw new Error(`${where} refers to unknown source "${d.sourceId}".`);
-      const performers = d.performerIds.map((id) => {
-        const p = refs.performers.get(id);
-        if (!p) throw new Error(`${where} refers to unknown performer "${id}".`);
-        return performerRef(p);
-      });
-      const instructors = d.instructorIds.map((id) => {
-        const p = refs.instructors.get(id);
-        if (!p) throw new Error(`${where} refers to unknown instructor "${id}".`);
-        return instructorRef(p);
-      });
-      const styles = d.danceStyles.map((id) => {
-        const s = refs.styles.get(id);
-        if (!s) throw new Error(`${where} uses unknown dance style "${id}".`);
-        return { id, name: s.data.name, order: s.data.order, danceType: s.data.danceType };
-      });
-      const v = venue?.data;
-      const loc = {
-        name: v?.name,
-        address: v?.address,
-        town: v?.town ?? d.town,
-        county: v?.county,
-        state: v?.state ?? 'NY',
-        postalCode: v?.postalCode,
-        latitude: v?.latitude,
-        longitude: v?.longitude,
-      };
-      const full = [loc.name, loc.address, [loc.town, [loc.state, loc.postalCode].filter(Boolean).join(' ')].filter(Boolean).join(', ')].filter(Boolean).join(', ');
-      const dir = loc.address ? directions(full) : undefined;
-      const price = priceOf(d);
-      const od = organizer?.data;
-      const dancing = assessDancing({
-        category: d.category,
-        sourceFocus: source.data.focus,
-        sourceName: source.data.name,
-        styles: styles.map(({ id, name, danceType }) => ({ id, name, danceType })),
-        cues: d.dancingCues,
-        venue: v ? { name: v.name, kind: v.kind, dancing: v.dancing } : undefined,
-        performers: d.performerIds.map((id) => {
-          const p = refs.performers.get(id)!.data;
-          return { name: p.name, type: p.type, dancing: p.dancing };
-        }),
-        override: d.dancing,
-      });
-      return {
-        ...o,
-        url: `/events/${o.slug}/`,
-        category: d.category,
-        categoryLabel: CATEGORY_LABELS[d.category],
-        venue,
-        organizer,
-        source,
-        location: { ...loc, directionsUrl: dir?.google, appleMapsUrl: dir?.apple, full },
-        performers,
-        djs: performers.filter((p) => p.kind === 'dj'),
-        liveActs: performers.filter((p) => p.kind !== 'dj'),
-        instructors,
-        styles: styles.sort((a, b) => a.order - b.order).map(({ id, name }) => ({ id, name })),
-        price,
-        priceLine: priceText(price),
-        skillLabel: SKILL_LABELS[d.skillLevel],
-        weekday: weekdayOf(o.date),
-        dateLabel: formatDateLong(o.date),
-        timeLabel: timeLabelOf(o),
-        lessonLabel: d.lessonTime ? formatTime(d.lessonTime) : undefined,
-        contact: {
-          name: od?.name,
-          phone: d.contactPhone ?? od?.phone,
-          email: d.contactEmail ?? od?.email,
-          website: od?.website,
-          links: od ? linksOf(od) : [],
-        },
-        moreInfoUrl: d.ticketUrl ?? d.infoUrl ?? od?.website,
-        cadence: o.cadence ?? cadenceOf(d),
-        dancing,
-      };
-    });
-  })();
-  return cache;
+export function getAllEvents(): Promise<ResolvedEvent[]> {
+  return allEvents();
 }
+
+const allEvents = remember(async () => {
+  const [events, refs] = await Promise.all([getCollection('events'), lookup()]);
+  const occurrences = resolveOccurrences(
+    events.map((e) => ({ id: e.id, data: e.data })),
+    { now: buildNow() },
+  );
+  return occurrences.map((o): ResolvedEvent => {
+    const d = o.data;
+    const where = `Event "${o.eventId}"`;
+    const venue = d.venueId ? refs.venues.get(d.venueId) : undefined;
+    if (d.venueId && !venue) throw new Error(`${where} refers to unknown venue "${d.venueId}".`);
+    const organizer = d.organizerId ? refs.organizers.get(d.organizerId) : undefined;
+    if (d.organizerId && !organizer) throw new Error(`${where} refers to unknown organizer "${d.organizerId}".`);
+    const source = refs.sources.get(d.sourceId);
+    if (!source) throw new Error(`${where} refers to unknown source "${d.sourceId}".`);
+    const performers = d.performerIds.map((id) => {
+      const p = refs.performers.get(id);
+      if (!p) throw new Error(`${where} refers to unknown performer "${id}".`);
+      return performerRef(p);
+    });
+    const instructors = d.instructorIds.map((id) => {
+      const p = refs.instructors.get(id);
+      if (!p) throw new Error(`${where} refers to unknown instructor "${id}".`);
+      return instructorRef(p);
+    });
+    const styles = d.danceStyles.map((id) => {
+      const s = refs.styles.get(id);
+      if (!s) throw new Error(`${where} uses unknown dance style "${id}".`);
+      return { id, name: s.data.name, order: s.data.order, danceType: s.data.danceType };
+    });
+    const v = venue?.data;
+    const loc = {
+      name: v?.name,
+      address: v?.address,
+      town: v?.town ?? d.town,
+      county: v?.county,
+      state: v?.state ?? 'NY',
+      postalCode: v?.postalCode,
+      latitude: v?.latitude,
+      longitude: v?.longitude,
+    };
+    const full = [loc.name, loc.address, [loc.town, [loc.state, loc.postalCode].filter(Boolean).join(' ')].filter(Boolean).join(', ')].filter(Boolean).join(', ');
+    const dir = loc.address ? directions(full) : undefined;
+    const price = priceOf(d);
+    const od = organizer?.data;
+    const dancing = assessDancing({
+      category: d.category,
+      sourceFocus: source.data.focus,
+      sourceName: source.data.name,
+      styles: styles.map(({ id, name, danceType }) => ({ id, name, danceType })),
+      cues: d.dancingCues,
+      venue: v ? { name: v.name, kind: v.kind, dancing: v.dancing } : undefined,
+      performers: d.performerIds.map((id) => {
+        const p = refs.performers.get(id)!.data;
+        return { name: p.name, type: p.type, dancing: p.dancing };
+      }),
+      override: d.dancing,
+    });
+    return {
+      ...o,
+      url: `/events/${o.slug}/`,
+      category: d.category,
+      categoryLabel: CATEGORY_LABELS[d.category],
+      venue,
+      organizer,
+      source,
+      location: { ...loc, directionsUrl: dir?.google, appleMapsUrl: dir?.apple, full },
+      performers,
+      djs: performers.filter((p) => p.kind === 'dj'),
+      liveActs: performers.filter((p) => p.kind !== 'dj'),
+      instructors,
+      styles: styles.sort((a, b) => a.order - b.order).map(({ id, name }) => ({ id, name })),
+      price,
+      priceLine: priceText(price),
+      skillLabel: SKILL_LABELS[d.skillLevel],
+      weekday: weekdayOf(o.date),
+      dateLabel: formatDateLong(o.date),
+      timeLabel: timeLabelOf(o),
+      lessonLabel: d.lessonTime ? formatTime(d.lessonTime) : undefined,
+      contact: {
+        name: od?.name,
+        phone: d.contactPhone ?? od?.phone,
+        email: d.contactEmail ?? od?.email,
+        website: od?.website,
+        links: od ? linksOf(od) : [],
+      },
+      moreInfoUrl: d.ticketUrl ?? d.infoUrl ?? od?.website,
+      cadence: o.cadence ?? cadenceOf(d),
+      dancing,
+    };
+  });
+});
 
 export interface DayGroup {
   date: string;
@@ -258,6 +257,17 @@ export async function upcomingFor(test: (e: ResolvedEvent) => boolean): Promise<
   return (await getAllEvents()).filter((e) => isUpcoming(e, now) && test(e));
 }
 
+/**
+ * Share pictures (social.png, social-square.png) are made only for dates in the next three weeks,
+ * when people share an event. Two pictures for every date up to 120 days ahead were about 40% of the
+ * whole website; the nightly rebuild adds them as dates come closer. Later dates use the site picture.
+ */
+export const SHARE_IMAGE_DAYS = 21;
+
+export function hasShareImage(e: Pick<ResolvedEvent, 'date'> & Parameters<typeof isUpcoming>[0], now: Date): boolean {
+  return isUpcoming(e, now) && e.date <= addDays(dateInZone(now, DEFAULT_TZ), SHARE_IMAGE_DAYS - 1);
+}
+
 export function calendarEventOf(e: ResolvedEvent, site: URL | string): CalendarEvent {
   const url = new URL(e.url, site).toString();
   const parts = [
@@ -281,17 +291,5 @@ export function calendarEventOf(e: ResolvedEvent, site: URL | string): CalendarE
     status: e.status === 'cancelled' ? 'CANCELLED' : 'CONFIRMED',
     latitude: e.location.latitude,
     longitude: e.location.longitude,
-  };
-}
-
-export function shareInputOf(e: ResolvedEvent, site: URL | string): ShareInput {
-  return {
-    title: e.title,
-    dateLabel: e.dateLabel,
-    timeLabel: e.timeLabel,
-    venueName: e.location.name,
-    town: e.location.town,
-    url: new URL(e.url, site).toString(),
-    status: e.status,
   };
 }

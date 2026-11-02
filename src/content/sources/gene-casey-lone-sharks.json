@@ -15,12 +15,12 @@
   "feedUrl": "https://genecasey.com/events/list/?ical=1",
   "focus": "music",
   "lastCounts": {
-    "found": 28,
-    "kept": 17,
+    "found": 23,
+    "kept": 13,
     "needsReview": 0,
     "outOfArea": 3
   },
-  "lastScraped": "2026-10-04T16:07:10.710Z",
+  "lastScraped": "2026-11-01T16:16:33.843Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a filtered band source. Use a venue allowlist so only dance-friendly LI gigs are imported.",

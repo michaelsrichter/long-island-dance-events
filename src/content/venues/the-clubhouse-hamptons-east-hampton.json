@@ -1,0 +1,53 @@
+{
+  "name": "The Clubhouse Hamptons",
+  "aliases": [
+    "ClubHouse Hamptons",
+    "Clubhouse Hamptons",
+    "The Clubhouse",
+    "The Clubhouse East Hampton"
+  ],
+  "address": "174 Daniels Hole Rd",
+  "town": "East Hampton",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11937",
+  "phone": "(631) 537-2695",
+  "website": "https://clubhousehamptons.com/",
+  "facebookUrl": "https://www.facebook.com/hamptonsclubhouse",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Clubhouse+Hamptons%2C+174+Daniels+Hole+Rd%2C+East+Hampton%2C+NY+11937",
+  "kind": "other",
+  "description": "A family entertainment center with bowling, an arcade, mini golf, a bar and restaurant, and a stage for shows. It has hosted DJ line dancing nights with a teacher, plus karaoke and bowling nights with DJ music.",
+  "dancing": {
+    "floor": "dance-floor",
+    "policy": "encouraged",
+    "kinds": [
+      "line"
+    ],
+    "notes": "Line dancing nights with a DJ and a teacher have been held in the large bar area, where staff set up a big dance floor; regulars praised the floor and stage. Beginners and people who just came for dinner join in. The fall 2026 calendar shows karaoke and bowling nights but no line dancing dates yet, so check before you go.",
+    "evidence": [
+      {
+        "url": "https://www.danspapers.com/2024/02/clubhouse-hamptons-country-line-dancing/",
+        "note": "2024 news story on weekly Saturday line dancing: a teacher and DJ lead dances on a big dance floor in the bar area, open to all skill levels, no cover."
+      },
+      {
+        "url": "https://clubhousehamptons.com/event/line-dancing-8/",
+        "note": "Venue event page for a November 29, 2025 line dancing night, 7 to 9:30 PM, with a DJ and live dance instruction, ages 18 and up."
+      },
+      {
+        "url": "https://clubhousehamptons.com/event/line-dancing/",
+        "note": "Venue event page for a March 2025 line dancing night with a teacher and DJ in the winter lounge, no cover."
+      },
+      {
+        "url": "https://clubhousehamptons.com/events/",
+        "note": "Current venue calendar lists Friday karaoke and Saturday bowling nights with House and Hip-Hop music; no line dancing dates listed for fall 2026."
+      }
+    ],
+    "confidence": "high",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: clubhousehamptons.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source the-clubhouse-hamptons-east-hampton. Some news stories place it in Wainscott; the venue lists its address as East Hampton. The last line dancing night we found on its calendar was November 2025.",
+  "latitude": 40.956139,
+  "longitude": -72.243519,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -3,7 +3,7 @@
  * POST /api/likes { key, like: true|false } — one like per signed-in person per page.
  * Likes table: PartitionKey = page key, RowKey = user id (so a second like is a no-op).
  */
-require('../telemetry-setup');
+const { serverEvent } = require('../telemetry-setup');
 const { app } = require('@azure/functions');
 const { json, error, sameOrigin, readJson } = require('../lib/http');
 const { table, TABLES } = require('../lib/store');
@@ -39,7 +39,10 @@ app.http('likes', {
       await items.remove(userId, `like~${key}`);
     }
     const doc = await rebuild(key);
-    if (Boolean(existing) !== like) await rebuildCounts(key, doc.likes);
+    if (Boolean(existing) !== like) {
+      await rebuildCounts(key, doc.likes);
+      await serverEvent('community_like', { type: key.split(':')[0], value: like ? 'like' : 'unlike' });
+    }
     return json(200, { key, liked: like, count: doc.likes });
   },
 });

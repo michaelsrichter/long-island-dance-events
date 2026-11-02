@@ -1,4 +1,5 @@
 ---
+import { pageProps } from '../../../lib/page-props';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import PageHeader from '../../../components/PageHeader.astro';
 import EventViews from '../../../components/EventViews.astro';
@@ -12,6 +13,7 @@ export async function getStaticPaths() {
   const { all, now } = await getEventGroups();
   return monthRange(all, now).map((month) => ({ params: { month } }));
 }
+if (!(await pageProps(Astro, getStaticPaths))) return Astro.rewrite('/404');
 const { all, now } = await getEventGroups();
 const months = monthRange(all, now);
 const month = (Astro.params as { month: string }).month;

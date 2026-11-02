@@ -1,0 +1,21 @@
+{
+  "title": "Live music at 89 North Music Venue",
+  "summary": "Live music at 89 North Music Venue. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-10-29T20:00",
+  "end": "2026-10-29T23:00",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/afbd3d5c068c4b1c8842cf7ac60148f3ea952f07",
+  "status": "past",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/afbd3d5c068c4b1c8842cf7ac60148f3ea952f07",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-10-29",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|89-north-music-venue-patchogue||thursday|20:00|live-music|||2026-10-29"
+}

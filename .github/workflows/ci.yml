@@ -22,7 +22,7 @@ jobs:
   quality:
     name: Type check, tests, build, links
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -37,6 +37,16 @@ jobs:
         run: node scripts/normalize-lockfile.mjs --check
       - name: Install site dependencies
         run: npm ci
+      # Share pictures and resized photos from earlier CI builds (decision P55). CI builds use example.org and a
+      # pinned "now", so they keep their own copy. Saved only from main; pull requests reuse main's copy.
+      - name: Restore saved share pictures and resized photos
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            .cache/og
+            node_modules/.astro/assets
+          key: ci-images-${{ github.run_id }}
+          restore-keys: ci-images-
       - name: Install API dependencies
         run: npm ci --prefix api
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
@@ -61,8 +71,21 @@ jobs:
 
       - name: Build
         run: npm run build
-      - name: Unit tests against the built site (headers, sitemap, robots)
-        run: npm test -- tests/unit/seo-config.test.ts
+      - name: Forget share pictures not used for 14 days (main only)
+        if: github.event_name == 'push'
+        run: if [ -d .cache/og ]; then find .cache/og -type f -mtime +14 -delete; fi
+      - name: Save share pictures and resized photos for the next build (main only)
+        if: github.event_name == 'push'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: |
+            .cache/og
+            node_modules/.astro/assets
+          key: ci-images-${{ github.run_id }}
+      - name: Site size stays well under the Azure limits (files and MB)
+        run: npm run test:size
+      - name: Unit tests against the built site (headers, sitemaps, robots, AI files)
+        run: npm test -- tests/unit/seo-config.test.ts tests/unit/seo-built.test.ts
       - name: Check internal links and #anchors
         run: npm run test:links
 

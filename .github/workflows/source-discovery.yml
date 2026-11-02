@@ -1,9 +1,11 @@
 name: Find and recheck sources (monthly)
 
 # On the 1st of each month:
-#  1. Search the web with Microsoft Web IQ (85 queries in catalog/search-queries.json) for new
-#     Long Island dance and live-music sources. Needs the repository secret WEBIQ_API_KEY; without it
-#     this step is skipped. Cost after the free evaluation: about $1.06 a month at $12.50 per 1,000 calls.
+#  1. Search the web with Microsoft Web IQ for new Long Island dance and live-music sources: the 85
+#     Long Island-wide queries in catalog/search-queries.json, plus one twelfth of the town-by-town
+#     queries in catalog/search-matrix.json (about 250; every town gets searched again once a year).
+#     Needs the repository secret WEBIQ_API_KEY; without it this step is skipped. Cost: about 340 calls,
+#     about $4.25 a month at $12.50 per 1,000 calls.
 #  2. Recheck every tracked source in catalog/sources.json politely (robots.txt, page opens,
 #     upcoming dates), with our own User-Agent and a pause between requests.
 #  3. Open an issue with the results. Nothing is added or switched on automatically.
@@ -43,11 +45,16 @@ jobs:
             exit 0
           fi
           node catalog/scripts/webiq-search.mjs --cache "$RUNNER_TEMP/webiq" --log "$RUNNER_TEMP/search-log.json"
+          # This month's twelfth of the town-by-town matrix (January = part 1).
+          node catalog/scripts/webiq-search.mjs --queries catalog/search-matrix.json --slice "$(date -u +%-m)/12" \
+            --max-results 30 --compact --max-calls 400 --cache "$RUNNER_TEMP/webiq" --log "$RUNNER_TEMP/search-log-towns.json"
 
       - name: Recheck tracked sources and write the report
         run: |
           args=(--cache "$RUNNER_TEMP/verify" --out "$RUNNER_TEMP/discovery.md")
-          if [ -f "$RUNNER_TEMP/search-log.json" ]; then args+=(--search-log "$RUNNER_TEMP/search-log.json"); fi
+          for f in "$RUNNER_TEMP/search-log.json" "$RUNNER_TEMP/search-log-towns.json"; do
+            if [ -f "$f" ]; then args+=(--search-log "$f"); fi
+          done
           python catalog/scripts/discovery_report.py "${args[@]}"
           cat "$RUNNER_TEMP/discovery.md" >> "$GITHUB_STEP_SUMMARY"
 
@@ -57,6 +64,7 @@ jobs:
           path: |
             ${{ runner.temp }}/discovery.md
             ${{ runner.temp }}/search-log.json
+            ${{ runner.temp }}/search-log-towns.json
             ${{ runner.temp }}/verify/verify.json
           if-no-files-found: ignore
           retention-days: 90

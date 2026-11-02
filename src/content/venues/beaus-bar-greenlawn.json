@@ -1,0 +1,48 @@
+{
+  "name": "Beau's Bar",
+  "aliases": [
+    "Beaus Bar",
+    "Beau's",
+    "Beaus",
+    "Beau's Bar Greenlawn"
+  ],
+  "address": "54 Broadway",
+  "town": "Greenlawn",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11740",
+  "phone": "(631) 269-4302",
+  "website": "https://beausbar.com/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Beau%27s+Bar%2C+54+Broadway%2C+Greenlawn%2C+NY+11740",
+  "kind": "bar",
+  "description": "A cash-only live music bar in Greenlawn filled with Grateful Dead and concert memorabilia. Jam bands and tribute acts (Dead, Phish, Allman Brothers, Led Zeppelin and more) play many nights a week.",
+  "dancing": {
+    "floor": "small",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Review summaries describe a friendly jam-band crowd with good music and dancing. The room is small, and some visitors say it gets packed when a popular band plays, so people dance wherever they find room near the band.",
+    "evidence": [
+      {
+        "url": "https://www.restaurantji.com/ny/greenlawn/beaus-bar-/",
+        "note": "Review summary mentions a super friendly crowd with good music, dancing and great people, especially for jam band fans."
+      },
+      {
+        "url": "https://beaus-bar.wheree.com/",
+        "note": "Review roundup says the limited space gets crowded when bands are playing."
+      },
+      {
+        "url": "https://crescat.io/venues/beaus-bar",
+        "note": "Venue profile calls it a Grateful Dead bar with bands covering the Dead, Phish and the Allman Brothers, plus extra patio space."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: beausbar.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.869622,
+  "longitude": -73.365169,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

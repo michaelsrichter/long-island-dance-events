@@ -1,0 +1,14 @@
+{
+  "name": "Hamptons.com Events Calendar - dance calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from Hamptons.com Events Calendar. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "description": "Hamptons calendar shows many dated East End dance classes and music listings in October.",
+  "enabled": false,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: East End things-to-do calendar. Switched off: its live-music listings are at many venues we have not researched yet (for example in Sag Harbor, Southampton, Water Mill, Bridgehampton). Switch on after adding those venues.",
+  "url": "https://hamptons.com/events/"
+}

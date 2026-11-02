@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getCollection } from 'astro:content';
+import { getCollection } from '../lib/collections';
 import { pageKey } from '../lib/community';
 import { buildNow, getAllEvents } from '../lib/content';
 

@@ -1,10 +1,49 @@
 {
-  "name": "Plattduetsche Park",
+  "name": "Plattduetsche Park Restaurant",
+  "aliases": [
+    "Plattduetsche Park",
+    "Plattduetsche Biergarten",
+    "Plattduetsche Park Biergarten & Beer Hall",
+    "The Hive at Plattduetsche Park",
+    "Platt"
+  ],
   "address": "1132 Hempstead Turnpike",
-  "county": "Nassau",
-  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
-  "state": "NY",
   "town": "Franklin Square",
+  "county": "Nassau",
+  "state": "NY",
+  "postalCode": "11010",
+  "phone": "(516) 354-3131",
+  "website": "https://parkrestaurant.com/",
+  "facebookUrl": "https://www.facebook.com/Plattduetsche-Park-343081899069409/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Plattduetsche+Park+Restaurant%2C+1132+Hempstead+Turnpike%2C+Franklin+Square%2C+NY+11010",
+  "kind": "restaurant",
+  "description": "A German restaurant, beer hall and outdoor biergarten on an eight-acre property in Franklin Square that also hosts banquets. Live bands play most Friday and Saturday nights, from German oompah groups to '80s and '90s cover bands, and it holds big festivals like Oktoberfest.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "The two-level beer hall has an indoor stage, and the biergarten has long shared tables. Weekend shows feature party cover bands (disco, '80s, '90s), and Oktoberfest nights add German bands with folk dance groups performing. We did not find a marked dance floor, so dancing would be in open space near the stage.",
+    "evidence": [
+      {
+        "url": "https://parkrestaurant.com/german-events/",
+        "note": "Venue calendar lists Oktoberfest bands with German folk dancing shows plus weekend cover bands like The '90s Band and Touch the '80s, with an $8 cover."
+      },
+      {
+        "url": "https://parkrestaurant.com/about-plattduetsche-park/",
+        "note": "About page says the two-level beer hall has an indoor stage for performances and big glass doors that open to the outdoor area."
+      },
+      {
+        "url": "https://parkrestaurant.com/oktoberfest/",
+        "note": "Oktoberfest 2026 page promises live German bands and traditional dancing demonstrations in the biergarten and beer hall."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: parkrestaurant.com.",
+  "reviewNotes": "Added automatically from Ira's List's calendar, then researched in the town-by-town source search (2026-10-05).",
   "latitude": 40.70821,
   "longitude": -73.682294,
   "coordinatesSource": "U.S. Census Bureau Geocoder"

@@ -1,0 +1,17 @@
+{
+  "name": "DiVa Ballroom / Dance with Lourdes Cruz - newsletter",
+  "type": "api",
+  "adapter": "agentmail",
+  "attribution": "Some listings come from the DiVa Ballroom newsletter. We write our own short summaries and link back to the organizer's website.",
+  "cadence": "weekly",
+  "rateLimitSeconds": 5,
+  "catalogStatus": "verified",
+  "defaults": {
+    "organizerId": "dance-with-lourdes"
+  },
+  "description": "Lourdes Cruz's email updates about classes and dances, read from the site's newsletter inbox.",
+  "enabled": false,
+  "focus": "dance",
+  "reviewNotes": "Newsletter source (decision P44), 2026-10-05: subscribed (welcome email received). Off until a real issue arrives and passes a spot check.",
+  "url": "https://divaballroomdancing.com/long-island/"
+}

@@ -1,0 +1,25 @@
+---
+/**
+ * Shown by Static Web Apps for every "401 Unauthorized" (staticwebapp.config.json responseOverrides).
+ * The usual way here: a returning visitor's silent sign-in (account-state.ts) found that the sign-in
+ * service had forgotten them. The script then clears the saved name and goes straight back to the page
+ * they were on, signed out, so most people only see this page for a moment.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { loginHref } from '../lib/community';
+---
+<BaseLayout title="You're signed out" description="You need to sign in to do that on Long Island Dance Events." pageType="signed-out" noindex>
+  <div class="container--narrow section stack" data-signed-out-page>
+    <p class="card__kicker">Signed out</p>
+    <h1>You're signed out</h1>
+    <p>Your sign-in has ended. You can keep looking at events without signing in. To like, save or post, sign in again. We email you a one-time code, so there is no password to remember.</p>
+    <div class="btn-row">
+      <a class="btn btn--primary" href={loginHref(Astro.site!, '/')} data-signin><Icon name="people" />Sign in</a>
+      <a class="btn btn--secondary" href="/">Go to the home page</a>
+    </div>
+  </div>
+</BaseLayout>
+<script>
+  import '../scripts/signed-out';
+</script>

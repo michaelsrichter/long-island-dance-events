@@ -114,7 +114,8 @@ function finish(score: number, level: DancingLevel, kinds: DanceType[], input: D
   const k = level === 'unlikely' ? [] : kinds;
   return {
     score: s,
-    outOf10: Math.round(s * 10),
+    // Rounded down so the number matches the level: 0-3 mostly listening, 4-6 some, 7-10 likely.
+    outOf10: Math.floor(s * 10 + 1e-9),
     level,
     kinds: k,
     label: labelFor(level, k),

@@ -1,0 +1,23 @@
+{
+  "name": "Peconic Landing - dance calendar",
+  "type": "ical",
+  "adapter": "ical",
+  "attribution": "Some listings come from Peconic Landing. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "needs-permission",
+  "defaults": {
+    "venueId": "peconic-landing-greenport",
+    "town": "Greenport"
+  },
+  "description": "Greenport community calendar has dated Active Aging Week dance lessons, Zumba and live music with an iCal feed.",
+  "enabled": false,
+  "feedUrl": "https://peconiclanding.org/events/?ical=1",
+  "focus": "dance",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: Greenport community calendar has dated Active Aging Week dance lessons, Zumba and live music with an iCal feed.",
+  "url": "https://peconiclanding.org/events/",
+  "permission": {
+    "status": "needed",
+    "note": "robots.txt does not allow our bot to read the events feed (/events/?ical=1). Ask Peconic Landing for permission or a public calendar link."
+  }
+}

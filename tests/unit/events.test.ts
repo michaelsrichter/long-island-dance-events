@@ -81,6 +81,11 @@ describe('occurrences', () => {
     expect(c[0]!.status).toBe('cancelled');
     expect(isUpcoming(c[0]!, NOW)).toBe(true);
   });
+  it('never shows a listing an editor hid, not even in admin previews', () => {
+    const gone = ev('2026-10-18-copy', { title: 'A copy of another listing', start: '2026-10-18T19:00', status: 'hidden' });
+    expect(resolveOccurrences([gone], { now: NOW })).toEqual([]);
+    expect(resolveOccurrences([gone], { now: NOW, includePending: true })).toEqual([]);
+  });
   it('refuses two events with the same URL', () => {
     expect(() => resolveOccurrences([once, { ...once }], { now: NOW })).toThrow(/Duplicate event URL/);
   });

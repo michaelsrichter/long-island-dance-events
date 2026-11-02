@@ -1,0 +1,46 @@
+{
+  "name": "Oakdale Brew House",
+  "aliases": [
+    "OBH",
+    "Oakdale Brewhouse",
+    "The Oakdale Brew House"
+  ],
+  "address": "927a Montauk Highway",
+  "town": "Oakdale",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11769",
+  "phone": "(631) 212-1255",
+  "website": "https://www.oakdalebrewhouse.com/",
+  "facebookUrl": "https://www.facebook.com/Oakdalebrewhouse",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Oakdale+Brew+House%2C+927a+Montauk+Highway%2C+Oakdale%2C+NY+11769",
+  "kind": "restaurant",
+  "description": "A casual American restaurant and bar on Montauk Highway with 24 rotating craft beers on tap. It books live music, mostly acoustic solo and duo acts, on Friday and Saturday nights from 7 to 10 PM, plus trivia and music bingo midweek.",
+  "dancing": {
+    "floor": "seated",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Live music is mostly acoustic players and duos in a busy dining room and bar with TVs. We found no mention of a dance floor or of people dancing, so expect a dinner-and-drinks crowd.",
+    "evidence": [
+      {
+        "url": "https://www.oakdalebrewhouse.com/events",
+        "note": "The restaurant's calendar lists live music on Friday and Saturday nights from 7 to 10 PM, plus trivia and music bingo on Wednesdays."
+      },
+      {
+        "url": "https://www.restaurantji.com/ny/oakdale/oakdale-brew-house-/",
+        "note": "Review summary says the room is loud with TVs everywhere and has live music on weekends."
+      },
+      {
+        "url": "https://www.opentable.com/r/oakdale-brew-house-oakdale",
+        "note": "Reservation page listing a bar/lounge, entertainment and parking in a public lot."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: oakdalebrewhouse.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source oakdale-brew-house. Not a brewery despite the name; it pours other brewers' beers. Part of the LFRG restaurant group. Floor and policy are a guess.",
+  "latitude": 40.737989,
+  "longitude": -73.120396,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

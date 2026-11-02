@@ -1,0 +1,49 @@
+{
+  "name": "Rocky Point Ale House",
+  "aliases": [
+    "Rocky Point Alehouse"
+  ],
+  "address": "42 Broadway",
+  "town": "Rocky Point",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11778",
+  "phone": "(631) 849-5800",
+  "facebookUrl": "https://www.facebook.com/rockypointalehouse/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Rocky+Point+Ale+House%2C+42+Broadway%2C+Rocky+Point%2C+NY+11778",
+  "kind": "bar",
+  "description": "A neighborhood bar and grill on Broadway in Rocky Point with pool, darts and karaoke, a Wednesday open mic, and local cover bands on some Friday and Saturday nights.",
+  "dancing": {
+    "floor": "unknown",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Rock and party cover bands play in the bar, and at least one band asked fans to come out and dance to a dance-rock set. A visitor review mentions a few high tables out on the floor. We could not confirm how much room is left for dancing.",
+    "evidence": [
+      {
+        "url": "https://lisaarce.net/event/6117158/722960900/lisa-arce-with-drop-dead-gorgeous-at-rocky-point-ale-house",
+        "note": "A band's gig post for Rocky Point Ale House invites people to come out and dance and promises a dance and rock set."
+      },
+      {
+        "url": "https://allevents.in/rocky-point/ventura-blvd/200029604653620",
+        "note": "Listing for rock band Ventura Blvd at the bar on Saturday, Feb 7, 2026, 7:30-10:30 PM."
+      },
+      {
+        "url": "https://restaurantjump.com/rocky-point-ale-house-11778/",
+        "note": "Restaurant listing repeats the bar's own description: live bands, karaoke, duos and trios, darts and a pool table."
+      },
+      {
+        "url": "https://www.tripadvisor.com/ShowUserReviews-g48510-d9837920-r417719467-Rocky_Point_Ale_House-Rocky_Point_Long_Island_New_York.html",
+        "note": "Older visitor review mentions three high bar tables out on the floor of the bar room."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: facebook.com/rockypointalehouse and event listings.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.94896,
+  "longitude": -72.923937,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

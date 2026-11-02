@@ -1,0 +1,19 @@
+{
+  "name": "Piano Man Pat - live music calendar",
+  "type": "html",
+  "adapter": "htmllist",
+  "attribution": "Some listings come from Piano Man Pat. We write our own short summaries and link back to the original page.",
+  "cadence": "weekly",
+  "catalogStatus": "verified",
+  "defaults": {
+    "performerIds": [
+      "piano-man-pat"
+    ]
+  },
+  "description": "Duplicate Pat Farrell schedule with recurring Westbury live-music dates in October, November, and December.",
+  "enabled": false,
+  "focus": "music",
+  "rateLimitSeconds": 5,
+  "reviewNotes": "Town-by-town search 2026-10-05: kept in the catalog but switched off. On 2026-10-05 none of its upcoming listings could be used: they are at an unnamed place in Westbury. Switch on after those venues are researched, or if the page starts naming venues clearly.",
+  "url": "https://www.pianomanpat.com/Upcoming.htm"
+}

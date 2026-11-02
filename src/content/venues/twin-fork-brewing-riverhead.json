@@ -1,0 +1,46 @@
+{
+  "name": "Twin Fork Beer Co.",
+  "aliases": [
+    "Twin Fork Brewery",
+    "Twin Fork Brewing",
+    "Twin Fork Beer Company",
+    "Twin Fork Beer Co Riverhead"
+  ],
+  "address": "807 Raynor Ave",
+  "town": "Riverhead",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11901",
+  "phone": "(631) 209-4233",
+  "website": "https://www.twinforkbeer.com/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Twin+Fork+Beer+Co.%2C+807+Raynor+Ave%2C+Riverhead%2C+NY+11901",
+  "kind": "brewery",
+  "description": "A family-run craft brewery and tasting room in Riverhead, started by twin brothers, with local bands or solo acts on most Sunday afternoons.",
+  "dancing": {
+    "floor": "unknown",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Live music is mostly Sunday afternoon sets from about 2 to 5 PM, plus special band days such as a winter jam with three bands. We could not find out how much open floor there is or whether people dance.",
+    "evidence": [
+      {
+        "url": "https://www.twinforkbeer.com/",
+        "note": "Official site lists the address, hours and upcoming Sunday live music, such as Bear the Bell on Oct 4."
+      },
+      {
+        "url": "https://www.twinforkbeer.com/events/live-music-with-rodehauss/",
+        "note": "Event page: live music with Rodehauss on Sunday, Oct 11, 2026, 2-5 PM."
+      },
+      {
+        "url": "https://riverheadnewsreview.timesreview.com/2026/02/132013/jam-out-at-twin-fork-beer-co-this-sunday/",
+        "note": "Local news: a ticketed Winter Jam at the brewery with three bands (Dead Ahead Band, NoFo Band, White Room) and a food truck."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: twinforkbeer.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05): a venue in local bands' gig lists.",
+  "latitude": 40.926364,
+  "longitude": -72.682391,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

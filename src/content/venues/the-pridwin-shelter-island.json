@@ -1,0 +1,50 @@
+{
+  "name": "The Pridwin Hotel & Cottages",
+  "aliases": [
+    "The Pridwin",
+    "Pridwin Hotel",
+    "The Pridwin Hotel and Cottages",
+    "Pridwin Shelter Island"
+  ],
+  "address": "81 Shore Rd",
+  "town": "Shelter Island",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11964",
+  "phone": "(631) 749-0476",
+  "website": "https://www.caperesorts.com/pridwin",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=The+Pridwin+Hotel+%26+Cottages%2C+81+Shore+Rd%2C+Shelter+Island%2C+NY+11964",
+  "kind": "other",
+  "description": "A historic beach resort on Crescent Beach on Shelter Island, open since 1927 and now run by Cape Resorts. In summer it hosts Wednesday night cookouts on its waterfront lawn with a live band.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Live bands play the summer Wednesday cookouts on the big front lawn, so there is open grass near the music. Most guests sit at picnic tables to eat, and none of the sources we found say whether people dance. The cookouts run only in summer (about mid-June to early September) and need a reservation.",
+    "evidence": [
+      {
+        "url": "https://shelterislandreporter.timesreview.com/2024/06/24/an-anniversary-for-a-shelter-island-tradition/",
+        "note": "Local paper on the 60th summer of the Wednesday lawn barbecues, with a popular local band playing while families eat and kids play."
+      },
+      {
+        "url": "https://www.kdhamptons.com/weekly-wednesday-bbqs-shelter-island-pridwin-hotel/",
+        "note": "Describes the Wednesday buffet served at picnic tables across the waterfront lawn with live music; reservations are taken online or by phone."
+      },
+      {
+        "url": "https://mofflylifestylemedia.com/the-pridwin-is-the-ultimate-summer-getaway-on-shelter-island/",
+        "note": "Travel feature on the hotel; says a live band plays at the Wednesday BBQ night on the lawn overlooking Peconic Bay."
+      },
+      {
+        "url": "https://www.caperesorts.com/pridwin",
+        "note": "The hotel's own page, listing the BBQs, The Crescent Bar and weekend packages that include live music."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: caperesorts.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source the-pridwin-hotel-cottages-shelter-island. Seasonal resort reached by ferry. Floor and policy are a guess; no source mentions dancing at the cookouts.",
+  "latitude": 41.069649,
+  "longitude": -72.375335,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

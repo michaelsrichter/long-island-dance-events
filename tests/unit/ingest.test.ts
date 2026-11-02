@@ -3,6 +3,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { eventSchema } from '../../src/lib/schemas';
+import { addDays } from '../../src/lib/time';
 import { extractRows, findDjNames, guessVenue, normalizeRows, python, statedCadence } from '../../ingest/adapters/thedancecalendar';
 import { collapse, inferRecurrence } from '../../ingest/lib/collapse';
 import { makeSummary, plainLabel, themeOf } from '../../ingest/lib/describe';
@@ -12,6 +13,7 @@ import { parsePrices } from '../../ingest/lib/prices';
 import { lookupPlace, Registry, ROOT } from '../../ingest/lib/registry';
 import { cleanListingText, extractPhones, extractUrls, slugify } from '../../ingest/lib/text';
 import { findLessonTime, parseSchedule, parseTimes } from '../../ingest/lib/times';
+import { reportMarkdown } from '../../ingest/run';
 
 const real = Registry.load();
 /** Registry with the real style taxonomy and small fictional venues and organizers. */
@@ -195,15 +197,13 @@ describe.skipIf(!hasPython)('fixture PDF to events (golden file)', () => {
 });
 
 describe('merging runs', () => {
-  const draft = (overrides: Record<string, unknown> = {}) =>
-    collapse([
-      {
-        sourceId: 's', sourceUrl: 'https://example.org/a.pdf', sourceName: 'Example, October 2026', sourceRef: 'page 1', date: '2026-10-06', start: '19:30',
-        category: 'social-dance', danceStyles: ['hustle'], town: 'Huntington', performerIds: [], instructorIds: [], skillLevel: 'all-levels',
-        title: 'Hustle social dance', summary: 'An evening of Hustle social dancing.', seriesTitle: 'Hustle social dance', seriesSummary: 'An evening of Hustle social dancing.',
-        confidence: 0.9, reviewNotes: [], seriesKey: 'k', oneOff: false, ...overrides,
-      },
-    ]);
+  const cand = {
+    sourceId: 's', sourceUrl: 'https://example.org/a.pdf', sourceName: 'Example, October 2026', sourceRef: 'page 1', date: '2026-10-06', start: '19:30',
+    category: 'social-dance', danceStyles: ['hustle'], town: 'Huntington', performerIds: [], instructorIds: [], skillLevel: 'all-levels',
+    title: 'Hustle social dance', summary: 'An evening of Hustle social dancing.', seriesTitle: 'Hustle social dance', seriesSummary: 'An evening of Hustle social dancing.',
+    confidence: 0.9, reviewNotes: [], seriesKey: 'k', oneOff: false,
+  };
+  const draft = (overrides: Record<string, unknown> = {}) => collapse([{ ...cand, ...overrides } as Parameters<typeof collapse>[0][number]]);
   it('is idempotent and keeps firstSeen', () => {
     const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
     const stored = new Map([...first.events].map(([id, e]) => [id, eventSchema.parse(e)]));
@@ -227,18 +227,47 @@ describe('merging runs', () => {
     expect(next.events.get(id)).toMatchObject({ status: 'pending-review', reviewNotes: 'Band is on tour that night.' });
     expect(next.stats).toMatchObject({ updated: 0, unchanged: 1 });
   });
-  it('marks ended events past and vanished ones for review, without deleting', () => {
+  it('keeps a listing an editor hid hidden, even when the source lists it again', () => {
+    const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
+    const [id, e] = [...first.events][0]!;
+    const hidden = eventSchema.parse({ ...e, status: 'hidden', lockedFields: ['status'], reviewNotes: 'Hidden by the owner: a copy of another listing.' });
+    const next = mergeDrafts(new Map([[id, hidden]]), draft({ confidence: 1 }), { sourceId: 's', today: '2026-10-02' });
+    expect(next.events.get(id)).toMatchObject({ status: 'hidden' });
+    expect(next.review).toEqual([]);
+  });
+  it('keeps editor-cancelled listings cancelled when status is locked', () => {
+    const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
+    const [id, e] = [...first.events][0]!;
+    const cancelled = eventSchema.parse({ ...e, status: 'cancelled', lockedFields: ['status'], cancelledNote: 'Cancelled by the organizer.' });
+    const next = mergeDrafts(new Map([[id, cancelled]]), draft({ confidence: 1 }), { sourceId: 's', today: '2026-10-02' });
+    expect(next.events.get(id)).toMatchObject({ status: 'cancelled', cancelledNote: 'Cancelled by the organizer.' });
+  });
+  it('reactivates an unlocked machine-hidden listing when reliable data returns', () => {
+    const first = mergeDrafts(new Map(), draft({ confidence: 0.4 }), { sourceId: 's', today: '2026-10-01' });
+    const [id, e] = [...first.events][0]!;
+    expect(e.status).toBe('hidden');
+    const next = mergeDrafts(new Map([[id, eventSchema.parse(e)]]), draft({ confidence: 0.95 }), { sourceId: 's', today: '2026-10-02' });
+    expect(next.events.get(id)).toMatchObject({ status: 'active', confidence: 0.95 });
+    expect(next.events.get(id)!.reviewNotes).toBeUndefined();
+  });
+  it('marks ended events past and hides vanished ones, without deleting', () => {
     const first = mergeDrafts(new Map(), draft(), { sourceId: 's', today: '2026-10-01' });
     const stored = new Map([...first.events].map(([id, e]) => [id, eventSchema.parse(e)]));
     const later = mergeDrafts(stored, [], { sourceId: 's', today: '2026-10-08' });
     expect([...later.events.values()][0]!.status).toBe('past');
     const missing = mergeDrafts(stored, [], { sourceId: 's', today: '2026-10-02', coverage: { from: '2026-10-01', to: '2026-10-31' } });
-    expect([...missing.events.values()][0]!.status).toBe('pending-review');
+    expect([...missing.events.values()][0]).toMatchObject({ status: 'hidden' });
+    expect([...missing.events.values()][0]!.reviewNotes).toMatch(/Hidden automatically because it was not found/);
+    expect(missing.hidden).toHaveLength(1);
+    expect(missing.review).toEqual([]);
     expect(missing.events.size).toBe(1);
   });
-  it('sends low-confidence listings to review', () => {
+  it('hides low-confidence listings with an honest note and no review task', () => {
     const r = mergeDrafts(new Map(), draft({ confidence: 0.4 }), { sourceId: 's', today: '2026-10-01' });
-    expect([...r.events.values()][0]!.status).toBe('pending-review');
+    expect([...r.events.values()][0]).toMatchObject({ status: 'hidden' });
+    expect([...r.events.values()][0]!.reviewNotes).toMatch(/confidence score \(0\.40\).*0\.60 publishing threshold/);
+    expect(r.hidden).toHaveLength(1);
+    expect(r.review).toEqual([]);
   });
   it('does not add the same evening twice when another source already lists it', () => {
     const atLodge = { venueId: 'example-lodge', sourceId: 'lodge-calendar', seriesKey: 'lodge' };
@@ -255,5 +284,116 @@ describe('merging runs', () => {
     expect(mergeDrafts(stored, draft({ ...other, category: 'live-music' }), { sourceId: 'town-calendar', today: '2026-10-02' }).stats.new).toBe(1);
     // The venue's own source updating its own listing is never a duplicate.
     expect(mergeDrafts(stored, draft(atLodge), { sourceId: 'lodge-calendar', today: '2026-10-02' }).stats).toMatchObject({ unchanged: 1, duplicates: 0 });
+  });
+  it("lets the organizer's own calendar win over a calendar that lists everything, for repeating series too", () => {
+    const mondays = (o: Record<string, unknown>) =>
+      collapse(['2026-10-05', '2026-10-12', '2026-10-19'].map((date) => ({ ...cand, date, category: 'class-lesson', venueId: 'example-lodge', organizerId: 'practice-studio', ...o }) as Parameters<typeof collapse>[0][number]));
+    const fromPdf = { sourceId: 'pdf-calendar', seriesKey: 'pdf', start: '19:00', title: 'Hustle classes', seriesTitle: 'Hustle classes' };
+    const own = mergeDrafts(new Map(), mondays({ sourceId: 'org-calendar', seriesKey: 'own' }), { sourceId: 'org-calendar', today: '2026-10-01' });
+    const pdf = mergeDrafts(new Map(), mondays(fromPdf), { sourceId: 'pdf-calendar', today: '2026-10-01' });
+    const stored = new Map([...own.events, ...[...pdf.events].map(([id, e]) => [`${id}-pdf`, e] as const)].map(([id, e]) => [id, eventSchema.parse(e)]));
+    expect(stored.size).toBe(2);
+    const isOwnCalendar = (sid: string) => sid === 'org-calendar';
+    const opts = { sourceId: 'pdf-calendar', today: '2026-10-02', allInOne: true, isOwnCalendar };
+    // The older copy from the everything-calendar steps aside automatically; it is not deleted.
+    const pdfId = `${[...pdf.events.keys()][0]!}-pdf`;
+    const again = mergeDrafts(stored, mondays(fromPdf), opts);
+    expect(again.events.get(pdfId)).toMatchObject({ status: 'hidden' });
+    expect(again.events.get(pdfId)!.reviewNotes).toMatch(/own calendar/);
+    expect(again.hidden).toHaveLength(1);
+    expect(again.review).toEqual([]);
+    expect(again.duplicates).toHaveLength(1);
+    // A new copy is not added at all; another organizer's class at the same lodge is.
+    const ownOnly = new Map([...own.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    expect(mergeDrafts(ownOnly, mondays(fromPdf), opts).stats).toMatchObject({ new: 0, duplicates: 1 });
+    expect(mergeDrafts(ownOnly, mondays({ ...fromPdf, organizerId: 'other-studio' }), opts).stats.new).toBe(1);
+  });
+  it('keeps a 12-week class when the own calendar lists only one workshop that day, and drops only that date', () => {
+    const weeks = Array.from({ length: 12 }, (_, i) => addDays('2026-10-05', i * 7));
+    const cls = (o: Record<string, unknown>, dates: string[]) =>
+      collapse(dates.map((date) => ({ ...cand, date, category: 'class-lesson', venueId: 'example-lodge', organizerId: 'practice-studio', ...o }) as Parameters<typeof collapse>[0][number]));
+    const workshop = mergeDrafts(new Map(), cls({ sourceId: 'org-calendar', seriesKey: 'ws', oneOff: true, start: '19:00' }, ['2026-10-19']), { sourceId: 'org-calendar', today: '2026-10-01' });
+    const stored = new Map([...workshop.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    const opts = { sourceId: 'pdf-calendar', today: '2026-10-01', allInOne: true, isOwnCalendar: (s: string) => s === 'org-calendar' };
+    const r = mergeDrafts(stored, cls({ sourceId: 'pdf-calendar', seriesKey: 'pdf', start: '19:00' }, weeks), opts);
+    expect(r.stats.new).toBe(1);
+    const added = [...r.events.values()].find((e) => e.sourceId === 'pdf-calendar')!;
+    expect(added.status).toBe('active');
+    expect(added.recurrence?.exdates).toEqual(['2026-10-19']);
+    // A 2 PM class and an 8 PM social by the same organizer on the same day are two events.
+    const social = mergeDrafts(new Map(), cls({ sourceId: 'org-calendar', seriesKey: 'soc', category: 'social-dance', start: '20:00' }, weeks), { sourceId: 'org-calendar', today: '2026-10-01' });
+    const socials = new Map([...social.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    expect(mergeDrafts(socials, cls({ sourceId: 'pdf-calendar', seriesKey: 'pdf', category: 'lesson-party', start: '14:00' }, weeks), opts).stats).toMatchObject({ new: 1, duplicates: 0 });
+  });
+  it('treats the same dance style at the same place and minute as one event, even under another organizer', () => {
+    const one = (o: Record<string, unknown>) =>
+      collapse([{ ...cand, oneOff: true, date: '2026-10-11', start: '14:00', venueId: 'example-lodge', danceStyles: ['west-coast-swing'], ...o } as Parameters<typeof collapse>[0][number]]);
+    const own = mergeDrafts(new Map(), one({ sourceId: 'teacher-calendar', seriesKey: 'own', category: 'class-lesson', organizerId: 'practice-studio' }), { sourceId: 'teacher-calendar', today: '2026-10-01' });
+    const stored = new Map([...own.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    const opts = { sourceId: 'pdf-calendar', today: '2026-10-02', allInOne: true, isOwnCalendar: (s: string) => s === 'teacher-calendar' };
+    // The PDF guessed the venue's usual club as organizer and calls it a lesson and practice.
+    const pdf = { sourceId: 'pdf-calendar', seriesKey: 'pdf', category: 'lesson-party', organizerId: 'other-club' };
+    expect(mergeDrafts(stored, one(pdf), opts).stats).toMatchObject({ new: 0, duplicates: 1 });
+    // An hour later, or another style, is another event.
+    expect(mergeDrafts(stored, one({ ...pdf, start: '15:00' }), opts).stats.new).toBe(1);
+    expect(mergeDrafts(stored, one({ ...pdf, danceStyles: ['hustle'] }), opts).stats.new).toBe(1);
+  });
+  it('trims, not hides, an older series when the own calendar covers only some of its dates', () => {
+    const tuesdays = ['2026-10-06', '2026-10-13', '2026-10-20', '2026-10-27'];
+    const series = (o: Record<string, unknown>, dates: string[]) =>
+      collapse(dates.map((date) => ({ ...cand, date, venueId: 'example-lodge', organizerId: 'practice-studio', ...o }) as Parameters<typeof collapse>[0][number]));
+    const pdf = mergeDrafts(new Map(), series({ sourceId: 'pdf-calendar', seriesKey: 'pdf' }, tuesdays), { sourceId: 'pdf-calendar', today: '2026-10-01' });
+    const own = mergeDrafts(new Map(), series({ sourceId: 'org-calendar', seriesKey: 'own', oneOff: true }, ['2026-10-13']), { sourceId: 'org-calendar', today: '2026-10-01' });
+    const pdfId = [...pdf.events.keys()][0]!;
+    const stored = new Map([...pdf.events, ...[...own.events].map(([id, e]) => [`${id}-own`, e] as const)].map(([id, e]) => [id, eventSchema.parse(e)]));
+    const r = mergeDrafts(stored, series({ sourceId: 'pdf-calendar', seriesKey: 'pdf' }, tuesdays), { sourceId: 'pdf-calendar', today: '2026-10-02', allInOne: true, isOwnCalendar: (s) => s === 'org-calendar' });
+    expect(r.events.get(pdfId)).toMatchObject({ status: 'active' });
+    expect(r.events.get(pdfId)!.recurrence?.exdates).toEqual(['2026-10-13']);
+  });
+  it("lets a band's own calendar win over an older copy of the same gig from a calendar of everything", () => {
+    const gig = { venueId: 'example-lodge', category: 'live-music', danceStyles: [], performerIds: ['the-fictionals'] };
+    const ira = mergeDrafts(new Map(), draft({ ...gig, sourceId: 'everything', seriesKey: 'ira', start: '20:00' }), { sourceId: 'everything', today: '2026-10-01' });
+    const band = mergeDrafts(new Map(), draft({ ...gig, sourceId: 'band-page', seriesKey: 'band', start: undefined }), { sourceId: 'band-page', today: '2026-10-01' });
+    const iraId = [...ira.events.keys()][0]!;
+    const stored = new Map([...[...ira.events].map(([id, e]) => [id, e] as const), ...[...band.events].map(([id, e]) => [`${id}-band`, e] as const)].map(([id, e]) => [id, eventSchema.parse(e)]));
+    const again = mergeDrafts(stored, draft({ ...gig, sourceId: 'everything', seriesKey: 'ira', start: '20:00' }), { sourceId: 'everything', today: '2026-10-02', allInOne: true, isOwnCalendar: (s) => s === 'band-page' });
+    expect(again.events.get(iraId)).toMatchObject({ status: 'hidden' });
+    expect(again.hidden).toHaveLength(1);
+  });
+  it('lists a double bill once when two bands name the same start time at the same place', () => {
+    const show = { venueId: 'example-lodge', category: 'live-music', danceStyles: [], start: '14:00' };
+    const first = mergeDrafts(new Map(), draft({ ...show, sourceId: 'band-a', seriesKey: 'a', performerIds: ['the-fictionals'] }), { sourceId: 'band-a', today: '2026-10-01' });
+    const stored = new Map([...first.events].map(([id, e]) => [id, eventSchema.parse(e)]));
+    expect(mergeDrafts(stored, draft({ ...show, sourceId: 'band-b', seriesKey: 'b', performerIds: ['midnight-fiction'] }), { sourceId: 'band-b', today: '2026-10-02' }).stats).toMatchObject({ new: 0, duplicates: 1 });
+    // A different start time is a different show.
+    expect(mergeDrafts(stored, draft({ ...show, start: '16:00', sourceId: 'band-b', seriesKey: 'b', performerIds: ['midnight-fiction'] }), { sourceId: 'band-b', today: '2026-10-02' }).stats.new).toBe(1);
+  });
+});
+
+describe('ingest report', () => {
+  it('reports automatic hiding without creating a routine owner-review instruction', () => {
+    const report = reportMarkdown({
+      startedAt: '2026-10-28T12:00:00Z',
+      today: '2026-10-28',
+      dryRun: false,
+      sources: [{
+        id: 's',
+        name: 'Example',
+        status: 'ok',
+        documents: [],
+        found: 2,
+        kept: 2,
+        outOfArea: [],
+        merge: { new: 1, updated: 0, unchanged: 1, needsReview: 0, hidden: 1, expired: 0, missing: 1, duplicates: 0 },
+        hidden: [{ id: 'event-one', reason: 'Hidden automatically because it was not found.' }],
+        review: [],
+        invalid: [],
+      }],
+      created: { venues: [], performers: [], instructors: [], organizers: [] },
+      totals: { activeEvents: 10, needsReview: 0, hidden: 1, changedFiles: 1 },
+    });
+    expect(report).toContain('Hidden automatically');
+    expect(report).toContain('0 manually held');
+    expect(report).not.toMatch(/Waiting for review|please check|person should check/i);
   });
 });

@@ -1,0 +1,43 @@
+{
+  "name": "The Max: The Ultimate 90's Party",
+  "type": "band",
+  "aliases": [
+    "The Max",
+    "The Max - The Ultimate 90's Party",
+    "The Max Ultimate 90s Party",
+    "The Max 90s Party"
+  ],
+  "genres": [
+    "90s covers",
+    "90s rock",
+    "90s pop",
+    "90s hip hop"
+  ],
+  "website": "https://wearethemaxny.com/",
+  "facebookUrl": "https://www.facebook.com/wearethemaxny",
+  "instagramUrl": "https://www.instagram.com/wearethemaxny/",
+  "description": "New York party band (listed in Farmingdale) that plays only 1990s music: rock anthems, pop hits, hip hop and dance tracks. It plays Long Island bars and music rooms such as Painters' in Brookhaven, 89 North in Patchogue, Amsterdam in Patchogue and Daisy's Nashville Lounge in Miller Place.",
+  "dancing": {
+    "rating": "party",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [
+      "freestyle"
+    ],
+    "notes": "A 90s throwback party band that bills its shows as dance parties with 90s pop, hip hop and dance-floor hits. Expect freestyle dancing at bar shows; we found no outside review describing the crowd.",
+    "evidence": [
+      {
+        "url": "https://wearethemaxny.com/",
+        "note": "Home page: high-energy 90s party show mixing rock, pop, hip hop and dance-floor hits; lists Oct-Nov 2026 Long Island shows."
+      },
+      {
+        "url": "https://www.thebash.com/cover-band/the-max-the-ultimate-90-s-party",
+        "note": "Booking listing (Farmingdale, NY) tagged as a dance band; says the show is meant to keep you dancing and singing all night."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source the-max-the-ultimate-90s-party."
+}

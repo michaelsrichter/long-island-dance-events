@@ -1,0 +1,53 @@
+{
+  "name": "Canoe Place Inn & Cottages",
+  "aliases": [
+    "Canoe Place Inn",
+    "Canoe Place",
+    "Garden Lawn and Terrace",
+    "The Study at Canoe Place",
+    "Good Ground Tavern at Canoe Place",
+    "Front Courtyard & Outdoor Rotunda"
+  ],
+  "address": "239 E Montauk Hwy",
+  "town": "Hampton Bays",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11946",
+  "phone": "(631) 763-6300",
+  "website": "https://canoeplace.com/",
+  "facebookUrl": "https://www.facebook.com/canoeplace",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Canoe+Place+Inn+%26+Cottages%2C+239+E+Montauk+Hwy%2C+Hampton+Bays%2C+NY+11946",
+  "kind": "other",
+  "description": "A restored historic inn in Hampton Bays with cottages, the Good Ground Tavern restaurant, a garden and a ballroom. It hosts Wednesday evening music in the garden, such as acoustic sets and jazz trios, plus other special events.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "unknown",
+    "kinds": [],
+    "notes": "Public music nights take place in the garden with lounge seating and fire pits, and they are set up for relaxing and listening. The inn has a ballroom and offers DJ dance after-parties in the Study for weddings, but we found no public dance nights.",
+    "evidence": [
+      {
+        "url": "https://canoeplace.com/event/autumn-acoustics-in-the-garden/2026-10-07/",
+        "note": "Venue event page for Autumn Acoustics: live acoustic music in the garden by the fire pits on Wednesdays, 5 to 8 PM."
+      },
+      {
+        "url": "https://canoeplace.com/event/jazz-in-the-garden/",
+        "note": "Venue page for an earlier Wednesday Jazz in the Garden series with rotating jazz trios, including Latin jazz nights; no tickets or reservations needed."
+      },
+      {
+        "url": "https://canoeplace.com/weddings/",
+        "note": "Weddings page describes ballroom receptions and an after-party option with a DJ in the Study for dancing (private events only)."
+      },
+      {
+        "url": "https://hamptons.com/events/summer-sounds-at-canoe-place-inn/",
+        "note": "Listing for the 2026 Summer Sounds series: Wednesday garden concerts with lounge seating from June 24 to September 2."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: canoeplace.com.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source canoe-place-inn-cottages-hampton-bays. Event listings use the names of spaces inside the inn (garden, Study, Good Ground Tavern, front courtyard); these are saved as aliases.",
+  "latitude": 40.884034,
+  "longitude": -72.496597,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

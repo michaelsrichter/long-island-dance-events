@@ -1,0 +1,47 @@
+{
+  "title": "West Coast Swing class at Brumidi Lodge (Sons of Italy)",
+  "summary": "Group class in West Coast Swing.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "west-coast-swing"
+  ],
+  "start": "2026-10-05T17:45",
+  "end": "2026-10-05T18:45",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-10-19",
+      "2026-10-26",
+      "2026-11-02",
+      "2026-11-09",
+      "2026-11-16",
+      "2026-11-23",
+      "2026-11-30",
+      "2026-12-07",
+      "2026-12-14",
+      "2026-12-21",
+      "2026-12-28",
+      "2027-01-04",
+      "2027-01-11",
+      "2027-01-18",
+      "2027-01-25",
+      "2027-02-01",
+      "2027-02-08",
+      "2027-02-15",
+      "2027-03-01"
+    ]
+  },
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "dance-with-lourdes",
+  "skillLevel": "mixed",
+  "status": "active",
+  "sourceId": "diva-lourdes-gcal",
+  "sourceUrl": "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
+  "sourceName": "DiVa Ballroom / Dance with Lourdes Cruz - Long Island Google Calendar",
+  "sourceRef": "pages 2026, 2027",
+  "firstSeen": "2026-10-05",
+  "lastSeen": "2026-11-01",
+  "confidence": 0.9,
+  "matchKey": "diva-lourdes-gcal|brumidi-lodge|dance-with-lourdes|monday|17:45|class-lesson||west-coast-swing|repeat"
+}

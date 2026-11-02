@@ -1,0 +1,106 @@
+name: Database sync
+
+# Phase 1 (decision P56): git is still the master copy, and the live PostgreSQL database mirrors it.
+# Each run sends a snapshot of src/content/** to the server, then checks that the database gives back every
+# file byte for byte. On Sundays (or when asked) it also runs the restore drill.
+# The server accepts only this workflow on main (GitHub OIDC token; no password or key).
+# Until the repository variable SERVER_URL is set, the run only builds and checks the snapshot.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/content/**'
+      - 'src/data/long-island-places.json'
+      - 'scripts/db/**'
+  schedule:
+    - cron: '45 7 * * *' # every night, about 3:45 AM in New York
+  workflow_dispatch:
+    inputs:
+      drill:
+        description: 'Also run the restore drill (copy everything into empty tables and compare)'
+        type: boolean
+        default: false
+      drill_server:
+        description: 'Compare with a server restored from Azure backups (its name, for example psql-li-dance-events-drill)'
+        type: string
+        default: ''
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: database-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync and check the round trip
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SERVER_URL: ${{ vars.SERVER_URL }}
+      AUDIENCE: li-dance-server
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Snapshot of the content (every record checked with the site's schemas)
+        run: npx tsx scripts/db/build-payload.ts --out "$RUNNER_TEMP/payload.json.gz"
+      - name: Server not configured yet
+        if: env.SERVER_URL == ''
+        run: echo "::notice::SERVER_URL is not set, so nothing was sent. See docs/deployment.md (Live database)."
+      - name: Wait until the server answers
+        if: env.SERVER_URL != ''
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS --max-time 60 "$SERVER_URL/api/health" -o health.json; then jq -c . health.json; exit 0; fi
+            sleep 10
+          done
+          echo "::error::$SERVER_URL/api/health did not answer"; exit 1
+      - name: Send the snapshot
+        if: env.SERVER_URL != ''
+        run: |
+          TOKEN=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUDIENCE" | jq -r .value)
+          curl -sS --fail-with-body --max-time 600 -X POST "$SERVER_URL/api/sync/import" \
+            -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -H "Content-Encoding: gzip" \
+            --data-binary @"$RUNNER_TEMP/payload.json.gz" -o import.json || { cat import.json; exit 1; }
+          jq -c '.summary | {created, updated, deleted, unchanged, eventDates, places, dataVersion}' import.json
+          {
+            echo "### Database sync"
+            echo
+            echo "| Kind | Added | Changed | Removed | Same |"
+            echo "| --- | ---: | ---: | ---: | ---: |"
+            jq -r '.summary.kinds | to_entries[] | "| \(.key) | \(.value.created) | \(.value.updated) | \(.value.deleted) | \(.value.unchanged) |"' import.json
+            echo
+            jq -r '.summary | "Event dates: \(.eventDates). Places: \(.places). Data version: \(.dataVersion)."' import.json
+            echo
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Check the round trip (the database gives back every file exactly)
+        if: env.SERVER_URL != ''
+        run: |
+          TOKEN=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUDIENCE" | jq -r .value)
+          curl -sS --fail-with-body --compressed --max-time 300 "$SERVER_URL/api/sync/export" -H "Authorization: Bearer $TOKEN" -o export.json || { cat export.json; exit 1; }
+          npx tsx scripts/db/compare-export.ts --export export.json
+      - name: Restore drill (Sundays, or when asked)
+        if: env.SERVER_URL != '' && (inputs.drill == true || github.event_name == 'schedule')
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$(date -u +%u)" != "7" ]; then echo "Not Sunday: no drill today."; exit 0; fi
+          TOKEN=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUDIENCE" | jq -r .value)
+          curl -sS --fail-with-body --max-time 300 -X POST "$SERVER_URL/api/sync/drill" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d '{}' -o drill.json || { cat drill.json; exit 1; }
+          jq -c . drill.json
+          jq -r '"### Restore drill: \(if .ok then "passed" else "FAILED" end)\n\n\(.result.records) records copied into empty tables and compared (\(.result.ms) ms)."' drill.json >> "$GITHUB_STEP_SUMMARY"
+          [ "$(jq -r .ok drill.json)" = "true" ]
+      - name: Compare with a restored server
+        if: env.SERVER_URL != '' && inputs.drill_server != ''
+        env:
+          DRILL_SERVER: ${{ inputs.drill_server }}
+        run: |
+          TOKEN=$(curl -fsS -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=$AUDIENCE" | jq -r .value)
+          jq -n --arg s "$DRILL_SERVER" '{server: $s}' > body.json
+          curl -sS --fail-with-body --max-time 300 -X POST "$SERVER_URL/api/sync/drill" -H "Authorization: Bearer $TOKEN" -H "Content-Type: application/json" -d @body.json -o drill.json || { cat drill.json; exit 1; }
+          jq . drill.json
+          jq -r '"### Restored server \(.server): \(.identicalKinds) of \(.kinds) kinds identical\n\n| Kind | Live | Restored | Same text |\n| --- | ---: | ---: | --- |", (. as $d | $d.live | keys[] | select(. != "history") | "| \(.) | \($d.live[.].count) | \($d.restored[.].count // "-") | \(if $d.live[.].sha == $d.restored[.].sha then "yes" else "no" end) |")' drill.json >> "$GITHUB_STEP_SUMMARY"

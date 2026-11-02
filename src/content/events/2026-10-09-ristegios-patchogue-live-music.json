@@ -10,13 +10,13 @@
   "isFree": true,
   "skillLevel": "all-levels",
   "infoUrl": "https://dpe-li.com/upcoming-shows/ristegios-5/",
-  "status": "active",
+  "status": "past",
   "sourceId": "dance-party-explosion",
   "sourceUrl": "https://dpe-li.com/upcoming-shows/ristegios-5/",
   "sourceName": "Dance Party Explosion - upcoming shows",
   "sourceRef": "event data on the page 2026-10-09",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-04",
+  "lastSeen": "2026-10-05",
   "dancingCues": [
     "afternoon"
   ],

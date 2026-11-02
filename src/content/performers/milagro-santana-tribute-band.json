@@ -1,0 +1,47 @@
+{
+  "name": "Milagro",
+  "type": "band",
+  "aliases": [
+    "Milagro Santana Tribute Band",
+    "Milagro Santana Tribute",
+    "Milagro - Santana Tribute"
+  ],
+  "genres": [
+    "Santana tribute",
+    "Latin rock",
+    "rock",
+    "blues"
+  ],
+  "website": "https://www.milagrolive.com/",
+  "facebookUrl": "https://www.facebook.com/Milagrolive/",
+  "instagramUrl": "https://www.instagram.com/milagro_santana_tribute_band/",
+  "youtubeUrl": "https://www.youtube.com/channel/UC0TIDPLu9J2kEmkTGdvhdRQ",
+  "description": "Long Island Santana tribute band, playing since 2005, that performs Carlos Santana's hits with a six-piece lineup including timbales and congas, blending rock, blues, Latin and jazz. It plays summer town concerts, street festivals, vineyards and dinner shows across Nassau and Suffolk.",
+  "dancing": {
+    "rating": "mixed",
+    "kinds": [
+      "freestyle"
+    ],
+    "styles": [
+      "freestyle"
+    ],
+    "notes": "Latin-rock grooves like Smooth and Oye Como Va invite dancing, and a dinner-show listing invited people to listen and dance. Many gigs are outdoor town concerts where most people sit, so expect some freestyle dancing near the stage.",
+    "evidence": [
+      {
+        "url": "https://www.milagrolive.com/about",
+        "note": "About page: Santana tribute since 2005 with timbales and congas, mixing rock, blues, funk, Latin and jazz."
+      },
+      {
+        "url": "https://www.milagrolive.com/schedule",
+        "note": "2026 schedule: town concerts and festivals in Patchogue, Northport, Center Moriches, Lake Grove and more."
+      },
+      {
+        "url": "https://events.longisland.com/santana-tribute-show-with-milagro-a-verterans-day-event.html",
+        "note": "Past dinner-show listing at Anthony's Live (Lake Ronkonkoma) inviting guests to listen and dance to Santana hits."
+      }
+    ],
+    "confidence": "low",
+    "checked": "2026-10-05"
+  },
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source milagro-santana-tribute-band. Different from the Santana tribute 'Moonflower - Spirit of Santana' already in the performer list."
+}

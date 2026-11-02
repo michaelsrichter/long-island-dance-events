@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getTowns, seriesCount, townHref } from '../../lib/towns';
+import { breadcrumbJsonLd, itemListJsonLd } from '../../lib/seo';
+import { listNames } from '../../lib/page-meta';
+import '../../styles/towns.css';
+
+const towns = await getTowns();
+const active = towns.filter((t) => t.events.length > 0);
+const crumbs = [
+  { name: 'Home', href: '/' },
+  { name: 'Towns', href: '/towns/' },
+];
+const busiest = [...active].sort((a, b) => seriesCount(b.events) - seriesCount(a.events)).slice(0, 5);
+const intro = `${active.length} Long Island towns have dances, classes or live music coming up. The busiest right now are ${listNames(busiest.map((t) => t.name), 5)}. Pick a town to see what's on, where, and when.`;
+---
+<BaseLayout
+  title="Dancing town by town on Long Island"
+  description={`Where to dance in ${active.length} Long Island towns in Nassau and Suffolk: social dances, classes and live music, town by town, with times, prices and directions.`}
+  pageType="towns"
+  jsonLd={[breadcrumbJsonLd(crumbs, Astro.site!), itemListJsonLd('Long Island towns with dancing', active.map((t) => townHref(t.name)), Astro.site!)]}
+>
+  <PageHeader title="Dancing town by town" lede={intro} crumbs={crumbs} />
+  <div class="container section stack-l">
+    {(['Nassau', 'Suffolk', undefined] as const).map((county) => {
+      const list = towns.filter((t) => t.county === county);
+      return list.length > 0 && (
+        <section aria-labelledby={`c-${county ?? 'other'}`}>
+          <h2 id={`c-${county ?? 'other'}`}>{county ? `${county} County` : 'More places'}</h2>
+          <ul class="town-grid mt-3">
+            {list.map((t) => (
+              <li>
+                <a href={townHref(t.name)}>
+                  <strong>{t.name}</strong>
+                  <span>{t.events.length ? `${seriesCount(t.events)} coming up` : 'Nothing listed now'}{t.venues.length ? ` · ${t.venues.length} ${t.venues.length === 1 ? 'place' : 'places'}` : ''}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    })}
+  </div>
+</BaseLayout>

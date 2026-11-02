@@ -1,0 +1,52 @@
+{
+  "name": "HOG Farm",
+  "aliases": [
+    "H.O.G. Farm",
+    "The HOG Farm",
+    "Hamlet Organic Garden",
+    "HOG Farm Brookhaven"
+  ],
+  "address": "319 Beaver Dam Road",
+  "town": "Brookhaven",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11719",
+  "website": "https://thehogfarm.org/",
+  "facebookUrl": "https://www.facebook.com/theHOGFarmBrookhaven",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=HOG+Farm%2C+319+Beaver+Dam+Road%2C+Brookhaven%2C+NY+11719",
+  "kind": "other",
+  "description": "A 20-acre community farm in Brookhaven hamlet that began in 1996 as the Hamlet Organic Garden. From spring to fall it hosts outdoor music: a Tuesday open-mic Farm Jam, cookouts with cover bands and a yearly Americana music festival.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "allowed",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Shows are outdoors on the farm grounds and guests bring their own chairs or blankets, so there is open space. The farm's listing for its Americana festival promised honky-tonk and fiddle tunes to get people dancing. Most Farm Jam nights are open-mic sets that feel more like a picnic than a dance. Events have rain dates.",
+    "evidence": [
+      {
+        "url": "https://thehogfarm.org/events/2025/10/5/american-fest",
+        "note": "The farm's 2025 Americana Festival listing: country and roots bands, with the headliner's honky-tonk set billed as music that will get you dancing."
+      },
+      {
+        "url": "https://thehogfarm.org/events/2026/8/25/farm-jam",
+        "note": "Farm Jam open-mic night listing: local musicians, food vendors, bring your own chairs and reusable cups."
+      },
+      {
+        "url": "https://thehogfarm.org/events/2026/7/25/shuck-u-bbq",
+        "note": "Seafood boil with a cover band; describes blankets on the grass on a summer evening."
+      },
+      {
+        "url": "https://thehogfarm.org/about-us-1",
+        "note": "The farm's About page with its street address and history as a community farm since 1996."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: thehogfarm.org.",
+  "reviewNotes": "Added from the town-by-town source search (2026-10-05) for source hog-farm-brookhaven. No public phone found; the farm takes questions by email through its website. Events are outdoors and seasonal.",
+  "latitude": 40.773282,
+  "longitude": -72.905133,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

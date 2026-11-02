@@ -1,0 +1,20 @@
+{
+  "cadence": "weekly",
+  "rateLimitSeconds": 5,
+  "attribution": "Some listings come from Southbound. We write our own short summaries and link back to the original page.",
+  "reviewNotes": "Town-by-town search 2026-10-05: kept in the catalog but switched off. On 2026-10-05 none of its upcoming listings could be used: they are at an unnamed place in North Patchogue; an unnamed place in Patchogue; an unnamed place in Port Jefferson; an unnamed place in Sayville. Switch on after those venues are researched, or if the page starts naming venues clearly.",
+  "feedUrl": "https://calendar.google.com/calendar/ical/mike%40southbound.li/public/basic.ics",
+  "catalogStatus": "verified",
+  "name": "Southbound - band calendar",
+  "defaults": {
+    "performerIds": [
+      "southbound"
+    ]
+  },
+  "focus": "music",
+  "enabled": false,
+  "description": "Gig calendar of Southbound, a Long Island country and classic-rock band (public Google Calendar).",
+  "type": "ical",
+  "adapter": "ical",
+  "url": "https://southbound.li/"
+}

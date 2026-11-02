@@ -1,6 +1,6 @@
 # Decap CMS configuration for Long Island Dance Events.
-# Editors sign in with GitHub at /admin/. Every change becomes a pull request (editorial workflow),
-# is checked by automated tests, gets a preview website, and goes live when it is published (merged).
+# Editors sign in with GitHub at /admin/. Each save is a commit on main and goes live with the next deploy
+# (a few minutes); there is no draft or "Publish" step (Phase 0 of docs/proposals/postgres-live-site.md, decision P55).
 # The weekly scrape writes the same JSON files. Fields listed in "Locked fields" are never overwritten by it.
 backend:
   name: github
@@ -17,7 +17,8 @@ backend:
     uploadMedia: 'Upload "{{path}}"'
     deleteMedia: 'Delete "{{path}}"'
 
-publish_mode: editorial_workflow
+# "simple": Save publishes straight to main. "editorial_workflow" would make every save a draft pull request.
+publish_mode: simple
 show_preview_links: true
 locale: en
 
@@ -178,7 +179,7 @@ collections:
   - name: events
     label: Events
     label_singular: Event
-    description: 'One file per event. A repeating event (like every Tuesday) is one file with a repeat rule. Set the status to "Waiting for review" to hide an event.'
+    description: 'One file per event. A repeating event (like every Tuesday) is one file with a repeat rule. Use "Held by an editor" only for an exceptional manual decision; routine uncertainty is hidden automatically.'
     folder: src/content/events
     extension: json
     format: json
@@ -188,10 +189,11 @@ collections:
     summary: '{{start}} · {{title}} ({{status}})'
     sortable_fields: [start, title, lastSeen]
     view_filters:
-      - { label: 'Waiting for review', field: status, pattern: 'pending-review' }
+      - { label: 'Held by an editor', field: status, pattern: 'pending-review' }
       - { label: 'Listed', field: status, pattern: 'active' }
       - { label: 'Cancelled', field: status, pattern: 'cancelled' }
       - { label: 'Past', field: status, pattern: 'past' }
+      - { label: 'Hidden', field: status, pattern: 'hidden' }
     view_groups:
       - { label: 'Source', field: sourceId }
     fields:
@@ -262,7 +264,8 @@ collections:
           - { label: 'Listed', value: active }
           - { label: 'Past', value: past }
           - { label: 'Cancelled', value: cancelled }
-          - { label: 'Waiting for review (hidden)', value: pending-review }
+          - { label: 'Held by an editor (hidden)', value: pending-review }
+          - { label: 'Hidden automatically or by an editor (never shown)', value: hidden }
       - { label: 'Cancellation note', name: cancelledNote, widget: string, required: false }
       - { label: 'Source', name: sourceId, widget: relation, collection: sources, value_field: '{{slug}}', search_fields: [name], display_fields: [name] }
       - { label: 'Source link', name: sourceUrl, widget: string, hint: 'The page or file where this listing was found.' }
@@ -570,10 +573,12 @@ collections:
               - { label: 'Asked, waiting for an answer', value: requested }
               - { label: 'Allowed', value: granted }
               - { label: 'Said no', value: denied }
+              - { label: 'Asked, no answer', value: no-reply }
           - { label: 'Note', name: note, widget: text, required: false }
           - { label: 'Asked on', name: requestedAt, <<: *date, required: false }
           - { label: 'Answered on', name: decidedAt, <<: *date, required: false }
           - { label: 'Feed they gave us', name: feedUrl, widget: string, required: false }
+      - { label: 'Public contact email (for permission requests)', name: contactEmail, widget: string, required: false, hint: 'Only an address the website publishes, for example on its Contact page.' }
       - { label: 'Credit shown on the Sources page', name: attribution, widget: text }
       - { label: 'Description', name: description, widget: text, required: false }
       - { label: 'Seconds between requests', name: rateLimitSeconds, widget: number, value_type: int, min: 1, max: 60, default: 3 }
@@ -589,7 +594,7 @@ collections:
           - { label: 'Found', name: found, widget: number, value_type: int }
           - { label: 'Kept', name: kept, widget: number, value_type: int }
           - { label: 'Outside Long Island', name: outOfArea, widget: number, value_type: int }
-          - { label: 'Needs review', name: needsReview, widget: number, value_type: int }
+          - { label: 'Manually held', name: needsReview, widget: number, value_type: int }
       - *review
 
   - name: styles

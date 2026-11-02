@@ -1,0 +1,139 @@
+/*
+ * Long Island Dance Events: Entra External ID sign-in pages (company branding custom CSS).
+ * Matches the website: near-black page with a red glow, white rounded card, red pill buttons.
+ * Only colors, fonts, borders, corner radius and padding: no layout or positioning properties
+ * (Microsoft is retiring those for custom CSS). Apply with ./apply-branding.ps1.
+ */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #0b0b0d;
+}
+
+/* The red glow on wide screens is the branding background image (background.jpg); Microsoft hides it on
+   phones and shows a plain white page there, where its gray footer links stay readable. */
+
+.ext-sign-in-box {
+  background-color: #ffffff;
+  border: 1px solid #dcdde2;
+  border-radius: 20px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+}
+
+.ext-title {
+  color: #0b0b0d;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.ext-subtitle,
+.ext-boilerplate-text {
+  color: #4b4e57;
+}
+
+/* Only selectors from Microsoft's template are kept (a rule with any other selector is dropped whole).
+   Links use plain "a" (not "a:link") so the footer's own class can override the color. */
+a {
+  color: #a3111f;
+}
+
+.ext-link {
+  color: #a3111f;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus {
+  outline: 3px solid #1757c2;
+  outline-offset: 2px;
+}
+
+a:focus:hover {
+  outline: 3px solid #1757c2;
+  outline-offset: 2px;
+}
+
+.ext-button.ext-primary {
+  background-color: #a3111f;
+  border: 1px solid #a3111f;
+  border-radius: 999px;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.ext-button.ext-primary:hover {
+  background-color: #7d0c18;
+  border-color: #7d0c18;
+}
+
+.ext-button.ext-primary:focus,
+.ext-button.ext-primary:focus:hover {
+  background-color: #7d0c18;
+  border-color: #7d0c18;
+  outline: 3px solid #1757c2;
+  outline-offset: 2px;
+}
+
+.ext-button.ext-primary:active {
+  background-color: #5e0912;
+  border-color: #5e0912;
+}
+
+.ext-button.ext-secondary {
+  background-color: #ffffff;
+  border: 2px solid #0b0b0d;
+  border-radius: 999px;
+  color: #0b0b0d;
+  font-weight: 600;
+}
+
+.ext-button.ext-secondary:hover {
+  background-color: #ececf0;
+}
+
+.ext-button.ext-secondary:focus,
+.ext-button.ext-secondary:focus:hover {
+  background-color: #ececf0;
+  outline: 3px solid #1757c2;
+  outline-offset: 2px;
+}
+
+.ext-button.ext-secondary:active {
+  background-color: #dcdde2;
+}
+
+.ext-input.ext-text-box {
+  background-color: #f6f6f8;
+  border: 1px solid #dcdde2;
+  border-radius: 12px;
+  padding-left: 12px;
+  padding-right: 12px;
+  color: #0b0b0d;
+}
+
+.ext-input.ext-text-box:hover {
+  border-color: #4b4e57;
+}
+
+.ext-input.ext-text-box:focus,
+.ext-input.ext-text-box:focus:hover {
+  background-color: #ffffff;
+  border-color: #a3111f;
+  outline: 3px solid rgba(23, 87, 194, 0.35);
+}
+
+.ext-input.ext-text-box.ext-has-error {
+  border-color: #b00020;
+}
+
+.ext-error {
+  color: #b00020;
+}
+
+.ext-footer {
+  background-color: transparent;
+}
+
+/* Microsoft's sign-in pages keep only the template selectors exactly as listed: the footer-link selectors
+   (.ext-footer-item, .ext-debug-item), doubled classes and @media rules are dropped. */

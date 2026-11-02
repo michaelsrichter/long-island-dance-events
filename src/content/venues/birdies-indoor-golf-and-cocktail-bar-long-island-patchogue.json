@@ -1,10 +1,54 @@
 {
-  "name": "Birdies Indoor Golf and Cocktail Bar Long Island",
+  "name": "Birdies Indoor Golf & Cocktail Bar",
+  "aliases": [
+    "Birdies",
+    "Birdies Patchogue",
+    "Birdies LI",
+    "Birdies of Long Island",
+    "Birdies Indoor Golf and Cocktail Bar",
+    "Birdies Indoor Golf and Cocktail Bar Long Island"
+  ],
   "address": "17 N Ocean Ave",
-  "county": "Suffolk",
-  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
-  "state": "NY",
   "town": "Patchogue",
+  "county": "Suffolk",
+  "state": "NY",
+  "postalCode": "11772",
+  "phone": "(631) 654-4653",
+  "website": "https://www.birdiesli.com/",
+  "facebookUrl": "https://www.facebook.com/people/Birdies-Patchogue/100065681941725/",
+  "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Birdies+Indoor+Golf+%26+Cocktail+Bar%2C+17+N+Ocean+Ave%2C+Patchogue%2C+NY+11772",
+  "kind": "bar",
+  "description": "An indoor golf simulator center with a cocktail and sports bar and an outdoor beer garden on North Ocean Avenue in Patchogue. Local bands play on Friday nights, and DJs run dance parties on Saturday nights.",
+  "dancing": {
+    "floor": "open-space",
+    "policy": "encouraged",
+    "kinds": [
+      "freestyle"
+    ],
+    "notes": "Birdies is a big space (two floors plus a beer garden) but has no dedicated dance floor that we could confirm. Fridays have live bands at 8 PM followed by DJs, and Saturdays are promoted as DJ dance parties from 10 PM. Some band nights are mellow acoustic sets, so dancing depends on the act.",
+    "evidence": [
+      {
+        "url": "https://www.birdiesli.com/indoor-golf-bar-daily-specials",
+        "note": "Official specials page: live music every Friday at 8 PM with DJs at 10 PM, and a Saturday DJ dance party from 10 PM to 2 AM."
+      },
+      {
+        "url": "https://www.birdiesli.com/about-birdies",
+        "note": "Official About page: about 11,000 square feet with golf simulators, a sports bar, a restaurant area and an outdoor beer garden."
+      },
+      {
+        "url": "https://allevents.in/patchogue/mixed-vibes-gen-x-birdies-patchogue/200030764770138",
+        "note": "Band listing: Mixed Vibes and Gen-X play Birdies on Friday, Oct 23, 2026, 8:30 to 11:30 PM."
+      },
+      {
+        "url": "https://happeningnext.com/event/the-brother-pluckers-at-birdies-eid3a0e45kbbd",
+        "note": "The Brother Pluckers play acoustic jams at Birdies on Oct 22, 2026 with no cover, a quieter kind of band night."
+      }
+    ],
+    "confidence": "medium",
+    "checked": "2026-10-05"
+  },
+  "factsSource": "Checked October 5, 2026. Source: birdiesli.com.",
+  "reviewNotes": "Added automatically from Ira's List's calendar, then researched in the town-by-town source search (2026-10-05).",
   "latitude": 40.765945,
   "longitude": -73.015021,
   "coordinatesSource": "U.S. Census Bureau Geocoder"

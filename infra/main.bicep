@@ -142,7 +142,7 @@ resource communityTables 'Microsoft.Storage/storageAccounts/tableServices@2023-0
   name: 'default'
 }
 
-var tableNames = ['Users', 'Comments', 'Photos', 'Likes', 'LikeCounts', 'UserItems', 'Flags', 'ModQueue', 'ModLog', 'Limits']
+var tableNames = ['Users', 'Comments', 'Photos', 'Likes', 'LikeCounts', 'UserItems', 'Flags', 'ModQueue', 'ModLog', 'Limits', 'ReviewState']
 resource communityTableList 'Microsoft.Storage/storageAccounts/tableServices/tables@2023-05-01' = [for t in tableNames: if (enableCommunity) {
   parent: communityTables
   name: t

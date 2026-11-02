@@ -20,7 +20,16 @@
   "W. Islip": "West Islip",
   "E. Islip": "East Islip",
   "E. Northport": "East Northport",
-  "Bayshore": "Bay Shore"
+  "Bayshore": "Bay Shore",
+  "Remsenburg-Speonk": "Remsenburg",
+  "Stony Brook University": "Stony Brook",
+  "Rockville Center": "Rockville Centre",
+  "Setauket-East Setauket": "Setauket",
+  "Port Jeff Station": "Port Jefferson Station",
+  "Pt Washington": "Port Washington",
+  "Huntington Village": "Huntington",
+  "Mt Sinai": "Mount Sinai",
+  "Mt. Sinai": "Mount Sinai"
  },
  "places": [
   {
@@ -90,6 +99,10 @@
   {
    "name": "Bayville",
    "county": "Nassau"
+  },
+  {
+   "name": "Baywood",
+   "county": "Suffolk"
   },
   {
    "name": "Belle Terre",
@@ -176,6 +189,10 @@
    "county": "Nassau"
   },
   {
+   "name": "Cherry Grove",
+   "county": "Suffolk"
+  },
+  {
    "name": "Cold Spring Harbor",
    "county": "Suffolk"
   },
@@ -197,6 +214,10 @@
   },
   {
    "name": "Cutchogue",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Davis Park",
    "county": "Suffolk"
   },
   {
@@ -225,6 +246,10 @@
   },
   {
    "name": "East Hampton",
+   "county": "Suffolk"
+  },
+  {
+   "name": "East Hampton North",
    "county": "Suffolk"
   },
   {
@@ -276,6 +301,10 @@
    "county": "Suffolk"
   },
   {
+   "name": "East Shoreham",
+   "county": "Suffolk"
+  },
+  {
    "name": "East Williston",
    "county": "Nassau"
   },
@@ -305,6 +334,10 @@
   },
   {
    "name": "Fire Island",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Fire Island Pines",
    "county": "Suffolk"
   },
   {
@@ -348,6 +381,10 @@
    "county": "Nassau"
   },
   {
+   "name": "Gilgo",
+   "county": "Suffolk"
+  },
+  {
    "name": "Glen Cove",
    "county": "Nassau"
   },
@@ -389,6 +426,10 @@
   },
   {
    "name": "Greenport",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Greenport West",
    "county": "Suffolk"
   },
   {
@@ -476,6 +517,10 @@
    "county": "Nassau"
   },
   {
+   "name": "Island Trees",
+   "county": "Nassau"
+  },
+  {
    "name": "Islandia",
    "county": "Suffolk"
   },
@@ -556,6 +601,10 @@
    "county": "Suffolk"
   },
   {
+   "name": "Lloyd Neck",
+   "county": "Suffolk"
+  },
+  {
    "name": "Locust Valley",
    "county": "Nassau"
   },
@@ -569,6 +618,10 @@
   },
   {
    "name": "Malverne",
+   "county": "Nassau"
+  },
+  {
+   "name": "Malverne Park Oaks",
    "county": "Nassau"
   },
   {
@@ -700,6 +753,10 @@
    "county": "Nassau"
   },
   {
+   "name": "North Bellport",
+   "county": "Suffolk"
+  },
+  {
    "name": "North Great River",
    "county": "Suffolk"
   },
@@ -752,6 +809,10 @@
    "county": "Nassau"
   },
   {
+   "name": "North Woodmere",
+   "county": "Nassau"
+  },
+  {
    "name": "Northampton",
    "county": "Suffolk"
   },
@@ -764,11 +825,23 @@
    "county": "Suffolk"
   },
   {
+   "name": "Northwest Harbor",
+   "county": "Suffolk"
+  },
+  {
    "name": "Noyack",
    "county": "Suffolk"
   },
   {
+   "name": "Oak Beach",
+   "county": "Suffolk"
+  },
+  {
    "name": "Oakdale",
+   "county": "Suffolk"
+  },
+  {
+   "name": "Ocean Bay Park",
    "county": "Suffolk"
   },
   {
@@ -976,6 +1049,10 @@
    "county": "Suffolk"
   },
   {
+   "name": "Shelter Island Heights",
+   "county": "Suffolk"
+  },
+  {
    "name": "Shinnecock Hills",
    "county": "Suffolk"
   },
@@ -1010,6 +1087,10 @@
   {
    "name": "South Huntington",
    "county": "Suffolk"
+  },
+  {
+   "name": "South Valley Stream",
+   "county": "Nassau"
   },
   {
    "name": "Southampton",
@@ -1110,6 +1191,10 @@
   {
    "name": "West Hempstead",
    "county": "Nassau"
+  },
+  {
+   "name": "West Hills",
+   "county": "Suffolk"
   },
   {
    "name": "West Islip",

@@ -29,7 +29,8 @@ await check('Security headers', async () => {
   assert(/frame-ancestors 'none'/.test(h.get('content-security-policy')), 'CSP missing frame-ancestors');
 });
 await check('Custom 404', async () => { const r = await get('/no-such-page/'); assert(r.status === 404, `status ${r.status}`); assert((await r.text()).includes('Oops, we missed a step'), 'not custom page'); });
-await check('Sitemap', async () => { const r = await get('/sitemap-index.xml'); assert(r.status === 200, `status ${r.status}`); const s = await (await get('/sitemap-0.xml')).text(); const n = (s.match(/<loc>/g) || []).length; assert(n > 20, `only ${n} URLs`); return `${n} URLs`; });
+await check('Sitemap', async () => { const r = await get('/sitemap-index.xml'); assert(r.status === 200, `status ${r.status}`); const idx = await r.text(); const maps = [...idx.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => new URL(m[1]).pathname); assert(maps.length >= 5, `only ${maps.length} sitemaps`); let n = 0; for (const m of maps) { const s = await (await get(m)).text(); n += (s.match(/<loc>/g) || []).length; assert(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/.test(s), `no lastmod in ${m}`); } assert(n > 20, `only ${n} URLs`); return `${maps.length} sitemaps, ${n} URLs`; });
+await check('llms-full.txt and upcoming.json', async () => { const t = await (await get('/llms-full.txt')).text(); assert(t.includes('http'), 'empty'); const j = await (await get('/events/upcoming.json')).json(); assert(Array.isArray(j.events), 'no events'); return `${j.events.length} events`; });
 await check('robots.txt', async () => { const t = await (await get('/robots.txt')).text(); assert(/User-agent/.test(t), 'invalid'); });
 await check('llms.txt', async () => { const t = await (await get('/llms.txt')).text(); assert(t.includes('Nassau and Suffolk'), 'missing area'); });
 await check('Calendar feed', async () => { const feed = await get('/events/all.ics'); assert(/text\/calendar/.test(feed.headers.get('content-type') || ''), 'feed content type'); const body = await feed.text(); assert(body.startsWith('BEGIN:VCALENDAR'), 'not iCalendar'); return `${(body.match(/BEGIN:VEVENT/g) || []).length} events in feed`; });
@@ -104,8 +105,19 @@ await check('Community data allows our site (CORS)', async () => {
   assert(r.status === 200, `preflight status ${r.status}`);
   assert(r.headers.get('access-control-allow-origin') === origin || r.headers.get('access-control-allow-origin') === '*', 'origin not allowed');
 });
-await check('Account, moderation and rules pages', async () => {
-  for (const p of ['/account/', '/moderate/', '/community-rules/']) { const r = await get(p); assert(r.status === 200, `${p} status ${r.status}`); }
+await check('Account and rules pages', async () => {
+  for (const p of ['/account/', '/community-rules/']) { const r = await get(p); assert(r.status === 200, `${p} status ${r.status}`); }
+});
+await check('Review center is for editors only', async () => {
+  // Signed-out visitors get the route rule's 401, shown as our "You're signed out" page with a Sign in button.
+  const page = await get('/moderate/');
+  assert(page.status === 401, `/moderate/ status ${page.status}`);
+  assert(!(await page.text()).includes('data-review-app'), '/moderate/ served the review center to a signed-out visitor');
+  for (const p of ['/api/review/status', '/api/review/listings', '/api/moderation/queue']) {
+    const r = await get(p);
+    assert(r.status === 401 || r.status === 403, `${p} status ${r.status}`);
+  }
+  return 'sign-in required';
 });
 
 const width = Math.max(...results.map((r) => r.name.length));

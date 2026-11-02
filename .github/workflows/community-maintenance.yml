@@ -4,6 +4,8 @@ name: Community maintenance
 # older than 90 days, moderation log older than 2 years and old rate-limit counters
 # (see the privacy page and docs/deployment.md). Also runs after each production deploy so new
 # pages get their empty file within minutes. Same-day reruns overwrite that day's backup.
+# If posts have waited in the moderation queue for over 6 hours, it emails one reminder a day
+# (ADMIN_NOTIFY_URL secret; reruns the same day send nothing more).
 on:
   schedule:
     - cron: '30 10 * * *' # every morning U.S. Eastern time, after the nightly site rebuild
@@ -50,5 +52,6 @@ jobs:
         if: env.HAS_STORAGE == 'true'
         env:
           COMMUNITY_STORAGE: ${{ secrets.COMMUNITY_STORAGE }}
+          ADMIN_NOTIFY_URL: ${{ secrets.ADMIN_NOTIFY_URL }}
           SITE_URL: ${{ vars.SITE_URL }}
         run: node scripts/community-maintenance.mjs ${{ inputs.dry_run && '--dry-run' || '' }}

@@ -1,0 +1,36 @@
+name: Publish collected events
+
+# This workflow is trusted because workflow_run always uses the copy on the default branch. It only
+# accepts a manually dispatched CI run for the repository-owned rolling collection branch; the
+# script repeats every guard and merges only src/content/** changes at the exact successful SHA.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: publish-collected-events
+  cancel-in-progress: false
+
+jobs:
+  merge:
+    name: Merge the checked collection update
+    if: >-
+      github.event.workflow_run.event == 'workflow_dispatch' &&
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'ingest/updates'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: main
+      - name: Verify and merge the exact checked content update
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node .github/scripts/auto-merge-ingest.mjs
