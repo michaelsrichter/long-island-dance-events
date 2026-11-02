@@ -3,6 +3,7 @@
  * bar, one matching rule, so a filtered view stays filtered when you switch views. Items carry the data-*
  * attributes from lib/event-filter-data.ts. No DOM side effects on import.
  */
+import { eventDateRanges, matchesEventDate } from '../lib/event-date-windows';
 
 export const FILTER_FIELDS = ['when', 'category', 'has', 'dance', 'style', 'q', 'county', 'town', 'day', 'price', 'level', 'venue', 'person'] as const;
 export type FilterField = (typeof FILTER_FIELDS)[number];
@@ -20,21 +21,7 @@ export function calMoreLabel(day: string, extra: number, open: boolean): string 
   return open ? `Show fewer events on ${d}` : `Show ${extra} more ${extra === 1 ? 'event' : 'events'} on ${d}`;
 }
 
-const nyDate = (d: Date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
-const addDays = (date: string, n: number) => {
-  const [y, m, d] = date.split('-').map(Number) as [number, number, number];
-  return new Date(Date.UTC(y, m - 1, d + n, 12)).toISOString().slice(0, 10);
-};
-
-/** Today's date and the coming weekend (Friday to Sunday; from today when already in it), in New York time. */
-export function ranges(now = new Date()) {
-  const today = nyDate(now);
-  const [y, m, d] = today.split('-').map(Number) as [number, number, number];
-  const dow = new Date(Date.UTC(y, m - 1, d, 12)).getUTCDay();
-  const friday = addDays(today, dow === 0 ? -2 : dow === 6 ? -1 : 5 - dow);
-  const weekendFrom = dow === 0 || dow === 6 ? today : friday;
-  return { today, weekEnd: addDays(today, 6), month: today.slice(0, 7), weekendFrom, weekendTo: addDays(friday, 2) };
-}
+export const ranges = eventDateRanges;
 export type Ranges = ReturnType<typeof ranges>;
 
 const has = (list: string | undefined, v: string) => (list ?? '').split(' ').includes(v);
@@ -42,10 +29,7 @@ const has = (list: string | undefined, v: string) => (list ?? '').split(' ').inc
 /** Does an item (a card, calendar entry or map row) match the filters? `text` is used for the search box. */
 export function matchesEvent(ds: DOMStringMap, text: string, v: Partial<FilterValues>, r: Ranges): boolean {
   const date = ds.date ?? '';
-  if (v.when === 'today' && date !== r.today) return false;
-  if (v.when === 'weekend' && (date < r.weekendFrom || date > r.weekendTo)) return false;
-  if (v.when === 'week' && (date < r.today || date > r.weekEnd)) return false;
-  if (v.when === 'month' && !date.startsWith(r.month)) return false;
+  if (!matchesEventDate(date, v.when ?? '', r)) return false;
   // The default view: dances and live music people dance to (no classes, no listening-only concerts).
   const category = v.category || 'dances';
   if (category === 'dances' && (ds.category === 'class-lesson' || ds.dancing === 'unlikely')) return false;
@@ -103,11 +87,16 @@ export function filterParams(v: Partial<FilterValues>): URLSearchParams {
 
 /** Update the address bar, and the List / Month calendar / Map links (and month arrows), so filters follow you. */
 export function syncFilterLinks(params: URLSearchParams) {
-  const qs = params.toString();
+  const preserved = new URLSearchParams(location.search);
+  for (const field of FILTER_FIELDS) preserved.delete(field);
+  for (const [key, value] of params) preserved.set(key, value);
+  const qs = preserved.toString();
   history.replaceState(history.state, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
   for (const a of document.querySelectorAll<HTMLAnchorElement>('a[data-carry-filters]')) {
     const url = new URL(a.href, location.href);
-    url.search = qs;
+    for (const [key, value] of preserved) if (!FILTER_FIELDS.includes(key as FilterField) && !url.searchParams.has(key)) url.searchParams.set(key, value);
+    for (const field of FILTER_FIELDS) url.searchParams.delete(field);
+    for (const [key, value] of params) url.searchParams.set(key, value);
     a.href = url.pathname + url.search + url.hash;
   }
 }

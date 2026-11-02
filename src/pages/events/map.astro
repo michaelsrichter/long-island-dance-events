@@ -11,6 +11,7 @@ import FeatureBadges from '../../components/FeatureBadges.astro';
 import { eventFilterData } from '../../lib/event-filter-data';
 import { getEventGroups, type ResolvedEvent } from '../../lib/content';
 import { isDanceLevel } from '../../lib/dancing';
+import { EVENT_DATE_FILTERS } from '../../lib/event-date-windows';
 import { groupByPlace } from '../../lib/map-places';
 import { formatDateShort } from '../../lib/time';
 import { breadcrumbJsonLd } from '../../lib/seo';
@@ -23,14 +24,7 @@ const crumbs = [
   { name: 'Events', href: '/events/' },
   { name: 'Map', href: '/events/map/' },
 ];
-/** The same date choices as the event list, so filters carry over between views. */
-const whens = [
-  { value: 'all', label: 'All upcoming' },
-  { value: 'today', label: 'Today' },
-  { value: 'weekend', label: 'This weekend' },
-  { value: 'week', label: 'Next 7 days' },
-  { value: 'month', label: 'This month' },
-];
+const whens = EVENT_DATE_FILTERS;
 const dancePlaces = places.filter((p) => p.events.some((e) => e.category !== 'class-lesson' && isDanceLevel(e.dancing.level))).length;
 /** dance = dances and live music with dancing; class = classes; listen = concerts where people mostly listen. */
 const kind = (e: ResolvedEvent) => (e.category === 'class-lesson' ? 'class' : isDanceLevel(e.dancing.level) ? 'dance' : 'listen');
@@ -48,8 +42,20 @@ const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` 
   </PageHeader>
 
   <div class="container section stack-l">
+    <div class="map-near-me js-only">
+      <div class="map-near-me__intro">
+        <span class="map-near-me__icon" aria-hidden="true"><Icon name="pin" /></span>
+        <div>
+          <p class="map-near-me__title">Find the closest dance places</p>
+          <p class="map-near-me__help" id="map-location-help">Your browser asks for location only after you choose this. It stays on your device.</p>
+          <p class="map-near-me__status" data-map-locate-status aria-live="polite"></p>
+        </div>
+      </div>
+      <button type="button" class="btn btn--primary map-near-me__button" data-map-locate aria-describedby="map-location-help">
+        <Icon name="pin" />Show places near me
+      </button>
+    </div>
     <EventFilters events={upcoming} view="map" when={whens} collapsible countText={`${dancePlaces} ${dancePlaces === 1 ? 'place' : 'places'} shown`}>
-      <button type="button" class="btn btn--secondary btn--small" data-map-locate><Icon name="pin" />Show places near me</button>
     </EventFilters>
 
     <div class="map-layout">

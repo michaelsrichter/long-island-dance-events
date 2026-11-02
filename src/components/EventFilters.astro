@@ -4,7 +4,7 @@
  * address bar (scripts/event-match.ts), so a filtered view stays filtered when you switch views.
  * Needs JavaScript; without it every event shows.
  */
-import { getCollection } from 'astro:content';
+import { getCollection } from '../lib/collections';
 import Icon from './Icon.astro';
 import type { ResolvedEvent } from '../lib/content';
 import { eventFeatures, FEATURE_INFO, FEATURES } from '../lib/event-features';
@@ -15,7 +15,7 @@ interface Props {
   events: ResolvedEvent[];
   view: 'list' | 'calendar' | 'map';
   /** Date choices ("Today", "This weekend"...). The calendar has none: it shows one month. */
-  when?: { value: string; label: string }[];
+  when?: readonly { value: string; label: string }[];
   /** Initial result text, e.g. "42 events shown". */
   countText: string;
   /** Show the kind-of-dancing choice as chips (the list) instead of in "More filters". */
@@ -45,12 +45,12 @@ const Wrap = collapsible ? 'details' : 'div';
 ---
 <Wrap class={collapsible ? 'filters-panel js-only' : undefined} data-filters-panel={collapsible ? '' : undefined}>
 {collapsible && <summary class="filters-panel__toggle"><Icon name="search" />Filters<span class="filters-panel__count" data-filter-count></span></summary>}
-<form class:list={['filters event-filters js-only', collapsible && 'event-filters--collapsible']} data-event-filters data-view={view} aria-label="Filter events">
+<form class:list={['filters event-filters js-only', collapsible && 'event-filters--collapsible']} data-event-filters data-map-filters={view === 'map' ? '' : undefined} data-view={view} aria-label="Filter events">
   {when && when.length > 0 && (
     <fieldset>
       <legend>When</legend>
       <div class="quick-views">
-        {when.map((q, i) => <label class="chip"><input type="radio" name="when" value={q.value} checked={i === 0} /><span>{q.label}</span></label>)}
+        {when.map((q) => <label class="chip"><input type="radio" name="when" value={q.value} checked={q.value === 'all'} /><span>{q.label}</span></label>)}
       </div>
     </fieldset>
   )}
@@ -161,7 +161,7 @@ const Wrap = collapsible ? 'details' : 'div';
     </div>
   </details>
   <div class="btn-row filters__foot">
-    <p class="result-count" data-result-count aria-live="polite">{countText}</p>
+    <p class="result-count" data-result-count data-map-count={view === 'map' ? '' : undefined} aria-live="polite">{countText}</p>
     <slot />
     <button type="reset" class="btn btn--secondary btn--small">Clear filters</button>
   </div>

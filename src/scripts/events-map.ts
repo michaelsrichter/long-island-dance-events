@@ -132,6 +132,7 @@ if (mapEl && list) {
   const empty = document.querySelector<HTMLElement>('[data-map-empty]');
   const unplaced = [...document.querySelectorAll<HTMLElement>('[data-map-unplaced]')];
   const r = ranges();
+  let nearestFirst = false;
   /** Old links used ?type=dance|class|all; the list, calendar and map now share ?category=. */
   const LEGACY_TYPE: Record<string, string> = { dance: 'dances', class: 'class-lesson', all: 'all' };
 
@@ -155,7 +156,7 @@ if (mapEl && list) {
       } else layer.removeLayer(p.marker);
     }
     for (const e of unplaced) e.hidden = !matches(e);
-    if (count) count.textContent = `${shown} ${shown === 1 ? 'place' : 'places'} shown`;
+    if (count) count.textContent = `${shown} ${shown === 1 ? 'place' : 'places'} shown${nearestFirst ? ', nearest first' : ''}`;
     if (empty) empty.hidden = shown !== 0;
     if (visible.length) map.fitBounds(L.latLngBounds(visible), { padding: [28, 28], maxZoom: 13 });
     else if (source === 'load') map.setView([40.8, -73.2], 9);
@@ -170,7 +171,11 @@ if (mapEl && list) {
     const params = new URLSearchParams(location.search);
     const legacy = params.get('type');
     if (legacy && !params.get('category') && LEGACY_TYPE[legacy]) params.set('category', LEGACY_TYPE[legacy]!);
-    params.delete('type');
+    if (legacy) {
+      params.delete('type');
+      const qs = params.toString();
+      history.replaceState(history.state, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
+    }
     if (['dance', 'county', 'town', 'day', 'price', 'level', 'venue', 'person'].some((k) => params.get(k))) {
       const more = form.querySelector<HTMLDetailsElement>('.filters__more');
       if (more) more.open = true;
@@ -199,10 +204,12 @@ if (mapEl && list) {
 
   // "Show dances near me": sort the list by distance and show the nearest places. The location stays in the browser.
   const locate = document.querySelector<HTMLButtonElement>('[data-map-locate]');
+  const locateStatus = document.querySelector<HTMLElement>('[data-map-locate-status]');
   let you: L.CircleMarker | undefined;
   if (locate && 'geolocation' in navigator) {
     locate.addEventListener('click', () => {
       locate.disabled = true;
+      if (locateStatus) locateStatus.textContent = 'Checking your location…';
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           locate.disabled = false;
@@ -216,19 +223,24 @@ if (mapEl && list) {
             if (label) label.textContent = ` · ${miles < 10 ? miles.toFixed(1) : Math.round(miles)} mi away`;
             list.append(p.el);
           }
+          nearestFirst = true;
           const nearest = sorted.filter((p) => !p.el.hidden).slice(0, 4).map((p) => p.latlng);
           map.fitBounds(L.latLngBounds([here, ...nearest]), { padding: [36, 36], maxZoom: 13 });
-          if (count) count.textContent = `${count.textContent?.replace(/, nearest first$/, '')}, nearest first`;
+          const shown = places.filter((p) => !p.el.hidden).length;
+          if (count) count.textContent = `${shown} ${shown === 1 ? 'place' : 'places'} shown, nearest first`;
+          if (locateStatus) locateStatus.textContent = 'Nearest places are listed first. Your location stayed on this device.';
           track('filter_events', { location: 'map', filter: 'near_me', value: 'granted' });
         },
         () => {
           locate.disabled = false;
-          locate.textContent = 'Location not available';
+          if (locateStatus) locateStatus.textContent = 'Your location is not available. You can still browse every place on the map.';
           track('filter_events', { location: 'map', filter: 'near_me', value: 'denied' });
         },
         { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 },
       );
     });
-  } else if (locate) locate.hidden = true;
+  } else if (locate) {
+    locate.disabled = true;
+    if (locateStatus) locateStatus.textContent = 'This browser cannot share a location. You can still browse every place on the map.';
+  }
 }
-
