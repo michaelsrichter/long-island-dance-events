@@ -12,7 +12,7 @@
   "isFree": true,
   "skillLevel": "all-levels",
   "infoUrl": "https://www.timetravelersli.com/upcoming-shows/riptides-lindenhurst",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "the-time-travelers",
   "sourceUrl": "https://www.timetravelersli.com/upcoming-shows/riptides-lindenhurst",
   "sourceName": "The Time Travelers - live music calendar",
@@ -21,5 +21,5 @@
   "lastSeen": "2026-10-05",
   "confidence": 0.6,
   "matchKey": "the-time-travelers|riptides-lindenhurst||saturday|tba|live-music|the-time-travelers||2026-11-21",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Hidden automatically because it was not found in the latest the-time-travelers run on 2026-10-29; it may have been cancelled or moved."
 }

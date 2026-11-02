@@ -10,11 +10,11 @@
   "focus": "dance",
   "lastCounts": {
     "found": 40,
-    "kept": 2,
+    "kept": 1,
     "needsReview": 0,
-    "outOfArea": 19
+    "outOfArea": 15
   },
-  "lastScraped": "2026-10-05T06:44:34.446Z",
+  "lastScraped": "2026-11-01T16:22:42.615Z",
   "lastStatus": "ok",
   "pageUrls": [
     "https://sabaki.dance/events/Levittown"

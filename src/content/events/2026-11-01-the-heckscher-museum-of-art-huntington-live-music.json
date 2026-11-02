@@ -1,0 +1,26 @@
+{
+  "title": "Live music at The Heckscher Museum of Art",
+  "summary": "Live music at The Heckscher Museum of Art. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-01T12:00",
+  "end": "2026-11-01T17:00",
+  "timezone": "America/New_York",
+  "venueId": "the-heckscher-museum-of-art-huntington",
+  "town": "Huntington",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/dia-de-los-muertos-family-celebration-free/?occurrence=2026-11-01",
+  "status": "active",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/dia-de-los-muertos-family-celebration-free/?occurrence=2026-11-01",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-11-01",
+  "firstSeen": "2026-11-01",
+  "lastSeen": "2026-11-01",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "huntington-matters|the-heckscher-museum-of-art-huntington||sunday|12:00|live-music|||2026-11-01",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

@@ -10,13 +10,13 @@
     "vintage-vinyl"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "past",
   "sourceId": "bobbique-patchogue",
   "sourceUrl": "https://www.bobbique.com/upcoming-events/",
   "sourceName": "BOBBIQUE (Patchogue) - live music calendar",
   "sourceRef": "events page 2026-10-30",
   "firstSeen": "2026-10-05",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-29",
   "confidence": 0.8,
   "matchKey": "bobbique-patchogue|bobbique-patchogue||friday|20:00|live-music|vintage-vinyl||2026-10-30"
 }

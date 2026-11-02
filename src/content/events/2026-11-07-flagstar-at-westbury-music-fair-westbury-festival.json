@@ -1,0 +1,27 @@
+{
+  "title": "Salsa festival at Flagstar at Westbury Music Fair",
+  "summary": "A larger dance event for Salsa.",
+  "category": "festival",
+  "danceStyles": [
+    "salsa"
+  ],
+  "start": "2026-11-07T20:00",
+  "timezone": "America/New_York",
+  "venueId": "flagstar-at-westbury-music-fair-westbury",
+  "town": "Westbury",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://sabaki.dance/event/9b470443-c931-44dd-8650-805710d716f7",
+  "status": "active",
+  "sourceId": "sabaki-dance",
+  "sourceUrl": "https://sabaki.dance/event/9b470443-c931-44dd-8650-805710d716f7",
+  "sourceName": "sabaki.dance (Latin dance aggregator) - city pages",
+  "sourceRef": "event data on the page 2026-11-07",
+  "firstSeen": "2026-11-01",
+  "lastSeen": "2026-11-01",
+  "dancingCues": [
+    "festival",
+    "theater"
+  ],
+  "confidence": 0.9,
+  "matchKey": "sabaki-dance|flagstar-at-westbury-music-fair-westbury||saturday|20:00|festival||salsa|2026-11-07"
+}

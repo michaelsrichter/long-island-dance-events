@@ -1,0 +1,11 @@
+{
+  "name": "The Allegria Hotel",
+  "address": "80 W Broadway",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Long Beach",
+  "latitude": 40.584644,
+  "longitude": -73.666237,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

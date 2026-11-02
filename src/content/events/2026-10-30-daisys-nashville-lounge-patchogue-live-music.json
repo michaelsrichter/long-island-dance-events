@@ -15,13 +15,13 @@
     "southbound"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "past",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-10-30",
   "confidence": 0.75,
   "matchKey": "iraslist|2026-10-30|daisys-nashville-lounge-patchogue|southbound|2026-10-30|special"
 }

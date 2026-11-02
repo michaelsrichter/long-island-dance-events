@@ -17,7 +17,7 @@
   ],
   "skillLevel": "all-levels",
   "infoUrl": "https://genecasey.com/event/gene-casey-solo-at-bedell-cellars/",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "gene-casey-lone-sharks",
   "sourceUrl": "https://genecasey.com/event/gene-casey-solo-at-bedell-cellars/",
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
@@ -28,5 +28,6 @@
     "afternoon"
   ],
   "confidence": 0.9,
-  "matchKey": "gene-casey-lone-sharks|bedell-cellars-cutchogue||sunday|13:00|live-music|gene-casey-and-the-lone-sharks||repeat"
+  "matchKey": "gene-casey-lone-sharks|bedell-cellars-cutchogue||sunday|13:00|live-music|gene-casey-and-the-lone-sharks||repeat",
+  "reviewNotes": "Hidden automatically because it was not found in the latest gene-casey-lone-sharks run on 2026-10-29; it may have been cancelled or moved."
 }

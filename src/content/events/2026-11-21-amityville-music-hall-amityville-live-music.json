@@ -1,0 +1,20 @@
+{
+  "title": "Sanctified: Mall Goth at Amityville Music Hall",
+  "summary": "Live music by Sanctified: Mall Goth at Amityville Music Hall. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-21T23:00",
+  "timezone": "America/New_York",
+  "venueId": "amityville-music-hall-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "amityville-music-hall",
+  "sourceUrl": "https://amh.live/",
+  "sourceName": "Amityville Music Hall - show list",
+  "sourceRef": "events page 2026-11-21",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.75,
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||saturday|23:00|live-music|sanctifiedmallgoth||2026-11-21",
+  "reviewNotes": "Band or DJ not researched yet: Sanctified: Mall Goth."
+}

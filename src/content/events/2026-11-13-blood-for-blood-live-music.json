@@ -1,0 +1,23 @@
+{
+  "title": "Blood For Blood at Amityville Music Hall",
+  "summary": "Live music by Blood For Blood at Amityville Music Hall. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-13",
+  "timezone": "America/New_York",
+  "venueId": "amityville-music-hall-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "blood-for-blood"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "amityville-music-hall",
+  "sourceUrl": "https://amh.live/",
+  "sourceName": "Amityville Music Hall - show list",
+  "sourceRef": "events page 2026-11-13",
+  "firstSeen": "2026-10-29",
+  "lastSeen": "2026-10-29",
+  "confidence": 0.6,
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||friday|tba|live-music|blood-for-blood||2026-11-13",
+  "reviewNotes": "No start time found."
+}
