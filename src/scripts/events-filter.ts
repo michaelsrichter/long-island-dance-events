@@ -1,24 +1,11 @@
 /** Event filters for /events/. The full list works without JavaScript; filters sync to the URL so views can be shared. */
+import { eventDateRanges, matchesEventDate } from '../lib/event-date-windows';
 import { track } from './analytics';
 
 const form = document.querySelector<HTMLFormElement>('[data-event-filters]');
 const list = document.querySelector<HTMLElement>('[data-upcoming-list]');
 
-const nyDate = (d: Date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
-const addDays = (date: string, n: number) => {
-  const [y, m, d] = date.split('-').map(Number) as [number, number, number];
-  return new Date(Date.UTC(y, m - 1, d + n, 12)).toISOString().slice(0, 10);
-};
-
-/** Today's date and the coming weekend (Friday to Sunday; from today when already in it), in New York time. */
-export function ranges(now = new Date()) {
-  const today = nyDate(now);
-  const [y, m, d] = today.split('-').map(Number) as [number, number, number];
-  const dow = new Date(Date.UTC(y, m - 1, d, 12)).getUTCDay();
-  const friday = addDays(today, dow === 0 ? -2 : dow === 6 ? -1 : 5 - dow);
-  const weekendFrom = dow === 0 || dow === 6 ? today : friday;
-  return { today, weekEnd: addDays(today, 6), month: today.slice(0, 7), weekendFrom, weekendTo: addDays(friday, 2) };
-}
+export const ranges = eventDateRanges;
 
 if (form && list) {
   form.hidden = false;
@@ -43,10 +30,7 @@ if (form && list) {
 
   function matches(c: HTMLElement, v: Record<Field, string>): boolean {
     const date = c.dataset.date ?? '';
-    if (v.when === 'today' && date !== r.today) return false;
-    if (v.when === 'weekend' && (date < r.weekendFrom || date > r.weekendTo)) return false;
-    if (v.when === 'week' && (date < r.today || date > r.weekEnd)) return false;
-    if (v.when === 'month' && !date.startsWith(r.month)) return false;
+    if (!matchesEventDate(date, v.when, r)) return false;
     // The default view: dances and live music people dance to (no classes, no listening-only concerts).
     if (v.category === 'dances' && (c.dataset.category === 'class-lesson' || c.dataset.dancing === 'unlikely')) return false;
     if (v.dance && !has(c.dataset.danceKinds, v.dance)) return false;

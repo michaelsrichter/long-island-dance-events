@@ -2,6 +2,7 @@
 import { getCollection, getEntry, type CollectionEntry } from './collections';
 import { cadenceOf, isUpcoming, partition, priceOf, priceText, resolveOccurrences, type Occurrence, type PriceInfo } from './event-core';
 import type { CalendarEvent } from './calendar';
+import { eventDateRanges } from './event-date-windows';
 import { CATEGORY_LABELS, SKILL_LABELS, type County, type EventCategory } from './schemas';
 import { addDays, dateInZone, formatDateLong, formatTime, weekdayOf, DEFAULT_TZ } from './time';
 import { linksOf, type ExternalLink } from './links';
@@ -226,18 +227,17 @@ export const isDance = (e: { category: string; dancing: { level: DancingAssessme
 
 /** Saturday and Sunday of the coming weekend (Friday evening counts too), as YYYY-MM-DD. */
 export function weekendRange(now: Date, tz = DEFAULT_TZ): { from: string; to: string } {
-  const today = dateInZone(now, tz);
-  const dow = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'].indexOf(weekdayOf(today));
-  const friday = addDays(today, dow === 0 ? -2 : dow === 6 ? -1 : 5 - dow);
-  return { from: dow === 0 || dow === 6 ? today : friday, to: addDays(friday, 2) };
+  const ranges = eventDateRanges(now, tz);
+  return { from: ranges.weekendFrom, to: ranges.weekendTo };
 }
 
 export async function getEventGroups() {
   const all = await getAllEvents();
   const now = buildNow();
   const { upcoming, past } = partition(all, now);
-  const today = dateInZone(now, DEFAULT_TZ);
-  const weekend = weekendRange(now);
+  const ranges = eventDateRanges(now);
+  const today = ranges.today;
+  const weekend = { from: ranges.weekendFrom, to: ranges.weekendTo };
   return {
     all,
     upcoming,
@@ -247,7 +247,8 @@ export async function getEventGroups() {
     tonight: upcoming.filter((e) => e.date === today),
     weekend: upcoming.filter((e) => e.date >= weekend.from && e.date <= weekend.to),
     weekendRange: weekend,
-    nextSevenDays: upcoming.filter((e) => e.date <= addDays(today, 6)),
+    thisWeek: upcoming.filter((e) => e.date <= ranges.thisWeekEnd),
+    nextSevenDays: upcoming.filter((e) => e.date <= ranges.weekEnd),
   };
 }
 
