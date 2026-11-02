@@ -5,6 +5,10 @@ import { addDays, daysInMonth, formatDateLong, formatMonthKey, weekdayOf, WEEKDA
 import EventCard from './EventCard.astro';
 import EmptyState from './EmptyState.astro';
 import Icon from './Icon.astro';
+import EventFilters from './EventFilters.astro';
+import { eventFilterData, shownByDefault } from '../lib/event-filter-data';
+import { CAL_MAX, calMoreLabel } from '../scripts/event-match';
+import { CALENDAR_FEATURES, eventFeatures, FEATURE_INFO } from '../lib/event-features';
 
 interface Props {
   month: string; // YYYY-MM
@@ -28,18 +32,31 @@ for (const e of events) byDate.set(e.date, [...(byDate.get(e.date) ?? []), e]);
 for (const [k, list] of byDate) byDate.set(k, sortOccurrences(list));
 const inMonth = sortOccurrences(events.filter((e) => e.date.startsWith(month)));
 const label = formatMonthKey(month);
+/** Tiny icons in a calendar square: only the features worth the space, in a fixed order. */
+const calFeatures = (e: ResolvedEvent) => eventFeatures(e).filter((f) => CALENDAR_FEATURES.includes(f));
+const usedFeatures = CALENDAR_FEATURES.filter((f) => inMonth.some((e) => calFeatures(e).includes(f)));
+/**
+ * The page starts in its default filtered state (no classes, at most CAL_MAX per square, "+N more"), marked with
+ * data-off and shown only while data-cal-pending is set and JavaScript is on; scripts/calendar-filter.ts then takes
+ * over without anything moving. Without JavaScript every event shows.
+ */
+const on = new Set(inMonth.filter(shownByDefault));
+const inMonthDances = on.size;
 ---
-<div class="cal-nav">
-  {prev ? <a class="btn btn--secondary btn--small" href={`/events/calendar/${prev}/`} data-track="view_calendar_month" data-track-method="prev"><span aria-hidden="true">←</span> {formatMonthKey(prev)}</a> : <span></span>}
+<EventFilters events={events} view="calendar" collapsible countText={`${inMonthDances} ${inMonthDances === 1 ? 'event' : 'events'} shown in ${label}`} />
+
+<div class="cal-nav mt-5">
+  {prev ? <a class="btn btn--secondary btn--small" href={`/events/calendar/${prev}/`} data-carry-filters data-track="view_calendar_month" data-track-method="prev"><span aria-hidden="true">←</span> {formatMonthKey(prev)}</a> : <span></span>}
   <h2 id="cal-title">{label}</h2>
-  {next ? <a class="btn btn--secondary btn--small" href={`/events/calendar/${next}/`} data-track="view_calendar_month" data-track-method="next">{formatMonthKey(next)} <span aria-hidden="true">→</span></a> : <span></span>}
+  {next ? <a class="btn btn--secondary btn--small" href={`/events/calendar/${next}/`} data-carry-filters data-track="view_calendar_month" data-track-method="next">{formatMonthKey(next)} <span aria-hidden="true">→</span></a> : <span></span>}
 </div>
-<ul class="host-legend mt-3" aria-label="What the colors mean">
+<ul class="host-legend mt-3" aria-label="What the colors and icons mean">
   <li><span class="cal__event cal__event--social-dance legend-swatch" aria-hidden="true">Dance</span>Dances and live music</li>
   <li><span class="cal__event cal__event--class-lesson legend-swatch" aria-hidden="true">Class</span>Classes and lessons</li>
+  {usedFeatures.map((f) => <li><span class="cal__feat legend-icon" aria-hidden="true"><Icon name={FEATURE_INFO[f].icon} /></span>{FEATURE_INFO[f].label}</li>)}
 </ul>
 
-<table class="cal" aria-labelledby="cal-title">
+<table class="cal" aria-labelledby="cal-title" data-cal-pending>
   <thead>
     <tr>{WEEKDAYS.map((d) => <th scope="col"><abbr title={d[0]!.toUpperCase() + d.slice(1)}>{d.slice(0, 3)}</abbr></th>)}</tr>
   </thead>
@@ -49,20 +66,24 @@ const label = formatMonthKey(month);
         {week.map((day) => {
           const list = byDate.get(day) ?? [];
           const outside = !day.startsWith(month);
+          const shown = list.filter((e) => on.has(e));
+          const extra = outside ? 0 : shown.length - CAL_MAX;
           return (
-            <td class:list={[outside && 'cal__outside', day === today && 'cal__today']}>
+            <td class:list={[outside && 'cal__outside', day === today && 'cal__today']} data-cal-day={outside ? undefined : day}>
               <span class="cal__day"><span class="visually-hidden">{formatDateLong(day)}{day === today ? ' (today)' : ''}</span><span aria-hidden="true">{Number(day.slice(8))}</span></span>
               {!outside && list.map((e) => {
                 const st = e.end.getTime() <= now.getTime() && e.status !== 'cancelled' ? 'past' : e.status;
                 const kind = e.category === 'class-lesson' ? 'class-lesson' : 'social-dance';
                 return (
-                  <a class:list={['cal__event', `cal__event--${st}`, `cal__event--${kind}`]} href={e.url}>
+                  <a class:list={['cal__event', `cal__event--${st}`, `cal__event--${kind}`]} href={e.url} data-cal-event data-off={!on.has(e) || shown.indexOf(e) >= CAL_MAX ? '' : undefined} {...eventFilterData(e)}>
                     {e.status === 'cancelled' && <span class="visually-hidden">Cancelled: </span>}
                     {e.timeLabel && <span class="cal__time">{e.timeLabel.split(' to ')[0]}</span>} {e.title.replace(/ at [^,]+$/, '')}{e.location.name && <span class="visually-hidden"> at {e.location.name}</span>}
-                    <span class="visually-hidden"> ({e.categoryLabel})</span>
+                    <span class="visually-hidden"> ({[e.categoryLabel, ...calFeatures(e).map((f) => FEATURE_INFO[f].label)].join(', ')})</span>
+                    {calFeatures(e).length > 0 && <span class="cal__feats" aria-hidden="true">{calFeatures(e).map((f) => <span class:list={['cal__feat', `cal__feat--${f}`]}><span class={`fi fi--${FEATURE_INFO[f].icon}`}></span></span>)}</span>}
                   </a>
                 );
               })}
+              {extra > 0 && <button type="button" class="cal__more js-only" data-cal-more aria-expanded="false" aria-label={calMoreLabel(day, extra, false)}>+{extra} more</button>}
             </td>
           );
         })}
@@ -71,13 +92,19 @@ const label = formatMonthKey(month);
   </tbody>
 </table>
 
-<div class="cal-agenda">
+<div class="cal-agenda" data-cal-pending>
   {inMonth.length ? (
     <ul class="event-list">
-      {inMonth.map((e) => <EventCard event={e} past={e.end.getTime() <= now.getTime()} />)}
+      {inMonth.map((e) => <EventCard event={e} past={e.end.getTime() <= now.getTime()} offByDefault={!on.has(e)} />)}
     </ul>
   ) : (
     <EmptyState title={`No events listed for ${label}`}><p><a href="/events/">See all upcoming events</a></p></EmptyState>
   )}
 </div>
+<div class="js-only" data-filter-empty hidden={!(inMonth.length > 0 && on.size === 0)}>
+  <EmptyState title="No events match those filters this month" icon="info"><p>Try a different filter, or clear the filters to see everything.</p></EmptyState>
+</div>
 <p class="mt-5"><a href="/events/all.ics" data-track="add_to_calendar" data-track-method="subscribe_feed" data-track-location="calendar"><Icon name="calendar" class="visually-hidden" />Subscribe in your calendar app</a></p>
+<script>
+  import '../scripts/calendar-filter';
+</script>

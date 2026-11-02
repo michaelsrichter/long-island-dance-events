@@ -26,3 +26,9 @@ export async function firstEventUrl(page: Page, selector = '[data-upcoming-list]
   expect(href).toMatch(/^\/events\/\d{4}-\d{2}-\d{2}-/);
   return href!;
 }
+
+/** On the calendar and map, phones start with the filters folded behind a "Filters" button; open it if needed. */
+export async function openFilters(page: Page) {
+  const panel = page.locator('[data-filters-panel]');
+  if ((await panel.count()) && (await panel.getAttribute('open')) === null) await panel.locator('.filters-panel__toggle').click();
+}

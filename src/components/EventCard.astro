@@ -8,6 +8,8 @@ import RelativeWhen from './RelativeWhen.astro';
 import StyleTags from './StyleTags.astro';
 import Reactions from './Reactions.astro';
 import PersonName from './PersonName.astro';
+import FeatureBadges from './FeatureBadges.astro';
+import { eventFilterData } from '../lib/event-filter-data';
 import { formatDateLong } from '../lib/time';
 
 interface Props {
@@ -18,29 +20,16 @@ interface Props {
   hideDate?: boolean;
   /** Starts hidden behind a "Show more" button (see scripts/collapse.ts). */
   collapsed?: boolean;
+  /** Hidden until the filters script runs, because the default filters hide it (see MonthCalendar.astro). */
+  offByDefault?: boolean;
 }
-const { event: e, headingLevel = 'h3', past = false, hideDate = false, collapsed = false } = Astro.props;
+const { event: e, headingLevel = 'h3', past = false, hideDate = false, collapsed = false, offByDefault = false } = Astro.props;
 const Heading = headingLevel;
-const people = [...e.performers, ...e.instructors];
 const filterData = {
   'data-event': '',
   'data-collapsed': collapsed ? '' : undefined,
-  'data-date': e.date,
-  'data-end': String(e.end.getTime()),
-  'data-start-min': e.timeTba ? '' : e.startLocal.slice(11),
-  'data-status': e.status,
-  'data-category': e.category,
-  'data-styles': e.styles.map((s) => s.id).join(' '),
-  'data-venue': e.venue?.id ?? '',
-  'data-town': e.location.town ?? '',
-  'data-county': e.location.county ?? '',
-  'data-weekday': e.weekday,
-  'data-level': e.data.skillLevel,
-  'data-price': e.price.free ? 'free' : e.price.known ? 'paid' : 'unknown',
-  'data-people': people.map((p) => p.id).join(' '),
-  'data-organizer': e.organizer?.id ?? '',
-  'data-dancing': e.dancing.level,
-  'data-dance-kinds': e.dancing.kinds.join(' '),
+  'data-off': offByDefault ? '' : undefined,
+  ...eventFilterData(e),
 };
 ---
 <li class:list={['event-card', `event-card--${e.status}`, `event-card--${e.category}`]} {...filterData}>
@@ -48,6 +37,7 @@ const filterData = {
   <div class="event-card__body">
     <div class="event-card__badges">
       <span class:list={['cat-badge', `cat-badge--${e.category}`]}>{e.categoryLabel}</span>
+      <FeatureBadges event={e} />
       {e.category !== 'class-lesson' && <DancingBadge dancing={e.dancing} />}
       <StatusBadge status={e.status} />
       {!past && <RelativeWhen start={e.start} end={e.end} allDay={e.timeTba} />}

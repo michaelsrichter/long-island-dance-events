@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import { test, expect, firstEventUrl } from './fixtures';
+import { test, expect, firstEventUrl, openFilters } from './fixtures';
 
 const placeData = JSON.parse(readFileSync(new URL('../../src/data/long-island-places.json', import.meta.url), 'utf8')) as {
   aliases: Record<string, string>;
@@ -237,10 +237,11 @@ test.describe('views', () => {
     if (isMobile) {
       await expect(page.locator('table.cal')).toBeHidden();
       for (const past of await page.locator('.cal-agenda .event-card--past').all()) await expect(past).toBeHidden();
-      await expect(page.locator('.cal-agenda .event-card:not(.event-card--past)').first()).toBeVisible();
+      // Like the list and map, the calendar starts with dances and live music (classes are one tap away).
+      await expect(page.locator('.cal-agenda .event-card:not(.event-card--past):not([hidden])').first()).toBeVisible();
     } else {
       await expect(page.locator('table.cal')).toBeVisible();
-      await expect(page.locator('table.cal .cal__event').first()).toBeVisible();
+      await expect(page.locator('table.cal .cal__event:not([hidden])').first()).toBeVisible();
     }
   });
 
@@ -254,11 +255,12 @@ test.describe('views', () => {
     const dancePlaces = await page.locator('[data-map-place]:not([hidden])').count();
     expect(dancePlaces).toBeGreaterThan(0);
     await expect(page.locator('.leaflet-marker-icon')).toHaveCount(dancePlaces);
+    await openFilters(page);
     await page.locator('label.chip', { hasText: 'Everything' }).click();
-    await expect(page).toHaveURL(/type=all/);
+    await expect(page).toHaveURL(/category=all/);
     await expect(page.locator('.leaflet-marker-icon')).toHaveCount(n);
     await page.locator('label.chip', { hasText: 'Classes' }).click();
-    await expect(page).toHaveURL(/type=class/);
+    await expect(page).toHaveURL(/category=class-lesson/);
     expect(await page.locator('.leaflet-marker-icon').count()).toBeLessThan(n);
   });
 
@@ -266,10 +268,11 @@ test.describe('views', () => {
     await page.goto('/events/map/');
     const placeId = await page.locator('[data-map-place]').first().getAttribute('id');
     expect(placeId).toBeTruthy();
-    await page.goto(`/events/map/?when=weekend&type=all&campaign=map-test#${placeId}`);
+    await page.goto(`/events/map/?when=weekend&category=all&campaign=map-test#${placeId}`);
     await page.locator('[data-events-map]').scrollIntoViewIfNeeded();
     await expect(page.locator('input[name="when"][value="weekend"]')).toBeChecked();
-    await expect(page.locator('input[name="type"][value="all"]')).toBeChecked();
+    await expect(page.locator('input[name="category"][value="all"]')).toBeChecked();
+    await openFilters(page);
 
     for (const choice of ['Today', 'This week', 'This weekend', 'Next 7 days', 'This month', 'All upcoming']) {
       await page.getByRole('radio', { name: choice, exact: true }).check();
@@ -287,7 +290,8 @@ test.describe('views', () => {
     const url = new URL(page.url());
     expect(url.searchParams.get('campaign')).toBe('map-test');
     expect(url.hash).toBe(`#${placeId}`);
-    expect(url.searchParams.get('type')).toBe('all');
+    expect(url.searchParams.get('category')).toBe('all');
+    expect(url.searchParams.get('campaign')).toBe('map-test');
     expect(url.searchParams.get('when')).toBeNull();
   });
 

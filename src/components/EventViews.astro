@@ -1,5 +1,5 @@
 ---
-/** List / Month calendar / Map / Past events switcher shown at the top of every events page. */
+/** List / Month calendar / Map / Past events switcher shown at the top of every events page. The first three keep the current filters (scripts/event-match.ts). */
 interface Props {
   current: 'list' | 'calendar' | 'map' | 'past';
 }
@@ -13,6 +13,6 @@ const views = [
 ---
 <nav class="mt-5" aria-label="Event views">
   <div class="view-switch">
-    {views.map((v) => <a href={v.href} aria-current={v.id === current ? 'page' : undefined}>{v.label}</a>)}
+    {views.map((v) => <a href={v.href} aria-current={v.id === current ? 'page' : undefined} data-carry-filters={v.id === 'past' ? undefined : ''}>{v.label}</a>)}
   </div>
 </nav>
