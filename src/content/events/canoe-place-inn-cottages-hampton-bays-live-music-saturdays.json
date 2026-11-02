@@ -15,7 +15,7 @@
   ],
   "skillLevel": "all-levels",
   "infoUrl": "https://canoeplace.com/event/holidays-in-the-study/2026-11-28/",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "canoe-place-inn-cottages-hampton-bays",
   "sourceUrl": "https://canoeplace.com/event/holidays-in-the-study/2026-11-28/",
   "sourceName": "Canoe Place Inn & Cottages - live music calendar",
@@ -23,5 +23,6 @@
   "firstSeen": "2026-10-05",
   "lastSeen": "2026-10-05",
   "confidence": 0.9,
-  "matchKey": "canoe-place-inn-cottages-hampton-bays|canoe-place-inn-cottages-hampton-bays||saturday|18:00|live-music|jeff-leblanc||repeat"
+  "matchKey": "canoe-place-inn-cottages-hampton-bays|canoe-place-inn-cottages-hampton-bays||saturday|18:00|live-music|jeff-leblanc||repeat",
+  "reviewNotes": "Hidden automatically because it was not found in the latest canoe-place-inn-cottages-hampton-bays run on 2026-11-02; it may have been cancelled or moved."
 }
