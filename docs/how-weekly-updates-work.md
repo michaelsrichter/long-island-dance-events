@@ -18,8 +18,8 @@ costs, and what you (the owner) need to do. Technical details live in
 - **What you do:** nothing for routine event publishing. Uncertain, missing and duplicate listings
   stay hidden automatically instead of becoming approval tasks. The **review center** at
   [longisland.dance/moderate/](https://longisland.dance/moderate/) is still where you handle visitor
-  messages, takedown requests, community photos and notes, permission choices, source failures and
-  exceptional event corrections.
+  messages, takedown requests, community photos and notes, permission choices, source security/legal
+  exceptions and exceptional event corrections. Routine source failures and discoveries are automatic.
 - **What it costs:** the weekly collecting is **free** (GitHub Actions is free for public
   repositories). The search for new sources costs about **$4.25 a month** (Microsoft Web IQ). The
   website itself costs about **$9 a month** on Azure. The newsletter inbox is **free** (AgentMail
@@ -36,21 +36,21 @@ flowchart TD
   subgraph GH["GitHub's cloud (GitHub Actions, free)"]
     T1["Timer: every morning,\nMon + Thu, Sunday"] --> C["Collect events\n(ingest-scheduled.yml)"]
     T2["Timer: 1st of the month"] --> D["Find and recheck sources\n(source-discovery.yml)"]
-    C --> R1["Read each switched-on source\nrobots.txt first, slow and polite"]
+    C --> R1["Read each switched-on source\npublic addresses only, robots.txt first,\nslow and polite"]
     R1 --> R2["Pull out facts, write our own words,\nmatch venues and bands, skip non-dance\nand off-island items, remove duplicates"]
     R2 --> R3["Map pins for new venues\n(Census geocoder, then OpenStreetMap)"]
     R3 --> R4["Check every file\n(npm run check)"]
     R4 --> PR["One rolling pull request\n'Collected events: auto-publish after checks'"]
     PR --> CI["CI checks this exact commit"]
     CI -->|"passes every guard"| M["main branch"]
-    R4 --> IS["Issue for any source that broke"]
-    D --> DI["Monthly issue: new websites found,\nsources that changed or broke"]
+    R4 --> H["30-day retry history\nsuccess clears it; 30 days disables"]
+    D --> DI["Safety-check and validate new sites\nwith an existing reader"]
+    DI --> PR
   end
   N["Newsletter inbox (AgentMail)"] --> R1
-  DI --> O
-  IS --> O(("You"))
+  O(("You"))
   M --> AZ["Azure Static Web Apps builds\nand publishes longisland.dance"]
-  O -.->|"new source or broken adapter"| CP["Copilot session (on demand)\nresearch, fixes, new venues"]
+  O -.->|"permission, legal or unusual adapter"| CP["Copilot session (on demand)\nresearch, fixes, new venues"]
   CP -.->|"pull request"| M
 ```
 
@@ -68,7 +68,7 @@ first runs started about five hours late). That is normal and does not lose anyt
 | Every night, about 5:15 AM | Azure Static Web Apps (`azure-static-web-apps.yml`) | Rebuilds the site so "This week" and "Today" stay correct. |
 | Every morning, about 6:30 AM | Community maintenance | Backups and cleanup for likes, notes and photos. |
 | Monday, 8 AM | External link check | Reports broken outside links (does not block anything). |
-| 1st of the month, 7 AM | Find and recheck sources (`source-discovery.yml`) | Searches the web for new sources (Web IQ) and rechecks every source we track. Opens an issue with what it found. |
+| 1st of the month, 7 AM | Find and recheck sources (`source-discovery.yml`) | Searches the web for new sources (Web IQ), rejects unsafe/private addresses, rechecks tracked sources, and automatically adds sources that pass robots, location and real-reader validation. Results are saved as workflow artifacts, not owner tasks. |
 | 1st of the month, 8 AM | Report database | Saves a spreadsheet-style copy of all the data for reports. |
 | Any time a venue is added or changed | Venue map locations (`geocode-venues.yml`) | Looks up the map pin from the street address. |
 
@@ -141,14 +141,21 @@ The Dance Calendar's PDF, which is set to weekly for that reason) shows up withi
     source found, what was skipped and why, and which uncertain listings were hidden automatically.
     The review center's **Event updates** tab shows the same report and keeps a manual fallback for
     exceptional recovery.
-14. **Report problems.** A source that breaks gets a GitHub issue labeled `ingest-failure`. After
-    three failures in a row it is switched off in the pull request, with a note.
+14. **Retry failed sources automatically.** The first failed check starts a 30-day clock. The source
+    stays switched on and is retried on every normal run during that time. Any successful check clears
+    the streak. After 30 continuous days without success, it switches off automatically with the first
+    and last failure dates, the disabled date, a machine-readable reason and a plain-language history note.
+    No routine failure issue or owner task is created.
 15. **CI checks the exact commit.** The collection run starts the trusted `CI` workflow with
-    `workflow_dispatch`. Type checks, tests, builds, links, accessibility and other checks must pass.
-16. **The trusted workflow publishes.** A `workflow_run` workflow stored on `main` checks that the
-    successful CI SHA is still the open pull request's SHA, the PR is repository-owned, clean,
-    non-draft and based on `main`, and every changed file is under `src/content/`. It creates a normal
-    merge commit and keeps `ingest/updates`. The site updates a few minutes later.
+    `workflow_dispatch`, then starts the publisher workflow from `main` with that exact 40-character
+    commit address. Type checks, tests, builds, links, accessibility and other checks must pass.
+16. **The trusted workflow publishes.** The publisher waits until it can independently find a
+    successful manually dispatched CI run for that exact commit. It checks again that the pull request
+    still has that SHA, belongs to this repository, is open, non-draft, mergeable and based on `main`,
+    and that both current and previous names of every changed file are under `src/content/`. GitHub's
+    `unstable` merge label is allowed only after that exact CI success; conflicts and all other unsafe
+    states are refused. It creates a normal merge commit and keeps or restores `ingest/updates`. The
+    site updates a few minutes later.
 
 ## How we get the details of each event
 
@@ -234,21 +241,18 @@ GitHub secrets (`AGENTMAIL_INBOX`, `AGENTMAIL_API_KEY`), never in the code.
    styles and music words, such as "Commack NY line dancing" or "Wantagh NY cover band"). Every town
    is searched again once a year. It also rechecks every source we already track (does `robots.txt`
    still allow us? are there still upcoming dates?).
-2. **The monthly issue.** It opens a GitHub issue listing websites it has never seen before and any
-   tracked source that changed or broke. **Nothing is switched on automatically.** The new websites also
-   show in the review center's **Sources** tab (read from a hidden `review-data` block at the end of the
-   issue), with **Worth adding** (a Copilot task) and **Not useful** (saved in `catalog/search-triage.json`
-   as `owner-no`, so it is not suggested again).
-3. **Checking a find.** A person (usually with a Copilot session) opens each promising website and
-   asks: does it list **several upcoming** dance or live-music events on Long Island? Is it allowed
-   (robots.txt and the site's rules)? Is it more than one event page, and is it kept up to date?
-4. **Adding it.** If yes, the session adds:
-   - a line in `catalog/sources.json` (what we found and why);
-   - a source file in `src/content/sources/<id>.json` (where the calendar is and how to read it);
-   - venue, band or organizer files for anything the source needs, with addresses and dancing research;
-   - an attempt to sign up for the source's newsletter.
-5. **You approve.** All of that arrives as a pull request. Merging it is your approval. The next
-   collection run starts reading the source.
+2. **Safety first (automatic).** Every candidate must be public `http` or `https`, contain no
+   credentials, and resolve only to public internet addresses. Loopback, link-local, private IPv4,
+   private/unique-local IPv6, internal host names and redirects to any of them are refused before fetch.
+3. **Polite validation (automatic).** The workflow checks robots.txt, uses the identifying bot name,
+   waits between requests, rejects bot challenges, requires clear Nassau or Suffolk evidence and several
+   upcoming dates, then chooses an existing `jsonld`, `ical` or `htmllist` reader.
+4. **Real collector test (automatic).** A proposed source file is tested with the same collector that
+   runs every week. If the reader cannot produce usable events, the file is removed and the result fails
+   closed. It does not become an owner or Copilot task.
+5. **Publish (automatic).** Valid source files go onto `ingest/updates`. Exact-SHA CI and the trusted
+   content-only publisher use the same repository, pull-request, mergeability and path guards as event
+   updates. No "Worth adding" approval is required.
 
 The October 2026 town-by-town search is described in [source-catalog.md](source-catalog.md#town-by-town-search-october-2026).
 
@@ -259,13 +263,12 @@ Everything below is in one place: the **review center** at **https://longisland.
 
 1. **Messages and takedowns:** answer what waits there. Removal requests stay manual and come first.
 2. **Community posts and photos:** approve or reject anything that needs a person.
-3. **Sources and permission:** handle broken sources, robots/permission choices and replies from
-   website owners. Source failures never get approved automatically.
+3. **Sources and permission:** handle only permission replies, security/legal exceptions and takedowns.
+   Routine retries, 30-day disablement and validated new-source onboarding are automatic.
 4. **Exceptional corrections:** an editor can still hold, publish, fix, cancel or hide an event by
    hand. A locked status stays as the editor set it.
-5. **Now and then:** the **Sources** tab also shows new websites
-   from the monthly source check (**Worth adding** asks Copilot to add one, **Not useful** remembers the
-   no), switched-off sources you could help with (a ready-made permission email), and **Check sources now**.
+5. **Now and then:** the **Sources** tab shows automatic retry/disable history, switched-off sources
+   that need permission or unusual setup, and **Check sources now**.
 
 Routine event publishing creates no owner task. You can still inspect the update log, use the manual
 fallback, or edit an event in `/admin/`.
@@ -305,14 +308,15 @@ pull-request previews together.
 
 ## When a source breaks or a site blocks us
 
-- **A source finds nothing or its data is broken:** the run files a GitHub issue labeled
-  `ingest-failure` with a small snapshot (page size, type and fingerprint, never the page text). The
-  rest of the run goes on as normal. After three failures in a row, the source is switched off in the
-  pull request with a note.
+- **A source finds nothing or its data is broken:** the first failed check starts a 30-day grace
+  period. The source stays on and is retried on every normal run. Any successful check clears the
+  failure streak. After 30 continuous days without success, automation switches the source off,
+  records the date and reason, and keeps the source file for the audit history. Routine retries and
+  automatic disablement do not create owner tasks.
 - **Finding only past or off-island events is not a failure** (a summer concert series in winter, for
   example).
-- **A site changes its layout:** usually the adapter needs a small fix. Start a Copilot session,
-  point it at the issue, and it fixes the adapter and adds a test.
+- **A site changes its layout:** automation keeps retrying during the grace period. A custom adapter
+  fix is exceptional work only when the source is still useful and no existing reader works.
 - **A site blocks robots** (`robots.txt` says no, or a "checking your browser" page): we stop
   reading it, switch it off and mark it **needs permission**. We never get around a block: no
   disguised browsers, no screenshots, no reading text from images. You can email the organizer and
@@ -328,14 +332,14 @@ pull-request previews together.
 | Needs your computer on? | No | Usually, for local sessions |
 | Same result every time? | Yes: the same code reads the same sources the same way | No: an AI decides what to do each time |
 | Cost | Free here | Uses your Copilot plan |
-| Good for | Collecting events on a timer, checking, building, publishing | Research and judgment: checking new sources, writing a new adapter, researching venues and bands, fixing a broken source |
+| Good for | Collecting events, checking source health, onboarding supported public sources, building, publishing | Exceptional research and judgment: permission, a new custom adapter, security/legal questions, researching venues and bands |
 
 We use **GitHub Actions for the weekly collection** because it must run the same way every time,
 cost nothing, and not depend on anyone's computer. Use a **Copilot session** (started by you, when
 needed) to:
 
-- go through the monthly "source check" issue and add good new sources;
-- fix a source after an `ingest-failure` issue;
+- build a custom adapter when a safe public source cannot use an existing reader;
+- investigate a source only when the automatic history shows an unusual permission, security or legal exception;
 - research venues and bands listed as "unknown" in the run report;
 - check a newsletter's first issue and switch it on.
 

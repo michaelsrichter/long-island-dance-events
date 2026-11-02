@@ -3,9 +3,10 @@ import {
   changedFileProblems,
   openPullRequestProblems,
   pullRequestProblems,
+  successfulWorkflowRun,
   workflowRunProblems,
 } from '../../.github/scripts/auto-merge-ingest.mjs';
-import { PULL_REQUEST_TITLE, pullRequestBody } from '../../.github/scripts/ingest-pr.mjs';
+import { PULL_REQUEST_TITLE, pullRequestBody, workflowDispatchCommands } from '../../.github/scripts/ingest-pr.mjs';
 
 const repository = 'michaelsrichter/long-island-dance-events';
 const sha = 'a'.repeat(40);
@@ -28,7 +29,7 @@ const pr = {
 
 describe('collected-event auto-merge guards', () => {
   it('accepts only the trusted manual CI run for the repository-owned rolling branch', () => {
-    expect(workflowRunProblems(run, repository)).toEqual([]);
+    expect(workflowRunProblems(run, repository, sha)).toEqual([]);
     for (const [change, problem] of [
       [{ name: 'Other' }, 'workflow must be CI'],
       [{ event: 'pull_request' }, 'workflow_dispatch'],
@@ -37,12 +38,14 @@ describe('collected-event auto-merge guards', () => {
       [{ head_repository: { full_name: 'someone/fork' } }, 'head repository'],
       [{ head_sha: 'short' }, 'full commit SHA'],
     ] satisfies [Record<string, unknown>, string][]) {
-      expect(workflowRunProblems({ ...run, ...change }, repository).join(' ')).toContain(problem);
+      expect(workflowRunProblems({ ...run, ...change }, repository, sha).join(' ')).toContain(problem);
     }
+    expect(workflowRunProblems(run, repository, 'b'.repeat(40)).join(' ')).toContain('dispatched ingest SHA');
   });
 
   it('rejects stale, draft, forked, conflicting, or wrongly based pull requests', () => {
     expect(pullRequestProblems(run, pr, repository)).toEqual([]);
+    expect(pullRequestProblems(run, { ...pr, mergeable_state: 'unstable' }, repository)).toEqual([]);
     for (const [change, problem] of [
       [{ state: 'closed' }, 'must be open'],
       [{ draft: true }, 'must not be a draft'],
@@ -51,10 +54,26 @@ describe('collected-event auto-merge guards', () => {
       [{ head: { ...pr.head, repo: { full_name: 'someone/fork' } } }, 'head repository'],
       [{ head: { ...pr.head, sha: 'b'.repeat(40) } }, 'no longer matches'],
       [{ mergeable: false }, 'not currently mergeable'],
-      [{ mergeable_state: 'behind' }, 'must be clean'],
+      [{ mergeable_state: 'behind' }, 'clean or independently checked unstable'],
     ] satisfies [Record<string, unknown>, string][]) {
       expect(pullRequestProblems(run, { ...pr, ...change }, repository).join(' ')).toContain(problem);
     }
+    expect(pullRequestProblems({ ...run, conclusion: 'failure' }, { ...pr, mergeable_state: 'unstable' }, repository).join(' ')).toContain('clean or independently checked unstable');
+  });
+
+  it('finds only a successful trusted CI run for the exact dispatched SHA', () => {
+    expect(
+      successfulWorkflowRun(
+        [
+          { ...run, head_sha: 'b'.repeat(40) },
+          { ...run, conclusion: 'failure' },
+          run,
+        ],
+        sha,
+        repository,
+      ),
+    ).toBe(run);
+    expect(successfulWorkflowRun([{ ...run, head_repository: { full_name: 'someone/fork' } }], sha, repository)).toBeNull();
   });
 
   it('requires exactly one open rolling pull request', () => {
@@ -74,6 +93,14 @@ describe('collected-event auto-merge guards', () => {
 });
 
 describe('rolling collection pull request copy', () => {
+  it('starts CI first, then dispatches the trusted publisher on main with the exact SHA', () => {
+    expect(workflowDispatchCommands('ingest/updates', sha)).toEqual([
+      ['workflow', 'run', 'ci.yml', '--ref', 'ingest/updates'],
+      ['workflow', 'run', 'ingest-auto-merge.yml', '--ref', 'main', '-f', `head_sha=${sha}`],
+    ]);
+    expect(() => workflowDispatchCommands('ingest/updates', 'short')).toThrow(/exact 40-character/);
+  });
+
   it('promises automatic publishing without asking for review or mentioning the owner', () => {
     const body = pullRequestBody({
       report: 'Totals: 10 listed events, 2 hidden automatically, 3 files changed.\n',

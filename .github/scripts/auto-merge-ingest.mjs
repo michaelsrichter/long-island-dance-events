@@ -1,20 +1,22 @@
 #!/usr/bin/env node
-import { readFileSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 export const CI_WORKFLOW = 'CI';
+export const CI_WORKFLOW_FILE = 'ci.yml';
 export const INGEST_BRANCH = 'ingest/updates';
 export const MAIN_BRANCH = 'main';
 export const CONTENT_PREFIX = 'src/content/';
 
-export function workflowRunProblems(run, repository) {
+export function workflowRunProblems(run, repository, expectedSha = run?.head_sha) {
   const problems = [];
   if (run?.name !== CI_WORKFLOW) problems.push(`workflow must be ${CI_WORKFLOW}`);
   if (run?.event !== 'workflow_dispatch') problems.push('CI must have been started with workflow_dispatch');
   if (run?.conclusion !== 'success') problems.push('CI conclusion must be success');
   if (run?.head_branch !== INGEST_BRANCH) problems.push(`CI head branch must be ${INGEST_BRANCH}`);
   if (run?.head_repository?.full_name !== repository) problems.push(`CI head repository must be ${repository}`);
+  if (!/^[0-9a-f]{40}$/.test(String(expectedSha ?? ''))) problems.push('expected head SHA must be a full commit SHA');
   if (!/^[0-9a-f]{40}$/.test(String(run?.head_sha ?? ''))) problems.push('CI head SHA must be a full commit SHA');
+  else if (run.head_sha !== expectedSha) problems.push('CI head SHA must match the dispatched ingest SHA');
   return problems;
 }
 
@@ -27,8 +29,16 @@ export function pullRequestProblems(run, pr, repository) {
   if (pr?.head?.repo?.full_name !== repository) problems.push(`pull request head repository must be ${repository}`);
   if (pr?.head?.sha !== run?.head_sha) problems.push('successful CI SHA no longer matches the pull request head SHA');
   if (pr?.mergeable !== true) problems.push('pull request is not currently mergeable');
-  if (pr?.mergeable_state !== 'clean') problems.push(`pull request mergeable state must be clean, not ${pr?.mergeable_state ?? 'unknown'}`);
+  const exactTrustedCi = workflowRunProblems(run, repository, pr?.head?.sha).length === 0;
+  if (pr?.mergeable_state !== 'clean' && !(pr?.mergeable_state === 'unstable' && exactTrustedCi)) {
+    problems.push(`pull request mergeable state must be clean or independently checked unstable, not ${pr?.mergeable_state ?? 'unknown'}`);
+  }
   return problems;
+}
+
+export function successfulWorkflowRun(runs, expectedSha, repository) {
+  if (!Array.isArray(runs)) return null;
+  return runs.find((run) => workflowRunProblems(run, repository, expectedSha).length === 0) ?? null;
 }
 
 export function openPullRequestProblems(pulls) {
@@ -90,6 +100,24 @@ async function changedFiles(repository, number) {
   throw new Error('Changed-file guard refused: GitHub pull request file listing exceeded 3,000 files');
 }
 
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+async function waitForSuccessfulCi(repository, expectedSha) {
+  const timeout = Number(process.env.CI_POLL_TIMEOUT_MS) || 12 * 60_000;
+  const interval = Number(process.env.CI_POLL_INTERVAL_MS) || 15_000;
+  const deadline = Date.now() + timeout;
+  while (Date.now() < deadline) {
+    const data = await githubApi(
+      `/repos/${repository}/actions/workflows/${CI_WORKFLOW_FILE}/runs?event=workflow_dispatch&branch=${encodeURIComponent(INGEST_BRANCH)}&per_page=100`,
+    );
+    const run = successfulWorkflowRun(data?.workflow_runs, expectedSha, repository);
+    if (run) return run;
+    console.log(`Waiting for successful ${CI_WORKFLOW} workflow_dispatch at ${expectedSha}...`);
+    await delay(interval);
+  }
+  throw new Error(`CI guard refused: no successful workflow_dispatch ${CI_WORKFLOW} run found for ${expectedSha} before timeout`);
+}
+
 async function ensureRollingBranch(repository, sha) {
   const refPath = `/repos/${repository}/git/ref/heads/${INGEST_BRANCH}`;
   try {
@@ -106,14 +134,13 @@ async function ensureRollingBranch(repository, sha) {
 
 export async function main() {
   const repository = process.env.GITHUB_REPOSITORY ?? '';
-  const eventPath = process.env.GITHUB_EVENT_PATH ?? '';
+  const expectedSha = process.env.EXPECTED_HEAD_SHA ?? '';
   if (!process.env.GH_TOKEN) throw new Error('GH_TOKEN is required');
   if (!/^[^/]+\/[^/]+$/.test(repository)) throw new Error('GITHUB_REPOSITORY must be owner/name');
-  if (!eventPath) throw new Error('GITHUB_EVENT_PATH is required');
+  if (!/^[0-9a-f]{40}$/.test(expectedSha)) throw new Error('EXPECTED_HEAD_SHA must be a full commit SHA');
 
-  const payload = JSON.parse(readFileSync(eventPath, 'utf8'));
-  const run = payload.workflow_run;
-  requireNoProblems('Workflow-run guard', workflowRunProblems(run, repository));
+  const run = await waitForSuccessfulCi(repository, expectedSha);
+  requireNoProblems('Workflow-run guard', workflowRunProblems(run, repository, expectedSha));
 
   const owner = repository.split('/')[0];
   const pulls = await githubApi(

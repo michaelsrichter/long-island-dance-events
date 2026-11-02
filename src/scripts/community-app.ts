@@ -4,7 +4,7 @@
  * If the site session ended while the page was open, sending a note or report signs the visitor back in
  * (silently when possible) and sends it on return; a photo has to be chosen again.
  */
-import { ensureSession, loginUrl, rememberAccount, signInFor, takeAction, type PendingAction } from './account-state';
+import { ensureSession, hasAction, loginUrl, rememberAccount, signInFor, takeAction, verifyForAction, type PendingAction } from './account-state';
 type Comment = { id: string; name: string; text: string; at: string; date?: string };
 type Photo = { id: string; by: string; caption: string; alt: string; w: number; h: number; at: string; src: { s: string; m: string; l: string } };
 type Doc = { likes: number; comments: Comment[]; photos: Photo[] };
@@ -84,6 +84,7 @@ export function init(panel: HTMLElement) {
 
   let me: Me | null = null;
   let reportTarget: { itemType: 'comment' | 'photo'; itemId: string } | null = null;
+  let activating: Promise<boolean> | null = null;
 
   const say = (text: string) => {
     status.textContent = text;
@@ -94,12 +95,8 @@ export function init(panel: HTMLElement) {
     b.type = 'button';
     b.className = 'link-btn community__report';
     b.textContent = 'Report';
-    b.addEventListener('click', () => {
-      if (!me) {
-        say('Please sign in to report a post.');
-        signin.focus();
-        return;
-      }
+    b.addEventListener('click', async () => {
+      if (!me && !(await activateMember({ type: 'report', key, itemType, itemId }))) return;
       reportTarget = { itemType, itemId };
       reportForm.reset();
       reportDialog.showModal();
@@ -205,6 +202,28 @@ export function init(panel: HTMLElement) {
   /** The panel's own address, so the visitor comes back to the notes after signing in. */
   const back = () => `${location.pathname}${location.search}#community`;
 
+  async function loadMember(): Promise<boolean> {
+    const meRes = await api('/api/me');
+    me = meRes.status === 200 && meRes.data?.signedIn ? (meRes.data.user as Me) : null;
+    applyMe();
+    return Boolean(me);
+  }
+
+  function activateMember(action: PendingAction | null = null): Promise<boolean> {
+    activating ??= (async () => {
+      let signedIn = false;
+      if (action) signedIn = await verifyForAction(action, back());
+      else {
+        signedIn = (await ensureSession()).signedIn;
+        if (!signedIn) signInFor(null, back());
+      }
+      return signedIn ? loadMember() : false;
+    })().finally(() => {
+      activating = null;
+    });
+    return activating;
+  }
+
   function handleError(r: { status: number; data: any }, action: PendingAction | null = null) {
     if (r.status === 401) {
       // The site session ended while the page was open: sign in again (silently if possible) and finish on return.
@@ -309,7 +328,7 @@ export function init(panel: HTMLElement) {
 
   /** A note, report or photo sent while the site session had ended: finish it now that the visitor is back. */
   async function finishRemembered() {
-    const a = takeAction(key, ['comment', 'flag', 'photo']);
+    const a = takeAction(key, ['comment', 'flag', 'photo', 'report']);
     if (!a || !me || me.needsProfile || me.status === 'banned' || me.status === 'under13') return;
     if (a.type === 'comment' && typeof a.text === 'string') {
       const kind = a.kind === 'correction' ? 'correction' : 'comment';
@@ -322,18 +341,23 @@ export function init(panel: HTMLElement) {
       const details = q<HTMLDetailsElement>(panel, '[data-photo-details]');
       if (details) details.open = true;
       say("You're signed in again. Please choose your photo again and press Send.");
+    } else if (a.type === 'report' && (a.itemType === 'comment' || a.itemType === 'photo') && typeof a.itemId === 'string') {
+      reportTarget = { itemType: a.itemType, itemId: a.itemId };
+      reportForm.reset();
+      reportDialog.showModal();
     }
   }
 
   (async () => {
     await load();
-    if (!(await ensureSession()).signedIn) {
-      applyMe();
-      return;
-    }
-    const meRes = await api('/api/me');
-    me = meRes.status === 200 && meRes.data?.signedIn ? (meRes.data.user as Me) : null;
     applyMe();
-    await finishRemembered();
+    signin.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      void activateMember();
+    });
+    if (hasAction(key, ['comment', 'flag', 'photo', 'report']) && (await ensureSession()).signedIn) {
+      await loadMember();
+      await finishRemembered();
+    }
   })();
 }

@@ -146,6 +146,7 @@ function decideSource(source, decision, { today }) {
   if (decision.action === 'enable') {
     if (s.enabled !== false) throw new DecisionError('This source is already switched on.');
     s.enabled = true;
+    delete s.failure;
     appendNote(s, `Switched on ${when}${note ? `: ${note}` : '.'}`);
     summary = 'switch on';
   } else if (decision.action === 'disable') {

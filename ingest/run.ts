@@ -17,6 +17,7 @@ import { collapse } from './lib/collapse';
 import { PoliteFetcher } from './lib/fetch';
 import { mergeDrafts, type MergeStats } from './lib/merge';
 import { Registry, ROOT } from './lib/registry';
+import { applySourceHealth } from './lib/source-health';
 import { writeEntity } from './lib/store';
 import type { Adapter, NormalizeResult } from './lib/types';
 
@@ -125,6 +126,7 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
       const docs = await mod.adapter.fetch(ctx);
       sr.documents = docs.map((d) => `${d.url}${d.meta.issue ? ` (${d.meta.issue})` : ''}`);
       if (docs.length === 0 && mod.adapter.quietWhenNoDocuments) {
+        sr.status = 'ok';
         sr.message = 'Nothing new to read this time (for example, no newsletter issue lately).';
         continue;
       }
@@ -169,12 +171,22 @@ export async function run(argv = process.argv.slice(2)): Promise<RunReport> {
       log(`ERROR ${id}: ${sr.message}`);
     } finally {
       if (sr.status !== 'skipped') {
-        registry.sources.set(id, sourceSchema.parse({
+        const checked = sourceSchema.parse({
           ...source,
           lastScraped: new Date().toISOString(),
           lastStatus: sr.status,
           lastMessage: sr.message,
           lastCounts: { found: sr.found, kept: sr.kept, outOfArea: sr.outOfArea.reduce((n, o) => n + o.count, 0), needsReview: sr.review.length },
+        });
+        const health = applySourceHealth(checked, sr, today);
+        if (health.outcome === 'retrying') {
+          sr.message = `${sr.message ?? 'The source check failed.'} It will be checked again on its normal schedule for up to ${30 - health.daysFailing} more days.`;
+        } else if (health.outcome === 'disabled') {
+          sr.message = `${sr.message ?? 'The source check failed.'} It was switched off automatically after ${health.daysFailing} continuous days without a successful check.`;
+        }
+        registry.sources.set(id, sourceSchema.parse({
+          ...health.source,
+          lastMessage: sr.message,
         }));
       }
     }

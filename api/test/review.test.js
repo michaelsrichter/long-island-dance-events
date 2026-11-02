@@ -68,7 +68,6 @@ functions.app.http = (name, opts) => {
   routes[name] = opts;
 };
 require('../src/functions/review');
-const { triageWithNo } = require('../src/functions/review');
 const github = require('../src/lib/github');
 
 const BASE = 'https://longisland.dance';
@@ -369,11 +368,15 @@ test('sources: grouped by next step; permission answers and switching on are com
   const notes = 'Weekly schedule written in words with no dates.';
   assert.equal(sourceGroup({ enabled: false, reviewNotes: notes }), 'schedule');
   assert.equal(sourceGroup({ enabled: false, reviewNotes: `Covered by hand on 2026-10-06; check again by 2026-11-01. ${notes}` }), 'byhand', 'a schedule already added by hand is not offered again');
+  assert.equal(sourceGroup({ enabled: true, lastStatus: 'error', failure: { firstFailedAt: '2026-10-01' } }), 'retrying');
+  assert.equal(sourceGroup({ enabled: false, lastStatus: 'error', failure: { firstFailedAt: '2026-10-01', disabledAt: '2026-10-31' } }), 'auto-disabled');
   let r = await call('reviewSources', '/api/review/sources', { user: ADMIN });
   assert.equal(r.status, 200);
   const by = Object.fromEntries(r.body.sources.map((s) => [s.id, s]));
-  assert.equal(by.s1.group, 'broken');
+  assert.equal(by.s1.group, 'retrying');
   assert.equal(by.s2.group, 'permission');
+  assert.deepEqual(r.body.failures, []);
+  assert.deepEqual(r.body.discovery, []);
   r = await call('reviewSourcesDecide', '/api/review/sources', { method: 'POST', user: ADMIN, body: { decisions: [{ id: 's2', action: 'permission', status: 'requested', note: 'Emailed the club' }] } });
   assert.equal(r.status, 200, JSON.stringify(r.body));
   const s2 = JSON.parse(gh.file('src/content/sources/s2.json'));
@@ -397,7 +400,7 @@ test('sources: grouped by next step; permission answers and switching on are com
   assert.equal((await call('reviewRun', '/api/review/run', { method: 'POST', user: ADMIN, body: { cadence: 'hourly' } })).status, 400);
 });
 
-test('monthly source check: "not useful" is remembered in search-triage.json; "worth adding" asks Copilot', async () => {
+test('monthly source discovery no longer creates owner approval work', async () => {
   gh.issues.push({
     number: 70,
     state: 'open',
@@ -408,29 +411,13 @@ test('monthly source check: "not useful" is remembered in search-triage.json; "w
     body: '# Monthly source check\n\n<!-- review-data {"newSites":[{"domain":"mike.example","url":"https://mike.example/events","title":"Events","queries":["q"]},{"domain":"bad.example","url":"https://bad.example/","title":"x","queries":["q"]}],"robotsChanged":[],"broken":[],"noDates":[]} -->',
   });
   let r = await call('reviewSources', '/api/review/sources', { user: ADMIN });
-  assert.deepEqual(r.body.discovery[0].data.newSites.map((s) => s.domain), ['mike.example', 'bad.example']);
-  r = await call('reviewCandidate', '/api/review/candidate', { method: 'POST', user: ADMIN, body: { issue: 70, domain: 'bad.example', action: 'reject', note: 'Not on Long Island' } });
-  assert.equal(r.status, 200, JSON.stringify(r.body));
-  const triage = gh.file('catalog/search-triage.json');
-  const doc = JSON.parse(triage);
-  assert.equal(doc.domains['bad.example'].decision, 'owner-no');
-  assert.match(triage, /\n {4}"alpha\.example": \{"decision": "platform"\},\n {4}"bad\.example": \{"decision":"owner-no","note":"Not on Long Island \(review center, \d{4}-\d{2}-\d{2}\)"\},\n {4}"zulu\.example"/);
-  assert.ok(doc.decisions['owner-no']);
+  assert.deepEqual(r.body.discovery, []);
+  const before = gh.commitCount();
   r = await call('reviewCandidate', '/api/review/candidate', { method: 'POST', user: ADMIN, body: { issue: 70, domain: 'mike.example', action: 'copilot', url: 'https://mike.example/events' } });
-  assert.equal(r.status, 200);
-  const task = gh.issues.find((i) => i.title === 'Check a possible new source: mike.example');
-  assert.deepEqual(task.labels.map((l) => l.name), ['copilot-task']);
-  assert.match(task.body, /does not start this by itself/);
-  assert.match(task.body, /Copilot session/);
-  r = await call('reviewSources', '/api/review/sources', { user: ADMIN });
-  assert.deepEqual(r.body.discovery[0].data.newSites, [], 'decided websites are not shown again');
-});
-
-test('triageWithNo adds the last domain, keeps one per line, and never adds twice', () => {
-  const text = FILES['catalog/search-triage.json'];
-  const out = triageWithNo(text, 'zz-last.example', '', '2026-10-05');
-  assert.match(out, /"zulu\.example": \{"decision": "platform"\},\n {4}"zz-last\.example": \{"decision":"owner-no","note":"\(review center, 2026-10-05\)"\}\n {2}\}/);
-  assert.equal(triageWithNo(out, 'zz-last.example', '', '2026-10-05'), null);
+  assert.equal(r.status, 410);
+  assert.match(r.body.message, /onboarded automatically/);
+  assert.equal(gh.commitCount(), before);
+  assert.equal(gh.issues.some((i) => i.title === 'Check a possible new source: mike.example'), false);
 });
 
 test('visitor messages: only real messages, with a 7-day countdown for takedowns; reply and close', async () => {
@@ -448,7 +435,7 @@ test('visitor messages: only real messages, with a 7-day countdown for takedowns
   assert.equal(m.dueInDays, 5);
   assert.equal(m.page, 'https://longisland.dance/performers/the-max/');
   assert.equal(m.sections['What would you like us to do?'], 'Stop listing all my events (opt out)');
-  assert.ok(r.body.copilotTasks.some((t) => t.title === 'Check a possible new source: mike.example'));
+  assert.equal(r.body.copilotTasks.some((t) => t.title === 'Check a possible new source: mike.example'), false);
   r = await call('reviewMessagesAct', '/api/review/messages', { method: 'POST', user: ADMIN, body: { number: 6, action: 'close' } });
   assert.equal(r.status, 404, 'automation issues are not closed from here');
   r = await call('reviewMessagesAct', '/api/review/messages', { method: 'POST', user: ADMIN, body: { number: 5, action: 'reply' } });
@@ -459,13 +446,14 @@ test('visitor messages: only real messages, with a 7-day countdown for takedowns
   assert.equal(gh.issues.find((i) => i.number === 5).state, 'closed');
 });
 
-test('Ask Copilot makes a labeled issue; the log lists every decision', async () => {
+test('Ask Copilot makes a labeled issue; the log lists owner decisions', async () => {
   const r = await call('reviewCopilot', '/api/review/copilot', { method: 'POST', user: ADMIN, body: { title: 'Research the band The Max', body: 'It plays at 89 North on Oct 23. Add a performer file with dancing research.' } });
   assert.equal(r.status, 200);
   assert.match(r.body.issue.url, /\/issues\/\d+$/);
   const log = await call('reviewLog', '/api/review/log', { user: ADMIN });
   const actions = log.body.entries.map((e) => e.action);
-  for (const a of ['listing.fix', 'listing.hide', 'listing.cancel', 'collected.publish', 'source.permission', 'source.enable', 'run', 'candidate.reject', 'candidate.copilot', 'message.close', 'copilot.ask', 'github.connect']) assert.ok(actions.includes(a), a);
+  for (const a of ['listing.fix', 'listing.hide', 'listing.cancel', 'collected.publish', 'source.permission', 'source.enable', 'run', 'message.close', 'copilot.ask', 'github.connect']) assert.ok(actions.includes(a), a);
+  assert.equal(actions.some((a) => a.startsWith('candidate.')), false, 'routine source discovery creates no owner decision');
 });
 
 test('a new app stored by another instance ("Start over") is picked up when the old one is not installed', async () => {

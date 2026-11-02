@@ -51,6 +51,11 @@ const quick = [
           <button class="btn btn--primary" type="submit"><Icon name="search" />Search</button>
         </form>
         <p class="hero__stat"><strong>{weekDancesAll.length}</strong> dances and live-music nights in the next 7 days, at {places} {places === 1 ? 'place' : 'places'}.</p>
+        <p class="hero__all-events">
+          <a href="/events/?category=all" data-all-upcoming>
+            <strong>{upcoming.length}</strong> total upcoming events <span>See everything <Icon name="arrow" /></span>
+          </a>
+        </p>
       </div>
       <nav class="quick-links" aria-label="Quick links">
         <ul>

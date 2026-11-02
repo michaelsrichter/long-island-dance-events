@@ -131,7 +131,7 @@ export function renderCollected(root: HTMLElement, c: Collected, onPublished: ()
 
   if (problems.length || r.notes.length) {
     const box = details(`Sources with problems in this check (${problems.length})`, 'review-details panel');
-    box.body.append(el('p', 'You can also find these under Sources, with "Try again now" and "Ask Copilot to fix it" buttons.', 'review-hint'));
+    box.body.append(el('p', 'These retry automatically on their normal schedule. A source switches off only after 30 continuous days without a successful check.', 'review-hint'));
     box.body.append(list(r.notes.map((n) => `${n.source}: ${n.message}`), 'review-sub'));
     root.append(box.box);
   }

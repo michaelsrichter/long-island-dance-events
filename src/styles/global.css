@@ -1088,6 +1088,13 @@ h3.day-heading { font-size: 1.1rem; }
 .hero-search .btn { min-height: 46px; padding-inline: 1.15rem; }
 .hero__stat { color: #c8cad1; font-size: 0.92rem; font-weight: 500; margin-top: 0.75rem; }
 .hero__stat strong { color: #ffffff; }
+.hero__all-events { margin-top: 0.6rem; }
+.hero__all-events a { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0.35rem 0.65rem; padding: 0.55rem 0.8rem; border: 1px solid rgb(255 255 255 / 0.22); border-radius: 12px; color: #ffffff; background: rgb(255 255 255 / 0.08); font-weight: 650; text-decoration: none; }
+.hero__all-events a:hover { background: rgb(255 255 255 / 0.14); }
+.hero__all-events a:focus-visible { outline: 3px solid #8ab4ff; outline-offset: 2px; }
+.hero__all-events strong { font-size: 1.15em; }
+.hero__all-events span { display: inline-flex; align-items: center; gap: 0.25rem; color: #ffd1d5; }
+.hero__all-events svg { width: 1em; height: 1em; }
 
 /* Quick links: tiles on wide screens, one swipeable row on phones */
 .quick-links ul { gap: 0.6rem; }

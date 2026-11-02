@@ -10,7 +10,12 @@
     "venueId": "saint-demetrios-merrick"
   },
   "description": "Dance listings in Merrick: Greek dinner dance, live Greek band.",
-  "enabled": false,
+  "enabled": true,
+  "failure": {
+    "firstFailedAt": "2026-11-02",
+    "lastFailedAt": "2026-11-02",
+    "consecutiveFailedChecks": 3
+  },
   "focus": "dance",
   "lastCounts": {
     "found": 0,
@@ -22,6 +27,6 @@
   "lastScraped": "2026-11-01T16:20:58.082Z",
   "lastStatus": "error",
   "rateLimitSeconds": 5,
-  "reviewNotes": "Catalog check 2026-10-03: Keep it because it is a future Long Island dinner dance with live music and ticket details. Paused on 2026-11-01 after 3 failed runs in a row (issue #75).",
+  "reviewNotes": "Catalog check 2026-10-03: Keep it because it is a future Long Island dinner dance with live music and ticket details. Re-enabled on 2026-11-02 under the automatic 30-day retry policy; the old three-run pause no longer applies.",
   "url": "https://saint-demetrios.com/dance"
 }

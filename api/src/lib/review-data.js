@@ -94,11 +94,11 @@ function listingCard(id, e, today, sourceNames = {}) {
 
 /* ---------- sources ---------- */
 
-const BROKEN = new Set(['error', 'empty', 'invalid']);
-
 /** What a person can do about a switched-off source. */
 function sourceGroup(s) {
-  if (s.enabled !== false) return BROKEN.has(s.lastStatus) ? 'broken' : 'on';
+  const failed = s.lastStatus === 'error' || s.lastStatus === 'invalid' || (s.lastStatus === 'empty' && !(s.lastCounts && s.lastCounts.found > 0));
+  if (s.enabled !== false) return failed ? 'retrying' : 'on';
+  if (s.failure && s.failure.disabledAt) return 'auto-disabled';
   const notes = `${s.reviewNotes || ''} ${(s.permission && s.permission.note) || ''}`;
   const perm = s.permission && s.permission.status;
   if (s.adapter === 'agentmail') return 'newsletter';
@@ -136,6 +136,7 @@ function sourceCard(id, s) {
     lastStatus: s.lastStatus || 'never',
     lastMessage: s.lastMessage || '',
     lastCounts: s.lastCounts || null,
+    failure: s.failure || null,
     notes: s.reviewNotes || '',
     group: sourceGroup(s),
   };
