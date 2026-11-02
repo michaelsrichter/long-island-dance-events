@@ -12,8 +12,9 @@ import { formatDateLong } from '../lib/time';
 import { getTowns, seriesCount, townHref } from '../lib/towns';
 
 const settings = await getSettings();
-const { upcoming, tonight, weekend, nextSevenDays, today } = await getEventGroups();
+const { upcoming, tonight, weekend, thisWeek, nextSevenDays, today } = await getEventGroups();
 const dancesToday = tonight.filter(isDance);
+const thisWeekDances = thisWeek.filter(isDance);
 const weekDancesAll = nextSevenDays.filter(isDance);
 const weekDances = weekDancesAll.filter((e) => e.date > today);
 const weekClasses = nextSevenDays.filter((e) => e.category === 'class-lesson');
@@ -29,7 +30,7 @@ const topTowns = (await getTowns())
   .sort((a, b) => seriesCount(b.events) - seriesCount(a.events) || a.name.localeCompare(b.name))
   .slice(0, 12);
 const quick = [
-  { href: '/events/?when=week', label: 'This week', count: weekDancesAll.length, icon: 'calendar' as const, primary: true },
+  { href: '/events/?when=this-week', label: 'This week', count: thisWeekDances.length, icon: 'calendar' as const, primary: true },
   { href: '/events/?when=today', label: 'Today', count: dancesToday.length, icon: 'clock' as const },
   { href: '/events/?when=weekend', label: 'This weekend', count: weekend.filter(isDance).length, icon: 'music' as const },
   { href: '/events/?category=live-music', label: 'Live music', count: upcoming.filter((e) => e.category === 'live-music').length, icon: 'star' as const },

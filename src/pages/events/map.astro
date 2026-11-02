@@ -8,6 +8,7 @@ import EmptyState from '../../components/EmptyState.astro';
 import Icon from '../../components/Icon.astro';
 import { getEventGroups, type ResolvedEvent } from '../../lib/content';
 import { isDanceLevel } from '../../lib/dancing';
+import { EVENT_DATE_FILTERS } from '../../lib/event-date-windows';
 import { groupByPlace } from '../../lib/map-places';
 import { formatDateShort } from '../../lib/time';
 import { breadcrumbJsonLd } from '../../lib/seo';
@@ -26,11 +27,7 @@ const types = [
   { value: 'class', label: 'Classes' },
   { value: 'all', label: 'Everything' },
 ];
-const whens = [
-  { value: 'all', label: 'All upcoming' },
-  { value: 'week', label: 'Next 7 days' },
-  { value: 'month', label: 'This month' },
-];
+const whens = EVENT_DATE_FILTERS;
 /** dance = dances and live music with dancing; class = classes; listen = concerts where people mostly listen. */
 const kind = (e: ResolvedEvent) => (e.category === 'class-lesson' ? 'class' : isDanceLevel(e.dancing.level) ? 'dance' : 'listen');
 const placeKind = (list: ResolvedEvent[]) => (list.some((e) => kind(e) === 'dance') ? 'dance' : list.some((e) => kind(e) === 'class') ? 'class' : 'listen');
@@ -47,27 +44,37 @@ const when = (e: ResolvedEvent) => `${formatDateShort(e.date)}${e.timeLabel ? ` 
   </PageHeader>
 
   <div class="container section stack-l">
-    <form class="filters js-only" data-map-filters aria-label="Filter the map">
+    <form class="filters map-filters js-only" data-map-filters aria-label="Filter the map">
+      <div class="map-near-me">
+        <div class="map-near-me__intro">
+          <span class="map-near-me__icon" aria-hidden="true"><Icon name="pin" /></span>
+          <div>
+            <p class="map-near-me__title">Find the closest dance places</p>
+            <p class="map-near-me__help" id="map-location-help">Your browser asks for location only after you choose this. It stays on your device.</p>
+            <p class="map-near-me__status" data-map-locate-status aria-live="polite"></p>
+          </div>
+        </div>
+        <button type="button" class="btn btn--primary map-near-me__button" data-map-locate aria-describedby="map-location-help">
+          <Icon name="pin" />Show places near me
+        </button>
+      </div>
       <fieldset>
         <legend>Type of event</legend>
-        <div class="quick-views">
-          {types.map((h, i) => (
-            <label class="chip"><input type="radio" name="type" value={h.value} checked={i === 0} /><span>{h.label}</span></label>
+        <div class="quick-views map-filter-options map-filter-options--type">
+          {types.map((h) => (
+            <label class="chip"><input type="radio" name="type" value={h.value} checked={h.value === 'dance'} /><span>{h.label}</span></label>
           ))}
         </div>
       </fieldset>
       <fieldset>
         <legend>When</legend>
-        <div class="quick-views">
-          {whens.map((w, i) => (
-            <label class="chip"><input type="radio" name="when" value={w.value} checked={i === 0} /><span>{w.label}</span></label>
+        <div class="quick-views map-filter-options map-filter-options--when">
+          {whens.map((w) => (
+            <label class="chip"><input type="radio" name="when" value={w.value} checked={w.value === 'all'} /><span>{w.label}</span></label>
           ))}
         </div>
       </fieldset>
-      <div class="btn-row filters__foot">
-        <p class="result-count" data-map-count aria-live="polite">{places.length} places shown</p>
-        <button type="button" class="btn btn--secondary btn--small" data-map-locate><Icon name="pin" />Show places near me</button>
-      </div>
+      <p class="result-count" data-map-count aria-live="polite">{places.length} places shown</p>
     </form>
 
     <div class="map-layout">

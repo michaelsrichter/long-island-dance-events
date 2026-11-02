@@ -266,6 +266,73 @@ test.describe('views', () => {
     expect(await page.locator('.leaflet-marker-icon').count()).toBeLessThan(n);
   });
 
+  test('map date filters keep the URL, place count, accessible list and markers in sync', async ({ pinned: page }) => {
+    await page.goto('/events/map/');
+    const placeId = await page.locator('[data-map-place]').first().getAttribute('id');
+    expect(placeId).toBeTruthy();
+    await page.goto(`/events/map/?when=weekend&type=all&campaign=map-test#${placeId}`);
+    await page.locator('[data-events-map]').scrollIntoViewIfNeeded();
+    await expect(page.locator('input[name="when"][value="weekend"]')).toBeChecked();
+    await expect(page.locator('input[name="type"][value="all"]')).toBeChecked();
+
+    for (const choice of ['Today', 'This week', 'This weekend', 'Next 7 days', 'This month', 'All upcoming']) {
+      await page.getByRole('radio', { name: choice, exact: true }).check();
+      const visiblePlaces = await page.locator('[data-map-place]:not([hidden])').count();
+      await expect(page.locator('.leaflet-marker-icon')).toHaveCount(visiblePlaces);
+      await expect(page.locator('[data-map-count]')).toHaveText(new RegExp(`^${visiblePlaces} ${visiblePlaces === 1 ? 'place' : 'places'} shown`));
+      const emptyShown = await page.locator('[data-map-empty]').isVisible();
+      expect(emptyShown).toBe(visiblePlaces === 0);
+      const placesWithoutEvents = await page.locator('[data-map-place]:not([hidden])').evaluateAll((places) =>
+        places.filter((place) => !place.querySelector('[data-map-event]:not([hidden])')).length,
+      );
+      expect(placesWithoutEvents).toBe(0);
+    }
+
+    const url = new URL(page.url());
+    expect(url.searchParams.get('campaign')).toBe('map-test');
+    expect(url.hash).toBe(`#${placeId}`);
+    expect(url.searchParams.get('type')).toBe('all');
+    expect(url.searchParams.get('when')).toBeNull();
+  });
+
+  test('near me requests location only after the prominent button is pressed', async ({ pinned: page }) => {
+    await page.addInitScript(() => {
+      (window as typeof window & { __geoCalls?: number }).__geoCalls = 0;
+      Object.defineProperty(navigator, 'geolocation', {
+        configurable: true,
+        value: {
+          getCurrentPosition(success: PositionCallback) {
+            (window as typeof window & { __geoCalls?: number }).__geoCalls!++;
+            success({
+              coords: { latitude: 40.789, longitude: -73.135, accuracy: 10, altitude: null, altitudeAccuracy: null, heading: null, speed: null },
+              timestamp: Date.now(),
+            } as GeolocationPosition);
+          },
+        },
+      });
+    });
+    await page.goto('/events/map/');
+    const locate = page.getByRole('button', { name: 'Show places near me' });
+    await expect(locate).toBeVisible();
+    expect(await page.evaluate(() => (window as typeof window & { __geoCalls?: number }).__geoCalls)).toBe(0);
+    await locate.click();
+    await expect(page.locator('[data-map-locate-status]')).toContainText('Nearest places are listed first');
+    expect(await page.evaluate(() => (window as typeof window & { __geoCalls?: number }).__geoCalls)).toBe(1);
+    await expect(page.locator('[data-map-count]')).toContainText('nearest first');
+    await expect(page.locator('[data-map-place]:not([hidden]) [data-map-distance]').first()).toContainText('mi away');
+  });
+
+  test('the map place list remains useful without JavaScript', async ({ browser }) => {
+    const ctx = await browser.newContext({ javaScriptEnabled: false });
+    const page = await ctx.newPage();
+    await page.goto('/events/map/');
+    await expect(page.locator('[data-map-filters]')).toBeHidden();
+    expect(await page.locator('[data-map-place]').count()).toBeGreaterThan(3);
+    await expect(page.locator('[data-map-place] .map-place__name').first()).toBeVisible();
+    await expect(page.locator('[data-map-place] [data-map-event]').first()).toBeVisible();
+    await ctx.close();
+  });
+
   test('the event list works without JavaScript', async ({ browser }) => {
     const ctx = await browser.newContext({ javaScriptEnabled: false });
     const page = await ctx.newPage();

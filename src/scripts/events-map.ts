@@ -3,6 +3,7 @@
  * plain HTML; this script adds a Leaflet map with one pin per place, plus filters and "near me".
  */
 import L from 'leaflet';
+import { eventDateRanges, matchesEventDate } from '../lib/event-date-windows';
 import { track } from './analytics';
 
 const mapEl = document.querySelector<HTMLElement>('[data-events-map]');
@@ -23,7 +24,6 @@ interface Place {
 
 const MAX_EVENTS = 3;
 const SVG = 'http://www.w3.org/2000/svg';
-const nyDate = (d: Date) => new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(d);
 
 function pinIcon(host: Place['host']): L.DivIcon {
   const el = document.createElement('span');
@@ -129,6 +129,7 @@ if (mapEl && list) {
 
   const count = document.querySelector<HTMLElement>('[data-map-count]');
   const empty = document.querySelector<HTMLElement>('[data-map-empty]');
+  let nearestFirst = false;
   const fields = ['type', 'when'] as const;
   type Values = Record<(typeof fields)[number], string>;
 
@@ -139,16 +140,11 @@ if (mapEl && list) {
 
   function apply(source: 'load' | 'change') {
     const v = values();
-    const today = nyDate(new Date());
-    const weekEnd = nyDate(new Date(Date.now() + 6 * 86400000));
-    const month = today.slice(0, 7);
+    const ranges = eventDateRanges();
     const matches = (e: HTMLElement) => {
       if (e.hasAttribute('data-expired')) return false;
       if (v.type && v.type !== 'all' && e.dataset.host !== v.type) return false;
-      const d = e.dataset.date ?? '';
-      if (v.when === 'week' && (d < today || d > weekEnd)) return false;
-      if (v.when === 'month' && !d.startsWith(month)) return false;
-      return true;
+      return matchesEventDate(e.dataset.date ?? '', v.when, ranges);
     };
     let shown = 0;
     const visible: L.LatLng[] = [];
@@ -166,18 +162,20 @@ if (mapEl && list) {
         labelMarker(p);
       } else layer.removeLayer(p.marker);
     }
-    if (count) count.textContent = `${shown} ${shown === 1 ? 'place' : 'places'} shown`;
+    if (count) count.textContent = `${shown} ${shown === 1 ? 'place' : 'places'} shown${nearestFirst ? ', nearest first' : ''}`;
     if (empty) empty.hidden = shown !== 0;
     if (visible.length) map.fitBounds(L.latLngBounds(visible), { padding: [28, 28], maxZoom: 13 });
     else if (source === 'load') map.setView([40.8, -73.2], 9);
     // Long Island is wide and short: never zoom out further than needed to show the island.
     if (map.getZoom() < 8.5) map.setZoom(8.5);
     if (form) {
-      const params = new URLSearchParams();
+      const params = new URLSearchParams(location.search);
       if (v.type && v.type !== 'dance') params.set('type', v.type);
+      else params.delete('type');
       if (v.when && v.when !== 'all') params.set('when', v.when);
+      else params.delete('when');
       const qs = params.toString();
-      history.replaceState(null, '', `${qs ? `?${qs}` : location.pathname}${location.hash}`);
+      history.replaceState(null, '', `${location.pathname}${qs ? `?${qs}` : ''}${location.hash}`);
     }
     if (source === 'change') track('filter_events', { location: 'map', filter: [v.type !== 'dance' && 'type', v.when !== 'all' && 'when'].filter(Boolean).join(',') || 'none', value: [v.type, v.when].join(',').slice(0, 100), results: shown });
   }
@@ -203,10 +201,12 @@ if (mapEl && list) {
 
   // "Show dances near me": sort the list by distance and show the nearest places. The location stays in the browser.
   const locate = document.querySelector<HTMLButtonElement>('[data-map-locate]');
+  const locateStatus = document.querySelector<HTMLElement>('[data-map-locate-status]');
   let you: L.CircleMarker | undefined;
   if (locate && 'geolocation' in navigator) {
     locate.addEventListener('click', () => {
       locate.disabled = true;
+      if (locateStatus) locateStatus.textContent = 'Checking your location…';
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           locate.disabled = false;
@@ -220,19 +220,24 @@ if (mapEl && list) {
             if (label) label.textContent = ` · ${miles < 10 ? miles.toFixed(1) : Math.round(miles)} mi away`;
             list.append(p.el);
           }
+          nearestFirst = true;
           const nearest = sorted.filter((p) => !p.el.hidden).slice(0, 4).map((p) => p.latlng);
           map.fitBounds(L.latLngBounds([here, ...nearest]), { padding: [36, 36], maxZoom: 13 });
-          if (count) count.textContent = `${count.textContent?.replace(/, nearest first$/, '')}, nearest first`;
+          const shown = places.filter((p) => !p.el.hidden).length;
+          if (count) count.textContent = `${shown} ${shown === 1 ? 'place' : 'places'} shown, nearest first`;
+          if (locateStatus) locateStatus.textContent = 'Nearest places are listed first. Your location stayed on this device.';
           track('filter_events', { location: 'map', filter: 'near_me', value: 'granted' });
         },
         () => {
           locate.disabled = false;
-          locate.textContent = 'Location not available';
+          if (locateStatus) locateStatus.textContent = 'Your location is not available. You can still browse every place on the map.';
           track('filter_events', { location: 'map', filter: 'near_me', value: 'denied' });
         },
         { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 },
       );
     });
-  } else if (locate) locate.hidden = true;
+  } else if (locate) {
+    locate.disabled = true;
+    if (locateStatus) locateStatus.textContent = 'This browser cannot share a location. You can still browse every place on the map.';
+  }
 }
-
