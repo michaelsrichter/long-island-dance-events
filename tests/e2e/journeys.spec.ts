@@ -272,6 +272,7 @@ test.describe('views', () => {
     await page.locator('[data-events-map]').scrollIntoViewIfNeeded();
     await expect(page.locator('input[name="when"][value="weekend"]')).toBeChecked();
     await expect(page.locator('input[name="category"][value="all"]')).toBeChecked();
+    await openFilters(page);
 
     for (const choice of ['Today', 'This week', 'This weekend', 'Next 7 days', 'This month', 'All upcoming']) {
       await page.getByRole('radio', { name: choice, exact: true }).check();
