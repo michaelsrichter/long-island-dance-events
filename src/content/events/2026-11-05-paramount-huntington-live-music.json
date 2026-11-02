@@ -1,0 +1,25 @@
+{
+  "title": "Dweezil Zappa DZ20: Like Father, Like Son at The Paramount",
+  "summary": "Live music by Dweezil Zappa DZ20: Like Father, Like Son at The Paramount. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-05T20:00",
+  "end": "2026-11-05T23:00",
+  "timezone": "America/New_York",
+  "venueId": "paramount-huntington",
+  "town": "Huntington",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/6edfb4ec7e2f055a4ec99966462662316950cb9d",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/6edfb4ec7e2f055a4ec99966462662316950cb9d",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-11-05",
+  "firstSeen": "2026-11-02",
+  "lastSeen": "2026-11-02",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|paramount-huntington||thursday|20:00|live-music|dweezilzappadz20likefatherlikeson||2026-11-05",
+  "reviewNotes": "Band or DJ not researched yet: Dweezil Zappa DZ20: Like Father, Like Son."
+}

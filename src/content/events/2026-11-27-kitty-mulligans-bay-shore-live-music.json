@@ -1,0 +1,24 @@
+{
+  "title": "Mountain Jam Orchestra at Kitty Mulligan's Irish Pub",
+  "summary": "Live music by Mountain Jam Orchestra at Kitty Mulligan's Irish Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-27T19:30",
+  "end": "2026-11-27T22:30",
+  "timezone": "America/New_York",
+  "venueId": "kitty-mulligans-bay-shore",
+  "town": "Bay Shore",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "kitty-mulligans-bay-shore",
+  "sourceUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+  "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
+  "sourceRef": "events page 2026-11-27",
+  "firstSeen": "2026-11-02",
+  "lastSeen": "2026-11-02",
+  "dancingCues": [
+    "jam"
+  ],
+  "confidence": 0.75,
+  "matchKey": "kitty-mulligans-bay-shore|kitty-mulligans-bay-shore||friday|19:30|live-music|mountainjamorchestra||2026-11-27",
+  "reviewNotes": "Band or DJ not researched yet: Mountain Jam Orchestra."
+}

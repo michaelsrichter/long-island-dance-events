@@ -1,0 +1,25 @@
+{
+  "title": "Little River Band at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by Little River Band at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-02-09T20:00",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "little-river-band"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "patchogue-theatre",
+  "sourceUrl": "https://www.patchoguetheatre.org/events/",
+  "sourceName": "Patchogue Theatre - events",
+  "sourceRef": "events page 2027-02-09",
+  "firstSeen": "2026-11-02",
+  "lastSeen": "2026-11-02",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.8,
+  "matchKey": "patchogue-theatre|patchogue-theatre-patchogue||tuesday|20:00|live-music|little-river-band||2027-02-09"
+}

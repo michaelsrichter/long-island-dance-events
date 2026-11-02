@@ -10,11 +10,11 @@
   "focus": "music",
   "lastCounts": {
     "found": 10,
-    "kept": 4,
+    "kept": 7,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-29T23:05:35.214Z",
+  "lastScraped": "2026-11-02T20:33:04.075Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it: LI-only page with machine-readable live-music events, but expect duplicates.",
