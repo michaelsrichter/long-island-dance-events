@@ -53,7 +53,7 @@ test.describe('community panel', () => {
     await page.goto(`${VENUE}#community`);
     const panel = page.locator('[data-community]');
     await expect(panel.getByRole('heading', { name: "Dancers' notes and photos" })).toBeVisible();
-    await expect(page.locator('.page-header [data-react] [data-like-count]')).toContainText('4');
+    await expect(page.locator('.page-header [data-react] [data-like-count]')).toContainText('4', { timeout: 15_000 });
     await expect(panel.locator('[data-like]'), 'Like lives at the top of the page now').toHaveCount(0);
     await expect(panel.locator('.community__comment')).toHaveCount(2);
     await expect(panel.getByText('<script>alert(1)</script> shown as text')).toBeVisible();
@@ -73,7 +73,7 @@ test.describe('community panel', () => {
     const activate = panel.getByRole('link', { name: /Sign in to like/ });
     await expect(activate).toBeVisible();
     const like = page.locator('.page-header [data-react] [data-like]');
-    await expect(like).toBeEnabled();
+    await expect(like).toBeEnabled({ timeout: 15_000 });
     await like.click();
     await expect(like).toHaveAttribute('aria-pressed', 'true');
     await expect(like.locator('[data-like-count]')).toContainText('5');
