@@ -52,7 +52,7 @@ For a plain-language walk-through of what runs every week, where, when and what 
 | Step | Code | Notes |
 | --- | --- | --- |
 | Load registries | `ingest/lib/registry.ts` | Venues, organizers, teachers, bands/DJs, styles and their `aliases`; Long Island place list. |
-| Fetch | `ingest/lib/fetch.ts` | Honors `robots.txt`, waits `rateLimitSeconds` between requests to a host, conditional GET, cache in `.cache/ingest/` (never committed). User-Agent `LongIslandDanceEventsBot/1.0 (+repo URL)`. |
+| Fetch | `ingest/lib/fetch.ts` | Accepts public http(s) only; resolves and rejects loopback, link-local, private/internal and non-public addresses before every request and redirect. Honors `robots.txt`, waits `rateLimitSeconds` between requests to a host, conditional GET, cache in `.cache/ingest/` (never committed). User-Agent `LongIslandDanceEventsBot/1.0 (+repo URL)`. |
 | Adapter | `ingest/adapters/<id>.ts` | `fetch(ctx)` returns documents; `normalize(docs, ctx)` returns dated `Candidate`s. Loaded by name from the source file's `adapter` field. Most sources use a generic adapter configured in their source file: `ical` (calendar feeds), `jsonld` (schema.org Event data, event sitemaps) or `htmllist` (dated web page lists, Squarespace event lists), all sharing `ingest/lib/structured.ts`. `agentmail` reads email newsletters from the project inbox (senders in `catalog/newsletters.json`) with the `htmllist` reader; an adapter can set `quietWhenNoDocuments` so "no new issue" is not a failure. |
 | PDF | `ingest/pdf/extract_calendar.py` | Day headings are uppercase and larger than body text; sections and towns are bold. Outputs rows: date, section, town, text, page. |
 | Normalize | `ingest/lib/times.ts`, `prices.ts`, `text.ts`, `describe.ts` | Times ("7:30-11pm", "lesson at 7"), prices ("$15/$20 members"), styles, venues and people; titles and summaries in our own words. |
@@ -161,7 +161,7 @@ flowchart LR
   O["Owner at /moderate/<br/>(admin role)"] -->|"/api/review/*<br/>same-origin JSON"| FN["Functions<br/>review.js"]
   FN -->|"app JWT -> installation token<br/>(key encrypted in ReviewState)"| GH["GitHub API"]
   GH -->|"one commit per decision batch"| MAIN[("main: src/content/**")]
-  CI["CI workflow_dispatch<br/>exact ingest SHA"] --> AM["Trusted workflow_run<br/>strict content-only guards"]
+  CI["CI workflow_dispatch<br/>exact ingest SHA"] --> AM["Trusted main workflow_dispatch<br/>poll exact CI + strict content-only guards"]
   AM -->|"normal merge commit"| MAIN
   GH -->|"manual fallback only"| MAIN
   GH -->|"workflow_dispatch (Check sources now)"| ACT["Collect events workflow"]
@@ -175,7 +175,7 @@ flowchart LR
 | `GET /api/review/status` | GitHub connection (app set up? installed?) and the community queue count. |
 | `GET/POST /api/review/listings` | Exceptional manually held listings (`status: pending-review` on `main`) with reasons parsed from `reviewNotes`; decisions publish, fix, cancel, hide and undo. Routine machine uncertainty uses `hidden` and never enters this queue. Changed fields go into `lockedFields`; files keep the `ingest/lib/store.ts` layout (`api/src/lib/content-files.js`, checked by `tests/unit/review-content.test.ts`). |
 | `GET/POST /api/review/collected` | The rolling `ingest/updates` pull request: run report, check runs and merge state. Publishing is automatic after the trusted `CI` run; the POST remains an exact-SHA manual fallback. |
-| `GET/POST /api/review/sources`, `POST /api/review/run`, `POST /api/review/candidate` | Sources grouped by next step (`api/src/lib/review-data.js`), `ingest-failure` and `source-discovery` issues, recent runs; switch on/off and permission answers (commits); run the Collect workflow for a cadence or one source; new websites: Copilot task or `owner-no` in `catalog/search-triage.json`. |
+| `GET/POST /api/review/sources`, `POST /api/review/run` | Sources grouped by automatic retry/disable history and exceptional next steps (`api/src/lib/review-data.js`), plus recent runs; switch on/off and permission answers (commits); run the Collect workflow for a cadence or one source. `POST /api/review/candidate` is retained only to return a clear "automatic now" response to stale clients. |
 | `GET/POST /api/review/messages` | Open visitor issues (automation labels excluded), reply and close. |
 | `POST /api/review/copilot` | An issue labeled `copilot-task` with the context. Copilot does not start it by itself: a person starts a Copilot session with the link (or assigns it to Copilot and checks for an error reply). |
 | `GET /api/review/outreach`, `GET /api/review/outreach/draft`, `POST /api/review/outreach/send`, `GET /api/review/outreach/thread` | Emails to website owners through the site's AgentMail inbox (P53): ready-made drafts, review-then-send (production only; previews dry-run), 30-day and 14-day limits, conversations labeled `outreach` + `source-<id>`, and the source's `permission` updated by a commit. |
@@ -231,7 +231,7 @@ flowchart LR
 - **Duplicates (phase 3):** exact `matchKey` pass, then local embeddings (bge-small, run in CI, no API key). Cosine ≥ 0.9 merges; 0.8-0.9 goes to a human review queue.
 - **Admin (phase 5):** shipped as the review center (P51, updated by P65): exceptional manually held listings, event update logs and fallback controls, sources and visitor messages, next to the moderation queue.
 - **Azure (phase 6):** Bicep for Static Web App, Storage account (Tables for mutable state, Blobs for raw snapshots) and settings.
-- **Scheduled runs (built):** `.github/workflows/ingest-scheduled.yml` runs each source on its `cadence` (daily, Monday + Thursday, Sunday), updates one rolling pull request with the report and dispatches CI. `.github/workflows/ingest-auto-merge.yml` verifies the exact successful SHA and content-only guard before merging automatically. Source failures still file a metadata-only issue for a person; `report-database.yml` builds the SQLite report database; `source-discovery.yml` searches for new sources monthly (85 Long Island-wide queries plus one twelfth of the town-by-town matrix in `catalog/search-matrix.json`). See [database-plan.md](database-plan.md) and [how-weekly-updates-work.md](how-weekly-updates-work.md).
+- **Scheduled runs (built):** `.github/workflows/ingest-scheduled.yml` runs each source on its `cadence` (daily, Monday + Thursday, Sunday), updates one rolling pull request with the report and dispatches CI. `.github/workflows/ingest-auto-merge.yml` verifies the exact successful SHA and content-only guard before merging automatically. Source health uses a 30-day continuous-failure grace period with automatic reset/disable and no routine issue. `report-database.yml` builds the SQLite report database; `source-discovery.yml` searches monthly, blocks private/internal URLs, honors robots.txt, validates supported public sources with the real collector and adds them through the same rolling content-only publication path. See [database-plan.md](database-plan.md) and [how-weekly-updates-work.md](how-weekly-updates-work.md).
 
 ## Known tradeoffs
 

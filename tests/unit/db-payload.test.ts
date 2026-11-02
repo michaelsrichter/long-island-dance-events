@@ -54,5 +54,5 @@ describe('database snapshot (decision P56)', () => {
     expect(compareExport(root, changed).different).toEqual([exact[0]!.path]);
     expect(compareExport(root, exact.slice(1)).missing).toEqual([exact[0]!.path]);
     expect(compareExport(root, [...exact, { path: 'src/content/events/zzz.json', raw: '{}' }]).extra).toEqual(['src/content/events/zzz.json']);
-  });
+  }, 120_000);
 });

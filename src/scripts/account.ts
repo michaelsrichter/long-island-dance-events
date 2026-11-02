@@ -84,7 +84,6 @@ if (root) {
     if ((r.status !== 200 || !r.data?.signedIn) && cachedAccount() && (await ensureSession()).signedIn) r = await api('/api/me');
     show('[data-loading]', false);
     if (r.status !== 200 || !r.data?.signedIn) {
-      rememberAccount(null);
       $<HTMLAnchorElement>('[data-signin]').href = loginUrl(next || '/account/');
       show('[data-signed-out]', true);
       return;

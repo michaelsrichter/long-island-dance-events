@@ -1,4 +1,4 @@
-/** Sources: what stopped working, new websites found, and switched-off sources grouped by what you can do. */
+/** Sources: automatic health history and exceptional switched-off sources grouped by what a person can do. */
 import { ago, api, button, cmsUrl, copilotButton, dateTimeLabel, dayLabel, details, el, emptyState, errorText, link, list, LIVE, plural, say, settle } from './core';
 import { composer, conversations, type OutreachSummary } from './compose';
 
@@ -16,21 +16,22 @@ export type Source = {
   lastStatus: string;
   lastMessage: string;
   lastCounts: null | { found: number; kept: number; outOfArea: number; needsReview: number };
+  failure: null | { firstFailedAt: string; lastFailedAt: string; consecutiveFailedChecks: number; disabledAt?: string; disabledReason?: string };
   notes: string;
   group: string;
   snoozedUntil: string;
 };
-type Site = { domain: string; url: string; title: string; queries: string[] };
 export type SourcesData = {
   today: string;
   sources: Source[];
-  failures: { number: number; title: string; url: string; createdAt: string; sourceId: string }[];
-  discovery: { number: number; title: string; url: string; createdAt: string; data: null | { newSites: Site[]; robotsChanged: unknown[]; broken: unknown[]; noDates: unknown[] } }[];
+  failures: unknown[];
+  discovery: unknown[];
   runs: { id: number; title: string; event: string; status: string; conclusion: string; createdAt: string; url: string }[];
 };
 
 const GROUPS: { id: string; title: string; help: string; closed?: boolean }[] = [
-  { id: 'broken', title: 'Stopped working', help: 'The last check of these sources failed. Often the website changed its layout. Press "Try again now". If it still fails, press "Ask Copilot to fix it", or switch it off.' },
+  { id: 'retrying', title: 'Being retried automatically', help: 'The latest check failed. The site keeps trying on the normal schedule for 30 continuous days. Any successful check clears the streak.', closed: true },
+  { id: 'auto-disabled', title: 'Switched off automatically', help: 'These sources went 30 continuous days without a successful check. They stay here with the date and reason, and can be switched on again later.', closed: true },
   { id: 'granted', title: 'They said yes: switch it on', help: 'The owner of the website said we may list their events. Switch the source on, or ask Copilot to set it up if they sent a calendar link.' },
   { id: 'asked', title: 'Waiting for an answer', help: 'You asked these websites for permission. Their answers show under each one. When they answer, press "They said yes: switch it on" or "They said no". If there is no answer after 14 days, you can send one short follow-up.' },
   { id: 'permission', title: 'Ask for permission', help: 'These websites ask programs like ours to stay away, or their rules say to ask first. We never work around that. A short, friendly email often works. Press "Review and send the email…". If you asked another way (like a contact form), press "I asked another way".' },
@@ -46,7 +47,7 @@ const GROUPS: { id: string; title: string; help: string; closed?: boolean }[] = 
   { id: 'noreply', title: 'Asked, no answer', help: 'We asked, but they never answered. You can ask again after a while.', closed: true },
   { id: 'other', title: 'Other switched-off sources', help: 'Set aside for now (for example, not updated lately). The monthly check keeps an eye on them.', closed: true },
 ];
-const ACTION_GROUPS = new Set(['broken', 'granted', 'asked']);
+const ACTION_GROUPS = new Set(['granted', 'asked']);
 
 const CADENCE: Record<string, string> = { daily: 'every morning', 'twice-weekly': 'Mondays and Thursdays', weekly: 'Sundays', monthly: 'Sundays', seasonal: 'in season', manual: 'by hand only' };
 const RESULT: Record<string, string> = { ok: 'worked', empty: 'found nothing', invalid: 'found broken data', error: 'could not be read', skipped: 'skipped', never: 'not checked yet' };
@@ -65,8 +66,7 @@ function followupIsDue(s: Source, o: OutreachSummary | null, now = Date.now()): 
 }
 
 export function sourceTodoCount(d: SourcesData, o: OutreachSummary | null = null): number {
-  const actions = d.sources.filter((s) => !s.snoozedUntil && (['broken', 'granted'].includes(effectiveGroup(s, o)) || newAnswers(s, o) || followupIsDue(s, o))).length;
-  return actions + d.discovery.reduce((n, i) => n + (i.data?.newSites.length || 0), 0);
+  return d.sources.filter((s) => !s.snoozedUntil && (effectiveGroup(s, o) === 'granted' || newAnswers(s, o) || followupIsDue(s, o))).length;
 }
 
 export function renderSources(root: HTMLElement, d: SourcesData, o: OutreachSummary | null, onCount: (n: number) => void) {
@@ -77,7 +77,6 @@ export function renderSources(root: HTMLElement, d: SourcesData, o: OutreachSumm
   const followupDue = (id: string) => followupIsDue(d.sources.find((x) => x.id === id)!, o);
   onCount(open);
   const decided = () => onCount(Math.max(0, --open));
-  const failureFor = new Map(d.failures.map((f) => [f.sourceId, f]));
 
   const commit = async (decision: Record<string, unknown>, card: HTMLElement, message: string) => {
     const r = await api('/api/review/sources', { decisions: [decision] });
@@ -107,15 +106,19 @@ export function renderSources(root: HTMLElement, d: SourcesData, o: OutreachSumm
         'review-meta',
       ),
     );
-    if (s.group === 'broken' && s.lastMessage) li.append(el('p', `What went wrong: ${s.lastMessage}`, 'review-note'));
+    if (s.group === 'retrying' && s.failure) {
+      li.append(el('p', `Automatic retry period started ${dayLabel(s.failure.firstFailedAt)}. Last failure: ${s.lastMessage || s.lastStatus}.`, 'review-note'));
+    }
+    if (s.group === 'auto-disabled' && s.failure?.disabledAt) {
+      li.append(el('p', `Switched off automatically on ${dayLabel(s.failure.disabledAt)}. ${s.failure.disabledReason || s.lastMessage}`, 'review-note'));
+    }
     if (s.notes || s.permission?.note) {
       const n = details(s.enabled ? 'Notes' : 'Why it is switched off', 'review-hint');
       if (s.notes) n.body.append(el('p', s.notes, 'review-note'));
       if (s.permission?.note) n.body.append(el('p', `Permission: ${s.permission.note}`, 'review-note'));
       li.append(n.box);
     }
-    const f = failureFor.get(s.id);
-    li.append(list([link(s.url, 'Open their website'), f ? link(f.url, `Problem report #${f.number}`) : null, link(cmsUrl('sources', s.id), 'Edit in the editor', { external: true })], 'review-links'));
+    li.append(list([link(s.url, 'Open their website'), link(cmsUrl('sources', s.id), 'Edit in the editor', { external: true })], 'review-links'));
 
     if (!['permission', 'asked', 'noreply'].includes(s.group)) {
       const conv = conversations(`source:${s.id}`, o);
@@ -129,19 +132,13 @@ export function renderSources(root: HTMLElement, d: SourcesData, o: OutreachSumm
         await commit({ id: s.id, action: 'enable' }, li, `Switched on. The next check will read it. ${LIVE}`);
       });
     const fixBody = () =>
-      `The source **${s.name}** (\`src/content/sources/${s.id}.json\`, ${s.url}) ${s.group === 'broken' ? `stopped working: ${s.lastMessage || s.lastStatus}` : 'needs a change before it can be switched on'}.${f ? ` Problem report: ${f.url}.` : ''}\n\nNotes: ${s.notes || 'none'}\n\nPlease find out why and fix it (adapter settings, address or a small adapter change), with a test. Never work around a robots.txt block or a bot check. Open a pull request.`;
+      `The source **${s.name}** (\`src/content/sources/${s.id}.json\`, ${s.url}) needs a change before it can be switched on.\n\nNotes: ${s.notes || 'none'}\n\nPlease find out why and fix it (adapter settings, address or a small adapter change), with a test. Never work around a robots.txt block or a bot check. Open a pull request.`;
 
     switch (s.group) {
-      case 'broken':
-        actions.append(button('Try again now', 'btn--primary', (b) => run({ source: s.id }, b, `a new check of ${s.name}`)));
-        actions.append(copilotButton('Ask Copilot to fix it', () => `Fix the source: ${s.name}`, fixBody));
-        actions.append(
-          button('Switch off…', 'btn--secondary', async () => {
-            const why = prompt('Why switch it off? (saved in the history)', 'Stopped working');
-            if (why === null) return;
-            await commit({ id: s.id, action: 'disable', note: why }, li, `Switched off. ${LIVE}`);
-          }),
-        );
+      case 'retrying':
+        break;
+      case 'auto-disabled':
+        actions.append(switchOn('Switch on again', `Switch on "${s.name}" and start a new failure grace period?`));
         break;
       case 'permission':
       case 'asked':
@@ -274,57 +271,10 @@ export function renderSources(root: HTMLElement, d: SourcesData, o: OutreachSumm
     runBox.append(recent.box);
   }
 
-  /* ---- monthly source check (new websites) ---- */
-  const discovery = d.discovery.filter((i) => i.data);
-  let newSitesSection: HTMLElement | null = null;
-  const newSites = discovery.flatMap((i) => i.data!.newSites.map((s) => ({ ...s, issue: i.number })));
-  if (newSites.length) {
-    const sec = el('section', null, 'review-sub');
-    sec.append(el('h3', `New websites found (${newSites.length})`));
-    sec.append(el('p', 'The monthly search found these websites. Open each one. If it lists several upcoming dances or live music on Long Island, press "Worth adding". Copilot will then check it and add it. If not, press "Not useful", and we won\'t show it again.', 'review-hint'));
-    const ul = el('ul', null, 'review-grid');
-    for (const site of newSites) {
-      const li = el('li', null, 'review-card');
-      li.append(el('h4', site.domain));
-      if (site.title) li.append(el('p', site.title, 'review-hint'));
-      li.append(list([link(site.url, 'Open the page'), site.queries?.length ? `Found by searching: ${site.queries.slice(0, 2).join('; ')}` : null], 'review-links'));
-      const row = el('div', null, 'review-actions');
-      const decide = async (action: 'copilot' | 'reject', note = '') => {
-        const r = await api('/api/review/candidate', { issue: site.issue, domain: site.domain, url: site.url, action, note });
-        if (r.status !== 200) return say(errorText(r));
-        settle(li, action === 'copilot' ? 'Copilot has a task to check and add it.' : 'Saved. It will not be suggested again.', r.data.issue ? [link(r.data.issue.url, 'Open the Copilot task')] : []);
-        decided();
-      };
-      row.append(
-        button('Worth adding', 'btn--primary', () => decide('copilot')),
-        button('Not useful', 'btn--secondary', async () => {
-          const why = prompt('Why not? (optional, saved in the history)', '');
-          if (why === null) return;
-          await decide('reject', why);
-        }),
-      );
-      li.append(row);
-      ul.append(li);
-    }
-    sec.append(ul);
-    const reports = el('p', null, 'review-hint');
-    reports.append('Full monthly reports: ');
-    discovery.forEach((i, n) => {
-      if (n) reports.append(', ');
-      reports.append(link(i.url, i.title));
-    });
-    sec.append(reports);
-    newSitesSection = sec;
-  }
-
   /* ---- groups ---- */
   const visible = d.sources.filter((s) => s.group !== 'on' && !s.snoozedUntil);
-  if (!visible.some((s) => ACTION_GROUPS.has(s.group)) && !newSites.length) root.append(emptyState('All switched-on sources are working, and nothing waits for an answer.'));
+  if (!visible.some((s) => ACTION_GROUPS.has(s.group))) root.append(emptyState('Routine source checks, retries, disablement and new-source onboarding are automatic. Nothing needs an answer.'));
   for (const g of GROUPS) {
-    if (g.id !== 'broken' && newSitesSection) {
-      root.append(newSitesSection);
-      newSitesSection = null;
-    }
     const items = visible.filter((s) => s.group === g.id);
     if (!items.length) continue;
     const ul = el('ul', null, 'review-grid');
@@ -338,13 +288,6 @@ export function renderSources(root: HTMLElement, d: SourcesData, o: OutreachSumm
       sec.append(el('h3', `${g.title} (${items.length})`), el('p', g.help, 'review-hint'), ul);
       root.append(sec);
     }
-  }
-  const leftover = d.failures.filter((f) => !d.sources.some((s) => s.id === f.sourceId && s.group === 'broken'));
-  if (leftover.length) {
-    const box = details(`Problem reports still open (${leftover.length})`, 'review-details panel');
-    box.body.append(el('p', 'A report closes by itself when its source works again. Close the rest on GitHub when they are no longer needed.', 'review-hint'));
-    box.body.append(list(leftover.map((f) => link(f.url, `#${f.number}: ${f.title}`)), 'review-log'));
-    root.append(box.box);
   }
   const snoozed = d.sources.filter((s) => s.snoozedUntil);
   if (snoozed.length) {

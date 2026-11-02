@@ -7,7 +7,7 @@ import { addDays } from '../../src/lib/time';
 import { extractRows, findDjNames, guessVenue, normalizeRows, python, statedCadence } from '../../ingest/adapters/thedancecalendar';
 import { collapse, inferRecurrence } from '../../ingest/lib/collapse';
 import { makeSummary, plainLabel, themeOf } from '../../ingest/lib/describe';
-import { isAllowed, parseRobots } from '../../ingest/lib/fetch';
+import { assertPublicHttpUrl, isAllowed, isPublicAddress, parseRobots } from '../../ingest/lib/fetch';
 import { mergeDrafts } from '../../ingest/lib/merge';
 import { parsePrices } from '../../ingest/lib/prices';
 import { lookupPlace, Registry, ROOT } from '../../ingest/lib/registry';
@@ -132,6 +132,25 @@ describe('robots.txt', () => {
   it('honors wildcard rules for every bot', () => {
     expect(isAllowed(rules, '/dance-calendar')).toBe(true);
     expect(isAllowed(rules, '/gallery?lightbox=1')).toBe(false);
+  });
+
+  describe('public source URL safety', () => {
+    it('rejects loopback, private, link-local and private DNS results', async () => {
+      expect(isPublicAddress('8.8.8.8')).toBe(true);
+      expect(isPublicAddress('127.0.0.1')).toBe(false);
+      expect(isPublicAddress('192.168.1.2')).toBe(false);
+      expect(isPublicAddress('169.254.169.254')).toBe(false);
+      expect(isPublicAddress('fc00::1')).toBe(false);
+      await expect(assertPublicHttpUrl('http://127.0.0.1/events')).rejects.toThrow(/Unsafe source URL/);
+      await expect(assertPublicHttpUrl('https://events.example/', async () => ['10.0.0.5'])).rejects.toThrow(/public addresses/);
+    });
+
+    it('accepts public http(s) URLs whose DNS answers are all public', async () => {
+      await expect(assertPublicHttpUrl('https://events.example/calendar', async () => ['8.8.8.8', '1.1.1.1'])).resolves.toMatchObject({
+        protocol: 'https:',
+        hostname: 'events.example',
+      });
+    });
   });
   it('uses a group for this bot when there is one', () => {
     expect(isAllowed(parseRobots('User-agent: LongIslandDanceEventsBot\nDisallow: /private\n'), '/private/x')).toBe(false);

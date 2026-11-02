@@ -10,7 +10,11 @@ name: Collect events (scheduled)
 #   twice-weekly  Monday and Thursday  busy bar, venue and aggregator calendars
 #   weekly        Sunday               clubs, studios, bands, libraries, monthly calendars
 #
-# The collector honors robots.txt, waits between requests, and names itself
+# A failed source stays enabled and is retried on every normal run for 30 continuous days. A
+# successful check clears the streak. After 30 days without success, the source is switched off
+# automatically with an auditable date and reason; routine source failures do not create issues.
+#
+# The collector honors robots.txt, refuses private/internal addresses and unsafe redirects, waits between requests, and names itself
 # LongIslandDanceEventsBot/1.0. Nothing here gets around a block.
 #
 # One-time setting for the owner: Settings > Actions > General > Workflow permissions >
@@ -34,7 +38,6 @@ on:
 permissions:
   contents: write
   pull-requests: write
-  issues: write
   # Start CI on the collection branch (pull requests opened with this token do not start it).
   actions: write
 
@@ -129,12 +132,6 @@ jobs:
       # "Venue map locations" job would not run on them. New venues get their map pin here instead.
       - name: Fill in map coordinates for new venues
         run: node scripts/geocode-venues.mjs | tee -a "$GITHUB_STEP_SUMMARY"
-
-      - name: File or update issues for sources that failed
-        env:
-          GH_TOKEN: ${{ github.token }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: node .github/scripts/ingest-issues.mjs .cache/ingest/report.json
 
       - name: Validate every content file (astro check)
         run: npm run check

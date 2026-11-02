@@ -5,7 +5,9 @@
  * unchanged file is not downloaded again. Cached copies live in .cache/ingest and are never committed.
  */
 import { createHash } from 'node:crypto';
+import { lookup } from 'node:dns/promises';
 import { mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { BlockList, isIP } from 'node:net';
 import { join } from 'node:path';
 
 const isFile = (p: string): boolean => statSync(p, { throwIfNoEntry: false })?.isFile() ?? false;
@@ -21,6 +23,68 @@ function readIfExists(p: string): string | undefined {
 
 export const USER_AGENT = 'LongIslandDanceEventsBot/1.0 (+https://github.com/michaelsrichter/long-island-dance-events; weekly, polite)';
 const BOT_TOKEN = 'longislanddanceeventsbot';
+const MAX_REDIRECTS = 8;
+
+const blockedV4 = new BlockList();
+const blockedV6 = new BlockList();
+for (const [address, prefix, family] of [
+  ['0.0.0.0', 8, 'ipv4'],
+  ['10.0.0.0', 8, 'ipv4'],
+  ['100.64.0.0', 10, 'ipv4'],
+  ['127.0.0.0', 8, 'ipv4'],
+  ['169.254.0.0', 16, 'ipv4'],
+  ['172.16.0.0', 12, 'ipv4'],
+  ['192.0.0.0', 24, 'ipv4'],
+  ['192.0.2.0', 24, 'ipv4'],
+  ['192.168.0.0', 16, 'ipv4'],
+  ['198.18.0.0', 15, 'ipv4'],
+  ['198.51.100.0', 24, 'ipv4'],
+  ['203.0.113.0', 24, 'ipv4'],
+  ['224.0.0.0', 4, 'ipv4'],
+  ['240.0.0.0', 4, 'ipv4'],
+  ['::', 128, 'ipv6'],
+  ['::1', 128, 'ipv6'],
+  ['::ffff:0:0', 96, 'ipv6'],
+  ['100::', 64, 'ipv6'],
+  ['2001:db8::', 32, 'ipv6'],
+  ['fc00::', 7, 'ipv6'],
+  ['fe80::', 10, 'ipv6'],
+  ['ff00::', 8, 'ipv6'],
+] as const) {
+  (family === 'ipv4' ? blockedV4 : blockedV6).addSubnet(address, prefix, family);
+}
+
+export function isPublicAddress(address: string): boolean {
+  const family = isIP(address);
+  return family === 4 ? !blockedV4.check(address, 'ipv4') : family === 6 ? !blockedV6.check(address, 'ipv6') : false;
+}
+
+/**
+ * Refuse URLs that could make the collector read a private service. DNS is checked immediately
+ * before every request, including redirects; all returned addresses must be public.
+ */
+export async function assertPublicHttpUrl(
+  value: string,
+  resolve: (hostname: string) => Promise<string[]> = async (hostname) => (await lookup(hostname, { all: true, verbatim: true })).map((r) => r.address),
+): Promise<URL> {
+  let url: URL;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error(`Unsafe source URL: not a valid web address (${value})`);
+  }
+  if (!['http:', 'https:'].includes(url.protocol)) throw new Error(`Unsafe source URL: only public http(s) addresses are allowed (${value})`);
+  if (url.username || url.password) throw new Error(`Unsafe source URL: credentials are not allowed (${value})`);
+  const hostname = url.hostname.replace(/^\[|\]$/g, '').toLowerCase();
+  if (!hostname || hostname === 'localhost' || hostname.endsWith('.localhost') || hostname.endsWith('.local') || hostname.endsWith('.internal')) {
+    throw new Error(`Unsafe source URL: private host name (${value})`);
+  }
+  const addresses = isIP(hostname) ? [hostname] : await resolve(hostname);
+  if (!addresses.length || addresses.some((address) => !isPublicAddress(address))) {
+    throw new Error(`Unsafe source URL: host does not resolve only to public addresses (${value})`);
+  }
+  return url;
+}
 
 interface RobotsRules {
   allow: string[];
@@ -118,12 +182,31 @@ export class PoliteFetcher {
     this.lastRequest.set(host, Date.now());
   }
 
+  private async request(url: string, headers: Record<string, string>, delay: number, obeyRobots: boolean): Promise<Response> {
+    let current = url;
+    for (let redirects = 0; redirects <= MAX_REDIRECTS; redirects++) {
+      const u = await assertPublicHttpUrl(current);
+      let waitFor = delay;
+      if (obeyRobots && !isPublishedCalendarFeed(current)) {
+        const rules = await this.rules(u.origin, delay);
+        if (!isAllowed(rules, u.pathname + u.search)) throw new Error(`robots.txt does not allow ${current}`);
+        waitFor = Math.max(delay, rules.crawlDelay ?? 0);
+      }
+      await this.wait(u.host, waitFor);
+      const res = await fetch(current, { headers, redirect: 'manual', signal: AbortSignal.timeout(90000) });
+      if (![301, 302, 303, 307, 308].includes(res.status)) return res;
+      const location = res.headers.get('location');
+      if (!location) throw new Error(`HTTP ${res.status} redirect without a location for ${current}`);
+      current = new URL(location, current).href;
+    }
+    throw new Error(`Too many redirects for ${url}`);
+  }
+
   private async rules(origin: string, delay: number): Promise<RobotsRules> {
     if (this.robots.has(origin)) return this.robots.get(origin)!;
     let rules: RobotsRules = { allow: [], disallow: [] };
     try {
-      await this.wait(new URL(origin).host, delay);
-      const res = await fetch(`${origin}/robots.txt`, { headers: { 'user-agent': USER_AGENT }, signal: AbortSignal.timeout(20000) });
+      const res = await this.request(`${origin}/robots.txt`, { 'user-agent': USER_AGENT }, delay, false);
       if (res.ok) rules = parseRobots(await res.text());
       else if (res.status === 401 || res.status === 403) rules = { allow: [], disallow: ['/'] };
     } catch {
@@ -145,18 +228,13 @@ export class PoliteFetcher {
       if (!cached) throw new Error(`Offline and not cached: ${url}`);
       return { url, status: 200, file, contentType: meta?.contentType ?? '', fromCache: true };
     }
-    const u = new URL(url);
-    const feed = isPublishedCalendarFeed(url);
-    const rules = feed ? { allow: [], disallow: [] } : await this.rules(u.origin, delaySeconds);
-    if (!feed && !isAllowed(rules, u.pathname + u.search)) throw new Error(`robots.txt does not allow ${url}`);
-    await this.wait(u.host, Math.max(delaySeconds, rules.crawlDelay ?? 0));
     const headers: Record<string, string> = { 'user-agent': USER_AGENT, accept: '*/*' };
     if (meta?.etag && cached) headers['if-none-match'] = meta.etag;
     if (meta?.lastModified && cached) headers['if-modified-since'] = meta.lastModified;
     let res: Response | undefined;
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        res = await fetch(url, { headers, redirect: 'follow', signal: AbortSignal.timeout(90000) });
+        res = await this.request(url, headers, delaySeconds, true);
         if (res.status < 500) break;
       } catch (e) {
         if (attempt === 1) throw e;
