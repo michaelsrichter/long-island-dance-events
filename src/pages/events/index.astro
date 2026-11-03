@@ -8,6 +8,7 @@ import EmptyState from '../../components/EmptyState.astro';
 import Icon from '../../components/Icon.astro';
 import RelativeDay from '../../components/RelativeDay.astro';
 import { byDay, getEventGroups, getSettings, isDance } from '../../lib/content';
+import { EVENT_DATE_FILTERS } from '../../lib/event-date-windows';
 import { DANCE_TYPES, DANCE_TYPE_LABELS, SKILL_LABELS } from '../../lib/schemas';
 import { breadcrumbJsonLd } from '../../lib/seo';
 
@@ -36,13 +37,7 @@ const crumbs = [
   { name: 'Home', href: '/' },
   { name: 'Events', href: '/events/' },
 ];
-const when = [
-  { value: 'all', label: 'All upcoming' },
-  { value: 'today', label: 'Today' },
-  { value: 'weekend', label: 'This weekend' },
-  { value: 'week', label: 'Next 7 days' },
-  { value: 'month', label: 'This month' },
-];
+const when = EVENT_DATE_FILTERS;
 const weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 ---
@@ -61,9 +56,9 @@ const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
       <fieldset>
         <legend>When</legend>
         <div class="quick-views">
-          {when.map((q, i) => (
+          {when.map((q) => (
             <label class="chip">
-              <input type="radio" name="when" value={q.value} checked={i === 0} />
+              <input type="radio" name="when" value={q.value} checked={q.value === 'all'} />
               <span>{q.label}</span>
             </label>
           ))}
