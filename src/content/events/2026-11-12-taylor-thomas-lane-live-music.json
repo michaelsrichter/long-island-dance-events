@@ -1,0 +1,24 @@
+{
+  "title": "Taylor Thomas Lane at Daisy's Nashville Lounge (Miller Place)",
+  "summary": "Live music by Taylor Thomas Lane at Daisy's Nashville Lounge (Miller Place). The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-12T18:00",
+  "end": "2026-11-12T23:00",
+  "timezone": "America/New_York",
+  "venueId": "daisys-nashville-lounge-miller-place",
+  "town": "Miller Place",
+  "performerIds": [
+    "taylor-thomas-lane"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://daisysli.com/event/taylor-thomas-lane-8/",
+  "status": "active",
+  "sourceId": "daisys-miller-place",
+  "sourceUrl": "https://daisysli.com/event/taylor-thomas-lane-8/",
+  "sourceName": "Daisy's (Miller Place) - live music calendar",
+  "sourceRef": "calendar feed 2026-11-12",
+  "firstSeen": "2026-11-05",
+  "lastSeen": "2026-11-05",
+  "confidence": 0.9,
+  "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||thursday|18:00|live-music|taylor-thomas-lane||2026-11-12"
+}

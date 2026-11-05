@@ -10,7 +10,7 @@
     "house-of-heavy"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",
@@ -19,5 +19,5 @@
   "lastSeen": "2026-11-02",
   "confidence": 0.6,
   "matchKey": "amityville-music-hall|amityville-music-hall-amityville||saturday|tba|live-music|house-of-heavy||2027-01-09",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Hidden automatically because it was not found in the latest amityville-music-hall run on 2026-11-05; it may have been cancelled or moved."
 }
