@@ -1,0 +1,26 @@
+{
+  "title": "FiveStone at Shannon Rose Pub",
+  "summary": "Live music by FiveStone at Shannon Rose Pub in Lynbrook. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-11-06T20:00",
+  "end": "2026-11-06T23:00",
+  "timezone": "America/New_York",
+  "venueId": "shannon-rose-pub-lynbrook",
+  "town": "Lynbrook",
+  "performerIds": [
+    "fivestone"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-06",
+  "lastSeen": "2026-11-06",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-06|shannon-rose-pub-lynbrook|fivestone-friday-11-6|2026-11-06|special"
+}

@@ -8,14 +8,14 @@
   "venueId": "the-village-lanterne-lindenhurst",
   "town": "Lindenhurst",
   "skillLevel": "all-levels",
-  "status": "hidden",
+  "status": "active",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-11-04",
-  "lastSeen": "2026-11-04",
+  "lastSeen": "2026-11-06",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-12-02|the-village-lanterne-lindenhurst|gotcha-covered|2026-12-02|special",
-  "reviewNotes": "Band or DJ not researched yet: Gotcha Covered. Hidden automatically because it was not found in the latest iraslist run on 2026-11-05; it may have been cancelled or moved."
+  "reviewNotes": "Band or DJ not researched yet: Gotcha Covered."
 }
