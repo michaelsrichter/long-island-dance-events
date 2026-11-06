@@ -1,0 +1,25 @@
+{
+  "title": "Live music at Dublin Deck Tiki Bar and Grill",
+  "summary": "Live music at Dublin Deck Tiki Bar and Grill. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-06T08:00",
+  "end": "2026-11-06T23:00",
+  "timezone": "America/New_York",
+  "venueId": "dublin-deck-tiki-bar-and-grill-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/%f0%9f%8d%b9%e2%9c%a8-pass-the-patron-fridays-at-dublin-deck-%f0%9f%8e%b6%f0%9f%8c%b4/2026-11-06/",
+  "status": "hidden",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/%f0%9f%8d%b9%e2%9c%a8-pass-the-patron-fridays-at-dublin-deck-%f0%9f%8e%b6%f0%9f%8c%b4/2026-11-06/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-11-06",
+  "firstSeen": "2026-11-05",
+  "lastSeen": "2026-11-05",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.4,
+  "matchKey": "out-on-the-town-li|dublin-deck-tiki-bar-and-grill-patchogue||friday|08:00|live-music|||2026-11-06",
+  "reviewNotes": "Start time looks wrong (8:00 in the morning). Check the source. Hidden automatically because its confidence score (0.40) is below the 0.60 publishing threshold."
+}

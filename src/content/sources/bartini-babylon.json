@@ -13,12 +13,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 16,
-    "kept": 16,
+    "found": 14,
+    "kept": 14,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-29T22:56:09.997Z",
+  "lastScraped": "2026-11-05T18:17:58.267Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. The event-calendar page has many current local bar-band dates, but the dance signal is indirect.",

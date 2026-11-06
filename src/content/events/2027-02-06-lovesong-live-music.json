@@ -1,0 +1,24 @@
+{
+  "title": "Lovesong at Mulcahy's",
+  "summary": "Live music by Lovesong at Mulcahy's. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-02-06T20:00",
+  "end": "2027-02-06T23:30",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "performerIds": [
+    "lovesong"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/lovesong-new-wave-resurrected/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/lovesong-new-wave-resurrected/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2027-02-06",
+  "firstSeen": "2026-11-02",
+  "lastSeen": "2026-11-02",
+  "confidence": 0.9,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||saturday|20:00|live-music|lovesong||2027-02-06"
+}

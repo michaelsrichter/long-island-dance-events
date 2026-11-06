@@ -1,0 +1,24 @@
+{
+  "title": "Live music at Mulcahy's",
+  "summary": "Live music at Mulcahy's. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-01-15T20:00",
+  "end": "2027-01-15T23:30",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/rock-country-nights-nashville-southern-and-classic-rock-tribute/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/rock-country-nights-nashville-southern-and-classic-rock-tribute/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2027-01-15",
+  "firstSeen": "2026-11-05",
+  "lastSeen": "2026-11-05",
+  "dancingCues": [
+    "tribute"
+  ],
+  "confidence": 0.85,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|20:00|live-music|||2027-01-15"
+}

@@ -6,7 +6,8 @@
   "timezone": "America/New_York",
   "recurrence": {
     "rdates": [
-      "2026-12-10"
+      "2026-12-10",
+      "2027-01-14"
     ]
   },
   "venueId": "amityville-music-hall-amityville",
@@ -20,9 +21,9 @@
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",
-  "sourceRef": "events page 2026-11-19",
+  "sourceRef": "pages 2026, 2027",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-10-29",
+  "lastSeen": "2026-11-05",
   "confidence": 0.8,
   "matchKey": "amityville-music-hall|amityville-music-hall-amityville||thursday|18:00|live-music|plan-your-visit||repeat"
 }

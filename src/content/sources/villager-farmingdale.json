@@ -13,13 +13,14 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 34,
-    "kept": 3,
+    "found": 31,
+    "kept": 0,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-29T23:03:47.237Z",
-  "lastStatus": "ok",
+  "lastMessage": "The adapter found 31 listings but none could be used. The source layout may have changed.",
+  "lastScraped": "2026-11-05T18:19:18.639Z",
+  "lastStatus": "empty",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many current dated band nights in an easy format.",
   "url": "https://www.thevillagerfarmingdale.com/livemusic"

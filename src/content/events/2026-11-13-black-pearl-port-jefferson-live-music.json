@@ -1,0 +1,21 @@
+{
+  "title": "Wildheart Trio at Black Pearl Seafood Chophouse",
+  "summary": "Live music by Wildheart Trio at Black Pearl Seafood Chophouse in Port Jefferson. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-13T18:30",
+  "end": "2026-11-13T21:30",
+  "timezone": "America/New_York",
+  "venueId": "black-pearl-port-jefferson",
+  "town": "Port Jefferson",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-06",
+  "lastSeen": "2026-11-06",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-13|black-pearl-port-jefferson|wildheart-trio|2026-11-13|special",
+  "reviewNotes": "Band or DJ not researched yet: Wildheart Trio."
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Zebra Plays Zeppelin at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by Zebra Plays Zeppelin at Patchogue Theatre for the Performing Arts in Patchogue. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-14T20:00",
+  "end": "2026-11-14T23:00",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-04",
+  "lastSeen": "2026-11-06",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-14|patchogue-theatre-patchogue|zebra-plays-zeppelin|2026-11-14|special",
+  "reviewNotes": "Band or DJ not researched yet: Zebra Plays Zeppelin."
+}

@@ -8,14 +8,14 @@
   "venueId": "nutty-irishman-farmingdale",
   "town": "Farmingdale",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-11-01",
+  "lastSeen": "2026-11-03",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-11-20|nutty-irishman-farmingdale|superbad|2026-11-20|special",
-  "reviewNotes": "Band or DJ not researched yet: Superbad."
+  "reviewNotes": "Band or DJ not researched yet: Superbad. Hidden automatically because it was not found in the latest iraslist run on 2026-11-04; it may have been cancelled or moved."
 }
