@@ -11,7 +11,7 @@
   "venueId": "dox-island-park",
   "town": "Island Park",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -23,5 +23,5 @@
   ],
   "confidence": 0.7,
   "matchKey": "iraslist|2026-11-25|dox-island-park|dj-jef-nec-alisha|2026-11-25|special",
-  "reviewNotes": "Band or DJ not researched yet: DJ Jef Nec, Alisha."
+  "reviewNotes": "Band or DJ not researched yet: DJ Jef Nec, Alisha. Hidden automatically because it was not found in the latest iraslist run on 2026-11-07; it may have been cancelled or moved."
 }
