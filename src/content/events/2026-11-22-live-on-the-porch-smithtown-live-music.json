@@ -7,6 +7,9 @@
   "timezone": "America/New_York",
   "venueId": "live-on-the-porch-smithtown",
   "town": "Smithtown",
+  "performerIds": [
+    "sarah-gross-and-the-killjoys"
+  ],
   "skillLevel": "all-levels",
   "status": "active",
   "sourceId": "iraslist",
@@ -14,8 +17,7 @@
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-11-03",
-  "lastSeen": "2026-11-07",
-  "confidence": 0.7,
-  "matchKey": "iraslist|2026-11-22|live-on-the-porch-smithtown|sarah-gross-and-the-killjoys|2026-11-22|special",
-  "reviewNotes": "Band or DJ not researched yet: Sarah Gross & The Killjoys."
+  "lastSeen": "2026-11-08",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-22|live-on-the-porch-smithtown|sarah-gross-and-the-killjoys|2026-11-22|special"
 }
