@@ -15,7 +15,7 @@
     "mixed-vibes-band"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "mixed-vibes-band",
   "sourceUrl": "https://bnds.us/fm31j4",
   "sourceName": "Mixed Vibes Band - live music calendar",
@@ -24,5 +24,5 @@
   "lastSeen": "2026-11-01",
   "confidence": 0.6,
   "matchKey": "mixed-vibes-band|flanagans-pub-lake-ronkonkoma||saturday|tba|live-music|mixed-vibes-band||repeat",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Hidden automatically because it was not found in the latest mixed-vibes-band run on 2026-11-08; it may have been cancelled or moved."
 }

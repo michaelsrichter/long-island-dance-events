@@ -1,0 +1,25 @@
+{
+  "title": "Decadia at Suffolk Theater",
+  "summary": "Live music by Decadia at Suffolk Theater. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-01-15T19:00",
+  "timezone": "America/New_York",
+  "venueId": "suffolk-theater-riverhead",
+  "town": "Riverhead",
+  "performerIds": [
+    "decadia"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "decadia",
+  "sourceUrl": "https://www.decadialive.com/home",
+  "sourceName": "Decadia - upcoming shows",
+  "sourceRef": "events page 2027-01-15",
+  "firstSeen": "2026-11-08",
+  "lastSeen": "2026-11-08",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.8,
+  "matchKey": "decadia|suffolk-theater-riverhead||friday|19:00|live-music|decadia||2027-01-15"
+}

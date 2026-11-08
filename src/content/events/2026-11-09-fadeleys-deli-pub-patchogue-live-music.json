@@ -1,0 +1,21 @@
+{
+  "title": "Live music at Fadeley’s Deli Pub",
+  "summary": "Live music at Fadeley’s Deli Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-09T19:00",
+  "end": "2026-11-09T22:00",
+  "timezone": "America/New_York",
+  "venueId": "fadeleys-deli-pub-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.theragtimes.net/event/roots-rock-reggae-mondays-at-fadeleys-li/",
+  "status": "active",
+  "sourceId": "the-rag-times-patchogue",
+  "sourceUrl": "https://www.theragtimes.net/event/roots-rock-reggae-mondays-at-fadeleys-li/",
+  "sourceName": "The Rag Times - live music calendar",
+  "sourceRef": "calendar feed 2026-11-09",
+  "firstSeen": "2026-11-08",
+  "lastSeen": "2026-11-08",
+  "confidence": 0.85,
+  "matchKey": "the-rag-times-patchogue|fadeleys-deli-pub-patchogue||monday|19:00|live-music|||2026-11-09"
+}

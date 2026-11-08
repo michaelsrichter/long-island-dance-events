@@ -14,12 +14,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 18,
+    "found": 16,
     "kept": 4,
     "needsReview": 0,
-    "outOfArea": 6
+    "outOfArea": 4
   },
-  "lastScraped": "2026-11-01T16:20:47.074Z",
+  "lastScraped": "2026-11-08T16:17:10.096Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a strong source because it has many future LI public gigs and clear venue details.",

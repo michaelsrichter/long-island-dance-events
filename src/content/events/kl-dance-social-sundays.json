@@ -1,0 +1,30 @@
+{
+  "title": "Ballroom social dance at JLR Dance Unlimited",
+  "summary": "An evening of Ballroom social dancing. Snacks are included.",
+  "category": "social-dance",
+  "danceStyles": [
+    "ballroom"
+  ],
+  "start": "2026-11-08T19:00",
+  "end": "2026-11-08T22:00",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-11-22"
+    ]
+  },
+  "venueId": "jlr-dance-unlimited",
+  "town": "Bay Shore",
+  "organizerId": "kl-dance",
+  "price": 20.5,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "jlr-dance-unlimited",
+  "sourceUrl": "https://www.jlrdanceunlimited.com/events/ballroom-dance-social",
+  "sourceName": "JLR Dance Unlimited (Bay Shore) - events",
+  "sourceRef": "event data on the page 2026-11-08",
+  "firstSeen": "2026-11-08",
+  "lastSeen": "2026-11-08",
+  "confidence": 0.9,
+  "matchKey": "jlr-dance-unlimited|jlr-dance-unlimited|kl-dance|sunday|19:00|social-dance||ballroom|repeat"
+}
