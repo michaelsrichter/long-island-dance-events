@@ -8,7 +8,7 @@
   "venueId": "frogzz-bar-n-grill-yaphank",
   "town": "Yaphank",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -20,5 +20,5 @@
   ],
   "confidence": 0.7,
   "matchKey": "iraslist|2026-11-10|frogzz-bar-n-grill-yaphank|acoustic-tuesdays|2026-11-10|special",
-  "reviewNotes": "Band or DJ not researched yet: Acoustic Tuesday's."
+  "reviewNotes": "Band or DJ not researched yet: Acoustic Tuesday's. Hidden automatically because it was not found in the latest iraslist run on 2026-11-09; it may have been cancelled or moved."
 }
