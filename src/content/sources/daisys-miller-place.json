@@ -14,12 +14,12 @@
   "feedUrl": "https://daisysli.com/events/?ical=1",
   "focus": "music",
   "lastCounts": {
-    "found": 29,
-    "kept": 14,
+    "found": 30,
+    "kept": 11,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-11-05T18:18:12.120Z",
+  "lastScraped": "2026-11-09T21:07:10.308Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. It has many current Long Island events, a feed, and clear dance-floor wording.",

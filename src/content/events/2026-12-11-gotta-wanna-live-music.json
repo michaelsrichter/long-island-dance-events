@@ -1,0 +1,22 @@
+{
+  "title": "Gotta Wanna at Bobbique",
+  "summary": "Live music by Gotta Wanna at Bobbique. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-11T20:00",
+  "timezone": "America/New_York",
+  "venueId": "bobbique-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "gotta-wanna"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "bobbique-patchogue",
+  "sourceUrl": "https://www.bobbique.com/upcoming-events/",
+  "sourceName": "BOBBIQUE (Patchogue) - live music calendar",
+  "sourceRef": "events page 2026-12-11",
+  "firstSeen": "2026-11-09",
+  "lastSeen": "2026-11-09",
+  "confidence": 0.8,
+  "matchKey": "bobbique-patchogue|bobbique-patchogue||friday|20:00|live-music|gotta-wanna||2026-12-11"
+}
