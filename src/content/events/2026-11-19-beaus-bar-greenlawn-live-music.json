@@ -1,0 +1,21 @@
+{
+  "title": "JITB at Beau's Bar",
+  "summary": "Live music by JITB at Beau's Bar in Greenlawn. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-19T20:00",
+  "end": "2026-11-19T23:00",
+  "timezone": "America/New_York",
+  "venueId": "beaus-bar-greenlawn",
+  "town": "Greenlawn",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-11",
+  "lastSeen": "2026-11-11",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-19|beaus-bar-greenlawn|jitb|2026-11-19|special",
+  "reviewNotes": "Band or DJ not researched yet: JITB."
+}

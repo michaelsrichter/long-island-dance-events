@@ -8,7 +8,7 @@
   "venueId": "popeis-clam-bar-coram",
   "town": "Coram",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-11-10",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-11-21|popeis-clam-bar-coram|debut-show|2026-11-21|special",
-  "reviewNotes": "Band or DJ not researched yet: Debut Show."
+  "reviewNotes": "Band or DJ not researched yet: Debut Show. Hidden automatically because it was not found in the latest iraslist run on 2026-11-11; it may have been cancelled or moved."
 }

@@ -1,0 +1,29 @@
+{
+  "title": "Mach5 Band NY at MICHALEEN FLYNN'S",
+  "summary": "Live music by Mach5 Band NY at MICHALEEN FLYNN'S in Lynbrook. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-11-21T18:00",
+  "end": "2026-11-21T21:00",
+  "timezone": "America/New_York",
+  "venueId": "michaleen-flynns-lynbrook",
+  "town": "Lynbrook",
+  "performerIds": [
+    "mach5-band-ny"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-11",
+  "lastSeen": "2026-11-11",
+  "dancingCues": [
+    "acoustic"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-21|michaleen-flynns-lynbrook|mach5-band-duo-debuts|2026-11-21|special"
+}
