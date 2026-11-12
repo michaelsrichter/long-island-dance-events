@@ -1,0 +1,24 @@
+{
+  "title": "Come Together at Public House 106!",
+  "summary": "Live music by Come Together at Public House 106! in East Meadow. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-14T19:30",
+  "end": "2026-11-14T22:30",
+  "timezone": "America/New_York",
+  "venueId": "public-house-106-east-meadow",
+  "town": "East Meadow",
+  "performerIds": [
+    "come-together"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-12",
+  "lastSeen": "2026-11-12",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-14|public-house-106-east-meadow|come-together|2026-11-14|special",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

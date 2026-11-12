@@ -8,7 +8,7 @@
   "venueId": "suffolk-theater-riverhead",
   "town": "Riverhead",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -20,5 +20,5 @@
   ],
   "confidence": 0.7,
   "matchKey": "iraslist|2026-11-21|suffolk-theater-riverhead|electric-avenue-the-80-s-mtv-experience|2026-11-21|special",
-  "reviewNotes": "Band or DJ not researched yet: Electric Avenue: The 80’s MTV Experience."
+  "reviewNotes": "Band or DJ not researched yet: Electric Avenue: The 80’s MTV Experience. Hidden automatically because it was not found in the latest iraslist run on 2026-11-12; it may have been cancelled or moved."
 }
