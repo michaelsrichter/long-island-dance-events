@@ -1,0 +1,25 @@
+{
+  "title": "Open Jam & Taps & Apps at Liam’s Landing",
+  "summary": "Live music by Open Jam & Taps & Apps at Liam’s Landing. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-12T21:00",
+  "end": "2026-11-12T00:00",
+  "timezone": "America/New_York",
+  "venueId": "liams-landing-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/760234ce-4803-41a0-90e4-cb763fa63642",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/760234ce-4803-41a0-90e4-cb763fa63642",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-11-12",
+  "firstSeen": "2026-11-12",
+  "lastSeen": "2026-11-12",
+  "dancingCues": [
+    "jam"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|liams-landing-amityville||thursday|21:00|live-music|openjamandtapsandapps||2026-11-12",
+  "reviewNotes": "Band or DJ not researched yet: Open Jam & Taps & Apps."
+}

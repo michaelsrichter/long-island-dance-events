@@ -10,7 +10,7 @@
     "venueId": "the-audrey-oyster-bay"
   },
   "description": "Oyster Bay venue lists frequent dated live music and karaoke nights through October.",
-  "enabled": true,
+  "enabled": false,
   "focus": "music",
   "lastCounts": {
     "found": 0,
@@ -19,9 +19,9 @@
     "outOfArea": 0
   },
   "lastMessage": "The adapter found 0 listings but none could be used. The source layout may have changed.",
-  "lastScraped": "2026-11-09T21:08:08.916Z",
+  "lastScraped": "2026-11-12T18:38:44.704Z",
   "lastStatus": "empty",
   "rateLimitSeconds": 5,
-  "reviewNotes": "Town-by-town search 2026-10-05: Oyster Bay venue lists frequent dated live music and karaoke nights through October.",
+  "reviewNotes": "Town-by-town search 2026-10-05: Oyster Bay venue lists frequent dated live music and karaoke nights through October. Paused on 2026-11-12 after 3 failed runs in a row (issue #96).",
   "url": "https://theaudreyob.com/events/"
 }
