@@ -1,0 +1,24 @@
+{
+  "title": "Nick Balzano's Watkin's Jam at The Warehouse",
+  "summary": "Live music by Nick Balzano's Watkin's Jam at The Warehouse in Amityville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-12-02T19:00",
+  "end": "2026-12-02T23:00",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-13",
+  "lastSeen": "2026-11-13",
+  "dancingCues": [
+    "jam"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-02|the-warehouse-amityville|nick-balzanos-watkins-jam|2026-12-02|special",
+  "reviewNotes": "Band or DJ not researched yet: Nick Balzano's Watkin's Jam."
+}

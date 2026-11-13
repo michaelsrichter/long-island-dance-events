@@ -1,0 +1,21 @@
+{
+  "title": "Sceneless Scene at The Warehouse",
+  "summary": "Live music by Sceneless Scene at The Warehouse in Amityville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-12-03T19:00",
+  "end": "2026-12-03T23:30",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-13",
+  "lastSeen": "2026-11-13",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-03|the-warehouse-amityville|sceneless-scene|2026-12-03|special",
+  "reviewNotes": "Band or DJ not researched yet: Sceneless Scene."
+}

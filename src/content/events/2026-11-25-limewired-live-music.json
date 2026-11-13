@@ -1,0 +1,26 @@
+{
+  "title": "Limewired at The Warehouse",
+  "summary": "Live music by Limewired at The Warehouse in Amityville. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-11-25T19:00",
+  "end": "2026-11-25T23:00",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "limewired"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-13",
+  "lastSeen": "2026-11-13",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-25|the-warehouse-amityville|limewired-pour-some-80s|2026-11-25|special"
+}
