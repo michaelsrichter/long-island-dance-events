@@ -1,0 +1,23 @@
+{
+  "title": "House of Heavy at Amityville Music Hall",
+  "summary": "Live music by House of Heavy at Amityville Music Hall. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-01-09",
+  "timezone": "America/New_York",
+  "venueId": "amityville-music-hall-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "house-of-heavy"
+  ],
+  "skillLevel": "all-levels",
+  "status": "hidden",
+  "sourceId": "amityville-music-hall",
+  "sourceUrl": "https://amh.live/",
+  "sourceName": "Amityville Music Hall - show list",
+  "sourceRef": "events page 2027-01-09",
+  "firstSeen": "2026-11-02",
+  "lastSeen": "2026-11-02",
+  "confidence": 0.6,
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||saturday|tba|live-music|house-of-heavy||2027-01-09",
+  "reviewNotes": "No start time found. Hidden automatically because it was not found in the latest amityville-music-hall run on 2026-11-05; it may have been cancelled or moved."
+}

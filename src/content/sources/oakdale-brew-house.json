@@ -14,12 +14,12 @@
   "exclude": "books|breakfast|brunch|character|trivia|bingo|paint|craft|kids|story ?time",
   "focus": "music",
   "lastCounts": {
-    "found": 46,
-    "kept": 10,
+    "found": 47,
+    "kept": 8,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-10-29T23:01:32.713Z",
+  "lastScraped": "2026-11-12T18:38:12.839Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Oakdale brewery calendar has live music almost every Friday and Saturday plus music bingo through October.",

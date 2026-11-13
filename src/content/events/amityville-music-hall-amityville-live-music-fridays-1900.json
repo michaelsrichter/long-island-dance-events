@@ -7,7 +7,8 @@
   "recurrence": {
     "rdates": [
       "2026-11-27",
-      "2026-12-18"
+      "2026-12-18",
+      "2027-02-26"
     ]
   },
   "venueId": "amityville-music-hall-amityville",
@@ -15,15 +16,15 @@
   "performerIds": [
     "plan-your-visit"
   ],
-  "price": 21,
+  "price": 32.99,
   "skillLevel": "all-levels",
   "status": "active",
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",
-  "sourceRef": "events page 2026-10-30",
+  "sourceRef": "events page 2026-11-27",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-10-29",
+  "lastSeen": "2026-11-12",
   "confidence": 0.8,
   "matchKey": "amityville-music-hall|amityville-music-hall-amityville||friday|19:00|live-music|plan-your-visit||repeat"
 }

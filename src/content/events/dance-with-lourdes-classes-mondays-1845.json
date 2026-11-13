@@ -28,7 +28,8 @@
       "2027-02-01",
       "2027-02-08",
       "2027-02-15",
-      "2027-03-01"
+      "2027-03-01",
+      "2027-03-08"
     ]
   },
   "venueId": "brumidi-lodge",
@@ -41,7 +42,7 @@
   "sourceName": "DiVa Ballroom / Dance with Lourdes Cruz - Long Island Google Calendar",
   "sourceRef": "pages 2026, 2027",
   "firstSeen": "2026-10-05",
-  "lastSeen": "2026-11-01",
+  "lastSeen": "2026-11-08",
   "confidence": 0.9,
   "matchKey": "diva-lourdes-gcal|brumidi-lodge|dance-with-lourdes|monday|18:45|class-lesson||ballroom|repeat"
 }

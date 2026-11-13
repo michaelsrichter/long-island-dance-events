@@ -16,13 +16,13 @@
   "skillLevel": "all-levels",
   "contactPhone": "(516) 500-9375",
   "contactEmail": "info@375dancestudio.com",
-  "status": "active",
+  "status": "past",
   "sourceId": "thedancecalendar",
   "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_b4a4dbcacff14843992f6a1b46fa6f07.pdf",
   "sourceName": "The Dance Calendar, November 2026",
   "sourceRef": "page 17",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-11-01",
+  "lastSeen": "2026-11-08",
   "confidence": 0.85,
   "matchKey": "thedancecalendar|375-dance-studio-carle-place||saturday|19:30|live-music|louis-del-prete|||2026-11-07"
 }

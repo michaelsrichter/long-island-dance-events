@@ -18,7 +18,7 @@
   "priceNotes": "Pay at the door",
   "skillLevel": "all-levels",
   "infoUrl": "https://sonsofitalyli.com/event/dinner-dance-with-dominick-paradise/",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "brumidi-lodge-deer-park",
   "sourceUrl": "https://sonsofitalyli.com/event/dinner-dance-with-dominick-paradise/",
   "sourceName": "Club Brumidi at Brumidi Lodge (Deer Park) - events",
@@ -26,5 +26,6 @@
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-11-01",
   "confidence": 0.8,
-  "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|friday|19:00|live-music|dominick-paradise|ballroom|2026-12-04"
+  "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|friday|19:00|live-music|dominick-paradise|ballroom|2026-12-04",
+  "reviewNotes": "Hidden automatically because it was not found in the latest brumidi-lodge-deer-park run on 2026-11-08; it may have been cancelled or moved."
 }

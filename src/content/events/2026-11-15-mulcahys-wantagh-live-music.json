@@ -1,0 +1,28 @@
+{
+  "title": "Live music at Mulcahy's",
+  "summary": "Live music at Mulcahy's. The dancing score on this page says whether people usually dance. Dance styles: Line Dancing.",
+  "category": "live-music",
+  "danceStyles": [
+    "line-dancing"
+  ],
+  "start": "2026-11-15T15:00",
+  "end": "2026-11-15T19:00",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "price": 65,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/americas-vetdogs-presents-salute-to-our-veterans/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/americas-vetdogs-presents-salute-to-our-veterans/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2026-11-15",
+  "firstSeen": "2026-11-09",
+  "lastSeen": "2026-11-12",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.9,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||sunday|15:00|live-music||line-dancing|2026-11-15"
+}

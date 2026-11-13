@@ -1,0 +1,26 @@
+{
+  "title": "Mardi gras show with Mardi Gras at Kitty Mulligan's Irish Pub",
+  "summary": "Live music by Mardi Gras at Kitty Mulligan's Irish Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-02-09T11:00",
+  "end": "2027-02-09T23:00",
+  "timezone": "America/New_York",
+  "venueId": "kitty-mulligans-bay-shore",
+  "town": "Bay Shore",
+  "performerIds": [
+    "mardi-gras"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "kitty-mulligans-bay-shore",
+  "sourceUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+  "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
+  "sourceRef": "events page 2027-02-09",
+  "firstSeen": "2026-11-09",
+  "lastSeen": "2026-11-12",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.8,
+  "matchKey": "kitty-mulligans-bay-shore|kitty-mulligans-bay-shore||tuesday|11:00|live-music|mardi-gras||2027-02-09|mardi-gras"
+}

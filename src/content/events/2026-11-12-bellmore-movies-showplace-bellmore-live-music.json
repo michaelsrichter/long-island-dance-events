@@ -1,0 +1,24 @@
+{
+  "title": "Live music at Bellmore Movies & Showplace",
+  "summary": "Live music at Bellmore Movies & Showplace. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-12T19:00",
+  "end": "2026-11-12T21:30",
+  "timezone": "America/New_York",
+  "venueId": "bellmore-movies-showplace-bellmore",
+  "town": "Bellmore",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/movies-turning-50-a-star-is-born/",
+  "status": "past",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/movies-turning-50-a-star-is-born/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-11-12",
+  "firstSeen": "2026-11-12",
+  "lastSeen": "2026-11-12",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.85,
+  "matchKey": "out-on-the-town-li|bellmore-movies-showplace-bellmore||thursday|19:00|live-music|||2026-11-12"
+}

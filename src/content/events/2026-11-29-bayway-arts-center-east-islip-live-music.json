@@ -1,0 +1,21 @@
+{
+  "title": "The Dupree's Holiday Hits at Bayway Arts Center",
+  "summary": "Live music by The Dupree's Holiday Hits at Bayway Arts Center in East Islip. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-29T15:00",
+  "end": "2026-11-29T17:00",
+  "timezone": "America/New_York",
+  "venueId": "bayway-arts-center-east-islip",
+  "town": "East Islip",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-05",
+  "lastSeen": "2026-11-13",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-29|bayway-arts-center-east-islip|the-duprees-holiday-hits|2026-11-29|special",
+  "reviewNotes": "Band or DJ not researched yet: The Dupree's Holiday Hits."
+}

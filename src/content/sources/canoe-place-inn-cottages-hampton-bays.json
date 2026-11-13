@@ -17,13 +17,12 @@
   "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano",
   "lastCounts": {
     "found": 7,
-    "kept": 0,
+    "kept": 1,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastMessage": "The adapter found 7 listings but none could be used. The source layout may have changed.",
-  "lastScraped": "2026-11-01T16:15:54.426Z",
-  "lastStatus": "empty",
+  "lastScraped": "2026-11-08T16:12:20.620Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Hampton Bays venue calendar includes jazz in the garden, acoustic garden music and ballroom concerts.",
   "url": "https://canoeplace.com/event/"

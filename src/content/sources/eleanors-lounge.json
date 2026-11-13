@@ -19,7 +19,7 @@
     "outOfArea": 0
   },
   "lastMessage": "The adapter found 2 listings but none could be used. The source layout may have changed.",
-  "lastScraped": "2026-10-29T22:57:15.011Z",
+  "lastScraped": "2026-11-12T18:37:55.210Z",
   "lastStatus": "empty",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it as a local bar-music source. It looks dance-friendly but needs HTML scraping and filtering.",

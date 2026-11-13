@@ -1,0 +1,24 @@
+{
+  "title": "American Girl — A Tribute to Tom Petty at Live On The Porch",
+  "summary": "Live music by American Girl — A Tribute to Tom Petty at Live On The Porch. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-11T20:00",
+  "timezone": "America/New_York",
+  "venueId": "live-on-the-porch-smithtown",
+  "town": "Smithtown",
+  "price": 35,
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "live-on-the-porch",
+  "sourceUrl": "https://liveontheporch.com/events/",
+  "sourceName": "Live On The Porch (Smithtown) - show calendar",
+  "sourceRef": "event data on the page 2026-12-11",
+  "firstSeen": "2026-11-08",
+  "lastSeen": "2026-11-08",
+  "dancingCues": [
+    "tribute"
+  ],
+  "confidence": 0.85,
+  "matchKey": "live-on-the-porch|live-on-the-porch-smithtown||friday|20:00|live-music|americangirlatributetotompetty||2026-12-11",
+  "reviewNotes": "Band or DJ not researched yet: American Girl — A Tribute to Tom Petty."
+}

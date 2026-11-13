@@ -1,0 +1,11 @@
+{
+  "name": "Bayman’s Clam Bar",
+  "address": "116 Division Street",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from The Rag Times - live music calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Patchogue",
+  "latitude": 40.760705,
+  "longitude": -73.019718,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

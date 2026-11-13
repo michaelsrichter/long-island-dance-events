@@ -9,13 +9,14 @@
   "enabled": true,
   "focus": "dance",
   "lastCounts": {
-    "found": 7,
-    "kept": 7,
+    "found": 0,
+    "kept": 0,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-11-01T16:22:14.553Z",
-  "lastStatus": "ok",
+  "lastMessage": "The adapter found 0 listings but none could be used. The source layout may have changed.",
+  "lastScraped": "2026-11-08T16:18:31.647Z",
+  "lastStatus": "empty",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a cross-check. It catches LI swing nights that are otherwise social-only, but it is free text.",
   "url": "http://dancemanhattan.com/calendar/event/113"

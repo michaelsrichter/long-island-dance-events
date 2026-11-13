@@ -14,12 +14,12 @@
   "focus": "music",
   "include": "music|jam|band|musical|concert|acoustic|singer|songwriter|jazz|blues|dj|dance|trio|duo|quartet|guitar|piano",
   "lastCounts": {
-    "found": 33,
-    "kept": 22,
+    "found": 36,
+    "kept": 21,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-11-01T16:20:52.845Z",
+  "lastScraped": "2026-11-08T16:17:15.663Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Cutchogue winery calendar lists weekly Friday live-music nights into December.",

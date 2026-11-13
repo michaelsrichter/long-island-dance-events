@@ -1,0 +1,29 @@
+{
+  "title": "Rich Mahogany at Boulton Center for the Performing Arts",
+  "summary": "Live music by Rich Mahogany at Boulton Center for the Performing Arts in Bay Shore. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-11-13T19:30",
+  "end": "2026-11-13T22:30",
+  "timezone": "America/New_York",
+  "venueId": "boulton-center-bay-shore",
+  "town": "Bay Shore",
+  "performerIds": [
+    "rich-mahogany"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-04",
+  "lastSeen": "2026-11-13",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-13|boulton-center-bay-shore|rich-mahogany|2026-11-13|special"
+}

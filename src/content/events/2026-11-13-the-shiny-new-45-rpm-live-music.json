@@ -1,0 +1,24 @@
+{
+  "title": "The Shiny New 45 RPM at The Warehouse",
+  "summary": "Live music by The Shiny New 45 RPM at The Warehouse. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-13T18:30",
+  "end": "2026-11-13T21:30",
+  "timezone": "America/New_York",
+  "venueId": "the-warehouse-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "the-shiny-new-45-rpm"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/f697cfff24b17bb5c8345b48e88f692da5150ad8",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/f697cfff24b17bb5c8345b48e88f692da5150ad8",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-11-13",
+  "firstSeen": "2026-11-12",
+  "lastSeen": "2026-11-12",
+  "confidence": 0.9,
+  "matchKey": "webtunes-li|the-warehouse-amityville||friday|18:30|live-music|the-shiny-new-45-rpm||2026-11-13"
+}

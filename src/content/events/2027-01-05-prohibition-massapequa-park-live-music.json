@@ -1,0 +1,23 @@
+{
+  "title": "Live music at Prohibition",
+  "summary": "Live music by live music at Prohibition in Massapequa Park. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2027-01-05T19:30",
+  "end": "2027-01-05T23:30",
+  "timezone": "America/New_York",
+  "venueId": "prohibition-massapequa-park",
+  "town": "Massapequa Park",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-06",
+  "lastSeen": "2026-11-13",
+  "dancingCues": [
+    "jam"
+  ],
+  "confidence": 0.75,
+  "matchKey": "iraslist|2027-01-05|prohibition-massapequa-park|open-jam-prohibition|2027-01-05|special"
+}

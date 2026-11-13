@@ -1,0 +1,21 @@
+{
+  "title": "Johnny Rain Band at Campagne House",
+  "summary": "Live music by Johnny Rain Band at Campagne House in Bethpage. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-12-04T19:00",
+  "end": "2026-12-04T20:00",
+  "timezone": "America/New_York",
+  "venueId": "campagne-house-bethpage",
+  "town": "Bethpage",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-10",
+  "lastSeen": "2026-11-13",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-04|campagne-house-bethpage|johnny-rain-band|2026-12-04|special",
+  "reviewNotes": "Band or DJ not researched yet: Johnny Rain Band."
+}

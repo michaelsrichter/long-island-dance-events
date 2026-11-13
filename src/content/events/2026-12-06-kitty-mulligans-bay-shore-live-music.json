@@ -1,0 +1,24 @@
+{
+  "title": "Toy Fundraiser at Kitty Mulligan's Irish Pub",
+  "summary": "Live music by Toy Fundraiser at Kitty Mulligan's Irish Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-06T14:00",
+  "end": "2026-12-06T22:00",
+  "timezone": "America/New_York",
+  "venueId": "kitty-mulligans-bay-shore",
+  "town": "Bay Shore",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "kitty-mulligans-bay-shore",
+  "sourceUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
+  "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
+  "sourceRef": "events page 2026-12-06",
+  "firstSeen": "2026-11-09",
+  "lastSeen": "2026-11-12",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.75,
+  "matchKey": "kitty-mulligans-bay-shore|kitty-mulligans-bay-shore||sunday|14:00|live-music|toyfundraiser||2026-12-06",
+  "reviewNotes": "Band or DJ not researched yet: Toy Fundraiser."
+}

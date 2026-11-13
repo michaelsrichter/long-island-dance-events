@@ -14,12 +14,12 @@
   "enabled": true,
   "focus": "dance",
   "lastCounts": {
-    "found": 22,
-    "kept": 10,
+    "found": 20,
+    "kept": 9,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-11-01T16:21:03.469Z",
+  "lastScraped": "2026-11-08T16:17:21.233Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it. SDLI has its own dated Tuesday swing schedule with lessons, bands, and venue details.",

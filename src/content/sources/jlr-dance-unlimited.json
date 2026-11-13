@@ -15,13 +15,12 @@
   "focus": "dance",
   "lastCounts": {
     "found": 29,
-    "kept": 0,
+    "kept": 2,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastMessage": "The adapter found 29 listings but none could be used. The source layout may have changed.",
-  "lastScraped": "2026-11-01T16:19:43.397Z",
-  "lastStatus": "empty",
+  "lastScraped": "2026-11-08T16:16:07.658Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep with care. Wix sitemap and hidden page data confirm a few Bay Shore dance socials.",
   "url": "https://www.jlrdanceunlimited.com/events-2"

@@ -1,0 +1,24 @@
+{
+  "title": "Let It Bleed (Stones) at Port Wash Library",
+  "summary": "Live music by Let It Bleed (Stones) at Port Wash Library in Port Washington. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-20T19:30",
+  "end": "2026-11-20T22:30",
+  "timezone": "America/New_York",
+  "venueId": "port-wash-library-port-washington",
+  "town": "Port Washington",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-12",
+  "lastSeen": "2026-11-13",
+  "dancingCues": [
+    "library"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-20|port-wash-library-port-washington|let-it-bleed-stones|2026-11-20|special",
+  "reviewNotes": "Band or DJ not researched yet: Let It Bleed (Stones)."
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Uva Rossa",
+  "address": "243 Hempstead Ave",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Malverne",
+  "latitude": 40.674152,
+  "longitude": -73.670301,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

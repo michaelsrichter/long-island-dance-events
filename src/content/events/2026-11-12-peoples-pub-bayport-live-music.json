@@ -9,13 +9,13 @@
   "town": "Bayport",
   "skillLevel": "all-levels",
   "infoUrl": "https://www.theragtimes.net/event/jason-carter-band-at-peoples-pub-li/",
-  "status": "active",
+  "status": "past",
   "sourceId": "the-rag-times-patchogue",
   "sourceUrl": "https://www.theragtimes.net/event/jason-carter-band-at-peoples-pub-li/",
   "sourceName": "The Rag Times - live music calendar",
   "sourceRef": "calendar feed 2026-11-12",
   "firstSeen": "2026-11-01",
-  "lastSeen": "2026-11-01",
+  "lastSeen": "2026-11-08",
   "confidence": 0.85,
   "matchKey": "the-rag-times-patchogue|peoples-pub-bayport||thursday|20:00|live-music|||2026-11-12"
 }

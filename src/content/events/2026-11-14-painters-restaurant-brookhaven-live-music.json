@@ -1,0 +1,21 @@
+{
+  "title": "Mean Machine at Painters' Restaurant",
+  "summary": "Live music by Mean Machine at Painters' Restaurant in Brookhaven. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-14T21:00",
+  "end": "2026-11-14T23:30",
+  "timezone": "America/New_York",
+  "venueId": "painters-restaurant-brookhaven",
+  "town": "Brookhaven",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-06",
+  "lastSeen": "2026-11-13",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-14|painters-restaurant-brookhaven|mean-machine|2026-11-14|special",
+  "reviewNotes": "Band or DJ not researched yet: Mean Machine."
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Live music at Eleanor's Lounge",
+  "summary": "Live music by live music at Eleanor's Lounge in Bohemia. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-21T20:00",
+  "end": "2026-11-21T23:00",
+  "timezone": "America/New_York",
+  "venueId": "eleanors-lounge-bohemia",
+  "town": "Bohemia",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-11",
+  "lastSeen": "2026-11-13",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-21|eleanors-lounge-bohemia|1984|2026-11-21|special"
+}

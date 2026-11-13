@@ -1,0 +1,11 @@
+{
+  "name": "Port Wash Library",
+  "address": "1 Library Dr",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Port Washington",
+  "latitude": 40.831946,
+  "longitude": -73.696848,
+  "coordinatesSource": "OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL)"
+}

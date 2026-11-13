@@ -9,13 +9,14 @@
   "price": 15,
   "priceMax": 20,
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",
   "sourceRef": "events page 2026-11-14",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-10-29",
+  "lastSeen": "2026-11-02",
   "confidence": 0.75,
-  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||saturday|17:30|live-music|||2026-11-14"
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||saturday|17:30|live-music|||2026-11-14",
+  "reviewNotes": "Hidden automatically because it was not found in the latest amityville-music-hall run on 2026-11-05; it may have been cancelled or moved."
 }

@@ -14,14 +14,13 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 4,
-    "kept": 0,
+    "found": 10,
+    "kept": 1,
     "needsReview": 0,
-    "outOfArea": 1
+    "outOfArea": 2
   },
-  "lastMessage": "The adapter found 4 listings but none could be used. The source layout may have changed.",
-  "lastScraped": "2026-11-01T16:16:16.712Z",
-  "lastStatus": "empty",
+  "lastScraped": "2026-11-08T16:12:42.057Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep because it has many LI public dates soon and useful repeat venue signals.",
   "url": "https://www.decadialive.com/home"

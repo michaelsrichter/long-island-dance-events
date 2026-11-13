@@ -1,0 +1,25 @@
+{
+  "title": "Evan & James at Uncle Frank's Pizza & Cocktails",
+  "summary": "Live music by Evan & James at Uncle Frank's Pizza & Cocktails. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-19",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2027-01-28"
+    ]
+  },
+  "venueId": "uncle-franks-pizza-and-cocktails-wantagh",
+  "town": "Wantagh",
+  "skillLevel": "all-levels",
+  "status": "hidden",
+  "sourceId": "uncle-franks-pizza-and-cocktails-wantagh",
+  "sourceUrl": "https://www.unclefranksli.com/music-and-events/",
+  "sourceName": "Uncle Frank's Pizza and Cocktails (Wantagh) - live music calendar",
+  "sourceRef": "pages 2026, 2027",
+  "firstSeen": "2026-11-08",
+  "lastSeen": "2026-11-08",
+  "confidence": 0.55,
+  "matchKey": "uncle-franks-pizza-and-cocktails-wantagh|uncle-franks-pizza-and-cocktails-wantagh||thursday|tba|live-music|evanandjames||repeat",
+  "reviewNotes": "Band or DJ not researched yet: Evan & James. No start time found. Hidden automatically because its confidence score (0.55) is below the 0.60 publishing threshold."
+}
