@@ -14,12 +14,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 6,
+    "found": 4,
     "kept": 1,
     "needsReview": 0,
     "outOfArea": 3
   },
-  "lastScraped": "2026-11-08T16:17:31.868Z",
+  "lastScraped": "2026-11-15T16:38:04.932Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep because it has several public LI oldies dates, but many listings are outside LI.",

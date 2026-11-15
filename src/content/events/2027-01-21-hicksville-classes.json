@@ -1,0 +1,21 @@
+{
+  "title": "Dance class",
+  "summary": "Group class.",
+  "category": "class-lesson",
+  "start": "2027-01-21",
+  "timezone": "America/New_York",
+  "town": "Hicksville",
+  "price": 45,
+  "priceMax": 90,
+  "skillLevel": "all-levels",
+  "status": "hidden",
+  "sourceId": "town-of-hempstead-dance-classes",
+  "sourceUrl": "https://hempsteadny.gov/297/Line-Dancing",
+  "sourceName": "Town of Hempstead adult classes (Line Dancing, Ballroom, Salsa & Latin)",
+  "sourceRef": "events page 2027-01-21",
+  "firstSeen": "2026-11-15",
+  "lastSeen": "2026-11-15",
+  "confidence": 0.3,
+  "matchKey": "town-of-hempstead-dance-classes|hicksville||thursday|tba|class-lesson|||2027-01-21",
+  "reviewNotes": "Venue not found in the listing. No start time found. Hidden automatically because its confidence score (0.30) is below the 0.60 publishing threshold."
+}

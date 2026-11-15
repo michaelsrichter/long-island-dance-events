@@ -15,11 +15,11 @@
   "focus": "dance",
   "lastCounts": {
     "found": 29,
-    "kept": 2,
+    "kept": 3,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-11-08T16:16:07.658Z",
+  "lastScraped": "2026-11-15T16:36:38.664Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep with care. Wix sitemap and hidden page data confirm a few Bay Shore dance socials.",

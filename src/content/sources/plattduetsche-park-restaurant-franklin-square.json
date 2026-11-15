@@ -15,11 +15,11 @@
   "include": "\\blive\\b|music|band|\\bdj\\b|danc|disco|accordion|concert|orchestra|polka",
   "lastCounts": {
     "found": 12,
-    "kept": 7,
+    "kept": 6,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-11-08T16:16:44.227Z",
+  "lastScraped": "2026-11-15T16:37:17.349Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Franklin Square venue calendar has frequent Oktoberfest bands, German dancing demonstrations and live bands through December.",

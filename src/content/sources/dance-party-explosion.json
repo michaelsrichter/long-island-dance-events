@@ -14,14 +14,13 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 0,
-    "kept": 0,
+    "found": 14,
+    "kept": 2,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastMessage": "The adapter found 0 listings but none could be used. The source layout may have changed.",
-  "lastScraped": "2026-11-08T16:12:31.639Z",
-  "lastStatus": "empty",
+  "lastScraped": "2026-11-15T16:33:00.305Z",
+  "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep because the schedule is clean JSON-LD and the band has an explicit dance-floor signal.",
   "url": "https://dpe-li.com/upcoming-shows/"

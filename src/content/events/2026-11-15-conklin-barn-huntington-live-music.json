@@ -1,0 +1,25 @@
+{
+  "title": "Live music at Conklin Barn",
+  "summary": "Live music at Conklin Barn. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-15T14:00",
+  "end": "2026-11-15T16:30",
+  "timezone": "America/New_York",
+  "venueId": "conklin-barn-huntington",
+  "town": "Huntington",
+  "price": 17.85,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/the-rodrigo-bonelli-trio-jazz-at-the-barn/?occurrence=2026-11-15",
+  "status": "active",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/the-rodrigo-bonelli-trio-jazz-at-the-barn/?occurrence=2026-11-15",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-11-15",
+  "firstSeen": "2026-11-15",
+  "lastSeen": "2026-11-15",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "huntington-matters|conklin-barn-huntington||sunday|14:00|live-music|||2026-11-15"
+}

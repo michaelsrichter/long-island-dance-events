@@ -1,0 +1,24 @@
+{
+  "title": "Ballroom class at Brumidi Lodge (Sons of Italy)",
+  "summary": "Group class in Ballroom.",
+  "category": "class-lesson",
+  "danceStyles": [
+    "ballroom"
+  ],
+  "start": "2026-11-23T18:30",
+  "end": "2026-11-23T19:00",
+  "timezone": "America/New_York",
+  "venueId": "brumidi-lodge",
+  "town": "Deer Park",
+  "organizerId": "dance-with-lourdes",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "diva-lourdes-gcal",
+  "sourceUrl": "https://calendar.google.com/calendar/ical/0q5vgpcdjbs2ioqoebrgv8bn0s%40group.calendar.google.com/public/basic.ics",
+  "sourceName": "DiVa Ballroom / Dance with Lourdes Cruz - Long Island Google Calendar",
+  "sourceRef": "calendar feed 2026-11-23",
+  "firstSeen": "2026-11-15",
+  "lastSeen": "2026-11-15",
+  "confidence": 0.9,
+  "matchKey": "diva-lourdes-gcal|brumidi-lodge|dance-with-lourdes|monday|18:30|class-lesson||ballroom|2026-11-23"
+}

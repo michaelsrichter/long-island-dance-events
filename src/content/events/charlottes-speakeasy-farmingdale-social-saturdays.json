@@ -13,7 +13,7 @@
   "venueId": "charlottes-speakeasy-farmingdale",
   "town": "Farmingdale",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "dancemanhattan-li-swing",
   "sourceUrl": "http://dancemanhattan.com/calendar/event/113",
   "sourceName": "Dance Manhattan - Long Island swing dances list",
@@ -21,5 +21,6 @@
   "firstSeen": "2026-10-04",
   "lastSeen": "2026-11-01",
   "confidence": 0.75,
-  "matchKey": "dancemanhattan-li-swing|charlottes-speakeasy-farmingdale||saturday|19:30|social-dance|||repeat"
+  "matchKey": "dancemanhattan-li-swing|charlottes-speakeasy-farmingdale||saturday|19:30|social-dance|||repeat",
+  "reviewNotes": "Hidden automatically because it was not found in the latest dancemanhattan-li-swing run on 2026-11-15; it may have been cancelled or moved."
 }

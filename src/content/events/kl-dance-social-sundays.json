@@ -10,7 +10,8 @@
   "timezone": "America/New_York",
   "recurrence": {
     "rdates": [
-      "2026-11-22"
+      "2026-11-22",
+      "2026-12-06"
     ]
   },
   "venueId": "jlr-dance-unlimited",
@@ -20,11 +21,11 @@
   "skillLevel": "all-levels",
   "status": "active",
   "sourceId": "jlr-dance-unlimited",
-  "sourceUrl": "https://www.jlrdanceunlimited.com/events/ballroom-dance-social",
+  "sourceUrl": "https://www.jlrdanceunlimited.com/events/ballroom-dance-social-3",
   "sourceName": "JLR Dance Unlimited (Bay Shore) - events",
-  "sourceRef": "event data on the page 2026-11-08",
+  "sourceRef": "event data on the page 2026-12-06",
   "firstSeen": "2026-11-08",
-  "lastSeen": "2026-11-08",
+  "lastSeen": "2026-11-15",
   "confidence": 0.9,
   "matchKey": "jlr-dance-unlimited|jlr-dance-unlimited|kl-dance|sunday|19:00|social-dance||ballroom|repeat"
 }
