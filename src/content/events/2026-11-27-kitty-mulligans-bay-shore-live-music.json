@@ -7,7 +7,7 @@
   "timezone": "America/New_York",
   "venueId": "kitty-mulligans-bay-shore",
   "town": "Bay Shore",
-  "isFree": true,
+  "price": 10,
   "skillLevel": "all-levels",
   "status": "active",
   "sourceId": "kitty-mulligans-bay-shore",
@@ -15,7 +15,7 @@
   "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
   "sourceRef": "events page 2026-11-27",
   "firstSeen": "2026-11-02",
-  "lastSeen": "2026-11-12",
+  "lastSeen": "2026-11-16",
   "dancingCues": [
     "jam"
   ],

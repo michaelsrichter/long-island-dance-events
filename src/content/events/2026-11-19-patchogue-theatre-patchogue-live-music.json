@@ -1,0 +1,25 @@
+{
+  "title": "Daniel in The Lions' Den – Featuring Queen Esther at Patchogue Theatre for the Performing Arts",
+  "summary": "Live music by Daniel in The Lions' Den – Featuring Queen Esther at Patchogue Theatre for the Performing Arts. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-19T18:30",
+  "end": "2026-11-19T21:30",
+  "timezone": "America/New_York",
+  "venueId": "patchogue-theatre-patchogue",
+  "town": "Patchogue",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/aa42fc3b88133bcb85150640ba4bd146d617011a",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/aa42fc3b88133bcb85150640ba4bd146d617011a",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-11-19",
+  "firstSeen": "2026-11-16",
+  "lastSeen": "2026-11-16",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|patchogue-theatre-patchogue||thursday|18:30|live-music|danielinthelionsdenfeaturingqueenesther||2026-11-19",
+  "reviewNotes": "Band or DJ not researched yet: Daniel in The Lions' Den – Featuring Queen Esther."
+}

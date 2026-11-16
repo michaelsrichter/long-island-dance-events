@@ -9,7 +9,8 @@
       "2026-10-14",
       "2026-11-04",
       "2026-11-11",
-      "2026-11-18"
+      "2026-11-18",
+      "2026-11-25"
     ]
   },
   "venueId": "daisys-nashville-lounge-miller-place",
@@ -17,15 +18,15 @@
   "price": 1,
   "priceMax": 3,
   "skillLevel": "all-levels",
-  "infoUrl": "https://daisysli.com/event/wing-wednesday-miller-place/2026-11-11/",
-  "status": "hidden",
+  "infoUrl": "https://daisysli.com/event/wing-wednesday-miller-place/2026-11-18/",
+  "status": "active",
   "sourceId": "daisys-miller-place",
-  "sourceUrl": "https://daisysli.com/event/wing-wednesday-miller-place/2026-11-11/",
+  "sourceUrl": "https://daisysli.com/event/wing-wednesday-miller-place/2026-11-18/",
   "sourceName": "Daisy's (Miller Place) - live music calendar",
-  "sourceRef": "calendar feed 2026-11-11",
+  "sourceRef": "calendar feed 2026-11-18",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-11-09",
+  "lastSeen": "2026-11-16",
   "confidence": 0.65,
   "matchKey": "daisys-miller-place|daisys-nashville-lounge-miller-place||wednesday|tba|live-music|||repeat",
-  "reviewNotes": "No start time found. Hidden automatically because it was not found in the latest daisys-miller-place run on 2026-11-12; it may have been cancelled or moved."
+  "reviewNotes": "No start time found."
 }

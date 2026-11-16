@@ -14,7 +14,7 @@
   ],
   "skillLevel": "all-levels",
   "infoUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-c2wl5-ksdrb-6b67d-aaa4w-p55fz-d7586-wtkwb-7w3ze-stm4a-7w83k-2bdfa-y8hl3-xnkgx",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "stereo-garden-patchogue",
   "sourceUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-c2wl5-ksdrb-6b67d-aaa4w-p55fz-d7586-wtkwb-7w3ze-stm4a-7w83k-2bdfa-y8hl3-xnkgx",
   "sourceName": "Stereo Garden (Patchogue) - concerts and dance parties",
@@ -23,5 +23,5 @@
   "lastSeen": "2026-11-02",
   "confidence": 0.6,
   "matchKey": "stereo-garden-patchogue|stereo-garden-patchogue||saturday|tba|live-music|navidad-en-salsa|salsa|2026-12-19",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Hidden automatically because it was not found in the latest stereo-garden-patchogue run on 2026-11-16; it may have been cancelled or moved."
 }

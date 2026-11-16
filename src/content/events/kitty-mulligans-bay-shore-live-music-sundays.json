@@ -13,7 +13,7 @@
   "venueId": "kitty-mulligans-bay-shore",
   "town": "Bay Shore",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "kitty-mulligans-bay-shore",
   "sourceUrl": "https://kittymulligans.com/bay-shore-kitty-mulligans-irish-pub-events",
   "sourceName": "Kitty Mulligan's Irish Pub (Bay Shore) - events",
@@ -25,5 +25,5 @@
   ],
   "confidence": 0.75,
   "matchKey": "kitty-mulligans-bay-shore|kitty-mulligans-bay-shore||sunday|18:00|live-music|||repeat",
-  "reviewNotes": "The venue lists this as repeating (Monthly on x); only the date shown was kept."
+  "reviewNotes": "The venue lists this as repeating (Monthly on x); only the date shown was kept. Hidden automatically because it was not found in the latest kitty-mulligans-bay-shore run on 2026-11-16; it may have been cancelled or moved."
 }

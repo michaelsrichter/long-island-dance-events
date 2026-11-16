@@ -5,7 +5,7 @@
   "start": "2026-10-07T19:30",
   "timezone": "America/New_York",
   "recurrence": {
-    "rrule": "FREQ=WEEKLY;BYDAY=WE;UNTIL=20261202",
+    "rrule": "FREQ=WEEKLY;BYDAY=WE;UNTIL=20261209",
     "exdates": [
       "2026-11-25"
     ]
@@ -19,7 +19,7 @@
   "sourceName": "BOBBIQUE (Patchogue) - live music calendar",
   "sourceRef": "events page 2026-11-18",
   "firstSeen": "2026-10-05",
-  "lastSeen": "2026-11-12",
+  "lastSeen": "2026-11-16",
   "dancingCues": [
     "jam"
   ],
