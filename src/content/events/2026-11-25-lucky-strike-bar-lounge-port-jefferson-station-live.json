@@ -1,0 +1,21 @@
+{
+  "title": "DOORZ at Lucky Strike Bar & Lounge at Port Jeff Bowl",
+  "summary": "Live music by DOORZ at Lucky Strike Bar & Lounge at Port Jeff Bowl in Port Jefferson Station. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-25T19:30",
+  "end": "2026-11-25T22:30",
+  "timezone": "America/New_York",
+  "venueId": "lucky-strike-bar-lounge-port-jefferson-station",
+  "town": "Port Jefferson Station",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-16",
+  "lastSeen": "2026-11-16",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-25|lucky-strike-bar-lounge-port-jefferson-station|doorz|2026-11-25|special",
+  "reviewNotes": "Band or DJ not researched yet: DOORZ."
+}
