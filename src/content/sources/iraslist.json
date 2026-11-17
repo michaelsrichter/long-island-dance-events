@@ -10,12 +10,12 @@
   "feedUrl": "https://calendar.google.com/calendar/ical/iraslistli%40gmail.com/public/basic.ics",
   "focus": "music",
   "lastCounts": {
-    "found": 599,
-    "kept": 437,
+    "found": 603,
+    "kept": 440,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-11-16T20:24:22.325Z",
+  "lastScraped": "2026-11-17T19:09:48.465Z",
   "lastStatus": "ok",
   "permission": {
     "note": "Ira's List publishes this calendar publicly. Google documents the public iCal address as the way for other apps to subscribe (support.google.com/calendar/answer/37083). We read only that feed, once per run, with caching.",
