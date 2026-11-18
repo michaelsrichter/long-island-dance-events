@@ -1,0 +1,24 @@
+{
+  "title": "Streetfighter Matinee at East Meadow Library!!",
+  "summary": "Live music by Streetfighter Matinee at East Meadow Library!! in East Meadow. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-12-06T14:00",
+  "end": "2026-12-06T17:00",
+  "timezone": "America/New_York",
+  "venueId": "east-meadow-library-east-meadow",
+  "town": "East Meadow",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-18",
+  "lastSeen": "2026-11-18",
+  "dancingCues": [
+    "library"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-06|east-meadow-library-east-meadow|streetfighter-matinee|2026-12-06|special",
+  "reviewNotes": "Band or DJ not researched yet: Streetfighter Matinee. New venue was added automatically. Check it."
+}
