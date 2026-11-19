@@ -27,7 +27,8 @@ costs, and what you (the owner) need to do. Technical details live in
 - **Is it a GitHub Copilot App automation?** **No.** See [the comparison](#github-actions-vs-a-copilot-app-automation)
   below. A Copilot session is the helper you call in when something new needs research or a fix,
   not the thing that runs every week.
-- **Is it working?** Yes. See [Is it running?](#is-it-running) for the latest runs.
+- **Is it working?** The collector is running daily, but collection and publication are separate.
+  See [Is it running?](#is-it-running) and the review center's **Event updates** tab for both.
 
 ## The picture
 
@@ -139,8 +140,9 @@ The Dance Calendar's PDF, which is set to weekly for that reason) shows up withi
 13. **Update the pull request.** All changes go into **one** rolling pull request called
     "Collected events: publish automatically after checks," with a run report on top: what each
     source found, what was skipped and why, and which uncertain listings were hidden automatically.
-    The review center's **Event updates** tab shows the same report and keeps a manual fallback for
-    exceptional recovery.
+    The review center's **Event updates** tab shows the same report, a weekly table of source listings
+    found, new events added and new events actually published, and a manual fallback for exceptional
+    recovery. A green collection run is not shown as a site update unless its event files merged.
 14. **Report problems.** A source that breaks gets a GitHub issue labeled `ingest-failure`. After
     three failures in a row it is switched off in the pull request, with a note.
 15. **CI checks the exact commit.** The collection run starts the trusted `CI` workflow with
@@ -342,27 +344,24 @@ needed) to:
 ## Is it running?
 
 <!-- actions-history -->
-**Yes: the scheduled collection is running and every run so far has succeeded** (checked October 5, 2026
-with `gh run list --workflow ingest-scheduled.yml`).
+**The collector is running, but automatic publication is currently behind** (checked November 19,
+2026 with GitHub Actions and pull-request history).
 
-| When (UTC) | Started by | Result |
+| Evidence | Latest result |
 | --- | --- | --- |
-| Oct 4, 2026, 2:54 PM | timer (Sunday run) | success |
-| Oct 4, 2026, 3:19 PM | timer (daily run) | success |
-| Oct 4-5, 2026 | 8 runs started by hand (testing new sources and fixes) | all success |
+| Scheduled collection | Run [44373892378](https://github.com/michaelsrichter/long-island-dance-events/actions/runs/44373892378) succeeded November 18, 2026, 1:49-1:50 PM New York time. The daily, Monday/Thursday and Sunday schedules remain enabled. |
+| Rolling update | [#93](https://github.com/michaelsrichter/long-island-dance-events/pull/93) is open. As of November 19 it contains 490 new event files that are not on the public site. |
+| Last collector update on `main` | [#56](https://github.com/michaelsrichter/long-island-dance-events/pull/56) merged November 2, 2026, 3:02 PM New York time. |
+| Automatic publisher | Every `Publish collected events` run since November 2 has been skipped. [#95](https://github.com/michaelsrichter/long-island-dance-events/pull/95) is the existing validated prerequisite that repairs the exact-SHA publisher; this dashboard does not duplicate that change. |
 
-- The workflow was added on October 3, 2026, so October 4 was its first day on the timer. Both timed
-  runs that day started about five hours late; GitHub delays timed runs when it is busy, and nothing is lost.
-- The collection pull requests are being merged, which publishes the events:
-  [#17](https://github.com/michaelsrichter/long-island-dance-events/pull/17) on October 4 and
-  [#23](https://github.com/michaelsrichter/long-island-dance-events/pull/23) on October 5. The next run
-  opens a new rolling pull request.
-- The monthly source search (`source-discovery.yml`) has not run yet. Its first timed run is November 1, 2026.
+The **Event updates** tab at `/moderate/#publish` reads the machine-maintained automation log plus live
+GitHub workflow and pull-request facts. It shows weekly counts and makes the collector-versus-publisher
+gap visible instead of treating a green collector as a website update.
 <!-- /actions-history -->
 
-To check for yourself: open the repository on GitHub, click **Actions**, then **Collect events
-(scheduled)**. A green check means the run worked. You can also start a run by hand there with
-**Run workflow** (choose which cadences to read).
+To check for yourself, open `/moderate/#publish`. You can still open GitHub, click **Actions**, then
+**Collect events (scheduled)** for the raw run logs. A green check there means collection worked; use
+the dashboard's **Published** count to confirm that the public site also changed.
 
 ## Words used on this page
 
