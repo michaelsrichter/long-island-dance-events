@@ -193,7 +193,11 @@ export class PoliteFetcher {
         waitFor = Math.max(delay, rules.crawlDelay ?? 0);
       }
       await this.wait(u.host, waitFor);
-      const res = await fetch(current, { headers, redirect: 'manual', signal: AbortSignal.timeout(90000) });
+      // A discovered link can originate in this fetcher's disk cache, but that cache contains only
+      // public HTTP responses. No cached bytes are sent as headers or body, and every hop is checked
+      // above for public http(s), public DNS, robots rules and rate limits before this GET.
+      // codeql[js/file-access-to-http]
+      const res = await fetch(u.href, { headers, redirect: 'manual', signal: AbortSignal.timeout(90000) });
       if (![301, 302, 303, 307, 308].includes(res.status)) return res;
       const location = res.headers.get('location');
       if (!location) throw new Error(`HTTP ${res.status} redirect without a location for ${current}`);

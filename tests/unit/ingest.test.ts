@@ -1,13 +1,14 @@
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { eventSchema } from '../../src/lib/schemas';
 import { addDays } from '../../src/lib/time';
 import { extractRows, findDjNames, guessVenue, normalizeRows, python, statedCadence } from '../../ingest/adapters/thedancecalendar';
 import { collapse, inferRecurrence } from '../../ingest/lib/collapse';
 import { makeSummary, plainLabel, themeOf } from '../../ingest/lib/describe';
-import { assertPublicHttpUrl, isAllowed, isPublicAddress, parseRobots } from '../../ingest/lib/fetch';
+import { assertPublicHttpUrl, isAllowed, isPublicAddress, parseRobots, PoliteFetcher } from '../../ingest/lib/fetch';
 import { mergeDrafts } from '../../ingest/lib/merge';
 import { parsePrices } from '../../ingest/lib/prices';
 import { lookupPlace, Registry, ROOT } from '../../ingest/lib/registry';
@@ -150,6 +151,23 @@ describe('robots.txt', () => {
         protocol: 'https:',
         hostname: 'events.example',
       });
+    });
+
+    it('uses the validated canonical URL for the outbound request', async () => {
+      const cache = mkdtempSync(join(tmpdir(), 'li-fetch-'));
+      const requested: string[] = [];
+      const fetchMock = vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
+        const url = String(input);
+        requested.push(url);
+        return new Response(url.endsWith('/robots.txt') ? '' : 'events', { status: url.endsWith('/robots.txt') ? 404 : 200 });
+      });
+      try {
+        await new PoliteFetcher(cache, { delaySeconds: 0 }).text('HTTP://8.8.8.8:80/a/../events');
+        expect(requested).toEqual(['http://8.8.8.8/robots.txt', 'http://8.8.8.8/events']);
+      } finally {
+        fetchMock.mockRestore();
+        rmSync(cache, { recursive: true, force: true });
+      }
     });
   });
   it('uses a group for this bot when there is one', () => {
