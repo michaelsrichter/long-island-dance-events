@@ -595,6 +595,18 @@ collections:
           - { label: 'Kept', name: kept, widget: number, value_type: int }
           - { label: 'Outside Long Island', name: outOfArea, widget: number, value_type: int }
           - { label: 'Manually held', name: needsReview, widget: number, value_type: int }
+      - label: 'Automatic failure history'
+        name: failure
+        widget: object
+        required: false
+        collapsed: true
+        hint: 'Filled in by collection. A successful check clears it; 30 continuous failed days switches the source off.'
+        fields:
+          - { label: 'First failed check', name: firstFailedAt, <<: *date }
+          - { label: 'Latest failed check', name: lastFailedAt, <<: *date }
+          - { label: 'Failed checks in this streak', name: consecutiveFailedChecks, widget: number, value_type: int, min: 1 }
+          - { label: 'Automatically switched off on', name: disabledAt, <<: *date, required: false }
+          - { label: 'Reason it was switched off', name: disabledReason, widget: text, required: false }
       - *review
 
   - name: styles

@@ -4,14 +4,10 @@
  * Signing in always returns through /account/, which asks the one-time "welcome" questions
  * the first time and then sends the visitor back to the page they came from.
  *
- * Coming back later: the site's own session (a Static Web Apps cookie) ends after 8 hours, but the sign-in
- * service (Microsoft Entra External ID) remembers the visitor until the browser closes (or longer, see
- * COMMUNITY.signInServiceDays). While it does, a sign-in needs no form at all: Microsoft answers at once and
- * Static Web Apps comes straight back. So when this browser has a saved name, the site session is gone and
- * the sign-in service very likely still remembers the visitor, ensureSession() makes that one quick trip
- * and returns to the same page, signed in. "Very likely" is the li-sso cookie: set while signed in, it
- * ends when the sign-in service forgets (when the browser closes, by default). Without it the visitor is
- * simply shown as signed out: no trip to a sign-in form they did not ask for.
+ * Public pages use this cached display identity without checking the secure session or redirecting. The
+ * hosting service and Microsoft Entra External ID own the real session, which can end independently.
+ * A protected click or an account page calls ensureSession(); only then may the site make one silent
+ * sign-in trip when the li-sso cookie says External ID probably still remembers this browser.
  */
 import { COMMUNITY } from '../lib/community';
 
@@ -86,7 +82,7 @@ export function rememberAccount(account: CachedAccount | null) {
   window.dispatchEvent(new CustomEvent('li-account', { detail: account }));
 }
 
-/** "Sign out" (and account deletion): forget the name here, so nothing signs the visitor back in by itself. */
+/** "Sign out" (and account deletion): forget the cached display identity and every pending action. */
 export function markSignedOut() {
   rememberAccount(null);
   signingOut = true;
@@ -158,12 +154,11 @@ function startRestore(back: string) {
   location.replace(restoreUrl(back));
 }
 
-/** The visitor is signed out now: forget the name, and say so once if they had been signed in. */
+/** The secure session ended: keep the cached display identity, but say so once and stop silent retries. */
 function endedHere() {
   write(session(), RESTORE, null);
   setSso(null);
   if (cachedAccount()) write(session(), NOTICE, 1);
-  rememberAccount(null);
 }
 
 const here = () => location.pathname + location.search + location.hash;
@@ -171,10 +166,9 @@ const quietPage = () => location.pathname.startsWith('/.auth/') || document.docu
 
 let ensured: Promise<Session> | null = null;
 /**
- * Who is signed in, signing a returning visitor back in silently when that can work. The silent sign-in is
- * only tried in browsers that were signed in before (a saved name); callers that should cost nothing for
- * other visitors check cachedAccount() first. While the page leaves for the silent sign-in, the promise
- * never settles (nothing on this page should act on it).
+ * Who is signed in, signing a returning visitor back in silently when that can work. Call this only for a
+ * protected action or an account-specific page, never during ordinary public-page initialization. While
+ * the page leaves for the silent sign-in, the promise never settles (nothing on this page should act on it).
  */
 export function ensureSession(): Promise<Session> {
   ensured ??= (async () => {
@@ -182,6 +176,7 @@ export function ensureSession(): Promise<Session> {
     const me = await whoAmI();
     if (me.signedIn) {
       write(session(), RESTORE, null);
+      write(session(), NOTICE, null);
       if (!signingOut && ssoValue() !== '0') setSso('1');
       return me;
     }
@@ -202,22 +197,48 @@ export function rememberAction(action: PendingAction) {
   write(session(), PENDING, { ...action, at: Date.now() });
 }
 
-/** The remembered click for this page, if any (taken: it is finished only once). */
-export function takeAction(key: string, types: string[]): PendingAction | null {
+function matchingAction(key: string, types: string[]): PendingAction | null {
   const a = read<PendingAction>(session(), PENDING);
   if (!a) return null;
   if (typeof a.at !== 'number' || Date.now() - a.at > PENDING_MAX_AGE_MS) {
     write(session(), PENDING, null);
     return null;
   }
-  if (a.key !== key || !types.includes(a.type)) return null;
+  return a.key === key && types.includes(a.type) ? a : null;
+}
+
+/** Is there a protected click waiting to be finished on this page? */
+export function hasAction(key: string, types: string[]): boolean {
+  return Boolean(matchingAction(key, types));
+}
+
+/** The remembered click for this page, if any (taken: it is finished only once). */
+export function takeAction(key: string, types: string[]): PendingAction | null {
+  const a = matchingAction(key, types);
+  if (!a) return null;
   write(session(), PENDING, null);
   return a;
 }
 
 /**
+ * Verify the secure session because the visitor explicitly clicked a protected action. The action remains
+ * pending across a redirect, but is removed when the current session is already valid.
+ */
+export async function verifyForAction(action: PendingAction, back: string = here()): Promise<boolean> {
+  rememberAction(action);
+  const me = await ensureSession();
+  if (me.signedIn) {
+    takeAction(action.key, [action.type]);
+    return true;
+  }
+  if (!restoring) location.href = loginUrl(safePath(back));
+  return false;
+}
+
+/**
  * Something needs a signed-in visitor (a Like, a note…): remember it, then sign back in silently when that
- * can work, or show the normal sign-in. Either way the action is finished on return.
+ * can work, or show the normal sign-in. Use this after an API has already answered 401, so another session
+ * probe would only repeat the failed request.
  */
 export function signInFor(action: PendingAction | null, back: string = here()) {
   if (action) rememberAction(action);
@@ -228,8 +249,8 @@ export function signInFor(action: PendingAction | null, back: string = here()) {
 
 /**
  * On the 401 page (/signed-out/): Static Web Apps shows it when a sign-in comes back with an error (for
- * example the visitor pressed Cancel). If this tab was signing in silently, go back to the page, signed out;
- * if they had clicked something, show the normal sign-in instead so the click can still be finished.
+ * example the visitor pressed Cancel). A failed silent restore always goes back to the requested public
+ * page without starting another sign-in. The visitor can choose Sign in or repeat the protected action.
  * Returns false when there was nothing to do (the page then just explains and offers to sign in).
  */
 export function finishFailedRestore(): boolean {
@@ -238,11 +259,8 @@ export function finishFailedRestore(): boolean {
   if (!m || typeof m.at !== 'number' || Date.now() - m.at > PENDING_MAX_AGE_MS) return false;
   setSso(null);
   if (cachedAccount()) write(session(), NOTICE, 1);
-  rememberAccount(null);
-  if (read<PendingAction>(session(), PENDING)) {
-    write(session(), NOTICE, null);
-    location.replace(loginUrl(safePath(m.back)));
-  } else location.replace(safePath(m.back));
+  write(session(), PENDING, null);
+  location.replace(safePath(m.back));
   return true;
 }
 

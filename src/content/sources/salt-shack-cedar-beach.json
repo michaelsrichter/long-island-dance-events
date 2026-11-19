@@ -10,7 +10,12 @@
     "venueId": "salt-shack-babylon"
   },
   "description": "Live music listings in Babylon: beach DJs, party and variety bands, seasonal live music.",
-  "enabled": false,
+  "enabled": true,
+  "failure": {
+    "firstFailedAt": "2026-11-02",
+    "lastFailedAt": "2026-11-02",
+    "consecutiveFailedChecks": 3
+  },
   "focus": "music",
   "lastCounts": {
     "found": 0,
@@ -22,6 +27,6 @@
   "lastScraped": "2026-10-29T23:02:35.874Z",
   "lastStatus": "empty",
   "rateLimitSeconds": 5,
-  "reviewNotes": "Catalog check 2026-10-03: Keep it during the season. It has current beach-bar events and direct dance wording. Paused on 2026-10-29 after 3 failed runs in a row (issue #70).",
+  "reviewNotes": "Catalog check 2026-10-03: Keep it during the season. It has current beach-bar events and direct dance wording. Re-enabled on 2026-11-02 under the automatic 30-day retry policy; the old three-run pause no longer applies.",
   "url": "https://saltshackny.com/"
 }

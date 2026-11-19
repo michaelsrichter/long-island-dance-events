@@ -6,35 +6,62 @@ name: Find and recheck sources (monthly)
 #     queries in catalog/search-matrix.json (about 250; every town gets searched again once a year).
 #     Needs the repository secret WEBIQ_API_KEY; without it this step is skipped. Cost: about 340 calls,
 #     about $4.25 a month at $12.50 per 1,000 calls.
-#  2. Recheck every tracked source in catalog/sources.json politely (robots.txt, page opens,
-#     upcoming dates), with our own User-Agent and a pause between requests.
-#  3. Open an issue with the results. Nothing is added or switched on automatically.
+#  2. Reject unsafe/private addresses, honor robots.txt and recheck every tracked source politely.
+#  3. Match safe new sites to an existing generic reader and validate them with the real collector.
+#  4. Add valid sources to the rolling content branch. Exact-SHA CI and the trusted publisher merge
+#     them automatically; routine discoveries and failures never become owner tasks.
 on:
   schedule:
     - cron: '0 11 1 * *'
   workflow_dispatch:
 
 permissions:
-  contents: read
-  issues: write
+  contents: write
+  pull-requests: write
+  actions: write
 
 concurrency:
-  group: source-discovery
+  group: ingest
   cancel-in-progress: false
+
+env:
+  BRANCH: ingest/updates
 
 jobs:
   discover:
-    name: Search, recheck and report
+    name: Search, validate and onboard
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: .nvmrc
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.12'
+
+      - name: Continue the rolling content branch (or start a new one from main)
+        id: branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if git ls-remote --exit-code --heads origin "$BRANCH" >/dev/null; then
+            git fetch origin "$BRANCH"
+            git checkout -B "$BRANCH" "origin/$BRANCH"
+            if ! git merge --no-edit origin/main; then
+              git merge --abort
+              git checkout -B "$BRANCH" origin/main
+              echo "reset=true" >> "$GITHUB_OUTPUT"
+            fi
+          else
+            git checkout -B "$BRANCH" origin/main
+          fi
 
       - name: Search with Web IQ
         env:
@@ -49,29 +76,50 @@ jobs:
           node catalog/scripts/webiq-search.mjs --queries catalog/search-matrix.json --slice "$(date -u +%-m)/12" \
             --max-results 30 --compact --max-calls 400 --cache "$RUNNER_TEMP/webiq" --log "$RUNNER_TEMP/search-log-towns.json"
 
-      - name: Recheck tracked sources and write the report
+      - name: Recheck sources and verify new websites
         run: |
-          args=(--cache "$RUNNER_TEMP/verify" --out "$RUNNER_TEMP/discovery.md")
+          args=(--cache "$RUNNER_TEMP/verify" --out "$RUNNER_TEMP/discovery.md" --data-out "$RUNNER_TEMP/discovery.json")
           for f in "$RUNNER_TEMP/search-log.json" "$RUNNER_TEMP/search-log-towns.json"; do
             if [ -f "$f" ]; then args+=(--search-log "$f"); fi
           done
           python catalog/scripts/discovery_report.py "${args[@]}"
           cat "$RUNNER_TEMP/discovery.md" >> "$GITHUB_STEP_SUMMARY"
 
+      - name: Restore the collector cache
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .cache/ingest
+          key: ingest-cache-source-discovery-${{ github.run_id }}
+          restore-keys: ingest-cache-
+
+      - name: Add safely validated sources
+        run: |
+          node .github/scripts/source-onboarding.mjs "$RUNNER_TEMP/discovery.json" "$RUNNER_TEMP/onboarding.md"
+          cat "$RUNNER_TEMP/onboarding.md" >> "$GITHUB_STEP_SUMMARY"
+          printf '\n\n' >> "$RUNNER_TEMP/discovery.md"
+          cat "$RUNNER_TEMP/onboarding.md" >> "$RUNNER_TEMP/discovery.md"
+
+      - name: Validate every content file
+        run: npm run check
+
       - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: source-discovery-${{ github.run_id }}
           path: |
             ${{ runner.temp }}/discovery.md
+            ${{ runner.temp }}/discovery.json
+            ${{ runner.temp }}/onboarding.md
             ${{ runner.temp }}/search-log.json
             ${{ runner.temp }}/search-log-towns.json
-            ${{ runner.temp }}/verify/verify.json
+            ${{ runner.temp }}/verify/new/verify.json
+            ${{ runner.temp }}/verify/tracked/verify.json
           if-no-files-found: ignore
           retention-days: 90
 
-      - name: Open the monthly issue
+      - name: Publish validated sources through the trusted content flow
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          gh label create source-discovery --color 0E8A16 --description "Monthly source search and recheck" 2>/dev/null || true
-          gh issue create --title "Monthly source check: $(date -u +'%B %Y')" --label source-discovery --body-file "$RUNNER_TEMP/discovery.md"
+          RESET: ${{ steps.branch.outputs.reset }}
+          CADENCE: source-discovery
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node .github/scripts/ingest-pr.mjs "$RUNNER_TEMP/discovery.md"

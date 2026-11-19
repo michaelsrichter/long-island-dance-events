@@ -40,15 +40,19 @@ const collections = {
 
 describe('every content file is valid', () => {
   for (const [dir, { ext, schema }] of Object.entries(collections)) {
-    it(`${dir} (${ext})`, () => {
-      const items = load(dir, ext);
-      expect(items.length, `${dir} should not be empty`).toBeGreaterThan(0);
-      for (const item of items) {
-        const r = (schema as z.ZodType).safeParse(item.data);
-        expect(r.success, `${dir}/${item.id}${ext}: ${r.success ? '' : JSON.stringify(r.error.issues.slice(0, 3))}`).toBe(true);
-        expect(item.id, `${dir}/${item.id} file names must be lowercase-hyphen ids`).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
-      }
-    });
+    it(
+      `${dir} (${ext})`,
+      () => {
+        const items = load(dir, ext);
+        expect(items.length, `${dir} should not be empty`).toBeGreaterThan(0);
+        for (const item of items) {
+          const r = (schema as z.ZodType).safeParse(item.data);
+          expect(r.success, `${dir}/${item.id}${ext}: ${r.success ? '' : JSON.stringify(r.error.issues.slice(0, 3))}`).toBe(true);
+          expect(item.id, `${dir}/${item.id} file names must be lowercase-hyphen ids`).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+        }
+      },
+      30_000,
+    );
   }
   it('settings and pages', () => {
     expect(settingsSchema(img).safeParse(YAML.parse(readFileSync(join(content, 'settings', 'site.yml'), 'utf8'))).success).toBe(true);

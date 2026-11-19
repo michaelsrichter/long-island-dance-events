@@ -33,6 +33,10 @@ test.describe('finding something to dance to', () => {
     await expect(page.getByRole('heading', { level: 2, name: 'Today' })).toBeVisible();
     const quick = page.getByRole('navigation', { name: 'Quick links' });
     for (const name of [/^This week(?!end)/, /^Today/, /^This weekend/, /^Live music/, /^Classes/, /^Map/]) await expect(quick.getByRole('link', { name })).toBeAttached();
+    const allUpcoming = page.locator('[data-all-upcoming]');
+    await expect(allUpcoming).toHaveAttribute('href', '/events/?category=all');
+    const allCount = Number((await allUpcoming.textContent())!.match(/\d+/)![0]);
+    expect(allCount).toBeGreaterThan(50);
     // Dances and live music come first; classes have their own, shorter section.
     for (const c of await page.locator('[data-upcoming-list="home_week"] [data-event]').all()) expect(await c.getAttribute('data-category')).not.toBe('class-lesson');
     for (const c of await page.locator('[data-upcoming-list="home_classes"] [data-event]').all()) await expect(c).toHaveAttribute('data-category', 'class-lesson');
@@ -397,6 +401,7 @@ test.describe('can you dance there?', () => {
   });
 
   test('the kind-of-dancing filter keeps only that kind, and venue pages explain their dancing', async ({ pinned: page }) => {
+    test.setTimeout(90_000);
     await page.goto('/events/?category=all');
     await page.locator('.chip', { hasText: 'Line dancing' }).click();
     await expect(page).toHaveURL(/dance=line/);

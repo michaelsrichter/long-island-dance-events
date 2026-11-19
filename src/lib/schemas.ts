@@ -490,6 +490,16 @@ export const sourceSchema = z.object({
   lastStatus: z.enum(SOURCE_STATUSES).default('never'),
   lastMessage: opt(z.string().max(500)),
   lastCounts: opt(z.object({ found: z.number().int(), kept: z.number().int(), outOfArea: z.number().int().default(0), needsReview: z.number().int().default(0) })),
+  /** Continuous collection failures. A successful check removes this object. */
+  failure: opt(
+    z.object({
+      firstFailedAt: dateField,
+      lastFailedAt: dateField,
+      consecutiveFailedChecks: z.number().int().min(1),
+      disabledAt: opt(dateField),
+      disabledReason: opt(z.string().max(500)),
+    }),
+  ),
   reviewNotes: opt(z.string()),
 });
 

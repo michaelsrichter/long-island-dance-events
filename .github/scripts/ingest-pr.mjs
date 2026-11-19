@@ -12,6 +12,8 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export const PULL_REQUEST_TITLE = 'Collected events: publish automatically after checks';
+export const CI_WORKFLOW_FILE = 'ci.yml';
+export const PUBLISH_WORKFLOW_FILE = 'ingest-auto-merge.yml';
 
 export function pullRequestBody({ report, cadence, today, runUrl = '', reset = false }) {
   const header = [
@@ -27,6 +29,14 @@ export function pullRequestBody({ report, cadence, today, runUrl = '', reset = f
     '',
   ].join('\n');
   return (header + report).slice(0, 60000);
+}
+
+export function workflowDispatchCommands(branch, sha) {
+  if (!/^[0-9a-f]{40}$/.test(sha)) throw new Error('The publisher needs the exact 40-character ingest commit SHA.');
+  return [
+    ['workflow', 'run', CI_WORKFLOW_FILE, '--ref', branch],
+    ['workflow', 'run', PUBLISH_WORKFLOW_FILE, '--ref', 'main', '-f', `head_sha=${sha}`],
+  ];
 }
 
 const sh = (cmd, args, opts = {}) => execFileSync(cmd, args, { encoding: 'utf8', ...opts }).trim();
@@ -72,9 +82,11 @@ export function main() {
     number = url.split('/').pop();
   }
   // A pull request opened or updated with the workflow's own token does not start other workflows.
-  // Dispatch CI on the branch; the trusted workflow_run workflow merges this exact SHA after success.
-  sh('gh', ['workflow', 'run', 'ci.yml', '--ref', branch]);
-  console.log(`Started CI on ${branch}.`);
+  // Start CI, then start the trusted main-branch publisher with this exact commit. The publisher
+  // waits for CI and refuses a stale SHA, fork, draft, conflict or non-content change.
+  const sha = sh('git', ['rev-parse', 'HEAD']);
+  for (const args of workflowDispatchCommands(branch, sha)) sh('gh', args);
+  console.log(`Started CI on ${branch} and publisher verification for ${sha}.`);
   console.log(`Pull request #${number} is up to date and will publish automatically after CI.`);
 }
 

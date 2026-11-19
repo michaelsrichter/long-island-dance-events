@@ -280,7 +280,7 @@ sequenceDiagram
 
 - **No password anywhere.** GitHub signs a short-lived token for each run. The site checks that it comes from `ingest-scheduled.yml` on `main` of this repository, and otherwise refuses.
 - **Same rules:** the same adapters and `ingest/lib/merge.ts`. Only where records are read from and written to changes (`ingest/lib/registry.ts` and `writeEntity()` in `ingest/lib/store.ts`). `firstSeen`, `lockedFields`, "never delete", ended → past, gone or low confidence → held, and hidden stays hidden all work as today. If an editor changed a record during the run, the editor's locked fields win.
-- **Run reports** are saved in the database and shown in the review center. Broken sources still open GitHub issues (`.github/scripts/ingest-issues.mjs`).
+- **Run reports** are saved in the database and shown in the review center. As implemented later in P68, broken sources use the automatic 30-day retry/disable history and do not open routine GitHub issues.
 - **The Sunday email** comes from the existing Logic App (`ADMIN_NOTIFY_URL`), with counts and a link to the review center, instead of a GitHub @mention.
 
 **What replaces the rolling pull request** (you choose, see [open questions](#16-open-questions)):
@@ -589,4 +589,3 @@ Platform facts we relied on:
 - **SEO and usage dashboard** (PR #36): all page code is reused. Application Insights stays the same; the dashboard's queries get the new app's name added.
 - **Rolling collector pull request:** keeps running as today until switch day, with shadow mode in phase 3.
 - **Decision log:** this proposal is recorded as P54, "Proposed". If approved, it answers P52's "revisit when": the git-based workflow has become too slow.
-

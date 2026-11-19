@@ -1,14 +1,14 @@
 /**
  * Like and Save buttons (components/Reactions.astro) on event cards and at the top of detail pages.
  * - Like counts come from small public files in Blob Storage (no Function call).
- * - Which pages you liked or saved is asked once per page, and only if this browser has signed in before.
- * - A visitor whose site session ended is signed back in silently first (account-state.ts); a click made
- *   while signed out is remembered and finished after signing in, without another click.
+ * - Public page loads never check the secure session or redirect.
+ * - A Like or Save verifies the session on demand; a click made while signed out is remembered and
+ *   finished after signing in, without another click.
  * - One like per person per page: the API keeps one row per person, so a second like changes nothing.
  * All text is set with textContent.
  */
 import { COMMUNITY, readModelUrl } from '../lib/community';
-import { cachedAccount, ensureSession, signInFor, takeAction, type PendingAction } from './account-state';
+import { ensureSession, hasAction, signInFor, takeAction, verifyForAction, type PendingAction } from './account-state';
 import { toast } from './toast';
 
 const groups = Array.from(document.querySelectorAll<HTMLElement>('[data-react]'));
@@ -112,22 +112,6 @@ async function loadCounts() {
   paintAll();
 }
 
-/** What this person liked and saved (only when this browser has signed in before). */
-async function loadMine() {
-  if (!cachedAccount()) return;
-  const me = await ensureSession();
-  if (!me.signedIn) return;
-  signedIn = true;
-  const wantSaves = groups.some((g) => g.querySelector('[data-save]'));
-  const [likes, saves] = await Promise.all([
-    getJson('/api/me/likes', { credentials: 'same-origin', headers: { Accept: 'application/json' } }),
-    wantSaves ? getJson('/api/me/saves', { credentials: 'same-origin', headers: { Accept: 'application/json' } }) : Promise.resolve(null),
-  ]);
-  for (const k of Object.keys(likes.data?.liked || {})) liked.add(k);
-  for (const s of saves?.data?.saved || []) if (s && typeof s.key === 'string') saved.add(s.key);
-  paintAll();
-}
-
 type Kind = 'like' | 'save';
 
 /** Ask the visitor to sign in (silently when this browser was signed in before) and finish the click afterwards. */
@@ -148,8 +132,9 @@ function handleError(r: { status: number; data: any }, kind: Kind, key: string, 
 /** Like or unlike, save or unsave (`want` is the state to end in). */
 async function act(kind: Kind, key: string, want: boolean, date?: string) {
   if (!signedIn) {
-    needSignIn(kind, key, want, date);
-    return;
+    const action: PendingAction = { type: kind, key, want, ...(date ? { date } : {}) };
+    if (!(await verifyForAction(action, here()))) return;
+    signedIn = true;
   }
   if (busy.has(key)) return;
   busy.add(key);
@@ -195,8 +180,8 @@ async function finishRemembered() {
     if (!a) continue;
     const kind = a.type as Kind;
     const want = a.want !== false;
-    // Already in the wanted state (for example liked on another device): nothing to do.
-    if ((kind === 'like' ? liked.has(key) : saved.has(key)) === want) return;
+    // Public pages deliberately do not load personal state, so the neutral button cannot prove the
+    // server is already in the wanted state. The protected endpoints are idempotent; always finish it.
     await act(kind, key, want, typeof a.date === 'string' ? a.date : undefined);
     return;
   }
@@ -211,10 +196,14 @@ if (groups.length) {
       void onClick(btn);
     }
   });
-  void loadCounts();
-  loadMine()
-    .finally(() => {
-      for (const g of groups) for (const b of g.querySelectorAll<HTMLButtonElement>('button')) b.disabled = false;
-    })
-    .then(() => (signedIn ? finishRemembered() : undefined));
+  void loadCounts().finally(() => {
+    for (const g of groups) for (const b of g.querySelectorAll<HTMLButtonElement>('button')) b.disabled = false;
+  });
+  if ([...byKey.keys()].some((key) => hasAction(key, ['like', 'save']))) {
+    void ensureSession().then((me) => {
+      if (!me.signedIn) return;
+      signedIn = true;
+      return finishRemembered();
+    });
+  }
 }

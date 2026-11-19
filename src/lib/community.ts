@@ -8,9 +8,10 @@ import config from '../data/community.json';
 export type PageType = 'event' | 'venue' | 'organizer' | 'instructor' | 'performer' | 'style';
 
 /**
- * signInServiceDays: how long the sign-in service remembers a visitor after the browser closes. 0 = until the
- * browser closes (External ID's default). Set it to 90 after turning on Conditional Access
- * "Persistent browser session: Always persistent" (docs/deployment.md), so returning the next day works too.
+ * signInServiceDays controls only the lifetime of this app's `li-sso` restore hint. 0 keeps that hint
+ * as a browser-session cookie; it does not describe or extend the secure SWA or External ID sessions.
+ * Consider 90 only after the External ID "Persistent browser session: Always persistent" policy is
+ * enabled and verified (docs/deployment.md).
  */
 export const COMMUNITY = config as { blobBase: string; loginProvider: string; photosEnabled: boolean; signInServiceDays: number };
 

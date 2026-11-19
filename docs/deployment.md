@@ -156,29 +156,31 @@ The script registers `https://longisland.dance/.auth/login/extid/callback` (and 
 
 ### How long people stay signed in
 
-There are two sessions, and they end at different times:
+There are three different things, and only one is the site's browser display cache:
 
-| Session | Kept in | Ends |
+| Item | Kept in | What it means |
 | --- | --- | --- |
-| The website's own (Static Web Apps) | cookie `StaticWebAppsAuthCookie` on longisland.dance | 8 hours after signing in (Azure's fixed limit; it cannot be changed) |
-| The sign-in service's (External ID) | cookies on longislanddance.ciamlogin.com | when the browser is closed (today), or after many days with the setting below |
+| Cached display identity | `li-account` in this browser's local storage | Keeps the person's name in the header until they choose **Sign out** or delete this site's browser data. It is not proof that the secure session is still valid. |
+| The website's secure session | A hosting-service cookie on longisland.dance | Controlled by Static Web Apps or App Service Easy Auth. The built-in Static Web Apps cookie is roughly 8 hours and is not configurable at the Static Web Apps level. Application JavaScript must not promise that it never expires. |
+| The sign-in service's session | Cookies on longislanddance.ciamlogin.com | Controlled by Microsoft Entra External ID and its browser-session / Conditional Access policy. Entra's default sign-in frequency is a rolling 90 days, but browser persistence and policy enforcement still depend on the External ID tenant. |
 
-When a browser that was signed in before comes back and the website's session has ended, the page signs the visitor back in silently: while the sign-in service still remembers them, a sign-in needs no form (Microsoft answers at once), so the page makes that one quick trip and comes back to the same page, without the welcome step. The header keeps showing their name, and Like, Save and notes work without reloading. A click made while the session had ended (for example a Like on a page left open all day) is remembered and finished after the trip. This is `ensureSession()` in `src/scripts/account-state.ts`. (Static Web Apps cannot pass `prompt=none` to the sign-in service: `loginParameterNames` does not forward it.)
+**Public browsing never checks or restores the secure session during page load.** A brand-new visitor and a returning visitor whose secure session ended can open the home page, event list, calendar, map and detail pages without an auth request or redirect. A cached name may still appear in the header; that is only a friendly browser memory.
 
-The trip is only made when the sign-in service very likely still remembers the visitor, so nobody is sent to a sign-in form they did not ask for. The site sets its own cookie `li-sso` while signed in; it lasts as long as the sign-in service remembers (until the browser closes, or `signInServiceDays` in `src/data/community.json`). Without it, the visitor is shown as signed out at once, with a short "Your sign-in ended" note. The sign-in service does not remember a brand-new sign-up the way it remembers a sign-in (tested 2026-10-05), so the welcome step sets `li-sso=0` for the rest of that browser session; the next normal sign-in allows the silent trip again. If a sign-in comes back with an error (for example "Cancel"), Static Web Apps answers 401; the `401` response override shows `/signed-out/`, which goes straight back to the page, signed out. "Sign out" forgets the saved name and `li-sso` at once, so the site never signs anyone back in by itself. (Pressing "Sign in" again in the same browser session can still sign the last person in without a code, because the sign-in service remembers them; on a shared computer, close the browser after signing out.)
+Verification happens only when the visitor chooses a protected action (Like, Save, posting or reporting community content), opens an account-specific page such as `/account/` or `/saved/`, or returns with one of those actions waiting. If the website session ended and External ID still remembers the browser, `ensureSession()` in `src/scripts/account-state.ts` makes one silent trip and returns to the requested page. If that restore fails or is cancelled, `/signed-out/` returns to the public page once, clears the pending write, and does not start another login loop. The cached display name remains until explicit **Sign out** or site-data deletion.
+
+The `li-sso` cookie is only a hint that External ID probably still remembers this browser. `signInServiceDays` in `src/data/community.json` must stay `0` unless the matching External ID persistent-browser policy is actually enabled and verified. Changing that number alone does not lengthen either secure session.
 
 To test the whole flow with real sign-ins, use `scripts/e2e-signin.mjs` steps `sa` to `sd` (see the top of that file).
 
-### Stay signed in the next day (owner, External ID admin center)
+### Optional persistent browser session (owner, External ID admin)
 
-Today the sign-in service forgets visitors when the browser closes, so someone who returns the next day must enter a new email code. External ID decides this with a **Conditional Access** setting, not a user-flow setting, and Conditional Access cannot be used while **security defaults** are on. To keep visitors signed in for 90 days:
+No Conditional Access policy was verified as enabled for the External ID tenant during this work. Do not describe the current secure session as permanent.
 
-1. [Entra admin center](https://entra.microsoft.com) → switch to the **Long Island Dance** directory.
-2. **Entra ID → Conditional Access → Policies → New policy**, name "Admins need MFA": Users: **Directory roles** → Global Administrator (and any other admin role in use); Target resources: **All resources**; Grant: **Require multifactor authentication**; turn it **On**. This replaces the admin protection that security defaults give today.
-3. **Entra ID → Overview → Properties → Manage security defaults** → **Disabled** (reason: "Using Conditional Access"). Do this only after step 2 is saved.
-4. **New policy**, name "Visitors stay signed in": Users: **All users**, exclude your admin account; Target resources: **Select resources** → **Long Island Dance website**; Session: **Sign-in frequency** = 90 days and **Persistent browser session** = **Always persistent**; turn it **On**.
-5. In `src/data/community.json` set `"signInServiceDays": 90` (so the site knows the sign-in service now remembers visitors for that long) and publish.
-6. Check: sign in on the website, close the browser completely, open it the next day (or wait 8 hours): your name is still in the header and Like works. With the harness, step `sb` "next day" passes.
+If the tenant's licensing and the administrator's permissions allow it, an External ID administrator may create a Conditional Access policy for the website with **Persistent browser session = Always persistent**. The normal Entra sign-in frequency can remain at its default rolling **90 days**, or the administrator can set an explicit 90-day frequency. Review the tenant's security-defaults and administrator-protection requirements before changing Conditional Access; do not weaken administrator sign-in protection just to make visitor sessions longer.
+
+Only after that policy is enabled and tested should `"signInServiceDays": 90` be considered in `src/data/community.json`. That value is still only the application's silent-restore hint; it does not change the roughly 8-hour Static Web Apps auth cookie or create a never-expiring secure session.
+
+Check: sign in, close the browser completely, open it the next day, browse several public pages without a redirect, then press Like. The protected action should restore the secure session and finish on the same page while the External ID browser session remains valid.
 
 ### Email alerts for moderators
 

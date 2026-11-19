@@ -23,9 +23,11 @@ import concurrent.futures as cf
 import datetime as dt
 import hashlib
 import html
+import ipaddress
 import json
 import os
 import re
+import socket
 import threading
 import time
 import urllib.error
@@ -38,6 +40,8 @@ USER_AGENT = (
 )
 BOT_TOKEN = "longislanddanceeventsbot"
 HOST_DELAY = 3.0
+MAX_REDIRECTS = 8
+REDIRECT_CODES = {301, 302, 303, 307, 308}
 MONTHS = {m: i + 1 for i, m in enumerate(
     "january february march april may june july august september october november december".split())}
 MONTHS.update({k[:3]: v for k, v in list(MONTHS.items())})
@@ -52,33 +56,107 @@ _host_last: dict[str, float] = {}
 _glock = threading.Lock()
 
 
-def _polite_get(url: str, cache_dir: str, accept: str = "text/html,*/*") -> dict:
-    host = urllib.parse.urlparse(url).netloc.lower()
+class UnsafeUrl(ValueError):
+    pass
+
+
+def public_url_problem(url: str) -> str | None:
+    """Why this URL is unsafe for automation, or None when every resolved address is public."""
+    try:
+        p = urllib.parse.urlparse(url)
+        if p.scheme not in ("http", "https"):
+            return "only public http(s) addresses are allowed"
+        if p.username or p.password:
+            return "credentials are not allowed in source URLs"
+        host = (p.hostname or "").lower()
+        if not host or host == "localhost" or host.endswith((".localhost", ".local", ".internal")):
+            return "private host name"
+        infos = socket.getaddrinfo(host, p.port or (443 if p.scheme == "https" else 80), type=socket.SOCK_STREAM)
+        addresses = {i[4][0].split("%", 1)[0] for i in infos}
+        if not addresses or any(not ipaddress.ip_address(a).is_global for a in addresses):
+            return "host does not resolve only to public addresses"
+    except (OSError, ValueError) as e:
+        return "host could not be safely resolved: " + str(e)[:120]
+    return None
+
+
+def require_public_url(url: str) -> None:
+    problem = public_url_problem(url)
+    if problem:
+        raise UnsafeUrl(f"Unsafe source URL ({problem}): {url}")
+
+
+class NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+def _polite_get(url: str, cache_dir: str, accept: str = "text/html,*/*",
+                obey_redirect_robots: bool = False) -> dict:
+    try:
+        require_public_url(url)
+    except UnsafeUrl as e:
+        return {"url": url, "status": 0, "finalUrl": url, "contentType": "", "body": "",
+                "bytes": 0, "error": str(e), "unsafeReason": str(e)}
     key = hashlib.sha1(url.encode()).hexdigest()[:20]
     path = os.path.join(cache_dir, key + ".json")
     if os.path.exists(path):
         with open(path, encoding="utf-8") as f:
             return json.load(f)
-    with _glock:
-        lock = _host_locks.setdefault(host, threading.Lock())
-    with lock:
-        wait = HOST_DELAY - (time.time() - _host_last.get(host, 0))
-        if wait > 0:
-            time.sleep(wait)
-        req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, "Accept": accept})
-        rec: dict = {"url": url, "fetchedAt": dt.datetime.now(dt.timezone.utc).isoformat()}
+    rec: dict = {"url": url, "fetchedAt": dt.datetime.now(dt.timezone.utc).isoformat()}
+    current = url
+    body = b""
+    for redirects in range(MAX_REDIRECTS + 1):
         try:
-            with urllib.request.urlopen(req, timeout=25) as r:
-                body = r.read(3_000_000)
-                rec.update(status=r.status, finalUrl=r.geturl(), contentType=r.headers.get("content-type", ""),
-                           etag=r.headers.get("etag"), lastModified=r.headers.get("last-modified"))
-        except urllib.error.HTTPError as e:
-            body = e.read(200_000) if hasattr(e, "read") else b""
-            rec.update(status=e.code, finalUrl=url, contentType=e.headers.get("content-type", "") if e.headers else "")
-        except Exception as e:  # network errors, TLS, timeouts
-            body = b""
-            rec.update(status=0, error=type(e).__name__ + ": " + str(e)[:160], finalUrl=url, contentType="")
-        _host_last[host] = time.time()
+            require_public_url(current)
+        except UnsafeUrl as e:
+            rec.update(status=0, error=str(e), unsafeReason=str(e), finalUrl=current, contentType="")
+            break
+        if redirects and obey_redirect_robots:
+            redirect_rules = robots_check(current, cache_dir)
+            if redirect_rules["robots"] == "disallowed":
+                rec.update(status=0, error=f"robots.txt disallows redirected page: {current}",
+                           robotsBlocked=True, finalUrl=current, contentType="")
+                break
+        host = urllib.parse.urlparse(current).netloc.lower()
+        with _glock:
+            lock = _host_locks.setdefault(host, threading.Lock())
+        redirect_to = None
+        with lock:
+            wait = HOST_DELAY - (time.time() - _host_last.get(host, 0))
+            if wait > 0:
+                time.sleep(wait)
+            req = urllib.request.Request(current, headers={"User-Agent": USER_AGENT, "Accept": accept})
+            try:
+                with urllib.request.build_opener(NoRedirectHandler()).open(req, timeout=25) as r:
+                    body = r.read(3_000_000)
+                    rec.update(status=r.status, finalUrl=current, contentType=r.headers.get("content-type", ""),
+                               etag=r.headers.get("etag"), lastModified=r.headers.get("last-modified"))
+            except urllib.error.HTTPError as e:
+                if e.code in REDIRECT_CODES and e.headers and e.headers.get("location"):
+                    redirect_to = urllib.parse.urljoin(current, e.headers["location"])
+                    body = b""
+                else:
+                    body = e.read(200_000) if hasattr(e, "read") else b""
+                    rec.update(status=e.code, finalUrl=current,
+                               contentType=e.headers.get("content-type", "") if e.headers else "")
+            except Exception as e:  # network errors, TLS, timeouts
+                body = b""
+                rec.update(status=0, error=type(e).__name__ + ": " + str(e)[:160],
+                           finalUrl=current, contentType="")
+                if isinstance(e, UnsafeUrl):
+                    rec["unsafeReason"] = str(e)
+            _host_last[host] = time.time()
+        if not redirect_to:
+            break
+        try:
+            require_public_url(redirect_to)
+        except UnsafeUrl as e:
+            rec.update(status=0, error=str(e), unsafeReason=str(e), finalUrl=redirect_to, contentType="")
+            break
+        current = redirect_to
+    else:
+        rec.update(status=0, error=f"Too many redirects for {url}", finalUrl=current, contentType="")
     text = body.decode("utf-8", errors="replace")
     rec["sha256"] = hashlib.sha256(body).hexdigest() if body else None
     rec["bytes"] = len(body)
@@ -316,7 +394,11 @@ def load_places(repo_root: str) -> list[str]:
 
 
 def verify(cand: dict, cache_dir: str, today: dt.date, places: list[str]) -> dict:
-    out = {"id": cand["id"], "url": cand["url"], "checkedAt": today.isoformat(), "pages": []}
+    problem = public_url_problem(cand["url"])
+    out = {"id": cand["id"], "url": cand["url"], "checkedAt": today.isoformat(), "pages": [], "safe": not problem}
+    if problem:
+        out["unsafeReason"] = problem
+        return out
     out.update(robots_check(cand["url"], cache_dir))
     urls = [cand["url"]] + cand.get("also", [])
     all_text = ""
@@ -325,7 +407,10 @@ def verify(cand: dict, cache_dir: str, today: dt.date, places: list[str]) -> dic
         if r["robots"] == "disallowed":
             out["pages"].append({"url": u, "skipped": "robots.txt disallows our bot"})
             continue
-        rec = _polite_get(u, cache_dir)
+        rec = _polite_get(u, cache_dir, obey_redirect_robots=True)
+        if rec.get("unsafeReason"):
+            out["safe"] = False
+            out["unsafeReason"] = rec["unsafeReason"]
         body = rec.get("body", "")
         jl = []
         for m in re.finditer(r'(?is)<script[^>]+application/ld\+json[^>]*>(.*?)</script>', body):

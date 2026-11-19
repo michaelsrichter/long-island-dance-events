@@ -178,13 +178,10 @@ function renderTodo() {
   else {
     const n = counts.sources ?? sourceTodoCount(s, loaded.outreach ?? null);
     const answers = (loaded.outreach?.threads || []).filter((t) => t.unread && t.key.startsWith('source:')).length;
-    const broken = s.sources.filter((x) => x.group === 'broken' && !x.snoozedUntil).length;
-    const asked = s.sources.filter((x) => (x.group === 'asked' || x.group === 'granted') && !x.snoozedUntil).length;
-    const sites = s.discovery.reduce((k, i) => k + (i.data?.newSites.length || 0), 0);
     const optional = s.sources.filter((x) => ['permission', 'venues', 'schedule', 'recheck'].includes(x.group) && !x.snoozedUntil).length;
     if (n > 0) {
       waiting++;
-      cards.push(todoCard('Sources', String(n), [answers ? `${plural(answers, 'new answer')} to your permission emails.` : null, broken ? `${plural(broken, 'source')} stopped working.` : null, asked ? `${plural(asked, 'permission request')} to follow up.` : null, sites ? `${plural(sites, 'new website')} found.` : null], 'sources', 'Open sources', broken > 0 || answers > 0));
+      cards.push(todoCard('Sources', String(n), [answers ? `${plural(answers, 'new answer')} to your permission emails.` : null, n > answers ? `${plural(n - answers, 'permission item')} needs a decision or follow-up.` : null], 'sources', 'Open sources', answers > 0));
     } else if (optional) {
       const extra = el('section', null, 'review-card');
       extra.append(el('h3', 'When you have time'), el('p', `${plural(optional, 'switched-off source')} could add more events if someone asks for permission, looks up venues, or adds a schedule. Nothing urgent.`));

@@ -1,9 +1,11 @@
 """Monthly source check: new websites from a fresh Web IQ search, plus a recheck of every source
-we track (robots.txt still allows us? still shows upcoming dates?). Writes a Markdown report for a
-GitHub issue. It never edits the catalog; a person decides what to add or switch off.
+we track (robots.txt still allows us? still shows upcoming dates?). Writes a Markdown report and
+machine-readable verification data. Trusted automation uses that data to onboard supported public
+sources; routine results never become owner tasks.
 
 Usage (from the repository root):
   python catalog/scripts/discovery_report.py --cache $RUNNER_TEMP/verify --out $RUNNER_TEMP/discovery.md \
+      --data-out $RUNNER_TEMP/discovery.json \
       [--search-log $RUNNER_TEMP/search-log.json] [--today 2026-11-01]
 """
 from __future__ import annotations
@@ -15,6 +17,7 @@ import os
 import subprocess
 import sys
 import urllib.parse
+from glob import glob
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 # Big platforms and ticket sellers: not sources we can or want to collect (see docs/source-catalog.md).
@@ -58,8 +61,15 @@ def merge_logs(logs: list[dict]) -> dict:
 
 
 def committed_domains() -> set[str]:
-    """Websites already looked at: the committed search logs and the triage list (catalog/search-triage.json)."""
+    """Websites already tracked in content, committed search logs, or the triage list."""
     known: set[str] = set()
+    for path in glob(os.path.join(ROOT, "src", "content", "sources", "*.json")):
+        try:
+            with open(path, encoding="utf-8") as f:
+                source = json.load(f)
+            known |= {domain(u) for u in [source.get("url", ""), source.get("feedUrl", ""), *(source.get("pageUrls") or [])] if u}
+        except (OSError, ValueError, TypeError):
+            pass
     for name in ("search-log.json", "search-log-towns.json"):
         p = os.path.join(ROOT, "catalog", name)
         if os.path.exists(p):
@@ -89,17 +99,15 @@ def new_domains(search_log: dict, catalog: list[dict], committed: set[str]) -> l
     return out
 
 
-def recheck(catalog: list[dict], cache: str, today: str) -> list[dict]:
-    cands = [{"id": s["id"], "url": s["url"]} for s in catalog if s["status"] in TRACKED]
-    # When the block is on a separate feed host (Google Calendar, widget APIs), recheck the feed too.
-    cands += [{"id": f"{s['id']}#feed", "url": s["feedUrl"]} for s in catalog if s["status"] in TRACKED and s.get("feedUrl") and s.get("robotsResult") == "disallowed"]
-    tmp_in = os.path.join(cache, "candidates.json")
-    tmp_out = os.path.join(cache, "verify.json")
-    os.makedirs(cache, exist_ok=True)
+def verify_batch(cands: list[dict], cache: str, today: str, name: str) -> list[dict]:
+    batch = os.path.join(cache, name)
+    os.makedirs(batch, exist_ok=True)
+    tmp_in = os.path.join(batch, "candidates.json")
+    tmp_out = os.path.join(batch, "verify.json")
     with open(tmp_in, "w", encoding="utf-8") as f:
         json.dump(cands, f)
     subprocess.run(
-        [sys.executable, os.path.join(ROOT, "catalog", "scripts", "verify_sources.py"), tmp_in, "--cache", cache, "--out", tmp_out, "--today", today],
+        [sys.executable, os.path.join(ROOT, "catalog", "scripts", "verify_sources.py"), tmp_in, "--cache", os.path.join(batch, "pages"), "--out", tmp_out, "--today", today],
         check=True,
         stdout=subprocess.DEVNULL,
     )
@@ -107,11 +115,19 @@ def recheck(catalog: list[dict], cache: str, today: str) -> list[dict]:
         return json.load(f)
 
 
+def recheck(catalog: list[dict], cache: str, today: str) -> list[dict]:
+    cands = [{"id": s["id"], "url": s["url"]} for s in catalog if s["status"] in TRACKED]
+    # When the block is on a separate feed host (Google Calendar, widget APIs), recheck the feed too.
+    cands += [{"id": f"{s['id']}#feed", "url": s["feedUrl"]} for s in catalog if s["status"] in TRACKED and s.get("feedUrl") and s.get("robotsResult") == "disallowed"]
+    return verify_batch(cands, cache, today, "tracked")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--search-log", action="append", default=[], help="search log (repeat for the core and town logs)")
     ap.add_argument("--cache", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--data-out", required=True)
     ap.add_argument("--today", default=dt.date.today().isoformat())
     a = ap.parse_args()
     catalog = json.load(open(os.path.join(ROOT, "catalog", "sources.json"), encoding="utf-8"))
@@ -119,9 +135,10 @@ def main() -> None:
     by_id = {s["id"]: s for s in catalog}
     lines = [f"# Monthly source check ({a.today})", ""]
     lines += [
-        "This report is made by `.github/workflows/source-discovery.yml`. It does not change anything.",
-        "To add a source: check it by hand (upcoming Long Island events, robots.txt), add it to `catalog/sources.json`, "
-        "then add a file in `src/content/sources/` with `enabled: true` after the owner says yes.",
+        "This report is made by `.github/workflows/source-discovery.yml`.",
+        "New public websites are safety-checked, checked against robots.txt, matched to an existing reader, "
+        "and tested with the real collector. Valid sources are added to the rolling event update automatically.",
+        "Unsafe, blocked, private, out-of-area, or unsupported results are not added and do not create owner tasks.",
         "",
     ]
 
@@ -143,20 +160,22 @@ def main() -> None:
     else:
         lines += ["## New websites from Web IQ", "", "Skipped: the `WEBIQ_API_KEY` secret is not set.", ""]
 
+    fresh_results = verify_batch([{"id": e["domain"], "url": e["url"]} for e in fresh[:40]], a.cache, a.today, "new") if fresh else []
+    fresh_by_domain = {r["id"]: r for r in fresh_results}
     results = recheck(catalog, a.cache, a.today)
     feeds = {r["id"].removesuffix("#feed"): r for r in results if r["id"].endswith("#feed")}
     results = [r for r in results if not r["id"].endswith("#feed")]
     robots_changed, no_dates, broken = [], [], []
-    data = {"newSites": [], "robotsChanged": [], "broken": [], "noDates": []}
+    data = {"today": a.today, "candidates": [], "robotsChanged": [], "broken": [], "noDates": []}
     for r in results:
         s = by_id.get(r["id"], {})
         page = (r.get("pages") or [{}])[0]
         was, now = s.get("robotsResult"), (feeds.get(r["id"]) or r).get("robots")
         if was in ("allowed", "none") and now == "disallowed":
-            robots_changed.append(f"| {s.get('name', r['id'])} | {was} → **disallowed** | Switch off and ask permission |")
+            robots_changed.append(f"| {s.get('name', r['id'])} | {was} → **disallowed** | The normal collector will retry, then switch it off after 30 continuous days |")
             data["robotsChanged"].append({"id": r["id"], "was": was, "now": now})
         elif was == "disallowed" and now in ("allowed", "none"):
-            robots_changed.append(f"| {s.get('name', r['id'])} | disallowed → {now} | Could be switched on |")
+            robots_changed.append(f"| {s.get('name', r['id'])} | disallowed → {now} | Recorded for history |")
             data["robotsChanged"].append({"id": r["id"], "was": was, "now": now})
         status = page.get("status")
         if status in (0, 401, 403, 404, 410, 429, 500, 502, 503):
@@ -168,14 +187,18 @@ def main() -> None:
     lines += [f"## Tracked sources rechecked ({len(results)})", ""]
     lines += ["### robots.txt changed", ""] + (["| Source | Change | What to do |", "| --- | --- | --- |", *robots_changed] if robots_changed else ["No changes."]) + [""]
     lines += ["### Pages that did not open", ""] + (["| Source | Problem | Address |", "| --- | --- | --- |", *broken] if broken else ["All pages opened."]) + [""]
-    lines += ["### Verified sources with no upcoming dates on the main page", "", "These may be seasonal, moved, or only show dates in a browser. Check them by hand.", ""]
+    lines += ["### Verified sources with no upcoming dates on the main page", "", "These may be seasonal, moved, or only show dates in a browser. The normal collector keeps retrying them; no owner action is created.", ""]
     lines += (["| Source | Address |", "| --- | --- |", *no_dates] if no_dates else ["None."]) + [""]
-    # The review center (/moderate/, Sources tab) reads this block to show Worth adding / Not useful buttons.
-    data["newSites"] = [{"domain": e["domain"], "url": e["url"], "title": e["title"][:120], "queries": e["queries"][:3]} for e in fresh[:40]]
-    lines += ["Decide on each new website in the review center: https://longisland.dance/moderate/#sources", ""]
-    lines += [f"<!-- review-data {json.dumps(data, ensure_ascii=False).replace('-->', '--&gt;')} -->", ""]
+    data["candidates"] = [
+        {"domain": e["domain"], "url": e["url"], "title": e["title"][:120], "queries": e["queries"][:3], "verification": fresh_by_domain.get(e["domain"], {})}
+        for e in fresh[:40]
+    ]
+    lines += ["Routine source maintenance is automatic. Only permission, security, legal, or takedown exceptions should reach the owner.", ""]
     with open(a.out, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines))
+    with open(a.data_out, "w", encoding="utf-8", newline="\n") as f:
+        json.dump(data, f, indent=2)
+        f.write("\n")
     print(f"wrote {a.out}")
 
 

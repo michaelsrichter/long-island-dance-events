@@ -42,7 +42,7 @@ const tabs = [
           <ol class="review-steps">
             <li><strong>Messages:</strong> answer anything in <a href="#messages">Messages</a>. Answer requests to remove a listing first (within 7 days).</li>
             <li><strong>Community posts:</strong> approve or reject anything in <a href="#posts">Community posts</a>.</li>
-            <li><strong>Sources:</strong> look at <a href="#sources">Sources</a> for anything that stopped working. Press <strong>Try again now</strong>, or <strong>Ask Copilot to fix it</strong>. If a website owner answered your email, it says <strong>new answer!</strong> under "Waiting for an answer". Read it, then press the button that matches what they said.</li>
+            <li><strong>Sources:</strong> routine retries, 30-day disablement and safe new-source onboarding happen automatically. Use <a href="#sources">Sources</a> only for exceptional permission answers or to review the automatic history.</li>
             <li><strong>Exceptional event corrections:</strong> use <a href="#listings">Held listings</a> only when an editor deliberately held an event. Routine uncertainty is hidden automatically.</li>
           </ol>
           <p class="review-hint">Changes show on the website a few minutes (usually about 5) after you press a button. Every decision is saved in the <a href="#log">Log</a>.</p>
@@ -63,7 +63,7 @@ const tabs = [
 
       <section class="review-panel" id="sources" data-panel="sources" aria-labelledby="sources-h" hidden>
         <h2 id="sources-h" tabindex="-1">Sources</h2>
-        <p class="review-intro">Sources are the calendars, websites and newsletters we collect events from. Here you can see which ones stopped working, which new ones we found, and which switched-off ones you could help with.</p>
+        <p class="review-intro">Sources are the calendars, websites and newsletters we collect events from. Failed checks retry automatically for 30 continuous days, then switch off with a saved reason. Safe new public sources are validated and added automatically. This tab shows that history and the few permission or legal exceptions that still need a person.</p>
         <div class="review-panel" data-sources><p class="spinner" role="status">Loading sources…</p></div>
       </section>
 

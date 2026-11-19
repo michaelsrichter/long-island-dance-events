@@ -1,13 +1,14 @@
 import { spawnSync } from 'node:child_process';
-import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { eventSchema } from '../../src/lib/schemas';
 import { addDays } from '../../src/lib/time';
 import { extractRows, findDjNames, guessVenue, normalizeRows, python, statedCadence } from '../../ingest/adapters/thedancecalendar';
 import { collapse, inferRecurrence } from '../../ingest/lib/collapse';
 import { makeSummary, plainLabel, themeOf } from '../../ingest/lib/describe';
-import { isAllowed, parseRobots } from '../../ingest/lib/fetch';
+import { assertPublicHttpUrl, isAllowed, isPublicAddress, parseRobots, PoliteFetcher } from '../../ingest/lib/fetch';
 import { mergeDrafts } from '../../ingest/lib/merge';
 import { parsePrices } from '../../ingest/lib/prices';
 import { lookupPlace, Registry, ROOT } from '../../ingest/lib/registry';
@@ -132,6 +133,42 @@ describe('robots.txt', () => {
   it('honors wildcard rules for every bot', () => {
     expect(isAllowed(rules, '/dance-calendar')).toBe(true);
     expect(isAllowed(rules, '/gallery?lightbox=1')).toBe(false);
+  });
+
+  describe('public source URL safety', () => {
+    it('rejects loopback, private, link-local and private DNS results', async () => {
+      expect(isPublicAddress('8.8.8.8')).toBe(true);
+      expect(isPublicAddress('127.0.0.1')).toBe(false);
+      expect(isPublicAddress('192.168.1.2')).toBe(false);
+      expect(isPublicAddress('169.254.169.254')).toBe(false);
+      expect(isPublicAddress('fc00::1')).toBe(false);
+      await expect(assertPublicHttpUrl('http://127.0.0.1/events')).rejects.toThrow(/Unsafe source URL/);
+      await expect(assertPublicHttpUrl('https://events.example/', async () => ['10.0.0.5'])).rejects.toThrow(/public addresses/);
+    });
+
+    it('accepts public http(s) URLs whose DNS answers are all public', async () => {
+      await expect(assertPublicHttpUrl('https://events.example/calendar', async () => ['8.8.8.8', '1.1.1.1'])).resolves.toMatchObject({
+        protocol: 'https:',
+        hostname: 'events.example',
+      });
+    });
+
+    it('uses the validated canonical URL for the outbound request', async () => {
+      const cache = mkdtempSync(join(tmpdir(), 'li-fetch-'));
+      const requested: string[] = [];
+      const fetchMock = vi.spyOn(globalThis, 'fetch').mockImplementation(async (input) => {
+        const url = String(input);
+        requested.push(url);
+        return new Response(url.endsWith('/robots.txt') ? '' : 'events', { status: url.endsWith('/robots.txt') ? 404 : 200 });
+      });
+      try {
+        await new PoliteFetcher(cache, { delaySeconds: 0 }).text('HTTP://8.8.8.8:80/a/../events');
+        expect(requested).toEqual(['http://8.8.8.8/robots.txt', 'http://8.8.8.8/events']);
+      } finally {
+        fetchMock.mockRestore();
+        rmSync(cache, { recursive: true, force: true });
+      }
+    });
   });
   it('uses a group for this bot when there is one', () => {
     expect(isAllowed(parseRobots('User-agent: LongIslandDanceEventsBot\nDisallow: /private\n'), '/private/x')).toBe(false);

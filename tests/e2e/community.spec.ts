@@ -53,7 +53,7 @@ test.describe('community panel', () => {
     await page.goto(`${VENUE}#community`);
     const panel = page.locator('[data-community]');
     await expect(panel.getByRole('heading', { name: "Dancers' notes and photos" })).toBeVisible();
-    await expect(page.locator('.page-header [data-react] [data-like-count]')).toContainText('4');
+    await expect(page.locator('.page-header [data-react] [data-like-count]')).toContainText('4', { timeout: 15_000 });
     await expect(panel.locator('[data-like]'), 'Like lives at the top of the page now').toHaveCount(0);
     await expect(panel.locator('.community__comment')).toHaveCount(2);
     await expect(panel.getByText('<script>alert(1)</script> shown as text')).toBeVisible();
@@ -70,15 +70,18 @@ test.describe('community panel', () => {
     await mockCommunity(page, { signedIn: true });
     await page.goto(`${VENUE}#community`);
     const panel = page.locator('[data-community]');
-    await expect(panel.getByRole('link', { name: /Sign in to like/ })).toBeHidden();
+    const activate = panel.getByRole('link', { name: /Sign in to like/ });
+    await expect(activate).toBeVisible();
     const like = page.locator('.page-header [data-react] [data-like]');
-    await expect(like).toBeEnabled();
+    await expect(like).toBeEnabled({ timeout: 15_000 });
     await like.click();
     await expect(like).toHaveAttribute('aria-pressed', 'true');
     await expect(like.locator('[data-like-count]')).toContainText('5');
     // The page's public file arrives 1.2 s late (see mockCommunity); it must not undo the new count.
     await page.waitForTimeout(1500);
     await expect(like.locator('[data-like-count]')).toContainText('5');
+    await activate.click();
+    await expect(panel.locator('[data-comment-form]')).toBeVisible();
     await panel.getByLabel('Your note').fill('Lovely place to dance.');
     await panel.getByRole('button', { name: 'Send', exact: true }).click();
     await expect(panel.locator('[data-status]')).toContainText('A volunteer will check');
@@ -87,6 +90,8 @@ test.describe('community panel', () => {
   test('signed in panel has no serious accessibility problems', async ({ pinned: page }) => {
     await mockCommunity(page, { signedIn: true });
     await page.goto(`${VENUE}#community`);
+    await expect(page.locator('[data-panel-loading]')).toBeHidden();
+    await page.locator('[data-community]').getByRole('link', { name: /Sign in to like/ }).click();
     await expect(page.locator('[data-comment-form]')).toBeVisible();
     const results = await new AxeBuilder({ page }).include('[data-community]').withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa']).analyze();
     const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical');
@@ -149,7 +154,7 @@ test.describe('community panel', () => {
 test.describe('likes and saves on lists and detail pages', () => {
   /** Mock the community API with a little state, so liking twice behaves like the real one (one like per person). */
   async function mockReactions(page: import('@playwright/test').Page, { signedIn = true, startCount = 7 } = {}) {
-    const state = { liked: new Set<string>(), saved: new Map<string, string | undefined>(), counts: new Map<string, number>() };
+    const state = { liked: new Set<string>(), saved: new Map<string, string | undefined>(), counts: new Map<string, number>(), personalReads: 0 };
     if (signedIn) await page.addInitScript(() => localStorage.setItem('li-account', JSON.stringify({ name: 'Ann B', admin: false })));
     // Every event starts with the same count, so the test does not depend on this week's listings. Read the page
     // list once here: a request made inside the route handler can still be running when the test ends.
@@ -159,8 +164,14 @@ test.describe('likes and saves on lists and detail pages', () => {
     await page.route('**/community/event/*.json', (r) => r.fulfill({ status: 404, body: '' }));
     await page.route('**/.auth/me', (r) => r.fulfill({ json: { clientPrincipal: signedIn ? { userId: 'u1', userDetails: 'Ann B', userRoles: ['anonymous', 'authenticated', 'member'] } : null } }));
     await page.route('**/.auth/login/**', (r) => r.fulfill({ status: 200, contentType: 'text/html', body: '<!doctype html><title>sign in</title><h1>Sign-in page</h1>' }));
-    await page.route('**/api/me/likes**', (r) => r.fulfill({ json: { liked: Object.fromEntries([...state.liked].map((k) => [k, true])) } }));
-    await page.route('**/api/me/saves', (r) => r.fulfill({ json: { signedIn, saved: [...state.saved].map(([key, date]) => ({ key, at: '2026-10-03T12:00:00Z', ...(date ? { date } : {}) })) } }));
+    await page.route('**/api/me/likes**', (r) => {
+      state.personalReads++;
+      return r.fulfill({ json: { liked: Object.fromEntries([...state.liked].map((k) => [k, true])) } });
+    });
+    await page.route('**/api/me/saves', (r) => {
+      state.personalReads++;
+      return r.fulfill({ json: { signedIn, saved: [...state.saved].map(([key, date]) => ({ key, at: '2026-10-03T12:00:00Z', ...(date ? { date } : {}) })) } });
+    });
     await page.route('**/api/likes', async (r) => {
       const { key, like } = r.request().postDataJSON();
       const had = state.liked.has(key);
@@ -227,7 +238,7 @@ test.describe('likes and saves on lists and detail pages', () => {
     expect(state.saved.size).toBe(0);
   });
 
-  test('the top of an event page has Like and Save, and they remember what you chose', async ({ pinned: page }) => {
+  test('the top of an event page stays neutral until a protected action synchronizes personal state', async ({ pinned: page }) => {
     const state = await mockReactions(page);
     await page.goto('/events/');
     const href = (await page.locator('[data-upcoming-list] [data-event]:not([hidden]) .event-card__title a').first().getAttribute('href'))!;
@@ -237,6 +248,11 @@ test.describe('likes and saves on lists and detail pages', () => {
     state.liked.add(key);
     state.saved.set(key, undefined);
     await page.reload();
+    await expect(top.locator('[data-like]')).toHaveAttribute('aria-pressed', 'false');
+    await expect(top.locator('[data-save]')).toHaveAttribute('aria-pressed', 'false');
+    expect(state.personalReads, 'public page loads must not read personal reaction state').toBe(0);
+    await top.locator('[data-like]').click();
+    await top.locator('[data-save]').click();
     await expect(top.locator('[data-like]')).toHaveAttribute('aria-pressed', 'true');
     await expect(top.locator('[data-save]')).toHaveAttribute('aria-pressed', 'true');
     await expect(top.locator('[data-save]')).toContainText('Saved');

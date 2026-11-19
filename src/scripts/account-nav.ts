@@ -1,11 +1,10 @@
 /**
  * Header and footer account links: "Sign in" for visitors, the person's name (linking to their
  * profile) once signed in, plus "Sign out" and, for moderators, "Moderation queue".
- * Only calls /.auth/me when this browser has signed in before, so most visitors cause no request.
- * A returning visitor whose site session ended is signed back in silently (see account-state.ts),
- * so the name stays in the header and Like, Save and notes work without a page reload.
+ * Public pages use only the browser's cached display identity. They never check /.auth/me or redirect
+ * during ordinary navigation; protected actions and account pages verify the secure session on demand.
  */
-import { cachedAccount, ensureSession, firstName, loginUrl, logoutUrl, markSignedOut, rememberAccount, takeSignedOutNotice, type CachedAccount } from './account-state';
+import { cachedAccount, firstName, loginUrl, logoutUrl, markSignedOut, takeSignedOutNotice, type CachedAccount } from './account-state';
 import { toast } from './toast';
 
 function render(account: CachedAccount | null) {
@@ -46,12 +45,4 @@ const showNotice = () => {
   if (notice) window.setTimeout(() => toast(notice), 400);
 };
 
-const cached = cachedAccount();
-if (cached) {
-  ensureSession().then((me) => {
-    if (me.signedIn && me.admin !== cached.admin) rememberAccount({ ...cached, admin: me.admin });
-    showNotice();
-  });
-}
-// Also when the sign-in ended on the way here (after a sign-in that came back with an error).
 showNotice();

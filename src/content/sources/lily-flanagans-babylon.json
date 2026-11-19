@@ -10,7 +10,12 @@
     "venueId": "lilys-babylon"
   },
   "description": "Live music listings in Babylon: Friday happy-hour cover bands, Saturday pub bands.",
-  "enabled": false,
+  "enabled": true,
+  "failure": {
+    "firstFailedAt": "2026-11-02",
+    "lastFailedAt": "2026-11-02",
+    "consecutiveFailedChecks": 3
+  },
   "focus": "music",
   "lastCounts": {
     "found": 0,
@@ -22,6 +27,6 @@
   "lastScraped": "2026-10-29T23:00:58.870Z",
   "lastStatus": "error",
   "rateLimitSeconds": 5,
-  "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a clean, dated pub-band calendar with iCal links, even though the dance signal is indirect. Paused on 2026-10-29 after 3 failed runs in a row (issue #73).",
+  "reviewNotes": "Catalog check 2026-10-03: Keep it. It is a clean, dated pub-band calendar with iCal links, even though the dance signal is indirect. Re-enabled on 2026-11-02 under the automatic 30-day retry policy; the old three-run pause no longer applies.",
   "url": "https://www.lilyflanaganspub.com/musicevents"
 }

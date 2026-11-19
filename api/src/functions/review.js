@@ -342,29 +342,17 @@ route(
 
 route('reviewSources', ['GET'], 'review/sources', async () => {
   const sha = await github.headSha();
-  const [c, failures, discovery, runs, snooze, decided] = await Promise.all([
+  const [c, runs, snooze] = await Promise.all([
     content(sha),
-    github.gh('GET', `/repos/${REPO}/issues?state=open&labels=ingest-failure&per_page=100`),
-    github.gh('GET', `/repos/${REPO}/issues?state=open&labels=source-discovery&per_page=10`),
     github.gh('GET', `/repos/${REPO}/actions/workflows/${INGEST_WORKFLOW}/runs?per_page=15`),
     snoozed('source'),
-    table(TABLES.review).list('candidate', { limit: 2000 }),
   ]);
-  const done = new Set(decided.map((r) => r.rowKey));
   return json(200, {
     sha,
     today: today(),
     sources: [...c.sources].map(([id, s]) => ({ ...data.sourceCard(id, s), snoozedUntil: snooze[id] || '' })).sort((a, b) => a.name.localeCompare(b.name)),
-    failures: failures
-      .filter((i) => !i.pull_request)
-      .map((i) => ({ number: i.number, title: i.title, url: i.html_url, createdAt: i.created_at, comments: i.comments, sourceId: (/<!-- ingest-failure ([a-z0-9-]+) -->/.exec(i.body || '') || [])[1] || '' })),
-    discovery: discovery
-      .filter((i) => !i.pull_request)
-      .map((i) => {
-        const d = data.parseDiscovery(i.body);
-        if (d) d.newSites = d.newSites.filter((s) => !done.has(String(s.domain)));
-        return { number: i.number, title: i.title, url: i.html_url, createdAt: i.created_at, data: d };
-      }),
+    failures: [],
+    discovery: [],
     runs: (runs.workflow_runs || []).map((r) => ({ id: r.id, title: r.display_title, event: r.event, status: r.status, conclusion: r.conclusion || '', createdAt: r.created_at, url: r.html_url })),
   });
 });
@@ -430,81 +418,11 @@ route(
   { write: true },
 );
 
-/** Add a "the owner said no" line to catalog/search-triage.json (one domain per line, sorted). */
-function triageWithNo(text, domain, why, today) {
-  const doc = JSON.parse(text);
-  if (doc.domains && doc.domains[domain]) return null;
-  const lines = text.split('\n');
-  const start = lines.findIndex((l) => /^ {2}"domains": \{$/.test(l));
-  const end = lines.findIndex((l, i) => i > start && /^ {2}\}$/.test(l));
-  if (start < 0 || end < 0) throw new Error('search-triage.json layout changed');
-  const entry = `    ${JSON.stringify(domain)}: ${JSON.stringify({ decision: 'owner-no', note: `${why ? `${why} ` : ''}(review center, ${today})`.trim() })}`;
-  let at = end;
-  for (let i = start + 1; i < end; i++) {
-    const k = /^ {4}"([^"]+)":/.exec(lines[i]);
-    if (k && k[1] > domain) {
-      at = i;
-      break;
-    }
-  }
-  if (at === end) lines[end - 1] = `${lines[end - 1]},`;
-  lines.splice(at, 0, at === end ? entry : `${entry},`);
-  let out = lines.join('\n');
-  if (!/"owner-no":/.test(out.split('\n').find((l) => /^ {2}"decisions": /.test(l)) || '')) {
-    out = out.replace(/^ {2}"decisions": \{/m, '  "decisions": {"owner-no": "the owner looked and said no (review center)", ');
-  }
-  const check = JSON.parse(out);
-  if (Object.keys(check.domains).length !== Object.keys(doc.domains).length + 1) throw new Error('search-triage.json edit failed');
-  return out;
-}
-
-const DOMAIN = /^(?=.{3,120}$)[a-z0-9-]+(\.[a-z0-9-]+)+$/;
-
 route(
   'reviewCandidate',
   ['POST'],
   'review/candidate',
-  async (request, principal) => {
-    const b = await readJson(request, 4096);
-    if (!b.ok) return b.response;
-    const domain = String(b.body.domain || '').toLowerCase();
-    const issue = Number(b.body.issue) || 0;
-    const why = cleanText(b.body.note, 200);
-    if (!DOMAIN.test(domain) || !['reject', 'copilot'].includes(b.body.action)) return error(400, 'bad_request', 'Bad request.');
-    let result = {};
-    if (b.body.action === 'reject') {
-      const commit = await github.commitFiles(async (base) => {
-        const path = 'catalog/search-triage.json';
-        const texts = await github.readFiles(base, [path]);
-        const next = triageWithNo(texts[path], domain, why, today());
-        return next ? { files: { [path]: next }, message: `Review center: not a source: ${domain}\n\nThe owner looked at it from the monthly source check${issue ? ` (#${issue})` : ''} and said no.` } : null;
-      });
-      result = { commit };
-    } else {
-      const url = typeof b.body.url === 'string' && /^https?:\/\//.test(b.body.url) ? b.body.url.slice(0, 300) : `https://${domain}/`;
-      const created = await copilotIssue(
-        `Check a possible new source: ${domain}`,
-        [
-          `The owner thinks **${domain}** may be worth adding as a source (found by the monthly source check${issue ? ` #${issue}` : ''}).`,
-          '',
-          `Example page: ${url}`,
-          ...(why ? ['', `Owner's note: ${why}`] : []),
-          '',
-          'Please follow "How new sources are found and switched on" in docs/how-weekly-updates-work.md:',
-          '- [ ] Does it list several upcoming dance or live-music events on Long Island (Nassau or Suffolk)?',
-          '- [ ] Is it allowed (robots.txt and the site\'s terms)? Never work around a block.',
-          '- [ ] Add it to catalog/sources.json and a source file in src/content/sources/ (use a generic adapter if you can).',
-          '- [ ] Add any venues, bands or organizers it needs, with addresses and dancing research.',
-          '- [ ] Open a pull request. Merging it is the owner\'s approval.',
-        ].join('\n'),
-      );
-      result = { issue: created };
-    }
-    await table(TABLES.review).upsert({ partitionKey: 'candidate', rowKey: domain, decision: b.body.action, at: new Date().toISOString(), actor: actorOf(principal) });
-    await audit({ actor: actorOf(principal), action: `candidate.${b.body.action}`, targetType: 'domain', targetId: domain, reason: why });
-    await note({ area: 'candidate', action: b.body.action, count: '1' });
-    return json(200, { ok: true, ...result });
-  },
+  async () => error(410, 'automatic', 'New sources are safety-checked and onboarded automatically. This approval step is no longer used.'),
   { write: true },
 );
 
@@ -796,4 +714,4 @@ app.http('githubSetup', {
   },
 });
 
-module.exports = { triageWithNo };
+module.exports = {};

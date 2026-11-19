@@ -210,8 +210,8 @@ ORDER BY u.start_local;
 **Failure alerts:**
 
 - Each run opens a pull request with the run report and requests review from `michaelsrichter` (decision P14). That is the weekly email.
-- If a source returns **0 events** or **invalid data**, the workflow opens a GitHub issue with the source name, the error and the saved page (as an artifact). Same-source issues are reused, not duplicated.
-- After **3 failed runs in a row**, the source is paused (`enabled: false` in a pull request) so one broken site cannot block the rest.
+- If a source returns **0 listings**, invalid data or a fetch error, the first failure date and each later failed check are stored in the source file. The source keeps running on its normal cadence for a 30-day continuous-failure grace period.
+- Any successful check clears the streak. After **30 continuous days** without success, the source is paused (`enabled: false`) with a machine-readable disabled date/reason and a plain-language history note. Routine failures do not open issues or enter the owner's queue.
 - An event that disappears from its source is not deleted. It goes to `pending-review`, as today.
 
 ## 5. How we read each format

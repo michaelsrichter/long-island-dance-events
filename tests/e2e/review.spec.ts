@@ -45,11 +45,11 @@ const SOURCES = {
   today: '2026-10-03',
   failures: [],
   runs: [{ id: 1, title: 'Collect events', event: 'schedule', status: 'completed', conclusion: 'success', createdAt: '2026-10-03T10:15:00Z', url: 'https://github.com/x/actions/runs/1' }],
-  discovery: [{ number: 70, title: 'Monthly source check: November 2026', url: 'https://github.com/x/issues/70', createdAt: '2026-10-01T11:00:00Z', data: { newSites: [{ domain: 'mike.example', url: 'https://mike.example/', title: 'Swing nights', queries: ['swing'] }], robotsChanged: [], broken: [], noDates: [] } }],
+  discovery: [],
   sources: [
-    { id: 'broken-bar', name: 'Broken Bar', url: 'https://broken.example/', feedUrl: '', enabled: true, cadence: 'weekly', adapter: 'htmllist', catalogStatus: '', permission: null, lastScraped: '2026-10-03T09:00:00Z', lastStatus: 'error', lastMessage: 'HTTP 500', lastCounts: null, notes: '', group: 'broken', snoozedUntil: '' },
-    { id: 'club-x', name: 'Club X', url: 'https://clubx.example/', feedUrl: '', enabled: false, cadence: 'weekly', adapter: 'htmllist', catalogStatus: 'needs-permission', permission: { status: 'needed', note: 'robots.txt says no' }, lastScraped: '', lastStatus: 'never', lastMessage: '', lastCounts: null, notes: 'Blocked by robots.txt.', group: 'permission', snoozedUntil: '' },
-    { id: 'ok-one', name: 'Working One', url: 'https://ok.example/', feedUrl: '', enabled: true, cadence: 'daily', adapter: 'ical', catalogStatus: 'live', permission: null, lastScraped: '2026-10-03T09:00:00Z', lastStatus: 'ok', lastMessage: '', lastCounts: { found: 10, kept: 8, outOfArea: 0, needsReview: 0 }, notes: '', group: 'on', snoozedUntil: '' },
+    { id: 'broken-bar', name: 'Broken Bar', url: 'https://broken.example/', feedUrl: '', enabled: true, cadence: 'weekly', adapter: 'htmllist', catalogStatus: '', permission: null, lastScraped: '2026-10-03T09:00:00Z', lastStatus: 'error', lastMessage: 'HTTP 500', lastCounts: null, failure: { firstFailedAt: '2026-09-28', lastFailedAt: '2026-10-03', consecutiveFailedChecks: 2 }, notes: '', group: 'retrying', snoozedUntil: '' },
+    { id: 'club-x', name: 'Club X', url: 'https://clubx.example/', feedUrl: '', enabled: false, cadence: 'weekly', adapter: 'htmllist', catalogStatus: 'needs-permission', permission: { status: 'needed', note: 'robots.txt says no' }, lastScraped: '', lastStatus: 'never', lastMessage: '', lastCounts: null, failure: null, notes: 'Blocked by robots.txt.', group: 'permission', snoozedUntil: '' },
+    { id: 'ok-one', name: 'Working One', url: 'https://ok.example/', feedUrl: '', enabled: true, cadence: 'daily', adapter: 'ical', catalogStatus: 'live', permission: null, lastScraped: '2026-10-03T09:00:00Z', lastStatus: 'ok', lastMessage: '', lastCounts: { found: 10, kept: 8, outOfArea: 0, needsReview: 0 }, failure: null, notes: '', group: 'on', snoozedUntil: '' },
   ],
 };
 const MESSAGES = {
@@ -114,6 +114,7 @@ test.describe('review center', () => {
     await expect(todo.getByRole('heading', { name: 'Manually held listings' })).toBeVisible();
     await expect(todo.getByRole('heading', { name: 'Messages from visitors' })).toBeVisible();
     await expect(todo.getByRole('heading', { name: 'Community posts' })).toBeVisible();
+    await expect(todo.getByRole('heading', { name: 'Sources' })).toHaveCount(0);
     await expect(page.locator('[data-count="listings"]')).toHaveText('3', { timeout: 10_000 });
     await expect(page.locator('[data-count="messages"]')).toHaveText('1');
     await expect(page.getByText('1 request to remove a listing: 5 days left.')).toBeVisible();
@@ -164,18 +165,19 @@ test.describe('review center', () => {
     expect(posts.find((p) => p.url === '/api/review/collected')!.body).toEqual({ number: 41, headSha: 'b'.repeat(40) });
   });
 
-  test('sources and messages: record "I asked", say "Not useful", reply and close', async ({ pinned: page }) => {
+  test('sources and messages: routine failures are informational; permission and visitor messages remain actionable', async ({ pinned: page }) => {
     const posts = await mockApi(page);
     await page.goto('/moderate/#sources');
     const sources = page.locator('#sources');
-    await expect(sources.getByRole('heading', { name: 'Stopped working (1)' })).toBeVisible();
-    await expect(sources.getByRole('heading', { name: 'New websites found (1)' })).toBeVisible();
+    await expect(sources.getByText('Being retried automatically (1)')).toBeVisible();
+    await sources.getByText('Being retried automatically (1)').click();
+    await expect(sources.getByText(/Automatic retry period started/)).toBeVisible();
+    await expect(sources.getByRole('button', { name: 'Ask Copilot to fix it' })).toHaveCount(0);
     page.on('dialog', (d) => d.accept(d.type() === 'prompt' ? 'Emailed the club' : undefined));
     await sources.getByText('Ask for permission (1)').click();
     await sources.getByRole('button', { name: 'I asked' }).click();
     await expect.poll(() => posts.at(-1)?.body).toEqual({ decisions: [{ id: 'club-x', action: 'permission', status: 'requested', note: 'Emailed the club' }] });
-    await sources.getByRole('button', { name: 'Not useful' }).click();
-    await expect.poll(() => posts.at(-1)?.url).toBe('/api/review/candidate');
+    expect(posts.some((p) => p.url === '/api/review/candidate')).toBe(false);
 
     await page.getByRole('link', { name: /^Messages/ }).click();
     const messages = page.locator('#messages');
