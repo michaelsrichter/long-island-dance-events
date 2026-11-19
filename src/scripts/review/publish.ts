@@ -1,8 +1,33 @@
-/** Event update log: the rolling "Collected events" pull request, with a manual fallback. */
-import { ago, api, button, cmsUrl, copilotButton, dateTimeLabel, details, el, emptyState, errorText, link, list, LIVE, plural, say, settle } from './core';
+/** Event update log: weekly collector/publisher history plus the rolling pull request fallback. */
+import { ago, api, button, cmsUrl, copilotButton, dateTimeLabel, dayLabel, details, el, emptyState, errorText, link, list, LIVE, plural, say, settle } from './core';
 
 type SourceRow = { name: string; result: string; found: number; kept: number; new: number; updated: number; unchanged: number; ended: number; missing: number; hidden: number };
 type Report = { latest: string; totals: string; sources: SourceRow[]; created: { kind: string; id: string }[]; hidden: number; notes: { source: string; message: string }[] };
+type RunCounts = { success: number; failure: number; cancelled: number; skipped?: number };
+type HistoryWeek = {
+  week: string;
+  found: number;
+  added: number;
+  changed: number;
+  hidden: number;
+  published: number;
+  collector: RunCounts;
+  publisher: RunCounts;
+  latestAt: string;
+  latestUrl: string;
+  publicationUrls: string[];
+};
+type CollectionHistory = {
+  generatedAt: string;
+  issueUrl: string;
+  lastCollectedAt: string;
+  lastCollectedUrl: string;
+  lastPublishedAt: string;
+  lastPublishedUrl: string;
+  lastPublishedNumber: number;
+  pendingAdded: number;
+  weeks: HistoryWeek[];
+};
 export type Collected = {
   open: null | {
     number: number;
@@ -22,6 +47,7 @@ export type Collected = {
     branchUrl: string;
   };
   last: null | { number: number; url: string; mergedAt: string; closedAt: string };
+  history: CollectionHistory;
 };
 
 const KINDS: Record<string, [string, string]> = { venues: ['venue', 'venues'], performers: ['band or DJ', 'performers'], instructors: ['teacher', 'instructors'], organizers: ['organizer', 'organizers'] };
@@ -36,8 +62,106 @@ export function newEventCount(c: Collected): number {
   return c.open ? c.open.report.sources.reduce((n, s) => n + s.new, 0) : 0;
 }
 
+function countText(counts: RunCounts, includeSkipped = false) {
+  const parts = [`${counts.success || 0} passed`];
+  if (counts.failure) parts.push(`${counts.failure} failed`);
+  if (counts.cancelled) parts.push(`${counts.cancelled} cancelled`);
+  if (includeSkipped && counts.skipped) parts.push(`${counts.skipped} skipped`);
+  return parts.join(', ');
+}
+
+function historyCell(label: string, text: string, cls?: string) {
+  const cell = el('td', text, cls);
+  cell.dataset.label = label;
+  return cell;
+}
+
+function renderHistory(root: HTMLElement, history: CollectionHistory) {
+  const collectionIsNewer = Boolean(history.lastCollectedAt && (!history.lastPublishedAt || Date.parse(history.lastCollectedAt) > Date.parse(history.lastPublishedAt)));
+  const latestWeek = history.weeks[0];
+  const publisherProblem = latestWeek && (latestWeek.publisher.failure > 0 || latestWeek.publisher.cancelled > 0 || (latestWeek.publisher.skipped || 0) > 0);
+  const cards = el('div', null, 'review-grid review-history-summary');
+
+  const collected = el('article', null, 'review-card review-card--ok');
+  collected.append(el('h3', 'Last successful collection'), el('p', history.lastCollectedAt ? dateTimeLabel(history.lastCollectedAt) : 'No successful run found', 'review-card__big review-card__big--date'));
+  if (history.lastCollectedUrl) collected.append(link(history.lastCollectedUrl, 'Open the collector run'));
+  cards.append(collected);
+
+  const published = el('article', null, `review-card${collectionIsNewer ? ' review-card--urgent' : ' review-card--ok'}`);
+  published.append(el('h3', 'Last collector update published'), el('p', history.lastPublishedAt ? dateTimeLabel(history.lastPublishedAt) : 'No published update found', 'review-card__big review-card__big--date'));
+  if (history.lastPublishedUrl) published.append(link(history.lastPublishedUrl, `Open update #${history.lastPublishedNumber}`));
+  cards.append(published);
+
+  const waiting = el('article', null, `review-card${history.pendingAdded > 0 ? ' review-card--urgent' : ' review-card--ok'}`);
+  waiting.append(el('h3', 'New events waiting to publish'), el('p', String(history.pendingAdded), 'review-card__big'));
+  waiting.append(el('p', history.pendingAdded ? 'These are on the rolling update branch, not on the public site yet.' : 'The public site has caught up with the collector.', 'review-hint'));
+  cards.append(waiting);
+  root.append(cards);
+
+  if (collectionIsNewer || publisherProblem) {
+    const warning = el('p', null, 'alert alert--warn');
+    warning.append(el('strong', 'Collection and publication are different steps. '));
+    warning.append(
+      history.pendingAdded
+        ? `The collector is working, but ${plural(history.pendingAdded, 'new event')} have not reached the public site. The existing publisher repair is tracked in pull request #95.`
+        : 'The collector has run more recently than the last published update. Check the weekly rows and publisher runs below.',
+    );
+    root.append(warning);
+  }
+
+  const box = el('section', null, 'review-card');
+  box.append(el('h3', 'Weekly history'));
+  const wrap = el('div', null, 'review-table-wrap');
+  const table = el('table', null, 'review-table review-history-table');
+  const head = el('tr');
+  for (const label of ['Week starting', 'Source listings found', 'New events added', 'Published', 'Collector runs', 'Publisher runs']) {
+    const th = el('th', label);
+    th.scope = 'col';
+    if (['Source listings found', 'New events added', 'Published'].includes(label)) th.className = 'num';
+    head.append(th);
+  }
+  const thead = el('thead');
+  thead.append(head);
+  const tbody = el('tbody');
+  for (const week of history.weeks) {
+    const tr = el('tr');
+    const label = week.latestUrl ? link(week.latestUrl, dayLabel(week.week), { external: true }) : document.createTextNode(dayLabel(week.week));
+    const th = el('th');
+    th.scope = 'row';
+    th.append(label);
+    const publishedCell = historyCell('Published', String(week.published), 'num');
+    if (!week.published && week.added) {
+      publishedCell.append(el('span', ' not yet', 'review-table-note'));
+    } else if (week.publicationUrls[0]) {
+      publishedCell.replaceChildren(link(week.publicationUrls[0], String(week.published), { external: true }));
+    }
+    tr.append(
+      th,
+      historyCell('Source listings found', String(week.found), 'num'),
+      historyCell('New events added', String(week.added), 'num'),
+      publishedCell,
+      historyCell('Collector runs', countText(week.collector)),
+      historyCell('Publisher runs', countText(week.publisher, true)),
+    );
+    tbody.append(tr);
+  }
+  table.append(thead, tbody);
+  wrap.append(table);
+  box.append(wrap);
+  box.append(
+    el(
+      'p',
+      'Source listings found counts every listing read from every source, so the same recurring listing can be read more than once. New events added counts new event records written to the rolling update. Published counts new event files that actually merged to the public site. A passed collector does not mean the site was updated.',
+      'review-hint',
+    ),
+  );
+  if (history.issueUrl) box.append(link(history.issueUrl, 'Open the machine-maintained history log'));
+  root.append(box);
+}
+
 export function renderCollected(root: HTMLElement, c: Collected, onPublished: () => void) {
   root.replaceChildren();
+  renderHistory(root, c.history);
   const pr = c.open;
   if (!pr) {
     const box = emptyState('No event update is in progress. Scheduled checks publish automatically after CI passes.');

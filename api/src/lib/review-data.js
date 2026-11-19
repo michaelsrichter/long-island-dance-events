@@ -179,6 +179,64 @@ function checksState(runs) {
   return 'passed';
 }
 
+/* ---------- weekly collector and publisher history ---------- */
+
+const INGEST_HISTORY_MARKER = 'ingest-history-data';
+
+function weekStart(iso) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date(iso));
+  const get = (type) => parts.find((part) => part.type === type)?.value || '';
+  const date = new Date(`${get('year')}-${get('month')}-${get('day')}T12:00:00Z`);
+  date.setUTCDate(date.getUTCDate() - ((date.getUTCDay() + 6) % 7));
+  return date.toISOString().slice(0, 10);
+}
+
+function parseIngestHistory(text) {
+  const raw = String(text || '').trim();
+  const marker = new RegExp(`<!-- ${INGEST_HISTORY_MARKER}\\n([\\s\\S]*?)\\n-->`).exec(raw);
+  try {
+    const parsed = JSON.parse(marker ? marker[1] : raw);
+    if (parsed?.version !== 1 || !Array.isArray(parsed.weeks)) return null;
+    return {
+      version: 1,
+      generatedAt: String(parsed.generatedAt || ''),
+      weeks: parsed.weeks
+        .filter((week) => /^\d{4}-\d{2}-\d{2}$/.test(String(week?.week || '')))
+        .map((week) => ({
+          week: week.week,
+          found: Number(week.found) || 0,
+          added: Number(week.added) || 0,
+          changed: Number(week.changed) || 0,
+          hidden: Number(week.hidden) || 0,
+          published: Number(week.published) || 0,
+          collector: {
+            success: Number(week.collector?.success) || 0,
+            failure: Number(week.collector?.failure) || 0,
+            cancelled: Number(week.collector?.cancelled) || 0,
+          },
+          publisher: {
+            success: Number(week.publisher?.success) || 0,
+            failure: Number(week.publisher?.failure) || 0,
+            cancelled: Number(week.publisher?.cancelled) || 0,
+            skipped: Number(week.publisher?.skipped) || 0,
+          },
+          latestAt: String(week.latestAt || ''),
+          latestUrl: String(week.latestUrl || ''),
+          publicationIds: Array.isArray(week.publicationIds) ? week.publicationIds.map(Number).filter(Number.isInteger) : [],
+          publicationUrls: Array.isArray(week.publicationUrls) ? week.publicationUrls.map(String) : [],
+        }))
+        .sort((a, b) => b.week.localeCompare(a.week)),
+    };
+  } catch {
+    return null;
+  }
+}
+
 /* ---------- source-discovery issues ---------- */
 
 /** The machine-readable part of the monthly source check (catalog/scripts/discovery_report.py). */
@@ -201,7 +259,7 @@ function parseDiscovery(body) {
 /* ---------- visitor messages (GitHub issues) ---------- */
 
 const MESSAGE_KINDS = ['remove-listing', 'listing-correction', 'add-listing', 'bug', 'enhancement'];
-const AUTOMATION_LABELS = new Set(['ingest-failure', 'source-discovery', 'copilot-task', 'dependencies']);
+const AUTOMATION_LABELS = new Set(['ingest-failure', 'source-discovery', 'automation-log', 'copilot-task', 'dependencies']);
 
 function messageCard(issue, now = Date.now()) {
   const labels = (issue.labels || []).map((l) => (typeof l === 'string' ? l : l.name));
@@ -229,6 +287,25 @@ function messageCard(issue, now = Date.now()) {
   };
 }
 
-const isMessage = (issue) => !issue.pull_request && !(issue.labels || []).some((l) => AUTOMATION_LABELS.has(typeof l === 'string' ? l : l.name));
+const isMessage = (issue) =>
+  !issue.pull_request &&
+  !String(issue.body || '').includes('<!-- ingest-history -->') &&
+  !(issue.labels || []).some((l) => AUTOMATION_LABELS.has(typeof l === 'string' ? l : l.name));
 
-module.exports = { reasonsOf, eveningTime, suggestion, lastDateOf, listingCard, sourceGroup, sourceCard, parseReport, checksState, parseDiscovery, messageCard, isMessage, MESSAGE_KINDS };
+module.exports = {
+  reasonsOf,
+  eveningTime,
+  suggestion,
+  lastDateOf,
+  listingCard,
+  sourceGroup,
+  sourceCard,
+  parseReport,
+  checksState,
+  weekStart,
+  parseIngestHistory,
+  parseDiscovery,
+  messageCard,
+  isMessage,
+  MESSAGE_KINDS,
+};

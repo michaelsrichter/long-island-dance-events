@@ -159,3 +159,14 @@ jobs:
           CADENCE: ${{ steps.pick.outputs.source || steps.pick.outputs.cadence }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: node .github/scripts/ingest-pr.mjs .cache/ingest/report.md
+
+      - name: Record this run for the weekly owner dashboard
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+          RUN_ID: ${{ github.run_id }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node .github/scripts/ingest-history.mjs .cache/ingest/report.json

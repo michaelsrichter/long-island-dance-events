@@ -40,6 +40,44 @@ const COLLECTED = {
     filesUrl: 'https://github.com/x/y/pull/41/files', branchUrl: 'https://github.com/x/y/tree/ingest/updates',
   },
   last: null,
+  history: {
+    generatedAt: '2026-10-03T11:00:00Z',
+    issueUrl: 'https://github.com/x/y/issues/90',
+    lastCollectedAt: '2026-10-03T10:15:00Z',
+    lastCollectedUrl: 'https://github.com/x/y/actions/runs/10',
+    lastPublishedAt: '2026-09-27T18:00:00Z',
+    lastPublishedUrl: 'https://github.com/x/y/pull/40',
+    lastPublishedNumber: 40,
+    pendingAdded: 12,
+    weeks: [
+      {
+        week: '2026-09-28',
+        found: 100,
+        added: 12,
+        changed: 3,
+        hidden: 2,
+        published: 0,
+        collector: { success: 5, failure: 0, cancelled: 0 },
+        publisher: { success: 0, failure: 0, cancelled: 0, skipped: 1 },
+        latestAt: '2026-10-03T10:15:00Z',
+        latestUrl: 'https://github.com/x/y/actions/runs/10',
+        publicationUrls: [],
+      },
+      {
+        week: '2026-09-21',
+        found: 80,
+        added: 7,
+        changed: 1,
+        hidden: 0,
+        published: 7,
+        collector: { success: 4, failure: 1, cancelled: 0 },
+        publisher: { success: 1, failure: 0, cancelled: 0, skipped: 0 },
+        latestAt: '2026-09-27T10:15:00Z',
+        latestUrl: 'https://github.com/x/y/actions/runs/9',
+        publicationUrls: ['https://github.com/x/y/pull/40'],
+      },
+    ],
+  },
 };
 const SOURCES = {
   today: '2026-10-03',
@@ -156,6 +194,18 @@ test.describe('review center', () => {
     const panel = page.locator('#publish');
     await expect(panel.getByText('Checks passed.')).toBeVisible();
     await expect(panel.getByText('12 new events, 3 changed events, 0 events ended')).toBeVisible();
+    await expect(panel.getByRole('heading', { name: 'Last successful collection' })).toBeVisible();
+    await expect(panel.getByRole('heading', { name: 'Last collector update published' })).toBeVisible();
+    await expect(panel.getByRole('heading', { name: 'New events waiting to publish' })).toBeVisible();
+    await expect(panel.getByText('The collector is working, but 12 new events have not reached the public site.')).toBeVisible();
+    const history = panel.getByRole('table');
+    const currentWeek = history.getByRole('row', { name: /Mon, Sep 28/ });
+    await expect(currentWeek).toContainText('100');
+    await expect(currentWeek).toContainText('12');
+    await expect(currentWeek).toContainText('not yet');
+    await expect(currentWeek).toContainText('5 passed');
+    await expect(currentWeek).toContainText('1 skipped');
+    await expect(panel.getByText('Published counts new event files that actually merged to the public site.', { exact: false })).toBeVisible();
     page.on('dialog', (d) => d.accept());
     await expect(panel.getByText(/Automatic publishing is next; no action is needed/)).toBeVisible();
     await expect(panel.getByText(/2 uncertain listings.*stayed hidden automatically/)).toBeVisible();

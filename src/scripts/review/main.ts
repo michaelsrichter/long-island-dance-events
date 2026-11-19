@@ -240,7 +240,7 @@ async function loadCollected() {
   setCount('publish', r.data.open ? 1 : 0);
   renderCollected(panel, r.data, () => {
     setCount('publish', 0);
-    loaded.collected = { open: null, last: null };
+    loaded.collected = { ...r.data, open: null };
     window.setTimeout(loadListings, 3000);
   });
 }

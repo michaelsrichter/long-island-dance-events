@@ -40,6 +40,25 @@ const FILES = {
     '}',
     '',
   ].join('\n'),
+  '.github/ingest-history-seed.json': `${JSON.stringify({
+    version: 1,
+    generatedAt: '2026-10-05T09:00:00Z',
+    weeks: [
+      {
+        week: '2026-10-05',
+        found: 120,
+        added: 12,
+        changed: 3,
+        hidden: 2,
+        published: 0,
+        collector: { success: 1, failure: 0, cancelled: 0 },
+        latestAt: '2026-10-05T10:00:00Z',
+        latestUrl: `https://github.com/${REPO}/actions/runs/10`,
+        publicationIds: [],
+        publicationUrls: [],
+      },
+    ],
+  }, null, 2)}\n`,
 };
 
 const gh = createFakeGitHub(REPO, FILES);
@@ -315,6 +334,12 @@ test('collected events: automatic-publish report summary, with a guarded manual 
     changed_files: 52,
     created_at: '2026-10-04T10:00:00Z',
     updated_at: '2026-10-05T10:00:00Z',
+    files: [
+      { filename: 'src/content/events/new-one.json', status: 'added' },
+      { filename: 'src/content/events/new-two.json', status: 'added' },
+      { filename: 'src/content/events/changed.json', status: 'modified' },
+      { filename: 'src/content/sources/s1.json', status: 'modified' },
+    ],
     body: [
       'Latest run: **weekly,monthly** on 2026-10-05.',
       '| Source | Result | Listings found | Kept (Long Island) | New | Updated | Unchanged | Ended | Missing | Hidden automatically |',
@@ -337,9 +362,17 @@ test('collected events: automatic-publish report summary, with a guarded manual 
     ].join('\n'),
   });
   gh.checkRuns[head] = [{ name: 'Type check, tests, build, links', status: 'in_progress', conclusion: null }];
+  gh.runs = [{ id: 10, run_started_at: '2026-10-05T10:00:00Z', created_at: '2026-10-05T10:00:00Z', status: 'completed', conclusion: 'success', html_url: `https://github.com/${REPO}/actions/runs/10` }];
+  gh.publisherRuns = [{ id: 11, run_started_at: '2026-10-05T11:00:00Z', created_at: '2026-10-05T11:00:00Z', status: 'completed', conclusion: 'skipped', html_url: `https://github.com/${REPO}/actions/runs/11` }];
   let r = await call('reviewCollected', '/api/review/collected', { user: ADMIN });
   assert.equal(r.status, 200);
   assert.equal(r.body.open.checks, 'running');
+  assert.equal(r.body.history.pendingAdded, 2);
+  assert.equal(r.body.history.lastCollectedAt, '2026-10-05T10:00:00Z');
+  assert.equal(r.body.history.weeks[0].found, 120);
+  assert.equal(r.body.history.weeks[0].added, 12);
+  assert.equal(r.body.history.weeks[0].collector.success, 1);
+  assert.equal(r.body.history.weeks[0].publisher.skipped, 1);
   const rep = r.body.open.report;
   assert.equal(rep.latest, 'weekly,monthly on 2026-10-05');
   assert.deepEqual(rep.sources.map((s) => [s.name, s.result, s.new]), [["Ira's List", 'OK', 12], ['Broken Bar', 'ERROR', 0]]);
@@ -362,6 +395,8 @@ test('collected events: automatic-publish report summary, with a guarded manual 
   r = await call('reviewCollected', '/api/review/collected', { user: ADMIN });
   assert.equal(r.body.open, null);
   assert.equal(r.body.last.number, 41);
+  assert.equal(r.body.history.lastPublishedNumber, 41);
+  assert.equal(r.body.history.weeks[0].published, 2);
 });
 
 test('sources: grouped by next step; permission answers and switching on are commits; runs start the workflow', async () => {
@@ -439,6 +474,7 @@ test('visitor messages: only real messages, with a 7-day countdown for takedowns
     { number: 5, state: 'open', title: 'Remove: my band', labels: [{ name: 'remove-listing' }], html_url: `https://github.com/${REPO}/issues/5`, created_at: new Date(now - 2 * 86400000).toISOString(), user: { login: 'band' }, body: '### Page address\n\nhttps://longisland.dance/performers/the-max/\n\n### What would you like us to do?\n\nStop listing all my events (opt out)' },
     { number: 6, state: 'open', title: 'Source problem: X', labels: [{ name: 'ingest-failure' }], html_url: '', created_at: new Date().toISOString(), body: '<!-- ingest-failure s1 -->' },
     { number: 7, state: 'open', title: 'PR', labels: [], pull_request: {}, created_at: new Date().toISOString() },
+    { number: 8, state: 'open', title: 'Automation log', labels: [], html_url: '', created_at: new Date().toISOString(), body: '<!-- ingest-history -->\n<!-- ingest-history-data\n{"version":1,"weeks":[]}\n-->' },
   );
   let r = await call('reviewMessages', '/api/review/messages', { user: ADMIN });
   assert.equal(r.status, 200);

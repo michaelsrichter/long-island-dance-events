@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-19T17:59:15Z",
+  "source": "GitHub Actions report.json artifacts and merged ingest pull request file lists",
+  "weeks": [
+    {
+      "week": "2026-11-16",
+      "found": 2271,
+      "added": 110,
+      "changed": 18,
+      "hidden": 37,
+      "published": 0,
+      "collector": { "success": 4, "failure": 0, "cancelled": 0 },
+      "latestAt": "2026-11-18T18:49:36Z",
+      "latestUrl": "https://github.com/michaelsrichter/long-island-dance-events/actions/runs/44373892378",
+      "publicationIds": [],
+      "publicationUrls": []
+    },
+    {
+      "week": "2026-11-09",
+      "found": 6059,
+      "added": 185,
+      "changed": 72,
+      "hidden": 59,
+      "published": 0,
+      "collector": { "success": 10, "failure": 0, "cancelled": 0 },
+      "latestAt": "2026-11-15T17:03:00Z",
+      "latestUrl": "https://github.com/michaelsrichter/long-island-dance-events/actions/runs/43738882109",
+      "publicationIds": [],
+      "publicationUrls": []
+    },
+    {
+      "week": "2026-11-02",
+      "found": 5951,
+      "added": 195,
+      "changed": 45,
+      "hidden": 57,
+      "published": 433,
+      "collector": { "success": 12, "failure": 0, "cancelled": 2 },
+      "latestAt": "2026-11-08T16:38:21Z",
+      "latestUrl": "https://github.com/michaelsrichter/long-island-dance-events/actions/runs/42500909574",
+      "publicationIds": [56],
+      "publicationUrls": ["https://github.com/michaelsrichter/long-island-dance-events/pull/56"]
+    },
+    {
+      "week": "2026-10-26",
+      "found": 8228,
+      "added": 537,
+      "changed": 110,
+      "hidden": 66,
+      "published": 0,
+      "collector": { "success": 13, "failure": 0, "cancelled": 0 },
+      "latestAt": "2026-11-01T16:48:03Z",
+      "latestUrl": "https://github.com/michaelsrichter/long-island-dance-events/actions/runs/41328168910",
+      "publicationIds": [],
+      "publicationUrls": []
+    },
+    {
+      "week": "2026-10-19",
+      "found": 5932,
+      "added": 180,
+      "changed": 26,
+      "hidden": 0,
+      "published": 0,
+      "collector": { "success": 10, "failure": 0, "cancelled": 0 },
+      "latestAt": "2026-10-25T14:20:29Z",
+      "latestUrl": "https://github.com/michaelsrichter/long-island-dance-events/actions/runs/40201769880",
+      "publicationIds": [],
+      "publicationUrls": []
+    },
+    {
+      "week": "2026-10-12",
+      "found": 6055,
+      "added": 293,
+      "changed": 50,
+      "hidden": 0,
+      "published": 0,
+      "collector": { "success": 10, "failure": 0, "cancelled": 0 },
+      "latestAt": "2026-10-18T13:58:46Z",
+      "latestUrl": "https://github.com/michaelsrichter/long-island-dance-events/actions/runs/39133916801",
+      "publicationIds": [],
+      "publicationUrls": []
+    },
+    {
+      "week": "2026-10-05",
+      "found": 7286,
+      "added": 269,
+      "changed": 74,
+      "hidden": 0,
+      "published": 149,
+      "collector": { "success": 11, "failure": 3, "cancelled": 0 },
+      "latestAt": "2026-10-11T16:18:16Z",
+      "latestUrl": "https://github.com/michaelsrichter/long-island-dance-events/actions/runs/38154891811",
+      "publicationIds": [44, 38, 32],
+      "publicationUrls": [
+        "https://github.com/michaelsrichter/long-island-dance-events/pull/44",
+        "https://github.com/michaelsrichter/long-island-dance-events/pull/38",
+        "https://github.com/michaelsrichter/long-island-dance-events/pull/32"
+      ]
+    },
+    {
+      "week": "2026-09-28",
+      "found": 5576,
+      "added": 1203,
+      "changed": 170,
+      "hidden": 0,
+      "published": 577,
+      "collector": { "success": 10, "failure": 0, "cancelled": 0 },
+      "latestAt": "2026-10-05T03:17:41Z",
+      "latestUrl": "https://github.com/michaelsrichter/long-island-dance-events/actions/runs/37258862087",
+      "publicationIds": [23, 17],
+      "publicationUrls": [
+        "https://github.com/michaelsrichter/long-island-dance-events/pull/23",
+        "https://github.com/michaelsrichter/long-island-dance-events/pull/17"
+      ]
+    }
+  ]
+}

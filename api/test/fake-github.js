@@ -24,6 +24,7 @@ function createFakeGitHub(repo, files) {
     issues: [],
     checkRuns: {},
     runs: [],
+    publisherRuns: [],
     dispatches: [],
     comments: [],
     merged: [],
@@ -131,6 +132,13 @@ function createFakeGitHub(repo, files) {
       const p = gh.pulls.find((x) => x.number === Number(m[1]));
       return p ? json(200, p) : json(404, { message: 'Not Found' });
     }
+    if ((m = new RegExp(`^${R}/pulls/(\\d+)/files$`).exec(path))) {
+      const p = gh.pulls.find((x) => x.number === Number(m[1]));
+      if (!p) return json(404, { message: 'Not Found' });
+      const page = Number(u.searchParams.get('page')) || 1;
+      const perPage = Number(u.searchParams.get('per_page')) || 30;
+      return json(200, (p.files || []).slice((page - 1) * perPage, page * perPage));
+    }
     if ((m = new RegExp(`^${R}/pulls/(\\d+)/merge$`).exec(path)) && method === 'PUT') {
       const p = gh.pulls.find((x) => x.number === Number(m[1]));
       if (p.head.sha !== body.sha) return json(409, { message: 'Head branch was modified' });
@@ -142,7 +150,8 @@ function createFakeGitHub(repo, files) {
     if ((m = new RegExp(`^${R}/commits/([0-9a-f]{40})/check-runs$`).exec(path))) return json(200, { check_runs: gh.checkRuns[m[1]] || [] });
     if (path === `${R}/issues` && method === 'GET') {
       const labels = u.searchParams.get('labels');
-      return json(200, gh.issues.filter((i) => i.state === 'open' && (!labels || i.labels.some((l) => l.name === labels))));
+      const state = u.searchParams.get('state') || 'open';
+      return json(200, gh.issues.filter((i) => (state === 'all' || i.state === state) && (!labels || i.labels.some((l) => l.name === labels))));
     }
     if (path === `${R}/issues` && method === 'POST') {
       const issue = { number: 900 + gh.issues.length, title: body.title, body: body.body, labels: (body.labels || []).map((name) => ({ name })), state: 'open', html_url: `https://github.com/${repo}/issues/${900 + gh.issues.length}`, created_at: new Date().toISOString(), user: { login: 'review-bot[bot]' } };
@@ -169,6 +178,7 @@ function createFakeGitHub(repo, files) {
       return json(204);
     }
     if (path === `${R}/actions/workflows/ingest-scheduled.yml/runs`) return json(200, { workflow_runs: gh.runs });
+    if (path === `${R}/actions/workflows/ingest-auto-merge.yml/runs`) return json(200, { workflow_runs: gh.publisherRuns });
     return json(404, { message: `fake GitHub has no ${method} ${path}` });
   };
   return gh;

@@ -44,6 +44,9 @@ const outreach = require('../lib/outreach');
 const { REPO, OWNER } = github;
 const INGEST_BRANCH = 'ingest/updates';
 const INGEST_WORKFLOW = 'ingest-scheduled.yml';
+const PUBLISH_WORKFLOW = 'ingest-auto-merge.yml';
+const INGEST_HISTORY_LABEL = 'automation-log';
+const INGEST_HISTORY_SEED = '.github/ingest-history-seed.json';
 const LIVE_MINUTES = 10;
 const CADENCES = { daily: 'daily', 'twice-weekly': 'twice-weekly', weekly: 'weekly,monthly' };
 const SNOOZE_KINDS = new Set(['listing', 'source', 'message', 'candidate']);
@@ -279,16 +282,118 @@ async function openIngestPr() {
   return open[0] || null;
 }
 
+async function pullFiles(number, cacheKey = String(number)) {
+  return cached(`pull-files:${cacheKey}`, 5 * 60 * 1000, async () => {
+    const out = [];
+    for (let page = 1; page <= 20; page++) {
+      const batch = await github.gh('GET', `/repos/${REPO}/pulls/${number}/files?per_page=100&page=${page}`);
+      out.push(...batch);
+      if (batch.length < 100) break;
+    }
+    return out;
+  });
+}
+
+const addedEventFiles = (pullFilesList) => pullFilesList.filter((file) => file.status === 'added' && /^src\/content\/events\/[^/]+\.json$/.test(file.filename)).length;
+
+async function collectionHistory(openPr) {
+  return cached(`collection-history:${openPr?.head?.sha || 'none'}`, 5 * 60 * 1000, async () => {
+    const [seedFiles, historyIssues, collectorResponse, publisherResponse, closedPulls] = await Promise.all([
+      github.readMainFiles([INGEST_HISTORY_SEED]),
+      github.gh('GET', `/repos/${REPO}/issues?state=all&labels=${INGEST_HISTORY_LABEL}&per_page=20`),
+      github.gh('GET', `/repos/${REPO}/actions/workflows/${INGEST_WORKFLOW}/runs?per_page=100`),
+      github.gh('GET', `/repos/${REPO}/actions/workflows/${PUBLISH_WORKFLOW}/runs?per_page=100`),
+      github.gh('GET', `/repos/${REPO}/pulls?state=closed&head=${OWNER}:${encodeURIComponent(INGEST_BRANCH)}&per_page=100&sort=updated&direction=desc`),
+    ]);
+    const issue = historyIssues.find((item) => String(item.body || '').includes('<!-- ingest-history -->'));
+    const base = data.parseIngestHistory(issue?.body) || data.parseIngestHistory(seedFiles[INGEST_HISTORY_SEED]) || { version: 1, generatedAt: '', weeks: [] };
+    const weeks = new Map(base.weeks.map((week) => [week.week, { ...week, collector: { ...week.collector }, publisher: { ...week.publisher }, publicationIds: [...week.publicationIds], publicationUrls: [...week.publicationUrls] }]));
+    const ensureWeek = (key) => {
+      if (!weeks.has(key)) {
+        weeks.set(key, {
+          week: key,
+          found: 0,
+          added: 0,
+          changed: 0,
+          hidden: 0,
+          published: 0,
+          collector: { success: 0, failure: 0, cancelled: 0 },
+          publisher: { success: 0, failure: 0, cancelled: 0, skipped: 0 },
+          latestAt: '',
+          latestUrl: '',
+          publicationIds: [],
+          publicationUrls: [],
+        });
+      }
+      return weeks.get(key);
+    };
+
+    const collectorRuns = collectorResponse.workflow_runs || [];
+    const publisherRuns = publisherResponse.workflow_runs || [];
+    for (const [runs, field, statuses] of [
+      [collectorRuns, 'collector', ['success', 'failure', 'cancelled']],
+      [publisherRuns, 'publisher', ['success', 'failure', 'cancelled', 'skipped']],
+    ]) {
+      const grouped = new Map();
+      for (const run of runs) {
+        const key = data.weekStart(run.run_started_at || run.created_at);
+        if (!grouped.has(key)) grouped.set(key, Object.fromEntries(statuses.map((status) => [status, 0])));
+        const conclusion = statuses.includes(run.conclusion) ? run.conclusion : run.status === 'completed' ? 'failure' : '';
+        if (conclusion) grouped.get(key)[conclusion]++;
+        if (field === 'collector') {
+          const week = ensureWeek(key);
+          const at = run.run_started_at || run.created_at || '';
+          if (!week.latestAt || at > week.latestAt) {
+            week.latestAt = at;
+            week.latestUrl = run.html_url || '';
+          }
+        }
+      }
+      for (const [key, counts] of grouped) ensureWeek(key)[field] = counts;
+    }
+
+    const merged = closedPulls.filter((pull) => pull.merged_at).sort((a, b) => String(b.merged_at).localeCompare(String(a.merged_at)));
+    const recorded = new Set([...weeks.values()].flatMap((week) => week.publicationIds));
+    for (const pull of merged.filter((item) => !recorded.has(item.number))) {
+      const count = addedEventFiles(await pullFiles(pull.number));
+      const week = ensureWeek(data.weekStart(pull.merged_at));
+      week.published += count;
+      week.publicationIds.push(pull.number);
+      week.publicationUrls.push(pull.html_url);
+    }
+
+    const successfulCollectors = collectorRuns.filter((run) => run.conclusion === 'success').sort((a, b) => String(b.run_started_at || b.created_at).localeCompare(String(a.run_started_at || a.created_at)));
+    const latestCollector = successfulCollectors[0] || null;
+    const lastPublished = merged[0] || null;
+    const pendingAdded = openPr ? addedEventFiles(await pullFiles(openPr.number, `${openPr.number}:${openPr.head.sha}`)) : 0;
+    return {
+      generatedAt: base.generatedAt,
+      issueUrl: issue?.html_url || '',
+      lastCollectedAt: latestCollector?.run_started_at || latestCollector?.created_at || '',
+      lastCollectedUrl: latestCollector?.html_url || '',
+      lastPublishedAt: lastPublished?.merged_at || '',
+      lastPublishedUrl: lastPublished?.html_url || '',
+      lastPublishedNumber: lastPublished?.number || 0,
+      pendingAdded,
+      weeks: [...weeks.values()].sort((a, b) => b.week.localeCompare(a.week)).slice(0, 12),
+    };
+  });
+}
+
 route('reviewCollected', ['GET'], 'review/collected', async () => {
   const pr = await openIngestPr();
   if (!pr) {
-    const closed = await github.gh('GET', `/repos/${REPO}/pulls?state=closed&head=${OWNER}:${encodeURIComponent(INGEST_BRANCH)}&per_page=1&sort=updated&direction=desc`);
-    const last = closed[0];
-    return json(200, { open: null, last: last ? { number: last.number, url: last.html_url, mergedAt: last.merged_at || '', closedAt: last.closed_at || '' } : null });
+    const history = await collectionHistory(null);
+    return json(200, {
+      open: null,
+      last: history.lastPublishedNumber ? { number: history.lastPublishedNumber, url: history.lastPublishedUrl, mergedAt: history.lastPublishedAt, closedAt: history.lastPublishedAt } : null,
+      history,
+    });
   }
-  const [full, checks] = await Promise.all([
+  const [full, checks, history] = await Promise.all([
     github.gh('GET', `/repos/${REPO}/pulls/${pr.number}`),
     github.gh('GET', `/repos/${REPO}/commits/${pr.head.sha}/check-runs?per_page=100`),
+    collectionHistory(pr),
   ]);
   const runs = (checks.check_runs || []).map((r) => ({ name: r.name, status: r.status, conclusion: r.conclusion || '', url: r.html_url }));
   return json(200, {
@@ -309,6 +414,8 @@ route('reviewCollected', ['GET'], 'review/collected', async () => {
       filesUrl: `${full.html_url}/files`,
       branchUrl: `https://github.com/${REPO}/tree/${INGEST_BRANCH}`,
     },
+    last: history.lastPublishedNumber ? { number: history.lastPublishedNumber, url: history.lastPublishedUrl, mergedAt: history.lastPublishedAt, closedAt: history.lastPublishedAt } : null,
+    history,
   });
 });
 
@@ -331,6 +438,7 @@ route(
     if (pr.mergeable === false) return error(409, 'conflict', 'This update clashes with a recent change. The next collection run fixes that by itself.');
     const merged = await github.gh('PUT', `/repos/${REPO}/pulls/${number}/merge`, { merge_method: 'merge', sha: headSha });
     forget('content:');
+    forget('collection-history:');
     await audit({ actor: actorOf(principal), action: 'collected.publish', targetType: 'pull', targetId: String(number), reason: `merged ${short(merged.sha)}` });
     await note({ area: 'collected', action: 'publish', count: '1' });
     return json(200, { ok: true, sha: merged.sha, liveInMinutes: LIVE_MINUTES });
