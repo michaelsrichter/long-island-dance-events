@@ -8,7 +8,7 @@
   "venueId": "black-pearl-port-jefferson",
   "town": "Port Jefferson",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-11-19",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-12-31|black-pearl-port-jefferson|peat-moss|2026-12-31|special",
-  "reviewNotes": "Band or DJ not researched yet: Peat Moss."
+  "reviewNotes": "Band or DJ not researched yet: Peat Moss. Hidden automatically because it was not found in the latest iraslist run on 2026-11-20; it may have been cancelled or moved."
 }
