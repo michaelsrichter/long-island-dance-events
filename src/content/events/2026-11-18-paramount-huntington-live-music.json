@@ -1,0 +1,25 @@
+{
+  "title": "Wage WAR at The Paramount",
+  "summary": "Live music by Wage WAR at The Paramount. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-18T18:30",
+  "end": "2026-11-18T21:30",
+  "timezone": "America/New_York",
+  "venueId": "paramount-huntington",
+  "town": "Huntington",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/f105230e8ce3223814c022d84db62da879230f31",
+  "status": "past",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/f105230e8ce3223814c022d84db62da879230f31",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-11-18",
+  "firstSeen": "2026-11-16",
+  "lastSeen": "2026-11-16",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|paramount-huntington||wednesday|18:30|live-music|wagewar||2026-11-18",
+  "reviewNotes": "Band or DJ not researched yet: Wage WAR."
+}

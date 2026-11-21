@@ -1,0 +1,11 @@
+{
+  "name": "Levittown Public Library",
+  "address": "1 Bluegrass Ln",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Levittown",
+  "latitude": 40.722925,
+  "longitude": -73.530056,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

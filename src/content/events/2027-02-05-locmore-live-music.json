@@ -1,0 +1,24 @@
+{
+  "title": "LoCMore at Mulcahy's",
+  "summary": "Live music by LoCMore at Mulcahy's. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-02-05T20:00",
+  "end": "2027-02-05T23:30",
+  "timezone": "America/New_York",
+  "venueId": "mulcahys-wantagh",
+  "town": "Wantagh",
+  "performerIds": [
+    "locmore"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://mulcahyslongisland.com/event/10332/",
+  "status": "active",
+  "sourceId": "mulcahys-wantagh",
+  "sourceUrl": "https://mulcahyslongisland.com/event/10332/",
+  "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
+  "sourceRef": "calendar feed 2027-02-05",
+  "firstSeen": "2026-11-16",
+  "lastSeen": "2026-11-19",
+  "confidence": 0.9,
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|20:00|live-music|locmore||2027-02-05"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Hidden Harbor Restaurant and Bar",
+  "address": "341 Bayville Ave",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Bayville",
+  "latitude": 40.908287,
+  "longitude": -73.543168,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

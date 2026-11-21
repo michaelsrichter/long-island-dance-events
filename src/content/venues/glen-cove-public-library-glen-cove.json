@@ -1,0 +1,11 @@
+{
+  "name": "Glen Cove Public Library",
+  "address": "4 Glen Cove Ave",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Glen Cove",
+  "latitude": 40.862738,
+  "longitude": -73.633715,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

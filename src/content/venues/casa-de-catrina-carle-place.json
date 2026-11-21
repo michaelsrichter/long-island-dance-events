@@ -1,0 +1,11 @@
+{
+  "name": "Casa De Catrina",
+  "address": "223 Old Country Rd",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Carle Place",
+  "latitude": 40.743413,
+  "longitude": -73.613179,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

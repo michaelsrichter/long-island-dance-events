@@ -1,0 +1,21 @@
+{
+  "title": "New Year's Eve at Chateau La Mer",
+  "summary": "Live music by New Year's Eve at Chateau La Mer in Lindenhurst. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-12-31T20:00",
+  "end": "2026-12-31T23:30",
+  "timezone": "America/New_York",
+  "venueId": "chateau-la-mer-lindenhurst",
+  "town": "Lindenhurst",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-20",
+  "lastSeen": "2026-11-21",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-31|chateau-la-mer-lindenhurst|new-years-eve|2026-12-31|special",
+  "reviewNotes": "Band or DJ not researched yet: New Year's Eve."
+}

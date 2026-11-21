@@ -1,0 +1,25 @@
+{
+  "title": "Gene Casey & the Lone Sharks at Liam’s Landing",
+  "summary": "Live music by Gene Casey & the Lone Sharks at Liam’s Landing. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-01-08T20:00",
+  "end": "2027-01-08T00:00",
+  "timezone": "America/New_York",
+  "venueId": "liams-landing-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "gene-casey-and-the-lone-sharks"
+  ],
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://genecasey.com/event/amityville-welcomes-back-gene-the-lone-sharks-to-liams-landing/",
+  "status": "active",
+  "sourceId": "gene-casey-lone-sharks",
+  "sourceUrl": "https://genecasey.com/event/amityville-welcomes-back-gene-the-lone-sharks-to-liams-landing/",
+  "sourceName": "Gene Casey & the Lone Sharks - show calendar",
+  "sourceRef": "calendar feed 2027-01-08",
+  "firstSeen": "2026-11-15",
+  "lastSeen": "2026-11-15",
+  "confidence": 0.9,
+  "matchKey": "gene-casey-lone-sharks|liams-landing-amityville||friday|20:00|live-music|gene-casey-and-the-lone-sharks||2027-01-08"
+}

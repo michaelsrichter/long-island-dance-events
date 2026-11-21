@@ -5,22 +5,27 @@
   "start": "2026-11-13T18:00",
   "timezone": "America/New_York",
   "recurrence": {
-    "rrule": "FREQ=MONTHLY;BYDAY=2FR,3FR;UNTIL=20261211"
+    "rdates": [
+      "2026-11-20",
+      "2026-12-04",
+      "2026-12-11",
+      "2027-01-08"
+    ]
   },
   "venueId": "amityville-music-hall-amityville",
   "town": "Amityville",
   "performerIds": [
     "plan-your-visit"
   ],
-  "price": 42.99,
+  "price": 22.99,
   "skillLevel": "all-levels",
   "status": "active",
   "sourceId": "amityville-music-hall",
   "sourceUrl": "https://amh.live/",
   "sourceName": "Amityville Music Hall - show list",
-  "sourceRef": "events page 2026-11-13",
+  "sourceRef": "pages 2026, 2027",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-10-29",
+  "lastSeen": "2026-11-19",
   "confidence": 0.8,
   "matchKey": "amityville-music-hall|amityville-music-hall-amityville||friday|18:00|live-music|plan-your-visit||repeat"
 }

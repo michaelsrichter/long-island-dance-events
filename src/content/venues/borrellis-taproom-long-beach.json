@@ -1,0 +1,11 @@
+{
+  "name": "Borrelli's Taproom",
+  "address": "912 W Beech St",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Long Beach",
+  "latitude": 40.585963,
+  "longitude": -73.69212,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

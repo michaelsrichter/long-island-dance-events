@@ -10,13 +10,13 @@
     "atlantic-wind-symphony"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "past",
   "sourceId": "patchogue-theatre",
   "sourceUrl": "https://www.patchoguetheatre.org/events/",
   "sourceName": "Patchogue Theatre - events",
   "sourceRef": "events page 2026-11-08",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-10-29",
+  "lastSeen": "2026-11-05",
   "dancingCues": [
     "afternoon",
     "theater"

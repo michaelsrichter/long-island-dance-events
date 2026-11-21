@@ -1,0 +1,21 @@
+{
+  "title": "GhostPepper at Beau's Bar",
+  "summary": "Live music by GhostPepper at Beau's Bar in Greenlawn. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-29T16:30",
+  "end": "2026-11-29T19:30",
+  "timezone": "America/New_York",
+  "venueId": "beaus-bar-greenlawn",
+  "town": "Greenlawn",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-18",
+  "lastSeen": "2026-11-21",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-29|beaus-bar-greenlawn|ghostpepper|2026-11-29|special",
+  "reviewNotes": "Band or DJ not researched yet: GhostPepper."
+}
