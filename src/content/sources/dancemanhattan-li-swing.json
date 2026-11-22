@@ -10,11 +10,11 @@
   "focus": "dance",
   "lastCounts": {
     "found": 5,
-    "kept": 5,
+    "kept": 4,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-11-15T16:39:06.371Z",
+  "lastScraped": "2026-11-22T17:25:38.019Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a cross-check. It catches LI swing nights that are otherwise social-only, but it is free text.",

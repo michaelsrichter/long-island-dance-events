@@ -1,0 +1,25 @@
+{
+  "title": "Live music at 89 North Music Venue",
+  "summary": "Live music at 89 North Music Venue. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-22T14:00",
+  "end": "2026-11-22T18:00",
+  "timezone": "America/New_York",
+  "venueId": "89-north-music-venue-patchogue",
+  "town": "Patchogue",
+  "isFree": true,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.theragtimes.net/event/art-soul-music-show-at-89-north-li/",
+  "status": "active",
+  "sourceId": "the-rag-times-patchogue",
+  "sourceUrl": "https://www.theragtimes.net/event/art-soul-music-show-at-89-north-li/",
+  "sourceName": "The Rag Times - live music calendar",
+  "sourceRef": "calendar feed 2026-11-22",
+  "firstSeen": "2026-11-22",
+  "lastSeen": "2026-11-22",
+  "dancingCues": [
+    "afternoon"
+  ],
+  "confidence": 0.85,
+  "matchKey": "the-rag-times-patchogue|89-north-music-venue-patchogue||sunday|14:00|live-music|||2026-11-22"
+}

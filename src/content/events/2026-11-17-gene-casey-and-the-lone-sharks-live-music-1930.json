@@ -1,0 +1,31 @@
+{
+  "title": "East Coast Swing dance with live music by Gene Casey & the Lone Sharks and East Coast",
+  "summary": "Dance to live music by Gene Casey & the Lone Sharks and East Coast. Dance styles: East Coast Swing. A group lesson starts at 7:30 PM.",
+  "category": "live-music",
+  "danceStyles": [
+    "east-coast-swing"
+  ],
+  "start": "2026-11-17T19:30",
+  "timezone": "America/New_York",
+  "lessonTime": "19:30",
+  "venueId": "huntington-moose-lodge",
+  "town": "Greenlawn",
+  "organizerId": "swing-dance-long-island",
+  "performerIds": [
+    "gene-casey-and-the-lone-sharks",
+    "east-coast"
+  ],
+  "price": 20,
+  "priceNotes": "Members pay less",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.sdli.org",
+  "status": "past",
+  "sourceId": "thedancecalendar",
+  "sourceUrl": "https://www.thedancecalendar.com/_files/ugd/bda0a7_7a210c400603404db2aa73c031d48b7c.pdf",
+  "sourceName": "The Dance Calendar, November 2026",
+  "sourceRef": "page 19",
+  "firstSeen": "2026-11-22",
+  "lastSeen": "2026-11-22",
+  "confidence": 1,
+  "matchKey": "thedancecalendar|huntington-moose-lodge|swing-dance-long-island|tuesday|19:30|live-music|east-coast+gene-casey-and-the-lone-sharks|east-coast-swing||2026-11-17"
+}

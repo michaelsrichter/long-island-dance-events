@@ -15,7 +15,7 @@
   "isFree": true,
   "skillLevel": "all-levels",
   "infoUrl": "https://dpe-li.com/upcoming-shows/ristegios-6/",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "dance-party-explosion",
   "sourceUrl": "https://dpe-li.com/upcoming-shows/ristegios-6/",
   "sourceName": "Dance Party Explosion - upcoming shows",
@@ -26,5 +26,6 @@
     "afternoon"
   ],
   "confidence": 0.85,
-  "matchKey": "dance-party-explosion|ristegios-patchogue||friday|15:00|live-music|||repeat"
+  "matchKey": "dance-party-explosion|ristegios-patchogue||friday|15:00|live-music|||repeat",
+  "reviewNotes": "Hidden automatically because it was not found in the latest dance-party-explosion run on 2026-11-22; it may have been cancelled or moved."
 }

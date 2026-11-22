@@ -14,12 +14,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 35,
+    "found": 34,
     "kept": 2,
     "needsReview": 0,
-    "outOfArea": 1
+    "outOfArea": 0
   },
-  "lastScraped": "2026-11-15T16:38:11.698Z",
+  "lastScraped": "2026-11-22T17:24:44.850Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Beatles tribute band calendar lists multiple Long Island restaurant, beach and cruise gigs into 2027.",

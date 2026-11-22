@@ -1,0 +1,24 @@
+{
+  "title": "Shecky & The Twangtones at Fadeley’s Deli Pub",
+  "summary": "Live music by Shecky & The Twangtones at Fadeley’s Deli Pub. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-28T20:00",
+  "end": "2026-11-28T23:00",
+  "timezone": "America/New_York",
+  "venueId": "fadeleys-deli-pub-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "shecky-and-the-twangtones"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.theragtimes.net/event/shecky-the-twangtones-at-fadeleys-li-2/",
+  "status": "active",
+  "sourceId": "the-rag-times-patchogue",
+  "sourceUrl": "https://www.theragtimes.net/event/shecky-the-twangtones-at-fadeleys-li-2/",
+  "sourceName": "The Rag Times - live music calendar",
+  "sourceRef": "calendar feed 2026-11-28",
+  "firstSeen": "2026-11-22",
+  "lastSeen": "2026-11-22",
+  "confidence": 0.9,
+  "matchKey": "the-rag-times-patchogue|fadeleys-deli-pub-patchogue||saturday|20:00|live-music|shecky-and-the-twangtones||2026-11-28"
+}

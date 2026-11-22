@@ -1,0 +1,22 @@
+{
+  "title": "Radio Active at Parsnip Lake House",
+  "summary": "Live music by Radio Active at Parsnip Lake House. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-04T20:00",
+  "timezone": "America/New_York",
+  "venueId": "parsnip-lake-house-lake-ronkonkoma",
+  "town": "Lake Ronkonkoma",
+  "performerIds": [
+    "radio-active"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "radio-active",
+  "sourceUrl": "https://radioactiveny.com/",
+  "sourceName": "Radio Active - events calendar",
+  "sourceRef": "events page 2026-12-04",
+  "firstSeen": "2026-11-22",
+  "lastSeen": "2026-11-22",
+  "confidence": 0.8,
+  "matchKey": "radio-active|parsnip-lake-house-lake-ronkonkoma||friday|20:00|live-music|radio-active||2026-12-04"
+}

@@ -1,0 +1,33 @@
+{
+  "title": "The Mystic at Plattduetsche Park Restaurant",
+  "summary": "Live music by The Mystic at Plattduetsche Park Restaurant. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-28",
+  "timezone": "America/New_York",
+  "recurrence": {
+    "rdates": [
+      "2026-12-12"
+    ]
+  },
+  "venueId": "plattduetsche-park-franklin-square",
+  "town": "Franklin Square",
+  "performerIds": [
+    "the-mystic"
+  ],
+  "price": 8,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://parkrestaurant.com/events/the-mystic-live-7/",
+  "status": "active",
+  "sourceId": "plattduetsche-park-restaurant-franklin-square",
+  "sourceUrl": "https://parkrestaurant.com/events/the-mystic-live-7/",
+  "sourceName": "Plattduetsche Park Restaurant - live music calendar",
+  "sourceRef": "event data on the page 2026-11-28",
+  "firstSeen": "2026-11-22",
+  "lastSeen": "2026-11-22",
+  "dancingCues": [
+    "outdoor"
+  ],
+  "confidence": 0.7,
+  "matchKey": "plattduetsche-park-restaurant-franklin-square|plattduetsche-park-franklin-square||saturday|tba|live-music|the-mystic||repeat",
+  "reviewNotes": "No start time found."
+}

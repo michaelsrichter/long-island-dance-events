@@ -17,9 +17,9 @@
     "found": 16,
     "kept": 4,
     "needsReview": 0,
-    "outOfArea": 4
+    "outOfArea": 5
   },
-  "lastScraped": "2026-11-15T16:37:43.256Z",
+  "lastScraped": "2026-11-22T17:24:15.868Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep as a strong source because it has many future LI public gigs and clear venue details.",

@@ -14,12 +14,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 10,
+    "found": 7,
     "kept": 1,
     "needsReview": 0,
     "outOfArea": 2
   },
-  "lastScraped": "2026-11-15T16:33:10.640Z",
+  "lastScraped": "2026-11-22T17:19:45.362Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep because it has many LI public dates soon and useful repeat venue signals.",

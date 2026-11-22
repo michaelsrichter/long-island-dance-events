@@ -13,7 +13,7 @@
   "isFree": true,
   "skillLevel": "all-levels",
   "infoUrl": "https://genecasey.com/event/amityville-welcomes-back-gene-the-lone-sharks-to-liams-landing/",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "gene-casey-lone-sharks",
   "sourceUrl": "https://genecasey.com/event/amityville-welcomes-back-gene-the-lone-sharks-to-liams-landing/",
   "sourceName": "Gene Casey & the Lone Sharks - show calendar",
@@ -21,5 +21,6 @@
   "firstSeen": "2026-11-15",
   "lastSeen": "2026-11-15",
   "confidence": 0.9,
-  "matchKey": "gene-casey-lone-sharks|liams-landing-amityville||friday|20:00|live-music|gene-casey-and-the-lone-sharks||2027-01-08"
+  "matchKey": "gene-casey-lone-sharks|liams-landing-amityville||friday|20:00|live-music|gene-casey-and-the-lone-sharks||2027-01-08",
+  "reviewNotes": "Hidden automatically because it was not found in the latest gene-casey-lone-sharks run on 2026-11-22; it may have been cancelled or moved."
 }
