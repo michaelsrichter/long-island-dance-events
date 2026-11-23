@@ -9,7 +9,7 @@
   "town": "Wantagh",
   "skillLevel": "all-levels",
   "infoUrl": "https://mulcahyslongisland.com/event/love-in-the-club-2000s-hip-hop-rb-dance-party/",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "mulcahys-wantagh",
   "sourceUrl": "https://mulcahyslongisland.com/event/love-in-the-club-2000s-hip-hop-rb-dance-party/",
   "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
@@ -20,5 +20,6 @@
     "dance-party"
   ],
   "confidence": 0.85,
-  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|20:30|live-music|||2027-01-08"
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||friday|20:30|live-music|||2027-01-08",
+  "reviewNotes": "Hidden automatically because it was not found in the latest mulcahys-wantagh run on 2026-11-23; it may have been cancelled or moved."
 }

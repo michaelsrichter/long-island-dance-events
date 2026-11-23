@@ -11,7 +11,7 @@
   ],
   "priceNotes": "Pay at the door",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "eighty-nine-north",
   "sourceUrl": "https://89northmusic.com/calendar",
   "sourceName": "89 North (Patchogue) - music calendar",
@@ -20,5 +20,5 @@
   "lastSeen": "2026-11-19",
   "confidence": 0.6,
   "matchKey": "eighty-nine-north|89-north-music-venue-patchogue||saturday|tba|live-music|the-shiny-new-45-rpm||2027-01-16",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Hidden automatically because it was not found in the latest eighty-nine-north run on 2026-11-23; it may have been cancelled or moved."
 }
