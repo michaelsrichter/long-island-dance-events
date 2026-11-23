@@ -8,7 +8,7 @@
   "venueId": "beaus-bar-greenlawn",
   "town": "Greenlawn",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-11-22",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-11-29|beaus-bar-greenlawn|ghostpepper|2026-11-29|special",
-  "reviewNotes": "Band or DJ not researched yet: GhostPepper."
+  "reviewNotes": "Band or DJ not researched yet: GhostPepper. Hidden automatically because it was not found in the latest iraslist run on 2026-11-23; it may have been cancelled or moved."
 }

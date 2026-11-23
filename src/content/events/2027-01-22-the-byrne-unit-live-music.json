@@ -1,0 +1,27 @@
+{
+  "title": "The Byrne Unit at Napper Tandy’s",
+  "summary": "Live music by The Byrne Unit at Napper Tandy’s in Bay Shore. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2027-01-22T19:00",
+  "end": "2027-01-22T22:00",
+  "timezone": "America/New_York",
+  "venueId": "napper-tandys-bay-shore",
+  "town": "Bay Shore",
+  "performerIds": [
+    "the-byrne-unit"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-23",
+  "lastSeen": "2026-11-23",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2027-01-22|napper-tandys-bay-shore|byrne-unit|2027-01-22|special",
+  "reviewNotes": "New venue was added automatically. Check it."
+}
