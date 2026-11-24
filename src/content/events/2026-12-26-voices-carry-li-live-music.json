@@ -1,0 +1,26 @@
+{
+  "title": "Voices Carry LI at Prohibition",
+  "summary": "Live music by Voices Carry LI at Prohibition in Massapequa Park. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "danceStyles": [
+    "freestyle"
+  ],
+  "start": "2026-12-26T19:30",
+  "end": "2026-12-26T20:30",
+  "timezone": "America/New_York",
+  "venueId": "prohibition-massapequa-park",
+  "town": "Massapequa Park",
+  "performerIds": [
+    "voices-carry-li"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-24",
+  "lastSeen": "2026-11-24",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-12-26|prohibition-massapequa-park|voices-carry-cover-story-time-machine|2026-12-26|special"
+}
