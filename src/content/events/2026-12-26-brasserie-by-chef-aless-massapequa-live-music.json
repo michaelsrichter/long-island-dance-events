@@ -1,0 +1,21 @@
+{
+  "title": "Swing 26 Band at Brasserie by Chef Aless",
+  "summary": "Live music by Swing 26 Band at Brasserie by Chef Aless in Massapequa. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-12-26T19:00",
+  "end": "2026-12-26T22:00",
+  "timezone": "America/New_York",
+  "venueId": "brasserie-by-chef-aless-massapequa",
+  "town": "Massapequa",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-25",
+  "lastSeen": "2026-11-25",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-26|brasserie-by-chef-aless-massapequa|swing-26-band|2026-12-26|special",
+  "reviewNotes": "Band or DJ not researched yet: Swing 26 Band."
+}
