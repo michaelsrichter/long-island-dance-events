@@ -9,7 +9,7 @@
   "town": "Wantagh",
   "skillLevel": "all-levels",
   "infoUrl": "https://mulcahyslongisland.com/event/grunge-rock-tribute-the-music-of-pearl-jam-soundgarden-audioslave-chris-cornell/",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "mulcahys-wantagh",
   "sourceUrl": "https://mulcahyslongisland.com/event/grunge-rock-tribute-the-music-of-pearl-jam-soundgarden-audioslave-chris-cornell/",
   "sourceName": "Mulcahy's (Wantagh) - concerts and dance parties",
@@ -21,5 +21,6 @@
     "tribute"
   ],
   "confidence": 0.85,
-  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||saturday|20:00|live-music|||2027-01-09"
+  "matchKey": "mulcahys-wantagh|mulcahys-wantagh||saturday|20:00|live-music|||2027-01-09",
+  "reviewNotes": "Hidden automatically because it was not found in the latest mulcahys-wantagh run on 2026-11-26; it may have been cancelled or moved."
 }

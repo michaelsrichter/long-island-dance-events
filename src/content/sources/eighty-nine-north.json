@@ -13,12 +13,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 32,
-    "kept": 32,
+    "found": 30,
+    "kept": 29,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-11-23T22:15:33.933Z",
+  "lastScraped": "2026-11-26T19:51:22.992Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Catalog check 2026-10-03: Keep it because it has many future Long Island music and dance events in an easy calendar format.",
