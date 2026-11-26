@@ -1,0 +1,21 @@
+{
+  "title": "Country Day and Sammy Brenner at Go West!",
+  "summary": "Live music by Country Day and Sammy Brenner at Go West! in Bohemia. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-12-06T12:00",
+  "end": "2026-12-06T16:00",
+  "timezone": "America/New_York",
+  "venueId": "go-west-bohemia",
+  "town": "Bohemia",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-26",
+  "lastSeen": "2026-11-26",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-06|go-west-bohemia|country-day-w-sammy-brenner|2026-12-06|special",
+  "reviewNotes": "Band or DJ not researched yet: Country Day, Sammy Brenner."
+}

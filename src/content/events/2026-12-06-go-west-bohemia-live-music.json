@@ -8,7 +8,7 @@
   "venueId": "go-west-bohemia",
   "town": "Bohemia",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-11-25",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-12-06|go-west-bohemia|go-west-and-eleanors-presents-country|2026-12-06|special",
-  "reviewNotes": "Band or DJ not researched yet: Go West & Eleanor's Presents Country Day, Sammy Brenner."
+  "reviewNotes": "Band or DJ not researched yet: Go West & Eleanor's Presents Country Day, Sammy Brenner. Hidden automatically because it was not found in the latest iraslist run on 2026-11-26; it may have been cancelled or moved."
 }

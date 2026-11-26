@@ -8,7 +8,7 @@
   "venueId": "fadeleys-deli-pub-patchogue",
   "town": "Patchogue",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-11-25",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-11-30|fadeleys-deli-pub-patchogue|grateful-roots-rock-reggae-mixtape|2026-11-30|special",
-  "reviewNotes": "Band or DJ not researched yet: Grateful Roots Rock Reggae Mixtape."
+  "reviewNotes": "Band or DJ not researched yet: Grateful Roots Rock Reggae Mixtape. Hidden automatically because it was not found in the latest iraslist run on 2026-11-26; it may have been cancelled or moved."
 }

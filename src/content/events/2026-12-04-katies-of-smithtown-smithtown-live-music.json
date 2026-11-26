@@ -8,7 +8,7 @@
   "venueId": "katies-of-smithtown-smithtown",
   "town": "Smithtown",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
@@ -17,5 +17,5 @@
   "lastSeen": "2026-11-25",
   "confidence": 0.7,
   "matchKey": "iraslist|2026-12-04|katies-of-smithtown-smithtown|mistress-of-evil-returns-to-katie-s|2026-12-04|special",
-  "reviewNotes": "Band or DJ not researched yet: Mistress of Evil."
+  "reviewNotes": "Band or DJ not researched yet: Mistress of Evil. Hidden automatically because it was not found in the latest iraslist run on 2026-11-26; it may have been cancelled or moved."
 }
