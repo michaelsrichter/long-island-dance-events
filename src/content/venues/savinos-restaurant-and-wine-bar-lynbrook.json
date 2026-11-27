@@ -1,0 +1,11 @@
+{
+  "name": "SaVino's Restaurant & Wine Bar",
+  "address": "88 Atlantic Ave",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Lynbrook",
+  "latitude": 40.654006,
+  "longitude": -73.671616,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Acoustic Groove at Garden Grill",
+  "summary": "Live music by Acoustic Groove at Garden Grill. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-04T18:30",
+  "end": "2026-11-04T21:30",
+  "timezone": "America/New_York",
+  "venueId": "garden-grill-smithtown",
+  "town": "Smithtown",
+  "performerIds": [
+    "acoustic-groove"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/1f8fb80b-9644-48ef-922b-05342d7a7447",
+  "status": "past",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/1f8fb80b-9644-48ef-922b-05342d7a7447",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-11-04",
+  "firstSeen": "2026-11-02",
+  "lastSeen": "2026-11-02",
+  "dancingCues": [
+    "acoustic"
+  ],
+  "confidence": 0.9,
+  "matchKey": "webtunes-li|garden-grill-smithtown||wednesday|18:30|live-music|acoustic-groove||2026-11-04"
+}

@@ -1,21 +1,24 @@
 {
-  "title": "Another Stereomatic East End Invasion at Stephen Talkhouse",
-  "summary": "Live music by Another Stereomatic East End Invasion at Stephen Talkhouse in Amagansett. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "title": "Stereomatic at Stephen Talkhouse",
+  "summary": "Live music by Stereomatic at Stephen Talkhouse in Amagansett. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
   "category": "live-music",
   "start": "2026-11-27T22:00",
   "end": "2026-11-27T01:00",
   "timezone": "America/New_York",
   "venueId": "stephen-talkhouse-amagansett",
   "town": "Amagansett",
+  "performerIds": [
+    "stereomatic"
+  ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-11-01",
-  "confidence": 0.7,
+  "lastSeen": "2026-11-17",
+  "confidence": 0.75,
   "matchKey": "iraslist|2026-11-27|stephen-talkhouse-amagansett|another-stereomatic-east-end-invasion|2026-11-27|special",
-  "reviewNotes": "Band or DJ not researched yet: Another Stereomatic East End Invasion."
+  "reviewNotes": "Hidden automatically because it was not found in the latest iraslist run on 2026-11-18; it may have been cancelled or moved."
 }

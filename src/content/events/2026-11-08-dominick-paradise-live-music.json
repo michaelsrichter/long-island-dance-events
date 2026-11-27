@@ -18,7 +18,7 @@
   "priceNotes": "Pay at the door",
   "skillLevel": "all-levels",
   "infoUrl": "https://sonsofitalyli.com/event/music-from-our-generation-with-dominick-paradise/",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "brumidi-lodge-deer-park",
   "sourceUrl": "https://sonsofitalyli.com/event/music-from-our-generation-with-dominick-paradise/",
   "sourceName": "Club Brumidi at Brumidi Lodge (Deer Park) - events",
@@ -29,5 +29,6 @@
     "afternoon"
   ],
   "confidence": 0.8,
-  "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|sunday|16:00|live-music|dominick-paradise|ballroom|2026-11-08"
+  "matchKey": "brumidi-lodge-deer-park|brumidi-lodge|club-brumidi|sunday|16:00|live-music|dominick-paradise|ballroom|2026-11-08",
+  "reviewNotes": "Hidden automatically because it was not found in the latest brumidi-lodge-deer-park run on 2026-11-08; it may have been cancelled or moved."
 }

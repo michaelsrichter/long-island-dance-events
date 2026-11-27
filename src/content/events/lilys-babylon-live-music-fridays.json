@@ -16,13 +16,14 @@
     "beer-nutz"
   ],
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "beernutz",
   "sourceUrl": "https://www.beernutzmusic.com/",
   "sourceName": "Beer Nutz - 2026 gigs",
   "sourceRef": "events page 2026-11-20",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-11-01",
+  "lastSeen": "2026-11-15",
   "confidence": 0.8,
-  "matchKey": "beernutz|lilys-babylon||friday|18:00|live-music|beer-nutz||repeat"
+  "matchKey": "beernutz|lilys-babylon||friday|18:00|live-music|beer-nutz||repeat",
+  "reviewNotes": "Hidden automatically because it was not found in the latest beernutz run on 2026-11-22; it may have been cancelled or moved."
 }

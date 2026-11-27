@@ -1,0 +1,11 @@
+{
+  "name": "Looney Tunes",
+  "address": "31 Brookvale Ave",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "West Babylon",
+  "latitude": 40.686358,
+  "longitude": -73.347155,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

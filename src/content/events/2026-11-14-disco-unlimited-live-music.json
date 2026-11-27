@@ -12,13 +12,13 @@
   "price": 97,
   "skillLevel": "all-levels",
   "infoUrl": "https://parkrestaurant.com/events/dinner-dance-with-disco-unlimited/",
-  "status": "active",
+  "status": "past",
   "sourceId": "plattduetsche-park-restaurant-franklin-square",
   "sourceUrl": "https://parkrestaurant.com/events/dinner-dance-with-disco-unlimited/",
   "sourceName": "Plattduetsche Park Restaurant - live music calendar",
   "sourceRef": "event data on the page 2026-11-14",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-11-01",
+  "lastSeen": "2026-11-08",
   "dancingCues": [
     "dance-party",
     "outdoor"

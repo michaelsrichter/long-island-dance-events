@@ -16,14 +16,14 @@
   ],
   "skillLevel": "all-levels",
   "infoUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-p9hy6-7ysl3-hz6fr",
-  "status": "active",
+  "status": "hidden",
   "sourceId": "hotel-moraine",
   "sourceUrl": "https://www.hotelmoraine.com/events/happy-hour-with-live-music-by-rachelle-rossi-1-e5j24-a8pr2-47ger-ty5cl-bb2h7-g5d4k-p9hy6-7ysl3-hz6fr",
   "sourceName": "Hotel Moraine (Greenport) - events",
   "sourceRef": "events page 2026-11-14",
   "firstSeen": "2026-10-29",
-  "lastSeen": "2026-11-01",
+  "lastSeen": "2026-11-08",
   "confidence": 0.6,
   "matchKey": "hotel-moraine|hotel-moraine-greenport||saturday|tba|live-music|ahmad-ali||repeat",
-  "reviewNotes": "No start time found."
+  "reviewNotes": "No start time found. Hidden automatically because it was not found in the latest hotel-moraine run on 2026-11-15; it may have been cancelled or moved."
 }

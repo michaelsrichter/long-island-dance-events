@@ -1,0 +1,26 @@
+{
+  "title": "BEAT: Belew/Vai/Levin/Bozzio Performing the Music of KING CRIMSON at The Paramount",
+  "summary": "Live music by BEAT: Belew/Vai/Levin/Bozzio Performing the Music of KING CRIMSON at The Paramount. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-04T20:00",
+  "end": "2026-11-04T23:00",
+  "timezone": "America/New_York",
+  "venueId": "paramount-huntington",
+  "town": "Huntington",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/92ff6d8e4fcbd7e3f3bf4403f6dadffaf87c8a1a",
+  "status": "past",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/92ff6d8e4fcbd7e3f3bf4403f6dadffaf87c8a1a",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-11-04",
+  "firstSeen": "2026-11-02",
+  "lastSeen": "2026-11-02",
+  "dancingCues": [
+    "theater",
+    "tribute"
+  ],
+  "confidence": 0.85,
+  "matchKey": "webtunes-li|paramount-huntington||wednesday|20:00|live-music|beatbelewvailevinbozzioperformingthemusicofkingcrimson||2026-11-04",
+  "reviewNotes": "Band or DJ not researched yet: BEAT: Belew/Vai/Levin/Bozzio Performing the Music of KING CRIMSON."
+}

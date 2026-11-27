@@ -1,0 +1,11 @@
+{
+  "name": "Nisen Sushi",
+  "address": "5032 Jericho Tpke",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Commack",
+  "latitude": 40.840661,
+  "longitude": -73.311863,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

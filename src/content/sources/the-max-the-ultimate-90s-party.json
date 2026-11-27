@@ -14,12 +14,12 @@
   "enabled": true,
   "focus": "music",
   "lastCounts": {
-    "found": 10,
-    "kept": 3,
+    "found": 8,
+    "kept": 1,
     "needsReview": 0,
     "outOfArea": 2
   },
-  "lastScraped": "2026-11-01T16:21:31.034Z",
+  "lastScraped": "2026-11-22T17:24:55.341Z",
   "lastStatus": "ok",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Band shows page lists multiple upcoming 90s party gigs at Suffolk music venues and bars.",

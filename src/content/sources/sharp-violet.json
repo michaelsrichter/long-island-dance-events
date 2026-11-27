@@ -15,12 +15,13 @@
   "focus": "music",
   "lastCounts": {
     "found": 3,
-    "kept": 1,
+    "kept": 0,
     "needsReview": 0,
     "outOfArea": 0
   },
-  "lastScraped": "2026-11-01T16:21:08.738Z",
-  "lastStatus": "ok",
+  "lastMessage": "The adapter found 3 listings but none could be used. The source layout may have changed.",
+  "lastScraped": "2026-11-22T17:24:32.883Z",
+  "lastStatus": "empty",
   "rateLimitSeconds": 5,
   "reviewNotes": "Town-by-town search 2026-10-05: Long Island punk band lists upcoming shows including Bay Shore and Lindenhurst dates.",
   "url": "https://sharpviolet.com/"

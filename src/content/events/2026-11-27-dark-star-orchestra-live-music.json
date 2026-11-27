@@ -1,0 +1,27 @@
+{
+  "title": "Dark Star Orchestra at The Paramount",
+  "summary": "Live music by Dark Star Orchestra at The Paramount. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-27T20:00",
+  "end": "2026-11-27T23:00",
+  "timezone": "America/New_York",
+  "venueId": "paramount-huntington",
+  "town": "Huntington",
+  "performerIds": [
+    "dark-star-orchestra"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://webtunes.com/events/1e18a82fdbf91dc58ee323044338a7e7a5067e56",
+  "status": "active",
+  "sourceId": "webtunes-li",
+  "sourceUrl": "https://webtunes.com/events/1e18a82fdbf91dc58ee323044338a7e7a5067e56",
+  "sourceName": "Webtunes - Long Island live music",
+  "sourceRef": "event data on the page 2026-11-27",
+  "firstSeen": "2026-11-26",
+  "lastSeen": "2026-11-26",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.9,
+  "matchKey": "webtunes-li|paramount-huntington||friday|20:00|live-music|dark-star-orchestra||2026-11-27"
+}

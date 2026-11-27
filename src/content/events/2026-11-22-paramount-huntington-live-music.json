@@ -1,0 +1,24 @@
+{
+  "title": "Live music at The Paramount",
+  "summary": "Live music at The Paramount. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-11-22T20:00",
+  "timezone": "America/New_York",
+  "venueId": "paramount-huntington",
+  "town": "Huntington",
+  "price": 30,
+  "skillLevel": "all-levels",
+  "infoUrl": "https://huntingtonmatters.com/events/orville-peck-huntington/?occurrence=2026-11-22",
+  "status": "past",
+  "sourceId": "huntington-matters",
+  "sourceUrl": "https://huntingtonmatters.com/events/orville-peck-huntington/?occurrence=2026-11-22",
+  "sourceName": "Huntington Matters events",
+  "sourceRef": "event data on the page 2026-11-22",
+  "firstSeen": "2026-11-22",
+  "lastSeen": "2026-11-22",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.85,
+  "matchKey": "huntington-matters|paramount-huntington||sunday|20:00|live-music|||2026-11-22"
+}

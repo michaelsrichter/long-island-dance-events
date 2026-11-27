@@ -6,20 +6,22 @@
   "timezone": "America/New_York",
   "recurrence": {
     "rdates": [
-      "2026-10-30"
+      "2026-10-30",
+      "2026-12-04",
+      "2026-12-11"
     ]
   },
   "venueId": "stereo-garden-patchogue",
   "town": "Patchogue",
   "skillLevel": "all-levels",
-  "infoUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-c2wl5-ksdrb-6b67d-l6lk9-c3fx5-pkz3g-7xey9-wcdkz-sc9jd",
+  "infoUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-brr6m-bpen6-bse2m-h4p76-zey7a",
   "status": "past",
   "sourceId": "stereo-garden-patchogue",
-  "sourceUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-c2wl5-ksdrb-6b67d-l6lk9-c3fx5-pkz3g-7xey9-wcdkz-sc9jd",
+  "sourceUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-brr6m-bpen6-bse2m-h4p76-zey7a",
   "sourceName": "Stereo Garden (Patchogue) - concerts and dance parties",
-  "sourceRef": "events page 2026-10-09",
+  "sourceRef": "events page 2026-12-04",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-10-05",
+  "lastSeen": "2026-11-26",
   "confidence": 0.55,
   "matchKey": "stereo-garden-patchogue|stereo-garden-patchogue||friday|tba|live-music|||repeat",
   "lockedFields": [

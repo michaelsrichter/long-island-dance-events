@@ -1,0 +1,21 @@
+{
+  "title": "Time Lapse at Napper Tandy’s",
+  "summary": "Live music by Time Lapse at Napper Tandy’s in Bay Shore. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-12-04T21:00",
+  "end": "2026-12-04T00:00",
+  "timezone": "America/New_York",
+  "venueId": "napper-tandys-bay-shore",
+  "town": "Bay Shore",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-23",
+  "lastSeen": "2026-11-27",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-04|napper-tandys-bay-shore|time-lapse|2026-12-04|special",
+  "reviewNotes": "Band or DJ not researched yet: Time Lapse."
+}

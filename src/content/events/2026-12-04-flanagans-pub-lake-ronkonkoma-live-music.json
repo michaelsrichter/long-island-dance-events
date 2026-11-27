@@ -1,0 +1,21 @@
+{
+  "title": "Radio Remix at Flanagan's Pub",
+  "summary": "Live music by Radio Remix at Flanagan's Pub in Lake Ronkonkoma. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-12-04T20:00",
+  "end": "2026-12-04T23:00",
+  "timezone": "America/New_York",
+  "venueId": "flanagans-pub-lake-ronkonkoma",
+  "town": "Lake Ronkonkoma",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-23",
+  "lastSeen": "2026-11-27",
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-12-04|flanagans-pub-lake-ronkonkoma|radio-remix|2026-12-04|special",
+  "reviewNotes": "Band or DJ not researched yet: Radio Remix."
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Francesco's Restaurant and Pizzeria",
+  "address": "29 John St",
+  "county": "Suffolk",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Babylon",
+  "latitude": 40.702387,
+  "longitude": -73.317502,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

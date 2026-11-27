@@ -1,0 +1,23 @@
+{
+  "title": "Lisa Polizzi at Eleanor's Lounge",
+  "summary": "Live music by Lisa Polizzi at Eleanor's Lounge in Bohemia. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-28T20:00",
+  "end": "2026-11-28T23:00",
+  "timezone": "America/New_York",
+  "venueId": "eleanors-lounge-bohemia",
+  "town": "Bohemia",
+  "performerIds": [
+    "lisa-polizzi"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-18",
+  "lastSeen": "2026-11-27",
+  "confidence": 0.75,
+  "matchKey": "iraslist|2026-11-28|eleanors-lounge-bohemia|lilly-pallili-and-cosplay-featuring-lisa|2026-11-28|special"
+}

@@ -1,0 +1,11 @@
+{
+  "name": "La Bella Cucina",
+  "address": "2601 Merrick Rd",
+  "county": "Nassau",
+  "reviewNotes": "Added automatically from Ira's List's calendar. Check the name and address; research the dance floor.",
+  "state": "NY",
+  "town": "Bellmore",
+  "latitude": 40.662728,
+  "longitude": -73.530058,
+  "coordinatesSource": "U.S. Census Bureau Geocoder"
+}

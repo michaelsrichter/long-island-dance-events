@@ -1,0 +1,24 @@
+{
+  "title": "The Trammps at Stereo Garden",
+  "summary": "Live music by The Trammps at Stereo Garden. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2027-01-09",
+  "timezone": "America/New_York",
+  "venueId": "stereo-garden-patchogue",
+  "town": "Patchogue",
+  "performerIds": [
+    "the-trammps"
+  ],
+  "skillLevel": "all-levels",
+  "infoUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-brr6m-ewb8e-39nhp-pfehj-ewa6h-en3kr",
+  "status": "active",
+  "sourceId": "stereo-garden-patchogue",
+  "sourceUrl": "https://www.stereogardenli.com/stereo-garden-li-events/2025/10/5/life-of-agony-jasta-rollin-coffin-ft-tim-williams-of-vod-xfe2a-rxba6-ntdl2-gxs7r-g4sf6-8ys52-y3nss-gj6df-4yetc-brr6m-ewb8e-39nhp-pfehj-ewa6h-en3kr",
+  "sourceName": "Stereo Garden (Patchogue) - concerts and dance parties",
+  "sourceRef": "events page 2027-01-09",
+  "firstSeen": "2026-11-23",
+  "lastSeen": "2026-11-26",
+  "confidence": 0.6,
+  "matchKey": "stereo-garden-patchogue|stereo-garden-patchogue||saturday|tba|live-music|the-trammps||2027-01-09",
+  "reviewNotes": "No start time found."
+}

@@ -1,0 +1,25 @@
+{
+  "title": "Live music at The Headliner Bar & Grill",
+  "summary": "Live music at The Headliner Bar & Grill. The dancing score on this page says whether people usually dance. Dance styles: Argentine Tango.",
+  "category": "live-music",
+  "danceStyles": [
+    "argentine-tango"
+  ],
+  "start": "2026-11-24T20:00",
+  "end": "2026-11-24T22:00",
+  "timezone": "America/New_York",
+  "venueId": "the-headliner-bar-and-grill-hicksville",
+  "town": "Hicksville",
+  "skillLevel": "all-levels",
+  "infoUrl": "https://outonthetownli.com/event/tango-time-trivia-presents-trivia-night/2026-11-24/",
+  "status": "past",
+  "sourceId": "out-on-the-town-li",
+  "sourceUrl": "https://outonthetownli.com/event/tango-time-trivia-presents-trivia-night/2026-11-24/",
+  "sourceName": "Out on the Town - Long Island event calendar",
+  "sourceRef": "calendar feed 2026-11-24",
+  "firstSeen": "2026-11-23",
+  "lastSeen": "2026-11-23",
+  "confidence": 0.9,
+  "matchKey": "out-on-the-town-li|the-headliner-bar-and-grill-hicksville||tuesday|20:00|live-music||argentine-tango|2026-11-24",
+  "reviewNotes": "New venue was added automatically. Check it."
+}

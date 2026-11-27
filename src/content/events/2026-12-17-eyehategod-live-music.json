@@ -1,0 +1,23 @@
+{
+  "title": "Eyehategod at Amityville Music Hall",
+  "summary": "Live music by Eyehategod at Amityville Music Hall. The dancing score on this page says whether people usually dance.",
+  "category": "live-music",
+  "start": "2026-12-17",
+  "timezone": "America/New_York",
+  "venueId": "amityville-music-hall-amityville",
+  "town": "Amityville",
+  "performerIds": [
+    "eyehategod"
+  ],
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "amityville-music-hall",
+  "sourceUrl": "https://amh.live/",
+  "sourceName": "Amityville Music Hall - show list",
+  "sourceRef": "events page 2026-12-17",
+  "firstSeen": "2026-11-16",
+  "lastSeen": "2026-11-26",
+  "confidence": 0.6,
+  "matchKey": "amityville-music-hall|amityville-music-hall-amityville||thursday|tba|live-music|eyehategod||2026-12-17",
+  "reviewNotes": "No start time found."
+}

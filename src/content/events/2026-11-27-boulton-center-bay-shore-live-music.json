@@ -1,0 +1,24 @@
+{
+  "title": "Clapton Is God at Boulton Center for the Performing Arts",
+  "summary": "Live music by Clapton Is God at Boulton Center for the Performing Arts in Bay Shore. Listed on Ira's List. Times and lineups change, so check with the venue before you go.",
+  "category": "live-music",
+  "start": "2026-11-27T20:00",
+  "end": "2026-11-27T23:00",
+  "timezone": "America/New_York",
+  "venueId": "boulton-center-bay-shore",
+  "town": "Bay Shore",
+  "skillLevel": "all-levels",
+  "status": "active",
+  "sourceId": "iraslist",
+  "sourceUrl": "https://www.iraslistli.com/",
+  "sourceName": "Ira's List calendar",
+  "sourceRef": "calendar",
+  "firstSeen": "2026-11-18",
+  "lastSeen": "2026-11-27",
+  "dancingCues": [
+    "theater"
+  ],
+  "confidence": 0.7,
+  "matchKey": "iraslist|2026-11-27|boulton-center-bay-shore|clapton-is-god|2026-11-27|special",
+  "reviewNotes": "Band or DJ not researched yet: Clapton Is God."
+}

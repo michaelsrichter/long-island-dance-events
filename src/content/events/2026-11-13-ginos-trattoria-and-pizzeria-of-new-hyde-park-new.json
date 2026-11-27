@@ -11,13 +11,13 @@
   "venueId": "ginos-trattoria-and-pizzeria-of-new-hyde-park-new-hyde-park",
   "town": "New Hyde Park",
   "skillLevel": "all-levels",
-  "status": "active",
+  "status": "past",
   "sourceId": "iraslist",
   "sourceUrl": "https://www.iraslistli.com/",
   "sourceName": "Ira's List calendar",
   "sourceRef": "calendar",
   "firstSeen": "2026-10-04",
-  "lastSeen": "2026-11-01",
+  "lastSeen": "2026-11-13",
   "dancingCues": [
     "dj"
   ],
